@@ -61,19 +61,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.cards.sketch1.title",
       "sketchId": "sketch2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-insert-with-explicit-column-lists-sketch1",
-        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.title",
-        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.prompt",
-        "exerciseKey": "try-insert-with-explicit-column-lists-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -183,7 +171,7 @@
     {
       "id": "try-insert-with-explicit-column-lists-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0",
       "language": "sql",
@@ -275,7 +263,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status) VALUES ('Notebook', 'Stationery', 3.99, 'active');\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE name = 'Notebook';",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -316,29 +304,24 @@
         {
           "type": "source_regex",
           "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.sourceCheckMessages.explicitInsert",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
-      "id": "try-insert-with-explicit-column-lists-sketch1",
+      "id": "practice-explicit-column-intake",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1",
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterCode",
       "starterFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterFiles.operations_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -346,7 +329,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -356,7 +339,7 @@
       "solutionFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionFiles.operations_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.solutionFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -364,7 +347,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.solutionFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -392,11 +375,11 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterFiles.operations_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -404,7 +387,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -422,11 +405,11 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser')\nORDER BY name;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionFiles.operations_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.solutionFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -434,7 +417,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.solutionFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -463,16 +446,11 @@
         {
           "type": "source_regex",
           "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.sourceCheckMessages.explicitInsert",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "insert-with-explicit-column-lists-policy-single_choice-2",

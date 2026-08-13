@@ -37,170 +37,194 @@
             "steps": {
               "ci_warehouse_schema_step1": {
                 "title": "Create the Warehouse Table",
-                "prompt": "A regional warehouse team is replacing a spreadsheet with a stock ledger. Create or complete the `warehouses` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='warehouses'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "prompt": "Start the ledger with a `warehouses` table containing an integer id and a text name. Inspect the table afterward to confirm that the first schema object exists.",
+                "hint": "This first milestone establishes only the basic table shape.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `warehouses`."
+                  "concept": "The project grows one valid schema state at a time.",
+                  "hint_1": "Begin with the warehouse identity field and name field.",
+                  "hint_2": "Inspect the created table in query.sql."
                 },
-                "starterCode": "-- Build the table definition required for \"Create the Warehouse Table\" below.\n",
-                "solutionCode": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);",
+                "starterCode": "-- Build the warehouse ledger schema below.\n",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Build the table definition required for \"Create the Warehouse Table\" below.\n"
+                    "content": "-- Build the warehouse ledger schema below.\n"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Create the Warehouse Table\" below.\n"
+                    "content": "-- Inspect the current schema milestone below.\n"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='warehouses';"
+                    "content": "SELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- file: query.sql\nSELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';",
+                "sourceCheckMessages": {
+                  "warehouseShape": "Define warehouses with integer `id` and text `name` columns."
                 }
               },
               "ci_warehouse_schema_step2": {
-                "title": "Add Identity and Name Rules",
-                "prompt": "Warehouse names must now be reliable business identifiers. Create or complete the `warehouses` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='warehouses'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "title": "Strengthen Warehouse Identity",
+                "prompt": "Carry the warehouse table forward. Make its id the primary key, require every warehouse to have a name, and prevent duplicate warehouse names. Inspect the resulting definition.",
+                "hint": "Edit the existing table definition rather than creating a second warehouses table.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return the stored SQL definition for the table `warehouses` from `sqlite_master`."
+                  "concept": "A cumulative schema project strengthens the same definition as requirements grow.",
+                  "hint_1": "The id needs the identity rule.",
+                  "hint_2": "The name needs both completeness and uniqueness."
                 },
-                "starterCode": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- Continue the next requirement for Add Identity and Name Rules below.\n",
-                "solutionCode": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- Continue the next requirement for Add Identity and Name Rules below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Add Identity and Name Rules\" below.\n"
+                    "content": "SELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';",
+                "sourceCheckMessages": {
+                  "warehouseIdentityRules": "Make warehouse `id` the primary key and make `name` required and unique."
                 }
               },
               "ci_warehouse_schema_step3": {
-                "title": "Add an Operational Default",
-                "prompt": "New warehouse locations should open as active unless operations says otherwise. Create or complete the `warehouses` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='warehouses'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "title": "Add the Warehouse Operating Default",
+                "prompt": "Carry the constrained warehouse table forward. Add a required text status whose value defaults to `active` when a new warehouse omits it. Inspect the updated definition.",
+                "hint": "Preserve all existing warehouse rules while adding the new status field.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return the stored SQL definition for the table `warehouses` from `sqlite_master`."
+                  "concept": "A default can establish a consistent initial state without weakening required-data rules.",
+                  "hint_1": "The status itself is required.",
+                  "hint_2": "Its omitted value should become active."
                 },
-                "starterCode": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- Continue the next requirement for Add an Operational Default below.\n",
-                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- Continue the next requirement for Add an Operational Default below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Add an Operational Default\" below.\n"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';",
+                "sourceCheckMessages": {
+                  "warehouseStatusRule": "Define required text `status` with an `active` default."
                 }
               },
               "ci_warehouse_schema_step4": {
                 "title": "Create the Movement Table",
-                "prompt": "The ledger also needs a place to record every receipt and adjustment. Create or complete the `warehouses` table with the columns and constraints named in the brief. Create or complete the `stock_movements` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='stock_movements'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "prompt": "Keep the completed warehouse definition. Add a `stock_movements` table with an integer id, integer warehouse id, text sku, real quantity change, text movement type, and optional text note. Inspect the new table afterward.",
+                "hint": "This milestone establishes the movement record shape before adding stricter rules.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `stock_movements`."
+                  "concept": "Create the basic child-table structure before adding its integrity constraints.",
+                  "hint_1": "Do not remove or recreate the warehouse requirements.",
+                  "hint_2": "The note remains optional."
                 },
-                "starterCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Continue the next requirement for Create the Movement Table below.\n",
-                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Continue the next requirement for Create the Movement Table below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Create the Movement Table\" below.\n"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+                    "content": "SELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- file: query.sql\nSELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';",
+                "sourceCheckMessages": {
+                  "movementShape": "Define the required stock_movements columns and data types."
                 }
               },
               "ci_warehouse_schema_step5": {
                 "title": "Protect Required Movement Data",
-                "prompt": "Operations cannot accept incomplete movement records. Create or complete the `warehouses` table with the columns and constraints named in the brief. Create or complete the `stock_movements` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='stock_movements'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "prompt": "Carry both tables forward. Make the movement id the primary key, and require warehouse id, sku, quantity change, and movement type on every movement record. The note may remain optional. Inspect the strengthened movement definition.",
+                "hint": "Strengthen the existing movement table instead of adding another table.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return the stored SQL definition for the table `stock_movements` from `sqlite_master`."
+                  "concept": "Required operational fields belong in the schema so incomplete movements are rejected consistently.",
+                  "hint_1": "The movement id becomes the row identity.",
+                  "hint_2": "Only note remains optional."
                 },
-                "starterCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- Continue the next requirement for Protect Required Movement Data below.\n",
-                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- Continue the next requirement for Protect Required Movement Data below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Protect Required Movement Data\" below.\n"
+                    "content": "SELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';",
+                "sourceCheckMessages": {
+                  "movementRequiredRules": "Make movement `id` the primary key and require `warehouse_id`, `sku`, `quantity_change`, and `movement_type`."
                 }
               },
               "ci_warehouse_schema_step6": {
                 "title": "Connect Movements to Warehouses",
-                "prompt": "Finish the warehouse ledger by connecting each movement to a real location. Create or complete the `warehouses` table with the columns and constraints named in the brief. Create or complete the `stock_movements` table with the columns and constraints named in the brief. Declare every required foreign-key relationship in `schema.sql`. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='stock_movements'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "prompt": "Finish the ledger schema. Give new movement records a default movement type of `receipt`, and require each movement's warehouse id to reference the id of an existing warehouse. Inspect the final movement definition.",
+                "hint": "Preserve every earlier constraint while adding the default and relationship.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return the stored SQL definition for the table `stock_movements` from `sqlite_master`."
+                  "concept": "The final schema combines row identity, required data, defaults, uniqueness, and referential integrity.",
+                  "hint_1": "The default belongs to movement_type.",
+                  "hint_2": "warehouse_id is the child side of the relationship."
                 },
-                "starterCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- Continue the next requirement for Connect Movements to Warehouses below.\n",
-                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with a foreign key\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- Continue the next requirement for Connect Movements to Warehouses below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Connect Movements to Warehouses\" below.\n"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with a foreign key\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the foreign key constraint\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';",
+                "sourceCheckMessages": {
+                  "movementRelationship": "Give `movement_type` a `receipt` default and link `warehouse_id` to `warehouses.id`."
                 }
               }
             }
@@ -214,8 +238,8 @@
       "sql-data-management-module-2-table-creation-constraints": {
         "module-2-warehouse-stock-ledger-schema": {
           "sketch-warehouse-schema-intro": {
-            "title": "Understanding the Warehouse Schema",
-            "bodyMarkdown": "A regional warehouse team is replacing a shared spreadsheet with a small stock-ledger database. You are the junior database builder responsible for a structure that keeps warehouse locations reliable and makes every movement traceable.\n\nYou will create the `warehouses` table, strengthen its identity and business rules, add `stock_movements`, require the operational fields, and connect each movement to a valid warehouse.\n\nYour deliverable is a two-file schema workspace:\n\n- `schema.sql` contains the complete cumulative definitions of `warehouses` and `stock_movements`.\n- `query.sql` inspects each completed definition through `sqlite_master`.\n\nThe final schema must reject incomplete movement records and declare the foreign-key relationship clearly."
+            "title": "Warehouse Stock Ledger Schema",
+            "bodyMarkdown": "A warehouse team is replacing a spreadsheet with a small stock-ledger database.\n\nAcross six milestones you will build one cumulative schema:\n\n1. create the warehouse table;\n2. protect warehouse identity and names;\n3. add a warehouse operating default;\n4. create the movement table;\n5. require complete movement records;\n6. add the movement default and warehouse relationship.\n\n`schema.sql` carries the complete schema forward. `query.sql` changes as needed to inspect the current milestone."
           }
         }
       }

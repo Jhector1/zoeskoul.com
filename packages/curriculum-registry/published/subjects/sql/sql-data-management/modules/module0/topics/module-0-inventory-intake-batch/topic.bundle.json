@@ -211,7 +211,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -252,16 +252,11 @@
         {
           "type": "source_regex",
           "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.sourceCheckMessages.insert",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-module-0-step2",
@@ -358,7 +353,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -399,16 +394,17 @@
         {
           "type": "source_regex",
           "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.sourceCheckMessages.insert",
           "path": "operations.sql"
         },
         {
           "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
+          "pattern": "\\b[nN][uU][lL][lL]\\b",
+          "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.sourceCheckMessages.nullNotes",
+          "path": "operations.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-module-0-step3",
@@ -505,7 +501,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -545,17 +541,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\((?![^)]*\\b[sS][tT][aA][tT][uU][sS]\\b)(?=[^)]*\\b[nN][oO][tT][eE][sS]\\b)[^)]*\\)",
+          "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.sourceCheckMessages.useDefault",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-module-0-step4",
@@ -652,7 +643,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105)\nORDER BY id;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -692,17 +683,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\([^;]*?\\)\\s*[vV][aA][lL][uU][eE][sS]\\s*\\([^;]+?\\)\\s*,\\s*\\(",
+          "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.sourceCheckMessages.multiRowInsert",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-module-0-step5",
@@ -799,7 +785,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n\n-- file: query.sql\n-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -835,14 +821,8 @@
           "query.sql"
         ]
       },
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
-        }
-      ]
+      "sourceChecks": [],
+      "showExpectedExample": true
     }
   ]
 }

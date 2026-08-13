@@ -19,59 +19,35 @@
           "tryIt": {
             "allowReveal": true,
             "try_foreign_keys_and_references_sketch0": {
-              "title": "Create Departments and Link Their Managers",
-              "prompt": "The employee directory is already available as the parent table. Create or complete the `employees` table with the columns and constraints named in the brief. Create or complete the `departments` table with the columns and constraints named in the brief. Declare every required foreign-key relationship in `schema.sql`. Use `query.sql` to inspect the state named in the brief.",
-              "hint": "Keep employees unchanged, add departments below it, then inspect the relationship.",
+              "title": "Link Departments to Their Managers",
+              "prompt": "The `employees` parent table is already provided. Create a `departments` child table with its own id and name, plus a manager id that must reference an employee id. Inspect the declared relationship afterward.",
+              "hint": "Leave the parent table unchanged and define the relationship on the child table.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, inspect the declared relationships with `PRAGMA foreign_key_list(departments)`."
+                "concept": "A foreign key records which parent key a child column may reference.",
+                "hint_1": "manager_id is the child-side relationship column.",
+                "hint_2": "Use SQLite's foreign-key metadata to inspect the result."
               },
-              "starterCode": "-- Provided parent table: keep this definition unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Task: create departments below and link manager_id to employees.id.\n",
-              "solutionCode": "-- Provided parent table\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Create the departments child table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);",
+              "starterCode": "-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Define departments below.\n",
+              "solutionCode": "-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);",
               "starterFiles": {
                 "schema_sql": {
-                  "content": "-- Provided parent table: keep this definition unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Task: create departments below and link manager_id to employees.id.\n"
+                  "content": "-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Define departments below.\n"
                 },
                 "query_sql": {
-                  "content": "-- Task: inspect the departments foreign key here.\n"
+                  "content": "-- Inspect the departments relationship below.\n"
                 }
               },
               "solutionFiles": {
                 "schema_sql": {
-                  "content": "-- Provided parent table\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Create the departments child table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);"
+                  "content": "-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);"
                 },
                 "query_sql": {
                   "content": "PRAGMA foreign_key_list(departments);"
                 }
-              }
-            },
-            "try_foreign_keys_and_references_sketch1": {
-              "title": "Create Order Items with Two Relationships",
-              "prompt": "The sales database already has parent tables `orders` and `products`. Create or complete the `orders` table with the columns and constraints named in the brief. Create or complete the `products` table with the columns and constraints named in the brief. Create or complete the `order_items` table with the columns and constraints named in the brief. Declare every required foreign-key relationship in `schema.sql`. Use `query.sql` to inspect the state named in the brief.",
-              "hint": "Keep orders and products, create order_items below them, and add both REFERENCES clauses.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, inspect the declared relationships with `PRAGMA foreign_key_list(order_items)`."
               },
-              "starterCode": "-- Provided parent tables: keep these definitions unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Task: create order_items below and add both foreign keys.\n",
-              "solutionCode": "-- Provided parent tables\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Create the order_items child table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
-              "starterFiles": {
-                "schema_sql": {
-                  "content": "-- Provided parent tables: keep these definitions unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Task: create order_items below and add both foreign keys.\n"
-                },
-                "query_sql": {
-                  "content": "-- Task: inspect both order_items foreign keys here.\n"
-                }
-              },
-              "solutionFiles": {
-                "schema_sql": {
-                  "content": "-- Provided parent tables\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Create the order_items child table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
-                },
-                "query_sql": {
-                  "content": "PRAGMA foreign_key_list(order_items);"
-                }
+              "runtimeSolutionCode": "-- file: schema.sql\n-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(departments);",
+              "sourceCheckMessages": {
+                "managerRelationship": "Link `manager_id` to `employees.id` in the departments schema."
               }
             }
           },
@@ -172,6 +148,38 @@
                 "c": "The column must have the same data type as the referenced column",
                 "d": "The column must be indexed"
               }
+            },
+            "practice-two-foreign-key-relationships": {
+              "title": "Practice: Give Order Items Two Parent Relationships",
+              "prompt": "The `orders` and `products` parent tables are provided. Create `order_items` so each line can identify both the order it belongs to and the product it represents. Declare both parent relationships and inspect them afterward.",
+              "hint": "The two relationship columns have different parent tables.",
+              "help": {
+                "concept": "One child table can carry multiple independent foreign-key relationships.",
+                "hint_1": "order_id belongs to the orders relationship.",
+                "hint_2": "product_id belongs to the products relationship."
+              },
+              "starterCode": "-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Define order_items below.\n",
+              "solutionCode": "-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Define order_items below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Inspect both order_items relationships below.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA foreign_key_list(order_items);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\n-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(order_items);",
+              "sourceCheckMessages": {
+                "orderItemRelationships": "Link `order_id` to `orders.id` and `product_id` to `products.id`."
+              }
             }
           }
         }
@@ -183,12 +191,12 @@
       "sql-data-management-module-2-table-creation-constraints": {
         "foreign-keys-and-references": {
           "sketch-foreign-key-intro": {
-            "title": "A FOREIGN KEY records which parent row a child column may reference",
-            "bodyMarkdown": "A FOREIGN KEY in SQL is a field (or collection of fields) in one table that uniquely identifies a row of another table. The table containing the foreign key is called the child table, and the table containing the candidate key is called the parent table. This relationship enforces referential integrity between the two tables.\n\n### Example\nConsider two tables: `orders` and `customers`. The `orders` table has a column `customer_id` that references the `id` column in the `customers` table. This ensures that every order is associated with a valid customer.\n\n```sql\nCREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL,\n    customer_id INTEGER,\n    FOREIGN KEY (customer_id) REFERENCES customers(id)\n);\n```\n\nIn this example, the `customer_id` in the `orders` table is a foreign key that references the `id` column in the `customers` table. This setup ensures that you cannot have an order with a `customer_id` that does not exist in the `customers` table."
+            "title": "A foreign key protects a parent-child relationship",
+            "bodyMarkdown": "A child row can store the key of a parent row. A foreign-key constraint records which parent key is valid for that relationship.\n\n```sql\nCREATE TABLE teams (\n    id INTEGER PRIMARY KEY\n);\n\nCREATE TABLE members (\n    id INTEGER PRIMARY KEY,\n    team_id INTEGER,\n    FOREIGN KEY (team_id) REFERENCES teams(id)\n);\n```\n\nThe relationship prevents a child from pointing at an unknown parent when foreign-key enforcement is enabled."
           },
           "sketch-foreign-key-usage": {
-            "title": "The same constraint pattern can protect another business relationship",
-            "bodyMarkdown": "A **foreign-key path** names the child column and the parent key it is allowed to reference. Reusing the pattern in another domain is useful because the constraint is about relationship integrity, not about orders or inventory specifically. A project tracker, for example, should not accept a task that points to a project that does not exist.\n\n### Example\nThe `tasks.project_id` column can reference `projects.id`:\n\n```sql\nCREATE TABLE projects (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL\n);\n\nCREATE TABLE tasks (\n    id INTEGER PRIMARY KEY,\n    project_id INTEGER NOT NULL,\n    summary TEXT NOT NULL,\n    FOREIGN KEY (project_id) REFERENCES projects(id)\n);\n```\n\nFirst, `projects` establishes the parent rows. Second, `tasks` stores the child records. The `FOREIGN KEY` line makes the relationship explicit and prevents an orphaned task from naming an unknown project. This example intentionally uses one project-to-task path; the Try It activities use different tables and relationship requirements."
+            "title": "One child table can reference more than one parent",
+            "bodyMarkdown": "A table may participate in several relationships when each foreign-key column has a different parent role.\n\nFor example, a line item can belong to an order and also identify a product. Each relationship should name its own child column and parent key so the schema documents both paths independently."
           }
         }
       }

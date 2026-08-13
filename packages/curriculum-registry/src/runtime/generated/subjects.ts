@@ -105095,19 +105095,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.cards.sketch1.title",
           "sketchId": "sketch2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-insert-with-explicit-column-lists-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.prompt",
-            "exerciseKey": "try-insert-with-explicit-column-lists-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -105217,7 +105205,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-insert-with-explicit-column-lists-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0",
           "language": "sql",
@@ -105309,7 +105297,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status) VALUES ('Notebook', 'Stationery', 3.99, 'active');\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE name = 'Notebook';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -105350,29 +105338,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-              "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.sourceCheckMessages.explicitInsert",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-insert-with-explicit-column-lists-sketch1",
+          "id": "practice-explicit-column-intake",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterCode",
           "starterFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -105380,7 +105363,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -105390,7 +105373,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.solutionFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -105398,7 +105381,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -105426,11 +105409,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "operations.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterCode",
             "starterFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -105438,7 +105421,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -105456,11 +105439,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser')\nORDER BY name;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.solutionFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -105468,7 +105451,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -105497,16 +105480,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-              "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.sourceCheckMessages.explicitInsert",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "insert-with-explicit-column-lists-policy-single_choice-2",
@@ -105610,19 +105588,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.cards.sketch1.title",
           "sketchId": "sketch-using-null-default-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-using-null-and-default-values-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.prompt",
-            "exerciseKey": "try-using-null-and-default-values-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -105658,7 +105624,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-using-null-and-default-values-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0",
           "language": "sql",
@@ -105750,7 +105716,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Gadget';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -105790,30 +105756,31 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-              "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\((?![^)]*\\b[sS][tT][aA][tT][uU][sS]\\b)(?=[^)]*\\b[nN][oO][tT][eE][sS]\\b)[^)]*\\)",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.sourceCheckMessages.omitStatus",
               "path": "operations.sql"
             },
             {
               "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
+              "pattern": "\\b[nN][uU][lL][lL]\\b",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.sourceCheckMessages.explicitNull",
+              "path": "operations.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-using-null-and-default-values-sketch1",
+          "id": "practice-default-status-null-notes-batch",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterCode",
           "starterFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -105821,7 +105788,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -105831,7 +105798,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.solutionFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -105839,7 +105806,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -105867,11 +105834,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "operations.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterCode",
             "starterFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -105879,7 +105846,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -105897,11 +105864,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device')\nORDER BY name;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.solutionFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -105909,7 +105876,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -105937,17 +105904,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-              "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\((?![^)]*\\b[sS][tT][aA][tT][uU][sS]\\b)(?=[^)]*\\b[nN][oO][tT][eE][sS]\\b)[^)]*\\)",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.sourceCheckMessages.omitStatus",
               "path": "operations.sql"
             },
             {
               "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
+              "pattern": "\\b[nN][uU][lL][lL]\\b",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.sourceCheckMessages.explicitNull",
+              "path": "operations.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -106122,19 +106090,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-inserting-multiple-rows-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.prompt",
-            "exerciseKey": "try-inserting-multiple-rows-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -106170,7 +106126,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-inserting-multiple-rows-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch0",
           "language": "sql",
@@ -106262,7 +106218,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Sketchbook', 'Stationery', 8.00, 'active', 0, NULL, '2026-02-10'),\n  ('Marker Set', 'Stationery', 12.00, 'active', 0, NULL, '2026-02-10');\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes, last_updated FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set')\nORDER BY name;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -106302,43 +106258,54 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-              "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\([^;]*?\\)\\s*[vV][aA][lL][uU][eE][sS]\\s*\\([^;]+?\\)\\s*,\\s*\\(",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch0.sourceCheckMessages.multiRowInsert",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-inserting-multiple-rows-sketch1",
+          "id": "practice-multi-row-supply-batch",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterCode",
           "starterFiles": [
             {
-              "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.starterFiles.query_sql.content",
+              "path": "operations.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
+              "readOnly": false
+            },
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterFiles.query_sql.content",
+              "language": "sql",
+              "isEntry": false,
+              "entry": false,
               "readOnly": false
             }
           ],
           "solutionFiles": [
             {
-              "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.solutionFiles.query_sql.content",
+              "path": "operations.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.solutionFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
+              "readOnly": false
+            },
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.solutionFiles.query_sql.content",
+              "language": "sql",
+              "isEntry": false,
+              "entry": false,
               "readOnly": false
             }
           ],
@@ -106357,24 +106324,34 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           },
           "workspace": {
             "language": "sql",
-            "entryFilePath": "query.sql",
-            "entryFile": "query.sql",
+            "entryFilePath": "operations.sql",
+            "entryFile": "operations.sql",
             "openTabs": [
+              "operations.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterCode",
             "starterFiles": [
               {
-                "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.starterFiles.query_sql.content",
+                "path": "operations.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
+                "readOnly": false
+              },
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterFiles.query_sql.content",
+                "language": "sql",
+                "isEntry": false,
+                "entry": false,
                 "readOnly": false
               }
             ],
             "workspaceExpectations": {
               "requiredFiles": [
+                "operations.sql",
                 "query.sql"
               ]
             }
@@ -106383,40 +106360,52 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: query.sql\nSELECT * FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set')\nORDER BY name;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.runtimeSolutionCode",
             "solutionFiles": [
               {
-                "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.solutionFiles.query_sql.content",
+                "path": "operations.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.solutionFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
                 "readOnly": false
+              },
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.solutionFiles.query_sql.content",
+                "language": "sql",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": false
               }
             ],
-            "checkSql": "SELECT name, category, price, status, is_test, notes, last_updated FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set');",
+            "checkSql": "SELECT name, category, price, status, is_test, notes, last_updated FROM inventory_items WHERE name IN ('Binder Clips', 'Index Cards');",
             "sqlFileOrder": [
+              "operations.sql",
               "query.sql"
             ],
             "ignoreRowOrder": true
           },
-          "entryFilePath": "query.sql",
+          "entryFilePath": "operations.sql",
           "sqlFileOrder": [
+            "operations.sql",
             "query.sql"
           ],
           "workspaceExpectations": {
             "requiredFiles": [
+              "operations.sql",
               "query.sql"
             ]
           },
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
+              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\([^;]*?\\)\\s*[vV][aA][lL][uU][eE][sS]\\s*\\([^;]+?\\)\\s*,\\s*\\(",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.sourceCheckMessages.multiRowInsert",
+              "path": "operations.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -106745,7 +106734,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -106786,16 +106775,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-              "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.sourceCheckMessages.insert",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-module-0-step2",
@@ -106892,7 +106876,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -106933,16 +106917,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-              "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.sourceCheckMessages.insert",
               "path": "operations.sql"
             },
             {
               "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
+              "pattern": "\\b[nN][uU][lL][lL]\\b",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.sourceCheckMessages.nullNotes",
+              "path": "operations.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-module-0-step3",
@@ -107039,7 +107024,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -107079,17 +107064,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-              "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\((?![^)]*\\b[sS][tT][aA][tT][uU][sS]\\b)(?=[^)]*\\b[nN][oO][tT][eE][sS]\\b)[^)]*\\)",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.sourceCheckMessages.useDefault",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-module-0-step4",
@@ -107186,7 +107166,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105)\nORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -107226,17 +107206,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-              "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\([^;]*?\\)\\s*[vV][aA][lL][uU][eE][sS]\\s*\\([^;]+?\\)\\s*,\\s*\\(",
+              "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.sourceCheckMessages.multiRowInsert",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-module-0-step5",
@@ -107333,7 +107308,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n\n-- file: query.sql\n-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -107369,14 +107344,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
-            }
-          ]
+          "sourceChecks": [],
+          "showExpectedExample": true
         }
       ]
     },
@@ -107443,19 +107412,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.cards.sketch1.title",
           "sketchId": "mutation-execution",
-          "height": 420,
-          "tryIt": {
-            "id": "try-previewing-update-and-delete-targets-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.prompt",
-            "exerciseKey": "try-previewing-update-and-delete-targets-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -107491,7 +107448,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-previewing-update-and-delete-targets-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0",
           "language": "sql",
@@ -107557,7 +107514,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: query.sql\nSELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
@@ -107582,27 +107539,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
-            }
-          ]
+          "sourceChecks": [],
+          "showExpectedExample": true
         },
         {
-          "id": "try-previewing-update-and-delete-targets-sketch1",
+          "id": "practice-update-reviewed-target-set",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterCode",
           "starterFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -107610,7 +107561,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -107620,7 +107571,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.solutionFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -107628,7 +107579,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -107656,11 +107607,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "operations.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterCode",
             "starterFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -107668,7 +107619,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -107686,11 +107637,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\nUPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.solutionFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -107698,7 +107649,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -107727,16 +107678,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.sourceCheckMessages.scopedUpdate",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-preview",
@@ -107903,19 +107849,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.cards.sketch1.title",
           "sketchId": "sketch-2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-updating-one-row-precisely-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.prompt",
-            "exerciseKey": "try-updating-one-row-precisely-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -107951,7 +107885,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-updating-one-row-precisely-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch0",
           "language": "sql",
@@ -108043,7 +107977,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Update the status of 'Trial Tote' to 'active'\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 6;\n\n-- file: query.sql\n-- Verify the change\nSELECT id, name, status\nFROM inventory_items\nWHERE id IN (5, 6)\nORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -108084,29 +108018,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch0.sourceCheckMessages.scopedUpdate",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-updating-one-row-precisely-sketch1",
+          "id": "practice-precise-single-row-update",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterCode",
           "starterFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -108114,7 +108043,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -108124,7 +108053,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.solutionFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.solutionFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -108132,7 +108061,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -108160,11 +108089,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "operations.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterCode",
             "starterFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -108172,7 +108101,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -108190,11 +108119,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;\n\n-- file: query.sql\n-- Verify the change\nSELECT id, name, category\nFROM inventory_items\nWHERE id IN (3, 4, 5)\nORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.solutionFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.solutionFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -108202,7 +108131,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -108231,16 +108160,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.sourceCheckMessages.scopedUpdate",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -108406,19 +108330,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.cards.sketch1.title",
           "sketchId": "sketch2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-updating-controlled-row-sets-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.prompt",
-            "exerciseKey": "try-updating-controlled-row-sets-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -108454,7 +108366,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-updating-controlled-row-sets-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0",
           "language": "sql",
@@ -108546,7 +108458,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET price = 50.00, status = 'inactive'\nWHERE id = 3;\n\n-- file: query.sql\nSELECT price, status FROM inventory_items WHERE id = 3;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -108587,29 +108499,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.sourceCheckMessages.scopedUpdate",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-updating-controlled-row-sets-sketch1",
+          "id": "practice-compound-update-scope",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterCode",
           "starterFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -108617,7 +108524,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -108627,7 +108534,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.solutionFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -108635,7 +108542,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -108663,11 +108570,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "operations.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterCode",
             "starterFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -108675,7 +108582,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -108693,11 +108600,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;\n\n-- file: query.sql\nSELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.solutionFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -108705,7 +108612,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -108734,16 +108641,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.sourceCheckMessages.scopedUpdate",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -108908,19 +108810,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.cards.sketch1.title",
           "sketchId": "sketch2",
-          "height": 420,
-          "tryIt": {
-            "id": "try-deleting-only-confirmed-rows-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.prompt",
-            "exerciseKey": "try-deleting-only-confirmed-rows-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -108956,7 +108846,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-deleting-only-confirmed-rows-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0",
           "language": "sql",
@@ -109048,7 +108938,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;\n\n-- file: query.sql\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -109089,29 +108979,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.sourceCheckMessages.scopedDelete",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-deleting-only-confirmed-rows-sketch1",
+          "id": "practice-delete-confirmed-row-set",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterCode",
           "starterFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -109119,7 +109004,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -109129,7 +109014,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "operations.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionFiles.operations_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.solutionFiles.operations_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -109137,7 +109022,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -109165,11 +109050,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "operations.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterCode",
             "starterFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -109177,7 +109062,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -109195,11 +109080,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- file: query.sql\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionFiles.operations_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.solutionFiles.operations_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -109207,7 +109092,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -109236,16 +109121,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "type": "source_regex",
               "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.sourceCheckMessages.scopedDelete",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -109404,15 +109284,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "maxAttempts": null,
             "steps": [
               {
-                "id": "try_module_1_inventory_correction_cleanup_sketch0",
-                "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.projectSteps.try_module_1_inventory_correction_cleanup_sketch0.title",
-                "exerciseKey": "try-module-1-inventory-correction-cleanup-sketch0",
-                "difficulty": "easy",
-                "preferKind": "code_input",
-                "seedPolicy": "global",
-                "maxAttempts": null
-              },
-              {
                 "id": "try_module_1_inventory_correction_cleanup_sketch1",
                 "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.projectSteps.try_module_1_inventory_correction_cleanup_sketch1.title",
                 "exerciseKey": "try-module-1-inventory-correction-cleanup-sketch1",
@@ -109476,17 +109347,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
-          "id": "try-module-1-inventory-correction-cleanup-sketch0",
+          "id": "practice-preview-audit-targets",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterCode",
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -109496,7 +109367,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -109523,11 +109394,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "openTabs": [
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -109544,11 +109415,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: query.sql\nSELECT id, price, status, is_test, notes\nFROM inventory_items\nWHERE id IN (2, 4, 6)\nORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -109568,14 +109439,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
-            }
-          ]
+          "sourceChecks": [],
+          "showExpectedExample": true
         },
         {
           "id": "try-module-1-inventory-correction-cleanup-sketch1",
@@ -109672,7 +109537,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- file: query.sql\nSELECT id, price, status\nFROM inventory_items\nWHERE id = 2;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch1.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -109711,17 +109576,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[^;]*\\b[wW][hH][eE][rR][eE]\\b(?=[^;]*\\b[iI][dD]\\b\\s*=\\s*2\\b)[^;]*",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch1.sourceCheckMessages.updateItem2",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "try-module-1-inventory-correction-cleanup-sketch2",
@@ -109818,7 +109678,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- file: query.sql\nSELECT id, category, is_test, last_updated\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 0\nORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch2.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -109857,17 +109717,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[^;]*\\b[wW][hH][eE][rR][eE]\\b(?=[^;]*\\b[cC][aA][tT][eE][gG][oO][rR][yY]\\b\\s*=\\s*['\\\"]Decor['\\\"])(?=[^;]*\\b[iI][sS]_[tT][eE][sS][tT]\\b\\s*=\\s*0\\b)[^;]*",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch2.sourceCheckMessages.updateDecor",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "try-module-1-inventory-correction-cleanup-sketch3",
@@ -109964,7 +109819,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- file: query.sql\nSELECT id, name\nFROM inventory_items\nWHERE id = 4;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch3.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -110003,23 +109858,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[^;]*\\b[wW][hH][eE][rR][eE]\\b(?=[^;]*\\b[iI][dD]\\b\\s*=\\s*4\\b)[^;]*",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch3.sourceCheckMessages.deleteItem4",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
-              "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "try-module-1-inventory-correction-cleanup-sketch4",
@@ -110116,7 +109960,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- file: query.sql\nSELECT id, name\nFROM inventory_items\nWHERE id = 6;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch4.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -110155,23 +109999,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+              "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[^;]*\\b[wW][hH][eE][rR][eE]\\b(?=[^;]*\\b[iI][dD]\\b\\s*=\\s*6\\b)(?=[^;]*\\b[iI][sS]_[tT][eE][sS][tT]\\b\\s*=\\s*1\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b\\s*=\\s*['\\\"]draft['\\\"])[^;]*",
+              "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch4.sourceCheckMessages.deleteItem6",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
-              "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "try-module-1-inventory-correction-cleanup-sketch5",
@@ -110180,7 +110013,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterFiles.query_sql.content",
           "starterFiles": [
             {
               "path": "operations.sql",
@@ -110238,7 +110071,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "operations.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterFiles.query_sql.content",
             "starterFiles": [
               {
                 "path": "operations.sql",
@@ -110268,7 +110101,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "inventory_ops",
             "resultShape": "table",
-            "solutionCode": "-- file: operations.sql\n-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "operations.sql",
@@ -110304,14 +110137,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "query.sql"
             ]
           },
-          "sourceChecks": [
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-              "path": "query.sql"
-            }
-          ]
+          "sourceChecks": [],
+          "showExpectedExample": true
         }
       ]
     },
@@ -110384,19 +110211,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-creating-tables-and-defining-columns-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.prompt",
-            "exerciseKey": "try-creating-tables-and-defining-columns-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -110432,7 +110247,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-creating-tables-and-defining-columns-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch0",
           "language": "sql",
@@ -110524,7 +110339,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Define the products table\nCREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);\n\n-- file: query.sql\n-- Verify the products table definition\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -110564,30 +110379,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-              "message": "Create the `products` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[pP][rR][oO][dD][uU][cC][tT][sS]\\b(?=[^;]*\\b[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\b\\s+[iI][nN][tT][eE][gG][eE][rR]\\b)(?=[^;]*\\b[pP][rR][oO][dD][uU][cC][tT]_[nN][aA][mM][eE]\\b\\s+[tT][eE][xX][tT]\\b)(?=[^;]*\\b[pP][rR][iI][cC][eE]\\b\\s+[rR][eE][aA][lL]\\b)[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch0.sourceCheckMessages.productsShape",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required learner-authored inspection in query.sql.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-creating-tables-and-defining-columns-sketch1",
+          "id": "practice-create-orders-table",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterCode",
           "starterFiles": [
             {
               "path": "schema.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.starterCode",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -110595,7 +110405,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -110605,7 +110415,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "schema.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.solutionCode",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -110613,7 +110423,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -110641,11 +110451,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "schema.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterCode",
             "starterFiles": [
               {
                 "path": "schema.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.starterCode",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -110653,7 +110463,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -110671,11 +110481,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Define the orders table\nCREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  total_amount REAL\n);\n\n-- file: query.sql\n-- Verify the orders table definition\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.solutionCode",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -110683,7 +110493,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -110711,17 +110521,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?orders\\b",
-              "message": "Create the `orders` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[oO][rR][dD][eE][rR][sS]\\b(?=[^;]*\\b[oO][rR][dD][eE][rR]_[iI][dD]\\b\\s+[iI][nN][tT][eE][gG][eE][rR]\\b)(?=[^;]*\\b[cC][uU][sS][tT][oO][mM][eE][rR]_[nN][aA][mM][eE]\\b\\s+[tT][eE][xX][tT]\\b)(?=[^;]*\\b[tT][oO][tT][aA][lL]_[aA][mM][oO][uU][nN][tT]\\b\\s+[rR][eE][aA][lL]\\b)[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.sourceCheckMessages.ordersShape",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required learner-authored inspection in query.sql.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "fill-blank-choice-1",
@@ -110898,19 +110703,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.cards.sketch1.title",
           "sketchId": "sketch-not-null",
-          "height": 420,
-          "tryIt": {
-            "id": "try-primary-key-and-not-null-constraints-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.prompt",
-            "exerciseKey": "try-primary-key-and-not-null-constraints-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -110946,7 +110739,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-primary-key-and-not-null-constraints-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0",
           "language": "sql",
@@ -111038,7 +110831,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Define the products table\nCREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    product_name TEXT NOT NULL\n);\n\n-- file: query.sql\nSELECT name FROM sqlite_master WHERE type='table' AND name='products';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -111078,30 +110871,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-              "message": "Define the `products` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[pP][rR][oO][dD][uU][cC][tT][sS]\\b(?=[^;]*(?:\\b[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\s*\\)))(?=[^;]*\\b[pP][rR][oO][dD][uU][cC][tT]_[nN][aA][mM][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0.sourceCheckMessages.requiredProductRules",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-primary-key-and-not-null-constraints-sketch1",
+          "id": "practice-required-order-columns",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterCode",
           "starterFiles": [
             {
               "path": "schema.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterFiles.schema_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.schema_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -111109,7 +110897,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -111119,7 +110907,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "schema.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.solutionFiles.schema_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.solutionFiles.schema_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -111127,7 +110915,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -111155,11 +110943,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "schema.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterCode",
             "starterFiles": [
               {
                 "path": "schema.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterFiles.schema_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.schema_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -111167,7 +110955,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -111185,11 +110973,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Define the orders table\nCREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);\n\n-- file: query.sql\nSELECT name FROM sqlite_master WHERE type='table' AND name='orders';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.solutionFiles.schema_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.solutionFiles.schema_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -111197,7 +110985,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -111225,17 +111013,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?orders\\b",
-              "message": "Define the `orders` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[oO][rR][dD][eE][rR][sS]\\b(?=[^;]*(?:\\b[oO][rR][dD][eE][rR]_[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[oO][rR][dD][eE][rR]_[iI][dD]\\s*\\)))(?=[^;]*\\b[cC][uU][sS][tT][oO][mM][eE][rR]_[nN][aA][mM][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.sourceCheckMessages.requiredOrderRules",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "multi-choice-primary-key",
@@ -111409,19 +111192,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.cards.sketch1.title",
           "sketchId": "default-constraint",
-          "height": 420,
-          "tryIt": {
-            "id": "try-unique-and-default-constraints-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.prompt",
-            "exerciseKey": "try-unique-and-default-constraints-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -111457,7 +111228,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-unique-and-default-constraints-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch0",
           "language": "sql",
@@ -111549,7 +111320,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\nCREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);\n\n-- file: query.sql\nSELECT name FROM sqlite_master WHERE type='table' AND name='customers';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -111589,30 +111360,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?customers\\b",
-              "message": "Define the `customers` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b(?=[^;]*(?:\\b[pP][hH][oO][nN][eE]_[nN][uU][mM][bB][eE][rR]\\b[^,;]*\\b[uU][nN][iI][qQ][uU][eE]\\b|\\b[uU][nN][iI][qQ][uU][eE]\\s*\\(\\s*[pP][hH][oO][nN][eE]_[nN][uU][mM][bB][eE][rR]\\s*\\)))[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch0.sourceCheckMessages.uniquePhone",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-unique-and-default-constraints-sketch1",
+          "id": "practice-default-order-status",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterCode",
           "starterFiles": [
             {
               "path": "schema.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.starterFiles.schema_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterFiles.schema_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -111620,7 +111386,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -111630,7 +111396,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "schema.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.solutionFiles.schema_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.solutionFiles.schema_sql.content",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -111638,7 +111404,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -111666,11 +111432,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "schema.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterCode",
             "starterFiles": [
               {
                 "path": "schema.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.starterFiles.schema_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterFiles.schema_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -111678,7 +111444,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -111696,11 +111462,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);\n\n-- file: query.sql\nSELECT name FROM sqlite_master WHERE type='table' AND name='orders';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.solutionFiles.schema_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.solutionFiles.schema_sql.content",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -111708,7 +111474,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -111736,17 +111502,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?orders\\b",
-              "message": "Define the `orders` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[oO][rR][dD][eE][rR][sS]\\b(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b[^,;]*\\b[dD][eE][fF][aA][uU][lL][tT]\\b\\s+['\\\"][pP][eE][nN][dD][iI][nN][gG]['\\\"])[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.sourceCheckMessages.pendingDefault",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "unique-constraint-multi-choice",
@@ -111923,19 +111684,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.cards.sketch1.title",
           "sketchId": "sketch-foreign-key-usage",
-          "height": 420,
-          "tryIt": {
-            "id": "try-foreign-keys-and-references-sketch1",
-            "titleKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.title",
-            "promptKey": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.prompt",
-            "exerciseKey": "try-foreign-keys-and-references-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -112072,7 +111821,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-foreign-keys-and-references-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0",
           "language": "sql",
@@ -112164,7 +111913,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Provided parent table\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Create the departments child table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(departments);",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -112204,30 +111953,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?departments\\b",
-              "message": "Create the `departments` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[dD][eE][pP][aA][rR][tT][mM][eE][nN][tT][sS]\\b(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[mM][aA][nN][aA][gG][eE][rR]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[eE][mM][pP][lL][oO][yY][eE][eE][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[mM][aA][nN][aA][gG][eE][rR]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[eE][mM][pP][lL][oO][yY][eE][eE][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.sourceCheckMessages.managerRelationship",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
-              "message": "Write the required learner-authored inspection in query.sql.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
-          "id": "try-foreign-keys-and-references-sketch1",
+          "id": "practice-two-foreign-key-relationships",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1",
+          "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
           "starterFiles": [
             {
               "path": "schema.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -112235,7 +111979,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -112245,7 +111989,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "schema.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionCode",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true,
@@ -112253,7 +111997,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "query.sql",
-              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionFiles.query_sql.content",
+              "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.solutionFiles.query_sql.content",
               "language": "sql",
               "isEntry": false,
               "entry": false,
@@ -112281,11 +112025,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "schema.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
             "starterFiles": [
               {
                 "path": "schema.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -112293,7 +112037,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -112311,11 +112055,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Provided parent tables\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Create the order_items child table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(order_items);",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionCode",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true,
@@ -112323,7 +112067,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionFiles.query_sql.content",
+                "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.solutionFiles.query_sql.content",
                 "language": "sql",
                 "isEntry": false,
                 "entry": false,
@@ -112351,17 +112095,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?order_items\\b",
-              "message": "Create the `order_items` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[oO][rR][dD][eE][rR]_[iI][tT][eE][mM][sS]\\b(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[oO][rR][dD][eE][rR]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[oO][rR][dD][eE][rR][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[oO][rR][dD][eE][rR]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[oO][rR][dD][eE][rR][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.sourceCheckMessages.orderItemRelationships",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
-              "message": "Write the required learner-authored inspection in query.sql.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         }
       ]
     },
@@ -112594,7 +112333,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- file: query.sql\n-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='warehouses';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -112634,17 +112373,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-              "message": "Define the `warehouses` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\b(?=[^;]*\\b[iI][dD]\\b\\s+[iI][nN][tT][eE][gG][eE][rR]\\b)(?=[^;]*\\b[nN][aA][mM][eE]\\b\\s+[tT][eE][xX][tT]\\b)[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.sourceCheckMessages.warehouseShape",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-warehouse-schema-step2",
@@ -112741,7 +112475,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- file: query.sql\n-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -112781,17 +112515,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-              "message": "Define the `warehouses` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\b(?=[^;]*(?:\\b[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*\\b[nN][aA][mM][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*(?:\\b[nN][aA][mM][eE]\\b[^,;]*\\b[uU][nN][iI][qQ][uU][eE]\\b|\\b[uU][nN][iI][qQ][uU][eE]\\s*\\(\\s*[nN][aA][mM][eE]\\s*\\)))[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.sourceCheckMessages.warehouseIdentityRules",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-warehouse-schema-step3",
@@ -112888,7 +112617,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- file: query.sql\n-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -112928,17 +112657,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-              "message": "Define the `warehouses` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\b(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b\\s+[tT][eE][xX][tT]\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b[^,;]*\\b[dD][eE][fF][aA][uU][lL][tT]\\b\\s+['\\\"][aA][cC][tT][iI][vV][eE]['\\\"])[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.sourceCheckMessages.warehouseStatusRule",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-warehouse-schema-step4",
@@ -113035,7 +112759,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- file: query.sql\n-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='stock_movements';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -113075,23 +112799,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-              "message": "Define the `warehouses` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[sS][tT][oO][cC][kK]_[mM][oO][vV][eE][mM][eE][nN][tT][sS]\\b(?=[^;]*\\b[iI][dD]\\b\\s+[iI][nN][tT][eE][gG][eE][rR]\\b)(?=[^;]*\\b[wW][aA][rR][eE][hH][oO][uU][sS][eE]_[iI][dD]\\b\\s+[iI][nN][tT][eE][gG][eE][rR]\\b)(?=[^;]*\\b[sS][kK][uU]\\b\\s+[tT][eE][xX][tT]\\b)(?=[^;]*\\b[qQ][uU][aA][nN][tT][iI][tT][yY]_[cC][hH][aA][nN][gG][eE]\\b\\s+[rR][eE][aA][lL]\\b)(?=[^;]*\\b[mM][oO][vV][eE][mM][eE][nN][tT]_[tT][yY][pP][eE]\\b\\s+[tT][eE][xX][tT]\\b)(?=[^;]*\\b[nN][oO][tT][eE]\\b\\s+[tT][eE][xX][tT]\\b)[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.sourceCheckMessages.movementShape",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_movements\\b",
-              "message": "Define the `stock_movements` table in schema.sql.",
-              "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-warehouse-schema-step5",
@@ -113188,7 +112901,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- file: query.sql\n-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -113228,23 +112941,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-              "message": "Define the `warehouses` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[sS][tT][oO][cC][kK]_[mM][oO][vV][eE][mM][eE][nN][tT][sS]\\b(?=[^;]*(?:\\b[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*\\b[wW][aA][rR][eE][hH][oO][uU][sS][eE]_[iI][dD]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[sS][kK][uU]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[qQ][uU][aA][nN][tT][iI][tT][yY]_[cC][hH][aA][nN][gG][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[mM][oO][vV][eE][mM][eE][nN][tT]_[tT][yY][pP][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.sourceCheckMessages.movementRequiredRules",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_movements\\b",
-              "message": "Define the `stock_movements` table in schema.sql.",
-              "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-warehouse-schema-step6",
@@ -113341,7 +113043,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\n-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with a foreign key\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);\n\n-- file: query.sql\n-- Verify the foreign key constraint\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -113381,23 +113083,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-              "message": "Define the `warehouses` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[sS][tT][oO][cC][kK]_[mM][oO][vV][eE][mM][eE][nN][tT][sS]\\b(?=[^;]*\\b[mM][oO][vV][eE][mM][eE][nN][tT]_[tT][yY][pP][eE]\\b[^,;]*\\b[dD][eE][fF][aA][uU][lL][tT]\\b\\s+['\\\"][rR][eE][cC][eE][iI][pP][tT]['\\\"])(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[wW][aA][rR][eE][hH][oO][uU][sS][eE]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[wW][aA][rR][eE][hH][oO][uU][sS][eE]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.sourceCheckMessages.movementRelationship",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_movements\\b",
-              "message": "Define the `stock_movements` table in schema.sql.",
-              "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         }
       ]
     },
@@ -113538,6 +113229,228 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
+          "id": "practice-launch-review-mutations",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations",
+          "language": "sql",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
+          "starterFiles": [
+            {
+              "path": "schema.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.schema_sql.content",
+              "language": "sql",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
+            },
+            {
+              "path": "seed.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.seed_sql.content",
+              "language": "sql",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
+            },
+            {
+              "path": "operations.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true,
+              "readOnly": false
+            },
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.query_sql.content",
+              "language": "sql",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": false
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "schema.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.schema_sql.content",
+              "language": "sql",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
+            },
+            {
+              "path": "seed.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.seed_sql.content",
+              "language": "sql",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
+            },
+            {
+              "path": "operations.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.operations_sql.content",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true,
+              "readOnly": false
+            },
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.query_sql.content",
+              "language": "sql",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": false
+            }
+          ],
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "ddl_blank",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": true,
+            "supportsFileSystem": true
+          },
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "operations.sql",
+            "entryFile": "operations.sql",
+            "openTabs": [
+              "schema.sql",
+              "seed.sql",
+              "operations.sql",
+              "query.sql"
+            ],
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
+            "starterFiles": [
+              {
+                "path": "schema.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.schema_sql.content",
+                "language": "sql",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
+              },
+              {
+                "path": "seed.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.seed_sql.content",
+                "language": "sql",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
+              },
+              {
+                "path": "operations.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true,
+                "readOnly": false
+              },
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.query_sql.content",
+                "language": "sql",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": false
+              }
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "schema.sql",
+                "seed.sql",
+                "operations.sql",
+                "query.sql"
+              ]
+            }
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "ddl_blank",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.runtimeSolutionCode",
+            "solutionFiles": [
+              {
+                "path": "schema.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.schema_sql.content",
+                "language": "sql",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
+              },
+              {
+                "path": "seed.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.seed_sql.content",
+                "language": "sql",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
+              },
+              {
+                "path": "operations.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.operations_sql.content",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true,
+                "readOnly": false
+              },
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.query_sql.content",
+                "language": "sql",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": false
+              }
+            ],
+            "sqlFileOrder": [
+              "schema.sql",
+              "seed.sql",
+              "operations.sql",
+              "query.sql"
+            ],
+            "checkSql": "SELECT\n  (SELECT price FROM products WHERE id = 2) AS product_2_price,\n  (SELECT status FROM products WHERE id = 2) AS product_2_status,\n  (SELECT COUNT(*) FROM stock_events WHERE note = 'Placeholder') AS placeholder_events;",
+            "ignoreRowOrder": true
+          },
+          "entryFilePath": "operations.sql",
+          "sqlFileOrder": [
+            "schema.sql",
+            "seed.sql",
+            "operations.sql",
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "schema.sql",
+              "seed.sql",
+              "operations.sql",
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\b(?=[^;]*\\b[wW][hH][eE][rR][eE]\\b[^;]*\\b[iI][dD]\\b\\s*=\\s*2\\b)(?=[^;]*\\b[pP][rR][iI][cC][eE]\\b\\s*=\\s*22\\.5(?:0+)?)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b\\s*=\\s*['\\\"][aA][cC][tT][iI][vV][eE]['\\\"])[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.sourceCheckMessages.practiceUpdate",
+              "path": "operations.sql"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+[sS][tT][oO][cC][kK]_[eE][vV][eE][nN][tT][sS]\\b(?=[^;]*\\b[wW][hH][eE][rR][eE]\\b[^;]*\\b[nN][oO][tT][eE]\\b\\s*=\\s*['\\\"][pP][lL][aA][cC][eE][hH][oO][lL][dD][eE][rR]['\\\"])[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.sourceCheckMessages.practiceDelete",
+              "path": "operations.sql"
+            }
+          ],
+          "showExpectedExample": true
+        },
+        {
           "id": "ci-final-capstone-step1",
           "kind": "code_input",
           "purpose": "project",
@@ -113632,7 +113545,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\n-- file: query.sql\nSELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -113672,17 +113585,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-              "message": "Define the `products` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[pP][rR][oO][dD][uU][cC][tT][sS]\\b(?=[^;]*(?:\\b[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*\\b[sS][kK][uU]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*(?:\\b[sS][kK][uU]\\b[^,;]*\\b[uU][nN][iI][qQ][uU][eE]\\b|\\b[uU][nN][iI][qQ][uU][eE]\\s*\\(\\s*[sS][kK][uU]\\s*\\)))(?=[^;]*\\b[nN][aA][mM][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[cC][aA][tT][eE][gG][oO][rR][yY]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[pP][rR][iI][cC][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b[^,;]*\\b[dD][eE][fF][aA][uU][lL][tT]\\b\\s+['\\\"][dD][rR][aA][fF][tT]['\\\"])[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.sourceCheckMessages.productSchema",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-final-capstone-step2",
@@ -113779,7 +113687,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: query.sql\nSELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name IN ('products', 'stock_events')\nORDER BY name;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -113818,23 +113726,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-              "message": "Define the `products` table in schema.sql.",
+              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[sS][tT][oO][cC][kK]_[eE][vV][eE][nN][tT][sS]\\b(?=[^;]*(?:\\b[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*\\b[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[qQ][uU][aA][nN][tT][iI][tT][yY]_[cC][hH][aA][nN][gG][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[eE][vV][eE][nN][tT]_[tT][yY][pP][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[eE][vV][eE][nN][tT]_[tT][yY][pP][eE]\\b[^,;]*\\b[dD][eE][fF][aA][uU][lL][tT]\\b\\s+['\\\"][rR][eE][cC][eE][iI][pP][tT]['\\\"])(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.sourceCheckMessages.stockEventSchema",
               "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_events\\b",
-              "message": "Define the `stock_events` table in schema.sql.",
-              "path": "schema.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-final-capstone-step3",
@@ -113843,7 +113740,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.seed_sql.content",
           "starterFiles": [
             {
               "path": "schema.sql",
@@ -113918,7 +113815,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "seed.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.seed_sql.content",
             "starterFiles": [
               {
                 "path": "schema.sql",
@@ -113957,7 +113854,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\n-- file: query.sql\nSELECT id, sku, name, category, price, status, notes\nFROM products\nORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -114007,17 +113904,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+products\\s*\\(",
-              "message": "Load the approved `products` rows in seed.sql with an explicit column list.",
+              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\([^)]*\\)\\s+[vV][aA][lL][uU][eE][sS]\\s*\\([^;]*\\)\\s*,\\s*\\(",
+              "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.sourceCheckMessages.productSeedBatch",
               "path": "seed.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+products\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `products`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-final-capstone-step4",
@@ -114140,7 +114032,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');\n\n-- file: query.sql\nSELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -114190,23 +114082,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+products\\s*\\(",
-              "message": "Load the approved `products` rows in seed.sql with an explicit column list.",
+              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+[sS][tT][oO][cC][kK]_[eE][vV][eE][nN][tT][sS]\\s*\\([^)]*\\)\\s+[vV][aA][lL][uU][eE][sS]\\s*\\([^;]*\\)\\s*,\\s*\\(",
+              "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.sourceCheckMessages.stockEventSeedBatch",
               "path": "seed.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+stock_events\\s*\\(",
-              "message": "Load the approved `stock_events` rows in seed.sql with an explicit column list.",
-              "path": "seed.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+stock_events\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `stock_events`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-final-capstone-step5",
@@ -114215,7 +114096,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "weight": 1,
           "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5",
           "language": "sql",
-          "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterCode",
+          "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.operations_sql.content",
           "starterFiles": [
             {
               "path": "schema.sql",
@@ -114307,7 +114188,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "operations.sql",
               "query.sql"
             ],
-            "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterCode",
+            "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.operations_sql.content",
             "starterFiles": [
               {
                 "path": "schema.sql",
@@ -114355,7 +114236,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');\n\n-- file: operations.sql\nUPDATE products\nSET\n    price = 24.99,\n    status = 'active'\nWHERE\n    id = 1;\n\n-- file: query.sql\nSELECT id, sku, price, status\nFROM products\nWHERE id = 1;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -114417,17 +114298,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+products\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `products` in operations.sql and keep its WHERE clause.",
+              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\b(?=[^;]*\\b[wW][hH][eE][rR][eE]\\b[^;]*\\b[iI][dD]\\b\\s*=\\s*1\\b)(?=[^;]*\\b[pP][rR][iI][cC][eE]\\b\\s*=\\s*24\\.99)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b\\s*=\\s*['\\\"][aA][cC][tT][iI][vV][eE]['\\\"])[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.sourceCheckMessages.launchCorrection",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+products\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `products`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         },
         {
           "id": "ci-final-capstone-step6",
@@ -114576,7 +114452,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "ddl_blank",
             "resultShape": "table",
-            "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');\n\n-- file: operations.sql\nUPDATE products\nSET\n    price = 24.99,\n    status = 'active'\nWHERE\n    id = 1;\n\nDELETE FROM stock_events\nWHERE\n    note = 'Test event';\n\n-- file: query.sql\nSELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;",
+            "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.runtimeSolutionCode",
             "solutionFiles": [
               {
                 "path": "schema.sql",
@@ -114617,7 +114493,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "operations.sql",
               "query.sql"
             ],
-            "checkSql": "SELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;"
+            "checkSql": "SELECT\n  (SELECT price FROM products WHERE id = 1) AS product_1_price,\n  (SELECT status FROM products WHERE id = 1) AS product_1_status,\n  (SELECT COUNT(*) FROM stock_events WHERE note = 'Test event') AS placeholder_events;"
           },
           "entryFilePath": "operations.sql",
           "sqlFileOrder": [
@@ -114637,23 +114513,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "sourceChecks": [
             {
               "type": "source_regex",
-              "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+products\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped UPDATE for `products` in operations.sql and keep its WHERE clause.",
+              "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+[sS][tT][oO][cC][kK]_[eE][vV][eE][nN][tT][sS]\\b(?=[^;]*\\b[wW][hH][eE][rR][eE]\\b[^;]*\\b[nN][oO][tT][eE]\\b\\s*=\\s*['\\\"][tT][eE][sS][tT]\\ [eE][vV][eE][nN][tT]['\\\"])[^;]*;",
+              "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.sourceCheckMessages.removePlaceholder",
               "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+stock_events\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-              "message": "Write the required scoped DELETE for `stock_events` in operations.sql and keep its WHERE clause.",
-              "path": "operations.sql"
-            },
-            {
-              "type": "source_regex",
-              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+stock_events\\b",
-              "message": "Write the required result-returning SELECT in query.sql for `stock_events`.",
-              "path": "query.sql"
             }
-          ]
+          ],
+          "showExpectedExample": true
         }
       ]
     }

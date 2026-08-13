@@ -67,19 +67,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.cards.sketch1.title",
       "sketchId": "sketch-foreign-key-usage",
-      "height": 420,
-      "tryIt": {
-        "id": "try-foreign-keys-and-references-sketch1",
-        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.title",
-        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.prompt",
-        "exerciseKey": "try-foreign-keys-and-references-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -216,7 +204,7 @@
     {
       "id": "try-foreign-keys-and-references-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0",
       "language": "sql",
@@ -308,7 +296,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Provided parent table\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Create the departments child table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(departments);",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -348,30 +336,25 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?departments\\b",
-          "message": "Create the `departments` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[dD][eE][pP][aA][rR][tT][mM][eE][nN][tT][sS]\\b(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[mM][aA][nN][aA][gG][eE][rR]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[eE][mM][pP][lL][oO][yY][eE][eE][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[mM][aA][nN][aA][gG][eE][rR]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[eE][mM][pP][lL][oO][yY][eE][eE][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))[^;]*;",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.sourceCheckMessages.managerRelationship",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
-          "message": "Write the required learner-authored inspection in query.sql.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
-      "id": "try-foreign-keys-and-references-sketch1",
+      "id": "practice-two-foreign-key-relationships",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1",
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
       "starterFiles": [
         {
           "path": "schema.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -379,7 +362,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -389,7 +372,7 @@
       "solutionFiles": [
         {
           "path": "schema.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionCode",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.solutionCode",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -397,7 +380,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.solutionFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -425,11 +408,11 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterCode",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -437,7 +420,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.starterFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -455,11 +438,11 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Provided parent tables\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Create the order_items child table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(order_items);",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionCode",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -467,7 +450,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch1.solutionFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.solutionFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -495,17 +478,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?order_items\\b",
-          "message": "Create the `order_items` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[oO][rR][dD][eE][rR]_[iI][tT][eE][mM][sS]\\b(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[oO][rR][dD][eE][rR]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[oO][rR][dD][eE][rR][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[oO][rR][dD][eE][rR]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[oO][rR][dD][eE][rR][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))[^;]*;",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.sourceCheckMessages.orderItemRelationships",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
-          "message": "Write the required learner-authored inspection in query.sql.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     }
   ]
 }

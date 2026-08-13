@@ -67,19 +67,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.cards.sketch1.title",
       "sketchId": "sketch-not-null",
-      "height": 420,
-      "tryIt": {
-        "id": "try-primary-key-and-not-null-constraints-sketch1",
-        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.title",
-        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.prompt",
-        "exerciseKey": "try-primary-key-and-not-null-constraints-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -115,7 +103,7 @@
     {
       "id": "try-primary-key-and-not-null-constraints-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0",
       "language": "sql",
@@ -207,7 +195,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Define the products table\nCREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    product_name TEXT NOT NULL\n);\n\n-- file: query.sql\nSELECT name FROM sqlite_master WHERE type='table' AND name='products';",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -247,30 +235,25 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-          "message": "Define the `products` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[pP][rR][oO][dD][uU][cC][tT][sS]\\b(?=[^;]*(?:\\b[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\s*\\)))(?=[^;]*\\b[pP][rR][oO][dD][uU][cC][tT]_[nN][aA][mM][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)[^;]*;",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0.sourceCheckMessages.requiredProductRules",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
-      "id": "try-primary-key-and-not-null-constraints-sketch1",
+      "id": "practice-required-order-columns",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1",
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterCode",
       "starterFiles": [
         {
           "path": "schema.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterFiles.schema_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.schema_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -278,7 +261,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -288,7 +271,7 @@
       "solutionFiles": [
         {
           "path": "schema.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.solutionFiles.schema_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.solutionFiles.schema_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -296,7 +279,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.solutionFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.solutionFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -324,11 +307,11 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterFiles.schema_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.schema_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -336,7 +319,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.starterFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -354,11 +337,11 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Define the orders table\nCREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);\n\n-- file: query.sql\nSELECT name FROM sqlite_master WHERE type='table' AND name='orders';",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.solutionFiles.schema_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.solutionFiles.schema_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -366,7 +349,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch1.solutionFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.solutionFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -394,17 +377,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?orders\\b",
-          "message": "Define the `orders` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[oO][rR][dD][eE][rR][sS]\\b(?=[^;]*(?:\\b[oO][rR][dD][eE][rR]_[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[oO][rR][dD][eE][rR]_[iI][dD]\\s*\\)))(?=[^;]*\\b[cC][uU][sS][tT][oO][mM][eE][rR]_[nN][aA][mM][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)[^;]*;",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.sourceCheckMessages.requiredOrderRules",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "multi-choice-primary-key",

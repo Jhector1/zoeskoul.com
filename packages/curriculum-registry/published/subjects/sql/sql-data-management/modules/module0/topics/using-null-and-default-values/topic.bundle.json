@@ -61,19 +61,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.cards.sketch1.title",
       "sketchId": "sketch-using-null-default-2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-using-null-and-default-values-sketch1",
-        "titleKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.title",
-        "promptKey": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.prompt",
-        "exerciseKey": "try-using-null-and-default-values-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -109,7 +97,7 @@
     {
       "id": "try-using-null-and-default-values-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0",
       "language": "sql",
@@ -201,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Gadget';",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -241,30 +229,31 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\((?![^)]*\\b[sS][tT][aA][tT][uU][sS]\\b)(?=[^)]*\\b[nN][oO][tT][eE][sS]\\b)[^)]*\\)",
+          "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.sourceCheckMessages.omitStatus",
           "path": "operations.sql"
         },
         {
           "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
+          "pattern": "\\b[nN][uU][lL][lL]\\b",
+          "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch0.sourceCheckMessages.explicitNull",
+          "path": "operations.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
-      "id": "try-using-null-and-default-values-sketch1",
+      "id": "practice-default-status-null-notes-batch",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1",
+      "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterCode",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterCode",
       "starterFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.operations_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -272,7 +261,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.query_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -282,7 +271,7 @@
       "solutionFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.operations_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.solutionFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -290,7 +279,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.query_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.solutionFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -318,11 +307,11 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterCode",
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.operations_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -330,7 +319,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.starterFiles.query_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.starterFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -348,11 +337,11 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device')\nORDER BY name;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.operations_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.solutionFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -360,7 +349,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.tryIt.try_using_null_and_default_values_sketch1.solutionFiles.query_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.solutionFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -388,17 +377,18 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\((?![^)]*\\b[sS][tT][aA][tT][uU][sS]\\b)(?=[^)]*\\b[nN][oO][tT][eE][sS]\\b)[^)]*\\)",
+          "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.sourceCheckMessages.omitStatus",
           "path": "operations.sql"
         },
         {
           "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
+          "pattern": "\\b[nN][uU][lL][lL]\\b",
+          "message": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.using-null-and-default-values.practice.practice-default-status-null-notes-batch.sourceCheckMessages.explicitNull",
+          "path": "operations.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-1",

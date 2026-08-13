@@ -61,19 +61,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.cards.sketch1.title",
       "sketchId": "sketch2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-updating-controlled-row-sets-sketch1",
-        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.title",
-        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.prompt",
-        "exerciseKey": "try-updating-controlled-row-sets-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -109,7 +97,7 @@
     {
       "id": "try-updating-controlled-row-sets-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0",
       "language": "sql",
@@ -201,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET price = 50.00, status = 'inactive'\nWHERE id = 3;\n\n-- file: query.sql\nSELECT price, status FROM inventory_items WHERE id = 3;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -242,29 +230,24 @@
         {
           "type": "source_regex",
           "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch0.sourceCheckMessages.scopedUpdate",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
-      "id": "try-updating-controlled-row-sets-sketch1",
+      "id": "practice-compound-update-scope",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1",
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterCode",
       "starterFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.operations_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -272,7 +255,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -282,7 +265,7 @@
       "solutionFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.operations_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.solutionFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -290,7 +273,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.solutionFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -318,11 +301,11 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.operations_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -330,7 +313,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.starterFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.starterFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -348,11 +331,11 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;\n\n-- file: query.sql\nSELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.operations_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.solutionFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -360,7 +343,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.tryIt.try_updating_controlled_row_sets_sketch1.solutionFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.solutionFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -389,16 +372,11 @@
         {
           "type": "source_regex",
           "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-controlled-row-sets.practice.practice-compound-update-scope.sourceCheckMessages.scopedUpdate",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-1",

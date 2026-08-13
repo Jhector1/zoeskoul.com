@@ -20,21 +20,21 @@
             "allowReveal": true,
             "try_unique_and_default_constraints_sketch0": {
               "title": "Protect Customer Phone Numbers",
-              "prompt": "A customer-support team uses phone numbers to avoid duplicate contact records. Create or complete the `customers` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='customers'`.",
-              "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+              "prompt": "Create a `customers` table with an integer primary id, a required name, and a phone number that may not be duplicated across customer records. Inspect the resulting definition.",
+              "hint": "The business rule concerns duplicate phone numbers.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `customers`."
+                "concept": "UNIQUE protects a business identifier from duplicate non-null values.",
+                "hint_1": "Apply the uniqueness rule to phone_number.",
+                "hint_2": "Inspect the final table definition afterward."
               },
-              "starterCode": "-- Build the table definition required for \"Protect Customer Phone Numbers\" below.\n",
+              "starterCode": "-- Define the customers table below.\n",
               "solutionCode": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);",
               "starterFiles": {
                 "schema_sql": {
-                  "content": "-- Build the table definition required for \"Protect Customer Phone Numbers\" below.\n"
+                  "content": "-- Define the customers table below.\n"
                 },
                 "query_sql": {
-                  "content": "-- Return the verification result required for \"Protect Customer Phone Numbers\" below.\n"
+                  "content": "-- Inspect the customers table below.\n"
                 }
               },
               "solutionFiles": {
@@ -42,36 +42,12 @@
                   "content": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);"
                 },
                 "query_sql": {
-                  "content": "SELECT name FROM sqlite_master WHERE type='table' AND name='customers';"
-                }
-              }
-            },
-            "try_unique_and_default_constraints_sketch1": {
-              "title": "Give New Orders a Default Status",
-              "prompt": "New orders should begin in the pending queue unless another status is supplied. Create or complete the `orders` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='orders'`.",
-              "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `orders`."
-              },
-              "starterCode": "-- Build the table definition required for \"Give New Orders a Default Status\" below.\n",
-              "solutionCode": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);",
-              "starterFiles": {
-                "schema_sql": {
-                  "content": "-- Build the table definition required for \"Give New Orders a Default Status\" below.\n"
-                },
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Give New Orders a Default Status\" below.\n"
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'customers';"
                 }
               },
-              "solutionFiles": {
-                "schema_sql": {
-                  "content": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);"
-                },
-                "query_sql": {
-                  "content": "SELECT name FROM sqlite_master WHERE type='table' AND name='orders';"
-                }
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'customers';",
+              "sourceCheckMessages": {
+                "uniquePhone": "Declare `phone_number` as unique in the customers schema."
               }
             }
           },
@@ -173,6 +149,38 @@
                 "FOREIGN KEY",
                 "CHECK"
               ]
+            },
+            "practice-default-order-status": {
+              "title": "Practice: Give New Orders a Default Status",
+              "prompt": "Create an `orders` table with an integer primary id, a required customer id, and a status that automatically begins as `pending` when the column is omitted. Inspect the final definition.",
+              "hint": "The status column needs a database-supplied initial value.",
+              "help": {
+                "concept": "DEFAULT supplies a value when an INSERT omits that column.",
+                "hint_1": "The required default is pending.",
+                "hint_2": "Inspect the completed orders definition afterward."
+              },
+              "starterCode": "-- Define the orders table below.\n",
+              "solutionCode": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the orders table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Inspect the orders table below.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';",
+              "sourceCheckMessages": {
+                "pendingDefault": "Give `status` a default value of `pending`."
+              }
             }
           }
         }
@@ -184,12 +192,12 @@
       "sql-data-management-module-2-table-creation-constraints": {
         "unique-and-default-constraints": {
           "unique-constraint": {
-            "title": "UNIQUE protects values that must identify one real-world record",
-            "bodyMarkdown": "The UNIQUE constraint in SQL ensures that all values in a column are different from each other. This is crucial for maintaining data integrity, especially when dealing with business identifiers like email addresses or product SKUs. By enforcing uniqueness, you prevent duplicate entries that could lead to data inconsistencies.\n\nFor example, consider a table `employees` where each employee must have a unique email address:\n\n```sql\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);\n```\n\nIn this example, the `email` column is constrained to have unique values. If you attempt to insert a duplicate email, the database will reject the entry, ensuring that each email address is unique across the table. This constraint is particularly useful in scenarios where a unique identifier is required for each record."
+            "title": "UNIQUE protects business identifiers from duplicates",
+            "bodyMarkdown": "Some values must identify at most one record even when they are not the table's primary key.\n\n```sql\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    email TEXT UNIQUE\n);\n```\n\nA duplicate non-null email is rejected because the schema declares that business rule directly."
           },
           "default-constraint": {
-            "title": "DEFAULT supplies a value when an INSERT omits the column",
-            "bodyMarkdown": "The DEFAULT constraint in SQL allows you to specify a default value for a column. This is useful when you want to ensure that a column has a value even if none is provided during an INSERT operation. It simplifies data entry and ensures consistency across records.\n\nConsider a `products` table where each product has a default status of 'active':\n\n```sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    status TEXT DEFAULT 'active'\n);\n```\n\nIn this example, if a new product is added without specifying a status, the database automatically assigns it the default value 'active'. This helps maintain a consistent state for new entries and reduces the need for explicit value assignments during data insertion."
+            "title": "DEFAULT supplies a value when an INSERT omits one",
+            "bodyMarkdown": "A `DEFAULT` defines the value a column receives when an INSERT leaves that column out.\n\n```sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    status TEXT DEFAULT 'active'\n);\n```\n\nDefaults reduce repeated input while keeping the initial state consistent."
           }
         }
       }

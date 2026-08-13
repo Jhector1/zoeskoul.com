@@ -30965,12 +30965,12 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_insert_with_explicit_column_lists_sketch0": {
               "title": "Add a Notebook with Explicit Columns",
-              "prompt": "The receiving desk approved a Notebook for the stationery shelf. Insert the approved row or rows into `inventory_items` using the explicit column list `(name, category, price, status)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `name = 'Notebook'`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "prompt": "In `operations.sql`, add one inventory item with name `Notebook`, category `Stationery`, price `3.99`, and status `active`. Use an explicit column list rather than relying on the table's column order. In `query.sql`, return the stored Notebook row so the Results tab proves the change.",
+              "hint": "Match each supplied value to a named destination column, then verify the row by its name.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `name = 'Notebook'`."
+                "concept": "An explicit insert column list documents where every supplied value belongs.",
+                "hint_1": "The operation belongs in `operations.sql`; inspection belongs in `query.sql`.",
+                "hint_2": "Verify only the Notebook row after the insert."
               },
               "starterCode": "-- Apply the approved data change for \"Add a Notebook with Explicit Columns\" below.\n",
               "solutionCode": "INSERT INTO inventory_items (name, category, price, status) VALUES ('Notebook', 'Stationery', 3.99, 'active');",
@@ -30989,35 +30989,11 @@ const messages: Record<string, any> = {
                 "query_sql": {
                   "content": "SELECT * FROM inventory_items WHERE name = 'Notebook';"
                 }
-              }
-            },
-            "try_insert_with_explicit_column_lists_sketch1": {
-              "title": "Add Two Stationery Items",
-              "prompt": "The stationery buyer approved a Pen and an Eraser in the same intake batch. Insert the approved row or rows into `inventory_items` using the explicit column list `(name, category, price, status)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `name IN ('Pen', 'Eraser')`. Sort the final result by `name`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `name IN ('Pen', 'Eraser')`, ordered by `name`."
               },
-              "starterCode": "-- Apply the approved data change for \"Add Two Stationery Items\" below.\n",
-              "solutionCode": "INSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');",
-              "starterFiles": {
-                "operations_sql": {
-                  "content": "-- Apply the approved data change for \"Add Two Stationery Items\" below.\n"
-                },
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Add Two Stationery Items\" below.\n"
-                }
+              "sourceCheckMessages": {
+                "explicitInsert": "Use an INSERT into `inventory_items` with an explicit column list in operations.sql."
               },
-              "solutionFiles": {
-                "operations_sql": {
-                  "content": "INSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');"
-                },
-                "query_sql": {
-                  "content": "SELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser')\nORDER BY name;"
-                }
-              }
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status) VALUES ('Notebook', 'Stationery', 3.99, 'active');\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE name = 'Notebook';"
             }
           },
           "practice": {
@@ -31118,6 +31094,38 @@ const messages: Record<string, any> = {
                 "c": "Ignore duplicate-producing relationships when choosing a count.",
                 "d": "Use an adjacent topic's technique even when it changes the requested metric."
               }
+            },
+            "practice-explicit-column-intake": {
+              "title": "Practice: Use Explicit Columns for an Intake Batch",
+              "prompt": "In `operations.sql`, add the approved stationery items `Pen` at `1.50` and `Eraser` at `0.99`; both have status `active`. Use an explicit column list so each supplied value has a visible destination. In `query.sql`, show only the two new rows and sort them by name.",
+              "hint": "Declare the destinations before the values and keep the same mapping for both approved rows.",
+              "help": {
+                "concept": "Explicit column lists keep value-to-column mapping reviewable even when several rows are added.",
+                "hint_1": "Both new items belong in the same inventory table.",
+                "hint_2": "The verification result should contain only Pen and Eraser."
+              },
+              "starterCode": "-- Apply the approved data change for \"Add Two Stationery Items\" below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Add Two Stationery Items\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Add Two Stationery Items\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser')\nORDER BY name;"
+                }
+              },
+              "sourceCheckMessages": {
+                "explicitInsert": "Use an INSERT into `inventory_items` with an explicit column list in operations.sql."
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser')\nORDER BY name;"
             }
           }
         },
@@ -31139,12 +31147,12 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_inserting_multiple_rows_sketch0": {
               "title": "Add a Two-Item Intake Batch",
-              "prompt": "A classroom-supplies shipment contains two approved items. Insert the approved row or rows into `inventory_items` using the explicit column list `(name, category, price, status, is_test, notes, last_updated)`. In `query.sql`, return `name, category, price, status, is_test, notes, last_updated` from `inventory_items` in that column order. Keep only rows where `name IN ('Sketchbook', 'Marker Set')`. Sort the final result by `name`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "prompt": "In `operations.sql`, add `Sketchbook` and `Marker Set` as one multi-row insert. Both are `Stationery`, active, not test items, have no notes, and were updated on `2026-02-10`; their prices are `8.00` and `12.00` respectively. In `query.sql`, show those two rows with their inventory fields and sort by name.",
+              "hint": "Use one shared column list and one statement containing two value tuples.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `name, category, price, status, is_test, notes, last_updated` from `inventory_items` for rows matching `name IN ('Sketchbook', 'Marker Set')`, ordered by `name`."
+                "concept": "A multi-row insert uses one column contract for several value tuples.",
+                "hint_1": "Both tuples must contain the same number of values.",
+                "hint_2": "Verify only the two rows from this batch."
               },
               "starterCode": "-- Apply the approved data change for \"Add a Two-Item Intake Batch\" below.\n",
               "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Sketchbook', 'Stationery', 8.00, 'active', 0, NULL, '2026-02-10'),\n  ('Marker Set', 'Stationery', 12.00, 'active', 0, NULL, '2026-02-10');",
@@ -31163,29 +31171,11 @@ const messages: Record<string, any> = {
                 "query_sql": {
                   "content": "SELECT name, category, price, status, is_test, notes, last_updated FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set')\nORDER BY name;"
                 }
-              }
-            },
-            "try_inserting_multiple_rows_sketch1": {
-              "title": "Verify the New Batch",
-              "prompt": "The receiving lead wants proof that the new classroom-supplies batch is present. In `query.sql`, return every column from `inventory_items`. Keep only rows where `name IN ('Sketchbook', 'Marker Set')`. Sort the final result by `name`.",
-              "hint": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `name IN ('Sketchbook', 'Marker Set')`, ordered by `name`."
               },
-              "starterCode": "-- Return the verification result required for \"Verify the New Batch\" below.\n",
-              "solutionCode": "SELECT * FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set')\nORDER BY name;",
-              "starterFiles": {
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Verify the New Batch\" below.\n"
-                }
+              "sourceCheckMessages": {
+                "multiRowInsert": "Add the approved batch with one multi-row INSERT in operations.sql."
               },
-              "solutionFiles": {
-                "query_sql": {
-                  "content": "SELECT * FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set')\nORDER BY name;"
-                }
-              }
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Sketchbook', 'Stationery', 8.00, 'active', 0, NULL, '2026-02-10'),\n  ('Marker Set', 'Stationery', 12.00, 'active', 0, NULL, '2026-02-10');\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes, last_updated FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set')\nORDER BY name;"
             }
           },
           "practice": {
@@ -31286,6 +31276,38 @@ const messages: Record<string, any> = {
                 "c": "Reduces the chance of errors",
                 "d": "Requires specifying every column"
               }
+            },
+            "practice-multi-row-supply-batch": {
+              "title": "Practice: Add Another Batch in One Statement",
+              "prompt": "In `operations.sql`, add two approved Stationery items as one batch: `Binder Clips` at `2.50` and `Index Cards` at `3.25`. Both are active, not test items, have no notes, and use `2026-02-11` as `last_updated`. In `query.sql`, show only these two rows and sort by name.",
+              "hint": "Keep one column list for the batch and place both rows in the same VALUES list.",
+              "help": {
+                "concept": "Independent practice should create the batch, not only inspect data that another exercise created.",
+                "hint_1": "Use one statement containing two tuples.",
+                "hint_2": "The verification result should contain Binder Clips and Index Cards only."
+              },
+              "starterCode": "-- Add the approved two-item batch below.",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Binder Clips', 'Stationery', 2.50, 'active', 0, NULL, '2026-02-11'),\n  ('Index Cards', 'Stationery', 3.25, 'active', 0, NULL, '2026-02-11');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Add the approved two-item batch below."
+                },
+                "query_sql": {
+                  "content": "-- Verify only the two newly added rows."
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Binder Clips', 'Stationery', 2.50, 'active', 0, NULL, '2026-02-11'),\n  ('Index Cards', 'Stationery', 3.25, 'active', 0, NULL, '2026-02-11');"
+                },
+                "query_sql": {
+                  "content": "SELECT name, category, price, status, is_test, notes, last_updated\nFROM inventory_items\nWHERE name IN ('Binder Clips', 'Index Cards')\nORDER BY name;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: query.sql\nSELECT * FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set')\nORDER BY name;",
+              "sourceCheckMessages": {
+                "multiRowInsert": "Add both approved rows with one multi-row INSERT in operations.sql."
+              }
             }
           }
         },
@@ -31321,12 +31343,12 @@ const messages: Record<string, any> = {
             "steps": {
               "ci_module_0_step1": {
                 "title": "Add the First Approved Item",
-                "prompt": "The fulfillment team has approved the first item for its new packing station. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, status, is_test, notes, last_updated)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `id = 101`.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "prompt": "Start the intake script by adding item `101`: `Desk Organizer`, category `Office`, price `12.99`, status `active`, test flag `0`, notes `New stock`, and `last_updated` of `2026-02-10`. Use an explicit column list. In `query.sql`, verify only item 101.",
+                "hint": "Create the approved row in operations.sql and use its id as the narrow verification target.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `id = 101`."
+                  "concept": "The project grows cumulatively from approved inserts.",
+                  "hint_1": "Keep the mutation and verification responsibilities in their separate files.",
+                  "hint_2": "This step should prove item 101 exists with the approved values."
                 },
                 "starterCode": "-- Apply the approved data change for \"Add the First Approved Item\" below.\n",
                 "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');",
@@ -31345,25 +31367,29 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;"
                   }
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;",
+                "sourceCheckMessages": {
+                  "insert": "Add item 101 with an INSERT that uses an explicit column list in operations.sql."
                 }
               },
               "ci_module_0_step2": {
                 "title": "Record an Item with No Notes",
-                "prompt": "A second approved item has no notes on the intake sheet. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, status, is_test, notes, last_updated)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `id = 102`.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "prompt": "Carry the intake script forward and add item `102`: `Cable Labels`, category `Office`, price `5.99`, status `active`, test flag `0`, no notes, and `last_updated` of `2026-02-11`. Record the missing notes deliberately as SQL `NULL`. In `query.sql`, verify item 102.",
+                "hint": "Preserve item 101 and add one new insert for item 102; the missing notes are intentional data.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `id = 102`."
+                  "concept": "A deliberate missing value should be represented as NULL rather than an invented placeholder string.",
+                  "hint_1": "Do not remove or rewrite the first approved insert.",
+                  "hint_2": "Verify the newly added id after the mutation."
                 },
-                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Continue the next requirement for Record an Item with No Notes below.\n",
+                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');",
                 "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');",
                 "starterFiles": {
                   "operations_sql": {
-                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Continue the next requirement for Record an Item with No Notes below.\n"
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Record an Item with No Notes\" below.\n"
+                    "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 101;"
                   }
                 },
                 "solutionFiles": {
@@ -31373,25 +31399,30 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;"
                   }
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;",
+                "sourceCheckMessages": {
+                  "insert": "Add the approved item with an INSERT in operations.sql.",
+                  "nullNotes": "Represent the deliberately missing notes with SQL NULL."
                 }
               },
               "ci_module_0_step3": {
                 "title": "Use the Approved Defaults",
-                "prompt": "The Shipping Pouch should receive the database's approved defaults instead of hard-coded values. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, status, is_test, notes, last_updated)`. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, is_test, notes)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `id = 103`.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "prompt": "Carry the intake script forward and add item `103`: `Shipping Pouch`, category `Office`, price `3.49`, test flag `0`, and notes `Durable material`. Let the database supply fields governed by its defaults instead of hard-coding those values. In `query.sql`, verify item 103.",
+                "hint": "Preserve the earlier inserts and omit the defaulted field from this new insert's column list.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `id = 103`."
+                  "concept": "A schema default is used by omitting that column from the insert.",
+                  "hint_1": "Keep only the values the intake sheet actually supplies.",
+                  "hint_2": "Inspect item 103 to confirm the schema filled the remaining value."
                 },
-                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Continue the next requirement for Use the Approved Defaults below.\n",
+                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');",
                 "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');",
                 "starterFiles": {
                   "operations_sql": {
-                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Continue the next requirement for Use the Approved Defaults below.\n"
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Use the Approved Defaults\" below.\n"
+                    "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 102;"
                   }
                 },
                 "solutionFiles": {
@@ -31401,25 +31432,29 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;"
                   }
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;",
+                "sourceCheckMessages": {
+                  "useDefault": "Let the schema supply status by omitting `status` from the new item's insert column list."
                 }
               },
               "ci_module_0_step4": {
                 "title": "Add Two Items as One Batch",
-                "prompt": "Two small packing supplies were approved together and should be recorded as one batch. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, status, is_test, notes, last_updated)`. Insert the approved row or rows into `inventory_items` using the explicit column list `(id, name, category, price, is_test, notes)`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `id IN (104, 105)`. Sort the final result by `id`.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "prompt": "Carry the intake script forward and add items `104` and `105` with one multi-row insert. Item 104 is `Packing Tape`, Office, `2.99`, active, test flag 0, notes `Strong adhesive`, updated `2026-02-12`. Item 105 is `Label Roll`, Office, `1.99`, active, test flag 0, notes `Easy to peel`, updated `2026-02-12`. In `query.sql`, verify only these two ids in id order.",
+                "hint": "Keep items 101–103 intact and use one shared column list for the final two approved rows.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `id IN (104, 105)`, ordered by `id`."
+                  "concept": "A batch insert groups rows governed by one column contract.",
+                  "hint_1": "Both new rows belong in the same statement.",
+                  "hint_2": "Verify ids 104 and 105 together after the change."
                 },
-                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Continue the next requirement for Add Two Items as One Batch below.\n",
+                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');",
                 "solutionCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');",
                 "starterFiles": {
                   "operations_sql": {
-                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Continue the next requirement for Add Two Items as One Batch below.\n"
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Add Two Items as One Batch\" below.\n"
+                    "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id = 103;"
                   }
                 },
                 "solutionFiles": {
@@ -31429,25 +31464,29 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105)\nORDER BY id;"
                   }
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n\n-- file: query.sql\n-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105)\nORDER BY id;",
+                "sourceCheckMessages": {
+                  "multiRowInsert": "Add items 104 and 105 with one multi-row INSERT."
                 }
               },
               "ci_module_0_step5": {
                 "title": "Finish the Intake Handoff",
-                "prompt": "The intake script is ready for an operations handoff. In `query.sql`, return every column from `inventory_items`. Sort the final result by `id`. Keep the completed work in `operations.sql` unchanged.",
-                "hint": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
+                "prompt": "The mutation script is complete. Leave `operations.sql` unchanged. In `query.sql`, return the full inventory and order it by id so the intake can be reviewed as one final handoff.",
+                "hint": "This final step changes only the verification query.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `*` from `inventory_items`, ordered by `id`."
+                  "concept": "A completed mutation workflow ends with a clear inspection of the resulting state.",
+                  "hint_1": "Do not add another mutation.",
+                  "hint_2": "The final report should be deterministic by id."
                 },
-                "starterCode": "-- Return the verification result required for \"Finish the Intake Handoff\" below.\n",
+                "starterCode": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');",
                 "solutionCode": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;",
                 "starterFiles": {
                   "operations_sql": {
-                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n"
+                    "content": "-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Finish the Intake Handoff\" below.\n"
+                    "content": "-- Verify the insertion\nSELECT * FROM inventory_items WHERE id IN (104, 105)\nORDER BY id;"
                   }
                 },
                 "solutionFiles": {
@@ -31457,7 +31496,8 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;"
                   }
-                }
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Insert the first approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (101, 'Desk Organizer', 'Office', 12.99, 'active', 0, 'New stock', '2026-02-10');\n\n-- Insert the second approved item\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (102, 'Cable Labels', 'Office', 5.99, 'active', 0, NULL, '2026-02-11');\n\n-- Insert the third approved item\nINSERT INTO inventory_items (id, name, category, price, is_test, notes)\nVALUES\n  (103, 'Shipping Pouch', 'Office', 3.49, 0, 'Durable material');\n\n-- Insert the fourth and fifth approved items\nINSERT INTO inventory_items (id, name, category, price, status, is_test, notes, last_updated)\nVALUES\n  (104, 'Packing Tape', 'Office', 2.99, 'active', 0, 'Strong adhesive', '2026-02-12'),\n  (105, 'Label Roll', 'Office', 1.99, 'active', 0, 'Easy to peel', '2026-02-12');\n\n-- file: query.sql\n-- Verify all new items and existing inventory\nSELECT * FROM inventory_items ORDER BY id;"
               }
             }
           }
@@ -31594,12 +31634,12 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_using_null_and_default_values_sketch0": {
               "title": "Use a Default Status and NULL Notes",
-              "prompt": "A new Electronics item arrived without any notes, and operations wants the database to assign its normal status. Insert the approved row or rows into `inventory_items` using the explicit column list `(name, category, price, notes)`. In `query.sql`, return `name, category, price, status, is_test, notes` from `inventory_items` in that column order. Keep only rows where `name = 'Gadget'`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "prompt": "In `operations.sql`, add `Gadget`, an Electronics item priced at `19.99`. Let the database provide its normal status instead of supplying one, and deliberately store no notes with SQL `NULL`. In `query.sql`, show the new row including its resulting status, test flag, and notes.",
+              "hint": "Omit the column whose value should come from the schema, but include the column whose missing value is deliberate.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `name, category, price, status, is_test, notes` from `inventory_items` for rows matching `name = 'Gadget'`."
+                "concept": "A default comes from omission; NULL is an explicit stored value.",
+                "hint_1": "Do not hard-code the status value.",
+                "hint_2": "Verify the resulting row after the insert."
               },
               "starterCode": "-- Apply the approved data change for \"Use a Default Status and NULL Notes\" below.\n",
               "solutionCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);",
@@ -31618,35 +31658,12 @@ const messages: Record<string, any> = {
                 "query_sql": {
                   "content": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Gadget';"
                 }
-              }
-            },
-            "try_using_null_and_default_values_sketch1": {
-              "title": "Add Two Rows with Defaults",
-              "prompt": "The intake sheet contains two rows that should use the table's default status. Insert the approved row or rows into `inventory_items` using the explicit column list `(name, category, price, notes)`. In `query.sql`, return `name, category, price, status, is_test, notes` from `inventory_items` in that column order. Keep only rows where `name IN ('Widget', 'Device')`. Sort the final result by `name`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `name, category, price, status, is_test, notes` from `inventory_items` for rows matching `name IN ('Widget', 'Device')`, ordered by `name`."
               },
-              "starterCode": "-- Apply the approved data change for \"Add Two Rows with Defaults\" below.\n",
-              "solutionCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);",
-              "starterFiles": {
-                "operations_sql": {
-                  "content": "-- Apply the approved data change for \"Add Two Rows with Defaults\" below.\n"
-                },
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Add Two Rows with Defaults\" below.\n"
-                }
+              "sourceCheckMessages": {
+                "omitStatus": "Let the schema provide status: omit `status` from the inventory_items insert column list while still including `notes`.",
+                "explicitNull": "Store the missing notes deliberately with SQL NULL in operations.sql."
               },
-              "solutionFiles": {
-                "operations_sql": {
-                  "content": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);"
-                },
-                "query_sql": {
-                  "content": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device')\nORDER BY name;"
-                }
-              }
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES ('Gadget', 'Electronics', 19.99, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name = 'Gadget';"
             }
           },
           "practice": {
@@ -31745,6 +31762,39 @@ const messages: Record<string, any> = {
                 "quote",
                 "highlight"
               ]
+            },
+            "practice-default-status-null-notes-batch": {
+              "title": "Practice: Combine Defaults and NULL in a Batch",
+              "prompt": "In `operations.sql`, add `Widget` in Tools at `5.99` and `Device` in Gadgets at `12.49`. For both rows, let the database provide status and deliberately record no notes with SQL `NULL`. In `query.sql`, show the two resulting rows and sort them by name.",
+              "hint": "The same omission-versus-NULL decision applies to both rows in the batch.",
+              "help": {
+                "concept": "Defaults and explicit NULLs can be combined across several inserted rows.",
+                "hint_1": "Status should come from the table definition.",
+                "hint_2": "Notes should be deliberately stored as missing."
+              },
+              "starterCode": "-- Apply the approved data change for \"Add Two Rows with Defaults\" below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Add Two Rows with Defaults\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Add Two Rows with Defaults\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);"
+                },
+                "query_sql": {
+                  "content": "SELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device')\nORDER BY name;"
+                }
+              },
+              "sourceCheckMessages": {
+                "omitStatus": "Let the schema provide status: omit `status` from the inventory_items insert column list while still including `notes`.",
+                "explicitNull": "Store the missing notes deliberately with SQL NULL in operations.sql."
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device')\nORDER BY name;"
             }
           }
         }
@@ -31768,12 +31818,12 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_deleting_only_confirmed_rows_sketch0": {
               "title": "Remove One Approved Test Row",
-              "prompt": "The audit log confirms that row `id = 4` is an approved test record. Delete only the approved rows from `inventory_items`. Limit the mutation with `WHERE id = 4`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `id = 4`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "prompt": "The audit approved test row `4` for removal. In `operations.sql`, use a `DELETE` with a `WHERE` condition that limits the deletion to that item only. In `query.sql`, inspect item 4 again so an empty result confirms the approved row is gone.",
+              "hint": "Keep the deletion boundary as narrow as the approval.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `id = 4`."
+                "concept": "A scoped DELETE removes only the rows named by its WHERE condition.",
+                "hint_1": "The mutation belongs in operations.sql.",
+                "hint_2": "Verify the deleted id in query.sql."
               },
               "starterCode": "-- Apply the approved data change for \"Remove One Approved Test Row\" below.\n",
               "solutionCode": "-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;",
@@ -31792,35 +31842,11 @@ const messages: Record<string, any> = {
                 "query_sql": {
                   "content": "-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;"
                 }
-              }
-            },
-            "try_deleting_only_confirmed_rows_sketch1": {
-              "title": "Remove Inactive Test Rows",
-              "prompt": "Operations has approved removal of every row that is both inactive and marked as test data. Delete only the approved rows from `inventory_items`. Limit the mutation with `WHERE status = 'inactive' AND is_test = 1`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `status = 'inactive' AND is_test = 1`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `status = 'inactive' AND is_test = 1`."
               },
-              "starterCode": "-- Apply the approved data change for \"Remove Inactive Test Rows\" below.\n",
-              "solutionCode": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;",
-              "starterFiles": {
-                "operations_sql": {
-                  "content": "-- Apply the approved data change for \"Remove Inactive Test Rows\" below.\n"
-                },
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Remove Inactive Test Rows\" below.\n"
-                }
+              "sourceCheckMessages": {
+                "scopedDelete": "Use a scoped DELETE on `inventory_items` with a WHERE condition in operations.sql."
               },
-              "solutionFiles": {
-                "operations_sql": {
-                  "content": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;"
-                },
-                "query_sql": {
-                  "content": "-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;"
-                }
-              }
+              "runtimeSolutionCode": "-- file: operations.sql\n-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;\n\n-- file: query.sql\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;"
             }
           },
           "practice": {
@@ -31920,6 +31946,38 @@ const messages: Record<string, any> = {
                 "no",
                 "random"
               ]
+            },
+            "practice-delete-confirmed-row-set": {
+              "title": "Practice: Remove Only Confirmed Test Data",
+              "prompt": "Operations approved removal of rows that are both inactive and test data. In `operations.sql`, use one `DELETE` with a `WHERE` condition that expresses both parts of that approval. In `query.sql`, inspect the same target set and confirm that no approved rows remain.",
+              "hint": "The deletion should require both the inactive status and the test-data flag.",
+              "help": {
+                "concept": "Compound deletion conditions prevent a broad cleanup from removing legitimate rows.",
+                "hint_1": "Do not delete all inactive rows.",
+                "hint_2": "Verify the same approved set afterward."
+              },
+              "starterCode": "-- Apply the approved data change for \"Remove Inactive Test Rows\" below.\n",
+              "solutionCode": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Remove Inactive Test Rows\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Remove Inactive Test Rows\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;"
+                }
+              },
+              "sourceCheckMessages": {
+                "scopedDelete": "Use a scoped DELETE on `inventory_items` with a WHERE condition in operations.sql."
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\n-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- file: query.sql\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;"
             }
           }
         },
@@ -31956,36 +32014,14 @@ const messages: Record<string, any> = {
           },
           "moduleProject": {
             "steps": {
-              "try_module_1_inventory_correction_cleanup_sketch0": {
-                "title": "Preview the Audit Targets",
-                "prompt": "The inventory audit flagged rows `2`, `4`, and `6` for review, but no changes are approved yet. In `query.sql`, return `id, price, status, is_test, notes` from `inventory_items` in that column order. Keep only rows where `id IN (2, 4, 6)`. Sort the final result by `id`.",
-                "hint": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
-                "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `id, price, status, is_test, notes` from `inventory_items` for rows matching `id IN (2, 4, 6)`, ordered by `id`."
-                },
-                "starterCode": "-- Return the verification result required for \"Preview the Audit Targets\" below.\n",
-                "solutionCode": "SELECT id, price, status, is_test, notes\nFROM inventory_items\nWHERE id IN (2, 4, 6)\nORDER BY id;",
-                "starterFiles": {
-                  "query_sql": {
-                    "content": "-- Return the verification result required for \"Preview the Audit Targets\" below.\n"
-                  }
-                },
-                "solutionFiles": {
-                  "query_sql": {
-                    "content": "SELECT id, price, status, is_test, notes\nFROM inventory_items\nWHERE id IN (2, 4, 6)\nORDER BY id;"
-                  }
-                }
-              },
               "try_module_1_inventory_correction_cleanup_sketch1": {
                 "title": "Correct One Item Precisely",
-                "prompt": "The audit confirms that item `id = 2` has the wrong price and status. Update `inventory_items` with the assignments `price = 8.25, status = 'active'`. Limit the mutation with `WHERE id = 2`. In `query.sql`, return `id, price, status` from `inventory_items` in that column order. Keep only rows where `id = 2`.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "prompt": "Begin the approved cleanup by correcting item `2`. Its price should become `8.25` and its status should become `active`. Add one scoped `UPDATE` in `operations.sql`, then verify item 2 in `query.sql`.",
+                "hint": "The first project mutation should affect only item 2.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `id, price, status` from `inventory_items` for rows matching `id = 2`."
+                  "concept": "The project carries each approved mutation forward.",
+                  "hint_1": "Keep both assignments in one scoped update.",
+                  "hint_2": "Verify item 2 after the change."
                 },
                 "starterCode": "-- Continue the next requirement for Correct One Item Precisely below.\n",
                 "solutionCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;",
@@ -32004,25 +32040,29 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "SELECT id, price, status\nFROM inventory_items\nWHERE id = 2;"
                   }
-                }
+                },
+                "sourceCheckMessages": {
+                  "updateItem2": "Add the scoped UPDATE whose WHERE condition targets item 2."
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- file: query.sql\nSELECT id, price, status\nFROM inventory_items\nWHERE id = 2;"
               },
               "try_module_1_inventory_correction_cleanup_sketch2": {
-                "title": "Apply a Controlled Category Update",
-                "prompt": "Operations needs one audit date on legitimate Decor inventory. Update `inventory_items` with the assignments `price = 8.25, status = 'active'`. Update `inventory_items` with the assignments `last_updated = '2026-02-10'`. Limit the mutation with `WHERE id = 2; UPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0`. In `query.sql`, return `id, category, is_test, last_updated` from `inventory_items` in that column order. Keep only rows where `category = 'Decor' AND is_test = 0`. Sort the final result by `id`.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "title": "Apply the Approved Decor Audit Date",
+                "prompt": "Carry the first correction forward. Add another scoped `UPDATE` so legitimate Decor inventory receives `2026-02-10` as its audit date. Test rows must not be included. In `query.sql`, inspect the legitimate Decor rows and their resulting date.",
+                "hint": "Preserve the first mutation and add only the new approved group update.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `id, category, is_test, last_updated` from `inventory_items` for rows matching `category = 'Decor' AND is_test = 0`, ordered by `id`."
+                  "concept": "A cumulative project preserves earlier working mutations while adding the next requirement.",
+                  "hint_1": "The new scope requires Decor and non-test inventory.",
+                  "hint_2": "Verify the controlled group after the update."
                 },
-                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Continue the next requirement for Apply a Controlled Category Update below.\n",
+                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;",
                 "solutionCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;",
                 "starterFiles": {
                   "operations_sql": {
-                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Continue the next requirement for Apply a Controlled Category Update below.\n"
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Apply a Controlled Category Update\" below.\n"
+                    "content": "SELECT id, price, status\nFROM inventory_items\nWHERE id = 2;"
                   }
                 },
                 "solutionFiles": {
@@ -32032,25 +32072,29 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "SELECT id, category, is_test, last_updated\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 0\nORDER BY id;"
                   }
-                }
+                },
+                "sourceCheckMessages": {
+                  "updateDecor": "Add the scoped UPDATE whose WHERE condition targets Decor rows that are not test data."
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- file: query.sql\nSELECT id, category, is_test, last_updated\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 0\nORDER BY id;"
               },
               "try_module_1_inventory_correction_cleanup_sketch3": {
-                "title": "Delete One Confirmed Test Item",
-                "prompt": "The audit board approved row `id = 4` for deletion. Update `inventory_items` with the assignments `price = 8.25, status = 'active'`. Update `inventory_items` with the assignments `last_updated = '2026-02-10'`. Delete only the approved rows from `inventory_items`. Limit the mutation with `WHERE id = 2; UPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0; DELETE FROM inventory_items WHERE id = 4`. In `query.sql`, return `id, name` from `inventory_items` in that column order. Keep only rows where `id = 4`.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "title": "Delete the First Confirmed Test Item",
+                "prompt": "Carry both approved updates forward. The audit board now authorizes deletion of item `4`. Add one scoped `DELETE` for that item only, then verify in `query.sql` that item 4 no longer exists.",
+                "hint": "Do not rewrite the earlier updates; add only the newly approved deletion.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `id, name` from `inventory_items` for rows matching `id = 4`."
+                  "concept": "A deletion milestone should add one narrow mutation without disturbing earlier project work.",
+                  "hint_1": "The approved target is one id.",
+                  "hint_2": "An empty verification result proves it is gone."
                 },
-                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Continue the next requirement for Delete One Confirmed Test Item below.\n",
+                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;",
                 "solutionCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;",
                 "starterFiles": {
                   "operations_sql": {
-                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Continue the next requirement for Delete One Confirmed Test Item below.\n"
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Delete One Confirmed Test Item\" below.\n"
+                    "content": "SELECT id, category, is_test, last_updated\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 0\nORDER BY id;"
                   }
                 },
                 "solutionFiles": {
@@ -32060,25 +32104,29 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "SELECT id, name\nFROM inventory_items\nWHERE id = 4;"
                   }
-                }
+                },
+                "sourceCheckMessages": {
+                  "deleteItem4": "Add the scoped DELETE whose WHERE condition targets item 4."
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- file: query.sql\nSELECT id, name\nFROM inventory_items\nWHERE id = 4;"
               },
               "try_module_1_inventory_correction_cleanup_sketch4": {
                 "title": "Remove the Remaining Draft Test Row",
-                "prompt": "Row `id = 6` may be removed only while it is still both test data and in draft status. Update `inventory_items` with the assignments `price = 8.25, status = 'active'`. Update `inventory_items` with the assignments `last_updated = '2026-02-10'`. Delete only the approved rows from `inventory_items`. Limit the mutation with `WHERE id = 2; UPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0; DELETE FROM inventory_items WHERE id = 4; DELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft'`. In `query.sql`, return `id, name` from `inventory_items` in that column order. Keep only rows where `id = 6`.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "prompt": "Carry the existing cleanup forward. Item `6` may now be removed, but only while it is still both test data and in draft status. Add one `DELETE` whose condition keeps all three requirements in the safety boundary. Verify item 6 afterward.",
+                "hint": "The new deletion must identify the id and preserve both approval conditions.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `id, name` from `inventory_items` for rows matching `id = 6`."
+                  "concept": "Extra conditions can protect a deletion from acting on a row whose state has changed.",
+                  "hint_1": "Require id 6, test data, and draft status together.",
+                  "hint_2": "Verify that item 6 is absent afterward."
                 },
-                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Continue the next requirement for Remove the Remaining Draft Test Row below.\n",
+                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;",
                 "solutionCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
                 "starterFiles": {
                   "operations_sql": {
-                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Continue the next requirement for Remove the Remaining Draft Test Row below.\n"
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Remove the Remaining Draft Test Row\" below.\n"
+                    "content": "SELECT id, name\nFROM inventory_items\nWHERE id = 4;"
                   }
                 },
                 "solutionFiles": {
@@ -32088,25 +32136,29 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "SELECT id, name\nFROM inventory_items\nWHERE id = 6;"
                   }
-                }
+                },
+                "sourceCheckMessages": {
+                  "deleteItem6": "Add the DELETE whose WHERE condition keeps item 6, test-data status, and draft status in the approved scope."
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- file: query.sql\nSELECT id, name\nFROM inventory_items\nWHERE id = 6;"
               },
               "try_module_1_inventory_correction_cleanup_sketch5": {
                 "title": "Complete the Operational Handoff",
-                "prompt": "The audit cleanup is complete and another analyst needs a final handoff report. In `query.sql`, return every column from `inventory_items`. Sort the final result by `id`. Keep the completed work in `operations.sql` unchanged.",
-                "hint": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
+                "prompt": "The approved mutations are complete. Leave `operations.sql` unchanged. In `query.sql`, return the full remaining inventory and sort it by id for the final handoff.",
+                "hint": "This final milestone changes only the report query.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `*` from `inventory_items`, ordered by `id`."
+                  "concept": "A mutation workflow ends with a deterministic view of the resulting table.",
+                  "hint_1": "Do not add another UPDATE or DELETE.",
+                  "hint_2": "Return the complete remaining table in id order."
                 },
-                "starterCode": "-- Return the verification result required for \"Complete the Operational Handoff\" below.\n",
+                "starterCode": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';",
                 "solutionCode": "SELECT *\nFROM inventory_items\nORDER BY id;",
                 "starterFiles": {
                   "operations_sql": {
-                    "content": "-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n"
+                    "content": "-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Complete the Operational Handoff\" below.\n"
+                    "content": "SELECT id, name\nFROM inventory_items\nWHERE id = 6;"
                   }
                 },
                 "solutionFiles": {
@@ -32116,8 +32168,34 @@ const messages: Record<string, any> = {
                   "query_sql": {
                     "content": "SELECT *\nFROM inventory_items\nORDER BY id;"
                   }
-                }
+                },
+                "runtimeSolutionCode": "-- file: operations.sql\n-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nORDER BY id;"
               }
+            }
+          },
+          "practice": {
+            "practice-preview-audit-targets": {
+              "title": "Practice: Preview the Audit Targets",
+              "prompt": "The audit flagged items `2`, `4`, and `6`, but no changes are approved in this exercise. In `query.sql`, return `id, price, status, is_test, notes` for those three rows and sort them by id.",
+              "hint": "Inspect the evidence before making any mutation.",
+              "help": {
+                "concept": "Safe data management begins by confirming the rows under review.",
+                "hint_1": "This exercise is read-only.",
+                "hint_2": "Return only the three flagged ids."
+              },
+              "starterCode": "-- Return the verification result required for \"Preview the Audit Targets\" below.\n",
+              "solutionCode": "SELECT id, price, status, is_test, notes\nFROM inventory_items\nWHERE id IN (2, 4, 6)\nORDER BY id;",
+              "starterFiles": {
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Preview the Audit Targets\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "query_sql": {
+                  "content": "SELECT id, price, status, is_test, notes\nFROM inventory_items\nWHERE id IN (2, 4, 6)\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: query.sql\nSELECT id, price, status, is_test, notes\nFROM inventory_items\nWHERE id IN (2, 4, 6)\nORDER BY id;"
             }
           }
         },
@@ -32139,12 +32217,12 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_previewing_update_and_delete_targets_sketch0": {
               "title": "Preview Decor Test Rows",
-              "prompt": "Before the cleanup window opens, the audit team wants to see the exact Decor rows that could be removed. In `query.sql`, return every column from `inventory_items`. Keep only rows where `category = 'Decor' AND is_test = 1`.",
-              "hint": "Leave the setup files unchanged and write the requested result-returning statement in query.sql.",
+              "prompt": "Before any cleanup is approved, inspect the Decor rows that are marked as test data. In `query.sql`, return all columns for only that target set.",
+              "hint": "This is inspection only; do not mutate the table.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `category = 'Decor' AND is_test = 1`."
+                "concept": "A preview lets you validate a target set before any data-changing statement runs.",
+                "hint_1": "Use the category and test flag together.",
+                "hint_2": "Only query.sql needs to change."
               },
               "starterCode": "-- Return the verification result required for \"Preview Decor Test Rows\" below.\n",
               "solutionCode": "SELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;",
@@ -32157,35 +32235,8 @@ const messages: Record<string, any> = {
                 "query_sql": {
                   "content": "SELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;"
                 }
-              }
-            },
-            "try_previewing_update_and_delete_targets_sketch1": {
-              "title": "Update Approved Accessories",
-              "prompt": "The pricing team approved a standard price of `10.99` for legitimate Accessories items. Update `inventory_items` with the assignments `price = 10.99`. Limit the mutation with `WHERE category = 'Accessories' AND is_test = 0`. In `query.sql`, return every column from `inventory_items`. Keep only rows where `category = 'Accessories' AND is_test = 0`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `*` from `inventory_items` for rows matching `category = 'Accessories' AND is_test = 0`."
               },
-              "starterCode": "-- Apply the approved data change for \"Update Approved Accessories\" below.\n",
-              "solutionCode": "UPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;",
-              "starterFiles": {
-                "operations_sql": {
-                  "content": "-- Apply the approved data change for \"Update Approved Accessories\" below.\n"
-                },
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Update Approved Accessories\" below.\n"
-                }
-              },
-              "solutionFiles": {
-                "operations_sql": {
-                  "content": "UPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;"
-                },
-                "query_sql": {
-                  "content": "SELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;"
-                }
-              }
+              "runtimeSolutionCode": "-- file: query.sql\nSELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;"
             }
           },
           "practice": {
@@ -32286,6 +32337,38 @@ const messages: Record<string, any> = {
                 "'Accessories'",
                 "'active'"
               ]
+            },
+            "practice-update-reviewed-target-set": {
+              "title": "Practice: Update a Reviewed Target Set",
+              "prompt": "The pricing team approved a price of `10.99` for legitimate Accessories inventory. In `operations.sql`, use an `UPDATE` with a `WHERE` condition that limits the change to Accessories rows that are not test data. In `query.sql`, inspect the affected rows after the change.",
+              "hint": "The approved target needs both the category and non-test conditions.",
+              "help": {
+                "concept": "A reviewed filter should remain the mutation's safety boundary.",
+                "hint_1": "Use one scoped UPDATE.",
+                "hint_2": "Verify only the reviewed target set."
+              },
+              "starterCode": "-- Apply the approved data change for \"Update Approved Accessories\" below.\n",
+              "solutionCode": "UPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Update Approved Accessories\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Update Approved Accessories\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;"
+                },
+                "query_sql": {
+                  "content": "SELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;"
+                }
+              },
+              "sourceCheckMessages": {
+                "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;"
             }
           }
         },
@@ -32306,13 +32389,13 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_updating_controlled_row_sets_sketch0": {
-              "title": "Correct One Item's Price and Status",
-              "prompt": "The audit ticket for item `id = 3` changes two fields at once. Update `inventory_items` with the assignments `price = 50.00, status = 'inactive'`. Limit the mutation with `WHERE id = 3`. In `query.sql`, return `price, status` from `inventory_items` in that column order. Keep only rows where `id = 3`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "title": "Correct Two Fields on One Item",
+              "prompt": "The audit approved two changes for item `3`: its price should become `50.00` and its status should become `inactive`. Apply both assignments in one scoped `UPDATE`. In `query.sql`, verify the resulting price and status for item 3.",
+              "hint": "Keep the related assignments together and restrict the change to one id.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `price, status` from `inventory_items` for rows matching `id = 3`."
+                "concept": "One UPDATE can apply several related assignments to the same approved row.",
+                "hint_1": "Use one SET list for both changes.",
+                "hint_2": "Verify only item 3 afterward."
               },
               "starterCode": "-- Apply the approved data change for \"Correct One Item's Price and Status\" below.\n",
               "solutionCode": "UPDATE inventory_items\nSET price = 50.00, status = 'inactive'\nWHERE id = 3;",
@@ -32331,35 +32414,11 @@ const messages: Record<string, any> = {
                 "query_sql": {
                   "content": "SELECT price, status FROM inventory_items WHERE id = 3;"
                 }
-              }
-            },
-            "try_updating_controlled_row_sets_sketch1": {
-              "title": "Archive Test Kitchen Items",
-              "prompt": "The test kitchen catalog is being retired. Update `inventory_items` with the assignments `status = 'archived'`. Limit the mutation with `WHERE category = 'Kitchen' AND is_test = 1`. In `query.sql`, return `id, status` from `inventory_items` in that column order. Keep only rows where `category = 'Kitchen' AND is_test = 1`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `id, status` from `inventory_items` for rows matching `category = 'Kitchen' AND is_test = 1`."
               },
-              "starterCode": "-- Apply the approved data change for \"Archive Test Kitchen Items\" below.\n",
-              "solutionCode": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;",
-              "starterFiles": {
-                "operations_sql": {
-                  "content": "-- Apply the approved data change for \"Archive Test Kitchen Items\" below.\n"
-                },
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Archive Test Kitchen Items\" below.\n"
-                }
+              "sourceCheckMessages": {
+                "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
               },
-              "solutionFiles": {
-                "operations_sql": {
-                  "content": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;"
-                },
-                "query_sql": {
-                  "content": "SELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;"
-                }
-              }
+              "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET price = 50.00, status = 'inactive'\nWHERE id = 3;\n\n-- file: query.sql\nSELECT price, status FROM inventory_items WHERE id = 3;"
             }
           },
           "practice": {
@@ -32459,6 +32518,38 @@ const messages: Record<string, any> = {
                 "t2": "Execute the UPDATE statement",
                 "t3": "Verify the update results with a SELECT"
               }
+            },
+            "practice-compound-update-scope": {
+              "title": "Practice: Update a Compound Target Set",
+              "prompt": "The test Kitchen catalog is being retired. Change the status of Kitchen rows that are test data to `archived`. Use one scoped `UPDATE` whose condition requires both parts of that target. In `query.sql`, verify the affected rows.",
+              "hint": "Neither category alone nor the test flag alone is narrow enough.",
+              "help": {
+                "concept": "A compound WHERE condition expresses a multi-part business approval.",
+                "hint_1": "Both target conditions belong in the same update.",
+                "hint_2": "Verify the exact target set afterward."
+              },
+              "starterCode": "-- Apply the approved data change for \"Archive Test Kitchen Items\" below.\n",
+              "solutionCode": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Archive Test Kitchen Items\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Archive Test Kitchen Items\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;"
+                }
+              },
+              "sourceCheckMessages": {
+                "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;\n\n-- file: query.sql\nSELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;"
             }
           }
         },
@@ -32480,12 +32571,12 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_updating_one_row_precisely_sketch0": {
               "title": "Activate the Trial Tote",
-              "prompt": "The Trial Tote has passed review and can return to active inventory. Update `inventory_items` with the assignments `status = 'active'`. Limit the mutation with `WHERE id = 6`. In `query.sql`, return `id, name, status` from `inventory_items` in that column order. Keep only rows where `id IN (5, 6)`. Sort the final result by `id`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+              "prompt": "The Trial Tote, item `6`, passed review. Change only that item's status to `active` with a scoped `UPDATE`. In `query.sql`, show items 5 and 6 in id order so the target and a nearby row can be compared.",
+              "hint": "Use the item's id as the mutation boundary.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `id, name, status` from `inventory_items` for rows matching `id IN (5, 6)`, ordered by `id`."
+                "concept": "A unique id is a strong boundary for a one-row correction.",
+                "hint_1": "Only item 6 should change.",
+                "hint_2": "Keep a nearby row visible in verification."
               },
               "starterCode": "-- Apply the approved data change for \"Activate the Trial Tote\" below.\n",
               "solutionCode": "-- Update the status of 'Trial Tote' to 'active'\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 6;",
@@ -32504,35 +32595,11 @@ const messages: Record<string, any> = {
                 "query_sql": {
                   "content": "-- Verify the change\nSELECT id, name, status\nFROM inventory_items\nWHERE id IN (5, 6)\nORDER BY id;"
                 }
-              }
-            },
-            "try_updating_one_row_precisely_sketch1": {
-              "title": "Reclassify the Sample Poster",
-              "prompt": "The merchandising team reclassified the Sample Poster as Art. Update `inventory_items` with the assignments `category = 'Art'`. Limit the mutation with `WHERE id = 4`. In `query.sql`, return `id, name, category` from `inventory_items` in that column order. Keep only rows where `id IN (3, 4, 5)`. Sort the final result by `id`.",
-              "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `id, name, category` from `inventory_items` for rows matching `id IN (3, 4, 5)`, ordered by `id`."
               },
-              "starterCode": "-- Apply the approved data change for \"Reclassify the Sample Poster\" below.\n",
-              "solutionCode": "-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;",
-              "starterFiles": {
-                "operations_sql": {
-                  "content": "-- Apply the approved data change for \"Reclassify the Sample Poster\" below.\n"
-                },
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Reclassify the Sample Poster\" below.\n"
-                }
+              "sourceCheckMessages": {
+                "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
               },
-              "solutionFiles": {
-                "operations_sql": {
-                  "content": "-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;"
-                },
-                "query_sql": {
-                  "content": "-- Verify the change\nSELECT id, name, category\nFROM inventory_items\nWHERE id IN (3, 4, 5)\nORDER BY id;"
-                }
-              }
+              "runtimeSolutionCode": "-- file: operations.sql\n-- Update the status of 'Trial Tote' to 'active'\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 6;\n\n-- file: query.sql\n-- Verify the change\nSELECT id, name, status\nFROM inventory_items\nWHERE id IN (5, 6)\nORDER BY id;"
             }
           },
           "practice": {
@@ -32632,6 +32699,38 @@ const messages: Record<string, any> = {
                 "'Water Bottle'",
                 "'Trial Tote'"
               ]
+            },
+            "practice-precise-single-row-update": {
+              "title": "Practice: Reclassify One Item",
+              "prompt": "The Sample Poster, item `4`, was reclassified as `Art`. Use a scoped `UPDATE` so only that item receives the new category. In `query.sql`, show items 3 through 5 in id order to verify the correction beside unchanged rows.",
+              "hint": "Use the stable item id rather than a broad text match.",
+              "help": {
+                "concept": "A one-row correction should use a predicate that identifies exactly that record.",
+                "hint_1": "Only item 4 should receive the new category.",
+                "hint_2": "Use neighboring rows as verification context."
+              },
+              "starterCode": "-- Apply the approved data change for \"Reclassify the Sample Poster\" below.\n",
+              "solutionCode": "-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change for \"Reclassify the Sample Poster\" below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Return the verification result required for \"Reclassify the Sample Poster\" below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;"
+                },
+                "query_sql": {
+                  "content": "-- Verify the change\nSELECT id, name, category\nFROM inventory_items\nWHERE id IN (3, 4, 5)\nORDER BY id;"
+                }
+              },
+              "sourceCheckMessages": {
+                "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\n-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;\n\n-- file: query.sql\n-- Verify the change\nSELECT id, name, category\nFROM inventory_items\nWHERE id IN (3, 4, 5)\nORDER BY id;"
             }
           }
         }
@@ -32654,59 +32753,35 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_creating_tables_and_defining_columns_sketch0": {
-              "title": "Create and Verify the Products Table",
-              "prompt": "The catalog team is opening a new product registry. Create or complete the `products` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name = 'products'`.",
-              "hint": "Create products in schema.sql first, then inspect that exact table through sqlite_master in query.sql.",
+              "title": "Build a Products Table",
+              "prompt": "The catalog needs a `products` table with three fields: an integer product id, a text product name, and a real-valued price. Define that table in `schema.sql`. Then inspect the stored table definition in `query.sql`.",
+              "hint": "Focus on the table name, column names, and data types.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return the stored SQL definition for the table `products` from `sqlite_master`."
+                "concept": "CREATE TABLE defines the columns and data types that make up each record.",
+                "hint_1": "This exercise does not require additional business constraints.",
+                "hint_2": "Use sqlite_master to inspect the completed table."
               },
-              "starterCode": "-- Task: create the products table below.\n-- Required columns:\n--   product_id INTEGER PRIMARY KEY\n--   product_name TEXT NOT NULL\n--   price REAL\n",
-              "solutionCode": "-- Define the products table\nCREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);",
+              "starterCode": "-- Define the products table below.\n",
+              "solutionCode": "CREATE TABLE products (\n    product_id INTEGER,\n    product_name TEXT,\n    price REAL\n);",
               "starterFiles": {
                 "schema_sql": {
-                  "content": "-- Task: create the products table below.\n-- Required columns:\n--   product_id INTEGER PRIMARY KEY\n--   product_name TEXT NOT NULL\n--   price REAL\n"
+                  "content": "-- Define the products table below.\n"
                 },
                 "query_sql": {
-                  "content": "-- Task: inspect the completed products table through sqlite_master.\n"
+                  "content": "-- Inspect the stored products definition below.\n"
                 }
               },
               "solutionFiles": {
                 "schema_sql": {
-                  "content": "-- Define the products table\nCREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);"
+                  "content": "CREATE TABLE products (\n    product_id INTEGER,\n    product_name TEXT,\n    price REAL\n);"
                 },
                 "query_sql": {
-                  "content": "-- Verify the products table definition\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';"
-                }
-              }
-            },
-            "try_creating_tables_and_defining_columns_sketch1": {
-              "title": "Create and Verify the Orders Table",
-              "prompt": "The order team needs a new register for customer purchases. Create or complete the `orders` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name = 'orders'`.",
-              "hint": "Define all three orders columns in schema.sql, then inspect orders in query.sql.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return the stored SQL definition for the table `orders` from `sqlite_master`."
-              },
-              "starterCode": "-- Task: create the orders table below.\n-- Required columns:\n--   order_id INTEGER PRIMARY KEY\n--   customer_name TEXT NOT NULL\n--   total_amount REAL\n",
-              "solutionCode": "-- Define the orders table\nCREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  total_amount REAL\n);",
-              "starterFiles": {
-                "schema_sql": {
-                  "content": "-- Task: create the orders table below.\n-- Required columns:\n--   order_id INTEGER PRIMARY KEY\n--   customer_name TEXT NOT NULL\n--   total_amount REAL\n"
-                },
-                "query_sql": {
-                  "content": "-- Task: inspect the completed orders table through sqlite_master.\n"
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';"
                 }
               },
-              "solutionFiles": {
-                "schema_sql": {
-                  "content": "-- Define the orders table\nCREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  total_amount REAL\n);"
-                },
-                "query_sql": {
-                  "content": "-- Verify the orders table definition\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';"
-                }
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    product_id INTEGER,\n    product_name TEXT,\n    price REAL\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';",
+              "sourceCheckMessages": {
+                "productsShape": "Define `products` with integer `product_id`, text `product_name`, and real `price` columns."
               }
             }
           },
@@ -32806,6 +32881,38 @@ const messages: Record<string, any> = {
                 "c": "Every column rejects values from other storage classes",
                 "d": "SQLite requires a separate BOOLEAN storage class"
               }
+            },
+            "practice-create-orders-table": {
+              "title": "Practice: Build an Orders Table",
+              "prompt": "Create an `orders` table with an integer order id, a text customer name, and a real-valued total amount. Define it in `schema.sql`, then inspect its stored definition in `query.sql`.",
+              "hint": "Translate the three field requirements into typed columns.",
+              "help": {
+                "concept": "A table definition turns a record design into named, typed columns.",
+                "hint_1": "Keep this exercise focused on structure rather than additional constraints.",
+                "hint_2": "Inspect the completed orders definition afterward."
+              },
+              "starterCode": "-- Define the orders table below.\n",
+              "solutionCode": "CREATE TABLE orders (\n    order_id INTEGER,\n    customer_name TEXT,\n    total_amount REAL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the orders table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Inspect the stored orders definition below.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE orders (\n    order_id INTEGER,\n    customer_name TEXT,\n    total_amount REAL\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE orders (\n    order_id INTEGER,\n    customer_name TEXT,\n    total_amount REAL\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';",
+              "sourceCheckMessages": {
+                "ordersShape": "Define `orders` with integer `order_id`, text `customer_name`, and real `total_amount` columns."
+              }
             }
           }
         },
@@ -32826,59 +32933,35 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_foreign_keys_and_references_sketch0": {
-              "title": "Create Departments and Link Their Managers",
-              "prompt": "The employee directory is already available as the parent table. Create or complete the `employees` table with the columns and constraints named in the brief. Create or complete the `departments` table with the columns and constraints named in the brief. Declare every required foreign-key relationship in `schema.sql`. Use `query.sql` to inspect the state named in the brief.",
-              "hint": "Keep employees unchanged, add departments below it, then inspect the relationship.",
+              "title": "Link Departments to Their Managers",
+              "prompt": "The `employees` parent table is already provided. Create a `departments` child table with its own id and name, plus a manager id that must reference an employee id. Inspect the declared relationship afterward.",
+              "hint": "Leave the parent table unchanged and define the relationship on the child table.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, inspect the declared relationships with `PRAGMA foreign_key_list(departments)`."
+                "concept": "A foreign key records which parent key a child column may reference.",
+                "hint_1": "manager_id is the child-side relationship column.",
+                "hint_2": "Use SQLite's foreign-key metadata to inspect the result."
               },
-              "starterCode": "-- Provided parent table: keep this definition unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Task: create departments below and link manager_id to employees.id.\n",
-              "solutionCode": "-- Provided parent table\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Create the departments child table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);",
+              "starterCode": "-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Define departments below.\n",
+              "solutionCode": "-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);",
               "starterFiles": {
                 "schema_sql": {
-                  "content": "-- Provided parent table: keep this definition unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Task: create departments below and link manager_id to employees.id.\n"
+                  "content": "-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Define departments below.\n"
                 },
                 "query_sql": {
-                  "content": "-- Task: inspect the departments foreign key here.\n"
+                  "content": "-- Inspect the departments relationship below.\n"
                 }
               },
               "solutionFiles": {
                 "schema_sql": {
-                  "content": "-- Provided parent table\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\n-- Create the departments child table\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);"
+                  "content": "-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);"
                 },
                 "query_sql": {
                   "content": "PRAGMA foreign_key_list(departments);"
                 }
-              }
-            },
-            "try_foreign_keys_and_references_sketch1": {
-              "title": "Create Order Items with Two Relationships",
-              "prompt": "The sales database already has parent tables `orders` and `products`. Create or complete the `orders` table with the columns and constraints named in the brief. Create or complete the `products` table with the columns and constraints named in the brief. Create or complete the `order_items` table with the columns and constraints named in the brief. Declare every required foreign-key relationship in `schema.sql`. Use `query.sql` to inspect the state named in the brief.",
-              "hint": "Keep orders and products, create order_items below them, and add both REFERENCES clauses.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, inspect the declared relationships with `PRAGMA foreign_key_list(order_items)`."
               },
-              "starterCode": "-- Provided parent tables: keep these definitions unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Task: create order_items below and add both foreign keys.\n",
-              "solutionCode": "-- Provided parent tables\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Create the order_items child table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
-              "starterFiles": {
-                "schema_sql": {
-                  "content": "-- Provided parent tables: keep these definitions unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Task: create order_items below and add both foreign keys.\n"
-                },
-                "query_sql": {
-                  "content": "-- Task: inspect both order_items foreign keys here.\n"
-                }
-              },
-              "solutionFiles": {
-                "schema_sql": {
-                  "content": "-- Provided parent tables\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Create the order_items child table\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
-                },
-                "query_sql": {
-                  "content": "PRAGMA foreign_key_list(order_items);"
-                }
+              "runtimeSolutionCode": "-- file: schema.sql\n-- Provided parent table: keep it unchanged.\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE departments (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    manager_id INTEGER,\n    FOREIGN KEY (manager_id) REFERENCES employees(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(departments);",
+              "sourceCheckMessages": {
+                "managerRelationship": "Link `manager_id` to `employees.id` in the departments schema."
               }
             }
           },
@@ -32979,6 +33062,38 @@ const messages: Record<string, any> = {
                 "c": "The column must have the same data type as the referenced column",
                 "d": "The column must be indexed"
               }
+            },
+            "practice-two-foreign-key-relationships": {
+              "title": "Practice: Give Order Items Two Parent Relationships",
+              "prompt": "The `orders` and `products` parent tables are provided. Create `order_items` so each line can identify both the order it belongs to and the product it represents. Declare both parent relationships and inspect them afterward.",
+              "hint": "The two relationship columns have different parent tables.",
+              "help": {
+                "concept": "One child table can carry multiple independent foreign-key relationships.",
+                "hint_1": "order_id belongs to the orders relationship.",
+                "hint_2": "product_id belongs to the products relationship."
+              },
+              "starterCode": "-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Define order_items below.\n",
+              "solutionCode": "-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\n-- Define order_items below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Inspect both order_items relationships below.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA foreign_key_list(order_items);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\n-- Provided parent tables: keep them unchanged.\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL\n);\n\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    price REAL NOT NULL\n);\n\nCREATE TABLE order_items (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER,\n    product_id INTEGER,\n    quantity INTEGER NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id),\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(order_items);",
+              "sourceCheckMessages": {
+                "orderItemRelationships": "Link `order_id` to `orders.id` and `product_id` to `products.id`."
+              }
             }
           }
         },
@@ -33017,170 +33132,194 @@ const messages: Record<string, any> = {
             "steps": {
               "ci_warehouse_schema_step1": {
                 "title": "Create the Warehouse Table",
-                "prompt": "A regional warehouse team is replacing a spreadsheet with a stock ledger. Create or complete the `warehouses` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='warehouses'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "prompt": "Start the ledger with a `warehouses` table containing an integer id and a text name. Inspect the table afterward to confirm that the first schema object exists.",
+                "hint": "This first milestone establishes only the basic table shape.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `warehouses`."
+                  "concept": "The project grows one valid schema state at a time.",
+                  "hint_1": "Begin with the warehouse identity field and name field.",
+                  "hint_2": "Inspect the created table in query.sql."
                 },
-                "starterCode": "-- Build the table definition required for \"Create the Warehouse Table\" below.\n",
-                "solutionCode": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);",
+                "starterCode": "-- Build the warehouse ledger schema below.\n",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Build the table definition required for \"Create the Warehouse Table\" below.\n"
+                    "content": "-- Build the warehouse ledger schema below.\n"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Create the Warehouse Table\" below.\n"
+                    "content": "-- Inspect the current schema milestone below.\n"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='warehouses';"
+                    "content": "SELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- file: query.sql\nSELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';",
+                "sourceCheckMessages": {
+                  "warehouseShape": "Define warehouses with integer `id` and text `name` columns."
                 }
               },
               "ci_warehouse_schema_step2": {
-                "title": "Add Identity and Name Rules",
-                "prompt": "Warehouse names must now be reliable business identifiers. Create or complete the `warehouses` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='warehouses'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "title": "Strengthen Warehouse Identity",
+                "prompt": "Carry the warehouse table forward. Make its id the primary key, require every warehouse to have a name, and prevent duplicate warehouse names. Inspect the resulting definition.",
+                "hint": "Edit the existing table definition rather than creating a second warehouses table.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return the stored SQL definition for the table `warehouses` from `sqlite_master`."
+                  "concept": "A cumulative schema project strengthens the same definition as requirements grow.",
+                  "hint_1": "The id needs the identity rule.",
+                  "hint_2": "The name needs both completeness and uniqueness."
                 },
-                "starterCode": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- Continue the next requirement for Add Identity and Name Rules below.\n",
-                "solutionCode": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- Continue the next requirement for Add Identity and Name Rules below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Add Identity and Name Rules\" below.\n"
+                    "content": "SELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';",
+                "sourceCheckMessages": {
+                  "warehouseIdentityRules": "Make warehouse `id` the primary key and make `name` required and unique."
                 }
               },
               "ci_warehouse_schema_step3": {
-                "title": "Add an Operational Default",
-                "prompt": "New warehouse locations should open as active unless operations says otherwise. Create or complete the `warehouses` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='warehouses'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "title": "Add the Warehouse Operating Default",
+                "prompt": "Carry the constrained warehouse table forward. Add a required text status whose value defaults to `active` when a new warehouse omits it. Inspect the updated definition.",
+                "hint": "Preserve all existing warehouse rules while adding the new status field.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return the stored SQL definition for the table `warehouses` from `sqlite_master`."
+                  "concept": "A default can establish a consistent initial state without weakening required-data rules.",
+                  "hint_1": "The status itself is required.",
+                  "hint_2": "Its omitted value should become active."
                 },
-                "starterCode": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- Continue the next requirement for Add an Operational Default below.\n",
-                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- Continue the next requirement for Add an Operational Default below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Add an Operational Default\" below.\n"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';",
+                "sourceCheckMessages": {
+                  "warehouseStatusRule": "Define required text `status` with an `active` default."
                 }
               },
               "ci_warehouse_schema_step4": {
                 "title": "Create the Movement Table",
-                "prompt": "The ledger also needs a place to record every receipt and adjustment. Create or complete the `warehouses` table with the columns and constraints named in the brief. Create or complete the `stock_movements` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='stock_movements'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "prompt": "Keep the completed warehouse definition. Add a `stock_movements` table with an integer id, integer warehouse id, text sku, real quantity change, text movement type, and optional text note. Inspect the new table afterward.",
+                "hint": "This milestone establishes the movement record shape before adding stricter rules.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `stock_movements`."
+                  "concept": "Create the basic child-table structure before adding its integrity constraints.",
+                  "hint_1": "Do not remove or recreate the warehouse requirements.",
+                  "hint_2": "The note remains optional."
                 },
-                "starterCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Continue the next requirement for Create the Movement Table below.\n",
-                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Continue the next requirement for Create the Movement Table below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Create the Movement Table\" below.\n"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'warehouses';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+                    "content": "SELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- file: query.sql\nSELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';",
+                "sourceCheckMessages": {
+                  "movementShape": "Define the required stock_movements columns and data types."
                 }
               },
               "ci_warehouse_schema_step5": {
                 "title": "Protect Required Movement Data",
-                "prompt": "Operations cannot accept incomplete movement records. Create or complete the `warehouses` table with the columns and constraints named in the brief. Create or complete the `stock_movements` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='stock_movements'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "prompt": "Carry both tables forward. Make the movement id the primary key, and require warehouse id, sku, quantity change, and movement type on every movement record. The note may remain optional. Inspect the strengthened movement definition.",
+                "hint": "Strengthen the existing movement table instead of adding another table.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return the stored SQL definition for the table `stock_movements` from `sqlite_master`."
+                  "concept": "Required operational fields belong in the schema so incomplete movements are rejected consistently.",
+                  "hint_1": "The movement id becomes the row identity.",
+                  "hint_2": "Only note remains optional."
                 },
-                "starterCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- Continue the next requirement for Protect Required Movement Data below.\n",
-                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- Continue the next requirement for Protect Required Movement Data below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Protect Required Movement Data\" below.\n"
+                    "content": "SELECT name\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';",
+                "sourceCheckMessages": {
+                  "movementRequiredRules": "Make movement `id` the primary key and require `warehouse_id`, `sku`, `quantity_change`, and `movement_type`."
                 }
               },
               "ci_warehouse_schema_step6": {
                 "title": "Connect Movements to Warehouses",
-                "prompt": "Finish the warehouse ledger by connecting each movement to a real location. Create or complete the `warehouses` table with the columns and constraints named in the brief. Create or complete the `stock_movements` table with the columns and constraints named in the brief. Declare every required foreign-key relationship in `schema.sql`. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='stock_movements'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "prompt": "Finish the ledger schema. Give new movement records a default movement type of `receipt`, and require each movement's warehouse id to reference the id of an existing warehouse. Inspect the final movement definition.",
+                "hint": "Preserve every earlier constraint while adding the default and relationship.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return the stored SQL definition for the table `stock_movements` from `sqlite_master`."
+                  "concept": "The final schema combines row identity, required data, defaults, uniqueness, and referential integrity.",
+                  "hint_1": "The default belongs to movement_type.",
+                  "hint_2": "warehouse_id is the child side of the relationship."
                 },
-                "starterCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- Continue the next requirement for Connect Movements to Warehouses below.\n",
-                "solutionCode": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with a foreign key\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);",
+                "starterCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);",
+                "solutionCode": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- Continue the next requirement for Connect Movements to Warehouses below.\n"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Connect Movements to Warehouses\" below.\n"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with a foreign key\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);"
+                    "content": "CREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);"
                   },
                   "query_sql": {
-                    "content": "-- Verify the foreign key constraint\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';"
+                    "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';"
                   }
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'stock_movements';",
+                "sourceCheckMessages": {
+                  "movementRelationship": "Give `movement_type` a `receipt` default and link `warehouse_id` to `warehouses.id`."
                 }
               }
             }
@@ -33203,59 +33342,35 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_primary_key_and_not_null_constraints_sketch0": {
-              "title": "Define Required Product Columns",
-              "prompt": "A product registry needs a stable identifier and a required display name. Create or complete the `products` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='products'`.",
-              "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+              "title": "Give Products Identity and a Required Name",
+              "prompt": "Create a `products` table where `product_id` is the stable primary identifier and `product_name` is required text. Inspect the completed table afterward.",
+              "hint": "The schema needs one identity rule and one required-value rule.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `products`."
+                "concept": "PRIMARY KEY identifies rows; NOT NULL makes a value mandatory.",
+                "hint_1": "Apply the identity rule to product_id.",
+                "hint_2": "Apply the required-value rule to product_name."
               },
-              "starterCode": "-- Build the table definition required for \"Define Required Product Columns\" below.\n",
-              "solutionCode": "-- Define the products table\nCREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    product_name TEXT NOT NULL\n);",
+              "starterCode": "-- Define the constrained products table below.\n",
+              "solutionCode": "CREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    product_name TEXT NOT NULL\n);",
               "starterFiles": {
                 "schema_sql": {
-                  "content": "-- Build the table definition required for \"Define Required Product Columns\" below.\n"
+                  "content": "-- Define the constrained products table below.\n"
                 },
                 "query_sql": {
-                  "content": "-- Return the verification result required for \"Define Required Product Columns\" below.\n"
+                  "content": "-- Inspect the products table below.\n"
                 }
               },
               "solutionFiles": {
                 "schema_sql": {
-                  "content": "-- Define the products table\nCREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    product_name TEXT NOT NULL\n);"
+                  "content": "CREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    product_name TEXT NOT NULL\n);"
                 },
                 "query_sql": {
-                  "content": "SELECT name FROM sqlite_master WHERE type='table' AND name='products';"
-                }
-              }
-            },
-            "try_primary_key_and_not_null_constraints_sketch1": {
-              "title": "Define Required Order Columns",
-              "prompt": "A small order register must reject unnamed customers. Create or complete the `orders` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='orders'`.",
-              "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `orders`."
-              },
-              "starterCode": "-- Build the table definition required for \"Define Required Order Columns\" below.\n",
-              "solutionCode": "-- Define the orders table\nCREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);",
-              "starterFiles": {
-                "schema_sql": {
-                  "content": "-- Build the table definition required for \"Define Required Order Columns\" below.\n"
-                },
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Define Required Order Columns\" below.\n"
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';"
                 }
               },
-              "solutionFiles": {
-                "schema_sql": {
-                  "content": "-- Define the orders table\nCREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);"
-                },
-                "query_sql": {
-                  "content": "SELECT name FROM sqlite_master WHERE type='table' AND name='orders';"
-                }
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    product_id INTEGER PRIMARY KEY,\n    product_name TEXT NOT NULL\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';",
+              "sourceCheckMessages": {
+                "requiredProductRules": "Make `product_id` the primary key and require `product_name`."
               }
             }
           },
@@ -33357,6 +33472,38 @@ const messages: Record<string, any> = {
                 "t3": "Declare PRIMARY KEY",
                 "t4": "Add NOT NULL constraint"
               }
+            },
+            "practice-required-order-columns": {
+              "title": "Practice: Protect Required Order Data",
+              "prompt": "Create an `orders` table where `order_id` uniquely identifies each row and every order must include a customer name. Inspect the stored definition afterward.",
+              "hint": "Use one identity constraint and one required-value constraint.",
+              "help": {
+                "concept": "Identity and completeness rules belong in the schema.",
+                "hint_1": "order_id should identify one row.",
+                "hint_2": "customer_name must not be omitted."
+              },
+              "starterCode": "-- Define the constrained orders table below.\n",
+              "solutionCode": "CREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the constrained orders table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Inspect the orders table below.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE orders (\n    order_id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';",
+              "sourceCheckMessages": {
+                "requiredOrderRules": "Make `order_id` the primary key and require `customer_name`."
+              }
             }
           }
         },
@@ -33378,21 +33525,21 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_unique_and_default_constraints_sketch0": {
               "title": "Protect Customer Phone Numbers",
-              "prompt": "A customer-support team uses phone numbers to avoid duplicate contact records. Create or complete the `customers` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='customers'`.",
-              "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+              "prompt": "Create a `customers` table with an integer primary id, a required name, and a phone number that may not be duplicated across customer records. Inspect the resulting definition.",
+              "hint": "The business rule concerns duplicate phone numbers.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `customers`."
+                "concept": "UNIQUE protects a business identifier from duplicate non-null values.",
+                "hint_1": "Apply the uniqueness rule to phone_number.",
+                "hint_2": "Inspect the final table definition afterward."
               },
-              "starterCode": "-- Build the table definition required for \"Protect Customer Phone Numbers\" below.\n",
+              "starterCode": "-- Define the customers table below.\n",
               "solutionCode": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);",
               "starterFiles": {
                 "schema_sql": {
-                  "content": "-- Build the table definition required for \"Protect Customer Phone Numbers\" below.\n"
+                  "content": "-- Define the customers table below.\n"
                 },
                 "query_sql": {
-                  "content": "-- Return the verification result required for \"Protect Customer Phone Numbers\" below.\n"
+                  "content": "-- Inspect the customers table below.\n"
                 }
               },
               "solutionFiles": {
@@ -33400,36 +33547,12 @@ const messages: Record<string, any> = {
                   "content": "CREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);"
                 },
                 "query_sql": {
-                  "content": "SELECT name FROM sqlite_master WHERE type='table' AND name='customers';"
-                }
-              }
-            },
-            "try_unique_and_default_constraints_sketch1": {
-              "title": "Give New Orders a Default Status",
-              "prompt": "New orders should begin in the pending queue unless another status is supplied. Create or complete the `orders` table with the columns and constraints named in the brief. In `query.sql`, return `name` from `sqlite_master` in that column order. Keep only rows where `type='table' AND name='orders'`.",
-              "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return `name` from `sqlite_master` for the table `orders`."
-              },
-              "starterCode": "-- Build the table definition required for \"Give New Orders a Default Status\" below.\n",
-              "solutionCode": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);",
-              "starterFiles": {
-                "schema_sql": {
-                  "content": "-- Build the table definition required for \"Give New Orders a Default Status\" below.\n"
-                },
-                "query_sql": {
-                  "content": "-- Return the verification result required for \"Give New Orders a Default Status\" below.\n"
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'customers';"
                 }
               },
-              "solutionFiles": {
-                "schema_sql": {
-                  "content": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);"
-                },
-                "query_sql": {
-                  "content": "SELECT name FROM sqlite_master WHERE type='table' AND name='orders';"
-                }
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    phone_number TEXT UNIQUE\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'customers';",
+              "sourceCheckMessages": {
+                "uniquePhone": "Declare `phone_number` as unique in the customers schema."
               }
             }
           },
@@ -33531,6 +33654,38 @@ const messages: Record<string, any> = {
                 "FOREIGN KEY",
                 "CHECK"
               ]
+            },
+            "practice-default-order-status": {
+              "title": "Practice: Give New Orders a Default Status",
+              "prompt": "Create an `orders` table with an integer primary id, a required customer id, and a status that automatically begins as `pending` when the column is omitted. Inspect the final definition.",
+              "hint": "The status column needs a database-supplied initial value.",
+              "help": {
+                "concept": "DEFAULT supplies a value when an INSERT omits that column.",
+                "hint_1": "The required default is pending.",
+                "hint_2": "Inspect the completed orders definition afterward."
+              },
+              "starterCode": "-- Define the orders table below.\n",
+              "solutionCode": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the orders table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Inspect the orders table below.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_id INTEGER NOT NULL,\n    status TEXT DEFAULT 'pending'\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';",
+              "sourceCheckMessages": {
+                "pendingDefault": "Give `status` a default value of `pending`."
+              }
             }
           }
         }
@@ -33570,208 +33725,285 @@ const messages: Record<string, any> = {
           "finalCapstone": {
             "steps": {
               "ci_final_capstone_step1": {
-                "title": "Build the Product Table",
-                "prompt": "The neighborhood makers market is replacing its launch spreadsheet with a real product catalog. Create or complete the `products` table with the columns and constraints named in the brief. In `query.sql`, return `name, sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name = 'products'`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "title": "Build the Product Catalog",
+                "prompt": "Start the launch database with a `products` table. Use an integer primary id. Require a unique SKU, name, category, price, and status. New products should begin with a `draft` status when no status is supplied, while notes may remain empty. Inspect the stored product definition in `query.sql`.",
+                "hint": "This first milestone establishes the complete product catalog rules before any rows are loaded.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `name, sql` from `sqlite_master` for the table `products`."
+                  "concept": "A launch schema should encode identity, required values, uniqueness, and defaults before data arrives.",
+                  "hint_1": "The SKU is a business identifier in addition to the table's primary id.",
+                  "hint_2": "The status has both a required-value rule and an initial default."
                 },
-                "starterCode": "-- Build the table definition required for \"Build the Product Table\" below.",
-                "solutionCode": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL );",
+                "starterCode": "-- Build the launch database schema below.\n",
+                "solutionCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "-- Build the table definition required for \"Build the Product Table\" below."
+                    "content": "-- Build the launch database schema below.\n"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Build the Product Table\" below."
+                    "content": "-- Inspect the current launch milestone below.\n"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name = 'products';"
+                    "content": "SELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';"
                   }
-                }
+                },
+                "sourceCheckMessages": {
+                  "productSchema": "Define the product catalog with its required identity, uniqueness, required-value, and default rules."
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\n-- file: query.sql\nSELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';"
               },
               "ci_final_capstone_step2": {
-                "title": "Build the Stock Event Table",
-                "prompt": "The market also needs an auditable history of stock receipts and adjustments. Create or complete the `products` table with the columns and constraints named in the brief. Create or complete the `stock_events` table with the columns and constraints named in the brief. Declare every required foreign-key relationship in `schema.sql`. In `query.sql`, return `name, sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name IN ('products', 'stock_events')`. Sort the final result by `name`.",
-                "hint": "Complete the required table definitions in schema.sql, then write query.sql so the Results tab proves the structure exists.",
+                "title": "Add the Stock Event Ledger",
+                "prompt": "Carry the product schema forward. Add `stock_events` with an integer primary id, a required product id, a required integer quantity change, and a required event type that defaults to `receipt`. Notes may remain empty. Connect each event's product id to the product table, then inspect both stored table definitions.",
+                "hint": "Preserve the completed product table and add only the new event-ledger definition.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `name, sql` from `sqlite_master` for the table `the named table`."
+                  "concept": "The child table records stock history while the foreign key protects its relationship to products.",
+                  "hint_1": "Every event must belong to a valid product.",
+                  "hint_2": "The event type receives the receipt default."
                 },
-                "starterCode": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); -- Complete Build the Stock Event Table below.",
-                "solutionCode": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );",
+                "starterCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);",
+                "solutionCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); -- Complete Build the Stock Event Table below."
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Build the Stock Event Table\" below."
+                    "content": "SELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
+                  },
+                  "seed_sql": {
+                    "content": "-- Add the approved launch rows in the next milestone.\n"
                   },
                   "query_sql": {
-                    "content": "SELECT name, sql FROM sqlite_master WHERE type = 'table' AND name IN ('products', 'stock_events') ORDER BY name;"
+                    "content": "SELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name IN ('products', 'stock_events')\nORDER BY name;"
                   }
-                }
+                },
+                "sourceCheckMessages": {
+                  "stockEventSchema": "Define stock_events with its required fields, receipt default, and relationship to products."
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: query.sql\nSELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name IN ('products', 'stock_events')\nORDER BY name;"
               },
               "ci_final_capstone_step3": {
                 "title": "Load the Approved Products",
-                "prompt": "The launch committee approved three catalog rows. Load the approved starting rows into `products` in `seed.sql`. In `query.sql`, return `id, sku, name, category, price, status, notes` from `products` in that column order. Sort the final result by `id`. Keep the completed work in `schema.sql` unchanged.",
-                "hint": "Load only the approved rows in seed.sql, then write query.sql so the Results tab proves the load succeeded.",
+                "prompt": "Carry the completed schema forward. In `seed.sql`, load the three approved catalog rows using one multi-row INSERT with an explicit column list. Let the product status default apply rather than supplying status values. In `query.sql`, verify the loaded products in id order.",
+                "hint": "The schema is complete; this milestone adds only the approved product seed data.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `id, sku, name, category, price, status, notes` from `products`, ordered by `id`."
+                  "concept": "Seed data belongs in its own file and should rely on schema defaults when the approved input omits them.",
+                  "hint_1": "Load exactly the three approved products.",
+                  "hint_2": "Leave the status column out of the insert so the draft default can take effect."
                 },
-                "starterCode": "-- Product and stock-event rows are loaded in later capstone steps. -- No changes are required in this file yet. -- Complete Load the Approved Products below.",
-                "solutionCode": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL);",
+                "starterCode": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);",
+                "solutionCode": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
                   },
                   "seed_sql": {
-                    "content": "-- Product and stock-event rows are loaded in later capstone steps. -- No changes are required in this file yet. -- Complete Load the Approved Products below."
+                    "content": "-- Add the approved launch rows in the next milestone.\n"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Load the Approved Products\" below."
+                    "content": "SELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name IN ('products', 'stock_events')\nORDER BY name;"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
                   },
                   "seed_sql": {
-                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL);"
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);"
                   },
                   "query_sql": {
-                    "content": "SELECT id, sku, name, category, price, status, notes FROM products ORDER BY id;"
+                    "content": "SELECT id, sku, name, category, price, status, notes\nFROM products\nORDER BY id;"
                   }
-                }
+                },
+                "sourceCheckMessages": {
+                  "productSeedBatch": "Load the approved products with an explicit column list in one multi-row INSERT."
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\n-- file: query.sql\nSELECT id, sku, name, category, price, status, notes\nFROM products\nORDER BY id;"
               },
               "ci_final_capstone_step4": {
                 "title": "Load the Opening Stock Events",
-                "prompt": "The opening inventory counts are ready. Load the approved starting rows into `products`, `stock_events` in `seed.sql`. In `query.sql`, return `id, product_id, quantity_change, event_type, note` from `stock_events` in that column order. Sort the final result by `id`. Keep the completed work in `schema.sql` unchanged.",
-                "hint": "Load only the approved rows in seed.sql, then write query.sql so the Results tab proves the load succeeded.",
+                "prompt": "Carry the product seed forward. Add the four approved opening stock events in `seed.sql` using one multi-row INSERT with an explicit column list. Keep the completed schema and product rows unchanged. Verify the event ledger in id order.",
+                "hint": "Append the event batch after the existing product seed.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `id, product_id, quantity_change, event_type, note` from `stock_events`, ordered by `id`."
+                  "concept": "A cumulative seed file preserves earlier approved rows while adding the next approved batch.",
+                  "hint_1": "Do not rewrite or remove the product insert.",
+                  "hint_2": "The fourth row is intentionally a placeholder that will be reviewed later."
                 },
-                "starterCode": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); -- Complete Load the Opening Stock Events below.",
-                "solutionCode": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');",
+                "starterCode": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);",
+                "solutionCode": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
                   },
                   "seed_sql": {
-                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); -- Complete Load the Opening Stock Events below."
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Load the Opening Stock Events\" below."
+                    "content": "SELECT id, sku, name, category, price, status, notes\nFROM products\nORDER BY id;"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
                   },
                   "seed_sql": {
-                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');"
+                  },
+                  "operations_sql": {
+                    "content": "-- Add approved launch corrections in the next milestone.\n"
                   },
                   "query_sql": {
-                    "content": "SELECT id, product_id, quantity_change, event_type, note FROM stock_events ORDER BY id;"
+                    "content": "SELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;"
                   }
-                }
+                },
+                "sourceCheckMessages": {
+                  "stockEventSeedBatch": "Load the approved stock events with an explicit column list in one multi-row INSERT."
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');\n\n-- file: query.sql\nSELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;"
               },
               "ci_final_capstone_step5": {
                 "title": "Apply the Launch Correction",
-                "prompt": "A final pricing review changed the launch record for product `id = 1`. Update `products` with the assignments `price = 24.99, status = 'active'`. Limit the mutation with `WHERE id = 1`. In `query.sql`, return `id, sku, price, status` from `products` in that column order. Keep only rows where `id = 1`. Keep the completed work in `schema.sql`, `seed.sql` unchanged.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "prompt": "Carry the schema and seed files forward. The launch review approved a correction for product 1: its price should become `24.99` and its status should become `active`. Apply one scoped update in `operations.sql` that changes only that product, then verify product 1.",
+                "hint": "Use the stable product id as the safety boundary.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `id, sku, price, status` from `products` for rows matching `id = 1`."
+                  "concept": "A production correction should combine the approved assignments with a narrow row condition.",
+                  "hint_1": "Both approved assignments belong in the same update.",
+                  "hint_2": "Only product 1 should change."
                 },
-                "starterCode": "-- Data corrections begin in a later capstone step. -- No changes are required in this file yet. -- Complete Apply the Launch Correction below.",
-                "solutionCode": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1;",
+                "starterCode": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');",
+                "solutionCode": "UPDATE products\nSET price = 24.99,\n    status = 'active'\nWHERE id = 1;",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
                   },
                   "seed_sql": {
-                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');"
                   },
                   "operations_sql": {
-                    "content": "-- Data corrections begin in a later capstone step. -- No changes are required in this file yet. -- Complete Apply the Launch Correction below."
+                    "content": "-- Add approved launch corrections in the next milestone.\n"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Apply the Launch Correction\" below."
+                    "content": "SELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
                   },
                   "seed_sql": {
-                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');"
                   },
                   "operations_sql": {
-                    "content": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1;"
+                    "content": "UPDATE products\nSET price = 24.99,\n    status = 'active'\nWHERE id = 1;"
                   },
                   "query_sql": {
-                    "content": "SELECT id, sku, price, status FROM products WHERE id = 1;"
+                    "content": "SELECT id, sku, price, status\nFROM products\nWHERE id = 1;"
                   }
-                }
+                },
+                "sourceCheckMessages": {
+                  "launchCorrection": "Apply the approved price and status correction only to product 1."
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');\n\n-- file: operations.sql\nUPDATE products\nSET price = 24.99,\n    status = 'active'\nWHERE id = 1;\n\n-- file: query.sql\nSELECT id, sku, price, status\nFROM products\nWHERE id = 1;"
               },
               "ci_final_capstone_step6": {
-                "title": "Remove the Test Event and Finalize",
-                "prompt": "Quality assurance found one placeholder stock event that must not reach production. Update `products` with the assignments `price = 24.99, status = 'active'`. Delete only the approved rows from `stock_events`. Limit the mutation with `WHERE id = 1; DELETE FROM stock_events WHERE note = 'Test event'`. In `query.sql`, return `id, product_id, quantity_change, event_type, note` from `stock_events` in that column order. Sort the final result by `id`. Keep the completed work in `schema.sql`, `seed.sql` unchanged.",
-                "hint": "Apply the narrowly scoped change in operations.sql, then write query.sql so the Results tab proves the final state.",
+                "title": "Remove the Placeholder and Finalize",
+                "prompt": "Carry the approved product correction forward. Quality assurance now authorizes removal of the stock event whose note is `Test event`. Add one scoped delete for that placeholder only. In `query.sql`, return the remaining stock events in id order for the final operational handoff.",
+                "hint": "Preserve the earlier update and add only the newly approved deletion.",
                 "help": {
-                  "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                  "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                  "hint_2": "In `query.sql`, return `id, product_id, quantity_change, event_type, note` from `stock_events`, ordered by `id`."
+                  "concept": "The final milestone preserves earlier approved mutations while removing one confirmed placeholder.",
+                  "hint_1": "The placeholder's note identifies the approved deletion target.",
+                  "hint_2": "The final result should contain only production stock events."
                 },
-                "starterCode": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1; -- Complete Remove the Test Event and Finalize below.",
-                "solutionCode": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1; DELETE FROM stock_events WHERE note = 'Test event';",
+                "starterCode": "UPDATE products\nSET price = 24.99,\n    status = 'active'\nWHERE id = 1;",
+                "solutionCode": "UPDATE products\nSET price = 24.99,\n    status = 'active'\nWHERE id = 1;\n\nDELETE FROM stock_events\nWHERE note = 'Test event';",
                 "starterFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
                   },
                   "seed_sql": {
-                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');"
                   },
                   "operations_sql": {
-                    "content": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1; -- Complete Remove the Test Event and Finalize below."
+                    "content": "UPDATE products\nSET price = 24.99,\n    status = 'active'\nWHERE id = 1;"
                   },
                   "query_sql": {
-                    "content": "-- Return the verification result required for \"Remove the Test Event and Finalize\" below."
+                    "content": "SELECT id, sku, price, status\nFROM products\nWHERE id = 1;"
                   }
                 },
                 "solutionFiles": {
                   "schema_sql": {
-                    "content": "CREATE TABLE products ( id INTEGER PRIMARY KEY, sku TEXT NOT NULL UNIQUE, name TEXT NOT NULL, category TEXT NOT NULL, price REAL NOT NULL, status TEXT NOT NULL DEFAULT 'draft', notes TEXT NULL ); CREATE TABLE stock_events ( id INTEGER PRIMARY KEY, product_id INTEGER NOT NULL, quantity_change INTEGER NOT NULL, event_type TEXT NOT NULL DEFAULT 'receipt', note TEXT NULL, FOREIGN KEY (product_id) REFERENCES products(id) );"
+                    "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
                   },
                   "seed_sql": {
-                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES ('SKU001', 'Product A', 'Category 1', 19.99, NULL), ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'), ('SKU003', 'Product C', 'Category 3', 39.99, NULL); INSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES (1, 100, 'receipt', 'Initial stock'), (2, 50, 'receipt', 'Restock'), (3, 30, 'receipt', 'New shipment'), (1, 0, 'adjustment', 'Test event');"
+                    "content": "INSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');"
                   },
                   "operations_sql": {
-                    "content": "UPDATE products SET price = 24.99, status = 'active' WHERE id = 1; DELETE FROM stock_events WHERE note = 'Test event';"
+                    "content": "UPDATE products\nSET price = 24.99,\n    status = 'active'\nWHERE id = 1;\n\nDELETE FROM stock_events\nWHERE note = 'Test event';"
                   },
                   "query_sql": {
-                    "content": "SELECT id, product_id, quantity_change, event_type, note FROM stock_events ORDER BY id;"
+                    "content": "SELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;"
                   }
+                },
+                "sourceCheckMessages": {
+                  "removePlaceholder": "Remove only the stock event identified by the `Test event` note."
+                },
+                "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');\n\n-- file: operations.sql\nUPDATE products\nSET price = 24.99,\n    status = 'active'\nWHERE id = 1;\n\nDELETE FROM stock_events\nWHERE note = 'Test event';\n\n-- file: query.sql\nSELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;"
+              }
+            }
+          },
+          "practice": {
+            "practice-launch-review-mutations": {
+              "title": "Practice: Rehearse the Launch Review",
+              "prompt": "Before the capstone, rehearse a smaller launch review. The schema and seed data are already complete. In `operations.sql`, change product 2 so its price becomes `22.50` and its status becomes `active`, using its id as the safety boundary. Then remove the stock event whose note is `Placeholder`. In `query.sql`, verify product 2's final price and status and confirm that no placeholder event remains.",
+              "hint": "Preserve the supplied schema and seed data. Add one scoped update and one scoped delete.",
+              "help": {
+                "concept": "A launch review combines precise mutations with final state verification.",
+                "hint_1": "Product 2 is the only row approved for the update.",
+                "hint_2": "Only the event identified by the Placeholder note is approved for deletion."
+              },
+              "starterCode": "-- Add the approved rehearsal mutations below.\n",
+              "solutionCode": "UPDATE products\nSET price = 22.50,\n    status = 'active'\nWHERE id = 2;\n\nDELETE FROM stock_events\nWHERE note = 'Placeholder';",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft'\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
+                },
+                "seed_sql": {
+                  "content": "INSERT INTO products (sku, price, status) VALUES\n    ('P-100', 10.00, 'active'),\n    ('P-200', 20.00, 'draft');\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 10, 'receipt', 'Opening'),\n    (2, 0, 'adjustment', 'Placeholder');"
+                },
+                "operations_sql": {
+                  "content": "-- Add the approved rehearsal mutations below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verify the rehearsal result below.\n"
                 }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft'\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);"
+                },
+                "seed_sql": {
+                  "content": "INSERT INTO products (sku, price, status) VALUES\n    ('P-100', 10.00, 'active'),\n    ('P-200', 20.00, 'draft');\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 10, 'receipt', 'Opening'),\n    (2, 0, 'adjustment', 'Placeholder');"
+                },
+                "operations_sql": {
+                  "content": "UPDATE products\nSET price = 22.50,\n    status = 'active'\nWHERE id = 2;\n\nDELETE FROM stock_events\nWHERE note = 'Placeholder';"
+                },
+                "query_sql": {
+                  "content": "SELECT\n    (SELECT price FROM products WHERE id = 2) AS product_2_price,\n    (SELECT status FROM products WHERE id = 2) AS product_2_status,\n    (SELECT COUNT(*)\n     FROM stock_events\n     WHERE note = 'Placeholder') AS placeholder_events;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft'\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, price, status) VALUES\n    ('P-100', 10.00, 'active'),\n    ('P-200', 20.00, 'draft');\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 10, 'receipt', 'Opening'),\n    (2, 0, 'adjustment', 'Placeholder');\n\n-- file: operations.sql\nUPDATE products\nSET price = 22.50,\n    status = 'active'\nWHERE id = 2;\n\nDELETE FROM stock_events\nWHERE note = 'Placeholder';\n\n-- file: query.sql\nSELECT\n    (SELECT price FROM products WHERE id = 2) AS product_2_price,\n    (SELECT status FROM products WHERE id = 2) AS product_2_status,\n    (SELECT COUNT(*)\n     FROM stock_events\n     WHERE note = 'Placeholder') AS placeholder_events;",
+              "sourceCheckMessages": {
+                "practiceUpdate": "Apply the approved price and status correction only to product 2.",
+                "practiceDelete": "Remove only the stock event identified by the `Placeholder` note."
               }
             }
           }
@@ -39538,22 +39770,22 @@ const messages: Record<string, any> = {
       "sql-data-management-module-0-safe-inserts": {
         "insert-with-explicit-column-lists": {
           "sketch1": {
-            "title": "An explicit column list makes every value's destination visible",
-            "bodyMarkdown": "When inserting data into a SQL table, it's crucial to specify the columns explicitly. This practice ensures that your data is inserted into the correct columns, even if the table schema changes. By naming the columns, you make your SQL statements more readable and less prone to errors.\n\nConsider the following example:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status) VALUES ('Storage Bin', 'Warehouse', 14.50, 'active');\n```\n\nIn this example, we specify the columns `name`, `category`, `price`, and `status`. This ensures that the values 'Storage Bin', 'Warehouse', 14.50, and 'active' are inserted into the correct columns, regardless of the table's column order.\n\nUsing explicit column lists is especially important when dealing with tables that have many columns or when some columns have default values. It prevents accidental data misplacement and maintains data integrity."
+            "title": "Explicit column lists make an INSERT's mapping visible",
+            "bodyMarkdown": "An `INSERT` adds a new row, and an explicit column list states exactly where each supplied value belongs.\n\n```sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES ('Storage Bin', 'Warehouse', 14.50, 'active');\n```\n\nRead the column list and value list as matching positions: `name` receives `'Storage Bin'`, `category` receives `'Warehouse'`, and so on. The statement does not depend on the table's physical column order.\n\nThis makes mutations easier to review and safer when a table contains generated, optional, or defaulted columns."
           },
           "sketch2": {
-            "title": "A multi-row INSERT keeps one column contract across the batch",
-            "bodyMarkdown": "Let's apply what we've learned about explicit column lists in a practical scenario. Imagine you are managing an inventory database and need to add new products. Using explicit column lists ensures that each product's details are correctly recorded.\n\nHere's an example of inserting multiple rows with explicit column lists:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status) VALUES\n  ('Bubble Mailer', 'Packaging', 2.75, 'active'),\n  ('Label Sleeve', 'Packaging', 1.25, 'active');\n```\n\nIn this example, two new products, 'Bubble Mailer' and 'Label Sleeve', are added to the `inventory_items` table. By specifying the columns, we ensure that each product's details are accurately placed in the corresponding columns.\n\nThis method is not only safer but also makes your SQL scripts easier to read and maintain, especially when dealing with complex tables or when collaborating with others."
+            "title": "Name the columns this operation is responsible for",
+            "bodyMarkdown": "An explicit list also documents which columns the operation is intentionally supplying. Columns that are generated or handled by the schema do not need to be named just because they exist in the table.\n\n```sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES ('Label Sleeve', 'Packaging', 1.25, 'active');\n```\n\nThe important habit is not to memorize the table order. Decide which values the new row is responsible for, name those destinations explicitly, and keep the values aligned with that list."
           }
         },
         "inserting-multiple-rows": {
           "sketch0": {
-            "title": "A multi-row VALUES list records related arrivals together",
-            "bodyMarkdown": "In SQL, inserting multiple rows in a single statement can be efficient and helps maintain consistency. The `INSERT INTO` statement allows you to specify a list of columns followed by multiple sets of values. Each set of values corresponds to a new row in the table.\n\nFor example, consider the `inventory_items` table. To insert multiple new products, you can use:\n\n```sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Shipping Box', 'Stationery', 4.25, 'active', 0, NULL, '2026-02-10'),\n  ('Tape Dispenser', 'Stationery', 9.75, 'active', 0, NULL, '2026-02-10');\n```\n\nThis statement adds two new rows to the `inventory_items` table. Each tuple in the `VALUES` list corresponds to a new row, and the order of values must match the order of columns specified. This approach ensures that all new rows are inserted with the correct data alignment."
+            "title": "One VALUES list can add several approved rows",
+            "bodyMarkdown": "When several rows belong to the same approved batch, one `INSERT` can use one column contract followed by several value tuples.\n\n```sql\nINSERT INTO inventory_items (name, category, price, status) VALUES\n  ('Shipping Box', 'Stationery', 4.25, 'active'),\n  ('Tape Dispenser', 'Stationery', 9.75, 'active');\n```\n\nEach tuple creates one row. Every tuple must supply values in the same order as the shared column list."
           },
           "sketch1": {
-            "title": "A verification query checks exactly the rows the batch added",
-            "bodyMarkdown": "After inserting multiple rows, it's crucial to verify that the data has been added correctly. You can do this by running a `SELECT` query to preview the changes.\n\nFor instance, after executing the previous `INSERT` statement, you can verify the new entries with:\n\n```sql\nSELECT * FROM inventory_items WHERE name IN ('Shipping Box', 'Tape Dispenser');\n```\n\nThis query checks that the new products have been added to the `inventory_items` table. It ensures that the data aligns with expectations and that no existing data has been altered. Always verify your data after a multi-row insert to catch any discrepancies early."
+            "title": "Every row in the batch follows the same column contract",
+            "bodyMarkdown": "A multi-row insert is one statement, not several unrelated inserts placed next to each other. The single column list defines the meaning of every tuple that follows it.\n\nBefore running the statement, compare the tuples vertically: the first position should describe the same field in every row, the second position should describe the same field, and each tuple should contain the same number of values.\n\nAfter the change, verify only the new batch so an unexpected row is easy to notice."
           }
         },
         "module-0-inventory-intake-batch": {
@@ -39575,115 +39807,115 @@ const messages: Record<string, any> = {
         "using-null-and-default-values": {
           "sketch-using-null-default-1": {
             "title": "Omitting a column and storing NULL are different decisions",
-            "bodyMarkdown": "In SQL, NULL represents a missing or undefined value, while DEFAULT is a predefined value set for a column when no specific value is provided during an INSERT operation. Understanding the difference between these two is crucial for managing data integrity and ensuring that your database behaves as expected.\n\nFor example, consider the `inventory_items` table where the `status` column has a default value of 'draft'. If you insert a new row without specifying a `status`, SQL will automatically assign 'draft' to that row. However, if you explicitly insert NULL into the `status` column, it will store a NULL value instead.\n\n```sql\nINSERT INTO inventory_items (name, category, price) VALUES ('New Item', 'Category', 10.99);\n-- This will use the default 'draft' for status.\n\nINSERT INTO inventory_items (name, category, price, status) VALUES ('Another Item', 'Category', 15.99, NULL);\n-- This will store NULL in the status column.\n```\n\nIn the first example, the `status` column uses its default value because it is omitted from the INSERT statement. In the second example, NULL is explicitly inserted, overriding the default."
+            "bodyMarkdown": "`NULL` means that the row intentionally has no known value for a column. A default is different: the schema supplies a value when the insert does not supply that column.\n\nIf `status` has a default, leaving `status` out of the insert allows the schema to choose it. Supplying `NULL` for `status` instead asks SQL to store a missing value.\n\nChoose between omission and `NULL` from the meaning of the incoming data, not because the two happen to look similar in an unfinished row."
           },
           "sketch-using-null-default-2": {
-            "title": "NULL can be deliberate while status still comes from the schema",
-            "bodyMarkdown": "When inserting data into a table, you can control whether to use a column's default value or to insert NULL explicitly. This decision can affect how your data is interpreted and processed later.\n\nConsider a scenario where you want to add a new product to the `inventory_items` table. You might want to use the default `status` but explicitly set the `notes` to NULL to indicate that no additional information is available.\n\n```sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES ('Sample Product', 'Gadgets', 29.99, NULL);\n-- The status will default to 'draft', and notes will be explicitly set to NULL.\n```\n\nThis approach ensures that your data entries are consistent and that any missing information is clearly marked with NULL, while default values are used where applicable. This practice helps maintain data integrity and clarity in your database."
+            "title": "A row can use a default and an explicit NULL together",
+            "bodyMarkdown": "Different columns in the same row can make different choices. An item may deliberately have no notes while its status still comes from the table's default.\n\nIn that case, include the notes column and supply `NULL`, but omit the status column. The stored row then records two separate facts: the absence of notes was intentional, and the status came from the schema policy."
           }
         }
       },
       "sql-data-management-module-1-controlled-updates-deletes": {
         "deleting-only-confirmed-rows": {
           "sketch1": {
-            "title": "A narrow WHERE clause turns deletion into a reviewable change",
-            "bodyMarkdown": "Deleting records in a database is a powerful operation that must be handled with care. The `DELETE FROM` statement is used to remove rows from a table, but without a `WHERE` clause, it will delete all rows, which is often not the desired outcome. To prevent accidental data loss, always use a `WHERE` clause to specify which rows should be deleted.\n\nFor example, consider a table `inventory_items` where we want to delete a test item:\n\n```sql\nDELETE FROM inventory_items\nWHERE id = 2;\n```\n\nThis command deletes the row with `id` 2, which is a specific test item. The `WHERE` clause ensures that only this row is affected, preventing unintended deletions.\n\n**Why it matters:** Using a `WHERE` clause with `DELETE` helps maintain data integrity by ensuring only the intended records are removed. This practice is crucial in environments where data accuracy is paramount."
+            "title": "DELETE needs a narrow condition",
+            "bodyMarkdown": "`DELETE` permanently removes rows, so its target must be clear before the statement runs.\n\n```sql\nDELETE FROM inventory_items\nWHERE id = 2;\n```\n\nThe `WHERE` condition is the safety boundary. Without it, every row in the table can be removed.\n\nWhen an approval names one row or one precise group, make the deletion condition express exactly that scope."
           },
           "sketch2": {
-            "title": "A post-delete SELECT confirms the approved target disappeared",
-            "bodyMarkdown": "After performing a deletion, it's important to verify that only the intended records were removed. This can be done by running a `SELECT` query to check the current state of the table.\n\nFor instance, after deleting a test item from `inventory_items`, you can verify the deletion with:\n\n```sql\nSELECT * FROM inventory_items WHERE id = 2;\n```\n\nIf the deletion was successful, this query should return no rows, confirming that the item with `id` 2 has been removed.\n\n**Why it matters:** Verification ensures that the deletion operation was executed correctly and that no unintended data was affected. This step is essential for maintaining trust in the database's accuracy and reliability."
+            "title": "Verify that the approved target is gone",
+            "bodyMarkdown": "After a deletion, inspect the same target again.\n\n```sql\nSELECT *\nFROM inventory_items\nWHERE id = 2;\n```\n\nFor a successfully deleted row, this verification should return no rows. A narrow post-delete query makes the result easy to interpret without scanning the entire table."
           }
         },
         "module-1-inventory-correction-cleanup": {
           "sketch1": {
-            "title": "Inventory Correction and Cleanup Overview",
-            "bodyMarkdown": "A makers-market inventory audit found records that need correction and test rows that are approved for removal. You are the inventory data steward responsible for applying the audit without touching legitimate inventory outside the request.\n\nThe project progresses from evidence to action. You will preview the affected rows, correct one item, update an approved group, remove two confirmed test records under different conditions, and inspect the final table.\n\nYour deliverable is a two-file audit workspace:\n\n- `operations.sql` contains the cumulative scoped `UPDATE` and `DELETE` statements.\n- `query.sql` contains the previews and final verification queries that prove the target rows changed while unrelated rows were preserved.\n\nEvery mutation must use a narrow condition that reflects the audit decision."
+            "title": "Inventory Correction and Cleanup",
+            "bodyMarkdown": "The audit has already identified the rows that need attention. After practicing the preview workflow, this project begins when corrections are approved.\n\nYou will carry one two-file workspace through five milestones:\n\n1. correct one item;\n2. update an approved group;\n3. delete one confirmed test item;\n4. delete a second row only while its safety conditions still hold;\n5. produce the final inventory handoff.\n\n`operations.sql` accumulates the approved `UPDATE` and `DELETE` statements. `query.sql` changes at each milestone to verify the current result."
           }
         },
         "previewing-update-and-delete-targets": {
           "preview-select": {
-            "title": "The safest mutation begins with the same filter in a SELECT",
-            "bodyMarkdown": "Before executing an UPDATE or DELETE operation in SQL, it's crucial to preview the rows that will be affected. This is done by running a SELECT statement with the same WHERE clause intended for the mutation. This step ensures that only the desired rows are targeted, preventing accidental data changes.\n\nFor example, consider the `inventory_items` table. If you want to update the status of all items in the 'Kitchen' category to 'active', you should first preview these rows:\n\n```sql\nSELECT * FROM inventory_items WHERE category = 'Kitchen';\n```\n\nThis query will return all rows where the category is 'Kitchen'. If the result matches your expectations, you can proceed with the UPDATE operation. This practice helps avoid unintended data modifications and ensures data integrity."
+            "title": "Preview the target set before changing it",
+            "bodyMarkdown": "Before an `UPDATE` or `DELETE`, use a `SELECT` to inspect the rows that the business rule identifies.\n\n```sql\nSELECT *\nFROM inventory_items\nWHERE category = 'Kitchen';\n```\n\nIf the preview contains an unexpected row, the mutation condition is not ready yet. Fix the scope before changing data."
           },
           "mutation-execution": {
-            "title": "UPDATE and DELETE are safe only when they preserve the reviewed scope",
-            "bodyMarkdown": "Once you've previewed the target rows with a SELECT statement, you can safely execute the mutation. Always use the same WHERE clause in your UPDATE or DELETE statement to ensure consistency.\n\nContinuing with the previous example, after confirming the rows to update, execute the following:\n\n```sql\nUPDATE inventory_items SET status = 'active' WHERE category = 'Kitchen';\n```\n\nThis command updates the status of all items in the 'Kitchen' category to 'active'. By using the same WHERE clause, you ensure that only the intended rows are affected. This method is crucial for maintaining data accuracy and preventing errors in your database operations."
+            "title": "Carry the reviewed scope into the mutation",
+            "bodyMarkdown": "Once the preview is correct, the mutation should preserve that same target boundary.\n\n```sql\nUPDATE inventory_items\nSET status = 'active'\nWHERE category = 'Kitchen';\n```\n\nThe important workflow is: preview the intended set, apply the approved change to that set, then verify the resulting state."
           }
         },
         "updating-controlled-row-sets": {
           "sketch1": {
-            "title": "One UPDATE can keep related corrections on the same row",
-            "bodyMarkdown": "When working with databases, there are times when you need to update multiple columns in a single operation. This is particularly useful when you want to ensure that related data changes occur together, maintaining data integrity.\n\nTo update multiple columns, you use the `SET` clause in the `UPDATE` statement. You can specify multiple column-value pairs, separated by commas. Here's an example:\n\n```sql\nUPDATE inventory_items\nSET price = 5.99, status = 'active'\nWHERE id = 2;\n```\n\nIn this example, the `price` and `status` columns for the item with `id` 2 are updated. This ensures that both changes happen simultaneously, reducing the risk of data inconsistency.\n\nIt's important to use a `WHERE` clause to target specific rows. Without it, you risk updating every row in the table, which can lead to unintended data changes."
+            "title": "One UPDATE can change related fields together",
+            "bodyMarkdown": "When one approved correction changes several fields on the same rows, keep those assignments in one `UPDATE`.\n\n```sql\nUPDATE inventory_items\nSET price = 5.99, status = 'active'\nWHERE id = 2;\n```\n\nThe `SET` list describes the approved changes. The `WHERE` condition describes which rows may receive them."
           },
           "sketch2": {
-            "title": "A complete predicate expresses the full business approval",
-            "bodyMarkdown": "To update a specific set of rows, you can use a compound `WHERE` condition. This allows you to define a precise subset of rows that should be updated, ensuring that only the intended data is modified.\n\nConsider the following example:\n\n```sql\nUPDATE inventory_items\nSET status = 'inactive'\nWHERE category = 'Decor' AND is_test = 1;\n```\n\nHere, only the rows in the `inventory_items` table where the `category` is 'Decor' and `is_test` is 1 will have their `status` updated to 'inactive'. This compound condition ensures that only test items in the 'Decor' category are affected, leaving other rows unchanged.\n\nUsing compound conditions in your `WHERE` clause helps maintain data integrity by precisely targeting the rows you intend to update."
+            "title": "A compound condition expresses the full approval",
+            "bodyMarkdown": "Sometimes one condition is not enough to identify the approved set.\n\n```sql\nUPDATE inventory_items\nSET status = 'inactive'\nWHERE category = 'Decor' AND is_test = 1;\n```\n\nBoth conditions matter. Removing either one would widen the mutation beyond the intended group."
           }
         },
         "updating-one-row-precisely": {
           "sketch-1": {
-            "title": "A primary-key filter keeps a correction on exactly one row",
-            "bodyMarkdown": "When working with databases, it's crucial to update only the intended records without affecting others. The `UPDATE` statement in SQL allows you to modify existing records in a table. To ensure that only the desired row is updated, you must use a `WHERE` clause with a condition that uniquely identifies the row.\n\nFor example, consider the `inventory_items` table. If you want to update the price of the 'Canvas Print' item, you can use its `id` as a unique identifier:\n\n```sql\nUPDATE inventory_items\nSET price = 50.00\nWHERE id = 3;\n```\n\nThis query changes the price of the item with `id` 3 to 50.00. The `WHERE` clause ensures that only this specific row is updated, leaving all other rows unchanged. This approach prevents accidental updates to unintended records."
+            "title": "Use a stable identifier for one-row corrections",
+            "bodyMarkdown": "When an audit approves a correction for exactly one record, a unique identifier gives the mutation a precise boundary.\n\n```sql\nUPDATE inventory_items\nSET price = 50.00\nWHERE id = 3;\n```\n\nThe assignment defines the change; the identifier prevents the same change from spreading to unrelated rows."
           },
           "sketch-2": {
-            "title": "Verification is stronger when nearby unchanged rows remain visible",
-            "bodyMarkdown": "After performing an update, it's important to verify that the change was applied correctly and that no other data was unintentionally modified. You can do this by running a `SELECT` query to check the updated row and its neighbors.\n\nContinuing with the previous example, you can verify the update by selecting the relevant rows:\n\n```sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id IN (1, 2, 3);\n```\n\nThis query retrieves the `id`, `name`, and `price` of the items with `id` 1, 2, and 3. By inspecting the results, you can confirm that only the 'Canvas Print' item has its price updated to 50.00, while the other items remain unchanged. This verification step is crucial for maintaining data integrity."
+            "title": "Nearby rows can strengthen verification",
+            "bodyMarkdown": "A useful verification can show the corrected row together with nearby records.\n\n```sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id IN (1, 2, 3)\nORDER BY id;\n```\n\nThis makes it easier to confirm both sides of the result: the target changed and neighboring rows remained intact."
           }
         }
       },
       "sql-data-management-module-2-table-creation-constraints": {
         "creating-tables-and-defining-columns": {
           "sketch0": {
-            "title": "A CREATE TABLE statement turns record requirements into typed columns",
-            "bodyMarkdown": "In SQL, creating a table is a fundamental task that involves defining the structure of the data you want to store. A table is defined using the `CREATE TABLE` statement, followed by the table name and a list of column definitions enclosed in parentheses. Each column definition includes the column name and its data type, such as INTEGER, TEXT, or REAL.\n\nFor example, to create a table named `employees` with columns for `id`, `name`, and `salary`, you would write:\n\n```sql\nCREATE TABLE employees (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  salary REAL\n);\n```\n\nThis statement creates a table with three columns: `id`, which is an integer and serves as the primary key; `name`, which is a text field and cannot be null; and `salary`, which is a real number. The primary key ensures that each `id` is unique, while the `NOT NULL` constraint on `name` ensures that every employee must have a name."
+            "title": "CREATE TABLE turns a record design into typed columns",
+            "bodyMarkdown": "A table definition names the records you want to store and the type of value each column accepts.\n\n```sql\nCREATE TABLE employees (\n    id INTEGER,\n    name TEXT,\n    salary REAL\n);\n```\n\nHere `INTEGER`, `TEXT`, and `REAL` describe the shape of each row. Start with the table and column design before adding stronger business constraints."
           },
           "sketch1": {
-            "title": "sqlite_master reveals the exact table statement SQLite stored",
-            "bodyMarkdown": "After creating a table, it's important to verify that it has been defined correctly. In SQLite, you can inspect the `sqlite_master` table to see the SQL statement used to create any table. This table contains metadata about all the tables, indexes, and other objects in the database.\n\nTo view the definition of a table, you can run a query like:\n\n```sql\nSELECT sql FROM sqlite_master WHERE type='table' AND name='employees';\n```\n\nThis query retrieves the SQL statement used to create the `employees` table. By examining this output, you can confirm that the table structure matches your expectations. This step is crucial for ensuring data integrity and consistency in your database."
+            "title": "sqlite_master shows the definition SQLite stored",
+            "bodyMarkdown": "SQLite records table definitions in `sqlite_master`.\n\n```sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'employees';\n```\n\nInspecting the stored definition is useful when you want to confirm the actual schema rather than relying on memory."
           }
         },
         "foreign-keys-and-references": {
           "sketch-foreign-key-intro": {
-            "title": "A FOREIGN KEY records which parent row a child column may reference",
-            "bodyMarkdown": "A FOREIGN KEY in SQL is a field (or collection of fields) in one table that uniquely identifies a row of another table. The table containing the foreign key is called the child table, and the table containing the candidate key is called the parent table. This relationship enforces referential integrity between the two tables.\n\n### Example\nConsider two tables: `orders` and `customers`. The `orders` table has a column `customer_id` that references the `id` column in the `customers` table. This ensures that every order is associated with a valid customer.\n\n```sql\nCREATE TABLE customers (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    order_date TEXT NOT NULL,\n    customer_id INTEGER,\n    FOREIGN KEY (customer_id) REFERENCES customers(id)\n);\n```\n\nIn this example, the `customer_id` in the `orders` table is a foreign key that references the `id` column in the `customers` table. This setup ensures that you cannot have an order with a `customer_id` that does not exist in the `customers` table."
+            "title": "A foreign key protects a parent-child relationship",
+            "bodyMarkdown": "A child row can store the key of a parent row. A foreign-key constraint records which parent key is valid for that relationship.\n\n```sql\nCREATE TABLE teams (\n    id INTEGER PRIMARY KEY\n);\n\nCREATE TABLE members (\n    id INTEGER PRIMARY KEY,\n    team_id INTEGER,\n    FOREIGN KEY (team_id) REFERENCES teams(id)\n);\n```\n\nThe relationship prevents a child from pointing at an unknown parent when foreign-key enforcement is enabled."
           },
           "sketch-foreign-key-usage": {
-            "title": "The same constraint pattern can protect another business relationship",
-            "bodyMarkdown": "A **foreign-key path** names the child column and the parent key it is allowed to reference. Reusing the pattern in another domain is useful because the constraint is about relationship integrity, not about orders or inventory specifically. A project tracker, for example, should not accept a task that points to a project that does not exist.\n\n### Example\nThe `tasks.project_id` column can reference `projects.id`:\n\n```sql\nCREATE TABLE projects (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL\n);\n\nCREATE TABLE tasks (\n    id INTEGER PRIMARY KEY,\n    project_id INTEGER NOT NULL,\n    summary TEXT NOT NULL,\n    FOREIGN KEY (project_id) REFERENCES projects(id)\n);\n```\n\nFirst, `projects` establishes the parent rows. Second, `tasks` stores the child records. The `FOREIGN KEY` line makes the relationship explicit and prevents an orphaned task from naming an unknown project. This example intentionally uses one project-to-task path; the Try It activities use different tables and relationship requirements."
+            "title": "One child table can reference more than one parent",
+            "bodyMarkdown": "A table may participate in several relationships when each foreign-key column has a different parent role.\n\nFor example, a line item can belong to an order and also identify a product. Each relationship should name its own child column and parent key so the schema documents both paths independently."
           }
         },
         "module-2-warehouse-stock-ledger-schema": {
           "sketch-warehouse-schema-intro": {
-            "title": "Understanding the Warehouse Schema",
-            "bodyMarkdown": "A regional warehouse team is replacing a shared spreadsheet with a small stock-ledger database. You are the junior database builder responsible for a structure that keeps warehouse locations reliable and makes every movement traceable.\n\nYou will create the `warehouses` table, strengthen its identity and business rules, add `stock_movements`, require the operational fields, and connect each movement to a valid warehouse.\n\nYour deliverable is a two-file schema workspace:\n\n- `schema.sql` contains the complete cumulative definitions of `warehouses` and `stock_movements`.\n- `query.sql` inspects each completed definition through `sqlite_master`.\n\nThe final schema must reject incomplete movement records and declare the foreign-key relationship clearly."
+            "title": "Warehouse Stock Ledger Schema",
+            "bodyMarkdown": "A warehouse team is replacing a spreadsheet with a small stock-ledger database.\n\nAcross six milestones you will build one cumulative schema:\n\n1. create the warehouse table;\n2. protect warehouse identity and names;\n3. add a warehouse operating default;\n4. create the movement table;\n5. require complete movement records;\n6. add the movement default and warehouse relationship.\n\n`schema.sql` carries the complete schema forward. `query.sql` changes as needed to inspect the current milestone."
           }
         },
         "primary-key-and-not-null-constraints": {
           "sketch-primary-key": {
-            "title": "A PRIMARY KEY makes every record addressable and unique",
-            "bodyMarkdown": "A PRIMARY KEY is a column or a set of columns that uniquely identifies each row in a table. It ensures that no two rows have the same value in the primary key column(s), providing a unique identifier for each record. This is crucial for maintaining data integrity and enabling efficient data retrieval.\n\nFor example, consider a table `employees` where each employee must have a unique ID:\n\n```sql\nCREATE TABLE employees (\n    employee_id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    department TEXT\n);\n```\n\nIn this example, `employee_id` is the PRIMARY KEY, ensuring each employee has a unique identifier. The `name` column is marked as NOT NULL, indicating that every employee must have a name.\n\nThe PRIMARY KEY constraint prevents duplicate entries in the `employee_id` column, which is essential for operations like JOINs and data lookups."
+            "title": "A primary key gives every row a stable identity",
+            "bodyMarkdown": "A `PRIMARY KEY` identifies one row uniquely.\n\n```sql\nCREATE TABLE employees (\n    employee_id INTEGER PRIMARY KEY,\n    name TEXT\n);\n```\n\nThat identity can later be used for precise lookups and relationships without depending on descriptive text."
           },
           "sketch-not-null": {
-            "title": "NOT NULL turns a business requirement into a table rule",
-            "bodyMarkdown": "A **NOT NULL constraint** states that a record is incomplete when a required column has no value. The rule belongs in the table definition so every INSERT and UPDATE must respect it, not only the application screen that happens to collect the data.\n\nConsider a support queue where every ticket needs a short summary:\n\n```sql\nCREATE TABLE support_tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL,\n    assigned_team TEXT\n);\n```\n\nThe `ticket_id` gives each ticket a permanent identity. The `summary` column is required because a ticket without a description cannot be triaged, while `assigned_team` may remain empty until routing occurs. This example isolates the NOT NULL decision in a support workflow; the Try It activities apply the same rule to different table designs."
+            "title": "NOT NULL makes required data a database rule",
+            "bodyMarkdown": "A `NOT NULL` constraint rejects records that omit a required value.\n\n```sql\nCREATE TABLE support_tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL,\n    assigned_team TEXT\n);\n```\n\nThe rule belongs in the schema, so every writer must respect it—not only one application form."
           }
         },
         "unique-and-default-constraints": {
           "unique-constraint": {
-            "title": "UNIQUE protects values that must identify one real-world record",
-            "bodyMarkdown": "The UNIQUE constraint in SQL ensures that all values in a column are different from each other. This is crucial for maintaining data integrity, especially when dealing with business identifiers like email addresses or product SKUs. By enforcing uniqueness, you prevent duplicate entries that could lead to data inconsistencies.\n\nFor example, consider a table `employees` where each employee must have a unique email address:\n\n```sql\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);\n```\n\nIn this example, the `email` column is constrained to have unique values. If you attempt to insert a duplicate email, the database will reject the entry, ensuring that each email address is unique across the table. This constraint is particularly useful in scenarios where a unique identifier is required for each record."
+            "title": "UNIQUE protects business identifiers from duplicates",
+            "bodyMarkdown": "Some values must identify at most one record even when they are not the table's primary key.\n\n```sql\nCREATE TABLE employees (\n    id INTEGER PRIMARY KEY,\n    email TEXT UNIQUE\n);\n```\n\nA duplicate non-null email is rejected because the schema declares that business rule directly."
           },
           "default-constraint": {
-            "title": "DEFAULT supplies a value when an INSERT omits the column",
-            "bodyMarkdown": "The DEFAULT constraint in SQL allows you to specify a default value for a column. This is useful when you want to ensure that a column has a value even if none is provided during an INSERT operation. It simplifies data entry and ensures consistency across records.\n\nConsider a `products` table where each product has a default status of 'active':\n\n```sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    status TEXT DEFAULT 'active'\n);\n```\n\nIn this example, if a new product is added without specifying a status, the database automatically assigns it the default value 'active'. This helps maintain a consistent state for new entries and reduces the need for explicit value assignments during data insertion."
+            "title": "DEFAULT supplies a value when an INSERT omits one",
+            "bodyMarkdown": "A `DEFAULT` defines the value a column receives when an INSERT leaves that column out.\n\n```sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    status TEXT DEFAULT 'active'\n);\n```\n\nDefaults reduce repeated input while keeping the initial state consistent."
           }
         }
       },
       "sql-data-management-module-3-final-capstone": {
         "final-inventory-operations-launch": {
           "sketch-1": {
-            "title": "Inventory Operations Launch Project",
-            "bodyMarkdown": "A neighborhood makers market is replacing its launch spreadsheet with a small relational database. You are the SQL data management specialist responsible for preparing the database for its first operational handoff. The capstone develops one workspace in six stages: create the product catalog, create the related stock-event table, load approved products, load opening stock events, correct the launch record for product 1, and remove one confirmed placeholder event. Your final deliverable is a four-file workspace: - `schema.sql` defines `products` and `stock_events` with keys, required values, defaults, uniqueness, and a foreign key. - `seed.sql` loads the approved starting products and stock events. - `operations.sql` contains the precise update and delete required by the launch review. - `query.sql` provides the schema inspections and final data verification required at each stage. Each step states which file to edit and what the Results panel must prove. Completed files carry forward without changing responsibilities."
+            "title": "Inventory Operations Launch",
+            "bodyMarkdown": "A neighborhood makers market is replacing its launch spreadsheet with a small operational database.\n\nYou will carry one workspace through six milestones:\n\n1. build the product catalog;\n2. add the related stock-event ledger;\n3. load approved products;\n4. load opening stock events;\n5. apply one approved product correction;\n6. remove one confirmed placeholder event and produce the final handoff.\n\n`schema.sql`, `seed.sql`, `operations.sql`, and `query.sql` keep separate responsibilities. Completed work carries forward at every milestone."
           }
         }
       }

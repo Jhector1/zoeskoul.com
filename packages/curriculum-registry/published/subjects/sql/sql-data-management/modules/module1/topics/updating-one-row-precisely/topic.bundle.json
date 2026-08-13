@@ -61,19 +61,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.cards.sketch1.title",
       "sketchId": "sketch-2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-updating-one-row-precisely-sketch1",
-        "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.title",
-        "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.prompt",
-        "exerciseKey": "try-updating-one-row-precisely-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -109,7 +97,7 @@
     {
       "id": "try-updating-one-row-precisely-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch0",
       "language": "sql",
@@ -201,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Update the status of 'Trial Tote' to 'active'\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 6;\n\n-- file: query.sql\n-- Verify the change\nSELECT id, name, status\nFROM inventory_items\nWHERE id IN (5, 6)\nORDER BY id;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch0.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -242,29 +230,24 @@
         {
           "type": "source_regex",
           "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch0.sourceCheckMessages.scopedUpdate",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
-      "id": "try-updating-one-row-precisely-sketch1",
+      "id": "practice-precise-single-row-update",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1",
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterCode",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterCode",
       "starterFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterFiles.operations_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -272,7 +255,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterFiles.query_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -282,7 +265,7 @@
       "solutionFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.solutionFiles.operations_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.solutionFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -290,7 +273,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.solutionFiles.query_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.solutionFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -318,11 +301,11 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterCode",
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterFiles.operations_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -330,7 +313,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.starterFiles.query_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.starterFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -348,11 +331,11 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;\n\n-- file: query.sql\n-- Verify the change\nSELECT id, name, category\nFROM inventory_items\nWHERE id IN (3, 4, 5)\nORDER BY id;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.solutionFiles.operations_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.solutionFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -360,7 +343,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.tryIt.try_updating_one_row_precisely_sketch1.solutionFiles.query_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.solutionFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -389,16 +372,11 @@
         {
           "type": "source_regex",
           "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-precise-single-row-update.sourceCheckMessages.scopedUpdate",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-1",

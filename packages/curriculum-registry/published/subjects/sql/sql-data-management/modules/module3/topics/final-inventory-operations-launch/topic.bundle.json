@@ -135,6 +135,228 @@
   ],
   "exercises": [
     {
+      "id": "practice-launch-review-mutations",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "seed.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.seed_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "schema.sql",
+          "seed.sql",
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "seed.sql",
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "seed.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.seed_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "sqlFileOrder": [
+          "schema.sql",
+          "seed.sql",
+          "operations.sql",
+          "query.sql"
+        ],
+        "checkSql": "SELECT\n  (SELECT price FROM products WHERE id = 2) AS product_2_price,\n  (SELECT status FROM products WHERE id = 2) AS product_2_status,\n  (SELECT COUNT(*) FROM stock_events WHERE note = 'Placeholder') AS placeholder_events;",
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "seed.sql",
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "seed.sql",
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\b(?=[^;]*\\b[wW][hH][eE][rR][eE]\\b[^;]*\\b[iI][dD]\\b\\s*=\\s*2\\b)(?=[^;]*\\b[pP][rR][iI][cC][eE]\\b\\s*=\\s*22\\.5(?:0+)?)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b\\s*=\\s*['\\\"][aA][cC][tT][iI][vV][eE]['\\\"])[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.sourceCheckMessages.practiceUpdate",
+          "path": "operations.sql"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+[sS][tT][oO][cC][kK]_[eE][vV][eE][nN][tT][sS]\\b(?=[^;]*\\b[wW][hH][eE][rR][eE]\\b[^;]*\\b[nN][oO][tT][eE]\\b\\s*=\\s*['\\\"][pP][lL][aA][cC][eE][hH][oO][lL][dD][eE][rR]['\\\"])[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.sourceCheckMessages.practiceDelete",
+          "path": "operations.sql"
+        }
+      ],
+      "showExpectedExample": true
+    },
+    {
       "id": "ci-final-capstone-step1",
       "kind": "code_input",
       "purpose": "project",
@@ -229,7 +451,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\n-- file: query.sql\nSELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -269,17 +491,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-          "message": "Define the `products` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[pP][rR][oO][dD][uU][cC][tT][sS]\\b(?=[^;]*(?:\\b[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*\\b[sS][kK][uU]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*(?:\\b[sS][kK][uU]\\b[^,;]*\\b[uU][nN][iI][qQ][uU][eE]\\b|\\b[uU][nN][iI][qQ][uU][eE]\\s*\\(\\s*[sS][kK][uU]\\s*\\)))(?=[^;]*\\b[nN][aA][mM][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[cC][aA][tT][eE][gG][oO][rR][yY]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[pP][rR][iI][cC][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b[^,;]*\\b[dD][eE][fF][aA][uU][lL][tT]\\b\\s+['\\\"][dD][rR][aA][fF][tT]['\\\"])[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.sourceCheckMessages.productSchema",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-final-capstone-step2",
@@ -376,7 +593,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: query.sql\nSELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name IN ('products', 'stock_events')\nORDER BY name;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -415,23 +632,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-          "message": "Define the `products` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[sS][tT][oO][cC][kK]_[eE][vV][eE][nN][tT][sS]\\b(?=[^;]*(?:\\b[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*\\b[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[qQ][uU][aA][nN][tT][iI][tT][yY]_[cC][hH][aA][nN][gG][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[eE][vV][eE][nN][tT]_[tT][yY][pP][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[eE][vV][eE][nN][tT]_[tT][yY][pP][eE]\\b[^,;]*\\b[dD][eE][fF][aA][uU][lL][tT]\\b\\s+['\\\"][rR][eE][cC][eE][iI][pP][tT]['\\\"])(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[pP][rR][oO][dD][uU][cC][tT]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.sourceCheckMessages.stockEventSchema",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_events\\b",
-          "message": "Define the `stock_events` table in schema.sql.",
-          "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-final-capstone-step3",
@@ -440,7 +646,7 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterCode",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.seed_sql.content",
       "starterFiles": [
         {
           "path": "schema.sql",
@@ -515,7 +721,7 @@
           "seed.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterCode",
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.seed_sql.content",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -554,7 +760,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\n-- file: query.sql\nSELECT id, sku, name, category, price, status, notes\nFROM products\nORDER BY id;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -604,17 +810,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+products\\s*\\(",
-          "message": "Load the approved `products` rows in seed.sql with an explicit column list.",
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\s*\\([^)]*\\)\\s+[vV][aA][lL][uU][eE][sS]\\s*\\([^;]*\\)\\s*,\\s*\\(",
+          "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.sourceCheckMessages.productSeedBatch",
           "path": "seed.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+products\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `products`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-final-capstone-step4",
@@ -737,7 +938,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');\n\n-- file: query.sql\nSELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -787,23 +988,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+products\\s*\\(",
-          "message": "Load the approved `products` rows in seed.sql with an explicit column list.",
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+[sS][tT][oO][cC][kK]_[eE][vV][eE][nN][tT][sS]\\s*\\([^)]*\\)\\s+[vV][aA][lL][uU][eE][sS]\\s*\\([^;]*\\)\\s*,\\s*\\(",
+          "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.sourceCheckMessages.stockEventSeedBatch",
           "path": "seed.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+stock_events\\s*\\(",
-          "message": "Load the approved `stock_events` rows in seed.sql with an explicit column list.",
-          "path": "seed.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+stock_events\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `stock_events`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-final-capstone-step5",
@@ -812,7 +1002,7 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterCode",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.operations_sql.content",
       "starterFiles": [
         {
           "path": "schema.sql",
@@ -904,7 +1094,7 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterCode",
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.operations_sql.content",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -952,7 +1142,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');\n\n-- file: operations.sql\nUPDATE products\nSET\n    price = 24.99,\n    status = 'active'\nWHERE\n    id = 1;\n\n-- file: query.sql\nSELECT id, sku, price, status\nFROM products\nWHERE id = 1;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -1014,17 +1204,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+products\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `products` in operations.sql and keep its WHERE clause.",
+          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+[pP][rR][oO][dD][uU][cC][tT][sS]\\b(?=[^;]*\\b[wW][hH][eE][rR][eE]\\b[^;]*\\b[iI][dD]\\b\\s*=\\s*1\\b)(?=[^;]*\\b[pP][rR][iI][cC][eE]\\b\\s*=\\s*24\\.99)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b\\s*=\\s*['\\\"][aA][cC][tT][iI][vV][eE]['\\\"])[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.sourceCheckMessages.launchCorrection",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+products\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `products`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-final-capstone-step6",
@@ -1173,7 +1358,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    sku TEXT NOT NULL UNIQUE,\n    name TEXT NOT NULL,\n    category TEXT NOT NULL,\n    price REAL NOT NULL,\n    status TEXT NOT NULL DEFAULT 'draft',\n    notes TEXT NULL\n);\n\nCREATE TABLE stock_events (\n    id INTEGER PRIMARY KEY,\n    product_id INTEGER NOT NULL,\n    quantity_change INTEGER NOT NULL,\n    event_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT NULL,\n    FOREIGN KEY (product_id) REFERENCES products(id)\n);\n\n-- file: seed.sql\nINSERT INTO products (sku, name, category, price, notes) VALUES\n    ('SKU001', 'Product A', 'Category 1', 19.99, NULL),\n    ('SKU002', 'Product B', 'Category 2', 29.99, 'Special edition'),\n    ('SKU003', 'Product C', 'Category 3', 39.99, NULL);\n\nINSERT INTO stock_events (product_id, quantity_change, event_type, note) VALUES\n    (1, 100, 'receipt', 'Initial stock'),\n    (2, 50, 'receipt', 'Restock'),\n    (3, 30, 'receipt', 'New shipment'),\n    (1, 0, 'adjustment', 'Test event');\n\n-- file: operations.sql\nUPDATE products\nSET\n    price = 24.99,\n    status = 'active'\nWHERE\n    id = 1;\n\nDELETE FROM stock_events\nWHERE\n    note = 'Test event';\n\n-- file: query.sql\nSELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -1214,7 +1399,7 @@
           "operations.sql",
           "query.sql"
         ],
-        "checkSql": "SELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;"
+        "checkSql": "SELECT\n  (SELECT price FROM products WHERE id = 1) AS product_1_price,\n  (SELECT status FROM products WHERE id = 1) AS product_1_status,\n  (SELECT COUNT(*) FROM stock_events WHERE note = 'Test event') AS placeholder_events;"
       },
       "entryFilePath": "operations.sql",
       "sqlFileOrder": [
@@ -1234,23 +1419,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+products\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `products` in operations.sql and keep its WHERE clause.",
+          "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+[sS][tT][oO][cC][kK]_[eE][vV][eE][nN][tT][sS]\\b(?=[^;]*\\b[wW][hH][eE][rR][eE]\\b[^;]*\\b[nN][oO][tT][eE]\\b\\s*=\\s*['\\\"][tT][eE][sS][tT]\\ [eE][vV][eE][nN][tT]['\\\"])[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.sourceCheckMessages.removePlaceholder",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+stock_events\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped DELETE for `stock_events` in operations.sql and keep its WHERE clause.",
-          "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+stock_events\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `stock_events`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     }
   ]
 }

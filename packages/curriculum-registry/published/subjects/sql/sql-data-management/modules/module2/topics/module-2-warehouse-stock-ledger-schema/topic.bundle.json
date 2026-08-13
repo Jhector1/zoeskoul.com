@@ -227,7 +227,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Define the warehouses table\nCREATE TABLE warehouses (\n    id INTEGER,\n    name TEXT\n);\n\n-- file: query.sql\n-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='warehouses';",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -267,17 +267,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-          "message": "Define the `warehouses` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\b(?=[^;]*\\b[iI][dD]\\b\\s+[iI][nN][tT][eE][gG][eE][rR]\\b)(?=[^;]*\\b[nN][aA][mM][eE]\\b\\s+[tT][eE][xX][tT]\\b)[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.sourceCheckMessages.warehouseShape",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-warehouse-schema-step2",
@@ -374,7 +369,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Redefine the warehouses table with constraints\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE\n);\n\n-- file: query.sql\n-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -414,17 +409,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-          "message": "Define the `warehouses` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\b(?=[^;]*(?:\\b[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*\\b[nN][aA][mM][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*(?:\\b[nN][aA][mM][eE]\\b[^,;]*\\b[uU][nN][iI][qQ][uU][eE]\\b|\\b[uU][nN][iI][qQ][uU][eE]\\s*\\(\\s*[nN][aA][mM][eE]\\s*\\)))[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.sourceCheckMessages.warehouseIdentityRules",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-warehouse-schema-step3",
@@ -521,7 +511,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- file: query.sql\n-- Verify the table structure\nSELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -561,17 +551,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-          "message": "Define the `warehouses` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\b(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b\\s+[tT][eE][xX][tT]\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b[^,;]*\\b[dD][eE][fF][aA][uU][lL][tT]\\b\\s+['\\\"][aA][cC][tT][iI][vV][eE]['\\\"])[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.sourceCheckMessages.warehouseStatusRule",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-warehouse-schema-step4",
@@ -668,7 +653,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Define the stock_movements table\nCREATE TABLE stock_movements (\n    id INTEGER,\n    warehouse_id INTEGER,\n    sku TEXT,\n    quantity_change REAL,\n    movement_type TEXT,\n    note TEXT\n);\n\n-- file: query.sql\n-- Verify the table creation\nSELECT name FROM sqlite_master WHERE type='table' AND name='stock_movements';",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -708,23 +693,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-          "message": "Define the `warehouses` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[sS][tT][oO][cC][kK]_[mM][oO][vV][eE][mM][eE][nN][tT][sS]\\b(?=[^;]*\\b[iI][dD]\\b\\s+[iI][nN][tT][eE][gG][eE][rR]\\b)(?=[^;]*\\b[wW][aA][rR][eE][hH][oO][uU][sS][eE]_[iI][dD]\\b\\s+[iI][nN][tT][eE][gG][eE][rR]\\b)(?=[^;]*\\b[sS][kK][uU]\\b\\s+[tT][eE][xX][tT]\\b)(?=[^;]*\\b[qQ][uU][aA][nN][tT][iI][tT][yY]_[cC][hH][aA][nN][gG][eE]\\b\\s+[rR][eE][aA][lL]\\b)(?=[^;]*\\b[mM][oO][vV][eE][mM][eE][nN][tT]_[tT][yY][pP][eE]\\b\\s+[tT][eE][xX][tT]\\b)(?=[^;]*\\b[nN][oO][tT][eE]\\b\\s+[tT][eE][xX][tT]\\b)[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.sourceCheckMessages.movementShape",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_movements\\b",
-          "message": "Define the `stock_movements` table in schema.sql.",
-          "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-warehouse-schema-step5",
@@ -821,7 +795,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with constraints\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL,\n    note TEXT\n);\n\n-- file: query.sql\n-- Verify the table constraints\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -861,23 +835,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-          "message": "Define the `warehouses` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[sS][tT][oO][cC][kK]_[mM][oO][vV][eE][mM][eE][nN][tT][sS]\\b(?=[^;]*(?:\\b[iI][dD]\\b[^,;]*\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\b|\\b[pP][rR][iI][mM][aA][rR][yY]\\s+[kK][eE][yY]\\s*\\(\\s*[iI][dD]\\s*\\)))(?=[^;]*\\b[wW][aA][rR][eE][hH][oO][uU][sS][eE]_[iI][dD]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[sS][kK][uU]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[qQ][uU][aA][nN][tT][iI][tT][yY]_[cC][hH][aA][nN][gG][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)(?=[^;]*\\b[mM][oO][vV][eE][mM][eE][nN][tT]_[tT][yY][pP][eE]\\b[^,;]*\\b[nN][oO][tT]\\s+[nN][uU][lL][lL]\\b)[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.sourceCheckMessages.movementRequiredRules",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_movements\\b",
-          "message": "Define the `stock_movements` table in schema.sql.",
-          "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "ci-warehouse-schema-step6",
@@ -974,7 +937,7 @@
         "type": "sql_query",
         "datasetId": "ddl_blank",
         "resultShape": "table",
-        "solutionCode": "-- file: schema.sql\n-- Update the warehouses table with a default status\nCREATE TABLE warehouses (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL UNIQUE,\n    status TEXT NOT NULL DEFAULT 'active'\n);\n\n-- Update the stock_movements table with a foreign key\nCREATE TABLE stock_movements (\n    id INTEGER PRIMARY KEY,\n    warehouse_id INTEGER NOT NULL,\n    sku TEXT NOT NULL,\n    quantity_change REAL NOT NULL,\n    movement_type TEXT NOT NULL DEFAULT 'receipt',\n    note TEXT,\n    FOREIGN KEY (warehouse_id) REFERENCES warehouses(id)\n);\n\n-- file: query.sql\n-- Verify the foreign key constraint\nSELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "schema.sql",
@@ -1014,23 +977,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-          "message": "Define the `warehouses` table in schema.sql.",
+          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?[sS][tT][oO][cC][kK]_[mM][oO][vV][eE][mM][eE][nN][tT][sS]\\b(?=[^;]*\\b[mM][oO][vV][eE][mM][eE][nN][tT]_[tT][yY][pP][eE]\\b[^,;]*\\b[dD][eE][fF][aA][uU][lL][tT]\\b\\s+['\\\"][rR][eE][cC][eE][iI][pP][tT]['\\\"])(?=[^;]*(?:\\b[fF][oO][rR][eE][iI][gG][nN]\\s+[kK][eE][yY]\\s*\\(\\s*[wW][aA][rR][eE][hH][oO][uU][sS][eE]_[iI][dD]\\s*\\)\\s+[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\s*\\(\\s*[iI][dD]\\s*\\)|\\b[wW][aA][rR][eE][hH][oO][uU][sS][eE]_[iI][dD]\\b[^,;]*\\b[rR][eE][fF][eE][rR][eE][nN][cC][eE][sS]\\s+[wW][aA][rR][eE][hH][oO][uU][sS][eE][sS]\\s*\\(\\s*[iI][dD]\\s*\\)))[^;]*;",
+          "message": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.sourceCheckMessages.movementRelationship",
           "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_movements\\b",
-          "message": "Define the `stock_movements` table in schema.sql.",
-          "path": "schema.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     }
   ]
 }

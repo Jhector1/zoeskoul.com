@@ -55,15 +55,6 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "try_module_1_inventory_correction_cleanup_sketch0",
-            "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.projectSteps.try_module_1_inventory_correction_cleanup_sketch0.title",
-            "exerciseKey": "try-module-1-inventory-correction-cleanup-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
             "id": "try_module_1_inventory_correction_cleanup_sketch1",
             "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.projectSteps.try_module_1_inventory_correction_cleanup_sketch1.title",
             "exerciseKey": "try-module-1-inventory-correction-cleanup-sketch1",
@@ -127,17 +118,17 @@
   ],
   "exercises": [
     {
-      "id": "try-module-1-inventory-correction-cleanup-sketch0",
+      "id": "practice-preview-audit-targets",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0",
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.starterCode",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterCode",
       "starterFiles": [
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.starterFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterFiles.query_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -147,7 +138,7 @@
       "solutionFiles": [
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.solutionFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.solutionFiles.query_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -174,11 +165,11 @@
         "openTabs": [
           "query.sql"
         ],
-        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.starterCode",
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.starterFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterFiles.query_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -195,11 +186,11 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: query.sql\nSELECT id, price, status, is_test, notes\nFROM inventory_items\nWHERE id IN (2, 4, 6)\nORDER BY id;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch0.solutionFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.solutionFiles.query_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -219,14 +210,8 @@
           "query.sql"
         ]
       },
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
-        }
-      ]
+      "sourceChecks": [],
+      "showExpectedExample": true
     },
     {
       "id": "try-module-1-inventory-correction-cleanup-sketch1",
@@ -323,7 +308,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- file: query.sql\nSELECT id, price, status\nFROM inventory_items\nWHERE id = 2;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch1.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -362,17 +347,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[^;]*\\b[wW][hH][eE][rR][eE]\\b(?=[^;]*\\b[iI][dD]\\b\\s*=\\s*2\\b)[^;]*",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch1.sourceCheckMessages.updateItem2",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "try-module-1-inventory-correction-cleanup-sketch2",
@@ -469,7 +449,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- file: query.sql\nSELECT id, category, is_test, last_updated\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 0\nORDER BY id;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch2.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -508,17 +488,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[^;]*\\b[wW][hH][eE][rR][eE]\\b(?=[^;]*\\b[cC][aA][tT][eE][gG][oO][rR][yY]\\b\\s*=\\s*['\\\"]Decor['\\\"])(?=[^;]*\\b[iI][sS]_[tT][eE][sS][tT]\\b\\s*=\\s*0\\b)[^;]*",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch2.sourceCheckMessages.updateDecor",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "try-module-1-inventory-correction-cleanup-sketch3",
@@ -615,7 +590,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- file: query.sql\nSELECT id, name\nFROM inventory_items\nWHERE id = 4;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch3.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -654,23 +629,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[^;]*\\b[wW][hH][eE][rR][eE]\\b(?=[^;]*\\b[iI][dD]\\b\\s*=\\s*4\\b)[^;]*",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch3.sourceCheckMessages.deleteItem4",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
-          "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "try-module-1-inventory-correction-cleanup-sketch4",
@@ -767,7 +731,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Update the item\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update the items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete the item\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- file: query.sql\nSELECT id, name\nFROM inventory_items\nWHERE id = 6;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch4.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -806,23 +770,12 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[^;]*\\b[wW][hH][eE][rR][eE]\\b(?=[^;]*\\b[iI][dD]\\b\\s*=\\s*6\\b)(?=[^;]*\\b[iI][sS]_[tT][eE][sS][tT]\\b\\s*=\\s*1\\b)(?=[^;]*\\b[sS][tT][aA][tT][uU][sS]\\b\\s*=\\s*['\\\"]draft['\\\"])[^;]*",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch4.sourceCheckMessages.deleteItem6",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
-          "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "try-module-1-inventory-correction-cleanup-sketch5",
@@ -831,7 +784,7 @@
       "weight": 1,
       "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterCode",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterFiles.query_sql.content",
       "starterFiles": [
         {
           "path": "operations.sql",
@@ -889,7 +842,7 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterCode",
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterFiles.query_sql.content",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -919,7 +872,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Correct item with id 2\nUPDATE inventory_items SET price = 8.25, status = 'active' WHERE id = 2;\n\n-- Update non-test Decor items\nUPDATE inventory_items SET last_updated = '2026-02-10' WHERE category = 'Decor' AND is_test = 0;\n\n-- Delete item with id 4\nDELETE FROM inventory_items WHERE id = 4;\n\n-- Delete item with id 6\nDELETE FROM inventory_items WHERE id = 6 AND is_test = 1 AND status = 'draft';\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nORDER BY id;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -955,14 +908,8 @@
           "query.sql"
         ]
       },
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
-        }
-      ]
+      "sourceChecks": [],
+      "showExpectedExample": true
     }
   ]
 }

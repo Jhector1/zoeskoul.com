@@ -61,19 +61,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-inserting-multiple-rows-sketch1",
-        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.title",
-        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.prompt",
-        "exerciseKey": "try-inserting-multiple-rows-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -109,7 +97,7 @@
     {
       "id": "try-inserting-multiple-rows-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch0",
       "language": "sql",
@@ -201,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status, is_test, notes, last_updated) VALUES\n  ('Sketchbook', 'Stationery', 8.00, 'active', 0, NULL, '2026-02-10'),\n  ('Marker Set', 'Stationery', 12.00, 'active', 0, NULL, '2026-02-10');\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes, last_updated FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set')\nORDER BY name;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch0.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -241,43 +229,54 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-          "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\([^;]*?\\)\\s*[vV][aA][lL][uU][eE][sS]\\s*\\([^;]+?\\)\\s*,\\s*\\(",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch0.sourceCheckMessages.multiRowInsert",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
-      "id": "try-inserting-multiple-rows-sketch1",
+      "id": "practice-multi-row-supply-batch",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1",
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterCode",
       "starterFiles": [
         {
-          "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.starterFiles.query_sql.content",
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
       "solutionFiles": [
         {
-          "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.solutionFiles.query_sql.content",
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.solutionFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
           "readOnly": false
         }
       ],
@@ -296,24 +295,34 @@
       },
       "workspace": {
         "language": "sql",
-        "entryFilePath": "query.sql",
-        "entryFile": "query.sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
         "openTabs": [
+          "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterCode",
         "starterFiles": [
           {
-            "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.starterFiles.query_sql.content",
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
             "readOnly": false
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
+            "operations.sql",
             "query.sql"
           ]
         }
@@ -322,40 +331,52 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: query.sql\nSELECT * FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set')\nORDER BY name;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.runtimeSolutionCode",
         "solutionFiles": [
           {
-            "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.tryIt.try_inserting_multiple_rows_sketch1.solutionFiles.query_sql.content",
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.solutionFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
             "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
           }
         ],
-        "checkSql": "SELECT name, category, price, status, is_test, notes, last_updated FROM inventory_items WHERE name IN ('Sketchbook', 'Marker Set');",
+        "checkSql": "SELECT name, category, price, status, is_test, notes, last_updated FROM inventory_items WHERE name IN ('Binder Clips', 'Index Cards');",
         "sqlFileOrder": [
+          "operations.sql",
           "query.sql"
         ],
         "ignoreRowOrder": true
       },
-      "entryFilePath": "query.sql",
+      "entryFilePath": "operations.sql",
       "sqlFileOrder": [
+        "operations.sql",
         "query.sql"
       ],
       "workspaceExpectations": {
         "requiredFiles": [
+          "operations.sql",
           "query.sql"
         ]
       },
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
+          "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\([^;]*?\\)\\s*[vV][aA][lL][uU][eE][sS]\\s*\\([^;]+?\\)\\s*,\\s*\\(",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-multi-row-supply-batch.sourceCheckMessages.multiRowInsert",
+          "path": "operations.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-1",

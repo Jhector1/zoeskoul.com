@@ -61,19 +61,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.cards.sketch1.title",
       "sketchId": "sketch2",
-      "height": 420,
-      "tryIt": {
-        "id": "try-deleting-only-confirmed-rows-sketch1",
-        "titleKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.title",
-        "promptKey": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.prompt",
-        "exerciseKey": "try-deleting-only-confirmed-rows-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -109,7 +97,7 @@
     {
       "id": "try-deleting-only-confirmed-rows-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0",
       "language": "sql",
@@ -201,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Delete the test item with id 4\nDELETE FROM inventory_items\nWHERE id = 4;\n\n-- file: query.sql\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE id = 4;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
@@ -242,29 +230,24 @@
         {
           "type": "source_regex",
           "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch0.sourceCheckMessages.scopedDelete",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
-      "id": "try-deleting-only-confirmed-rows-sketch1",
+      "id": "practice-delete-confirmed-row-set",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1",
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterCode",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterCode",
       "starterFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterFiles.operations_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -272,7 +255,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterFiles.query_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -282,7 +265,7 @@
       "solutionFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionFiles.operations_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.solutionFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -290,7 +273,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionFiles.query_sql.content",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.solutionFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -318,11 +301,11 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterCode",
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterFiles.operations_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -330,7 +313,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.starterFiles.query_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.starterFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -348,11 +331,11 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\n-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- file: query.sql\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionFiles.operations_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.solutionFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -360,7 +343,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.tryIt.try_deleting_only_confirmed_rows_sketch1.solutionFiles.query_sql.content",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.solutionFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -389,16 +372,11 @@
         {
           "type": "source_regex",
           "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "message": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.deleting-only-confirmed-rows.practice.practice-delete-confirmed-row-set.sourceCheckMessages.scopedDelete",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-1",

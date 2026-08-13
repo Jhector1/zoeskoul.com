@@ -61,19 +61,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.cards.sketch1.title",
       "sketchId": "mutation-execution",
-      "height": 420,
-      "tryIt": {
-        "id": "try-previewing-update-and-delete-targets-sketch1",
-        "titleKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.title",
-        "promptKey": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.prompt",
-        "exerciseKey": "try-previewing-update-and-delete-targets-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -109,7 +97,7 @@
     {
       "id": "try-previewing-update-and-delete-targets-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0",
       "language": "sql",
@@ -175,7 +163,7 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: query.sql\nSELECT * FROM inventory_items WHERE category = 'Decor' AND is_test = 1;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "query.sql",
@@ -200,27 +188,21 @@
           "query.sql"
         ]
       },
-      "sourceChecks": [
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
-        }
-      ]
+      "sourceChecks": [],
+      "showExpectedExample": true
     },
     {
-      "id": "try-previewing-update-and-delete-targets-sketch1",
+      "id": "practice-update-reviewed-target-set",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1",
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterCode",
       "starterFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterFiles.operations_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -228,7 +210,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -238,7 +220,7 @@
       "solutionFiles": [
         {
           "path": "operations.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionFiles.operations_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.solutionFiles.operations_sql.content",
           "language": "sql",
           "isEntry": true,
           "entry": true,
@@ -246,7 +228,7 @@
         },
         {
           "path": "query.sql",
-          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionFiles.query_sql.content",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.solutionFiles.query_sql.content",
           "language": "sql",
           "isEntry": false,
           "entry": false,
@@ -274,11 +256,11 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterFiles.operations_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -286,7 +268,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.starterFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -304,11 +286,11 @@
         "type": "sql_query",
         "datasetId": "inventory_ops",
         "resultShape": "table",
-        "solutionCode": "-- file: operations.sql\nUPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.runtimeSolutionCode",
         "solutionFiles": [
           {
             "path": "operations.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionFiles.operations_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.solutionFiles.operations_sql.content",
             "language": "sql",
             "isEntry": true,
             "entry": true,
@@ -316,7 +298,7 @@
           },
           {
             "path": "query.sql",
-            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch1.solutionFiles.query_sql.content",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.solutionFiles.query_sql.content",
             "language": "sql",
             "isEntry": false,
             "entry": false,
@@ -345,16 +327,11 @@
         {
           "type": "source_regex",
           "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-          "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
+          "message": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.sourceCheckMessages.scopedUpdate",
           "path": "operations.sql"
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-          "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-          "path": "query.sql"
         }
-      ]
+      ],
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-preview",

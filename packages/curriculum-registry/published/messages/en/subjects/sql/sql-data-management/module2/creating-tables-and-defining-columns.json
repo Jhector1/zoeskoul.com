@@ -19,59 +19,35 @@
           "tryIt": {
             "allowReveal": true,
             "try_creating_tables_and_defining_columns_sketch0": {
-              "title": "Create and Verify the Products Table",
-              "prompt": "The catalog team is opening a new product registry. Create or complete the `products` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name = 'products'`.",
-              "hint": "Create products in schema.sql first, then inspect that exact table through sqlite_master in query.sql.",
+              "title": "Build a Products Table",
+              "prompt": "The catalog needs a `products` table with three fields: an integer product id, a text product name, and a real-valued price. Define that table in `schema.sql`. Then inspect the stored table definition in `query.sql`.",
+              "hint": "Focus on the table name, column names, and data types.",
               "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return the stored SQL definition for the table `products` from `sqlite_master`."
+                "concept": "CREATE TABLE defines the columns and data types that make up each record.",
+                "hint_1": "This exercise does not require additional business constraints.",
+                "hint_2": "Use sqlite_master to inspect the completed table."
               },
-              "starterCode": "-- Task: create the products table below.\n-- Required columns:\n--   product_id INTEGER PRIMARY KEY\n--   product_name TEXT NOT NULL\n--   price REAL\n",
-              "solutionCode": "-- Define the products table\nCREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);",
+              "starterCode": "-- Define the products table below.\n",
+              "solutionCode": "CREATE TABLE products (\n    product_id INTEGER,\n    product_name TEXT,\n    price REAL\n);",
               "starterFiles": {
                 "schema_sql": {
-                  "content": "-- Task: create the products table below.\n-- Required columns:\n--   product_id INTEGER PRIMARY KEY\n--   product_name TEXT NOT NULL\n--   price REAL\n"
+                  "content": "-- Define the products table below.\n"
                 },
                 "query_sql": {
-                  "content": "-- Task: inspect the completed products table through sqlite_master.\n"
+                  "content": "-- Inspect the stored products definition below.\n"
                 }
               },
               "solutionFiles": {
                 "schema_sql": {
-                  "content": "-- Define the products table\nCREATE TABLE products (\n  product_id INTEGER PRIMARY KEY,\n  product_name TEXT NOT NULL,\n  price REAL\n);"
+                  "content": "CREATE TABLE products (\n    product_id INTEGER,\n    product_name TEXT,\n    price REAL\n);"
                 },
                 "query_sql": {
-                  "content": "-- Verify the products table definition\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';"
-                }
-              }
-            },
-            "try_creating_tables_and_defining_columns_sketch1": {
-              "title": "Create and Verify the Orders Table",
-              "prompt": "The order team needs a new register for customer purchases. Create or complete the `orders` table with the columns and constraints named in the brief. In `query.sql`, return `sql` from `sqlite_master` in that column order. Keep only rows where `type = 'table' AND name = 'orders'`.",
-              "hint": "Define all three orders columns in schema.sql, then inspect orders in query.sql.",
-              "help": {
-                "concept": "Keep each database responsibility in its named file: schema definitions in schema.sql, approved starting rows in seed.sql, mutations in operations.sql, and visible evidence in query.sql.",
-                "hint_1": "Complete the main database change before writing the inspection or verification query.",
-                "hint_2": "In `query.sql`, return the stored SQL definition for the table `orders` from `sqlite_master`."
-              },
-              "starterCode": "-- Task: create the orders table below.\n-- Required columns:\n--   order_id INTEGER PRIMARY KEY\n--   customer_name TEXT NOT NULL\n--   total_amount REAL\n",
-              "solutionCode": "-- Define the orders table\nCREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  total_amount REAL\n);",
-              "starterFiles": {
-                "schema_sql": {
-                  "content": "-- Task: create the orders table below.\n-- Required columns:\n--   order_id INTEGER PRIMARY KEY\n--   customer_name TEXT NOT NULL\n--   total_amount REAL\n"
-                },
-                "query_sql": {
-                  "content": "-- Task: inspect the completed orders table through sqlite_master.\n"
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';"
                 }
               },
-              "solutionFiles": {
-                "schema_sql": {
-                  "content": "-- Define the orders table\nCREATE TABLE orders (\n  order_id INTEGER PRIMARY KEY,\n  customer_name TEXT NOT NULL,\n  total_amount REAL\n);"
-                },
-                "query_sql": {
-                  "content": "-- Verify the orders table definition\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';"
-                }
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE products (\n    product_id INTEGER,\n    product_name TEXT,\n    price REAL\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';",
+              "sourceCheckMessages": {
+                "productsShape": "Define `products` with integer `product_id`, text `product_name`, and real `price` columns."
               }
             }
           },
@@ -171,6 +147,38 @@
                 "c": "Every column rejects values from other storage classes",
                 "d": "SQLite requires a separate BOOLEAN storage class"
               }
+            },
+            "practice-create-orders-table": {
+              "title": "Practice: Build an Orders Table",
+              "prompt": "Create an `orders` table with an integer order id, a text customer name, and a real-valued total amount. Define it in `schema.sql`, then inspect its stored definition in `query.sql`.",
+              "hint": "Translate the three field requirements into typed columns.",
+              "help": {
+                "concept": "A table definition turns a record design into named, typed columns.",
+                "hint_1": "Keep this exercise focused on structure rather than additional constraints.",
+                "hint_2": "Inspect the completed orders definition afterward."
+              },
+              "starterCode": "-- Define the orders table below.\n",
+              "solutionCode": "CREATE TABLE orders (\n    order_id INTEGER,\n    customer_name TEXT,\n    total_amount REAL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the orders table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Inspect the stored orders definition below.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE orders (\n    order_id INTEGER,\n    customer_name TEXT,\n    total_amount REAL\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE orders (\n    order_id INTEGER,\n    customer_name TEXT,\n    total_amount REAL\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'orders';",
+              "sourceCheckMessages": {
+                "ordersShape": "Define `orders` with integer `order_id`, text `customer_name`, and real `total_amount` columns."
+              }
             }
           }
         }
@@ -182,12 +190,12 @@
       "sql-data-management-module-2-table-creation-constraints": {
         "creating-tables-and-defining-columns": {
           "sketch0": {
-            "title": "A CREATE TABLE statement turns record requirements into typed columns",
-            "bodyMarkdown": "In SQL, creating a table is a fundamental task that involves defining the structure of the data you want to store. A table is defined using the `CREATE TABLE` statement, followed by the table name and a list of column definitions enclosed in parentheses. Each column definition includes the column name and its data type, such as INTEGER, TEXT, or REAL.\n\nFor example, to create a table named `employees` with columns for `id`, `name`, and `salary`, you would write:\n\n```sql\nCREATE TABLE employees (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  salary REAL\n);\n```\n\nThis statement creates a table with three columns: `id`, which is an integer and serves as the primary key; `name`, which is a text field and cannot be null; and `salary`, which is a real number. The primary key ensures that each `id` is unique, while the `NOT NULL` constraint on `name` ensures that every employee must have a name."
+            "title": "CREATE TABLE turns a record design into typed columns",
+            "bodyMarkdown": "A table definition names the records you want to store and the type of value each column accepts.\n\n```sql\nCREATE TABLE employees (\n    id INTEGER,\n    name TEXT,\n    salary REAL\n);\n```\n\nHere `INTEGER`, `TEXT`, and `REAL` describe the shape of each row. Start with the table and column design before adding stronger business constraints."
           },
           "sketch1": {
-            "title": "sqlite_master reveals the exact table statement SQLite stored",
-            "bodyMarkdown": "After creating a table, it's important to verify that it has been defined correctly. In SQLite, you can inspect the `sqlite_master` table to see the SQL statement used to create any table. This table contains metadata about all the tables, indexes, and other objects in the database.\n\nTo view the definition of a table, you can run a query like:\n\n```sql\nSELECT sql FROM sqlite_master WHERE type='table' AND name='employees';\n```\n\nThis query retrieves the SQL statement used to create the `employees` table. By examining this output, you can confirm that the table structure matches your expectations. This step is crucial for ensuring data integrity and consistency in your database."
+            "title": "sqlite_master shows the definition SQLite stored",
+            "bodyMarkdown": "SQLite records table definitions in `sqlite_master`.\n\n```sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'employees';\n```\n\nInspecting the stored definition is useful when you want to confirm the actual schema rather than relying on memory."
           }
         }
       }
