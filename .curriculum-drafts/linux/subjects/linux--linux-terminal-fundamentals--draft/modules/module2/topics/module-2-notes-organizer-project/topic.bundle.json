@@ -89,33 +89,68 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.sh",
-          "content": "mkdir -p class-notes-organizer/inbox\nmkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "class-notes-organizer/inbox/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox__keep.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/math.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_math_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/history.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_history_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.main_sh.content",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "class-notes-organizer/inbox/.keep",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_inbox__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/handoff/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_handoff__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/archive/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_archive__keep.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/math.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_inbox_math_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/history.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_inbox_history_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
           "language": "bash"
         }
       ],
@@ -125,6 +160,11 @@
           "class-notes-organizer/inbox",
           "class-notes-organizer/handoff",
           "class-notes-organizer/archive"
+        ],
+        "requiredFiles": [
+          "class-notes-organizer/inbox/math.txt",
+          "class-notes-organizer/inbox/history.txt",
+          "class-notes-organizer/inbox/tmp-scratch.txt"
         ]
       },
       "terminalExpectations": {
@@ -160,10 +200,30 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "class-notes-organizer/inbox/.keep",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox__keep.content",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/math.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_math_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/history.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_history_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
+            "language": "bash"
           }
         ],
         "workspaceExpectations": {
@@ -172,10 +232,37 @@
             "class-notes-organizer/inbox",
             "class-notes-organizer/handoff",
             "class-notes-organizer/archive"
+          ],
+          "requiredFiles": [
+            "class-notes-organizer/inbox/math.txt",
+            "class-notes-organizer/inbox/history.txt",
+            "class-notes-organizer/inbox/tmp-scratch.txt"
           ]
-        }
+        },
+        "fixtureFiles": [
+          {
+            "path": "class-notes-organizer/inbox/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/math.txt",
+            "content": "Math notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/history.txt",
+            "content": "History notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+            "content": "scratch\n",
+            "language": "bash"
+          }
+        ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -204,62 +291,97 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "class-notes-organizer/inbox/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/handoff/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_handoff__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/archive/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_archive__keep.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/math.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_math_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/history.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_history_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir -p class-notes-organizer/handoff\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "class-notes-organizer/inbox/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_inbox__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/handoff/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_handoff__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/archive/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_archive__keep.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/math.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_inbox_math_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/history.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_inbox_history_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/handoff/README.txt",
-          "content": "Substitute teacher handoff\nBring math worksheets\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_handoff_README_txt.content",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
-        "requiredFiles": [
-          "class-notes-organizer/handoff/README.txt"
-        ],
         "requiredFolders": [
-          "class-notes-organizer/handoff"
+          "class-notes-organizer/inbox",
+          "class-notes-organizer/handoff",
+          "class-notes-organizer/archive"
+        ],
+        "requiredFiles": [
+          "class-notes-organizer/inbox/math.txt",
+          "class-notes-organizer/inbox/history.txt",
+          "class-notes-organizer/inbox/tmp-scratch.txt",
+          "class-notes-organizer/handoff/README.txt"
         ]
       },
       "terminalExpectations": {
@@ -303,33 +425,53 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "class-notes-organizer/inbox/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox__keep.content",
             "language": "bash"
           },
           {
             "path": "class-notes-organizer/handoff/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_handoff__keep.content",
             "language": "bash"
           },
           {
             "path": "class-notes-organizer/archive/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_archive__keep.content",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/math.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_math_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/history.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_history_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
-          "requiredFiles": [
-            "class-notes-organizer/handoff/README.txt"
-          ],
           "requiredFolders": [
-            "class-notes-organizer/handoff"
+            "class-notes-organizer/inbox",
+            "class-notes-organizer/handoff",
+            "class-notes-organizer/archive"
+          ],
+          "requiredFiles": [
+            "class-notes-organizer/inbox/math.txt",
+            "class-notes-organizer/inbox/history.txt",
+            "class-notes-organizer/inbox/tmp-scratch.txt",
+            "class-notes-organizer/handoff/README.txt"
           ]
         },
         "fixtureFiles": [
@@ -347,10 +489,25 @@
             "path": "class-notes-organizer/archive/.keep",
             "content": "",
             "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/math.txt",
+            "content": "Math notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/history.txt",
+            "content": "History notes\n",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+            "content": "scratch\n",
+            "language": "bash"
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -396,93 +553,96 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "class-notes-organizer/inbox/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/handoff/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/archive/.keep",
-          "content": "",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/handoff/README.txt",
-          "content": "Substitute teacher handoff\nBring math worksheets\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_archive__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/inbox/math.txt",
-          "content": "Math notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_math_txt.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/inbox/history.txt",
-          "content": "History notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_history_txt.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/inbox/tmp-scratch.txt",
-          "content": "scratch\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "class-notes-organizer/handoff/README.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff_README_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir -p class-notes-organizer/archive\nmv class-notes-organizer/inbox/math.txt class-notes-organizer/archive/math.txt\nmv class-notes-organizer/inbox/history.txt class-notes-organizer/archive/history.txt\nrm class-notes-organizer/inbox/tmp-scratch.txt\nls class-notes-organizer/archive\nls class-notes-organizer/inbox\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "class-notes-organizer/inbox/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_inbox__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/handoff/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_handoff__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/archive/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_archive__keep.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/handoff/README.txt",
-          "content": "Substitute teacher handoff\nBring math worksheets\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_handoff_README_txt.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/archive/math.txt",
-          "content": "Math notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_archive_math_txt.content",
           "language": "bash"
         },
         {
           "path": "class-notes-organizer/archive/history.txt",
-          "content": "History notes\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_archive_history_txt.content",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
+        "requiredFolders": [
+          "class-notes-organizer/inbox",
+          "class-notes-organizer/handoff",
+          "class-notes-organizer/archive"
+        ],
         "requiredFiles": [
+          "class-notes-organizer/handoff/README.txt",
           "class-notes-organizer/archive/math.txt",
           "class-notes-organizer/archive/history.txt"
-        ],
-        "requiredFolders": [
-          "class-notes-organizer/archive"
         ],
         "forbiddenFiles": [
           "class-notes-organizer/inbox/math.txt",
@@ -527,54 +687,57 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "class-notes-organizer/inbox/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox__keep.content",
             "language": "bash"
           },
           {
             "path": "class-notes-organizer/handoff/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff__keep.content",
             "language": "bash"
           },
           {
             "path": "class-notes-organizer/archive/.keep",
-            "content": "",
-            "language": "bash"
-          },
-          {
-            "path": "class-notes-organizer/handoff/README.txt",
-            "content": "Substitute teacher handoff\nBring math worksheets\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_archive__keep.content",
             "language": "bash"
           },
           {
             "path": "class-notes-organizer/inbox/math.txt",
-            "content": "Math notes\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_math_txt.content",
             "language": "bash"
           },
           {
             "path": "class-notes-organizer/inbox/history.txt",
-            "content": "History notes\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_history_txt.content",
             "language": "bash"
           },
           {
             "path": "class-notes-organizer/inbox/tmp-scratch.txt",
-            "content": "scratch\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/handoff/README.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff_README_txt.content",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
+          "requiredFolders": [
+            "class-notes-organizer/inbox",
+            "class-notes-organizer/handoff",
+            "class-notes-organizer/archive"
+          ],
           "requiredFiles": [
+            "class-notes-organizer/handoff/README.txt",
             "class-notes-organizer/archive/math.txt",
             "class-notes-organizer/archive/history.txt"
-          ],
-          "requiredFolders": [
-            "class-notes-organizer/archive"
           ],
           "forbiddenFiles": [
             "class-notes-organizer/inbox/math.txt",
@@ -599,11 +762,6 @@
             "language": "bash"
           },
           {
-            "path": "class-notes-organizer/handoff/README.txt",
-            "content": "Substitute teacher handoff\nBring math worksheets\n",
-            "language": "bash"
-          },
-          {
             "path": "class-notes-organizer/inbox/math.txt",
             "content": "Math notes\n",
             "language": "bash"
@@ -617,10 +775,15 @@
             "path": "class-notes-organizer/inbox/tmp-scratch.txt",
             "content": "scratch\n",
             "language": "bash"
+          },
+          {
+            "path": "class-notes-organizer/handoff/README.txt",
+            "content": "Substitute teacher handoff\nBring math worksheets\n",
+            "language": "bash"
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",

@@ -16,25 +16,31 @@
           "finalCapstone": {
             "steps": {
               "final-capstone-file-room-handoff-terminal-task-1": {
-                "title": "Inspect and build the archive structure",
-                "prompt": "Inspect `media-archive`, enter it, and create `organized/photos`, `organized/documents`, `backup`, and `review`. Create the empty review marker `review/needs-review.txt`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 1: Build the Archive Structure",
+                "prompt": "Open `media-archive` and inspect what arrived. Create `organized/photos`, `organized/documents`, `backup`, and `review`, then add an empty `review/needs-review.txt` marker and verify the new structure.",
+                "hint": "Preserve every incoming file while adding only the required folders and review marker.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "The capstone begins by adding structure without disturbing the incoming records.",
+                  "hint_1": "Inspect first, then create the four requested destinations.",
+                  "hint_2": "The review marker should exist but remain empty at this stage."
                 },
-                "starterCode": "# Step 1: inspect media-archive, enter it, create the archive folders, and add review/needs-review.txt.\n",
+                "starterCode": "# Build the media archive from the incoming files below.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Use `pwd` to confirm where you are."
+                      "message": "Use `pwd` to confirm the working location."
                     },
                     "1": {
-                      "message": "Use `ls` to inspect before changing."
+                      "message": "Use `ls` to inspect before and after the structure change."
                     },
                     "2": {
-                      "message": "Create the handoff folders with `mkdir` or `mkdir -p`."
+                      "message": "Enter the archive with `cd`."
+                    },
+                    "3": {
+                      "message": "Create the required directories with `mkdir` or `mkdir -p`."
+                    },
+                    "4": {
+                      "message": "Create the review marker with `touch`."
                     }
                   },
                   "forbiddenCommands": {
@@ -53,40 +59,76 @@
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_inbox_agenda_txt": {
-                    "content": "Community event agenda\n"
+                  "main_sh": {
+                    "content": "# Build the media archive from the incoming files below.\n"
                   },
-                  "community_file_room_inbox_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
                   },
-                  "community_file_room_inbox_venue_txt": {
-                    "content": "Venue note\n"
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "temporary scratch\n"
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": ""
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-2": {
-                "title": "Write the archive guide and review note",
-                "prompt": "In `media-archive`, write `organized/README.txt` with the three required guide lines and write `Check image names before publishing` into `review/needs-review.txt`. Use `>` for the first README line and `>>` for the next two lines. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 2: Write the Archive Guide",
+                "prompt": "With the archive folders in place, create `organized/README.txt` with these three lines in order: `Community media archive`, `Photos go in organized/photos`, and `Documents go in organized/documents`. Put `Check image names before publishing` in `review/needs-review.txt`, then read both files.",
+                "hint": "Create the first README line, preserve it while adding the next two, and verify the finished text.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "Redirection can create a file and append later lines while preserving earlier text.",
+                  "hint_1": "The README must contain exactly three guide lines in order.",
+                  "hint_2": "Read both written files before moving on."
                 },
-                "starterCode": "# Step 2: write organized/README.txt and review/needs-review.txt, then read both files.\n",
+                "starterCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Write the first README line with `>`."
+                      "message": "Use `echo` to produce the required text."
                     },
                     "1": {
-                      "message": "Append the second README line with `>>`."
+                      "message": "Use write-or-replace redirection for the first line."
                     },
                     "2": {
-                      "message": "Read the README with `cat`."
+                      "message": "Use append redirection for the later README lines."
+                    },
+                    "3": {
+                      "message": "Read the written files with `cat`."
                     }
                   },
                   "forbiddenCommands": {
@@ -105,34 +147,85 @@
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_inbox_agenda_txt": {
-                    "content": "Community event agenda\n"
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n"
                   },
-                  "community_file_room_inbox_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "media_archive_backup__keep": {
+                    "content": ""
                   },
-                  "community_file_room_inbox_venue_txt": {
-                    "content": "Venue note\n"
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "temporary scratch\n"
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": ""
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-3": {
-                "title": "Move and rename the incoming records",
-                "prompt": "Move `inbox/photo-index.txt` to `organized/photos/index.txt`, move `inbox/release-forms.txt` to `organized/documents/release-forms.txt`, and move `inbox/shoot-notes.txt` to `review/shoot-notes.txt`. Verify the old and new locations. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 3: Organize the Incoming Records",
+                "prompt": "Organize the incoming records. Put the photo index at `organized/photos/index.txt`, the release forms at `organized/documents/release-forms.txt`, and the shoot notes at `review/shoot-notes.txt`. Check the inbox and destination folders to confirm each file moved.",
+                "hint": "These are relocations, not copies; preserve each file's content at its destination.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "Moving files changes their paths while preserving their contents.",
+                  "hint_1": "The photo index is both moved and renamed.",
+                  "hint_2": "Verify the new destinations and the cleaned old paths."
                 },
-                "starterCode": "# Step 3: move and rename the three incoming records into their final folders.\n",
+                "starterCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Use `mv` to move the inbox files."
+                      "message": "Use `mv` for the three required relocations."
+                    },
+                    "1": {
+                      "message": "Use `ls` to verify the old and new locations."
                     }
                   },
                   "forbiddenCommands": {
@@ -151,37 +244,91 @@
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_inbox_agenda_txt": {
-                    "content": "Community event agenda\n"
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n"
                   },
-                  "community_file_room_inbox_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "media_archive_backup__keep": {
+                    "content": ""
                   },
-                  "community_file_room_inbox_venue_txt": {
-                    "content": "Venue note\n"
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "temporary scratch\n"
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-4": {
-                "title": "Back up the index and remove the temporary import",
-                "prompt": "Copy `organized/photos/index.txt` to `backup/photo-index-backup.txt`. Then remove only `inbox/tmp-import.txt` and verify that the backup exists and the temporary file is gone. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 4: Back Up and Remove the Temporary Import",
+                "prompt": "Create `backup/photo-index-backup.txt` from the organized photo index, keeping the original index in place. Then remove only `inbox/tmp-import.txt` and inspect the backup and inbox to verify both changes.",
+                "hint": "The original organized index must remain after the backup, and only the confirmed temporary import should be deleted.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "A backup preserves the source; safe deletion targets one confirmed temporary file.",
+                  "hint_1": "The organized photo index must survive the copy.",
+                  "hint_2": "Do not use recursive deletion."
                 },
-                "starterCode": "# Step 4: copy the photo index to backup, remove only inbox/tmp-import.txt, and verify both results.\n",
+                "starterCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Use `cp` to create the backup."
+                      "message": "Use `cp` to create the photo-index backup."
                     },
                     "1": {
-                      "message": "Remove only the temporary scratch file."
+                      "message": "Use `rm` only for the confirmed temporary import."
+                    },
+                    "2": {
+                      "message": "Use `ls` to verify the backup and cleaned inbox."
                     }
                   },
                   "forbiddenCommands": {
@@ -200,34 +347,100 @@
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_reports_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "temporary scratch\n"
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_backup_photo_index_backup_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-5": {
-                "title": "Verify the archive and mark it ready",
-                "prompt": "Run a final verification with `pwd`, targeted `ls`, `cat organized/README.txt`, and `wc -l organized/photos/index.txt`. Then write `Media archive verified` to `organized/READY.txt` and display the marker. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 5: Verify and Mark the Archive Ready",
+                "prompt": "Before marking the archive ready, verify your location, inspect the organized folders, read `organized/README.txt`, and check the line count of `organized/photos/index.txt`. When those checks look right, create `organized/READY.txt` with `Media archive verified` and display the marker.",
+                "hint": "The READY marker is the final action; create it only after the archive evidence has been checked.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "A final handoff should be supported by filesystem and file content checks before it is marked ready.",
+                  "hint_1": "Verify the archive before creating READY.txt.",
+                  "hint_2": "The READY marker should contain the requested verification text."
                 },
-                "starterCode": "# Step 5: verify the complete archive, then create and display organized/READY.txt.\n",
+                "starterCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Use `wc -l` to count the guest list."
+                      "message": "Use `pwd` as part of the final location check."
                     },
                     "1": {
-                      "message": "Append the final README line with `>>`."
+                      "message": "Use targeted `ls` commands to inspect the finished archive."
                     },
                     "2": {
-                      "message": "Create the ready marker with `touch`."
+                      "message": "Use `cat` to read the README and READY marker."
+                    },
+                    "3": {
+                      "message": "Use `wc -l` to count the photo-index lines."
+                    },
+                    "4": {
+                      "message": "Use `echo` to produce the READY text."
+                    },
+                    "5": {
+                      "message": "Redirect the READY text into the marker file."
                     }
                   },
                   "forbiddenCommands": {
@@ -246,11 +459,140 @@
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_reports_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n"
                   },
-                  "community_file_room_handoff_readme_txt": {
-                    "content": "Community file room handoff\n"
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_backup_photo_index_backup_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\npwd\nls organized/photos organized/documents backup review\ncat organized/README.txt\nwc -l organized/photos/index.txt\necho \"Media archive verified\" > organized/READY.txt\ncat organized/READY.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\npwd\nls organized/photos organized/documents backup review\ncat organized/README.txt\nwc -l organized/photos/index.txt\necho \"Media archive verified\" > organized/READY.txt\ncat organized/READY.txt\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_backup_photo_index_backup_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_READY_txt": {
+                    "content": "Media archive verified\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-final-capstone-handoff-check": {
+              "title": "Practice: Clean a Small Handoff Folder",
+              "prompt": "A small handoff folder contains one real agenda and one confirmed temporary note. Move the agenda from the inbox into the archive, remove only the temporary note, and inspect both folders to confirm the final state.",
+              "hint": "Preserve the real record, delete only the explicitly temporary file, and verify the result.",
+              "help": {
+                "concept": "An integrated handoff can combine inspection, moving, safe single-file deletion, and final verification.",
+                "hint_1": "The agenda should survive in the archive.",
+                "hint_2": "The temporary note should be the only deleted file."
+              },
+              "starterCode": "# Complete the handoff practice below.\n",
+              "solutionCode": "pwd\nls handoff-practice/inbox\nmv handoff-practice/inbox/agenda.txt handoff-practice/archive/agenda.txt\nrm handoff-practice/inbox/tmp-note.txt\nls handoff-practice/archive handoff-practice/inbox\n",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Complete the handoff practice below.\n"
+                },
+                "handoff_practice_archive__keep": {
+                  "content": ""
+                },
+                "handoff_practice_inbox_agenda_txt": {
+                  "content": "Community agenda\n"
+                },
+                "handoff_practice_inbox_tmp_note_txt": {
+                  "content": "temporary note\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "pwd\nls handoff-practice/inbox\nmv handoff-practice/inbox/agenda.txt handoff-practice/archive/agenda.txt\nrm handoff-practice/inbox/tmp-note.txt\nls handoff-practice/archive handoff-practice/inbox\n"
+                },
+                "handoff_practice_archive__keep": {
+                  "content": ""
+                },
+                "handoff_practice_archive_agenda_txt": {
+                  "content": "Community agenda\n"
+                }
+              },
+              "terminalExpectations": {
+                "requiredCommands": {
+                  "0": {
+                    "message": "Confirm the starting location with `pwd`."
+                  },
+                  "1": {
+                    "message": "Inspect the handoff folders with `ls`."
+                  },
+                  "2": {
+                    "message": "Move the real agenda with `mv`."
+                  },
+                  "3": {
+                    "message": "Remove only the confirmed temporary note with `rm`."
+                  }
+                },
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not use sudo in this beginner workspace."
+                  },
+                  "1": {
+                    "message": "Do not use recursive rm in this course."
+                  },
+                  "2": {
+                    "message": "Permissions commands are not needed for this workspace."
+                  },
+                  "3": {
+                    "message": "Do not download anything for this exercise."
                   }
                 }
               }
@@ -265,8 +607,8 @@
       "linux-module-3-final-capstone": {
         "final-capstone-file-room-handoff": {
           "capstone-synopsis": {
-            "title": "Community file room handoff",
-            "bodyMarkdown": "A neighborhood media team has inherited a small archive after a community photo project. The incoming files are all in one inbox: a photo index, release forms, shoot notes, and one temporary import file. Your job is to turn that inbox into a verified archive another volunteer can understand without asking you what happened.\n\nAcross five cumulative steps, you will inspect the workspace, create an organized structure, write a README and review note, move and rename records, back up the photo index, remove the known temporary file, and perform a final verification with `pwd`, `ls`, `cat`, and `wc -l`.\n\nThis is not a larger copy of the notes project. It is a transfer task: you must choose the correct command for preservation, relocation, naming, cleanup, and evidence that the archive is ready."
+            "title": "Final Capstone: Community Media Archive",
+            "bodyMarkdown": "Use the terminal skills from Modules 1 and 2 to turn an incoming media folder into a verified handoff. The five milestones are cumulative: create the structure, write the guide, organize the incoming records, back up the index and remove only the temporary import, then verify the finished archive."
           }
         }
       }

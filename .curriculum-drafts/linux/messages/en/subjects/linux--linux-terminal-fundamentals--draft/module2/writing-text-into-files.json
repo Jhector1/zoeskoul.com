@@ -88,15 +88,15 @@
             "allowReveal": true,
             "exercises": {
               "writing-text-into-files-try-it-1": {
-                "title": "Print the morning briefing",
-                "prompt": "Print the line `Morning briefing` in the terminal with `echo`. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
+                "title": "Try It: Print a Briefing",
+                "prompt": "Use `echo` to print `Morning briefing` in the terminal. This task should display the text only; do not save it to a file.",
+                "hint": "No file should be created in this guided task.",
                 "help": {
-                  "concept": "`echo` produces text, `>` writes or replaces a file, and `>>` appends without removing earlier lines.",
-                  "hint_1": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
-                  "hint_2": "Read the file with `cat` and check the exact line order before submitting. The current task asks: Print the line `Morning briefing` in the terminal with `echo`."
+                  "concept": "`echo` produces text; redirection decides whether that text is displayed, written, replaced, or appended.",
+                  "hint_1": "Decide whether existing content must be preserved.",
+                  "hint_2": "Read the finished file when the task changes file content."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Print the requested text without saving it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -117,18 +117,29 @@
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "echo \"Morning briefing\"\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Print the requested text without saving it.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "echo \"Morning briefing\"\n"
+                  }
                 }
               },
               "writing-text-into-files-try-it-2": {
-                "title": "Write a volunteer welcome note",
-                "prompt": "Create `welcome-note.txt` by writing `Welcome volunteers` into it with `echo` and `>`. Then read it with `cat`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
+                "title": "Practice: Write a Welcome Note",
+                "prompt": "Create `welcome-note.txt` with exactly one line: `Welcome volunteers`. Read the file afterward to confirm the text was written correctly.",
+                "hint": "Use redirection that establishes or replaces file content, then inspect the result.",
                 "help": {
-                  "concept": "`echo` produces text, `>` writes or replaces a file, and `>>` appends without removing earlier lines.",
-                  "hint_1": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
-                  "hint_2": "Read the file with `cat` and check the exact line order before submitting. The current task asks: Create `welcome-note.txt` by writing `Welcome volunteers` into it with `echo` and `>`. Then read it with `cat`."
+                  "concept": "`echo` produces text; redirection decides whether that text is displayed, written, replaced, or appended.",
+                  "hint_1": "Decide whether existing content must be preserved.",
+                  "hint_2": "Read the finished file when the task changes file content."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Write the requested first line and verify the file.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -152,18 +163,32 @@
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "echo \"Welcome volunteers\" > welcome-note.txt\ncat welcome-note.txt\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Write the requested first line and verify the file.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "echo \"Welcome volunteers\" > welcome-note.txt\ncat welcome-note.txt\n"
+                  },
+                  "welcome_note_txt": {
+                    "content": "Welcome volunteers\n"
+                  }
                 }
               },
               "writing-text-into-files-try-it-3": {
-                "title": "Add to the supply list",
-                "prompt": "The supply list already has one line. Append `Water bottles` to `supply-list.txt` with `>>`, then read the file with `cat`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
+                "title": "Practice: Preserve and Extend a Supply List",
+                "prompt": "`supply-list.txt` already contains one line. Add `Water bottles` to the end without replacing the existing content, then read the finished file.",
+                "hint": "Use the redirection form that preserves earlier lines.",
                 "help": {
-                  "concept": "`echo` produces text, `>` writes or replaces a file, and `>>` appends without removing earlier lines.",
-                  "hint_1": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
-                  "hint_2": "Read the file with `cat` and check the exact line order before submitting. The current task asks: The supply list already has one line. Append `Water bottles` to `supply-list.txt` with `>>`, then read the file with `cat`."
+                  "concept": "`echo` produces text; redirection decides whether that text is displayed, written, replaced, or appended.",
+                  "hint_1": "Decide whether existing content must be preserved.",
+                  "hint_2": "Read the finished file when the task changes file content."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Extend the existing file without replacing it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -191,6 +216,18 @@
                 "starterFiles": {
                   "supply_list_txt": {
                     "content": "Name tags\n"
+                  },
+                  "main_sh": {
+                    "content": "# Extend the existing file without replacing it.\n"
+                  }
+                },
+                "solutionCode": "echo \"Water bottles\" >> supply-list.txt\ncat supply-list.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "echo \"Water bottles\" >> supply-list.txt\ncat supply-list.txt\n"
+                  },
+                  "supply_list_txt": {
+                    "content": "Name tags\nWater bottles\n"
                   }
                 }
               }
@@ -217,16 +254,16 @@
       "linux-module-2-files-and-folders": {
         "writing-text-into-files": {
           "echo-prints-text": {
-            "title": "`echo` prints text",
-            "bodyMarkdown": "`echo` sends text to terminal output. It is useful for checking wording before saving it.\n\n```bash\necho \"Workshop opens at 9\"\n```\n\nThe sentence appears in the terminal, but no file changes. Quotation marks keep the words together and are especially helpful when the text contains spaces. A common mistake is assuming visible output was saved automatically. In the next sketches, redirection symbols connect that output to a file."
+            "title": "`echo` Produces Text",
+            "bodyMarkdown": "`echo` writes text to terminal output.\n\n```bash\necho \"Workshop opens at 9\"\n```\n\nBy itself, it does not save that text to a file."
           },
           "write-with-greater-than": {
-            "title": "Use `>` to write or replace a file",
-            "bodyMarkdown": "The `>` redirection symbol sends command output into a file. It creates the file when needed and **replaces all existing content** when the file already exists.\n\n```bash\necho \"Packing checklist\" > packing.txt\ncat packing.txt\n```\n\nThe first command writes one line; the second verifies it. Because `>` overwrites, inspect an important file before using it and make a backup when the original must be preserved. Use `>` for the first line of a new file or when replacement is the explicit goal."
+            "title": "Write or Replace with `>`",
+            "bodyMarkdown": "`>` redirects command output into a file. It creates the file when needed and replaces existing content when the file already exists."
           },
           "append-with-double-greater-than": {
-            "title": "Use `>>` to add another line",
-            "bodyMarkdown": "The `>>` symbol appends new output to the end of a file instead of replacing what is already there.\n\n```bash\necho \"Packing checklist\" > packing.txt\necho \"Passport\" >> packing.txt\ncat packing.txt\n```\n\nThe final file contains both lines in order. Use `>` once to establish the file, then `>>` for additions. Reversing the symbols can erase earlier work or create duplicate lines. Always read the finished file before moving on."
+            "title": "Append with `>>`",
+            "bodyMarkdown": "`>>` redirects output to the end of a file while preserving the content already there. Read the finished file to verify the line order."
           }
         }
       }

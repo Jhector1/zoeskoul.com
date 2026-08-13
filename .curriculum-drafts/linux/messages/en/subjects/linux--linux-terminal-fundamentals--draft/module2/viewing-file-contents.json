@@ -69,9 +69,9 @@
               }
             },
             "dr-inspect-file": {
-              "title": "Inspect a file carefully",
-              "prompt": "Put the file-inspection flow in order.",
-              "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
+              "title": "Inspect and count for a handoff",
+              "prompt": "A handoff requires you to confirm the filename, inspect its content, and then record its line count. Put those required steps in order.",
+              "hint": "Confirm the target before reading it, then count after the content check.",
               "help": {
                 "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
                 "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
@@ -79,8 +79,8 @@
               },
               "tokens": {
                 "t1": "Use `ls` to confirm the file name",
-                "t2": "Use `cat`, `head`, or `tail` to inspect content",
-                "t3": "Use `wc -l` if line count matters"
+                "t2": "Inspect the file content",
+                "t3": "Use `wc -l` to record the line count"
               }
             }
           },
@@ -88,15 +88,15 @@
             "allowReveal": true,
             "exercises": {
               "viewing-file-contents-try-it-1": {
-                "title": "Read a visitor welcome note",
-                "prompt": "You are at the visitor desk. Use `cat welcome-note.txt` to read the short note. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "title": "Try It: Read a Welcome Note",
+                "prompt": "Use `cat welcome-note.txt` to read the complete visitor note in the terminal. Do not change the file.",
+                "hint": "This guided task prints the whole file without changing it.",
                 "help": {
-                  "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
-                  "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
-                  "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: You are at the visitor desk. Use `cat welcome-note.txt` to read the short note."
+                  "concept": "`cat`, `head`, `tail`, and `wc -l` answer different inspection questions.",
+                  "hint_1": "Choose the inspection command that matches the information you need.",
+                  "hint_2": "These tasks should not modify the fixture file."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Read the short file in the terminal.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -121,19 +121,31 @@
                 "starterFiles": {
                   "visitor_desk_welcome_note_txt": {
                     "content": "Welcome table opens at 9:00.\n"
+                  },
+                  "main_sh": {
+                    "content": "# Read the short file in the terminal.\n"
+                  }
+                },
+                "solutionCode": "cat welcome-note.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "cat welcome-note.txt\n"
+                  },
+                  "visitor_desk_welcome_note_txt": {
+                    "content": "Welcome table opens at 9:00.\n"
                   }
                 }
               },
               "viewing-file-contents-try-it-2": {
-                "title": "Preview a delivery log",
-                "prompt": "The dispatch folder has a longer `delivery-log.txt`. Use `head delivery-log.txt`, then `tail delivery-log.txt`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "title": "Practice: Preview a Delivery Log",
+                "prompt": "The delivery log is long. Inspect both the beginning and the end of `delivery-log.txt` without printing the entire file.",
+                "hint": "Use the two preview commands designed for opposite ends of a file.",
                 "help": {
-                  "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
-                  "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
-                  "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: The dispatch folder has a longer `delivery-log.txt`. Use `head delivery-log.txt`, then `tail delivery-log.txt`."
+                  "concept": "`cat`, `head`, `tail`, and `wc -l` answer different inspection questions.",
+                  "hint_1": "Choose the inspection command that matches the information you need.",
+                  "hint_2": "These tasks should not modify the fixture file."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Preview both ends of the delivery log.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -161,19 +173,31 @@
                 "starterFiles": {
                   "dispatch_delivery_log_txt": {
                     "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n"
+                  },
+                  "main_sh": {
+                    "content": "# Preview both ends of the delivery log.\n"
+                  }
+                },
+                "solutionCode": "head delivery-log.txt\ntail delivery-log.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "head delivery-log.txt\ntail delivery-log.txt\n"
+                  },
+                  "dispatch_delivery_log_txt": {
+                    "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Signs arrived\n09:10 Water arrived\n09:30 Radios arrived\n10:00 Lunch arrived\n"
                   }
                 }
               },
               "viewing-file-contents-try-it-3": {
-                "title": "Count meal requests",
-                "prompt": "The kitchen keeps one meal request per line. Use `wc -l meal-requests.txt` to count them. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "title": "Practice: Count Meal Requests",
+                "prompt": "`meal-requests.txt` stores one request per line. Find out how many requests are in the file.",
+                "hint": "Use the line-counting form of the word-count command.",
                 "help": {
-                  "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
-                  "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
-                  "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: The kitchen keeps one meal request per line. Use `wc -l meal-requests.txt` to count them."
+                  "concept": "`cat`, `head`, `tail`, and `wc -l` answer different inspection questions.",
+                  "hint_1": "Choose the inspection command that matches the information you need.",
+                  "hint_2": "These tasks should not modify the fixture file."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Count the line-based meal requests.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -196,6 +220,18 @@
                   }
                 },
                 "starterFiles": {
+                  "kitchen_meal_requests_txt": {
+                    "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n"
+                  },
+                  "main_sh": {
+                    "content": "# Count the line-based meal requests.\n"
+                  }
+                },
+                "solutionCode": "wc -l meal-requests.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "wc -l meal-requests.txt\n"
+                  },
                   "kitchen_meal_requests_txt": {
                     "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n"
                   }
@@ -224,16 +260,16 @@
       "linux-module-2-files-and-folders": {
         "viewing-file-contents": {
           "cat-whole-file": {
-            "title": "Use `cat` for a small file",
-            "bodyMarkdown": "`cat` prints an entire text file to the terminal. It is a good choice for a short recipe, note, or small configuration file.\n\n```bash\ncat recipe-card.txt\n```\n\nReading with `cat` does not modify the file. Check the file name carefully: if the path is wrong, the command reports that the file does not exist. For a long log, printing everything can bury the useful lines, so the next sketch introduces smaller previews."
+            "title": "Read a Small File with `cat`",
+            "bodyMarkdown": "`cat` prints the complete contents of a text file without changing it. It works best for short files."
           },
           "head-tail-preview": {
-            "title": "Use `head` and `tail` for previews",
-            "bodyMarkdown": "`head` shows the beginning of a file, while `tail` shows the end. They are useful when a long file has a meaningful header or the newest entries appear last.\n\n```bash\nhead sensor-log.txt\ntail sensor-log.txt\n```\n\nBoth commands inspect without changing content. Keep the file path the same when comparing the first and last lines; otherwise you may believe one file is inconsistent when you actually opened two different files. Use a preview first, then `cat` only when the whole file is short enough to read."
+            "title": "Preview the Beginning and End",
+            "bodyMarkdown": "`head` shows the beginning of a file and `tail` shows the end. They are useful when printing an entire long file would be noisy."
           },
           "wc-line-count": {
-            "title": "Use `wc -l` to count lines",
-            "bodyMarkdown": "`wc -l` counts the lines in a text file. It gives a quick size check for lists, logs, and line-based records.\n\n```bash\nwc -l reading-list.txt\n```\n\nThe output includes a number and usually the file name. A line count does not prove the content is correct, but it can reveal a missing or duplicated record before a handoff. Combine it with `head`, `tail`, or `cat` when you need both a quantity and a content check."
+            "title": "Count Lines with `wc -l`",
+            "bodyMarkdown": "`wc -l file` reports how many lines the file contains. Use it when the number of line-based records matters."
           }
         }
       }

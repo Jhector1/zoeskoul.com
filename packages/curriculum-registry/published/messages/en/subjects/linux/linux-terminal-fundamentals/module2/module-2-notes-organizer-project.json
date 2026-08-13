@@ -16,15 +16,15 @@
           "moduleProject": {
             "steps": {
               "module-2-notes-organizer-project-terminal-task-1": {
-                "title": "Create the notes workspace",
-                "prompt": "Create a clean notes organizer with `inbox`, `handoff`, and `archive` folders. Then list the top folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Begin from the previous working step and add only the new workspace change named here.",
+                "title": "Milestone 1: Complete the Organizer Structure",
+                "prompt": "The organizer inbox already contains `math.txt`, `history.txt`, and `tmp-scratch.txt`. Add the missing `handoff` and `archive` folders, then inspect the organizer to make sure the incoming notes are still untouched.",
+                "hint": "Preserve every incoming note. This milestone only completes the directory structure.",
                 "help": {
-                  "concept": "This project chains folder creation, writing, moving, reading, and one exact safe deletion.",
-                  "hint_1": "Begin from the previous working step and add only the new workspace change named here.",
-                  "hint_2": "Verify the organizer with `ls` and `cat`; preserve the real notes and remove only the scratch file. The current task asks: Create a clean notes organizer with `inbox`, `handoff`, and `archive` folders. Then list the top folder."
+                  "concept": "A cumulative workspace preserves the incoming notes while the organizer structure is completed.",
+                  "hint_1": "The inbox already exists because it contains the incoming files.",
+                  "hint_2": "Create only the missing organizer directories and verify them."
                 },
-                "starterCode": "# Use the terminal for this project step.",
+                "starterCode": "# Complete the organizer around the existing inbox.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -45,18 +45,59 @@
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Complete the organizer around the existing inbox.\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
+                  },
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
+                  },
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
+                  }
                 }
               },
               "module-2-notes-organizer-project-terminal-task-2": {
-                "title": "Write the first handoff notes",
-                "prompt": "Write `Substitute teacher handoff` to `class-notes-organizer/handoff/README.txt`, then append `Bring math worksheets`. Read the file with `cat`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Begin from the previous working step and add only the new workspace change named here.",
+                "title": "Milestone 2: Write the Handoff README",
+                "prompt": "Now create the handoff guide. Write `Substitute teacher handoff` as the first line of `class-notes-organizer/handoff/README.txt`, add `Bring math worksheets` as the second line, and read the file to check the result.",
+                "hint": "Preserve the completed folders and inbox notes while adding only the handoff documentation.",
                 "help": {
-                  "concept": "This project chains folder creation, writing, moving, reading, and one exact safe deletion.",
-                  "hint_1": "Begin from the previous working step and add only the new workspace change named here.",
-                  "hint_2": "Verify the organizer with `ls` and `cat`; preserve the real notes and remove only the scratch file. The current task asks: Write `Substitute teacher handoff` to `class-notes-organizer/handoff/README.txt`, then append `Bring math worksheets`. Read the file with `cat`."
+                  "concept": "The second milestone adds handoff documentation without discarding the workspace created earlier.",
+                  "hint_1": "The README needs two lines in the specified order.",
+                  "hint_2": "Read the completed file after writing it."
                 },
-                "starterCode": "# Use the terminal for this project step.",
+                "starterCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -83,18 +124,68 @@
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
+                  },
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
+                  },
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
+                  },
+                  "class_notes_organizer_handoff_README_txt": {
+                    "content": "Substitute teacher handoff\nBring math worksheets\n"
+                  }
                 }
               },
               "module-2-notes-organizer-project-terminal-task-3": {
-                "title": "Move notes and remove scratch",
-                "prompt": "Move `math.txt` and `history.txt` from `inbox` into `archive`. Remove only `tmp-scratch.txt`, then list the folders. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Begin from the previous working step and add only the new workspace change named here.",
+                "title": "Milestone 3: Archive Notes and Remove Scratch",
+                "prompt": "Finish the organizer by moving `math.txt` and `history.txt` from the inbox into the archive. Delete only `tmp-scratch.txt`, then inspect the final folders and make sure the handoff README remains.",
+                "hint": "The real notes must survive in the archive; only the explicitly named scratch file should disappear.",
                 "help": {
-                  "concept": "This project chains folder creation, writing, moving, reading, and one exact safe deletion.",
-                  "hint_1": "Begin from the previous working step and add only the new workspace change named here.",
-                  "hint_2": "Verify the organizer with `ls` and `cat`; preserve the real notes and remove only the scratch file. The current task asks: Move `math.txt` and `history.txt` from `inbox` into `archive`. Remove only `tmp-scratch.txt`, then list the folders."
+                  "concept": "The final milestone archives real notes and deletes only the confirmed temporary scratch file.",
+                  "hint_1": "Both subject notes must end in the archive.",
+                  "hint_2": "The README must remain and only the scratch file should vanish."
                 },
-                "starterCode": "# Use the terminal for this project step.",
+                "starterCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -128,6 +219,45 @@
                   },
                   "class_notes_organizer_inbox_tmp_scratch_txt": {
                     "content": "scratch\n"
+                  },
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff_README_txt": {
+                    "content": "Substitute teacher handoff\nBring math worksheets\n"
+                  }
+                },
+                "solutionCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\nmv class-notes-organizer/inbox/math.txt class-notes-organizer/archive/math.txt\nmv class-notes-organizer/inbox/history.txt class-notes-organizer/archive/history.txt\nrm class-notes-organizer/inbox/tmp-scratch.txt\nls class-notes-organizer/archive\nls class-notes-organizer/inbox\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\nmv class-notes-organizer/inbox/math.txt class-notes-organizer/archive/math.txt\nmv class-notes-organizer/inbox/history.txt class-notes-organizer/archive/history.txt\nrm class-notes-organizer/inbox/tmp-scratch.txt\nls class-notes-organizer/archive\nls class-notes-organizer/inbox\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff_README_txt": {
+                    "content": "Substitute teacher handoff\nBring math worksheets\n"
+                  },
+                  "class_notes_organizer_archive_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_archive_history_txt": {
+                    "content": "History notes\n"
                   }
                 }
               }
@@ -142,8 +272,8 @@
       "linux-module-2-files-and-folders": {
         "module-2-notes-organizer-project": {
           "project-synopsis": {
-            "title": "Class notes handoff",
-            "bodyMarkdown": "A substitute teacher receives a folder of class notes, but the files are mixed with a temporary scratch note and there is no guide for the next person. Your job is to turn that folder into a small, readable teaching workspace.\n\nThe project is cumulative. First create the organizer structure. Next write a README that explains the folders. Then move the real subject notes into the archive and remove only the named scratch file. Use inspection commands between changes so the final workspace tells a clear story rather than merely satisfying a list of commands."
+            "title": "Module 2 Project: Class Notes Handoff",
+            "bodyMarkdown": "A substitute teacher receives real notes plus one temporary scratch file in the organizer inbox. Complete the organizer, write the handoff README, then archive the real notes and remove only the named scratch file. Each milestone carries the complete previous workspace forward."
           }
         }
       }

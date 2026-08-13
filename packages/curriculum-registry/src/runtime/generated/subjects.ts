@@ -30462,25 +30462,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.cards.sketch2.title",
-          "sketchId": "safe-first-steps",
-          "height": 420,
-          "tryIt": {
-            "id": "try-what-the-terminal-is-sketch2",
-            "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch2.title",
-            "promptKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch2.prompt",
-            "exerciseKey": "what-terminal-is-try-it-3",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.cards.quiz.title",
@@ -30513,12 +30494,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.prompt-and-command.title",
           "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.prompt-and-command.bodyMarkdown"
-        },
-        {
-          "id": "safe-first-steps",
-          "archetype": "paragraph",
-          "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.safe-first-steps.title",
-          "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.safe-first-steps.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -30601,7 +30576,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "what-terminal-is-try-it-1",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1",
           "language": "bash",
@@ -30609,28 +30584,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "welcome-desk/shift-note.txt",
-              "content": "Morning volunteer shift\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterFiles.welcome_desk_shift_note_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "pwd\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "welcome-desk/shift-note.txt",
-              "content": "Morning volunteer shift\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.solutionFiles.welcome_desk_shift_note_txt.content",
               "language": "bash"
             }
           ],
@@ -30673,14 +30648,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "welcome-desk/shift-note.txt",
-                "content": "Morning volunteer shift\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterFiles.welcome_desk_shift_note_txt.content",
                 "language": "bash"
               }
             ],
@@ -30697,7 +30672,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -30725,7 +30700,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "what-terminal-is-try-it-2",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2",
           "language": "bash",
@@ -30733,38 +30708,38 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "supply-room/labels.txt",
-              "content": "Name tags\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterFiles.supply_room_labels_txt.content",
               "language": "bash"
             },
             {
               "path": "supply-room/inventory.txt",
-              "content": "Markers\nTape\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterFiles.supply_room_inventory_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "ls\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "supply-room/labels.txt",
-              "content": "Name tags\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.solutionFiles.supply_room_labels_txt.content",
               "language": "bash"
             },
             {
               "path": "supply-room/inventory.txt",
-              "content": "Markers\nTape\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.solutionFiles.supply_room_inventory_txt.content",
               "language": "bash"
             }
           ],
@@ -30808,19 +30783,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "supply-room/labels.txt",
-                "content": "Name tags\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterFiles.supply_room_labels_txt.content",
                 "language": "bash"
               },
               {
                 "path": "supply-room/inventory.txt",
-                "content": "Markers\nTape\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterFiles.supply_room_inventory_txt.content",
                 "language": "bash"
               }
             ],
@@ -30843,7 +30818,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -30869,134 +30844,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "supply-room/inventory.txt",
               "content": "Markers\nTape\n",
-              "language": "bash"
-            }
-          ]
-        },
-        {
-          "id": "what-terminal-is-try-it-3",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3",
-          "language": "bash",
-          "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
-              "language": "bash",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "check-in/arrival-note.txt",
-              "content": "Open doors at 8:00\n",
-              "language": "bash"
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.sh",
-              "content": "pwd\nls\n",
-              "language": "bash",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "check-in/arrival-note.txt",
-              "content": "Open doors at 8:00\n",
-              "language": "bash"
-            }
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "check-in/arrival-note.txt"
-            ]
-          },
-          "terminalExpectations": {
-            "requiredCommands": [
-              {
-                "pattern": "\\bpwd\\b",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.requiredCommands.0.message"
-              },
-              {
-                "pattern": "\\bls\\b",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.requiredCommands.1.message"
-              }
-            ],
-            "forbiddenCommands": [
-              {
-                "pattern": "(^|\\s)sudo(\\s|$)",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.forbiddenCommands.0.message"
-              },
-              {
-                "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.forbiddenCommands.1.message"
-              },
-              {
-                "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.forbiddenCommands.2.message"
-              },
-              {
-                "pattern": "(^|\\s)(curl|wget)(\\s|$)",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.forbiddenCommands.3.message"
-              }
-            ],
-            "cwdEndsWith": "check-in"
-          },
-          "workspace": {
-            "language": "bash",
-            "entryFilePath": "main.sh",
-            "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
-                "language": "bash",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "check-in/arrival-note.txt",
-                "content": "Open doors at 8:00\n",
-                "language": "bash"
-              }
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "check-in/arrival-note.txt"
-              ]
-            },
-            "fixtureFiles": [
-              {
-                "path": "check-in/arrival-note.txt",
-                "content": "Open doors at 8:00\n",
-                "language": "bash"
-              }
-            ]
-          },
-          "showExpectedExample": false,
-          "recipe": {
-            "type": "shell_task",
-            "mode": "terminal_workspace",
-            "instructions": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.prompt"
-          },
-          "ideConfig": {
-            "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
-            "requires": {
-              "files": true,
-              "multiFile": true,
-              "terminal": true
-            },
-            "terminalSessionScope": "exercise",
-            "terminalCwd": "/workspace/check-in"
-          },
-          "fixtureFiles": [
-            {
-              "path": "check-in/arrival-note.txt",
-              "content": "Open doors at 8:00\n",
               "language": "bash"
             }
           ]
@@ -31080,25 +30927,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.sketch2.title",
-          "sketchId": "pwd-ls-habit",
-          "height": 420,
-          "tryIt": {
-            "id": "try-where-am-i-sketch2",
-            "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch2.title",
-            "promptKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.try_where_am_i_sketch2.prompt",
-            "exerciseKey": "where-am-i-try-it-3",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.cards.quiz.title",
@@ -31125,12 +30953,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.ls-current-folder.title",
           "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.ls-current-folder.bodyMarkdown"
-        },
-        {
-          "id": "pwd-ls-habit",
-          "archetype": "paragraph",
-          "titleKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.pwd-ls-habit.title",
-          "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.pwd-ls-habit.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -31211,7 +31033,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "where-am-i-try-it-1",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1",
           "language": "bash",
@@ -31219,28 +31041,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "newsroom/assignment.txt",
-              "content": "Draft the Saturday update\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.newsroom_assignment_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "pwd\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "newsroom/assignment.txt",
-              "content": "Draft the Saturday update\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.solutionFiles.newsroom_assignment_txt.content",
               "language": "bash"
             }
           ],
@@ -31283,14 +31105,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "newsroom/assignment.txt",
-                "content": "Draft the Saturday update\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.newsroom_assignment_txt.content",
                 "language": "bash"
               }
             ],
@@ -31307,7 +31129,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -31335,7 +31157,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "where-am-i-try-it-2",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2",
           "language": "bash",
@@ -31343,38 +31165,38 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "art-table/brushes.txt",
-              "content": "Small brush\nLarge brush\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.art_table_brushes_txt.content",
               "language": "bash"
             },
             {
               "path": "art-table/paint-list.txt",
-              "content": "Blue\nYellow\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.art_table_paint_list_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "ls\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "art-table/brushes.txt",
-              "content": "Small brush\nLarge brush\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.solutionFiles.art_table_brushes_txt.content",
               "language": "bash"
             },
             {
               "path": "art-table/paint-list.txt",
-              "content": "Blue\nYellow\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.solutionFiles.art_table_paint_list_txt.content",
               "language": "bash"
             }
           ],
@@ -31418,19 +31240,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "art-table/brushes.txt",
-                "content": "Small brush\nLarge brush\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.art_table_brushes_txt.content",
                 "language": "bash"
               },
               {
                 "path": "art-table/paint-list.txt",
-                "content": "Blue\nYellow\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.art_table_paint_list_txt.content",
                 "language": "bash"
               }
             ],
@@ -31453,7 +31275,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -31479,161 +31301,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             {
               "path": "art-table/paint-list.txt",
               "content": "Blue\nYellow\n",
-              "language": "bash"
-            }
-          ]
-        },
-        {
-          "id": "where-am-i-try-it-3",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3",
-          "language": "bash",
-          "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
-              "language": "bash",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "event-desk/run-sheet.txt",
-              "content": "Doors open at 6:00\n",
-              "language": "bash"
-            },
-            {
-              "path": "event-desk/contact.txt",
-              "content": "Call the coordinator\n",
-              "language": "bash"
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.sh",
-              "content": "pwd\nls\n",
-              "language": "bash",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "event-desk/run-sheet.txt",
-              "content": "Doors open at 6:00\n",
-              "language": "bash"
-            },
-            {
-              "path": "event-desk/contact.txt",
-              "content": "Call the coordinator\n",
-              "language": "bash"
-            }
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "event-desk/run-sheet.txt",
-              "event-desk/contact.txt"
-            ]
-          },
-          "terminalExpectations": {
-            "requiredCommands": [
-              {
-                "pattern": "\\bpwd\\b",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.requiredCommands.0.message"
-              },
-              {
-                "pattern": "\\bls\\b",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.requiredCommands.1.message"
-              }
-            ],
-            "forbiddenCommands": [
-              {
-                "pattern": "(^|\\s)sudo(\\s|$)",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.forbiddenCommands.0.message"
-              },
-              {
-                "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.forbiddenCommands.1.message"
-              },
-              {
-                "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.forbiddenCommands.2.message"
-              },
-              {
-                "pattern": "(^|\\s)(curl|wget)(\\s|$)",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.forbiddenCommands.3.message"
-              }
-            ],
-            "cwdEndsWith": "event-desk"
-          },
-          "workspace": {
-            "language": "bash",
-            "entryFilePath": "main.sh",
-            "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
-                "language": "bash",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "event-desk/run-sheet.txt",
-                "content": "Doors open at 6:00\n",
-                "language": "bash"
-              },
-              {
-                "path": "event-desk/contact.txt",
-                "content": "Call the coordinator\n",
-                "language": "bash"
-              }
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "event-desk/run-sheet.txt",
-                "event-desk/contact.txt"
-              ]
-            },
-            "fixtureFiles": [
-              {
-                "path": "event-desk/run-sheet.txt",
-                "content": "Doors open at 6:00\n",
-                "language": "bash"
-              },
-              {
-                "path": "event-desk/contact.txt",
-                "content": "Call the coordinator\n",
-                "language": "bash"
-              }
-            ]
-          },
-          "showExpectedExample": false,
-          "recipe": {
-            "type": "shell_task",
-            "mode": "terminal_workspace",
-            "instructions": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.prompt"
-          },
-          "ideConfig": {
-            "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
-            "requires": {
-              "files": true,
-              "multiFile": true,
-              "terminal": true
-            },
-            "terminalSessionScope": "exercise",
-            "terminalCwd": "/workspace/event-desk"
-          },
-          "fixtureFiles": [
-            {
-              "path": "event-desk/run-sheet.txt",
-              "content": "Doors open at 6:00\n",
-              "language": "bash"
-            },
-            {
-              "path": "event-desk/contact.txt",
-              "content": "Call the coordinator\n",
               "language": "bash"
             }
           ]
@@ -31848,7 +31515,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "moving-around-try-it-1",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1",
           "language": "bash",
@@ -31856,28 +31523,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "newsletter/brief.txt",
-              "content": "Community newsletter brief\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.newsletter_brief_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "cd newsletter\npwd\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "newsletter/brief.txt",
-              "content": "Community newsletter brief\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.solutionFiles.newsletter_brief_txt.content",
               "language": "bash"
             }
           ],
@@ -31924,14 +31591,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "newsletter/brief.txt",
-                "content": "Community newsletter brief\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.newsletter_brief_txt.content",
                 "language": "bash"
               }
             ],
@@ -31948,7 +31615,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -31976,7 +31643,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "moving-around-try-it-2",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2",
           "language": "bash",
@@ -31984,28 +31651,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "library-kit/returns/today.txt",
-              "content": "Three books returned\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.library_kit_returns_today_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "cd ..\npwd\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "library-kit/returns/today.txt",
-              "content": "Three books returned\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.solutionFiles.library_kit_returns_today_txt.content",
               "language": "bash"
             }
           ],
@@ -32052,14 +31719,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "library-kit/returns/today.txt",
-                "content": "Three books returned\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.library_kit_returns_today_txt.content",
                 "language": "bash"
               }
             ],
@@ -32076,7 +31743,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -32104,7 +31771,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "moving-around-try-it-3",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3",
           "language": "bash",
@@ -32112,28 +31779,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "museum-tour/signs/labels.txt",
-              "content": "Entrance\nExit\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.museum_tour_signs_labels_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "cd museum-tour/signs\nls\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "museum-tour/signs/labels.txt",
-              "content": "Entrance\nExit\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.solutionFiles.museum_tour_signs_labels_txt.content",
               "language": "bash"
             }
           ],
@@ -32180,14 +31847,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "museum-tour/signs/labels.txt",
-                "content": "Entrance\nExit\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.museum_tour_signs_labels_txt.content",
                 "language": "bash"
               }
             ],
@@ -32204,7 +31871,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -32339,48 +32006,48 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "club-hub/newsletter/draft.txt",
-              "content": "Newsletter draft\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_newsletter_draft_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/events/checklist.txt",
-              "content": "Event checklist\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_events_checklist_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/archive/old-note.txt",
-              "content": "Old note\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_archive_old_note_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "ls\ncd club-hub\npwd\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "club-hub/newsletter/draft.txt",
-              "content": "Newsletter draft\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.solutionFiles.club_hub_newsletter_draft_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/events/checklist.txt",
-              "content": "Event checklist\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.solutionFiles.club_hub_events_checklist_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/archive/old-note.txt",
-              "content": "Old note\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.solutionFiles.club_hub_archive_old_note_txt.content",
               "language": "bash"
             }
           ],
@@ -32434,24 +32101,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "club-hub/newsletter/draft.txt",
-                "content": "Newsletter draft\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_newsletter_draft_txt.content",
                 "language": "bash"
               },
               {
                 "path": "club-hub/events/checklist.txt",
-                "content": "Event checklist\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_events_checklist_txt.content",
                 "language": "bash"
               },
               {
                 "path": "club-hub/archive/old-note.txt",
-                "content": "Old note\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_archive_old_note_txt.content",
                 "language": "bash"
               }
             ],
@@ -32481,7 +32148,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -32527,48 +32194,48 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "club-hub/newsletter/draft.txt",
-              "content": "Newsletter draft\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_newsletter_draft_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/events/checklist.txt",
-              "content": "Event checklist\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_events_checklist_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/archive/old-note.txt",
-              "content": "Old note\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_archive_old_note_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "cd newsletter\nls\ncd ..\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "club-hub/newsletter/draft.txt",
-              "content": "Newsletter draft\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.solutionFiles.club_hub_newsletter_draft_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/events/checklist.txt",
-              "content": "Event checklist\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.solutionFiles.club_hub_events_checklist_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/archive/old-note.txt",
-              "content": "Old note\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.solutionFiles.club_hub_archive_old_note_txt.content",
               "language": "bash"
             }
           ],
@@ -32615,24 +32282,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "club-hub/newsletter/draft.txt",
-                "content": "Newsletter draft\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_newsletter_draft_txt.content",
                 "language": "bash"
               },
               {
                 "path": "club-hub/events/checklist.txt",
-                "content": "Event checklist\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_events_checklist_txt.content",
                 "language": "bash"
               },
               {
                 "path": "club-hub/archive/old-note.txt",
-                "content": "Old note\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_archive_old_note_txt.content",
                 "language": "bash"
               }
             ],
@@ -32659,7 +32326,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -32705,48 +32372,48 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "club-hub/newsletter/draft.txt",
-              "content": "Newsletter draft\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_newsletter_draft_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/events/checklist.txt",
-              "content": "Event checklist\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_events_checklist_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/archive/old-note.txt",
-              "content": "Old note\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_archive_old_note_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "cd events\npwd\nls\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "club-hub/newsletter/draft.txt",
-              "content": "Newsletter draft\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.solutionFiles.club_hub_newsletter_draft_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/events/checklist.txt",
-              "content": "Event checklist\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.solutionFiles.club_hub_events_checklist_txt.content",
               "language": "bash"
             },
             {
               "path": "club-hub/archive/old-note.txt",
-              "content": "Old note\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.solutionFiles.club_hub_archive_old_note_txt.content",
               "language": "bash"
             }
           ],
@@ -32797,24 +32464,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "club-hub/newsletter/draft.txt",
-                "content": "Newsletter draft\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_newsletter_draft_txt.content",
                 "language": "bash"
               },
               {
                 "path": "club-hub/events/checklist.txt",
-                "content": "Event checklist\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_events_checklist_txt.content",
                 "language": "bash"
               },
               {
                 "path": "club-hub/archive/old-note.txt",
-                "content": "Old note\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_archive_old_note_txt.content",
                 "language": "bash"
               }
             ],
@@ -32841,7 +32508,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -33086,7 +32753,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "creating-folders-and-files-try-it-1",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1",
           "language": "bash",
@@ -33094,7 +32761,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
@@ -33103,7 +32770,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "mkdir volunteer-desk\nls\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
@@ -33151,7 +32818,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
@@ -33164,7 +32831,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             "fixtureFiles": []
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -33186,7 +32853,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "creating-folders-and-files-try-it-2",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2",
           "language": "bash",
@@ -33194,7 +32861,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
@@ -33203,7 +32870,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "mkdir -p event-pack/signs\nmkdir -p event-pack/schedules\nls event-pack\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
@@ -33249,7 +32916,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
@@ -33264,7 +32931,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             "fixtureFiles": []
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -33286,7 +32953,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "creating-folders-and-files-try-it-3",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3",
           "language": "bash",
@@ -33294,28 +32961,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "planning-board/README.txt",
-              "content": "Planning board workspace\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.planning_board_README_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "touch tasks.txt\ntouch contacts.txt\nls\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "planning-board/README.txt",
-              "content": "Planning board workspace\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.solutionFiles.planning_board_README_txt.content",
               "language": "bash"
             }
           ],
@@ -33367,14 +33034,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "planning-board/README.txt",
-                "content": "Planning board workspace\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.planning_board_README_txt.content",
                 "language": "bash"
               }
             ],
@@ -33396,7 +33063,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -33631,7 +33298,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "viewing-file-contents-try-it-1",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1",
           "language": "bash",
@@ -33639,28 +33306,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "visitor-desk/welcome-note.txt",
-              "content": "Welcome table opens at 9:00.\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.visitor_desk_welcome_note_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "cat welcome-note.txt\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "visitor-desk/welcome-note.txt",
-              "content": "Welcome table opens at 9:00.\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.solutionFiles.visitor_desk_welcome_note_txt.content",
               "language": "bash"
             }
           ],
@@ -33703,14 +33370,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "visitor-desk/welcome-note.txt",
-                "content": "Welcome table opens at 9:00.\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.visitor_desk_welcome_note_txt.content",
                 "language": "bash"
               }
             ],
@@ -33727,7 +33394,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -33755,7 +33422,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "viewing-file-contents-try-it-2",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2",
           "language": "bash",
@@ -33763,28 +33430,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "dispatch/delivery-log.txt",
-              "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.dispatch_delivery_log_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "head delivery-log.txt\ntail delivery-log.txt\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "dispatch/delivery-log.txt",
-              "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Signs arrived\n09:10 Water arrived\n09:30 Radios arrived\n10:00 Lunch arrived\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.solutionFiles.dispatch_delivery_log_txt.content",
               "language": "bash"
             }
           ],
@@ -33831,14 +33498,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "dispatch/delivery-log.txt",
-                "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.dispatch_delivery_log_txt.content",
                 "language": "bash"
               }
             ],
@@ -33855,7 +33522,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -33883,7 +33550,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "viewing-file-contents-try-it-3",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3",
           "language": "bash",
@@ -33891,28 +33558,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "kitchen/meal-requests.txt",
-              "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.kitchen_meal_requests_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "wc -l meal-requests.txt\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "kitchen/meal-requests.txt",
-              "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.solutionFiles.kitchen_meal_requests_txt.content",
               "language": "bash"
             }
           ],
@@ -33955,14 +33622,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "kitchen/meal-requests.txt",
-                "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.kitchen_meal_requests_txt.content",
                 "language": "bash"
               }
             ],
@@ -33979,7 +33646,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -34211,7 +33878,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "writing-text-into-files-try-it-1",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1",
           "language": "bash",
@@ -34219,7 +33886,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
@@ -34228,7 +33895,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "echo \"Morning briefing\"\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
@@ -34268,7 +33935,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
@@ -34277,7 +33944,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "workspaceExpectations": {},
             "fixtureFiles": []
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -34299,7 +33966,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "writing-text-into-files-try-it-2",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2",
           "language": "bash",
@@ -34307,7 +33974,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
@@ -34316,14 +33983,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "echo \"Welcome volunteers\" > welcome-note.txt\ncat welcome-note.txt\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "welcome-note.txt",
-              "content": "Welcome volunteers\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.solutionFiles.welcome_note_txt.content",
               "language": "bash"
             }
           ],
@@ -34369,7 +34036,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
@@ -34382,7 +34049,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             "fixtureFiles": []
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -34404,7 +34071,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "writing-text-into-files-try-it-3",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3",
           "language": "bash",
@@ -34412,28 +34079,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "supply-list.txt",
-              "content": "Name tags\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.supply_list_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "echo \"Water bottles\" >> supply-list.txt\ncat supply-list.txt\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "supply-list.txt",
-              "content": "Name tags\nWater bottles\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.solutionFiles.supply_list_txt.content",
               "language": "bash"
             }
           ],
@@ -34479,14 +34146,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "supply-list.txt",
-                "content": "Name tags\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.supply_list_txt.content",
                 "language": "bash"
               }
             ],
@@ -34503,7 +34170,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -34738,7 +34405,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "copy-move-rename-try-it-1",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1",
           "language": "bash",
@@ -34746,33 +34413,33 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "registration/attendee-list.txt",
-              "content": "Amina\nDiego\nMaya\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.registration_attendee_list_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "cp attendee-list.txt attendee-list-backup.txt\nls\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "registration/attendee-list.txt",
-              "content": "Amina\nDiego\nMaya\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.solutionFiles.registration_attendee_list_txt.content",
               "language": "bash"
             },
             {
               "path": "registration/attendee-list-backup.txt",
-              "content": "Amina\nDiego\nMaya\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.solutionFiles.registration_attendee_list_backup_txt.content",
               "language": "bash"
             }
           ],
@@ -34816,14 +34483,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "registration/attendee-list.txt",
-                "content": "Amina\nDiego\nMaya\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.registration_attendee_list_txt.content",
                 "language": "bash"
               }
             ],
@@ -34841,7 +34508,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -34869,7 +34536,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "copy-move-rename-try-it-2",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2",
           "language": "bash",
@@ -34877,38 +34544,38 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "sign-shop/banner-note.txt",
-              "content": "Hang the welcome banner by 8:30.\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.sign_shop_banner_note_txt.content",
               "language": "bash"
             },
             {
               "path": "sign-shop/handoff/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.sign_shop_handoff__keep.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "mv banner-note.txt handoff/banner-note.txt\nls handoff\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "sign-shop/handoff/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.solutionFiles.sign_shop_handoff__keep.content",
               "language": "bash"
             },
             {
               "path": "sign-shop/handoff/banner-note.txt",
-              "content": "Hang the welcome banner by 8:30.\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.solutionFiles.sign_shop_handoff_banner_note_txt.content",
               "language": "bash"
             }
           ],
@@ -34957,19 +34624,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "sign-shop/banner-note.txt",
-                "content": "Hang the welcome banner by 8:30.\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.sign_shop_banner_note_txt.content",
                 "language": "bash"
               },
               {
                 "path": "sign-shop/handoff/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.sign_shop_handoff__keep.content",
                 "language": "bash"
               }
             ],
@@ -34997,7 +34664,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -35030,7 +34697,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "copy-move-rename-try-it-3",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3",
           "language": "bash",
@@ -35038,28 +34705,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "schedule-desk/schedule-draft.txt",
-              "content": "Opening: 9:00\nWorkshop: 10:30\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterFiles.schedule_desk_schedule_draft_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "mv schedule-draft.txt schedule-final.txt\nls\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "schedule-desk/schedule-final.txt",
-              "content": "Opening: 9:00\nWorkshop: 10:30\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.solutionFiles.schedule_desk_schedule_final_txt.content",
               "language": "bash"
             }
           ],
@@ -35105,14 +34772,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "schedule-desk/schedule-draft.txt",
-                "content": "Opening: 9:00\nWorkshop: 10:30\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterFiles.schedule_desk_schedule_draft_txt.content",
                 "language": "bash"
               }
             ],
@@ -35132,7 +34799,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -35198,25 +34865,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       },
       "cards": [
         {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.cards.sketch0.title",
-          "sketchId": "check-before-rm",
-          "height": 420,
-          "tryIt": {
-            "id": "try-safe-delete-with-rm-sketch0",
-            "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.try_safe_delete_with_rm_sketch0.title",
-            "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.try_safe_delete_with_rm_sketch0.prompt",
-            "exerciseKey": "safe-delete-with-rm-try-it-1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
-        },
-        {
           "id": "sketch1",
           "kind": "sketch",
           "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.cards.sketch1.title",
@@ -35270,12 +34918,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         }
       ],
       "sketches": [
-        {
-          "id": "check-before-rm",
-          "archetype": "paragraph",
-          "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.check-before-rm.title",
-          "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.check-before-rm.bodyMarkdown"
-        },
         {
           "id": "rm-one-file",
           "archetype": "paragraph",
@@ -35366,160 +35008,9 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "safe-delete-with-rm-try-it-1",
-          "kind": "code_input",
-          "purpose": "project",
-          "weight": 1,
-          "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1",
-          "language": "bash",
-          "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.starterCode",
-          "starterFiles": [
-            {
-              "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.starterCode",
-              "language": "bash",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "print-room/print-test.txt",
-              "content": "Printer alignment test\n",
-              "language": "bash"
-            },
-            {
-              "path": "print-room/event-plan.txt",
-              "content": "Keep this event plan\n",
-              "language": "bash"
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.sh",
-              "content": "ls\n",
-              "language": "bash",
-              "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "print-room/print-test.txt",
-              "content": "Printer alignment test\n",
-              "language": "bash"
-            },
-            {
-              "path": "print-room/event-plan.txt",
-              "content": "Keep this event plan\n",
-              "language": "bash"
-            }
-          ],
-          "workspaceExpectations": {
-            "requiredFiles": [
-              "print-room/print-test.txt",
-              "print-room/event-plan.txt"
-            ]
-          },
-          "terminalExpectations": {
-            "requiredCommands": [
-              {
-                "pattern": "\\bls\\b",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.terminalExpectations.requiredCommands.0.message"
-              }
-            ],
-            "forbiddenCommands": [
-              {
-                "pattern": "(^|\\s)sudo(\\s|$)",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.terminalExpectations.forbiddenCommands.0.message"
-              },
-              {
-                "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.terminalExpectations.forbiddenCommands.1.message"
-              },
-              {
-                "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.terminalExpectations.forbiddenCommands.2.message"
-              },
-              {
-                "pattern": "(^|\\s)(curl|wget)(\\s|$)",
-                "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.terminalExpectations.forbiddenCommands.3.message"
-              }
-            ],
-            "cwdEndsWith": "print-room"
-          },
-          "workspace": {
-            "language": "bash",
-            "entryFilePath": "main.sh",
-            "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.starterCode",
-            "starterFiles": [
-              {
-                "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.starterCode",
-                "language": "bash",
-                "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "print-room/print-test.txt",
-                "content": "Printer alignment test\n",
-                "language": "bash"
-              },
-              {
-                "path": "print-room/event-plan.txt",
-                "content": "Keep this event plan\n",
-                "language": "bash"
-              }
-            ],
-            "workspaceExpectations": {
-              "requiredFiles": [
-                "print-room/print-test.txt",
-                "print-room/event-plan.txt"
-              ]
-            },
-            "fixtureFiles": [
-              {
-                "path": "print-room/print-test.txt",
-                "content": "Printer alignment test\n",
-                "language": "bash"
-              },
-              {
-                "path": "print-room/event-plan.txt",
-                "content": "Keep this event plan\n",
-                "language": "bash"
-              }
-            ]
-          },
-          "showExpectedExample": false,
-          "recipe": {
-            "type": "shell_task",
-            "mode": "terminal_workspace",
-            "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.prompt"
-          },
-          "ideConfig": {
-            "runnerBackend": "pty",
-            "layoutMode": "terminal_workspace",
-            "requires": {
-              "files": true,
-              "multiFile": true,
-              "terminal": true
-            },
-            "terminalSessionScope": "exercise",
-            "terminalCwd": "/workspace/print-room"
-          },
-          "fixtureFiles": [
-            {
-              "path": "print-room/print-test.txt",
-              "content": "Printer alignment test\n",
-              "language": "bash"
-            },
-            {
-              "path": "print-room/event-plan.txt",
-              "content": "Keep this event plan\n",
-              "language": "bash"
-            }
-          ]
-        },
-        {
           "id": "safe-delete-with-rm-try-it-2",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2",
           "language": "bash",
@@ -35527,33 +35018,33 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "cleanup-desk/temp-label.txt",
-              "content": "Temporary printer label\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterFiles.cleanup_desk_temp_label_txt.content",
               "language": "bash"
             },
             {
               "path": "cleanup-desk/display-plan.txt",
-              "content": "Keep the display plan\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterFiles.cleanup_desk_display_plan_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "rm temp-label.txt\nls\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "cleanup-desk/display-plan.txt",
-              "content": "Keep the display plan\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.solutionFiles.cleanup_desk_display_plan_txt.content",
               "language": "bash"
             }
           ],
@@ -35603,19 +35094,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "cleanup-desk/temp-label.txt",
-                "content": "Temporary printer label\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterFiles.cleanup_desk_temp_label_txt.content",
                 "language": "bash"
               },
               {
                 "path": "cleanup-desk/display-plan.txt",
-                "content": "Keep the display plan\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterFiles.cleanup_desk_display_plan_txt.content",
                 "language": "bash"
               }
             ],
@@ -35640,7 +35131,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -35673,7 +35164,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "safe-delete-with-rm-try-it-3",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
           "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3",
           "language": "bash",
@@ -35681,28 +35172,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "archive-review/maybe-archive.txt",
-              "content": "Needs coordinator review\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.starterFiles.archive_review_maybe_archive_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "mkdir -p review-later\nmv maybe-archive.txt review-later/maybe-archive.txt\nls review-later\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "archive-review/review-later/maybe-archive.txt",
-              "content": "Needs coordinator review\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.solutionFiles.archive_review_review_later_maybe_archive_txt.content",
               "language": "bash"
             }
           ],
@@ -35755,14 +35246,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "archive-review/maybe-archive.txt",
-                "content": "Needs coordinator review\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.starterFiles.archive_review_maybe_archive_txt.content",
                 "language": "bash"
               }
             ],
@@ -35785,7 +35276,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -35920,33 +35411,68 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
-              "language": "bash",
-              "isEntry": true,
-              "entry": true
-            }
-          ],
-          "solutionFiles": [
-            {
-              "path": "main.sh",
-              "content": "mkdir -p class-notes-organizer/inbox\nmkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "class-notes-organizer/inbox/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox__keep.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/math.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_math_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/history.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_history_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.main_sh.content",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "class-notes-organizer/inbox/.keep",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_inbox__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/handoff/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_handoff__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/archive/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_archive__keep.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/math.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_inbox_math_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/history.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_inbox_history_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.solutionFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
               "language": "bash"
             }
           ],
@@ -35956,6 +35482,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "class-notes-organizer/inbox",
               "class-notes-organizer/handoff",
               "class-notes-organizer/archive"
+            ],
+            "requiredFiles": [
+              "class-notes-organizer/inbox/math.txt",
+              "class-notes-organizer/inbox/history.txt",
+              "class-notes-organizer/inbox/tmp-scratch.txt"
             ]
           },
           "terminalExpectations": {
@@ -35991,10 +35522,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
+              },
+              {
+                "path": "class-notes-organizer/inbox/.keep",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox__keep.content",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/math.txt",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_math_txt.content",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/history.txt",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_history_txt.content",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
+                "language": "bash"
               }
             ],
             "workspaceExpectations": {
@@ -36003,10 +35554,37 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "class-notes-organizer/inbox",
                 "class-notes-organizer/handoff",
                 "class-notes-organizer/archive"
+              ],
+              "requiredFiles": [
+                "class-notes-organizer/inbox/math.txt",
+                "class-notes-organizer/inbox/history.txt",
+                "class-notes-organizer/inbox/tmp-scratch.txt"
               ]
-            }
+            },
+            "fixtureFiles": [
+              {
+                "path": "class-notes-organizer/inbox/.keep",
+                "content": "",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/math.txt",
+                "content": "Math notes\n",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/history.txt",
+                "content": "History notes\n",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+                "content": "scratch\n",
+                "language": "bash"
+              }
+            ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -36035,62 +35613,97 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "class-notes-organizer/inbox/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/handoff/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_handoff__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/archive/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_archive__keep.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/math.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_math_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/history.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_history_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "mkdir -p class-notes-organizer/handoff\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "class-notes-organizer/inbox/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_inbox__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/handoff/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_handoff__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/archive/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_archive__keep.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/math.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_inbox_math_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/history.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_inbox_history_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/handoff/README.txt",
-              "content": "Substitute teacher handoff\nBring math worksheets\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.solutionFiles.class_notes_organizer_handoff_README_txt.content",
               "language": "bash"
             }
           ],
           "workspaceExpectations": {
-            "requiredFiles": [
-              "class-notes-organizer/handoff/README.txt"
-            ],
             "requiredFolders": [
-              "class-notes-organizer/handoff"
+              "class-notes-organizer/inbox",
+              "class-notes-organizer/handoff",
+              "class-notes-organizer/archive"
+            ],
+            "requiredFiles": [
+              "class-notes-organizer/inbox/math.txt",
+              "class-notes-organizer/inbox/history.txt",
+              "class-notes-organizer/inbox/tmp-scratch.txt",
+              "class-notes-organizer/handoff/README.txt"
             ]
           },
           "terminalExpectations": {
@@ -36134,33 +35747,53 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "class-notes-organizer/inbox/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox__keep.content",
                 "language": "bash"
               },
               {
                 "path": "class-notes-organizer/handoff/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_handoff__keep.content",
                 "language": "bash"
               },
               {
                 "path": "class-notes-organizer/archive/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_archive__keep.content",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/math.txt",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_math_txt.content",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/history.txt",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_history_txt.content",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
                 "language": "bash"
               }
             ],
             "workspaceExpectations": {
-              "requiredFiles": [
-                "class-notes-organizer/handoff/README.txt"
-              ],
               "requiredFolders": [
-                "class-notes-organizer/handoff"
+                "class-notes-organizer/inbox",
+                "class-notes-organizer/handoff",
+                "class-notes-organizer/archive"
+              ],
+              "requiredFiles": [
+                "class-notes-organizer/inbox/math.txt",
+                "class-notes-organizer/inbox/history.txt",
+                "class-notes-organizer/inbox/tmp-scratch.txt",
+                "class-notes-organizer/handoff/README.txt"
               ]
             },
             "fixtureFiles": [
@@ -36178,10 +35811,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "path": "class-notes-organizer/archive/.keep",
                 "content": "",
                 "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/math.txt",
+                "content": "Math notes\n",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/history.txt",
+                "content": "History notes\n",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/inbox/tmp-scratch.txt",
+                "content": "scratch\n",
+                "language": "bash"
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -36227,93 +35875,96 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "class-notes-organizer/inbox/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/handoff/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/archive/.keep",
-              "content": "",
-              "language": "bash"
-            },
-            {
-              "path": "class-notes-organizer/handoff/README.txt",
-              "content": "Substitute teacher handoff\nBring math worksheets\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_archive__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/inbox/math.txt",
-              "content": "Math notes\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_math_txt.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/inbox/history.txt",
-              "content": "History notes\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_history_txt.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/inbox/tmp-scratch.txt",
-              "content": "scratch\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "class-notes-organizer/handoff/README.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff_README_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "mkdir -p class-notes-organizer/archive\nmv class-notes-organizer/inbox/math.txt class-notes-organizer/archive/math.txt\nmv class-notes-organizer/inbox/history.txt class-notes-organizer/archive/history.txt\nrm class-notes-organizer/inbox/tmp-scratch.txt\nls class-notes-organizer/archive\nls class-notes-organizer/inbox\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "class-notes-organizer/inbox/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_inbox__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/handoff/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_handoff__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/archive/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_archive__keep.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/handoff/README.txt",
-              "content": "Substitute teacher handoff\nBring math worksheets\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_handoff_README_txt.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/archive/math.txt",
-              "content": "Math notes\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_archive_math_txt.content",
               "language": "bash"
             },
             {
               "path": "class-notes-organizer/archive/history.txt",
-              "content": "History notes\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.solutionFiles.class_notes_organizer_archive_history_txt.content",
               "language": "bash"
             }
           ],
           "workspaceExpectations": {
+            "requiredFolders": [
+              "class-notes-organizer/inbox",
+              "class-notes-organizer/handoff",
+              "class-notes-organizer/archive"
+            ],
             "requiredFiles": [
+              "class-notes-organizer/handoff/README.txt",
               "class-notes-organizer/archive/math.txt",
               "class-notes-organizer/archive/history.txt"
-            ],
-            "requiredFolders": [
-              "class-notes-organizer/archive"
             ],
             "forbiddenFiles": [
               "class-notes-organizer/inbox/math.txt",
@@ -36358,54 +36009,57 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "class-notes-organizer/inbox/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox__keep.content",
                 "language": "bash"
               },
               {
                 "path": "class-notes-organizer/handoff/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff__keep.content",
                 "language": "bash"
               },
               {
                 "path": "class-notes-organizer/archive/.keep",
-                "content": "",
-                "language": "bash"
-              },
-              {
-                "path": "class-notes-organizer/handoff/README.txt",
-                "content": "Substitute teacher handoff\nBring math worksheets\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_archive__keep.content",
                 "language": "bash"
               },
               {
                 "path": "class-notes-organizer/inbox/math.txt",
-                "content": "Math notes\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_math_txt.content",
                 "language": "bash"
               },
               {
                 "path": "class-notes-organizer/inbox/history.txt",
-                "content": "History notes\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_history_txt.content",
                 "language": "bash"
               },
               {
                 "path": "class-notes-organizer/inbox/tmp-scratch.txt",
-                "content": "scratch\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
+                "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/handoff/README.txt",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff_README_txt.content",
                 "language": "bash"
               }
             ],
             "workspaceExpectations": {
+              "requiredFolders": [
+                "class-notes-organizer/inbox",
+                "class-notes-organizer/handoff",
+                "class-notes-organizer/archive"
+              ],
               "requiredFiles": [
+                "class-notes-organizer/handoff/README.txt",
                 "class-notes-organizer/archive/math.txt",
                 "class-notes-organizer/archive/history.txt"
-              ],
-              "requiredFolders": [
-                "class-notes-organizer/archive"
               ],
               "forbiddenFiles": [
                 "class-notes-organizer/inbox/math.txt",
@@ -36430,11 +36084,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "bash"
               },
               {
-                "path": "class-notes-organizer/handoff/README.txt",
-                "content": "Substitute teacher handoff\nBring math worksheets\n",
-                "language": "bash"
-              },
-              {
                 "path": "class-notes-organizer/inbox/math.txt",
                 "content": "Math notes\n",
                 "language": "bash"
@@ -36448,10 +36097,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "path": "class-notes-organizer/inbox/tmp-scratch.txt",
                 "content": "scratch\n",
                 "language": "bash"
+              },
+              {
+                "path": "class-notes-organizer/handoff/README.txt",
+                "content": "Substitute teacher handoff\nBring math worksheets\n",
+                "language": "bash"
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -36551,7 +36205,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.cards.sketch0.title",
           "sketchId": "capstone-synopsis",
-          "height": 420
+          "height": 420,
+          "tryIt": {
+            "id": "practice-final-capstone-handoff-check",
+            "titleKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.title",
+            "promptKey": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.prompt",
+            "exerciseKey": "practice-final-capstone-handoff-check",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "required": true,
+            "allowReveal": true,
+            "maxAttempts": null
+          }
         },
         {
           "id": "project",
@@ -36628,6 +36294,202 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
+          "kind": "code_input",
+          "weight": 1,
+          "language": "bash",
+          "ideConfig": {
+            "runnerBackend": "pty",
+            "layoutMode": "terminal_workspace",
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": true
+            },
+            "terminalSessionScope": "exercise",
+            "terminalCwd": "/workspace"
+          },
+          "id": "practice-final-capstone-handoff-check",
+          "purpose": "practice",
+          "messageBase": "topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check",
+          "showExpectedExample": true,
+          "workspaceExpectations": {
+            "requiredFolders": [
+              "handoff-practice/archive",
+              "handoff-practice/inbox"
+            ],
+            "requiredFiles": [
+              "handoff-practice/archive/agenda.txt"
+            ],
+            "forbiddenFiles": [
+              "handoff-practice/inbox/agenda.txt",
+              "handoff-practice/inbox/tmp-note.txt"
+            ]
+          },
+          "terminalExpectations": {
+            "requiredCommands": [
+              {
+                "pattern": "\\bpwd\\b",
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.requiredCommands.0.message"
+              },
+              {
+                "pattern": "\\bls\\b",
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.requiredCommands.1.message"
+              },
+              {
+                "pattern": "(^|\\s)mv(\\s|$)",
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.requiredCommands.2.message"
+              },
+              {
+                "pattern": "(^|\\s)rm(\\s|$)",
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.requiredCommands.3.message"
+              }
+            ],
+            "forbiddenCommands": [
+              {
+                "pattern": "(^|\\s)sudo(\\s|$)",
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.forbiddenCommands.0.message"
+              },
+              {
+                "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.forbiddenCommands.1.message"
+              },
+              {
+                "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.forbiddenCommands.2.message"
+              },
+              {
+                "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.forbiddenCommands.3.message"
+              }
+            ]
+          },
+          "workspace": {
+            "language": "bash",
+            "entryFilePath": "main.sh",
+            "workspaceExpectations": {
+              "requiredFolders": [
+                "handoff-practice/archive",
+                "handoff-practice/inbox"
+              ],
+              "requiredFiles": [
+                "handoff-practice/archive/agenda.txt"
+              ],
+              "forbiddenFiles": [
+                "handoff-practice/inbox/agenda.txt",
+                "handoff-practice/inbox/tmp-note.txt"
+              ]
+            },
+            "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.sh",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.main_sh.content",
+                "language": "bash",
+                "isEntry": true,
+                "entry": true
+              },
+              {
+                "path": "handoff-practice/archive/.keep",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_archive__keep.content",
+                "language": "bash"
+              },
+              {
+                "path": "handoff-practice/inbox/agenda.txt",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_inbox_agenda_txt.content",
+                "language": "bash"
+              },
+              {
+                "path": "handoff-practice/inbox/tmp-note.txt",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_inbox_tmp_note_txt.content",
+                "language": "bash"
+              }
+            ],
+            "fixtureFiles": [
+              {
+                "path": "handoff-practice/archive/.keep",
+                "content": "",
+                "language": "bash"
+              },
+              {
+                "path": "handoff-practice/inbox/agenda.txt",
+                "content": "Community agenda\n",
+                "language": "bash"
+              },
+              {
+                "path": "handoff-practice/inbox/tmp-note.txt",
+                "content": "temporary note\n",
+                "language": "bash"
+              }
+            ]
+          },
+          "recipe": {
+            "type": "shell_task",
+            "mode": "terminal_workspace",
+            "instructions": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.prompt"
+          },
+          "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterCode",
+          "starterFiles": [
+            {
+              "path": "main.sh",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.main_sh.content",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "handoff-practice/archive/.keep",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_archive__keep.content",
+              "language": "bash"
+            },
+            {
+              "path": "handoff-practice/inbox/agenda.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_inbox_agenda_txt.content",
+              "language": "bash"
+            },
+            {
+              "path": "handoff-practice/inbox/tmp-note.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_inbox_tmp_note_txt.content",
+              "language": "bash"
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "main.sh",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.solutionFiles.main_sh.content",
+              "language": "bash",
+              "isEntry": true,
+              "entry": true
+            },
+            {
+              "path": "handoff-practice/archive/.keep",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.solutionFiles.handoff_practice_archive__keep.content",
+              "language": "bash"
+            },
+            {
+              "path": "handoff-practice/archive/agenda.txt",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.solutionFiles.handoff_practice_archive_agenda_txt.content",
+              "language": "bash"
+            }
+          ],
+          "fixtureFiles": [
+            {
+              "path": "handoff-practice/archive/.keep",
+              "content": "",
+              "language": "bash"
+            },
+            {
+              "path": "handoff-practice/inbox/agenda.txt",
+              "content": "Community agenda\n",
+              "language": "bash"
+            },
+            {
+              "path": "handoff-practice/inbox/tmp-note.txt",
+              "content": "temporary note\n",
+              "language": "bash"
+            }
+          ]
+        },
+        {
           "id": "final-capstone-file-room-handoff-terminal-task-1",
           "kind": "code_input",
           "purpose": "project",
@@ -36638,78 +36500,78 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/inbox/photo-index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_photo_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_shoot_notes_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/tmp-import.txt",
-              "content": "temporary import cache\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_tmp_import_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/backup/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_backup__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/photo-index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_inbox_photo_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_inbox_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_inbox_shoot_notes_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/tmp-import.txt",
-              "content": "temporary import cache\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_inbox_tmp_import_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_organized_documents__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_organized_photos__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/needs-review.txt",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_review_needs_review_txt.content",
               "language": "bash"
             }
           ],
@@ -36721,6 +36583,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "media-archive/review"
             ],
             "requiredFiles": [
+              "media-archive/inbox/photo-index.txt",
+              "media-archive/inbox/release-forms.txt",
+              "media-archive/inbox/shoot-notes.txt",
+              "media-archive/inbox/tmp-import.txt",
               "media-archive/review/needs-review.txt"
             ]
           },
@@ -36728,23 +36594,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredCommands": [
               {
                 "pattern": "\\bpwd\\b",
-                "message": "Use the required capstone command for step 1: \\bpwd\\b."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.0.message"
               },
               {
                 "pattern": "\\bls\\b",
-                "message": "Use the required capstone command for step 1: \\bls\\b."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.1.message"
               },
               {
                 "pattern": "(^|\\s)cd(\\s|$)",
-                "message": "Use the required capstone command for step 1: (^|\\s)cd(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.2.message"
               },
               {
                 "pattern": "(^|\\s)mkdir(\\s|$)",
-                "message": "Use the required capstone command for step 1: (^|\\s)mkdir(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.3.message"
               },
               {
                 "pattern": "(^|\\s)touch(\\s|$)",
-                "message": "Use the required capstone command for step 1: (^|\\s)touch(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.4.message"
               }
             ],
             "forbiddenCommands": [
@@ -36764,7 +36630,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "pattern": "(^|\\s)(curl|wget)(\\s|$)",
                 "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.forbiddenCommands.3.message"
               }
-            ]
+            ],
+            "cwdEndsWith": "media-archive"
           },
           "workspace": {
             "language": "bash",
@@ -36773,29 +36640,29 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "media-archive/inbox/photo-index.txt",
-                "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_photo_index_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/release-forms.txt",
-                "content": "Release forms received\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_release_forms_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/shoot-notes.txt",
-                "content": "Check captions and dates\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_shoot_notes_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/tmp-import.txt",
-                "content": "temporary import cache\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_tmp_import_txt.content",
                 "language": "bash"
               }
             ],
@@ -36807,6 +36674,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "media-archive/review"
               ],
               "requiredFiles": [
+                "media-archive/inbox/photo-index.txt",
+                "media-archive/inbox/release-forms.txt",
+                "media-archive/inbox/shoot-notes.txt",
+                "media-archive/inbox/tmp-import.txt",
                 "media-archive/review/needs-review.txt"
               ]
             },
@@ -36833,7 +36704,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -36884,108 +36755,118 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/backup/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_backup__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/photo-index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_photo_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_shoot_notes_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/tmp-import.txt",
-              "content": "temporary import cache\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_tmp_import_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_organized_documents__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_organized_photos__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/needs-review.txt",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_review_needs_review_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "echo \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/backup/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_backup__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/photo-index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_inbox_photo_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_inbox_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_inbox_shoot_notes_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/tmp-import.txt",
-              "content": "temporary import cache\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_inbox_tmp_import_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/README.txt",
-              "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_organized_README_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_organized_documents__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_organized_photos__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/needs-review.txt",
-              "content": "Check image names before publishing\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_review_needs_review_txt.content",
               "language": "bash"
             }
           ],
           "workspaceExpectations": {
+            "requiredFolders": [
+              "media-archive/organized/photos",
+              "media-archive/organized/documents",
+              "media-archive/backup",
+              "media-archive/review"
+            ],
             "requiredFiles": [
+              "media-archive/inbox/photo-index.txt",
+              "media-archive/inbox/release-forms.txt",
+              "media-archive/inbox/shoot-notes.txt",
+              "media-archive/inbox/tmp-import.txt",
               "media-archive/organized/README.txt",
               "media-archive/review/needs-review.txt"
             ]
@@ -36994,19 +36875,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredCommands": [
               {
                 "pattern": "(^|\\s)echo(\\s|$)",
-                "message": "Use the required capstone command for step 2: (^|\\s)echo(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.0.message"
               },
               {
                 "pattern": ">",
-                "message": "Use the required capstone command for step 2: >."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.1.message"
               },
               {
                 "pattern": ">>",
-                "message": "Use the required capstone command for step 2: >>."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.2.message"
               },
               {
                 "pattern": "(^|\\s)cat(\\s|$)",
-                "message": "Use the required capstone command for step 2: (^|\\s)cat(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.3.message"
               }
             ],
             "forbiddenCommands": [
@@ -37026,7 +36907,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "pattern": "(^|\\s)(curl|wget)(\\s|$)",
                 "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.forbiddenCommands.3.message"
               }
-            ]
+            ],
+            "cwdEndsWith": "media-archive"
           },
           "workspace": {
             "language": "bash",
@@ -37035,54 +36917,64 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "media-archive/backup/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_backup__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/photo-index.txt",
-                "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_photo_index_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/release-forms.txt",
-                "content": "Release forms received\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_release_forms_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/shoot-notes.txt",
-                "content": "Check captions and dates\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_shoot_notes_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/tmp-import.txt",
-                "content": "temporary import cache\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_tmp_import_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/documents/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_organized_documents__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/photos/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_organized_photos__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/review/needs-review.txt",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_review_needs_review_txt.content",
                 "language": "bash"
               }
             ],
             "workspaceExpectations": {
+              "requiredFolders": [
+                "media-archive/organized/photos",
+                "media-archive/organized/documents",
+                "media-archive/backup",
+                "media-archive/review"
+              ],
               "requiredFiles": [
+                "media-archive/inbox/photo-index.txt",
+                "media-archive/inbox/release-forms.txt",
+                "media-archive/inbox/shoot-notes.txt",
+                "media-archive/inbox/tmp-import.txt",
                 "media-archive/organized/README.txt",
                 "media-archive/review/needs-review.txt"
               ]
@@ -37130,7 +37022,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -37145,7 +37037,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "terminal": true
             },
             "terminalSessionScope": "exercise",
-            "terminalCwd": "/workspace/media-archive"
+            "terminalCwd": "/workspace"
           },
           "fixtureFiles": [
             {
@@ -37201,115 +37093,118 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/backup/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_backup__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/photo-index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_photo_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_shoot_notes_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/tmp-import.txt",
-              "content": "temporary import cache\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_tmp_import_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/README.txt",
-              "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_README_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_documents__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_photos__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/needs-review.txt",
-              "content": "Check image names before publishing\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_review_needs_review_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "ls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/backup/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_backup__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/tmp-import.txt",
-              "content": "temporary import cache\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_inbox_tmp_import_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/README.txt",
-              "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_README_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_documents__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_documents_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_photos__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_photos_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/needs-review.txt",
-              "content": "Check image names before publishing\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_review_needs_review_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_review_shoot_notes_txt.content",
               "language": "bash"
             }
           ],
           "workspaceExpectations": {
             "requiredFiles": [
+              "media-archive/inbox/tmp-import.txt",
+              "media-archive/organized/README.txt",
               "media-archive/organized/photos/index.txt",
               "media-archive/organized/documents/release-forms.txt",
+              "media-archive/review/needs-review.txt",
               "media-archive/review/shoot-notes.txt"
             ],
             "forbiddenFiles": [
@@ -37322,11 +37217,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredCommands": [
               {
                 "pattern": "(^|\\s)mv(\\s|$)",
-                "message": "Use the required capstone command for step 3: (^|\\s)mv(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.requiredCommands.0.message"
               },
               {
                 "pattern": "(^|\\s)ls(\\s|$)",
-                "message": "Use the required capstone command for step 3: (^|\\s)ls(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.requiredCommands.1.message"
               }
             ],
             "forbiddenCommands": [
@@ -37346,7 +37241,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "pattern": "(^|\\s)(curl|wget)(\\s|$)",
                 "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.forbiddenCommands.3.message"
               }
-            ]
+            ],
+            "cwdEndsWith": "media-archive"
           },
           "workspace": {
             "language": "bash",
@@ -37355,61 +37251,64 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "media-archive/backup/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_backup__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/photo-index.txt",
-                "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_photo_index_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/release-forms.txt",
-                "content": "Release forms received\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_release_forms_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/shoot-notes.txt",
-                "content": "Check captions and dates\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_shoot_notes_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/tmp-import.txt",
-                "content": "temporary import cache\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_tmp_import_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/README.txt",
-                "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_README_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/documents/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_documents__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/photos/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_photos__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/review/needs-review.txt",
-                "content": "Check image names before publishing\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_review_needs_review_txt.content",
                 "language": "bash"
               }
             ],
             "workspaceExpectations": {
               "requiredFiles": [
+                "media-archive/inbox/tmp-import.txt",
+                "media-archive/organized/README.txt",
                 "media-archive/organized/photos/index.txt",
                 "media-archive/organized/documents/release-forms.txt",
+                "media-archive/review/needs-review.txt",
                 "media-archive/review/shoot-notes.txt"
               ],
               "forbiddenFiles": [
@@ -37466,7 +37365,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -37481,7 +37380,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "terminal": true
             },
             "terminalSessionScope": "exercise",
-            "terminalCwd": "/workspace/media-archive"
+            "terminalCwd": "/workspace"
           },
           "fixtureFiles": [
             {
@@ -37542,117 +37441,124 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/backup/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_backup__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/inbox/tmp-import.txt",
-              "content": "temporary import cache\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_inbox_tmp_import_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/README.txt",
-              "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_README_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_documents__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_documents_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_photos__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_photos_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/needs-review.txt",
-              "content": "Check image names before publishing\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_review_needs_review_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_review_shoot_notes_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "cp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/backup/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_backup__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/backup/photo-index-backup.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_backup_photo_index_backup_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/README.txt",
-              "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_README_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_documents__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_documents_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_photos__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_photos_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/needs-review.txt",
-              "content": "Check image names before publishing\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_review_needs_review_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_review_shoot_notes_txt.content",
               "language": "bash"
             }
           ],
           "workspaceExpectations": {
             "requiredFiles": [
               "media-archive/backup/photo-index-backup.txt",
-              "media-archive/organized/photos/index.txt"
+              "media-archive/organized/README.txt",
+              "media-archive/organized/photos/index.txt",
+              "media-archive/organized/documents/release-forms.txt",
+              "media-archive/review/needs-review.txt",
+              "media-archive/review/shoot-notes.txt"
             ],
             "forbiddenFiles": [
+              "media-archive/inbox/photo-index.txt",
+              "media-archive/inbox/release-forms.txt",
+              "media-archive/inbox/shoot-notes.txt",
               "media-archive/inbox/tmp-import.txt"
             ]
           },
@@ -37660,15 +37566,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredCommands": [
               {
                 "pattern": "(^|\\s)cp(\\s|$)",
-                "message": "Use the required capstone command for step 4: (^|\\s)cp(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.0.message"
               },
               {
                 "pattern": "(^|\\s)rm(\\s|$)",
-                "message": "Use the required capstone command for step 4: (^|\\s)rm(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.1.message"
               },
               {
                 "pattern": "(^|\\s)ls(\\s|$)",
-                "message": "Use the required capstone command for step 4: (^|\\s)ls(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.2.message"
               }
             ],
             "forbiddenCommands": [
@@ -37688,7 +37594,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "pattern": "(^|\\s)(curl|wget)(\\s|$)",
                 "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.forbiddenCommands.3.message"
               }
-            ]
+            ],
+            "cwdEndsWith": "media-archive"
           },
           "workspace": {
             "language": "bash",
@@ -37697,63 +37604,70 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "media-archive/backup/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_backup__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/inbox/tmp-import.txt",
-                "content": "temporary import cache\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_inbox_tmp_import_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/README.txt",
-                "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_README_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/documents/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_documents__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/documents/release-forms.txt",
-                "content": "Release forms received\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_documents_release_forms_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/photos/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_photos__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/photos/index.txt",
-                "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_photos_index_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/review/needs-review.txt",
-                "content": "Check image names before publishing\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_review_needs_review_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/review/shoot-notes.txt",
-                "content": "Check captions and dates\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_review_shoot_notes_txt.content",
                 "language": "bash"
               }
             ],
             "workspaceExpectations": {
               "requiredFiles": [
                 "media-archive/backup/photo-index-backup.txt",
-                "media-archive/organized/photos/index.txt"
+                "media-archive/organized/README.txt",
+                "media-archive/organized/photos/index.txt",
+                "media-archive/organized/documents/release-forms.txt",
+                "media-archive/review/needs-review.txt",
+                "media-archive/review/shoot-notes.txt"
               ],
               "forbiddenFiles": [
+                "media-archive/inbox/photo-index.txt",
+                "media-archive/inbox/release-forms.txt",
+                "media-archive/inbox/shoot-notes.txt",
                 "media-archive/inbox/tmp-import.txt"
               ]
             },
@@ -37805,7 +37719,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -37820,7 +37734,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "terminal": true
             },
             "terminalSessionScope": "exercise",
-            "terminalCwd": "/workspace/media-archive"
+            "terminalCwd": "/workspace"
           },
           "fixtureFiles": [
             {
@@ -37881,149 +37795,158 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.sh",
-              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterCode",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/backup/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_backup__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/backup/photo-index-backup.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_backup_photo_index_backup_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/README.txt",
-              "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_README_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_documents__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_documents_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_photos__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_photos_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/needs-review.txt",
-              "content": "Check image names before publishing\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_review_needs_review_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_review_shoot_notes_txt.content",
               "language": "bash"
             }
           ],
           "solutionFiles": [
             {
               "path": "main.sh",
-              "content": "pwd\nls organized/photos organized/documents backup review\ncat organized/README.txt\nwc -l organized/photos/index.txt\necho \"Media archive verified\" > organized/READY.txt\ncat organized/READY.txt\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.main_sh.content",
               "language": "bash",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "media-archive/backup/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_backup__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/backup/photo-index-backup.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_backup_photo_index_backup_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/README.txt",
-              "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_README_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/READY.txt",
-              "content": "Media archive verified\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_READY_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_documents__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/documents/release-forms.txt",
-              "content": "Release forms received\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_documents_release_forms_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/.keep",
-              "content": "",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_photos__keep.content",
               "language": "bash"
             },
             {
               "path": "media-archive/organized/photos/index.txt",
-              "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_photos_index_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/needs-review.txt",
-              "content": "Check image names before publishing\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_review_needs_review_txt.content",
               "language": "bash"
             },
             {
               "path": "media-archive/review/shoot-notes.txt",
-              "content": "Check captions and dates\n",
+              "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_review_shoot_notes_txt.content",
               "language": "bash"
             }
           ],
           "workspaceExpectations": {
             "requiredFiles": [
-              "media-archive/organized/README.txt",
-              "media-archive/organized/photos/index.txt",
               "media-archive/backup/photo-index-backup.txt",
-              "media-archive/organized/READY.txt"
+              "media-archive/organized/README.txt",
+              "media-archive/organized/READY.txt",
+              "media-archive/organized/photos/index.txt",
+              "media-archive/organized/documents/release-forms.txt",
+              "media-archive/review/needs-review.txt",
+              "media-archive/review/shoot-notes.txt"
+            ],
+            "forbiddenFiles": [
+              "media-archive/inbox/photo-index.txt",
+              "media-archive/inbox/release-forms.txt",
+              "media-archive/inbox/shoot-notes.txt",
+              "media-archive/inbox/tmp-import.txt"
             ]
           },
           "terminalExpectations": {
             "requiredCommands": [
               {
                 "pattern": "\\bpwd\\b",
-                "message": "Use the required capstone command for step 5: \\bpwd\\b."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.0.message"
               },
               {
                 "pattern": "(^|\\s)ls(\\s|$)",
-                "message": "Use the required capstone command for step 5: (^|\\s)ls(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.1.message"
               },
               {
                 "pattern": "(^|\\s)cat(\\s|$)",
-                "message": "Use the required capstone command for step 5: (^|\\s)cat(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.2.message"
               },
               {
                 "pattern": "wc\\s+-l",
-                "message": "Use the required capstone command for step 5: wc\\s+-l."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.3.message"
               },
               {
                 "pattern": "(^|\\s)echo(\\s|$)",
-                "message": "Use the required capstone command for step 5: (^|\\s)echo(\\s|$)."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.4.message"
               },
               {
                 "pattern": ">",
-                "message": "Use the required capstone command for step 5: >."
+                "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.5.message"
               }
             ],
             "forbiddenCommands": [
@@ -38043,7 +37966,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "pattern": "(^|\\s)(curl|wget)(\\s|$)",
                 "message": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.forbiddenCommands.3.message"
               }
-            ]
+            ],
+            "cwdEndsWith": "media-archive"
           },
           "workspace": {
             "language": "bash",
@@ -38052,63 +37976,72 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.sh",
-                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterCode",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.main_sh.content",
                 "language": "bash",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "media-archive/backup/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_backup__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/backup/photo-index-backup.txt",
-                "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_backup_photo_index_backup_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/README.txt",
-                "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_README_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/documents/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_documents__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/documents/release-forms.txt",
-                "content": "Release forms received\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_documents_release_forms_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/photos/.keep",
-                "content": "",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_photos__keep.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/organized/photos/index.txt",
-                "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_photos_index_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/review/needs-review.txt",
-                "content": "Check image names before publishing\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_review_needs_review_txt.content",
                 "language": "bash"
               },
               {
                 "path": "media-archive/review/shoot-notes.txt",
-                "content": "Check captions and dates\n",
+                "content": "@:topics.linux-terminal-fundamentals.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_review_shoot_notes_txt.content",
                 "language": "bash"
               }
             ],
             "workspaceExpectations": {
               "requiredFiles": [
-                "media-archive/organized/README.txt",
-                "media-archive/organized/photos/index.txt",
                 "media-archive/backup/photo-index-backup.txt",
-                "media-archive/organized/READY.txt"
+                "media-archive/organized/README.txt",
+                "media-archive/organized/READY.txt",
+                "media-archive/organized/photos/index.txt",
+                "media-archive/organized/documents/release-forms.txt",
+                "media-archive/review/needs-review.txt",
+                "media-archive/review/shoot-notes.txt"
+              ],
+              "forbiddenFiles": [
+                "media-archive/inbox/photo-index.txt",
+                "media-archive/inbox/release-forms.txt",
+                "media-archive/inbox/shoot-notes.txt",
+                "media-archive/inbox/tmp-import.txt"
               ]
             },
             "fixtureFiles": [
@@ -38159,7 +38092,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               }
             ]
           },
-          "showExpectedExample": false,
+          "showExpectedExample": true,
           "recipe": {
             "type": "shell_task",
             "mode": "terminal_workspace",
@@ -38174,7 +38107,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "terminal": true
             },
             "terminalSessionScope": "exercise",
-            "terminalCwd": "/workspace/media-archive"
+            "terminalCwd": "/workspace"
           },
           "fixtureFiles": [
             {

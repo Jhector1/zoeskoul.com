@@ -6113,15 +6113,15 @@ const messages: Record<string, any> = {
           "moduleProject": {
             "steps": {
               "module-1-terminal-map-project-terminal-task-1": {
-                "title": "Find the club hub",
-                "prompt": "The school club has a prepared folder tree. Use `ls`, enter `club-hub`, and use `pwd` to confirm you are inside it. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Carry the same campus map forward and inspect each stop before changing directories.",
+                "title": "Milestone 1: Find the Club Hub",
+                "prompt": "Start by inspecting the workspace. Enter `club-hub` and confirm that it is now your current folder.",
+                "hint": "Inspect before moving, then verify the destination after the directory change.",
                 "help": {
-                  "concept": "This project grades a repeatable navigation process using `pwd`, `ls`, and `cd`.",
-                  "hint_1": "Carry the same campus map forward and inspect each stop before changing directories.",
-                  "hint_2": "Do not invent replacement folders; prove the requested destination with terminal output. The current task asks: The school club has a prepared folder tree. Use `ls`, enter `club-hub`, and use `pwd` to confirm you are inside it."
+                  "concept": "The project begins by establishing the root of the prepared club workspace.",
+                  "hint_1": "The destination folder is named `club-hub`.",
+                  "hint_2": "Confirm the final working directory."
                 },
-                "starterCode": "# Use the terminal for this project step.",
+                "starterCode": "# Build the terminal-map command sequence below.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6158,19 +6158,37 @@ const messages: Record<string, any> = {
                   },
                   "club_hub_archive_old_note_txt": {
                     "content": "Old note\n"
+                  },
+                  "main_sh": {
+                    "content": "# Build the terminal-map command sequence below.\n"
+                  }
+                },
+                "solutionCode": "ls\ncd club-hub\npwd\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "ls\ncd club-hub\npwd\n"
+                  },
+                  "club_hub_newsletter_draft_txt": {
+                    "content": "Newsletter draft\n"
+                  },
+                  "club_hub_events_checklist_txt": {
+                    "content": "Event checklist\n"
+                  },
+                  "club_hub_archive_old_note_txt": {
+                    "content": "Old note\n"
                   }
                 }
               },
               "module-1-terminal-map-project-terminal-task-2": {
-                "title": "Inspect the newsletter folder",
-                "prompt": "From the club hub, move into `newsletter`, list its contents, then move back up one folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Carry the same campus map forward and inspect each stop before changing directories.",
+                "title": "Milestone 2: Inspect Newsletter and Return",
+                "prompt": "Visit the `newsletter` folder inside `club-hub`, inspect its contents, then return to `club-hub`.",
+                "hint": "Add only the navigation needed for this new stop; preserve the earlier project commands.",
                 "help": {
-                  "concept": "This project grades a repeatable navigation process using `pwd`, `ls`, and `cd`.",
-                  "hint_1": "Carry the same campus map forward and inspect each stop before changing directories.",
-                  "hint_2": "Do not invent replacement folders; prove the requested destination with terminal output. The current task asks: From the club hub, move into `newsletter`, list its contents, then move back up one folder."
+                  "concept": "A cumulative terminal workflow can extend an earlier command sequence without replacing it.",
+                  "hint_1": "Enter the newsletter folder and inspect it.",
+                  "hint_2": "Finish back in the club hub."
                 },
-                "starterCode": "# Use the terminal for this project step.",
+                "starterCode": "ls\ncd club-hub\npwd\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6204,19 +6222,37 @@ const messages: Record<string, any> = {
                   },
                   "club_hub_archive_old_note_txt": {
                     "content": "Old note\n"
+                  },
+                  "main_sh": {
+                    "content": "ls\ncd club-hub\npwd\n"
+                  }
+                },
+                "solutionCode": "ls\ncd club-hub\npwd\ncd newsletter\nls\ncd ..\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "ls\ncd club-hub\npwd\ncd newsletter\nls\ncd ..\n"
+                  },
+                  "club_hub_newsletter_draft_txt": {
+                    "content": "Newsletter draft\n"
+                  },
+                  "club_hub_events_checklist_txt": {
+                    "content": "Event checklist\n"
+                  },
+                  "club_hub_archive_old_note_txt": {
+                    "content": "Old note\n"
                   }
                 }
               },
               "module-1-terminal-map-project-terminal-task-3": {
-                "title": "End in the events folder",
-                "prompt": "Use what you learned to end inside `club-hub/events`. Run `pwd` and `ls` there so the next teammate knows you found the right place. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Carry the same campus map forward and inspect each stop before changing directories.",
+                "title": "Milestone 3: Finish in Events",
+                "prompt": "Finish the handoff in the `events` folder. Move there from `club-hub`, confirm the final location, and inspect its contents so the next teammate can verify where you ended.",
+                "hint": "Preserve the first two milestones and add only the final trip into events.",
                 "help": {
-                  "concept": "This project grades a repeatable navigation process using `pwd`, `ls`, and `cd`.",
-                  "hint_1": "Carry the same campus map forward and inspect each stop before changing directories.",
-                  "hint_2": "Do not invent replacement folders; prove the requested destination with terminal output. The current task asks: Use what you learned to end inside `club-hub/events`. Run `pwd` and `ls` there so the next teammate knows you found the right place."
+                  "concept": "The final project state is the complete navigation sequence ending in the requested destination.",
+                  "hint_1": "The final directory must be `club-hub/events`.",
+                  "hint_2": "Confirm the path and inspect the destination."
                 },
-                "starterCode": "# Use the terminal for this project step.",
+                "starterCode": "ls\ncd club-hub\npwd\ncd newsletter\nls\ncd ..\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6245,6 +6281,24 @@ const messages: Record<string, any> = {
                   }
                 },
                 "starterFiles": {
+                  "club_hub_newsletter_draft_txt": {
+                    "content": "Newsletter draft\n"
+                  },
+                  "club_hub_events_checklist_txt": {
+                    "content": "Event checklist\n"
+                  },
+                  "club_hub_archive_old_note_txt": {
+                    "content": "Old note\n"
+                  },
+                  "main_sh": {
+                    "content": "ls\ncd club-hub\npwd\ncd newsletter\nls\ncd ..\n"
+                  }
+                },
+                "solutionCode": "ls\ncd club-hub\npwd\ncd newsletter\nls\ncd ..\ncd events\npwd\nls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "ls\ncd club-hub\npwd\ncd newsletter\nls\ncd ..\ncd events\npwd\nls\n"
+                  },
                   "club_hub_newsletter_draft_txt": {
                     "content": "Newsletter draft\n"
                   },
@@ -6310,13 +6364,13 @@ const messages: Record<string, any> = {
               }
             },
             "mc-check-after-cd": {
-              "title": "Check after moving",
-              "prompt": "Which commands can help confirm where you are after `cd`?",
-              "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+              "title": "Verify a navigation result",
+              "prompt": "Which commands can help verify a navigation result after `cd`?",
+              "hint": "Think about confirming both the destination path and what is present there.",
               "help": {
-                "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
-                "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
-                "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: Which commands can help confirm where you are after `cd`?"
+                "concept": "`pwd` confirms the current path. `ls` can help confirm that the expected destination contents are present.",
+                "hint_1": "One command reports the path itself.",
+                "hint_2": "Another inspects the destination contents."
               },
               "options": {
                 "a": "pwd",
@@ -6345,15 +6399,15 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "exercises": {
               "moving-around-try-it-1": {
-                "title": "Enter the newsletter folder",
-                "prompt": "The workspace has a `newsletter` folder. Move into it with `cd newsletter`, then use `pwd` to confirm. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                "title": "Try It: Enter the Newsletter Folder",
+                "prompt": "The `newsletter` folder is inside your current directory. Use `cd newsletter`, then run `pwd` to confirm where you landed.",
+                "hint": "This guided example changes the working directory and then checks the result.",
                 "help": {
-                  "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
-                  "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
-                  "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: The workspace has a `newsletter` folder. Move into it with `cd newsletter`, then use `pwd` to confirm."
+                  "concept": "Changing directory updates the terminal's current location.",
+                  "hint_1": "Enter the child folder first.",
+                  "hint_2": "Then print the working directory."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Move into the guided newsletter destination.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6381,19 +6435,31 @@ const messages: Record<string, any> = {
                 "starterFiles": {
                   "newsletter_brief_txt": {
                     "content": "Community newsletter brief\n"
+                  },
+                  "main_sh": {
+                    "content": "# Move into the guided newsletter destination.\n"
+                  }
+                },
+                "solutionCode": "cd newsletter\npwd\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "cd newsletter\npwd\n"
+                  },
+                  "newsletter_brief_txt": {
+                    "content": "Community newsletter brief\n"
                   }
                 }
               },
               "moving-around-try-it-2": {
-                "title": "Return from the returns folder",
-                "prompt": "You are starting inside `library-kit/returns`. Use `cd ..` to move back to `library-kit`, then type `pwd`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                "title": "Practice: Return to the Parent Folder",
+                "prompt": "Move up one folder from your current location, then confirm the new working directory.",
+                "hint": "Use the special relative-path marker for the parent directory.",
                 "help": {
-                  "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
-                  "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
-                  "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: You are starting inside `library-kit/returns`. Use `cd ..` to move back to `library-kit`, then type `pwd`."
+                  "concept": "The parent directory is one level above the current folder.",
+                  "hint_1": "Move upward only one level.",
+                  "hint_2": "Verify where you ended."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Return one folder level and verify the result.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6421,19 +6487,31 @@ const messages: Record<string, any> = {
                 "starterFiles": {
                   "library_kit_returns_today_txt": {
                     "content": "Three books returned\n"
+                  },
+                  "main_sh": {
+                    "content": "# Return one folder level and verify the result.\n"
+                  }
+                },
+                "solutionCode": "cd ..\npwd\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "cd ..\npwd\n"
+                  },
+                  "library_kit_returns_today_txt": {
+                    "content": "Three books returned\n"
                   }
                 }
               },
               "moving-around-try-it-3": {
-                "title": "Reach the museum signs folder",
-                "prompt": "Move into the signs folder with one relative path: `cd museum-tour/signs`. Then type `ls`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                "title": "Practice: Follow a Relative Path",
+                "prompt": "Starting from the museum tour workspace, reach the `signs` folder using a relative path and inspect what is inside.",
+                "hint": "A relative path can cross both folder names in a single navigation step.",
                 "help": {
-                  "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
-                  "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
-                  "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: Move into the signs folder with one relative path: `cd museum-tour/signs`. Then type `ls`."
+                  "concept": "Relative paths are interpreted from the terminal's current working directory.",
+                  "hint_1": "Use both folder names in the path.",
+                  "hint_2": "Inspect the destination after you arrive."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Navigate to the requested relative destination.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6459,6 +6537,18 @@ const messages: Record<string, any> = {
                   }
                 },
                 "starterFiles": {
+                  "museum_tour_signs_labels_txt": {
+                    "content": "Entrance\nExit\n"
+                  },
+                  "main_sh": {
+                    "content": "# Navigate to the requested relative destination.\n"
+                  }
+                },
+                "solutionCode": "cd museum-tour/signs\nls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "cd museum-tour/signs\nls\n"
+                  },
                   "museum_tour_signs_labels_txt": {
                     "content": "Entrance\nExit\n"
                   }
@@ -6492,9 +6582,6 @@ const messages: Record<string, any> = {
             "sketch1": {
               "title": "Prompt, command, and output"
             },
-            "sketch2": {
-              "title": "Start with safe inspection"
-            },
             "quiz": {
               "title": "Practice check"
             }
@@ -6517,19 +6604,19 @@ const messages: Record<string, any> = {
               }
             },
             "mc-safe-inspection": {
-              "title": "Safe first commands",
-              "prompt": "Which commands are safe inspection commands in this course?",
-              "hint": "Separate the prompt from the command and read the response before continuing.",
+              "title": "Run a terminal command",
+              "prompt": "Which actions are part of correctly running a simple terminal command?",
+              "hint": "Think about what happens after the prompt appears and before you receive output.",
               "help": {
-                "concept": "The terminal follows a command → output → verification cycle.",
-                "hint_1": "Separate the prompt from the command and read the response before continuing.",
-                "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: Which commands are safe inspection commands in this course?"
+                "concept": "A basic interaction is: type a command, submit it, then read the terminal's result.",
+                "hint_1": "The prompt itself is not part of the command.",
+                "hint_2": "The command must be submitted before output appears."
               },
               "options": {
-                "a": "pwd",
-                "b": "ls",
-                "c": "rm",
-                "d": "mv"
+                "a": "Type the command at the prompt",
+                "b": "Press Enter to run the command",
+                "c": "Assume it worked without reading the result",
+                "d": "Copy the prompt symbols into the command"
               }
             },
             "dr-terminal-flow": {
@@ -6569,15 +6656,15 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "exercises": {
               "what-terminal-is-try-it-1": {
-                "title": "Identify the welcome desk folder",
-                "prompt": "You opened the welcome desk workspace. Type `pwd` to print its full folder path. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Separate the prompt from the command and read the response before continuing.",
+                "title": "Try It: Find Your Current Location",
+                "prompt": "You are starting at the welcome desk. Run `pwd` to see the full path of the folder the terminal opened in.",
+                "hint": "This is a guided first command. Read the path the terminal prints before continuing.",
                 "help": {
-                  "concept": "The terminal follows a command → output → verification cycle.",
-                  "hint_1": "Separate the prompt from the command and read the response before continuing.",
-                  "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: You opened the welcome desk workspace. Type `pwd` to print its full folder path."
+                  "concept": "The shell always has a current working directory.",
+                  "hint_1": "Use the command that prints the working directory.",
+                  "hint_2": "The answer appears in the terminal output."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Run the guided orientation command in the terminal.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6602,19 +6689,31 @@ const messages: Record<string, any> = {
                 "starterFiles": {
                   "welcome_desk_shift_note_txt": {
                     "content": "Morning volunteer shift\n"
+                  },
+                  "main_sh": {
+                    "content": "# Run the guided orientation command in the terminal.\n"
+                  }
+                },
+                "solutionCode": "pwd\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\n"
+                  },
+                  "welcome_desk_shift_note_txt": {
+                    "content": "Morning volunteer shift\n"
                   }
                 }
               },
               "what-terminal-is-try-it-2": {
-                "title": "Inspect the supply room",
-                "prompt": "Before changing anything in the supply room, type `ls` to see the files already there. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Separate the prompt from the command and read the response before continuing.",
+                "title": "Practice: Inspect the Supply Room",
+                "prompt": "Take a quick look around the supply room. Find out which files and folders are already there without changing anything.",
+                "hint": "Use the read-only command that lists the current directory.",
                 "help": {
-                  "concept": "The terminal follows a command → output → verification cycle.",
-                  "hint_1": "Separate the prompt from the command and read the response before continuing.",
-                  "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: Before changing anything in the supply room, type `ls` to see the files already there."
+                  "concept": "Inspecting a directory is different from changing it.",
+                  "hint_1": "You only need to see the names already present.",
+                  "hint_2": "Do not move or modify anything."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Inspect the current workspace without changing it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6642,46 +6741,21 @@ const messages: Record<string, any> = {
                   },
                   "supply_room_inventory_txt": {
                     "content": "Markers\nTape\n"
-                  }
-                }
-              },
-              "what-terminal-is-try-it-3": {
-                "title": "Use the first safe check",
-                "prompt": "A teammate left you at the check-in desk. Type `pwd`, then `ls`, before deciding what to do next. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Separate the prompt from the command and read the response before continuing.",
-                "help": {
-                  "concept": "The terminal follows a command → output → verification cycle.",
-                  "hint_1": "Separate the prompt from the command and read the response before continuing.",
-                  "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: A teammate left you at the check-in desk. Type `pwd`, then `ls`, before deciding what to do next."
-                },
-                "starterCode": "# Use the terminal for this task.",
-                "terminalExpectations": {
-                  "requiredCommands": {
-                    "0": {
-                      "message": "Type `pwd` first to confirm your location."
-                    },
-                    "1": {
-                      "message": "Type `ls` to inspect the current folder."
-                    }
                   },
-                  "forbiddenCommands": {
-                    "0": {
-                      "message": "Do not use sudo in this beginner workspace."
-                    },
-                    "1": {
-                      "message": "Do not use recursive rm in this course."
-                    },
-                    "2": {
-                      "message": "Permissions commands are not needed for this workspace."
-                    },
-                    "3": {
-                      "message": "Do not download anything for this exercise."
-                    }
+                  "main_sh": {
+                    "content": "# Inspect the current workspace without changing it.\n"
                   }
                 },
-                "starterFiles": {
-                  "check_in_arrival_note_txt": {
-                    "content": "Open doors at 8:00\n"
+                "solutionCode": "ls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "ls\n"
+                  },
+                  "supply_room_labels_txt": {
+                    "content": "Name tags\n"
+                  },
+                  "supply_room_inventory_txt": {
+                    "content": "Markers\nTape\n"
                   }
                 }
               }
@@ -6693,10 +6767,6 @@ const messages: Record<string, any> = {
             "try_what_the_terminal_is_sketch1": {
               "title": "Inspect the supply room",
               "prompt": "List what is stored in the supply room. Press **Enter** to run the command."
-            },
-            "try_what_the_terminal_is_sketch2": {
-              "title": "Use the first safe check",
-              "prompt": "Confirm your location, then inspect it. Press **Enter** after each command."
             }
           }
         },
@@ -6709,9 +6779,6 @@ const messages: Record<string, any> = {
             },
             "sketch1": {
               "title": "`ls` shows what is nearby"
-            },
-            "sketch2": {
-              "title": "Use `pwd` and `ls` as a pair"
             },
             "quiz": {
               "title": "Practice check"
@@ -6767,18 +6834,18 @@ const messages: Record<string, any> = {
               }
             },
             "dr-safe-check-order": {
-              "title": "A safe first check",
-              "prompt": "Put the safe first-check routine in order.",
-              "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+              "title": "Orient before choosing an action",
+              "prompt": "Put this safe orientation routine in order.",
+              "hint": "Establish location first, inspect the folder second, then decide what should happen next.",
               "help": {
-                "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
-                "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: Put the safe first-check routine in order."
+                "concept": "Orientation establishes context before a modifying command is chosen.",
+                "hint_1": "First determine the working directory.",
+                "hint_2": "Then inspect its contents before deciding what to do."
               },
               "tokens": {
-                "t1": "Type `pwd`",
-                "t2": "Type `ls`",
-                "t3": "Choose the next command"
+                "t1": "Run `pwd` to confirm the current location",
+                "t2": "Run `ls` to inspect the current folder",
+                "t3": "Read both results before choosing the next action"
               }
             }
           },
@@ -6786,15 +6853,15 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "exercises": {
               "where-am-i-try-it-1": {
-                "title": "Confirm the newsroom location",
-                "prompt": "The editor opened a newsroom workspace for you. Type `pwd` to confirm its full path. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                "title": "Try It: Confirm the Newsroom Path",
+                "prompt": "Before you do anything else in this workspace, run `pwd` and use the output to identify your current folder.",
+                "hint": "Use the command that prints the current working directory.",
                 "help": {
-                  "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
-                  "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                  "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: The editor opened a newsroom workspace for you. Type `pwd` to confirm its full path."
+                  "concept": "The current path tells you where relative paths will begin.",
+                  "hint_1": "You do not need to move anywhere.",
+                  "hint_2": "Read the full path from the terminal result."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Confirm the current newsroom location.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6819,19 +6886,31 @@ const messages: Record<string, any> = {
                 "starterFiles": {
                   "newsroom_assignment_txt": {
                     "content": "Draft the Saturday update\n"
+                  },
+                  "main_sh": {
+                    "content": "# Confirm the current newsroom location.\n"
+                  }
+                },
+                "solutionCode": "pwd\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\n"
+                  },
+                  "newsroom_assignment_txt": {
+                    "content": "Draft the Saturday update\n"
                   }
                 }
               },
               "where-am-i-try-it-2": {
-                "title": "See what is on the art table",
-                "prompt": "You are at the art table. Type `ls` to see which supply notes are waiting here. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                "title": "Practice: Inspect the Art Table",
+                "prompt": "Check what files and folders are in your current location. This is an inspection task, so leave the workspace unchanged.",
+                "hint": "Use the directory-inspection command you practiced earlier.",
                 "help": {
-                  "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
-                  "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                  "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: You are at the art table. Type `ls` to see which supply notes are waiting here."
+                  "concept": "Listing a directory lets you verify what is available before you reference a file by name.",
+                  "hint_1": "Stay in the current folder.",
+                  "hint_2": "Only inspect its contents."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Inspect the current art-table folder.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -6859,49 +6938,21 @@ const messages: Record<string, any> = {
                   },
                   "art_table_paint_list_txt": {
                     "content": "Blue\nYellow\n"
-                  }
-                }
-              },
-              "where-am-i-try-it-3": {
-                "title": "Orient yourself at the event desk",
-                "prompt": "Before touching the event desk files, type `pwd` and then `ls`. Read both results. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                "help": {
-                  "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
-                  "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                  "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: Before touching the event desk files, type `pwd` and then `ls`. Read both results."
-                },
-                "starterCode": "# Use the terminal for this task.",
-                "terminalExpectations": {
-                  "requiredCommands": {
-                    "0": {
-                      "message": "Use `pwd` to confirm the event desk path."
-                    },
-                    "1": {
-                      "message": "Use `ls` to inspect the event desk."
-                    }
                   },
-                  "forbiddenCommands": {
-                    "0": {
-                      "message": "Do not use sudo in this beginner workspace."
-                    },
-                    "1": {
-                      "message": "Do not use recursive rm in this course."
-                    },
-                    "2": {
-                      "message": "Permissions commands are not needed for this workspace."
-                    },
-                    "3": {
-                      "message": "Do not download anything for this exercise."
-                    }
+                  "main_sh": {
+                    "content": "# Inspect the current art-table folder.\n"
                   }
                 },
-                "starterFiles": {
-                  "event_desk_run_sheet_txt": {
-                    "content": "Doors open at 6:00\n"
+                "solutionCode": "ls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "ls\n"
                   },
-                  "event_desk_contact_txt": {
-                    "content": "Call the coordinator\n"
+                  "art_table_brushes_txt": {
+                    "content": "Small brush\nLarge brush\n"
+                  },
+                  "art_table_paint_list_txt": {
+                    "content": "Blue\nYellow\n"
                   }
                 }
               }
@@ -6913,10 +6964,6 @@ const messages: Record<string, any> = {
             "try_where_am_i_sketch1": {
               "title": "See what is on the art table",
               "prompt": "List the art table files. Press **Enter** to run the command."
-            },
-            "try_where_am_i_sketch2": {
-              "title": "Orient yourself at the event desk",
-              "prompt": "Check the event desk before editing. Press **Enter** after each command."
             }
           }
         }
@@ -6989,18 +7036,18 @@ const messages: Record<string, any> = {
               }
             },
             "dr-backup-then-move": {
-              "title": "Safe handoff order",
-              "prompt": "Put these handoff steps in a safe order.",
-              "hint": "Read the source and destination paths from left to right before running the command.",
+              "title": "Required backup before handoff",
+              "prompt": "A handoff requires a backup copy before the working file is moved. Put the required steps in order.",
+              "hint": "Preserve the backup first, perform the move second, then verify.",
               "help": {
                 "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
                 "hint_1": "Read the source and destination paths from left to right before running the command.",
                 "hint_2": "Verify both locations: a copy leaves both files, while a move or rename removes the old path. The current task asks: Put these handoff steps in a safe order."
               },
               "tokens": {
-                "t1": "Copy a backup if needed",
+                "t1": "Create the required backup copy",
                 "t2": "Move the working file into handoff",
-                "t3": "List the folder to verify"
+                "t3": "List the destination to verify"
               }
             }
           },
@@ -7008,15 +7055,15 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "exercises": {
               "copy-move-rename-try-it-1": {
-                "title": "Back up the attendee list",
-                "prompt": "Before registration opens, copy `attendee-list.txt` to `attendee-list-backup.txt`, then list the folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Read the source and destination paths from left to right before running the command.",
+                "title": "Try It: Back Up the Attendee List",
+                "prompt": "Use `cp` to make `attendee-list-backup.txt` from `attendee-list.txt`. Keep the original file in place and list the folder afterward to verify the backup.",
+                "hint": "The original attendee list must remain in place.",
                 "help": {
-                  "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
-                  "hint_1": "Read the source and destination paths from left to right before running the command.",
-                  "hint_2": "Verify both locations: a copy leaves both files, while a move or rename removes the old path. The current task asks: Before registration opens, copy `attendee-list.txt` to `attendee-list-backup.txt`, then list the folder."
+                  "concept": "`cp` preserves the source; `mv` relocates or renames it.",
+                  "hint_1": "Read source and destination paths from left to right.",
+                  "hint_2": "Verify both the old and new locations after the operation."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Create the guided backup and verify it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7041,19 +7088,34 @@ const messages: Record<string, any> = {
                 "starterFiles": {
                   "registration_attendee_list_txt": {
                     "content": "Amina\nDiego\nMaya\n"
+                  },
+                  "main_sh": {
+                    "content": "# Create the guided backup and verify it.\n"
+                  }
+                },
+                "solutionCode": "cp attendee-list.txt attendee-list-backup.txt\nls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "cp attendee-list.txt attendee-list-backup.txt\nls\n"
+                  },
+                  "registration_attendee_list_txt": {
+                    "content": "Amina\nDiego\nMaya\n"
+                  },
+                  "registration_attendee_list_backup_txt": {
+                    "content": "Amina\nDiego\nMaya\n"
                   }
                 }
               },
               "copy-move-rename-try-it-2": {
-                "title": "Move a banner note to handoff",
-                "prompt": "The banner note is ready for the handoff team. Move `banner-note.txt` to `handoff/banner-note.txt`, then list `handoff`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Read the source and destination paths from left to right before running the command.",
+                "title": "Practice: Move the Banner Note",
+                "prompt": "The banner note is ready for handoff. Move `banner-note.txt` into the `handoff` folder so it ends up at `handoff/banner-note.txt`, then verify the destination.",
+                "hint": "Use the file operation that relocates rather than duplicates.",
                 "help": {
-                  "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
-                  "hint_1": "Read the source and destination paths from left to right before running the command.",
-                  "hint_2": "Verify both locations: a copy leaves both files, while a move or rename removes the old path. The current task asks: The banner note is ready for the handoff team. Move `banner-note.txt` to `handoff/banner-note.txt`, then list `handoff`."
+                  "concept": "`cp` preserves the source; `mv` relocates or renames it.",
+                  "hint_1": "Read source and destination paths from left to right.",
+                  "hint_2": "Verify both the old and new locations after the operation."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Relocate the banner note and verify the destination.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7081,19 +7143,37 @@ const messages: Record<string, any> = {
                   },
                   "sign_shop_handoff_keep": {
                     "content": ""
+                  },
+                  "main_sh": {
+                    "content": "# Relocate the banner note and verify the destination.\n"
+                  },
+                  "sign_shop_handoff__keep": {
+                    "content": ""
+                  }
+                },
+                "solutionCode": "mv banner-note.txt handoff/banner-note.txt\nls handoff\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mv banner-note.txt handoff/banner-note.txt\nls handoff\n"
+                  },
+                  "sign_shop_handoff__keep": {
+                    "content": ""
+                  },
+                  "sign_shop_handoff_banner_note_txt": {
+                    "content": "Hang the welcome banner by 8:30.\n"
                   }
                 }
               },
               "copy-move-rename-try-it-3": {
-                "title": "Rename the approved schedule",
-                "prompt": "The schedule is approved. Rename `schedule-draft.txt` to `schedule-final.txt`, then list the folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Read the source and destination paths from left to right before running the command.",
+                "title": "Practice: Rename the Approved Schedule",
+                "prompt": "The schedule has been approved. Rename `schedule-draft.txt` to `schedule-final.txt` in the same folder, then verify that the final name is present.",
+                "hint": "A rename uses the same operation as a move.",
                 "help": {
-                  "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
-                  "hint_1": "Read the source and destination paths from left to right before running the command.",
-                  "hint_2": "Verify both locations: a copy leaves both files, while a move or rename removes the old path. The current task asks: The schedule is approved. Rename `schedule-draft.txt` to `schedule-final.txt`, then list the folder."
+                  "concept": "`cp` preserves the source; `mv` relocates or renames it.",
+                  "hint_1": "Read source and destination paths from left to right.",
+                  "hint_2": "Verify both the old and new locations after the operation."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Rename the approved schedule and verify it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7117,6 +7197,18 @@ const messages: Record<string, any> = {
                 },
                 "starterFiles": {
                   "schedule_desk_schedule_draft_txt": {
+                    "content": "Opening: 9:00\nWorkshop: 10:30\n"
+                  },
+                  "main_sh": {
+                    "content": "# Rename the approved schedule and verify it.\n"
+                  }
+                },
+                "solutionCode": "mv schedule-draft.txt schedule-final.txt\nls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mv schedule-draft.txt schedule-final.txt\nls\n"
+                  },
+                  "schedule_desk_schedule_final_txt": {
                     "content": "Opening: 9:00\nWorkshop: 10:30\n"
                   }
                 }
@@ -7222,15 +7314,15 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "exercises": {
               "creating-folders-and-files-try-it-1": {
-                "title": "Create a volunteer desk folder",
-                "prompt": "The event team needs one place for volunteer notes. Create a folder named `volunteer-desk`, then list the current folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Create parent folders before files and copy every required path exactly.",
+                "title": "Try It: Create One Folder",
+                "prompt": "Create a folder named `volunteer-desk` with `mkdir`, then list the current directory to make sure the new folder is there.",
+                "hint": "This guided task uses the basic directory-creation command.",
                 "help": {
-                  "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
-                  "hint_1": "Create parent folders before files and copy every required path exactly.",
-                  "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: The event team needs one place for volunteer notes. Create a folder named `volunteer-desk`, then list the current folder."
+                  "concept": "`mkdir` creates directories and `touch` can create empty files.",
+                  "hint_1": "Build parent directories before relying on paths inside them.",
+                  "hint_2": "Verify the resulting filesystem rather than assuming the command worked."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Create the requested directory and verify it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7254,18 +7346,29 @@ const messages: Record<string, any> = {
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "mkdir volunteer-desk\nls\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Create the requested directory and verify it.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir volunteer-desk\nls\n"
+                  }
                 }
               },
               "creating-folders-and-files-try-it-2": {
-                "title": "Build an event pack",
-                "prompt": "Set up `event-pack/signs` and `event-pack/schedules`. One `mkdir -p` command or separate safe commands are both valid. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Create parent folders before files and copy every required path exactly.",
+                "title": "Practice: Build a Nested Event Pack",
+                "prompt": "Set up `event-pack/signs` and `event-pack/schedules`. The parent folder does not exist yet, so choose a directory-creation approach that can build the full structure, then verify it.",
+                "hint": "Choose a directory-creation approach that can handle missing parent folders.",
                 "help": {
-                  "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
-                  "hint_1": "Create parent folders before files and copy every required path exactly.",
-                  "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: Set up `event-pack/signs` and `event-pack/schedules`. One `mkdir -p` command or separate safe commands are both valid."
+                  "concept": "`mkdir` creates directories and `touch` can create empty files.",
+                  "hint_1": "Build parent directories before relying on paths inside them.",
+                  "hint_2": "Verify the resulting filesystem rather than assuming the command worked."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Build the requested nested directory structure.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7286,18 +7389,29 @@ const messages: Record<string, any> = {
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "mkdir -p event-pack/signs\nmkdir -p event-pack/schedules\nls event-pack\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Build the requested nested directory structure.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p event-pack/signs\nmkdir -p event-pack/schedules\nls event-pack\n"
+                  }
                 }
               },
               "creating-folders-and-files-try-it-3": {
-                "title": "Create planning board files",
-                "prompt": "You are starting inside `planning-board`. Create `tasks.txt` and `contacts.txt` with `touch`, then list the folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Create parent folders before files and copy every required path exactly.",
+                "title": "Practice: Add Planning Files",
+                "prompt": "You are already inside `planning-board`. Add empty `tasks.txt` and `contacts.txt` files, then check the folder to make sure both were created.",
+                "hint": "Use the command for creating empty placeholder files.",
                 "help": {
-                  "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
-                  "hint_1": "Create parent folders before files and copy every required path exactly.",
-                  "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: You are starting inside `planning-board`. Create `tasks.txt` and `contacts.txt` with `touch`, then list the folder."
+                  "concept": "`mkdir` creates directories and `touch` can create empty files.",
+                  "hint_1": "Build parent directories before relying on paths inside them.",
+                  "hint_2": "Verify the resulting filesystem rather than assuming the command worked."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Add the two requested empty files.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7324,6 +7438,21 @@ const messages: Record<string, any> = {
                 },
                 "starterFiles": {
                   "planning_board_readme_txt": {
+                    "content": "Planning board workspace\n"
+                  },
+                  "main_sh": {
+                    "content": "# Add the two requested empty files.\n"
+                  },
+                  "planning_board_README_txt": {
+                    "content": "Planning board workspace\n"
+                  }
+                },
+                "solutionCode": "touch tasks.txt\ntouch contacts.txt\nls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "touch tasks.txt\ntouch contacts.txt\nls\n"
+                  },
+                  "planning_board_README_txt": {
                     "content": "Planning board workspace\n"
                   }
                 }
@@ -7357,15 +7486,15 @@ const messages: Record<string, any> = {
           "moduleProject": {
             "steps": {
               "module-2-notes-organizer-project-terminal-task-1": {
-                "title": "Create the notes workspace",
-                "prompt": "Create a clean notes organizer with `inbox`, `handoff`, and `archive` folders. Then list the top folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Begin from the previous working step and add only the new workspace change named here.",
+                "title": "Milestone 1: Complete the Organizer Structure",
+                "prompt": "The organizer inbox already contains `math.txt`, `history.txt`, and `tmp-scratch.txt`. Add the missing `handoff` and `archive` folders, then inspect the organizer to make sure the incoming notes are still untouched.",
+                "hint": "Preserve every incoming note. This milestone only completes the directory structure.",
                 "help": {
-                  "concept": "This project chains folder creation, writing, moving, reading, and one exact safe deletion.",
-                  "hint_1": "Begin from the previous working step and add only the new workspace change named here.",
-                  "hint_2": "Verify the organizer with `ls` and `cat`; preserve the real notes and remove only the scratch file. The current task asks: Create a clean notes organizer with `inbox`, `handoff`, and `archive` folders. Then list the top folder."
+                  "concept": "A cumulative workspace preserves the incoming notes while the organizer structure is completed.",
+                  "hint_1": "The inbox already exists because it contains the incoming files.",
+                  "hint_2": "Create only the missing organizer directories and verify them."
                 },
-                "starterCode": "# Use the terminal for this project step.",
+                "starterCode": "# Complete the organizer around the existing inbox.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7386,18 +7515,59 @@ const messages: Record<string, any> = {
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Complete the organizer around the existing inbox.\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
+                  },
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
+                  },
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
+                  }
                 }
               },
               "module-2-notes-organizer-project-terminal-task-2": {
-                "title": "Write the first handoff notes",
-                "prompt": "Write `Substitute teacher handoff` to `class-notes-organizer/handoff/README.txt`, then append `Bring math worksheets`. Read the file with `cat`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Begin from the previous working step and add only the new workspace change named here.",
+                "title": "Milestone 2: Write the Handoff README",
+                "prompt": "Now create the handoff guide. Write `Substitute teacher handoff` as the first line of `class-notes-organizer/handoff/README.txt`, add `Bring math worksheets` as the second line, and read the file to check the result.",
+                "hint": "Preserve the completed folders and inbox notes while adding only the handoff documentation.",
                 "help": {
-                  "concept": "This project chains folder creation, writing, moving, reading, and one exact safe deletion.",
-                  "hint_1": "Begin from the previous working step and add only the new workspace change named here.",
-                  "hint_2": "Verify the organizer with `ls` and `cat`; preserve the real notes and remove only the scratch file. The current task asks: Write `Substitute teacher handoff` to `class-notes-organizer/handoff/README.txt`, then append `Bring math worksheets`. Read the file with `cat`."
+                  "concept": "The second milestone adds handoff documentation without discarding the workspace created earlier.",
+                  "hint_1": "The README needs two lines in the specified order.",
+                  "hint_2": "Read the completed file after writing it."
                 },
-                "starterCode": "# Use the terminal for this project step.",
+                "starterCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7424,18 +7594,68 @@ const messages: Record<string, any> = {
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
+                  },
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
+                  },
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
+                  },
+                  "class_notes_organizer_handoff_README_txt": {
+                    "content": "Substitute teacher handoff\nBring math worksheets\n"
+                  }
                 }
               },
               "module-2-notes-organizer-project-terminal-task-3": {
-                "title": "Move notes and remove scratch",
-                "prompt": "Move `math.txt` and `history.txt` from `inbox` into `archive`. Remove only `tmp-scratch.txt`, then list the folders. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Begin from the previous working step and add only the new workspace change named here.",
+                "title": "Milestone 3: Archive Notes and Remove Scratch",
+                "prompt": "Finish the organizer by moving `math.txt` and `history.txt` from the inbox into the archive. Delete only `tmp-scratch.txt`, then inspect the final folders and make sure the handoff README remains.",
+                "hint": "The real notes must survive in the archive; only the explicitly named scratch file should disappear.",
                 "help": {
-                  "concept": "This project chains folder creation, writing, moving, reading, and one exact safe deletion.",
-                  "hint_1": "Begin from the previous working step and add only the new workspace change named here.",
-                  "hint_2": "Verify the organizer with `ls` and `cat`; preserve the real notes and remove only the scratch file. The current task asks: Move `math.txt` and `history.txt` from `inbox` into `archive`. Remove only `tmp-scratch.txt`, then list the folders."
+                  "concept": "The final milestone archives real notes and deletes only the confirmed temporary scratch file.",
+                  "hint_1": "Both subject notes must end in the archive.",
+                  "hint_2": "The README must remain and only the scratch file should vanish."
                 },
-                "starterCode": "# Use the terminal for this project step.",
+                "starterCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7469,6 +7689,45 @@ const messages: Record<string, any> = {
                   },
                   "class_notes_organizer_inbox_tmp_scratch_txt": {
                     "content": "scratch\n"
+                  },
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff_README_txt": {
+                    "content": "Substitute teacher handoff\nBring math worksheets\n"
+                  }
+                },
+                "solutionCode": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\nmv class-notes-organizer/inbox/math.txt class-notes-organizer/archive/math.txt\nmv class-notes-organizer/inbox/history.txt class-notes-organizer/archive/history.txt\nrm class-notes-organizer/inbox/tmp-scratch.txt\nls class-notes-organizer/archive\nls class-notes-organizer/inbox\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p class-notes-organizer/handoff\nmkdir -p class-notes-organizer/archive\nls class-notes-organizer\necho \"Substitute teacher handoff\" > class-notes-organizer/handoff/README.txt\necho \"Bring math worksheets\" >> class-notes-organizer/handoff/README.txt\ncat class-notes-organizer/handoff/README.txt\nmv class-notes-organizer/inbox/math.txt class-notes-organizer/archive/math.txt\nmv class-notes-organizer/inbox/history.txt class-notes-organizer/archive/history.txt\nrm class-notes-organizer/inbox/tmp-scratch.txt\nls class-notes-organizer/archive\nls class-notes-organizer/inbox\n"
+                  },
+                  "class_notes_organizer_inbox__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_archive__keep": {
+                    "content": ""
+                  },
+                  "class_notes_organizer_handoff_README_txt": {
+                    "content": "Substitute teacher handoff\nBring math worksheets\n"
+                  },
+                  "class_notes_organizer_archive_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_archive_history_txt": {
+                    "content": "History notes\n"
                   }
                 }
               }
@@ -7479,9 +7738,6 @@ const messages: Record<string, any> = {
           "label": "Safe Delete with rm",
           "summary": "Remove only clear temporary files, and learn when moving to trash is safer than deleting.",
           "cards": {
-            "sketch0": {
-              "title": "Check before deleting"
-            },
             "sketch1": {
               "title": "Remove one file with `rm`"
             },
@@ -7511,34 +7767,34 @@ const messages: Record<string, any> = {
             },
             "mc-rm-safety": {
               "title": "Safe delete habits",
-              "prompt": "Which habits make deletion safer?",
-              "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
+              "prompt": "Which habits make deletion of one confirmed temporary file safer?",
+              "hint": "Inspect first, target one exact file, and verify afterward.",
               "help": {
                 "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
                 "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
                 "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: Which habits make deletion safer?"
               },
               "options": {
-                "a": "Use `ls` first",
-                "b": "Delete only the exact temporary file",
+                "a": "Use `ls` before deleting",
+                "b": "Delete only the exact confirmed temporary file",
                 "c": "Use `rm -rf` when unsure",
-                "d": "Keep important files out of the command"
+                "d": "List again after deletion to verify the result"
               }
             },
             "sc-uncertain-file": {
-              "title": "When you are unsure",
+              "title": "When deletion is uncertain",
               "prompt": "What is safer when you are not sure a file should be deleted?",
-              "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
+              "hint": "Choose the action that keeps the file recoverable for review.",
               "help": {
                 "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
                 "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
                 "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: What is safer when you are not sure a file should be deleted?"
               },
               "options": {
-                "a": "Move it to a trash/archive folder",
+                "a": "Move it to a review or archive folder",
                 "b": "Use sudo rm -rf",
                 "c": "Delete the whole folder",
-                "d": "Ignore all file names"
+                "d": "Ignore the filename and delete anyway"
               }
             },
             "dr-safe-delete-flow": {
@@ -7560,56 +7816,16 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "exercises": {
-              "safe-delete-with-rm-try-it-1": {
-                "title": "Inspect the print room first",
-                "prompt": "The print room has a test page and an event plan. Type `ls` first so you can read both names before deciding what is temporary. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
-                "help": {
-                  "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
-                  "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
-                  "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: The print room has a test page and an event plan. Type `ls` first so you can read both names before deciding what is temporary."
-                },
-                "starterCode": "# Use the terminal for this task.",
-                "terminalExpectations": {
-                  "requiredCommands": {
-                    "0": {
-                      "message": "Use `ls` to inspect the print room first."
-                    }
-                  },
-                  "forbiddenCommands": {
-                    "0": {
-                      "message": "Do not use sudo in this beginner workspace."
-                    },
-                    "1": {
-                      "message": "Do not use recursive rm in this course."
-                    },
-                    "2": {
-                      "message": "Permissions commands are not needed for this workspace."
-                    },
-                    "3": {
-                      "message": "Do not download anything for this exercise."
-                    }
-                  }
-                },
-                "starterFiles": {
-                  "print_room_print_test_txt": {
-                    "content": "Printer alignment test\n"
-                  },
-                  "print_room_event_plan_txt": {
-                    "content": "Keep this event plan\n"
-                  }
-                }
-              },
               "safe-delete-with-rm-try-it-2": {
-                "title": "Remove one temporary label",
-                "prompt": "Remove only `temp-label.txt`, then type `ls` to confirm `display-plan.txt` is still there. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
+                "title": "Try It: Remove One Confirmed Temporary File",
+                "prompt": "The cleanup desk contains `temp-label.txt` and `display-plan.txt`. Use `rm` to remove only the temporary label, then check the folder and make sure `display-plan.txt` is still there.",
+                "hint": "Name only the confirmed temporary file in the delete command.",
                 "help": {
-                  "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
-                  "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
-                  "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: Remove only `temp-label.txt`, then type `ls` to confirm `display-plan.txt` is still there."
+                  "concept": "`rm` permanently removes the named file in this workspace.",
+                  "hint_1": "Delete only when the exact temporary target is known.",
+                  "hint_2": "If uncertain, preserve the file in a review location instead."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Remove only the confirmed temporary file.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7640,19 +7856,31 @@ const messages: Record<string, any> = {
                   },
                   "cleanup_desk_display_plan_txt": {
                     "content": "Keep the display plan\n"
+                  },
+                  "main_sh": {
+                    "content": "# Remove only the confirmed temporary file.\n"
+                  }
+                },
+                "solutionCode": "rm temp-label.txt\nls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "rm temp-label.txt\nls\n"
+                  },
+                  "cleanup_desk_display_plan_txt": {
+                    "content": "Keep the display plan\n"
                   }
                 }
               },
               "safe-delete-with-rm-try-it-3": {
-                "title": "Set aside an uncertain note",
-                "prompt": "You are not sure whether `maybe-archive.txt` can be deleted. Create `review-later`, move the file into it, and list that folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
+                "title": "Practice: Preserve an Uncertain File",
+                "prompt": "You are not sure whether `maybe-archive.txt` can be deleted. Keep it instead: create a `review-later` folder, move the file there, and verify its new location.",
+                "hint": "Preserve uncertain work instead of deleting it.",
                 "help": {
-                  "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
-                  "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
-                  "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: You are not sure whether `maybe-archive.txt` can be deleted. Create `review-later`, move the file into it, and list that folder."
+                  "concept": "`rm` permanently removes the named file in this workspace.",
+                  "hint_1": "Delete only when the exact temporary target is known.",
+                  "hint_2": "If uncertain, preserve the file in a review location instead."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Preserve the uncertain file in a review location.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7680,13 +7908,21 @@ const messages: Record<string, any> = {
                 "starterFiles": {
                   "archive_review_maybe_archive_txt": {
                     "content": "Needs coordinator review\n"
+                  },
+                  "main_sh": {
+                    "content": "# Preserve the uncertain file in a review location.\n"
+                  }
+                },
+                "solutionCode": "mkdir -p review-later\nmv maybe-archive.txt review-later/maybe-archive.txt\nls review-later\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p review-later\nmv maybe-archive.txt review-later/maybe-archive.txt\nls review-later\n"
+                  },
+                  "archive_review_review_later_maybe_archive_txt": {
+                    "content": "Needs coordinator review\n"
                   }
                 }
               }
-            },
-            "try_safe_delete_with_rm_sketch0": {
-              "title": "Inspect the print room first",
-              "prompt": "List a new folder before removing anything. Press **Enter** to run the command."
             },
             "try_safe_delete_with_rm_sketch1": {
               "title": "Remove one temporary label",
@@ -7765,9 +8001,9 @@ const messages: Record<string, any> = {
               }
             },
             "dr-inspect-file": {
-              "title": "Inspect a file carefully",
-              "prompt": "Put the file-inspection flow in order.",
-              "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
+              "title": "Inspect and count for a handoff",
+              "prompt": "A handoff requires you to confirm the filename, inspect its content, and then record its line count. Put those required steps in order.",
+              "hint": "Confirm the target before reading it, then count after the content check.",
               "help": {
                 "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
                 "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
@@ -7775,8 +8011,8 @@ const messages: Record<string, any> = {
               },
               "tokens": {
                 "t1": "Use `ls` to confirm the file name",
-                "t2": "Use `cat`, `head`, or `tail` to inspect content",
-                "t3": "Use `wc -l` if line count matters"
+                "t2": "Inspect the file content",
+                "t3": "Use `wc -l` to record the line count"
               }
             }
           },
@@ -7784,15 +8020,15 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "exercises": {
               "viewing-file-contents-try-it-1": {
-                "title": "Read a visitor welcome note",
-                "prompt": "You are at the visitor desk. Use `cat welcome-note.txt` to read the short note. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "title": "Try It: Read a Welcome Note",
+                "prompt": "Use `cat welcome-note.txt` to read the complete visitor note in the terminal. Do not change the file.",
+                "hint": "This guided task prints the whole file without changing it.",
                 "help": {
-                  "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
-                  "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
-                  "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: You are at the visitor desk. Use `cat welcome-note.txt` to read the short note."
+                  "concept": "`cat`, `head`, `tail`, and `wc -l` answer different inspection questions.",
+                  "hint_1": "Choose the inspection command that matches the information you need.",
+                  "hint_2": "These tasks should not modify the fixture file."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Read the short file in the terminal.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7817,19 +8053,31 @@ const messages: Record<string, any> = {
                 "starterFiles": {
                   "visitor_desk_welcome_note_txt": {
                     "content": "Welcome table opens at 9:00.\n"
+                  },
+                  "main_sh": {
+                    "content": "# Read the short file in the terminal.\n"
+                  }
+                },
+                "solutionCode": "cat welcome-note.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "cat welcome-note.txt\n"
+                  },
+                  "visitor_desk_welcome_note_txt": {
+                    "content": "Welcome table opens at 9:00.\n"
                   }
                 }
               },
               "viewing-file-contents-try-it-2": {
-                "title": "Preview a delivery log",
-                "prompt": "The dispatch folder has a longer `delivery-log.txt`. Use `head delivery-log.txt`, then `tail delivery-log.txt`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "title": "Practice: Preview a Delivery Log",
+                "prompt": "The delivery log is long. Inspect both the beginning and the end of `delivery-log.txt` without printing the entire file.",
+                "hint": "Use the two preview commands designed for opposite ends of a file.",
                 "help": {
-                  "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
-                  "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
-                  "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: The dispatch folder has a longer `delivery-log.txt`. Use `head delivery-log.txt`, then `tail delivery-log.txt`."
+                  "concept": "`cat`, `head`, `tail`, and `wc -l` answer different inspection questions.",
+                  "hint_1": "Choose the inspection command that matches the information you need.",
+                  "hint_2": "These tasks should not modify the fixture file."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Preview both ends of the delivery log.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7857,19 +8105,31 @@ const messages: Record<string, any> = {
                 "starterFiles": {
                   "dispatch_delivery_log_txt": {
                     "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n"
+                  },
+                  "main_sh": {
+                    "content": "# Preview both ends of the delivery log.\n"
+                  }
+                },
+                "solutionCode": "head delivery-log.txt\ntail delivery-log.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "head delivery-log.txt\ntail delivery-log.txt\n"
+                  },
+                  "dispatch_delivery_log_txt": {
+                    "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Signs arrived\n09:10 Water arrived\n09:30 Radios arrived\n10:00 Lunch arrived\n"
                   }
                 }
               },
               "viewing-file-contents-try-it-3": {
-                "title": "Count meal requests",
-                "prompt": "The kitchen keeps one meal request per line. Use `wc -l meal-requests.txt` to count them. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "title": "Practice: Count Meal Requests",
+                "prompt": "`meal-requests.txt` stores one request per line. Find out how many requests are in the file.",
+                "hint": "Use the line-counting form of the word-count command.",
                 "help": {
-                  "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
-                  "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
-                  "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: The kitchen keeps one meal request per line. Use `wc -l meal-requests.txt` to count them."
+                  "concept": "`cat`, `head`, `tail`, and `wc -l` answer different inspection questions.",
+                  "hint_1": "Choose the inspection command that matches the information you need.",
+                  "hint_2": "These tasks should not modify the fixture file."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Count the line-based meal requests.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -7892,6 +8152,18 @@ const messages: Record<string, any> = {
                   }
                 },
                 "starterFiles": {
+                  "kitchen_meal_requests_txt": {
+                    "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n"
+                  },
+                  "main_sh": {
+                    "content": "# Count the line-based meal requests.\n"
+                  }
+                },
+                "solutionCode": "wc -l meal-requests.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "wc -l meal-requests.txt\n"
+                  },
                   "kitchen_meal_requests_txt": {
                     "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n"
                   }
@@ -7998,15 +8270,15 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "exercises": {
               "writing-text-into-files-try-it-1": {
-                "title": "Print the morning briefing",
-                "prompt": "Print the line `Morning briefing` in the terminal with `echo`. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
+                "title": "Try It: Print a Briefing",
+                "prompt": "Use `echo` to print `Morning briefing` in the terminal. This task should display the text only; do not save it to a file.",
+                "hint": "No file should be created in this guided task.",
                 "help": {
-                  "concept": "`echo` produces text, `>` writes or replaces a file, and `>>` appends without removing earlier lines.",
-                  "hint_1": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
-                  "hint_2": "Read the file with `cat` and check the exact line order before submitting. The current task asks: Print the line `Morning briefing` in the terminal with `echo`."
+                  "concept": "`echo` produces text; redirection decides whether that text is displayed, written, replaced, or appended.",
+                  "hint_1": "Decide whether existing content must be preserved.",
+                  "hint_2": "Read the finished file when the task changes file content."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Print the requested text without saving it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -8027,18 +8299,29 @@ const messages: Record<string, any> = {
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "echo \"Morning briefing\"\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Print the requested text without saving it.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "echo \"Morning briefing\"\n"
+                  }
                 }
               },
               "writing-text-into-files-try-it-2": {
-                "title": "Write a volunteer welcome note",
-                "prompt": "Create `welcome-note.txt` by writing `Welcome volunteers` into it with `echo` and `>`. Then read it with `cat`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
+                "title": "Practice: Write a Welcome Note",
+                "prompt": "Create `welcome-note.txt` with exactly one line: `Welcome volunteers`. Read the file afterward to confirm the text was written correctly.",
+                "hint": "Use redirection that establishes or replaces file content, then inspect the result.",
                 "help": {
-                  "concept": "`echo` produces text, `>` writes or replaces a file, and `>>` appends without removing earlier lines.",
-                  "hint_1": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
-                  "hint_2": "Read the file with `cat` and check the exact line order before submitting. The current task asks: Create `welcome-note.txt` by writing `Welcome volunteers` into it with `echo` and `>`. Then read it with `cat`."
+                  "concept": "`echo` produces text; redirection decides whether that text is displayed, written, replaced, or appended.",
+                  "hint_1": "Decide whether existing content must be preserved.",
+                  "hint_2": "Read the finished file when the task changes file content."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Write the requested first line and verify the file.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -8062,18 +8345,32 @@ const messages: Record<string, any> = {
                       "message": "Do not download anything for this exercise."
                     }
                   }
+                },
+                "solutionCode": "echo \"Welcome volunteers\" > welcome-note.txt\ncat welcome-note.txt\n",
+                "starterFiles": {
+                  "main_sh": {
+                    "content": "# Write the requested first line and verify the file.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "echo \"Welcome volunteers\" > welcome-note.txt\ncat welcome-note.txt\n"
+                  },
+                  "welcome_note_txt": {
+                    "content": "Welcome volunteers\n"
+                  }
                 }
               },
               "writing-text-into-files-try-it-3": {
-                "title": "Add to the supply list",
-                "prompt": "The supply list already has one line. Append `Water bottles` to `supply-list.txt` with `>>`, then read the file with `cat`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
+                "title": "Practice: Preserve and Extend a Supply List",
+                "prompt": "`supply-list.txt` already contains one line. Add `Water bottles` to the end without replacing the existing content, then read the finished file.",
+                "hint": "Use the redirection form that preserves earlier lines.",
                 "help": {
-                  "concept": "`echo` produces text, `>` writes or replaces a file, and `>>` appends without removing earlier lines.",
-                  "hint_1": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
-                  "hint_2": "Read the file with `cat` and check the exact line order before submitting. The current task asks: The supply list already has one line. Append `Water bottles` to `supply-list.txt` with `>>`, then read the file with `cat`."
+                  "concept": "`echo` produces text; redirection decides whether that text is displayed, written, replaced, or appended.",
+                  "hint_1": "Decide whether existing content must be preserved.",
+                  "hint_2": "Read the finished file when the task changes file content."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Extend the existing file without replacing it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -8101,6 +8398,18 @@ const messages: Record<string, any> = {
                 "starterFiles": {
                   "supply_list_txt": {
                     "content": "Name tags\n"
+                  },
+                  "main_sh": {
+                    "content": "# Extend the existing file without replacing it.\n"
+                  }
+                },
+                "solutionCode": "echo \"Water bottles\" >> supply-list.txt\ncat supply-list.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "echo \"Water bottles\" >> supply-list.txt\ncat supply-list.txt\n"
+                  },
+                  "supply_list_txt": {
+                    "content": "Name tags\nWater bottles\n"
                   }
                 }
               }
@@ -8135,25 +8444,31 @@ const messages: Record<string, any> = {
           "finalCapstone": {
             "steps": {
               "final-capstone-file-room-handoff-terminal-task-1": {
-                "title": "Inspect and build the archive structure",
-                "prompt": "Inspect `media-archive`, enter it, and create `organized/photos`, `organized/documents`, `backup`, and `review`. Create the empty review marker `review/needs-review.txt`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 1: Build the Archive Structure",
+                "prompt": "Open `media-archive` and inspect what arrived. Create `organized/photos`, `organized/documents`, `backup`, and `review`, then add an empty `review/needs-review.txt` marker and verify the new structure.",
+                "hint": "Preserve every incoming file while adding only the required folders and review marker.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "The capstone begins by adding structure without disturbing the incoming records.",
+                  "hint_1": "Inspect first, then create the four requested destinations.",
+                  "hint_2": "The review marker should exist but remain empty at this stage."
                 },
-                "starterCode": "# Step 1: inspect media-archive, enter it, create the archive folders, and add review/needs-review.txt.\n",
+                "starterCode": "# Build the media archive from the incoming files below.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Use `pwd` to confirm where you are."
+                      "message": "Use `pwd` to confirm the working location."
                     },
                     "1": {
-                      "message": "Use `ls` to inspect before changing."
+                      "message": "Use `ls` to inspect before and after the structure change."
                     },
                     "2": {
-                      "message": "Create the handoff folders with `mkdir` or `mkdir -p`."
+                      "message": "Enter the archive with `cd`."
+                    },
+                    "3": {
+                      "message": "Create the required directories with `mkdir` or `mkdir -p`."
+                    },
+                    "4": {
+                      "message": "Create the review marker with `touch`."
                     }
                   },
                   "forbiddenCommands": {
@@ -8172,40 +8487,76 @@ const messages: Record<string, any> = {
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_inbox_agenda_txt": {
-                    "content": "Community event agenda\n"
+                  "main_sh": {
+                    "content": "# Build the media archive from the incoming files below.\n"
                   },
-                  "community_file_room_inbox_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
                   },
-                  "community_file_room_inbox_venue_txt": {
-                    "content": "Venue note\n"
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "temporary scratch\n"
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": ""
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-2": {
-                "title": "Write the archive guide and review note",
-                "prompt": "In `media-archive`, write `organized/README.txt` with the three required guide lines and write `Check image names before publishing` into `review/needs-review.txt`. Use `>` for the first README line and `>>` for the next two lines. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 2: Write the Archive Guide",
+                "prompt": "With the archive folders in place, create `organized/README.txt` with these three lines in order: `Community media archive`, `Photos go in organized/photos`, and `Documents go in organized/documents`. Put `Check image names before publishing` in `review/needs-review.txt`, then read both files.",
+                "hint": "Create the first README line, preserve it while adding the next two, and verify the finished text.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "Redirection can create a file and append later lines while preserving earlier text.",
+                  "hint_1": "The README must contain exactly three guide lines in order.",
+                  "hint_2": "Read both written files before moving on."
                 },
-                "starterCode": "# Step 2: write organized/README.txt and review/needs-review.txt, then read both files.\n",
+                "starterCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Write the first README line with `>`."
+                      "message": "Use `echo` to produce the required text."
                     },
                     "1": {
-                      "message": "Append the second README line with `>>`."
+                      "message": "Use write-or-replace redirection for the first line."
                     },
                     "2": {
-                      "message": "Read the README with `cat`."
+                      "message": "Use append redirection for the later README lines."
+                    },
+                    "3": {
+                      "message": "Read the written files with `cat`."
                     }
                   },
                   "forbiddenCommands": {
@@ -8224,34 +8575,85 @@ const messages: Record<string, any> = {
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_inbox_agenda_txt": {
-                    "content": "Community event agenda\n"
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n"
                   },
-                  "community_file_room_inbox_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "media_archive_backup__keep": {
+                    "content": ""
                   },
-                  "community_file_room_inbox_venue_txt": {
-                    "content": "Venue note\n"
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "temporary scratch\n"
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": ""
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-3": {
-                "title": "Move and rename the incoming records",
-                "prompt": "Move `inbox/photo-index.txt` to `organized/photos/index.txt`, move `inbox/release-forms.txt` to `organized/documents/release-forms.txt`, and move `inbox/shoot-notes.txt` to `review/shoot-notes.txt`. Verify the old and new locations. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 3: Organize the Incoming Records",
+                "prompt": "Organize the incoming records. Put the photo index at `organized/photos/index.txt`, the release forms at `organized/documents/release-forms.txt`, and the shoot notes at `review/shoot-notes.txt`. Check the inbox and destination folders to confirm each file moved.",
+                "hint": "These are relocations, not copies; preserve each file's content at its destination.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "Moving files changes their paths while preserving their contents.",
+                  "hint_1": "The photo index is both moved and renamed.",
+                  "hint_2": "Verify the new destinations and the cleaned old paths."
                 },
-                "starterCode": "# Step 3: move and rename the three incoming records into their final folders.\n",
+                "starterCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Use `mv` to move the inbox files."
+                      "message": "Use `mv` for the three required relocations."
+                    },
+                    "1": {
+                      "message": "Use `ls` to verify the old and new locations."
                     }
                   },
                   "forbiddenCommands": {
@@ -8270,37 +8672,91 @@ const messages: Record<string, any> = {
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_inbox_agenda_txt": {
-                    "content": "Community event agenda\n"
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n"
                   },
-                  "community_file_room_inbox_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "media_archive_backup__keep": {
+                    "content": ""
                   },
-                  "community_file_room_inbox_venue_txt": {
-                    "content": "Venue note\n"
+                  "media_archive_inbox_photo_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "temporary scratch\n"
+                  "media_archive_inbox_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_inbox_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-4": {
-                "title": "Back up the index and remove the temporary import",
-                "prompt": "Copy `organized/photos/index.txt` to `backup/photo-index-backup.txt`. Then remove only `inbox/tmp-import.txt` and verify that the backup exists and the temporary file is gone. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 4: Back Up and Remove the Temporary Import",
+                "prompt": "Create `backup/photo-index-backup.txt` from the organized photo index, keeping the original index in place. Then remove only `inbox/tmp-import.txt` and inspect the backup and inbox to verify both changes.",
+                "hint": "The original organized index must remain after the backup, and only the confirmed temporary import should be deleted.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "A backup preserves the source; safe deletion targets one confirmed temporary file.",
+                  "hint_1": "The organized photo index must survive the copy.",
+                  "hint_2": "Do not use recursive deletion."
                 },
-                "starterCode": "# Step 4: copy the photo index to backup, remove only inbox/tmp-import.txt, and verify both results.\n",
+                "starterCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Use `cp` to create the backup."
+                      "message": "Use `cp` to create the photo-index backup."
                     },
                     "1": {
-                      "message": "Remove only the temporary scratch file."
+                      "message": "Use `rm` only for the confirmed temporary import."
+                    },
+                    "2": {
+                      "message": "Use `ls` to verify the backup and cleaned inbox."
                     }
                   },
                   "forbiddenCommands": {
@@ -8319,34 +8775,100 @@ const messages: Record<string, any> = {
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_reports_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "temporary scratch\n"
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_inbox_tmp_import_txt": {
+                    "content": "temporary import cache\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_backup_photo_index_backup_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-5": {
-                "title": "Verify the archive and mark it ready",
-                "prompt": "Run a final verification with `pwd`, targeted `ls`, `cat organized/README.txt`, and `wc -l organized/photos/index.txt`. Then write `Media archive verified` to `organized/READY.txt` and display the marker. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "title": "Milestone 5: Verify and Mark the Archive Ready",
+                "prompt": "Before marking the archive ready, verify your location, inspect the organized folders, read `organized/README.txt`, and check the line count of `organized/photos/index.txt`. When those checks look right, create `organized/READY.txt` with `Media archive verified` and display the marker.",
+                "hint": "The READY marker is the final action; create it only after the archive evidence has been checked.",
                 "help": {
-                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
-                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
-                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                  "concept": "A final handoff should be supported by filesystem and file content checks before it is marked ready.",
+                  "hint_1": "Verify the archive before creating READY.txt.",
+                  "hint_2": "The READY marker should contain the requested verification text."
                 },
-                "starterCode": "# Step 5: verify the complete archive, then create and display organized/READY.txt.\n",
+                "starterCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Use `wc -l` to count the guest list."
+                      "message": "Use `pwd` as part of the final location check."
                     },
                     "1": {
-                      "message": "Append the final README line with `>>`."
+                      "message": "Use targeted `ls` commands to inspect the finished archive."
                     },
                     "2": {
-                      "message": "Create the ready marker with `touch`."
+                      "message": "Use `cat` to read the README and READY marker."
+                    },
+                    "3": {
+                      "message": "Use `wc -l` to count the photo-index lines."
+                    },
+                    "4": {
+                      "message": "Use `echo` to produce the READY text."
+                    },
+                    "5": {
+                      "message": "Redirect the READY text into the marker file."
                     }
                   },
                   "forbiddenCommands": {
@@ -8365,11 +8887,140 @@ const messages: Record<string, any> = {
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_reports_guest_list_txt": {
-                    "content": "Guest list\n"
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n"
                   },
-                  "community_file_room_handoff_readme_txt": {
-                    "content": "Community file room handoff\n"
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_backup_photo_index_backup_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  }
+                },
+                "solutionCode": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\npwd\nls organized/photos organized/documents backup review\ncat organized/README.txt\nwc -l organized/photos/index.txt\necho \"Media archive verified\" > organized/READY.txt\ncat organized/READY.txt\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\necho \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\nls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\ncp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\npwd\nls organized/photos organized/documents backup review\ncat organized/README.txt\nwc -l organized/photos/index.txt\necho \"Media archive verified\" > organized/READY.txt\ncat organized/READY.txt\n"
+                  },
+                  "media_archive_backup__keep": {
+                    "content": ""
+                  },
+                  "media_archive_backup_photo_index_backup_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_organized_README_txt": {
+                    "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n"
+                  },
+                  "media_archive_organized_READY_txt": {
+                    "content": "Media archive verified\n"
+                  },
+                  "media_archive_organized_documents__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_documents_release_forms_txt": {
+                    "content": "Release forms received\n"
+                  },
+                  "media_archive_organized_photos__keep": {
+                    "content": ""
+                  },
+                  "media_archive_organized_photos_index_txt": {
+                    "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n"
+                  },
+                  "media_archive_review_needs_review_txt": {
+                    "content": "Check image names before publishing\n"
+                  },
+                  "media_archive_review_shoot_notes_txt": {
+                    "content": "Check captions and dates\n"
+                  }
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-final-capstone-handoff-check": {
+              "title": "Practice: Clean a Small Handoff Folder",
+              "prompt": "A small handoff folder contains one real agenda and one confirmed temporary note. Move the agenda from the inbox into the archive, remove only the temporary note, and inspect both folders to confirm the final state.",
+              "hint": "Preserve the real record, delete only the explicitly temporary file, and verify the result.",
+              "help": {
+                "concept": "An integrated handoff can combine inspection, moving, safe single-file deletion, and final verification.",
+                "hint_1": "The agenda should survive in the archive.",
+                "hint_2": "The temporary note should be the only deleted file."
+              },
+              "starterCode": "# Complete the handoff practice below.\n",
+              "solutionCode": "pwd\nls handoff-practice/inbox\nmv handoff-practice/inbox/agenda.txt handoff-practice/archive/agenda.txt\nrm handoff-practice/inbox/tmp-note.txt\nls handoff-practice/archive handoff-practice/inbox\n",
+              "starterFiles": {
+                "main_sh": {
+                  "content": "# Complete the handoff practice below.\n"
+                },
+                "handoff_practice_archive__keep": {
+                  "content": ""
+                },
+                "handoff_practice_inbox_agenda_txt": {
+                  "content": "Community agenda\n"
+                },
+                "handoff_practice_inbox_tmp_note_txt": {
+                  "content": "temporary note\n"
+                }
+              },
+              "solutionFiles": {
+                "main_sh": {
+                  "content": "pwd\nls handoff-practice/inbox\nmv handoff-practice/inbox/agenda.txt handoff-practice/archive/agenda.txt\nrm handoff-practice/inbox/tmp-note.txt\nls handoff-practice/archive handoff-practice/inbox\n"
+                },
+                "handoff_practice_archive__keep": {
+                  "content": ""
+                },
+                "handoff_practice_archive_agenda_txt": {
+                  "content": "Community agenda\n"
+                }
+              },
+              "terminalExpectations": {
+                "requiredCommands": {
+                  "0": {
+                    "message": "Confirm the starting location with `pwd`."
+                  },
+                  "1": {
+                    "message": "Inspect the handoff folders with `ls`."
+                  },
+                  "2": {
+                    "message": "Move the real agenda with `mv`."
+                  },
+                  "3": {
+                    "message": "Remove only the confirmed temporary note with `rm`."
+                  }
+                },
+                "forbiddenCommands": {
+                  "0": {
+                    "message": "Do not use sudo in this beginner workspace."
+                  },
+                  "1": {
+                    "message": "Do not use recursive rm in this course."
+                  },
+                  "2": {
+                    "message": "Permissions commands are not needed for this workspace."
+                  },
+                  "3": {
+                    "message": "Do not download anything for this exercise."
                   }
                 }
               }
@@ -37951,140 +38602,128 @@ const messages: Record<string, any> = {
       "linux-module-1-terminal-navigation": {
         "module-1-terminal-map-project": {
           "project-synopsis": {
-            "title": "Campus folder tour",
-            "bodyMarkdown": "The first project is a navigation checkpoint. A campus club has a prepared folder map, and another volunteer needs you to locate specific areas without changing any files.\n\nWork like a careful guide: begin at the workspace root, inspect the available folders, move into the requested location, and report what you find. Each step carries the same map forward, so do not create substitute folders or rename anything.\n\nThe project is successful when your command history shows a repeatable inspection routine—`pwd`, `ls`, and deliberate `cd` commands—not a lucky jump to the final folder."
+            "title": "Module 1 Project: Terminal Map",
+            "bodyMarkdown": "Navigate one prepared club workspace across three cumulative milestones. Inspect the starting map, visit the newsletter folder and return, then finish inside the events folder. Each completed command sequence carries forward to the next milestone."
           }
         },
         "moving-around": {
           "cd-into-folder": {
-            "title": "Use `cd` to enter a folder",
-            "bodyMarkdown": "`cd` means **change directory**. Use it when `ls` shows a folder you want to enter.\n\n```bash\nls\ncd drafts\npwd\n```\n\nIf `drafts` is inside the current folder, `cd drafts` makes it the new working directory. The command usually prints no success message, so verify with `pwd` or `ls`. A common mistake is trying to `cd` into a text file. Directories are places you can enter; files are content you inspect with commands introduced later."
+            "title": "Move Into a Folder",
+            "bodyMarkdown": "`cd` changes the terminal's current working directory. A folder name can be used when that folder is inside the current location."
           },
           "cd-up-one-level": {
-            "title": "Use `cd ..` to go up one folder",
-            "bodyMarkdown": "The path `..` represents the **parent directory**, one level above the current folder. It is useful after you finish inspecting a child folder or realize you entered the wrong place.\n\n```bash\npwd\ncd ..\npwd\n```\n\nCompare the two paths. The second should be shorter by one folder name. Do not read `..` as “go home” or “start over”; it moves exactly one level. You can repeat `cd ..`, checking with `pwd` each time, instead of making a large jump you do not understand."
+            "title": "Move to the Parent Folder",
+            "bodyMarkdown": "`cd ..` moves one directory level upward to the current folder's parent."
           },
           "relative-paths": {
-            "title": "Use simple relative paths",
-            "bodyMarkdown": "A **relative path** describes a location starting from where you are now. If you are in `club-hub` and `ls` shows an `events` folder, this command can enter a nested folder directly:\n\n```bash\ncd events/photos\n```\n\nThe slash separates one folder level from the next. Relative paths are concise, but they depend on the current directory. The same command can fail from a different location. Before using a multi-part path, confirm the starting point with `pwd`, inspect the first folder with `ls`, and verify the destination after moving."
+            "title": "Navigate With Relative Paths",
+            "bodyMarkdown": "A relative path starts from the current directory. It can cross more than one folder level without requiring the full absolute path."
           }
         },
         "what-the-terminal-is": {
           "course-introduction": {
-            "title": "Welcome to Linux Terminal Fundamentals",
-            "bodyMarkdown": "This course is for learners who want to become comfortable working in a terminal without being asked to memorize a wall of commands. You do **not** need previous Linux or command-line experience. You only need to recognize ordinary files and folders and be willing to pause, read the screen, and check your work.\n\nThe terminal in this course runs inside a safe ZoeSkoul workspace. You will not administer a real computer, install software, use `sudo`, or write Bash scripts. Instead, you will practice the beginner skills that make later development work possible: locating yourself, inspecting folders, moving through paths, creating a clean structure, reading and writing text files, copying important files, moving and renaming them, and removing only clearly temporary files.\n\nThe course unfolds in three chapters. **Module 1** teaches inspection and navigation. **Module 2** teaches deliberate file operations and ends with a cumulative organizer project. **Module 3** is one final capstone in which you repair and verify a small media archive using the complete command set.\n\nKeep one rule beside you throughout the course: **inspect first, change second, verify last**. The first technical lesson begins next with the terminal as a command conversation."
+            "title": "The Terminal Is a Text Interface",
+            "bodyMarkdown": "A terminal lets you control the computer by typing commands instead of clicking through windows. A command asks the shell to perform one specific action."
           },
           "terminal-command-output": {
-            "title": "The terminal is a command conversation",
-            "bodyMarkdown": "A terminal is a text-based way to ask the computer to do one clear job at a time. The exchange has a simple rhythm: you type a **command**, press Enter, and read the **output** before deciding what to do next.\n\n```bash\nls\n```\n\nThe command above asks, “What names are in this folder?” The terminal might answer with `drafts`, `images`, and `todo.txt`. Some successful commands print nothing, so silence does not always mean failure. The important habit is to read the prompt again and verify the workspace instead of typing several guesses in a row.\n\nIn the first module, commands mostly answer questions. Later commands will change files and folders, but the conversation stays the same: command, response, check."
+            "title": "Commands Produce Results",
+            "bodyMarkdown": "Type a command, press Enter, and read the result before continuing. Some commands print information; others change the current terminal state."
           },
           "prompt-and-command": {
-            "title": "Prompt, command, and output",
-            "bodyMarkdown": "The **prompt** is the small piece of text shown before the cursor. It may include a user name, folder name, or `$` symbol. It tells you the terminal is ready; it is **not** part of the command you type.\n\n```text\n[zoeskoul]~/project$ pwd\n/workspace/project\n```\n\nHere, `[zoeskoul]~/project$` is the prompt, `pwd` is the command, and `/workspace/project` is the output. A common beginner mistake is copying the prompt along with the command. Type only the command after the prompt. In the Try It, watch where your typing begins and separate what you enter from what the terminal prints."
-          },
-          "safe-first-steps": {
-            "title": "Start with safe inspection",
-            "bodyMarkdown": "Before changing a workspace, learn to inspect it. `pwd` prints your current location, and `ls` lists the names nearby. Neither command creates, moves, renames, or deletes anything.\n\n```bash\npwd\nls\n```\n\nUse them as a safety pair: first confirm **where** you are, then see **what** is there. If the location or file names are not what you expected, stop and investigate rather than continuing with a changing command. This “inspect first” habit is more valuable than speed. It protects you from performing the right command in the wrong folder."
+            "title": "Prompt Versus Command",
+            "bodyMarkdown": "The prompt shows that the terminal is ready for input. Type your command after the prompt; do not copy the prompt itself."
           }
         },
         "where-am-i": {
           "pwd-current-folder": {
-            "title": "`pwd` shows your current folder",
-            "bodyMarkdown": "Every terminal command runs from a current directory—the folder where the terminal is presently working. `pwd` means **print working directory** and shows the full path to that location.\n\n```bash\npwd\n```\n\nPossible output:\n\n```text\n/workspace/newsletter\n```\n\nThat path tells you that a relative name such as `drafts` will be interpreted from `/workspace/newsletter`. If the path is not where you expected, do not compensate with guesses. Navigate deliberately, run `pwd` again, and continue only after the location makes sense."
+            "title": "Know Your Current Folder",
+            "bodyMarkdown": "`pwd` prints the full path of the directory where the terminal is currently working."
           },
           "ls-current-folder": {
-            "title": "`ls` shows what is nearby",
-            "bodyMarkdown": "After confirming your location, `ls` answers the next question: **what is in this folder?**\n\n```bash\nls\n```\n\nA newsroom folder might show:\n\n```text\nassignments  photos  schedule.txt\n```\n\n`ls` reports names; it does not open files or move into folders. A name without an extension can be a folder, while a name such as `schedule.txt` is usually a file. When a task mentions a path, compare its first part with the names shown by `ls` before typing the next command."
-          },
-          "pwd-ls-habit": {
-            "title": "Use `pwd` and `ls` as a pair",
-            "bodyMarkdown": "Strong terminal work follows a small loop: **locate, inspect, act, verify**. At the beginning of a task, run `pwd` and `ls`. After a navigation command, run them again.\n\n```bash\npwd\nls\n# choose the next command\npwd\nls\n```\n\nThis may feel slower than immediately typing the command you remember, but it prevents the most common beginner error: changing the wrong folder. As the course introduces file operations, keep this inspection loop around every change. The commands will become more powerful, but the safety habit should stay simple."
+            "title": "Inspect the Current Folder",
+            "bodyMarkdown": "`ls` lists the names available in the current directory so you can inspect a location before acting."
           }
         }
       },
       "linux-module-2-files-and-folders": {
         "copy-move-rename": {
           "copy-with-cp": {
-            "title": "Use `cp` when you need a backup",
-            "bodyMarkdown": "`cp` creates a second file while leaving the source in place. The command shape is `cp source destination`.\n\n```bash\ncp itinerary.txt backups/itinerary.txt\n```\n\nAfterward, both paths should exist. This is the right choice when you need a backup or another team needs its own copy. A reversed source and destination can overwrite the wrong file, so inspect both folders first and verify both names after the command."
+            "title": "Copy a File with `cp`",
+            "bodyMarkdown": "`cp source destination` creates another file while keeping the source in place.\n\n```bash\ncp itinerary.txt backups/itinerary.txt\n```\n\nVerify that both source and destination exist afterward."
           },
           "move-with-mv": {
-            "title": "Use `mv` to move a file",
-            "bodyMarkdown": "`mv` relocates a file. The source disappears from its old location and appears at the destination.\n\n```bash\nmv camera-notes.txt photo-archive/camera-notes.txt\n```\n\nThe destination folder must already exist. Inspect the source and destination before moving, then list both afterward. If the old path still exists, the move did not happen as expected; if the destination name was wrong, the file may have been renamed accidentally."
+            "title": "Move a File with `mv`",
+            "bodyMarkdown": "`mv source destination` relocates a file. After a successful move, the old path is gone and the destination path exists."
           },
           "rename-with-mv": {
-            "title": "Use `mv` to rename a file",
-            "bodyMarkdown": "`mv` also renames a file when the destination is a new name in the same folder.\n\n```bash\nmv recipe-draft.txt recipe-final.txt\n```\n\nThe file content stays the same, but the old name is replaced by the new one. Choose the final name deliberately and check whether it already exists before running the command. A rename is still a move, so verify that the old path is gone and the new path is present."
+            "title": "Rename a File with `mv`",
+            "bodyMarkdown": "`mv` also renames a file when the destination is a different name in the same directory.\n\n```bash\nmv draft.txt final.txt\n```"
           }
         },
         "creating-folders-and-files": {
           "mkdir-one-folder": {
-            "title": "Create one folder with `mkdir`",
-            "bodyMarkdown": "`mkdir` creates a directory in the current location. The command shape is `mkdir folder-name`.\n\n```bash\nmkdir reading-list\nls\n```\n\nAfter the command, `reading-list` should appear in the listing. `mkdir` does not move you into the new folder, and it will not quietly replace a folder that already exists. Choose a clear name, create it once, and verify before building anything inside it."
+            "title": "Create a Folder with `mkdir`",
+            "bodyMarkdown": "`mkdir` creates a directory without moving you into it.\n\n```bash\nmkdir reading-list\n```\n\nList the parent directory afterward to verify the new name."
           },
           "mkdir-p-nested": {
-            "title": "Create nested folders with `mkdir -p`",
-            "bodyMarkdown": "When a structure needs several levels, `mkdir -p` can create missing parent folders and the final folder in one command.\n\n```bash\nmkdir -p travel-pack/tickets travel-pack/maps\n```\n\nThis creates `travel-pack` first, then the two folders inside it. Without `-p`, a nested command fails when the parent does not exist. The option is helpful, but still verify the exact names with targeted `ls` commands so a spelling mistake does not become an unnoticed second folder."
+            "title": "Create Nested Paths with `mkdir -p`",
+            "bodyMarkdown": "`mkdir -p` creates missing parent directories along with the requested nested path.\n\n```bash\nmkdir -p travel-pack/tickets\n```\n\nIt is useful when the parent path may not exist yet."
           },
           "touch-files": {
-            "title": "Create empty files with `touch`",
-            "bodyMarkdown": "`touch` creates an empty file when the named file does not exist. It is useful for placeholders that will receive content later.\n\n```bash\ntouch research/links.txt\nls research\n```\n\nThe parent folder must already exist. If `research` is missing, create it before running `touch`. An empty file is still a real workspace item, so give it a meaningful name rather than creating anonymous clutter. The next lesson will replace or append text inside files with `echo` and redirection."
+            "title": "Create Empty Files with `touch`",
+            "bodyMarkdown": "`touch` creates an empty file when the named file does not already exist.\n\n```bash\ntouch research/links.txt\n```\n\nThe parent directory must already exist."
           }
         },
         "module-2-notes-organizer-project": {
           "project-synopsis": {
-            "title": "Class notes handoff",
-            "bodyMarkdown": "A substitute teacher receives a folder of class notes, but the files are mixed with a temporary scratch note and there is no guide for the next person. Your job is to turn that folder into a small, readable teaching workspace.\n\nThe project is cumulative. First create the organizer structure. Next write a README that explains the folders. Then move the real subject notes into the archive and remove only the named scratch file. Use inspection commands between changes so the final workspace tells a clear story rather than merely satisfying a list of commands."
+            "title": "Module 2 Project: Class Notes Handoff",
+            "bodyMarkdown": "A substitute teacher receives real notes plus one temporary scratch file in the organizer inbox. Complete the organizer, write the handoff README, then archive the real notes and remove only the named scratch file. Each milestone carries the complete previous workspace forward."
           }
         },
         "safe-delete-with-rm": {
-          "check-before-rm": {
-            "title": "Check before deleting",
-            "bodyMarkdown": "`rm` permanently removes a file from the course workspace. It does not move the file to a recycle bin, so deletion begins with inspection.\n\n```bash\nls print-room\ncat print-room/test-page.txt\n```\n\nConfirm that the path is temporary and that a similarly named important file should remain. In this course, delete only the exact file named by the task. Never add recursive flags or broad wildcards to “make it work.”"
-          },
           "rm-one-file": {
-            "title": "Remove one file with `rm`",
-            "bodyMarkdown": "To delete one known temporary file, use `rm` followed by its exact path.\n\n```bash\nrm downloads/tmp-preview.txt\nls downloads\n```\n\nA successful `rm` command is often silent, which makes the final `ls` essential. If the terminal says the file does not exist, stop and inspect instead of changing the path blindly. Course tasks forbid `rm -rf` because it can remove whole directory trees with too little feedback."
+            "title": "Delete One Exact File Safely",
+            "bodyMarkdown": "Before `rm`, inspect the directory and confirm the exact temporary filename. Then remove only that file and list the directory again to verify the result.\n\nAvoid recursive flags and broad wildcards in this course."
           },
           "move-to-trash-alternative": {
-            "title": "When unsure, move instead of delete",
-            "bodyMarkdown": "When you are unsure whether a file is disposable, do not delete it. Create a review or archive folder and move the file there.\n\n```bash\nmkdir -p review-later\nmv old-outline.txt review-later/old-outline.txt\n```\n\nThe original location becomes cleaner, but the file remains recoverable. This is a better choice for drafts, uncertain duplicates, or work another person may still need. Deletion should be the result of certainty, not the first response to clutter."
+            "title": "When Unsure, Move to Review",
+            "bodyMarkdown": "If you are not certain a file should be deleted, preserve it. Create a review or archive directory and move the file there instead. Delete only when the target is known to be disposable."
           }
         },
         "viewing-file-contents": {
           "cat-whole-file": {
-            "title": "Use `cat` for a small file",
-            "bodyMarkdown": "`cat` prints an entire text file to the terminal. It is a good choice for a short recipe, note, or small configuration file.\n\n```bash\ncat recipe-card.txt\n```\n\nReading with `cat` does not modify the file. Check the file name carefully: if the path is wrong, the command reports that the file does not exist. For a long log, printing everything can bury the useful lines, so the next sketch introduces smaller previews."
+            "title": "Read a Small File with `cat`",
+            "bodyMarkdown": "`cat` prints the complete contents of a text file without changing it. It works best for short files."
           },
           "head-tail-preview": {
-            "title": "Use `head` and `tail` for previews",
-            "bodyMarkdown": "`head` shows the beginning of a file, while `tail` shows the end. They are useful when a long file has a meaningful header or the newest entries appear last.\n\n```bash\nhead sensor-log.txt\ntail sensor-log.txt\n```\n\nBoth commands inspect without changing content. Keep the file path the same when comparing the first and last lines; otherwise you may believe one file is inconsistent when you actually opened two different files. Use a preview first, then `cat` only when the whole file is short enough to read."
+            "title": "Preview the Beginning and End",
+            "bodyMarkdown": "`head` shows the beginning of a file and `tail` shows the end. They are useful when printing an entire long file would be noisy."
           },
           "wc-line-count": {
-            "title": "Use `wc -l` to count lines",
-            "bodyMarkdown": "`wc -l` counts the lines in a text file. It gives a quick size check for lists, logs, and line-based records.\n\n```bash\nwc -l reading-list.txt\n```\n\nThe output includes a number and usually the file name. A line count does not prove the content is correct, but it can reveal a missing or duplicated record before a handoff. Combine it with `head`, `tail`, or `cat` when you need both a quantity and a content check."
+            "title": "Count Lines with `wc -l`",
+            "bodyMarkdown": "`wc -l file` reports how many lines the file contains. Use it when the number of line-based records matters."
           }
         },
         "writing-text-into-files": {
           "echo-prints-text": {
-            "title": "`echo` prints text",
-            "bodyMarkdown": "`echo` sends text to terminal output. It is useful for checking wording before saving it.\n\n```bash\necho \"Workshop opens at 9\"\n```\n\nThe sentence appears in the terminal, but no file changes. Quotation marks keep the words together and are especially helpful when the text contains spaces. A common mistake is assuming visible output was saved automatically. In the next sketches, redirection symbols connect that output to a file."
+            "title": "`echo` Produces Text",
+            "bodyMarkdown": "`echo` writes text to terminal output.\n\n```bash\necho \"Workshop opens at 9\"\n```\n\nBy itself, it does not save that text to a file."
           },
           "write-with-greater-than": {
-            "title": "Use `>` to write or replace a file",
-            "bodyMarkdown": "The `>` redirection symbol sends command output into a file. It creates the file when needed and **replaces all existing content** when the file already exists.\n\n```bash\necho \"Packing checklist\" > packing.txt\ncat packing.txt\n```\n\nThe first command writes one line; the second verifies it. Because `>` overwrites, inspect an important file before using it and make a backup when the original must be preserved. Use `>` for the first line of a new file or when replacement is the explicit goal."
+            "title": "Write or Replace with `>`",
+            "bodyMarkdown": "`>` redirects command output into a file. It creates the file when needed and replaces existing content when the file already exists."
           },
           "append-with-double-greater-than": {
-            "title": "Use `>>` to add another line",
-            "bodyMarkdown": "The `>>` symbol appends new output to the end of a file instead of replacing what is already there.\n\n```bash\necho \"Packing checklist\" > packing.txt\necho \"Passport\" >> packing.txt\ncat packing.txt\n```\n\nThe final file contains both lines in order. Use `>` once to establish the file, then `>>` for additions. Reversing the symbols can erase earlier work or create duplicate lines. Always read the finished file before moving on."
+            "title": "Append with `>>`",
+            "bodyMarkdown": "`>>` redirects output to the end of a file while preserving the content already there. Read the finished file to verify the line order."
           }
         }
       },
       "linux-module-3-final-capstone": {
         "final-capstone-file-room-handoff": {
           "capstone-synopsis": {
-            "title": "Community file room handoff",
-            "bodyMarkdown": "A neighborhood media team has inherited a small archive after a community photo project. The incoming files are all in one inbox: a photo index, release forms, shoot notes, and one temporary import file. Your job is to turn that inbox into a verified archive another volunteer can understand without asking you what happened.\n\nAcross five cumulative steps, you will inspect the workspace, create an organized structure, write a README and review note, move and rename records, back up the photo index, remove the known temporary file, and perform a final verification with `pwd`, `ls`, `cat`, and `wc -l`.\n\nThis is not a larger copy of the notes project. It is a transfer task: you must choose the correct command for preservation, relocation, naming, cleanup, and evidence that the archive is ready."
+            "title": "Final Capstone: Community Media Archive",
+            "bodyMarkdown": "Use the terminal skills from Modules 1 and 2 to turn an incoming media folder into a verified handoff. The five milestones are cumulative: create the structure, write the guide, organize the incoming records, back up the index and remove only the temporary import, then verify the finished archive."
           }
         }
       }

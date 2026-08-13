@@ -24,7 +24,19 @@
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.cards.sketch0.title",
       "sketchId": "capstone-synopsis",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "practice-final-capstone-handoff-check",
+        "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.title",
+        "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.prompt",
+        "exerciseKey": "practice-final-capstone-handoff-check",
+        "difficulty": "medium",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "project",
@@ -101,6 +113,202 @@
   ],
   "exercises": [
     {
+      "kind": "code_input",
+      "weight": 1,
+      "language": "bash",
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace"
+      },
+      "id": "practice-final-capstone-handoff-check",
+      "purpose": "practice",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check",
+      "showExpectedExample": true,
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "handoff-practice/archive",
+          "handoff-practice/inbox"
+        ],
+        "requiredFiles": [
+          "handoff-practice/archive/agenda.txt"
+        ],
+        "forbiddenFiles": [
+          "handoff-practice/inbox/agenda.txt",
+          "handoff-practice/inbox/tmp-note.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "\\bpwd\\b",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "\\bls\\b",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)mv(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.requiredCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)rm(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.requiredCommands.3.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "handoff-practice/archive",
+            "handoff-practice/inbox"
+          ],
+          "requiredFiles": [
+            "handoff-practice/archive/agenda.txt"
+          ],
+          "forbiddenFiles": [
+            "handoff-practice/inbox/agenda.txt",
+            "handoff-practice/inbox/tmp-note.txt"
+          ]
+        },
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.main_sh.content",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "handoff-practice/archive/.keep",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_archive__keep.content",
+            "language": "bash"
+          },
+          {
+            "path": "handoff-practice/inbox/agenda.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_inbox_agenda_txt.content",
+            "language": "bash"
+          },
+          {
+            "path": "handoff-practice/inbox/tmp-note.txt",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_inbox_tmp_note_txt.content",
+            "language": "bash"
+          }
+        ],
+        "fixtureFiles": [
+          {
+            "path": "handoff-practice/archive/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "handoff-practice/inbox/agenda.txt",
+            "content": "Community agenda\n",
+            "language": "bash"
+          },
+          {
+            "path": "handoff-practice/inbox/tmp-note.txt",
+            "content": "temporary note\n",
+            "language": "bash"
+          }
+        ]
+      },
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.prompt"
+      },
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.main_sh.content",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "handoff-practice/archive/.keep",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_archive__keep.content",
+          "language": "bash"
+        },
+        {
+          "path": "handoff-practice/inbox/agenda.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_inbox_agenda_txt.content",
+          "language": "bash"
+        },
+        {
+          "path": "handoff-practice/inbox/tmp-note.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.starterFiles.handoff_practice_inbox_tmp_note_txt.content",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.solutionFiles.main_sh.content",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "handoff-practice/archive/.keep",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.solutionFiles.handoff_practice_archive__keep.content",
+          "language": "bash"
+        },
+        {
+          "path": "handoff-practice/archive/agenda.txt",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.practice.practice-final-capstone-handoff-check.solutionFiles.handoff_practice_archive_agenda_txt.content",
+          "language": "bash"
+        }
+      ],
+      "fixtureFiles": [
+        {
+          "path": "handoff-practice/archive/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "handoff-practice/inbox/agenda.txt",
+          "content": "Community agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "handoff-practice/inbox/tmp-note.txt",
+          "content": "temporary note\n",
+          "language": "bash"
+        }
+      ]
+    },
+    {
       "id": "final-capstone-file-room-handoff-terminal-task-1",
       "kind": "code_input",
       "purpose": "project",
@@ -111,78 +319,78 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/inbox/photo-index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_photo_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_shoot_notes_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/tmp-import.txt",
-          "content": "temporary import cache\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_tmp_import_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/backup/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_backup__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/photo-index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_inbox_photo_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_inbox_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_inbox_shoot_notes_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/tmp-import.txt",
-          "content": "temporary import cache\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_inbox_tmp_import_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_organized_documents__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_organized_photos__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/needs-review.txt",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.solutionFiles.media_archive_review_needs_review_txt.content",
           "language": "bash"
         }
       ],
@@ -194,6 +402,10 @@
           "media-archive/review"
         ],
         "requiredFiles": [
+          "media-archive/inbox/photo-index.txt",
+          "media-archive/inbox/release-forms.txt",
+          "media-archive/inbox/shoot-notes.txt",
+          "media-archive/inbox/tmp-import.txt",
           "media-archive/review/needs-review.txt"
         ]
       },
@@ -201,23 +413,23 @@
         "requiredCommands": [
           {
             "pattern": "\\bpwd\\b",
-            "message": "Use the required capstone command for step 1: \\bpwd\\b."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.0.message"
           },
           {
             "pattern": "\\bls\\b",
-            "message": "Use the required capstone command for step 1: \\bls\\b."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.1.message"
           },
           {
             "pattern": "(^|\\s)cd(\\s|$)",
-            "message": "Use the required capstone command for step 1: (^|\\s)cd(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.2.message"
           },
           {
             "pattern": "(^|\\s)mkdir(\\s|$)",
-            "message": "Use the required capstone command for step 1: (^|\\s)mkdir(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.3.message"
           },
           {
             "pattern": "(^|\\s)touch(\\s|$)",
-            "message": "Use the required capstone command for step 1: (^|\\s)touch(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.4.message"
           }
         ],
         "forbiddenCommands": [
@@ -237,7 +449,8 @@
             "pattern": "(^|\\s)(curl|wget)(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "media-archive"
       },
       "workspace": {
         "language": "bash",
@@ -246,29 +459,29 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "media-archive/inbox/photo-index.txt",
-            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_photo_index_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/release-forms.txt",
-            "content": "Release forms received\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_release_forms_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/shoot-notes.txt",
-            "content": "Check captions and dates\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_shoot_notes_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/tmp-import.txt",
-            "content": "temporary import cache\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.media_archive_inbox_tmp_import_txt.content",
             "language": "bash"
           }
         ],
@@ -280,6 +493,10 @@
             "media-archive/review"
           ],
           "requiredFiles": [
+            "media-archive/inbox/photo-index.txt",
+            "media-archive/inbox/release-forms.txt",
+            "media-archive/inbox/shoot-notes.txt",
+            "media-archive/inbox/tmp-import.txt",
             "media-archive/review/needs-review.txt"
           ]
         },
@@ -306,7 +523,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -357,108 +574,118 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/backup/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_backup__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/photo-index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_photo_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_shoot_notes_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/tmp-import.txt",
-          "content": "temporary import cache\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_tmp_import_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_organized_documents__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_organized_photos__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/needs-review.txt",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_review_needs_review_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "echo \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/backup/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_backup__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/photo-index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_inbox_photo_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_inbox_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_inbox_shoot_notes_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/tmp-import.txt",
-          "content": "temporary import cache\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_inbox_tmp_import_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/README.txt",
-          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_organized_README_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_organized_documents__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_organized_photos__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/needs-review.txt",
-          "content": "Check image names before publishing\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.solutionFiles.media_archive_review_needs_review_txt.content",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
+        "requiredFolders": [
+          "media-archive/organized/photos",
+          "media-archive/organized/documents",
+          "media-archive/backup",
+          "media-archive/review"
+        ],
         "requiredFiles": [
+          "media-archive/inbox/photo-index.txt",
+          "media-archive/inbox/release-forms.txt",
+          "media-archive/inbox/shoot-notes.txt",
+          "media-archive/inbox/tmp-import.txt",
           "media-archive/organized/README.txt",
           "media-archive/review/needs-review.txt"
         ]
@@ -467,19 +694,19 @@
         "requiredCommands": [
           {
             "pattern": "(^|\\s)echo(\\s|$)",
-            "message": "Use the required capstone command for step 2: (^|\\s)echo(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.0.message"
           },
           {
             "pattern": ">",
-            "message": "Use the required capstone command for step 2: >."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.1.message"
           },
           {
             "pattern": ">>",
-            "message": "Use the required capstone command for step 2: >>."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.2.message"
           },
           {
             "pattern": "(^|\\s)cat(\\s|$)",
-            "message": "Use the required capstone command for step 2: (^|\\s)cat(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.3.message"
           }
         ],
         "forbiddenCommands": [
@@ -499,7 +726,8 @@
             "pattern": "(^|\\s)(curl|wget)(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "media-archive"
       },
       "workspace": {
         "language": "bash",
@@ -508,54 +736,64 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "media-archive/backup/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_backup__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/photo-index.txt",
-            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_photo_index_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/release-forms.txt",
-            "content": "Release forms received\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_release_forms_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/shoot-notes.txt",
-            "content": "Check captions and dates\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_shoot_notes_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/tmp-import.txt",
-            "content": "temporary import cache\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_inbox_tmp_import_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/documents/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_organized_documents__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/photos/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_organized_photos__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/review/needs-review.txt",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.media_archive_review_needs_review_txt.content",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
+          "requiredFolders": [
+            "media-archive/organized/photos",
+            "media-archive/organized/documents",
+            "media-archive/backup",
+            "media-archive/review"
+          ],
           "requiredFiles": [
+            "media-archive/inbox/photo-index.txt",
+            "media-archive/inbox/release-forms.txt",
+            "media-archive/inbox/shoot-notes.txt",
+            "media-archive/inbox/tmp-import.txt",
             "media-archive/organized/README.txt",
             "media-archive/review/needs-review.txt"
           ]
@@ -603,7 +841,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -618,7 +856,7 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/media-archive"
+        "terminalCwd": "/workspace"
       },
       "fixtureFiles": [
         {
@@ -674,115 +912,118 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/backup/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_backup__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/photo-index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_photo_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_shoot_notes_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/tmp-import.txt",
-          "content": "temporary import cache\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_tmp_import_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/README.txt",
-          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_README_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_documents__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_photos__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/needs-review.txt",
-          "content": "Check image names before publishing\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_review_needs_review_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "ls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/backup/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_backup__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/tmp-import.txt",
-          "content": "temporary import cache\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_inbox_tmp_import_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/README.txt",
-          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_README_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_documents__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_documents_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_photos__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_organized_photos_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/needs-review.txt",
-          "content": "Check image names before publishing\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_review_needs_review_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.solutionFiles.media_archive_review_shoot_notes_txt.content",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
+          "media-archive/inbox/tmp-import.txt",
+          "media-archive/organized/README.txt",
           "media-archive/organized/photos/index.txt",
           "media-archive/organized/documents/release-forms.txt",
+          "media-archive/review/needs-review.txt",
           "media-archive/review/shoot-notes.txt"
         ],
         "forbiddenFiles": [
@@ -795,11 +1036,11 @@
         "requiredCommands": [
           {
             "pattern": "(^|\\s)mv(\\s|$)",
-            "message": "Use the required capstone command for step 3: (^|\\s)mv(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.requiredCommands.0.message"
           },
           {
             "pattern": "(^|\\s)ls(\\s|$)",
-            "message": "Use the required capstone command for step 3: (^|\\s)ls(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.requiredCommands.1.message"
           }
         ],
         "forbiddenCommands": [
@@ -819,7 +1060,8 @@
             "pattern": "(^|\\s)(curl|wget)(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "media-archive"
       },
       "workspace": {
         "language": "bash",
@@ -828,61 +1070,64 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "media-archive/backup/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_backup__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/photo-index.txt",
-            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_photo_index_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/release-forms.txt",
-            "content": "Release forms received\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_release_forms_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/shoot-notes.txt",
-            "content": "Check captions and dates\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_shoot_notes_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/tmp-import.txt",
-            "content": "temporary import cache\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_inbox_tmp_import_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/README.txt",
-            "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_README_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/documents/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_documents__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/photos/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_organized_photos__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/review/needs-review.txt",
-            "content": "Check image names before publishing\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.media_archive_review_needs_review_txt.content",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
+            "media-archive/inbox/tmp-import.txt",
+            "media-archive/organized/README.txt",
             "media-archive/organized/photos/index.txt",
             "media-archive/organized/documents/release-forms.txt",
+            "media-archive/review/needs-review.txt",
             "media-archive/review/shoot-notes.txt"
           ],
           "forbiddenFiles": [
@@ -939,7 +1184,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -954,7 +1199,7 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/media-archive"
+        "terminalCwd": "/workspace"
       },
       "fixtureFiles": [
         {
@@ -1015,117 +1260,124 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/backup/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_backup__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/inbox/tmp-import.txt",
-          "content": "temporary import cache\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_inbox_tmp_import_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/README.txt",
-          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_README_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_documents__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_documents_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_photos__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_photos_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/needs-review.txt",
-          "content": "Check image names before publishing\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_review_needs_review_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_review_shoot_notes_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "cp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/backup/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_backup__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/backup/photo-index-backup.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_backup_photo_index_backup_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/README.txt",
-          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_README_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_documents__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_documents_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_photos__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_organized_photos_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/needs-review.txt",
-          "content": "Check image names before publishing\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_review_needs_review_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.solutionFiles.media_archive_review_shoot_notes_txt.content",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
           "media-archive/backup/photo-index-backup.txt",
-          "media-archive/organized/photos/index.txt"
+          "media-archive/organized/README.txt",
+          "media-archive/organized/photos/index.txt",
+          "media-archive/organized/documents/release-forms.txt",
+          "media-archive/review/needs-review.txt",
+          "media-archive/review/shoot-notes.txt"
         ],
         "forbiddenFiles": [
+          "media-archive/inbox/photo-index.txt",
+          "media-archive/inbox/release-forms.txt",
+          "media-archive/inbox/shoot-notes.txt",
           "media-archive/inbox/tmp-import.txt"
         ]
       },
@@ -1133,15 +1385,15 @@
         "requiredCommands": [
           {
             "pattern": "(^|\\s)cp(\\s|$)",
-            "message": "Use the required capstone command for step 4: (^|\\s)cp(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.0.message"
           },
           {
             "pattern": "(^|\\s)rm(\\s|$)",
-            "message": "Use the required capstone command for step 4: (^|\\s)rm(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.1.message"
           },
           {
             "pattern": "(^|\\s)ls(\\s|$)",
-            "message": "Use the required capstone command for step 4: (^|\\s)ls(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.2.message"
           }
         ],
         "forbiddenCommands": [
@@ -1161,7 +1413,8 @@
             "pattern": "(^|\\s)(curl|wget)(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "media-archive"
       },
       "workspace": {
         "language": "bash",
@@ -1170,63 +1423,70 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "media-archive/backup/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_backup__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/inbox/tmp-import.txt",
-            "content": "temporary import cache\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_inbox_tmp_import_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/README.txt",
-            "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_README_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/documents/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_documents__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/documents/release-forms.txt",
-            "content": "Release forms received\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_documents_release_forms_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/photos/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_photos__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/photos/index.txt",
-            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_organized_photos_index_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/review/needs-review.txt",
-            "content": "Check image names before publishing\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_review_needs_review_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/review/shoot-notes.txt",
-            "content": "Check captions and dates\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.media_archive_review_shoot_notes_txt.content",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
             "media-archive/backup/photo-index-backup.txt",
-            "media-archive/organized/photos/index.txt"
+            "media-archive/organized/README.txt",
+            "media-archive/organized/photos/index.txt",
+            "media-archive/organized/documents/release-forms.txt",
+            "media-archive/review/needs-review.txt",
+            "media-archive/review/shoot-notes.txt"
           ],
           "forbiddenFiles": [
+            "media-archive/inbox/photo-index.txt",
+            "media-archive/inbox/release-forms.txt",
+            "media-archive/inbox/shoot-notes.txt",
             "media-archive/inbox/tmp-import.txt"
           ]
         },
@@ -1278,7 +1538,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -1293,7 +1553,7 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/media-archive"
+        "terminalCwd": "/workspace"
       },
       "fixtureFiles": [
         {
@@ -1354,149 +1614,158 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/backup/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_backup__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/backup/photo-index-backup.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_backup_photo_index_backup_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/README.txt",
-          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_README_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_documents__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_documents_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_photos__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_photos_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/needs-review.txt",
-          "content": "Check image names before publishing\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_review_needs_review_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_review_shoot_notes_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "pwd\nls organized/photos organized/documents backup review\ncat organized/README.txt\nwc -l organized/photos/index.txt\necho \"Media archive verified\" > organized/READY.txt\ncat organized/READY.txt\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "media-archive/backup/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_backup__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/backup/photo-index-backup.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_backup_photo_index_backup_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/README.txt",
-          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_README_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/READY.txt",
-          "content": "Media archive verified\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_READY_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_documents__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/documents/release-forms.txt",
-          "content": "Release forms received\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_documents_release_forms_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/.keep",
-          "content": "",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_photos__keep.content",
           "language": "bash"
         },
         {
           "path": "media-archive/organized/photos/index.txt",
-          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_organized_photos_index_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/needs-review.txt",
-          "content": "Check image names before publishing\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_review_needs_review_txt.content",
           "language": "bash"
         },
         {
           "path": "media-archive/review/shoot-notes.txt",
-          "content": "Check captions and dates\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.solutionFiles.media_archive_review_shoot_notes_txt.content",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "media-archive/organized/README.txt",
-          "media-archive/organized/photos/index.txt",
           "media-archive/backup/photo-index-backup.txt",
-          "media-archive/organized/READY.txt"
+          "media-archive/organized/README.txt",
+          "media-archive/organized/READY.txt",
+          "media-archive/organized/photos/index.txt",
+          "media-archive/organized/documents/release-forms.txt",
+          "media-archive/review/needs-review.txt",
+          "media-archive/review/shoot-notes.txt"
+        ],
+        "forbiddenFiles": [
+          "media-archive/inbox/photo-index.txt",
+          "media-archive/inbox/release-forms.txt",
+          "media-archive/inbox/shoot-notes.txt",
+          "media-archive/inbox/tmp-import.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
             "pattern": "\\bpwd\\b",
-            "message": "Use the required capstone command for step 5: \\bpwd\\b."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.0.message"
           },
           {
             "pattern": "(^|\\s)ls(\\s|$)",
-            "message": "Use the required capstone command for step 5: (^|\\s)ls(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.1.message"
           },
           {
             "pattern": "(^|\\s)cat(\\s|$)",
-            "message": "Use the required capstone command for step 5: (^|\\s)cat(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.2.message"
           },
           {
             "pattern": "wc\\s+-l",
-            "message": "Use the required capstone command for step 5: wc\\s+-l."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.3.message"
           },
           {
             "pattern": "(^|\\s)echo(\\s|$)",
-            "message": "Use the required capstone command for step 5: (^|\\s)echo(\\s|$)."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.4.message"
           },
           {
             "pattern": ">",
-            "message": "Use the required capstone command for step 5: >."
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.5.message"
           }
         ],
         "forbiddenCommands": [
@@ -1516,7 +1785,8 @@
             "pattern": "(^|\\s)(curl|wget)(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "media-archive"
       },
       "workspace": {
         "language": "bash",
@@ -1525,63 +1795,72 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "media-archive/backup/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_backup__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/backup/photo-index-backup.txt",
-            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_backup_photo_index_backup_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/README.txt",
-            "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_README_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/documents/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_documents__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/documents/release-forms.txt",
-            "content": "Release forms received\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_documents_release_forms_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/photos/.keep",
-            "content": "",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_photos__keep.content",
             "language": "bash"
           },
           {
             "path": "media-archive/organized/photos/index.txt",
-            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_organized_photos_index_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/review/needs-review.txt",
-            "content": "Check image names before publishing\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_review_needs_review_txt.content",
             "language": "bash"
           },
           {
             "path": "media-archive/review/shoot-notes.txt",
-            "content": "Check captions and dates\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.media_archive_review_shoot_notes_txt.content",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "media-archive/organized/README.txt",
-            "media-archive/organized/photos/index.txt",
             "media-archive/backup/photo-index-backup.txt",
-            "media-archive/organized/READY.txt"
+            "media-archive/organized/README.txt",
+            "media-archive/organized/READY.txt",
+            "media-archive/organized/photos/index.txt",
+            "media-archive/organized/documents/release-forms.txt",
+            "media-archive/review/needs-review.txt",
+            "media-archive/review/shoot-notes.txt"
+          ],
+          "forbiddenFiles": [
+            "media-archive/inbox/photo-index.txt",
+            "media-archive/inbox/release-forms.txt",
+            "media-archive/inbox/shoot-notes.txt",
+            "media-archive/inbox/tmp-import.txt"
           ]
         },
         "fixtureFiles": [
@@ -1632,7 +1911,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -1647,7 +1926,7 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/media-archive"
+        "terminalCwd": "/workspace"
       },
       "fixtureFiles": [
         {

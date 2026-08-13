@@ -189,7 +189,7 @@
     {
       "id": "creating-folders-and-files-try-it-1",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1",
       "language": "bash",
@@ -197,7 +197,7 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -206,7 +206,7 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir volunteer-desk\nls\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -254,7 +254,7 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
@@ -267,7 +267,7 @@
         },
         "fixtureFiles": []
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -289,7 +289,7 @@
     {
       "id": "creating-folders-and-files-try-it-2",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2",
       "language": "bash",
@@ -297,7 +297,7 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -306,7 +306,7 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir -p event-pack/signs\nmkdir -p event-pack/schedules\nls event-pack\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -352,7 +352,7 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
@@ -367,7 +367,7 @@
         },
         "fixtureFiles": []
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -389,7 +389,7 @@
     {
       "id": "creating-folders-and-files-try-it-3",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3",
       "language": "bash",
@@ -397,28 +397,28 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "planning-board/README.txt",
-          "content": "Planning board workspace\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.planning_board_README_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "touch tasks.txt\ntouch contacts.txt\nls\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "planning-board/README.txt",
-          "content": "Planning board workspace\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.solutionFiles.planning_board_README_txt.content",
           "language": "bash"
         }
       ],
@@ -470,14 +470,14 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "planning-board/README.txt",
-            "content": "Planning board workspace\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.planning_board_README_txt.content",
             "language": "bash"
           }
         ],
@@ -499,7 +499,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",

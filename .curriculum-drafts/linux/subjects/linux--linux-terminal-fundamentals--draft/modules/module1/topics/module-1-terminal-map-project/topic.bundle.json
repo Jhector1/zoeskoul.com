@@ -89,48 +89,48 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "club-hub/newsletter/draft.txt",
-          "content": "Newsletter draft\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_newsletter_draft_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/events/checklist.txt",
-          "content": "Event checklist\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_events_checklist_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/archive/old-note.txt",
-          "content": "Old note\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_archive_old_note_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "ls\ncd club-hub\npwd\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "club-hub/newsletter/draft.txt",
-          "content": "Newsletter draft\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.solutionFiles.club_hub_newsletter_draft_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/events/checklist.txt",
-          "content": "Event checklist\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.solutionFiles.club_hub_events_checklist_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/archive/old-note.txt",
-          "content": "Old note\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.solutionFiles.club_hub_archive_old_note_txt.content",
           "language": "bash"
         }
       ],
@@ -184,24 +184,24 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "club-hub/newsletter/draft.txt",
-            "content": "Newsletter draft\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_newsletter_draft_txt.content",
             "language": "bash"
           },
           {
             "path": "club-hub/events/checklist.txt",
-            "content": "Event checklist\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_events_checklist_txt.content",
             "language": "bash"
           },
           {
             "path": "club-hub/archive/old-note.txt",
-            "content": "Old note\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-1.starterFiles.club_hub_archive_old_note_txt.content",
             "language": "bash"
           }
         ],
@@ -231,7 +231,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -277,48 +277,48 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "club-hub/newsletter/draft.txt",
-          "content": "Newsletter draft\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_newsletter_draft_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/events/checklist.txt",
-          "content": "Event checklist\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_events_checklist_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/archive/old-note.txt",
-          "content": "Old note\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_archive_old_note_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "cd newsletter\nls\ncd ..\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "club-hub/newsletter/draft.txt",
-          "content": "Newsletter draft\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.solutionFiles.club_hub_newsletter_draft_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/events/checklist.txt",
-          "content": "Event checklist\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.solutionFiles.club_hub_events_checklist_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/archive/old-note.txt",
-          "content": "Old note\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.solutionFiles.club_hub_archive_old_note_txt.content",
           "language": "bash"
         }
       ],
@@ -365,24 +365,24 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "club-hub/newsletter/draft.txt",
-            "content": "Newsletter draft\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_newsletter_draft_txt.content",
             "language": "bash"
           },
           {
             "path": "club-hub/events/checklist.txt",
-            "content": "Event checklist\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_events_checklist_txt.content",
             "language": "bash"
           },
           {
             "path": "club-hub/archive/old-note.txt",
-            "content": "Old note\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-2.starterFiles.club_hub_archive_old_note_txt.content",
             "language": "bash"
           }
         ],
@@ -409,7 +409,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -455,48 +455,48 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "club-hub/newsletter/draft.txt",
-          "content": "Newsletter draft\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_newsletter_draft_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/events/checklist.txt",
-          "content": "Event checklist\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_events_checklist_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/archive/old-note.txt",
-          "content": "Old note\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_archive_old_note_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "cd events\npwd\nls\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "club-hub/newsletter/draft.txt",
-          "content": "Newsletter draft\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.solutionFiles.club_hub_newsletter_draft_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/events/checklist.txt",
-          "content": "Event checklist\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.solutionFiles.club_hub_events_checklist_txt.content",
           "language": "bash"
         },
         {
           "path": "club-hub/archive/old-note.txt",
-          "content": "Old note\n",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.solutionFiles.club_hub_archive_old_note_txt.content",
           "language": "bash"
         }
       ],
@@ -547,24 +547,24 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "club-hub/newsletter/draft.txt",
-            "content": "Newsletter draft\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_newsletter_draft_txt.content",
             "language": "bash"
           },
           {
             "path": "club-hub/events/checklist.txt",
-            "content": "Event checklist\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_events_checklist_txt.content",
             "language": "bash"
           },
           {
             "path": "club-hub/archive/old-note.txt",
-            "content": "Old note\n",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.module-1-terminal-map-project.moduleProject.steps.module-1-terminal-map-project-terminal-task-3.starterFiles.club_hub_archive_old_note_txt.content",
             "language": "bash"
           }
         ],
@@ -591,7 +591,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",

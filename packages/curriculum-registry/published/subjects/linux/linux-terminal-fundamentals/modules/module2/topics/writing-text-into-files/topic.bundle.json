@@ -186,7 +186,7 @@
     {
       "id": "writing-text-into-files-try-it-1",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1",
       "language": "bash",
@@ -194,7 +194,7 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -203,7 +203,7 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "echo \"Morning briefing\"\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -243,7 +243,7 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
@@ -252,7 +252,7 @@
         "workspaceExpectations": {},
         "fixtureFiles": []
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -274,7 +274,7 @@
     {
       "id": "writing-text-into-files-try-it-2",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2",
       "language": "bash",
@@ -282,7 +282,7 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -291,14 +291,14 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "echo \"Welcome volunteers\" > welcome-note.txt\ncat welcome-note.txt\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "welcome-note.txt",
-          "content": "Welcome volunteers\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.solutionFiles.welcome_note_txt.content",
           "language": "bash"
         }
       ],
@@ -344,7 +344,7 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
@@ -357,7 +357,7 @@
         },
         "fixtureFiles": []
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -379,7 +379,7 @@
     {
       "id": "writing-text-into-files-try-it-3",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3",
       "language": "bash",
@@ -387,28 +387,28 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "supply-list.txt",
-          "content": "Name tags\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.supply_list_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "echo \"Water bottles\" >> supply-list.txt\ncat supply-list.txt\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "supply-list.txt",
-          "content": "Name tags\nWater bottles\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.solutionFiles.supply_list_txt.content",
           "language": "bash"
         }
       ],
@@ -454,14 +454,14 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "supply-list.txt",
-            "content": "Name tags\n",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.supply_list_txt.content",
             "language": "bash"
           }
         ],
@@ -478,7 +478,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",

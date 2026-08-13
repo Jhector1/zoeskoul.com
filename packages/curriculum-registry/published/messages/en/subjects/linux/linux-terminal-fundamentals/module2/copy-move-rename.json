@@ -69,18 +69,18 @@
               }
             },
             "dr-backup-then-move": {
-              "title": "Safe handoff order",
-              "prompt": "Put these handoff steps in a safe order.",
-              "hint": "Read the source and destination paths from left to right before running the command.",
+              "title": "Required backup before handoff",
+              "prompt": "A handoff requires a backup copy before the working file is moved. Put the required steps in order.",
+              "hint": "Preserve the backup first, perform the move second, then verify.",
               "help": {
                 "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
                 "hint_1": "Read the source and destination paths from left to right before running the command.",
                 "hint_2": "Verify both locations: a copy leaves both files, while a move or rename removes the old path. The current task asks: Put these handoff steps in a safe order."
               },
               "tokens": {
-                "t1": "Copy a backup if needed",
+                "t1": "Create the required backup copy",
                 "t2": "Move the working file into handoff",
-                "t3": "List the folder to verify"
+                "t3": "List the destination to verify"
               }
             }
           },
@@ -88,15 +88,15 @@
             "allowReveal": true,
             "exercises": {
               "copy-move-rename-try-it-1": {
-                "title": "Back up the attendee list",
-                "prompt": "Before registration opens, copy `attendee-list.txt` to `attendee-list-backup.txt`, then list the folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Read the source and destination paths from left to right before running the command.",
+                "title": "Try It: Back Up the Attendee List",
+                "prompt": "Use `cp` to make `attendee-list-backup.txt` from `attendee-list.txt`. Keep the original file in place and list the folder afterward to verify the backup.",
+                "hint": "The original attendee list must remain in place.",
                 "help": {
-                  "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
-                  "hint_1": "Read the source and destination paths from left to right before running the command.",
-                  "hint_2": "Verify both locations: a copy leaves both files, while a move or rename removes the old path. The current task asks: Before registration opens, copy `attendee-list.txt` to `attendee-list-backup.txt`, then list the folder."
+                  "concept": "`cp` preserves the source; `mv` relocates or renames it.",
+                  "hint_1": "Read source and destination paths from left to right.",
+                  "hint_2": "Verify both the old and new locations after the operation."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Create the guided backup and verify it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -121,19 +121,34 @@
                 "starterFiles": {
                   "registration_attendee_list_txt": {
                     "content": "Amina\nDiego\nMaya\n"
+                  },
+                  "main_sh": {
+                    "content": "# Create the guided backup and verify it.\n"
+                  }
+                },
+                "solutionCode": "cp attendee-list.txt attendee-list-backup.txt\nls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "cp attendee-list.txt attendee-list-backup.txt\nls\n"
+                  },
+                  "registration_attendee_list_txt": {
+                    "content": "Amina\nDiego\nMaya\n"
+                  },
+                  "registration_attendee_list_backup_txt": {
+                    "content": "Amina\nDiego\nMaya\n"
                   }
                 }
               },
               "copy-move-rename-try-it-2": {
-                "title": "Move a banner note to handoff",
-                "prompt": "The banner note is ready for the handoff team. Move `banner-note.txt` to `handoff/banner-note.txt`, then list `handoff`. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Read the source and destination paths from left to right before running the command.",
+                "title": "Practice: Move the Banner Note",
+                "prompt": "The banner note is ready for handoff. Move `banner-note.txt` into the `handoff` folder so it ends up at `handoff/banner-note.txt`, then verify the destination.",
+                "hint": "Use the file operation that relocates rather than duplicates.",
                 "help": {
-                  "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
-                  "hint_1": "Read the source and destination paths from left to right before running the command.",
-                  "hint_2": "Verify both locations: a copy leaves both files, while a move or rename removes the old path. The current task asks: The banner note is ready for the handoff team. Move `banner-note.txt` to `handoff/banner-note.txt`, then list `handoff`."
+                  "concept": "`cp` preserves the source; `mv` relocates or renames it.",
+                  "hint_1": "Read source and destination paths from left to right.",
+                  "hint_2": "Verify both the old and new locations after the operation."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Relocate the banner note and verify the destination.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -161,19 +176,37 @@
                   },
                   "sign_shop_handoff_keep": {
                     "content": ""
+                  },
+                  "main_sh": {
+                    "content": "# Relocate the banner note and verify the destination.\n"
+                  },
+                  "sign_shop_handoff__keep": {
+                    "content": ""
+                  }
+                },
+                "solutionCode": "mv banner-note.txt handoff/banner-note.txt\nls handoff\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mv banner-note.txt handoff/banner-note.txt\nls handoff\n"
+                  },
+                  "sign_shop_handoff__keep": {
+                    "content": ""
+                  },
+                  "sign_shop_handoff_banner_note_txt": {
+                    "content": "Hang the welcome banner by 8:30.\n"
                   }
                 }
               },
               "copy-move-rename-try-it-3": {
-                "title": "Rename the approved schedule",
-                "prompt": "The schedule is approved. Rename `schedule-draft.txt` to `schedule-final.txt`, then list the folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Read the source and destination paths from left to right before running the command.",
+                "title": "Practice: Rename the Approved Schedule",
+                "prompt": "The schedule has been approved. Rename `schedule-draft.txt` to `schedule-final.txt` in the same folder, then verify that the final name is present.",
+                "hint": "A rename uses the same operation as a move.",
                 "help": {
-                  "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
-                  "hint_1": "Read the source and destination paths from left to right before running the command.",
-                  "hint_2": "Verify both locations: a copy leaves both files, while a move or rename removes the old path. The current task asks: The schedule is approved. Rename `schedule-draft.txt` to `schedule-final.txt`, then list the folder."
+                  "concept": "`cp` preserves the source; `mv` relocates or renames it.",
+                  "hint_1": "Read source and destination paths from left to right.",
+                  "hint_2": "Verify both the old and new locations after the operation."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Rename the approved schedule and verify it.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -197,6 +230,18 @@
                 },
                 "starterFiles": {
                   "schedule_desk_schedule_draft_txt": {
+                    "content": "Opening: 9:00\nWorkshop: 10:30\n"
+                  },
+                  "main_sh": {
+                    "content": "# Rename the approved schedule and verify it.\n"
+                  }
+                },
+                "solutionCode": "mv schedule-draft.txt schedule-final.txt\nls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mv schedule-draft.txt schedule-final.txt\nls\n"
+                  },
+                  "schedule_desk_schedule_final_txt": {
                     "content": "Opening: 9:00\nWorkshop: 10:30\n"
                   }
                 }
@@ -224,16 +269,16 @@
       "linux-module-2-files-and-folders": {
         "copy-move-rename": {
           "copy-with-cp": {
-            "title": "Use `cp` when you need a backup",
-            "bodyMarkdown": "`cp` creates a second file while leaving the source in place. The command shape is `cp source destination`.\n\n```bash\ncp itinerary.txt backups/itinerary.txt\n```\n\nAfterward, both paths should exist. This is the right choice when you need a backup or another team needs its own copy. A reversed source and destination can overwrite the wrong file, so inspect both folders first and verify both names after the command."
+            "title": "Copy a File with `cp`",
+            "bodyMarkdown": "`cp source destination` creates another file while keeping the source in place.\n\n```bash\ncp itinerary.txt backups/itinerary.txt\n```\n\nVerify that both source and destination exist afterward."
           },
           "move-with-mv": {
-            "title": "Use `mv` to move a file",
-            "bodyMarkdown": "`mv` relocates a file. The source disappears from its old location and appears at the destination.\n\n```bash\nmv camera-notes.txt photo-archive/camera-notes.txt\n```\n\nThe destination folder must already exist. Inspect the source and destination before moving, then list both afterward. If the old path still exists, the move did not happen as expected; if the destination name was wrong, the file may have been renamed accidentally."
+            "title": "Move a File with `mv`",
+            "bodyMarkdown": "`mv source destination` relocates a file. After a successful move, the old path is gone and the destination path exists."
           },
           "rename-with-mv": {
-            "title": "Use `mv` to rename a file",
-            "bodyMarkdown": "`mv` also renames a file when the destination is a new name in the same folder.\n\n```bash\nmv recipe-draft.txt recipe-final.txt\n```\n\nThe file content stays the same, but the old name is replaced by the new one. Choose the final name deliberately and check whether it already exists before running the command. A rename is still a move, so verify that the old path is gone and the new path is present."
+            "title": "Rename a File with `mv`",
+            "bodyMarkdown": "`mv` also renames a file when the destination is a different name in the same directory.\n\n```bash\nmv draft.txt final.txt\n```"
           }
         }
       }

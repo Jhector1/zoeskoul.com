@@ -12,9 +12,6 @@
             "sketch1": {
               "title": "`ls` shows what is nearby"
             },
-            "sketch2": {
-              "title": "Use `pwd` and `ls` as a pair"
-            },
             "quiz": {
               "title": "Practice check"
             }
@@ -69,18 +66,18 @@
               }
             },
             "dr-safe-check-order": {
-              "title": "A safe first check",
-              "prompt": "Put the safe first-check routine in order.",
-              "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+              "title": "Orient before choosing an action",
+              "prompt": "Put this safe orientation routine in order.",
+              "hint": "Establish location first, inspect the folder second, then decide what should happen next.",
               "help": {
-                "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
-                "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: Put the safe first-check routine in order."
+                "concept": "Orientation establishes context before a modifying command is chosen.",
+                "hint_1": "First determine the working directory.",
+                "hint_2": "Then inspect its contents before deciding what to do."
               },
               "tokens": {
-                "t1": "Type `pwd`",
-                "t2": "Type `ls`",
-                "t3": "Choose the next command"
+                "t1": "Run `pwd` to confirm the current location",
+                "t2": "Run `ls` to inspect the current folder",
+                "t3": "Read both results before choosing the next action"
               }
             }
           },
@@ -88,15 +85,15 @@
             "allowReveal": true,
             "exercises": {
               "where-am-i-try-it-1": {
-                "title": "Confirm the newsroom location",
-                "prompt": "The editor opened a newsroom workspace for you. Type `pwd` to confirm its full path. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                "title": "Try It: Confirm the Newsroom Path",
+                "prompt": "Before you do anything else in this workspace, run `pwd` and use the output to identify your current folder.",
+                "hint": "Use the command that prints the current working directory.",
                 "help": {
-                  "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
-                  "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                  "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: The editor opened a newsroom workspace for you. Type `pwd` to confirm its full path."
+                  "concept": "The current path tells you where relative paths will begin.",
+                  "hint_1": "You do not need to move anywhere.",
+                  "hint_2": "Read the full path from the terminal result."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Confirm the current newsroom location.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -121,19 +118,31 @@
                 "starterFiles": {
                   "newsroom_assignment_txt": {
                     "content": "Draft the Saturday update\n"
+                  },
+                  "main_sh": {
+                    "content": "# Confirm the current newsroom location.\n"
+                  }
+                },
+                "solutionCode": "pwd\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "pwd\n"
+                  },
+                  "newsroom_assignment_txt": {
+                    "content": "Draft the Saturday update\n"
                   }
                 }
               },
               "where-am-i-try-it-2": {
-                "title": "See what is on the art table",
-                "prompt": "You are at the art table. Type `ls` to see which supply notes are waiting here. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                "title": "Practice: Inspect the Art Table",
+                "prompt": "Check what files and folders are in your current location. This is an inspection task, so leave the workspace unchanged.",
+                "hint": "Use the directory-inspection command you practiced earlier.",
                 "help": {
-                  "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
-                  "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                  "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: You are at the art table. Type `ls` to see which supply notes are waiting here."
+                  "concept": "Listing a directory lets you verify what is available before you reference a file by name.",
+                  "hint_1": "Stay in the current folder.",
+                  "hint_2": "Only inspect its contents."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Inspect the current art-table folder.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -161,49 +170,21 @@
                   },
                   "art_table_paint_list_txt": {
                     "content": "Blue\nYellow\n"
-                  }
-                }
-              },
-              "where-am-i-try-it-3": {
-                "title": "Orient yourself at the event desk",
-                "prompt": "Before touching the event desk files, type `pwd` and then `ls`. Read both results. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                "help": {
-                  "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
-                  "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
-                  "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: Before touching the event desk files, type `pwd` and then `ls`. Read both results."
-                },
-                "starterCode": "# Use the terminal for this task.",
-                "terminalExpectations": {
-                  "requiredCommands": {
-                    "0": {
-                      "message": "Use `pwd` to confirm the event desk path."
-                    },
-                    "1": {
-                      "message": "Use `ls` to inspect the event desk."
-                    }
                   },
-                  "forbiddenCommands": {
-                    "0": {
-                      "message": "Do not use sudo in this beginner workspace."
-                    },
-                    "1": {
-                      "message": "Do not use recursive rm in this course."
-                    },
-                    "2": {
-                      "message": "Permissions commands are not needed for this workspace."
-                    },
-                    "3": {
-                      "message": "Do not download anything for this exercise."
-                    }
+                  "main_sh": {
+                    "content": "# Inspect the current art-table folder.\n"
                   }
                 },
-                "starterFiles": {
-                  "event_desk_run_sheet_txt": {
-                    "content": "Doors open at 6:00\n"
+                "solutionCode": "ls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "ls\n"
                   },
-                  "event_desk_contact_txt": {
-                    "content": "Call the coordinator\n"
+                  "art_table_brushes_txt": {
+                    "content": "Small brush\nLarge brush\n"
+                  },
+                  "art_table_paint_list_txt": {
+                    "content": "Blue\nYellow\n"
                   }
                 }
               }
@@ -215,10 +196,6 @@
             "try_where_am_i_sketch1": {
               "title": "See what is on the art table",
               "prompt": "List the art table files. Press **Enter** to run the command."
-            },
-            "try_where_am_i_sketch2": {
-              "title": "Orient yourself at the event desk",
-              "prompt": "Check the event desk before editing. Press **Enter** after each command."
             }
           }
         }
@@ -230,16 +207,12 @@
       "linux-module-1-terminal-navigation": {
         "where-am-i": {
           "pwd-current-folder": {
-            "title": "`pwd` shows your current folder",
-            "bodyMarkdown": "Every terminal command runs from a current directory—the folder where the terminal is presently working. `pwd` means **print working directory** and shows the full path to that location.\n\n```bash\npwd\n```\n\nPossible output:\n\n```text\n/workspace/newsletter\n```\n\nThat path tells you that a relative name such as `drafts` will be interpreted from `/workspace/newsletter`. If the path is not where you expected, do not compensate with guesses. Navigate deliberately, run `pwd` again, and continue only after the location makes sense."
+            "title": "Know Your Current Folder",
+            "bodyMarkdown": "`pwd` prints the full path of the directory where the terminal is currently working."
           },
           "ls-current-folder": {
-            "title": "`ls` shows what is nearby",
-            "bodyMarkdown": "After confirming your location, `ls` answers the next question: **what is in this folder?**\n\n```bash\nls\n```\n\nA newsroom folder might show:\n\n```text\nassignments  photos  schedule.txt\n```\n\n`ls` reports names; it does not open files or move into folders. A name without an extension can be a folder, while a name such as `schedule.txt` is usually a file. When a task mentions a path, compare its first part with the names shown by `ls` before typing the next command."
-          },
-          "pwd-ls-habit": {
-            "title": "Use `pwd` and `ls` as a pair",
-            "bodyMarkdown": "Strong terminal work follows a small loop: **locate, inspect, act, verify**. At the beginning of a task, run `pwd` and `ls`. After a navigation command, run them again.\n\n```bash\npwd\nls\n# choose the next command\npwd\nls\n```\n\nThis may feel slower than immediately typing the command you remember, but it prevents the most common beginner error: changing the wrong folder. As the course introduces file operations, keep this inspection loop around every change. The commands will become more powerful, but the safety habit should stay simple."
+            "title": "Inspect the Current Folder",
+            "bodyMarkdown": "`ls` lists the names available in the current directory so you can inspect a location before acting."
           }
         }
       }

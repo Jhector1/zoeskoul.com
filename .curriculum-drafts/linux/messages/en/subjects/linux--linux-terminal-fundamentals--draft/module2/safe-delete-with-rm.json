@@ -6,9 +6,6 @@
           "label": "Safe Delete with rm",
           "summary": "Remove only clear temporary files, and learn when moving to trash is safer than deleting.",
           "cards": {
-            "sketch0": {
-              "title": "Check before deleting"
-            },
             "sketch1": {
               "title": "Remove one file with `rm`"
             },
@@ -38,34 +35,34 @@
             },
             "mc-rm-safety": {
               "title": "Safe delete habits",
-              "prompt": "Which habits make deletion safer?",
-              "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
+              "prompt": "Which habits make deletion of one confirmed temporary file safer?",
+              "hint": "Inspect first, target one exact file, and verify afterward.",
               "help": {
                 "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
                 "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
                 "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: Which habits make deletion safer?"
               },
               "options": {
-                "a": "Use `ls` first",
-                "b": "Delete only the exact temporary file",
+                "a": "Use `ls` before deleting",
+                "b": "Delete only the exact confirmed temporary file",
                 "c": "Use `rm -rf` when unsure",
-                "d": "Keep important files out of the command"
+                "d": "List again after deletion to verify the result"
               }
             },
             "sc-uncertain-file": {
-              "title": "When you are unsure",
+              "title": "When deletion is uncertain",
               "prompt": "What is safer when you are not sure a file should be deleted?",
-              "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
+              "hint": "Choose the action that keeps the file recoverable for review.",
               "help": {
                 "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
                 "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
                 "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: What is safer when you are not sure a file should be deleted?"
               },
               "options": {
-                "a": "Move it to a trash/archive folder",
+                "a": "Move it to a review or archive folder",
                 "b": "Use sudo rm -rf",
                 "c": "Delete the whole folder",
-                "d": "Ignore all file names"
+                "d": "Ignore the filename and delete anyway"
               }
             },
             "dr-safe-delete-flow": {
@@ -87,56 +84,16 @@
           "tryIt": {
             "allowReveal": true,
             "exercises": {
-              "safe-delete-with-rm-try-it-1": {
-                "title": "Inspect the print room first",
-                "prompt": "The print room has a test page and an event plan. Type `ls` first so you can read both names before deciding what is temporary. After typing the command, press **Enter** so the terminal runs it.",
-                "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
-                "help": {
-                  "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
-                  "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
-                  "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: The print room has a test page and an event plan. Type `ls` first so you can read both names before deciding what is temporary."
-                },
-                "starterCode": "# Use the terminal for this task.",
-                "terminalExpectations": {
-                  "requiredCommands": {
-                    "0": {
-                      "message": "Use `ls` to inspect the print room first."
-                    }
-                  },
-                  "forbiddenCommands": {
-                    "0": {
-                      "message": "Do not use sudo in this beginner workspace."
-                    },
-                    "1": {
-                      "message": "Do not use recursive rm in this course."
-                    },
-                    "2": {
-                      "message": "Permissions commands are not needed for this workspace."
-                    },
-                    "3": {
-                      "message": "Do not download anything for this exercise."
-                    }
-                  }
-                },
-                "starterFiles": {
-                  "print_room_print_test_txt": {
-                    "content": "Printer alignment test\n"
-                  },
-                  "print_room_event_plan_txt": {
-                    "content": "Keep this event plan\n"
-                  }
-                }
-              },
               "safe-delete-with-rm-try-it-2": {
-                "title": "Remove one temporary label",
-                "prompt": "Remove only `temp-label.txt`, then type `ls` to confirm `display-plan.txt` is still there. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
+                "title": "Try It: Remove One Confirmed Temporary File",
+                "prompt": "The cleanup desk contains `temp-label.txt` and `display-plan.txt`. Use `rm` to remove only the temporary label, then check the folder and make sure `display-plan.txt` is still there.",
+                "hint": "Name only the confirmed temporary file in the delete command.",
                 "help": {
-                  "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
-                  "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
-                  "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: Remove only `temp-label.txt`, then type `ls` to confirm `display-plan.txt` is still there."
+                  "concept": "`rm` permanently removes the named file in this workspace.",
+                  "hint_1": "Delete only when the exact temporary target is known.",
+                  "hint_2": "If uncertain, preserve the file in a review location instead."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Remove only the confirmed temporary file.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -167,19 +124,31 @@
                   },
                   "cleanup_desk_display_plan_txt": {
                     "content": "Keep the display plan\n"
+                  },
+                  "main_sh": {
+                    "content": "# Remove only the confirmed temporary file.\n"
+                  }
+                },
+                "solutionCode": "rm temp-label.txt\nls\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "rm temp-label.txt\nls\n"
+                  },
+                  "cleanup_desk_display_plan_txt": {
+                    "content": "Keep the display plan\n"
                   }
                 }
               },
               "safe-delete-with-rm-try-it-3": {
-                "title": "Set aside an uncertain note",
-                "prompt": "You are not sure whether `maybe-archive.txt` can be deleted. Create `review-later`, move the file into it, and list that folder. Press **Enter** after each command and wait for its result before typing the next one.",
-                "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
+                "title": "Practice: Preserve an Uncertain File",
+                "prompt": "You are not sure whether `maybe-archive.txt` can be deleted. Keep it instead: create a `review-later` folder, move the file there, and verify its new location.",
+                "hint": "Preserve uncertain work instead of deleting it.",
                 "help": {
-                  "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
-                  "hint_1": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
-                  "hint_2": "After deletion, list the folder and confirm that the protected files remain. The current task asks: You are not sure whether `maybe-archive.txt` can be deleted. Create `review-later`, move the file into it, and list that folder."
+                  "concept": "`rm` permanently removes the named file in this workspace.",
+                  "hint_1": "Delete only when the exact temporary target is known.",
+                  "hint_2": "If uncertain, preserve the file in a review location instead."
                 },
-                "starterCode": "# Use the terminal for this task.",
+                "starterCode": "# Preserve the uncertain file in a review location.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -207,13 +176,21 @@
                 "starterFiles": {
                   "archive_review_maybe_archive_txt": {
                     "content": "Needs coordinator review\n"
+                  },
+                  "main_sh": {
+                    "content": "# Preserve the uncertain file in a review location.\n"
+                  }
+                },
+                "solutionCode": "mkdir -p review-later\nmv maybe-archive.txt review-later/maybe-archive.txt\nls review-later\n",
+                "solutionFiles": {
+                  "main_sh": {
+                    "content": "mkdir -p review-later\nmv maybe-archive.txt review-later/maybe-archive.txt\nls review-later\n"
+                  },
+                  "archive_review_review_later_maybe_archive_txt": {
+                    "content": "Needs coordinator review\n"
                   }
                 }
               }
-            },
-            "try_safe_delete_with_rm_sketch0": {
-              "title": "Inspect the print room first",
-              "prompt": "List a new folder before removing anything. Press **Enter** to run the command."
             },
             "try_safe_delete_with_rm_sketch1": {
               "title": "Remove one temporary label",
@@ -232,17 +209,13 @@
     "linux--linux-terminal-fundamentals--draft": {
       "linux-module-2-files-and-folders": {
         "safe-delete-with-rm": {
-          "check-before-rm": {
-            "title": "Check before deleting",
-            "bodyMarkdown": "`rm` permanently removes a file from the course workspace. It does not move the file to a recycle bin, so deletion begins with inspection.\n\n```bash\nls print-room\ncat print-room/test-page.txt\n```\n\nConfirm that the path is temporary and that a similarly named important file should remain. In this course, delete only the exact file named by the task. Never add recursive flags or broad wildcards to “make it work.”"
-          },
           "rm-one-file": {
-            "title": "Remove one file with `rm`",
-            "bodyMarkdown": "To delete one known temporary file, use `rm` followed by its exact path.\n\n```bash\nrm downloads/tmp-preview.txt\nls downloads\n```\n\nA successful `rm` command is often silent, which makes the final `ls` essential. If the terminal says the file does not exist, stop and inspect instead of changing the path blindly. Course tasks forbid `rm -rf` because it can remove whole directory trees with too little feedback."
+            "title": "Delete One Exact File Safely",
+            "bodyMarkdown": "Before `rm`, inspect the directory and confirm the exact temporary filename. Then remove only that file and list the directory again to verify the result.\n\nAvoid recursive flags and broad wildcards in this course."
           },
           "move-to-trash-alternative": {
-            "title": "When unsure, move instead of delete",
-            "bodyMarkdown": "When you are unsure whether a file is disposable, do not delete it. Create a review or archive folder and move the file there.\n\n```bash\nmkdir -p review-later\nmv old-outline.txt review-later/old-outline.txt\n```\n\nThe original location becomes cleaner, but the file remains recoverable. This is a better choice for drafts, uncertain duplicates, or work another person may still need. Deletion should be the result of certainty, not the first response to clutter."
+            "title": "When Unsure, Move to Review",
+            "bodyMarkdown": "If you are not certain a file should be deleted, preserve it. Create a review or archive directory and move the file there instead. Delete only when the target is known to be disposable."
           }
         }
       }

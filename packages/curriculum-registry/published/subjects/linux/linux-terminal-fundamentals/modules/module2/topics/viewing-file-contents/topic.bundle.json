@@ -189,7 +189,7 @@
     {
       "id": "viewing-file-contents-try-it-1",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1",
       "language": "bash",
@@ -197,28 +197,28 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "visitor-desk/welcome-note.txt",
-          "content": "Welcome table opens at 9:00.\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.visitor_desk_welcome_note_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "cat welcome-note.txt\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "visitor-desk/welcome-note.txt",
-          "content": "Welcome table opens at 9:00.\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.solutionFiles.visitor_desk_welcome_note_txt.content",
           "language": "bash"
         }
       ],
@@ -261,14 +261,14 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "visitor-desk/welcome-note.txt",
-            "content": "Welcome table opens at 9:00.\n",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.visitor_desk_welcome_note_txt.content",
             "language": "bash"
           }
         ],
@@ -285,7 +285,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -313,7 +313,7 @@
     {
       "id": "viewing-file-contents-try-it-2",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2",
       "language": "bash",
@@ -321,28 +321,28 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "dispatch/delivery-log.txt",
-          "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.dispatch_delivery_log_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "head delivery-log.txt\ntail delivery-log.txt\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "dispatch/delivery-log.txt",
-          "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Signs arrived\n09:10 Water arrived\n09:30 Radios arrived\n10:00 Lunch arrived\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.solutionFiles.dispatch_delivery_log_txt.content",
           "language": "bash"
         }
       ],
@@ -389,14 +389,14 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "dispatch/delivery-log.txt",
-            "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.dispatch_delivery_log_txt.content",
             "language": "bash"
           }
         ],
@@ -413,7 +413,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
@@ -441,7 +441,7 @@
     {
       "id": "viewing-file-contents-try-it-3",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3",
       "language": "bash",
@@ -449,28 +449,28 @@
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "kitchen/meal-requests.txt",
-          "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.kitchen_meal_requests_txt.content",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "wc -l meal-requests.txt\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.solutionFiles.main_sh.content",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "kitchen/meal-requests.txt",
-          "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.solutionFiles.kitchen_meal_requests_txt.content",
           "language": "bash"
         }
       ],
@@ -513,14 +513,14 @@
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.main_sh.content",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "kitchen/meal-requests.txt",
-            "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.kitchen_meal_requests_txt.content",
             "language": "bash"
           }
         ],
@@ -537,7 +537,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
