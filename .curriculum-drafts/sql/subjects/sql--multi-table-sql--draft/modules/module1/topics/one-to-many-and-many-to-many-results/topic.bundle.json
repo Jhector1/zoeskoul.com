@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-one-to-many-and-many-to-many-results-sketch1",
-        "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.title",
-        "promptKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.prompt",
-        "exerciseKey": "try-one-to-many-and-many-to-many-results-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -95,7 +83,7 @@
     {
       "id": "try-one-to-many-and-many-to-many-results-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch0",
       "language": "sql",
@@ -139,7 +127,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT courses.id AS course_id,\n       departments.name AS department_name\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -151,16 +139,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-one-to-many-and-many-to-many-results-sketch1",
+      "id": "practice-preserve-one-row-per-enrollment",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1",
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment",
       "language": "sql",
-      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.starterCode",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -177,11 +166,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.starterCode",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.starterCode",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -200,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.grade_level,\n       courses.title AS course_title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY enrollments.id;",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -212,7 +201,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-1",

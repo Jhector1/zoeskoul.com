@@ -20,27 +20,15 @@
             "allowReveal": true,
             "try_table_aliases_for_join_queries_sketch0": {
               "title": "Shorten a Course-to-Department Join",
-              "prompt": "Use `c` and `d` as table aliases to return each course title with its department name. Return `c.title AS course_title, d.name AS department_name` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `c.department_id = d.id`. Sort the final result by `c.title`.",
-              "hint": "Declare each alias beside its table, then use the same aliases in `SELECT` and `ON`.",
+              "prompt": "Use `c` for `courses` and `d` for `departments`. Return the course title as `course_title` and department name as `department_name`, then sort by course title. Use the aliases consistently throughout the query.",
+              "hint": "Declare each short table name once, then use it for both selected columns and the relationship condition.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `departments` on `c.department_id = d.id`. Sort the final result by `c.title`."
+                "concept": "Table aliases shorten qualifications without changing the underlying relationship.",
+                "hint_1": "`c` should always refer to `courses`.",
+                "hint_2": "`d` should always refer to `departments`."
               },
               "starterCode": "-- Use short, consistent aliases for two related tables\n",
               "solutionCode": "SELECT c.title AS course_title,\n       d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d\n  ON c.department_id = d.id\nORDER BY c.title;\n"
-            },
-            "try_table_aliases_for_join_queries_sketch1": {
-              "title": "Keep Student and Enrollment Aliases Consistent",
-              "prompt": "Use `s` and `e` as aliases to return student name, enrollment term, and course id. Return `s.name AS student_name, e.term AS enrollment_term, e.course_id` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`. Sort the final result by `s.name, e.course_id`.",
-              "hint": "Every qualified column should begin with either `s.` or `e.` after the aliases are declared.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`. Sort the final result by `s.name, e.course_id`."
-              },
-              "starterCode": "-- Build a concise two-table student enrollment query\n",
-              "solutionCode": "SELECT s.name AS student_name,\n       e.term AS enrollment_term,\n       e.course_id\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id\nORDER BY s.name, e.course_id;\n"
             }
           },
           "practice": {
@@ -140,6 +128,18 @@
                 "WITH",
                 "BY"
               ]
+            },
+            "practice-student-enrollment-aliases": {
+              "title": "Practice: Keep Student and Enrollment Aliases Consistent",
+              "prompt": "Use `s` for `students` and `e` for `enrollments`. Return student name as `student_name`, enrollment term as `enrollment_term`, and course id. Sort by student name and then course id, using the aliases consistently throughout the query.",
+              "hint": "Once a short table name is declared, keep using that same name anywhere the table is referenced.",
+              "help": {
+                "concept": "Consistent aliases make a join path easier to scan without changing query behavior.",
+                "hint_1": "`s` represents the student table.",
+                "hint_2": "`e` represents the enrollment table."
+              },
+              "starterCode": "-- Build a concise two-table student enrollment query\n",
+              "solutionCode": "SELECT s.name AS student_name,\n       e.term AS enrollment_term,\n       e.course_id\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id\nORDER BY s.name, e.course_id;\n"
             }
           }
         }

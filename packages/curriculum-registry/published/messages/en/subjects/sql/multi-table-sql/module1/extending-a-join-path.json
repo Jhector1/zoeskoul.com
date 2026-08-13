@@ -19,9 +19,9 @@
           "tryIt": {
             "allowReveal": true,
             "try_extending_a_join_path_sketch0": {
-              "title": "Try Extending the Path to a Department ID",
-              "prompt": "Extend the student-to-course join path so each row also includes the id of the department that owns the course. Return `students.name, courses.title, departments.id AS department_id` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`.",
-              "hint": "Continue from `courses.department_id` to the matching department row.",
+              "title": "Extend an Enrollment Path to Departments",
+              "prompt": "Starting from students, build one row per enrollment with student name, course title, and the id of the department that owns the course displayed as `department_id`. Follow every documented relationship between those tables.",
+              "hint": "Reach the course through the enrollment first. The course then provides the key needed for the final department link.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29,18 +29,6 @@
               },
               "starterCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\n-- Add the departments table join here",
               "solutionCode": "SELECT students.name,\n       courses.title,\n       departments.id AS department_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id;"
-            },
-            "try_extending_a_join_path_sketch1": {
-              "title": "Try It: Include Term Information",
-              "prompt": "Modify the query to also include the term information for each enrollment. Return `students.name, courses.title, departments.name AS department_name, enrollments.term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`.",
-              "hint": "Add one verified relationship at a time.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`."
-              },
-              "starterCode": "SELECT students.name, courses.title, departments.name AS department_name\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id\n-- Add term information to the SELECT clause",
-              "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;"
             }
           },
           "practice": {
@@ -141,6 +129,18 @@
                 "students.term",
                 "departments.term"
               ]
+            },
+            "practice-extend-path-with-enrollment-term": {
+              "title": "Practice: Extend the Full Path with Enrollment Term",
+              "prompt": "Return one row per enrollment containing student name, course title, department name displayed as `department_name`, and the enrollment term. Follow the complete relationship path from students through the bridge and course to departments.",
+              "hint": "The term belongs to the relationship record itself, while the department is reached through the course.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;"
             }
           }
         }

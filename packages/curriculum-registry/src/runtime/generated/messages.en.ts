@@ -24447,28 +24447,16 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_inner_join_with_on_sketch0": {
-              "title": "Try INNER JOIN with Enrollment Records",
-              "prompt": "Write a query that lists each enrollment id beside the grade level of the student who owns it. Return `enrollments.id, students.grade_level` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`.",
-              "hint": "Start from `enrollments.student_id` and follow it to the matching student row.",
+              "title": "Connect Enrollments to Their Students",
+              "prompt": "Return each enrollment id beside the grade level of the student who owns that enrollment. Start from `enrollments`, connect each row to its matching student, and return the enrollment id first and student grade level second.",
+              "hint": "Follow the foreign key stored on an enrollment to the student primary key it references.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `enrollments.id, students.grade_level` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`."
+                "concept": "An inner join keeps the matched enrollment-student pairs defined by the schema relationship.",
+                "hint_1": "`enrollments.student_id` points to a student.",
+                "hint_2": "The matching student key is `students.id`."
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT enrollments.id, students.grade_level\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id;"
-            },
-            "try_inner_join_with_on_sketch1": {
-              "title": "Try INNER JOIN from Departments to Courses",
-              "prompt": "Write a query that lists each department name beside the id of a course in that department. Return `departments.name, courses.id` from `departments` in that column order. Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`.",
-              "hint": "Follow the relationship from `departments.id` to the foreign key stored in `courses`.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `departments.name, courses.id` from `departments` in that column order. Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id;"
             }
           },
           "practice": {
@@ -24568,6 +24556,18 @@ const messages: Record<string, any> = {
                 "c": "To specify which table a column belongs to.",
                 "d": "To automatically join tables without an ON condition."
               }
+            },
+            "practice-connect-departments-to-courses": {
+              "title": "Practice: Connect Departments to Courses",
+              "prompt": "Return each department name beside the id of a course that belongs to it. Start from `departments`, connect matching course rows, and return department name first and course id second.",
+              "hint": "Follow the department primary key to the department foreign key stored on each course.",
+              "help": {
+                "concept": "A reliable join condition follows the documented primary-key/foreign-key relationship.",
+                "hint_1": "`departments.id` identifies one department.",
+                "hint_2": "`courses.department_id` records which department owns a course."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id;"
             }
           }
         },
@@ -24603,8 +24603,8 @@ const messages: Record<string, any> = {
             "steps": {
               "step1": {
                 "title": "Connect Students to Enrollment Records",
-                "prompt": "Begin the Module 0 Student Enrollment Roster. Return `students.id, students.name, enrollments.id, enrollments.course_id, enrollments.term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`.",
-                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "prompt": "Start the Student Enrollment Roster with one row per enrollment. Return the student id, student name, enrollment id, course id, and enrollment term in that order. Connect each student to the enrollment rows that belong to that student.",
+                "hint": "The roster grain is one enrollment, so students may repeat when they have several enrollment records.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -24614,15 +24614,15 @@ const messages: Record<string, any> = {
                 "solutionCode": "SELECT \n  students.id, \n  students.name, \n  enrollments.id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;"
               },
               "step2": {
-                "title": "Step 2: Give Duplicate IDs Clear Output Headings",
-                "prompt": "Extend the Module 0 Student Enrollment Roster with the next approved requirement. Return `students.id AS student_id, students.name, enrollments.id AS enrollment_id, enrollments.course_id, enrollments.term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`.",
-                "hint": "Change only the naming requirement for this step; keep the relationship and selected data intact.",
+                "title": "Give Duplicate IDs Clear Output Headings",
+                "prompt": "Carry the roster forward. Rename the displayed student id to `student_id` and the displayed enrollment id to `enrollment_id`. Preserve the same rows, relationship, column order, and all other values.",
+                "hint": "This step changes result headings only; it does not change which records are joined.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Return `students.id AS student_id, students.name, enrollments.id AS enrollment_id, enrollments.course_id, enrollments.term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`."
                 },
-                "starterCode": "SELECT \n  students.id, \n  students.name, \n  enrollments.id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n-- Project step 2: Qualify Every Shared Identifier\n-- Keep the working code above from the previous step.\n-- Next, Keep the same rows and qualify every selected id column with its table name or alias\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT \n  students.id, \n  students.name, \n  enrollments.id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;",
                 "solutionCode": "SELECT \n  students.id AS student_id, \n  students.name, \n  enrollments.id AS enrollment_id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n",
                 "starterFiles": {
                   "main_py": {
@@ -24636,15 +24636,15 @@ const messages: Record<string, any> = {
                 }
               },
               "step3": {
-                "title": "Step 3: Shorten the Query with Table Aliases",
-                "prompt": "Extend the Module 0 Student Enrollment Roster with the next approved requirement. Return `s.id AS student_id, s.name, e.id AS enrollment_id, e.course_id AS course_id, e.term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`.",
-                "hint": "Change only the naming requirement for this step; keep the relationship and selected data intact.",
+                "title": "Shorten the Query with Table Aliases",
+                "prompt": "Carry the roster forward using `s` for `students` and `e` for `enrollments`. Preserve the existing output and relationship. Also display the course id as `course_id`.",
+                "hint": "Replace the repeated table names consistently from the selected columns through the relationship condition.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Return `s.id AS student_id, s.name, e.id AS enrollment_id, e.course_id AS course_id, e.term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`."
                 },
-                "starterCode": "SELECT \n  students.id AS student_id, \n  students.name, \n  enrollments.id AS enrollment_id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n-- Project step 3: Add Readable Table and Column Aliases\n-- Keep the working code above from the previous step.\n-- Next, Use concise table aliases and rename the displayed identifiers as student_id, enrollment_id, and course_id\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT \n  students.id AS student_id, \n  students.name, \n  enrollments.id AS enrollment_id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;\n",
                 "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id;\n",
                 "starterFiles": {
                   "main_py": {
@@ -24659,14 +24659,14 @@ const messages: Record<string, any> = {
               },
               "step4": {
                 "title": "Focus on Upper Grade Levels",
-                "prompt": "Extend the Module 0 Student Enrollment Roster with the next approved requirement. Return `s.id AS student_id, s.name, e.id AS enrollment_id, e.course_id AS course_id, e.term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`. Keep only rows where `s.grade_level >= 10`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Carry the roster forward and keep only enrollments owned by students in grade level 10 or higher. Preserve every existing output column and the current join.",
+                "hint": "Apply the new row filter without changing the roster grain.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`. Keep only rows where `s.grade_level >= 10`."
                 },
-                "starterCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id;\n-- Project step 4: Focus on Upper Grade Levels\n-- Keep the working code above from the previous step.\n-- Next, Keep the complete joined roster and include only students in grade level 10 or higher\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id;\n",
                 "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10;\n",
                 "starterFiles": {
                   "main_py": {
@@ -24681,14 +24681,14 @@ const messages: Record<string, any> = {
               },
               "step5": {
                 "title": "Order the Roster Predictably",
-                "prompt": "Complete the Module 0 Student Enrollment Roster. Return `s.id AS student_id, s.name, e.id AS enrollment_id, e.course_id AS course_id, e.term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`. Keep only rows where `s.grade_level >= 10`. Sort the final result by `s.name ASC, e.course_id ASC`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Complete the roster by sorting students alphabetically by name and then sorting each student's rows by course id. Preserve the existing join, aliases, selected columns, and grade-level filter.",
+                "hint": "Use student name as the primary ordering rule and course id as the secondary rule.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Keep only rows where `s.grade_level >= 10`. Sort the final result by `s.name ASC, e.course_id ASC`."
                 },
-                "starterCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10;\n-- Project step 5: Order the Roster Predictably\n-- Keep the working code above from the previous step.\n-- Next, Sort by student name ascending, then course_id ascending, while preserving the complete query\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10;\n",
                 "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10 \nORDER BY s.name ASC, e.course_id ASC;\n",
                 "starterFiles": {
                   "main_py": {
@@ -24722,27 +24722,15 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_qualifying_columns_across_tables_sketch0": {
               "title": "Disambiguate Enrollment and Student Columns",
-              "prompt": "Return `enrollments.id AS enrollment_id, students.name AS student_name, enrollments.term` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `enrollments.id`.",
-              "hint": "Start from `enrollments`, then follow `student_id` to `students.id`.",
+              "prompt": "Build an enrollment-to-student result with three columns: the enrollment id displayed as `enrollment_id`, the student name displayed as `student_name`, and the enrollment term. Qualify every selected column with its source table and sort by enrollment id.",
+              "hint": "Qualification answers where a value comes from; output aliases answer what the result heading should say.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `enrollments.id`."
+                "concept": "Qualified columns remove ambiguity when several joined tables contain similarly named fields.",
+                "hint_1": "The enrollment identifier and term come from `enrollments`.",
+                "hint_2": "The student's name comes from `students`."
               },
               "starterCode": "-- Return a readable enrollment-to-student result\n",
               "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.name AS student_name,\n       enrollments.term\nFROM enrollments\nINNER JOIN students\n  ON enrollments.student_id = students.id\nORDER BY enrollments.id;\n"
-            },
-            "try_qualifying_columns_across_tables_sketch1": {
-              "title": "Disambiguate Course and Department Columns",
-              "prompt": "Return `courses.id AS course_id, courses.title AS course_title, departments.name AS department_name` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `courses.id`.",
-              "hint": "The relationship is `courses.department_id = departments.id`.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `courses.id`."
-              },
-              "starterCode": "-- Return a readable course-to-department result\n",
-              "solutionCode": "SELECT courses.id AS course_id,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id\nORDER BY courses.id;\n"
             }
           },
           "practice": {
@@ -24843,6 +24831,18 @@ const messages: Record<string, any> = {
                 "IN",
                 "ON"
               ]
+            },
+            "practice-qualify-course-department-columns": {
+              "title": "Practice: Qualify Course and Department Columns",
+              "prompt": "Build a course-to-department result containing the course id as `course_id`, course title as `course_title`, and department name as `department_name`. Qualify every selected column with its source table and sort by course id.",
+              "hint": "Keep source qualification and displayed output names as two separate decisions.",
+              "help": {
+                "concept": "Qualification identifies a source table while an output alias labels the displayed result.",
+                "hint_1": "Course id and title come from `courses`.",
+                "hint_2": "Department name comes from `departments`."
+              },
+              "starterCode": "-- Return a readable course-to-department result\n",
+              "solutionCode": "SELECT courses.id AS course_id,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id\nORDER BY courses.id;\n"
             }
           }
         },
@@ -24978,27 +24978,15 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_table_aliases_for_join_queries_sketch0": {
               "title": "Shorten a Course-to-Department Join",
-              "prompt": "Use `c` and `d` as table aliases to return each course title with its department name. Return `c.title AS course_title, d.name AS department_name` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `c.department_id = d.id`. Sort the final result by `c.title`.",
-              "hint": "Declare each alias beside its table, then use the same aliases in `SELECT` and `ON`.",
+              "prompt": "Use `c` for `courses` and `d` for `departments`. Return the course title as `course_title` and department name as `department_name`, then sort by course title. Use the aliases consistently throughout the query.",
+              "hint": "Declare each short table name once, then use it for both selected columns and the relationship condition.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `departments` on `c.department_id = d.id`. Sort the final result by `c.title`."
+                "concept": "Table aliases shorten qualifications without changing the underlying relationship.",
+                "hint_1": "`c` should always refer to `courses`.",
+                "hint_2": "`d` should always refer to `departments`."
               },
               "starterCode": "-- Use short, consistent aliases for two related tables\n",
               "solutionCode": "SELECT c.title AS course_title,\n       d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d\n  ON c.department_id = d.id\nORDER BY c.title;\n"
-            },
-            "try_table_aliases_for_join_queries_sketch1": {
-              "title": "Keep Student and Enrollment Aliases Consistent",
-              "prompt": "Use `s` and `e` as aliases to return student name, enrollment term, and course id. Return `s.name AS student_name, e.term AS enrollment_term, e.course_id` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`. Sort the final result by `s.name, e.course_id`.",
-              "hint": "Every qualified column should begin with either `s.` or `e.` after the aliases are declared.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `enrollments` on `s.id = e.student_id`. Sort the final result by `s.name, e.course_id`."
-              },
-              "starterCode": "-- Build a concise two-table student enrollment query\n",
-              "solutionCode": "SELECT s.name AS student_name,\n       e.term AS enrollment_term,\n       e.course_id\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id\nORDER BY s.name, e.course_id;\n"
             }
           },
           "practice": {
@@ -25098,6 +25086,18 @@ const messages: Record<string, any> = {
                 "WITH",
                 "BY"
               ]
+            },
+            "practice-student-enrollment-aliases": {
+              "title": "Practice: Keep Student and Enrollment Aliases Consistent",
+              "prompt": "Use `s` for `students` and `e` for `enrollments`. Return student name as `student_name`, enrollment term as `enrollment_term`, and course id. Sort by student name and then course id, using the aliases consistently throughout the query.",
+              "hint": "Once a short table name is declared, keep using that same name anywhere the table is referenced.",
+              "help": {
+                "concept": "Consistent aliases make a join path easier to scan without changing query behavior.",
+                "hint_1": "`s` represents the student table.",
+                "hint_2": "`e` represents the enrollment table."
+              },
+              "starterCode": "-- Build a concise two-table student enrollment query\n",
+              "solutionCode": "SELECT s.name AS student_name,\n       e.term AS enrollment_term,\n       e.course_id\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id\nORDER BY s.name, e.course_id;\n"
             }
           }
         }
@@ -25120,9 +25120,9 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_avoiding_cartesian_and_wrong_key_joins_sketch0": {
-              "title": "Try a Connected Grade-Level Course List",
-              "prompt": "List each enrolled student grade level beside the matching course title without creating a Cartesian product. Return `students.grade_level, courses.title` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `students.grade_level, courses.title`.",
-              "hint": "The bridge table supplies the two key comparisons that prevent unrelated combinations.",
+              "title": "Build a Connected Grade-Level Course List",
+              "prompt": "List the grade level of each enrolled student beside the matching course title. Follow the documented relationship through `enrollments`, keep one row per enrollment, and sort first by grade level and then by course title.",
+              "hint": "Students and courses are not directly related. The bridge contains the student key and course key needed to connect the two sides.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -25130,18 +25130,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "SELECT students.name, courses.title\nFROM students\n-- Complete the JOINs here\n;",
               "solutionCode": "SELECT students.grade_level,\n       courses.title\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY students.grade_level, courses.title;"
-            },
-            "try_avoiding_cartesian_and_wrong_key_joins_sketch1": {
-              "title": "Repair a Wrong-Key Enrollment Audit",
-              "prompt": "Start from `enrollments` and return enrollment id, student name, and course title. Return `e.id AS enrollment_id, s.name AS student_name, c.title AS course_title` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `e.student_id = s.id`. Use a INNER JOIN to connect `courses` on `e.course_id = c.id`. Sort the final result by `e.id`.",
-              "hint": "`student_id` points to `students.id`; `course_id` points to `courses.id`.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `courses` on `e.course_id = c.id`. Sort the final result by `e.id`."
-              },
-              "starterCode": "-- Repair the key path for an enrollment audit\n",
-              "solutionCode": "SELECT e.id AS enrollment_id,\n       s.name AS student_name,\n       c.title AS course_title\nFROM enrollments AS e\nINNER JOIN students AS s\n  ON e.student_id = s.id\nINNER JOIN courses AS c\n  ON e.course_id = c.id\nORDER BY e.id;\n"
             }
           },
           "practice": {
@@ -25241,6 +25229,18 @@ const messages: Record<string, any> = {
                 "enrollments.student_id",
                 "students.id"
               ]
+            },
+            "practice-repair-enrollment-key-path": {
+              "title": "Practice: Repair an Enrollment Key Path",
+              "prompt": "Build an enrollment audit with one row per enrollment. Return the enrollment id as `enrollment_id`, student name as `student_name`, and course title as `course_title`. Connect each enrollment to the student and course it actually references, then sort by enrollment id.",
+              "hint": "Treat the two foreign keys stored on each enrollment as separate documented relationships.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `courses` on `e.course_id = c.id`. Sort the final result by `e.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT e.id AS enrollment_id,\n       s.name AS student_name,\n       c.title AS course_title\nFROM enrollments AS e\nINNER JOIN students AS s\n  ON e.student_id = s.id\nINNER JOIN courses AS c\n  ON e.course_id = c.id\nORDER BY e.id;\n"
             }
           }
         },
@@ -25261,9 +25261,9 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_extending_a_join_path_sketch0": {
-              "title": "Try Extending the Path to a Department ID",
-              "prompt": "Extend the student-to-course join path so each row also includes the id of the department that owns the course. Return `students.name, courses.title, departments.id AS department_id` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`.",
-              "hint": "Continue from `courses.department_id` to the matching department row.",
+              "title": "Extend an Enrollment Path to Departments",
+              "prompt": "Starting from students, build one row per enrollment with student name, course title, and the id of the department that owns the course displayed as `department_id`. Follow every documented relationship between those tables.",
+              "hint": "Reach the course through the enrollment first. The course then provides the key needed for the final department link.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -25271,18 +25271,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\n-- Add the departments table join here",
               "solutionCode": "SELECT students.name,\n       courses.title,\n       departments.id AS department_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id;"
-            },
-            "try_extending_a_join_path_sketch1": {
-              "title": "Try It: Include Term Information",
-              "prompt": "Modify the query to also include the term information for each enrollment. Return `students.name, courses.title, departments.name AS department_name, enrollments.term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`.",
-              "hint": "Add one verified relationship at a time.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`."
-              },
-              "starterCode": "SELECT students.name, courses.title, departments.name AS department_name\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id\n-- Add term information to the SELECT clause",
-              "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;"
             }
           },
           "practice": {
@@ -25383,6 +25371,18 @@ const messages: Record<string, any> = {
                 "students.term",
                 "departments.term"
               ]
+            },
+            "practice-extend-path-with-enrollment-term": {
+              "title": "Practice: Extend the Full Path with Enrollment Term",
+              "prompt": "Return one row per enrollment containing student name, course title, department name displayed as `department_name`, and the enrollment term. Follow the complete relationship path from students through the bridge and course to departments.",
+              "hint": "The term belongs to the relationship record itself, while the department is reached through the course.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;"
             }
           }
         },
@@ -25403,9 +25403,9 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_joining_through_a_bridge_table_sketch0": {
-              "title": "Try the Bridge with Enrollment Terms",
-              "prompt": "Use `enrollments` as the bridge to list each student name, course title, and enrollment term. Return `students.name AS student_name, courses.title AS course_title, enrollments.term AS enrollment_term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `students.name, courses.title`.",
-              "hint": "Follow both foreign keys in the bridge, then include one value stored on the bridge row itself.",
+              "title": "Use the Enrollment Bridge and Its Own Data",
+              "prompt": "Return one row per enrollment with student name displayed as `student_name`, course title as `course_title`, and the term stored on the enrollment as `enrollment_term`. Sort by student name and then course title.",
+              "hint": "The bridge proves which student-course pair is real and also owns the term value for that relationship.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -25413,18 +25413,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name AS student_name,\n       courses.title AS course_title,\n       enrollments.term AS enrollment_term\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY students.name, courses.title;"
-            },
-            "try_joining_through_a_bridge_table_sketch1": {
-              "title": "Try a Four-Table Path for Grade Levels",
-              "prompt": "Follow the full relationship path to list each student grade level, course title, and department name for every enrollment. Return `students.grade_level, courses.title AS course_title, departments.name AS department_name` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `students.grade_level, courses.title`.",
-              "hint": "Keep `enrollments` between students and courses, then extend from courses to departments.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `students.grade_level, courses.title`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT students.grade_level,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id\nORDER BY students.grade_level, courses.title;"
             }
           },
           "practice": {
@@ -25524,6 +25512,18 @@ const messages: Record<string, any> = {
                 "t2": "JOIN enrollments to courses on course_id",
                 "t3": "SELECT columns from students, enrollments, and courses"
               }
+            },
+            "practice-bridge-to-department-details": {
+              "title": "Practice: Carry a Bridge Path to Department Details",
+              "prompt": "For every enrollment, return student grade level, course title as `course_title`, and department name as `department_name`. Preserve one row per enrollment while following the bridge to the course and then its department. Sort by grade level and course title.",
+              "hint": "Cross the bridge before reaching the course; only then can the path continue to the department.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `students.grade_level, courses.title`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.grade_level,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id\nORDER BY students.grade_level, courses.title;"
             }
           }
         },
@@ -25559,8 +25559,8 @@ const messages: Record<string, any> = {
             "steps": {
               "step_1": {
                 "title": "Connect Courses to Departments",
-                "prompt": "Begin the Module 1 Course Enrollment Directory. Return `courses.title, departments.name` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`.",
-                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "prompt": "Begin the Course Enrollment Directory with each course title beside the name of the department that owns it. Start from courses and follow the documented course-to-department relationship. Return course title first and department name second.",
+                "hint": "At this stage one result row represents one matched course.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -25571,14 +25571,14 @@ const messages: Record<string, any> = {
               },
               "step_2": {
                 "title": "Add Enrollment Records",
-                "prompt": "Extend the Module 1 Course Enrollment Directory with the next approved requirement. Return `courses.title, departments.name, enrollments.term` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Carry the directory forward and extend each course to its enrollment records. Add the enrollment term as the third output column. The result grain should now be one row per enrollment while preserving the course and department information already present.",
+                "hint": "The course id is the relationship point between the current path and the enrollment bridge.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`."
                 },
-                "starterCode": "SELECT courses.title, departments.name FROM courses INNER JOIN departments ON courses.department_id = departments.id;\n-- Project step 2: Add Enrollment Records\n-- Keep the working code above from the previous step.\n-- Next, Extend the query to include enrollments so each result row represents one enrollment in a course\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT courses.title, departments.name FROM courses INNER JOIN departments ON courses.department_id = departments.id;",
                 "solutionCode": "SELECT courses.title, departments.name, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id;\n",
                 "starterFiles": {
                   "main_py": {
@@ -25593,14 +25593,14 @@ const messages: Record<string, any> = {
               },
               "step_3": {
                 "title": "Add Student Details",
-                "prompt": "Extend the Module 1 Course Enrollment Directory with the next approved requirement. Return `courses.title, departments.name, students.name, students.grade_level, enrollments.term` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Carry the directory forward to the student referenced by each enrollment. Return course title, department name, student name, student grade level, and enrollment term in that order while keeping one row per enrollment.",
+                "hint": "The enrollment record already contains the key needed to reach its student.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`."
                 },
-                "starterCode": "SELECT courses.title, departments.name, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id;\n-- Project step 3: Add Student Details\n-- Keep the working code above from the previous step.\n-- Next, Extend the query to include student details such as name and grade level\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT courses.title, departments.name, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id;\n",
                 "solutionCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n",
                 "starterFiles": {
                   "main_py": {
@@ -25615,14 +25615,14 @@ const messages: Record<string, any> = {
               },
               "step_4": {
                 "title": "Clarify the Directory Output",
-                "prompt": "Extend the Module 1 Course Enrollment Directory with the next approved requirement. Return `departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Preserve the complete four-table directory and rename its displayed columns to `department`, `course`, `student`, `grade_level`, and `term`, in that order. Do not change the row grain or relationship path.",
+                "hint": "This milestone changes report headings rather than which rows belong in the result.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`."
                 },
-                "starterCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n-- Project step 4: Clarify the Directory Output\n-- Keep the working code above from the previous step.\n-- Next, Use exact aliases for department, course, student, grade_level, and term without changing the row grain\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n",
                 "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n",
                 "starterFiles": {
                   "main_py": {
@@ -25637,14 +25637,14 @@ const messages: Record<string, any> = {
               },
               "step_5": {
                 "title": "Sort the Directory for Review",
-                "prompt": "Complete the Module 1 Course Enrollment Directory. Return `departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `department ASC, course ASC, student ASC`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Complete the directory by sorting alphabetically by `department`, then `course`, then `student`. Preserve the same five output columns, four-table relationship path, and one-row-per-enrollment grain.",
+                "hint": "Apply ordering only after the complete directory is built.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `department ASC, course ASC, student ASC`."
                 },
-                "starterCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n-- Project step 5: Sort the Directory for Review\n-- Keep the working code above from the previous step.\n-- Next, Order the results by department, course, and student in ascending order for a clear review\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n",
                 "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id ORDER BY department ASC, course ASC, student ASC;\n",
                 "starterFiles": {
                   "main_py": {
@@ -25677,9 +25677,9 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_one_to_many_and_many_to_many_results_sketch0": {
-              "title": "Try One Row per Course ID",
-              "prompt": "Return one row per course with the course id and its department name. Return `courses.id AS course_id, departments.name AS department_name` from `departments` in that column order. Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`. Sort the final result by `departments.id, courses.id`.",
-              "hint": "The many side is `courses`, so one output row should represent one course.",
+              "title": "Keep One Result Row per Course",
+              "prompt": "Return one row for each course with its id displayed as `course_id` and its department name displayed as `department_name`. Start from departments, connect their courses, and sort by department id and then course id.",
+              "hint": "The course is the many side of this relationship, so a department name may correctly repeat across several rows.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -25687,18 +25687,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "SELECT \nFROM departments\nJOIN courses ON ;",
               "solutionCode": "SELECT courses.id AS course_id,\n       departments.name AS department_name\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;"
-            },
-            "try_one_to_many_and_many_to_many_results_sketch1": {
-              "title": "Try One Row per Enrollment",
-              "prompt": "Return one row per enrollment with the enrollment id, student grade level, and course title. Return `enrollments.id AS enrollment_id, students.grade_level, courses.title AS course_title` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `enrollments.id`.",
-              "hint": "Use the bridge row as the grain and include its id in the result.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `enrollments.id`."
-              },
-              "starterCode": "SELECT \nFROM students\nJOIN enrollments ON \nJOIN courses ON ;",
-              "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.grade_level,\n       courses.title AS course_title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY enrollments.id;"
             }
           },
           "practice": {
@@ -25798,6 +25786,18 @@ const messages: Record<string, any> = {
                 "t2": "Join enrollments to courses",
                 "t3": "Select columns from students and courses"
               }
+            },
+            "practice-preserve-one-row-per-enrollment": {
+              "title": "Practice: Preserve One Row per Enrollment",
+              "prompt": "Return one row per enrollment containing its id as `enrollment_id`, the student's grade level, and the course title as `course_title`. Use the enrollment record as the result grain and sort by enrollment id.",
+              "hint": "The bridge row identifies one real student-course relationship, so its id can verify the intended grain.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `enrollments.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.grade_level,\n       courses.title AS course_title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY enrollments.id;"
             }
           }
         }
@@ -25820,9 +25820,9 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_counting_related_rows_without_inflation_sketch0": {
-              "title": "Try Counting Enrollments per Student",
-              "prompt": "List every student and the number of enrollment rows they have. Calculate and return `students.name, COUNT(enrollments.id) AS enrollment_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Produce one result row per `students.id, students.name`. Sort the final result by `students.id`.",
-              "hint": "Count a nullable identifier from the right table, not `COUNT(*)`.",
+              "title": "Count Enrollments Without Losing Students",
+              "prompt": "Return every student with an `enrollment_count` showing how many enrollment records belong to that student. Students with no enrollments must still appear with zero. Keep one result row per student and sort by student id.",
+              "hint": "Count evidence of a real enrollment match rather than counting the preserved placeholder row.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -25830,18 +25830,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name,\n       COUNT(enrollments.id) AS enrollment_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nGROUP BY students.id, students.name\nORDER BY students.id;"
-            },
-            "try_counting_related_rows_without_inflation_sketch1": {
-              "title": "Try Counting Department Breadth per Student",
-              "prompt": "List every student and the number of distinct departments represented by their enrolled courses. Calculate and return `students.name, COUNT(DISTINCT courses.department_id) AS department_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a LEFT JOIN to connect `courses` on `enrollments.course_id = courses.id`. Produce one result row per `students.id, students.name`. Sort the final result by `students.id`.",
-              "hint": "Follow enrollments to courses, then count unique department ids at the student grain.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `students.id, students.name`. Sort the final result by `students.id`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT students.name,\n       COUNT(DISTINCT courses.department_id) AS department_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id\nGROUP BY students.id, students.name\nORDER BY students.id;"
             }
           },
           "practice": {
@@ -25943,6 +25931,18 @@ const messages: Record<string, any> = {
                 "c": "To ignore unmatched rows",
                 "d": "To simplify the query"
               }
+            },
+            "practice-count-department-breadth-per-student": {
+              "title": "Practice: Count Department Breadth per Student",
+              "prompt": "Return every student with a `department_count` showing how many different departments are represented by that student's enrolled courses. A department should contribute at most once for each student, even when the student takes several courses from it. Preserve students with no enrollments and sort by student id.",
+              "hint": "The joined rows may repeat the same department for one student, so the metric must count unique departments.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Produce one result row per `students.id, students.name`. Sort the final result by `students.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name,\n       COUNT(DISTINCT courses.department_id) AS department_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id\nGROUP BY students.id, students.name\nORDER BY students.id;"
             }
           }
         },
@@ -25963,9 +25963,9 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_filtering_left_joins_with_on_and_where_sketch0": {
-              "title": "Preserve Every Department While Limiting Matches",
-              "prompt": "Return every department, but match only courses whose title contains `History`. Return `d.name AS department_name, c.title AS history_course` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id AND c.title LIKE '%History%'`. Sort the final result by `d.name`.",
-              "hint": "Add the title condition after the key comparison inside the `ON` clause.",
+              "title": "Preserve Departments While Limiting Course Matches",
+              "prompt": "Return every department as `department_name` and, when available, a related course whose title contains `History` as `history_course`. Departments without a matching History course must remain in the result. Sort by department name.",
+              "hint": "Limit which course rows are allowed to match without turning the condition into a final-row filter.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -25973,18 +25973,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Keep every department while matching only History courses\n",
               "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\n AND c.title LIKE '%History%'\nORDER BY d.name;\n"
-            },
-            "try_filtering_left_joins_with_on_and_where_sketch1": {
-              "title": "Move the Same Condition to WHERE",
-              "prompt": "Return `d.name AS department_name, c.title AS history_course` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id`. Keep only rows where `c.title LIKE '%History%'`. Sort the final result by `d.name`.",
-              "hint": "Keep the key comparison in `ON`; move only the title condition below the join.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Keep only rows where `c.title LIKE '%History%'`. Sort the final result by `d.name`."
-              },
-              "starterCode": "-- Move the same right-table filter to WHERE\n",
-              "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\nWHERE c.title LIKE '%History%'\nORDER BY d.name;\n"
             }
           },
           "practice": {
@@ -26085,6 +26073,18 @@ const messages: Record<string, any> = {
                 "c": "To exclude unmatched rows from the left table.",
                 "d": "To perform a full outer join."
               }
+            },
+            "practice-filter-to-history-course-rows": {
+              "title": "Practice: Keep Only History Course Rows",
+              "prompt": "Return department name as `department_name` and matching course title as `history_course`, but keep only final rows whose course title contains `History`. Departments without such a course should not appear. Sort by department name.",
+              "hint": "This time the title condition controls which completed result rows survive rather than which optional matches are allowed.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Keep only rows where `c.title LIKE '%History%'`. Sort the final result by `d.name`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\nWHERE c.title LIKE '%History%'\nORDER BY d.name;\n"
             }
           }
         },
@@ -26105,9 +26105,9 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_finding_missing_relationships_sketch0": {
-              "title": "Try a Filtered Anti-Join",
-              "prompt": "Find every department that does not offer a course whose title contains `History`. Return `departments.name` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `departments.id = courses.department_id AND courses.title LIKE '%History%'`. Keep only rows where `courses.id IS NULL`. Sort the final result by `departments.name`.",
-              "hint": "Filter the optional course relationship before checking whether a match exists.",
+              "title": "Find Departments Missing a History Course",
+              "prompt": "Return the names of departments that do not offer any course whose title contains `History`. Sort the result alphabetically by department name.",
+              "hint": "First define which related course would count as a match. Then keep only departments for which no such course row exists.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -26115,18 +26115,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT departments.name\nFROM departments\nLEFT JOIN courses\n  ON departments.id = courses.department_id\n AND courses.title LIKE '%History%'\nWHERE courses.id IS NULL\nORDER BY departments.name;"
-            },
-            "try_finding_missing_relationships_sketch1": {
-              "title": "Try Finding Students Missing One Course",
-              "prompt": "Find students who are not enrolled in Biology, whose course id is `1`. Return `students.name` from `students` in that column order. Use a LEFT JOIN to connect `enrollments` on `students.id = enrollments.student_id AND enrollments.course_id = 1`. Keep only rows where `enrollments.id IS NULL`. Sort the final result by `students.id`.",
-              "hint": "The question is about one specific relationship, so limit the optional enrollment match in the ON clause.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Keep only rows where `enrollments.id IS NULL`. Sort the final result by `students.id`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id\n AND enrollments.course_id = 1\nWHERE enrollments.id IS NULL\nORDER BY students.id;"
             }
           },
           "practice": {
@@ -26227,6 +26215,18 @@ const messages: Record<string, any> = {
                 "t3": "Check for NULL in right table",
                 "t4": "Select columns from left table"
               }
+            },
+            "practice-find-students-missing-biology": {
+              "title": "Practice: Find Students Missing Biology",
+              "prompt": "Biology has course id `1`. Return the names of students who do not have an enrollment in that course, even if they are enrolled in other courses. Sort by student id.",
+              "hint": "The absence question concerns one specific enrollment relationship, not whether the student has any enrollment at all.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Keep only rows where `enrollments.id IS NULL`. Sort the final result by `students.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id\n AND enrollments.course_id = 1\nWHERE enrollments.id IS NULL\nORDER BY students.id;"
             }
           }
         },
@@ -26247,9 +26247,9 @@ const messages: Record<string, any> = {
           "tryIt": {
             "allowReveal": true,
             "try_left_join_preserves_unmatched_rows_sketch0": {
-              "title": "Try LEFT JOIN with Every Department",
-              "prompt": "List every department beside a related course id. Return `departments.name, courses.id` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `departments.id = courses.department_id`. Sort the final result by `departments.id, courses.id`.",
-              "hint": "Place the table that must be preserved on the left side of the join.",
+              "title": "Keep Every Department in a Course Listing",
+              "prompt": "Return every department name beside each related course id. A department with no course must still appear. Sort first by department id and then by course id.",
+              "hint": "Choose the department as the entity whose presence is guaranteed, then attach course information when available.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -26257,18 +26257,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;"
-            },
-            "try_left_join_preserves_unmatched_rows_sketch1": {
-              "title": "Try Preserving Departments through a Longer Path",
-              "prompt": "List every department with the names of students enrolled in its courses. Return `departments.name AS department_name, students.name AS student_name` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `departments.id = courses.department_id`. Use a LEFT JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a LEFT JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `departments.id, students.name`.",
-              "hint": "Keep every join after `departments` as a LEFT JOIN so a missing row does not break the path.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a LEFT JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `departments.id, students.name`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT departments.name AS department_name,\n       students.name AS student_name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nLEFT JOIN students ON enrollments.student_id = students.id\nORDER BY departments.id, students.name;"
             }
           },
           "practice": {
@@ -26369,6 +26357,18 @@ const messages: Record<string, any> = {
                 "c": "To exclude unmatched rows from the left table.",
                 "d": "To include all rows from the right table, even if there are no matches in the left table."
               }
+            },
+            "practice-preserve-departments-through-long-path": {
+              "title": "Practice: Preserve Departments Through a Longer Path",
+              "prompt": "Return every department as `department_name` together with the names of students enrolled in its courses as `student_name`. Departments must remain visible even if their relationship path ends before reaching a student. Sort by department id and then student name.",
+              "hint": "Every step after the preserved department must allow an unmatched row to continue through the path.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a LEFT JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `departments.id, students.name`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name AS department_name,\n       students.name AS student_name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nLEFT JOIN students ON enrollments.student_id = students.id\nORDER BY departments.id, students.name;"
             }
           }
         },
@@ -26407,8 +26407,8 @@ const messages: Record<string, any> = {
             "steps": {
               "step1_preserve_departments": {
                 "title": "Preserve Every Department",
-                "prompt": "Begin the Module 2 Department Participation Scorecard. Return `d.name, c.title` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id`.",
-                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "prompt": "Begin the Department Participation Scorecard by returning every department name beside any course title related to that department. Departments without courses must remain visible.",
+                "hint": "The reporting promise starts with every department, so course information must be optional.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -26419,14 +26419,14 @@ const messages: Record<string, any> = {
               },
               "step2_count_courses": {
                 "title": "Count Courses Correctly",
-                "prompt": "Extend the Module 2 Department Participation Scorecard with the next approved requirement. Calculate and return `d.name, COUNT(DISTINCT c.id) AS course_count` from `departments`. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id`. Produce one result row per `d.name`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Carry the scorecard forward and change it to one row per department. Add `course_count`, the number of different courses owned by each department. Departments without courses must show zero.",
+                "hint": "Count real course identifiers and protect the department grain from repeated course appearances.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a LEFT JOIN to connect `courses` on `d.id = c.department_id`. Produce one result row per `d.name`."
                 },
-                "starterCode": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;\n-- Project step 2: Count Courses Correctly\n-- Keep the working code above from the previous step.\n-- Next, Modify your query to count the number of courses per department, ensuring that departments with no courses show a count of zero\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;",
                 "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;\n",
                 "starterFiles": {
                   "main_py": {
@@ -26441,14 +26441,14 @@ const messages: Record<string, any> = {
               },
               "step3_extend_enrollments": {
                 "title": "Extend to Enrollment Records",
-                "prompt": "Extend the Module 2 Department Participation Scorecard with the next approved requirement. Calculate and return `d.name, COUNT(DISTINCT c.id) AS course_count` from `departments`. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id`. Use a LEFT JOIN to connect `enrollments` on `c.id = e.course_id`. Produce one result row per `d.name`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Carry the scorecard forward through each department's courses to their enrollment records. Preserve every department and keep the existing `course_count` unchanged. The output should still contain one row per department.",
+                "hint": "The new relationship adds detail beneath courses, so make sure it does not remove quiet departments or inflate the existing course metric.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a LEFT JOIN to connect `enrollments` on `c.id = e.course_id`. Produce one result row per `d.name`."
                 },
-                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;\n-- Project step 3: Extend to Enrollment Records\n-- Keep the working code above from the previous step.\n-- Next, Extend your query to include enrollments, ensuring all departments are preserved\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;\n",
                 "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n",
                 "starterFiles": {
                   "main_py": {
@@ -26463,14 +26463,14 @@ const messages: Record<string, any> = {
               },
               "step4_count_enrollments": {
                 "title": "Count Enrollment Rows",
-                "prompt": "Extend the Module 2 Department Participation Scorecard with the next approved requirement. Calculate and return `d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count` from `departments`. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id`. Use a LEFT JOIN to connect `enrollments` on `c.id = e.course_id`. Produce one result row per `d.name`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Carry the scorecard forward and add `enrollment_count`, the number of real enrollment records associated with courses in each department. Preserve `course_count`, keep one row per department, and show zero when no enrollment exists.",
+                "hint": "Enrollment rows are the events being counted, so use evidence that exists only for a real enrollment match.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a LEFT JOIN to connect `enrollments` on `c.id = e.course_id`. Produce one result row per `d.name`."
                 },
-                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n-- Project step 4: Count Enrollment Rows\n-- Keep the working code above from the previous step.\n-- Next, Add a count of enrollment rows per department to your query, ensuring the department grain is maintained\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n",
                 "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n",
                 "starterFiles": {
                   "main_py": {
@@ -26485,14 +26485,14 @@ const messages: Record<string, any> = {
               },
               "step5_count_unique_students": {
                 "title": "Count Unique Students",
-                "prompt": "Extend the Module 2 Department Participation Scorecard with the next approved requirement. Calculate and return `d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count` from `departments`. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id`. Use a LEFT JOIN to connect `enrollments` on `c.id = e.course_id`. Produce one result row per `d.name`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Carry the scorecard forward and add `student_count`, the number of different students participating in each department. A student taking multiple courses in the same department must contribute only once. Preserve the existing course and enrollment metrics.",
+                "hint": "The joined result may contain the same student several times, so count students at their unique-entity grain.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a LEFT JOIN to connect `enrollments` on `c.id = e.course_id`. Produce one result row per `d.name`."
                 },
-                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n-- Project step 5: Count Unique Students\n-- Keep the working code above from the previous step.\n-- Next, Modify your query to count unique students per department, ensuring each student is counted only once per department\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n",
                 "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n",
                 "starterFiles": {
                   "main_py": {
@@ -26507,14 +26507,14 @@ const messages: Record<string, any> = {
               },
               "step6_rank_scorecard": {
                 "title": "Rank the Scorecard Predictably",
-                "prompt": "Complete the Module 2 Department Participation Scorecard. Calculate and return `d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count` from `departments`. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id`. Use a LEFT JOIN to connect `enrollments` on `c.id = e.course_id`. Produce one result row per `d.name`. Sort the final result by `enrollment_count DESC, d.name ASC`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Complete the scorecard by ranking departments from highest `enrollment_count` to lowest. When counts tie, sort department names alphabetically. Preserve `course_count`, `enrollment_count`, `student_count`, and one row per department.",
+                "hint": "Add deterministic ordering without changing any existing metric or relationship.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Produce one result row per `d.name`. Sort the final result by `enrollment_count DESC, d.name ASC`."
                 },
-                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n-- Project step 6: Rank the Scorecard Predictably\n-- Keep the working code above from the previous step.\n-- Next, Sort the final scorecard by enrollment count descending, then by department name ascending\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;\n",
                 "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name\nORDER BY enrollment_count DESC, d.name ASC;\n",
                 "starterFiles": {
                   "main_py": {
@@ -26561,8 +26561,8 @@ const messages: Record<string, any> = {
             "steps": {
               "step1_establish_grain": {
                 "title": "Step 1: Preserve the All-Student Grain",
-                "prompt": "Begin the Final School Program Participation Report. Return `s.name AS student_name, s.grade_level` from `students` in that column order. Use a LEFT JOIN to connect `enrollments` on `s.id = e.student_id`. Use a LEFT JOIN to connect `courses` on `e.course_id = c.id`. Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`.",
-                "hint": "Run the previous working query, preserve its grain, and add only the metric or label requested in this step.",
+                "prompt": "Begin the Student Program Participation Audit with one result row per student. Show each student's name under `student_name` and their grade level. Follow the complete relationship path from students through enrollments and courses to departments, while preserving students who have no enrollment at all.",
+                "hint": "The student is the entity this report promises to keep. Every relationship after the student must allow that row to survive when no related record exists.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -26573,14 +26573,14 @@ const messages: Record<string, any> = {
               },
               "step2_add_counts": {
                 "title": "Step 2: Add Enrollment and Course Counts",
-                "prompt": "Extend the Final School Program Participation Report with the next approved requirement. Calculate and return `s.name AS student_name, s.grade_level, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT c.id) AS course_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `s.id = e.student_id`. Use a LEFT JOIN to connect `courses` on `e.course_id = c.id`. Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`.",
-                "hint": "Run the previous working query, preserve its grain, and add only the metric or label requested in this step.",
+                "prompt": "Carry the audit forward and add two metrics while keeping one row per student. `enrollment_count` should measure the number of enrollment records for the student. `course_count` should measure the number of different courses represented by those enrollments. Students with no enrollment must remain with zero for both metrics.",
+                "hint": "The two metrics have different grains: one counts registration records, while the other counts unique courses.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`."
                 },
-                "starterCode": "SELECT s.name AS student_name,\n       s.grade_level\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n\n-- Step 2: Add Enrollment and Course Counts\n-- Add `enrollment_count` and distinct `course_count` while preserving one row per student.\n",
+                "starterCode": "SELECT s.name AS student_name,\n       s.grade_level\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
                 "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
                 "starterFiles": {
                   "main_py": {
@@ -26595,14 +26595,14 @@ const messages: Record<string, any> = {
               },
               "step3_add_distinct_students": {
                 "title": "Step 3: Measure Department Breadth",
-                "prompt": "Extend the Final School Program Participation Report with the next approved requirement. Calculate and return `s.name AS student_name, s.grade_level, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT c.id) AS course_count, COUNT(DISTINCT d.id) AS department_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `s.id = e.student_id`. Use a LEFT JOIN to connect `courses` on `e.course_id = c.id`. Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`.",
-                "hint": "Run the previous working query, preserve its grain, and add only the metric or label requested in this step.",
+                "prompt": "Carry the audit forward and add `department_count`, the number of different departments represented by each student's enrolled courses. A student taking multiple courses in the same department must contribute that department only once. Preserve all existing metrics and keep one row per student.",
+                "hint": "The relationship path may repeat a department across several courses, but this metric measures unique departments rather than course rows.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`."
                 },
-                "starterCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n\n-- Step 3: Measure Department Breadth\n-- Add distinct `department_count` to show how many departments each student participates in.\n",
+                "starterCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
                 "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
                 "starterFiles": {
                   "main_py": {
@@ -26617,14 +26617,14 @@ const messages: Record<string, any> = {
               },
               "step4_label_rank": {
                 "title": "Step 4: Label and Rank Participation",
-                "prompt": "Complete the Final School Program Participation Report. Calculate and return `s.name AS student_name, s.grade_level, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT c.id) AS course_count, COUNT(DISTINCT d.id) AS department_count, CASE WHEN COUNT(e.id) = 0 THEN 'Not enrolled' WHEN COUNT(DISTINCT d.id) >= 2 THEN 'Cross-disciplinary' ELSE 'Focused' END AS participation_status` from `students`. Use a LEFT JOIN to connect `enrollments` on `s.id = e.student_id`. Use a LEFT JOIN to connect `courses` on `e.course_id = c.id`. Use a LEFT JOIN to connect `departments` on `c.department_id = d.id`. Produce one result row per `s.id, s.name, s.grade_level`. Sort the final result by `department_count DESC, enrollment_count DESC, student_name ASC`.",
-                "hint": "Run the previous working query, preserve its grain, and add only the metric or label requested in this step.",
+                "prompt": "Complete the audit with a `participation_status`. Students with zero enrollments should be labeled `Not enrolled`. Students participating in two or more departments should be labeled `Cross-disciplinary`. All other enrolled students should be labeled `Focused`. Rank the report by department breadth from highest to lowest, then enrollment count from highest to lowest, then student name alphabetically.",
+                "hint": "Keep the existing student grain and metrics unchanged. Derive the label from the completed counts, then add the three ordering rules in priority order.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Produce one result row per `s.id, s.name, s.grade_level`. Sort the final result by `department_count DESC, enrollment_count DESC, student_name ASC`."
                 },
-                "starterCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n\n-- Step 4: Label and Rank Participation\n-- Add `participation_status`: `Not enrolled` for zero enrollments, `Cross-disciplinary` for two or more departments, otherwise `Focused`. Sort by department breadth, enrollment count, and student name.\n",
+                "starterCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
                 "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count,\n       CASE\n         WHEN COUNT(e.id) = 0 THEN 'Not enrolled'\n         WHEN COUNT(DISTINCT d.id) >= 2 THEN 'Cross-disciplinary'\n         ELSE 'Focused'\n       END AS participation_status\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level\nORDER BY department_count DESC,\n         enrollment_count DESC,\n         student_name ASC;\n",
                 "starterFiles": {
                   "main_py": {
@@ -40262,10 +40262,8 @@ const messages: Record<string, any> = {
     },
     "multi-table-sql": {
       "title": "Multi-Table SQL & Joins",
-      "description": "Move beyond single-table reports by following keys across related tables. Build INNER JOIN and LEFT JOIN reports, travel through bridge tables, preserve unmatched rows, count relationships accurately, and complete a school participation capstone.",
-      "prerequisites": [
-        "SQL Analysis & Reporting, or equivalent experience building clear single-table detail reports and grouped summaries."
-      ]
+      "description": "A focused SQLite course with three standard modules and one final capstone. Learners move directly from single-table reporting into INNER JOIN, multi-table relationship paths, LEFT JOIN, anti-joins, and join-aware counting without repeating earlier SELECT, filtering, alias, aggregate, or GROUP BY lessons.",
+      "moreComingSoon": "More Multi-Table SQL & Joins lessons are coming soon."
     },
     "sql-analysis-reporting": {
       "title": "SQL Analysis & Reporting",
@@ -40699,7 +40697,7 @@ const messages: Record<string, any> = {
     "multi-table-sql": {
       "multi-table-sql-module-0-join-foundations": {
         "title": "Join Foundations",
-        "description": "Read primary-key and foreign-key relationships, then build clear two-table INNER JOIN reports.",
+        "description": "Read relationship keys and write reliable two-table INNER JOIN queries without re-teaching single-table SQL.",
         "outcomes": [
           "Trace primary-key and foreign-key relationships in the ERD.",
           "Use INNER JOIN and ON to connect matching rows.",
@@ -40707,13 +40705,13 @@ const messages: Record<string, any> = {
           "Use concise table aliases without hiding the relationship logic."
         ],
         "why": [
-          "Read primary-key and foreign-key relationships, then build clear two-table INNER JOIN reports.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with join foundations.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "multi-table-sql-module-1-relationship-paths": {
         "title": "Following Relationship Paths",
-        "description": "Follow multi-step relationship paths through bridge tables while preserving the intended result grain.",
+        "description": "Move through bridge tables and extend a query across three or four related tables without creating accidental row combinations.",
         "outcomes": [
           "Distinguish one-to-many and many-to-many result behavior.",
           "Use enrollments as a bridge between students and courses.",
@@ -40721,13 +40719,13 @@ const messages: Record<string, any> = {
           "Detect missing, reversed, or unrelated ON conditions."
         ],
         "why": [
-          "Follow multi-step relationship paths through bridge tables while preserving the intended result grain.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with following relationship paths.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
         "title": "Outer Joins and Accurate Counts",
-        "description": "Use LEFT JOIN to preserve unmatched rows and count related records without accidental inflation.",
+        "description": "Preserve unmatched rows, place filters safely, find missing relationships, and count related records without inflating metrics.",
         "outcomes": [
           "Use LEFT JOIN to preserve every row from the chosen starting table.",
           "Explain how WHERE can accidentally remove unmatched LEFT JOIN rows.",
@@ -40735,22 +40733,22 @@ const messages: Record<string, any> = {
           "Use COUNT(right_id) and COUNT(DISTINCT ...) at the intended result grain."
         ],
         "why": [
-          "Use LEFT JOIN to preserve unmatched rows and count related records without accidental inflation.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with outer joins and accurate counts.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "multi-table-sql-module-3-final-capstone": {
         "title": "Final Capstone",
-        "description": "Combine joins, aliases, grouped counts, unmatched-row handling, and deterministic ordering in a final participation report.",
+        "description": "Build one complete school-program participation report that preserves inactive departments and reports trustworthy multi-table metrics.",
         "outcomes": [
-          "Plan the full students-to-departments relationship path from a reporting brief.",
-          "Preserve every student while joining optional enrollment, course, and department rows.",
-          "Calculate enrollment, distinct-course, and distinct-department counts at one-row-per-student grain.",
-          "Add a clear participation label and deterministic counseling-priority ranking."
+          "Plan a relationship path from requested output back to the required tables.",
+          "Preserve all departments while joining courses and enrollments.",
+          "Calculate course, enrollment, and unique-student counts at one-row-per-department grain.",
+          "Add a clear participation label and deterministic ranking."
         ],
         "why": [
-          "Combine joins, aliases, grouped counts, unmatched-row handling, and deterministic ordering in a final participation report.",
-          "The final work demonstrates the complete course workflow."
+          "Builds confidence with final capstone.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     },
@@ -41722,7 +41720,7 @@ const messages: Record<string, any> = {
           "description": "Complete one focused multi-table report from brief to final validated query.",
           "weeks": null,
           "bullets": [
-            "Final Capstone: Student Program Participation Audit"
+            "Final Capstone: School Program Participation Report"
           ]
         }
       }

@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.cards.sketch1.title",
       "sketchId": "sketch-1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-extending-a-join-path-sketch1",
-        "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.title",
-        "promptKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.prompt",
-        "exerciseKey": "try-extending-a-join-path-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -95,7 +83,7 @@
     {
       "id": "try-extending-a-join-path-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0",
       "language": "sql",
@@ -139,7 +127,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT students.name,\n       courses.title,\n       departments.id AS department_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id;",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -152,16 +140,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-extending-a-join-path-sketch1",
+      "id": "practice-extend-path-with-enrollment-term",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1",
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.starterCode",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -178,11 +167,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.starterCode",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.starterCode",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -201,7 +190,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -214,7 +203,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-1",

@@ -19,9 +19,9 @@
           "tryIt": {
             "allowReveal": true,
             "try_one_to_many_and_many_to_many_results_sketch0": {
-              "title": "Try One Row per Course ID",
-              "prompt": "Return one row per course with the course id and its department name. Return `courses.id AS course_id, departments.name AS department_name` from `departments` in that column order. Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`. Sort the final result by `departments.id, courses.id`.",
-              "hint": "The many side is `courses`, so one output row should represent one course.",
+              "title": "Keep One Result Row per Course",
+              "prompt": "Return one row for each course with its id displayed as `course_id` and its department name displayed as `department_name`. Start from departments, connect their courses, and sort by department id and then course id.",
+              "hint": "The course is the many side of this relationship, so a department name may correctly repeat across several rows.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29,18 +29,6 @@
               },
               "starterCode": "SELECT \nFROM departments\nJOIN courses ON ;",
               "solutionCode": "SELECT courses.id AS course_id,\n       departments.name AS department_name\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;"
-            },
-            "try_one_to_many_and_many_to_many_results_sketch1": {
-              "title": "Try One Row per Enrollment",
-              "prompt": "Return one row per enrollment with the enrollment id, student grade level, and course title. Return `enrollments.id AS enrollment_id, students.grade_level, courses.title AS course_title` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `enrollments.id`.",
-              "hint": "Use the bridge row as the grain and include its id in the result.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `enrollments.id`."
-              },
-              "starterCode": "SELECT \nFROM students\nJOIN enrollments ON \nJOIN courses ON ;",
-              "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.grade_level,\n       courses.title AS course_title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY enrollments.id;"
             }
           },
           "practice": {
@@ -140,6 +128,18 @@
                 "t2": "Join enrollments to courses",
                 "t3": "Select columns from students and courses"
               }
+            },
+            "practice-preserve-one-row-per-enrollment": {
+              "title": "Practice: Preserve One Row per Enrollment",
+              "prompt": "Return one row per enrollment containing its id as `enrollment_id`, the student's grade level, and the course title as `course_title`. Use the enrollment record as the result grain and sort by enrollment id.",
+              "hint": "The bridge row identifies one real student-course relationship, so its id can verify the intended grain.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `enrollments.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.grade_level,\n       courses.title AS course_title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY enrollments.id;"
             }
           }
         }

@@ -2,17 +2,15 @@
   "subjects": {
     "multi-table-sql": {
       "title": "Multi-Table SQL & Joins",
-      "description": "Move beyond single-table reports by following keys across related tables. Build INNER JOIN and LEFT JOIN reports, travel through bridge tables, preserve unmatched rows, count relationships accurately, and complete a school participation capstone.",
-      "prerequisites": [
-        "SQL Analysis & Reporting, or equivalent experience building clear single-table detail reports and grouped summaries."
-      ]
+      "description": "A focused SQLite course with three standard modules and one final capstone. Learners move directly from single-table reporting into INNER JOIN, multi-table relationship paths, LEFT JOIN, anti-joins, and join-aware counting without repeating earlier SELECT, filtering, alias, aggregate, or GROUP BY lessons.",
+      "moreComingSoon": "More Multi-Table SQL & Joins lessons are coming soon."
     }
   },
   "modules": {
     "multi-table-sql": {
       "multi-table-sql-module-0-join-foundations": {
         "title": "Join Foundations",
-        "description": "Read primary-key and foreign-key relationships, then build clear two-table INNER JOIN reports.",
+        "description": "Read relationship keys and write reliable two-table INNER JOIN queries without re-teaching single-table SQL.",
         "outcomes": [
           "Trace primary-key and foreign-key relationships in the ERD.",
           "Use INNER JOIN and ON to connect matching rows.",
@@ -20,13 +18,13 @@
           "Use concise table aliases without hiding the relationship logic."
         ],
         "why": [
-          "Read primary-key and foreign-key relationships, then build clear two-table INNER JOIN reports.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with join foundations.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "multi-table-sql-module-1-relationship-paths": {
         "title": "Following Relationship Paths",
-        "description": "Follow multi-step relationship paths through bridge tables while preserving the intended result grain.",
+        "description": "Move through bridge tables and extend a query across three or four related tables without creating accidental row combinations.",
         "outcomes": [
           "Distinguish one-to-many and many-to-many result behavior.",
           "Use enrollments as a bridge between students and courses.",
@@ -34,13 +32,13 @@
           "Detect missing, reversed, or unrelated ON conditions."
         ],
         "why": [
-          "Follow multi-step relationship paths through bridge tables while preserving the intended result grain.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with following relationship paths.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "multi-table-sql-module-2-outer-joins-and-accurate-counts": {
         "title": "Outer Joins and Accurate Counts",
-        "description": "Use LEFT JOIN to preserve unmatched rows and count related records without accidental inflation.",
+        "description": "Preserve unmatched rows, place filters safely, find missing relationships, and count related records without inflating metrics.",
         "outcomes": [
           "Use LEFT JOIN to preserve every row from the chosen starting table.",
           "Explain how WHERE can accidentally remove unmatched LEFT JOIN rows.",
@@ -48,22 +46,22 @@
           "Use COUNT(right_id) and COUNT(DISTINCT ...) at the intended result grain."
         ],
         "why": [
-          "Use LEFT JOIN to preserve unmatched rows and count related records without accidental inflation.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with outer joins and accurate counts.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "multi-table-sql-module-3-final-capstone": {
         "title": "Final Capstone",
-        "description": "Combine joins, aliases, grouped counts, unmatched-row handling, and deterministic ordering in a final participation report.",
+        "description": "Build one complete school-program participation report that preserves inactive departments and reports trustworthy multi-table metrics.",
         "outcomes": [
-          "Plan the full students-to-departments relationship path from a reporting brief.",
-          "Preserve every student while joining optional enrollment, course, and department rows.",
-          "Calculate enrollment, distinct-course, and distinct-department counts at one-row-per-student grain.",
-          "Add a clear participation label and deterministic counseling-priority ranking."
+          "Plan a relationship path from requested output back to the required tables.",
+          "Preserve all departments while joining courses and enrollments.",
+          "Calculate course, enrollment, and unique-student counts at one-row-per-department grain.",
+          "Add a clear participation label and deterministic ranking."
         ],
         "why": [
-          "Combine joins, aliases, grouped counts, unmatched-row handling, and deterministic ordering in a final participation report.",
-          "The final work demonstrates the complete course workflow."
+          "Builds confidence with final capstone.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     }
@@ -160,7 +158,7 @@
           "description": "Complete one focused multi-table report from brief to final validated query.",
           "weeks": null,
           "bullets": [
-            "Final Capstone: Student Program Participation Audit"
+            "Final Capstone: School Program Participation Report"
           ]
         }
       }

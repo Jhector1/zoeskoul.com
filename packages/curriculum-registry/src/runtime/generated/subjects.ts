@@ -2949,6 +2949,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "genKey": "sql_for_beginners",
       "order": 3,
       "accessPolicy": "paid",
+      "visibility": "public",
       "status": "active",
       "imagePublicId": null,
       "imageAlt": null,
@@ -2958,10 +2959,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "meta": {
         "curriculum": {
           "plannedModuleCount": 4,
-          "isTerminalRelease": true,
-          "prerequisiteSubjectSlugs": [
-            "sql-analysis-reporting"
-          ]
+          "isTerminalRelease": false,
+          "moreComingMessageKey": "subjects.multi-table-sql.moreComingSoon"
         },
         "completionPolicy": {
           "requireAllPublishedModules": true,
@@ -2971,8 +2970,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "versioning": {
           "family": "multi-table-sql",
           "version": 1,
-          "status": "active",
-          "defaultForNewEnrollments": true,
+          "status": "draft",
+          "defaultForNewEnrollments": false,
           "supersedes": null,
           "supersededBy": null
         }
@@ -2993,7 +2992,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           "kind": "sql",
           "showSchema": true,
           "showErd": true,
-          "showChen": false,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -3004,9 +3003,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "serviceDefaults": null,
         "meta": {
           "estimatedMinutes": 153,
-          "prereqKeys": [
-            "subjects.multi-table-sql.prerequisites.0"
-          ],
+          "prereqKeys": [],
           "outcomeKeys": [
             "modules.multi-table-sql.multi-table-sql-module-0-join-foundations.outcomes.0",
             "modules.multi-table-sql.multi-table-sql-module-0-join-foundations.outcomes.1",
@@ -3098,7 +3095,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           "kind": "sql",
           "showSchema": true,
           "showErd": true,
-          "showChen": false,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -3203,7 +3200,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           "kind": "sql",
           "showSchema": true,
           "showErd": true,
-          "showChen": false,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -3308,7 +3305,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           "kind": "sql",
           "showSchema": true,
           "showErd": true,
-          "showChen": false,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -90600,19 +90597,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.cards.sketch1.title",
           "sketchId": "inner-join-sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-inner-join-with-on-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.tryIt.try_inner_join_with_on_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.tryIt.try_inner_join_with_on_sketch1.prompt",
-            "exerciseKey": "try-inner-join-with-on-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -90648,7 +90633,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-inner-join-with-on-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.tryIt.try_inner_join_with_on_sketch0",
           "language": "sql",
@@ -90692,7 +90677,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT enrollments.id, students.grade_level\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.tryIt.try_inner_join_with_on_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -90705,16 +90690,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-inner-join-with-on-sketch1",
+          "id": "practice-connect-departments-to-courses",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.tryIt.try_inner_join_with_on_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.practice.practice-connect-departments-to-courses",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.tryIt.try_inner_join_with_on_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.practice.practice-connect-departments-to-courses.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -90731,11 +90717,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.tryIt.try_inner_join_with_on_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.practice.practice-connect-departments-to-courses.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.tryIt.try_inner_join_with_on_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.practice.practice-connect-departments-to-courses.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -90754,7 +90740,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.inner-join-with-on.practice.practice-connect-departments-to-courses.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -90767,7 +90753,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "sc-primary-foreign-keys",
@@ -90928,19 +90915,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-qualifying-columns-across-tables-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.prompt",
-            "exerciseKey": "try-qualifying-columns-across-tables-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -90976,7 +90951,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-qualifying-columns-across-tables-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch0",
           "language": "sql",
@@ -91020,7 +90995,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.name AS student_name,\n       enrollments.term\nFROM enrollments\nINNER JOIN students\n  ON enrollments.student_id = students.id\nORDER BY enrollments.id;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -91032,16 +91007,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-qualifying-columns-across-tables-sketch1",
+          "id": "practice-qualify-course-department-columns",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -91058,11 +91034,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -91081,7 +91057,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT courses.id AS course_id,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id\nORDER BY courses.id;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -91093,7 +91069,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -91256,19 +91233,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-table-aliases-for-join-queries-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.prompt",
-            "exerciseKey": "try-table-aliases-for-join-queries-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -91304,7 +91269,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-table-aliases-for-join-queries-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch0",
           "language": "sql",
@@ -91348,7 +91313,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT c.title AS course_title,\n       d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d\n  ON c.department_id = d.id\nORDER BY c.title;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -91360,16 +91325,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-table-aliases-for-join-queries-sketch1",
+          "id": "practice-student-enrollment-aliases",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -91386,11 +91352,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -91409,7 +91375,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT s.name AS student_name,\n       e.term AS enrollment_term,\n       e.course_id\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id\nORDER BY s.name, e.course_id;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -91421,7 +91387,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -91686,7 +91653,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT \n  students.id, \n  students.name, \n  enrollments.id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step1.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -91699,7 +91666,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step2",
@@ -91748,7 +91716,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT \n  students.id AS student_id, \n  students.name, \n  enrollments.id AS enrollment_id, \n  enrollments.course_id, \n  enrollments.term \nFROM students \nINNER JOIN enrollments ON students.id = enrollments.student_id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step2.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -91761,7 +91729,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step3",
@@ -91810,7 +91779,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step3.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -91823,7 +91792,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step4",
@@ -91872,7 +91842,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step4.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -91885,7 +91855,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step5",
@@ -91934,7 +91905,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT \n  s.id AS student_id, \n  s.name, \n  e.id AS enrollment_id, \n  e.course_id AS course_id, \n  e.term \nFROM students AS s \nINNER JOIN enrollments AS e ON s.id = e.student_id \nWHERE s.grade_level >= 10 \nORDER BY s.name ASC, e.course_id ASC;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step5.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -91946,7 +91917,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -91999,19 +91971,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-one-to-many-and-many-to-many-results-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.prompt",
-            "exerciseKey": "try-one-to-many-and-many-to-many-results-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -92047,7 +92007,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-one-to-many-and-many-to-many-results-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch0",
           "language": "sql",
@@ -92091,7 +92051,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT courses.id AS course_id,\n       departments.name AS department_name\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -92103,16 +92063,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-one-to-many-and-many-to-many-results-sketch1",
+          "id": "practice-preserve-one-row-per-enrollment",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -92129,11 +92090,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.tryIt.try_one_to_many_and_many_to_many_results_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -92152,7 +92113,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.grade_level,\n       courses.title AS course_title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY enrollments.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-preserve-one-row-per-enrollment.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -92164,7 +92125,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -92315,19 +92277,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.cards.sketch1.title",
           "sketchId": "sketch-joining-bridge-table-1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-joining-through-a-bridge-table-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.tryIt.try_joining_through_a_bridge_table_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.tryIt.try_joining_through_a_bridge_table_sketch1.prompt",
-            "exerciseKey": "try-joining-through-a-bridge-table-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -92363,7 +92313,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-joining-through-a-bridge-table-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.tryIt.try_joining_through_a_bridge_table_sketch0",
           "language": "sql",
@@ -92407,7 +92357,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT students.name AS student_name,\n       courses.title AS course_title,\n       enrollments.term AS enrollment_term\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY students.name, courses.title;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.tryIt.try_joining_through_a_bridge_table_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -92419,16 +92369,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-joining-through-a-bridge-table-sketch1",
+          "id": "practice-bridge-to-department-details",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.tryIt.try_joining_through_a_bridge_table_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.practice.practice-bridge-to-department-details",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.tryIt.try_joining_through_a_bridge_table_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.practice.practice-bridge-to-department-details.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -92445,11 +92396,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.tryIt.try_joining_through_a_bridge_table_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.practice.practice-bridge-to-department-details.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.tryIt.try_joining_through_a_bridge_table_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.practice.practice-bridge-to-department-details.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -92468,7 +92419,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT students.grade_level,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id\nORDER BY students.grade_level, courses.title;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.joining-through-a-bridge-table.practice.practice-bridge-to-department-details.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -92480,7 +92431,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -92631,19 +92583,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.cards.sketch1.title",
           "sketchId": "sketch-1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-extending-a-join-path-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.prompt",
-            "exerciseKey": "try-extending-a-join-path-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -92679,7 +92619,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-extending-a-join-path-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0",
           "language": "sql",
@@ -92723,7 +92663,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT students.name,\n       courses.title,\n       departments.id AS department_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -92736,16 +92676,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-extending-a-join-path-sketch1",
+          "id": "practice-extend-path-with-enrollment-term",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -92762,11 +92703,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -92785,7 +92726,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -92798,7 +92739,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "single-choice-1",
@@ -92951,19 +92893,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.prompt",
-            "exerciseKey": "try-avoiding-cartesian-and-wrong-key-joins-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -92999,7 +92929,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0",
           "language": "sql",
@@ -93043,7 +92973,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT students.grade_level,\n       courses.title\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY students.grade_level, courses.title;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -93055,16 +92985,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch1",
+          "id": "practice-repair-enrollment-key-path",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -93081,11 +93012,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -93104,7 +93035,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT e.id AS enrollment_id,\n       s.name AS student_name,\n       c.title AS course_title\nFROM enrollments AS e\nINNER JOIN students AS s\n  ON e.student_id = s.id\nINNER JOIN courses AS c\n  ON e.course_id = c.id\nORDER BY e.id;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -93116,7 +93047,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "quiz1",
@@ -93369,7 +93301,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT courses.title, departments.name FROM courses INNER JOIN departments ON courses.department_id = departments.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_1.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -93382,7 +93314,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step-2",
@@ -93431,7 +93364,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT courses.title, departments.name, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_2.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -93444,7 +93377,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step-3",
@@ -93493,7 +93427,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_3.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -93506,7 +93440,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step-4",
@@ -93555,7 +93490,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_4.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -93568,7 +93503,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step-5",
@@ -93617,7 +93553,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id ORDER BY department ASC, course ASC, student ASC;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_5.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -93629,7 +93565,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -93682,19 +93619,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-left-join-preserves-unmatched-rows-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.prompt",
-            "exerciseKey": "try-left-join-preserves-unmatched-rows-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -93730,7 +93655,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-left-join-preserves-unmatched-rows-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch0",
           "language": "sql",
@@ -93774,7 +93699,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -93786,16 +93711,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-left-join-preserves-unmatched-rows-sketch1",
+          "id": "practice-preserve-departments-through-long-path",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -93812,11 +93738,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -93835,7 +93761,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT departments.name AS department_name,\n       students.name AS student_name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nLEFT JOIN students ON enrollments.student_id = students.id\nORDER BY departments.id, students.name;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -93847,7 +93773,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "multi-choice-1",
@@ -93997,19 +93924,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-filtering-left-joins-with-on-and-where-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.prompt",
-            "exerciseKey": "try-filtering-left-joins-with-on-and-where-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -94045,7 +93960,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-filtering-left-joins-with-on-and-where-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch0",
           "language": "sql",
@@ -94089,7 +94004,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\n AND c.title LIKE '%History%'\nORDER BY d.name;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -94101,16 +94016,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-filtering-left-joins-with-on-and-where-sketch1",
+          "id": "practice-filter-to-history-course-rows",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -94127,11 +94043,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -94150,7 +94066,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\nWHERE c.title LIKE '%History%'\nORDER BY d.name;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -94162,7 +94078,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "multi-choice-1",
@@ -94312,19 +94229,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.cards.sketch1.title",
           "sketchId": "finding-missing-relationships-sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-finding-missing-relationships-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.prompt",
-            "exerciseKey": "try-finding-missing-relationships-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -94360,7 +94265,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-finding-missing-relationships-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch0",
           "language": "sql",
@@ -94404,7 +94309,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT departments.name\nFROM departments\nLEFT JOIN courses\n  ON departments.id = courses.department_id\n AND courses.title LIKE '%History%'\nWHERE courses.id IS NULL\nORDER BY departments.name;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -94416,16 +94321,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-finding-missing-relationships-sketch1",
+          "id": "practice-find-students-missing-biology",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -94442,11 +94348,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -94465,7 +94371,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id\n AND enrollments.course_id = 1\nWHERE enrollments.id IS NULL\nORDER BY students.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -94477,7 +94383,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "multi-choice-1",
@@ -94630,19 +94537,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-counting-related-rows-without-inflation-sketch1",
-            "titleKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch1.title",
-            "promptKey": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch1.prompt",
-            "exerciseKey": "try-counting-related-rows-without-inflation-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -94678,7 +94573,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
         {
           "id": "try-counting-related-rows-without-inflation-sketch0",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch0",
           "language": "sql",
@@ -94722,7 +94617,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT students.name,\n       COUNT(enrollments.id) AS enrollment_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nGROUP BY students.id, students.name\nORDER BY students.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -94734,16 +94629,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-counting-related-rows-without-inflation-sketch1",
+          "id": "practice-count-department-breadth-per-student",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch1",
+          "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-department-breadth-per-student",
           "language": "sql",
-          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch1.starterCode",
+          "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-department-breadth-per-student.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -94760,11 +94656,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch1.starterCode",
+            "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-department-breadth-per-student.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch1.starterCode",
+                "content": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-department-breadth-per-student.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -94783,7 +94679,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT students.name,\n       COUNT(DISTINCT courses.department_id) AS department_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id\nGROUP BY students.id, students.name\nORDER BY students.id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-department-breadth-per-student.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -94795,7 +94691,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "quiz1",
@@ -95065,7 +94962,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT d.name, c.title\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step1_preserve_departments.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -95078,7 +94975,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step2-count-courses",
@@ -95127,7 +95025,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nGROUP BY d.name;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step2_count_courses.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -95140,7 +95038,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step3-extend-enrollments",
@@ -95189,7 +95088,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step3_extend_enrollments.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -95202,7 +95101,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step4-count-enrollments",
@@ -95251,7 +95151,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step4_count_enrollments.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -95264,7 +95164,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step5-count-unique-students",
@@ -95313,7 +95214,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step5_count_unique_students.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -95326,7 +95227,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step6-rank-scorecard",
@@ -95375,7 +95277,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT d.name, COUNT(DISTINCT c.id) AS course_count, COUNT(e.id) AS enrollment_count, COUNT(DISTINCT e.student_id) AS student_count\nFROM departments d\nLEFT JOIN courses c ON d.id = c.department_id\nLEFT JOIN enrollments e ON c.id = e.course_id\nGROUP BY d.name\nORDER BY enrollment_count DESC, d.name ASC;",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.module-2-department-participation-scorecard.moduleProject.steps.step6_rank_scorecard.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -95387,7 +95289,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -95397,7 +95300,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "moduleSlug": "multi-table-sql-module-3-final-capstone",
       "sectionSlug": "multi-table-sql-multi-table-sql-section-3-final-capstone",
       "prefix": "multi_table_sql_module_3",
-      "minutes": 100,
+      "minutes": 110,
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
@@ -95534,7 +95437,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step1_establish_grain.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -95547,7 +95450,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step2-add-counts",
@@ -95596,7 +95500,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step2_add_counts.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -95609,7 +95513,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step3-add-distinct-students",
@@ -95658,7 +95563,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step3_add_distinct_students.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -95671,7 +95576,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "step4-label-rank",
@@ -95720,7 +95626,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "school_relations_intro",
             "resultShape": "table",
-            "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count,\n       CASE\n         WHEN COUNT(e.id) = 0 THEN 'Not enrolled'\n         WHEN COUNT(DISTINCT d.id) >= 2 THEN 'Cross-disciplinary'\n         ELSE 'Focused'\n       END AS participation_status\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level\nORDER BY department_count DESC,\n         enrollment_count DESC,\n         student_name ASC;\n",
+            "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step4_label_rank.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -95732,7 +95638,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     }

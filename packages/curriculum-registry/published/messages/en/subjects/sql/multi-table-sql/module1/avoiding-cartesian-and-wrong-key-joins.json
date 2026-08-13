@@ -19,9 +19,9 @@
           "tryIt": {
             "allowReveal": true,
             "try_avoiding_cartesian_and_wrong_key_joins_sketch0": {
-              "title": "Try a Connected Grade-Level Course List",
-              "prompt": "List each enrolled student grade level beside the matching course title without creating a Cartesian product. Return `students.grade_level, courses.title` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `students.grade_level, courses.title`.",
-              "hint": "The bridge table supplies the two key comparisons that prevent unrelated combinations.",
+              "title": "Build a Connected Grade-Level Course List",
+              "prompt": "List the grade level of each enrolled student beside the matching course title. Follow the documented relationship through `enrollments`, keep one row per enrollment, and sort first by grade level and then by course title.",
+              "hint": "Students and courses are not directly related. The bridge contains the student key and course key needed to connect the two sides.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29,18 +29,6 @@
               },
               "starterCode": "SELECT students.name, courses.title\nFROM students\n-- Complete the JOINs here\n;",
               "solutionCode": "SELECT students.grade_level,\n       courses.title\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY students.grade_level, courses.title;"
-            },
-            "try_avoiding_cartesian_and_wrong_key_joins_sketch1": {
-              "title": "Repair a Wrong-Key Enrollment Audit",
-              "prompt": "Start from `enrollments` and return enrollment id, student name, and course title. Return `e.id AS enrollment_id, s.name AS student_name, c.title AS course_title` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `e.student_id = s.id`. Use a INNER JOIN to connect `courses` on `e.course_id = c.id`. Sort the final result by `e.id`.",
-              "hint": "`student_id` points to `students.id`; `course_id` points to `courses.id`.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `courses` on `e.course_id = c.id`. Sort the final result by `e.id`."
-              },
-              "starterCode": "-- Repair the key path for an enrollment audit\n",
-              "solutionCode": "SELECT e.id AS enrollment_id,\n       s.name AS student_name,\n       c.title AS course_title\nFROM enrollments AS e\nINNER JOIN students AS s\n  ON e.student_id = s.id\nINNER JOIN courses AS c\n  ON e.course_id = c.id\nORDER BY e.id;\n"
             }
           },
           "practice": {
@@ -140,6 +128,18 @@
                 "enrollments.student_id",
                 "students.id"
               ]
+            },
+            "practice-repair-enrollment-key-path": {
+              "title": "Practice: Repair an Enrollment Key Path",
+              "prompt": "Build an enrollment audit with one row per enrollment. Return the enrollment id as `enrollment_id`, student name as `student_name`, and course title as `course_title`. Connect each enrollment to the student and course it actually references, then sort by enrollment id.",
+              "hint": "Treat the two foreign keys stored on each enrollment as separate documented relationships.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `courses` on `e.course_id = c.id`. Sort the final result by `e.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT e.id AS enrollment_id,\n       s.name AS student_name,\n       c.title AS course_title\nFROM enrollments AS e\nINNER JOIN students AS s\n  ON e.student_id = s.id\nINNER JOIN courses AS c\n  ON e.course_id = c.id\nORDER BY e.id;\n"
             }
           }
         }

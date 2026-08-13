@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-qualifying-columns-across-tables-sketch1",
-        "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.title",
-        "promptKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.prompt",
-        "exerciseKey": "try-qualifying-columns-across-tables-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -95,7 +83,7 @@
     {
       "id": "try-qualifying-columns-across-tables-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch0",
       "language": "sql",
@@ -139,7 +127,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.name AS student_name,\n       enrollments.term\nFROM enrollments\nINNER JOIN students\n  ON enrollments.student_id = students.id\nORDER BY enrollments.id;\n",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -151,16 +139,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-qualifying-columns-across-tables-sketch1",
+      "id": "practice-qualify-course-department-columns",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1",
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.starterCode",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -177,11 +166,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.starterCode",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.tryIt.try_qualifying_columns_across_tables_sketch1.starterCode",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -200,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT courses.id AS course_id,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id\nORDER BY courses.id;\n",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.qualifying-columns-across-tables.practice.practice-qualify-course-department-columns.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -212,7 +201,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-1",

@@ -19,9 +19,9 @@
           "tryIt": {
             "allowReveal": true,
             "try_finding_missing_relationships_sketch0": {
-              "title": "Try a Filtered Anti-Join",
-              "prompt": "Find every department that does not offer a course whose title contains `History`. Return `departments.name` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `departments.id = courses.department_id AND courses.title LIKE '%History%'`. Keep only rows where `courses.id IS NULL`. Sort the final result by `departments.name`.",
-              "hint": "Filter the optional course relationship before checking whether a match exists.",
+              "title": "Find Departments Missing a History Course",
+              "prompt": "Return the names of departments that do not offer any course whose title contains `History`. Sort the result alphabetically by department name.",
+              "hint": "First define which related course would count as a match. Then keep only departments for which no such course row exists.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29,18 +29,6 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT departments.name\nFROM departments\nLEFT JOIN courses\n  ON departments.id = courses.department_id\n AND courses.title LIKE '%History%'\nWHERE courses.id IS NULL\nORDER BY departments.name;"
-            },
-            "try_finding_missing_relationships_sketch1": {
-              "title": "Try Finding Students Missing One Course",
-              "prompt": "Find students who are not enrolled in Biology, whose course id is `1`. Return `students.name` from `students` in that column order. Use a LEFT JOIN to connect `enrollments` on `students.id = enrollments.student_id AND enrollments.course_id = 1`. Keep only rows where `enrollments.id IS NULL`. Sort the final result by `students.id`.",
-              "hint": "The question is about one specific relationship, so limit the optional enrollment match in the ON clause.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Keep only rows where `enrollments.id IS NULL`. Sort the final result by `students.id`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id\n AND enrollments.course_id = 1\nWHERE enrollments.id IS NULL\nORDER BY students.id;"
             }
           },
           "practice": {
@@ -141,6 +129,18 @@
                 "t3": "Check for NULL in right table",
                 "t4": "Select columns from left table"
               }
+            },
+            "practice-find-students-missing-biology": {
+              "title": "Practice: Find Students Missing Biology",
+              "prompt": "Biology has course id `1`. Return the names of students who do not have an enrollment in that course, even if they are enrolled in other courses. Sort by student id.",
+              "hint": "The absence question concerns one specific enrollment relationship, not whether the student has any enrollment at all.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Keep only rows where `enrollments.id IS NULL`. Sort the final result by `students.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id\n AND enrollments.course_id = 1\nWHERE enrollments.id IS NULL\nORDER BY students.id;"
             }
           }
         }

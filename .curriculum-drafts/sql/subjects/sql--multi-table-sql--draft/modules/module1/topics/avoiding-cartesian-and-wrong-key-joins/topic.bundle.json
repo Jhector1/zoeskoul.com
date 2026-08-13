@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch1",
-        "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.title",
-        "promptKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.prompt",
-        "exerciseKey": "try-avoiding-cartesian-and-wrong-key-joins-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -95,7 +83,7 @@
     {
       "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0",
       "language": "sql",
@@ -139,7 +127,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT students.grade_level,\n       courses.title\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY students.grade_level, courses.title;",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -151,16 +139,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-avoiding-cartesian-and-wrong-key-joins-sketch1",
+      "id": "practice-repair-enrollment-key-path",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1",
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path",
       "language": "sql",
-      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.starterCode",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -177,11 +166,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.starterCode",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.tryIt.try_avoiding_cartesian_and_wrong_key_joins_sketch1.starterCode",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -200,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT e.id AS enrollment_id,\n       s.name AS student_name,\n       c.title AS course_title\nFROM enrollments AS e\nINNER JOIN students AS s\n  ON e.student_id = s.id\nINNER JOIN courses AS c\n  ON e.course_id = c.id\nORDER BY e.id;\n",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-repair-enrollment-key-path.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -212,7 +201,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "quiz1",

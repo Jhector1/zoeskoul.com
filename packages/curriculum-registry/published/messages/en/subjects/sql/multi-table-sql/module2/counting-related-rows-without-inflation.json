@@ -19,9 +19,9 @@
           "tryIt": {
             "allowReveal": true,
             "try_counting_related_rows_without_inflation_sketch0": {
-              "title": "Try Counting Enrollments per Student",
-              "prompt": "List every student and the number of enrollment rows they have. Calculate and return `students.name, COUNT(enrollments.id) AS enrollment_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Produce one result row per `students.id, students.name`. Sort the final result by `students.id`.",
-              "hint": "Count a nullable identifier from the right table, not `COUNT(*)`.",
+              "title": "Count Enrollments Without Losing Students",
+              "prompt": "Return every student with an `enrollment_count` showing how many enrollment records belong to that student. Students with no enrollments must still appear with zero. Keep one result row per student and sort by student id.",
+              "hint": "Count evidence of a real enrollment match rather than counting the preserved placeholder row.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29,18 +29,6 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name,\n       COUNT(enrollments.id) AS enrollment_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nGROUP BY students.id, students.name\nORDER BY students.id;"
-            },
-            "try_counting_related_rows_without_inflation_sketch1": {
-              "title": "Try Counting Department Breadth per Student",
-              "prompt": "List every student and the number of distinct departments represented by their enrolled courses. Calculate and return `students.name, COUNT(DISTINCT courses.department_id) AS department_count` from `students`. Use a LEFT JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a LEFT JOIN to connect `courses` on `enrollments.course_id = courses.id`. Produce one result row per `students.id, students.name`. Sort the final result by `students.id`.",
-              "hint": "Follow enrollments to courses, then count unique department ids at the student grain.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `students.id, students.name`. Sort the final result by `students.id`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT students.name,\n       COUNT(DISTINCT courses.department_id) AS department_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id\nGROUP BY students.id, students.name\nORDER BY students.id;"
             }
           },
           "practice": {
@@ -142,6 +130,18 @@
                 "c": "To ignore unmatched rows",
                 "d": "To simplify the query"
               }
+            },
+            "practice-count-department-breadth-per-student": {
+              "title": "Practice: Count Department Breadth per Student",
+              "prompt": "Return every student with a `department_count` showing how many different departments are represented by that student's enrolled courses. A department should contribute at most once for each student, even when the student takes several courses from it. Preserve students with no enrollments and sort by student id.",
+              "hint": "The joined rows may repeat the same department for one student, so the metric must count unique departments.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Produce one result row per `students.id, students.name`. Sort the final result by `students.id`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name,\n       COUNT(DISTINCT courses.department_id) AS department_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id\nGROUP BY students.id, students.name\nORDER BY students.id;"
             }
           }
         }

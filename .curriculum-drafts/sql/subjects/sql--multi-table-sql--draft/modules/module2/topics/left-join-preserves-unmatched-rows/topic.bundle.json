@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-left-join-preserves-unmatched-rows-sketch1",
-        "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.title",
-        "promptKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.prompt",
-        "exerciseKey": "try-left-join-preserves-unmatched-rows-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -95,7 +83,7 @@
     {
       "id": "try-left-join-preserves-unmatched-rows-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch0",
       "language": "sql",
@@ -139,7 +127,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -151,16 +139,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-left-join-preserves-unmatched-rows-sketch1",
+      "id": "practice-preserve-departments-through-long-path",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1",
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path",
       "language": "sql",
-      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.starterCode",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -177,11 +166,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.starterCode",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch1.starterCode",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -200,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT departments.name AS department_name,\n       students.name AS student_name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nLEFT JOIN students ON enrollments.student_id = students.id\nORDER BY departments.id, students.name;",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -212,7 +201,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "multi-choice-1",

@@ -4,7 +4,7 @@
   "moduleSlug": "multi-table-sql-module-3-final-capstone",
   "sectionSlug": "sql--multi-table-sql--draft-multi-table-sql-section-3-final-capstone",
   "prefix": "multi_table_sql_module_3",
-  "minutes": 100,
+  "minutes": 110,
   "runtimeDefaults": {
     "kind": "sql",
     "showSchema": true,
@@ -141,7 +141,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step1_establish_grain.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -154,7 +154,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "step2-add-counts",
@@ -203,7 +204,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step2_add_counts.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -216,7 +217,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "step3-add-distinct-students",
@@ -265,7 +267,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level;\n",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step3_add_distinct_students.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -278,7 +280,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "step4-label-rank",
@@ -327,7 +330,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT s.name AS student_name,\n       s.grade_level,\n       COUNT(e.id) AS enrollment_count,\n       COUNT(DISTINCT c.id) AS course_count,\n       COUNT(DISTINCT d.id) AS department_count,\n       CASE\n         WHEN COUNT(e.id) = 0 THEN 'Not enrolled'\n         WHEN COUNT(DISTINCT d.id) >= 2 THEN 'Cross-disciplinary'\n         ELSE 'Focused'\n       END AS participation_status\nFROM students AS s\nLEFT JOIN enrollments AS e\n  ON s.id = e.student_id\nLEFT JOIN courses AS c\n  ON e.course_id = c.id\nLEFT JOIN departments AS d\n  ON c.department_id = d.id\nGROUP BY s.id, s.name, s.grade_level\nORDER BY department_count DESC,\n         enrollment_count DESC,\n         student_name ASC;\n",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step4_label_rank.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -339,7 +342,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

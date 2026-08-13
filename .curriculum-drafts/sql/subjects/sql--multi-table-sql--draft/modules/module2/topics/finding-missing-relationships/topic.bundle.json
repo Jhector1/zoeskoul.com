@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.cards.sketch1.title",
       "sketchId": "finding-missing-relationships-sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-finding-missing-relationships-sketch1",
-        "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.title",
-        "promptKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.prompt",
-        "exerciseKey": "try-finding-missing-relationships-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -95,7 +83,7 @@
     {
       "id": "try-finding-missing-relationships-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch0",
       "language": "sql",
@@ -139,7 +127,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT departments.name\nFROM departments\nLEFT JOIN courses\n  ON departments.id = courses.department_id\n AND courses.title LIKE '%History%'\nWHERE courses.id IS NULL\nORDER BY departments.name;",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -151,16 +139,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-finding-missing-relationships-sketch1",
+      "id": "practice-find-students-missing-biology",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1",
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology",
       "language": "sql",
-      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.starterCode",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -177,11 +166,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.starterCode",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch1.starterCode",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -200,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id\n AND enrollments.course_id = 1\nWHERE enrollments.id IS NULL\nORDER BY students.id;",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -212,7 +201,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "multi-choice-1",

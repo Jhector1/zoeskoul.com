@@ -34,8 +34,8 @@
             "steps": {
               "step_1": {
                 "title": "Connect Courses to Departments",
-                "prompt": "Begin the Module 1 Course Enrollment Directory. Return `courses.title, departments.name` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`.",
-                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "prompt": "Begin the Course Enrollment Directory with each course title beside the name of the department that owns it. Start from courses and follow the documented course-to-department relationship. Return course title first and department name second.",
+                "hint": "At this stage one result row represents one matched course.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -46,14 +46,14 @@
               },
               "step_2": {
                 "title": "Add Enrollment Records",
-                "prompt": "Extend the Module 1 Course Enrollment Directory with the next approved requirement. Return `courses.title, departments.name, enrollments.term` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Carry the directory forward and extend each course to its enrollment records. Add the enrollment term as the third output column. The result grain should now be one row per enrollment while preserving the course and department information already present.",
+                "hint": "The course id is the relationship point between the current path and the enrollment bridge.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`."
                 },
-                "starterCode": "SELECT courses.title, departments.name FROM courses INNER JOIN departments ON courses.department_id = departments.id;\n-- Project step 2: Add Enrollment Records\n-- Keep the working code above from the previous step.\n-- Next, Extend the query to include enrollments so each result row represents one enrollment in a course\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT courses.title, departments.name FROM courses INNER JOIN departments ON courses.department_id = departments.id;",
                 "solutionCode": "SELECT courses.title, departments.name, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id;\n",
                 "starterFiles": {
                   "main_py": {
@@ -68,14 +68,14 @@
               },
               "step_3": {
                 "title": "Add Student Details",
-                "prompt": "Extend the Module 1 Course Enrollment Directory with the next approved requirement. Return `courses.title, departments.name, students.name, students.grade_level, enrollments.term` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Carry the directory forward to the student referenced by each enrollment. Return course title, department name, student name, student grade level, and enrollment term in that order while keeping one row per enrollment.",
+                "hint": "The enrollment record already contains the key needed to reach its student.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`."
                 },
-                "starterCode": "SELECT courses.title, departments.name, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id;\n-- Project step 3: Add Student Details\n-- Keep the working code above from the previous step.\n-- Next, Extend the query to include student details such as name and grade level\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT courses.title, departments.name, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id;\n",
                 "solutionCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n",
                 "starterFiles": {
                   "main_py": {
@@ -90,14 +90,14 @@
               },
               "step_4": {
                 "title": "Clarify the Directory Output",
-                "prompt": "Extend the Module 1 Course Enrollment Directory with the next approved requirement. Return `departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Preserve the complete four-table directory and rename its displayed columns to `department`, `course`, `student`, `grade_level`, and `term`, in that order. Do not change the row grain or relationship path.",
+                "hint": "This milestone changes report headings rather than which rows belong in the result.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`."
                 },
-                "starterCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n-- Project step 4: Clarify the Directory Output\n-- Keep the working code above from the previous step.\n-- Next, Use exact aliases for department, course, student, grade_level, and term without changing the row grain\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n",
                 "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n",
                 "starterFiles": {
                   "main_py": {
@@ -112,14 +112,14 @@
               },
               "step_5": {
                 "title": "Sort the Directory for Review",
-                "prompt": "Complete the Module 1 Course Enrollment Directory. Return `departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Use a INNER JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `department ASC, course ASC, student ASC`.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "prompt": "Complete the directory by sorting alphabetically by `department`, then `course`, then `student`. Preserve the same five output columns, four-table relationship path, and one-row-per-enrollment grain.",
+                "hint": "Apply ordering only after the complete directory is built.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
                   "hint_2": "Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `department ASC, course ASC, student ASC`."
                 },
-                "starterCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n-- Project step 5: Sort the Directory for Review\n-- Keep the working code above from the previous step.\n-- Next, Order the results by department, course, and student in ascending order for a clear review\n-- Add only the focused change for this step inside the existing work.\n",
+                "starterCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;\n",
                 "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id ORDER BY department ASC, course ASC, student ASC;\n",
                 "starterFiles": {
                   "main_py": {

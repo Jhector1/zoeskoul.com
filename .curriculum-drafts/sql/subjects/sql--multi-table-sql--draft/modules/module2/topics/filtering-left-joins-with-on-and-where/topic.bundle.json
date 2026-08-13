@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-filtering-left-joins-with-on-and-where-sketch1",
-        "titleKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.title",
-        "promptKey": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.prompt",
-        "exerciseKey": "try-filtering-left-joins-with-on-and-where-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -95,7 +83,7 @@
     {
       "id": "try-filtering-left-joins-with-on-and-where-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch0",
       "language": "sql",
@@ -139,7 +127,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\n AND c.title LIKE '%History%'\nORDER BY d.name;\n",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -151,16 +139,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-filtering-left-joins-with-on-and-where-sketch1",
+      "id": "practice-filter-to-history-course-rows",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1",
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows",
       "language": "sql",
-      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.starterCode",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -177,11 +166,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.starterCode",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch1.starterCode",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -200,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\nWHERE c.title LIKE '%History%'\nORDER BY d.name;\n",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -212,7 +201,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "multi-choice-1",

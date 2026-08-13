@@ -19,9 +19,9 @@
           "tryIt": {
             "allowReveal": true,
             "try_joining_through_a_bridge_table_sketch0": {
-              "title": "Try the Bridge with Enrollment Terms",
-              "prompt": "Use `enrollments` as the bridge to list each student name, course title, and enrollment term. Return `students.name AS student_name, courses.title AS course_title, enrollments.term AS enrollment_term` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Sort the final result by `students.name, courses.title`.",
-              "hint": "Follow both foreign keys in the bridge, then include one value stored on the bridge row itself.",
+              "title": "Use the Enrollment Bridge and Its Own Data",
+              "prompt": "Return one row per enrollment with student name displayed as `student_name`, course title as `course_title`, and the term stored on the enrollment as `enrollment_term`. Sort by student name and then course title.",
+              "hint": "The bridge proves which student-course pair is real and also owns the term value for that relationship.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29,18 +29,6 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name AS student_name,\n       courses.title AS course_title,\n       enrollments.term AS enrollment_term\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY students.name, courses.title;"
-            },
-            "try_joining_through_a_bridge_table_sketch1": {
-              "title": "Try a Four-Table Path for Grade Levels",
-              "prompt": "Follow the full relationship path to list each student grade level, course title, and department name for every enrollment. Return `students.grade_level, courses.title AS course_title, departments.name AS department_name` from `students` in that column order. Use a INNER JOIN to connect `enrollments` on `students.id = enrollments.student_id`. Use a INNER JOIN to connect `courses` on `enrollments.course_id = courses.id`. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `students.grade_level, courses.title`.",
-              "hint": "Keep `enrollments` between students and courses, then extend from courses to departments.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `students.grade_level, courses.title`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT students.grade_level,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id\nORDER BY students.grade_level, courses.title;"
             }
           },
           "practice": {
@@ -140,6 +128,18 @@
                 "t2": "JOIN enrollments to courses on course_id",
                 "t3": "SELECT columns from students, enrollments, and courses"
               }
+            },
+            "practice-bridge-to-department-details": {
+              "title": "Practice: Carry a Bridge Path to Department Details",
+              "prompt": "For every enrollment, return student grade level, course title as `course_title`, and department name as `department_name`. Preserve one row per enrollment while following the bridge to the course and then its department. Sort by grade level and course title.",
+              "hint": "Cross the bridge before reaching the course; only then can the path continue to the department.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `students.grade_level, courses.title`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.grade_level,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id\nORDER BY students.grade_level, courses.title;"
             }
           }
         }

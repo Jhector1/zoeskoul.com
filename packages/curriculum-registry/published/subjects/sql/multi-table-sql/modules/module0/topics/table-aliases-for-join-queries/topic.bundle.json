@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-table-aliases-for-join-queries-sketch1",
-        "titleKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.title",
-        "promptKey": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.prompt",
-        "exerciseKey": "try-table-aliases-for-join-queries-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -95,7 +83,7 @@
     {
       "id": "try-table-aliases-for-join-queries-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch0",
       "language": "sql",
@@ -139,7 +127,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT c.title AS course_title,\n       d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d\n  ON c.department_id = d.id\nORDER BY c.title;\n",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -151,16 +139,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-table-aliases-for-join-queries-sketch1",
+      "id": "practice-student-enrollment-aliases",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1",
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.starterCode",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -177,11 +166,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.starterCode",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch1.starterCode",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -200,7 +189,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT s.name AS student_name,\n       e.term AS enrollment_term,\n       e.course_id\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id\nORDER BY s.name, e.course_id;\n",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -212,7 +201,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "single-choice-1",

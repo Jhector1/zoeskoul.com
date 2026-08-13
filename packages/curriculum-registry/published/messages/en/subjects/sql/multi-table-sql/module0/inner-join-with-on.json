@@ -19,28 +19,16 @@
           "tryIt": {
             "allowReveal": true,
             "try_inner_join_with_on_sketch0": {
-              "title": "Try INNER JOIN with Enrollment Records",
-              "prompt": "Write a query that lists each enrollment id beside the grade level of the student who owns it. Return `enrollments.id, students.grade_level` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`.",
-              "hint": "Start from `enrollments.student_id` and follow it to the matching student row.",
+              "title": "Connect Enrollments to Their Students",
+              "prompt": "Return each enrollment id beside the grade level of the student who owns that enrollment. Start from `enrollments`, connect each row to its matching student, and return the enrollment id first and student grade level second.",
+              "hint": "Follow the foreign key stored on an enrollment to the student primary key it references.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `enrollments.id, students.grade_level` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`."
+                "concept": "An inner join keeps the matched enrollment-student pairs defined by the schema relationship.",
+                "hint_1": "`enrollments.student_id` points to a student.",
+                "hint_2": "The matching student key is `students.id`."
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT enrollments.id, students.grade_level\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id;"
-            },
-            "try_inner_join_with_on_sketch1": {
-              "title": "Try INNER JOIN from Departments to Courses",
-              "prompt": "Write a query that lists each department name beside the id of a course in that department. Return `departments.name, courses.id` from `departments` in that column order. Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`.",
-              "hint": "Follow the relationship from `departments.id` to the foreign key stored in `courses`.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `departments.name, courses.id` from `departments` in that column order. Use a INNER JOIN to connect `courses` on `departments.id = courses.department_id`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id;"
             }
           },
           "practice": {
@@ -140,6 +128,18 @@
                 "c": "To specify which table a column belongs to.",
                 "d": "To automatically join tables without an ON condition."
               }
+            },
+            "practice-connect-departments-to-courses": {
+              "title": "Practice: Connect Departments to Courses",
+              "prompt": "Return each department name beside the id of a course that belongs to it. Start from `departments`, connect matching course rows, and return department name first and course id second.",
+              "hint": "Follow the department primary key to the department foreign key stored on each course.",
+              "help": {
+                "concept": "A reliable join condition follows the documented primary-key/foreign-key relationship.",
+                "hint_1": "`departments.id` identifies one department.",
+                "hint_2": "`courses.department_id` records which department owns a course."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id;"
             }
           }
         }

@@ -20,27 +20,15 @@
             "allowReveal": true,
             "try_qualifying_columns_across_tables_sketch0": {
               "title": "Disambiguate Enrollment and Student Columns",
-              "prompt": "Return `enrollments.id AS enrollment_id, students.name AS student_name, enrollments.term` from `enrollments` in that column order. Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `enrollments.id`.",
-              "hint": "Start from `enrollments`, then follow `student_id` to `students.id`.",
+              "prompt": "Build an enrollment-to-student result with three columns: the enrollment id displayed as `enrollment_id`, the student name displayed as `student_name`, and the enrollment term. Qualify every selected column with its source table and sort by enrollment id.",
+              "hint": "Qualification answers where a value comes from; output aliases answer what the result heading should say.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `enrollments.id`."
+                "concept": "Qualified columns remove ambiguity when several joined tables contain similarly named fields.",
+                "hint_1": "The enrollment identifier and term come from `enrollments`.",
+                "hint_2": "The student's name comes from `students`."
               },
               "starterCode": "-- Return a readable enrollment-to-student result\n",
               "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.name AS student_name,\n       enrollments.term\nFROM enrollments\nINNER JOIN students\n  ON enrollments.student_id = students.id\nORDER BY enrollments.id;\n"
-            },
-            "try_qualifying_columns_across_tables_sketch1": {
-              "title": "Disambiguate Course and Department Columns",
-              "prompt": "Return `courses.id AS course_id, courses.title AS course_title, departments.name AS department_name` from `courses` in that column order. Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `courses.id`.",
-              "hint": "The relationship is `courses.department_id = departments.id`.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a INNER JOIN to connect `departments` on `courses.department_id = departments.id`. Sort the final result by `courses.id`."
-              },
-              "starterCode": "-- Return a readable course-to-department result\n",
-              "solutionCode": "SELECT courses.id AS course_id,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id\nORDER BY courses.id;\n"
             }
           },
           "practice": {
@@ -141,6 +129,18 @@
                 "IN",
                 "ON"
               ]
+            },
+            "practice-qualify-course-department-columns": {
+              "title": "Practice: Qualify Course and Department Columns",
+              "prompt": "Build a course-to-department result containing the course id as `course_id`, course title as `course_title`, and department name as `department_name`. Qualify every selected column with its source table and sort by course id.",
+              "hint": "Keep source qualification and displayed output names as two separate decisions.",
+              "help": {
+                "concept": "Qualification identifies a source table while an output alias labels the displayed result.",
+                "hint_1": "Course id and title come from `courses`.",
+                "hint_2": "Department name comes from `departments`."
+              },
+              "starterCode": "-- Return a readable course-to-department result\n",
+              "solutionCode": "SELECT courses.id AS course_id,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id\nORDER BY courses.id;\n"
             }
           }
         }

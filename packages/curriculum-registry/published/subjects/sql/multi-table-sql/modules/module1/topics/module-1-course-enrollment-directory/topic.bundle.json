@@ -149,7 +149,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT courses.title, departments.name FROM courses INNER JOIN departments ON courses.department_id = departments.id;",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_1.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -162,7 +162,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "step-2",
@@ -211,7 +212,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT courses.title, departments.name, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id;",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_2.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -224,7 +225,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "step-3",
@@ -273,7 +275,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT courses.title, departments.name, students.name, students.grade_level, enrollments.term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_3.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -286,7 +288,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "step-4",
@@ -335,7 +338,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id;",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_4.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -348,7 +351,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "step-5",
@@ -397,7 +401,7 @@
         "type": "sql_query",
         "datasetId": "school_relations_intro",
         "resultShape": "table",
-        "solutionCode": "SELECT departments.name AS department, courses.title AS course, students.name AS student, students.grade_level AS grade_level, enrollments.term AS term FROM courses INNER JOIN departments ON courses.department_id = departments.id INNER JOIN enrollments ON courses.id = enrollments.course_id INNER JOIN students ON enrollments.student_id = students.id ORDER BY department ASC, course ASC, student ASC;",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.module-1-course-enrollment-directory.moduleProject.steps.step_5.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -409,7 +413,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

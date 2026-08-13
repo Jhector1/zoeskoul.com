@@ -19,9 +19,9 @@
           "tryIt": {
             "allowReveal": true,
             "try_filtering_left_joins_with_on_and_where_sketch0": {
-              "title": "Preserve Every Department While Limiting Matches",
-              "prompt": "Return every department, but match only courses whose title contains `History`. Return `d.name AS department_name, c.title AS history_course` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id AND c.title LIKE '%History%'`. Sort the final result by `d.name`.",
-              "hint": "Add the title condition after the key comparison inside the `ON` clause.",
+              "title": "Preserve Departments While Limiting Course Matches",
+              "prompt": "Return every department as `department_name` and, when available, a related course whose title contains `History` as `history_course`. Departments without a matching History course must remain in the result. Sort by department name.",
+              "hint": "Limit which course rows are allowed to match without turning the condition into a final-row filter.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29,18 +29,6 @@
               },
               "starterCode": "-- Keep every department while matching only History courses\n",
               "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\n AND c.title LIKE '%History%'\nORDER BY d.name;\n"
-            },
-            "try_filtering_left_joins_with_on_and_where_sketch1": {
-              "title": "Move the Same Condition to WHERE",
-              "prompt": "Return `d.name AS department_name, c.title AS history_course` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `d.id = c.department_id`. Keep only rows where `c.title LIKE '%History%'`. Sort the final result by `d.name`.",
-              "hint": "Keep the key comparison in `ON`; move only the title condition below the join.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Keep only rows where `c.title LIKE '%History%'`. Sort the final result by `d.name`."
-              },
-              "starterCode": "-- Move the same right-table filter to WHERE\n",
-              "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\nWHERE c.title LIKE '%History%'\nORDER BY d.name;\n"
             }
           },
           "practice": {
@@ -141,6 +129,18 @@
                 "c": "To exclude unmatched rows from the left table.",
                 "d": "To perform a full outer join."
               }
+            },
+            "practice-filter-to-history-course-rows": {
+              "title": "Practice: Keep Only History Course Rows",
+              "prompt": "Return department name as `department_name` and matching course title as `history_course`, but keep only final rows whose course title contains `History`. Departments without such a course should not appear. Sort by department name.",
+              "hint": "This time the title condition controls which completed result rows survive rather than which optional matches are allowed.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Keep only rows where `c.title LIKE '%History%'`. Sort the final result by `d.name`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\nWHERE c.title LIKE '%History%'\nORDER BY d.name;\n"
             }
           }
         }

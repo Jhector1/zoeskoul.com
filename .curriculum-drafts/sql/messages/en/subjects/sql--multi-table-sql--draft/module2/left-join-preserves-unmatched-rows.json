@@ -19,9 +19,9 @@
           "tryIt": {
             "allowReveal": true,
             "try_left_join_preserves_unmatched_rows_sketch0": {
-              "title": "Try LEFT JOIN with Every Department",
-              "prompt": "List every department beside a related course id. Return `departments.name, courses.id` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `departments.id = courses.department_id`. Sort the final result by `departments.id, courses.id`.",
-              "hint": "Place the table that must be preserved on the left side of the join.",
+              "title": "Keep Every Department in a Course Listing",
+              "prompt": "Return every department name beside each related course id. A department with no course must still appear. Sort first by department id and then by course id.",
+              "hint": "Choose the department as the entity whose presence is guaranteed, then attach course information when available.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29,18 +29,6 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nORDER BY departments.id, courses.id;"
-            },
-            "try_left_join_preserves_unmatched_rows_sketch1": {
-              "title": "Try Preserving Departments through a Longer Path",
-              "prompt": "List every department with the names of students enrolled in its courses. Return `departments.name AS department_name, students.name AS student_name` from `departments` in that column order. Use a LEFT JOIN to connect `courses` on `departments.id = courses.department_id`. Use a LEFT JOIN to connect `enrollments` on `courses.id = enrollments.course_id`. Use a LEFT JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `departments.id, students.name`.",
-              "hint": "Keep every join after `departments` as a LEFT JOIN so a missing row does not break the path.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Use a LEFT JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `departments.id, students.name`."
-              },
-              "starterCode": "-- Write your SQL answer below",
-              "solutionCode": "SELECT departments.name AS department_name,\n       students.name AS student_name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nLEFT JOIN students ON enrollments.student_id = students.id\nORDER BY departments.id, students.name;"
             }
           },
           "practice": {
@@ -141,6 +129,18 @@
                 "c": "To exclude unmatched rows from the left table.",
                 "d": "To include all rows from the right table, even if there are no matches in the left table."
               }
+            },
+            "practice-preserve-departments-through-long-path": {
+              "title": "Practice: Preserve Departments Through a Longer Path",
+              "prompt": "Return every department as `department_name` together with the names of students enrolled in its courses as `student_name`. Departments must remain visible even if their relationship path ends before reaching a student. Sort by department id and then student name.",
+              "hint": "Every step after the preserved department must allow an unmatched row to continue through the path.",
+              "help": {
+                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
+                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
+                "hint_2": "Use a LEFT JOIN to connect `students` on `enrollments.student_id = students.id`. Sort the final result by `departments.id, students.name`."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name AS department_name,\n       students.name AS student_name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nLEFT JOIN students ON enrollments.student_id = students.id\nORDER BY departments.id, students.name;"
             }
           }
         }
