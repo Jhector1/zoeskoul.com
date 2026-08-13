@@ -2,7 +2,7 @@
   "topicId": "case-for-readable-labels",
   "subjectSlug": "sql-analysis-reporting",
   "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
-  "sectionSlug": "sql-analysis-reporting-section-1-business-calculations",
+  "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations",
   "prefix": "sql_analysis_reporting_module_1",
   "minutes": 24,
   "runtimeDefaults": {
@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-case-for-readable-labels-sketch1",
-        "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.title",
-        "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.prompt",
-        "exerciseKey": "try-case-for-readable-labels-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -248,7 +236,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    CASE\n        WHEN discount_pct IS NULL THEN 'Missing discount'\n        WHEN discount_pct >= 15 THEN 'Large discount'\n        ELSE 'Standard discount'\n    END AS discount_review\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -261,16 +249,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-case-for-readable-labels-sketch1",
+      "id": "practice-order-value-bands",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1",
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.starterCode",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -287,11 +276,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.starterCode",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.starterCode",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -310,7 +299,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 130 THEN 'High value'\n        WHEN quantity * unit_price >= 80 THEN 'Mid value'\n        ELSE 'Low value'\n    END AS value_band\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -323,7 +312,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

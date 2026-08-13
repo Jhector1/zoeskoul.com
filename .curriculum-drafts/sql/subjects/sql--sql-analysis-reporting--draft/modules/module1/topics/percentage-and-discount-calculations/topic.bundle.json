@@ -2,7 +2,7 @@
   "topicId": "percentage-and-discount-calculations",
   "subjectSlug": "sql--sql-analysis-reporting--draft",
   "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
-  "sectionSlug": "sql-analysis-reporting-section-1-business-calculations",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations",
   "prefix": "sql_analysis_reporting_module_1",
   "minutes": 24,
   "runtimeDefaults": {
@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-percentage-and-discount-calculations-sketch1",
-        "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.title",
-        "promptKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.prompt",
-        "exerciseKey": "try-percentage-and-discount-calculations-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -248,7 +236,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    unit_price,\n    unit_price * COALESCE(discount_pct, 0) / 100 AS unit_discount,\n    unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS discounted_unit_price\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -261,16 +249,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-percentage-and-discount-calculations-sketch1",
+      "id": "practice-pending-order-net-sales",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1",
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -287,11 +276,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.starterCode",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -310,7 +299,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Pending';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -323,7 +312,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

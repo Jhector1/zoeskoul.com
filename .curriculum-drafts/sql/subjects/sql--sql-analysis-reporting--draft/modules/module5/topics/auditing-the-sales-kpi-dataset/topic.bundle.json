@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-auditing-the-sales-kpi-dataset-sketch1",
-        "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.tryIt.try_auditing_the_sales_kpi_dataset_sketch1.title",
-        "promptKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.tryIt.try_auditing_the_sales_kpi_dataset_sketch1.prompt",
-        "exerciseKey": "try-auditing-the-sales-kpi-dataset-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -261,16 +249,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-auditing-the-sales-kpi-dataset-sketch1",
+      "id": "practice-audit-date-and-value-boundaries",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.tryIt.try_auditing_the_sales_kpi_dataset_sketch1",
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-audit-date-and-value-boundaries",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.tryIt.try_auditing_the_sales_kpi_dataset_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-audit-date-and-value-boundaries.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -287,11 +276,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.tryIt.try_auditing_the_sales_kpi_dataset_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-audit-date-and-value-boundaries.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.tryIt.try_auditing_the_sales_kpi_dataset_sketch1.starterCode",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-audit-date-and-value-boundaries.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -323,7 +312,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

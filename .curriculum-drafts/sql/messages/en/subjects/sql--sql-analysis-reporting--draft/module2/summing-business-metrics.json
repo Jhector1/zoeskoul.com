@@ -113,33 +113,33 @@
                 "AVG",
                 "ROUND"
               ]
+            },
+            "practice-total-discount-dollars": {
+              "title": "Practice: Total Null-Safe Discount Dollars",
+              "prompt": "Return `total_discount_amount` for all orders. For each row, calculate its merchandise value and apply its discount percentage, treating a missing percentage as zero. Add the row-level discount amounts together and display the final total rounded to two decimal places.",
+              "hint": "Build the discount amount at row level, aggregate those amounts, and round the final report value.",
+              "help": {
+                "concept": "SUM can aggregate a calculated business measure rather than only a stored column.",
+                "hint_1": "A missing discount contributes zero discount dollars.",
+                "hint_2": "Round the completed total, not each input independently."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT ROUND(\n    SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100),\n    2\n) AS total_discount_amount\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_summing_business_metrics_sketch0": {
               "title": "Total Units in Pending Orders",
-              "prompt": "Return one value named `pending_units` that sums `quantity` for pending orders. Calculate and return `SUM(quantity) AS pending_units` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`.",
-              "hint": "Filter to pending rows before summing quantity.",
+              "prompt": "Return one value named `pending_units` containing the total quantity across pending orders.",
+              "hint": "Keep only pending rows before adding their quantity values.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `SUM(quantity) AS pending_units` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`."
+                "concept": "SUM combines a numeric measure across the selected report population.",
+                "hint_1": "The measure to total is `quantity`.",
+                "hint_2": "Pending orders are the only rows in this report."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT SUM(quantity) AS pending_units\nFROM sales_reporting\nWHERE order_status = 'Pending';"
-            },
-            "try_summing_business_metrics_sketch1": {
-              "title": "Total Null-Safe Discount Dollars",
-              "prompt": "Return the total discount amount across all orders, rounded to two decimals as `total_discount_amount`. Calculate and return `ROUND( SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100), 2 ) AS total_discount_amount` from `sales_reporting`.",
-              "hint": "Place the complete row-level discount expression inside SUM.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `ROUND( SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100), 2 ) AS total_discount_amount` from `sales_reporting`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT ROUND(\n    SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100),\n    2\n) AS total_discount_amount\nFROM sales_reporting;"
             }
           }
         }

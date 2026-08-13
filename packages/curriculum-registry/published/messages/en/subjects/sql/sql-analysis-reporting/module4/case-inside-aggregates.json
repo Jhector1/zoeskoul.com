@@ -113,33 +113,33 @@
                 "NULL + 1",
                 "COUNT(*)"
               ]
+            },
+            "practice-completed-net-sales-with-full-population": {
+              "title": "Practice: Completed Net Sales Without Dropping Rows",
+              "prompt": "Return one row per `region` with `total_orders` and `completed_net_sales`. The total-order metric must count every status in each region. The sales metric should include net sales only from completed orders, treating missing discounts as zero. Non-completed rows should contribute zero to that sales metric. Round completed net sales to two decimal places and sort by region.",
+              "hint": "Do not filter away non-completed rows because the first metric still needs them.",
+              "help": {
+                "concept": "Conditional aggregation preserves the full group while letting one metric include only selected rows.",
+                "hint_1": "Every row contributes to total orders.",
+                "hint_2": "Only completed rows contribute money."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_case_inside_aggregates_sketch0": {
               "title": "Count Pending Orders by Category",
-              "prompt": "Return one row per `category` with `total_orders` and `pending_orders`. Calculate and return `category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Pending' THEN 1 ELSE 0 END) AS pending_orders` from `sales_reporting`. Produce one result row per `category`. Sort the final result by `category`.",
-              "hint": "Keep every row in the group; contribute one only when the status is pending.",
+              "prompt": "Return one row per `category` with `total_orders` and `pending_orders`. Count every order in the first metric, but count only pending orders in the second without removing the other statuses from the group. Sort by category.",
+              "hint": "Keep the complete category population and let only matching rows contribute to the conditional count.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `category`."
+                "concept": "Conditional aggregation lets several measures use different conditions while sharing the same groups.",
+                "hint_1": "The total-order metric includes every row.",
+                "hint_2": "The pending metric contributes one only when the row has the requested status."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Pending' THEN 1 ELSE 0 END) AS pending_orders\nFROM sales_reporting\nGROUP BY category\nORDER BY category;"
-            },
-            "try_case_inside_aggregates_sketch1": {
-              "title": "Completed Net Sales by Region Without Filtering Rows",
-              "prompt": "Return one row per `region` with `total_orders` and completed-order net sales as `completed_net_sales`, rounded to two decimals. Calculate and return `region, COUNT(*) AS total_orders, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales` from `sales_reporting`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "Return the net-sales expression only in the completed branch; return zero otherwise.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
             }
           }
         }

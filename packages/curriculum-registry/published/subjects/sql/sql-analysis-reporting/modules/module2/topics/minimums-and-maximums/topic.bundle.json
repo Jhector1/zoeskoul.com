@@ -2,7 +2,7 @@
   "topicId": "minimums-and-maximums",
   "subjectSlug": "sql-analysis-reporting",
   "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
-  "sectionSlug": "sql-analysis-reporting-section-2-averages-and-extremes",
+  "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes",
   "prefix": "sql_analysis_reporting_module_2",
   "minutes": 24,
   "runtimeDefaults": {
@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-minimums-and-maximums-sketch1",
-        "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.title",
-        "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.prompt",
-        "exerciseKey": "try-minimums-and-maximums-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -249,7 +237,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -262,16 +250,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-minimums-and-maximums-sketch1",
+      "id": "practice-completed-net-sales-range",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1",
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.starterCode",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -288,11 +277,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.starterCode",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.starterCode",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -311,7 +300,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS minimum_net_sales,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS maximum_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -324,7 +313,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

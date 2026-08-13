@@ -3365,8 +3365,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "profileId": "sql",
       "catalogSlug": "sql",
       "genKey": "sql_for_beginners",
-      "order": 1,
+      "order": 0,
       "accessPolicy": "paid",
+      "visibility": "public",
       "status": "active",
       "imagePublicId": null,
       "imageAlt": null,
@@ -3376,10 +3377,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "meta": {
         "curriculum": {
           "plannedModuleCount": 6,
-          "isTerminalRelease": true,
-          "prerequisiteSubjectSlugs": [
-            "sql-v2"
-          ]
+          "isTerminalRelease": false,
+          "moreComingMessageKey": "subjects.sql-analysis-reporting.moreComingSoon"
         },
         "completionPolicy": {
           "requireAllPublishedModules": true,
@@ -3387,10 +3386,10 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           "certificateEnabledByDefault": true
         },
         "versioning": {
-          "family": "sql-analysis-reporting",
-          "version": 1,
+          "family": "sql",
+          "version": 2,
           "status": "active",
-          "defaultForNewEnrollments": true,
+          "defaultForNewEnrollments": false,
           "supersedes": null,
           "supersededBy": null
         }
@@ -3410,8 +3409,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -3422,9 +3421,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "serviceDefaults": null,
         "meta": {
           "estimatedMinutes": 151,
-          "prereqKeys": [
-            "subjects.sql-analysis-reporting.prerequisites.0"
-          ],
+          "prereqKeys": [],
           "outcomeKeys": [
             "modules.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.outcomes.0",
             "modules.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.outcomes.1",
@@ -3438,19 +3435,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "sql-analysis-reporting-section-0-readable-output",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output",
             "order": 1,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output.description",
             "meta": {
               "module": 0,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3460,19 +3456,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-0-calculated-output",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output",
             "order": 2,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output.description",
             "meta": {
               "module": 0,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3482,18 +3477,19 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-0-module-project",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-0-module-project",
             "order": 3,
             "role": "module_project",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-module-project.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-module-project.description",
             "meta": {
               "module": 0,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-module-project.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.bullets.2"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-module-project.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-module-project.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-module-project.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-sql-analysis-reporting-section-0-module-project.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3516,8 +3512,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -3544,19 +3540,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "sql-analysis-reporting-section-1-null-safety",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety",
             "order": 1,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety.description",
             "meta": {
               "module": 1,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3566,19 +3561,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-1-business-calculations",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations",
             "order": 2,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations.description",
             "meta": {
               "module": 1,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3588,18 +3582,19 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-1-module-project",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-1-module-project",
             "order": 3,
             "role": "module_project",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-module-project.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-module-project.description",
             "meta": {
               "module": 1,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-module-project.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.bullets.2"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-module-project.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-module-project.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-module-project.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-sql-analysis-reporting-section-1-module-project.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3622,8 +3617,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -3650,19 +3645,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "sql-analysis-reporting-section-2-counts-and-totals",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals",
             "order": 1,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals.description",
             "meta": {
               "module": 2,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3672,19 +3666,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-2-averages-and-extremes",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes",
             "order": 2,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes.description",
             "meta": {
               "module": 2,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3694,18 +3687,19 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-2-module-project",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-2-module-project",
             "order": 3,
             "role": "module_project",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-module-project.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-module-project.description",
             "meta": {
               "module": 2,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-module-project.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.bullets.2"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-module-project.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-module-project.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-module-project.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-sql-analysis-reporting-section-2-module-project.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3728,8 +3722,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -3756,19 +3750,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "sql-analysis-reporting-section-3-grouping-basics",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics",
             "order": 1,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics.description",
             "meta": {
               "module": 3,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3778,19 +3771,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-3-ranking-and-quality",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality",
             "order": 2,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality.description",
             "meta": {
               "module": 3,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3800,18 +3792,19 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-3-module-project",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-3-module-project",
             "order": 3,
             "role": "module_project",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-module-project.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-module-project.description",
             "meta": {
               "module": 3,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-module-project.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.bullets.2"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-module-project.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-module-project.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-module-project.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-sql-analysis-reporting-section-3-module-project.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3834,8 +3827,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -3862,19 +3855,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "sql-analysis-reporting-section-4-group-filters",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters",
             "order": 1,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters.description",
             "meta": {
               "module": 4,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3884,19 +3876,18 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-4-conditional-kpis",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis",
             "order": 2,
-            "role": "lesson",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis.description",
             "meta": {
               "module": 4,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3906,18 +3897,19 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             ]
           },
           {
-            "slug": "sql-analysis-reporting-section-4-module-project",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-4-module-project",
             "order": 3,
             "role": "module_project",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-module-project.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-module-project.description",
             "meta": {
               "module": 4,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-module-project.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.bullets.2"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-module-project.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-module-project.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-module-project.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-sql-analysis-reporting-section-4-module-project.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -3940,8 +3932,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "runtimeDefaults": {
           "kind": "sql",
           "showSchema": true,
-          "showErd": false,
-          "showChen": false,
+          "showErd": true,
+          "showChen": true,
           "supportsTerminal": false,
           "supportsMultiFile": false,
           "supportsFileSystem": false,
@@ -3968,19 +3960,19 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "sections": [
           {
-            "slug": "sql-analysis-reporting-section-5-final-capstone-project",
+            "slug": "sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project",
             "order": 1,
             "role": "capstone",
-            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.title",
-            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.description",
+            "titleKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project.title",
+            "descriptionKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project.description",
             "meta": {
               "module": 5,
-              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.weeks",
+              "weeksKey": "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project.weeks",
               "bulletKeys": [
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.bullets.0",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.bullets.1",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.bullets.2",
-                "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.bullets.3"
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project.bullets.0",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project.bullets.1",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project.bullets.2",
+                "sections.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project.bullets.3"
               ]
             },
             "serviceDefaults": null,
@@ -95750,7 +95742,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "aliases-for-readable-headings",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
-      "sectionSlug": "sql-analysis-reporting-section-0-readable-output",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output",
       "prefix": "sql_analysis_reporting_module_0",
       "minutes": 24,
       "runtimeDefaults": {
@@ -95795,19 +95787,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-aliases-for-readable-headings-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch1.prompt",
-            "exerciseKey": "try-aliases-for-readable-headings-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -95996,7 +95976,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id AS order_number,\n    product_name AS product,\n    order_status AS status\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -96009,16 +95989,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-aliases-for-readable-headings-sketch1",
+          "id": "practice-reader-friendly-headings",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-reader-friendly-headings",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-reader-friendly-headings.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -96035,11 +96016,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-reader-friendly-headings.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-reader-friendly-headings.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -96058,7 +96039,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region AS \"Sales Region\",\n    category AS \"Product Category\",\n    sales_rep AS \"Account Owner\"\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-reader-friendly-headings.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -96071,7 +96052,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -96079,7 +96061,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "distinct-values-for-report-categories",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
-      "sectionSlug": "sql-analysis-reporting-section-0-readable-output",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output",
       "prefix": "sql_analysis_reporting_module_0",
       "minutes": 24,
       "runtimeDefaults": {
@@ -96124,19 +96106,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-distinct-values-for-report-categories-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.prompt",
-            "exerciseKey": "try-distinct-values-for-report-categories-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -96324,7 +96294,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT DISTINCT region\nFROM sales_reporting\nORDER BY region;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -96336,16 +96306,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-distinct-values-for-report-categories-sketch1",
+          "id": "practice-unique-region-representative-pairs",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -96362,11 +96333,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -96385,7 +96356,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT DISTINCT region, sales_rep\nFROM sales_reporting\nORDER BY region, sales_rep;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -96397,7 +96368,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -96405,7 +96377,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "arithmetic-expressions-in-select",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
-      "sectionSlug": "sql-analysis-reporting-section-0-calculated-output",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output",
       "prefix": "sql_analysis_reporting_module_0",
       "minutes": 24,
       "runtimeDefaults": {
@@ -96450,19 +96422,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-arithmetic-expressions-in-select-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.prompt",
-            "exerciseKey": "try-arithmetic-expressions-in-select-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -96652,7 +96612,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS pending_value\nFROM sales_reporting\nWHERE order_status = 'Pending';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -96665,16 +96625,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-arithmetic-expressions-in-select-sketch1",
+          "id": "practice-multi-part-order-value",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -96691,11 +96652,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -96714,7 +96675,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS merchandise_value,\n    quantity * unit_price + 4.00 AS prepared_value\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -96727,7 +96688,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -96735,7 +96697,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "rounding-report-values",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
-      "sectionSlug": "sql-analysis-reporting-section-0-calculated-output",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output",
       "prefix": "sql_analysis_reporting_module_0",
       "minutes": 24,
       "runtimeDefaults": {
@@ -96780,19 +96742,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-rounding-report-values-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch1.prompt",
-            "exerciseKey": "try-rounding-report-values-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -96982,7 +96932,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -96995,16 +96945,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-rounding-report-values-sketch1",
+          "id": "practice-round-adjusted-order-value",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-round-adjusted-order-value",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-round-adjusted-order-value.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -97021,11 +96972,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-round-adjusted-order-value.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-round-adjusted-order-value.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -97044,7 +96995,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-round-adjusted-order-value.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -97057,7 +97008,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -97065,7 +97017,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "module-0-order-value-detail-report",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
-      "sectionSlug": "sql-analysis-reporting-section-0-module-project",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-0-module-project",
       "prefix": "sql_analysis_reporting_module_0",
       "minutes": 55,
       "runtimeDefaults": {
@@ -97212,7 +97164,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    order_date,\n    product_name,\n    quantity,\n    unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_1.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -97225,7 +97177,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-2",
@@ -97274,7 +97227,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_2.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -97287,7 +97240,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-3",
@@ -97336,7 +97290,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    quantity * unit_price AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_3.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -97349,7 +97303,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-4",
@@ -97398,7 +97353,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_4.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -97411,7 +97366,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-5",
@@ -97460,7 +97416,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY gross_sales DESC, order_number ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_5.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -97472,7 +97428,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -97480,7 +97437,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "how-null-affects-calculations",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
-      "sectionSlug": "sql-analysis-reporting-section-1-null-safety",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety",
       "prefix": "sql_analysis_reporting_module_1",
       "minutes": 24,
       "runtimeDefaults": {
@@ -97715,7 +97672,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    unit_price * discount_pct / 100 AS unit_discount\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.how-null-affects-calculations.tryIt.try_how_null_affects_calculations_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -97728,7 +97685,71 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
+        },
+        {
+          "id": "practice-raw-null-discounted-price",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.how-null-affects-calculations.practice.practice-raw-null-discounted-price",
+          "language": "sql",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.how-null-affects-calculations.practice.practice-raw-null-discounted-price.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "sales_reporting",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "main.sql",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.how-null-affects-calculations.practice.practice-raw-null-discounted-price.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.sql",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.how-null-affects-calculations.practice.practice-raw-null-discounted-price.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "main.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "main.sql"
+              ]
+            }
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "sales_reporting",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.how-null-affects-calculations.practice.practice-raw-null-discounted-price.solutionCode",
+            "sqlFileOrder": [
+              "main.sql"
+            ],
+            "ignoreRowOrder": true
+          },
+          "sqlFileOrder": [
+            "main.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "main.sql"
+            ]
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -97736,7 +97757,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "coalesce-for-missing-values",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
-      "sectionSlug": "sql-analysis-reporting-section-1-null-safety",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety",
       "prefix": "sql_analysis_reporting_module_1",
       "minutes": 24,
       "runtimeDefaults": {
@@ -97970,7 +97991,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.tryIt.try_coalesce_for_missing_values_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -97983,7 +98004,71 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
+        },
+        {
+          "id": "practice-null-safe-review-discount",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-null-safe-review-discount",
+          "language": "sql",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-null-safe-review-discount.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "sales_reporting",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "main.sql",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-null-safe-review-discount.starterCode",
+            "starterFiles": [
+              {
+                "path": "main.sql",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-null-safe-review-discount.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "main.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "main.sql"
+              ]
+            }
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "sales_reporting",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-null-safe-review-discount.solutionCode",
+            "sqlFileOrder": [
+              "main.sql"
+            ],
+            "ignoreRowOrder": true
+          },
+          "sqlFileOrder": [
+            "main.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "main.sql"
+            ]
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -97991,7 +98076,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "percentage-and-discount-calculations",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
-      "sectionSlug": "sql-analysis-reporting-section-1-business-calculations",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations",
       "prefix": "sql_analysis_reporting_module_1",
       "minutes": 24,
       "runtimeDefaults": {
@@ -98036,19 +98121,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-percentage-and-discount-calculations-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.prompt",
-            "exerciseKey": "try-percentage-and-discount-calculations-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -98237,7 +98310,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    unit_price,\n    unit_price * COALESCE(discount_pct, 0) / 100 AS unit_discount,\n    unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS discounted_unit_price\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -98250,16 +98323,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-percentage-and-discount-calculations-sketch1",
+          "id": "practice-pending-order-net-sales",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -98276,11 +98350,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -98299,7 +98373,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Pending';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -98312,7 +98386,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -98320,7 +98395,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "case-for-readable-labels",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
-      "sectionSlug": "sql-analysis-reporting-section-1-business-calculations",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations",
       "prefix": "sql_analysis_reporting_module_1",
       "minutes": 24,
       "runtimeDefaults": {
@@ -98365,19 +98440,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-case-for-readable-labels-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.prompt",
-            "exerciseKey": "try-case-for-readable-labels-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -98566,7 +98629,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    CASE\n        WHEN discount_pct IS NULL THEN 'Missing discount'\n        WHEN discount_pct >= 15 THEN 'Large discount'\n        ELSE 'Standard discount'\n    END AS discount_review\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -98579,16 +98642,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-case-for-readable-labels-sketch1",
+          "id": "practice-order-value-bands",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -98605,11 +98669,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.tryIt.try_case_for_readable_labels_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -98628,7 +98692,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 130 THEN 'High value'\n        WHEN quantity * unit_price >= 80 THEN 'Mid value'\n        ELSE 'Low value'\n    END AS value_band\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.practice.practice-order-value-bands.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -98641,7 +98705,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -98649,7 +98714,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "module-1-discount-audit-report",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
-      "sectionSlug": "sql-analysis-reporting-section-1-module-project",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-1-module-project",
       "prefix": "sql_analysis_reporting_module_1",
       "minutes": 60,
       "runtimeDefaults": {
@@ -98806,7 +98871,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_1.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -98819,7 +98884,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-2",
@@ -98868,7 +98934,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_2.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -98881,7 +98947,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-3",
@@ -98930,7 +98997,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_3.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -98943,7 +99010,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-4",
@@ -98992,7 +99060,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_4.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -99005,7 +99073,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-5",
@@ -99054,7 +99123,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_5.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -99067,7 +99136,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-6",
@@ -99116,7 +99186,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales,\n    CASE\n        WHEN discount_pct IS NULL THEN 'Missing discount'\n        WHEN discount_pct >= 15 THEN 'Review high discount'\n        ELSE 'OK'\n    END AS discount_review\nFROM sales_reporting\nORDER BY\n    CASE\n        WHEN discount_pct IS NULL THEN 1\n        WHEN discount_pct >= 15 THEN 2\n        ELSE 3\n    END,\n    order_id ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_6.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -99128,7 +99198,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -99136,7 +99207,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "counting-rows-and-values",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
-      "sectionSlug": "sql-analysis-reporting-section-2-counts-and-totals",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals",
       "prefix": "sql_analysis_reporting_module_2",
       "minutes": 24,
       "runtimeDefaults": {
@@ -99181,19 +99252,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-counting-rows-and-values-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch1.prompt",
-            "exerciseKey": "try-counting-rows-and-values-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -99381,7 +99440,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT COUNT(*) AS pending_orders\nFROM sales_reporting\nWHERE order_status = 'Pending';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -99394,16 +99453,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-counting-rows-and-values-sketch1",
+          "id": "practice-count-recorded-discounts",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-recorded-discounts",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-recorded-discounts.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -99420,11 +99480,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-recorded-discounts.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-recorded-discounts.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -99443,7 +99503,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    COUNT(*) AS total_orders,\n    COUNT(discount_pct) AS orders_with_discount_data\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-recorded-discounts.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -99456,7 +99516,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -99464,7 +99525,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "summing-business-metrics",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
-      "sectionSlug": "sql-analysis-reporting-section-2-counts-and-totals",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals",
       "prefix": "sql_analysis_reporting_module_2",
       "minutes": 24,
       "runtimeDefaults": {
@@ -99509,19 +99570,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-summing-business-metrics-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.prompt",
-            "exerciseKey": "try-summing-business-metrics-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -99711,7 +99760,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT SUM(quantity) AS pending_units\nFROM sales_reporting\nWHERE order_status = 'Pending';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -99724,16 +99773,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-summing-business-metrics-sketch1",
+          "id": "practice-total-discount-dollars",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -99750,11 +99800,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -99773,7 +99823,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT ROUND(\n    SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100),\n    2\n) AS total_discount_amount\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -99786,7 +99836,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -99794,7 +99845,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "averages-and-null-behavior",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
-      "sectionSlug": "sql-analysis-reporting-section-2-averages-and-extremes",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes",
       "prefix": "sql_analysis_reporting_module_2",
       "minutes": 24,
       "runtimeDefaults": {
@@ -99839,19 +99890,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-averages-and-null-behavior-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.prompt",
-            "exerciseKey": "try-averages-and-null-behavior-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -100041,7 +100080,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT ROUND(AVG(customer_rating), 2) AS average_completed_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100054,16 +100093,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-averages-and-null-behavior-sketch1",
+          "id": "practice-compare-rating-average-rules",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -100080,11 +100120,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -100103,7 +100143,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    ROUND(AVG(customer_rating), 2) AS rated_only_average,\n    ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100116,7 +100156,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -100124,7 +100165,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "minimums-and-maximums",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
-      "sectionSlug": "sql-analysis-reporting-section-2-averages-and-extremes",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes",
       "prefix": "sql_analysis_reporting_module_2",
       "minutes": 24,
       "runtimeDefaults": {
@@ -100169,19 +100210,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-minimums-and-maximums-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.prompt",
-            "exerciseKey": "try-minimums-and-maximums-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -100371,7 +100400,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity\nFROM sales_reporting;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100384,16 +100413,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-minimums-and-maximums-sketch1",
+          "id": "practice-completed-net-sales-range",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -100410,11 +100440,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.tryIt.try_minimums_and_maximums_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -100433,7 +100463,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS minimum_net_sales,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS maximum_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.minimums-and-maximums.practice.practice-completed-net-sales-range.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100446,7 +100476,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -100454,7 +100485,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "module-2-storewide-kpi-snapshot",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
-      "sectionSlug": "sql-analysis-reporting-section-2-module-project",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-2-module-project",
       "prefix": "sql_analysis_reporting_module_2",
       "minutes": 60,
       "runtimeDefaults": {
@@ -100611,7 +100642,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_1.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100624,7 +100655,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-2",
@@ -100673,7 +100705,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_2.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100686,7 +100718,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-3",
@@ -100735,7 +100768,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_3.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100748,7 +100781,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-4",
@@ -100797,7 +100831,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_4.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100810,7 +100844,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-5",
@@ -100859,7 +100894,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_5.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100872,7 +100907,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-6",
@@ -100921,7 +100957,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS smallest_net_order,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS largest_net_order\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_6.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -100934,7 +100970,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -100942,7 +100979,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "group-by-one-column",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
-      "sectionSlug": "sql-analysis-reporting-section-3-grouping-basics",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics",
       "prefix": "sql_analysis_reporting_module_3",
       "minutes": 24,
       "runtimeDefaults": {
@@ -100987,19 +101024,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-group-by-one-column-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.prompt",
-            "exerciseKey": "try-group-by-one-column-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -101189,7 +101214,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    category,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY category\nORDER BY category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -101201,16 +101226,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-group-by-one-column-sketch1",
+          "id": "practice-completed-orders-by-region",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-completed-orders-by-region",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-completed-orders-by-region.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -101227,11 +101253,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-completed-orders-by-region.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-completed-orders-by-region.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -101250,7 +101276,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-completed-orders-by-region.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -101262,7 +101288,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -101270,7 +101297,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "group-by-multiple-columns",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
-      "sectionSlug": "sql-analysis-reporting-section-3-grouping-basics",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics",
       "prefix": "sql_analysis_reporting_module_3",
       "minutes": 24,
       "runtimeDefaults": {
@@ -101315,19 +101342,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-group-by-multiple-columns-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.tryIt.try_group_by_multiple_columns_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.tryIt.try_group_by_multiple_columns_sketch1.prompt",
-            "exerciseKey": "try-group-by-multiple-columns-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -101517,7 +101532,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.tryIt.try_group_by_multiple_columns_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -101529,16 +101544,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-group-by-multiple-columns-sketch1",
+          "id": "practice-category-status-units",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.tryIt.try_group_by_multiple_columns_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-category-status-units",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.tryIt.try_group_by_multiple_columns_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-category-status-units.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -101555,11 +101571,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.tryIt.try_group_by_multiple_columns_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-category-status-units.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.tryIt.try_group_by_multiple_columns_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-category-status-units.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -101578,7 +101594,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    category,\n    order_status,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY category, order_status\nORDER BY category, order_status;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-category-status-units.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -101590,7 +101606,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -101598,7 +101615,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "sorting-aggregate-results",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
-      "sectionSlug": "sql-analysis-reporting-section-3-ranking-and-quality",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality",
       "prefix": "sql_analysis_reporting_module_3",
       "minutes": 24,
       "runtimeDefaults": {
@@ -101643,19 +101660,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-sorting-aggregate-results-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch1.prompt",
-            "exerciseKey": "try-sorting-aggregate-results-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -101845,7 +101850,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    category,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nORDER BY net_sales DESC, category ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -101857,16 +101862,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-sorting-aggregate-results-sketch1",
+          "id": "practice-rank-representatives-by-completed-orders",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-representatives-by-completed-orders",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-representatives-by-completed-orders.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -101883,11 +101889,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-representatives-by-completed-orders.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-representatives-by-completed-orders.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -101906,7 +101912,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    sales_rep,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY sales_rep\nORDER BY completed_orders DESC, sales_rep ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-representatives-by-completed-orders.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -101918,7 +101924,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -101926,7 +101933,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "avoiding-grouping-mistakes",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
-      "sectionSlug": "sql-analysis-reporting-section-3-ranking-and-quality",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality",
       "prefix": "sql_analysis_reporting_module_3",
       "minutes": 24,
       "runtimeDefaults": {
@@ -101971,19 +101978,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-avoiding-grouping-mistakes-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.prompt",
-            "exerciseKey": "try-avoiding-grouping-mistakes-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -102173,7 +102168,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    COUNT(*) AS order_count\nFROM sales_reporting\nGROUP BY region\nORDER BY region;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -102185,16 +102180,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-avoiding-grouping-mistakes-sketch1",
+          "id": "practice-preserve-region-category-grain",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -102211,11 +102207,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -102234,7 +102230,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -102246,7 +102242,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -102254,7 +102251,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "module-3-region-category-scorecard",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
-      "sectionSlug": "sql-analysis-reporting-section-3-module-project",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-3-module-project",
       "prefix": "sql_analysis_reporting_module_3",
       "minutes": 65,
       "runtimeDefaults": {
@@ -102411,7 +102408,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.module-3-region-category-scorecard.moduleProject.steps.project_step_1.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -102424,7 +102421,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-2",
@@ -102473,7 +102471,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.module-3-region-category-scorecard.moduleProject.steps.project_step_2.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -102486,7 +102484,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-3",
@@ -102535,7 +102534,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.module-3-region-category-scorecard.moduleProject.steps.project_step_3.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -102548,7 +102547,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-4",
@@ -102597,7 +102597,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.module-3-region-category-scorecard.moduleProject.steps.project_step_4.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -102610,7 +102610,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-5",
@@ -102659,7 +102660,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.module-3-region-category-scorecard.moduleProject.steps.project_step_5.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -102672,7 +102673,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-6",
@@ -102721,7 +102723,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region, category\nORDER BY net_sales DESC, region ASC, category ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.module-3-region-category-scorecard.moduleProject.steps.project_step_6.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -102733,7 +102735,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -102741,7 +102744,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "where-before-grouping",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
-      "sectionSlug": "sql-analysis-reporting-section-4-group-filters",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters",
       "prefix": "sql_analysis_reporting_module_4",
       "minutes": 24,
       "runtimeDefaults": {
@@ -102786,19 +102789,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-where-before-grouping-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.prompt",
-            "exerciseKey": "try-where-before-grouping-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -102988,7 +102979,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -103000,16 +102991,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-where-before-grouping-sketch1",
+          "id": "practice-active-gross-sales-by-category",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-active-gross-sales-by-category",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-active-gross-sales-by-category.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -103026,11 +103018,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-active-gross-sales-by-category.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-active-gross-sales-by-category.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -103049,7 +103041,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS active_gross_sales\nFROM sales_reporting\nWHERE order_status IN ('Completed', 'Pending')\nGROUP BY category\nORDER BY active_gross_sales DESC, category ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-active-gross-sales-by-category.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -103061,7 +103053,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -103069,7 +103062,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "having-after-grouping",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
-      "sectionSlug": "sql-analysis-reporting-section-4-group-filters",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters",
       "prefix": "sql_analysis_reporting_module_4",
       "minutes": 24,
       "runtimeDefaults": {
@@ -103114,19 +103107,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-having-after-grouping-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.tryIt.try_having_after_grouping_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.tryIt.try_having_after_grouping_sketch1.prompt",
-            "exerciseKey": "try-having-after-grouping-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -103316,7 +103297,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    category,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nHAVING COUNT(*) >= 4\nORDER BY completed_orders DESC, category ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.tryIt.try_having_after_grouping_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -103328,16 +103309,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-having-after-grouping-sketch1",
+          "id": "practice-high-value-categories",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.tryIt.try_having_after_grouping_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.practice.practice-high-value-categories",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.tryIt.try_having_after_grouping_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.practice.practice-high-value-categories.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -103354,11 +103336,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.tryIt.try_having_after_grouping_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.practice.practice-high-value-categories.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.tryIt.try_having_after_grouping_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.practice.practice-high-value-categories.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -103377,7 +103359,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY category\nHAVING SUM(quantity * unit_price) > 550\nORDER BY gross_sales DESC, category ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.having-after-grouping.practice.practice-high-value-categories.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -103389,7 +103371,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -103397,7 +103380,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "case-inside-aggregates",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
-      "sectionSlug": "sql-analysis-reporting-section-4-conditional-kpis",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis",
       "prefix": "sql_analysis_reporting_module_4",
       "minutes": 24,
       "runtimeDefaults": {
@@ -103442,19 +103425,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-case-inside-aggregates-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.prompt",
-            "exerciseKey": "try-case-inside-aggregates-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -103644,7 +103615,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Pending' THEN 1 ELSE 0 END) AS pending_orders\nFROM sales_reporting\nGROUP BY category\nORDER BY category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -103656,16 +103627,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-case-inside-aggregates-sketch1",
+          "id": "practice-completed-net-sales-with-full-population",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -103682,11 +103654,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -103705,7 +103677,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY region;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -103717,7 +103689,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -103725,7 +103698,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "performance-bands-from-aggregates",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
-      "sectionSlug": "sql-analysis-reporting-section-4-conditional-kpis",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis",
       "prefix": "sql_analysis_reporting_module_4",
       "minutes": 24,
       "runtimeDefaults": {
@@ -103770,19 +103743,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "sketch",
           "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.cards.sketch1.title",
           "sketchId": "sketch1",
-          "height": 420,
-          "tryIt": {
-            "id": "try-performance-bands-from-aggregates-sketch1",
-            "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.tryIt.try_performance_bands_from_aggregates_sketch1.title",
-            "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.tryIt.try_performance_bands_from_aggregates_sketch1.prompt",
-            "exerciseKey": "try-performance-bands-from-aggregates-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          "height": 420
         },
         {
           "id": "quiz",
@@ -103972,7 +103933,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS completed_net_sales,\n    CASE\n        WHEN SUM(\n            quantity * unit_price\n            - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n        ) >= 400 THEN 'Strong'\n        WHEN SUM(\n            quantity * unit_price\n            - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n        ) >= 340 THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY completed_net_sales DESC, region ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.tryIt.try_performance_bands_from_aggregates_sketch0.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -103984,16 +103945,17 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
-          "id": "try-performance-bands-from-aggregates-sketch1",
+          "id": "practice-category-completion-bands",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.tryIt.try_performance_bands_from_aggregates_sketch1",
+          "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.practice.practice-category-completion-bands",
           "language": "sql",
-          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.tryIt.try_performance_bands_from_aggregates_sketch1.starterCode",
+          "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.practice.practice-category-completion-bands.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -104010,11 +103972,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "main.sql",
-            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.tryIt.try_performance_bands_from_aggregates_sketch1.starterCode",
+            "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.practice.practice-category-completion-bands.starterCode",
             "starterFiles": [
               {
                 "path": "main.sql",
-                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.tryIt.try_performance_bands_from_aggregates_sketch1.starterCode",
+                "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.practice.practice-category-completion-bands.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -104033,7 +103995,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    category,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    CASE\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable'\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed'\n        ELSE 'At risk'\n    END AS completion_band\nFROM sales_reporting\nGROUP BY category\nORDER BY completion_rate DESC, category ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.performance-bands-from-aggregates.practice.practice-category-completion-bands.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -104045,7 +104007,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -104053,7 +104016,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "module-4-performance-exception-report",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
-      "sectionSlug": "sql-analysis-reporting-section-4-module-project",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-4-module-project",
       "prefix": "sql_analysis_reporting_module_4",
       "minutes": 75,
       "runtimeDefaults": {
@@ -104220,7 +104183,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders\nFROM sales_reporting\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.module-4-performance-exception-report.moduleProject.steps.project_step_1.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -104233,7 +104196,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-2",
@@ -104282,7 +104246,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders\nFROM sales_reporting\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.module-4-performance-exception-report.moduleProject.steps.project_step_2.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -104295,7 +104259,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-3",
@@ -104344,7 +104309,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.module-4-performance-exception-report.moduleProject.steps.project_step_3.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -104357,7 +104322,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-4",
@@ -104406,7 +104372,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.module-4-performance-exception-report.moduleProject.steps.project_step_4.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -104419,7 +104385,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-5",
@@ -104468,7 +104435,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders\nFROM sales_reporting\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.module-4-performance-exception-report.moduleProject.steps.project_step_5.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -104481,7 +104448,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-6",
@@ -104530,7 +104498,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 'Completion and rating risk'\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 'Completion risk'\n        ELSE 'Rating risk'\n    END AS exception_reason\nFROM sales_reporting\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.module-4-performance-exception-report.moduleProject.steps.project_step_6.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -104543,7 +104511,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "project-step-7",
@@ -104592,7 +104561,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 'Completion and rating risk'\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 'Completion risk'\n        ELSE 'Rating risk'\n    END AS exception_reason\nFROM sales_reporting\nGROUP BY region, category\nHAVING\n    COUNT(*) >= 2\n    AND (\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        OR COALESCE(AVG(customer_rating), 0) < 4.3\n    )\nORDER BY\n    CASE\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n            AND COALESCE(AVG(customer_rating), 0) < 4.3\n        THEN 1\n        WHEN\n            100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75\n        THEN 2\n        ELSE 3\n    END,\n    completed_net_sales ASC,\n    region ASC,\n    category ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.module-4-performance-exception-report.moduleProject.steps.project_step_7.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -104604,7 +104573,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     },
@@ -104612,7 +104582,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "final-executive-sales-performance-report",
       "subjectSlug": "sql-analysis-reporting",
       "moduleSlug": "sql-analysis-reporting-module-5-final-capstone",
-      "sectionSlug": "sql-analysis-reporting-section-5-final-capstone-project",
+      "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project",
       "prefix": "sql_analysis_reporting_module_5",
       "minutes": 110,
       "runtimeDefaults": {
@@ -104751,7 +104721,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_1.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -104764,7 +104734,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "capstone-step-2",
@@ -104813,7 +104784,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_2.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -104826,7 +104797,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "capstone-step-3",
@@ -104875,7 +104847,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_3.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ],
@@ -104888,7 +104860,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         },
         {
           "id": "capstone-step-4",
@@ -104937,7 +104910,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "sales_reporting",
             "resultShape": "table",
-            "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category\nHAVING\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) >= 2\n    OR SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ) >= 150\nORDER BY completed_net_sales DESC, region ASC, category ASC;",
+            "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_4.solutionCode",
             "sqlFileOrder": [
               "main.sql"
             ]
@@ -104949,7 +104922,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "main.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
         }
       ]
     }

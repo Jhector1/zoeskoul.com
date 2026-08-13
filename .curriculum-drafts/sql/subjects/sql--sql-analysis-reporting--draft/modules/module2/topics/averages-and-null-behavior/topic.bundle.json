@@ -2,7 +2,7 @@
   "topicId": "averages-and-null-behavior",
   "subjectSlug": "sql--sql-analysis-reporting--draft",
   "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
-  "sectionSlug": "sql-analysis-reporting-section-2-averages-and-extremes",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes",
   "prefix": "sql_analysis_reporting_module_2",
   "minutes": 24,
   "runtimeDefaults": {
@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-averages-and-null-behavior-sketch1",
-        "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.title",
-        "promptKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.prompt",
-        "exerciseKey": "try-averages-and-null-behavior-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -249,7 +237,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT ROUND(AVG(customer_rating), 2) AS average_completed_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -262,16 +250,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-averages-and-null-behavior-sketch1",
+      "id": "practice-compare-rating-average-rules",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1",
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -288,11 +277,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.starterCode",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -311,7 +300,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    ROUND(AVG(customer_rating), 2) AS rated_only_average,\n    ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.practice.practice-compare-rating-average-rules.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -324,7 +313,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

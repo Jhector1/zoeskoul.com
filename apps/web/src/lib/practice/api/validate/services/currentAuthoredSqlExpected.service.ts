@@ -1,5 +1,7 @@
 import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
+import { loadCurriculumLocaleMessages } from "@zoeskoul/curriculum-registry/runtime";
+import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { makeSqlExpected } from "@/lib/practice/generator/engines/sql/sqlExpected";
 import type { LoadedValidateInstance } from "@/lib/practice/api/validate/repositories/instance.repo";
 
@@ -10,6 +12,66 @@ function nonEmpty(value: unknown): string | null {
 
 function unique(values: Array<string | null | undefined>): string[] {
     return Array.from(new Set(values.filter((value): value is string => Boolean(value))));
+}
+
+let canonicalEnglishCurriculumMessagesPromise:
+    | Promise<Record<string, any>>
+    | null = null;
+
+function readCanonicalMessagePath(
+    messages: Record<string, any>,
+    dottedPath: string,
+): unknown {
+    let current: unknown = messages;
+
+    for (const segment of dottedPath.split(".")) {
+        if (
+            !current ||
+            typeof current !== "object" ||
+            Array.isArray(current) ||
+            !(segment in (current as Record<string, unknown>))
+        ) {
+            return undefined;
+        }
+
+        current = (
+            current as Record<string, unknown>
+        )[segment];
+    }
+
+    return current;
+}
+
+async function loadCanonicalEnglishCurriculumMessages() {
+    canonicalEnglishCurriculumMessagesPromise ??=
+        loadCurriculumLocaleMessages("en");
+
+    return canonicalEnglishCurriculumMessagesPromise;
+}
+
+async function resolveCanonicalCurriculumExercise<T>(
+    input: T,
+): Promise<T> {
+    const messages =
+        await loadCanonicalEnglishCurriculumMessages();
+
+    return resolveDeepTagged(
+        input as unknown,
+        (key) => {
+            const resolved =
+                readCanonicalMessagePath(
+                    messages,
+                    key,
+                );
+
+            // Preserve the tag when the canonical package does not
+            // contain the key. The runnable-contract builder below
+            // explicitly rejects unresolved solutionCode tags.
+            return resolved === undefined
+                ? `@:${key}`
+                : resolved;
+        },
+    ) as T;
 }
 
 function stringArray(value: unknown): string[] {
@@ -42,7 +104,18 @@ export function buildCurrentAuthoredSqlExpectedFromExercise(exercise: any) {
 
     const solutionCode = nonEmpty(exercise.recipe.solutionCode);
     const datasetId = nonEmpty(exercise.recipe.datasetId);
-    if (!solutionCode || !datasetId) return null;
+
+    // Published curriculum bundles intentionally keep learner-facing source
+    // text behind message references. Never treat an unresolved message key as
+    // executable SQL. The caller should materialize the exercise first; this
+    // guard makes persisted validation fall back safely if that ever fails.
+    if (
+        !solutionCode ||
+        !datasetId ||
+        solutionCode.startsWith("@:")
+    ) {
+        return null;
+    }
 
     const expected = makeSqlExpected({
         recipe: {
@@ -92,7 +165,7 @@ export function buildCurrentAuthoredSqlExpectedFromExercise(exercise: any) {
  * In that case an unanswered, previously-created instance must not continue to
  * grade against the obsolete secret payload.
  */
-export function resolveCurrentAuthoredSqlExpected(
+export async function resolveCurrentAuthoredSqlExpected(
     instance: LoadedValidateInstance,
 ) {
     const exerciseKey = nonEmpty(instance.exerciseKey);
@@ -135,10 +208,18 @@ export function resolveCurrentAuthoredSqlExpected(
 
             let exercise: any;
             try {
-                exercise = resolveManifestExercise({
+                const taggedExercise = resolveManifestExercise({
                     topicBundle,
                     exerciseKey,
                 });
+
+                // Keep validation on the same materialization path as normal
+                // authored exercise generation: resolve message-backed source
+                // before constructing the runnable SQL expected contract.
+                exercise =
+                    await resolveCanonicalCurriculumExercise(
+                        taggedExercise,
+                    );
             } catch {
                 continue;
             }
@@ -152,12 +233,12 @@ export function resolveCurrentAuthoredSqlExpected(
     return null;
 }
 
-export function selectExpectedCanonForValidation(args: {
+export async function selectExpectedCanonForValidation(args: {
     instance: LoadedValidateInstance;
     persistedExpected: unknown;
 }) {
-    return (
-        resolveCurrentAuthoredSqlExpected(args.instance) ??
-        args.persistedExpected
-    );
+    const currentExpected =
+        await resolveCurrentAuthoredSqlExpected(args.instance);
+
+    return currentExpected ?? args.persistedExpected;
 }

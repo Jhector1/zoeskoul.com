@@ -2,7 +2,7 @@
   "topicId": "module-0-order-value-detail-report",
   "subjectSlug": "sql--sql-analysis-reporting--draft",
   "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
-  "sectionSlug": "sql-analysis-reporting-section-0-module-project",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project",
   "prefix": "sql_analysis_reporting_module_0",
   "minutes": 55,
   "runtimeDefaults": {
@@ -149,7 +149,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    order_date,\n    product_name,\n    quantity,\n    unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_1.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -162,7 +162,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-2",
@@ -211,7 +212,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_2.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -224,7 +225,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-3",
@@ -273,7 +275,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    quantity * unit_price AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_3.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -286,7 +288,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-4",
@@ -335,7 +338,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_4.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -348,7 +351,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-5",
@@ -397,7 +401,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id AS order_number,\n    order_date AS ordered_on,\n    product_name AS product,\n    quantity AS units,\n    unit_price AS unit_price,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nORDER BY gross_sales DESC, order_number ASC;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_5.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -409,7 +413,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

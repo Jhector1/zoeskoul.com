@@ -113,33 +113,33 @@
                 "0.01",
                 "10"
               ]
+            },
+            "practice-category-completion-bands": {
+              "title": "Practice: Label Category Completion Rates",
+              "prompt": "Return one row per `category` with `completion_rate` and `completion_band`. Calculate the percentage of orders in each category that are completed and round the rate to one decimal place. Label rates of 70 or more as `Reliable`, rates from 55 up to that threshold as `Mixed`, and lower rates as `At risk`. Rank categories from the highest completion rate to the lowest, using category alphabetically to break ties.",
+              "hint": "The numerator counts completed rows while the denominator counts every row in the same category.",
+              "help": {
+                "concept": "Aggregate ratios can be classified with ordered business thresholds just like aggregate totals.",
+                "hint_1": "Keep the complete category population for the denominator.",
+                "hint_2": "Check the highest band threshold first."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    CASE\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable'\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed'\n        ELSE 'At risk'\n    END AS completion_band\nFROM sales_reporting\nGROUP BY category\nORDER BY completion_rate DESC, category ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_performance_bands_from_aggregates_sketch0": {
               "title": "Band Regions by Completed Net Sales",
-              "prompt": "For completed orders, return `region`, completed net sales rounded to two decimals, and `performance_band`: `Strong` for at least 400, `Stable` for at least 340, otherwise `Watch`. Calculate and return `region, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS completed_net_sales, CASE WHEN SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ) >= 400 THEN 'Strong' WHEN SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ) >= 340 THEN 'Stable' ELSE 'Watch' END AS performance_band` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region`. Sort the final result by `completed_net_sales DESC, region ASC`.",
-              "hint": "Repeat the same net-sales aggregate in the metric and CASE thresholds.",
+              "prompt": "Using completed orders, return one row per `region` with `completed_net_sales` and `performance_band`. Calculate null-safe net sales for each order and total it by region, rounded to two decimals. Label totals of 400 or more as `Strong`, totals from 340 up to that threshold as `Stable`, and lower totals as `Watch`. Rank regions from highest net sales to lowest, using region alphabetically to break ties.",
+              "hint": "First define one regional sales metric, then classify that aggregate using the thresholds from highest to lowest.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `completed_net_sales DESC, region ASC`."
+                "concept": "A CASE expression can classify a completed aggregate into business-readable performance bands.",
+                "hint_1": "Use the same net-sales definition for the displayed metric and the band thresholds.",
+                "hint_2": "Test the strongest threshold first."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS completed_net_sales,\n    CASE\n        WHEN SUM(\n            quantity * unit_price\n            - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n        ) >= 400 THEN 'Strong'\n        WHEN SUM(\n            quantity * unit_price\n            - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n        ) >= 340 THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY completed_net_sales DESC, region ASC;"
-            },
-            "try_performance_bands_from_aggregates_sketch1": {
-              "title": "Label Category Completion Rates",
-              "prompt": "Return one row per `category` with completion rate rounded to one decimal and `completion_band`: `Reliable` for at least 70, `Mixed` for at least 55, otherwise `At risk`. Calculate and return `category, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable' WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed' ELSE 'At risk' END AS completion_band` from `sales_reporting`. Produce one result row per `category`. Sort the final result by `completion_rate DESC, category ASC`.",
-              "hint": "Build the rate from completed-order count divided by total order count.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `completion_rate DESC, category ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    category,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    CASE\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable'\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed'\n        ELSE 'At risk'\n    END AS completion_band\nFROM sales_reporting\nGROUP BY category\nORDER BY completion_rate DESC, category ASC;"
             }
           }
         }

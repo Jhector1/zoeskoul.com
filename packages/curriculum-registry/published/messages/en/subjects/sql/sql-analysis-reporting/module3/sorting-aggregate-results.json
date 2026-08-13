@@ -113,33 +113,33 @@
                 "GROUP",
                 "HAVING"
               ]
+            },
+            "practice-rank-representatives-by-completed-orders": {
+              "title": "Practice: Rank Representatives by Completed Orders",
+              "prompt": "Return one row for each `sales_rep` with `completed_orders`, the number of completed orders handled by that representative. Rank from the largest count to the smallest, using representative name alphabetically to break ties.",
+              "hint": "Filter the population first, summarize by representative, then rank the summary rows.",
+              "help": {
+                "concept": "Sorting after aggregation ranks groups rather than individual source rows.",
+                "hint_1": "Only completed orders should contribute.",
+                "hint_2": "The representative name is the secondary ordering rule."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    sales_rep,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY sales_rep\nORDER BY completed_orders DESC, sales_rep ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_sorting_aggregate_results_sketch0": {
               "title": "Rank Categories by Completed Net Sales",
-              "prompt": "For completed orders, return `category` and null-safe net sales rounded to two decimals as `net_sales`. Calculate and return `category, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `category`. Sort the final result by `net_sales DESC, category ASC`.",
-              "hint": "Use the metric alias for the primary sort and the dimension for ties.",
+              "prompt": "For completed orders, return one row per `category` with `net_sales`. Calculate net sales using a zero fallback for missing discounts and round each category total to two decimal places. Rank categories from highest net sales to lowest, using category alphabetically to break ties.",
+              "hint": "Build the grouped metric first, then rank the finished summary rows by that metric.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `net_sales DESC, category ASC`."
+                "concept": "Aggregate reports can be ranked by their calculated summary metrics.",
+                "hint_1": "Only completed orders belong in the report.",
+                "hint_2": "The category name is only the tie-breaker."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nORDER BY net_sales DESC, category ASC;"
-            },
-            "try_sorting_aggregate_results_sketch1": {
-              "title": "Rank Representatives by Completed Orders",
-              "prompt": "Return each `sales_rep` and their completed-order count as `completed_orders`. Calculate and return `sales_rep, COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `sales_rep`. Sort the final result by `completed_orders DESC, sales_rep ASC`.",
-              "hint": "The representative name is the tie-breaker, not the main ranking metric.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `sales_rep`. Sort the final result by `completed_orders DESC, sales_rep ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    sales_rep,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY sales_rep\nORDER BY completed_orders DESC, sales_rep ASC;"
             }
           }
         }

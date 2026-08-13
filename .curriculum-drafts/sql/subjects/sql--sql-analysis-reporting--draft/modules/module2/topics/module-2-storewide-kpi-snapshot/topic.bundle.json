@@ -2,7 +2,7 @@
   "topicId": "module-2-storewide-kpi-snapshot",
   "subjectSlug": "sql--sql-analysis-reporting--draft",
   "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
-  "sectionSlug": "sql-analysis-reporting-section-2-module-project",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project",
   "prefix": "sql_analysis_reporting_module_2",
   "minutes": 60,
   "runtimeDefaults": {
@@ -159,7 +159,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_1.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -172,7 +172,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-2",
@@ -221,7 +222,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_2.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -234,7 +235,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-3",
@@ -283,7 +285,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_3.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -296,7 +298,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-4",
@@ -345,7 +348,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_4.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -358,7 +361,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-5",
@@ -407,7 +411,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_5.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -420,7 +424,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-6",
@@ -469,7 +474,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    COUNT(*) AS completed_orders,\n    SUM(quantity) AS completed_units,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS discount_amount,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales,\n    ROUND(AVG(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS average_net_order_value,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS smallest_net_order,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS largest_net_order\nFROM sales_reporting\nWHERE order_status = 'Completed';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.module-2-storewide-kpi-snapshot.moduleProject.steps.project_step_6.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -482,7 +487,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

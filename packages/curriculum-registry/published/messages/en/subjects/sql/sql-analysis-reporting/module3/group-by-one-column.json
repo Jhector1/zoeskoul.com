@@ -113,33 +113,33 @@
                 "COUNT(*)",
                 "order_id, product_name"
               ]
+            },
+            "practice-completed-orders-by-region": {
+              "title": "Practice: Count Completed Orders by Region",
+              "prompt": "Return one row for each `region` and a `completed_orders` value counting only completed orders in that region. Sort the regions alphabetically.",
+              "hint": "Limit the source population to completed orders before building the regional summary.",
+              "help": {
+                "concept": "Filtering determines which source rows participate; grouping determines the grain of the summary.",
+                "hint_1": "Only completed rows should contribute to the counts.",
+                "hint_2": "Each region should appear once."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_group_by_one_column_sketch0": {
               "title": "Total Units by Category",
-              "prompt": "Return one row per `category` with `SUM(quantity)` as `total_units`. Calculate and return `category, SUM(quantity) AS total_units` from `sales_reporting`. Produce one result row per `category`. Sort the final result by `category`.",
-              "hint": "Select the dimension, aggregate the measure, then group by the dimension.",
+              "prompt": "Return one row for each `category` and a `total_units` value containing the total quantity for that category. Sort the categories alphabetically.",
+              "hint": "The category defines the result grain; quantity is the measure summarized within each category.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `category`."
+                "concept": "A grouped report changes the grain from one row per source record to one row per dimension value.",
+                "hint_1": "Each category should appear exactly once.",
+                "hint_2": "Add all quantity values belonging to the same category."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY category\nORDER BY category;"
-            },
-            "try_group_by_one_column_sketch1": {
-              "title": "Completed Orders by Region",
-              "prompt": "Return one row per `region` with the number of completed orders as `completed_orders`. Calculate and return `region, COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "The status condition belongs before GROUP BY.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;"
             }
           }
         }

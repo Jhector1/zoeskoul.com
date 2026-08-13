@@ -4,8 +4,9 @@
     "profileId": "sql",
     "catalogSlug": "sql",
     "genKey": "sql_for_beginners",
-    "order": 1,
+    "order": 0,
     "accessPolicy": "paid",
+    "visibility": "public",
     "status": "active",
     "imagePublicId": null,
     "imageAlt": null,
@@ -15,10 +16,8 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 6,
-        "isTerminalRelease": true,
-        "prerequisiteSubjectSlugs": [
-          "sql-v2"
-        ]
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.sql--sql-analysis-reporting--draft.moreComingSoon"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
@@ -26,10 +25,10 @@
         "certificateEnabledByDefault": true
       },
       "versioning": {
-        "family": "sql-analysis-reporting",
-        "version": 1,
+        "family": "sql",
+        "version": 2,
         "status": "active",
-        "defaultForNewEnrollments": true,
+        "defaultForNewEnrollments": false,
         "supersedes": null,
         "supersededBy": null
       }
@@ -49,8 +48,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -61,9 +60,7 @@
       "serviceDefaults": null,
       "meta": {
         "estimatedMinutes": 151,
-        "prereqKeys": [
-          "subjects.sql--sql-analysis-reporting--draft.prerequisites.0"
-        ],
+        "prereqKeys": [],
         "outcomeKeys": [
           "modules.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.outcomes.0",
           "modules.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.outcomes.1",
@@ -77,19 +74,18 @@
       },
       "sections": [
         {
-          "slug": "sql-analysis-reporting-section-0-readable-output",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output",
           "order": 1,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-readable-output.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -99,19 +95,18 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-0-calculated-output",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output",
           "order": 2,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-calculated-output.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -121,18 +116,19 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-0-module-project",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project",
           "order": 3,
           "role": "module_project",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project.description",
           "meta": {
             "module": 0,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql-analysis-reporting-section-0-module-project.bullets.2"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-module-project.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -155,8 +151,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -183,19 +179,18 @@
       },
       "sections": [
         {
-          "slug": "sql-analysis-reporting-section-1-null-safety",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-null-safety",
           "order": 1,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-null-safety.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-null-safety.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-null-safety.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-null-safety.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-null-safety.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-null-safety.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-null-safety.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-null-safety.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -205,19 +200,18 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-1-business-calculations",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations",
           "order": 2,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-business-calculations.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-business-calculations.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -227,18 +221,19 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-1-module-project",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project",
           "order": 3,
           "role": "module_project",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project.description",
           "meta": {
             "module": 1,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql-analysis-reporting-section-1-module-project.bullets.2"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -261,8 +256,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -289,19 +284,18 @@
       },
       "sections": [
         {
-          "slug": "sql-analysis-reporting-section-2-counts-and-totals",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-counts-and-totals",
           "order": 1,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-counts-and-totals.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-counts-and-totals.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-counts-and-totals.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-counts-and-totals.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-counts-and-totals.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-counts-and-totals.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-counts-and-totals.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-counts-and-totals.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -311,19 +305,18 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-2-averages-and-extremes",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes",
           "order": 2,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-averages-and-extremes.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-averages-and-extremes.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -333,18 +326,19 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-2-module-project",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project",
           "order": 3,
           "role": "module_project",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project.description",
           "meta": {
             "module": 2,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql-analysis-reporting-section-2-module-project.bullets.2"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-2-module-project.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -367,8 +361,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -395,19 +389,18 @@
       },
       "sections": [
         {
-          "slug": "sql-analysis-reporting-section-3-grouping-basics",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-grouping-basics",
           "order": 1,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-grouping-basics.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-grouping-basics.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-grouping-basics.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-grouping-basics.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-grouping-basics.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-grouping-basics.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-grouping-basics.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-grouping-basics.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -417,19 +410,18 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-3-ranking-and-quality",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality",
           "order": 2,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-ranking-and-quality.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -439,18 +431,19 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-3-module-project",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-module-project",
           "order": 3,
           "role": "module_project",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-module-project.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-module-project.description",
           "meta": {
             "module": 3,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-module-project.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql-analysis-reporting-section-3-module-project.bullets.2"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-module-project.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-module-project.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-module-project.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-module-project.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -473,8 +466,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -501,19 +494,18 @@
       },
       "sections": [
         {
-          "slug": "sql-analysis-reporting-section-4-group-filters",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-group-filters",
           "order": 1,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-group-filters.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-group-filters.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-group-filters.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-group-filters.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-group-filters.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-group-filters.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-group-filters.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-group-filters.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -523,19 +515,18 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-4-conditional-kpis",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-conditional-kpis",
           "order": 2,
-          "role": "lesson",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-conditional-kpis.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-conditional-kpis.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-conditional-kpis.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-conditional-kpis.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-conditional-kpis.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-conditional-kpis.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-conditional-kpis.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-conditional-kpis.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -545,18 +536,19 @@
           ]
         },
         {
-          "slug": "sql-analysis-reporting-section-4-module-project",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-module-project",
           "order": 3,
           "role": "module_project",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-module-project.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-module-project.description",
           "meta": {
             "module": 4,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-module-project.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql-analysis-reporting-section-4-module-project.bullets.2"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-module-project.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-module-project.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-module-project.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-4-having-and-conditional-reporting.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-4-module-project.bullets.3"
             ]
           },
           "serviceDefaults": null,
@@ -579,8 +571,8 @@
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,
-        "showErd": false,
-        "showChen": false,
+        "showErd": true,
+        "showChen": true,
         "supportsTerminal": false,
         "supportsMultiFile": false,
         "supportsFileSystem": false,
@@ -607,19 +599,19 @@
       },
       "sections": [
         {
-          "slug": "sql-analysis-reporting-section-5-final-capstone-project",
+          "slug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-final-capstone-project",
           "order": 1,
           "role": "capstone",
-          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.title",
-          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.description",
+          "titleKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-final-capstone-project.title",
+          "descriptionKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-final-capstone-project.description",
           "meta": {
             "module": 5,
-            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.weeks",
+            "weeksKey": "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-final-capstone-project.weeks",
             "bulletKeys": [
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.bullets.0",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.bullets.1",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.bullets.2",
-              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql-analysis-reporting-section-5-final-capstone-project.bullets.3"
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-final-capstone-project.bullets.0",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-final-capstone-project.bullets.1",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-final-capstone-project.bullets.2",
+              "sections.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-5-final-capstone-project.bullets.3"
             ]
           },
           "serviceDefaults": null,

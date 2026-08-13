@@ -113,14 +113,26 @@
                 "10",
                 "100"
               ]
+            },
+            "practice-round-adjusted-order-value": {
+              "title": "Practice: Round an Adjusted Order Value",
+              "prompt": "Return `order_id` and `packed_order_value`. For each row, add `1.25` to the unit price, multiply that adjusted unit price by quantity, and display the final value rounded to two decimal places.",
+              "hint": "The price adjustment happens before multiplication. Round the completed value rather than one input.",
+              "help": {
+                "concept": "Parentheses define the business calculation first; rounding is applied to the finished presentation value.",
+                "hint_1": "Adjust the unit price before quantity is applied.",
+                "hint_2": "The displayed packed order value should have two decimal places."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_rounding_report_values_sketch0": {
               "title": "Round Completed Order Values",
-              "prompt": "For completed orders, return `order_id` and gross sales rounded to two decimal places as `gross_sales`. Return `order_id, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-              "hint": "Put the complete multiplication expression inside ROUND.",
+              "prompt": "For completed orders, return `order_id` and `gross_sales`. Calculate gross sales from quantity and unit price, then display that calculated value rounded to two decimal places.",
+              "hint": "Calculate the complete row value first, then round the displayed result.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -128,18 +140,6 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
-            },
-            "try_rounding_report_values_sketch1": {
-              "title": "Round an Adjusted Order Value",
-              "prompt": "Select `order_id` and `quantity * (unit_price + 1.25)` rounded to two decimals as `packed_order_value`. Return `order_id, ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value` from `sales_reporting` in that column order.",
-              "hint": "Round the final adjusted value, not just one input.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value` from `sales_reporting` in that column order."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value\nFROM sales_reporting;"
             }
           }
         }

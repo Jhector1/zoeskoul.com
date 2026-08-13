@@ -2,7 +2,7 @@
   "topicId": "final-executive-sales-performance-report",
   "subjectSlug": "sql-analysis-reporting",
   "moduleSlug": "sql-analysis-reporting-module-5-final-capstone",
-  "sectionSlug": "sql-analysis-reporting-section-5-final-capstone-project",
+  "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project",
   "prefix": "sql_analysis_reporting_module_5",
   "minutes": 110,
   "runtimeDefaults": {
@@ -141,7 +141,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_1.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -154,7 +154,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "capstone-step-2",
@@ -203,7 +204,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_2.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -216,7 +217,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "capstone-step-3",
@@ -265,7 +267,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_3.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -278,7 +280,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "capstone-step-4",
@@ -327,7 +330,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    region,\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales,\n    ROUND(AVG(customer_rating), 2) AS average_rating,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders,\n    CASE\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 150\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75\n        THEN 'Strong'\n        WHEN\n            SUM(\n                CASE\n                    WHEN order_status = 'Completed' THEN\n                        quantity * unit_price\n                        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n                    ELSE 0\n                END\n            ) >= 100\n            AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50\n        THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY region, category\nHAVING\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) >= 2\n    OR SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ) >= 150\nORDER BY completed_net_sales DESC, region ASC, category ASC;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_4.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -339,7 +342,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

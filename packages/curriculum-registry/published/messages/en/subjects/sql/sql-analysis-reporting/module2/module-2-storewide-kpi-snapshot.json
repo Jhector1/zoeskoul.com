@@ -37,8 +37,8 @@
             "steps": {
               "project_step_1": {
                 "title": "Count Completed Orders",
-                "prompt": "Begin the Module 2 Storewide Kpi Snapshot. Calculate and return `COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Establish one filtered population and one-row grain.",
+                "prompt": "Start the Module 2 Storewide KPI Snapshot with one summary value named `completed_orders`, counting all completed orders.",
+                "hint": "Establish the completed-order population first; the output grain is one summary row.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -58,9 +58,9 @@
                 }
               },
               "project_step_2": {
-                "title": "Add Completed Units — 2 Project: Completed Sales KPI Snapshot",
-                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Append the units total to the existing summary row.",
+                "title": "Add Completed Units",
+                "prompt": "Carry the snapshot forward and append `completed_units`, the total quantity across those same completed orders.",
+                "hint": "Keep the existing completed-order count and add one quantity total.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -80,9 +80,9 @@
                 }
               },
               "project_step_3": {
-                "title": "Add Gross Sales — 2 Project: Completed Sales KPI Snapshot",
-                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Place the row-level gross expression inside SUM and round the final total.",
+                "title": "Add Gross Sales",
+                "prompt": "Append `gross_sales`. Calculate each completed order's value from quantity and unit price, aggregate those values, and display the final total rounded to two decimal places.",
+                "hint": "Aggregate the row-level merchandise value across the same completed-order population.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -102,9 +102,9 @@
                 }
               },
               "project_step_4": {
-                "title": "Add Discount and Net Sales — 2 Project: Completed Sales KPI Snapshot",
-                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Use the same fallback rule in both monetary aggregates.",
+                "title": "Add Discount and Net Sales",
+                "prompt": "Append `discount_amount` and `net_sales`. Treat missing discount percentages as zero. Total the discount dollars across completed orders, then total the corresponding post-discount sales. Round both final monetary KPIs to two decimal places.",
+                "hint": "Use one consistent missing-discount rule for both monetary aggregates.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -125,8 +125,8 @@
               },
               "project_step_5": {
                 "title": "Add Averages",
-                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Average the same net expression used in the total; leave rating NULL behavior explicit.",
+                "prompt": "Append `average_net_order_value` and `average_rating`. Average the same null-safe net-order value already used in the snapshot, rounded to two decimals. Also average the recorded customer ratings for completed orders, leaving missing ratings out of that average.",
+                "hint": "Keep the net-sales definition consistent, while allowing AVG to use its normal NULL behavior for ratings.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -147,8 +147,8 @@
               },
               "project_step_6": {
                 "title": "Add the Net-Order Range",
-                "prompt": "Complete the Module 2 Storewide Kpi Snapshot. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating, ROUND(MIN( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS smallest_net_order, ROUND(MAX( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS largest_net_order` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Apply MIN and MAX to the same null-safe net-order expression used by the averages.",
+                "prompt": "Complete the KPI snapshot with `smallest_net_order` and `largest_net_order`. Find the minimum and maximum of the same null-safe net-order value used by the earlier net-sales KPIs, and round both results to two decimal places.",
+                "hint": "Reuse one definition of net order value for the average, minimum, and maximum.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",

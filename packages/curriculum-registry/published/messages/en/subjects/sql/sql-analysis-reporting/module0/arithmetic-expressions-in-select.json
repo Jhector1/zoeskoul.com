@@ -113,14 +113,26 @@
                 "/",
                 "="
               ]
+            },
+            "practice-multi-part-order-value": {
+              "title": "Practice: Build a Multi-Part Order Value",
+              "prompt": "Return `order_id`, `product_name`, `merchandise_value`, and `prepared_value`. Calculate merchandise value from the row's quantity and unit price. Prepared value should add one flat `4.00` preparation fee to that whole merchandise value.",
+              "hint": "Calculate the merchandise value first. The flat fee is added once to the whole order value, not once per unit.",
+              "help": {
+                "concept": "A row-level report can combine several arithmetic expressions that answer different business questions.",
+                "hint_1": "Both calculated columns come from the same row.",
+                "hint_2": "The preparation fee belongs after the merchandise value has been calculated."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS merchandise_value,\n    quantity * unit_price + 4.00 AS prepared_value\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_arithmetic_expressions_in_select_sketch0": {
               "title": "Calculate Pending Order Value",
-              "prompt": "For pending orders, select `order_id`, `product_name`, and a calculated `pending_value` equal to `quantity * unit_price`. Return `order_id, product_name, quantity * unit_price AS pending_value` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Pending'`.",
-              "hint": "Build the calculation in the SELECT list, then filter the source rows.",
+              "prompt": "For pending orders, return `order_id`, `product_name`, and `pending_value`. Calculate `pending_value` by multiplying that row's quantity by its unit price.",
+              "hint": "Build the row-level value from `quantity` and `unit_price`, then keep only pending orders.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -128,18 +140,6 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS pending_value\nFROM sales_reporting\nWHERE order_status = 'Pending';"
-            },
-            "try_arithmetic_expressions_in_select_sketch1": {
-              "title": "Add a Flat Order Preparation Fee",
-              "prompt": "Return `order_id`, `product_name`, the merchandise value as `merchandise_value`, and a `prepared_value` that adds one flat `4.00` preparation fee to the whole order. Return `order_id, product_name, quantity * unit_price AS merchandise_value, quantity * unit_price + 4.00 AS prepared_value` from `sales_reporting` in that column order.",
-              "hint": "Multiply `quantity * unit_price` first, then add the flat fee once.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, product_name, quantity * unit_price AS merchandise_value, quantity * unit_price + 4.00 AS prepared_value` from `sales_reporting` in that column order."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS merchandise_value,\n    quantity * unit_price + 4.00 AS prepared_value\nFROM sales_reporting;"
             }
           }
         }

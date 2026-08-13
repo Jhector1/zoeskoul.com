@@ -2,7 +2,7 @@
   "topicId": "module-1-discount-audit-report",
   "subjectSlug": "sql--sql-analysis-reporting--draft",
   "moduleSlug": "sql-analysis-reporting-module-1-null-safe-calculations",
-  "sectionSlug": "sql-analysis-reporting-section-1-module-project",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-1-module-project",
   "prefix": "sql_analysis_reporting_module_1",
   "minutes": 60,
   "runtimeDefaults": {
@@ -159,7 +159,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_1.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -172,7 +172,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-2",
@@ -221,7 +222,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_2.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -234,7 +235,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-3",
@@ -283,7 +285,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_3.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -296,7 +298,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-4",
@@ -345,7 +348,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_4.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -358,7 +361,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-5",
@@ -407,7 +411,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_5.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -420,7 +424,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
       "id": "project-step-6",
@@ -469,7 +474,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    order_status,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct,\n    ROUND(quantity * unit_price, 2) AS gross_sales,\n    ROUND(\n        quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS discount_amount,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales,\n    CASE\n        WHEN discount_pct IS NULL THEN 'Missing discount'\n        WHEN discount_pct >= 15 THEN 'Review high discount'\n        ELSE 'OK'\n    END AS discount_review\nFROM sales_reporting\nORDER BY\n    CASE\n        WHEN discount_pct IS NULL THEN 1\n        WHEN discount_pct >= 15 THEN 2\n        ELSE 3\n    END,\n    order_id ASC;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-1-null-safe-calculations.module-1-discount-audit-report.moduleProject.steps.project_step_6.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -481,7 +486,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

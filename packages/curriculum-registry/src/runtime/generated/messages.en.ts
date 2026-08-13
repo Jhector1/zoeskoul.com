@@ -26755,14 +26755,26 @@ const messages: Record<string, any> = {
                 "BY",
                 "ON"
               ]
+            },
+            "practice-reader-friendly-headings": {
+              "title": "Practice: Build Reader-Friendly Headings",
+              "prompt": "Return `region`, `category`, and `sales_rep` from `sales_reporting`. Display the result headings as `Sales Region`, `Product Category`, and `Account Owner`, in that order.",
+              "hint": "Each displayed heading belongs to one result column. A heading containing spaces must be treated as one alias.",
+              "help": {
+                "concept": "Aliases change the headings in this result without renaming the stored database columns.",
+                "hint_1": "Keep the three requested source columns in the same order.",
+                "hint_2": "The final result headings should read Sales Region, Product Category, and Account Owner."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region AS \"Sales Region\",\n    category AS \"Product Category\",\n    sales_rep AS \"Account Owner\"\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_aliases_for_readable_headings_sketch0": {
               "title": "Create Clear Operational Headings",
-              "prompt": "Select `order_id`, `product_name`, and `order_status`. Return `order_id AS order_number, product_name AS product, order_status AS status` from `sales_reporting` in that column order.",
-              "hint": "Place each alias immediately after the column it describes.",
+              "prompt": "Return `order_id`, `product_name`, and `order_status` from `sales_reporting`. Display the result headings as `order_number`, `product`, and `status`, in that order.",
+              "hint": "Give each returned column the heading requested by the report.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -26770,18 +26782,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id AS order_number,\n    product_name AS product,\n    order_status AS status\nFROM sales_reporting;"
-            },
-            "try_aliases_for_readable_headings_sketch1": {
-              "title": "Prepare Human-Readable Headings",
-              "prompt": "Select `region`, `category`, and `sales_rep`. Return `region AS \"Sales Region\", category AS \"Product Category\", sales_rep AS \"Account Owner\"` from `sales_reporting` in that column order.",
-              "hint": "A heading with spaces must be quoted as one alias.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `region AS \"Sales Region\", category AS \"Product Category\", sales_rep AS \"Account Owner\"` from `sales_reporting` in that column order."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    region AS \"Sales Region\",\n    category AS \"Product Category\",\n    sales_rep AS \"Account Owner\"\nFROM sales_reporting;"
             }
           }
         },
@@ -26896,14 +26896,26 @@ const messages: Record<string, any> = {
                 "/",
                 "="
               ]
+            },
+            "practice-multi-part-order-value": {
+              "title": "Practice: Build a Multi-Part Order Value",
+              "prompt": "Return `order_id`, `product_name`, `merchandise_value`, and `prepared_value`. Calculate merchandise value from the row's quantity and unit price. Prepared value should add one flat `4.00` preparation fee to that whole merchandise value.",
+              "hint": "Calculate the merchandise value first. The flat fee is added once to the whole order value, not once per unit.",
+              "help": {
+                "concept": "A row-level report can combine several arithmetic expressions that answer different business questions.",
+                "hint_1": "Both calculated columns come from the same row.",
+                "hint_2": "The preparation fee belongs after the merchandise value has been calculated."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS merchandise_value,\n    quantity * unit_price + 4.00 AS prepared_value\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_arithmetic_expressions_in_select_sketch0": {
               "title": "Calculate Pending Order Value",
-              "prompt": "For pending orders, select `order_id`, `product_name`, and a calculated `pending_value` equal to `quantity * unit_price`. Return `order_id, product_name, quantity * unit_price AS pending_value` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Pending'`.",
-              "hint": "Build the calculation in the SELECT list, then filter the source rows.",
+              "prompt": "For pending orders, return `order_id`, `product_name`, and `pending_value`. Calculate `pending_value` by multiplying that row's quantity by its unit price.",
+              "hint": "Build the row-level value from `quantity` and `unit_price`, then keep only pending orders.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -26911,18 +26923,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS pending_value\nFROM sales_reporting\nWHERE order_status = 'Pending';"
-            },
-            "try_arithmetic_expressions_in_select_sketch1": {
-              "title": "Add a Flat Order Preparation Fee",
-              "prompt": "Return `order_id`, `product_name`, the merchandise value as `merchandise_value`, and a `prepared_value` that adds one flat `4.00` preparation fee to the whole order. Return `order_id, product_name, quantity * unit_price AS merchandise_value, quantity * unit_price + 4.00 AS prepared_value` from `sales_reporting` in that column order.",
-              "hint": "Multiply `quantity * unit_price` first, then add the flat fee once.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, product_name, quantity * unit_price AS merchandise_value, quantity * unit_price + 4.00 AS prepared_value` from `sales_reporting` in that column order."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS merchandise_value,\n    quantity * unit_price + 4.00 AS prepared_value\nFROM sales_reporting;"
             }
           }
         },
@@ -27036,14 +27036,26 @@ const messages: Record<string, any> = {
                 "GROUP",
                 "HAVING"
               ]
+            },
+            "practice-unique-region-representative-pairs": {
+              "title": "Practice: Find Unique Region-Representative Pairs",
+              "prompt": "Return each unique combination of `region` and `sales_rep` once from `sales_reporting`. Sort the result by `region`, then by `sales_rep`.",
+              "hint": "Uniqueness applies to the selected pair together, not to either column independently.",
+              "help": {
+                "concept": "When multiple columns are selected, uniqueness is evaluated across the complete selected combination.",
+                "hint_1": "Keep only the two requested reporting dimensions.",
+                "hint_2": "After removing duplicate pairs, make the output order stable."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT DISTINCT region, sales_rep\nFROM sales_reporting\nORDER BY region, sales_rep;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_distinct_values_for_report_categories_sketch0": {
               "title": "List the Available Sales Regions",
-              "prompt": "Return each `region` once and sort the regions alphabetically. Return each distinct `region` value or combination from `sales_reporting`. Sort the final result by `region`.",
-              "hint": "Select only the column whose unique values you need.",
+              "prompt": "List each `region` from `sales_reporting` exactly once and sort the result alphabetically.",
+              "hint": "This lesson's uniqueness operation should be applied to the one result column you need.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27051,18 +27063,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT DISTINCT region\nFROM sales_reporting\nORDER BY region;"
-            },
-            "try_distinct_values_for_report_categories_sketch1": {
-              "title": "Map Representatives to Regions",
-              "prompt": "Return every unique `region` and `sales_rep` combination. Return each distinct `region, sales_rep` value or combination from `sales_reporting`. Sort the final result by `region, sales_rep`.",
-              "hint": "DISTINCT evaluates the pair of selected columns together.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return each distinct `region, sales_rep` value or combination from `sales_reporting`. Sort the final result by `region, sales_rep`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT DISTINCT region, sales_rep\nFROM sales_reporting\nORDER BY region, sales_rep;"
             }
           }
         },
@@ -27098,8 +27098,8 @@ const messages: Record<string, any> = {
             "steps": {
               "project_step_1": {
                 "title": "Select the Completed Order Details",
-                "prompt": "Begin the Module 0 Order Value Detail Report. Return `order_id, order_date, product_name, quantity, unit_price` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Keep the first version narrow: requested columns and the completed-status filter only.",
+                "prompt": "Start the Module 0 Order Value Detail Report. Keep only completed orders and return `order_id`, `order_date`, `product_name`, `quantity`, and `unit_price`, in that order.",
+                "hint": "Keep this first milestone focused on the requested detail columns and completed orders.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27119,9 +27119,9 @@ const messages: Record<string, any> = {
                 }
               },
               "project_step_2": {
-                "title": "Add Reader-Friendly Aliases",
-                "prompt": "Extend the Module 0 Order Value Detail Report with the next approved requirement. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Change only the output headings; keep every source column and the filter.",
+                "title": "Add Reader-Friendly Headings",
+                "prompt": "Carry the approved completed-order query forward. Keep the same five values, but display their headings as `order_number`, `ordered_on`, `product`, `units`, and `unit_price`, in that order.",
+                "hint": "Change the displayed headings without changing the source values or the completed-order requirement.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27141,9 +27141,9 @@ const messages: Record<string, any> = {
                 }
               },
               "project_step_3": {
-                "title": "Add Gross Sales — 0 Project: Completed Order Value Report",
-                "prompt": "Extend the Module 0 Order Value Detail Report with the next approved requirement. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, quantity * unit_price AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Append the calculated column after the existing detail fields.",
+                "title": "Add Gross Sales",
+                "prompt": "Carry the report forward and append `gross_sales`. Calculate gross sales for each order from its quantity and unit price. Preserve every earlier field and filter.",
+                "hint": "Add one calculated result after the existing detail columns.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27164,8 +27164,8 @@ const messages: Record<string, any> = {
               },
               "project_step_4": {
                 "title": "Round the Monetary Result",
-                "prompt": "Extend the Module 0 Order Value Detail Report with the next approved requirement. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Wrap the existing gross-sales expression in ROUND; do not round the source columns.",
+                "prompt": "Keep the complete approved report, but display `gross_sales` rounded to two decimal places. Preserve the existing detail fields and completed-order filter.",
+                "hint": "Only the displayed gross-sales calculation needs rounding.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27186,8 +27186,8 @@ const messages: Record<string, any> = {
               },
               "project_step_5": {
                 "title": "Rank the Report Predictably",
-                "prompt": "Complete the Module 0 Order Value Detail Report. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`. Sort the final result by `gross_sales DESC, order_number ASC`.",
-                "hint": "Add the ordering clause after the filter; keep the SELECT list unchanged.",
+                "prompt": "Complete the report by ranking `gross_sales` from highest to lowest. When two rows have the same gross sales, place the lower `order_number` first. Preserve every earlier column, heading, calculation, and filter.",
+                "hint": "Use gross sales as the primary ranking and order number only as the tie-breaker.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27320,14 +27320,26 @@ const messages: Record<string, any> = {
                 "10",
                 "100"
               ]
+            },
+            "practice-round-adjusted-order-value": {
+              "title": "Practice: Round an Adjusted Order Value",
+              "prompt": "Return `order_id` and `packed_order_value`. For each row, add `1.25` to the unit price, multiply that adjusted unit price by quantity, and display the final value rounded to two decimal places.",
+              "hint": "The price adjustment happens before multiplication. Round the completed value rather than one input.",
+              "help": {
+                "concept": "Parentheses define the business calculation first; rounding is applied to the finished presentation value.",
+                "hint_1": "Adjust the unit price before quantity is applied.",
+                "hint_2": "The displayed packed order value should have two decimal places."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_rounding_report_values_sketch0": {
               "title": "Round Completed Order Values",
-              "prompt": "For completed orders, return `order_id` and gross sales rounded to two decimal places as `gross_sales`. Return `order_id, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-              "hint": "Put the complete multiplication expression inside ROUND.",
+              "prompt": "For completed orders, return `order_id` and `gross_sales`. Calculate gross sales from quantity and unit price, then display that calculated value rounded to two decimal places.",
+              "hint": "Calculate the complete row value first, then round the displayed result.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27335,18 +27347,6 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * unit_price, 2) AS gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
-            },
-            "try_rounding_report_values_sketch1": {
-              "title": "Round an Adjusted Order Value",
-              "prompt": "Select `order_id` and `quantity * (unit_price + 1.25)` rounded to two decimals as `packed_order_value`. Return `order_id, ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value` from `sales_reporting` in that column order.",
-              "hint": "Round the final adjusted value, not just one input.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value` from `sales_reporting` in that column order."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value\nFROM sales_reporting;"
             }
           }
         }
@@ -27463,33 +27463,33 @@ const messages: Record<string, any> = {
                 "CLOSE",
                 "DONE"
               ]
+            },
+            "practice-order-value-bands": {
+              "title": "Practice: Classify Order Values",
+              "prompt": "Return `order_id`, `gross_sales`, and `value_band`. Calculate gross sales from quantity and unit price. Label values of 130 or more as `High value`, values from 80 up to that threshold as `Mid value`, and everything lower as `Low value`.",
+              "hint": "Test the highest threshold before the lower one so a high-value row is not classified too early.",
+              "help": {
+                "concept": "Ordered CASE conditions let one calculated value fall into exactly one reporting band.",
+                "hint_1": "Gross sales is the row's quantity multiplied by its unit price.",
+                "hint_2": "The first matching CASE branch wins."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 130 THEN 'High value'\n        WHEN quantity * unit_price >= 80 THEN 'Mid value'\n        ELSE 'Low value'\n    END AS value_band\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_case_for_readable_labels_sketch0": {
               "title": "Label Discount Review Status",
-              "prompt": "Select `order_id`, `discount_pct`, and a `discount_review` label: `Missing discount` for NULL, `Large discount` for 15 or more, otherwise `Standard discount`. Return `order_id, discount_pct, CASE WHEN discount_pct IS NULL THEN 'Missing discount' WHEN discount_pct >= 15 THEN 'Large discount' ELSE 'Standard discount' END AS discount_review` from `sales_reporting` in that column order.",
-              "hint": "Put the NULL condition before the numeric threshold.",
+              "prompt": "Return `order_id`, `discount_pct`, and `discount_review`. Label a missing discount as `Missing discount`, a discount of 15 or more as `Large discount`, and every other row as `Standard discount`.",
+              "hint": "Evaluate the missing-value case before the numeric threshold, then provide the fallback label.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, discount_pct, CASE WHEN discount_pct IS NULL THEN 'Missing discount' WHEN discount_pct >= 15 THEN 'Large discount' ELSE 'Standard discount' END AS discount_review` from `sales_reporting` in that column order."
+                "concept": "CASE turns business conditions into readable result labels.",
+                "hint_1": "A missing discount must not fall into the ordinary numeric cases.",
+                "hint_2": "After the high-discount condition, the remaining rows share the standard label."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    CASE\n        WHEN discount_pct IS NULL THEN 'Missing discount'\n        WHEN discount_pct >= 15 THEN 'Large discount'\n        ELSE 'Standard discount'\n    END AS discount_review\nFROM sales_reporting;"
-            },
-            "try_case_for_readable_labels_sketch1": {
-              "title": "Classify Order Values",
-              "prompt": "Select `order_id`, gross sales, and `value_band`: `High value` for gross sales of 130 or more, `Mid value` for 80 or more, otherwise `Low value`. Return `order_id, quantity * unit_price AS gross_sales, CASE WHEN quantity * unit_price >= 130 THEN 'High value' WHEN quantity * unit_price >= 80 THEN 'Mid value' ELSE 'Low value' END AS value_band` from `sales_reporting` in that column order.",
-              "hint": "Check the highest threshold before the lower threshold.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, quantity * unit_price AS gross_sales, CASE WHEN quantity * unit_price >= 130 THEN 'High value' WHEN quantity * unit_price >= 80 THEN 'Mid value' ELSE 'Low value' END AS value_band` from `sales_reporting` in that column order."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 130 THEN 'High value'\n        WHEN quantity * unit_price >= 80 THEN 'Mid value'\n        ELSE 'Low value'\n    END AS value_band\nFROM sales_reporting;"
             }
           }
         },
@@ -27604,18 +27604,30 @@ const messages: Record<string, any> = {
                 "COUNT",
                 "DISTINCT"
               ]
+            },
+            "practice-null-safe-review-discount": {
+              "title": "Practice: Prepare a Null-Safe Review Discount",
+              "prompt": "Return `order_id`, `order_status`, and `review_discount_pct`. Use the stored discount when it exists, and use `0` when it is missing.",
+              "hint": "Use COALESCE to provide the fallback only for the review value.",
+              "help": {
+                "concept": "A null-safe reporting field can preserve normal values while substituting a defined fallback for NULL.",
+                "hint_1": "The fallback is zero.",
+                "hint_2": "Do not filter out rows whose discount is missing."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    order_status,\n    COALESCE(discount_pct, 0) AS review_discount_pct\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_coalesce_for_missing_values_sketch0": {
               "title": "Show Raw and Applied Discount Values",
-              "prompt": "Return `order_id`, the original `discount_pct`, and `COALESCE(discount_pct, 0)` as `applied_discount_pct`. Return `order_id, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct` from `sales_reporting` in that column order.",
-              "hint": "Preserve `discount_pct` as its own column, then add a separate COALESCE expression for the value the report will use.",
+              "prompt": "Return `order_id`, the original `discount_pct`, and `applied_discount_pct`. Preserve the raw discount exactly as stored, but use `0` for `applied_discount_pct` whenever the stored discount is missing.",
+              "hint": "Keep the raw column untouched. Use COALESCE only for the separate value the report will apply.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct` from `sales_reporting` in that column order."
+                "concept": "COALESCE can provide a reporting fallback without hiding the original nullable value.",
+                "hint_1": "The report needs both the raw value and the applied value.",
+                "hint_2": "Only the applied value should turn NULL into zero."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;"
@@ -27733,18 +27745,30 @@ const messages: Record<string, any> = {
                 "= NULL",
                 "IS 0"
               ]
+            },
+            "practice-raw-null-discounted-price": {
+              "title": "Practice: Follow NULL Into a Discounted Price",
+              "prompt": "Return `order_id`, `unit_price`, `discount_pct`, and `raw_discounted_unit_price`. Calculate the discounted unit price using the stored discount percentage exactly as it is. Do not replace missing discounts; rows with a missing discount should therefore keep a missing calculated price.",
+              "hint": "Subtract the raw percentage discount from the unit price. Do not use COALESCE.",
+              "help": {
+                "concept": "This practice checks whether you can predict and preserve NULL propagation through arithmetic.",
+                "hint_1": "The percentage comes directly from `discount_pct`.",
+                "hint_2": "A NULL input should remain visible as a NULL calculated result."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    unit_price,\n    discount_pct,\n    unit_price - unit_price * discount_pct / 100 AS raw_discounted_unit_price\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_how_null_affects_calculations_sketch0": {
               "title": "Trace NULL Through a Discount Calculation",
-              "prompt": "Return `order_id`, the original `discount_pct`, and `unit_price * discount_pct / 100` as `unit_discount`. Return `order_id, discount_pct, unit_price * discount_pct / 100 AS unit_discount` from `sales_reporting` in that column order.",
-              "hint": "Use the raw `discount_pct` value. Do not add COALESCE yet; this exercise is about observing how NULL propagates.",
+              "prompt": "Return `order_id`, the original `discount_pct`, and `unit_discount`. Calculate the unit discount from the raw unit price and raw discount percentage. Do not replace missing discounts in this exercise.",
+              "hint": "Use the stored discount directly and observe what happens to the calculation when that value is NULL.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, discount_pct, unit_price * discount_pct / 100 AS unit_discount` from `sales_reporting` in that column order."
+                "concept": "Arithmetic involving NULL normally produces NULL, which is important when auditing incomplete data.",
+                "hint_1": "Do not use a fallback function in this exercise.",
+                "hint_2": "Rows with a missing discount should keep a missing calculated discount."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    unit_price * discount_pct / 100 AS unit_discount\nFROM sales_reporting;"
@@ -27786,8 +27810,8 @@ const messages: Record<string, any> = {
             "steps": {
               "project_step_1": {
                 "title": "Create the Audit Base",
-                "prompt": "Begin the Module 1 Discount Audit Report. Return `order_id, product_name, order_status, discount_pct` from `sales_reporting` in that column order.",
-                "hint": "Do not replace or filter missing discounts yet; the audit must expose them.",
+                "prompt": "Start the Module 1 Discount Audit Report. Return `order_id`, `product_name`, `order_status`, and the raw `discount_pct`, in that order. Keep missing discounts visible.",
+                "hint": "This first milestone exposes the stored audit fields without normalizing or filtering missing discounts.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27808,8 +27832,8 @@ const messages: Record<string, any> = {
               },
               "project_step_2": {
                 "title": "Add the Applied Discount Rule",
-                "prompt": "Extend the Module 1 Discount Audit Report with the next approved requirement. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct` from `sales_reporting` in that column order.",
-                "hint": "Add a separate calculated field; do not overwrite the raw percentage.",
+                "prompt": "Carry the approved audit forward and append `applied_discount_pct`. Preserve the raw discount column, but treat a missing discount as zero in the new applied field.",
+                "hint": "Keep both versions so the report can compare stored data with the value used in calculations.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27830,8 +27854,8 @@ const messages: Record<string, any> = {
               },
               "project_step_3": {
                 "title": "Calculate Gross Sales",
-                "prompt": "Extend the Module 1 Discount Audit Report with the next approved requirement. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order.",
-                "hint": "Append the row-level monetary calculation without removing the audit columns.",
+                "prompt": "Carry the report forward and append `gross_sales`. Calculate each row's order value from quantity and unit price and display it rounded to two decimal places.",
+                "hint": "Preserve every audit column and add one row-level monetary calculation.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27852,8 +27876,8 @@ const messages: Record<string, any> = {
               },
               "project_step_4": {
                 "title": "Calculate Discount Amount",
-                "prompt": "Extend the Module 1 Discount Audit Report with the next approved requirement. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct, ROUND(quantity * unit_price, 2) AS gross_sales, ROUND( quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS discount_amount` from `sales_reporting` in that column order.",
-                "hint": "Apply the fallback percentage to the same gross-sales expression.",
+                "prompt": "Append `discount_amount`. Calculate the percentage discount from the row's order value using the null-safe applied discount percentage, then display the amount rounded to two decimal places.",
+                "hint": "Use the same underlying order value as gross sales and the same missing-discount rule already approved.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27874,8 +27898,8 @@ const messages: Record<string, any> = {
               },
               "project_step_5": {
                 "title": "Calculate Net Sales",
-                "prompt": "Extend the Module 1 Discount Audit Report with the next approved requirement. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct, ROUND(quantity * unit_price, 2) AS gross_sales, ROUND( quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS discount_amount, ROUND( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS net_sales` from `sales_reporting` in that column order.",
-                "hint": "Subtract the same discount formula from gross sales and preserve every prior column.",
+                "prompt": "Append `net_sales`. Start from the row's order value, subtract its null-safe percentage discount, and round the final result to two decimal places. Preserve every earlier column.",
+                "hint": "Net sales is the original row value after its discount has been removed.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -27896,8 +27920,8 @@ const messages: Record<string, any> = {
               },
               "project_step_6": {
                 "title": "Add Review Labels and Priority",
-                "prompt": "Complete the Module 1 Discount Audit Report. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct, ROUND(quantity * unit_price, 2) AS gross_sales, ROUND( quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS discount_amount, ROUND( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS net_sales, CASE WHEN discount_pct IS NULL THEN 'Missing discount' WHEN discount_pct >= 15 THEN 'Review high discount' ELSE 'OK' END AS discount_review` from `sales_reporting` in that column order. Sort the final result by `CASE WHEN discount_pct IS NULL THEN 1 WHEN discount_pct >= 15 THEN 2 ELSE 3 END, order_id ASC`.",
-                "hint": "Use the same condition order in the label and priority sort.",
+                "prompt": "Complete the audit with `discount_review`. Label missing discounts as `Missing discount`, discounts of 15 or more as `Review high discount`, and all others as `OK`. Sort missing discounts first, high discounts second, and ordinary rows last. Within the same priority, sort by `order_id` ascending.",
+                "hint": "Use the same business-condition order for the readable label and the review priority.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -28030,33 +28054,33 @@ const messages: Record<string, any> = {
                 "1",
                 "0"
               ]
+            },
+            "practice-pending-order-net-sales": {
+              "title": "Practice: Calculate Pending Order Net Sales",
+              "prompt": "For pending orders, return `order_id`, `product_name`, and `net_sales`. Build gross order value from quantity and unit price, treat a missing discount as zero, subtract the percentage discount, and round the completed net value to two decimal places.",
+              "hint": "Calculate the complete row value and discount first; round only the final net-sales result.",
+              "help": {
+                "concept": "A null-safe percentage calculation can be combined with row filtering and final presentation rounding.",
+                "hint_1": "Only pending rows belong in the report.",
+                "hint_2": "The missing-discount fallback is zero."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    product_name,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Pending';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_percentage_and_discount_calculations_sketch0": {
               "title": "Calculate Discounted Unit Prices",
-              "prompt": "For each order, return `order_id`, `product_name`, and `unit_price`. Return `order_id, product_name, unit_price, unit_price * COALESCE(discount_pct, 0) / 100 AS unit_discount, unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS discounted_unit_price` from `sales_reporting` in that column order.",
-              "hint": "Apply the percentage to `unit_price`, then subtract that unit discount from the original unit price.",
+              "prompt": "Return `order_id`, `product_name`, `unit_price`, `unit_discount`, and `discounted_unit_price`. Treat a missing discount percentage as zero. Calculate the unit discount from the unit price, then subtract that discount from the original unit price.",
+              "hint": "Normalize the percentage before using it in both calculations.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, product_name, unit_price, unit_price * COALESCE(discount_pct, 0) / 100 AS unit_discount, unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS discounted_unit_price` from `sales_reporting` in that column order."
+                "concept": "Percentage calculations are easier to audit when the discount amount and final discounted value are both visible.",
+                "hint_1": "The unit discount is the requested percentage of `unit_price`.",
+                "hint_2": "The discounted unit price is the original unit price minus that discount."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    product_name,\n    unit_price,\n    unit_price * COALESCE(discount_pct, 0) / 100 AS unit_discount,\n    unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS discounted_unit_price\nFROM sales_reporting;"
-            },
-            "try_percentage_and_discount_calculations_sketch1": {
-              "title": "Calculate Net Value for Pending Orders",
-              "prompt": "For pending orders, return `order_id`, `product_name`, and null-safe `net_sales` rounded to two decimals. Return `order_id, product_name, ROUND( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS net_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Pending'`.",
-              "hint": "Subtract the discount expression from gross sales, then round the completed result.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, product_name, ROUND( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS net_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Pending'`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    order_id,\n    product_name,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Pending';"
             }
           }
         }
@@ -28173,33 +28197,33 @@ const messages: Record<string, any> = {
                 "COUNT",
                 "MAX"
               ]
+            },
+            "practice-compare-rating-average-rules": {
+              "title": "Practice: Compare Two Rating Average Rules",
+              "prompt": "Return two rounded averages across all orders. Name the first `rated_only_average` and let it average only recorded ratings. Name the second `zero_fallback_average` and treat a missing rating as zero before averaging.",
+              "hint": "Use two separate averages so the two business assumptions remain visible in the result.",
+              "help": {
+                "concept": "Changing how NULL is handled can change both the values included in an average and the resulting KPI.",
+                "hint_1": "The first metric uses normal AVG NULL behavior.",
+                "hint_2": "The second metric substitutes zero before averaging."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    ROUND(AVG(customer_rating), 2) AS rated_only_average,\n    ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_averages_and_null_behavior_sketch0": {
               "title": "Average Completed-Order Rating",
-              "prompt": "Return the average recorded `customer_rating` for completed orders, rounded to two decimals as `average_completed_rating`. Calculate and return `ROUND(AVG(customer_rating), 2) AS average_completed_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-              "hint": "Filter completed rows; AVG will ignore any remaining NULL ratings.",
+              "prompt": "For completed orders, return the average recorded `customer_rating` as `average_completed_rating`, rounded to two decimal places. Missing ratings should remain missing rather than being treated as zero.",
+              "hint": "Filter the completed population first. The ordinary average ignores NULL rating values.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `ROUND(AVG(customer_rating), 2) AS average_completed_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
+                "concept": "AVG normally uses only non-NULL values from the selected population.",
+                "hint_1": "Do not replace missing ratings.",
+                "hint_2": "Round the final average to two decimal places."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT ROUND(AVG(customer_rating), 2) AS average_completed_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
-            },
-            "try_averages_and_null_behavior_sketch1": {
-              "title": "Compare Two Rating Rules",
-              "prompt": "Return `rated_only_average` using `AVG(customer_rating)` and `zero_fallback_average` using `AVG(COALESCE(customer_rating, 0))`. Calculate and return `ROUND(AVG(customer_rating), 2) AS rated_only_average, ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average` from `sales_reporting`.",
-              "hint": "Write two separate AVG expressions so the business assumptions remain visible.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `ROUND(AVG(customer_rating), 2) AS rated_only_average, ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average` from `sales_reporting`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    ROUND(AVG(customer_rating), 2) AS rated_only_average,\n    ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average\nFROM sales_reporting;"
             }
           }
         },
@@ -28313,33 +28337,33 @@ const messages: Record<string, any> = {
                 "order_id, customer_rating",
                 "NULL"
               ]
+            },
+            "practice-count-recorded-discounts": {
+              "title": "Practice: Compare Rows With Recorded Discounts",
+              "prompt": "Return `total_orders` and `orders_with_discount_data`. The first value should count every order row. The second should count only rows where `discount_pct` contains a recorded value.",
+              "hint": "Counting rows and counting a nullable column answer different questions.",
+              "help": {
+                "concept": "COUNT(*) includes every row, while COUNT on a column does not count NULL values.",
+                "hint_1": "Both metrics come from the same unfiltered table.",
+                "hint_2": "The second metric should reveal how many discounts are actually recorded."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    COUNT(*) AS total_orders,\n    COUNT(discount_pct) AS orders_with_discount_data\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_counting_rows_and_values_sketch0": {
               "title": "Count Pending Orders",
-              "prompt": "Return one value named `pending_orders` that counts rows where `order_status` is `Pending`. Calculate and return `COUNT(*) AS pending_orders` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`.",
-              "hint": "Filter the population first, then count every remaining row.",
+              "prompt": "Return one value named `pending_orders` that tells how many pending orders are in `sales_reporting`.",
+              "hint": "First limit the population to pending rows, then count every row that remains.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `COUNT(*) AS pending_orders` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`."
+                "concept": "COUNT can summarize the number of rows in a filtered report population.",
+                "hint_1": "Only pending orders belong in the population.",
+                "hint_2": "The result should contain one summary value."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT COUNT(*) AS pending_orders\nFROM sales_reporting\nWHERE order_status = 'Pending';"
-            },
-            "try_counting_rows_and_values_sketch1": {
-              "title": "Compare Total and Recorded Discounts",
-              "prompt": "Return `total_orders` with `COUNT(*)` and `orders_with_discount_data` with `COUNT(discount_pct)`. Calculate and return `COUNT(*) AS total_orders, COUNT(discount_pct) AS orders_with_discount_data` from `sales_reporting`.",
-              "hint": "Count all rows once and the nullable column once.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `COUNT(*) AS total_orders, COUNT(discount_pct) AS orders_with_discount_data` from `sales_reporting`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    COUNT(*) AS total_orders,\n    COUNT(discount_pct) AS orders_with_discount_data\nFROM sales_reporting;"
             }
           }
         },
@@ -28454,33 +28478,33 @@ const messages: Record<string, any> = {
                 "AVG",
                 "SUM"
               ]
+            },
+            "practice-completed-net-sales-range": {
+              "title": "Practice: Find the Completed Net-Sales Range",
+              "prompt": "For completed orders, return `minimum_net_sales` and `maximum_net_sales`. Calculate each order's net sales from quantity, unit price, and discount percentage, treating a missing discount as zero. Find the smallest and largest net order values and round both final results to two decimal places.",
+              "hint": "Use the same null-safe net-sales calculation for both boundaries.",
+              "help": {
+                "concept": "MIN and MAX can operate on calculated row-level business values as well as stored columns.",
+                "hint_1": "Only completed orders belong in the population.",
+                "hint_2": "The minimum and maximum must use exactly the same net-sales definition."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS minimum_net_sales,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS maximum_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_minimums_and_maximums_sketch0": {
               "title": "Find the Quantity Range",
-              "prompt": "Return the smallest quantity as `minimum_quantity` and the largest quantity as `maximum_quantity`. Calculate and return `MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity` from `sales_reporting`.",
-              "hint": "Apply each boundary function to the same measure.",
+              "prompt": "Return the smallest recorded quantity as `minimum_quantity` and the largest as `maximum_quantity`.",
+              "hint": "Apply the two boundary aggregates to the same quantity measure.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity` from `sales_reporting`."
+                "concept": "MIN and MAX identify the lower and upper boundaries of a measure.",
+                "hint_1": "Both values come from `quantity`.",
+                "hint_2": "The result should be one summary row with two columns."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity\nFROM sales_reporting;"
-            },
-            "try_minimums_and_maximums_sketch1": {
-              "title": "Find the Completed Net-Sales Range",
-              "prompt": "For completed orders, return null-safe minimum and maximum net sales rounded to two decimals as `minimum_net_sales` and `maximum_net_sales`. Calculate and return `ROUND(MIN( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS minimum_net_sales, ROUND(MAX( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS maximum_net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-              "hint": "Use the same null-safe net expression inside both aggregates.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `ROUND(MIN( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS minimum_net_sales, ROUND(MAX( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS maximum_net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS minimum_net_sales,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS maximum_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
             }
           }
         },
@@ -28519,8 +28543,8 @@ const messages: Record<string, any> = {
             "steps": {
               "project_step_1": {
                 "title": "Count Completed Orders",
-                "prompt": "Begin the Module 2 Storewide Kpi Snapshot. Calculate and return `COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Establish one filtered population and one-row grain.",
+                "prompt": "Start the Module 2 Storewide KPI Snapshot with one summary value named `completed_orders`, counting all completed orders.",
+                "hint": "Establish the completed-order population first; the output grain is one summary row.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -28540,9 +28564,9 @@ const messages: Record<string, any> = {
                 }
               },
               "project_step_2": {
-                "title": "Add Completed Units — 2 Project: Completed Sales KPI Snapshot",
-                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Append the units total to the existing summary row.",
+                "title": "Add Completed Units",
+                "prompt": "Carry the snapshot forward and append `completed_units`, the total quantity across those same completed orders.",
+                "hint": "Keep the existing completed-order count and add one quantity total.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -28562,9 +28586,9 @@ const messages: Record<string, any> = {
                 }
               },
               "project_step_3": {
-                "title": "Add Gross Sales — 2 Project: Completed Sales KPI Snapshot",
-                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Place the row-level gross expression inside SUM and round the final total.",
+                "title": "Add Gross Sales",
+                "prompt": "Append `gross_sales`. Calculate each completed order's value from quantity and unit price, aggregate those values, and display the final total rounded to two decimal places.",
+                "hint": "Aggregate the row-level merchandise value across the same completed-order population.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -28584,9 +28608,9 @@ const messages: Record<string, any> = {
                 }
               },
               "project_step_4": {
-                "title": "Add Discount and Net Sales — 2 Project: Completed Sales KPI Snapshot",
-                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Use the same fallback rule in both monetary aggregates.",
+                "title": "Add Discount and Net Sales",
+                "prompt": "Append `discount_amount` and `net_sales`. Treat missing discount percentages as zero. Total the discount dollars across completed orders, then total the corresponding post-discount sales. Round both final monetary KPIs to two decimal places.",
+                "hint": "Use one consistent missing-discount rule for both monetary aggregates.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -28607,8 +28631,8 @@ const messages: Record<string, any> = {
               },
               "project_step_5": {
                 "title": "Add Averages",
-                "prompt": "Extend the Module 2 Storewide Kpi Snapshot with the next approved requirement. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Average the same net expression used in the total; leave rating NULL behavior explicit.",
+                "prompt": "Append `average_net_order_value` and `average_rating`. Average the same null-safe net-order value already used in the snapshot, rounded to two decimals. Also average the recorded customer ratings for completed orders, leaving missing ratings out of that average.",
+                "hint": "Keep the net-sales definition consistent, while allowing AVG to use its normal NULL behavior for ratings.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -28629,8 +28653,8 @@ const messages: Record<string, any> = {
               },
               "project_step_6": {
                 "title": "Add the Net-Order Range",
-                "prompt": "Complete the Module 2 Storewide Kpi Snapshot. Calculate and return `COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating, ROUND(MIN( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS smallest_net_order, ROUND(MAX( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS largest_net_order` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Apply MIN and MAX to the same null-safe net-order expression used by the averages.",
+                "prompt": "Complete the KPI snapshot with `smallest_net_order` and `largest_net_order`. Find the minimum and maximum of the same null-safe net-order value used by the earlier net-sales KPIs, and round both results to two decimal places.",
+                "hint": "Reuse one definition of net order value for the average, minimum, and maximum.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -28763,33 +28787,33 @@ const messages: Record<string, any> = {
                 "AVG",
                 "ROUND"
               ]
+            },
+            "practice-total-discount-dollars": {
+              "title": "Practice: Total Null-Safe Discount Dollars",
+              "prompt": "Return `total_discount_amount` for all orders. For each row, calculate its merchandise value and apply its discount percentage, treating a missing percentage as zero. Add the row-level discount amounts together and display the final total rounded to two decimal places.",
+              "hint": "Build the discount amount at row level, aggregate those amounts, and round the final report value.",
+              "help": {
+                "concept": "SUM can aggregate a calculated business measure rather than only a stored column.",
+                "hint_1": "A missing discount contributes zero discount dollars.",
+                "hint_2": "Round the completed total, not each input independently."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT ROUND(\n    SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100),\n    2\n) AS total_discount_amount\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_summing_business_metrics_sketch0": {
               "title": "Total Units in Pending Orders",
-              "prompt": "Return one value named `pending_units` that sums `quantity` for pending orders. Calculate and return `SUM(quantity) AS pending_units` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`.",
-              "hint": "Filter to pending rows before summing quantity.",
+              "prompt": "Return one value named `pending_units` containing the total quantity across pending orders.",
+              "hint": "Keep only pending rows before adding their quantity values.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `SUM(quantity) AS pending_units` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`."
+                "concept": "SUM combines a numeric measure across the selected report population.",
+                "hint_1": "The measure to total is `quantity`.",
+                "hint_2": "Pending orders are the only rows in this report."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT SUM(quantity) AS pending_units\nFROM sales_reporting\nWHERE order_status = 'Pending';"
-            },
-            "try_summing_business_metrics_sketch1": {
-              "title": "Total Null-Safe Discount Dollars",
-              "prompt": "Return the total discount amount across all orders, rounded to two decimals as `total_discount_amount`. Calculate and return `ROUND( SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100), 2 ) AS total_discount_amount` from `sales_reporting`.",
-              "hint": "Place the complete row-level discount expression inside SUM.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `ROUND( SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100), 2 ) AS total_discount_amount` from `sales_reporting`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT ROUND(\n    SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100),\n    2\n) AS total_discount_amount\nFROM sales_reporting;"
             }
           }
         }
@@ -28906,33 +28930,33 @@ const messages: Record<string, any> = {
                 "order_id",
                 "quantity"
               ]
+            },
+            "practice-preserve-region-category-grain": {
+              "title": "Practice: Preserve Region-Category Grain",
+              "prompt": "Return one row for each `region` and `category` combination with `average_rating`, the average recorded customer rating for that combination, rounded to two decimal places. Sort by region and then category.",
+              "hint": "Keep exactly the dimensions named by the requested grain.",
+              "help": {
+                "concept": "A grouped result is valid when its selected dimensions match its intended grain.",
+                "hint_1": "Both region and category are required dimensions.",
+                "hint_2": "The rating is summarized inside each combination."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_avoiding_grouping_mistakes_sketch0": {
               "title": "Correct a Regional Summary",
-              "prompt": "Write a query that returns exactly one row per `region` with `COUNT(*)` as `order_count`. Calculate and return `region, COUNT(*) AS order_count` from `sales_reporting`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "The only non-aggregate selected column should be the stated group dimension.",
+              "prompt": "Return exactly one row for each `region` with `order_count`, the number of orders in that region. Sort the regions alphabetically.",
+              "hint": "The only descriptive result field should be the field that defines the requested row grain.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
+                "concept": "Every non-aggregated result dimension must agree with the grain of the grouped report.",
+                "hint_1": "The requested grain is one row per region.",
+                "hint_2": "Do not include an unrelated detail column."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    COUNT(*) AS order_count\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
-            },
-            "try_avoiding_grouping_mistakes_sketch1": {
-              "title": "Preserve Region-Category Grain",
-              "prompt": "Return one row per `region` and `category` with `AVG(customer_rating)` rounded to two decimals as `average_rating`. Calculate and return `region, category, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Produce one result row per `region, category`. Sort the final result by `region, category`.",
-              "hint": "Select exactly the two dimensions named in the grain statement.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region, category`. Sort the final result by `region, category`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;"
             }
           }
         },
@@ -29047,33 +29071,33 @@ const messages: Record<string, any> = {
                 "SUM(quantity)",
                 "order_id"
               ]
+            },
+            "practice-category-status-units": {
+              "title": "Practice: Summarize Units by Category and Status",
+              "prompt": "Return one row for each unique `category` and `order_status` combination. Add `total_units`, the total quantity in that combination. Sort by category and then order status.",
+              "hint": "The two descriptive fields together define one summary group.",
+              "help": {
+                "concept": "A multi-dimension summary keeps each unique combination separate.",
+                "hint_1": "Do not collapse different order statuses together.",
+                "hint_2": "Quantity is the measure being totaled."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    order_status,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY category, order_status\nORDER BY category, order_status;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_group_by_multiple_columns_sketch0": {
               "title": "Gross Sales by Region and Category",
-              "prompt": "Return `region`, `category`, and gross sales rounded to two decimals as `gross_sales`. Calculate and return `region, category, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Produce one result row per `region, category`. Sort the final result by `region, category`.",
-              "hint": "Both displayed dimensions must be included in GROUP BY.",
+              "prompt": "Return one row for each unique combination of `region` and `category`. Add `gross_sales`, the total merchandise value for that combination, rounded to two decimal places. Sort by region and then category.",
+              "hint": "Both descriptive columns define the grain; calculate and total the order values inside each combination.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region, category`. Sort the final result by `region, category`."
+                "concept": "Multiple grouping dimensions create one summary row for each unique dimension combination.",
+                "hint_1": "A region may appear several times when it has several categories.",
+                "hint_2": "Gross sales comes from quantity multiplied by unit price."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;"
-            },
-            "try_group_by_multiple_columns_sketch1": {
-              "title": "Units by Category and Status",
-              "prompt": "Return `category`, `order_status`, and `SUM(quantity)` as `total_units`. Calculate and return `category, order_status, SUM(quantity) AS total_units` from `sales_reporting`. Produce one result row per `category, order_status`. Sort the final result by `category, order_status`.",
-              "hint": "Both descriptive columns define the result grain, while `SUM(quantity)` summarizes the rows in each group.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category, order_status`. Sort the final result by `category, order_status`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    category,\n    order_status,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY category, order_status\nORDER BY category, order_status;"
             }
           }
         },
@@ -29188,33 +29212,33 @@ const messages: Record<string, any> = {
                 "COUNT(*)",
                 "order_id, product_name"
               ]
+            },
+            "practice-completed-orders-by-region": {
+              "title": "Practice: Count Completed Orders by Region",
+              "prompt": "Return one row for each `region` and a `completed_orders` value counting only completed orders in that region. Sort the regions alphabetically.",
+              "hint": "Limit the source population to completed orders before building the regional summary.",
+              "help": {
+                "concept": "Filtering determines which source rows participate; grouping determines the grain of the summary.",
+                "hint_1": "Only completed rows should contribute to the counts.",
+                "hint_2": "Each region should appear once."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_group_by_one_column_sketch0": {
               "title": "Total Units by Category",
-              "prompt": "Return one row per `category` with `SUM(quantity)` as `total_units`. Calculate and return `category, SUM(quantity) AS total_units` from `sales_reporting`. Produce one result row per `category`. Sort the final result by `category`.",
-              "hint": "Select the dimension, aggregate the measure, then group by the dimension.",
+              "prompt": "Return one row for each `category` and a `total_units` value containing the total quantity for that category. Sort the categories alphabetically.",
+              "hint": "The category defines the result grain; quantity is the measure summarized within each category.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `category`."
+                "concept": "A grouped report changes the grain from one row per source record to one row per dimension value.",
+                "hint_1": "Each category should appear exactly once.",
+                "hint_2": "Add all quantity values belonging to the same category."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY category\nORDER BY category;"
-            },
-            "try_group_by_one_column_sketch1": {
-              "title": "Completed Orders by Region",
-              "prompt": "Return one row per `region` with the number of completed orders as `completed_orders`. Calculate and return `region, COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "The status condition belongs before GROUP BY.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;"
             }
           }
         },
@@ -29253,8 +29277,8 @@ const messages: Record<string, any> = {
             "steps": {
               "project_step_1": {
                 "title": "Establish the Scorecard Grain",
-                "prompt": "Begin the Module 3 Region Category Scorecard. Calculate and return `region, category, COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Start with the exact group key and filtered population used by every later step.",
+                "prompt": "Start the Module 3 Region-Category Scorecard. Use only completed orders and return one row for each `region` and `category` combination with `completed_orders`, the number of completed orders in that combination.",
+                "hint": "Establish the filtered population and exact two-dimension grain that every later milestone will preserve.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29274,9 +29298,9 @@ const messages: Record<string, any> = {
                 }
               },
               "project_step_2": {
-                "title": "Add Completed Units — 3 Project: Region-Category Scorecard",
-                "prompt": "Extend the Module 3 Region Category Scorecard with the next approved requirement. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Append the measure; do not change the group key or status filter.",
+                "title": "Add Completed Units",
+                "prompt": "Carry the scorecard forward and append `completed_units`, the total quantity within each existing region-category group.",
+                "hint": "Keep the same completed-order population and group grain; add only the new volume metric.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29296,9 +29320,9 @@ const messages: Record<string, any> = {
                 }
               },
               "project_step_3": {
-                "title": "Add Gross Sales — 3 Project: Region-Category Scorecard",
-                "prompt": "Extend the Module 3 Region Category Scorecard with the next approved requirement. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Add the monetary aggregate after the volume metrics.",
+                "title": "Add Gross Sales",
+                "prompt": "Append `gross_sales`. Calculate merchandise value from quantity and unit price, total it within each existing group, and display the result rounded to two decimal places.",
+                "hint": "Preserve the existing grain while adding one monetary aggregate.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29318,9 +29342,9 @@ const messages: Record<string, any> = {
                 }
               },
               "project_step_4": {
-                "title": "Add Discount and Net Sales — 3 Project: Region-Category Scorecard",
-                "prompt": "Extend the Module 3 Region Category Scorecard with the next approved requirement. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Use parallel null-safe formulas so each group can reconcile gross, discount, and net.",
+                "title": "Add Discount and Net Sales",
+                "prompt": "Append `discount_amount` and `net_sales`. Treat missing discount percentages as zero. Total both discount dollars and post-discount sales within each region-category group, rounding both monetary results to two decimal places.",
+                "hint": "Use one consistent missing-discount rule so gross, discount, and net values reconcile.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29341,8 +29365,8 @@ const messages: Record<string, any> = {
               },
               "project_step_5": {
                 "title": "Add Average Order Value and Rating",
-                "prompt": "Extend the Module 3 Region Category Scorecard with the next approved requirement. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Average the group-level order values without changing the group columns.",
+                "prompt": "Append `average_net_order_value` and `average_rating`. Average the same null-safe net-order value used earlier, rounded to two decimals. Also average the recorded customer ratings within each group, leaving missing ratings out.",
+                "hint": "Keep the group dimensions unchanged while adding the two average metrics.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29363,8 +29387,8 @@ const messages: Record<string, any> = {
               },
               "project_step_6": {
                 "title": "Rank the Completed Sales Scorecard",
-                "prompt": "Complete the Module 3 Region Category Scorecard. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`. Sort the final result by `net_sales DESC, region ASC, category ASC`.",
-                "hint": "Add sorting after GROUP BY and preserve every selected metric.",
+                "prompt": "Complete the scorecard by ranking the region-category groups from highest `net_sales` to lowest. Break ties first by `region` alphabetically and then by `category` alphabetically. Preserve every earlier metric.",
+                "hint": "Rank the finished grouped result without changing its grain or calculations.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29497,33 +29521,33 @@ const messages: Record<string, any> = {
                 "GROUP",
                 "HAVING"
               ]
+            },
+            "practice-rank-representatives-by-completed-orders": {
+              "title": "Practice: Rank Representatives by Completed Orders",
+              "prompt": "Return one row for each `sales_rep` with `completed_orders`, the number of completed orders handled by that representative. Rank from the largest count to the smallest, using representative name alphabetically to break ties.",
+              "hint": "Filter the population first, summarize by representative, then rank the summary rows.",
+              "help": {
+                "concept": "Sorting after aggregation ranks groups rather than individual source rows.",
+                "hint_1": "Only completed orders should contribute.",
+                "hint_2": "The representative name is the secondary ordering rule."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    sales_rep,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY sales_rep\nORDER BY completed_orders DESC, sales_rep ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_sorting_aggregate_results_sketch0": {
               "title": "Rank Categories by Completed Net Sales",
-              "prompt": "For completed orders, return `category` and null-safe net sales rounded to two decimals as `net_sales`. Calculate and return `category, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `category`. Sort the final result by `net_sales DESC, category ASC`.",
-              "hint": "Use the metric alias for the primary sort and the dimension for ties.",
+              "prompt": "For completed orders, return one row per `category` with `net_sales`. Calculate net sales using a zero fallback for missing discounts and round each category total to two decimal places. Rank categories from highest net sales to lowest, using category alphabetically to break ties.",
+              "hint": "Build the grouped metric first, then rank the finished summary rows by that metric.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `net_sales DESC, category ASC`."
+                "concept": "Aggregate reports can be ranked by their calculated summary metrics.",
+                "hint_1": "Only completed orders belong in the report.",
+                "hint_2": "The category name is only the tie-breaker."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nORDER BY net_sales DESC, category ASC;"
-            },
-            "try_sorting_aggregate_results_sketch1": {
-              "title": "Rank Representatives by Completed Orders",
-              "prompt": "Return each `sales_rep` and their completed-order count as `completed_orders`. Calculate and return `sales_rep, COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `sales_rep`. Sort the final result by `completed_orders DESC, sales_rep ASC`.",
-              "hint": "The representative name is the tie-breaker, not the main ranking metric.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `sales_rep`. Sort the final result by `completed_orders DESC, sales_rep ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    sales_rep,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY sales_rep\nORDER BY completed_orders DESC, sales_rep ASC;"
             }
           }
         }
@@ -29640,33 +29664,33 @@ const messages: Record<string, any> = {
                 "NULL + 1",
                 "COUNT(*)"
               ]
+            },
+            "practice-completed-net-sales-with-full-population": {
+              "title": "Practice: Completed Net Sales Without Dropping Rows",
+              "prompt": "Return one row per `region` with `total_orders` and `completed_net_sales`. The total-order metric must count every status in each region. The sales metric should include net sales only from completed orders, treating missing discounts as zero. Non-completed rows should contribute zero to that sales metric. Round completed net sales to two decimal places and sort by region.",
+              "hint": "Do not filter away non-completed rows because the first metric still needs them.",
+              "help": {
+                "concept": "Conditional aggregation preserves the full group while letting one metric include only selected rows.",
+                "hint_1": "Every row contributes to total orders.",
+                "hint_2": "Only completed rows contribute money."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_case_inside_aggregates_sketch0": {
               "title": "Count Pending Orders by Category",
-              "prompt": "Return one row per `category` with `total_orders` and `pending_orders`. Calculate and return `category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Pending' THEN 1 ELSE 0 END) AS pending_orders` from `sales_reporting`. Produce one result row per `category`. Sort the final result by `category`.",
-              "hint": "Keep every row in the group; contribute one only when the status is pending.",
+              "prompt": "Return one row per `category` with `total_orders` and `pending_orders`. Count every order in the first metric, but count only pending orders in the second without removing the other statuses from the group. Sort by category.",
+              "hint": "Keep the complete category population and let only matching rows contribute to the conditional count.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `category`."
+                "concept": "Conditional aggregation lets several measures use different conditions while sharing the same groups.",
+                "hint_1": "The total-order metric includes every row.",
+                "hint_2": "The pending metric contributes one only when the row has the requested status."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Pending' THEN 1 ELSE 0 END) AS pending_orders\nFROM sales_reporting\nGROUP BY category\nORDER BY category;"
-            },
-            "try_case_inside_aggregates_sketch1": {
-              "title": "Completed Net Sales by Region Without Filtering Rows",
-              "prompt": "Return one row per `region` with `total_orders` and completed-order net sales as `completed_net_sales`, rounded to two decimals. Calculate and return `region, COUNT(*) AS total_orders, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales` from `sales_reporting`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "Return the net-sales expression only in the completed branch; return zero otherwise.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
             }
           }
         },
@@ -29781,33 +29805,33 @@ const messages: Record<string, any> = {
                 "ORDER BY",
                 "SELECT"
               ]
+            },
+            "practice-high-value-categories": {
+              "title": "Practice: Find High-Value Categories",
+              "prompt": "Return one row per `category` with `gross_sales`, rounded to two decimal places. Keep only categories whose total gross sales exceed 550. Rank the retained categories from highest gross sales to lowest, using category alphabetically to break ties.",
+              "hint": "The sales threshold applies to each finished category aggregate, not to an individual source row.",
+              "help": {
+                "concept": "HAVING is used when the decision to keep a group depends on an aggregate result.",
+                "hint_1": "Build gross sales within each category first.",
+                "hint_2": "Apply the 550 threshold to the group total."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY category\nHAVING SUM(quantity * unit_price) > 550\nORDER BY gross_sales DESC, category ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_having_after_grouping_sketch0": {
               "title": "Keep Categories with Several Completed Orders",
-              "prompt": "Return `category` and completed-order count as `completed_orders`. Calculate and return `category, COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `category`. After grouping, keep groups where `COUNT(*) >= 4`. Sort the final result by `completed_orders DESC, category ASC`.",
-              "hint": "The status filter belongs in WHERE; the count threshold belongs in HAVING.",
+              "prompt": "Using only completed orders, return one row per `category` with `completed_orders`. Keep only categories that contain at least four completed orders. Rank the remaining categories from the largest count to the smallest, using category alphabetically to break ties.",
+              "hint": "The order status decides which source rows participate. The minimum-count requirement applies only after the category groups have been formed.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "After grouping, keep groups where `COUNT(*) >= 4`. Sort the final result by `completed_orders DESC, category ASC`."
+                "concept": "WHERE filters source rows; HAVING filters completed groups using aggregate conditions.",
+                "hint_1": "First restrict the population to completed orders.",
+                "hint_2": "Then keep only groups whose completed-order count meets the threshold."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nHAVING COUNT(*) >= 4\nORDER BY completed_orders DESC, category ASC;"
-            },
-            "try_having_after_grouping_sketch1": {
-              "title": "Find High-Value Categories",
-              "prompt": "Return each `category` and gross sales rounded to two decimals as `gross_sales`. Calculate and return `category, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Produce one result row per `category`. After grouping, keep groups where `SUM(quantity * unit_price) > 550`. Sort the final result by `gross_sales DESC, category ASC`.",
-              "hint": "Repeat the aggregate expression in HAVING and use the alias for display sorting.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "After grouping, keep groups where `SUM(quantity * unit_price) > 550`. Sort the final result by `gross_sales DESC, category ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY category\nHAVING SUM(quantity * unit_price) > 550\nORDER BY gross_sales DESC, category ASC;"
             }
           }
         },
@@ -29849,8 +29873,8 @@ const messages: Record<string, any> = {
             "steps": {
               "project_step_1": {
                 "title": "Establish Total Orders by Group",
-                "prompt": "Begin the Module 4 Performance Exception Report. Calculate and return `region, category, COUNT(*) AS total_orders` from `sales_reporting`. Produce one result row per `region, category`.",
-                "hint": "Keep all statuses because later metrics compare completed rows with the full group.",
+                "prompt": "Start the Module 4 Performance Exception Report. Return one row per `region` and `category` combination with `total_orders`, counting every order in that group.",
+                "hint": "Keep all order statuses because later metrics compare selected statuses with the full group.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29871,8 +29895,8 @@ const messages: Record<string, any> = {
               },
               "project_step_2": {
                 "title": "Add Completed Orders",
-                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders` from `sales_reporting`. Produce one result row per `region, category`.",
-                "hint": "Use a 1/0 CASE inside SUM so non-completed rows stay in the group.",
+                "prompt": "Carry the report forward and append `completed_orders`. Count only completed orders in the new metric while preserving every source row for `total_orders`.",
+                "hint": "Use a conditional contribution rather than removing non-completed rows from the group.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29893,8 +29917,8 @@ const messages: Record<string, any> = {
               },
               "project_step_3": {
                 "title": "Calculate Completion Rate",
-                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate` from `sales_reporting`. Produce one result row per `region, category`.",
-                "hint": "Use the same conditional count as the numerator and COUNT(*) as the denominator.",
+                "prompt": "Append `completion_rate`. Calculate completed orders as a percentage of all orders in the same region-category group and display the percentage rounded to one decimal place.",
+                "hint": "Use the completed-order metric as the numerator and the full group count as the denominator.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29915,8 +29939,8 @@ const messages: Record<string, any> = {
               },
               "project_step_4": {
                 "title": "Add Completed Net Sales",
-                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales` from `sales_reporting`. Produce one result row per `region, category`.",
-                "hint": "Let completed rows contribute null-safe net sales and all other rows contribute zero.",
+                "prompt": "Append `completed_net_sales`. Completed orders should contribute their null-safe net sales, while all other statuses contribute zero. Round the grouped sales result to two decimal places.",
+                "hint": "Do not remove other statuses because the earlier group metrics still depend on them.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29937,8 +29961,8 @@ const messages: Record<string, any> = {
               },
               "project_step_5": {
                 "title": "Add Rating and Missing-Discount Exposure",
-                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders` from `sales_reporting`. Produce one result row per `region, category`.",
-                "hint": "Add one recorded-value average and one conditional missing-value count.",
+                "prompt": "Append `average_rating` and `missing_discount_orders`. Average the recorded customer ratings in each group and round to two decimals. Also count how many orders in the group have no recorded discount percentage.",
+                "hint": "One metric uses ordinary average NULL behavior; the other explicitly counts missing values.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29959,8 +29983,8 @@ const messages: Record<string, any> = {
               },
               "project_step_6": {
                 "title": "Assign the Exception Reason",
-                "prompt": "Extend the Module 4 Performance Exception Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders, CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 AND COALESCE(AVG(customer_rating), 0) < 4.3 THEN 'Completion and rating risk' WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 THEN 'Completion risk' ELSE 'Rating risk' END AS exception_reason` from `sales_reporting`. Produce one result row per `region, category`.",
-                "hint": "Test the combined risk before the single completion condition.",
+                "prompt": "Append `exception_reason`. A group with completion below 75 percent and an average rating below 4.3 should be labeled `Completion and rating risk`. A group with only the completion problem should be labeled `Completion risk`. All remaining groups should be labeled `Rating risk`. Treat a missing average rating as zero for this classification.",
+                "hint": "Test the combined-risk condition before either single-risk outcome.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -29981,8 +30005,8 @@ const messages: Record<string, any> = {
               },
               "project_step_7": {
                 "title": "Keep and Prioritize Only Exceptions",
-                "prompt": "Complete the Module 4 Performance Exception Report. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders, CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 AND COALESCE(AVG(customer_rating), 0) < 4.3 THEN 'Completion and rating risk' WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 THEN 'Completion risk' ELSE 'Rating risk' END AS exception_reason` from `sales_reporting`. Produce one result row per `region, category`. After grouping, keep groups where `COUNT(*) >= 2 AND ( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 OR COALESCE(AVG(customer_rating), 0) < 4.3 )`. Sort the final result by `CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 AND COALESCE(AVG(customer_rating), 0) < 4.3 THEN 1 WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) < 75 THEN 2 ELSE 3 END, completed_net_sales ASC, region ASC, category ASC`.",
-                "hint": "Use HAVING for group thresholds and repeat the label priority in ORDER BY.",
+                "prompt": "Complete the report by keeping only groups with at least two orders that also have either completion below 75 percent or an average rating below 4.3. Treat a missing average rating as zero for that risk test. Rank combined completion-and-rating risks first, completion-only risks second, and rating-only risks third. Within the same risk priority, sort by `completed_net_sales` from lowest to highest, then by region and category alphabetically.",
+                "hint": "The retention rules apply to completed groups. After filtering those groups, rank them using the same risk priority used by the exception labels.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -30115,33 +30139,33 @@ const messages: Record<string, any> = {
                 "0.01",
                 "10"
               ]
+            },
+            "practice-category-completion-bands": {
+              "title": "Practice: Label Category Completion Rates",
+              "prompt": "Return one row per `category` with `completion_rate` and `completion_band`. Calculate the percentage of orders in each category that are completed and round the rate to one decimal place. Label rates of 70 or more as `Reliable`, rates from 55 up to that threshold as `Mixed`, and lower rates as `At risk`. Rank categories from the highest completion rate to the lowest, using category alphabetically to break ties.",
+              "hint": "The numerator counts completed rows while the denominator counts every row in the same category.",
+              "help": {
+                "concept": "Aggregate ratios can be classified with ordered business thresholds just like aggregate totals.",
+                "hint_1": "Keep the complete category population for the denominator.",
+                "hint_2": "Check the highest band threshold first."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    CASE\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable'\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed'\n        ELSE 'At risk'\n    END AS completion_band\nFROM sales_reporting\nGROUP BY category\nORDER BY completion_rate DESC, category ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_performance_bands_from_aggregates_sketch0": {
               "title": "Band Regions by Completed Net Sales",
-              "prompt": "For completed orders, return `region`, completed net sales rounded to two decimals, and `performance_band`: `Strong` for at least 400, `Stable` for at least 340, otherwise `Watch`. Calculate and return `region, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS completed_net_sales, CASE WHEN SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ) >= 400 THEN 'Strong' WHEN SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ) >= 340 THEN 'Stable' ELSE 'Watch' END AS performance_band` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region`. Sort the final result by `completed_net_sales DESC, region ASC`.",
-              "hint": "Repeat the same net-sales aggregate in the metric and CASE thresholds.",
+              "prompt": "Using completed orders, return one row per `region` with `completed_net_sales` and `performance_band`. Calculate null-safe net sales for each order and total it by region, rounded to two decimals. Label totals of 400 or more as `Strong`, totals from 340 up to that threshold as `Stable`, and lower totals as `Watch`. Rank regions from highest net sales to lowest, using region alphabetically to break ties.",
+              "hint": "First define one regional sales metric, then classify that aggregate using the thresholds from highest to lowest.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `completed_net_sales DESC, region ASC`."
+                "concept": "A CASE expression can classify a completed aggregate into business-readable performance bands.",
+                "hint_1": "Use the same net-sales definition for the displayed metric and the band thresholds.",
+                "hint_2": "Test the strongest threshold first."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS completed_net_sales,\n    CASE\n        WHEN SUM(\n            quantity * unit_price\n            - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n        ) >= 400 THEN 'Strong'\n        WHEN SUM(\n            quantity * unit_price\n            - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n        ) >= 340 THEN 'Stable'\n        ELSE 'Watch'\n    END AS performance_band\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY completed_net_sales DESC, region ASC;"
-            },
-            "try_performance_bands_from_aggregates_sketch1": {
-              "title": "Label Category Completion Rates",
-              "prompt": "Return one row per `category` with completion rate rounded to one decimal and `completion_band`: `Reliable` for at least 70, `Mixed` for at least 55, otherwise `At risk`. Calculate and return `category, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, CASE WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable' WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed' ELSE 'At risk' END AS completion_band` from `sales_reporting`. Produce one result row per `category`. Sort the final result by `completion_rate DESC, category ASC`.",
-              "hint": "Build the rate from completed-order count divided by total order count.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `completion_rate DESC, category ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    category,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    CASE\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable'\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed'\n        ELSE 'At risk'\n    END AS completion_band\nFROM sales_reporting\nGROUP BY category\nORDER BY completion_rate DESC, category ASC;"
             }
           }
         },
@@ -30256,33 +30280,33 @@ const messages: Record<string, any> = {
                 "ORDER BY",
                 "GROUP BY"
               ]
+            },
+            "practice-active-gross-sales-by-category": {
+              "title": "Practice: Active Gross Sales by Category",
+              "prompt": "Return one row per `category` with `active_gross_sales`. Include completed and pending orders but exclude all other statuses. Calculate gross sales from quantity and unit price, total it by category, round to two decimal places, and rank the categories from highest active gross sales to lowest. Break ties alphabetically by category.",
+              "hint": "Define the allowed source-row population before building the category totals.",
+              "help": {
+                "concept": "Filtering before grouping controls which rows can contribute to each aggregate.",
+                "hint_1": "Two statuses belong in the source population.",
+                "hint_2": "Rank the completed category summaries after aggregation."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS active_gross_sales\nFROM sales_reporting\nWHERE order_status IN ('Completed', 'Pending')\nGROUP BY category\nORDER BY active_gross_sales DESC, category ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_where_before_grouping_sketch0": {
               "title": "Completed Net Sales by Region",
-              "prompt": "Return one row per `region` with completed-order net sales rounded to two decimals as `completed_net_sales`. Calculate and return `region, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS completed_net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "Filter the source rows before grouping and summing them.",
+              "prompt": "For completed orders, return one row per `region` with `completed_net_sales`. Calculate each order's net value using a zero fallback for missing discounts, total that value within the region, and round the final regional amount to two decimal places. Sort by region.",
+              "hint": "First decide which source rows belong in the report. Only then summarize those rows by region.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
+                "concept": "A row filter changes the population before grouping and aggregation happen.",
+                "hint_1": "Only completed orders should contribute to the totals.",
+                "hint_2": "Each region should appear once in the result."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;"
-            },
-            "try_where_before_grouping_sketch1": {
-              "title": "Non-Cancelled Gross Sales by Category",
-              "prompt": "Return one row per `category` with gross sales from completed and pending orders as `active_gross_sales`, rounded to two decimals. Calculate and return `category, ROUND(SUM(quantity * unit_price), 2) AS active_gross_sales` from `sales_reporting`. Keep only rows where `order_status IN ('Completed', 'Pending')`. Produce one result row per `category`. Sort the final result by `active_gross_sales DESC, category ASC`.",
-              "hint": "Use WHERE to keep the two allowed statuses before aggregation.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `active_gross_sales DESC, category ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS active_gross_sales\nFROM sales_reporting\nWHERE order_status IN ('Completed', 'Pending')\nGROUP BY category\nORDER BY active_gross_sales DESC, category ASC;"
             }
           }
         }
@@ -30399,33 +30423,33 @@ const messages: Record<string, any> = {
                 "AVG",
                 "COUNT"
               ]
+            },
+            "practice-audit-date-and-value-boundaries": {
+              "title": "Practice: Audit Date and Value Boundaries",
+              "prompt": "Return one audit row containing `first_order_date`, `last_order_date`, `minimum_quantity`, `maximum_quantity`, `minimum_unit_price`, and `maximum_unit_price`. Use the earliest and latest recorded order dates, the quantity boundaries, and the unit-price boundaries. Display the two price boundaries rounded to two decimal places.",
+              "hint": "This is a whole-dataset audit, so the result should stay at one row rather than being divided into groups.",
+              "help": {
+                "concept": "Boundary checks help confirm that dates and numeric measures match the expected reporting domain.",
+                "hint_1": "Use the same lower/upper-bound idea for each audited field.",
+                "hint_2": "Only the price outputs need two-decimal presentation."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    MIN(order_date) AS first_order_date,\n    MAX(order_date) AS last_order_date,\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity,\n    ROUND(MIN(unit_price), 2) AS minimum_unit_price,\n    ROUND(MAX(unit_price), 2) AS maximum_unit_price\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_auditing_the_sales_kpi_dataset_sketch0": {
               "title": "Audit Missing Data by Region",
-              "prompt": "For each `region`, return `total_orders`, `missing_discount_rows`, and `missing_rating_rows`. Calculate and return `region, COUNT(*) AS total_orders, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_rows, SUM(CASE WHEN customer_rating IS NULL THEN 1 ELSE 0 END) AS missing_rating_rows` from `sales_reporting`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "Group by region, count all rows, and add one conditional count for each nullable column.",
+              "prompt": "Return one row per `region` with `total_orders`, `missing_discount_rows`, and `missing_rating_rows`. Count every order in the first metric, then count rows with a missing discount percentage and rows with a missing customer rating separately. Sort by region.",
+              "hint": "Keep the complete regional population and use separate conditional counts for the two nullable fields.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
+                "concept": "A dataset audit can compare total rows with targeted missing-value counts at the same report grain.",
+                "hint_1": "Each region should appear once.",
+                "hint_2": "Discount and rating missingness are separate metrics."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_rows,\n    SUM(CASE WHEN customer_rating IS NULL THEN 1 ELSE 0 END) AS missing_rating_rows\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
-            },
-            "try_auditing_the_sales_kpi_dataset_sketch1": {
-              "title": "Audit Date and Value Boundaries",
-              "prompt": "Return one audit row with `first_order_date`, `last_order_date`, `minimum_quantity`, `maximum_quantity`, `minimum_unit_price`, and `maximum_unit_price`. Calculate and return `MIN(order_date) AS first_order_date, MAX(order_date) AS last_order_date, MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity, ROUND(MIN(unit_price), 2) AS minimum_unit_price, ROUND(MAX(unit_price), 2) AS maximum_unit_price` from `sales_reporting`.",
-              "hint": "Use MIN and MAX on the date, quantity, and unit-price columns without grouping.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `MIN(order_date) AS first_order_date, MAX(order_date) AS last_order_date, MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity, ROUND(MIN(unit_price), 2) AS minimum_unit_price, ROUND(MAX(unit_price), 2) AS maximum_unit_price` from `sales_reporting`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    MIN(order_date) AS first_order_date,\n    MAX(order_date) AS last_order_date,\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity,\n    ROUND(MIN(unit_price), 2) AS minimum_unit_price,\n    ROUND(MAX(unit_price), 2) AS maximum_unit_price\nFROM sales_reporting;"
             }
           }
         },
@@ -30686,8 +30710,8 @@ const messages: Record<string, any> = {
             "steps": {
               "capstone_step_1": {
                 "title": "Build the KPI Foundation",
-                "prompt": "Begin the Final Executive Sales Performance Report. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`.",
-                "hint": "Build the report grain and all three volume KPIs in one working query.",
+                "prompt": "Start the Final Executive Sales Performance Report for January 1 through January 31, 2026. Return one row per `region` and `category` combination with `total_orders`, `completed_orders`, and `completion_rate`. Count every January order, count completed January orders separately, and express completed orders as a percentage of all orders in the same group rounded to one decimal place.",
+                "hint": "Establish the January population and region-category grain first, then build the three related volume metrics.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -30708,8 +30732,8 @@ const messages: Record<string, any> = {
               },
               "capstone_step_2": {
                 "title": "Add the Sales Metrics",
-                "prompt": "Extend the Final Executive Sales Performance Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`.",
-                "hint": "Preserve every existing column while adding one all-order value and one completed-order value.",
+                "prompt": "Carry the report forward and append `gross_sales` and `completed_net_sales`. Gross sales should include the merchandise value of every January order in the group. Completed net sales should include only completed orders and should treat a missing discount percentage as zero. Round both monetary totals to two decimal places.",
+                "hint": "Preserve the existing report grain and metrics while adding one all-order sales measure and one completed-order sales measure.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -30730,8 +30754,8 @@ const messages: Record<string, any> = {
               },
               "capstone_step_3": {
                 "title": "Add Context and Performance Bands",
-                "prompt": "Extend the Final Executive Sales Performance Report with the next approved requirement. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders, CASE WHEN SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 150 AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75 THEN 'Strong' WHEN SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 100 AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50 THEN 'Stable' ELSE 'Watch' END AS performance_band` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`.",
-                "hint": "Add the quality context first, then evaluate the stronger two-metric band before the stable band.",
+                "prompt": "Append `average_rating`, `missing_discount_orders`, and `performance_band`. Average only recorded customer ratings and round the result to two decimals. Count orders whose discount percentage is missing. Label a group `Strong` when completed net sales are at least 150 and completion rate is at least 75 percent. Label it `Stable` when completed net sales are at least 100 and completion rate is at least 50 percent. Label all other groups `Watch`.",
+                "hint": "Keep the earlier KPI definitions unchanged. Evaluate the stronger two-metric band before the stable band.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -30752,8 +30776,8 @@ const messages: Record<string, any> = {
               },
               "capstone_step_4": {
                 "title": "Filter and Rank the Final Report",
-                "prompt": "Complete the Final Executive Sales Performance Report. Calculate and return `region, category, COUNT(*) AS total_orders, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND( 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*), 1 ) AS completion_rate, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales, ROUND(AVG(customer_rating), 2) AS average_rating, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_orders, CASE WHEN SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 150 AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 75 THEN 'Strong' WHEN SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 100 AND 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 50 THEN 'Stable' ELSE 'Watch' END AS performance_band` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `region, category`. After grouping, keep groups where `SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) >= 2 OR SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ) >= 150`. Sort the final result by `completed_net_sales DESC, region ASC, category ASC`.",
-                "hint": "Use HAVING for the grouped thresholds and finish with deterministic ordering.",
+                "prompt": "Complete the executive report. Keep only region-category groups with at least two completed orders or at least 150 in completed net sales. Rank the retained groups from highest `completed_net_sales` to lowest, then use `region` and `category` alphabetically as deterministic tie-breakers. Preserve every metric and performance label built in the earlier steps.",
+                "hint": "Apply the retention rule to completed group metrics, then order the finished report deterministically.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -30889,33 +30913,33 @@ const messages: Record<string, any> = {
                 "order_id",
                 "product_name"
               ]
+            },
+            "practice-validate-representative-ranking": {
+              "title": "Practice: Validate a Representative Ranking",
+              "prompt": "For January 2026, return one row per `sales_rep` with `completed_orders` and `completed_net_sales`. Keep every January order available to the group, but let only completed orders contribute to those two metrics. Treat a missing discount as zero when calculating completed net sales and round that sales value to two decimal places. Rank representatives from highest completed net sales to lowest, using representative name alphabetically to break ties.",
+              "hint": "The report grain is one row per representative. Use conditional metrics rather than dropping other statuses from the January population.",
+              "help": {
+                "concept": "A deterministic validation query checks both the row grain and the ranking rule expected by a report.",
+                "hint_1": "Only completed rows contribute to the two metrics.",
+                "hint_2": "Representative name is the tie-breaker."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    sales_rep,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY sales_rep\nORDER BY completed_net_sales DESC, sales_rep ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_validating_report_grain_and_order_sketch0": {
               "title": "Prototype a Representative-Status Grain",
-              "prompt": "For January 2026, return `sales_rep`, `order_status`, and `total_orders`. Calculate and return `sales_rep, order_status, COUNT(*) AS total_orders` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `sales_rep, order_status`. Sort the final result by `sales_rep, order_status`.",
-              "hint": "The two selected dimensions must both appear in GROUP BY and in the deterministic sort.",
+              "prompt": "For January 2026, return one row for every unique `sales_rep` and `order_status` combination with `total_orders`, the number of orders in that combination. Sort first by representative and then by order status.",
+              "hint": "The two descriptive fields together define the result grain. The final sort should make that grain easy to inspect deterministically.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `sales_rep, order_status`. Sort the final result by `sales_rep, order_status`."
+                "concept": "A grain validation query should make each intended dimension combination visible exactly once.",
+                "hint_1": "Restrict the source population to January 2026.",
+                "hint_2": "Both dimensions belong in the grouped result."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    sales_rep,\n    order_status,\n    COUNT(*) AS total_orders\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY sales_rep, order_status\nORDER BY sales_rep, order_status;"
-            },
-            "try_validating_report_grain_and_order_sketch1": {
-              "title": "Validate a Representative Ranking",
-              "prompt": "For January 2026, return each `sales_rep`, their conditional `completed_orders`, and null-safe `completed_net_sales` rounded to two decimals. Calculate and return `sales_rep, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `sales_rep`. Sort the final result by `completed_net_sales DESC, sales_rep ASC`.",
-              "hint": "Keep every January row, calculate completed metrics with CASE, and use the representative name as the tie-breaker.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `sales_rep`. Sort the final result by `completed_net_sales DESC, sales_rep ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    sales_rep,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY sales_rep\nORDER BY completed_net_sales DESC, sales_rep ASC;"
             }
           }
         }
@@ -40245,10 +40269,8 @@ const messages: Record<string, any> = {
     },
     "sql-analysis-reporting": {
       "title": "SQL Analysis & Reporting",
-      "description": "Turn reliable single-table queries into readable business reports. Build calculations, handle NULL safely, summarize data with aggregates, create grouped scorecards, and finish with an executive performance report.",
-      "prerequisites": [
-        "SQL Foundations, or equivalent experience selecting, filtering, sorting, and limiting rows from one table."
-      ]
+      "description": "A cumulative SQLite reporting course covering readable output, null-safe calculations, aggregate functions, grouped summaries, conditional reporting, five module projects, and one final executive-report capstone.",
+      "moreComingSoon": "More SQL Analysis & Reporting lessons are coming soon."
     },
     "sql-data-management": {
       "title": "SQL Data Management",
@@ -40735,89 +40757,86 @@ const messages: Record<string, any> = {
     "sql-analysis-reporting": {
       "sql-analysis-reporting-module-0-report-foundations": {
         "title": "Readable Report Foundations",
-        "description": "Turn detail rows into readable reports with aliases, distinct categories, calculations, and rounded values.",
-        "prereqs": {
-          "0": "Complete SQL Foundations before beginning this reporting course."
-        },
-        "outcomes": {
-          "0": "Rename result columns without changing the database schema.",
-          "1": "Use DISTINCT to inspect available reporting categories.",
-          "2": "Build row-level calculations from existing numeric columns.",
-          "3": "Round presentation values while preserving the source data."
-        },
+        "description": "Shape clear row-level reports with aliases, unique values, calculated columns, and consistent rounding.",
+        "outcomes": [
+          "Rename result columns without changing the database schema.",
+          "Use DISTINCT to inspect available reporting categories.",
+          "Build row-level calculations from existing numeric columns.",
+          "Round presentation values while preserving the source data."
+        ],
         "why": [
-          "Turn detail rows into readable reports with aliases, distinct categories, calculations, and rounded values.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with readable report foundations.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-analysis-reporting-module-1-null-safe-calculations": {
         "title": "Null-Safe Calculations and Business Labels",
-        "description": "Keep calculations trustworthy when discounts, ratings, or other inputs are missing.",
-        "outcomes": {
-          "0": "Predict how NULL changes arithmetic results.",
-          "1": "Use COALESCE only when a documented fallback is appropriate.",
-          "2": "Calculate gross, discount, and net values consistently.",
-          "3": "Use CASE to label rows without hiding missing data."
-        },
+        "description": "Control how missing values affect calculations, then translate row-level results into useful review labels.",
+        "outcomes": [
+          "Predict how NULL changes arithmetic results.",
+          "Use COALESCE only when a documented fallback is appropriate.",
+          "Calculate gross, discount, and net values consistently.",
+          "Use CASE to label rows without hiding missing data."
+        ],
         "why": [
-          "Keep calculations trustworthy when discounts, ratings, or other inputs are missing.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with null-safe calculations and business labels.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-analysis-reporting-module-2-aggregate-functions": {
         "title": "Aggregate Functions and KPI Snapshots",
-        "description": "Build storewide KPI snapshots with COUNT, SUM, AVG, MIN, and MAX.",
-        "outcomes": {
-          "0": "Choose between COUNT(*) and COUNT(column).",
-          "1": "Sum stored columns and calculated expressions.",
-          "2": "Explain how AVG handles missing values.",
-          "3": "Use MIN and MAX to describe a metric range."
-        },
+        "description": "Condense many rows into trustworthy counts, totals, averages, minimums, and maximums.",
+        "outcomes": [
+          "Choose between COUNT(*) and COUNT(column).",
+          "Sum stored columns and calculated expressions.",
+          "Explain how AVG handles missing values.",
+          "Use MIN and MAX to describe a metric range."
+        ],
         "why": [
-          "Build storewide KPI snapshots with COUNT, SUM, AVG, MIN, and MAX.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with aggregate functions and kpi snapshots.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-analysis-reporting-module-3-grouped-summaries": {
         "title": "Grouped Summaries and Ranked Scorecards",
-        "description": "Change report grain deliberately with GROUP BY and produce one row per business group.",
-        "outcomes": {
-          "0": "Group an aggregate report by one dimension.",
-          "1": "Define the grain created by multiple grouping columns.",
-          "2": "Sort aggregate results with deterministic tie-breakers.",
-          "3": "Remove columns that accidentally split a report into extra groups."
-        },
+        "description": "Create one summary row per group, preserve the intended report grain, and rank results predictably.",
+        "outcomes": [
+          "Group an aggregate report by one dimension.",
+          "Define the grain created by multiple grouping columns.",
+          "Sort aggregate results with deterministic tie-breakers.",
+          "Remove columns that accidentally split a report into extra groups."
+        ],
         "why": [
-          "Change report grain deliberately with GROUP BY and produce one row per business group.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with grouped summaries and ranked scorecards.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
         "title": "HAVING and Conditional Reporting",
-        "description": "Filter grouped results with HAVING and calculate conditional metrics for performance exceptions.",
-        "outcomes": {
-          "0": "Use WHERE to control which rows enter an aggregate.",
-          "1": "Use HAVING to keep or remove completed groups.",
-          "2": "Calculate conditional counts and sums with CASE inside aggregates.",
-          "3": "Assign performance labels from aggregate results."
-        },
+        "description": "Filter source rows and grouped results at the correct stage, then calculate conditional KPIs and exception labels.",
+        "outcomes": [
+          "Use WHERE to control which rows enter an aggregate.",
+          "Use HAVING to keep or remove completed groups.",
+          "Calculate conditional counts and sums with CASE inside aggregates.",
+          "Assign performance labels from aggregate results."
+        ],
         "why": [
-          "Filter grouped results with HAVING and calculate conditional metrics for performance exceptions.",
-          "The work in this module becomes part of the next cumulative report or project."
+          "Builds confidence with having and conditional reporting.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "sql-analysis-reporting-module-5-final-capstone": {
         "title": "Final Capstone: Executive Sales Performance Report",
-        "description": "Deliver an executive region-category report with a documented grain, date range, metrics, and ordering.",
-        "outcomes": {
-          "0": "Define the January 2026 region-category report grain and reporting period.",
-          "1": "Build grouped order-volume and completion KPIs.",
-          "2": "Add financial, rating, data-quality, and performance-band metrics.",
-          "3": "Filter and rank the finished report with deterministic SQL."
-        },
+        "description": "Build and validate one complete executive sales performance report through a focused cumulative capstone.",
+        "outcomes": [
+          "Establish and preserve one row per region-category combination.",
+          "Combine volume, completion, sales, rating, and data-quality metrics in one report.",
+          "Apply a performance label, aggregate filter, and deterministic ranking.",
+          "Deliver one complete executive scorecard through four cumulative steps."
+        ],
         "why": [
-          "Deliver an executive region-category report with a documented grain, date range, metrics, and ordering.",
-          "The final work demonstrates the complete course workflow."
+          "Builds confidence with final capstone: executive sales performance report.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     },
@@ -41710,186 +41729,153 @@ const messages: Record<string, any> = {
     },
     "sql-analysis-reporting": {
       "sql-analysis-reporting-module-0-report-foundations": {
-        "sql-analysis-reporting-section-0-readable-output": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-0-readable-output": {
           "title": "Readable Report Output",
           "description": "Turn database-oriented columns into clear report output.",
-          "weeks": "Module 1",
-          "bullets": {
-            "0": "Rename result columns so a report communicates business meaning without changing the stored table.",
-            "1": "Inspect the unique values and combinations available before defining a report filter or grouping rule.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Aliases for Readable Headings",
+            "Distinct Values for Report Categories"
+          ]
         },
-        "sql-analysis-reporting-section-0-calculated-output": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-0-calculated-output": {
           "title": "Calculated Report Columns",
           "description": "Create and format useful row-level metrics.",
-          "weeks": "Module 1",
-          "bullets": {
-            "0": "Create row-level metrics from numeric columns while keeping the original source data unchanged.",
-            "1": "Format calculated numbers for a readable report without changing the precision stored in the source table.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Arithmetic Expressions in SELECT",
+            "Rounding Report Values"
+          ]
         },
-        "sql-analysis-reporting-section-0-module-project": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-0-module-project": {
           "title": "Module Project",
           "description": "Build one clean detail report without discarding earlier work.",
-          "weeks": "Module 1",
-          "bullets": {
-            "0": "Build one readable completed-order detail report, adding aliases, a gross-sales calculation, rounding, and stable sorting without discarding earlier columns.",
-            "1": "Run each query and inspect the results before continuing.",
-            "2": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Module 0 Project: Completed Order Value Report"
+          ]
         }
       },
       "sql-analysis-reporting-module-1-null-safe-calculations": {
-        "sql-analysis-reporting-section-1-null-safety": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-1-null-safety": {
           "title": "Null-Safe Calculations",
           "description": "Understand missing values before deciding how a report should treat them.",
-          "weeks": "Module 2",
-          "bullets": {
-            "0": "Recognize when a missing source value makes a calculated result unknown instead of zero.",
-            "1": "Apply an explicit fallback when the reporting rule defines how a missing value should be treated.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "How NULL Affects Calculations",
+            "COALESCE for Missing Values"
+          ]
         },
-        "sql-analysis-reporting-section-1-business-calculations": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations": {
           "title": "Business Calculations and Labels",
           "description": "Turn percentage rules into readable financial output.",
-          "weeks": "Module 2",
-          "bullets": {
-            "0": "Translate a percentage stored in the table into gross, discount, and net monetary values.",
-            "1": "Turn row-level values into clear categories while handling missing data before numeric thresholds.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Percentage and Discount Calculations",
+            "CASE for Readable Labels"
+          ]
         },
-        "sql-analysis-reporting-section-1-module-project": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-1-module-project": {
           "title": "Module Project",
           "description": "Create a review-ready discount audit in cumulative steps.",
-          "weeks": "Module 2",
-          "bullets": {
-            "0": "Build a row-level audit that preserves raw discount data, applies an explicit fallback for calculations, and identifies records requiring review.",
-            "1": "Run each query and inspect the results before continuing.",
-            "2": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Module 1 Project: Discount Audit Report"
+          ]
         }
       },
       "sql-analysis-reporting-module-2-aggregate-functions": {
-        "sql-analysis-reporting-section-2-counts-and-totals": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals": {
           "title": "Counts and Totals",
           "description": "Measure activity volume and monetary value.",
-          "weeks": "Module 3",
-          "bullets": {
-            "0": "Use COUNT deliberately to distinguish total records from records with a known value.",
-            "1": "Add stored values or calculated row expressions across the full query scope.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Counting Rows and Values",
+            "Summing Business Metrics"
+          ]
         },
-        "sql-analysis-reporting-section-2-averages-and-extremes": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-2-averages-and-extremes": {
           "title": "Averages and Extremes",
           "description": "Describe typical values and useful boundaries.",
-          "weeks": "Module 3",
-          "bullets": {
-            "0": "Calculate an average and state clearly whether missing values are excluded or replaced.",
-            "1": "Use MIN and MAX to describe the lower and upper boundaries of a numeric metric.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Averages and NULL Behavior",
+            "Minimums and Maximums"
+          ]
         },
-        "sql-analysis-reporting-section-2-module-project": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-2-module-project": {
           "title": "Module Project",
           "description": "Combine completed-order KPIs into one reliable snapshot.",
-          "weeks": "Module 3",
-          "bullets": {
-            "0": "Build one cumulative summary row for completed orders, preserving every previously added KPI.",
-            "1": "Run each query and inspect the results before continuing.",
-            "2": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Module 2 Project: Completed Sales KPI Snapshot"
+          ]
         }
       },
       "sql-analysis-reporting-module-3-grouped-summaries": {
-        "sql-analysis-reporting-section-3-grouping-basics": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-3-grouping-basics": {
           "title": "Grouping Basics",
           "description": "Define what one row represents in a grouped report.",
-          "weeks": "Module 4",
-          "bullets": {
-            "0": "Return one aggregate summary row for each value of a chosen business dimension.",
-            "1": "Define a more detailed report grain by grouping on a deliberate combination of dimensions.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "GROUP BY One Column",
+            "GROUP BY Multiple Columns"
+          ]
         },
-        "sql-analysis-reporting-section-3-ranking-and-quality": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-3-ranking-and-quality": {
           "title": "Ranking and Grouping Quality",
           "description": "Order grouped results and prevent accidental grain changes.",
-          "weeks": "Module 4",
-          "bullets": {
-            "0": "Rank grouped metrics and add deterministic tie-breakers so repeated runs produce a predictable order.",
-            "1": "Protect report grain by removing detail columns that split or confuse grouped results.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Sorting Aggregate Results",
+            "Avoiding Grouping Mistakes"
+          ]
         },
-        "sql-analysis-reporting-section-3-module-project": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-3-module-project": {
           "title": "Module Project",
           "description": "Build one region-category scorecard from a stable base query.",
-          "weeks": "Module 4",
-          "bullets": {
-            "0": "Build one completed-order scorecard at region-category grain and retain every metric as the report grows.",
-            "1": "Run each query and inspect the results before continuing.",
-            "2": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Module 3 Project: Region-Category Scorecard"
+          ]
         }
       },
       "sql-analysis-reporting-module-4-having-and-conditional-reporting": {
-        "sql-analysis-reporting-section-4-group-filters": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-4-group-filters": {
           "title": "Filtering Before and After Grouping",
           "description": "Place conditions where they match the report logic.",
-          "weeks": "Module 5",
-          "bullets": {
-            "0": "Filter source rows before aggregation so every metric describes the intended population.",
-            "1": "Keep only completed groups whose aggregate results meet a meaningful threshold.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "WHERE Before Grouping",
+            "HAVING After Grouping"
+          ]
         },
-        "sql-analysis-reporting-section-4-conditional-kpis": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis": {
           "title": "Conditional KPIs and Labels",
           "description": "Calculate several outcomes from the same grouped rows.",
-          "weeks": "Module 5",
-          "bullets": {
-            "0": "Calculate condition-specific counts and monetary totals without removing the other rows from each group.",
-            "1": "Use CASE on aggregate expressions to turn grouped metrics into concise management labels.",
-            "2": "Run each query and inspect the results before continuing.",
-            "3": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "CASE Inside Aggregate Functions",
+            "Performance Bands from Aggregates"
+          ]
         },
-        "sql-analysis-reporting-section-4-module-project": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-4-module-project": {
           "title": "Module Project",
           "description": "Build a focused exception report with calibrated rules.",
-          "weeks": "Module 5",
-          "bullets": {
-            "0": "Build one region-category exception report that compares total and completed activity, calculates risk metrics, and keeps only groups needing attention.",
-            "1": "Run each query and inspect the results before continuing.",
-            "2": "Keep the requested report grain and output order consistent."
-          }
+          "weeks": null,
+          "bullets": [
+            "Module 4 Project: Performance Exception Report"
+          ]
         }
       },
       "sql-analysis-reporting-module-5-final-capstone": {
-        "sql-analysis-reporting-section-5-final-capstone-project": {
+        "sql-analysis-reporting-sql-analysis-reporting-section-5-final-capstone-project": {
           "title": "Final Capstone",
-          "description": "Build one January 2026 executive report through a short grain-preview Try It and four cumulative project steps.",
-          "weeks": "Module 6",
-          "bullets": {
-            "0": "Confirm the January 2026 region-category grain with the warm-up Try It.",
-            "1": "Build order volume, completion, sales, rating, and data-quality metrics in one evolving query.",
-            "2": "Classify each group with clear performance-band rules.",
-            "3": "Finish with grouped filtering and deterministic ranking."
-          }
+          "description": "Complete one focused executive report from brief to final validated query.",
+          "weeks": null,
+          "bullets": [
+            "Final Capstone: Executive Sales Performance Report"
+          ]
         }
       }
     },

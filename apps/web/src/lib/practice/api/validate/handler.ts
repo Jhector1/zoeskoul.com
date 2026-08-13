@@ -272,7 +272,7 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         );
     }
 
-    const effectiveExpectedCanon = selectExpectedCanonForValidation({
+    const effectiveExpectedCanon = await selectExpectedCanonForValidation({
         instance,
         persistedExpected: expectedCanon,
     });

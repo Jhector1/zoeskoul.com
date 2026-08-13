@@ -113,18 +113,30 @@
                 "COUNT",
                 "DISTINCT"
               ]
+            },
+            "practice-null-safe-review-discount": {
+              "title": "Practice: Prepare a Null-Safe Review Discount",
+              "prompt": "Return `order_id`, `order_status`, and `review_discount_pct`. Use the stored discount when it exists, and use `0` when it is missing.",
+              "hint": "Use COALESCE to provide the fallback only for the review value.",
+              "help": {
+                "concept": "A null-safe reporting field can preserve normal values while substituting a defined fallback for NULL.",
+                "hint_1": "The fallback is zero.",
+                "hint_2": "Do not filter out rows whose discount is missing."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    order_status,\n    COALESCE(discount_pct, 0) AS review_discount_pct\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_coalesce_for_missing_values_sketch0": {
               "title": "Show Raw and Applied Discount Values",
-              "prompt": "Return `order_id`, the original `discount_pct`, and `COALESCE(discount_pct, 0)` as `applied_discount_pct`. Return `order_id, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct` from `sales_reporting` in that column order.",
-              "hint": "Preserve `discount_pct` as its own column, then add a separate COALESCE expression for the value the report will use.",
+              "prompt": "Return `order_id`, the original `discount_pct`, and `applied_discount_pct`. Preserve the raw discount exactly as stored, but use `0` for `applied_discount_pct` whenever the stored discount is missing.",
+              "hint": "Keep the raw column untouched. Use COALESCE only for the separate value the report will apply.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct` from `sales_reporting` in that column order."
+                "concept": "COALESCE can provide a reporting fallback without hiding the original nullable value.",
+                "hint_1": "The report needs both the raw value and the applied value.",
+                "hint_2": "Only the applied value should turn NULL into zero."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    COALESCE(discount_pct, 0) AS applied_discount_pct\nFROM sales_reporting;"

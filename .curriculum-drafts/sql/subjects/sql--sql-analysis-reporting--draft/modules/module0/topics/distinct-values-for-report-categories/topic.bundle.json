@@ -2,7 +2,7 @@
   "topicId": "distinct-values-for-report-categories",
   "subjectSlug": "sql--sql-analysis-reporting--draft",
   "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
-  "sectionSlug": "sql-analysis-reporting-section-0-readable-output",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-readable-output",
   "prefix": "sql_analysis_reporting_module_0",
   "minutes": 24,
   "runtimeDefaults": {
@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-distinct-values-for-report-categories-sketch1",
-        "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.title",
-        "promptKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.prompt",
-        "exerciseKey": "try-distinct-values-for-report-categories-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -247,7 +235,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT DISTINCT region\nFROM sales_reporting\nORDER BY region;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -259,16 +247,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-distinct-values-for-report-categories-sketch1",
+      "id": "practice-unique-region-representative-pairs",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1",
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -285,11 +274,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.tryIt.try_distinct_values_for_report_categories_sketch1.starterCode",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -308,7 +297,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT DISTINCT region, sales_rep\nFROM sales_reporting\nORDER BY region, sales_rep;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.distinct-values-for-report-categories.practice.practice-unique-region-representative-pairs.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -320,7 +309,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

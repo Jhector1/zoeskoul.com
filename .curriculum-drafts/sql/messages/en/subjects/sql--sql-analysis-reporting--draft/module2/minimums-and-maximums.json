@@ -113,33 +113,33 @@
                 "AVG",
                 "SUM"
               ]
+            },
+            "practice-completed-net-sales-range": {
+              "title": "Practice: Find the Completed Net-Sales Range",
+              "prompt": "For completed orders, return `minimum_net_sales` and `maximum_net_sales`. Calculate each order's net sales from quantity, unit price, and discount percentage, treating a missing discount as zero. Find the smallest and largest net order values and round both final results to two decimal places.",
+              "hint": "Use the same null-safe net-sales calculation for both boundaries.",
+              "help": {
+                "concept": "MIN and MAX can operate on calculated row-level business values as well as stored columns.",
+                "hint_1": "Only completed orders belong in the population.",
+                "hint_2": "The minimum and maximum must use exactly the same net-sales definition."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS minimum_net_sales,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS maximum_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_minimums_and_maximums_sketch0": {
               "title": "Find the Quantity Range",
-              "prompt": "Return the smallest quantity as `minimum_quantity` and the largest quantity as `maximum_quantity`. Calculate and return `MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity` from `sales_reporting`.",
-              "hint": "Apply each boundary function to the same measure.",
+              "prompt": "Return the smallest recorded quantity as `minimum_quantity` and the largest as `maximum_quantity`.",
+              "hint": "Apply the two boundary aggregates to the same quantity measure.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity` from `sales_reporting`."
+                "concept": "MIN and MAX identify the lower and upper boundaries of a measure.",
+                "hint_1": "Both values come from `quantity`.",
+                "hint_2": "The result should be one summary row with two columns."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity\nFROM sales_reporting;"
-            },
-            "try_minimums_and_maximums_sketch1": {
-              "title": "Find the Completed Net-Sales Range",
-              "prompt": "For completed orders, return null-safe minimum and maximum net sales rounded to two decimals as `minimum_net_sales` and `maximum_net_sales`. Calculate and return `ROUND(MIN( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS minimum_net_sales, ROUND(MAX( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS maximum_net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-              "hint": "Use the same null-safe net expression inside both aggregates.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `ROUND(MIN( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS minimum_net_sales, ROUND(MAX( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS maximum_net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS minimum_net_sales,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS maximum_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
             }
           }
         }

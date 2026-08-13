@@ -112,33 +112,33 @@
                 "order_id, customer_rating",
                 "NULL"
               ]
+            },
+            "practice-count-recorded-discounts": {
+              "title": "Practice: Compare Rows With Recorded Discounts",
+              "prompt": "Return `total_orders` and `orders_with_discount_data`. The first value should count every order row. The second should count only rows where `discount_pct` contains a recorded value.",
+              "hint": "Counting rows and counting a nullable column answer different questions.",
+              "help": {
+                "concept": "COUNT(*) includes every row, while COUNT on a column does not count NULL values.",
+                "hint_1": "Both metrics come from the same unfiltered table.",
+                "hint_2": "The second metric should reveal how many discounts are actually recorded."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    COUNT(*) AS total_orders,\n    COUNT(discount_pct) AS orders_with_discount_data\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_counting_rows_and_values_sketch0": {
               "title": "Count Pending Orders",
-              "prompt": "Return one value named `pending_orders` that counts rows where `order_status` is `Pending`. Calculate and return `COUNT(*) AS pending_orders` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`.",
-              "hint": "Filter the population first, then count every remaining row.",
+              "prompt": "Return one value named `pending_orders` that tells how many pending orders are in `sales_reporting`.",
+              "hint": "First limit the population to pending rows, then count every row that remains.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `COUNT(*) AS pending_orders` from `sales_reporting`. Keep only rows where `order_status = 'Pending'`."
+                "concept": "COUNT can summarize the number of rows in a filtered report population.",
+                "hint_1": "Only pending orders belong in the population.",
+                "hint_2": "The result should contain one summary value."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT COUNT(*) AS pending_orders\nFROM sales_reporting\nWHERE order_status = 'Pending';"
-            },
-            "try_counting_rows_and_values_sketch1": {
-              "title": "Compare Total and Recorded Discounts",
-              "prompt": "Return `total_orders` with `COUNT(*)` and `orders_with_discount_data` with `COUNT(discount_pct)`. Calculate and return `COUNT(*) AS total_orders, COUNT(discount_pct) AS orders_with_discount_data` from `sales_reporting`.",
-              "hint": "Count all rows once and the nullable column once.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `COUNT(*) AS total_orders, COUNT(discount_pct) AS orders_with_discount_data` from `sales_reporting`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    COUNT(*) AS total_orders,\n    COUNT(discount_pct) AS orders_with_discount_data\nFROM sales_reporting;"
             }
           }
         }

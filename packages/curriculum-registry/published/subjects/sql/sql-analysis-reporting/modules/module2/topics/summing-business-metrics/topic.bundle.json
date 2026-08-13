@@ -2,7 +2,7 @@
   "topicId": "summing-business-metrics",
   "subjectSlug": "sql-analysis-reporting",
   "moduleSlug": "sql-analysis-reporting-module-2-aggregate-functions",
-  "sectionSlug": "sql-analysis-reporting-section-2-counts-and-totals",
+  "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-2-counts-and-totals",
   "prefix": "sql_analysis_reporting_module_2",
   "minutes": 24,
   "runtimeDefaults": {
@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-summing-business-metrics-sketch1",
-        "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.title",
-        "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.prompt",
-        "exerciseKey": "try-summing-business-metrics-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -249,7 +237,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT SUM(quantity) AS pending_units\nFROM sales_reporting\nWHERE order_status = 'Pending';",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -262,16 +250,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-summing-business-metrics-sketch1",
+      "id": "practice-total-discount-dollars",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1",
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.starterCode",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -288,11 +277,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.starterCode",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch1.starterCode",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -311,7 +300,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT ROUND(\n    SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100),\n    2\n) AS total_discount_amount\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -324,7 +313,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

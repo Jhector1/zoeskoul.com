@@ -2,7 +2,7 @@
   "topicId": "arithmetic-expressions-in-select",
   "subjectSlug": "sql--sql-analysis-reporting--draft",
   "moduleSlug": "sql-analysis-reporting-module-0-report-foundations",
-  "sectionSlug": "sql-analysis-reporting-section-0-calculated-output",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-0-calculated-output",
   "prefix": "sql_analysis_reporting_module_0",
   "minutes": 24,
   "runtimeDefaults": {
@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-arithmetic-expressions-in-select-sketch1",
-        "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.title",
-        "promptKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.prompt",
-        "exerciseKey": "try-arithmetic-expressions-in-select-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -249,7 +237,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS pending_value\nFROM sales_reporting\nWHERE order_status = 'Pending';",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -262,16 +250,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-arithmetic-expressions-in-select-sketch1",
+      "id": "practice-multi-part-order-value",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1",
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -288,11 +277,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.tryIt.try_arithmetic_expressions_in_select_sketch1.starterCode",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -311,7 +300,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS merchandise_value,\n    quantity * unit_price + 4.00 AS prepared_value\nFROM sales_reporting;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-multi-part-order-value.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ],
@@ -324,7 +313,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

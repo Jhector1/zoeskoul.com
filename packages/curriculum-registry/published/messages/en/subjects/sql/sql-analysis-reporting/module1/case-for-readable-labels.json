@@ -113,33 +113,33 @@
                 "CLOSE",
                 "DONE"
               ]
+            },
+            "practice-order-value-bands": {
+              "title": "Practice: Classify Order Values",
+              "prompt": "Return `order_id`, `gross_sales`, and `value_band`. Calculate gross sales from quantity and unit price. Label values of 130 or more as `High value`, values from 80 up to that threshold as `Mid value`, and everything lower as `Low value`.",
+              "hint": "Test the highest threshold before the lower one so a high-value row is not classified too early.",
+              "help": {
+                "concept": "Ordered CASE conditions let one calculated value fall into exactly one reporting band.",
+                "hint_1": "Gross sales is the row's quantity multiplied by its unit price.",
+                "hint_2": "The first matching CASE branch wins."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 130 THEN 'High value'\n        WHEN quantity * unit_price >= 80 THEN 'Mid value'\n        ELSE 'Low value'\n    END AS value_band\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_case_for_readable_labels_sketch0": {
               "title": "Label Discount Review Status",
-              "prompt": "Select `order_id`, `discount_pct`, and a `discount_review` label: `Missing discount` for NULL, `Large discount` for 15 or more, otherwise `Standard discount`. Return `order_id, discount_pct, CASE WHEN discount_pct IS NULL THEN 'Missing discount' WHEN discount_pct >= 15 THEN 'Large discount' ELSE 'Standard discount' END AS discount_review` from `sales_reporting` in that column order.",
-              "hint": "Put the NULL condition before the numeric threshold.",
+              "prompt": "Return `order_id`, `discount_pct`, and `discount_review`. Label a missing discount as `Missing discount`, a discount of 15 or more as `Large discount`, and every other row as `Standard discount`.",
+              "hint": "Evaluate the missing-value case before the numeric threshold, then provide the fallback label.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, discount_pct, CASE WHEN discount_pct IS NULL THEN 'Missing discount' WHEN discount_pct >= 15 THEN 'Large discount' ELSE 'Standard discount' END AS discount_review` from `sales_reporting` in that column order."
+                "concept": "CASE turns business conditions into readable result labels.",
+                "hint_1": "A missing discount must not fall into the ordinary numeric cases.",
+                "hint_2": "After the high-discount condition, the remaining rows share the standard label."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    CASE\n        WHEN discount_pct IS NULL THEN 'Missing discount'\n        WHEN discount_pct >= 15 THEN 'Large discount'\n        ELSE 'Standard discount'\n    END AS discount_review\nFROM sales_reporting;"
-            },
-            "try_case_for_readable_labels_sketch1": {
-              "title": "Classify Order Values",
-              "prompt": "Select `order_id`, gross sales, and `value_band`: `High value` for gross sales of 130 or more, `Mid value` for 80 or more, otherwise `Low value`. Return `order_id, quantity * unit_price AS gross_sales, CASE WHEN quantity * unit_price >= 130 THEN 'High value' WHEN quantity * unit_price >= 80 THEN 'Mid value' ELSE 'Low value' END AS value_band` from `sales_reporting` in that column order.",
-              "hint": "Check the highest threshold before the lower threshold.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, quantity * unit_price AS gross_sales, CASE WHEN quantity * unit_price >= 130 THEN 'High value' WHEN quantity * unit_price >= 80 THEN 'Mid value' ELSE 'Low value' END AS value_band` from `sales_reporting` in that column order."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 130 THEN 'High value'\n        WHEN quantity * unit_price >= 80 THEN 'Mid value'\n        ELSE 'Low value'\n    END AS value_band\nFROM sales_reporting;"
             }
           }
         }

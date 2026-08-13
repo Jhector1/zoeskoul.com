@@ -34,8 +34,8 @@
             "steps": {
               "project_step_1": {
                 "title": "Select the Completed Order Details",
-                "prompt": "Begin the Module 0 Order Value Detail Report. Return `order_id, order_date, product_name, quantity, unit_price` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Keep the first version narrow: requested columns and the completed-status filter only.",
+                "prompt": "Start the Module 0 Order Value Detail Report. Keep only completed orders and return `order_id`, `order_date`, `product_name`, `quantity`, and `unit_price`, in that order.",
+                "hint": "Keep this first milestone focused on the requested detail columns and completed orders.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -55,9 +55,9 @@
                 }
               },
               "project_step_2": {
-                "title": "Add Reader-Friendly Aliases",
-                "prompt": "Extend the Module 0 Order Value Detail Report with the next approved requirement. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Change only the output headings; keep every source column and the filter.",
+                "title": "Add Reader-Friendly Headings",
+                "prompt": "Carry the approved completed-order query forward. Keep the same five values, but display their headings as `order_number`, `ordered_on`, `product`, `units`, and `unit_price`, in that order.",
+                "hint": "Change the displayed headings without changing the source values or the completed-order requirement.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -77,9 +77,9 @@
                 }
               },
               "project_step_3": {
-                "title": "Add Gross Sales — 0 Project: Completed Order Value Report",
-                "prompt": "Extend the Module 0 Order Value Detail Report with the next approved requirement. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, quantity * unit_price AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Append the calculated column after the existing detail fields.",
+                "title": "Add Gross Sales",
+                "prompt": "Carry the report forward and append `gross_sales`. Calculate gross sales for each order from its quantity and unit price. Preserve every earlier field and filter.",
+                "hint": "Add one calculated result after the existing detail columns.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -100,8 +100,8 @@
               },
               "project_step_4": {
                 "title": "Round the Monetary Result",
-                "prompt": "Extend the Module 0 Order Value Detail Report with the next approved requirement. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`.",
-                "hint": "Wrap the existing gross-sales expression in ROUND; do not round the source columns.",
+                "prompt": "Keep the complete approved report, but display `gross_sales` rounded to two decimal places. Preserve the existing detail fields and completed-order filter.",
+                "hint": "Only the displayed gross-sales calculation needs rounding.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -122,8 +122,8 @@
               },
               "project_step_5": {
                 "title": "Rank the Report Predictably",
-                "prompt": "Complete the Module 0 Order Value Detail Report. Return `order_id AS order_number, order_date AS ordered_on, product_name AS product, quantity AS units, unit_price AS unit_price, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Completed'`. Sort the final result by `gross_sales DESC, order_number ASC`.",
-                "hint": "Add the ordering clause after the filter; keep the SELECT list unchanged.",
+                "prompt": "Complete the report by ranking `gross_sales` from highest to lowest. When two rows have the same gross sales, place the lower `order_number` first. Preserve every earlier column, heading, calculation, and filter.",
+                "hint": "Use gross sales as the primary ranking and order number only as the tie-breaker.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",

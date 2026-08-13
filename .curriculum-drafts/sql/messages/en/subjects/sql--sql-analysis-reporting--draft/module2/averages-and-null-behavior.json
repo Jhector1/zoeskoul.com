@@ -113,33 +113,33 @@
                 "COUNT",
                 "MAX"
               ]
+            },
+            "practice-compare-rating-average-rules": {
+              "title": "Practice: Compare Two Rating Average Rules",
+              "prompt": "Return two rounded averages across all orders. Name the first `rated_only_average` and let it average only recorded ratings. Name the second `zero_fallback_average` and treat a missing rating as zero before averaging.",
+              "hint": "Use two separate averages so the two business assumptions remain visible in the result.",
+              "help": {
+                "concept": "Changing how NULL is handled can change both the values included in an average and the resulting KPI.",
+                "hint_1": "The first metric uses normal AVG NULL behavior.",
+                "hint_2": "The second metric substitutes zero before averaging."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    ROUND(AVG(customer_rating), 2) AS rated_only_average,\n    ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_averages_and_null_behavior_sketch0": {
               "title": "Average Completed-Order Rating",
-              "prompt": "Return the average recorded `customer_rating` for completed orders, rounded to two decimals as `average_completed_rating`. Calculate and return `ROUND(AVG(customer_rating), 2) AS average_completed_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`.",
-              "hint": "Filter completed rows; AVG will ignore any remaining NULL ratings.",
+              "prompt": "For completed orders, return the average recorded `customer_rating` as `average_completed_rating`, rounded to two decimal places. Missing ratings should remain missing rather than being treated as zero.",
+              "hint": "Filter the completed population first. The ordinary average ignores NULL rating values.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `ROUND(AVG(customer_rating), 2) AS average_completed_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`."
+                "concept": "AVG normally uses only non-NULL values from the selected population.",
+                "hint_1": "Do not replace missing ratings.",
+                "hint_2": "Round the final average to two decimal places."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT ROUND(AVG(customer_rating), 2) AS average_completed_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
-            },
-            "try_averages_and_null_behavior_sketch1": {
-              "title": "Compare Two Rating Rules",
-              "prompt": "Return `rated_only_average` using `AVG(customer_rating)` and `zero_fallback_average` using `AVG(COALESCE(customer_rating, 0))`. Calculate and return `ROUND(AVG(customer_rating), 2) AS rated_only_average, ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average` from `sales_reporting`.",
-              "hint": "Write two separate AVG expressions so the business assumptions remain visible.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `ROUND(AVG(customer_rating), 2) AS rated_only_average, ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average` from `sales_reporting`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    ROUND(AVG(customer_rating), 2) AS rated_only_average,\n    ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average\nFROM sales_reporting;"
             }
           }
         }

@@ -113,33 +113,33 @@
                 "order_id",
                 "quantity"
               ]
+            },
+            "practice-preserve-region-category-grain": {
+              "title": "Practice: Preserve Region-Category Grain",
+              "prompt": "Return one row for each `region` and `category` combination with `average_rating`, the average recorded customer rating for that combination, rounded to two decimal places. Sort by region and then category.",
+              "hint": "Keep exactly the dimensions named by the requested grain.",
+              "help": {
+                "concept": "A grouped result is valid when its selected dimensions match its intended grain.",
+                "hint_1": "Both region and category are required dimensions.",
+                "hint_2": "The rating is summarized inside each combination."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_avoiding_grouping_mistakes_sketch0": {
               "title": "Correct a Regional Summary",
-              "prompt": "Write a query that returns exactly one row per `region` with `COUNT(*)` as `order_count`. Calculate and return `region, COUNT(*) AS order_count` from `sales_reporting`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "The only non-aggregate selected column should be the stated group dimension.",
+              "prompt": "Return exactly one row for each `region` with `order_count`, the number of orders in that region. Sort the regions alphabetically.",
+              "hint": "The only descriptive result field should be the field that defines the requested row grain.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
+                "concept": "Every non-aggregated result dimension must agree with the grain of the grouped report.",
+                "hint_1": "The requested grain is one row per region.",
+                "hint_2": "Do not include an unrelated detail column."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    COUNT(*) AS order_count\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
-            },
-            "try_avoiding_grouping_mistakes_sketch1": {
-              "title": "Preserve Region-Category Grain",
-              "prompt": "Return one row per `region` and `category` with `AVG(customer_rating)` rounded to two decimals as `average_rating`. Calculate and return `region, category, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Produce one result row per `region, category`. Sort the final result by `region, category`.",
-              "hint": "Select exactly the two dimensions named in the grain statement.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region, category`. Sort the final result by `region, category`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;"
             }
           }
         }

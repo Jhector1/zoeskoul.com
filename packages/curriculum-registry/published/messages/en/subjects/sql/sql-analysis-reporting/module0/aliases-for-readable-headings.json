@@ -113,14 +113,26 @@
                 "BY",
                 "ON"
               ]
+            },
+            "practice-reader-friendly-headings": {
+              "title": "Practice: Build Reader-Friendly Headings",
+              "prompt": "Return `region`, `category`, and `sales_rep` from `sales_reporting`. Display the result headings as `Sales Region`, `Product Category`, and `Account Owner`, in that order.",
+              "hint": "Each displayed heading belongs to one result column. A heading containing spaces must be treated as one alias.",
+              "help": {
+                "concept": "Aliases change the headings in this result without renaming the stored database columns.",
+                "hint_1": "Keep the three requested source columns in the same order.",
+                "hint_2": "The final result headings should read Sales Region, Product Category, and Account Owner."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    region AS \"Sales Region\",\n    category AS \"Product Category\",\n    sales_rep AS \"Account Owner\"\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_aliases_for_readable_headings_sketch0": {
               "title": "Create Clear Operational Headings",
-              "prompt": "Select `order_id`, `product_name`, and `order_status`. Return `order_id AS order_number, product_name AS product, order_status AS status` from `sales_reporting` in that column order.",
-              "hint": "Place each alias immediately after the column it describes.",
+              "prompt": "Return `order_id`, `product_name`, and `order_status` from `sales_reporting`. Display the result headings as `order_number`, `product`, and `status`, in that order.",
+              "hint": "Give each returned column the heading requested by the report.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -128,18 +140,6 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id AS order_number,\n    product_name AS product,\n    order_status AS status\nFROM sales_reporting;"
-            },
-            "try_aliases_for_readable_headings_sketch1": {
-              "title": "Prepare Human-Readable Headings",
-              "prompt": "Select `region`, `category`, and `sales_rep`. Return `region AS \"Sales Region\", category AS \"Product Category\", sales_rep AS \"Account Owner\"` from `sales_reporting` in that column order.",
-              "hint": "A heading with spaces must be quoted as one alias.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `region AS \"Sales Region\", category AS \"Product Category\", sales_rep AS \"Account Owner\"` from `sales_reporting` in that column order."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    region AS \"Sales Region\",\n    category AS \"Product Category\",\n    sales_rep AS \"Account Owner\"\nFROM sales_reporting;"
             }
           }
         }

@@ -113,33 +113,33 @@
                 "order_id",
                 "product_name"
               ]
+            },
+            "practice-validate-representative-ranking": {
+              "title": "Practice: Validate a Representative Ranking",
+              "prompt": "For January 2026, return one row per `sales_rep` with `completed_orders` and `completed_net_sales`. Keep every January order available to the group, but let only completed orders contribute to those two metrics. Treat a missing discount as zero when calculating completed net sales and round that sales value to two decimal places. Rank representatives from highest completed net sales to lowest, using representative name alphabetically to break ties.",
+              "hint": "The report grain is one row per representative. Use conditional metrics rather than dropping other statuses from the January population.",
+              "help": {
+                "concept": "A deterministic validation query checks both the row grain and the ranking rule expected by a report.",
+                "hint_1": "Only completed rows contribute to the two metrics.",
+                "hint_2": "Representative name is the tie-breaker."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    sales_rep,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY sales_rep\nORDER BY completed_net_sales DESC, sales_rep ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_validating_report_grain_and_order_sketch0": {
               "title": "Prototype a Representative-Status Grain",
-              "prompt": "For January 2026, return `sales_rep`, `order_status`, and `total_orders`. Calculate and return `sales_rep, order_status, COUNT(*) AS total_orders` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `sales_rep, order_status`. Sort the final result by `sales_rep, order_status`.",
-              "hint": "The two selected dimensions must both appear in GROUP BY and in the deterministic sort.",
+              "prompt": "For January 2026, return one row for every unique `sales_rep` and `order_status` combination with `total_orders`, the number of orders in that combination. Sort first by representative and then by order status.",
+              "hint": "The two descriptive fields together define the result grain. The final sort should make that grain easy to inspect deterministically.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `sales_rep, order_status`. Sort the final result by `sales_rep, order_status`."
+                "concept": "A grain validation query should make each intended dimension combination visible exactly once.",
+                "hint_1": "Restrict the source population to January 2026.",
+                "hint_2": "Both dimensions belong in the grouped result."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    sales_rep,\n    order_status,\n    COUNT(*) AS total_orders\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY sales_rep, order_status\nORDER BY sales_rep, order_status;"
-            },
-            "try_validating_report_grain_and_order_sketch1": {
-              "title": "Validate a Representative Ranking",
-              "prompt": "For January 2026, return each `sales_rep`, their conditional `completed_orders`, and null-safe `completed_net_sales` rounded to two decimals. Calculate and return `sales_rep, SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, ROUND(SUM( CASE WHEN order_status = 'Completed' THEN quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ELSE 0 END ), 2) AS completed_net_sales` from `sales_reporting`. Keep only rows where `order_date BETWEEN '2026-01-01' AND '2026-01-31'`. Produce one result row per `sales_rep`. Sort the final result by `completed_net_sales DESC, sales_rep ASC`.",
-              "hint": "Keep every January row, calculate completed metrics with CASE, and use the representative name as the tie-breaker.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `sales_rep`. Sort the final result by `completed_net_sales DESC, sales_rep ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    sales_rep,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY sales_rep\nORDER BY completed_net_sales DESC, sales_rep ASC;"
             }
           }
         }

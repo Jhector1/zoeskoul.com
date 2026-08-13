@@ -113,33 +113,33 @@
                 "ORDER BY",
                 "SELECT"
               ]
+            },
+            "practice-high-value-categories": {
+              "title": "Practice: Find High-Value Categories",
+              "prompt": "Return one row per `category` with `gross_sales`, rounded to two decimal places. Keep only categories whose total gross sales exceed 550. Rank the retained categories from highest gross sales to lowest, using category alphabetically to break ties.",
+              "hint": "The sales threshold applies to each finished category aggregate, not to an individual source row.",
+              "help": {
+                "concept": "HAVING is used when the decision to keep a group depends on an aggregate result.",
+                "hint_1": "Build gross sales within each category first.",
+                "hint_2": "Apply the 550 threshold to the group total."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY category\nHAVING SUM(quantity * unit_price) > 550\nORDER BY gross_sales DESC, category ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_having_after_grouping_sketch0": {
               "title": "Keep Categories with Several Completed Orders",
-              "prompt": "Return `category` and completed-order count as `completed_orders`. Calculate and return `category, COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `category`. After grouping, keep groups where `COUNT(*) >= 4`. Sort the final result by `completed_orders DESC, category ASC`.",
-              "hint": "The status filter belongs in WHERE; the count threshold belongs in HAVING.",
+              "prompt": "Using only completed orders, return one row per `category` with `completed_orders`. Keep only categories that contain at least four completed orders. Rank the remaining categories from the largest count to the smallest, using category alphabetically to break ties.",
+              "hint": "The order status decides which source rows participate. The minimum-count requirement applies only after the category groups have been formed.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "After grouping, keep groups where `COUNT(*) >= 4`. Sort the final result by `completed_orders DESC, category ASC`."
+                "concept": "WHERE filters source rows; HAVING filters completed groups using aggregate conditions.",
+                "hint_1": "First restrict the population to completed orders.",
+                "hint_2": "Then keep only groups whose completed-order count meets the threshold."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nHAVING COUNT(*) >= 4\nORDER BY completed_orders DESC, category ASC;"
-            },
-            "try_having_after_grouping_sketch1": {
-              "title": "Find High-Value Categories",
-              "prompt": "Return each `category` and gross sales rounded to two decimals as `gross_sales`. Calculate and return `category, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Produce one result row per `category`. After grouping, keep groups where `SUM(quantity * unit_price) > 550`. Sort the final result by `gross_sales DESC, category ASC`.",
-              "hint": "Repeat the aggregate expression in HAVING and use the alias for display sorting.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "After grouping, keep groups where `SUM(quantity * unit_price) > 550`. Sort the final result by `gross_sales DESC, category ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY category\nHAVING SUM(quantity * unit_price) > 550\nORDER BY gross_sales DESC, category ASC;"
             }
           }
         }

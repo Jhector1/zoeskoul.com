@@ -2,7 +2,7 @@
   "topicId": "case-inside-aggregates",
   "subjectSlug": "sql-analysis-reporting",
   "moduleSlug": "sql-analysis-reporting-module-4-having-and-conditional-reporting",
-  "sectionSlug": "sql-analysis-reporting-section-4-conditional-kpis",
+  "sectionSlug": "sql-analysis-reporting-sql-analysis-reporting-section-4-conditional-kpis",
   "prefix": "sql_analysis_reporting_module_4",
   "minutes": 24,
   "runtimeDefaults": {
@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-case-inside-aggregates-sketch1",
-        "titleKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.title",
-        "promptKey": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.prompt",
-        "exerciseKey": "try-case-inside-aggregates-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -249,7 +237,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    category,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN order_status = 'Pending' THEN 1 ELSE 0 END) AS pending_orders\nFROM sales_reporting\nGROUP BY category\nORDER BY category;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -261,16 +249,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-case-inside-aggregates-sketch1",
+      "id": "practice-completed-net-sales-with-full-population",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1",
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.starterCode",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -287,11 +276,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.starterCode",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.tryIt.try_case_inside_aggregates_sketch1.starterCode",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -310,7 +299,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY region;",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.case-inside-aggregates.practice.practice-completed-net-sales-with-full-population.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -322,7 +311,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

@@ -113,33 +113,33 @@
                 "1",
                 "0"
               ]
+            },
+            "practice-pending-order-net-sales": {
+              "title": "Practice: Calculate Pending Order Net Sales",
+              "prompt": "For pending orders, return `order_id`, `product_name`, and `net_sales`. Build gross order value from quantity and unit price, treat a missing discount as zero, subtract the percentage discount, and round the completed net value to two decimal places.",
+              "hint": "Calculate the complete row value and discount first; round only the final net-sales result.",
+              "help": {
+                "concept": "A null-safe percentage calculation can be combined with row filtering and final presentation rounding.",
+                "hint_1": "Only pending rows belong in the report.",
+                "hint_2": "The missing-discount fallback is zero."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    product_name,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Pending';"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_percentage_and_discount_calculations_sketch0": {
               "title": "Calculate Discounted Unit Prices",
-              "prompt": "For each order, return `order_id`, `product_name`, and `unit_price`. Return `order_id, product_name, unit_price, unit_price * COALESCE(discount_pct, 0) / 100 AS unit_discount, unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS discounted_unit_price` from `sales_reporting` in that column order.",
-              "hint": "Apply the percentage to `unit_price`, then subtract that unit discount from the original unit price.",
+              "prompt": "Return `order_id`, `product_name`, `unit_price`, `unit_discount`, and `discounted_unit_price`. Treat a missing discount percentage as zero. Calculate the unit discount from the unit price, then subtract that discount from the original unit price.",
+              "hint": "Normalize the percentage before using it in both calculations.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, product_name, unit_price, unit_price * COALESCE(discount_pct, 0) / 100 AS unit_discount, unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS discounted_unit_price` from `sales_reporting` in that column order."
+                "concept": "Percentage calculations are easier to audit when the discount amount and final discounted value are both visible.",
+                "hint_1": "The unit discount is the requested percentage of `unit_price`.",
+                "hint_2": "The discounted unit price is the original unit price minus that discount."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    product_name,\n    unit_price,\n    unit_price * COALESCE(discount_pct, 0) / 100 AS unit_discount,\n    unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS discounted_unit_price\nFROM sales_reporting;"
-            },
-            "try_percentage_and_discount_calculations_sketch1": {
-              "title": "Calculate Net Value for Pending Orders",
-              "prompt": "For pending orders, return `order_id`, `product_name`, and null-safe `net_sales` rounded to two decimals. Return `order_id, product_name, ROUND( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS net_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Pending'`.",
-              "hint": "Subtract the discount expression from gross sales, then round the completed result.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, product_name, ROUND( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS net_sales` from `sales_reporting` in that column order. Keep only rows where `order_status = 'Pending'`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    order_id,\n    product_name,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Pending';"
             }
           }
         }

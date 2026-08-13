@@ -113,33 +113,33 @@
                 "AVG",
                 "COUNT"
               ]
+            },
+            "practice-audit-date-and-value-boundaries": {
+              "title": "Practice: Audit Date and Value Boundaries",
+              "prompt": "Return one audit row containing `first_order_date`, `last_order_date`, `minimum_quantity`, `maximum_quantity`, `minimum_unit_price`, and `maximum_unit_price`. Use the earliest and latest recorded order dates, the quantity boundaries, and the unit-price boundaries. Display the two price boundaries rounded to two decimal places.",
+              "hint": "This is a whole-dataset audit, so the result should stay at one row rather than being divided into groups.",
+              "help": {
+                "concept": "Boundary checks help confirm that dates and numeric measures match the expected reporting domain.",
+                "hint_1": "Use the same lower/upper-bound idea for each audited field.",
+                "hint_2": "Only the price outputs need two-decimal presentation."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    MIN(order_date) AS first_order_date,\n    MAX(order_date) AS last_order_date,\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity,\n    ROUND(MIN(unit_price), 2) AS minimum_unit_price,\n    ROUND(MAX(unit_price), 2) AS maximum_unit_price\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_auditing_the_sales_kpi_dataset_sketch0": {
               "title": "Audit Missing Data by Region",
-              "prompt": "For each `region`, return `total_orders`, `missing_discount_rows`, and `missing_rating_rows`. Calculate and return `region, COUNT(*) AS total_orders, SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_rows, SUM(CASE WHEN customer_rating IS NULL THEN 1 ELSE 0 END) AS missing_rating_rows` from `sales_reporting`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "Group by region, count all rows, and add one conditional count for each nullable column.",
+              "prompt": "Return one row per `region` with `total_orders`, `missing_discount_rows`, and `missing_rating_rows`. Count every order in the first metric, then count rows with a missing discount percentage and rows with a missing customer rating separately. Sort by region.",
+              "hint": "Keep the complete regional population and use separate conditional counts for the two nullable fields.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
+                "concept": "A dataset audit can compare total rows with targeted missing-value counts at the same report grain.",
+                "hint_1": "Each region should appear once.",
+                "hint_2": "Discount and rating missingness are separate metrics."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN discount_pct IS NULL THEN 1 ELSE 0 END) AS missing_discount_rows,\n    SUM(CASE WHEN customer_rating IS NULL THEN 1 ELSE 0 END) AS missing_rating_rows\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
-            },
-            "try_auditing_the_sales_kpi_dataset_sketch1": {
-              "title": "Audit Date and Value Boundaries",
-              "prompt": "Return one audit row with `first_order_date`, `last_order_date`, `minimum_quantity`, `maximum_quantity`, `minimum_unit_price`, and `maximum_unit_price`. Calculate and return `MIN(order_date) AS first_order_date, MAX(order_date) AS last_order_date, MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity, ROUND(MIN(unit_price), 2) AS minimum_unit_price, ROUND(MAX(unit_price), 2) AS maximum_unit_price` from `sales_reporting`.",
-              "hint": "Use MIN and MAX on the date, quantity, and unit-price columns without grouping.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Calculate and return `MIN(order_date) AS first_order_date, MAX(order_date) AS last_order_date, MIN(quantity) AS minimum_quantity, MAX(quantity) AS maximum_quantity, ROUND(MIN(unit_price), 2) AS minimum_unit_price, ROUND(MAX(unit_price), 2) AS maximum_unit_price` from `sales_reporting`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    MIN(order_date) AS first_order_date,\n    MAX(order_date) AS last_order_date,\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity,\n    ROUND(MIN(unit_price), 2) AS minimum_unit_price,\n    ROUND(MAX(unit_price), 2) AS maximum_unit_price\nFROM sales_reporting;"
             }
           }
         }

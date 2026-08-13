@@ -113,18 +113,30 @@
                 "= NULL",
                 "IS 0"
               ]
+            },
+            "practice-raw-null-discounted-price": {
+              "title": "Practice: Follow NULL Into a Discounted Price",
+              "prompt": "Return `order_id`, `unit_price`, `discount_pct`, and `raw_discounted_unit_price`. Calculate the discounted unit price using the stored discount percentage exactly as it is. Do not replace missing discounts; rows with a missing discount should therefore keep a missing calculated price.",
+              "hint": "Subtract the raw percentage discount from the unit price. Do not use COALESCE.",
+              "help": {
+                "concept": "This practice checks whether you can predict and preserve NULL propagation through arithmetic.",
+                "hint_1": "The percentage comes directly from `discount_pct`.",
+                "hint_2": "A NULL input should remain visible as a NULL calculated result."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    order_id,\n    unit_price,\n    discount_pct,\n    unit_price - unit_price * discount_pct / 100 AS raw_discounted_unit_price\nFROM sales_reporting;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_how_null_affects_calculations_sketch0": {
               "title": "Trace NULL Through a Discount Calculation",
-              "prompt": "Return `order_id`, the original `discount_pct`, and `unit_price * discount_pct / 100` as `unit_discount`. Return `order_id, discount_pct, unit_price * discount_pct / 100 AS unit_discount` from `sales_reporting` in that column order.",
-              "hint": "Use the raw `discount_pct` value. Do not add COALESCE yet; this exercise is about observing how NULL propagates.",
+              "prompt": "Return `order_id`, the original `discount_pct`, and `unit_discount`. Calculate the unit discount from the raw unit price and raw discount percentage. Do not replace missing discounts in this exercise.",
+              "hint": "Use the stored discount directly and observe what happens to the calculation when that value is NULL.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return `order_id, discount_pct, unit_price * discount_pct / 100 AS unit_discount` from `sales_reporting` in that column order."
+                "concept": "Arithmetic involving NULL normally produces NULL, which is important when auditing incomplete data.",
+                "hint_1": "Do not use a fallback function in this exercise.",
+                "hint_2": "Rows with a missing discount should keep a missing calculated discount."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    unit_price * discount_pct / 100 AS unit_discount\nFROM sales_reporting;"

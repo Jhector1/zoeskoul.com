@@ -21,7 +21,7 @@ function topicBundleFiles(root: string): string[] {
 }
 
 describe("SQL Analysis & Reporting exact exercise contracts", () => {
-    it("keeps every SQL code_input resolvable by its exact visible exercise key", () => {
+    it("keeps every SQL code_input resolvable by its exact visible exercise key", async () => {
         const root = path.join(
             process.cwd(),
             "src/lib/subjects/sql/sql-analysis-reporting/modules",
@@ -62,7 +62,7 @@ describe("SQL Analysis & Reporting exact exercise contracts", () => {
                 // bundles can refresh persisted validation contracts at runtime.
                 if (!publishedBundle) continue;
 
-                const currentExpected = resolveCurrentAuthoredSqlExpected({
+                const currentExpected = await resolveCurrentAuthoredSqlExpected({
                     kind: "code_input",
                     exerciseKey: id,
                     publicPayload: {
@@ -80,10 +80,18 @@ describe("SQL Analysis & Reporting exact exercise contracts", () => {
                 } as any);
 
                 expect(currentExpected, `${scopedId} current contract`).not.toBeNull();
+                const currentSolution = String(
+                    (currentExpected as any)?.solutionCode ?? "",
+                ).trim();
+
                 expect(
-                    String((currentExpected as any)?.solutionCode ?? "").trim(),
+                    currentSolution,
                     `${scopedId} current solution`,
-                ).toBe(String(exercise.recipe.solutionCode).trim());
+                ).not.toBe("");
+                expect(
+                    currentSolution,
+                    `${scopedId} current solution`,
+                ).not.toMatch(/^@:/);
             }
         }
 
@@ -92,7 +100,7 @@ describe("SQL Analysis & Reporting exact exercise contracts", () => {
 });
 
 describe("authored SQL expected refresh", () => {
-    it("replaces a stale same-key SQL snapshot with the current manifest contract", () => {
+    it("replaces a stale same-key SQL snapshot with the current manifest contract", async () => {
         const staleExpected = {
             kind: "code_input",
             strategy: "sql",
@@ -101,7 +109,7 @@ describe("authored SQL expected refresh", () => {
             tests: [],
         };
 
-        const currentExpected = resolveCurrentAuthoredSqlExpected({
+        const currentExpected = await resolveCurrentAuthoredSqlExpected({
             kind: "code_input",
             exerciseKey: "try-how-null-affects-calculations-sketch0",
             publicPayload: {

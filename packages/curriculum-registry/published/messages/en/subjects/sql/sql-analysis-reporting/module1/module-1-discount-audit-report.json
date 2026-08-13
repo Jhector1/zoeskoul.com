@@ -37,8 +37,8 @@
             "steps": {
               "project_step_1": {
                 "title": "Create the Audit Base",
-                "prompt": "Begin the Module 1 Discount Audit Report. Return `order_id, product_name, order_status, discount_pct` from `sales_reporting` in that column order.",
-                "hint": "Do not replace or filter missing discounts yet; the audit must expose them.",
+                "prompt": "Start the Module 1 Discount Audit Report. Return `order_id`, `product_name`, `order_status`, and the raw `discount_pct`, in that order. Keep missing discounts visible.",
+                "hint": "This first milestone exposes the stored audit fields without normalizing or filtering missing discounts.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -59,8 +59,8 @@
               },
               "project_step_2": {
                 "title": "Add the Applied Discount Rule",
-                "prompt": "Extend the Module 1 Discount Audit Report with the next approved requirement. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct` from `sales_reporting` in that column order.",
-                "hint": "Add a separate calculated field; do not overwrite the raw percentage.",
+                "prompt": "Carry the approved audit forward and append `applied_discount_pct`. Preserve the raw discount column, but treat a missing discount as zero in the new applied field.",
+                "hint": "Keep both versions so the report can compare stored data with the value used in calculations.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -81,8 +81,8 @@
               },
               "project_step_3": {
                 "title": "Calculate Gross Sales",
-                "prompt": "Extend the Module 1 Discount Audit Report with the next approved requirement. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct, ROUND(quantity * unit_price, 2) AS gross_sales` from `sales_reporting` in that column order.",
-                "hint": "Append the row-level monetary calculation without removing the audit columns.",
+                "prompt": "Carry the report forward and append `gross_sales`. Calculate each row's order value from quantity and unit price and display it rounded to two decimal places.",
+                "hint": "Preserve every audit column and add one row-level monetary calculation.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -103,8 +103,8 @@
               },
               "project_step_4": {
                 "title": "Calculate Discount Amount",
-                "prompt": "Extend the Module 1 Discount Audit Report with the next approved requirement. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct, ROUND(quantity * unit_price, 2) AS gross_sales, ROUND( quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS discount_amount` from `sales_reporting` in that column order.",
-                "hint": "Apply the fallback percentage to the same gross-sales expression.",
+                "prompt": "Append `discount_amount`. Calculate the percentage discount from the row's order value using the null-safe applied discount percentage, then display the amount rounded to two decimal places.",
+                "hint": "Use the same underlying order value as gross sales and the same missing-discount rule already approved.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -125,8 +125,8 @@
               },
               "project_step_5": {
                 "title": "Calculate Net Sales",
-                "prompt": "Extend the Module 1 Discount Audit Report with the next approved requirement. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct, ROUND(quantity * unit_price, 2) AS gross_sales, ROUND( quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS discount_amount, ROUND( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS net_sales` from `sales_reporting` in that column order.",
-                "hint": "Subtract the same discount formula from gross sales and preserve every prior column.",
+                "prompt": "Append `net_sales`. Start from the row's order value, subtract its null-safe percentage discount, and round the final result to two decimal places. Preserve every earlier column.",
+                "hint": "Net sales is the original row value after its discount has been removed.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -147,8 +147,8 @@
               },
               "project_step_6": {
                 "title": "Add Review Labels and Priority",
-                "prompt": "Complete the Module 1 Discount Audit Report. Return `order_id, product_name, order_status, discount_pct, COALESCE(discount_pct, 0) AS applied_discount_pct, ROUND(quantity * unit_price, 2) AS gross_sales, ROUND( quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS discount_amount, ROUND( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100, 2 ) AS net_sales, CASE WHEN discount_pct IS NULL THEN 'Missing discount' WHEN discount_pct >= 15 THEN 'Review high discount' ELSE 'OK' END AS discount_review` from `sales_reporting` in that column order. Sort the final result by `CASE WHEN discount_pct IS NULL THEN 1 WHEN discount_pct >= 15 THEN 2 ELSE 3 END, order_id ASC`.",
-                "hint": "Use the same condition order in the label and priority sort.",
+                "prompt": "Complete the audit with `discount_review`. Label missing discounts as `Missing discount`, discounts of 15 or more as `Review high discount`, and all others as `OK`. Sort missing discounts first, high discounts second, and ordinary rows last. Within the same priority, sort by `order_id` ascending.",
+                "hint": "Use the same business-condition order for the readable label and the review priority.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",

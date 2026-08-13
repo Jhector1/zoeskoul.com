@@ -2,7 +2,7 @@
   "topicId": "avoiding-grouping-mistakes",
   "subjectSlug": "sql--sql-analysis-reporting--draft",
   "moduleSlug": "sql-analysis-reporting-module-3-grouped-summaries",
-  "sectionSlug": "sql-analysis-reporting-section-3-ranking-and-quality",
+  "sectionSlug": "sql--sql-analysis-reporting--draft-sql-analysis-reporting-section-3-ranking-and-quality",
   "prefix": "sql_analysis_reporting_module_3",
   "minutes": 24,
   "runtimeDefaults": {
@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-avoiding-grouping-mistakes-sketch1",
-        "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.title",
-        "promptKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.prompt",
-        "exerciseKey": "try-avoiding-grouping-mistakes-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -249,7 +237,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    region,\n    COUNT(*) AS order_count\nFROM sales_reporting\nGROUP BY region\nORDER BY region;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch0.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -261,16 +249,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-avoiding-grouping-mistakes-sketch1",
+      "id": "practice-preserve-region-category-grain",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1",
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -287,11 +276,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.tryIt.try_avoiding_grouping_mistakes_sketch1.starterCode",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -310,7 +299,7 @@
         "type": "sql_query",
         "datasetId": "sales_reporting",
         "resultShape": "table",
-        "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-3-grouped-summaries.avoiding-grouping-mistakes.practice.practice-preserve-region-category-grain.solutionCode",
         "sqlFileOrder": [
           "main.sql"
         ]
@@ -322,7 +311,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

@@ -113,33 +113,33 @@
                 "ORDER BY",
                 "GROUP BY"
               ]
+            },
+            "practice-active-gross-sales-by-category": {
+              "title": "Practice: Active Gross Sales by Category",
+              "prompt": "Return one row per `category` with `active_gross_sales`. Include completed and pending orders but exclude all other statuses. Calculate gross sales from quantity and unit price, total it by category, round to two decimal places, and rank the categories from highest active gross sales to lowest. Break ties alphabetically by category.",
+              "hint": "Define the allowed source-row population before building the category totals.",
+              "help": {
+                "concept": "Filtering before grouping controls which rows can contribute to each aggregate.",
+                "hint_1": "Two statuses belong in the source population.",
+                "hint_2": "Rank the completed category summaries after aggregation."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS active_gross_sales\nFROM sales_reporting\nWHERE order_status IN ('Completed', 'Pending')\nGROUP BY category\nORDER BY active_gross_sales DESC, category ASC;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_where_before_grouping_sketch0": {
               "title": "Completed Net Sales by Region",
-              "prompt": "Return one row per `region` with completed-order net sales rounded to two decimals as `completed_net_sales`. Calculate and return `region, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS completed_net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region`. Sort the final result by `region`.",
-              "hint": "Filter the source rows before grouping and summing them.",
+              "prompt": "For completed orders, return one row per `region` with `completed_net_sales`. Calculate each order's net value using a zero fallback for missing discounts, total that value within the region, and round the final regional amount to two decimal places. Sort by region.",
+              "hint": "First decide which source rows belong in the report. Only then summarize those rows by region.",
               "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `region`. Sort the final result by `region`."
+                "concept": "A row filter changes the population before grouping and aggregation happen.",
+                "hint_1": "Only completed orders should contribute to the totals.",
+                "hint_2": "Each region should appear once in the result."
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    ROUND(SUM(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;"
-            },
-            "try_where_before_grouping_sketch1": {
-              "title": "Non-Cancelled Gross Sales by Category",
-              "prompt": "Return one row per `category` with gross sales from completed and pending orders as `active_gross_sales`, rounded to two decimals. Calculate and return `category, ROUND(SUM(quantity * unit_price), 2) AS active_gross_sales` from `sales_reporting`. Keep only rows where `order_status IN ('Completed', 'Pending')`. Produce one result row per `category`. Sort the final result by `active_gross_sales DESC, category ASC`.",
-              "hint": "Use WHERE to keep the two allowed statuses before aggregation.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Produce one result row per `category`. Sort the final result by `active_gross_sales DESC, category ASC`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS active_gross_sales\nFROM sales_reporting\nWHERE order_status IN ('Completed', 'Pending')\nGROUP BY category\nORDER BY active_gross_sales DESC, category ASC;"
             }
           }
         }

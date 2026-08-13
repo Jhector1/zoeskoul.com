@@ -37,8 +37,8 @@
             "steps": {
               "project_step_1": {
                 "title": "Establish the Scorecard Grain",
-                "prompt": "Begin the Module 3 Region Category Scorecard. Calculate and return `region, category, COUNT(*) AS completed_orders` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Start with the exact group key and filtered population used by every later step.",
+                "prompt": "Start the Module 3 Region-Category Scorecard. Use only completed orders and return one row for each `region` and `category` combination with `completed_orders`, the number of completed orders in that combination.",
+                "hint": "Establish the filtered population and exact two-dimension grain that every later milestone will preserve.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -58,9 +58,9 @@
                 }
               },
               "project_step_2": {
-                "title": "Add Completed Units — 3 Project: Region-Category Scorecard",
-                "prompt": "Extend the Module 3 Region Category Scorecard with the next approved requirement. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Append the measure; do not change the group key or status filter.",
+                "title": "Add Completed Units",
+                "prompt": "Carry the scorecard forward and append `completed_units`, the total quantity within each existing region-category group.",
+                "hint": "Keep the same completed-order population and group grain; add only the new volume metric.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -80,9 +80,9 @@
                 }
               },
               "project_step_3": {
-                "title": "Add Gross Sales — 3 Project: Region-Category Scorecard",
-                "prompt": "Extend the Module 3 Region Category Scorecard with the next approved requirement. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Add the monetary aggregate after the volume metrics.",
+                "title": "Add Gross Sales",
+                "prompt": "Append `gross_sales`. Calculate merchandise value from quantity and unit price, total it within each existing group, and display the result rounded to two decimal places.",
+                "hint": "Preserve the existing grain while adding one monetary aggregate.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -102,9 +102,9 @@
                 }
               },
               "project_step_4": {
-                "title": "Add Discount and Net Sales — 3 Project: Region-Category Scorecard",
-                "prompt": "Extend the Module 3 Region Category Scorecard with the next approved requirement. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Use parallel null-safe formulas so each group can reconcile gross, discount, and net.",
+                "title": "Add Discount and Net Sales",
+                "prompt": "Append `discount_amount` and `net_sales`. Treat missing discount percentages as zero. Total both discount dollars and post-discount sales within each region-category group, rounding both monetary results to two decimal places.",
+                "hint": "Use one consistent missing-discount rule so gross, discount, and net values reconcile.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -125,8 +125,8 @@
               },
               "project_step_5": {
                 "title": "Add Average Order Value and Rating",
-                "prompt": "Extend the Module 3 Region Category Scorecard with the next approved requirement. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`.",
-                "hint": "Average the group-level order values without changing the group columns.",
+                "prompt": "Append `average_net_order_value` and `average_rating`. Average the same null-safe net-order value used earlier, rounded to two decimals. Also average the recorded customer ratings within each group, leaving missing ratings out.",
+                "hint": "Keep the group dimensions unchanged while adding the two average metrics.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -147,8 +147,8 @@
               },
               "project_step_6": {
                 "title": "Rank the Completed Sales Scorecard",
-                "prompt": "Complete the Module 3 Region Category Scorecard. Calculate and return `region, category, COUNT(*) AS completed_orders, SUM(quantity) AS completed_units, ROUND(SUM(quantity * unit_price), 2) AS gross_sales, ROUND(SUM( quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS discount_amount, ROUND(SUM( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS net_sales, ROUND(AVG( quantity * unit_price - quantity * unit_price * COALESCE(discount_pct, 0) / 100 ), 2) AS average_net_order_value, ROUND(AVG(customer_rating), 2) AS average_rating` from `sales_reporting`. Keep only rows where `order_status = 'Completed'`. Produce one result row per `region, category`. Sort the final result by `net_sales DESC, region ASC, category ASC`.",
-                "hint": "Add sorting after GROUP BY and preserve every selected metric.",
+                "prompt": "Complete the scorecard by ranking the region-category groups from highest `net_sales` to lowest. Break ties first by `region` alphabetically and then by `category` alphabetically. Preserve every earlier metric.",
+                "hint": "Rank the finished grouped result without changing its grain or calculations.",
                 "help": {
                   "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                   "hint_1": "Build the result one clause at a time and run it after each meaningful change.",

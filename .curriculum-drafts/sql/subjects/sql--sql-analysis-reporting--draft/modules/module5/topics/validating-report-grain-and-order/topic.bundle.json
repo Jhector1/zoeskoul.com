@@ -47,19 +47,7 @@
       "kind": "sketch",
       "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.cards.sketch1.title",
       "sketchId": "sketch1",
-      "height": 420,
-      "tryIt": {
-        "id": "try-validating-report-grain-and-order-sketch1",
-        "titleKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.tryIt.try_validating_report_grain_and_order_sketch1.title",
-        "promptKey": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.tryIt.try_validating_report_grain_and_order_sketch1.prompt",
-        "exerciseKey": "try-validating-report-grain-and-order-sketch1",
-        "difficulty": "easy",
-        "preferKind": "code_input",
-        "seedPolicy": "global",
-        "required": true,
-        "allowReveal": true,
-        "maxAttempts": null
-      }
+      "height": 420
     },
     {
       "id": "quiz",
@@ -261,16 +249,17 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     },
     {
-      "id": "try-validating-report-grain-and-order-sketch1",
+      "id": "practice-validate-representative-ranking",
       "kind": "code_input",
-      "purpose": "try_it",
+      "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.tryIt.try_validating_report_grain_and_order_sketch1",
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.practice.practice-validate-representative-ranking",
       "language": "sql",
-      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.tryIt.try_validating_report_grain_and_order_sketch1.starterCode",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.practice.practice-validate-representative-ranking.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -287,11 +276,11 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.tryIt.try_validating_report_grain_and_order_sketch1.starterCode",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.practice.practice-validate-representative-ranking.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
-            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.tryIt.try_validating_report_grain_and_order_sketch1.starterCode",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.validating-report-grain-and-order.practice.practice-validate-representative-ranking.starterCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -322,7 +311,8 @@
         "requiredFiles": [
           "main.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
     }
   ]
 }

@@ -112,14 +112,26 @@
                 "GROUP",
                 "HAVING"
               ]
+            },
+            "practice-unique-region-representative-pairs": {
+              "title": "Practice: Find Unique Region-Representative Pairs",
+              "prompt": "Return each unique combination of `region` and `sales_rep` once from `sales_reporting`. Sort the result by `region`, then by `sales_rep`.",
+              "hint": "Uniqueness applies to the selected pair together, not to either column independently.",
+              "help": {
+                "concept": "When multiple columns are selected, uniqueness is evaluated across the complete selected combination.",
+                "hint_1": "Keep only the two requested reporting dimensions.",
+                "hint_2": "After removing duplicate pairs, make the output order stable."
+              },
+              "starterCode": "-- Write the query below.",
+              "solutionCode": "SELECT DISTINCT region, sales_rep\nFROM sales_reporting\nORDER BY region, sales_rep;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_distinct_values_for_report_categories_sketch0": {
               "title": "List the Available Sales Regions",
-              "prompt": "Return each `region` once and sort the regions alphabetically. Return each distinct `region` value or combination from `sales_reporting`. Sort the final result by `region`.",
-              "hint": "Select only the column whose unique values you need.",
+              "prompt": "List each `region` from `sales_reporting` exactly once and sort the result alphabetically.",
+              "hint": "This lesson's uniqueness operation should be applied to the one result column you need.",
               "help": {
                 "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
                 "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
@@ -127,18 +139,6 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT DISTINCT region\nFROM sales_reporting\nORDER BY region;"
-            },
-            "try_distinct_values_for_report_categories_sketch1": {
-              "title": "Map Representatives to Regions",
-              "prompt": "Return every unique `region` and `sales_rep` combination. Return each distinct `region, sales_rep` value or combination from `sales_reporting`. Sort the final result by `region, sales_rep`.",
-              "hint": "DISTINCT evaluates the pair of selected columns together.",
-              "help": {
-                "concept": "Read the brief as a result contract: identify the source table or join path, the result columns, the row condition or grouping rule, and any required ordering.",
-                "hint_1": "Build the result one clause at a time and run it after each meaningful change.",
-                "hint_2": "Return each distinct `region, sales_rep` value or combination from `sales_reporting`. Sort the final result by `region, sales_rep`."
-              },
-              "starterCode": "-- Write the query below.",
-              "solutionCode": "SELECT DISTINCT region, sales_rep\nFROM sales_reporting\nORDER BY region, sales_rep;"
             }
           }
         }
