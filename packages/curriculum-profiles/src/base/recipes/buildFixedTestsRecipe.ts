@@ -1,4 +1,4 @@
-import { buildTerminalExpectedExample } from "../expectedExample.js";
+import { buildTerminalExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
 import { buildFixedTestsExpected } from "../codeInputExpected.js";
 
 export const buildFixedTestsRecipe = (def: any, args: any, resolved: any) => {

@@ -1,4 +1,4 @@
-import { buildTerminalExpectedExample } from "../expectedExample.js";
+import { buildTerminalExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
 import {
   buildTemplateIoExpected,
   fillTemplate,

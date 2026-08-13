@@ -1,5 +1,5 @@
 import { buildSqlQueryExpected } from "../../base/codeInputExpected.js";
-import { buildSqlExpectedExample } from "../../base/expectedExample.js";
+import { buildSqlExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
 import { getSqlDatasetById } from "../datasets/index.js";
 
 function cleanSql(value: unknown): string {
