@@ -5,7 +5,7 @@ import {
 } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import { resolveSqlRunnerConfig } from "@zoeskoul/curriculum-runtime/subjects/sql/sql/runtime/resolveSqlRunnerConfig";
-import { buildSqlExpectedExample } from "./expectedExample";
+import { buildSqlExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
 import { makeSqlExpected } from "@/lib/practice/generator/engines/sql/sqlExpected";
 
 function cleanSql(value: unknown): string {
@@ -42,11 +42,9 @@ export const buildSqlQueryRecipe: RecipeHandler<any> = (def, args, resolved) => 
         fixedSqlDialect,
     });
 
-    const sourceChecks = Array.isArray((recipe as any)?.sourceChecks)
-        ? (recipe as any).sourceChecks
-        : Array.isArray((def as any).sourceChecks)
-            ? (def as any).sourceChecks
-            : undefined;
+    const sourceChecks = Array.isArray((def as any).sourceChecks)
+        ? (def as any).sourceChecks
+        : undefined;
     const expectedWithSourceChecks = {
         ...(expected as any),
         ...(sourceChecks?.length ? { sourceChecks } : {}),

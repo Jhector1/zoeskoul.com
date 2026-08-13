@@ -145,17 +145,8 @@ export function resolveRightRailSqlProps({
         compact: compactLayout,
     });
 
-    const authoredDefaultSurface = responsivePolicy?.defaultSurface;
-    const innerTabRequestsResultsSurface = Boolean(
-        responsivePolicy?.runnerPane?.defaultTab ??
-        responsivePolicy?.sqlPane?.defaultTab,
-    );
-    const defaultSurface: ToolSurface | undefined = authoredDefaultSurface ??
-        (compactLayout && isSqlTool
-            ? "results"
-            : innerTabRequestsResultsSurface
-                ? "results"
-                : undefined);
+    const defaultSurface: ToolSurface | undefined =
+        responsivePolicy?.defaultSurface;
 
     const sqlPaneCandidate: SqlPaneOptions = {
         ...(responsivePolicy?.sqlPane ?? {}),

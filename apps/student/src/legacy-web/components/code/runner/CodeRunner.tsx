@@ -1,5 +1,7 @@
 "use client";
 
+import { resolveWorkspaceInitialPane } from "@zoeskoul/learning-runtime/workspaceInitialPane";
+
 import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
@@ -284,31 +286,8 @@ export function shouldAttachWorkspaceTerminalTab(args: {
     });
 }
 
-export function resolveSqlMobilePaneDefault(args: {
-    language: WorkspaceLanguage;
-    defaultSurface?: ToolSurface | null;
-    sqlPaneOptions?: SqlPaneOptions | null;
-    runnerPaneOptions?: ToolRunnerPanePolicy | null;
-}): MobilePane {
-    if (args.defaultSurface === "results") return "output";
-    if (args.defaultSurface === "editor") return "editor";
-
-    // Backward compatibility for older bundles that authored only an inner
-    // tab. New compiler output should emit defaultSurface explicitly.
-    const hasAuthoredRunnerTab = Boolean(
-        args.runnerPaneOptions?.defaultTab ??
-        args.runnerPaneOptions?.compactDefaultTab,
-    );
-    const hasLegacyAuthoredSqlTab = Boolean(
-        args.sqlPaneOptions?.defaultTab ??
-        args.sqlPaneOptions?.compactDefaultTab,
-    );
-
-    return hasAuthoredRunnerTab ||
-        (args.language === "sql" && hasLegacyAuthoredSqlTab)
-        ? "output"
-        : "editor";
-}
+export const resolveSqlMobilePaneDefault =
+    resolveWorkspaceInitialPane;
 
 export function resolveRunnerPaneDefaultTab(args: {
     policy?: ToolRunnerPanePolicy | null;

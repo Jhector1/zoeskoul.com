@@ -6,6 +6,7 @@ import { DIFFICULTIES, rngFromActor } from "@/lib/practice/catalog";
 import { getExerciseWithExpected } from "@/lib/practice/generator";
 import { buildExerciseFromManifest } from "@/lib/practice/generator/engines/json/buildExerciseFromManifest";
 import { loadPracticeTopicI18n } from "@/i18n/loadPracticeTopicI18n";
+import { resolveTaggedOnServer } from "@/i18n/resolveTaggedOnServer";
 import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 import type { SlimTopicManifest } from "@/lib/subjects/_core/subjectManifestTypes";
@@ -79,7 +80,7 @@ function isGeneratorTopicMismatch(e: any) {
     );
 }
 
-function resolveAuthoredExercise(args: {
+async function resolveAuthoredExercise(args: {
     subjectSlug: string;
     topicSlug: string;
     topicId: string;
@@ -98,10 +99,13 @@ function resolveAuthoredExercise(args: {
         );
     }
 
-    const manifestExercise = resolveManifestExercise({
+    const taggedManifestExercise = resolveManifestExercise({
         topicBundle,
         exerciseKey: args.exerciseKey,
     }) as ManifestExercise;
+    const manifestExercise = await resolveTaggedOnServer(
+        taggedManifestExercise,
+    ) as ManifestExercise;
 
     const built = buildExerciseFromManifest(
         manifestExercise,
@@ -551,7 +555,7 @@ export async function generatePracticeExercise(
             authoredResolved = manifestFallback;
         }
 
-        const authored = resolveAuthoredExercise({
+        const authored = await resolveAuthoredExercise({
             subjectSlug: String(effectiveSubjectSlug),
             topicSlug: String(authoredResolved.topicSlug),
             topicId: String(authoredResolved.topicId),

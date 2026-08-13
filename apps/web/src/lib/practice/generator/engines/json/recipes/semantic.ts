@@ -4,7 +4,7 @@ import {
     starterCodeForGeneratedExercise
 } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
-import { buildTerminalExpectedExample } from "./expectedExample";
+import { buildTerminalExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
 import {
     buildFixedTestsExpected,
     buildSemanticExpected,
@@ -41,11 +41,9 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         parsedChecks: (expected as any).semanticChecks,
         rawChecks: rawSemanticChecks,
     });
-    const sourceChecks = Array.isArray((def.recipe as any)?.sourceChecks)
-        ? (def.recipe as any).sourceChecks
-        : Array.isArray((def as any).sourceChecks)
-            ? (def as any).sourceChecks
-            : undefined;
+    const sourceChecks = Array.isArray((def as any).sourceChecks)
+        ? (def as any).sourceChecks
+        : undefined;
 
     // Keep full reveal answers in the server-only expected payload.
     // The public exercise object intentionally omits solutionCode/solutionFiles,

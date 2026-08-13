@@ -5,7 +5,7 @@ import {
 } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import type { ManifestCodeInput } from "@/lib/subjects/_core/manifestTypes";
-import { buildTerminalExpectedExample } from "./expectedExample";
+import { buildTerminalExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
 import { buildFixedTestsExpected } from "@zoeskoul-code-input-expected";
 import {
     assertSemanticCheckPaths,
@@ -20,7 +20,6 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
             solutionCode?: string;
             solutionFiles?: unknown;
             semanticChecks?: unknown;
-            sourceChecks?: unknown;
             semanticFirst?: boolean;
         };
     },    args,
@@ -46,11 +45,9 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
         (def as any).solutionFiles ??
         (def.recipe as any).solutionFiles ??
         (def.workspace as any)?.solutionFiles;
-    const sourceChecks = Array.isArray((def.recipe as any).sourceChecks)
-        ? (def.recipe as any).sourceChecks
-        : Array.isArray((def as any).sourceChecks)
-            ? (def as any).sourceChecks
-            : undefined;
+    const sourceChecks = Array.isArray((def as any).sourceChecks)
+        ? (def as any).sourceChecks
+        : undefined;
 
     assertSemanticCheckPaths({
         checks: semanticChecks,

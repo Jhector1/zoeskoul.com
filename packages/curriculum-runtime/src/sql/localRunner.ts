@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { createRequire } from "node:module";
+import { DatabaseSync } from "node:sqlite";
 import type { RunSqlFn } from "./runner.js";
 
 type SqliteColumn = {
@@ -12,7 +12,9 @@ type SqliteColumn = {
 type SqliteStatement = {
     reader?: boolean;
     columns(): SqliteColumn[];
-    all(): Array<Record<string, unknown>>;
+    all(): Array<Record<string, unknown> | unknown[]>;
+    raw?(toggle?: boolean): SqliteStatement;
+    setReturnArrays?(enabled: boolean): void;
 };
 
 type SqliteDatabase = {
@@ -23,30 +25,8 @@ type SqliteDatabase = {
 
 type SqliteDatabaseConstructor = new (filename: string) => SqliteDatabase;
 
-function getInProcessSqlite(): SqliteDatabaseConstructor | null {
-    const require = createRequire(import.meta.url);
-
-    try {
-        const nodeSqlite = require("node:sqlite") as {
-            DatabaseSync?: SqliteDatabaseConstructor;
-        };
-        if (typeof nodeSqlite.DatabaseSync === "function") {
-            return nodeSqlite.DatabaseSync;
-        }
-    } catch {
-        // Older Node versions may not provide node:sqlite.
-    }
-
-    try {
-        const loaded = require("better-sqlite3") as
-            | SqliteDatabaseConstructor
-            | { default?: SqliteDatabaseConstructor };
-        const constructor =
-            typeof loaded === "function" ? loaded : loaded.default;
-        return typeof constructor === "function" ? constructor : null;
-    } catch {
-        return null;
-    }
+function getInProcessSqlite(): SqliteDatabaseConstructor {
+    return DatabaseSync as unknown as SqliteDatabaseConstructor;
 }
 
 function normalizeCell(value: unknown): string | number | boolean | null {
@@ -68,8 +48,22 @@ function collectTable(
     stmt: SqliteStatement,
 ) {
     const columns = stmt.columns().map((column) => column.name);
-    const rows = stmt.all().map((row) =>
-        columns.map((column) => normalizeCell(row[column])),
+
+    let rawRows: Array<Record<string, unknown> | unknown[]>;
+
+    if (typeof stmt.raw === "function") {
+        rawRows = stmt.raw(true).all();
+    } else if (typeof stmt.setReturnArrays === "function") {
+        stmt.setReturnArrays(true);
+        rawRows = stmt.all();
+    } else {
+        rawRows = stmt.all();
+    }
+
+    const rows = rawRows.map((row) =>
+        Array.isArray(row)
+            ? columns.map((_column, index) => normalizeCell(row[index]))
+            : columns.map((column) => normalizeCell(row[column])),
     );
 
     return { columns, rows };
@@ -216,86 +210,130 @@ function createSqliteCliRunner(): RunSqlFn {
     };
 }
 
-export function createLocalSqlRunner(): RunSqlFn | null {
-    const Sqlite = getInProcessSqlite();
-    if (!Sqlite) {
-        return hasSqliteCli() ? createSqliteCliRunner() : null;
+function runWithInProcessSqlite(
+    Sqlite: SqliteDatabaseConstructor,
+    args: Parameters<RunSqlFn>[0],
+) {
+    if ((args.dialect ?? "sqlite") !== "sqlite") {
+        return {
+            ok: false,
+            error: `Unsupported SQL dialect "${args.dialect}" for local SQL runner.`,
+        };
     }
 
-    return async (args) => {
-        if ((args.dialect ?? "sqlite") !== "sqlite") {
-            return {
-                ok: false,
-                error: `Unsupported SQL dialect "${args.dialect}" for local SQL runner.`,
-            };
+    const db = new Sqlite(":memory:");
+
+    try {
+        if (args.schemaSql?.trim()) {
+            db.exec(args.schemaSql);
         }
 
-        const db = new Sqlite(":memory:");
+        if (args.seedSql?.trim()) {
+            db.exec(args.seedSql);
+        }
 
-        try {
-            if (args.schemaSql?.trim()) {
-                db.exec(args.schemaSql);
-            }
-            if (args.seedSql?.trim()) {
-                db.exec(args.seedSql);
-            }
-
-            if (args.checkSql?.trim()) {
-                if (args.code.trim()) {
-                    db.exec(args.code);
-                }
-
-                const stmt = db.prepare(args.checkSql);
-                const columns = stmt.columns();
-                if (stmt.reader === false || columns.length === 0) {
-                    return {
-                        ok: false,
-                        error: "SQL checkSql must return a result table.",
-                    };
-                }
-
-                const table = collectTable(stmt);
-                return {
-                    ok: true,
-                    columns: table.columns,
-                    rows: table.rows,
-                    tables: [table],
-                };
+        if (args.checkSql?.trim()) {
+            if (args.code.trim()) {
+                db.exec(args.code);
             }
 
-            const statements = splitSqlStatements(args.code);
-            const lastStatement = statements.pop() ?? args.code.trim();
-
-            for (const statement of statements) {
-                db.exec(statement);
-            }
-
-            const stmt = db.prepare(lastStatement);
+            const stmt = db.prepare(args.checkSql);
             const columns = stmt.columns();
+
             if (stmt.reader === false || columns.length === 0) {
-                db.exec(lastStatement);
                 return {
-                    ok: true,
-                    columns: [],
-                    rows: [],
-                    tables: [],
+                    ok: false,
+                    error: "SQL checkSql must return a result table.",
                 };
             }
 
             const table = collectTable(stmt);
+
             return {
                 ok: true,
                 columns: table.columns,
                 rows: table.rows,
                 tables: [table],
             };
-        } catch (error) {
-            return {
-                ok: false,
-                error: error instanceof Error ? error.message : String(error),
-            };
-        } finally {
-            db.close();
         }
-    };
+
+        const statements = splitSqlStatements(args.code);
+        const lastStatement =
+            statements.pop() ?? args.code.trim();
+
+        for (const statement of statements) {
+            db.exec(statement);
+        }
+
+        const stmt = db.prepare(lastStatement);
+        const columns = stmt.columns();
+
+        if (stmt.reader === false || columns.length === 0) {
+            db.exec(lastStatement);
+
+            return {
+                ok: true,
+                columns: [],
+                rows: [],
+                tables: [],
+            };
+        }
+
+        const table = collectTable(stmt);
+
+        return {
+            ok: true,
+            columns: table.columns,
+            rows: table.rows,
+            tables: [table],
+        };
+    } catch (error) {
+        return {
+            ok: false,
+            error:
+                error instanceof Error
+                    ? error.message
+                    : String(error),
+        };
+    } finally {
+        db.close();
+    }
+}
+
+/**
+ * Execute SQL synchronously with the canonical in-process SQLite adapter.
+ *
+ * Returns null only when this Node runtime has no supported in-process
+ * SQLite implementation. Server/compiler Expected Example materialization
+ * uses this function so it cannot drift from the SQL runner semantics.
+ */
+export function runLocalSqlInProcess(
+    args: Parameters<RunSqlFn>[0],
+) {
+    const Sqlite = getInProcessSqlite();
+
+    if (!Sqlite) {
+        return null;
+    }
+
+    return runWithInProcessSqlite(
+        Sqlite,
+        args,
+    );
+}
+
+export function createLocalSqlRunner(): RunSqlFn | null {
+    const Sqlite = getInProcessSqlite();
+
+    if (!Sqlite) {
+        return hasSqliteCli()
+            ? createSqliteCliRunner()
+            : null;
+    }
+
+    return async (args) =>
+        runWithInProcessSqlite(
+            Sqlite,
+            args,
+        );
 }

@@ -20,10 +20,24 @@ vi.mock("@zoeskoul-code-input-expected", () => ({
       ? recipe.semanticChecks.map(({ path: _path, ...check }: any) => check)
       : [],
   })),
+  buildSqlQueryExpected: vi.fn((recipe: any) => ({
+    kind: "code_input",
+    strategy: "sql",
+    recipeType: "sql_query",
+    tests: recipe?.checkSql
+      ? [{ checkSql: recipe.checkSql }]
+      : [],
+  })),
 }));
 
 import { buildExerciseFromManifest } from "./buildExerciseFromManifest";
 import { resolveFullIDEConfigFromLearningIde } from "@/lib/ide/learningIdeConfig";
+import { resolveDeepTagged } from "@zoeskoul/i18n-core";
+import {
+  loadCurriculumLocaleMessages,
+  SUBJECT_GENERATOR_SOURCES,
+} from "@zoeskoul/curriculum-registry/runtime";
+import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 
 vi.mock("./i18nResolve", () => ({
   resolveChoicesByCount: vi.fn(),
@@ -107,6 +121,56 @@ const LINUX_COURSE1_TERMINAL_FIXTURE = {
 } as const;
 
 describe("buildExerciseFromManifest runtime IDE mapping", () => {
+  it("builds the canonical SQL v2 Try It with its expected result example", async () => {
+    const source = SUBJECT_GENERATOR_SOURCES["sql-v2"];
+    const topicBundle = source.topicManifests.what_select_does;
+    const authored = resolveManifestExercise({
+      topicBundle,
+      exerciseKey: "try-what_select_does-sketch0",
+    });
+    const messages = await loadCurriculumLocaleMessages("en");
+    const readMessage = (key: string) =>
+      key.split(".").reduce<any>(
+        (value, segment) => value?.[segment],
+        messages,
+      );
+    const materialized = resolveDeepTagged(
+      authored,
+      (key) => readMessage(key) ?? `@:${key}`,
+    );
+
+    const result = buildExerciseFromManifest(
+      materialized as any,
+      {
+        ...makeArgs(),
+        id: "try-what_select_does-sketch0",
+        topic: "sql-v2-1.what_select_does",
+      },
+      {
+        serviceDefaults: topicBundle.serviceDefaults ?? null,
+        runtimeDefaults: topicBundle.runtimeDefaults ?? null,
+      } as any,
+    );
+
+    expect({
+      id: result.exercise.id,
+      kind: result.exercise.kind,
+      language: (result.exercise as any).language,
+      starterCode: (result.exercise as any).starterCode,
+      expectedExample: (result.exercise as any).expectedExample,
+    }).toMatchObject({
+      id: "try-what_select_does-sketch0",
+      kind: "code_input",
+      language: "sql",
+      starterCode: "-- Write the requested product query here.",
+      expectedExample: {
+        kind: "sql_result",
+        columns: ["category", "stock", "created_at"],
+      },
+    });
+    expect((result.exercise as any).expectedExample.rows.length).toBeGreaterThan(0);
+  }, 60_000);
+
   it("maps runtimeDefaults.supportsFileSystem to ideConfig.requires.files", () => {
     const result = buildExerciseFromManifest(
       makeCodeInputDef(),
@@ -714,10 +778,10 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
 
     const result = buildExerciseFromManifest(
       makeCodeInputDef({
+        sourceChecks,
         recipe: {
           type: "fixed_tests",
           tests: [{ stdout: "ok\n" }],
-          sourceChecks,
         },
       }),
       makeArgs(),

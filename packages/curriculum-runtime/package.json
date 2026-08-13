@@ -49,6 +49,10 @@
     "./subjects/*": {
       "types": "./dist/subjects/*.d.ts",
       "default": "./dist/subjects/*.js"
+    },
+    "./expected-example": {
+      "types": "./dist/expectedExample.d.ts",
+      "default": "./dist/expectedExample.js"
     }
   },
   "scripts": {

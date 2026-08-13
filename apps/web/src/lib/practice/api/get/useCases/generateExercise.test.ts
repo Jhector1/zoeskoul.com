@@ -9,6 +9,7 @@ const signKeyMock = vi.hoisted(() => vi.fn());
 const buildRunMetaMock = vi.hoisted(() => vi.fn());
 const resolveTopicFromScopeMock = vi.hoisted(() => vi.fn());
 const loadPracticeTopicI18nMock = vi.hoisted(() => vi.fn());
+const resolveTaggedOnServerMock = vi.hoisted(() => vi.fn());
 
 vi.mock("@/lib/practice/catalog", () => ({
     DIFFICULTIES: ["easy", "medium", "hard"],
@@ -27,6 +28,10 @@ vi.mock("@/lib/practice/generator/engines/json/buildExerciseFromManifest", () =>
 
 vi.mock("@/i18n/loadPracticeTopicI18n", () => ({
     loadPracticeTopicI18n: loadPracticeTopicI18nMock,
+}));
+
+vi.mock("@/i18n/resolveTaggedOnServer", () => ({
+    resolveTaggedOnServer: resolveTaggedOnServerMock,
 }));
 
 vi.mock("@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise", () => ({
@@ -69,6 +74,7 @@ describe("generatePracticeExercise authored project resolution", () => {
         buildRunMetaMock.mockReset();
         resolveTopicFromScopeMock.mockReset();
         loadPracticeTopicI18nMock.mockReset();
+        resolveTaggedOnServerMock.mockReset();
 
         resolveTopicFromScopeMock.mockResolvedValue({
             kind: "ok",
@@ -85,10 +91,16 @@ describe("generatePracticeExercise authored project resolution", () => {
             exercises: [{ id: "using-imports-create-name-module", kind: "code_input" }],
         });
 
-        resolveManifestExerciseMock.mockReturnValue({
+        const authoredExercise = {
             id: "using-imports-create-name-module",
             kind: "code_input",
             messageBase: "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.projectSteps.using-imports-create-name-module",
+            starterCode: "@:topics.python.starterCode",
+        };
+        resolveManifestExerciseMock.mockReturnValue(authoredExercise);
+        resolveTaggedOnServerMock.mockResolvedValue({
+            ...authoredExercise,
+            starterCode: "print('materialized')\n",
         });
 
         buildExerciseFromManifestMock.mockReturnValue({
@@ -164,6 +176,18 @@ describe("generatePracticeExercise authored project resolution", () => {
             status: 200,
         });
         expect(getExerciseWithExpectedMock).not.toHaveBeenCalled();
+        expect(resolveTaggedOnServerMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                starterCode: "@:topics.python.starterCode",
+            }),
+        );
+        expect(buildExerciseFromManifestMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                starterCode: "print('materialized')\n",
+            }),
+            expect.any(Object),
+            expect.any(Object),
+        );
     });
 
     it("uses the manifest topic slug for bundle lookup instead of an opaque DB topic id", async () => {

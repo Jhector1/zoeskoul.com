@@ -78,8 +78,8 @@ describe("resolveRightRailSqlProps", () => {
                 showChen: false,
                 defaultTab: "tables",
             },
-            defaultSurface: "results",
         });
+        expect(props.defaultSurface).toBeUndefined();
     });
 
     it("lets an exercise-bound SQL dataset override topic/module fallback", () => {
@@ -338,7 +338,7 @@ describe("resolveRightRailSqlProps", () => {
         });
     });
 
-    it("defaults compact SQL layouts to Results without hiding Tables or ERD", () => {
+    it("keeps compact SQL tab defaults inside Results without choosing the outer surface", () => {
         const props = resolveRightRailSqlProps({
             routeCanUseBoundExercise: false,
             tool: {
@@ -368,6 +368,7 @@ describe("resolveRightRailSqlProps", () => {
             showErd: true,
             defaultTab: "results",
         });
+        expect(props.defaultSurface).toBeUndefined();
     });
 
     it("resolves topic, lesson, and exercise policies by specificity", () => {
@@ -486,7 +487,7 @@ describe("resolveRightRailSqlProps", () => {
             compactLayout: true,
         });
 
-        expect(compact.defaultSurface).toBe("results");
+        expect(compact.defaultSurface).toBeUndefined();
         expect(compact.runnerPaneOptions?.defaultTab).toBe("output");
     });
 

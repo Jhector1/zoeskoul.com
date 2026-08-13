@@ -7,7 +7,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./review/*": "./src/review/*.ts",
-    "./review/module/runtime/reviewRuntimeTypes": "./src/review/module/runtime/reviewRuntimeTypes.ts"
+    "./review/module/runtime/reviewRuntimeTypes": "./src/review/module/runtime/reviewRuntimeTypes.ts",
+    "./workspaceInitialPane": "./src/workspaceInitialPane.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit",

@@ -4,7 +4,7 @@ import {
     starterCodeForGeneratedExercise
 } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
-import { buildTerminalExpectedExample } from "./expectedExample";
+import { buildTerminalExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
 import {
     buildTemplateIoExpected,
     resolveTemplateIoVars,
@@ -23,11 +23,9 @@ export const buildTemplateIoRecipe: RecipeHandler<any> = (def, args, resolved) =
             def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
     });
 
-    const sourceChecks = Array.isArray((def.recipe as any)?.sourceChecks)
-        ? (def.recipe as any).sourceChecks
-        : Array.isArray((def as any).sourceChecks)
-            ? (def as any).sourceChecks
-            : undefined;
+    const sourceChecks = Array.isArray((def as any).sourceChecks)
+        ? (def as any).sourceChecks
+        : undefined;
     const expectedWithSourceChecks = {
         ...(expected as any),
         ...(sourceChecks?.length ? { sourceChecks } : {}),

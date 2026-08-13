@@ -263,20 +263,20 @@ describe("CodeRunner terminal tab presentation", () => {
 
 
 describe("CodeRunner SQL narrow-pane defaults", () => {
-    it("opens the output surface when a SQL lesson authors a default data tab", () => {
+    it("keeps SQL exercises on the editor when only an inner data tab is authored", () => {
         expect(
             resolveSqlMobilePaneDefault({
                 language: "sql",
                 sqlPaneOptions: { defaultTab: "tables" },
             }),
-        ).toBe("output");
+        ).toBe("editor");
 
         expect(
             resolveSqlMobilePaneDefault({
                 language: "sql",
                 sqlPaneOptions: { defaultTab: "erd" },
             }),
-        ).toBe("output");
+        ).toBe("editor");
     });
 
 
@@ -303,7 +303,7 @@ describe("CodeRunner SQL narrow-pane defaults", () => {
                 language: "sql",
                 sqlPaneOptions: { compactDefaultTab: "results" },
             }),
-        ).toBe("output");
+        ).toBe("editor");
 
         expect(
             resolveSqlMobilePaneDefault({
@@ -323,7 +323,7 @@ describe("CodeRunner SQL narrow-pane defaults", () => {
                 language: "bash",
                 runnerPaneOptions: { defaultTab: "terminal" },
             }),
-        ).toBe("output");
+        ).toBe("editor");
     });
 });
 

@@ -225,8 +225,16 @@ export async function loadDraftQaPractice(args: {
   const topicSlug = topicSlugOf(manifest);
   const resolveMessage = createDraftMessageResolver(loaded.messagesJson);
 
-  const built = buildExerciseFromManifest(
+  // Recipes materialize grading contracts and Expected Examples while they
+  // build the exercise. Resolve authored message references first so SQL
+  // starter/solution code never reaches a recipe as an @:topics... token.
+  const resolvedManifestExercise = deepResolveTagged(
     manifestExercise,
+    resolveMessage,
+  ) as ManifestExercise;
+
+  const built = buildExerciseFromManifest(
+    resolvedManifestExercise,
     {
       rng: rngFromActor({
         userId: null,
