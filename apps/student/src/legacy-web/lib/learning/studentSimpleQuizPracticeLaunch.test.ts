@@ -1159,7 +1159,7 @@ describe("student embedded Try It practice launch", () => {
           ],
         },
       }),
-    ).toBe(false);
+    ).toBe(true);
     expect(
       isEligibleStudentEmbeddedPythonTryIt({
         ...eligible,

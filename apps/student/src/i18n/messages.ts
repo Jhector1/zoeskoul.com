@@ -5,7 +5,7 @@ import {
 
 import {
   loadLocaleMessages as loadGeneratedLocaleMessages,
-} from "../legacy-web/i18n/messages.generated";
+} from "./messages.generated";
 
 import {
   loadCurriculumLocaleMessages,

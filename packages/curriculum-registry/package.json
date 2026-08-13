@@ -26,7 +26,8 @@
     "generate:subjects:web": "pnpm build && node dist/generate/generateSubjectManifests.js --app-root apps/web",
     "generate:catalogs:web": "pnpm build && node dist/generate/generateCatalogManifests.js --app-root apps/web",
     "check": "pnpm build && node scripts/check-published-runtime.mjs && node scripts/check-app-consumption-boundary.mjs",
-    "check:web": "pnpm build && node dist/generate/checkGeneratedArtifacts.js --app-root apps/web"
+    "check:web": "pnpm build && node dist/generate/checkGeneratedArtifacts.js --app-root apps/web",
+    "generate:i18n:student": "pnpm build && node dist/generate/generateI18nManifest.js --app-root apps/student"
   },
   "dependencies": {
     "@zoeskoul/curriculum-core": "workspace:*"

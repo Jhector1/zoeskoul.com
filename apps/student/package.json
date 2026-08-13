@@ -13,7 +13,8 @@
     "transplant:inventory": "wc -l src/legacy-web/TRANSPLANT_FILES.txt",
     "prebuild": "pnpm --dir ../.. --filter @zoeskoul/curriculum-registry build",
     "pretypecheck": "pnpm --dir ../.. --filter @zoeskoul/curriculum-registry build",
-    "pretest": "pnpm --dir ../.. --filter @zoeskoul/curriculum-registry build"
+    "pretest": "pnpm --dir ../.. --filter @zoeskoul/curriculum-registry build",
+    "i18n:generate": "pnpm --dir ../.. --filter @zoeskoul/curriculum-registry generate:i18n:student"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",

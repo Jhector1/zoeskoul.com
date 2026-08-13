@@ -40,6 +40,54 @@ async function walk(root) {
   return out;
 }
 
+async function walkAllFiles(root) {
+  const out = [];
+
+  let entries;
+
+  try {
+    entries = await fs.readdir(
+      root,
+      { withFileTypes: true },
+    );
+  } catch (error) {
+    if (
+      error &&
+      typeof error === "object" &&
+      error.code === "ENOENT"
+    ) {
+      return out;
+    }
+
+    throw error;
+  }
+
+  for (const entry of entries) {
+    const full =
+      path.join(root, entry.name);
+
+    if (entry.isDirectory()) {
+      out.push(
+        ...(await walkAllFiles(full)),
+      );
+      continue;
+    }
+
+    if (entry.isFile()) {
+      out.push(full);
+    }
+  }
+
+  return out;
+}
+
+function relativePosix(file) {
+  return path
+    .relative(repoRoot, file)
+    .split(path.sep)
+    .join("/");
+}
+
 const violations = [];
 
 for (const root of roots) {
@@ -56,13 +104,125 @@ for (const root of roots) {
   }
 }
 
+const studentSrc =
+  path.join(
+    repoRoot,
+    "apps",
+    "student",
+    "src",
+  );
+
+const studentPracticeGenerator =
+  path.join(
+    studentSrc,
+    "legacy-web",
+    "lib",
+    "practice",
+    "generator",
+  );
+
+for (
+  const file
+  of await walkAllFiles(
+    studentPracticeGenerator,
+  )
+) {
+  violations.push(
+    `${relativePosix(file)} reintroduces a Student-owned curriculum/practice generator`,
+  );
+}
+
+const studentSubjects =
+  path.join(
+    studentSrc,
+    "legacy-web",
+    "lib",
+    "subjects",
+  );
+
+const forbiddenPayloadNames =
+  new Set([
+    "subject.manifest.json",
+    "topic.bundle.json",
+    "topics.generated.ts",
+    "subjects.generated.ts",
+    "catalogs.generated.ts",
+  ]);
+
+for (
+  const file
+  of await walkAllFiles(
+    studentSubjects,
+  )
+) {
+  if (
+    forbiddenPayloadNames.has(
+      path.basename(file),
+    )
+  ) {
+    violations.push(
+      `${relativePosix(file)} reintroduces generated curriculum payload inside Student`,
+    );
+  }
+}
+
+for (
+  const file
+  of await walkAllFiles(
+    studentSrc,
+  )
+) {
+  const relative =
+    relativePosix(file);
+
+  if (
+    /^apps\/student\/src\/.*\/messages\/[^/]+\/subjects\//.test(
+      relative,
+    )
+  ) {
+    violations.push(
+      `${relative} reintroduces a Student-owned curriculum message mirror`,
+    );
+  }
+}
+
+const obsoleteStudentI18nAdapter =
+  path.join(
+    studentSrc,
+    "legacy-web",
+    "i18n",
+    "messages.generated.ts",
+  );
+
+try {
+  const stat =
+    await fs.stat(
+      obsoleteStudentI18nAdapter,
+    );
+
+  if (stat.isFile()) {
+    violations.push(
+      `${relativePosix(obsoleteStudentI18nAdapter)} reintroduces the obsolete Student curriculum i18n adapter`,
+    );
+  }
+} catch (error) {
+  if (
+    !error ||
+    typeof error !== "object" ||
+    error.code !== "ENOENT"
+  ) {
+    throw error;
+  }
+}
+
 if (violations.length) {
   throw new Error(
     [
-      "Application-owned curriculum runtime imports reappeared.",
+      "Application-owned curriculum ownership reappeared.",
       ...violations.map((violation) => `- ${violation}`),
       "",
       "Consume @zoeskoul/curriculum-registry/runtime instead.",
+        "Generated curriculum, generators, and curriculum messages must remain package-owned.",
     ].join("\n"),
   );
 }
