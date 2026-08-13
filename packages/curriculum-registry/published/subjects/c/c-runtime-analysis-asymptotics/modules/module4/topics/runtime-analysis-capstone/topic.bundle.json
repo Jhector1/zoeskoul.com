@@ -378,29 +378,6 @@
         ]
       },
       "showExpectedExample": true,
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "path": "capstone.c",
-          "pattern": "5 * n",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.0.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "capstone.c",
-          "pattern": "n * (n + 1) / 2",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.1.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "capstone.c",
-          "pattern": "n + n * n",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.2.message",
-          "normalizeWhitespace": false
-        }
-      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -434,7 +411,30 @@
             "entry": false
           }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "capstone.c",
+          "pattern": "5 * n",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "capstone.c",
+          "pattern": "n * (n + 1) / 2",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "capstone.c",
+          "pattern": "n + n * n",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ]
     },
     {
       "id": "classify-dominant-terms",
@@ -542,22 +542,6 @@
         ]
       },
       "showExpectedExample": true,
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "path": "classify.c",
-          "pattern": "Theta(n)",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.0.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "classify.c",
-          "pattern": "Theta(n^2)",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.1.message",
-          "normalizeWhitespace": false
-        }
-      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -591,7 +575,23 @@
             "entry": false
           }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "classify.c",
+          "pattern": "Theta(n)",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "classify.c",
+          "pattern": "Theta(n^2)",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.1.message",
+          "normalizeWhitespace": false
+        }
+      ]
     },
     {
       "id": "verify-new-theta-proof",
@@ -699,29 +699,6 @@
         ]
       },
       "showExpectedExample": true,
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "path": "proof.c",
-          "pattern": "n < 1",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.0.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "proof.c",
-          "pattern": "6 * n2 <= t",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.1.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "proof.c",
-          "pattern": "t <= 11 * n2",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.2.message",
-          "normalizeWhitespace": false
-        }
-      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -755,7 +732,30 @@
             "entry": false
           }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "proof.c",
+          "pattern": "n < 1",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "proof.c",
+          "pattern": "6 * n2 <= t",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "proof.c",
+          "pattern": "t <= 11 * n2",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ]
     },
     {
       "id": "capstone-method",

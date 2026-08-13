@@ -2,7 +2,7 @@
   "topicId": "what_null_means",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-4",
-  "sectionSlug": "sql-v2-sql-v2-4-3",
+  "sectionSlug": "sql-v2-sql-v2-4-1",
   "prefix": "sqlv2_4",
   "minutes": 16,
   "runtimeDefaults": {
@@ -113,11 +113,11 @@
       }
     },
     {
-      "id": "mc_null_true_statements",
-      "kind": "multi_choice",
+      "id": "sc_null_operator",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.mc_null_true_statements",
+      "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.sc_null_operator",
       "optionIds": [
         "a",
         "b",
@@ -125,31 +125,25 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b"
-        ]
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
-      "id": "dr_not_null_query_order",
-      "kind": "drag_reorder",
+      "id": "sc_or_vs_and",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.dr_not_null_query_order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
+      "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.sc_or_vs_and",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
       ],
       "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
+        "kind": "single_choice",
+        "optionId": "b"
       }
     },
     {
@@ -227,7 +221,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+            "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -250,7 +244,248 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Aa][Tt][Uu][Ss]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "practice-text-and-null-cleanup",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ee][Mm][Aa][Ii][Ll]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "practice-present-emails",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[eE][mM][aA][iI][lL]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[iI][sS]\\b\\s+\\b[nN][oO][tT]\\b\\s+\\b[nN][uU][lL][lL]\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.sourceChecks.2.message"
+        }
+      ]
     }
   ]
 }

@@ -300,7 +300,6 @@
             "entry": false
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "main.py"
@@ -510,7 +509,6 @@
             "entry": false
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "main.py"
@@ -761,7 +759,6 @@
             "entry": false
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "main.py"
@@ -1107,7 +1104,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_storage.py"
@@ -1529,7 +1525,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_requests.py"
@@ -1974,7 +1969,6 @@
             "entry": false
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "main.py"

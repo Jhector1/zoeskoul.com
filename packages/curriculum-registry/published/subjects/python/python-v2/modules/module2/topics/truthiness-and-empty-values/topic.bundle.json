@@ -456,7 +456,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": [
           {
             "type": "printed_line_count",

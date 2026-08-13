@@ -153,7 +153,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -176,7 +176,19 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "mp-2-add-stock-tiebreaker",
@@ -252,7 +264,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -275,7 +287,14 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "mp-3-finish-leaderboard",
@@ -351,7 +370,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -374,7 +393,14 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.sourceChecks.0.message"
+        }
+      ]
     }
   ]
 }

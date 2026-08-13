@@ -97,46 +97,6 @@
       }
     },
     {
-      "id": "mc_like_true_patterns",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.mc_like_true_patterns",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "d"
-        ]
-      }
-    },
-    {
-      "id": "dr_like_query_order",
-      "kind": "drag_reorder",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.dr_like_query_order",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
-      "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
-      }
-    },
-    {
       "id": "fb_like_contains",
       "kind": "fill_blank_choice",
       "purpose": "quiz",
@@ -146,6 +106,35 @@
       "expected": {
         "kind": "fill_blank_choice",
         "value": "'%a%'"
+      }
+    },
+    {
+      "id": "sc_1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.sc_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "fb_2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.fb_2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "____"
       }
     },
     {
@@ -223,7 +212,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT id, full_name, city\nFROM customers\nWHERE full_name LIKE 'M%';",
+            "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -246,7 +235,141 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Ii][Tt][Yy]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ll][Ii][Kk][Ee]\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.sourceChecks.2.message"
+        }
+      ]
+    },
+    {
+      "id": "practice-like-single-character",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][iI][tT][yY]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+          "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[lL][iI][kK][eE]\\b\\s*'[^']*_[^']*'",
+          "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.sourceChecks.2.message"
+        }
+      ]
     }
   ]
 }

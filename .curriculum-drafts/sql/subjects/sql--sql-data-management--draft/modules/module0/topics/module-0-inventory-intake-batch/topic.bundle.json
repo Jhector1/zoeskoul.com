@@ -235,7 +235,6 @@
           "operations.sql",
           "query.sql"
         ],
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",
@@ -383,7 +382,6 @@
           "operations.sql",
           "query.sql"
         ],
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",
@@ -531,7 +529,6 @@
           "operations.sql",
           "query.sql"
         ],
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",
@@ -679,7 +676,6 @@
           "operations.sql",
           "query.sql"
         ],
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",

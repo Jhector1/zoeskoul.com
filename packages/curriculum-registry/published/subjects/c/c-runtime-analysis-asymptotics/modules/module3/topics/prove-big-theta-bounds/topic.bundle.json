@@ -356,29 +356,6 @@
         ]
       },
       "showExpectedExample": true,
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "path": "bounds.c",
-          "pattern": "cube <= 2 * t",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.0.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "bounds.c",
-          "pattern": "t <= 2 * cube",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.1.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "bounds.c",
-          "pattern": "n >= 7",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.2.message",
-          "normalizeWhitespace": false
-        }
-      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -412,7 +389,30 @@
             "entry": false
           }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "bounds.c",
+          "pattern": "cube <= 2 * t",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "bounds.c",
+          "pattern": "t <= 2 * cube",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "bounds.c",
+          "pattern": "n >= 7",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ]
     },
     {
       "id": "theta-needs-both",

@@ -332,7 +332,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='departments';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -480,7 +479,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='order_items';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",

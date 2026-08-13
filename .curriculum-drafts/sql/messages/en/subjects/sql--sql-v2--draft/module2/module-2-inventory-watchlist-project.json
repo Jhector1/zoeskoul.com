@@ -35,15 +35,23 @@
                 "hint_2": "The boundary value 20 should not be included."
               },
               "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products;",
-              "solutionCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;"
+              "solutionCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `price`."
+                }
+              ]
             },
             "mp-2-focus-on-stationery": {
               "title": "Narrow the list to stationery",
-              "prompt": "The buyer only restocks stationery from this budget list. Keep the existing price rule and also require `category = 'Stationery'`.",
-              "hint": "Preserve the working budget query and connect the category rule with AND.",
+              "prompt": "The buyer only restocks stationery from this budget list. Keep the existing price rule and narrow the result to Stationery products.",
+              "hint": "Preserve the working budget condition and add a second condition that must also be true.",
               "help": {
                 "concept": "AND extends a working filter when every approved rule must remain true.",
-                "hint_1": "Do not replace the price rule; add the category rule to it.",
+                "hint_1": "Keep the existing price rule and add the category requirement rather than replacing it.",
                 "hint_2": "Both conditions must pass for a row to remain."
               },
               "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
@@ -51,12 +59,12 @@
             },
             "mp-3-finish-watchlist": {
               "title": "Flag the low-stock items",
-              "prompt": "Warehouse staff need the final restock list. Add `stock` to the result and keep only rows with `stock <= 15`, while preserving both earlier rules.",
-              "hint": "Start from the approved stationery query, add stock to SELECT, then add one inclusive stock condition.",
+              "prompt": "Warehouse staff need the final restock list. Add `stock` to the result and keep only products with at most `15` units in stock, while preserving both earlier rules.",
+              "hint": "Start from the approved stationery query, add stock to the SELECT list, then add one inclusive upper-bound condition.",
               "help": {
                 "concept": "A cumulative project extends the same working query instead of restarting each milestone.",
-                "hint_1": "Keep the price and category conditions exactly as they are.",
-                "hint_2": "Add stock to the SELECT list and require stock to be at most 15."
+                "hint_1": "Keep both earlier filtering requirements.",
+                "hint_2": "The value 15 must remain in the result, so use an inclusive upper boundary."
               },
               "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
               "solutionCode": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;"
@@ -104,40 +112,40 @@
                 "hint_1": "Add a WHERE clause that keeps prices strictly below 20.",
                 "hint_2": "The boundary value 20 should not be included."
               },
-              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products;"
+              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products;",
+              "solutionCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `price`."
+                }
+              ]
             },
             "mp-2-focus-on-stationery": {
               "title": "Narrow the list to stationery",
-              "prompt": "The buyer only restocks stationery from this budget list. Keep the existing price rule and also require `category = 'Stationery'`.",
-              "hint": "Preserve the working budget query and connect the category rule with AND.",
+              "prompt": "The buyer only restocks stationery from this budget list. Keep the existing price rule and narrow the result to Stationery products.",
+              "hint": "Preserve the working budget condition and add a second condition that must also be true.",
               "help": {
                 "concept": "AND extends a working filter when every approved rule must remain true.",
-                "hint_1": "Do not replace the price rule; add the category rule to it.",
+                "hint_1": "Keep the existing price rule and add the category requirement rather than replacing it.",
                 "hint_2": "Both conditions must pass for a row to remain."
               },
-              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;"
+              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+              "solutionCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
             },
             "mp-3-finish-watchlist": {
               "title": "Flag the low-stock items",
-              "prompt": "Warehouse staff need the final restock list. Add `stock` to the result and keep only rows with `stock <= 15`, while preserving both earlier rules.",
-              "hint": "Start from the approved stationery query, add stock to SELECT, then add one inclusive stock condition.",
+              "prompt": "Warehouse staff need the final restock list. Add `stock` to the result and keep only products with at most `15` units in stock, while preserving both earlier rules.",
+              "hint": "Start from the approved stationery query, add stock to the SELECT list, then add one inclusive upper-bound condition.",
               "help": {
                 "concept": "A cumulative project extends the same working query instead of restarting each milestone.",
-                "hint_1": "Keep the price and category conditions exactly as they are.",
-                "hint_2": "Add stock to the SELECT list and require stock to be at most 15."
+                "hint_1": "Keep both earlier filtering requirements.",
+                "hint_2": "The value 15 must remain in the result, so use an inclusive upper boundary."
               },
-              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';"
-            },
-            "try-module-2-inventory-watchlist-project-sketch0": {
-              "title": "Preview Budget Products",
-              "prompt": "Before adding category and stock rules, preview the budget products. Return `id`, `name`, and `price` from `products` where `price` is less than `20`.",
-              "hint": "Keep the three requested columns and use a strict price comparison below `20`.",
-              "help": {
-                "concept": "This warm-up creates the budget filter that the watchlist project will refine.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return id, name, price from the products table.\nSELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price <= 10;"
+              "starterCode": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
+              "solutionCode": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;"
             }
           },
           "tryIt": {

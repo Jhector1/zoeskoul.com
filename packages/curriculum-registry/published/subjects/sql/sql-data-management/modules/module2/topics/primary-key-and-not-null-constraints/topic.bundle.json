@@ -231,7 +231,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='products';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -379,7 +378,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='orders';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",

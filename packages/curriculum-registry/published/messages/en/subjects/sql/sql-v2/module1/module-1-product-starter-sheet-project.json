@@ -25,13 +25,22 @@
             "mp-1-preview-product-sheet": {
               "title": "Prepare the merchandising view",
               "prompt": "The merchandising team needs a compact review sheet. Return `name`, `category`, and `price` from `products`, in that order.",
-              "hint": "Choose only the three fields the merchandising reviewer needs.",
+              "hint": "Replace the all-columns view with only the fields the merchandising reviewer needs.",
               "help": {
                 "concept": "A focused SELECT list should match the reader's immediate information needs.",
-                "hint_1": "Keep `name` and `category`, then add `price` before FROM products.",
+                "hint_1": "Use a focused SELECT list instead of returning every column.",
                 "hint_2": "Run the query and confirm the result columns appear as name, category, price."
               },
-              "starterCode": "-- Build the first merchandising view.\nSELECT\n  name,\n  category\nFROM products;"
+              "starterCode": "-- Build the merchandising view.\nSELECT *\nFROM products;",
+              "solutionCode": "SELECT\n  name,\n  category,\n  price\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `price`."
+                }
+              ]
             },
             "mp-2-add-pricing-columns": {
               "title": "Prepare the operations handoff",
@@ -42,7 +51,16 @@
                 "hint_1": "Start from the working merchandising query without deleting its three fields.",
                 "hint_2": "Add `id` at the beginning of the SELECT list and `stock` at the end."
               },
-              "starterCode": "SELECT\n  name,\n  category,\n  price\nFROM products;"
+              "starterCode": "SELECT\n  name,\n  category,\n  price\nFROM products;",
+              "solutionCode": "SELECT\n  id,\n  name,\n  category,\n  price,\n  stock\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `category`, `price`, `stock`."
+                }
+              ]
             }
           },
           "tryIt": {

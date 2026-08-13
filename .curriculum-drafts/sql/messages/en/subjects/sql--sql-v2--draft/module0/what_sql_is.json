@@ -3,23 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-0": {
         "what_sql_is": {
-          "label": "What SQL Is",
-          "summary": "Meet SQL as a language for asking useful questions of organized data.",
+          "label": "SQL, Databases, and Tables",
+          "summary": "SQL asks organized data for results. Tables hold that data in rows and columns.",
           "cards": {
             "sketch0": {
-              "title": "What is SQL for?"
+              "title": "SQL asks data questions"
             },
             "sketch1": {
-              "title": "What is a database?"
-            },
-            "sketch2": {
-              "title": "How does SQL turn questions into answers?"
-            },
-            "sketch3": {
-              "title": "Where is database data used?"
+              "title": "Tables organize the data"
             },
             "quiz": {
-              "title": "Quiz: What SQL Is"
+              "title": "Check: SQL and tables"
             }
           },
           "quiz": {
@@ -55,36 +49,36 @@
                 "d": "A type of keyboard shortcut"
               }
             },
-            "m0_s01_why_sql_useful": {
-              "title": "What is one thing SQL can help you do?",
-              "prompt": "Which of these is something SQL can help you do?",
+            "m0_s02_rows_go_across": {
+              "title": "What direction does a row go?",
+              "prompt": "In a table, which statement is true about a row?",
               "help": {
-                "concept": "This checks whether you connect SQL to practical data tasks.",
-                "hint_1": "Think about actions on stored information.",
-                "hint_2": "Pick the option about working with data."
+                "concept": "This checks the basic shape of a table.",
+                "hint_1": "Think of a spreadsheet.",
+                "hint_2": "A row groups values from left to right."
               },
-              "hint": "Think about actions on stored data.",
+              "hint": "Picture one horizontal line in a spreadsheet.",
               "options": {
-                "a": "Filter data in a table",
-                "b": "Physically repair a computer",
-                "c": "Charge a battery",
-                "d": "Draw a painting by hand"
+                "a": "A row goes across",
+                "b": "A row goes straight down only",
+                "c": "A row is the table name",
+                "d": "A row is the database itself"
               }
             },
-            "m0_s01_real_world_examples": {
-              "title": "Which real system likely uses a database?",
-              "prompt": "Which option is the best example of a system that would likely use a database?",
+            "m0_s02_columns_meaning": {
+              "title": "What does a column usually represent?",
+              "prompt": "What does a column usually represent in a table?",
               "help": {
-                "concept": "This checks where organized stored data is needed in real life.",
-                "hint_1": "Look for a system that must remember many records.",
-                "hint_2": "Choose the option that tracks items or activity."
+                "concept": "Columns group the same kind of information together.",
+                "hint_1": "Think of headings like name, price, or grade.",
+                "hint_2": "Focus on the type of data."
               },
-              "hint": "Think about systems with lots of records.",
+              "hint": "Focus on the kind of data.",
               "options": {
-                "a": "An online store tracking products and orders",
-                "b": "A blank sheet of paper",
-                "c": "A flashlight with no memory",
-                "d": "A ruler"
+                "a": "One type of information",
+                "b": "One whole database",
+                "c": "A saved password",
+                "d": "A programming command"
               }
             }
           }
@@ -92,23 +86,17 @@
       },
       "sql-v2-0": {
         "what_sql_is": {
-          "label": "What SQL Is",
-          "summary": "Meet SQL as a language for asking useful questions of organized data.",
+          "label": "SQL, Databases, and Tables",
+          "summary": "SQL asks organized data for results. Tables hold that data in rows and columns.",
           "cards": {
             "sketch0": {
-              "title": "What is SQL for?"
+              "title": "SQL asks data questions"
             },
             "sketch1": {
-              "title": "What is a database?"
-            },
-            "sketch2": {
-              "title": "How does SQL turn questions into answers?"
-            },
-            "sketch3": {
-              "title": "Where is database data used?"
+              "title": "Tables organize the data"
             },
             "quiz": {
-              "title": "Quiz: What SQL Is"
+              "title": "Check: SQL and tables"
             }
           },
           "quiz": {
@@ -144,36 +132,36 @@
                 "d": "A type of keyboard shortcut"
               }
             },
-            "m0_s01_why_sql_useful": {
-              "title": "What is one thing SQL can help you do?",
-              "prompt": "Which of these is something SQL can help you do?",
+            "m0_s02_rows_go_across": {
+              "title": "What direction does a row go?",
+              "prompt": "In a table, which statement is true about a row?",
               "help": {
-                "concept": "This checks whether you connect SQL to practical data tasks.",
-                "hint_1": "Think about actions on stored information.",
-                "hint_2": "Pick the option about working with data."
+                "concept": "This checks the basic shape of a table.",
+                "hint_1": "Think of a spreadsheet.",
+                "hint_2": "A row groups values from left to right."
               },
-              "hint": "Think about actions on stored data.",
+              "hint": "Picture one horizontal line in a spreadsheet.",
               "options": {
-                "a": "Filter data in a table",
-                "b": "Physically repair a computer",
-                "c": "Charge a battery",
-                "d": "Draw a painting by hand"
+                "a": "A row goes across",
+                "b": "A row goes straight down only",
+                "c": "A row is the table name",
+                "d": "A row is the database itself"
               }
             },
-            "m0_s01_real_world_examples": {
-              "title": "Which real system likely uses a database?",
-              "prompt": "Which option is the best example of a system that would likely use a database?",
+            "m0_s02_columns_meaning": {
+              "title": "What does a column usually represent?",
+              "prompt": "What does a column usually represent in a table?",
               "help": {
-                "concept": "This checks where organized stored data is needed in real life.",
-                "hint_1": "Look for a system that must remember many records.",
-                "hint_2": "Choose the option that tracks items or activity."
+                "concept": "Columns group the same kind of information together.",
+                "hint_1": "Think of headings like name, price, or grade.",
+                "hint_2": "Focus on the type of data."
               },
-              "hint": "Think about systems with lots of records.",
+              "hint": "Focus on the kind of data.",
               "options": {
-                "a": "An online store tracking products and orders",
-                "b": "A blank sheet of paper",
-                "c": "A flashlight with no memory",
-                "d": "A ruler"
+                "a": "One type of information",
+                "b": "One whole database",
+                "c": "A saved password",
+                "d": "A programming command"
               }
             }
           }
@@ -186,40 +174,24 @@
       "sql--sql-v2--draft-0": {
         "what_sql_is": {
           "what_sql_means": {
-            "title": "SQL is a language for working with stored data.",
-            "bodyMarkdown": "Welcome to SQL Foundations. You do not need database experience before this course.\n\nSQL stands for **Structured Query Language**. It is a language for working with information stored in a database.\n\n[[image:sql_language_overview]]\n\nPeople use SQL to answer questions such as:\n\n- Which students are enrolled?\n- Which products are low in stock?\n- Which orders were placed today?\n\n[[image:sql_question_to_data_flow]]\n\nYou will learn the query syntax step by step in the next module. For now, focus on the purpose:\n\n> SQL lets you ask a database for the data you need.\n\n[[image:sql_result_focus]]"
+            "title": "SQL asks data questions",
+            "bodyMarkdown": "SQL is a language for asking questions of organized data.\n\nA **database** stores data so software can work with it consistently. SQL describes the result you want from that stored data.\n\nYou do not need to memorize database theory before writing queries. Start with one question: **what information do I need back?**"
           },
           "what_a_database_is": {
-            "title": "A database keeps related information organized.",
-            "bodyMarkdown": "A **database** is an organized collection of data that a system can store, find, and update.\n\n[[image:database_overview]]\n\nA school might keep students, courses, and grades in one database. An online store might keep products, customers, and orders in another.\n\n[[image:database_real_examples]]\n\nDatabases commonly organize information into **tables**. You will examine rows and columns closely in the next lesson.\n\n[[image:database_contains_tables]]\n\nThe important idea here is simple:\n\n> a database gives related information a structure that software can work with."
-          },
-          "why_sql_is_useful": {
-            "title": "SQL connects a question to a result.",
-            "bodyMarkdown": "Stored data becomes useful when you can ask a clear question and get a clear answer.\n\n[[image:data_everywhere]]\n\nWith SQL, analysts and developers can read, filter, sort, summarize, and later change stored data.\n\n[[image:sql_actions_overview]]\n\nThe basic workflow is:\n\n1. decide what you want to know;\n2. write a query that asks for it;\n3. run the query;\n4. inspect the returned result.\n\n[[image:ask_run_result_cycle]]\n\nYou do not need to memorize every SQL command at once. Each module will add one part of this workflow."
-          },
-          "real_world_examples_of_databases": {
-            "title": "Different systems store different records.",
-            "bodyMarkdown": "Databases sit behind many systems you already use.\n\n[[image:databases_in_daily_life]]\n\nA school may track students and courses. A store may track products and orders. A media app may track users and playlists. A clinic may track patients and appointments.\n\n[[image:school_database_example]]\n[[image:store_database_example]]\n[[image:media_database_example]]\n[[image:hospital_database_example]]\n\nThe details change, but the pattern does not:\n\n> the system stores organized records, and SQL helps people work with those records.\n\n[[image:shared_database_pattern]]"
+            "title": "Tables organize the data",
+            "bodyMarkdown": "Most data you will query in this course is organized in **tables**.\n\n- A **row** (or record) represents one item.\n- A **column** (or field) represents one kind of value.\n- The **table name** tells you which collection of records you are using.\n- **Column names** tell you which values are available.\n\nBefore writing SQL, identify the table and the columns that answer the question. That is enough database structure for the lessons that follow."
           }
         }
       },
       "sql-v2-0": {
         "what_sql_is": {
           "what_sql_means": {
-            "title": "SQL is a language for working with stored data.",
-            "bodyMarkdown": "Welcome to SQL Foundations. You do not need database experience before this course.\n\nSQL stands for **Structured Query Language**. It is a language for working with information stored in a database.\n\n[[image:sql_language_overview]]\n\nPeople use SQL to answer questions such as:\n\n- Which students are enrolled?\n- Which products are low in stock?\n- Which orders were placed today?\n\n[[image:sql_question_to_data_flow]]\n\nYou will learn the query syntax step by step in the next module. For now, focus on the purpose:\n\n> SQL lets you ask a database for the data you need.\n\n[[image:sql_result_focus]]"
+            "title": "SQL asks data questions",
+            "bodyMarkdown": "SQL is a language for asking questions of organized data.\n\nA **database** stores data so software can work with it consistently. SQL describes the result you want from that stored data.\n\nYou do not need to memorize database theory before writing queries. Start with one question: **what information do I need back?**"
           },
           "what_a_database_is": {
-            "title": "A database keeps related information organized.",
-            "bodyMarkdown": "A **database** is an organized collection of data that a system can store, find, and update.\n\n[[image:database_overview]]\n\nA school might keep students, courses, and grades in one database. An online store might keep products, customers, and orders in another.\n\n[[image:database_real_examples]]\n\nDatabases commonly organize information into **tables**. You will examine rows and columns closely in the next lesson.\n\n[[image:database_contains_tables]]\n\nThe important idea here is simple:\n\n> a database gives related information a structure that software can work with."
-          },
-          "why_sql_is_useful": {
-            "title": "SQL connects a question to a result.",
-            "bodyMarkdown": "Stored data becomes useful when you can ask a clear question and get a clear answer.\n\n[[image:data_everywhere]]\n\nWith SQL, analysts and developers can read, filter, sort, summarize, and later change stored data.\n\n[[image:sql_actions_overview]]\n\nThe basic workflow is:\n\n1. decide what you want to know;\n2. write a query that asks for it;\n3. run the query;\n4. inspect the returned result.\n\n[[image:ask_run_result_cycle]]\n\nYou do not need to memorize every SQL command at once. Each module will add one part of this workflow."
-          },
-          "real_world_examples_of_databases": {
-            "title": "Different systems store different records.",
-            "bodyMarkdown": "Databases sit behind many systems you already use.\n\n[[image:databases_in_daily_life]]\n\nA school may track students and courses. A store may track products and orders. A media app may track users and playlists. A clinic may track patients and appointments.\n\n[[image:school_database_example]]\n[[image:store_database_example]]\n[[image:media_database_example]]\n[[image:hospital_database_example]]\n\nThe details change, but the pattern does not:\n\n> the system stores organized records, and SQL helps people work with those records.\n\n[[image:shared_database_pattern]]"
+            "title": "Tables organize the data",
+            "bodyMarkdown": "Most data you will query in this course is organized in **tables**.\n\n- A **row** (or record) represents one item.\n- A **column** (or field) represents one kind of value.\n- The **table name** tells you which collection of records you are using.\n- **Column names** tell you which values are available.\n\nBefore writing SQL, identify the table and the columns that answer the question. That is enough database structure for the lessons that follow."
           }
         }
       }

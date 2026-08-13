@@ -145,7 +145,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  name,\n  category,\n  price\nFROM products;",
+            "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -168,7 +168,19 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "mp-2-add-pricing-columns",
@@ -245,7 +257,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  category,\n  price,\n  stock\nFROM products;",
+            "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -268,7 +280,19 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Oo][Cc][Kk]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.sourceChecks.1.message"
+        }
+      ]
     }
   ]
 }

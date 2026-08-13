@@ -28,38 +28,56 @@
             "mp-1-rank-by-price": {
               "title": "Rank premium products by price",
               "prompt": "The sales team is preparing a premium-product review. Return `name` and `price` from `products`, in that order, with the highest price first.",
-              "hint": "Sort price in descending order.",
+              "hint": "Arrange larger price values before smaller ones.",
               "help": {
                 "concept": "The primary sort defines the main ranking.",
-                "hint_1": "Add ORDER BY after FROM products.",
-                "hint_2": "Highest price first requires DESC."
+                "hint_1": "Add the ranking after the products source.",
+                "hint_2": "The largest price should appear first."
               },
               "starterCode": "SELECT\n  name,\n  price\nFROM products;",
-              "solutionCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;"
+              "solutionCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `price`."
+                }
+              ]
             },
             "mp-2-add-stock-tiebreaker": {
               "title": "Add a low-stock tie-breaker",
-              "prompt": "Operations wants lower-stock items to appear first when two products share the same price. Add `stock` to the result and keep `price DESC` as the primary sort, then use `stock ASC` as the tie-breaker.",
-              "hint": "Keep the approved ranking and add stock as the second ORDER BY expression.",
+              "prompt": "Operations wants lower-stock items to appear first when two products share the same price. Add `stock` to the result. Keep highest price as the primary ranking, then use lower stock as the tie-breaker.",
+              "hint": "Keep the approved price ranking and add stock as the second sort key.",
               "help": {
                 "concept": "A secondary sort changes order only inside rows tied on the primary sort.",
-                "hint_1": "Do not replace price DESC.",
-                "hint_2": "Add stock to SELECT and stock ASC after a comma in ORDER BY."
+                "hint_1": "Higher prices must still appear before lower prices.",
+                "hint_2": "For equal prices, lower stock values should appear first."
               },
               "starterCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
-              "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;"
+              "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                }
+              ]
             },
             "mp-3-finish-leaderboard": {
               "title": "Publish the top-five list",
               "prompt": "The campaign has room for five products. Keep the approved price and stock ranking, then return only the first `5` rows.",
-              "hint": "Preserve the complete ranking and add LIMIT 5 after ORDER BY.",
+              "hint": "Preserve the complete ranking, then apply a final row-count limit of five.",
               "help": {
                 "concept": "LIMIT keeps the first rows of an already ranked result.",
                 "hint_1": "Do not change the two sort expressions.",
-                "hint_2": "Add LIMIT 5 after the ORDER BY clause."
+                "hint_2": "The completed ranked result should contain only the first five rows."
               },
               "starterCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
-              "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;"
+              "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                }
+              ]
             }
           }
         }
@@ -91,46 +109,56 @@
             "mp-1-rank-by-price": {
               "title": "Rank premium products by price",
               "prompt": "The sales team is preparing a premium-product review. Return `name` and `price` from `products`, in that order, with the highest price first.",
-              "hint": "Sort price in descending order.",
+              "hint": "Arrange larger price values before smaller ones.",
               "help": {
                 "concept": "The primary sort defines the main ranking.",
-                "hint_1": "Add ORDER BY after FROM products.",
-                "hint_2": "Highest price first requires DESC."
+                "hint_1": "Add the ranking after the products source.",
+                "hint_2": "The largest price should appear first."
               },
-              "starterCode": "SELECT\n  name,\n  price\nFROM products;"
+              "starterCode": "SELECT\n  name,\n  price\nFROM products;",
+              "solutionCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `price`."
+                }
+              ]
             },
             "mp-2-add-stock-tiebreaker": {
               "title": "Add a low-stock tie-breaker",
-              "prompt": "Operations wants lower-stock items to appear first when two products share the same price. Add `stock` to the result and keep `price DESC` as the primary sort, then use `stock ASC` as the tie-breaker.",
-              "hint": "Keep the approved ranking and add stock as the second ORDER BY expression.",
+              "prompt": "Operations wants lower-stock items to appear first when two products share the same price. Add `stock` to the result. Keep highest price as the primary ranking, then use lower stock as the tie-breaker.",
+              "hint": "Keep the approved price ranking and add stock as the second sort key.",
               "help": {
                 "concept": "A secondary sort changes order only inside rows tied on the primary sort.",
-                "hint_1": "Do not replace price DESC.",
-                "hint_2": "Add stock to SELECT and stock ASC after a comma in ORDER BY."
+                "hint_1": "Higher prices must still appear before lower prices.",
+                "hint_2": "For equal prices, lower stock values should appear first."
               },
-              "starterCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;"
+              "starterCode": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+              "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                }
+              ]
             },
             "mp-3-finish-leaderboard": {
               "title": "Publish the top-five list",
               "prompt": "The campaign has room for five products. Keep the approved price and stock ranking, then return only the first `5` rows.",
-              "hint": "Preserve the complete ranking and add LIMIT 5 after ORDER BY.",
+              "hint": "Preserve the complete ranking, then apply a final row-count limit of five.",
               "help": {
                 "concept": "LIMIT keeps the first rows of an already ranked result.",
                 "hint_1": "Do not change the two sort expressions.",
-                "hint_2": "Add LIMIT 5 after the ORDER BY clause."
+                "hint_2": "The completed ranked result should contain only the first five rows."
               },
-              "starterCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;"
-            },
-            "try-module-3-sales-leaderboard-project-sketch0": {
-              "title": "Preview the Price Ranking",
-              "prompt": "Before adding a tie-breaker and row limit, preview the main ranking. Return `name` and `price` from `products`, ordered from the highest price to the lowest.",
-              "hint": "Select `name` and `price`, then sort `price` in descending order.",
-              "help": {
-                "concept": "This warm-up establishes the primary ranking used by the leaderboard project.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return name, price from the products table.\nSELECT\n  name,\n  price\nFROM products\nORDER BY price ASC;"
+              "starterCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+              "solutionCode": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                }
+              ]
             }
           }
         }

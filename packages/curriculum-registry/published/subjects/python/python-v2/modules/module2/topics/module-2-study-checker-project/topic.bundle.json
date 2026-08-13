@@ -151,7 +151,6 @@
             "entry": true
           }
         ],
-
         "tests": [
           {
             "stdin": "70\n",

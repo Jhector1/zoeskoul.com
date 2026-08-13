@@ -3,17 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-3": {
         "order_by": {
-          "label": "Sorting a Result with ORDER BY",
-          "summary": "Use ORDER BY after row selection to change result order without changing which rows belong in the result.",
+          "label": "Sorting with ORDER BY",
+          "summary": "Sort once with ORDER BY, choose ASC or DESC, and add a tie-breaker when repeated values need a stable order.",
           "cards": {
             "sketch0": {
-              "title": "Sorting Changes Order, Not Membership"
+              "title": "Sort rows and choose a direction"
             },
             "sketch1": {
-              "title": "Place ORDER BY After Filtering"
+              "title": "Use a second sort to break ties"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: ORDER BY"
             }
           },
           "quiz": {
@@ -33,53 +33,21 @@
                 "d": "It filters rows by a condition"
               }
             },
-            "mc_order_by_true_statements": {
-              "title": "True statements about sorting",
-              "prompt": "Which statements about `ORDER BY` are true? Choose all that apply.",
-              "hint": "Think about default sort direction and how `LIMIT` works with sorting.",
+            "sc_asc_meaning": {
+              "title": "Meaning of ASC",
+              "prompt": "What does `ASC` do in `ORDER BY price ASC`?",
+              "hint": "Think about whether the smallest or largest price should appear first.",
               "help": {
-                "concept": "`ORDER BY` sorts rows, `ASC` is the default direction, and sorting usually happens before limiting the displayed rows.",
-                "hint_1": "One true statement is about `ASC` being optional. Another is about using `ORDER BY` with `LIMIT`.",
-                "hint_2": "Avoid statements that claim `ORDER BY` filters rows or that `DESC` means smallest first."
+                "concept": "`ASC` means ascending order, so SQL sorts values from lower to higher, earlier to later, or A to Z depending on the column type.",
+                "hint_1": "For a price column, compare how 6.75 and 129.00 would be arranged.",
+                "hint_2": "The first row after sorting should have the lower price, not the higher one."
               },
               "options": {
-                "a": "`ORDER BY price` sorts by price in ascending order by default",
-                "b": "`ORDER BY` can be used before `LIMIT` to get the top rows after sorting",
-                "c": "`ORDER BY` removes rows that do not match a condition",
-                "d": "`DESC` puts the smallest values first"
+                "a": "It sorts prices from lowest to highest.",
+                "b": "It sorts prices from highest to lowest.",
+                "c": "It filters out prices below a value.",
+                "d": "It shows only the first price in the table."
               }
-            },
-            "dr_query_clause_order": {
-              "title": "Build a sorted query",
-              "prompt": "Put these SQL parts in the correct order to make a query that shows product names sorted by price from low to high.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT name",
-                "t2": "FROM products",
-                "t3": "ORDER BY price ASC"
-              }
-            },
-            "fb_default_direction": {
-              "title": "Default sort direction",
-              "prompt": "Complete the statement.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Choose the option that completes the statement with the clearest meaning."
-              },
-              "template": "`ORDER BY price` is the same as `ORDER BY price [blank1]`.",
-              "choices": [
-                "ASC",
-                "DESC",
-                "WHERE",
-                "LIMIT"
-              ]
             },
             "try-order_by-sketch0": {
               "title": "Sort the Catalog by Category",
@@ -91,7 +59,87 @@
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               },
               "starterCode": "-- Sort the result by category from A to Z.\nSELECT id, name, category\nFROM products",
-              "solutionCode": "SELECT id, name, category\nFROM products\nORDER BY category ASC;"
+              "solutionCode": "SELECT id, name, category\nFROM products\nORDER BY category ASC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `category`."
+                }
+              ]
+            },
+            "practice-sort-direction": {
+              "title": "Practice: Choose the requested sort direction",
+              "prompt": "Return `name` and `price` from `products`, in that order. Sort the result so the highest price appears first.",
+              "hint": "Highest first means descending order.",
+              "help": {
+                "concept": "DESC puts larger numeric values before smaller ones.",
+                "hint_1": "Highest first means descending order.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
+              },
+              "starterCode": "-- Put the highest prices first.\nSELECT name, price\nFROM products\nORDER BY price",
+              "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `price`."
+                }
+              ]
+            },
+            "practice-sort-tiebreaker": {
+              "title": "Practice: Add a deterministic tie-breaker",
+              "prompt": "Return `name`, `category`, and `stock` from `products`, in that order. Sort categories from A to Z, then sort product names from A to Z inside each category.",
+              "hint": "Use category as the primary sort and name as the tie-breaker.",
+              "help": {
+                "concept": "The first ORDER BY expression controls the main order; later expressions break ties inside it.",
+                "hint_1": "List category first and name second in the same ORDER BY clause.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
+              },
+              "starterCode": "-- Group by category, then alphabetize names inside each category.\nSELECT name, category, stock\nFROM products\nORDER BY",
+              "solutionCode": "SELECT name, category, stock\nFROM products\nORDER BY category ASC, name ASC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `stock`."
+                }
+              ]
+            },
+            "sc_order_by_first_column": {
+              "title": "Identify the primary sort column",
+              "prompt": "In `ORDER BY category ASC, price DESC`, which column is the primary sort?",
+              "hint": "The primary sort is the first column listed after ORDER BY.",
+              "help": {
+                "concept": "When ORDER BY has multiple columns, SQL applies the first column as the main ordering rule and later columns only break ties.",
+                "hint_1": "Read the ORDER BY clause from left to right.",
+                "hint_2": "The column before the comma controls the overall grouping and order first."
+              },
+              "options": {
+                "a": "category",
+                "b": "price",
+                "c": "name",
+                "d": "created_at"
+              }
+            },
+            "mc_order_by_true_statements": {
+              "title": "True statements about primary sort",
+              "prompt": "Which statements are true about primary sort? Choose all that apply.",
+              "hint": "Think about what the first ORDER BY column does.",
+              "help": {
+                "concept": "The primary sort is the first ordering rule. It controls the main arrangement of rows, and later sort columns only refine rows that are equal on the first one.",
+                "hint_1": "One true idea is about the first column after ORDER BY. Another true idea is about what happens when rows tie.",
+                "hint_2": "Reject statements that say every listed sort column has equal priority or that the second column is applied first."
+              },
+              "options": {
+                "a": "The first column in ORDER BY is the main sorting rule.",
+                "b": "A second sort column can break ties after the first sort column is applied.",
+                "c": "The second sort column always matters more than the first one.",
+                "d": "All ORDER BY columns are applied with equal priority at the same time."
+              }
             }
           },
           "tryIt": {
@@ -111,17 +159,17 @@
       },
       "sql-v2-3": {
         "order_by": {
-          "label": "Sorting a Result with ORDER BY",
-          "summary": "Use ORDER BY after row selection to change result order without changing which rows belong in the result.",
+          "label": "Sorting with ORDER BY",
+          "summary": "Sort once with ORDER BY, choose ASC or DESC, and add a tie-breaker when repeated values need a stable order.",
           "cards": {
             "sketch0": {
-              "title": "Sorting Changes Order, Not Membership"
+              "title": "Sort rows and choose a direction"
             },
             "sketch1": {
-              "title": "Place ORDER BY After Filtering"
+              "title": "Use a second sort to break ties"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: ORDER BY"
             }
           },
           "quiz": {
@@ -141,53 +189,21 @@
                 "d": "It filters rows by a condition"
               }
             },
-            "mc_order_by_true_statements": {
-              "title": "True statements about sorting",
-              "prompt": "Which statements about `ORDER BY` are true? Choose all that apply.",
-              "hint": "Think about default sort direction and how `LIMIT` works with sorting.",
+            "sc_asc_meaning": {
+              "title": "Meaning of ASC",
+              "prompt": "What does `ASC` do in `ORDER BY price ASC`?",
+              "hint": "Think about whether the smallest or largest price should appear first.",
               "help": {
-                "concept": "`ORDER BY` sorts rows, `ASC` is the default direction, and sorting usually happens before limiting the displayed rows.",
-                "hint_1": "One true statement is about `ASC` being optional. Another is about using `ORDER BY` with `LIMIT`.",
-                "hint_2": "Avoid statements that claim `ORDER BY` filters rows or that `DESC` means smallest first."
+                "concept": "`ASC` means ascending order, so SQL sorts values from lower to higher, earlier to later, or A to Z depending on the column type.",
+                "hint_1": "For a price column, compare how 6.75 and 129.00 would be arranged.",
+                "hint_2": "The first row after sorting should have the lower price, not the higher one."
               },
               "options": {
-                "a": "`ORDER BY price` sorts by price in ascending order by default",
-                "b": "`ORDER BY` can be used before `LIMIT` to get the top rows after sorting",
-                "c": "`ORDER BY` removes rows that do not match a condition",
-                "d": "`DESC` puts the smallest values first"
+                "a": "It sorts prices from lowest to highest.",
+                "b": "It sorts prices from highest to lowest.",
+                "c": "It filters out prices below a value.",
+                "d": "It shows only the first price in the table."
               }
-            },
-            "dr_query_clause_order": {
-              "title": "Build a sorted query",
-              "prompt": "Put these SQL parts in the correct order to make a query that shows product names sorted by price from low to high.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT name",
-                "t2": "FROM products",
-                "t3": "ORDER BY price ASC"
-              }
-            },
-            "fb_default_direction": {
-              "title": "Default sort direction",
-              "prompt": "Complete the statement.",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
-              "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Choose the option that completes the statement with the clearest meaning."
-              },
-              "template": "`ORDER BY price` is the same as `ORDER BY price [blank1]`.",
-              "choices": [
-                "ASC",
-                "DESC",
-                "WHERE",
-                "LIMIT"
-              ]
             },
             "try-order_by-sketch0": {
               "title": "Sort the Catalog by Category",
@@ -198,7 +214,88 @@
                 "hint_1": "Add ORDER BY after FROM and sort category in ascending order.",
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               },
-              "starterCode": "-- Sort the result by category from A to Z.\nSELECT id, name, category\nFROM products"
+              "starterCode": "-- Sort the result by category from A to Z.\nSELECT id, name, category\nFROM products",
+              "solutionCode": "SELECT id, name, category\nFROM products\nORDER BY category ASC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `category`."
+                }
+              ]
+            },
+            "practice-sort-direction": {
+              "title": "Practice: Choose the requested sort direction",
+              "prompt": "Return `name` and `price` from `products`, in that order. Sort the result so the highest price appears first.",
+              "hint": "Highest first means descending order.",
+              "help": {
+                "concept": "DESC puts larger numeric values before smaller ones.",
+                "hint_1": "Highest first means descending order.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
+              },
+              "starterCode": "-- Put the highest prices first.\nSELECT name, price\nFROM products\nORDER BY price",
+              "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `price`."
+                }
+              ]
+            },
+            "practice-sort-tiebreaker": {
+              "title": "Practice: Add a deterministic tie-breaker",
+              "prompt": "Return `name`, `category`, and `stock` from `products`, in that order. Sort categories from A to Z, then sort product names from A to Z inside each category.",
+              "hint": "Use category as the primary sort and name as the tie-breaker.",
+              "help": {
+                "concept": "The first ORDER BY expression controls the main order; later expressions break ties inside it.",
+                "hint_1": "List category first and name second in the same ORDER BY clause.",
+                "hint_2": "Run the query and compare both row order and row count with the requirement."
+              },
+              "starterCode": "-- Group by category, then alphabetize names inside each category.\nSELECT name, category, stock\nFROM products\nORDER BY",
+              "solutionCode": "SELECT name, category, stock\nFROM products\nORDER BY category ASC, name ASC;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `stock`."
+                }
+              ]
+            },
+            "sc_order_by_first_column": {
+              "title": "Identify the primary sort column",
+              "prompt": "In `ORDER BY category ASC, price DESC`, which column is the primary sort?",
+              "hint": "The primary sort is the first column listed after ORDER BY.",
+              "help": {
+                "concept": "When ORDER BY has multiple columns, SQL applies the first column as the main ordering rule and later columns only break ties.",
+                "hint_1": "Read the ORDER BY clause from left to right.",
+                "hint_2": "The column before the comma controls the overall grouping and order first."
+              },
+              "options": {
+                "a": "category",
+                "b": "price",
+                "c": "name",
+                "d": "created_at"
+              }
+            },
+            "mc_order_by_true_statements": {
+              "title": "True statements about primary sort",
+              "prompt": "Which statements are true about primary sort? Choose all that apply.",
+              "hint": "Think about what the first ORDER BY column does.",
+              "help": {
+                "concept": "The primary sort is the first ordering rule. It controls the main arrangement of rows, and later sort columns only refine rows that are equal on the first one.",
+                "hint_1": "One true idea is about the first column after ORDER BY. Another true idea is about what happens when rows tie.",
+                "hint_2": "Reject statements that say every listed sort column has equal priority or that the second column is applied first."
+              },
+              "options": {
+                "a": "The first column in ORDER BY is the main sorting rule.",
+                "b": "A second sort column can break ties after the first sort column is applied.",
+                "c": "The second sort column always matters more than the first one.",
+                "d": "All ORDER BY columns are applied with equal priority at the same time."
+              }
             }
           },
           "tryIt": {
@@ -223,24 +320,24 @@
       "sql--sql-v2--draft-3": {
         "order_by": {
           "sorting_changes_order": {
-            "title": "Sorting Changes Sequence, Not Membership",
-            "bodyMarkdown": "`ORDER BY` changes the sequence of result rows. It does not add rows, remove rows, or modify stored data.\n\n```sql\nSELECT\n    title,\n    author\nFROM books\nORDER BY title ASC;\n```\n\nThe same book rows are still present; they are simply arranged alphabetically by title.\n\nThink of sorting as the final presentation order of rows that the query has already selected."
+            "title": "Sort rows and choose a direction",
+            "bodyMarkdown": "`ORDER BY` changes the sequence of result rows; it does not decide which rows belong in the result.\n\nUse it after `FROM` and any `WHERE` condition.\n\nChoose the direction from the requirement:\n\n- `ASC` — smaller to larger, earliest to latest, A to Z\n- `DESC` — larger to smaller, latest to earliest, Z to A\n\nIf no direction is written, SQL uses ascending order by default."
           },
           "order_by_clause_position": {
-            "title": "Filter First, Then Sort the Remaining Rows",
-            "bodyMarkdown": "`ORDER BY` comes after `WHERE` because filtering decides which rows remain before sorting decides their sequence.\n\n```sql\nSELECT\n    invoice_id,\n    customer,\n    total\nFROM invoices\nWHERE total >= 100\nORDER BY total ASC;\n```\n\nRead the query in jobs: select columns, choose the source, keep qualifying rows, then sort the result.\n\nFor now, focus on one sort column. Multi-column ranking comes later in this module."
+            "title": "Use a second sort to break ties",
+            "bodyMarkdown": "When the first sort value can repeat, add another ORDER BY column as a tie-breaker.\n\nThe first column is the **primary sort**. The second column only orders rows that share the same primary value.\n\nWrite sort columns in priority order. This makes ranked output predictable instead of leaving ties in an arbitrary sequence."
           }
         }
       },
       "sql-v2-3": {
         "order_by": {
           "sorting_changes_order": {
-            "title": "Sorting Changes Sequence, Not Membership",
-            "bodyMarkdown": "`ORDER BY` changes the sequence of result rows. It does not add rows, remove rows, or modify stored data.\n\n```sql\nSELECT\n    title,\n    author\nFROM books\nORDER BY title ASC;\n```\n\nThe same book rows are still present; they are simply arranged alphabetically by title.\n\nThink of sorting as the final presentation order of rows that the query has already selected."
+            "title": "Sort rows and choose a direction",
+            "bodyMarkdown": "`ORDER BY` changes the sequence of result rows; it does not decide which rows belong in the result.\n\nUse it after `FROM` and any `WHERE` condition.\n\nChoose the direction from the requirement:\n\n- `ASC` — smaller to larger, earliest to latest, A to Z\n- `DESC` — larger to smaller, latest to earliest, Z to A\n\nIf no direction is written, SQL uses ascending order by default."
           },
           "order_by_clause_position": {
-            "title": "Filter First, Then Sort the Remaining Rows",
-            "bodyMarkdown": "`ORDER BY` comes after `WHERE` because filtering decides which rows remain before sorting decides their sequence.\n\n```sql\nSELECT\n    invoice_id,\n    customer,\n    total\nFROM invoices\nWHERE total >= 100\nORDER BY total ASC;\n```\n\nRead the query in jobs: select columns, choose the source, keep qualifying rows, then sort the result.\n\nFor now, focus on one sort column. Multi-column ranking comes later in this module."
+            "title": "Use a second sort to break ties",
+            "bodyMarkdown": "When the first sort value can repeat, add another ORDER BY column as a tie-breaker.\n\nThe first column is the **primary sort**. The second column only orders rows that share the same primary value.\n\nWrite sort columns in priority order. This makes ranked output predictable instead of leaving ties in an arbitrary sequence."
           }
         }
       }

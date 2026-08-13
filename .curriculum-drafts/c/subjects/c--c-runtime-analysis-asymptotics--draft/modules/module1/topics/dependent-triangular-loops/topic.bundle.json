@@ -372,22 +372,6 @@
         ]
       },
       "showExpectedExample": true,
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "path": "analysis.c",
-          "pattern": "total += i",
-          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.dependent-triangular-loops.finalLab.steps.count_foo3.checks.0.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "analysis.c",
-          "pattern": "foo3_tuple_prints(n) + n",
-          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.dependent-triangular-loops.finalLab.steps.count_foo3.checks.1.message",
-          "normalizeWhitespace": false
-        }
-      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -421,7 +405,23 @@
             "entry": false
           }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "total += i",
+          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.dependent-triangular-loops.finalLab.steps.count_foo3.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "foo3_tuple_prints(n) + n",
+          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.dependent-triangular-loops.finalLab.steps.count_foo3.checks.1.message",
+          "normalizeWhitespace": false
+        }
+      ]
     },
     {
       "id": "triangle-exact",

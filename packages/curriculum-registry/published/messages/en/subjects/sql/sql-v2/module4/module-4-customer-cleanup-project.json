@@ -34,29 +34,45 @@
                 "hint_1": "Keep the selected columns and table unchanged.",
                 "hint_2": "Change only the NULL condition so the result keeps missing emails."
               },
-              "starterCode": "-- The current NULL check keeps present emails. Fix it to keep missing emails.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;"
+              "starterCode": "-- The current NULL check keeps present emails. Fix it to keep missing emails.\nSELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NOT NULL;",
+              "solutionCode": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `full_name`, `email`."
+                }
+              ]
             },
             "mp-2-keep-real-follow-ups": {
               "title": "Narrow to inactive follow-ups",
-              "prompt": "The support team will follow up only on inactive customers from the approved missing-email slice. Add `status` to the result and require `status = 'inactive'`.",
-              "hint": "Keep the missing-email condition and add the inactive status rule with AND.",
+              "prompt": "The support team will follow up only on inactive customers from the approved missing-email slice. Return `id`, `full_name`, `email`, and `status`, in that order, while preserving the missing-email requirement.",
+              "hint": "Keep the working missing-email filter and add one exact status requirement that must also be true.",
               "help": {
                 "concept": "A cumulative project extends the working filter instead of replacing it.",
-                "hint_1": "Keep email IS NULL.",
-                "hint_2": "Add status to SELECT and add the inactive condition with AND."
+                "hint_1": "Do not replace the earlier missing-email rule.",
+                "hint_2": "Add status to the result and narrow the rows to inactive customers."
               },
-              "starterCode": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;"
+              "starterCode": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
+              "solutionCode": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                }
+              ]
             },
             "mp-3-finish-cleanup-report": {
               "title": "Publish the real H-city cleanup queue",
-              "prompt": "Before handoff, operations wants only real customer records from cities beginning with `H`. Add `city` to the result, keep the approved missing-email and inactive rules, require `city LIKE 'H%'`, and exclude test rows with `is_test = 0`.",
-              "hint": "Keep every approved condition, then add the H-city pattern and non-test rule.",
+              "prompt": "Before handoff, operations wants only real customer records from cities beginning with `H`. Return `id`, `full_name`, `email`, `city`, and `status`, in that order. Preserve the missing-email and inactive-customer requirements, keep only H-city records, and exclude test rows.",
+              "hint": "Keep every approved condition, add a prefix text filter for city, and use the `is_test` flag so only real records remain.",
               "help": {
                 "concept": "The final report combines missing-value, exact-value, text-pattern, and test-record rules.",
-                "hint_1": "Do not remove email IS NULL or status = 'inactive'.",
-                "hint_2": "Add city to SELECT, then add the LIKE and is_test conditions."
+                "hint_1": "Preserve both earlier cleanup requirements.",
+                "hint_2": "In this dataset, `0` in `is_test` represents a real record."
               },
-              "starterCode": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';"
+              "starterCode": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
+              "solutionCode": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;"
             }
           }
         }

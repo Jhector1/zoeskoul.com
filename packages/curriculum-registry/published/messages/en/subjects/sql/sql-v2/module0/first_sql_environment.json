@@ -4,33 +4,27 @@
       "sql-v2-0": {
         "first_sql_environment": {
           "label": "First SQL Environment",
-          "summary": "Use the SQL editor, Run button, Results view, and Tables view without learning extra query syntax too early.",
+          "summary": "Learn the workspace once, then run one tiny SQL statement and read its result.",
           "cards": {
             "sketch0": {
-              "title": "Where will you run SQL?"
-            },
-            "sketch1": {
-              "title": "Which workspace parts matter first?"
+              "title": "The SQL workspace in one view"
             },
             "sketch2": {
-              "title": "How do you run a tiny query?"
-            },
-            "sketch3": {
-              "title": "How do you read what came back?"
+              "title": "Run one statement"
             },
             "quiz": {
-              "title": "Quiz: First SQL Environment"
+              "title": "Check: Using the SQL workspace"
             }
           },
           "quiz": {
             "try-first_sql_environment-sketch2": {
               "title": "Run a different one-row query",
-              "prompt": "Return the expression `'Practice ready' AS check_in` as a one-row result. Run it, then verify the Results table has the `check_in` column.",
-              "hint": "Follow the same one-row SELECT pattern, but use the value and column name requested here.",
+              "prompt": "Return the text `Practice ready` in a one-row result with the column heading `check_in`. Run the statement, then verify the Results table shows that heading and value.",
+              "hint": "Use the same one-row pattern shown in the lesson. Change both the returned text and its result-column name.",
               "help": {
                 "concept": "This Try-It checks the write → run → inspect workflow, not multi-column table querying.",
                 "hint_1": "The quoted text is the returned value.",
-                "hint_2": "Use `AS check_in` so the result column has the requested name."
+                "hint_2": "The result should have one column named `check_in` and one row containing `Practice ready`."
               },
               "starterCode": "-- Return the requested practice message with the heading check_in\nSELECT ",
               "solutionCode": "SELECT 'Practice ready' AS check_in;"
@@ -98,13 +92,25 @@
                 "c": "Only read the last row",
                 "d": "Only read the border"
               }
+            },
+            "practice-edit-run-inspect": {
+              "title": "Practice: Edit, run, and inspect",
+              "prompt": "The starter already returns one row. Change the returned text to `Workspace ready` and change the result-column heading to `status`. Run it and check that the Results table shows the requested heading and value.",
+              "hint": "Keep the one-row statement structure and edit only the returned text and result-column name.",
+              "help": {
+                "concept": "The goal is the workspace cycle: edit the statement, run it, then inspect the returned column heading and value.",
+                "hint_1": "The result needs exactly one column named `status`.",
+                "hint_2": "Its single row should contain the text `Workspace ready`."
+              },
+              "starterCode": "-- Edit the value and result-column heading.\nSELECT 'Connected' AS result;",
+              "solutionCode": "SELECT 'Workspace ready' AS status;"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_first_sql_environment_sketch2": {
               "title": "Run a different one-row query",
-              "prompt": "Return `'Practice ready' AS check_in`, run the query, and confirm the result has one `check_in` column."
+              "prompt": "Return the text `Practice ready` in a one-row result with the column heading `check_in`. Run the statement, then verify the Results table shows that heading and value."
             }
           }
         }
@@ -116,20 +122,12 @@
       "sql-v2-0": {
         "first_sql_environment": {
           "where_sql_runs": {
-            "title": "You will practice SQL in the Tools panel on the right.",
-            "bodyMarkdown": "This course gives you a real **SQL workspace**.\n\n[[image:sql_workspace_overview]]\n\nYour basic loop is:\n\n1. write SQL in the editor;\n2. click **Run**;\n3. inspect the result.\n\nYou will use that same loop throughout the course. The queries will become more capable, but the workspace habit stays the same."
-          },
-          "sql_editor_basics": {
-            "title": "The dark editor is where you write your SQL.",
-            "bodyMarkdown": "The editor is where you write SQL before running it.\n\nFor now, focus on four parts of the workspace:\n\n- **Editor** — where the query is written;\n- **Run** — executes the query;\n- **Results** — shows what the query returned;\n- **Tables** — shows the tables available in the dataset.\n\nOther views can wait until a later module. You do not need to understand every control before running your first query."
+            "title": "The SQL workspace in one view",
+            "bodyMarkdown": "You only need four parts of the workspace:\n\n1. **Tables** — see what data is available.\n2. **Editor** — write SQL.\n3. **Run** — execute the current statement.\n4. **Results** — inspect what SQL returned.\n\nThat workflow stays the same throughout the course, so we will not reteach the interface later."
           },
           "running_your_first_query": {
-            "title": "Your first query can be tiny and still feel exciting.",
-            "bodyMarkdown": "Your first query does not need a table. Run this tiny expression:\n\n~~~sql\nSELECT 'Workspace online' AS status;\n~~~\n\nThen click **Run**.\n\n[[image:first_query_in_workspace]]\n\nYou should get one row and one column named `status`.\n\nThe point is not to memorize syntax yet. The point is to complete the full cycle once:\n\n> write → run → inspect"
-          },
-          "reading_query_results": {
-            "title": "Read results by checking the headers first, then the rows.",
-            "bodyMarkdown": "After a query runs, start with the **column headers**, then read the values underneath them.\n\nFor example, if a result shows:\n\n| check |\n|---|\n| connected |\n\nthen `check` is the column name and `connected` is the returned value.\n\nUse the **Tables** view when you need to see which tables are available. Use **Results** when you need to inspect the answer from the query you just ran.\n\nThe habit is simple:\n\n> do not stop at “the query ran” — read what it returned."
+            "title": "Run one statement",
+            "bodyMarkdown": "Run the small statement in the Try-It and inspect what comes back.\n\nThe workflow is **write → run → inspect**. After a query runs, read the **column headers first**, then the values under those headers. Do not stop at “the query ran” — confirm that the returned result matches what you asked for.\n\nLater lessons will change the query, not this workflow."
           }
         }
       }

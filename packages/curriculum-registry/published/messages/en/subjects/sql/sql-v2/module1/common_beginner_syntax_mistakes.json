@@ -3,17 +3,14 @@
     "sql-v2": {
       "sql-v2-1": {
         "common_beginner_syntax_mistakes": {
-          "label": "Predicting Results and Fixing Syntax",
-          "summary": "Predict a result shape, then diagnose and repair common SELECT, comma, and FROM mistakes.",
+          "label": "Reading and Fixing SELECT Queries",
+          "summary": "Predict the result shape, then use one short checklist to repair common beginner syntax mistakes.",
           "cards": {
             "sketch0": {
-              "title": "Predict the Result Before Running"
-            },
-            "sketch1": {
-              "title": "Use a Small Syntax Checklist"
+              "title": "Read the query, then check the syntax"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: Fixing SELECT queries"
             }
           },
           "quiz": {
@@ -54,7 +51,7 @@
               "prompt": "Complete the query so it starts correctly.",
               "hint": "A basic query begins with the keyword that asks for columns.",
               "help": {
-                "concept": "The first keyword in a simple read-only SQL query is `the blank`.",
+                "concept": "A simple read query starts with the keyword that requests columns.",
                 "hint_1": "This keyword comes before the column list.",
                 "hint_2": "It is the command used to retrieve data from a table."
               },
@@ -69,10 +66,10 @@
             "fb_missing_table_name": {
               "title": "Fill the table name",
               "prompt": "Complete the query with the correct table name from this dataset.",
-              "hint": "The dataset has one table named `the blank`.",
+              "hint": "Use the exact table name shown in the schema browser.",
               "help": {
                 "concept": "After `FROM`, SQL needs the exact table name from the schema.",
-                "hint_1": "The table stores product rows like Sketchbook and Desk Lamp.",
+                "hint_1": "Look for the table that stores product rows such as Sketchbook and Desk Lamp.",
                 "hint_2": "Use the singular table name shown in the schema browser, not an invented variation."
               },
               "template": "SELECT name, price FROM [blank1];",
@@ -92,7 +89,56 @@
                 "hint_1": "Check the comma between selected columns and make sure FROM appears before the table name.",
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Repair the broken query below.\nSELECT\n    name\n    created_at,\nproducts;"
+              "starterCode": "-- Repair the broken query below.\nSELECT\n    name\n    created_at,\nproducts;",
+              "solutionCode": "SELECT name, created_at\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `created_at`."
+                }
+              ]
+            },
+            "practice-repair-clause-order": {
+              "title": "Practice: Repair clause order",
+              "prompt": "Repair the broken query so it returns `category` and `price` from `products`, in that order.",
+              "hint": "Check which clause should come first and where the table name belongs.",
+              "help": {
+                "concept": "In a basic retrieval query, the SELECT list comes before the FROM clause.",
+                "hint_1": "First identify the requested result columns.",
+                "hint_2": "Then make sure the source table appears after FROM."
+              },
+              "starterCode": "-- Repair the clause order.\nFROM products\nSELECT category, price;",
+              "solutionCode": "SELECT category, price\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `category`, `price`."
+                }
+              ]
+            },
+            "practice-repair-column-list": {
+              "title": "Practice: Repair a column list",
+              "prompt": "Repair the broken query so it returns `id`, `name`, and `stock` from `products`, in that order.",
+              "hint": "Check the separators between selected columns before changing anything else.",
+              "help": {
+                "concept": "Multiple selected columns must be separated so SQL can recognize each result field.",
+                "hint_1": "Compare the requested three result columns with the SELECT list.",
+                "hint_2": "After the column list is valid, keep the products table after FROM."
+              },
+              "starterCode": "-- Repair the selected column list.\nSELECT\n  id\n  name,\n  stock\nFROM products;",
+              "solutionCode": "SELECT id, name, stock\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `stock`."
+                }
+              ]
             }
           },
           "tryIt": {
@@ -117,12 +163,8 @@
       "sql-v2-1": {
         "common_beginner_syntax_mistakes": {
           "predict_result_shape": {
-            "title": "Predict the Result Before You Run",
-            "bodyMarkdown": "Before running a query, predict its result shape.\n\n```sql\nSELECT\n    customer_name,\n    city\nFROM customers;\n```\n\nYou should expect two result columns, `customer_name` and `city`. With no filter, the query attempts to return one result row for each source row.\n\nPrediction gives you something concrete to compare with the actual result. If the returned columns differ, inspect the SELECT list. If SQL cannot find a table or column, compare the spelling with the schema."
-          },
-          "syntax_checklist": {
-            "title": "Use a Small Debugging Checklist",
-            "bodyMarkdown": "When a simple retrieval query fails, check the structure instead of guessing.\n\n1. Does the statement begin with `SELECT`?\n2. Are selected columns separated by commas?\n3. Does `FROM` come after the full column list?\n4. Do the table and column names match the schema?\n5. Is there an accidental comma immediately before `FROM`?\n\nCorrect:\n\n```sql\nSELECT\n    order_id,\n    total\nFROM orders;\n```\n\nFix one structural problem at a time, then run the query again."
+            "title": "Read the query, then check the syntax",
+            "bodyMarkdown": "Before running a simple SELECT query, predict the columns you expect to see. Then check the syntax:\n\n1. Are the requested columns after `SELECT`?\n2. Are multiple columns separated by commas?\n3. Does `FROM` come after the SELECT list?\n4. Is the table name valid?\n\nThis is a debugging checklist, not a new SQL feature. Use it whenever a basic query does not run or returns the wrong shape."
           }
         }
       }

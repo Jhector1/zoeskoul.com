@@ -3,17 +3,14 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-3": {
         "combining_order_by_with_limit": {
-          "label": "Building Ranked Top-N Results with LIMIT",
-          "summary": "Sort first when a request asks for top, bottom, cheapest, newest, or similar ranked rows, then limit that ordered result.",
+          "label": "Ranked Results with LIMIT",
+          "summary": "Create the ranking with ORDER BY, then use LIMIT to return only the requested top or bottom rows.",
           "cards": {
             "sketch0": {
-              "title": "LIMIT Keeps Only the First Result Rows"
-            },
-            "sketch1": {
-              "title": "ORDER BY Gives LIMIT a Meaningful Order"
+              "title": "Rank first, then limit"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: ORDER BY with LIMIT"
             }
           },
           "quiz": {
@@ -85,14 +82,62 @@
             "try-combining_order_by_with_limit-sketch1": {
               "title": "Find the Two Cheapest Stationery Products",
               "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep only `Stationery` products, sort them by `price` from low to high, and return only the first `2` rows.",
-              "hint": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+              "hint": "First narrow the candidates to Stationery, rank lower prices first, then keep only two rows.",
               "help": {
                 "concept": "A meaningful cheapest-two query ranks qualifying rows before LIMIT keeps the first two.",
-                "hint_1": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+                "hint_1": "The ranking must be established before the result is reduced to two rows.",
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               },
               "starterCode": "-- Find the two lowest-priced Stationery products.\nSELECT name, category, price\nFROM products\nWHERE category = 'Stationery'",
-              "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;"
+              "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `price`."
+                }
+              ]
+            },
+            "practice-top-three-prices": {
+              "title": "Practice: Keep the three highest prices",
+              "prompt": "Return `name` and `price` from `products`, in that order. Rank the most expensive products first and return only the first `3` rows.",
+              "hint": "Build the price ranking before reducing the result to three rows.",
+              "help": {
+                "concept": "A top-N query first creates the intended row order, then keeps only the requested number of rows.",
+                "hint_1": "Larger prices need to appear before smaller prices.",
+                "hint_2": "The final result should contain only three rows."
+              },
+              "starterCode": "-- Build the ranked result, then keep three rows.\nSELECT name, price\nFROM products\nORDER BY",
+              "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `price`."
+                }
+              ]
+            },
+            "practice-filter-rank-limit": {
+              "title": "Practice: Filter, rank, then limit",
+              "prompt": "Return `name`, `category`, and `created_at` from `products`, in that order. Keep only Home products, show the newest ones first, and return only the first `2` rows.",
+              "hint": "Narrow the rows first, establish the date ranking next, and reduce the row count last.",
+              "help": {
+                "concept": "For a filtered top-N result, WHERE narrows the candidates, ORDER BY ranks them, and LIMIT keeps the requested number.",
+                "hint_1": "Newer dates should appear before older dates.",
+                "hint_2": "The row-count step belongs after the ranking."
+              },
+              "starterCode": "-- Keep Home products, then rank and limit them.\nSELECT name, category, created_at\nFROM products\nWHERE category = 'Home'\nORDER BY",
+              "solutionCode": "SELECT name, category, created_at\nFROM products\nWHERE category = 'Home'\nORDER BY created_at DESC\nLIMIT 2;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `created_at`."
+                }
+              ]
             }
           },
           "tryIt": {
@@ -100,10 +145,10 @@
             "try_combining_order_by_with_limit_sketch1": {
               "title": "Find the Two Cheapest Stationery Products",
               "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep only `Stationery` products, sort them by `price` from low to high, and return only the first `2` rows.",
-              "hint": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+              "hint": "First narrow the candidates to Stationery, rank lower prices first, then keep only two rows.",
               "help": {
                 "concept": "A meaningful cheapest-two query ranks qualifying rows before LIMIT keeps the first two.",
-                "hint_1": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+                "hint_1": "The ranking must be established before the result is reduced to two rows.",
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
@@ -112,17 +157,14 @@
       },
       "sql-v2-3": {
         "combining_order_by_with_limit": {
-          "label": "Building Ranked Top-N Results with LIMIT",
-          "summary": "Sort first when a request asks for top, bottom, cheapest, newest, or similar ranked rows, then limit that ordered result.",
+          "label": "Ranked Results with LIMIT",
+          "summary": "Create the ranking with ORDER BY, then use LIMIT to return only the requested top or bottom rows.",
           "cards": {
             "sketch0": {
-              "title": "LIMIT Keeps Only the First Result Rows"
-            },
-            "sketch1": {
-              "title": "ORDER BY Gives LIMIT a Meaningful Order"
+              "title": "Rank first, then limit"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: ORDER BY with LIMIT"
             }
           },
           "quiz": {
@@ -194,13 +236,62 @@
             "try-combining_order_by_with_limit-sketch1": {
               "title": "Find the Two Cheapest Stationery Products",
               "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep only `Stationery` products, sort them by `price` from low to high, and return only the first `2` rows.",
-              "hint": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+              "hint": "First narrow the candidates to Stationery, rank lower prices first, then keep only two rows.",
               "help": {
                 "concept": "A meaningful cheapest-two query ranks qualifying rows before LIMIT keeps the first two.",
-                "hint_1": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+                "hint_1": "The ranking must be established before the result is reduced to two rows.",
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               },
-              "starterCode": "-- Find the two lowest-priced Stationery products.\nSELECT name, category, price\nFROM products\nWHERE category = 'Stationery'"
+              "starterCode": "-- Find the two lowest-priced Stationery products.\nSELECT name, category, price\nFROM products\nWHERE category = 'Stationery'",
+              "solutionCode": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `price`."
+                }
+              ]
+            },
+            "practice-top-three-prices": {
+              "title": "Practice: Keep the three highest prices",
+              "prompt": "Return `name` and `price` from `products`, in that order. Rank the most expensive products first and return only the first `3` rows.",
+              "hint": "Build the price ranking before reducing the result to three rows.",
+              "help": {
+                "concept": "A top-N query first creates the intended row order, then keeps only the requested number of rows.",
+                "hint_1": "Larger prices need to appear before smaller prices.",
+                "hint_2": "The final result should contain only three rows."
+              },
+              "starterCode": "-- Build the ranked result, then keep three rows.\nSELECT name, price\nFROM products\nORDER BY",
+              "solutionCode": "SELECT name, price\nFROM products\nORDER BY price DESC\nLIMIT 3;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `price`."
+                }
+              ]
+            },
+            "practice-filter-rank-limit": {
+              "title": "Practice: Filter, rank, then limit",
+              "prompt": "Return `name`, `category`, and `created_at` from `products`, in that order. Keep only Home products, show the newest ones first, and return only the first `2` rows.",
+              "hint": "Narrow the rows first, establish the date ranking next, and reduce the row count last.",
+              "help": {
+                "concept": "For a filtered top-N result, WHERE narrows the candidates, ORDER BY ranks them, and LIMIT keeps the requested number.",
+                "hint_1": "Newer dates should appear before older dates.",
+                "hint_2": "The row-count step belongs after the ranking."
+              },
+              "starterCode": "-- Keep Home products, then rank and limit them.\nSELECT name, category, created_at\nFROM products\nWHERE category = 'Home'\nORDER BY",
+              "solutionCode": "SELECT name, category, created_at\nFROM products\nWHERE category = 'Home'\nORDER BY created_at DESC\nLIMIT 2;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `created_at`."
+                }
+              ]
             }
           },
           "tryIt": {
@@ -208,10 +299,10 @@
             "try_combining_order_by_with_limit_sketch1": {
               "title": "Find the Two Cheapest Stationery Products",
               "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep only `Stationery` products, sort them by `price` from low to high, and return only the first `2` rows.",
-              "hint": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+              "hint": "First narrow the candidates to Stationery, rank lower prices first, then keep only two rows.",
               "help": {
                 "concept": "A meaningful cheapest-two query ranks qualifying rows before LIMIT keeps the first two.",
-                "hint_1": "Filter first, then ORDER BY price ASC, then LIMIT 2.",
+                "hint_1": "The ranking must be established before the result is reduced to two rows.",
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
@@ -225,24 +316,16 @@
       "sql--sql-v2--draft-3": {
         "combining_order_by_with_limit": {
           "limit_first_rows": {
-            "title": "LIMIT Keeps Rows; It Does Not Define Their Ranking",
-            "bodyMarkdown": "`LIMIT` keeps only the first requested number of result rows.\n\n```sql\nSELECT\n    ticket_id,\n    subject\nFROM support_tickets\nLIMIT 5;\n```\n\nThat query returns five rows, but it does **not** mean “five newest,” “five oldest,” or “five highest priority” because no ranking was defined.\n\nUse bare `LIMIT` only when the request truly means “some first rows.” A ranked request needs `ORDER BY` first."
-          },
-          "rank_then_limit": {
-            "title": "ORDER BY Gives a Top-N Request Meaning",
-            "bodyMarkdown": "Sort the completed result before limiting it when the request asks for a ranked subset.\n\n```sql\nSELECT\n    ticket_id,\n    priority_score\nFROM support_tickets\nORDER BY priority_score DESC\nLIMIT 3;\n```\n\nNow “first three rows” has a clear meaning: the three highest priority scores.\n\nThe clause order is:\n\n```text\nSELECT → FROM → WHERE → ORDER BY → LIMIT\n```\n\nFiltering narrows the candidates, sorting ranks them, and `LIMIT` keeps the requested number."
+            "title": "Rank first, then limit",
+            "bodyMarkdown": "`LIMIT` keeps only the first rows of the result.\n\nFor a request such as **top 5**, **cheapest 3**, or **newest 10**, first use `ORDER BY` to create the ranking, then put `LIMIT` after it.\n\nWithout ORDER BY, LIMIT only returns some first rows; it does not define what \"top\", \"bottom\", \"cheapest\", or \"newest\" means."
           }
         }
       },
       "sql-v2-3": {
         "combining_order_by_with_limit": {
           "limit_first_rows": {
-            "title": "LIMIT Keeps Rows; It Does Not Define Their Ranking",
-            "bodyMarkdown": "`LIMIT` keeps only the first requested number of result rows.\n\n```sql\nSELECT\n    ticket_id,\n    subject\nFROM support_tickets\nLIMIT 5;\n```\n\nThat query returns five rows, but it does **not** mean “five newest,” “five oldest,” or “five highest priority” because no ranking was defined.\n\nUse bare `LIMIT` only when the request truly means “some first rows.” A ranked request needs `ORDER BY` first."
-          },
-          "rank_then_limit": {
-            "title": "ORDER BY Gives a Top-N Request Meaning",
-            "bodyMarkdown": "Sort the completed result before limiting it when the request asks for a ranked subset.\n\n```sql\nSELECT\n    ticket_id,\n    priority_score\nFROM support_tickets\nORDER BY priority_score DESC\nLIMIT 3;\n```\n\nNow “first three rows” has a clear meaning: the three highest priority scores.\n\nThe clause order is:\n\n```text\nSELECT → FROM → WHERE → ORDER BY → LIMIT\n```\n\nFiltering narrows the candidates, sorting ranks them, and `LIMIT` keeps the requested number."
+            "title": "Rank first, then limit",
+            "bodyMarkdown": "`LIMIT` keeps only the first rows of the result.\n\nFor a request such as **top 5**, **cheapest 3**, or **newest 10**, first use `ORDER BY` to create the ranking, then put `LIMIT` after it.\n\nWithout ORDER BY, LIMIT only returns some first rows; it does not define what \"top\", \"bottom\", \"cheapest\", or \"newest\" means."
           }
         }
       }

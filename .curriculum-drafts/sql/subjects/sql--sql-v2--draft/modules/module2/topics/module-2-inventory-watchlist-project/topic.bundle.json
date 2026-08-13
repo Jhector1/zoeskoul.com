@@ -154,7 +154,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -177,7 +177,19 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "mp-2-focus-on-stationery",
@@ -254,7 +266,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-2-focus-on-stationery.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -354,7 +366,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-2.module-2-inventory-watchlist-project.quiz.mp-3-finish-watchlist.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true

@@ -4720,7 +4720,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 82,
+          "estimatedMinutes": 55,
           "prereqKeys": [],
           "outcomeKeys": [
             "modules.sql-v2.sql-v2-0.outcomes.0",
@@ -4751,72 +4751,13 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             },
             "serviceDefaults": null,
             "topics": [
-              "what_sql_is"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-0-2",
-            "order": 2,
-            "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-2.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-2.description",
-            "meta": {
-              "module": 0,
-              "weeksKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-2.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-2.bullets.0",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-2.bullets.1",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-2.bullets.2",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-2.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "understanding_tables"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-0-3",
-            "order": 3,
-            "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-3.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-3.description",
-            "meta": {
-              "module": 0,
-              "weeksKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-3.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-3.bullets.0",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-3.bullets.1",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-3.bullets.2",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-3.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "database_thinking"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-0-4",
-            "order": 4,
-            "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-4.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-4.description",
-            "meta": {
-              "module": 0,
-              "weeksKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-4.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-4.bullets.0",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-4.bullets.1",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-4.bullets.2",
-                "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-4.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
+              "what_sql_is",
               "first_sql_environment"
             ]
           },
           {
             "slug": "sql-v2-sql-v2-0-module-project",
-            "order": 5,
+            "order": 2,
             "role": "module_project",
             "titleKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.title",
             "descriptionKey": "sections.sql-v2.sql-v2-0.sql-v2-sql-v2-0-module-project.description",
@@ -4860,7 +4801,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 88,
+          "estimatedMinutes": 56,
           "prereqKeys": [
             "modules.sql-v2.sql-v2-0.title"
           ],
@@ -4893,72 +4834,13 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             },
             "serviceDefaults": null,
             "topics": [
-              "what_select_does"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-1-2",
-            "order": 2,
-            "titleKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-2.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-2.description",
-            "meta": {
-              "module": 1,
-              "weeksKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-2.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-2.bullets.0",
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-2.bullets.1",
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-2.bullets.2",
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-2.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "selecting_specific_columns"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-1-3",
-            "order": 3,
-            "titleKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-3.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-3.description",
-            "meta": {
-              "module": 1,
-              "weeksKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-3.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-3.bullets.0",
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-3.bullets.1",
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-3.bullets.2",
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-3.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "query_multiple_columns"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-1-4",
-            "order": 4,
-            "titleKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-4.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-4.description",
-            "meta": {
-              "module": 1,
-              "weeksKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-4.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-4.bullets.0",
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-4.bullets.1",
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-4.bullets.2",
-                "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-4.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
+              "what_select_does",
               "common_beginner_syntax_mistakes"
             ]
           },
           {
             "slug": "sql-v2-sql-v2-1-module-project",
-            "order": 5,
+            "order": 2,
             "role": "module_project",
             "titleKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-module-project.title",
             "descriptionKey": "sections.sql-v2.sql-v2-1.sql-v2-sql-v2-1-module-project.description",
@@ -5002,7 +4884,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 144,
+          "estimatedMinutes": 56,
           "prereqKeys": [
             "modules.sql-v2.sql-v2-1.title"
           ],
@@ -5036,74 +4918,12 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             "serviceDefaults": null,
             "topics": [
               "why_filtering_matters",
-              "equals_comparison"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-2-2",
-            "order": 2,
-            "titleKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-2.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-2.description",
-            "meta": {
-              "module": 2,
-              "weeksKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-2.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-2.bullets.0",
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-2.bullets.1",
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-2.bullets.2",
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-2.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "greater_than_comparison",
-              "filtering_numbers_and_text"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-2-3",
-            "order": 3,
-            "titleKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-3.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-3.description",
-            "meta": {
-              "module": 2,
-              "weeksKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-3.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-3.bullets.0",
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-3.bullets.1",
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-3.bullets.2",
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-3.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "and_conditions",
-              "combining_conditions_safely"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-2-4",
-            "order": 4,
-            "titleKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-4.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-4.description",
-            "meta": {
-              "module": 2,
-              "weeksKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-4.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-4.bullets.0",
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-4.bullets.1",
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-4.bullets.2",
-                "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-4.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "avoiding_filtering_mistakes"
+              "and_conditions"
             ]
           },
           {
             "slug": "sql-v2-sql-v2-2-module-project",
-            "order": 5,
+            "order": 2,
             "role": "module_project",
             "titleKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-module-project.title",
             "descriptionKey": "sections.sql-v2.sql-v2-2.sql-v2-sql-v2-2-module-project.description",
@@ -5147,7 +4967,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 92,
+          "estimatedMinutes": 60,
           "prereqKeys": [
             "modules.sql-v2.sql-v2-2.title"
           ],
@@ -5180,72 +5000,13 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             },
             "serviceDefaults": null,
             "topics": [
-              "order_by"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-3-2",
-            "order": 2,
-            "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-2.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-2.description",
-            "meta": {
-              "module": 3,
-              "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-2.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-2.bullets.0",
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-2.bullets.1",
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-2.bullets.2",
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-2.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "ascending_order"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-3-3",
-            "order": 3,
-            "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-3.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-3.description",
-            "meta": {
-              "module": 3,
-              "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-3.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-3.bullets.0",
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-3.bullets.1",
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-3.bullets.2",
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-3.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "primary_sort"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-3-4",
-            "order": 4,
-            "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-4.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-4.description",
-            "meta": {
-              "module": 3,
-              "weeksKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-4.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-4.bullets.0",
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-4.bullets.1",
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-4.bullets.2",
-                "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-4.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
+              "order_by",
               "combining_order_by_with_limit"
             ]
           },
           {
             "slug": "sql-v2-sql-v2-3-module-project",
-            "order": 5,
+            "order": 2,
             "role": "module_project",
             "titleKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-module-project.title",
             "descriptionKey": "sections.sql-v2.sql-v2-3.sql-v2-sql-v2-3-module-project.description",
@@ -5289,7 +5050,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 126,
+          "estimatedMinutes": 78,
           "prereqKeys": [
             "modules.sql-v2.sql-v2-3.title"
           ],
@@ -5323,73 +5084,13 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
             "serviceDefaults": null,
             "topics": [
               "intro_to_like",
-              "underscore_wildcard"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-4-2",
-            "order": 2,
-            "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-2.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-2.description",
-            "meta": {
-              "module": 4,
-              "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-2.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-2.bullets.0",
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-2.bullets.1",
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-2.bullets.2",
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-2.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
               "in_list_filter",
-              "between_range_filter"
-            ]
-          },
-          {
-            "slug": "sql-v2-sql-v2-4-3",
-            "order": 3,
-            "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-3.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-3.description",
-            "meta": {
-              "module": 4,
-              "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-3.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-3.bullets.0",
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-3.bullets.1",
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-3.bullets.2",
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-3.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
               "what_null_means"
             ]
           },
           {
-            "slug": "sql-v2-sql-v2-4-4",
-            "order": 4,
-            "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-4.title",
-            "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-4.description",
-            "meta": {
-              "module": 4,
-              "weeksKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-4.weeks",
-              "bulletKeys": [
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-4.bullets.0",
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-4.bullets.1",
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-4.bullets.2",
-                "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-4.bullets.3"
-              ]
-            },
-            "serviceDefaults": null,
-            "topics": [
-              "combine_text_and_null_filters"
-            ]
-          },
-          {
             "slug": "sql-v2-sql-v2-4-module-project",
-            "order": 5,
+            "order": 2,
             "role": "module_project",
             "titleKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-module-project.title",
             "descriptionKey": "sections.sql-v2.sql-v2-4.sql-v2-sql-v2-4-module-project.description",
@@ -13899,29 +13600,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "n * width",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "n * n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.1.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "n * (n - 1) / 2",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.2.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -13955,7 +13633,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "n * width",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "n * n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.1.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "n * (n - 1) / 2",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.2.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "fixed-inner",
@@ -14453,29 +14154,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "3 * n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "n * n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.1.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "n * n + n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.2.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -14509,7 +14187,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "3 * n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "n * n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.1.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "n * n + n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.2.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "foo1-reason",
@@ -14917,22 +14618,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "total += i",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.dependent-triangular-loops.finalLab.steps.count_foo3.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "foo3_tuple_prints(n) + n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.dependent-triangular-loops.finalLab.steps.count_foo3.checks.1.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -14966,7 +14651,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "total += i",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.dependent-triangular-loops.finalLab.steps.count_foo3.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "foo3_tuple_prints(n) + n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.dependent-triangular-loops.finalLab.steps.count_foo3.checks.1.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "triangle-exact",
@@ -15407,29 +15108,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "n * (n * n - n)",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "n * n * n - n * (n - 1) / 2",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.checks.1.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "+ n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.checks.2.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -15463,7 +15141,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "n * (n * n - n)",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "n * n * n - n * (n - 1) / 2",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.checks.1.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "+ n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.moving-loop-bounds.finalLab.steps.count_foo4_variants.checks.2.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "foo4-row",
@@ -15962,29 +15663,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "n + n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "n + 1",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.1.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "analysis.c",
-              "pattern": "return n;",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.2.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -16018,7 +15696,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "n + n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "n + 1",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.1.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "analysis.c",
+              "pattern": "return n;",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.2.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "sequential-cost",
@@ -17345,29 +17046,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "ratios.c",
-              "pattern": "3.0 * n * n + 7.0 * n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "ratios.c",
-              "pattern": "n * n * n * n * n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.1.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "ratios.c",
-              "pattern": "ratio *= 2.0 / 3.0",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.2.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -17401,7 +17079,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "ratios.c",
+              "pattern": "3.0 * n * n + 7.0 * n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "ratios.c",
+              "pattern": "n * n * n * n * n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.1.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "ratios.c",
+              "pattern": "ratio *= 2.0 / 3.0",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.2.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "sampling-proof",
@@ -18330,29 +18031,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "bounds.c",
-              "pattern": "cube <= 2 * t",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "bounds.c",
-              "pattern": "t <= 2 * cube",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.1.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "bounds.c",
-              "pattern": "n >= 7",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.2.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -18386,7 +18064,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "bounds.c",
+              "pattern": "cube <= 2 * t",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "bounds.c",
+              "pattern": "t <= 2 * cube",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.1.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "bounds.c",
+              "pattern": "n >= 7",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-3-inequality-proofs.prove-big-theta-bounds.finalLab.steps.verify_theta_bounds.checks.2.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "theta-needs-both",
@@ -19097,29 +18798,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "capstone.c",
-              "pattern": "5 * n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "capstone.c",
-              "pattern": "n * (n + 1) / 2",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.1.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "capstone.c",
-              "pattern": "n + n * n",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.2.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -19153,7 +18831,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "capstone.c",
+              "pattern": "5 * n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "capstone.c",
+              "pattern": "n * (n + 1) / 2",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.1.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "capstone.c",
+              "pattern": "n + n * n",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.checks.2.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "classify-dominant-terms",
@@ -19261,22 +18962,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "classify.c",
-              "pattern": "Theta(n)",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "classify.c",
-              "pattern": "Theta(n^2)",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.1.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -19310,7 +18995,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "classify.c",
+              "pattern": "Theta(n)",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "classify.c",
+              "pattern": "Theta(n^2)",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.checks.1.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "verify-new-theta-proof",
@@ -19418,29 +19119,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ]
           },
           "showExpectedExample": true,
-          "sourceChecks": [
-            {
-              "type": "source_contains",
-              "path": "proof.c",
-              "pattern": "n < 1",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.0.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "proof.c",
-              "pattern": "6 * n2 <= t",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.1.message",
-              "normalizeWhitespace": false
-            },
-            {
-              "type": "source_contains",
-              "path": "proof.c",
-              "pattern": "t <= 11 * n2",
-              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.2.message",
-              "normalizeWhitespace": false
-            }
-          ],
           "recipe": {
             "type": "fixed_tests",
             "tests": [
@@ -19474,7 +19152,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "entry": false
               }
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_contains",
+              "path": "proof.c",
+              "pattern": "n < 1",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.0.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "proof.c",
+              "pattern": "6 * n2 <= t",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.1.message",
+              "normalizeWhitespace": false
+            },
+            {
+              "type": "source_contains",
+              "path": "proof.c",
+              "pattern": "t <= 11 * n2",
+              "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.checks.2.message",
+              "normalizeWhitespace": false
+            }
+          ]
         },
         {
           "id": "capstone-method",
@@ -115124,28 +114825,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.what_sql_is.cards.sketch2.title",
-          "sketchId": "why_sql_is_useful",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
-          "id": "sketch3",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.what_sql_is.cards.sketch3.title",
-          "sketchId": "real_world_examples_of_databases",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-0.what_sql_is.cards.quiz.title",
@@ -115237,72 +114916,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "publicId": "database_container_model_eqjc9x"
             }
           ]
-        },
-        {
-          "id": "why_sql_is_useful",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.what_sql_is.why_sql_is_useful.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.what_sql_is.why_sql_is_useful.bodyMarkdown",
-          "images": [
-            {
-              "publicId": "data_everywhere",
-              "id": "data_everywhere",
-              "alt": ""
-            },
-            {
-              "publicId": "sql_actions_overview",
-              "id": "sql_actions_overview",
-              "alt": ""
-            },
-            {
-              "publicId": "sql_questions_and_answers",
-              "id": "sql_questions_and_answers",
-              "alt": ""
-            },
-            {
-              "publicId": "ask_run_result_cycle",
-              "id": "ask_run_result_cycle",
-              "alt": ""
-            }
-          ]
-        },
-        {
-          "id": "real_world_examples_of_databases",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.what_sql_is.real_world_examples_of_databases.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.what_sql_is.real_world_examples_of_databases.bodyMarkdown",
-          "images": [
-            {
-              "publicId": "databases_in_daily_life",
-              "id": "databases_in_daily_life",
-              "alt": ""
-            },
-            {
-              "publicId": "school_database_example",
-              "id": "school_database_example",
-              "alt": ""
-            },
-            {
-              "publicId": "store_database_example",
-              "id": "store_database_example",
-              "alt": ""
-            },
-            {
-              "publicId": "media_database_example",
-              "id": "media_database_example",
-              "alt": ""
-            },
-            {
-              "publicId": "hospital_database_example",
-              "id": "hospital_database_example",
-              "alt": ""
-            },
-            {
-              "publicId": "shared_database_pattern",
-              "id": "shared_database_pattern",
-              "alt": ""
-            }
-          ]
         }
       ],
       "exercises": [
@@ -115341,180 +114954,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "m0_s01_why_sql_useful",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_why_sql_useful",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s01_real_world_examples",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_real_world_examples",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        }
-      ]
-    },
-    "understanding_tables": {
-      "topicId": "understanding_tables",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-0",
-      "sectionSlug": "sql-v2-sql-v2-0-2",
-      "prefix": "sqlv2_0",
-      "minutes": 14,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "students_intro",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-0.understanding_tables.label",
-        "summaryKey": "topics.sql-v2.sql-v2-0.understanding_tables.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.understanding_tables.cards.sketch0.title",
-          "sketchId": "rows_and_columns",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.understanding_tables.cards.sketch1.title",
-          "sketchId": "records_and_fields",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.understanding_tables.cards.sketch2.title",
-          "sketchId": "table_names_and_column_names",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
-          "id": "sketch3",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.understanding_tables.cards.sketch3.title",
-          "sketchId": "reading_data_like_a_spreadsheet",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-0.understanding_tables.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "rows_and_columns",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.understanding_tables.rows_and_columns.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.understanding_tables.rows_and_columns.bodyMarkdown",
-          "images": [
-            {
-              "id": "table_row_column_labels",
-              "publicId": "Screenshot_2026-04-04_at_12.48.41_AM_iixkie",
-              "alt": ""
-            }
-          ]
-        },
-        {
-          "id": "records_and_fields",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.understanding_tables.records_and_fields.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.understanding_tables.records_and_fields.bodyMarkdown",
-          "images": [
-            {
-              "id": "row_records_fields",
-              "publicId": "row_records_fields_ofvu9f",
-              "alt": ""
-            }
-          ]
-        },
-        {
-          "id": "table_names_and_column_names",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.understanding_tables.table_names_and_column_names.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.understanding_tables.table_names_and_column_names.bodyMarkdown",
-          "images": []
-        },
-        {
-          "id": "reading_data_like_a_spreadsheet",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.understanding_tables.reading_data_like_a_spreadsheet.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.understanding_tables.reading_data_like_a_spreadsheet.bodyMarkdown",
-          "images": [
-            {
-              "id": "reading_table_flow",
-              "publicId": "Screenshot_2026-04-04_at_12.25.04_AM_toyto1",
-              "alt": ""
-            }
-          ]
-        }
-      ],
-      "exercises": [
-        {
           "id": "m0_s02_rows_go_across",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_rows_go_across",
+          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s02_rows_go_across",
           "optionIds": [
             "a",
             "b",
@@ -115531,250 +114975,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_columns_meaning",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s02_record_definition",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_record_definition",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s02_reading_order",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.understanding_tables.quiz.m0_s02_reading_order",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        }
-      ]
-    },
-    "database_thinking": {
-      "topicId": "database_thinking",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-0",
-      "sectionSlug": "sql-v2-sql-v2-0-3",
-      "prefix": "sqlv2_0",
-      "minutes": 13,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "students_intro",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-0.database_thinking.label",
-        "summaryKey": "topics.sql-v2.sql-v2-0.database_thinking.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.database_thinking.cards.sketch0.title",
-          "sketchId": "why_database_thinking_matters",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.database_thinking.cards.sketch1.title",
-          "sketchId": "questions_turn_into_answers",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
-          "id": "sketch2",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.database_thinking.cards.sketch2.title",
-          "sketchId": "why_structure_matters",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
-          "id": "sketch3",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.database_thinking.cards.sketch3.title",
-          "sketchId": "what_a_key_is",
-          "height": 420,
-          "tools": {
-            "defaultVisible": false,
-            "allowOpen": false
-          }
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-0.database_thinking.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "why_database_thinking_matters",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.database_thinking.why_database_thinking_matters.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.database_thinking.why_database_thinking_matters.bodyMarkdown",
-          "images": [
-            {
-              "id": "question_to_table_answer",
-              "publicId": "question_to_table_answer_ssu8dv",
-              "alt": ""
-            }
-          ]
-        },
-        {
-          "id": "questions_turn_into_answers",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.database_thinking.questions_turn_into_answers.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.database_thinking.questions_turn_into_answers.bodyMarkdown",
-          "images": [
-            {
-              "id": "data_question_flow",
-              "publicId": "question_to_table_answer_ssu8dv",
-              "alt": ""
-            }
-          ]
-        },
-        {
-          "id": "why_structure_matters",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.database_thinking.why_structure_matters.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.database_thinking.why_structure_matters.bodyMarkdown",
-          "images": [
-            {
-              "alt": "",
-              "id": "organized_vs_messy_table",
-              "publicId": "organized_vs_messy_table"
-            }
-          ]
-        },
-        {
-          "id": "what_a_key_is",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.database_thinking.what_a_key_is.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.database_thinking.what_a_key_is.bodyMarkdown",
-          "images": [
-            {
-              "id": "primary_key_simple_example",
-              "publicId": "primary_key_simple_example_l209sb",
-              "alt": ""
-            }
-          ]
-        }
-      ],
-      "exercises": [
-        {
-          "id": "m0_s03_database_thinking_focus",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_database_thinking_focus",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s03_questions_matter",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_questions_matter",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s03_structure_importance",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_structure_importance",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "m0_s03_name_vs_id",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-0.database_thinking.quiz.m0_s03_name_vs_id",
+          "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s02_columns_meaning",
           "optionIds": [
             "a",
             "b",
@@ -115792,7 +114993,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "first_sql_environment",
       "subjectSlug": "sql-v2",
       "moduleSlug": "sql-v2-0",
-      "sectionSlug": "sql-v2-sql-v2-0-4",
+      "sectionSlug": "sql-v2-sql-v2-0-1",
       "prefix": "sqlv2_0",
       "minutes": 16,
       "runtimeDefaults": {
@@ -115820,13 +115021,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "height": 420
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch1.title",
-          "sketchId": "sql_editor_basics",
-          "height": 420
-        },
-        {
           "id": "sketch2",
           "kind": "sketch",
           "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch2.title",
@@ -115844,13 +115038,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "allowReveal": true,
             "maxAttempts": null
           }
-        },
-        {
-          "id": "sketch3",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch3.title",
-          "sketchId": "reading_query_results",
-          "height": 420
         },
         {
           "id": "quiz",
@@ -115883,12 +115070,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ]
         },
         {
-          "id": "sql_editor_basics",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.sql_editor_basics.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.sql_editor_basics.bodyMarkdown"
-        },
-        {
           "id": "running_your_first_query",
           "archetype": "paragraph",
           "titleKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.running_your_first_query.title",
@@ -115900,19 +115081,13 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "alt": ""
             }
           ]
-        },
-        {
-          "id": "reading_query_results",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.reading_query_results.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.reading_query_results.bodyMarkdown"
         }
       ],
       "exercises": [
         {
           "id": "try-first_sql_environment-sketch2",
           "kind": "code_input",
-          "purpose": "project",
+          "purpose": "try_it",
           "weight": 1,
           "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2",
           "language": "sql",
@@ -115984,7 +115159,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT 'Practice ready' AS check_in;",
+                "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -116006,7 +115181,108 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "showExpectedExample": true
+        },
+        {
+          "id": "practice-edit-run-inspect",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false,
+            "datasetId": "students_intro",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table"
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "students_intro",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ],
+            "ignoreRowOrder": true
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "showExpectedExample": true
         },
         {
           "id": "m0_s04_where_sql_runs",
@@ -116225,7 +115501,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT 'Roster check started' AS status;",
+                "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -116248,7 +115524,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Uu][Dd][Ee][Nn][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Gg][Rr][Aa][Dd][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "mp-2-add-city-to-roster",
@@ -116325,7 +115613,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT *\nFROM students;",
+                "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-2-add-city-to-roster.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -116451,48 +115739,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_valid_select_parts",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.mc_valid_select_parts",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_order_basic",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.dr_query_order_basic",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
           "id": "fb_from_table_name",
           "kind": "fill_blank_choice",
           "purpose": "quiz",
@@ -116502,6 +115748,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "fill_blank_choice",
             "value": "products"
+          }
+        },
+        {
+          "id": "sc_select_specific_columns_meaning",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.sc_select_specific_columns_meaning",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "sc_columns_comma",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.sc_columns_comma",
+          "optionIds": [
+            "a",
+            "b",
+            "c"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
           }
         },
         {
@@ -116579,7 +115858,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, stock\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -116602,176 +115881,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "selecting_specific_columns": {
-      "topicId": "selecting_specific_columns",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-1",
-      "sectionSlug": "sql-v2-sql-v2-1-2",
-      "prefix": "sqlv2_1",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.label",
-        "summaryKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.cards.sketch0.title",
-          "sketchId": "select_all_columns",
-          "height": 420,
-          "tryIt": {
-            "id": "try-selecting_specific_columns-sketch2",
-            "titleKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.tryIt.try_selecting_specific_columns_sketch2.title",
-            "promptKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.tryIt.try_selecting_specific_columns_sketch2.prompt",
-            "exerciseKey": "try-selecting_specific_columns-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Oo][Cc][Kk]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Rr][Ee][Aa][Tt][Ee][Dd]_[Aa][Tt]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.try-what_select_does-sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.cards.sketch1.title",
-          "sketchId": "select_explicit_columns",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-1.selecting_specific_columns.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "select_all_columns",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-1.selecting_specific_columns.select_all_columns.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-1.selecting_specific_columns.select_all_columns.bodyMarkdown"
-        },
-        {
-          "id": "select_explicit_columns",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-1.selecting_specific_columns.select_explicit_columns.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-1.selecting_specific_columns.select_explicit_columns.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_select_specific_columns_meaning",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.sc_select_specific_columns_meaning",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "sc_column_order_result_order",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.sc_column_order_result_order",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "c"
-          }
-        },
-        {
-          "id": "mc_valid_specific_column_queries",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.mc_valid_specific_column_queries",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr_build_two_column_query",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.dr_build_two_column_query",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5"
-            ]
-          }
-        },
-        {
-          "id": "try-selecting_specific_columns-sketch2",
+          "id": "practice-selecting-specific-columns",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2",
+          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -116789,11 +115920,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -116808,7 +115939,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -116817,7 +115948,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -116826,11 +115957,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-1.selecting_specific_columns.quiz.try-selecting_specific_columns-sketch2.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -116839,7 +115970,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT category, created_at\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -116862,178 +115993,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "query_multiple_columns": {
-      "topicId": "query_multiple_columns",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-1",
-      "sectionSlug": "sql-v2-sql-v2-1-3",
-      "prefix": "sqlv2_1",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.label",
-        "summaryKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.sketch0.title",
-          "sketchId": "column_sequence",
-          "height": 420,
-          "tryIt": {
-            "id": "try-query_multiple_columns-sketch2",
-            "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch2.title",
-            "promptKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.tryIt.try_query_multiple_columns_sketch2.prompt",
-            "exerciseKey": "try-query_multiple_columns-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Rr][Ee][Aa][Tt][Ee][Dd]_[Aa][Tt]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-selecting-specific-columns.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.sketch1.title",
-          "sketchId": "readable_formatting",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-1.query_multiple_columns.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "column_sequence",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.column_sequence.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.column_sequence.bodyMarkdown"
-        },
-        {
-          "id": "readable_formatting",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.readable_formatting.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-1.query_multiple_columns.readable_formatting.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_columns_comma",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.sc_columns_comma",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "sc_result_order",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.sc_result_order",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "c"
-          }
-        },
-        {
-          "id": "mc_valid_multiple_column_queries",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.mc_valid_multiple_column_queries",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_structure_three_columns",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.dr_query_structure_three_columns",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5",
-            "t6"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t4",
-              "t3",
-              "t5",
-              "t6",
-              "t1",
-              "t2"
-            ]
-          }
-        },
-        {
-          "id": "try-query_multiple_columns-sketch2",
+          "id": "practice-multiple-column-order",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2",
+          "messageBase": "topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -117051,11 +116032,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -117070,7 +116051,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -117079,7 +116060,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -117088,11 +116069,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-1.query_multiple_columns.quiz.try-query_multiple_columns-sketch2.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -117101,7 +116082,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n    category,\n    stock,\n    created_at\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -117124,7 +116105,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Oo][Cc][Kk]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Rr][Ee][Aa][Tt][Ee][Dd]_[Aa][Tt]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.what_select_does.quiz.practice-multiple-column-order.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -117132,7 +116125,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "common_beginner_syntax_mistakes",
       "subjectSlug": "sql-v2",
       "moduleSlug": "sql-v2-1",
-      "sectionSlug": "sql-v2-sql-v2-1-4",
+      "sectionSlug": "sql-v2-sql-v2-1-1",
       "prefix": "sqlv2_1",
       "minutes": 16,
       "runtimeDefaults": {
@@ -117172,13 +116165,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.cards.sketch1.title",
-          "sketchId": "syntax_checklist",
-          "height": 420
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.cards.quiz.title",
@@ -117200,12 +116186,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.predict_result_shape.title",
           "bodyKey": "sketches.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.predict_result_shape.bodyMarkdown"
-        },
-        {
-          "id": "syntax_checklist",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.syntax_checklist.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.syntax_checklist.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -117346,7 +116326,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, created_at\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -117369,7 +116349,243 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Rr][Ee][Aa][Tt][Ee][Dd]_[Aa][Tt]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "practice-repair-clause-order",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "products_catalog",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "products_catalog",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ],
+            "ignoreRowOrder": true
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[pP][rR][oO][dD][uU][cC][tT][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][aA][tT][eE][gG][oO][rR][yY]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[pP][rR][iI][cC][eE]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "practice-repair-column-list",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "products_catalog",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "products_catalog",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ],
+            "ignoreRowOrder": true
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[pP][rR][oO][dD][uU][cC][tT][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[iI][dD]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[sS][tT][oO][cC][kK]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -117520,7 +116736,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  name,\n  category,\n  price\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -117543,7 +116759,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "mp-2-add-pricing-columns",
@@ -117620,7 +116848,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  category,\n  price,\n  stock\nFROM products;",
+                "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -117643,7 +116871,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Oo][Cc][Kk]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -117746,11 +116986,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sc_2",
+          "id": "eq-sc-1",
           "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.sc_2",
+          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.eq-sc-1",
           "optionIds": [
             "a",
             "b",
@@ -117759,15 +116999,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "expected": {
             "kind": "single_choice",
-            "optionId": "b"
+            "optionId": "a"
           }
         },
         {
-          "id": "mc_1",
-          "kind": "multi_choice",
+          "id": "gt-sc-inclusive",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.mc_1",
+          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.gt-sc-inclusive",
           "optionIds": [
             "a",
             "b",
@@ -117775,32 +117015,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
+            "kind": "single_choice",
+            "optionId": "c"
           }
         },
         {
-          "id": "dr_1",
-          "kind": "drag_reorder",
+          "id": "fb_text_quotes",
+          "kind": "fill_blank_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.dr_1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
+          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.fb_text_quotes",
+          "choiceCount": 4,
           "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
+            "kind": "fill_blank_choice",
+            "value": "Home"
           }
         },
         {
@@ -117878,7 +117106,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Stationery';",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -117901,168 +117129,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "equals_comparison": {
-      "topicId": "equals_comparison",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-2",
-      "sectionSlug": "sql-v2-sql-v2-2-1",
-      "prefix": "sqlv2_2",
-      "minutes": 20,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-2.equals_comparison.label",
-        "summaryKey": "topics.sql-v2.sql-v2-2.equals_comparison.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.sketch0.title",
-          "sketchId": "equals_exact_value",
-          "height": 420,
-          "tryIt": {
-            "id": "try-equals_comparison-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.equals_comparison.tryIt.try_equals_comparison_sketch0.prompt",
-            "exerciseKey": "try-equals_comparison-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.sketch1.title",
-          "sketchId": "not_equal_value",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-2.equals_comparison.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "equals_exact_value",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals_exact_value.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.equals_comparison.equals_exact_value.bodyMarkdown"
-        },
-        {
-          "id": "not_equal_value",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.equals_comparison.not_equal_value.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.equals_comparison.not_equal_value.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "eq-sc-1",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-sc-1",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "eq-mc-1",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-mc-1",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "eq-dr-1",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-dr-1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "eq-fb-2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.eq-fb-2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "name"
-          }
-        },
-        {
-          "id": "try-equals_comparison-sketch0",
+          "id": "practice-exact-comparisons",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0",
+          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -118080,11 +117168,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118099,7 +117187,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -118108,7 +117196,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -118117,11 +117205,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.equals_comparison.quiz.try-equals_comparison-sketch0.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118130,7 +117218,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118153,165 +117241,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "greater_than_comparison": {
-      "topicId": "greater_than_comparison",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-2",
-      "sectionSlug": "sql-v2-sql-v2-2-2",
-      "prefix": "sqlv2_2",
-      "minutes": 20,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.label",
-        "summaryKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.cards.sketch0.title",
-          "sketchId": "strict_numeric_comparisons",
-          "height": 420,
-          "tryIt": {
-            "id": "try-greater_than_comparison-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.tryIt.try_greater_than_comparison_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.tryIt.try_greater_than_comparison_sketch1.prompt",
-            "exerciseKey": "try-greater_than_comparison-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.cards.sketch1.title",
-          "sketchId": "inclusive_boundaries",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-2.greater_than_comparison.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "strict_numeric_comparisons",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.greater_than_comparison.strict_numeric_comparisons.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.greater_than_comparison.strict_numeric_comparisons.bodyMarkdown"
-        },
-        {
-          "id": "inclusive_boundaries",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.greater_than_comparison.inclusive_boundaries.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.greater_than_comparison.inclusive_boundaries.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "gt-sc-meaning",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.gt-sc-meaning",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
-          "id": "gt-sc-inclusive",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.gt-sc-inclusive",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "c"
-          }
-        },
-        {
-          "id": "gt-order-query-parts",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.gt-order-query-parts",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "gt-fb-price-threshold",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.gt-fb-price-threshold",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "20"
-          }
-        },
-        {
-          "id": "try-greater_than_comparison-sketch1",
+          "id": "practice-numeric-boundaries",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1",
+          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -118329,11 +117280,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118348,7 +117299,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -118357,7 +117308,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -118366,11 +117317,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.greater_than_comparison.quiz.try-greater_than_comparison-sketch1.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118379,7 +117330,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, stock\nFROM products\nWHERE stock >= 15;",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118402,164 +117353,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "filtering_numbers_and_text": {
-      "topicId": "filtering_numbers_and_text",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-2",
-      "sectionSlug": "sql-v2-sql-v2-2-2",
-      "prefix": "sqlv2_2",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.label",
-        "summaryKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.cards.sketch0.title",
-          "sketchId": "numeric_and_text_literals",
-          "height": 420,
-          "tryIt": {
-            "id": "try-filtering_numbers_and_text-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.tryIt.try_filtering_numbers_and_text_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.tryIt.try_filtering_numbers_and_text_sketch0.prompt",
-            "exerciseKey": "try-filtering_numbers_and_text-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Oo][Cc][Kk]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.cards.sketch1.title",
-          "sketchId": "operator_language",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "numeric_and_text_literals",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.filtering_numbers_and_text.numeric_and_text_literals.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.filtering_numbers_and_text.numeric_and_text_literals.bodyMarkdown"
-        },
-        {
-          "id": "operator_language",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.filtering_numbers_and_text.operator_language.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.filtering_numbers_and_text.operator_language.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_where_text_exact",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.sc_where_text_exact",
-          "optionIds": [
-            "a",
-            "b",
-            "c"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "sc_where_number_operator",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.sc_where_number_operator",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
-          "id": "mc_valid_where_filters",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.mc_valid_where_filters",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "fb_text_quotes",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.fb_text_quotes",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "Home"
-          }
-        },
-        {
-          "id": "try-filtering_numbers_and_text-sketch0",
+          "id": "practice-number-and-text-filters",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0",
+          "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -118577,11 +117392,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118596,7 +117411,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -118605,7 +117420,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -118614,11 +117429,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.filtering_numbers_and_text.quiz.try-filtering_numbers_and_text-sketch0.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118627,7 +117442,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Home';",
+                "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118650,7 +117465,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -118658,7 +117485,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "and_conditions",
       "subjectSlug": "sql-v2",
       "moduleSlug": "sql-v2-2",
-      "sectionSlug": "sql-v2-sql-v2-2-3",
+      "sectionSlug": "sql-v2-sql-v2-2-1",
       "prefix": "sqlv2_2",
       "minutes": 16,
       "runtimeDefaults": {
@@ -118753,11 +117580,40 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_rows_match_art_and_price",
+          "id": "fb_and_keyword",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.fb_and_keyword",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "AND"
+          }
+        },
+        {
+          "id": "sc_parentheses_clarity",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.sc_parentheses_clarity",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "mc_and_vs_or",
           "kind": "multi_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.mc_rows_match_art_and_price",
+          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.mc_and_vs_or",
           "optionIds": [
             "a",
             "b",
@@ -118770,38 +117626,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "a",
               "b"
             ]
-          }
-        },
-        {
-          "id": "dr_build_and_query",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.dr_build_and_query",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb_and_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.fb_and_keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "AND"
           }
         },
         {
@@ -118879,7 +117703,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'\n  AND stock >= 15;",
+                "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch1.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -118902,190 +117726,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "combining_conditions_safely": {
-      "topicId": "combining_conditions_safely",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-2",
-      "sectionSlug": "sql-v2-sql-v2-2-3",
-      "prefix": "sqlv2_2",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.label",
-        "summaryKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.cards.sketch0.title",
-          "sketchId": "parentheses_mixed_logic",
-          "height": 420,
-          "tryIt": {
-            "id": "try-combining_conditions_safely-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.tryIt.try_combining_conditions_safely_sketch0.prompt",
-            "exerciseKey": "try-combining_conditions_safely-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Oo][Cc][Kk]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.try-and_conditions-sketch1.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.cards.sketch1.title",
-          "sketchId": "not_reverses_condition",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-2.combining_conditions_safely.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "parentheses_mixed_logic",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.parentheses_mixed_logic.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.parentheses_mixed_logic.bodyMarkdown"
-        },
-        {
-          "id": "not_reverses_condition",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.not_reverses_condition.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.combining_conditions_safely.not_reverses_condition.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_parentheses_clarity",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.sc_parentheses_clarity",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "mc_parentheses_same_meaning",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.mc_parentheses_same_meaning",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "dr_build_grouped_filter",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.dr_build_grouped_filter",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5",
-            "t6",
-            "t7",
-            "t8"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5",
-              "t6",
-              "t7",
-              "t8"
-            ]
-          }
-        },
-        {
-          "id": "dr_build_not_filter",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.dr_build_not_filter",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4",
-            "t5"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4",
-              "t5"
-            ]
-          }
-        },
-        {
-          "id": "try-combining_conditions_safely-sketch0",
+          "id": "practice-grouped-conditions",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0",
+          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -119103,11 +117765,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -119122,7 +117784,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -119131,7 +117793,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -119140,11 +117802,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.combining_conditions_safely.quiz.try-combining_conditions_safely-sketch0.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -119153,7 +117815,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE (category = 'Home' OR category = 'Art')\n  AND price <= 30;",
+                "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -119176,168 +117838,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "avoiding_filtering_mistakes": {
-      "topicId": "avoiding_filtering_mistakes",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-2",
-      "sectionSlug": "sql-v2-sql-v2-2-4",
-      "prefix": "sqlv2_2",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.label",
-        "summaryKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.sketch0.title",
-          "sketchId": "filter_requirement_check",
-          "height": 420,
-          "tryIt": {
-            "id": "try-avoiding_filtering_mistakes-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.tryIt.try_avoiding_filtering_mistakes_sketch0.prompt",
-            "exerciseKey": "try-avoiding_filtering_mistakes-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-grouped-conditions.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.sketch1.title",
-          "sketchId": "filter_debug_steps",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "filter_requirement_check",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.filter_requirement_check.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.filter_requirement_check.bodyMarkdown"
-        },
-        {
-          "id": "filter_debug_steps",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.filter_debug_steps.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-2.avoiding_filtering_mistakes.filter_debug_steps.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_where_wrong_operator",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.sc_where_wrong_operator",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "mc_and_vs_or",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.mc_and_vs_or",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "mc_check_result_clues",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.mc_check_result_clues",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "fb_choose_quoted_text",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.fb_choose_quoted_text",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "'Home'"
-          }
-        },
-        {
-          "id": "try-avoiding_filtering_mistakes-sketch0",
+          "id": "practice-debug-filter",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0",
+          "messageBase": "topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -119355,11 +117877,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -119374,7 +117896,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -119383,7 +117905,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -119392,11 +117914,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-2.avoiding_filtering_mistakes.quiz.try-avoiding_filtering_mistakes-sketch0.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -119405,7 +117927,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, price\nFROM products\nWHERE price >= 20;",
+                "content": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -119428,7 +117950,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.and_conditions.quiz.practice-debug-filter.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -119588,7 +118122,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20;",
+                "content": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -119611,7 +118145,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-1-find-budget-products.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "mp-2-focus-on-stationery",
@@ -119688,7 +118234,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  price\nFROM products\nWHERE price < 20\n  AND category = 'Stationery';",
+                "content": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-2-focus-on-stationery.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -119788,7 +118334,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  name,\n  price,\n  stock\nFROM products\nWHERE price < 20\n  AND category = 'Stationery'\n  AND stock <= 15;",
+                "content": "@:topics.sql-v2.sql-v2-2.module-2-inventory-watchlist-project.quiz.mp-3-finish-watchlist.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -119914,6 +118460,40 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
+          "id": "sc_asc_meaning",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.sc_asc_meaning",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "sc_order_by_first_column",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.sc_order_by_first_column",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
           "id": "mc_order_by_true_statements",
           "kind": "multi_choice",
           "purpose": "quiz",
@@ -119931,38 +118511,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "a",
               "b"
             ]
-          }
-        },
-        {
-          "id": "dr_query_clause_order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.dr_query_clause_order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb_default_direction",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.fb_default_direction",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "ASC"
           }
         },
         {
@@ -120039,7 +118587,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, name, category\nFROM products\nORDER BY category ASC;",
+                "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -120062,165 +118610,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "ascending_order": {
-      "topicId": "ascending_order",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-3",
-      "sectionSlug": "sql-v2-sql-v2-3-2",
-      "prefix": "sqlv2_3",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-3.ascending_order.label",
-        "summaryKey": "topics.sql-v2.sql-v2-3.ascending_order.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-3.ascending_order.cards.sketch0.title",
-          "sketchId": "ascending_examples",
-          "height": 420,
-          "tryIt": {
-            "id": "try-ascending_order-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-3.ascending_order.tryIt.try_ascending_order_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-3.ascending_order.tryIt.try_ascending_order_sketch1.prompt",
-            "exerciseKey": "try-ascending_order-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.order_by.quiz.try-order_by-sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-3.ascending_order.cards.sketch1.title",
-          "sketchId": "descending_examples",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-3.ascending_order.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "ascending_examples",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-3.ascending_order.ascending_examples.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-3.ascending_order.ascending_examples.bodyMarkdown"
-        },
-        {
-          "id": "descending_examples",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-3.ascending_order.descending_examples.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-3.ascending_order.descending_examples.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_asc_meaning",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.sc_asc_meaning",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "sc_default_asc",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.sc_default_asc",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "mc_asc_examples",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.mc_asc_examples",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "fb_sort_keyword",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.fb_sort_keyword",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "ASC"
-          }
-        },
-        {
-          "id": "try-ascending_order-sketch1",
+          "id": "practice-sort-direction",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1",
+          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -120238,11 +118649,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -120256,7 +118667,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -120265,7 +118676,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -120274,11 +118685,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-3.ascending_order.quiz.try-ascending_order-sketch1.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -120287,7 +118698,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, price\nFROM products\nORDER BY price DESC;",
+                "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -120310,168 +118721,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "primary_sort": {
-      "topicId": "primary_sort",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-3",
-      "sectionSlug": "sql-v2-sql-v2-3-3",
-      "prefix": "sqlv2_3",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "products_catalog",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-3.primary_sort.label",
-        "summaryKey": "topics.sql-v2.sql-v2-3.primary_sort.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-3.primary_sort.cards.sketch0.title",
-          "sketchId": "primary_sort_column",
-          "height": 420,
-          "tryIt": {
-            "id": "try-primary_sort-sketch2",
-            "titleKey": "topics.sql-v2.sql-v2-3.primary_sort.tryIt.try_primary_sort_sketch2.title",
-            "promptKey": "topics.sql-v2.sql-v2-3.primary_sort.tryIt.try_primary_sort_sketch2.prompt",
-            "exerciseKey": "try-primary_sort-sketch2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-direction.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-3.primary_sort.cards.sketch1.title",
-          "sketchId": "secondary_tie_breaker",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-3.primary_sort.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "primary_sort_column",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-3.primary_sort.primary_sort_column.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-3.primary_sort.primary_sort_column.bodyMarkdown"
-        },
-        {
-          "id": "secondary_tie_breaker",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-3.primary_sort.secondary_tie_breaker.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-3.primary_sort.secondary_tie_breaker.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_primary_sort_first_column",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.sc_primary_sort_first_column",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "mc_primary_sort_true_statements",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.mc_primary_sort_true_statements",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr_primary_sort_query_order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.dr_primary_sort_query_order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
-          "id": "fb_primary_sort_column",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.fb_primary_sort_column",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "name"
-          }
-        },
-        {
-          "id": "try-primary_sort-sketch2",
+          "id": "practice-sort-tiebreaker",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2",
+          "messageBase": "topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -120489,11 +118760,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "products_catalog",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -120507,7 +118778,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -120516,7 +118787,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -120525,11 +118796,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-3.primary_sort.quiz.try-primary_sort-sketch2.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -120538,7 +118809,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, category, stock\nFROM products\nORDER BY category ASC, name ASC;",
+                "content": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -120561,7 +118832,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Oo][Cc][Kk]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.order_by.quiz.practice-sort-tiebreaker.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -120569,7 +118852,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "combining_order_by_with_limit",
       "subjectSlug": "sql-v2",
       "moduleSlug": "sql-v2-3",
-      "sectionSlug": "sql-v2-sql-v2-3-4",
+      "sectionSlug": "sql-v2-sql-v2-3-1",
       "prefix": "sqlv2_3",
       "minutes": 16,
       "runtimeDefaults": {
@@ -120609,13 +118892,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.cards.sketch1.title",
-          "sketchId": "rank_then_limit",
-          "height": 420
-        },
-        {
           "id": "quiz",
           "kind": "quiz",
           "titleKey": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.cards.quiz.title",
@@ -120637,12 +118913,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "archetype": "paragraph",
           "titleKey": "sketches.sql-v2.sql-v2-3.combining_order_by_with_limit.limit_first_rows.title",
           "bodyKey": "sketches.sql-v2.sql-v2-3.combining_order_by_with_limit.limit_first_rows.bodyMarkdown"
-        },
-        {
-          "id": "rank_then_limit",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-3.combining_order_by_with_limit.rank_then_limit.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-3.combining_order_by_with_limit.rank_then_limit.bodyMarkdown"
         }
       ],
       "exercises": [
@@ -120798,7 +119068,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT name, category, price\nFROM products\nWHERE category = 'Stationery'\nORDER BY price ASC\nLIMIT 2;",
+                "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -120821,7 +119091,241 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "practice-top-three-prices",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "products_catalog",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "products_catalog",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ]
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[pP][rR][oO][dD][uU][cC][tT][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[pP][rR][iI][cC][eE]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "practice-filter-rank-limit",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "products_catalog",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "products_catalog",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ]
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[pP][rR][oO][dD][uU][cC][tT][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][aA][tT][eE][gG][oO][rR][yY]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][rR][eE][aA][tT][eE][dD]_[aA][tT]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.sourceChecks.1.message"
+            }
+          ]
         }
       ]
     },
@@ -120980,7 +119484,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  name,\n  price\nFROM products\nORDER BY price DESC;",
+                "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121003,7 +119507,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Ii][Cc][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "mp-2-add-stock-tiebreaker",
@@ -121079,7 +119595,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC;",
+                "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121102,7 +119618,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "mp-3-finish-leaderboard",
@@ -121178,7 +119701,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  name,\n  price,\n  stock\nFROM products\nORDER BY price DESC, stock ASC\nLIMIT 5;",
+                "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121201,7 +119724,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.sourceChecks.0.message"
+            }
+          ]
         }
       ]
     },
@@ -121304,46 +119834,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_like_true_patterns",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.mc_like_true_patterns",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "dr_like_query_order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.dr_like_query_order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
-          }
-        },
-        {
           "id": "fb_like_contains",
           "kind": "fill_blank_choice",
           "purpose": "quiz",
@@ -121353,6 +119843,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "expected": {
             "kind": "fill_blank_choice",
             "value": "'%a%'"
+          }
+        },
+        {
+          "id": "sc_1",
+          "kind": "single_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.sc_1",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "expected": {
+            "kind": "single_choice",
+            "optionId": "a"
+          }
+        },
+        {
+          "id": "fb_2",
+          "kind": "fill_blank_choice",
+          "purpose": "quiz",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.fb_2",
+          "choiceCount": 4,
+          "expected": {
+            "kind": "fill_blank_choice",
+            "value": "____"
           }
         },
         {
@@ -121430,7 +119949,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, full_name, city\nFROM customers\nWHERE full_name LIKE 'M%';",
+                "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121453,171 +119972,33 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "underscore_wildcard": {
-      "topicId": "underscore_wildcard",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-4",
-      "sectionSlug": "sql-v2-sql-v2-4-1",
-      "prefix": "sqlv2_4",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.label",
-        "summaryKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.cards.sketch0.title",
-          "sketchId": "underscore_one_character",
-          "height": 420,
-          "tryIt": {
-            "id": "try-underscore_wildcard-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.tryIt.try_underscore_wildcard_sketch0.prompt",
-            "exerciseKey": "try-underscore_wildcard-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Ii][Tt][Yy]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ll][Ii][Kk][Ee]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.sourceChecks.2.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.cards.sketch1.title",
-          "sketchId": "mixed_wildcards",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-4.underscore_wildcard.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "underscore_one_character",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.underscore_one_character.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.underscore_one_character.bodyMarkdown"
-        },
-        {
-          "id": "mixed_wildcards",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.mixed_wildcards.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-4.underscore_wildcard.mixed_wildcards.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_1",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.sc_1",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "a"
-          }
-        },
-        {
-          "id": "mc_1",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.mc_1",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "d"
-            ]
-          }
-        },
-        {
-          "id": "dr_1",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.dr_1",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "fb_2",
-          "kind": "fill_blank_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.fb_2",
-          "choiceCount": 4,
-          "expected": {
-            "kind": "fill_blank_choice",
-            "value": "____"
-          }
-        },
-        {
-          "id": "try-underscore_wildcard-sketch0",
+          "id": "practice-like-single-character",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0",
+          "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -121635,11 +120016,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121654,7 +120035,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -121663,7 +120044,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -121672,11 +120053,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.underscore_wildcard.quiz.try-underscore_wildcard-sketch0.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121685,7 +120066,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT full_name, city\nFROM customers\nWHERE city LIKE 'H_uston';",
+                "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121708,7 +120089,24 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][iI][tT][yY]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[lL][iI][kK][eE]\\b\\s*'[^']*_[^']*'",
+              "message": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.sourceChecks.2.message"
+            }
+          ]
         }
       ]
     },
@@ -121716,7 +120114,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "in_list_filter",
       "subjectSlug": "sql-v2",
       "moduleSlug": "sql-v2-4",
-      "sectionSlug": "sql-v2-sql-v2-4-2",
+      "sectionSlug": "sql-v2-sql-v2-4-1",
       "prefix": "sqlv2_4",
       "minutes": 16,
       "runtimeDefaults": {
@@ -121828,11 +120226,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_in_equivalents",
-          "kind": "multi_choice",
+          "id": "sc_between_inclusive",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.mc_in_equivalents",
+          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.sc_between_inclusive",
           "optionIds": [
             "a",
             "b",
@@ -121840,31 +120238,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "d"
-            ]
+            "kind": "single_choice",
+            "optionId": "b"
           }
         },
         {
-          "id": "dr_where_in_logic",
-          "kind": "drag_reorder",
+          "id": "sc_between_equivalent",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.dr_where_in_logic",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
+          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.sc_between_equivalent",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
           ],
           "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
+            "kind": "single_choice",
+            "optionId": "b"
           }
         },
         {
@@ -121942,7 +120334,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'draft');",
+                "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -121965,176 +120357,33 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "between_range_filter": {
-      "topicId": "between_range_filter",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-4",
-      "sectionSlug": "sql-v2-sql-v2-4-2",
-      "prefix": "sqlv2_4",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-4.between_range_filter.label",
-        "summaryKey": "topics.sql-v2.sql-v2-4.between_range_filter.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-4.between_range_filter.cards.sketch0.title",
-          "sketchId": "between_inclusive_range",
-          "height": 420,
-          "tryIt": {
-            "id": "try-between_range_filter-sketch0",
-            "titleKey": "topics.sql-v2.sql-v2-4.between_range_filter.tryIt.try_between_range_filter_sketch0.title",
-            "promptKey": "topics.sql-v2.sql-v2-4.between_range_filter.tryIt.try_between_range_filter_sketch0.prompt",
-            "exerciseKey": "try-between_range_filter-sketch0",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Aa][Tt][Uu][Ss]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ii][Nn]\\b\\s*\\(",
+              "message": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.sourceChecks.2.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-4.between_range_filter.cards.sketch1.title",
-          "sketchId": "between_with_condition",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-4.between_range_filter.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "between_inclusive_range",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-4.between_range_filter.between_inclusive_range.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-4.between_range_filter.between_inclusive_range.bodyMarkdown"
-        },
-        {
-          "id": "between_with_condition",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-4.between_range_filter.between_with_condition.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-4.between_range_filter.between_with_condition.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_between_inclusive",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.sc_between_inclusive",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
-          "id": "sc_between_equivalent",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.sc_between_equivalent",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
-          "id": "mc_between_matches_rows",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.mc_between_matches_rows",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b",
-              "c"
-            ]
-          }
-        },
-        {
-          "id": "dr_between_with_order",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.dr_between_with_order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t3",
-              "t2",
-              "t4",
-              "t1"
-            ]
-          }
-        },
-        {
-          "id": "try-between_range_filter-sketch0",
+          "id": "practice-inclusive-range",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0",
+          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -122152,11 +120401,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122171,7 +120420,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -122180,7 +120429,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -122189,11 +120438,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.between_range_filter.quiz.try-between_range_filter-sketch0.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122202,7 +120451,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
+                "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122225,7 +120474,136 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[iI][dD]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[sS][iI][gG][nN][uU][pP]_[dD][aA][tT][eE]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "practice-exclude-status-list",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "customers_cleanup",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "customers_cleanup",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ],
+            "ignoreRowOrder": true
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[sS][tT][aA][tT][uU][sS]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[nN][oO][tT]\\b\\s+\\b[iI][nN]\\b\\s*\\(",
+              "message": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.sourceChecks.2.message"
+            }
+          ]
         }
       ]
     },
@@ -122233,7 +120611,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       "topicId": "what_null_means",
       "subjectSlug": "sql-v2",
       "moduleSlug": "sql-v2-4",
-      "sectionSlug": "sql-v2-sql-v2-4-3",
+      "sectionSlug": "sql-v2-sql-v2-4-1",
       "prefix": "sqlv2_4",
       "minutes": 16,
       "runtimeDefaults": {
@@ -122344,11 +120722,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           }
         },
         {
-          "id": "mc_null_true_statements",
-          "kind": "multi_choice",
+          "id": "sc_null_operator",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.mc_null_true_statements",
+          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.sc_null_operator",
           "optionIds": [
             "a",
             "b",
@@ -122356,31 +120734,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "d"
           ],
           "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
+            "kind": "single_choice",
+            "optionId": "b"
           }
         },
         {
-          "id": "dr_not_null_query_order",
-          "kind": "drag_reorder",
+          "id": "sc_or_vs_and",
+          "kind": "single_choice",
           "purpose": "quiz",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.dr_not_null_query_order",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3"
+          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.sc_or_vs_and",
+          "optionIds": [
+            "a",
+            "b",
+            "c",
+            "d"
           ],
           "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3"
-            ]
+            "kind": "single_choice",
+            "optionId": "b"
           }
         },
         {
@@ -122458,7 +120830,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+                "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122481,175 +120853,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
-        }
-      ]
-    },
-    "combine_text_and_null_filters": {
-      "topicId": "combine_text_and_null_filters",
-      "subjectSlug": "sql-v2",
-      "moduleSlug": "sql-v2-4",
-      "sectionSlug": "sql-v2-sql-v2-4-4",
-      "prefix": "sqlv2_4",
-      "minutes": 16,
-      "runtimeDefaults": {
-        "kind": "sql",
-        "showSchema": true,
-        "showErd": false,
-        "showChen": false,
-        "supportsTerminal": false,
-        "supportsMultiFile": false,
-        "supportsFileSystem": false,
-        "datasetId": "customers_cleanup",
-        "fixedSqlDialect": "sqlite",
-        "resultShape": "table"
-      },
-      "topic": {
-        "labelKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.label",
-        "summaryKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.summary"
-      },
-      "cards": [
-        {
-          "id": "sketch0",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.cards.sketch0.title",
-          "sketchId": "is_not_null_present_value",
-          "height": 420,
-          "tryIt": {
-            "id": "try-combine_text_and_null_filters-sketch1",
-            "titleKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.tryIt.try_combine_text_and_null_filters_sketch1.title",
-            "promptKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.tryIt.try_combine_text_and_null_filters_sketch1.prompt",
-            "exerciseKey": "try-combine_text_and_null_filters-sketch1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "required": true,
-            "allowReveal": true,
-            "maxAttempts": null
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Aa][Tt][Uu][Ss]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.sourceChecks.1.message"
+            }
+          ]
         },
         {
-          "id": "sketch1",
-          "kind": "sketch",
-          "titleKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.cards.sketch1.title",
-          "sketchId": "cleanup_filter_combination",
-          "height": 420
-        },
-        {
-          "id": "quiz",
-          "kind": "quiz",
-          "titleKey": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.cards.quiz.title",
-          "quiz": {
-            "difficulty": "easy",
-            "n": 4,
-            "min": 4,
-            "max": 4,
-            "selectionMode": "random",
-            "allowReveal": true,
-            "preferKind": null,
-            "maxAttempts": null
-          }
-        }
-      ],
-      "sketches": [
-        {
-          "id": "is_not_null_present_value",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-4.combine_text_and_null_filters.is_not_null_present_value.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-4.combine_text_and_null_filters.is_not_null_present_value.bodyMarkdown"
-        },
-        {
-          "id": "cleanup_filter_combination",
-          "archetype": "paragraph",
-          "titleKey": "sketches.sql-v2.sql-v2-4.combine_text_and_null_filters.cleanup_filter_combination.title",
-          "bodyKey": "sketches.sql-v2.sql-v2-4.combine_text_and_null_filters.cleanup_filter_combination.bodyMarkdown"
-        }
-      ],
-      "exercises": [
-        {
-          "id": "sc_null_operator",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.sc_null_operator",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
-          "id": "sc_or_vs_and",
-          "kind": "single_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.sc_or_vs_and",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "single_choice",
-            "optionId": "b"
-          }
-        },
-        {
-          "id": "mc_valid_combined_filters",
-          "kind": "multi_choice",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.mc_valid_combined_filters",
-          "optionIds": [
-            "a",
-            "b",
-            "c",
-            "d"
-          ],
-          "expected": {
-            "kind": "multi_choice",
-            "optionIds": [
-              "a",
-              "b"
-            ]
-          }
-        },
-        {
-          "id": "dr_query_order_grouped",
-          "kind": "drag_reorder",
-          "purpose": "quiz",
-          "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.dr_query_order_grouped",
-          "tokenIds": [
-            "t1",
-            "t2",
-            "t3",
-            "t4"
-          ],
-          "expected": {
-            "kind": "drag_reorder",
-            "tokenIds": [
-              "t1",
-              "t2",
-              "t3",
-              "t4"
-            ]
-          }
-        },
-        {
-          "id": "try-combine_text_and_null_filters-sketch1",
+          "id": "practice-text-and-null-cleanup",
           "kind": "code_input",
-          "purpose": "try_it",
+          "purpose": "practice",
           "weight": 1,
-          "messageBase": "topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1",
+          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup",
           "language": "sql",
-          "starterCode": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.starterCode",
+          "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
           "fixedSqlDialect": "sqlite",
           "runtime": {
             "kind": "sql",
@@ -122667,11 +120892,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "type": "sql_query",
             "datasetId": "customers_cleanup",
             "resultShape": "table",
-            "solutionCode": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.solutionCode",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.solutionCode",
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.solutionCode",
+                "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122686,7 +120911,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.starterCode",
+              "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -122695,7 +120920,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "query.sql",
-              "content": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.solutionCode",
+              "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.solutionCode",
               "language": "sql",
               "isEntry": true,
               "entry": true
@@ -122704,11 +120929,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "workspace": {
             "language": "sql",
             "entryFilePath": "query.sql",
-            "starterCode": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.starterCode",
+            "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
             "starterFiles": [
               {
                 "path": "query.sql",
-                "content": "@:topics.sql-v2.sql-v2-4.combine_text_and_null_filters.quiz.try-combine_text_and_null_filters-sketch1.starterCode",
+                "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122717,7 +120942,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL\n   OR full_name LIKE '%Test%';",
+                "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122740,7 +120965,136 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ee][Mm][Aa][Ii][Ll]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "practice-present-emails",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "customers_cleanup",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "customers_cleanup",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ],
+            "ignoreRowOrder": true
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[eE][mM][aA][iI][lL]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.sourceChecks.1.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[iI][sS]\\b\\s+\\b[nN][oO][tT]\\b\\s+\\b[nN][uU][lL][lL]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.sourceChecks.2.message"
+            }
+          ]
         }
       ]
     },
@@ -122900,7 +121254,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
+                "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-1-find-missing-emails.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -122923,7 +121277,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-1-find-missing-emails.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ee][Mm][Aa][Ii][Ll]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-1-find-missing-emails.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "mp-2-keep-real-follow-ups",
@@ -123000,7 +121366,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
+                "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-2-keep-real-follow-ups.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123023,7 +121389,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-2-keep-real-follow-ups.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "mp-3-finish-cleanup-report",
@@ -123100,7 +121473,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;",
+                "content": "@:topics.sql-v2.sql-v2-4.module-4-customer-cleanup-project.quiz.mp-3-finish-cleanup-report.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123218,6 +121591,342 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
       ],
       "exercises": [
         {
+          "id": "practice-capstone-contactability",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "customers_cleanup",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "customers_cleanup",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ],
+            "ignoreRowOrder": true
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[eE][mM][aA][iI][lL]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[sS][tT][aA][tT][uU][sS]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "practice-capstone-city-window",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "customers_cleanup",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "customers_cleanup",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ],
+            "ignoreRowOrder": true
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][iI][tT][yY]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[sS][iI][gG][nN][uU][pP]_[dD][aA][tT][eE]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
+          "id": "practice-capstone-ranked-outreach",
+          "kind": "code_input",
+          "purpose": "practice",
+          "weight": 1,
+          "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach",
+          "language": "sql",
+          "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
+          "fixedSqlDialect": "sqlite",
+          "runtime": {
+            "kind": "sql",
+            "datasetId": "customers_cleanup",
+            "fixedSqlDialect": "sqlite",
+            "resultShape": "table",
+            "showSchema": true,
+            "showErd": false,
+            "showChen": false,
+            "supportsTerminal": false,
+            "supportsMultiFile": false,
+            "supportsFileSystem": false
+          },
+          "recipe": {
+            "type": "sql_query",
+            "datasetId": "customers_cleanup",
+            "resultShape": "table",
+            "solutionCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.solutionCode",
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "sqlFileOrder": [
+              "query.sql"
+            ],
+            "ignoreRowOrder": false
+          },
+          "entryFilePath": "query.sql",
+          "starterFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "solutionFiles": [
+            {
+              "path": "query.sql",
+              "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.solutionCode",
+              "language": "sql",
+              "isEntry": true,
+              "entry": true
+            }
+          ],
+          "workspace": {
+            "language": "sql",
+            "entryFilePath": "query.sql",
+            "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
+            "starterFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "solutionFiles": [
+              {
+                "path": "query.sql",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.solutionCode",
+                "language": "sql",
+                "isEntry": true,
+                "entry": true
+              }
+            ],
+            "openTabs": [
+              "query.sql"
+            ],
+            "workspaceExpectations": {
+              "requiredFiles": [
+                "query.sql"
+              ]
+            }
+          },
+          "showExpectedExample": true,
+          "sqlFileOrder": [
+            "query.sql"
+          ],
+          "workspaceExpectations": {
+            "requiredFiles": [
+              "query.sql"
+            ]
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+              "message": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[sS][iI][gG][nN][uU][pP]_[dD][aA][tT][eE]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+              "message": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.sourceChecks.1.message"
+            }
+          ]
+        },
+        {
           "id": "cp-1-start-follow-up-slice",
           "kind": "code_input",
           "purpose": "project",
@@ -123292,7 +122001,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123315,7 +122024,19 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.sourceChecks.0.message"
+            },
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Ii][Tt][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Aa][Tt][Uu][Ss]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+              "message": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.sourceChecks.1.message"
+            }
+          ]
         },
         {
           "id": "cp-2-keep-real-contactable-customers",
@@ -123392,7 +122113,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123492,7 +122213,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true
@@ -123515,7 +122236,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "requiredFiles": [
               "query.sql"
             ]
-          }
+          },
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+              "message": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "cp-4-finish-capstone-report",
@@ -123592,7 +122320,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "solutionFiles": [
               {
                 "path": "query.sql",
-                "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+                "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.solutionCode",
                 "language": "sql",
                 "isEntry": true,
                 "entry": true

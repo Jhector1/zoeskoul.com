@@ -145,7 +145,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT 'Roster check started' AS status;",
+            "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -168,7 +168,19 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Uu][Dd][Ee][Nn][Tt][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Gg][Rr][Aa][Dd][Ee]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-1-preview-student-roster.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "mp-2-add-city-to-roster",
@@ -245,7 +257,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT *\nFROM students;",
+            "content": "@:topics.sql-v2.sql-v2-0.module-0-student-roster-project.quiz.mp-2-add-city-to-roster.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true

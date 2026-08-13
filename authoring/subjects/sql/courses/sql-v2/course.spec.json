@@ -39,7 +39,7 @@
     {
       "moduleNumber": 0,
       "moduleSlug": "sql-v2-0",
-      "title": "Getting Started with SQL and Databases",
+      "title": "Getting Started with SQL",
       "purpose": "Build the learner's mental model before syntax: what SQL is, how databases organize information, and how questions become queries.",
       "datasetId": "students_intro",
       "coreSkill": "Database mental model",
@@ -52,91 +52,37 @@
       "sections": [
         {
           "sectionSlug": "sql-v2-0-1",
-          "title": "What SQL Is",
+          "title": "Foundations",
           "topics": [
             {
               "topicId": "what_sql_is",
-              "title": "What SQL Is",
-              "summary": "Meet SQL as a language for asking useful questions of organized data.",
+              "title": "SQL, Databases, and Tables",
+              "summary": "Learn the one foundation you need before querying: SQL asks databases for results, and database tables organize values into rows and columns.",
               "minutes": 15,
               "difficulty": "beginner",
               "technical": false,
               "learningGoals": [
-                "Explain what SQL is used for without relying on query syntax.",
-                "Describe a database as organized stored data that software can work with.",
-                "Connect a real-world question to the idea of asking a database for a result."
+                "Explain that SQL is used to ask structured data for useful results.",
+                "Describe a database table using rows (records) and columns (fields).",
+                "Use table and column names to identify which data a question needs."
               ],
               "practice": {
                 "tryIt": false,
                 "requiresTryIt": false,
                 "conceptualOnly": true
               }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-0-2",
-          "title": "Understanding Tables",
-          "topics": [
-            {
-              "topicId": "understanding_tables",
-              "title": "Understanding Tables",
-              "summary": "Read a table by separating its columns, rows, records, and fields.",
-              "minutes": 14,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Distinguish a table, row, and column in a simple database.",
-                "Relate record to row and field to column without treating the terms as different structures.",
-                "Read table and column names from a small schema before writing queries."
-              ],
-              "practice": {
-                "tryIt": false,
-                "requiresTryIt": false,
-                "conceptualOnly": true
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-0-3",
-          "title": "Database Thinking",
-          "topics": [
-            {
-              "topicId": "database_thinking",
-              "title": "Database Thinking",
-              "summary": "Think about the question, the structure of the data, and how one record can be identified reliably.",
-              "minutes": 13,
-              "difficulty": "beginner",
-              "technical": false,
-              "learningGoals": [
-                "Turn a plain-language question into the data fields needed to answer it.",
-                "Explain why consistent structure makes stored data easier to inspect and query.",
-                "Explain why a stable identifier is safer than a display name for identifying one record."
-              ],
-              "practice": {
-                "tryIt": false,
-                "requiresTryIt": false,
-                "conceptualOnly": true
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-0-4",
-          "title": "First SQL Environment",
-          "topics": [
+            },
             {
               "topicId": "first_sql_environment",
               "title": "First SQL Environment",
-              "summary": "Use the SQL editor, Run button, Results view, and Tables view without learning extra query syntax too early.",
+              "summary": "Use the editor, Tables view, Run action, and Results view, then execute one tiny SQL statement.",
               "minutes": 16,
               "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Identify the SQL editor, Run action, and results area in the course workspace.",
+                "Locate the SQL editor, Tables view, Run action, and Results view.",
                 "Run one small SQL statement and inspect the returned result.",
-                "Use the Tables view to confirm what data is available before querying it."
+                "Check available data before writing a query."
               ],
               "practice": {
                 "tryIt": true,
@@ -152,7 +98,7 @@
         },
         {
           "sectionSlug": "sql-v2-0-module-project",
-          "title": "Module Project",
+          "title": "Project",
           "role": "module_project",
           "topics": [
             {
@@ -173,12 +119,13 @@
         }
       ],
       "moduleProject": "Create a simple data map for a tiny school or store database showing tables, columns, and example rows.",
-      "prefix": "sqlv2_0"
+      "prefix": "sqlv2_0",
+      "summary": "Understand tables, use the SQL workspace, and finish with a short roster project."
     },
     {
       "moduleNumber": 1,
       "moduleSlug": "sql-v2-1",
-      "title": "Your First Queries with SELECT",
+      "title": "Reading Data with SELECT",
       "purpose": "Teach learners to retrieve data confidently with SELECT and FROM before filtering or joining tables.",
       "datasetId": "products_catalog",
       "coreSkill": "SELECT",
@@ -191,18 +138,18 @@
       "sections": [
         {
           "sectionSlug": "sql-v2-1-1",
-          "title": "Intro to SELECT",
+          "title": "Reading Data",
           "topics": [
             {
               "topicId": "what_select_does",
-              "title": "What SELECT Does",
-              "summary": "Understand what select does so you can explain the idea in beginner-friendly language.",
+              "title": "Selecting Data with SELECT and FROM",
+              "summary": "Learn SELECT and FROM once: choose the columns to return, choose the source table, and build readable multi-column results.",
               "minutes": 12,
               "technical": false,
               "learningGoals": [
-                "Explain the different jobs of SELECT and FROM in a single-table query.",
-                "Write a complete beginner retrieval query with requested columns and a source table.",
-                "Predict which result columns a SELECT list will produce."
+                "Use SELECT to choose result columns and FROM to name the source table.",
+                "Choose between SELECT * and explicit columns based on what the task needs.",
+                "Select several columns with commas and control their left-to-right result order."
               ],
               "practice": {
                 "tryIt": true,
@@ -213,77 +160,17 @@
                   "code_input"
                 ]
               }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-1-2",
-          "title": "Reading Data from a Table",
-          "topics": [
-            {
-              "topicId": "selecting_specific_columns",
-              "title": "Selecting Specific Columns",
-              "summary": "Practice selecting specific columns so you can use it in a simple SQL query or workflow.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
-                "Explain when SELECT * is useful for exploration and when explicit columns are better.",
-                "Select only the columns required for a task.",
-                "Control the left-to-right result order through the SELECT list."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-1-3",
-          "title": "SQL Syntax Basics",
-          "topics": [
-            {
-              "topicId": "query_multiple_columns",
-              "title": "Query Multiple Columns",
-              "summary": "Practice query multiple columns so you can use it in a simple SQL query or workflow.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
-                "Separate multiple selected columns correctly with commas.",
-                "Control result-column order by arranging the SELECT list intentionally.",
-                "Format a multi-column query so it is easy to review without changing its behavior."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-1-4",
-          "title": "Practice with Basic Queries",
-          "topics": [
+            },
             {
               "topicId": "common_beginner_syntax_mistakes",
-              "title": "Common Beginner Syntax Mistakes",
-              "summary": "Practice common beginner syntax mistakes so you can use it in a simple SQL query or workflow.",
+              "title": "Reading and Fixing SELECT Queries",
+              "summary": "Predict the shape of a simple result and repair common SELECT, comma, FROM, and table-name mistakes.",
               "minutes": 16,
               "technical": true,
               "learningGoals": [
-                "Predict the columns a simple SELECT query should return before running it.",
-                "Recognize common beginner mistakes involving commas, clause order, and schema names.",
-                "Repair a broken single-table query using a small syntax checklist."
+                "Predict which columns a simple SELECT query will return before running it.",
+                "Recognize missing commas, missing FROM, and incorrect table names.",
+                "Repair a broken single-table SELECT query using a short syntax checklist."
               ],
               "practice": {
                 "tryIt": true,
@@ -299,7 +186,7 @@
         },
         {
           "sectionSlug": "sql-v2-1-module-project",
-          "title": "Module Project",
+          "title": "Project",
           "role": "module_project",
           "topics": [
             {
@@ -320,12 +207,13 @@
         }
       ],
       "moduleProject": "Build a starter query sheet with beginner SELECT queries against a products table.",
-      "prefix": "sqlv2_1"
+      "prefix": "sqlv2_1",
+      "summary": "Choose columns, read them from one table, fix simple syntax mistakes, and build a short product handoff."
     },
     {
       "moduleNumber": 2,
       "moduleSlug": "sql-v2-2",
-      "title": "Filtering Data with WHERE",
+      "title": "Filtering Rows",
       "purpose": "Introduce decision-making in queries by teaching learners to keep only the rows they actually need.",
       "datasetId": "products_catalog",
       "coreSkill": "WHERE",
@@ -338,18 +226,18 @@
       "sections": [
         {
           "sectionSlug": "sql-v2-2-1",
-          "title": "Intro to Filtering",
+          "title": "Filtering",
           "topics": [
             {
               "topicId": "why_filtering_matters",
-              "title": "Why Filtering Matters",
-              "summary": "Understand why filtering matters so you can explain the idea in beginner-friendly language.",
+              "title": "Filtering with WHERE and Comparisons",
+              "summary": "Use WHERE with exact, not-equal, strict, and inclusive comparisons, and format number and text literals correctly.",
               "minutes": 12,
               "technical": false,
               "learningGoals": [
-                "Explain how WHERE changes a query result without modifying stored data.",
-                "Place WHERE after FROM in a simple single-table query.",
-                "Translate a plain-language filtering request into one row condition."
+                "Place WHERE after FROM and translate one plain-language filter into a condition.",
+                "Choose among =, <>, >, <, >=, and <= based on the requirement and boundary.",
+                "Write numeric literals without quotes and text literals with single quotes."
               ],
               "practice": {
                 "tryIt": true,
@@ -361,139 +249,16 @@
                 ]
               }
             },
-            {
-              "topicId": "equals_comparison",
-              "title": "Equals Comparison",
-              "summary": "Practice equals comparison so you can use it in a simple SQL query or workflow.",
-              "minutes": 20,
-              "technical": true,
-              "learningGoals": [
-                "Use = to keep rows with one exact known value.",
-                "Use <> to exclude one exact known value.",
-                "Quote text comparison values correctly while leaving column names unquoted."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-2-2",
-          "title": "Comparison Operators",
-          "topics": [
-            {
-              "topicId": "greater_than_comparison",
-              "title": "Greater-Than Comparison",
-              "summary": "Practice greater-than comparison so you can use it in a simple SQL query or workflow.",
-              "minutes": 20,
-              "technical": true,
-              "learningGoals": [
-                "Distinguish strict comparisons > and < from inclusive comparisons >= and <=.",
-                "Translate boundary wording such as at least and at most into the correct operator.",
-                "Check whether the boundary row should be included before choosing an operator."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            },
-            {
-              "topicId": "filtering_numbers_and_text",
-              "title": "Filtering Numbers and Text",
-              "summary": "Practice filtering numbers and text so you can use it in a simple SQL query or workflow.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
-                "Write numeric comparison values without quotes and text values with single quotes.",
-                "Choose an operator that matches the wording of the filtering request.",
-                "Separate literal-format decisions from boundary-operator decisions."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-2-3",
-          "title": "Filtering with Multiple Conditions",
-          "topics": [
             {
               "topicId": "and_conditions",
-              "title": "AND Conditions",
-              "summary": "Practice and conditions so you can use it in a simple SQL query or workflow.",
+              "title": "Combining Conditions",
+              "summary": "Combine filters with AND and OR, group mixed logic with parentheses, use NOT deliberately, and debug conditions against the requirement.",
               "minutes": 16,
               "technical": true,
               "learningGoals": [
-                "Use AND when all listed filtering rules must be satisfied.",
-                "Use OR when any listed alternative may satisfy the request.",
-                "Translate plain-language simultaneous requirements and alternatives into logical conditions."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            },
-            {
-              "topicId": "combining_conditions_safely",
-              "title": "Combining Conditions Safely",
-              "summary": "Practice combining conditions safely so you can use it in a simple SQL query or workflow.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
+                "Use AND for simultaneous requirements and OR for acceptable alternatives.",
                 "Use parentheses to make mixed AND/OR logic explicit.",
-                "Explain how grouping changes which rows satisfy a mixed condition.",
-                "Use NOT deliberately and prefer a simpler equivalent comparison when it is clearer."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-2-4",
-          "title": "Beginner Filtering Practice",
-          "topics": [
-            {
-              "topicId": "avoiding_filtering_mistakes",
-              "title": "Avoiding Filtering Mistakes",
-              "summary": "Practice avoiding filtering mistakes so you can use it in a simple SQL query or workflow.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
-                "Distinguish a syntactically valid filter from a logically correct filter.",
-                "Diagnose common filtering mistakes involving operators, quoting, AND/OR, and clause order.",
-                "Repair one filtering problem at a time and verify the result against the requirement."
+                "Use NOT only when its scope is clear and debug one filtering condition at a time."
               ],
               "practice": {
                 "tryIt": true,
@@ -509,7 +274,7 @@
         },
         {
           "sectionSlug": "sql-v2-2-module-project",
-          "title": "Module Project",
+          "title": "Project",
           "role": "module_project",
           "topics": [
             {
@@ -530,7 +295,8 @@
         }
       ],
       "moduleProject": "Create a data-detective worksheet with filtering prompts and SQL answers.",
-      "prefix": "sqlv2_2"
+      "prefix": "sqlv2_2",
+      "summary": "Filter rows with comparisons and logical conditions, then build a practical inventory watchlist."
     },
     {
       "moduleNumber": 3,
@@ -548,18 +314,18 @@
       "sections": [
         {
           "sectionSlug": "sql-v2-3-1",
-          "title": "Sorting Data",
+          "title": "Ordering Results",
           "topics": [
             {
               "topicId": "order_by",
-              "title": "Sorting a Result with ORDER BY",
-              "summary": "Use ORDER BY after row selection to change result order without changing which rows belong in the result.",
+              "title": "Sorting with ORDER BY",
+              "summary": "Sort results with ORDER BY, choose ASC or DESC, and add a secondary column when ties need a predictable order.",
               "minutes": 16,
               "technical": true,
               "learningGoals": [
-                "Explain that ORDER BY changes result sequence rather than row membership.",
-                "Place ORDER BY after FROM and WHERE in a simple query.",
-                "Sort a single result column in a requested presentation order."
+                "Use ORDER BY after row selection to control result sequence without changing row membership.",
+                "Choose ASC or DESC from requirement language such as earliest, latest, smallest, or largest.",
+                "Use a second ORDER BY column as a tie-breaker when the primary sort can repeat."
               ],
               "practice": {
                 "tryIt": true,
@@ -570,77 +336,17 @@
                   "code_input"
                 ]
               }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-3-2",
-          "title": "Sorting by Multiple Columns",
-          "topics": [
-            {
-              "topicId": "ascending_order",
-              "title": "Choosing ASC or DESC",
-              "summary": "Choose ascending or descending direction from the business meaning of first, last, smallest, largest, earliest, or latest.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
-                "Explain the direction produced by ASC for text, numbers, and dates.",
-                "Explain the direction produced by DESC for text, numbers, and dates.",
-                "Translate ranking language such as highest first or earliest first into the correct direction."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-3-3",
-          "title": "Limiting Output",
-          "topics": [
-            {
-              "topicId": "primary_sort",
-              "title": "Primary Sorts and Tie-Breakers",
-              "summary": "Use a second ORDER BY column to create a predictable order inside rows that share the same primary value.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
-                "Identify the primary sort in a multi-column ORDER BY clause.",
-                "Explain when and why a secondary sort acts as a tie-breaker.",
-                "Write a two-column ORDER BY clause in the requested priority order."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-3-4",
-          "title": "Practice with Output Control",
-          "topics": [
+            },
             {
               "topicId": "combining_order_by_with_limit",
-              "title": "Building Ranked Top-N Results with LIMIT",
-              "summary": "Sort first when a request asks for top, bottom, cheapest, newest, or similar ranked rows, then limit that ordered result.",
+              "title": "Ranked Results with LIMIT",
+              "summary": "Sort first, then use LIMIT to return a meaningful top-N or bottom-N result.",
               "minutes": 16,
               "technical": true,
               "learningGoals": [
-                "Explain why LIMIT alone does not define a top or bottom ranking.",
+                "Explain why LIMIT alone does not define a ranking.",
                 "Place LIMIT after ORDER BY in a ranked query.",
-                "Combine filtering, ranking, and a row limit to answer a top-N or bottom-N request."
+                "Combine filtering, ordering, and LIMIT for top-N or bottom-N requests."
               ],
               "practice": {
                 "tryIt": true,
@@ -656,7 +362,7 @@
         },
         {
           "sectionSlug": "sql-v2-3-module-project",
-          "title": "Module Project",
+          "title": "Project",
           "role": "module_project",
           "topics": [
             {
@@ -677,12 +383,13 @@
         }
       ],
       "moduleProject": "Build a ranked product report using sorting and limiting.",
-      "prefix": "sqlv2_3"
+      "prefix": "sqlv2_3",
+      "summary": "Order rows predictably, build ranked top-N results, and finish with a cumulative sales leaderboard."
     },
     {
       "moduleNumber": 4,
       "moduleSlug": "sql-v2-4",
-      "title": "Working with Text, Lists, Ranges, and NULL",
+      "title": "Advanced Filtering",
       "purpose": "Expand filtering to real-world cases like partial text, multiple choices, ranges, and missing values.",
       "datasetId": "customers_cleanup",
       "coreSkill": "LIKE, IN, BETWEEN, NULL",
@@ -695,18 +402,18 @@
       "sections": [
         {
           "sectionSlug": "sql-v2-4-1",
-          "title": "Text Matching",
+          "title": "Advanced Filters",
           "topics": [
             {
               "topicId": "intro_to_like",
-              "title": "Matching Text with LIKE and %",
-              "summary": "Use LIKE with the percent wildcard to match text prefixes, suffixes, and contained fragments.",
+              "title": "LIKE and Wildcards",
+              "summary": "Use LIKE with % for variable-length text and _ for exactly one character.",
               "minutes": 16,
               "technical": true,
               "learningGoals": [
-                "Explain how LIKE differs from an exact equality comparison.",
-                "Interpret percent-wildcard patterns for starts-with, ends-with, and contains searches.",
-                "Write a LIKE filter that matches a required text prefix."
+                "Use LIKE when a text pattern is needed instead of an exact equality check.",
+                "Use % for prefixes, suffixes, and contained fragments.",
+                "Use _ when exactly one character may vary at a specific position."
               ],
               "practice": {
                 "tryIt": true,
@@ -718,43 +425,16 @@
                 ]
               }
             },
-            {
-              "topicId": "underscore_wildcard",
-              "title": "Matching Exact Character Positions with _",
-              "summary": "Use the underscore wildcard when a pattern needs exactly one character in a specific position.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
-                "Explain that underscore matches exactly one character in a LIKE pattern.",
-                "Distinguish fixed-length underscore matching from variable-length percent matching.",
-                "Write a pattern that constrains one unknown character at a specific position."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-4-2",
-          "title": "Lists and Ranges",
-          "topics": [
             {
               "topicId": "in_list_filter",
-              "title": "Filtering Exact Sets with IN and NOT IN",
-              "summary": "Use IN for several allowed exact values and NOT IN for several excluded exact values.",
+              "title": "IN and BETWEEN",
+              "summary": "Use IN for exact value sets and BETWEEN for inclusive lower-and-upper ranges.",
               "minutes": 16,
               "technical": true,
               "learningGoals": [
-                "Explain that IN matches any one exact value from a list.",
-                "Contrast IN with repeated OR comparisons and NOT IN with exclusions.",
-                "Write an IN filter for a small set of allowed text values."
+                "Use IN and NOT IN for allowed or excluded exact values.",
+                "Use BETWEEN for an inclusive range with correctly ordered boundaries.",
+                "Choose a list or range operator that matches the requirement instead of repeating comparisons."
               ],
               "practice": {
                 "tryIt": true,
@@ -767,69 +447,15 @@
               }
             },
             {
-              "topicId": "between_range_filter",
-              "title": "Filtering Inclusive Ranges with BETWEEN",
-              "summary": "Use BETWEEN for an inclusive lower-and-upper range, and combine it with other conditions when needed.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
-                "Explain that BETWEEN includes both lower and upper endpoints.",
-                "Translate BETWEEN into equivalent greater-than-or-equal and less-than-or-equal logic.",
-                "Write an inclusive date-range filter with correctly ordered boundaries."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-4-3",
-          "title": "Missing Data",
-          "topics": [
-            {
               "topicId": "what_null_means",
-              "title": "Understanding NULL and Missing Values",
-              "summary": "Treat NULL as missing or unknown data and use IS NULL or IS NOT NULL instead of normal equality.",
+              "title": "NULL and Combined Filters",
+              "summary": "Use IS NULL and IS NOT NULL for missing values, then combine presence and text rules clearly.",
               "minutes": 16,
               "technical": true,
               "learningGoals": [
-                "Explain what NULL represents and distinguish it from empty text or zero.",
+                "Distinguish NULL from empty text or zero and avoid = NULL.",
                 "Use IS NULL and IS NOT NULL for missing-value checks.",
-                "Recognize why = NULL is not the correct way to filter missing data."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "first_sketch",
-                "runtimeMode": "sql_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "sql-v2-4-4",
-          "title": "Search and Cleanup Practice",
-          "topics": [
-            {
-              "topicId": "combine_text_and_null_filters",
-              "title": "Combining Text and Missing-Value Rules",
-              "summary": "Combine LIKE, NULL checks, AND, OR, and parentheses to express practical cleanup rules clearly.",
-              "minutes": 16,
-              "technical": true,
-              "learningGoals": [
-                "Choose LIKE versus NULL operators based on whether the rule concerns text shape or value presence.",
-                "Combine text and missing-value conditions with AND or OR.",
-                "Use parentheses to make mixed AND/OR cleanup logic explicit."
+                "Combine NULL checks with LIKE, AND, OR, and parentheses for cleanup rules."
               ],
               "practice": {
                 "tryIt": true,
@@ -845,7 +471,7 @@
         },
         {
           "sectionSlug": "sql-v2-4-module-project",
-          "title": "Module Project",
+          "title": "Project",
           "role": "module_project",
           "topics": [
             {
@@ -867,7 +493,8 @@
         }
       ],
       "moduleProject": "Create a search-and-cleanup worksheet for a customer table with missing or inconsistent information.",
-      "prefix": "sqlv2_4"
+      "prefix": "sqlv2_4",
+      "summary": "Match text patterns, filter sets and ranges, handle missing values, and finish with a cumulative customer-cleanup report."
     },
     {
       "moduleNumber": 5,

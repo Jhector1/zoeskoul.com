@@ -5,27 +5,27 @@
   "courseSlug": "sql-v2",
   "summary": {
     "modules": 6,
-    "topicsTotal": 31,
-    "exercises": 392,
+    "topicsTotal": 17,
+    "exercises": 188,
     "exerciseKinds": {
-      "code_input": 148,
-      "single_choice": 66,
-      "multi_choice": 50,
-      "drag_reorder": 65,
-      "fill_blank_choice": 63
+      "code_input": 74,
+      "single_choice": 31,
+      "multi_choice": 24,
+      "drag_reorder": 30,
+      "fill_blank_choice": 29
     },
-    "codeInputs": 148,
-    "projects": 148,
-    "capstones": 132,
+    "codeInputs": 74,
+    "projects": 74,
+    "capstones": 66,
     "thinFixedTestCount": 0,
-    "blockers": 16,
-    "errors": 16,
+    "blockers": 8,
+    "errors": 8,
     "warnings": 0,
     "infos": 0
   },
   "severityCounts": {
-    "blocker": 16,
-    "error": 16,
+    "blocker": 8,
+    "error": 8,
     "warning": 0,
     "info": 0
   },
@@ -113,167 +113,7 @@
     {
       "code": "EXPECTED_ENTRY_FILE_MISSING",
       "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-2/understanding_tables",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "understanding_tables",
-      "exerciseId": "try-understanding_tables-sketch0",
-      "message": "Exercise \"try-understanding_tables-sketch0\" workspace does not reference expected entry file \"main.sql\"."
-    },
-    {
-      "code": "WORKSPACE_ENTRY_FILE_LEAK",
-      "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-2/understanding_tables",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "understanding_tables",
-      "exerciseId": "try-understanding_tables-sketch0",
-      "message": "Exercise \"try-understanding_tables-sketch0\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
-    },
-    {
-      "code": "EXPECTED_ENTRY_FILE_MISSING",
-      "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-2/understanding_tables",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "understanding_tables",
-      "exerciseId": "try-understanding_tables-sketch1",
-      "message": "Exercise \"try-understanding_tables-sketch1\" workspace does not reference expected entry file \"main.sql\"."
-    },
-    {
-      "code": "WORKSPACE_ENTRY_FILE_LEAK",
-      "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-2/understanding_tables",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "understanding_tables",
-      "exerciseId": "try-understanding_tables-sketch1",
-      "message": "Exercise \"try-understanding_tables-sketch1\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
-    },
-    {
-      "code": "EXPECTED_ENTRY_FILE_MISSING",
-      "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-2/understanding_tables",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "understanding_tables",
-      "exerciseId": "try-understanding_tables-sketch2",
-      "message": "Exercise \"try-understanding_tables-sketch2\" workspace does not reference expected entry file \"main.sql\"."
-    },
-    {
-      "code": "WORKSPACE_ENTRY_FILE_LEAK",
-      "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-2/understanding_tables",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "understanding_tables",
-      "exerciseId": "try-understanding_tables-sketch2",
-      "message": "Exercise \"try-understanding_tables-sketch2\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
-    },
-    {
-      "code": "EXPECTED_ENTRY_FILE_MISSING",
-      "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-2/understanding_tables",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "understanding_tables",
-      "exerciseId": "try-understanding_tables-sketch3",
-      "message": "Exercise \"try-understanding_tables-sketch3\" workspace does not reference expected entry file \"main.sql\"."
-    },
-    {
-      "code": "WORKSPACE_ENTRY_FILE_LEAK",
-      "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-2/understanding_tables",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "understanding_tables",
-      "exerciseId": "try-understanding_tables-sketch3",
-      "message": "Exercise \"try-understanding_tables-sketch3\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
-    },
-    {
-      "code": "EXPECTED_ENTRY_FILE_MISSING",
-      "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-3/database_thinking",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "database_thinking",
-      "exerciseId": "try-database_thinking-sketch0",
-      "message": "Exercise \"try-database_thinking-sketch0\" workspace does not reference expected entry file \"main.sql\"."
-    },
-    {
-      "code": "WORKSPACE_ENTRY_FILE_LEAK",
-      "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-3/database_thinking",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "database_thinking",
-      "exerciseId": "try-database_thinking-sketch0",
-      "message": "Exercise \"try-database_thinking-sketch0\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
-    },
-    {
-      "code": "EXPECTED_ENTRY_FILE_MISSING",
-      "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-3/database_thinking",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "database_thinking",
-      "exerciseId": "try-database_thinking-sketch1",
-      "message": "Exercise \"try-database_thinking-sketch1\" workspace does not reference expected entry file \"main.sql\"."
-    },
-    {
-      "code": "WORKSPACE_ENTRY_FILE_LEAK",
-      "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-3/database_thinking",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "database_thinking",
-      "exerciseId": "try-database_thinking-sketch1",
-      "message": "Exercise \"try-database_thinking-sketch1\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
-    },
-    {
-      "code": "EXPECTED_ENTRY_FILE_MISSING",
-      "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-3/database_thinking",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "database_thinking",
-      "exerciseId": "try-database_thinking-sketch2",
-      "message": "Exercise \"try-database_thinking-sketch2\" workspace does not reference expected entry file \"main.sql\"."
-    },
-    {
-      "code": "WORKSPACE_ENTRY_FILE_LEAK",
-      "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-3/database_thinking",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "database_thinking",
-      "exerciseId": "try-database_thinking-sketch2",
-      "message": "Exercise \"try-database_thinking-sketch2\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
-    },
-    {
-      "code": "EXPECTED_ENTRY_FILE_MISSING",
-      "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-3/database_thinking",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "database_thinking",
-      "exerciseId": "try-database_thinking-sketch3",
-      "message": "Exercise \"try-database_thinking-sketch3\" workspace does not reference expected entry file \"main.sql\"."
-    },
-    {
-      "code": "WORKSPACE_ENTRY_FILE_LEAK",
-      "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-3/database_thinking",
-      "profileId": "sql",
-      "moduleId": "sql-v2-0",
-      "topicId": "database_thinking",
-      "exerciseId": "try-database_thinking-sketch3",
-      "message": "Exercise \"try-database_thinking-sketch3\" uses workspace entry file \"query.sql\" but profile \"sql\" expects \"main.sql\"."
-    },
-    {
-      "code": "EXPECTED_ENTRY_FILE_MISSING",
-      "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-4/first_sql_environment",
+      "path": "sql-v2-0/sql-v2-0-1/first_sql_environment",
       "profileId": "sql",
       "moduleId": "sql-v2-0",
       "topicId": "first_sql_environment",
@@ -283,7 +123,7 @@
     {
       "code": "WORKSPACE_ENTRY_FILE_LEAK",
       "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-4/first_sql_environment",
+      "path": "sql-v2-0/sql-v2-0-1/first_sql_environment",
       "profileId": "sql",
       "moduleId": "sql-v2-0",
       "topicId": "first_sql_environment",
@@ -293,7 +133,7 @@
     {
       "code": "EXPECTED_ENTRY_FILE_MISSING",
       "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-4/first_sql_environment",
+      "path": "sql-v2-0/sql-v2-0-1/first_sql_environment",
       "profileId": "sql",
       "moduleId": "sql-v2-0",
       "topicId": "first_sql_environment",
@@ -303,7 +143,7 @@
     {
       "code": "WORKSPACE_ENTRY_FILE_LEAK",
       "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-4/first_sql_environment",
+      "path": "sql-v2-0/sql-v2-0-1/first_sql_environment",
       "profileId": "sql",
       "moduleId": "sql-v2-0",
       "topicId": "first_sql_environment",
@@ -313,7 +153,7 @@
     {
       "code": "EXPECTED_ENTRY_FILE_MISSING",
       "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-4/first_sql_environment",
+      "path": "sql-v2-0/sql-v2-0-1/first_sql_environment",
       "profileId": "sql",
       "moduleId": "sql-v2-0",
       "topicId": "first_sql_environment",
@@ -323,7 +163,7 @@
     {
       "code": "WORKSPACE_ENTRY_FILE_LEAK",
       "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-4/first_sql_environment",
+      "path": "sql-v2-0/sql-v2-0-1/first_sql_environment",
       "profileId": "sql",
       "moduleId": "sql-v2-0",
       "topicId": "first_sql_environment",
@@ -333,7 +173,7 @@
     {
       "code": "EXPECTED_ENTRY_FILE_MISSING",
       "severity": "error",
-      "path": "sql-v2-0/sql-v2-0-4/first_sql_environment",
+      "path": "sql-v2-0/sql-v2-0-1/first_sql_environment",
       "profileId": "sql",
       "moduleId": "sql-v2-0",
       "topicId": "first_sql_environment",
@@ -343,7 +183,7 @@
     {
       "code": "WORKSPACE_ENTRY_FILE_LEAK",
       "severity": "blocker",
-      "path": "sql-v2-0/sql-v2-0-4/first_sql_environment",
+      "path": "sql-v2-0/sql-v2-0-1/first_sql_environment",
       "profileId": "sql",
       "moduleId": "sql-v2-0",
       "topicId": "first_sql_environment",

@@ -154,7 +154,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  email\nFROM customers\nWHERE email IS NULL;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.module-4-customer-cleanup-project.quiz.mp-1-find-missing-emails.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -177,7 +177,19 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.module-4-customer-cleanup-project.quiz.mp-1-find-missing-emails.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ee][Mm][Aa][Ii][Ll]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.module-4-customer-cleanup-project.quiz.mp-1-find-missing-emails.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "mp-2-keep-real-follow-ups",
@@ -254,7 +266,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  email,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive';",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.module-4-customer-cleanup-project.quiz.mp-2-keep-real-follow-ups.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -277,7 +289,14 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.module-4-customer-cleanup-project.quiz.mp-2-keep-real-follow-ups.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "mp-3-finish-cleanup-report",
@@ -354,7 +373,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  id,\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE email IS NULL\n  AND status = 'inactive'\n  AND city LIKE 'H%'\n  AND is_test = 0;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.module-4-customer-cleanup-project.quiz.mp-3-finish-cleanup-report.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true

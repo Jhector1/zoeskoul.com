@@ -3,17 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-4": {
         "what_null_means": {
-          "label": "Understanding NULL and Missing Values",
-          "summary": "Treat NULL as missing or unknown data and use IS NULL or IS NOT NULL instead of normal equality.",
+          "label": "NULL and Combined Filters",
+          "summary": "Handle missing values correctly, then combine NULL and text rules without reteaching earlier logic.",
           "cards": {
             "sketch0": {
-              "title": "NULL Means a Value Is Missing or Unknown"
+              "title": "Handle missing values with NULL"
             },
             "sketch1": {
-              "title": "Use IS NULL and IS NOT NULL"
+              "title": "Combine NULL and text rules"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: NULL and combined filters"
             }
           },
           "quiz": {
@@ -48,35 +48,36 @@
                 "c": "city NOT NULL"
               }
             },
-            "mc_null_true_statements": {
-              "title": "True statements about NULL",
-              "prompt": "Choose all true statements about `NULL` in SQL.",
-              "hint": "Think about how SQL checks for missing values.",
+            "sc_null_operator": {
+              "title": "Check for a recorded email",
+              "prompt": "Which condition correctly keeps rows where `email` has a stored value?",
+              "hint": "Use the dedicated NULL syntax for values that are present.",
               "help": {
-                "concept": "NULL is a special marker for missing data, and SQL provides IS NULL and IS NOT NULL to test for it.",
-                "hint_1": "Some choices describe correct syntax, while others confuse NULL with text or numbers.",
-                "hint_2": "Select the statements that treat NULL as missing data and use `IS` syntax to test it."
+                "concept": "IS NOT NULL keeps rows where a column has a stored value.",
+                "hint_1": "This is the opposite of the missing-value check.",
+                "hint_2": "Normal equality operators are not the correct way to test NULL presence."
               },
               "options": {
-                "a": "You use `IS NULL` to find missing values",
-                "b": "You use `IS NOT NULL` to find rows where a value exists",
-                "c": "`NULL` means the same thing as an empty string in every case",
-                "d": "`email = NULL` is the standard way to find missing emails"
+                "a": "email = NULL",
+                "b": "email IS NOT NULL",
+                "c": "email LIKE NULL",
+                "d": "email NOT NULL"
               }
             },
-            "dr_not_null_query_order": {
-              "title": "Order a query with IS NOT NULL",
-              "prompt": "Arrange these parts to make a query that shows customer names and cities where the city value exists.",
-              "hint": "Use the normal SQL clause order and the `IS NOT NULL` condition.",
+            "sc_or_vs_and": {
+              "title": "Choose the right connector",
+              "prompt": "You want rows where the email is missing or the full name contains `Test`. Which connector should join those two conditions?",
+              "hint": "Read the question and connect it to the specific lesson example.",
               "help": {
-                "concept": "To filter for present values, SQL uses IS NOT NULL in the WHERE clause after SELECT and FROM.",
-                "hint_1": "The query should first choose columns, then name the table, then filter rows.",
-                "hint_2": "Place the token with `city IS NOT NULL` after the FROM clause."
+                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Remove options from unrelated SQL clauses, then choose the one that fits the question."
               },
-              "tokens": {
-                "t1": "SELECT full_name, city",
-                "t2": "FROM customers",
-                "t3": "WHERE city IS NOT NULL"
+              "options": {
+                "a": "AND",
+                "b": "OR",
+                "c": "FROM",
+                "d": "ORDER BY"
               }
             },
             "try-what_null_means-sketch0": {
@@ -89,7 +90,58 @@
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
               "starterCode": "-- Keep customer rows where email is missing.\nSELECT full_name, status\nFROM customers\nWHERE email ;",
-              "solutionCode": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;"
+              "solutionCode": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `status`."
+                }
+              ]
+            },
+            "practice-text-and-null-cleanup": {
+              "title": "Practice: Combine text and NULL cleanup rules",
+              "prompt": "Return `id`, `full_name`, and `email` from `customers`, in that order. Keep rows where the email is missing **or** the full name contains `Test` anywhere.",
+              "hint": "Combine the missing-email rule with the name-pattern rule so either one can keep a row.",
+              "help": {
+                "concept": "OR keeps a row when either cleanup condition is true, while LIKE and IS NULL test different kinds of problems.",
+                "hint_1": "One condition checks whether email is missing; the other checks whether the name contains the target text.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
+              },
+              "starterCode": "-- Find rows needing cleanup because email is missing or the name contains Test.\nSELECT id, full_name, email\nFROM customers\nWHERE ;",
+              "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL\n   OR full_name LIKE '%Test%';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `full_name`, `email`."
+                }
+              ]
+            },
+            "practice-present-emails": {
+              "title": "Practice: Require a recorded email",
+              "prompt": "Return `full_name` and `email` from `customers`, in that order. Keep only rows where an email value is present.",
+              "hint": "Use the dedicated NULL check that keeps present values rather than missing ones.",
+              "help": {
+                "concept": "IS NOT NULL keeps rows where the column contains a stored value.",
+                "hint_1": "This is the opposite of the check used to find missing emails.",
+                "hint_2": "Do not compare NULL with ordinary equality or inequality operators."
+              },
+              "starterCode": "-- Keep customers with a recorded email.\nSELECT full_name, email\nFROM customers\nWHERE email",
+              "solutionCode": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `email`."
+                },
+                {
+                  "message": "Use the NULL operator that requires a present value."
+                }
+              ]
             }
           },
           "tryIt": {
@@ -109,17 +161,17 @@
       },
       "sql-v2-4": {
         "what_null_means": {
-          "label": "Understanding NULL and Missing Values",
-          "summary": "Treat NULL as missing or unknown data and use IS NULL or IS NOT NULL instead of normal equality.",
+          "label": "NULL and Combined Filters",
+          "summary": "Handle missing values correctly, then combine NULL and text rules without reteaching earlier logic.",
           "cards": {
             "sketch0": {
-              "title": "NULL Means a Value Is Missing or Unknown"
+              "title": "Handle missing values with NULL"
             },
             "sketch1": {
-              "title": "Use IS NULL and IS NOT NULL"
+              "title": "Combine NULL and text rules"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: NULL and combined filters"
             }
           },
           "quiz": {
@@ -154,35 +206,36 @@
                 "c": "city NOT NULL"
               }
             },
-            "mc_null_true_statements": {
-              "title": "True statements about NULL",
-              "prompt": "Choose all true statements about `NULL` in SQL.",
-              "hint": "Think about how SQL checks for missing values.",
+            "sc_null_operator": {
+              "title": "Check for a recorded email",
+              "prompt": "Which condition correctly keeps rows where `email` has a stored value?",
+              "hint": "Use the dedicated NULL syntax for values that are present.",
               "help": {
-                "concept": "NULL is a special marker for missing data, and SQL provides IS NULL and IS NOT NULL to test for it.",
-                "hint_1": "Some choices describe correct syntax, while others confuse NULL with text or numbers.",
-                "hint_2": "Select the statements that treat NULL as missing data and use `IS` syntax to test it."
+                "concept": "IS NOT NULL keeps rows where a column has a stored value.",
+                "hint_1": "This is the opposite of the missing-value check.",
+                "hint_2": "Normal equality operators are not the correct way to test NULL presence."
               },
               "options": {
-                "a": "You use `IS NULL` to find missing values",
-                "b": "You use `IS NOT NULL` to find rows where a value exists",
-                "c": "`NULL` means the same thing as an empty string in every case",
-                "d": "`email = NULL` is the standard way to find missing emails"
+                "a": "email = NULL",
+                "b": "email IS NOT NULL",
+                "c": "email LIKE NULL",
+                "d": "email NOT NULL"
               }
             },
-            "dr_not_null_query_order": {
-              "title": "Order a query with IS NOT NULL",
-              "prompt": "Arrange these parts to make a query that shows customer names and cities where the city value exists.",
-              "hint": "Use the normal SQL clause order and the `IS NOT NULL` condition.",
+            "sc_or_vs_and": {
+              "title": "Choose the right connector",
+              "prompt": "You want rows where the email is missing or the full name contains `Test`. Which connector should join those two conditions?",
+              "hint": "Read the question and connect it to the specific lesson example.",
               "help": {
-                "concept": "To filter for present values, SQL uses IS NOT NULL in the WHERE clause after SELECT and FROM.",
-                "hint_1": "The query should first choose columns, then name the table, then filter rows.",
-                "hint_2": "Place the token with `city IS NOT NULL` after the FROM clause."
+                "concept": "This question checks a specific idea from the lesson, not general test-taking strategy.",
+                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
+                "hint_2": "Remove options from unrelated SQL clauses, then choose the one that fits the question."
               },
-              "tokens": {
-                "t1": "SELECT full_name, city",
-                "t2": "FROM customers",
-                "t3": "WHERE city IS NOT NULL"
+              "options": {
+                "a": "AND",
+                "b": "OR",
+                "c": "FROM",
+                "d": "ORDER BY"
               }
             },
             "try-what_null_means-sketch0": {
@@ -194,7 +247,59 @@
                 "hint_1": "Use the dedicated missing-value check on the email column.",
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Keep customer rows where email is missing.\nSELECT full_name, status\nFROM customers\nWHERE email ;"
+              "starterCode": "-- Keep customer rows where email is missing.\nSELECT full_name, status\nFROM customers\nWHERE email ;",
+              "solutionCode": "SELECT full_name, status\nFROM customers\nWHERE email IS NULL;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `status`."
+                }
+              ]
+            },
+            "practice-text-and-null-cleanup": {
+              "title": "Practice: Combine text and NULL cleanup rules",
+              "prompt": "Return `id`, `full_name`, and `email` from `customers`, in that order. Keep rows where the email is missing **or** the full name contains `Test` anywhere.",
+              "hint": "Combine the missing-email rule with the name-pattern rule so either one can keep a row.",
+              "help": {
+                "concept": "OR keeps a row when either cleanup condition is true, while LIKE and IS NULL test different kinds of problems.",
+                "hint_1": "One condition checks whether email is missing; the other checks whether the name contains the target text.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
+              },
+              "starterCode": "-- Find rows needing cleanup because email is missing or the name contains Test.\nSELECT id, full_name, email\nFROM customers\nWHERE ;",
+              "solutionCode": "SELECT id, full_name, email\nFROM customers\nWHERE email IS NULL\n   OR full_name LIKE '%Test%';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `full_name`, `email`."
+                }
+              ]
+            },
+            "practice-present-emails": {
+              "title": "Practice: Require a recorded email",
+              "prompt": "Return `full_name` and `email` from `customers`, in that order. Keep only rows where an email value is present.",
+              "hint": "Use the dedicated NULL check that keeps present values rather than missing ones.",
+              "help": {
+                "concept": "IS NOT NULL keeps rows where the column contains a stored value.",
+                "hint_1": "This is the opposite of the check used to find missing emails.",
+                "hint_2": "Do not compare NULL with ordinary equality or inequality operators."
+              },
+              "starterCode": "-- Keep customers with a recorded email.\nSELECT full_name, email\nFROM customers\nWHERE email",
+              "solutionCode": "SELECT full_name, email\nFROM customers\nWHERE email IS NOT NULL;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `email`."
+                },
+                {
+                  "message": "Use the NULL operator that requires a present value."
+                }
+              ]
             }
           },
           "tryIt": {
@@ -219,24 +324,24 @@
       "sql--sql-v2--draft-4": {
         "what_null_means": {
           "null_missing_value": {
-            "title": "NULL Means a Value Is Missing or Unknown",
-            "bodyMarkdown": "`NULL` is a marker for missing or unknown data. It is not the empty string, the number zero, or the word `\"NULL\"`.\n\n```sql\nSELECT\n    employee_name,\n    manager_email\nFROM employees\nWHERE manager_email IS NULL;\n```\n\nThis query finds employees with no stored manager email.\n\nWhen reading a table, separate “a value exists and happens to be empty-looking” from “no value is known.” SQL represents the second case with `NULL`."
+            "title": "Handle missing values with NULL",
+            "bodyMarkdown": "`NULL` means a value is missing or unknown. It is not the same as zero or an empty string.\n\nUse:\n\n- `IS NULL` to find missing values\n- `IS NOT NULL` to require a present value\n\nDo not use `= NULL` for missing-value checks."
           },
           "is_null_syntax": {
-            "title": "Use IS NULL and IS NOT NULL",
-            "bodyMarkdown": "Normal equality does not test for missing values. Use the dedicated NULL syntax.\n\n```sql\nSELECT\n    applicant_name,\n    portfolio_url\nFROM applications\nWHERE portfolio_url IS NOT NULL;\n```\n\n`IS NULL` keeps missing values. `IS NOT NULL` keeps rows where a value is present.\n\nAvoid `= NULL` and `<> NULL`; they do not behave like ordinary value comparisons."
+            "title": "Combine NULL and text rules",
+            "bodyMarkdown": "Cleanup rules often combine different kinds of tests.\n\nUse LIKE when the rule concerns **text shape** and NULL operators when the rule concerns **whether a value is present**. Connect simultaneous requirements with AND, alternatives with OR, and use parentheses when mixed logic needs explicit grouping.\n\nThese are combinations of skills already learned, not a new family of operators."
           }
         }
       },
       "sql-v2-4": {
         "what_null_means": {
           "null_missing_value": {
-            "title": "NULL Means a Value Is Missing or Unknown",
-            "bodyMarkdown": "`NULL` is a marker for missing or unknown data. It is not the empty string, the number zero, or the word `\"NULL\"`.\n\n```sql\nSELECT\n    employee_name,\n    manager_email\nFROM employees\nWHERE manager_email IS NULL;\n```\n\nThis query finds employees with no stored manager email.\n\nWhen reading a table, separate “a value exists and happens to be empty-looking” from “no value is known.” SQL represents the second case with `NULL`."
+            "title": "Handle missing values with NULL",
+            "bodyMarkdown": "`NULL` means a value is missing or unknown. It is not the same as zero or an empty string.\n\nUse:\n\n- `IS NULL` to find missing values\n- `IS NOT NULL` to require a present value\n\nDo not use `= NULL` for missing-value checks."
           },
           "is_null_syntax": {
-            "title": "Use IS NULL and IS NOT NULL",
-            "bodyMarkdown": "Normal equality does not test for missing values. Use the dedicated NULL syntax.\n\n```sql\nSELECT\n    applicant_name,\n    portfolio_url\nFROM applications\nWHERE portfolio_url IS NOT NULL;\n```\n\n`IS NULL` keeps missing values. `IS NOT NULL` keeps rows where a value is present.\n\nAvoid `= NULL` and `<> NULL`; they do not behave like ordinary value comparisons."
+            "title": "Combine NULL and text rules",
+            "bodyMarkdown": "Cleanup rules often combine different kinds of tests.\n\nUse LIKE when the rule concerns **text shape** and NULL operators when the rule concerns **whether a value is present**. Connect simultaneous requirements with AND, alternatives with OR, and use parentheses when mixed logic needs explicit grouping.\n\nThese are combinations of skills already learned, not a new family of operators."
           }
         }
       }

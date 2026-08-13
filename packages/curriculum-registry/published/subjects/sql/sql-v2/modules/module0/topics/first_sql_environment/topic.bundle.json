@@ -2,7 +2,7 @@
   "topicId": "first_sql_environment",
   "subjectSlug": "sql-v2",
   "moduleSlug": "sql-v2-0",
-  "sectionSlug": "sql-v2-sql-v2-0-4",
+  "sectionSlug": "sql-v2-sql-v2-0-1",
   "prefix": "sqlv2_0",
   "minutes": 16,
   "runtimeDefaults": {
@@ -30,13 +30,6 @@
       "height": 420
     },
     {
-      "id": "sketch1",
-      "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch1.title",
-      "sketchId": "sql_editor_basics",
-      "height": 420
-    },
-    {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch2.title",
@@ -54,13 +47,6 @@
         "allowReveal": true,
         "maxAttempts": null
       }
-    },
-    {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-0.first_sql_environment.cards.sketch3.title",
-      "sketchId": "reading_query_results",
-      "height": 420
     },
     {
       "id": "quiz",
@@ -93,12 +79,6 @@
       ]
     },
     {
-      "id": "sql_editor_basics",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.sql_editor_basics.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.sql_editor_basics.bodyMarkdown"
-    },
-    {
       "id": "running_your_first_query",
       "archetype": "paragraph",
       "titleKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.running_your_first_query.title",
@@ -110,19 +90,13 @@
           "alt": ""
         }
       ]
-    },
-    {
-      "id": "reading_query_results",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.reading_query_results.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-0.first_sql_environment.reading_query_results.bodyMarkdown"
     }
   ],
   "exercises": [
     {
       "id": "try-first_sql_environment-sketch2",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2",
       "language": "sql",
@@ -194,7 +168,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT 'Practice ready' AS check_in;",
+            "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -216,7 +190,108 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-edit-run-inspect",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
     },
     {
       "id": "m0_s04_where_sql_runs",

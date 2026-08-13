@@ -189,7 +189,6 @@
         "sqlFileOrder": [
           "query.sql"
         ],
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
@@ -329,7 +328,6 @@
           "operations.sql",
           "query.sql"
         ],
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",

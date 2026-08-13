@@ -347,29 +347,6 @@
         ]
       },
       "showExpectedExample": true,
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "path": "ratios.c",
-          "pattern": "3.0 * n * n + 7.0 * n",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.0.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "ratios.c",
-          "pattern": "n * n * n * n * n",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.1.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "ratios.c",
-          "pattern": "ratio *= 2.0 / 3.0",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.2.message",
-          "normalizeWhitespace": false
-        }
-      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -403,7 +380,30 @@
             "entry": false
           }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "ratios.c",
+          "pattern": "3.0 * n * n + 7.0 * n",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "ratios.c",
+          "pattern": "n * n * n * n * n",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "ratios.c",
+          "pattern": "ratio *= 2.0 / 3.0",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ]
     },
     {
       "id": "sampling-proof",

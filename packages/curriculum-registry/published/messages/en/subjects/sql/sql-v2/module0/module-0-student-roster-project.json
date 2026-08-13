@@ -3,14 +3,14 @@
     "sql-v2": {
       "sql-v2-0": {
         "module-0-student-roster-project": {
-          "label": "Module 0 Student Roster Project",
-          "summary": "Build a simple student roster that becomes more useful with each step.",
+          "label": "Module 0 First-Week Roster Check",
+          "summary": "Build a small student-roster query, verify its returned columns, then extend the same working query with one additional roster field.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Student roster build"
+              "title": "First-week roster verification"
             }
           },
           "projectSteps": {
@@ -19,62 +19,40 @@
             },
             "mp_2": {
               "title": "Add each student's city"
-            },
-            "mp_3": {
-              "title": "Finish the full roster view"
             }
           },
           "quiz": {
             "mp-1-preview-student-roster": {
               "title": "Preview the roster columns",
               "prompt": "Start the student roster by returning `id`, `name`, and `grade` from the `students` table.",
-              "hint": "Add the missing field in the SELECT list.",
+              "hint": "Keep the existing roster query and add the one missing requested field.",
               "help": {
-                "concept": "This step adds one more detail to the roster so it is easier to use.",
-                "hint_1": "Keep `id` and `name`, then add `grade` before `FROM students`.",
-                "hint_2": "Run the query and check that the result shows three columns in that order."
+                "concept": "This first milestone creates the working roster query that the next milestone will extend.",
+                "hint_1": "The final result needs `id`, `name`, and `grade`, in that order.",
+                "hint_2": "Run the query and confirm the result has three columns in the requested order."
               },
-              "starterCode": "-- Returning id, name, and grade from the students table.\nSELECT\n  id,\n  name\nFROM students;"
+              "starterCode": "-- Return id, name, and grade from students.\nSELECT\n  id,\n  name\nFROM students;",
+              "solutionCode": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `students` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `grade`."
+                }
+              ]
             },
             "mp-2-add-city-to-roster": {
               "title": "Add each student's city",
-              "prompt": "Add the `city` column so the roster shows where each student is from.",
-              "hint": "Extend the SELECT list instead of starting over.",
+              "prompt": "Keep the working roster and return `id`, `name`, `grade`, and `city`, in that order.",
+              "hint": "Extend the approved result with the new roster field instead of starting over.",
               "help": {
-                "concept": "Add the new detail without changing the parts of the roster that already work.",
-                "hint_1": "Keep `id`, `name`, and `grade` exactly as they are.",
-                "hint_2": "Add `city` before `FROM students`, then rerun the query."
+                "concept": "A cumulative project keeps approved work intact and adds only the new stakeholder requirement.",
+                "hint_1": "Preserve the three fields from the previous milestone.",
+                "hint_2": "The completed result should have four columns in the requested order."
               },
-              "starterCode": "-- Keep the roster fields above.\n-- Add city before FROM students.\nSELECT\n  id,\n  name,\n  grade\nFROM students;"
-            },
-            "mp-3-finish-student-roster": {
-              "title": "Finish the full roster view",
-              "prompt": "Add `age` so the final roster returns `id`, `name`, `grade`, `age`, and `city` from `students`.",
-              "hint": "Insert one more field into the SELECT list.",
-              "help": {
-                "concept": "This last step completes the roster with the final missing field.",
-                "hint_1": "Leave `id`, `name`, `grade`, and `city` in place.",
-                "hint_2": "Add `age` between `grade` and `city`, then rerun the query."
-              },
-              "starterCode": "-- Keep the roster fields above.\n-- Add age between grade and city.\nSELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;"
-            },
-            "try-module-0-student-roster-project-sketch0": {
-              "title": "Preview id and name from students",
-              "prompt": "Scenario: The school office is learning how to read its student roster database. Write a query that returns `id` and `name` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table.",
-              "hint": "Use the query pattern from the lesson, then adjust the selected columns, table, or filter for this scenario.",
-              "help": {
-                "concept": "This SQL exercise checks whether your query returns the requested result.",
-                "hint_1": "Check the selected columns and table name in the SQL editor.",
-                "hint_2": "Run the query and compare the result table with the expected result."
-              },
-              "starterCode": "-- Return id and name from the students table.\nSELECT\n  id\nFROM students;"
-            }
-          },
-          "tryIt": {
-            "allowReveal": true,
-            "try_module_0_student_roster_project_sketch0": {
-              "title": "Preview id and name from students",
-              "prompt": "Scenario: The school office is learning how to read its student roster database. Write a query that returns `id` and `name` from the `students` table. Write the query in the SQL editor, click Run query, and check the results table."
+              "starterCode": "SELECT\n  id,\n  name,\n  grade\nFROM students;",
+              "solutionCode": "SELECT\n  id,\n  name,\n  grade,\n  city\nFROM students;"
             }
           }
         }
@@ -86,8 +64,8 @@
       "sql-v2-0": {
         "module-0-student-roster-project": {
           "sketch_project_brief": {
-            "title": "Project brief",
-            "bodyMarkdown": "The school office is preparing a roster snapshot for the first week of classes.\n\nStart with a simple student list, then add the details that make the roster useful at a glance.\n\nThe finished result should present each student's key information in one clean view."
+            "title": "The roster import needs a quick verification.",
+            "bodyMarkdown": "The school office has imported its student roster and needs a quick verification before staff use it.\n\nStart with a small roster result containing the requested student fields. Run it and inspect the returned column headers and rows. Then extend that exact working query with the student's city.\n\nThis project is still about the basic workflow: **edit → run → inspect → extend → rerun**. The next module explains SELECT lists and column choices in detail."
           }
         }
       }

@@ -45,28 +45,6 @@
       }
     },
     {
-      "id": "sketch2",
-      "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-0.what_sql_is.cards.sketch2.title",
-      "sketchId": "why_sql_is_useful",
-      "height": 420,
-      "tools": {
-        "defaultVisible": false,
-        "allowOpen": false
-      }
-    },
-    {
-      "id": "sketch3",
-      "kind": "sketch",
-      "titleKey": "topics.sql-v2.sql-v2-0.what_sql_is.cards.sketch3.title",
-      "sketchId": "real_world_examples_of_databases",
-      "height": 420,
-      "tools": {
-        "defaultVisible": false,
-        "allowOpen": false
-      }
-    },
-    {
       "id": "quiz",
       "kind": "quiz",
       "titleKey": "topics.sql-v2.sql-v2-0.what_sql_is.cards.quiz.title",
@@ -158,72 +136,6 @@
           "publicId": "database_container_model_eqjc9x"
         }
       ]
-    },
-    {
-      "id": "why_sql_is_useful",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-0.what_sql_is.why_sql_is_useful.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-0.what_sql_is.why_sql_is_useful.bodyMarkdown",
-      "images": [
-        {
-          "publicId": "data_everywhere",
-          "id": "data_everywhere",
-          "alt": ""
-        },
-        {
-          "publicId": "sql_actions_overview",
-          "id": "sql_actions_overview",
-          "alt": ""
-        },
-        {
-          "publicId": "sql_questions_and_answers",
-          "id": "sql_questions_and_answers",
-          "alt": ""
-        },
-        {
-          "publicId": "ask_run_result_cycle",
-          "id": "ask_run_result_cycle",
-          "alt": ""
-        }
-      ]
-    },
-    {
-      "id": "real_world_examples_of_databases",
-      "archetype": "paragraph",
-      "titleKey": "sketches.sql-v2.sql-v2-0.what_sql_is.real_world_examples_of_databases.title",
-      "bodyKey": "sketches.sql-v2.sql-v2-0.what_sql_is.real_world_examples_of_databases.bodyMarkdown",
-      "images": [
-        {
-          "publicId": "databases_in_daily_life",
-          "id": "databases_in_daily_life",
-          "alt": ""
-        },
-        {
-          "publicId": "school_database_example",
-          "id": "school_database_example",
-          "alt": ""
-        },
-        {
-          "publicId": "store_database_example",
-          "id": "store_database_example",
-          "alt": ""
-        },
-        {
-          "publicId": "media_database_example",
-          "id": "media_database_example",
-          "alt": ""
-        },
-        {
-          "publicId": "hospital_database_example",
-          "id": "hospital_database_example",
-          "alt": ""
-        },
-        {
-          "publicId": "shared_database_pattern",
-          "id": "shared_database_pattern",
-          "alt": ""
-        }
-      ]
     }
   ],
   "exercises": [
@@ -262,11 +174,11 @@
       }
     },
     {
-      "id": "m0_s01_why_sql_useful",
+      "id": "m0_s02_rows_go_across",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_why_sql_useful",
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s02_rows_go_across",
       "optionIds": [
         "a",
         "b",
@@ -279,11 +191,11 @@
       }
     },
     {
-      "id": "m0_s01_real_world_examples",
+      "id": "m0_s02_columns_meaning",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s01_real_world_examples",
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.quiz.m0_s02_columns_meaning",
       "optionIds": [
         "a",
         "b",

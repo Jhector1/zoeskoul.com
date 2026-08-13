@@ -3,17 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "and_conditions": {
-          "label": "Combining Conditions with AND and OR",
-          "summary": "Use AND for simultaneous requirements and OR for acceptable alternatives.",
+          "label": "Combining Conditions",
+          "summary": "Use AND and OR, group mixed logic clearly, and debug a filter against the requirement.",
           "cards": {
             "sketch0": {
-              "title": "AND Requires Every Condition"
+              "title": "Combine requirements with AND and OR"
             },
             "sketch1": {
-              "title": "OR Allows Alternative Conditions"
+              "title": "Group and debug mixed conditions"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: Combining conditions"
             }
           },
           "quiz": {
@@ -33,43 +33,12 @@
                 "d": "It selects every column in the table."
               }
             },
-            "mc_rows_match_art_and_price": {
-              "title": "Choose all matching Art products",
-              "prompt": "Which products match `WHERE category = 'Art' AND price < 30`? Choose all that apply.",
-              "hint": "Start with the `Art` category, then check which of those prices are below 30.",
-              "help": {
-                "concept": "With `AND`, you first narrow to rows that match one condition, then keep only the rows that also satisfy the second condition.",
-                "hint_1": "The dataset has two `Art` products. Compare each of their prices to 30.",
-                "hint_2": "Both `Art` rows have prices under 30, so each one passes the second test too."
-              },
-              "options": {
-                "a": "Sketchbook",
-                "b": "Acrylic Paint Set",
-                "c": "Desk Lamp",
-                "d": "Office Chair"
-              }
-            },
-            "dr_build_and_query": {
-              "title": "Build a query with AND",
-              "prompt": "Arrange the SQL parts to query product names where the category is `Stationery` and stock is at least 15.",
-              "hint": "Start with `SELECT`, then `FROM`, then the `WHERE` clause with both conditions.",
-              "help": {
-                "concept": "A basic filtered SQL query follows the order `SELECT ... FROM ... WHERE ...`, and combined conditions stay together in the `WHERE` clause.",
-                "hint_1": "The column to show is `name`, the table is `products`, and the filter comes last.",
-                "hint_2": "Inside `WHERE`, place the category check and the stock check with `AND` between them."
-              },
-              "tokens": {
-                "t1": "SELECT name",
-                "t2": "FROM products",
-                "t3": "WHERE category = 'Stationery' AND stock >= 15;"
-              }
-            },
             "fb_and_keyword": {
               "title": "Complete the filter keyword",
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "Use the keyword that requires both conditions to be true.",
               "help": {
-                "concept": "SQL uses `the blank` to combine conditions when every condition must be true for a row to remain.",
+                "concept": "SQL has a logical operator for cases where every connected condition must be true.",
                 "hint_1": "This is not the keyword for either/or logic.",
                 "hint_2": "The missing word joins two conditions into one stricter filter."
               },
@@ -81,6 +50,38 @@
                 "ORDER BY"
               ]
             },
+            "sc_parentheses_clarity": {
+              "title": "Parentheses make mixed logic clearer",
+              "prompt": "Why is `WHERE (category = 'Art' OR category = 'Stationery') AND stock > 20` safer to read than leaving out the parentheses?",
+              "hint": "Look for the answer about grouping the category conditions before checking stock.",
+              "help": {
+                "concept": "Parentheses group conditions so the intended logic is explicit when `AND` and `OR` appear together.",
+                "hint_1": "The grouped part decides which category test belongs together as one unit.",
+                "hint_2": "The safer version makes SQL check the two category options together, then apply the stock rule."
+              },
+              "options": {
+                "a": "It groups the OR conditions so the stock rule applies to the whole category group.",
+                "b": "It automatically sorts the results by stock.",
+                "c": "It changes text values into numbers before filtering.",
+                "d": "It removes duplicate rows from the table."
+              }
+            },
+            "mc_and_vs_or": {
+              "title": "Choose filters that require both conditions",
+              "prompt": "Which WHERE clauses return only products that are in the Home category and have stock less than 10? Choose all that apply.",
+              "hint": "You need both category and stock rules to be true for the same row.",
+              "help": {
+                "concept": "When a query must satisfy two conditions at once, use AND so both tests apply to each row.",
+                "hint_1": "One condition should check `category`, and the other should check `stock < 10`.",
+                "hint_2": "Reject any option that uses OR or that changes the stock comparison away from 'less than 10'."
+              },
+              "options": {
+                "a": "category = 'Home' AND stock < 10",
+                "b": "stock < 10 AND category = 'Home'",
+                "c": "category = 'Home' OR stock < 10",
+                "d": "category = 'Home' AND stock > 10"
+              }
+            },
             "try-and_conditions-sketch1": {
               "title": "Require Category and Stock Together",
               "prompt": "Prepare a bulk-order list. Return `name`, `category`, and `stock` from `products`, in that order. Keep only `Stationery` products with stock of at least `15`.",
@@ -91,7 +92,55 @@
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
               "starterCode": "-- Require both the category and stock rules.\nSELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'",
-              "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'\n  AND stock >= 15;"
+              "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'\n  AND stock >= 15;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `stock`."
+                }
+              ]
+            },
+            "practice-grouped-conditions": {
+              "title": "Practice: Group mixed conditions safely",
+              "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep `Home` or `Art` products, and require every kept product to cost at most `30`.",
+              "hint": "Group the two category alternatives in parentheses, then connect the price condition with AND.",
+              "help": {
+                "concept": "Parentheses keep an OR group together so a following AND rule applies to every alternative.",
+                "hint_1": "Group the two category alternatives in parentheses, then connect the price condition with AND.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "-- Group the two acceptable categories before applying the price rule.\nSELECT name, category, price\nFROM products\nWHERE",
+              "solutionCode": "SELECT name, category, price\nFROM products\nWHERE (category = 'Home' OR category = 'Art')\n  AND price <= 30;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `price`."
+                }
+              ]
+            },
+            "practice-debug-filter": {
+              "title": "Practice: Repair a filtering mistake",
+              "prompt": "The starter query contains an invalid comparison operator. Repair it so the result returns `name` and `price` from `products` for items priced at least `20`.",
+              "hint": "SQL writes “greater than or equal to” with the two characters in the opposite order from the broken starter.",
+              "help": {
+                "concept": "A valid inclusive greater-than comparison uses >=, not =>.",
+                "hint_1": "SQL writes “greater than or equal to” with the two characters in the opposite order from the broken starter.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "SELECT name, price\nFROM products\nWHERE price => 20;",
+              "solutionCode": "SELECT name, price\nFROM products\nWHERE price >= 20;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `price`."
+                }
+              ]
             }
           },
           "tryIt": {
@@ -111,17 +160,17 @@
       },
       "sql-v2-2": {
         "and_conditions": {
-          "label": "Combining Conditions with AND and OR",
-          "summary": "Use AND for simultaneous requirements and OR for acceptable alternatives.",
+          "label": "Combining Conditions",
+          "summary": "Use AND and OR, group mixed logic clearly, and debug a filter against the requirement.",
           "cards": {
             "sketch0": {
-              "title": "AND Requires Every Condition"
+              "title": "Combine requirements with AND and OR"
             },
             "sketch1": {
-              "title": "OR Allows Alternative Conditions"
+              "title": "Group and debug mixed conditions"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: Combining conditions"
             }
           },
           "quiz": {
@@ -141,43 +190,12 @@
                 "d": "It selects every column in the table."
               }
             },
-            "mc_rows_match_art_and_price": {
-              "title": "Choose all matching Art products",
-              "prompt": "Which products match `WHERE category = 'Art' AND price < 30`? Choose all that apply.",
-              "hint": "Start with the `Art` category, then check which of those prices are below 30.",
-              "help": {
-                "concept": "With `AND`, you first narrow to rows that match one condition, then keep only the rows that also satisfy the second condition.",
-                "hint_1": "The dataset has two `Art` products. Compare each of their prices to 30.",
-                "hint_2": "Both `Art` rows have prices under 30, so each one passes the second test too."
-              },
-              "options": {
-                "a": "Sketchbook",
-                "b": "Acrylic Paint Set",
-                "c": "Desk Lamp",
-                "d": "Office Chair"
-              }
-            },
-            "dr_build_and_query": {
-              "title": "Build a query with AND",
-              "prompt": "Arrange the SQL parts to query product names where the category is `Stationery` and stock is at least 15.",
-              "hint": "Start with `SELECT`, then `FROM`, then the `WHERE` clause with both conditions.",
-              "help": {
-                "concept": "A basic filtered SQL query follows the order `SELECT ... FROM ... WHERE ...`, and combined conditions stay together in the `WHERE` clause.",
-                "hint_1": "The column to show is `name`, the table is `products`, and the filter comes last.",
-                "hint_2": "Inside `WHERE`, place the category check and the stock check with `AND` between them."
-              },
-              "tokens": {
-                "t1": "SELECT name",
-                "t2": "FROM products",
-                "t3": "WHERE category = 'Stationery' AND stock >= 15;"
-              }
-            },
             "fb_and_keyword": {
               "title": "Complete the filter keyword",
               "prompt": "Fill in the missing SQL keyword.",
               "hint": "Use the keyword that requires both conditions to be true.",
               "help": {
-                "concept": "SQL uses `the blank` to combine conditions when every condition must be true for a row to remain.",
+                "concept": "SQL has a logical operator for cases where every connected condition must be true.",
                 "hint_1": "This is not the keyword for either/or logic.",
                 "hint_2": "The missing word joins two conditions into one stricter filter."
               },
@@ -189,6 +207,38 @@
                 "ORDER BY"
               ]
             },
+            "sc_parentheses_clarity": {
+              "title": "Parentheses make mixed logic clearer",
+              "prompt": "Why is `WHERE (category = 'Art' OR category = 'Stationery') AND stock > 20` safer to read than leaving out the parentheses?",
+              "hint": "Look for the answer about grouping the category conditions before checking stock.",
+              "help": {
+                "concept": "Parentheses group conditions so the intended logic is explicit when `AND` and `OR` appear together.",
+                "hint_1": "The grouped part decides which category test belongs together as one unit.",
+                "hint_2": "The safer version makes SQL check the two category options together, then apply the stock rule."
+              },
+              "options": {
+                "a": "It groups the OR conditions so the stock rule applies to the whole category group.",
+                "b": "It automatically sorts the results by stock.",
+                "c": "It changes text values into numbers before filtering.",
+                "d": "It removes duplicate rows from the table."
+              }
+            },
+            "mc_and_vs_or": {
+              "title": "Choose filters that require both conditions",
+              "prompt": "Which WHERE clauses return only products that are in the Home category and have stock less than 10? Choose all that apply.",
+              "hint": "You need both category and stock rules to be true for the same row.",
+              "help": {
+                "concept": "When a query must satisfy two conditions at once, use AND so both tests apply to each row.",
+                "hint_1": "One condition should check `category`, and the other should check `stock < 10`.",
+                "hint_2": "Reject any option that uses OR or that changes the stock comparison away from 'less than 10'."
+              },
+              "options": {
+                "a": "category = 'Home' AND stock < 10",
+                "b": "stock < 10 AND category = 'Home'",
+                "c": "category = 'Home' OR stock < 10",
+                "d": "category = 'Home' AND stock > 10"
+              }
+            },
             "try-and_conditions-sketch1": {
               "title": "Require Category and Stock Together",
               "prompt": "Prepare a bulk-order list. Return `name`, `category`, and `stock` from `products`, in that order. Keep only `Stationery` products with stock of at least `15`.",
@@ -198,7 +248,56 @@
                 "hint_1": "Write one category condition and one stock condition, then connect them with AND.",
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
-              "starterCode": "-- Require both the category and stock rules.\nSELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'"
+              "starterCode": "-- Require both the category and stock rules.\nSELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'",
+              "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Stationery'\n  AND stock >= 15;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `stock`."
+                }
+              ]
+            },
+            "practice-grouped-conditions": {
+              "title": "Practice: Group mixed conditions safely",
+              "prompt": "Return `name`, `category`, and `price` from `products`, in that order. Keep `Home` or `Art` products, and require every kept product to cost at most `30`.",
+              "hint": "Group the two category alternatives in parentheses, then connect the price condition with AND.",
+              "help": {
+                "concept": "Parentheses keep an OR group together so a following AND rule applies to every alternative.",
+                "hint_1": "Group the two category alternatives in parentheses, then connect the price condition with AND.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "-- Group the two acceptable categories before applying the price rule.\nSELECT name, category, price\nFROM products\nWHERE",
+              "solutionCode": "SELECT name, category, price\nFROM products\nWHERE (category = 'Home' OR category = 'Art')\n  AND price <= 30;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `category`, `price`."
+                }
+              ]
+            },
+            "practice-debug-filter": {
+              "title": "Practice: Repair a filtering mistake",
+              "prompt": "The starter query contains an invalid comparison operator. Repair it so the result returns `name` and `price` from `products` for items priced at least `20`.",
+              "hint": "SQL writes “greater than or equal to” with the two characters in the opposite order from the broken starter.",
+              "help": {
+                "concept": "A valid inclusive greater-than comparison uses >=, not =>.",
+                "hint_1": "SQL writes “greater than or equal to” with the two characters in the opposite order from the broken starter.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "SELECT name, price\nFROM products\nWHERE price => 20;",
+              "solutionCode": "SELECT name, price\nFROM products\nWHERE price >= 20;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `price`."
+                }
+              ]
             }
           },
           "tryIt": {
@@ -223,24 +322,24 @@
       "sql--sql-v2--draft-2": {
         "and_conditions": {
           "and_all_rules": {
-            "title": "AND Requires Every Rule to Pass",
-            "bodyMarkdown": "Use `AND` when every condition must be true.\n\n```sql\nSELECT\n    application_id,\n    role,\n    years_experience\nFROM job_applications\nWHERE role = 'Analyst'\n  AND years_experience >= 2;\n```\n\nA row remains only if both tests pass. Break the requirement into separate yes-or-no questions, then connect the simultaneous requirements with `AND`."
+            "title": "Combine requirements with AND and OR",
+            "bodyMarkdown": "Use logical operators when one condition is not enough:\n\n- `AND` means every connected condition must be true.\n- `OR` means any connected alternative may be true.\n\nTranslate the requirement before choosing the operator: **all of these** usually means AND; **any of these** usually means OR."
           },
           "or_alternatives": {
-            "title": "OR Allows Acceptable Alternatives",
-            "bodyMarkdown": "Use `OR` when either condition is acceptable.\n\n```sql\nSELECT\n    application_id,\n    city\nFROM job_applications\nWHERE city = 'Austin'\n   OR city = 'Dallas';\n```\n\nA row can match either city. It does not need to satisfy both comparisons.\n\nUse `AND` for “this **and** that”; use `OR` for “this **or** that.” Mixed logic needs extra care, which the next lesson handles."
+            "title": "Group and debug mixed conditions",
+            "bodyMarkdown": "When AND and OR appear together, use parentheses to make the intended grouping explicit.\n\nWhen a filter is wrong, compare the query with the requirement one condition at a time: operator, literal, logical connector, grouping, then clause order."
           }
         }
       },
       "sql-v2-2": {
         "and_conditions": {
           "and_all_rules": {
-            "title": "AND Requires Every Rule to Pass",
-            "bodyMarkdown": "Use `AND` when every condition must be true.\n\n```sql\nSELECT\n    application_id,\n    role,\n    years_experience\nFROM job_applications\nWHERE role = 'Analyst'\n  AND years_experience >= 2;\n```\n\nA row remains only if both tests pass. Break the requirement into separate yes-or-no questions, then connect the simultaneous requirements with `AND`."
+            "title": "Combine requirements with AND and OR",
+            "bodyMarkdown": "Use logical operators when one condition is not enough:\n\n- `AND` means every connected condition must be true.\n- `OR` means any connected alternative may be true.\n\nTranslate the requirement before choosing the operator: **all of these** usually means AND; **any of these** usually means OR."
           },
           "or_alternatives": {
-            "title": "OR Allows Acceptable Alternatives",
-            "bodyMarkdown": "Use `OR` when either condition is acceptable.\n\n```sql\nSELECT\n    application_id,\n    city\nFROM job_applications\nWHERE city = 'Austin'\n   OR city = 'Dallas';\n```\n\nA row can match either city. It does not need to satisfy both comparisons.\n\nUse `AND` for “this **and** that”; use `OR` for “this **or** that.” Mixed logic needs extra care, which the next lesson handles."
+            "title": "Group and debug mixed conditions",
+            "bodyMarkdown": "When AND and OR appear together, use parentheses to make the intended grouping explicit.\n\nWhen a filter is wrong, compare the query with the requirement one condition at a time: operator, literal, logical connector, grouping, then clause order."
           }
         }
       }

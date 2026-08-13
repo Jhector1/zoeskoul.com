@@ -291,7 +291,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_model.py",
@@ -561,7 +560,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_reporting.py",
@@ -942,7 +940,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_loader.py",
@@ -1360,7 +1357,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_adoption.py",
@@ -1799,7 +1795,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_summary.py",
@@ -2308,7 +2303,6 @@
             "entry": false
           }
         ],
-
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_regression.py",

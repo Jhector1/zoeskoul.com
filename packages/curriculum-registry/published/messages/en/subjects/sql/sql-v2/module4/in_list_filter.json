@@ -3,17 +3,17 @@
     "sql-v2": {
       "sql-v2-4": {
         "in_list_filter": {
-          "label": "Filtering Exact Sets with IN and NOT IN",
-          "summary": "Use IN for several allowed exact values and NOT IN for several excluded exact values.",
+          "label": "IN and BETWEEN",
+          "summary": "Use IN for exact value sets and BETWEEN for inclusive ranges.",
           "cards": {
             "sketch0": {
-              "title": "IN Matches Any Exact Value in a List"
+              "title": "Match exact sets with IN"
             },
             "sketch1": {
-              "title": "NOT IN Excludes Every Listed Value"
+              "title": "Match inclusive ranges with BETWEEN"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: IN and BETWEEN"
             }
           },
           "quiz": {
@@ -24,7 +24,7 @@
               "help": {
                 "concept": "`IN` checks whether one column value matches any one item in a list of exact values.",
                 "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
-                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
+                "hint_2": "A row needs to match one listed city, not every city at the same time."
               },
               "options": {
                 "a": "The city must be both Chicago and Miami at the same time",
@@ -49,35 +49,36 @@
                 "d": "Emma Reed"
               }
             },
-            "mc_in_equivalents": {
-              "title": "Equivalent filters",
-              "prompt": "Choose all filters that mean the same as `WHERE city IN ('Chicago', 'Miami')`.",
-              "hint": "Compare the condition with the column named in the question, then check which rows would remain.",
+            "sc_between_inclusive": {
+              "title": "BETWEEN includes the ends",
+              "prompt": "What does `WHERE signup_date BETWEEN '2026-01-12' AND '2026-01-22'` mean?",
+              "hint": "Check whether the start and end dates are included in a BETWEEN range.",
               "help": {
-                "concept": "`IN` with two values is equivalent to joining two equality checks with `OR`, not `AND`.",
-                "hint_1": "Compare the condition with the column named in the question, then check which rows would remain.",
-                "hint_2": "Compare the condition with the column named in the question, then check which rows would remain."
+                "concept": "In SQL, BETWEEN checks whether a value is inside a range and includes both boundary values.",
+                "hint_1": "Think about whether rows on exactly `2026-01-12` and exactly `2026-01-22` should stay in the results.",
+                "hint_2": "BETWEEN acts like a start-and-end range check using both a lower bound and an upper bound."
               },
               "options": {
-                "a": "city = 'Chicago' OR city = 'Miami'",
-                "b": "city = 'Chicago' AND city = 'Miami'",
-                "c": "city NOT IN ('Chicago', 'Miami')",
-                "d": "city = 'Miami' OR city = 'Chicago'"
+                "a": "Only dates after `2026-01-12` and before `2026-01-22`",
+                "b": "Dates from `2026-01-12` through `2026-01-22`, including both ends",
+                "c": "Only dates equal to `2026-01-12` or `2026-01-22`",
+                "d": "Dates outside the range `2026-01-12` to `2026-01-22`"
               }
             },
-            "dr_where_in_logic": {
-              "title": "Read the filter in order",
-              "prompt": "Arrange these pieces to form a valid WHERE condition that keeps active or draft customers.",
-              "hint": "Focus on the logical order of the parts.",
+            "sc_between_equivalent": {
+              "title": "Equivalent range condition",
+              "prompt": "Which WHERE clause is equivalent to `signup_date BETWEEN '2026-01-15' AND '2026-01-25'`?",
+              "hint": "Look for one condition that keeps dates on or after the start and on or before the end.",
               "help": {
-                "concept": "Arrange the pieces according to the structure of the statement.",
-                "hint_1": "Compare the question to the lesson example and remove choices from unrelated topics.",
-                "hint_2": "Put the pieces in the order that makes the statement valid."
+                "concept": "BETWEEN can be rewritten as two comparisons joined with AND: one lower bound and one upper bound.",
+                "hint_1": "The first comparison should keep dates from the start date upward.",
+                "hint_2": "The second comparison should still allow the ending date itself, not exclude it."
               },
-              "tokens": {
-                "t1": "status",
-                "t2": "IN",
-                "t3": "('active', 'draft')"
+              "options": {
+                "a": "signup_date > '2026-01-15' AND signup_date < '2026-01-25'",
+                "b": "signup_date >= '2026-01-15' AND signup_date <= '2026-01-25'",
+                "c": "signup_date <= '2026-01-15' AND signup_date >= '2026-01-25'",
+                "d": "signup_date = '2026-01-15' AND signup_date = '2026-01-25'"
               }
             },
             "try-in_list_filter-sketch0": {
@@ -89,7 +90,62 @@
                 "hint_1": "Put both quoted status values inside the IN parentheses.",
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               },
-              "starterCode": "-- Keep only active or draft customers.\nSELECT id, full_name, status\nFROM customers\nWHERE status IN ();"
+              "starterCode": "-- Keep only active or draft customers.\nSELECT id, full_name, status\nFROM customers\nWHERE status IN ();",
+              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'draft');",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `full_name`, `status`."
+                },
+                {
+                  "message": "Use `IN` for the requested exact-value list."
+                }
+              ]
+            },
+            "practice-inclusive-range": {
+              "title": "Practice: Filter an inclusive range",
+              "prompt": "Return `id`, `full_name`, and `signup_date` from `customers`, in that order. Keep signups from `2026-01-12` through `2026-01-25`, including both boundary dates.",
+              "hint": "Use an inclusive lower and upper boundary. You can express the range in either standard equivalent form.",
+              "help": {
+                "concept": "An inclusive SQL range can be written with BETWEEN or with two inclusive comparisons joined by AND.",
+                "hint_1": "Both the starting date and ending date must remain in the result.",
+                "hint_2": "Run the query and compare the returned columns and rows with the expected result."
+              },
+              "starterCode": "-- Keep the inclusive signup window.\nSELECT id, full_name, signup_date\nFROM customers\nWHERE",
+              "solutionCode": "SELECT id, full_name, signup_date\nFROM customers\nWHERE signup_date BETWEEN '2026-01-12' AND '2026-01-25';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `full_name`, `signup_date`."
+                }
+              ]
+            },
+            "practice-exclude-status-list": {
+              "title": "Practice: Exclude statuses with NOT IN",
+              "prompt": "Return `full_name` and `status` from `customers`, in that order. Use one list-based exclusion to remove both `draft` and `inactive` statuses.",
+              "hint": "Use the list operator that rejects values appearing inside its parentheses.",
+              "help": {
+                "concept": "NOT IN excludes rows whose value appears in a listed set.",
+                "hint_1": "Both excluded status values belong inside one parenthesized list.",
+                "hint_2": "The remaining status rows should satisfy neither excluded value."
+              },
+              "starterCode": "-- Exclude two statuses with one list.\nSELECT full_name, status\nFROM customers\nWHERE status NOT IN ();",
+              "solutionCode": "SELECT full_name, status\nFROM customers\nWHERE status NOT IN ('draft', 'inactive');",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `status`."
+                },
+                {
+                  "message": "Use `NOT IN` for the requested list-based exclusion."
+                }
+              ]
             }
           },
           "tryIt": {
@@ -114,12 +170,12 @@
       "sql-v2-4": {
         "in_list_filter": {
           "in_value_list": {
-            "title": "IN Matches Any Exact Value in a List",
-            "bodyMarkdown": "`IN` is a compact way to keep rows whose column equals any value in a list.\n\n```sql\nSELECT\n    order_id,\n    status\nFROM orders\nWHERE status IN ('paid', 'refunded');\n```\n\nA row qualifies if its status is `paid` **or** `refunded`. It does not need to match every item.\n\n`IN` is often clearer than repeating the same column with several `OR` comparisons."
+            "title": "Match exact sets with IN",
+            "bodyMarkdown": "`IN` checks whether a value matches any exact value in a list.\n\nUse `IN (...)` for allowed values and `NOT IN (...)` for excluded values. It is usually clearer than repeating the same column with several OR comparisons."
           },
           "not_in_value_list": {
-            "title": "NOT IN Excludes Every Listed Value",
-            "bodyMarkdown": "`NOT IN` removes rows whose value appears in the listed set.\n\n```sql\nSELECT\n    shipment_id,\n    carrier\nFROM shipments\nWHERE carrier NOT IN ('Internal', 'Test');\n```\n\nRows using either excluded carrier are removed; other non-NULL carrier values remain.\n\nUse a list when the rule is about several exact values. Pattern matching and missing-value checks solve different problems."
+            "title": "Match inclusive ranges with BETWEEN",
+            "bodyMarkdown": "`BETWEEN` checks an inclusive range: both endpoints count.\n\nUse it when a requirement gives one lower and one upper boundary, such as a date window or numeric range.\n\n`BETWEEN low AND high` is equivalent to `>= low AND <= high`. Keep the boundaries in lower-to-upper order."
           }
         }
       }

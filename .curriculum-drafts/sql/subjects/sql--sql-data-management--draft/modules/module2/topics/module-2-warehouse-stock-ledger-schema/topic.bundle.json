@@ -251,7 +251,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='warehouses';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -399,7 +398,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -547,7 +545,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -695,7 +692,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='stock_movements';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -849,7 +845,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -1003,7 +998,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",

@@ -28,53 +28,126 @@
             }
           },
           "quiz": {
+            "practice-capstone-contactability": {
+              "title": "Practice: Build a contactable customer slice",
+              "prompt": "Return `full_name`, `email`, and `status` from `customers`, in that order. Keep only active customers with a recorded email, and exclude test records.",
+              "hint": "Combine the exact status requirement with the two contactability checks.",
+              "help": {
+                "concept": "Several independent cleanup requirements can be combined so every required condition must be satisfied.",
+                "hint_1": "The email must be present rather than missing.",
+                "hint_2": "Keep real records rather than test records."
+              },
+              "starterCode": "-- Build the contactable active-customer slice.\nSELECT full_name, email, status\nFROM customers\nWHERE",
+              "solutionCode": "SELECT full_name, email, status\nFROM customers\nWHERE status = 'active'\n  AND email IS NOT NULL\n  AND is_test = 0;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `email`, `status`."
+                }
+              ]
+            },
+            "practice-capstone-city-window": {
+              "title": "Practice: Combine a city set and date window",
+              "prompt": "Return `full_name`, `city`, and `signup_date` from `customers`, in that order. Keep customers from Chicago or Miami who signed up from `2026-01-10` through `2026-02-05`, including both boundary dates.",
+              "hint": "Combine one allowed-city requirement with one inclusive signup-date window.",
+              "help": {
+                "concept": "An allowed value set and an inclusive range can be combined without changing the selected result columns.",
+                "hint_1": "Either approved city may qualify.",
+                "hint_2": "The beginning and ending dates both count."
+              },
+              "starterCode": "-- Combine the location and date requirements.\nSELECT full_name, city, signup_date\nFROM customers\nWHERE",
+              "solutionCode": "SELECT full_name, city, signup_date\nFROM customers\nWHERE city IN ('Chicago', 'Miami')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `city`, `signup_date`."
+                }
+              ]
+            },
+            "practice-capstone-ranked-outreach": {
+              "title": "Practice: Filter, rank, and limit",
+              "prompt": "Return `full_name` and `signup_date` from `customers`, in that order. Keep names containing the letter `a`, show the newest signup dates first, use customer name A to Z to break date ties, and return only the first three rows.",
+              "hint": "Finish the filter before building the two-level ranking, then reduce the ranked result to three rows.",
+              "help": {
+                "concept": "A ranked subset needs its complete ordering before the final row count is applied.",
+                "hint_1": "Signup date controls the main ranking.",
+                "hint_2": "Customer name only decides the order of rows that share the same signup date."
+              },
+              "starterCode": "-- Build the filtered ranked outreach slice.\nSELECT full_name, signup_date\nFROM customers\nWHERE",
+              "solutionCode": "SELECT full_name, signup_date\nFROM customers\nWHERE full_name LIKE '%a%'\nORDER BY signup_date DESC, full_name ASC\nLIMIT 3;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `signup_date`."
+                }
+              ]
+            },
             "cp-1-start-follow-up-slice": {
               "title": "Build the eligible-status slice",
               "prompt": "Lifecycle operations wants a follow-up candidate list. Return `full_name`, `city`, and `status` from `customers`, in that order. Keep customers whose status is either `active` or `draft`.",
-              "hint": "The starter keeps only one status. Replace that single-value filter with the list operator that accepts either approved status.",
+              "hint": "Keep the selected columns and change the status filter so either approved status can qualify.",
               "help": {
-                "concept": "IN is a concise exact-value filter when any value from a short approved list may match.",
+                "concept": "A status-set requirement keeps a row when its status matches either approved value.",
                 "hint_1": "Keep the selected columns and table unchanged.",
-                "hint_2": "Change only the status condition so both approved statuses qualify."
+                "hint_2": "Both active and draft rows should be eligible."
               },
               "starterCode": "-- The starter keeps only active customers.\n-- Expand the filter so active and draft customers are both eligible.\nSELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status = 'active';",
-              "solutionCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');"
+              "solutionCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `city`, `status`."
+                }
+              ]
             },
             "cp-2-keep-real-contactable-customers": {
               "title": "Keep real contactable customers",
-              "prompt": "The outreach system can only use real records with an email address. Carry the approved status slice forward, add `email` to the result, require a present email value, and exclude test rows.",
-              "hint": "Keep the status rule from the previous milestone, then add one presence check and one test-record condition.",
+              "prompt": "The outreach system can only use real records with an email address. Carry the approved status slice forward. Return `full_name`, `email`, `city`, and `status`, in that order. Keep only rows with a recorded email and exclude test records.",
+              "hint": "Preserve the approved status rule, then add the two new contactability requirements.",
               "help": {
                 "concept": "Cumulative SQL work preserves approved logic and adds only the new business rules.",
-                "hint_1": "Do not replace the IN filter from milestone 1.",
-                "hint_2": "Add email to SELECT, then require a present email and is_test = 0."
+                "hint_1": "Do not replace the status-set requirement from the previous milestone.",
+                "hint_2": "The dataset uses the test flag to distinguish real and test records."
               },
               "starterCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
               "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;"
             },
             "cp-3-add-city-and-date-focus": {
               "title": "Add location and signup-date focus",
-              "prompt": "Regional operations is running this follow-up only for Chicago or Seattle customers who signed up from `2026-01-10` through `2026-02-05`, inclusive. Carry the approved query forward, add `signup_date`, and apply both the city list and date-window requirements.",
-              "hint": "Use one exact-value list for the two cities and one inclusive range for signup_date.",
+              "prompt": "Regional operations wants only Chicago or Seattle customers who signed up from `2026-01-10` through `2026-02-05`, including both boundary dates. Carry the approved query forward. Return `full_name`, `email`, `city`, `status`, and `signup_date`, in that order.",
+              "hint": "Preserve the earlier rules, then add one two-city requirement and one inclusive signup-date window.",
               "help": {
-                "concept": "IN handles the approved city set; BETWEEN handles an inclusive lower-and-upper date boundary.",
-                "hint_1": "Preserve the status, email-presence, and non-test requirements.",
-                "hint_2": "Add signup_date to SELECT, then add the city and date filters with AND."
+                "concept": "This milestone combines an exact set of allowed cities with an inclusive lower-and-upper date boundary.",
+                "hint_1": "Keep the approved status, contactability, and real-record requirements.",
+                "hint_2": "Both dates at the edges of the requested window must remain eligible."
               },
               "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
-              "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';"
+              "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                }
+              ]
             },
             "cp-4-finish-capstone-report": {
               "title": "Deliver the ranked final handoff",
-              "prompt": "For the final handoff, keep only names containing the letter `a`. Sort the approved records by `signup_date` from earliest to latest and return only the first five rows. Do not remove any requirement from the previous milestone.",
-              "hint": "Add a contains-pattern filter, then place ORDER BY after WHERE and LIMIT after ORDER BY.",
+              "prompt": "For the final handoff, keep only names containing the letter `a`. Sort the approved records by `signup_date` from earliest to latest. When signup dates tie, sort `full_name` from A to Z. Return only the first five rows and preserve every earlier requirement.",
+              "hint": "Add the final name-pattern rule, establish both ranking priorities, then trim the completed ranking to five rows.",
               "help": {
-                "concept": "The final report combines filtering with deterministic ordering before LIMIT chooses the first rows.",
-                "hint_1": "Keep every filter already approved in milestone 3.",
-                "hint_2": "Add the name LIKE condition, ORDER BY signup_date ASC, then LIMIT 5."
+                "concept": "The final report filters first, creates a deterministic primary-and-secondary ranking, and only then keeps the requested number of rows.",
+                "hint_1": "Keep every approved filter from milestone 3.",
+                "hint_2": "Signup date is the primary ranking; customer name only breaks ties."
               },
               "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
-              "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;"
+              "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC, full_name ASC\nLIMIT 5;"
             }
           }
         }
@@ -106,49 +179,126 @@
             }
           },
           "quiz": {
+            "practice-capstone-contactability": {
+              "title": "Practice: Build a contactable customer slice",
+              "prompt": "Return `full_name`, `email`, and `status` from `customers`, in that order. Keep only active customers with a recorded email, and exclude test records.",
+              "hint": "Combine the exact status requirement with the two contactability checks.",
+              "help": {
+                "concept": "Several independent cleanup requirements can be combined so every required condition must be satisfied.",
+                "hint_1": "The email must be present rather than missing.",
+                "hint_2": "Keep real records rather than test records."
+              },
+              "starterCode": "-- Build the contactable active-customer slice.\nSELECT full_name, email, status\nFROM customers\nWHERE",
+              "solutionCode": "SELECT full_name, email, status\nFROM customers\nWHERE status = 'active'\n  AND email IS NOT NULL\n  AND is_test = 0;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `email`, `status`."
+                }
+              ]
+            },
+            "practice-capstone-city-window": {
+              "title": "Practice: Combine a city set and date window",
+              "prompt": "Return `full_name`, `city`, and `signup_date` from `customers`, in that order. Keep customers from Chicago or Miami who signed up from `2026-01-10` through `2026-02-05`, including both boundary dates.",
+              "hint": "Combine one allowed-city requirement with one inclusive signup-date window.",
+              "help": {
+                "concept": "An allowed value set and an inclusive range can be combined without changing the selected result columns.",
+                "hint_1": "Either approved city may qualify.",
+                "hint_2": "The beginning and ending dates both count."
+              },
+              "starterCode": "-- Combine the location and date requirements.\nSELECT full_name, city, signup_date\nFROM customers\nWHERE",
+              "solutionCode": "SELECT full_name, city, signup_date\nFROM customers\nWHERE city IN ('Chicago', 'Miami')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `city`, `signup_date`."
+                }
+              ]
+            },
+            "practice-capstone-ranked-outreach": {
+              "title": "Practice: Filter, rank, and limit",
+              "prompt": "Return `full_name` and `signup_date` from `customers`, in that order. Keep names containing the letter `a`, show the newest signup dates first, use customer name A to Z to break date ties, and return only the first three rows.",
+              "hint": "Finish the filter before building the two-level ranking, then reduce the ranked result to three rows.",
+              "help": {
+                "concept": "A ranked subset needs its complete ordering before the final row count is applied.",
+                "hint_1": "Signup date controls the main ranking.",
+                "hint_2": "Customer name only decides the order of rows that share the same signup date."
+              },
+              "starterCode": "-- Build the filtered ranked outreach slice.\nSELECT full_name, signup_date\nFROM customers\nWHERE",
+              "solutionCode": "SELECT full_name, signup_date\nFROM customers\nWHERE full_name LIKE '%a%'\nORDER BY signup_date DESC, full_name ASC\nLIMIT 3;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `signup_date`."
+                }
+              ]
+            },
             "cp-1-start-follow-up-slice": {
               "title": "Build the eligible-status slice",
               "prompt": "Lifecycle operations wants a follow-up candidate list. Return `full_name`, `city`, and `status` from `customers`, in that order. Keep customers whose status is either `active` or `draft`.",
-              "hint": "The starter keeps only one status. Replace that single-value filter with the list operator that accepts either approved status.",
+              "hint": "Keep the selected columns and change the status filter so either approved status can qualify.",
               "help": {
-                "concept": "IN is a concise exact-value filter when any value from a short approved list may match.",
+                "concept": "A status-set requirement keeps a row when its status matches either approved value.",
                 "hint_1": "Keep the selected columns and table unchanged.",
-                "hint_2": "Change only the status condition so both approved statuses qualify."
+                "hint_2": "Both active and draft rows should be eligible."
               },
-              "starterCode": "-- The starter keeps only active customers.\n-- Expand the filter so active and draft customers are both eligible.\nSELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status = 'active';"
+              "starterCode": "-- The starter keeps only active customers.\n-- Expand the filter so active and draft customers are both eligible.\nSELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status = 'active';",
+              "solutionCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `full_name`, `city`, `status`."
+                }
+              ]
             },
             "cp-2-keep-real-contactable-customers": {
               "title": "Keep real contactable customers",
-              "prompt": "The outreach system can only use real records with an email address. Carry the approved status slice forward, add `email` to the result, require a present email value, and exclude test rows.",
-              "hint": "Keep the status rule from the previous milestone, then add one presence check and one test-record condition.",
+              "prompt": "The outreach system can only use real records with an email address. Carry the approved status slice forward. Return `full_name`, `email`, `city`, and `status`, in that order. Keep only rows with a recorded email and exclude test records.",
+              "hint": "Preserve the approved status rule, then add the two new contactability requirements.",
               "help": {
                 "concept": "Cumulative SQL work preserves approved logic and adds only the new business rules.",
-                "hint_1": "Do not replace the IN filter from milestone 1.",
-                "hint_2": "Add email to SELECT, then require a present email and is_test = 0."
+                "hint_1": "Do not replace the status-set requirement from the previous milestone.",
+                "hint_2": "The dataset uses the test flag to distinguish real and test records."
               },
-              "starterCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');"
+              "starterCode": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+              "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;"
             },
             "cp-3-add-city-and-date-focus": {
               "title": "Add location and signup-date focus",
-              "prompt": "Regional operations is running this follow-up only for Chicago or Seattle customers who signed up from `2026-01-10` through `2026-02-05`, inclusive. Carry the approved query forward, add `signup_date`, and apply both the city list and date-window requirements.",
-              "hint": "Use one exact-value list for the two cities and one inclusive range for signup_date.",
+              "prompt": "Regional operations wants only Chicago or Seattle customers who signed up from `2026-01-10` through `2026-02-05`, including both boundary dates. Carry the approved query forward. Return `full_name`, `email`, `city`, `status`, and `signup_date`, in that order.",
+              "hint": "Preserve the earlier rules, then add one two-city requirement and one inclusive signup-date window.",
               "help": {
-                "concept": "IN handles the approved city set; BETWEEN handles an inclusive lower-and-upper date boundary.",
-                "hint_1": "Preserve the status, email-presence, and non-test requirements.",
-                "hint_2": "Add signup_date to SELECT, then add the city and date filters with AND."
+                "concept": "This milestone combines an exact set of allowed cities with an inclusive lower-and-upper date boundary.",
+                "hint_1": "Keep the approved status, contactability, and real-record requirements.",
+                "hint_2": "Both dates at the edges of the requested window must remain eligible."
               },
-              "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;"
+              "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+              "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `customers` table in the FROM clause."
+                }
+              ]
             },
             "cp-4-finish-capstone-report": {
               "title": "Deliver the ranked final handoff",
-              "prompt": "For the final handoff, keep only names containing the letter `a`. Sort the approved records by `signup_date` from earliest to latest and return only the first five rows. Do not remove any requirement from the previous milestone.",
-              "hint": "Add a contains-pattern filter, then place ORDER BY after WHERE and LIMIT after ORDER BY.",
+              "prompt": "For the final handoff, keep only names containing the letter `a`. Sort the approved records by `signup_date` from earliest to latest. When signup dates tie, sort `full_name` from A to Z. Return only the first five rows and preserve every earlier requirement.",
+              "hint": "Add the final name-pattern rule, establish both ranking priorities, then trim the completed ranking to five rows.",
               "help": {
-                "concept": "The final report combines filtering with deterministic ordering before LIMIT chooses the first rows.",
-                "hint_1": "Keep every filter already approved in milestone 3.",
-                "hint_2": "Add the name LIKE condition, ORDER BY signup_date ASC, then LIMIT 5."
+                "concept": "The final report filters first, creates a deterministic primary-and-secondary ranking, and only then keeps the requested number of rows.",
+                "hint_1": "Keep every approved filter from milestone 3.",
+                "hint_2": "Signup date is the primary ranking; customer name only breaks ties."
               },
-              "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';"
+              "starterCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+              "solutionCode": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC, full_name ASC\nLIMIT 5;"
             }
           }
         }

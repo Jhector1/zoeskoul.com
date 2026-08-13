@@ -296,7 +296,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -377,7 +376,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -458,7 +456,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -539,7 +536,6 @@
             "entry": true
           }
         ],
-
         "semanticChecks": [
           {
             "type": "printed_line_count",

@@ -462,29 +462,6 @@
         ]
       },
       "showExpectedExample": true,
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "path": "analysis.c",
-          "pattern": "3 * n",
-          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.0.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "analysis.c",
-          "pattern": "n * n",
-          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.1.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "analysis.c",
-          "pattern": "n * n + n",
-          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.2.message",
-          "normalizeWhitespace": false
-        }
-      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -518,7 +495,30 @@
             "entry": false
           }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "3 * n",
+          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "n * n",
+          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "n * n + n",
+          "message": "@:topics.c--c-runtime-analysis-asymptotics--draft.c--c-runtime-analysis-asymptotics--draft-module-1-frequency-counting.constant-and-rectangular-loops.finalLab.steps.count_foo1_foo2.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ]
     },
     {
       "id": "foo1-reason",

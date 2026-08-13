@@ -97,11 +97,11 @@
       }
     },
     {
-      "id": "sc_2",
+      "id": "eq-sc-1",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.sc_2",
+      "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.eq-sc-1",
       "optionIds": [
         "a",
         "b",
@@ -110,15 +110,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "mc_1",
-      "kind": "multi_choice",
+      "id": "gt-sc-inclusive",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.mc_1",
+      "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.gt-sc-inclusive",
       "optionIds": [
         "a",
         "b",
@@ -126,32 +126,20 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "d"
-        ]
+        "kind": "single_choice",
+        "optionId": "c"
       }
     },
     {
-      "id": "dr_1",
-      "kind": "drag_reorder",
+      "id": "fb_text_quotes",
+      "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.dr_1",
-      "tokenIds": [
-        "t1",
-        "t2",
-        "t3"
-      ],
+      "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.fb_text_quotes",
+      "choiceCount": 4,
       "expected": {
-        "kind": "drag_reorder",
-        "tokenIds": [
-          "t1",
-          "t2",
-          "t3"
-        ]
+        "kind": "fill_blank_choice",
+        "value": "Home"
       }
     },
     {
@@ -229,7 +217,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT id, name, category\nFROM products\nWHERE category = 'Stationery';",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch0.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -252,7 +240,355 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.try-why_filtering_matters-sketch0.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "practice-exact-comparisons",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-exact-comparisons.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "practice-numeric-boundaries",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Oo][Cc][Kk]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-numeric-boundaries.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "practice-number-and-text-filters",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Pp][Rr][Oo][Dd][Uu][Cc][Tt][Ss]\\b",
+          "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ii][Dd]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Aa][Tt][Ee][Gg][Oo][Rr][Yy]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql-v2.sql-v2-2.why_filtering_matters.quiz.practice-number-and-text-filters.sourceChecks.1.message"
+        }
+      ]
     }
   ]
 }

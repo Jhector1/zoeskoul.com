@@ -588,7 +588,6 @@
             "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.4.message"
           }
         ],
-
         "tests": [
           {
             "stdin": "North Bed\n21.5\nSeedling Bench\n64\n",
@@ -832,7 +831,6 @@
             "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-greenhouse-sensor-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.1.message"
           }
         ],
-
         "tests": [
           {
             "stdin": "North Bed\n21.5\nSeedling Bench\n64\n",

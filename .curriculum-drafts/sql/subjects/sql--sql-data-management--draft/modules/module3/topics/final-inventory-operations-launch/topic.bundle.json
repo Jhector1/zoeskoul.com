@@ -253,7 +253,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -995,7 +994,6 @@
           "query.sql"
         ],
         "checkSql": "SELECT id, sku, price, status\nFROM products\nWHERE id = 1;",
-
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",

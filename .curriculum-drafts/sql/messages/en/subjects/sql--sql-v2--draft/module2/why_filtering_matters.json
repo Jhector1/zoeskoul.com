@@ -3,17 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-2": {
         "why_filtering_matters": {
-          "label": "Filtering Rows with WHERE",
-          "summary": "Use WHERE to keep only source rows that satisfy a clear condition.",
+          "label": "Filtering with WHERE and Comparisons",
+          "summary": "Use WHERE once, then choose the comparison operator and literal format that match the requirement.",
           "cards": {
             "sketch0": {
-              "title": "A Filter Changes Which Rows Remain"
+              "title": "Filter rows with WHERE"
             },
             "sketch1": {
-              "title": "Place WHERE After FROM"
+              "title": "Choose the comparison and literal"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: WHERE and comparisons"
             }
           },
           "quiz": {
@@ -33,75 +33,145 @@
                 "d": "It sorts the rows alphabetically"
               }
             },
-            "sc_2": {
-              "title": "Why not select everything",
-              "prompt": "Why is filtering useful when a table has many rows?",
-              "hint": "Think about getting only the rows that answer one question.",
+            "eq-sc-1": {
+              "title": "What does = do in WHERE?",
+              "prompt": "What does the `=` operator do in a `WHERE` clause?",
+              "hint": "Think about whether `=` keeps exact matches or a range of values.",
               "help": {
-                "concept": "Filtering reduces extra rows so the result is more focused and easier to use.",
-                "hint_1": "A filter helps when you do not want to read every row manually.",
-                "hint_2": "Choose the option about narrowing the result to relevant rows."
+                "concept": "In SQL filtering, `=` is used to keep rows where a column matches one specific value exactly.",
+                "hint_1": "Compare `category = 'Art'` with the idea of finding only rows whose category is exactly Art.",
+                "hint_2": "It does not mean greater than, less than, or contains part of the text."
               },
               "options": {
-                "a": "It makes SQL stop using table names",
-                "b": "It returns only the rows you need for a specific question",
-                "c": "It automatically adds missing data",
-                "d": "It turns numbers into text"
+                "a": "It keeps rows where the value exactly matches.",
+                "b": "It sorts rows from smallest to largest.",
+                "c": "It returns every row in the table.",
+                "d": "It checks whether a value is between two numbers."
               }
             },
-            "mc_1": {
-              "title": "Questions that need filtering",
-              "prompt": "Which questions would usually need a `WHERE` clause? Choose all that apply.",
-              "hint": "Look for questions that ask for only part of the table, not every row.",
+            "gt-sc-inclusive": {
+              "title": "Does > include the boundary?",
+              "prompt": "A product has `stock = 15`. Will it match `WHERE stock > 15`?",
+              "hint": "Compare exact equality with a strict greater-than check.",
               "help": {
-                "concept": "You use `WHERE` when you want rows that meet a condition, such as one category or a price range.",
-                "hint_1": "Questions with words like only, under, above, or in one category often need filtering.",
-                "hint_2": "Pick the options that ask for a subset of products rather than the full list."
+                "concept": "A strict greater-than comparison excludes rows where the value is exactly the same as the boundary number.",
+                "hint_1": "The row would need a stock value larger than 15, not the same as 15.",
+                "hint_2": "If the condition were `>= 15`, equality would count, but this condition is different."
               },
               "options": {
-                "a": "Show only products in the Art category",
-                "b": "Show products with price under 20",
-                "c": "Show every product name and price in the table",
-                "d": "Show only products with stock less than 10"
+                "a": "Yes, because 15 is part of greater than 15",
+                "b": "Yes, but only if the row is in the Home category",
+                "c": "No, because 15 is not larger than 15",
+                "d": "No, because WHERE cannot compare numbers"
               }
             },
-            "dr_1": {
-              "title": "Build a basic filtered query",
-              "prompt": "Put these SQL parts in the correct order to make a query that filters rows.",
-              "hint": "Start with the columns, then the table, then the filter.",
+            "fb_text_quotes": {
+              "title": "Complete a text filter",
+              "prompt": "Fill in the missing value to keep only Home products.",
+              "hint": "This is a text value from the `category` column.",
               "help": {
-                "concept": "A basic filtered query follows the order `SELECT`, `FROM`, then `WHERE`.",
-                "hint_1": "The table name comes after `FROM`, and the condition comes after `WHERE`.",
-                "hint_2": "Arrange the tokens so the query reads like a normal SQL statement from top to bottom."
+                "concept": "Text comparisons in SQL use the exact text value inside quotes.",
+                "hint_1": "The products table contains text categories such as Art, Home, and Stationery.",
+                "hint_2": "Choose the category used by products such as Desk Lamp and Office Chair."
               },
-              "tokens": {
-                "t1": "SELECT name, price",
-                "t2": "FROM products",
-                "t3": "WHERE price < 20"
-              }
+              "template": "WHERE category = '[blank1]'",
+              "choices": [
+                "Home",
+                "price",
+                "10",
+                "Notebook"
+              ]
             },
             "try-why_filtering_matters-sketch0": {
               "title": "Create a Stationery-Only Inventory View",
-              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only rows where `category = 'Stationery'`.",
-              "hint": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only Stationery products.",
+              "hint": "Add one exact text comparison after WHERE.",
               "help": {
                 "concept": "WHERE filters source rows by a condition without changing the stored table.",
-                "hint_1": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+                "hint_1": "The category requirement is an exact text match, so remember how SQL represents text values.",
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
               "starterCode": "-- Return only Stationery products.\nSELECT id, name, category\nFROM products\nWHERE",
-              "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Stationery';"
+              "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Stationery';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `category`."
+                }
+              ]
+            },
+            "practice-exact-comparisons": {
+              "title": "Practice: Exclude an exact text value",
+              "prompt": "A campaign will feature every product except the Home category. Return `id`, `name`, and `category` from `products`, in that order.",
+              "hint": "Choose a comparison that rejects one exact text value.",
+              "help": {
+                "concept": "A not-equal comparison removes rows whose value matches the excluded value.",
+                "hint_1": "The Home category should be the only exact category value rejected.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "-- Exclude the Home category.\nSELECT id, name, category\nFROM products\nWHERE category",
+              "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `category`."
+                }
+              ]
+            },
+            "practice-numeric-boundaries": {
+              "title": "Practice: Choose strict and inclusive boundaries",
+              "prompt": "Return `name` and `stock` from `products`, in that order. Keep products with at least `15` units in stock, including products with exactly `15`.",
+              "hint": "The boundary value must count, so use an inclusive greater-than comparison.",
+              "help": {
+                "concept": ">= means greater than or equal to, so the boundary itself passes.",
+                "hint_1": "The boundary value must count, so use an inclusive greater-than comparison.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "-- Include items with at least 15 units.\nSELECT name, stock\nFROM products\nWHERE stock",
+              "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock >= 15;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `stock`."
+                }
+              ]
+            },
+            "practice-number-and-text-filters": {
+              "title": "Practice: Match an exact text value",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only products in the Home category.",
+              "hint": "This condition compares a text column with one exact text value.",
+              "help": {
+                "concept": "Text comparison values need quotes; numeric comparison values do not.",
+                "hint_1": "Remember that SQL text literals need quotes.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "-- Match the Home text value exactly.\nSELECT id, name, category\nFROM products\nWHERE category =",
+              "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Home';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `category`."
+                }
+              ]
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_why_filtering_matters_sketch0": {
               "title": "Create a Stationery-Only Inventory View",
-              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only rows where `category = 'Stationery'`.",
-              "hint": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only Stationery products.",
+              "hint": "Add one exact text comparison after WHERE.",
               "help": {
                 "concept": "WHERE filters source rows by a condition without changing the stored table.",
-                "hint_1": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+                "hint_1": "The category requirement is an exact text match, so remember how SQL represents text values.",
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
@@ -110,17 +180,17 @@
       },
       "sql-v2-2": {
         "why_filtering_matters": {
-          "label": "Filtering Rows with WHERE",
-          "summary": "Use WHERE to keep only source rows that satisfy a clear condition.",
+          "label": "Filtering with WHERE and Comparisons",
+          "summary": "Use WHERE once, then choose the comparison operator and literal format that match the requirement.",
           "cards": {
             "sketch0": {
-              "title": "A Filter Changes Which Rows Remain"
+              "title": "Filter rows with WHERE"
             },
             "sketch1": {
-              "title": "Place WHERE After FROM"
+              "title": "Choose the comparison and literal"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: WHERE and comparisons"
             }
           },
           "quiz": {
@@ -140,74 +210,145 @@
                 "d": "It sorts the rows alphabetically"
               }
             },
-            "sc_2": {
-              "title": "Why not select everything",
-              "prompt": "Why is filtering useful when a table has many rows?",
-              "hint": "Think about getting only the rows that answer one question.",
+            "eq-sc-1": {
+              "title": "What does = do in WHERE?",
+              "prompt": "What does the `=` operator do in a `WHERE` clause?",
+              "hint": "Think about whether `=` keeps exact matches or a range of values.",
               "help": {
-                "concept": "Filtering reduces extra rows so the result is more focused and easier to use.",
-                "hint_1": "A filter helps when you do not want to read every row manually.",
-                "hint_2": "Choose the option about narrowing the result to relevant rows."
+                "concept": "In SQL filtering, `=` is used to keep rows where a column matches one specific value exactly.",
+                "hint_1": "Compare `category = 'Art'` with the idea of finding only rows whose category is exactly Art.",
+                "hint_2": "It does not mean greater than, less than, or contains part of the text."
               },
               "options": {
-                "a": "It makes SQL stop using table names",
-                "b": "It returns only the rows you need for a specific question",
-                "c": "It automatically adds missing data",
-                "d": "It turns numbers into text"
+                "a": "It keeps rows where the value exactly matches.",
+                "b": "It sorts rows from smallest to largest.",
+                "c": "It returns every row in the table.",
+                "d": "It checks whether a value is between two numbers."
               }
             },
-            "mc_1": {
-              "title": "Questions that need filtering",
-              "prompt": "Which questions would usually need a `WHERE` clause? Choose all that apply.",
-              "hint": "Look for questions that ask for only part of the table, not every row.",
+            "gt-sc-inclusive": {
+              "title": "Does > include the boundary?",
+              "prompt": "A product has `stock = 15`. Will it match `WHERE stock > 15`?",
+              "hint": "Compare exact equality with a strict greater-than check.",
               "help": {
-                "concept": "You use `WHERE` when you want rows that meet a condition, such as one category or a price range.",
-                "hint_1": "Questions with words like only, under, above, or in one category often need filtering.",
-                "hint_2": "Pick the options that ask for a subset of products rather than the full list."
+                "concept": "A strict greater-than comparison excludes rows where the value is exactly the same as the boundary number.",
+                "hint_1": "The row would need a stock value larger than 15, not the same as 15.",
+                "hint_2": "If the condition were `>= 15`, equality would count, but this condition is different."
               },
               "options": {
-                "a": "Show only products in the Art category",
-                "b": "Show products with price under 20",
-                "c": "Show every product name and price in the table",
-                "d": "Show only products with stock less than 10"
+                "a": "Yes, because 15 is part of greater than 15",
+                "b": "Yes, but only if the row is in the Home category",
+                "c": "No, because 15 is not larger than 15",
+                "d": "No, because WHERE cannot compare numbers"
               }
             },
-            "dr_1": {
-              "title": "Build a basic filtered query",
-              "prompt": "Put these SQL parts in the correct order to make a query that filters rows.",
-              "hint": "Start with the columns, then the table, then the filter.",
+            "fb_text_quotes": {
+              "title": "Complete a text filter",
+              "prompt": "Fill in the missing value to keep only Home products.",
+              "hint": "This is a text value from the `category` column.",
               "help": {
-                "concept": "A basic filtered query follows the order `SELECT`, `FROM`, then `WHERE`.",
-                "hint_1": "The table name comes after `FROM`, and the condition comes after `WHERE`.",
-                "hint_2": "Arrange the tokens so the query reads like a normal SQL statement from top to bottom."
+                "concept": "Text comparisons in SQL use the exact text value inside quotes.",
+                "hint_1": "The products table contains text categories such as Art, Home, and Stationery.",
+                "hint_2": "Choose the category used by products such as Desk Lamp and Office Chair."
               },
-              "tokens": {
-                "t1": "SELECT name, price",
-                "t2": "FROM products",
-                "t3": "WHERE price < 20"
-              }
+              "template": "WHERE category = '[blank1]'",
+              "choices": [
+                "Home",
+                "price",
+                "10",
+                "Notebook"
+              ]
             },
             "try-why_filtering_matters-sketch0": {
               "title": "Create a Stationery-Only Inventory View",
-              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only rows where `category = 'Stationery'`.",
-              "hint": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only Stationery products.",
+              "hint": "Add one exact text comparison after WHERE.",
               "help": {
                 "concept": "WHERE filters source rows by a condition without changing the stored table.",
-                "hint_1": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+                "hint_1": "The category requirement is an exact text match, so remember how SQL represents text values.",
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               },
-              "starterCode": "-- Return only Stationery products.\nSELECT id, name, category\nFROM products\nWHERE"
+              "starterCode": "-- Return only Stationery products.\nSELECT id, name, category\nFROM products\nWHERE",
+              "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Stationery';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `category`."
+                }
+              ]
+            },
+            "practice-exact-comparisons": {
+              "title": "Practice: Exclude an exact text value",
+              "prompt": "A campaign will feature every product except the Home category. Return `id`, `name`, and `category` from `products`, in that order.",
+              "hint": "Choose a comparison that rejects one exact text value.",
+              "help": {
+                "concept": "A not-equal comparison removes rows whose value matches the excluded value.",
+                "hint_1": "The Home category should be the only exact category value rejected.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "-- Exclude the Home category.\nSELECT id, name, category\nFROM products\nWHERE category",
+              "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category <> 'Home';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `category`."
+                }
+              ]
+            },
+            "practice-numeric-boundaries": {
+              "title": "Practice: Choose strict and inclusive boundaries",
+              "prompt": "Return `name` and `stock` from `products`, in that order. Keep products with at least `15` units in stock, including products with exactly `15`.",
+              "hint": "The boundary value must count, so use an inclusive greater-than comparison.",
+              "help": {
+                "concept": ">= means greater than or equal to, so the boundary itself passes.",
+                "hint_1": "The boundary value must count, so use an inclusive greater-than comparison.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "-- Include items with at least 15 units.\nSELECT name, stock\nFROM products\nWHERE stock",
+              "solutionCode": "SELECT name, stock\nFROM products\nWHERE stock >= 15;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `name`, `stock`."
+                }
+              ]
+            },
+            "practice-number-and-text-filters": {
+              "title": "Practice: Match an exact text value",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only products in the Home category.",
+              "hint": "This condition compares a text column with one exact text value.",
+              "help": {
+                "concept": "Text comparison values need quotes; numeric comparison values do not.",
+                "hint_1": "Remember that SQL text literals need quotes.",
+                "hint_2": "Run the query and compare the returned rows and columns with the requirement."
+              },
+              "starterCode": "-- Match the Home text value exactly.\nSELECT id, name, category\nFROM products\nWHERE category =",
+              "solutionCode": "SELECT id, name, category\nFROM products\nWHERE category = 'Home';",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `id`, `name`, `category`."
+                }
+              ]
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_why_filtering_matters_sketch0": {
               "title": "Create a Stationery-Only Inventory View",
-              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only rows where `category = 'Stationery'`.",
-              "hint": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+              "prompt": "Return `id`, `name`, and `category` from `products`, in that order. Keep only Stationery products.",
+              "hint": "Add one exact text comparison after WHERE.",
               "help": {
                 "concept": "WHERE filters source rows by a condition without changing the stored table.",
-                "hint_1": "Keep the SELECT and FROM clauses, then add one WHERE condition for the exact category.",
+                "hint_1": "The category requirement is an exact text match, so remember how SQL represents text values.",
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
@@ -221,24 +362,24 @@
       "sql--sql-v2--draft-2": {
         "why_filtering_matters": {
           "where_changes_rows": {
-            "title": "Filter the Rows, Not the Stored Table",
-            "bodyMarkdown": "A query without `WHERE` can return every source row. `WHERE` keeps only rows that pass a yes-or-no test.\n\n```sql\nSELECT\n    employee_id,\n    name,\n    department\nFROM employees\nWHERE department = 'Support';\n```\n\nSQL checks the condition for each employee row. Rows in Support remain in the result; the others do not. The stored `employees` table is unchanged.\n\nTranslate the request into a test first: “Is this employee in Support?” Then write that test after `WHERE`."
+            "title": "Filter rows with WHERE",
+            "bodyMarkdown": "`WHERE` keeps only rows whose condition is true.\n\nA basic filtered query follows this order:\n\n`SELECT ... FROM ... WHERE ...`\n\nWHERE changes the result, not the stored table. Read the request first, identify the condition, then write it after FROM."
           },
           "where_clause_order": {
-            "title": "Place the Filter After the Source Table",
-            "bodyMarkdown": "A basic filtered query follows this shape:\n\n```text\nSELECT columns\nFROM table\nWHERE condition;\n```\n\nFor example:\n\n```sql\nSELECT\n    event_name,\n    seats_left\nFROM events\nWHERE seats_left < 20;\n```\n\n`SELECT` shapes the result, `FROM` names the source, and `WHERE` decides which source rows remain. Keep those jobs separate when you read or debug a query."
+            "title": "Choose the comparison and literal",
+            "bodyMarkdown": "Choose the comparison that matches the requirement:\n\n- `=` exact match\n- `<>` not equal\n- `>` and `<` exclude the boundary\n- `>=` and `<=` include the boundary\n\nNumbers are written without quotes. Text values use single quotes.\n\nThese comparison rules are taught here once; later lessons and projects will use them without reteaching them."
           }
         }
       },
       "sql-v2-2": {
         "why_filtering_matters": {
           "where_changes_rows": {
-            "title": "Filter the Rows, Not the Stored Table",
-            "bodyMarkdown": "A query without `WHERE` can return every source row. `WHERE` keeps only rows that pass a yes-or-no test.\n\n```sql\nSELECT\n    employee_id,\n    name,\n    department\nFROM employees\nWHERE department = 'Support';\n```\n\nSQL checks the condition for each employee row. Rows in Support remain in the result; the others do not. The stored `employees` table is unchanged.\n\nTranslate the request into a test first: “Is this employee in Support?” Then write that test after `WHERE`."
+            "title": "Filter rows with WHERE",
+            "bodyMarkdown": "`WHERE` keeps only rows whose condition is true.\n\nA basic filtered query follows this order:\n\n`SELECT ... FROM ... WHERE ...`\n\nWHERE changes the result, not the stored table. Read the request first, identify the condition, then write it after FROM."
           },
           "where_clause_order": {
-            "title": "Place the Filter After the Source Table",
-            "bodyMarkdown": "A basic filtered query follows this shape:\n\n```text\nSELECT columns\nFROM table\nWHERE condition;\n```\n\nFor example:\n\n```sql\nSELECT\n    event_name,\n    seats_left\nFROM events\nWHERE seats_left < 20;\n```\n\n`SELECT` shapes the result, `FROM` names the source, and `WHERE` decides which source rows remain. Keep those jobs separate when you read or debug a query."
+            "title": "Choose the comparison and literal",
+            "bodyMarkdown": "Choose the comparison that matches the requirement:\n\n- `=` exact match\n- `<>` not equal\n- `>` and `<` exclude the boundary\n- `>=` and `<=` include the boundary\n\nNumbers are written without quotes. Text values use single quotes.\n\nThese comparison rules are taught here once; later lessons and projects will use them without reteaching them."
           }
         }
       }

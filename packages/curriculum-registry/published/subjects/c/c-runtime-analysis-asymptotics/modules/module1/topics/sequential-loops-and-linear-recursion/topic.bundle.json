@@ -459,29 +459,6 @@
         ]
       },
       "showExpectedExample": true,
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "path": "analysis.c",
-          "pattern": "n + n",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.0.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "analysis.c",
-          "pattern": "n + 1",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.1.message",
-          "normalizeWhitespace": false
-        },
-        {
-          "type": "source_contains",
-          "path": "analysis.c",
-          "pattern": "return n;",
-          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.2.message",
-          "normalizeWhitespace": false
-        }
-      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -515,7 +492,30 @@
             "entry": false
           }
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "n + n",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "n + 1",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "return n;",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.sequential-loops-and-linear-recursion.finalLab.steps.count_foo5_foo6.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ]
     },
     {
       "id": "sequential-cost",

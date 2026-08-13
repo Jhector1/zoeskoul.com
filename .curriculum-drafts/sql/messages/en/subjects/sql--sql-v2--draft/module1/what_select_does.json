@@ -3,17 +3,17 @@
     "sql--sql-v2--draft": {
       "sql--sql-v2--draft-1": {
         "what_select_does": {
-          "label": "SELECT and FROM: Building a Query",
-          "summary": "Build a complete single-table query by choosing result columns and naming the table that supplies them.",
+          "label": "Selecting Data with SELECT and FROM",
+          "summary": "Choose the result columns, name the source table, and build readable multi-column output.",
           "cards": {
             "sketch0": {
-              "title": "Choose What the Result Should Show"
+              "title": "Choose columns and the source table"
             },
             "sketch1": {
-              "title": "Name the Table That Supplies the Rows"
+              "title": "Build a useful column list"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: SELECT and FROM"
             }
           },
           "quiz": {
@@ -33,45 +33,13 @@
                 "d": "It renames a column permanently"
               }
             },
-            "mc_valid_select_parts": {
-              "title": "Valid beginner SELECT queries",
-              "prompt": "Which queries correctly retrieve data from the `products` table? Choose all that apply.",
-              "hint": "A valid beginner query here needs `SELECT` and `FROM products` in the right places.",
-              "help": {
-                "concept": "A basic retrieval query names one or more columns after `SELECT` and the table after `FROM`.",
-                "hint_1": "Check whether the query starts with `SELECT` and whether `products` appears after `FROM`.",
-                "hint_2": "Two choices correctly ask for columns from `products`; the others misuse the keywords."
-              },
-              "options": {
-                "a": "SELECT name FROM products;",
-                "b": "FROM products SELECT name;",
-                "c": "SELECT * FROM products;",
-                "d": "products FROM SELECT name;"
-              }
-            },
-            "dr_query_order_basic": {
-              "title": "Build a basic query",
-              "prompt": "Arrange the tokens to make a valid query that shows the `name` column from the `products` table.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT",
-                "t2": "name",
-                "t3": "FROM",
-                "t4": "products;"
-              }
-            },
             "fb_from_table_name": {
               "title": "Complete the table name",
               "prompt": "Fill in the missing table name to select all columns from the products table.",
               "hint": "Use the actual table name shown in the schema browser.",
               "help": {
                 "concept": "The `FROM` clause names the table that the query reads from.",
-                "hint_1": "This lesson's dataset has one table named `the blank`.",
+                "hint_1": "Check the schema browser for the table that contains `id`, `name`, `price`, `category`, `stock`, and `created_at`.",
                 "hint_2": "Choose the table name that contains columns like `id`, `name`, and `price`."
               },
               "template": "SELECT * FROM [blank1];",
@@ -82,28 +50,107 @@
                 "category"
               ]
             },
+            "sc_select_specific_columns_meaning": {
+              "title": "What does selecting specific columns do?",
+              "prompt": "What does this query do?\n\nSELECT name, price\nFROM products;",
+              "hint": "Look at the column names listed right after SELECT.",
+              "help": {
+                "concept": "A SELECT query returns only the columns named after SELECT, from the table named after FROM.",
+                "hint_1": "This query names two columns: `name` and `price`.",
+                "hint_2": "Think about whether SQL is showing all columns from `products` or only the listed ones."
+              },
+              "options": {
+                "a": "It returns only the name and price columns from the products table.",
+                "b": "It returns every column from the products table.",
+                "c": "It changes the price values in the products table.",
+                "d": "It creates a new table with two rows."
+              }
+            },
+            "sc_columns_comma": {
+              "title": "How to list multiple columns",
+              "prompt": "Which query correctly selects the `name` and `price` columns from the `products` table?",
+              "hint": "Look for the query that separates the two column names with a comma.",
+              "help": {
+                "concept": "In SQL, multiple selected columns are written in the `SELECT` clause as a comma-separated list before the `FROM` clause.",
+                "hint_1": "Check whether `name` and `price` are both in the `SELECT` part and whether `products` appears after `FROM`.",
+                "hint_2": "A correct pattern looks like `SELECT first_column, second_column FROM table_name`."
+              },
+              "options": {
+                "a": "SELECT name, price FROM products;",
+                "b": "FROM products SELECT name, price;",
+                "c": "SELECT products FROM name, price;"
+              }
+            },
             "try-what_select_does-sketch0": {
-              "title": "Build a Two-Column Stock Reference",
-              "prompt": "Build a compact stock reference that returns `id` and `stock` from `products`, in that order.",
-              "hint": "Choose the two requested columns after SELECT and name the source table after FROM.",
+              "title": "Build a three-column product view",
+              "prompt": "Return `category`, `stock`, and `created_at` from `products`, in that column order.",
+              "hint": "SELECT the three requested columns in order, separate them with commas, then name the products table with FROM.",
               "help": {
                 "concept": "SELECT controls which columns appear, while FROM identifies the table that supplies the rows.",
-                "hint_1": "Choose the two requested columns after SELECT and name the source table after FROM.",
+                "hint_1": "Choose the three requested columns after SELECT and name the source table after FROM.",
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Return id and stock from products.\nSELECT\nFROM products;",
-              "solutionCode": "SELECT id, stock\nFROM products;"
+              "starterCode": "-- Write the requested product query here.",
+              "solutionCode": "SELECT\n  category,\n  stock,\n  created_at\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `category`, `stock`, `created_at`."
+                }
+              ]
+            },
+            "practice-selecting-specific-columns": {
+              "title": "Practice: Select only the needed columns",
+              "prompt": "Audit when product categories were added. Return only `category` and `created_at` from `products`, in that order.",
+              "hint": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+              "help": {
+                "concept": "Explicit column lists keep a result focused and make its column order intentional.",
+                "hint_1": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
+              },
+              "starterCode": "-- Return only category and created_at from products.\nSELECT\nFROM products;",
+              "solutionCode": "SELECT category, created_at\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `category`, `created_at`."
+                }
+              ]
+            },
+            "practice-multiple-column-order": {
+              "title": "Practice: Build a three-column result",
+              "prompt": "Prepare an inventory extract. Return `category`, `stock`, and `created_at` from `products`, in that order.",
+              "hint": "Separate selected columns with commas and keep FROM products after the complete list.",
+              "help": {
+                "concept": "A SELECT list controls both which columns appear and their left-to-right order.",
+                "hint_1": "Separate selected columns with commas and keep FROM products after the complete list.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
+              },
+              "starterCode": "-- Build a readable three-column product query.\nSELECT\nFROM products;",
+              "solutionCode": "SELECT\n    category,\n    stock,\n    created_at\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `category`, `stock`, `created_at`."
+                }
+              ]
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_what_select_does_sketch0": {
-              "title": "Build a Two-Column Stock Reference",
-              "prompt": "Build a compact stock reference that returns `id` and `stock` from `products`, in that order.",
-              "hint": "Choose the two requested columns after SELECT and name the source table after FROM.",
+              "title": "Build a three-column product view",
+              "prompt": "Return `category`, `stock`, and `created_at` from `products`, in that column order.",
+              "hint": "SELECT the three requested columns in order, separate them with commas, then name the products table with FROM.",
               "help": {
                 "concept": "SELECT controls which columns appear, while FROM identifies the table that supplies the rows.",
-                "hint_1": "Choose the two requested columns after SELECT and name the source table after FROM.",
+                "hint_1": "Choose the three requested columns after SELECT and name the source table after FROM.",
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
@@ -112,17 +159,17 @@
       },
       "sql-v2-1": {
         "what_select_does": {
-          "label": "SELECT and FROM: Building a Query",
-          "summary": "Build a complete single-table query by choosing result columns and naming the table that supplies them.",
+          "label": "Selecting Data with SELECT and FROM",
+          "summary": "Choose the result columns, name the source table, and build readable multi-column output.",
           "cards": {
             "sketch0": {
-              "title": "Choose What the Result Should Show"
+              "title": "Choose columns and the source table"
             },
             "sketch1": {
-              "title": "Name the Table That Supplies the Rows"
+              "title": "Build a useful column list"
             },
             "quiz": {
-              "title": "Check Your Understanding"
+              "title": "Check: SELECT and FROM"
             }
           },
           "quiz": {
@@ -142,45 +189,13 @@
                 "d": "It renames a column permanently"
               }
             },
-            "mc_valid_select_parts": {
-              "title": "Valid beginner SELECT queries",
-              "prompt": "Which queries correctly retrieve data from the `products` table? Choose all that apply.",
-              "hint": "A valid beginner query here needs `SELECT` and `FROM products` in the right places.",
-              "help": {
-                "concept": "A basic retrieval query names one or more columns after `SELECT` and the table after `FROM`.",
-                "hint_1": "Check whether the query starts with `SELECT` and whether `products` appears after `FROM`.",
-                "hint_2": "Two choices correctly ask for columns from `products`; the others misuse the keywords."
-              },
-              "options": {
-                "a": "SELECT name FROM products;",
-                "b": "FROM products SELECT name;",
-                "c": "SELECT * FROM products;",
-                "d": "products FROM SELECT name;"
-              }
-            },
-            "dr_query_order_basic": {
-              "title": "Build a basic query",
-              "prompt": "Arrange the tokens to make a valid query that shows the `name` column from the `products` table.",
-              "hint": "Read each piece and arrange them in the order the statement should be understood.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "SELECT",
-                "t2": "name",
-                "t3": "FROM",
-                "t4": "products;"
-              }
-            },
             "fb_from_table_name": {
               "title": "Complete the table name",
               "prompt": "Fill in the missing table name to select all columns from the products table.",
               "hint": "Use the actual table name shown in the schema browser.",
               "help": {
                 "concept": "The `FROM` clause names the table that the query reads from.",
-                "hint_1": "This lesson's dataset has one table named `the blank`.",
+                "hint_1": "Check the schema browser for the table that contains `id`, `name`, `price`, `category`, `stock`, and `created_at`.",
                 "hint_2": "Choose the table name that contains columns like `id`, `name`, and `price`."
               },
               "template": "SELECT * FROM [blank1];",
@@ -191,27 +206,107 @@
                 "category"
               ]
             },
+            "sc_select_specific_columns_meaning": {
+              "title": "What does selecting specific columns do?",
+              "prompt": "What does this query do?\n\nSELECT name, price\nFROM products;",
+              "hint": "Look at the column names listed right after SELECT.",
+              "help": {
+                "concept": "A SELECT query returns only the columns named after SELECT, from the table named after FROM.",
+                "hint_1": "This query names two columns: `name` and `price`.",
+                "hint_2": "Think about whether SQL is showing all columns from `products` or only the listed ones."
+              },
+              "options": {
+                "a": "It returns only the name and price columns from the products table.",
+                "b": "It returns every column from the products table.",
+                "c": "It changes the price values in the products table.",
+                "d": "It creates a new table with two rows."
+              }
+            },
+            "sc_columns_comma": {
+              "title": "How to list multiple columns",
+              "prompt": "Which query correctly selects the `name` and `price` columns from the `products` table?",
+              "hint": "Look for the query that separates the two column names with a comma.",
+              "help": {
+                "concept": "In SQL, multiple selected columns are written in the `SELECT` clause as a comma-separated list before the `FROM` clause.",
+                "hint_1": "Check whether `name` and `price` are both in the `SELECT` part and whether `products` appears after `FROM`.",
+                "hint_2": "A correct pattern looks like `SELECT first_column, second_column FROM table_name`."
+              },
+              "options": {
+                "a": "SELECT name, price FROM products;",
+                "b": "FROM products SELECT name, price;",
+                "c": "SELECT products FROM name, price;"
+              }
+            },
             "try-what_select_does-sketch0": {
-              "title": "Build a Two-Column Stock Reference",
-              "prompt": "Build a compact stock reference that returns `id` and `stock` from `products`, in that order.",
-              "hint": "Choose the two requested columns after SELECT and name the source table after FROM.",
+              "title": "Build a three-column product view",
+              "prompt": "Return `category`, `stock`, and `created_at` from `products`, in that column order.",
+              "hint": "SELECT the three requested columns in order, separate them with commas, then name the products table with FROM.",
               "help": {
                 "concept": "SELECT controls which columns appear, while FROM identifies the table that supplies the rows.",
-                "hint_1": "Choose the two requested columns after SELECT and name the source table after FROM.",
+                "hint_1": "Choose the three requested columns after SELECT and name the source table after FROM.",
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               },
-              "starterCode": "-- Return id and stock from products.\nSELECT\nFROM products;"
+              "starterCode": "-- Write the requested product query here.",
+              "solutionCode": "SELECT\n  category,\n  stock,\n  created_at\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `category`, `stock`, `created_at`."
+                }
+              ]
+            },
+            "practice-selecting-specific-columns": {
+              "title": "Practice: Select only the needed columns",
+              "prompt": "Audit when product categories were added. Return only `category` and `created_at` from `products`, in that order.",
+              "hint": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+              "help": {
+                "concept": "Explicit column lists keep a result focused and make its column order intentional.",
+                "hint_1": "Use an explicit two-column SELECT list rather than the all-columns wildcard.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
+              },
+              "starterCode": "-- Return only category and created_at from products.\nSELECT\nFROM products;",
+              "solutionCode": "SELECT category, created_at\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `category`, `created_at`."
+                }
+              ]
+            },
+            "practice-multiple-column-order": {
+              "title": "Practice: Build a three-column result",
+              "prompt": "Prepare an inventory extract. Return `category`, `stock`, and `created_at` from `products`, in that order.",
+              "hint": "Separate selected columns with commas and keep FROM products after the complete list.",
+              "help": {
+                "concept": "A SELECT list controls both which columns appear and their left-to-right order.",
+                "hint_1": "Separate selected columns with commas and keep FROM products after the complete list.",
+                "hint_2": "Run the query and compare the returned columns and their order with the expected result."
+              },
+              "starterCode": "-- Build a readable three-column product query.\nSELECT\nFROM products;",
+              "solutionCode": "SELECT\n    category,\n    stock,\n    created_at\nFROM products;",
+              "sourceChecks": [
+                {
+                  "message": "Use the `products` table in the FROM clause."
+                },
+                {
+                  "message": "Select the required columns in the requested order: `category`, `stock`, `created_at`."
+                }
+              ]
             }
           },
           "tryIt": {
             "allowReveal": true,
             "try_what_select_does_sketch0": {
-              "title": "Build a Two-Column Stock Reference",
-              "prompt": "Build a compact stock reference that returns `id` and `stock` from `products`, in that order.",
-              "hint": "Choose the two requested columns after SELECT and name the source table after FROM.",
+              "title": "Build a three-column product view",
+              "prompt": "Return `category`, `stock`, and `created_at` from `products`, in that column order.",
+              "hint": "SELECT the three requested columns in order, separate them with commas, then name the products table with FROM.",
               "help": {
                 "concept": "SELECT controls which columns appear, while FROM identifies the table that supplies the rows.",
-                "hint_1": "Choose the two requested columns after SELECT and name the source table after FROM.",
+                "hint_1": "Choose the three requested columns after SELECT and name the source table after FROM.",
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
@@ -225,24 +320,24 @@
       "sql--sql-v2--draft-1": {
         "what_select_does": {
           "select_result_list": {
-            "title": "Choose What the Result Should Show",
-            "bodyMarkdown": "A basic SQL query answers two questions: **what should the result show**, and **where should those values come from**?\n\n`SELECT` answers the first question. The column list after it becomes the left-to-right shape of the result.\n\n```sql\nSELECT\n    title,\n    author\nFROM books;\n```\n\nThis result has two columns: `title` and `author`. The example uses a `books` table so you can focus on the idea rather than memorize the product dataset used in practice.\n\nBefore writing SQL, say the request in plain language: “Show each book title and author.” Then translate only those requested fields into the `SELECT` list."
+            "title": "Choose columns and the source table",
+            "bodyMarkdown": "A basic read query has two jobs:\n\n- **SELECT** chooses what the result should show.\n- **FROM** names the table that supplies the rows.\n\nUse `SELECT *` when you truly need to inspect every available column. For a report or task with specific requirements, choose only the requested columns.\n\nOnce this is clear, later lessons will use SELECT and FROM without reteaching them."
           },
           "from_source_table": {
-            "title": "Name the Table That Supplies the Rows",
-            "bodyMarkdown": "`FROM` identifies the source table.\n\n```sql\nSELECT\n    event_name,\n    event_date\nFROM events;\n```\n\nThe selected columns describe the result, while `events` tells SQL where those values live. A complete beginner read query therefore has two essential parts:\n\n```text\nSELECT requested_columns\nFROM source_table;\n```\n\nThe semicolon closes the statement. Uppercase keywords are a readability convention, not a requirement."
+            "title": "Build a useful column list",
+            "bodyMarkdown": "To return more than one column, list the column names after SELECT and separate them with commas.\n\nThe SELECT list also controls the result's left-to-right column order. Put the columns in the order the reader needs.\n\nFormatting the list across multiple lines can make longer queries easier to review, but whitespace does not change the result."
           }
         }
       },
       "sql-v2-1": {
         "what_select_does": {
           "select_result_list": {
-            "title": "Choose What the Result Should Show",
-            "bodyMarkdown": "A basic SQL query answers two questions: **what should the result show**, and **where should those values come from**?\n\n`SELECT` answers the first question. The column list after it becomes the left-to-right shape of the result.\n\n```sql\nSELECT\n    title,\n    author\nFROM books;\n```\n\nThis result has two columns: `title` and `author`. The example uses a `books` table so you can focus on the idea rather than memorize the product dataset used in practice.\n\nBefore writing SQL, say the request in plain language: “Show each book title and author.” Then translate only those requested fields into the `SELECT` list."
+            "title": "Choose columns and the source table",
+            "bodyMarkdown": "A basic read query has two jobs:\n\n- **SELECT** chooses what the result should show.\n- **FROM** names the table that supplies the rows.\n\nUse `SELECT *` when you truly need to inspect every available column. For a report or task with specific requirements, choose only the requested columns.\n\nOnce this is clear, later lessons will use SELECT and FROM without reteaching them."
           },
           "from_source_table": {
-            "title": "Name the Table That Supplies the Rows",
-            "bodyMarkdown": "`FROM` identifies the source table.\n\n```sql\nSELECT\n    event_name,\n    event_date\nFROM events;\n```\n\nThe selected columns describe the result, while `events` tells SQL where those values live. A complete beginner read query therefore has two essential parts:\n\n```text\nSELECT requested_columns\nFROM source_table;\n```\n\nThe semicolon closes the statement. Uppercase keywords are a readability convention, not a requirement."
+            "title": "Build a useful column list",
+            "bodyMarkdown": "To return more than one column, list the column names after SELECT and separate them with commas.\n\nThe SELECT list also controls the result's left-to-right column order. Put the columns in the order the reader needs.\n\nFormatting the list across multiple lines can make longer queries easier to review, but whitespace does not change the result."
           }
         }
       }

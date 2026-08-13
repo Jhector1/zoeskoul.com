@@ -89,6 +89,342 @@
   ],
   "exercises": [
     {
+      "id": "practice-capstone-contactability",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[eE][mM][aA][iI][lL]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[sS][tT][aA][tT][uU][sS]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "practice-capstone-city-window",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][iI][tT][yY]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[sS][iI][gG][nN][uU][pP]_[dD][aA][tT][eE]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "practice-capstone-ranked-outreach",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "ignoreRowOrder": false
+      },
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[fF][rR][oO][mM]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[cC][uU][sS][tT][oO][mM][eE][rR][sS]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[fF][uU][lL][lL]_[nN][aA][mM][eE]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[sS][iI][gG][nN][uU][pP]_[dD][aA][tT][eE]\\b\\s+\\b[fF][rR][oO][mM]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
       "id": "cp-1-start-follow-up-slice",
       "kind": "code_input",
       "purpose": "project",
@@ -163,7 +499,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  full_name,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft');",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -186,7 +522,19 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ss][Ee][Ll][Ee][Cc][Tt]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ff][Uu][Ll][Ll]_[Nn][Aa][Mm][Ee]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Ii][Tt][Yy]\\b\\s*,\\s*(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Ss][Tt][Aa][Tt][Uu][Ss]\\b\\s+\\b[Ff][Rr][Oo][Mm]\\b\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "cp-2-keep-real-contactable-customers",
@@ -263,7 +611,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -363,7 +711,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05';",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
@@ -386,7 +734,14 @@
         "requiredFiles": [
           "query.sql"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\b[Ff][Rr][Oo][Mm]\\b\\s+(?:[A-Za-z_][A-Za-z0-9_]*\\.)?\\b[Cc][Uu][Ss][Tt][Oo][Mm][Ee][Rr][Ss]\\b",
+          "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "cp-4-finish-capstone-report",
@@ -463,7 +818,7 @@
         "solutionFiles": [
           {
             "path": "query.sql",
-            "content": "SELECT\n  full_name,\n  email,\n  city,\n  status,\n  signup_date\nFROM customers\nWHERE status IN ('active', 'draft')\n  AND email IS NOT NULL\n  AND is_test = 0\n  AND city IN ('Chicago', 'Seattle')\n  AND signup_date BETWEEN '2026-01-10' AND '2026-02-05'\n  AND full_name LIKE '%a%'\nORDER BY signup_date ASC\nLIMIT 5;",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.solutionCode",
             "language": "sql",
             "isEntry": true,
             "entry": true
