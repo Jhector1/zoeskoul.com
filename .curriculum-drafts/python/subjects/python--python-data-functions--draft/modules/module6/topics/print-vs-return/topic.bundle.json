@@ -254,18 +254,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+show_status\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+print\\s*\\(\\s*text\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "show_status",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.sourceChecks.1.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -354,13 +342,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_call",
-            "functionName": "double",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.sourceChecks.0.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -443,18 +424,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+make_label\\s*\\(\\s*item\\s*\\)\\s*:\\s*\\n[ \\t]+return\\s+[\\'\\\"]Item:\\s[\\'\\\"]\\s*\\+\\s*item\\b",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "make_label",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.sourceChecks.1.message"
           }
         ]
       },

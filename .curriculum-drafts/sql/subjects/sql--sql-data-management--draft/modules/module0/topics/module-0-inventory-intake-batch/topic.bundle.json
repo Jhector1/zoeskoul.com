@@ -235,20 +235,7 @@
           "operations.sql",
           "query.sql"
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-            "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",
@@ -396,20 +383,7 @@
           "operations.sql",
           "query.sql"
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-            "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",
@@ -557,20 +531,7 @@
           "operations.sql",
           "query.sql"
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-            "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",
@@ -718,20 +679,7 @@
           "operations.sql",
           "query.sql"
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+inventory_items\\s*\\(",
-            "message": "Write the required `inventory_items` insertion in operations.sql with an explicit column list.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",
@@ -878,14 +826,6 @@
         "sqlFileOrder": [
           "operations.sql",
           "query.sql"
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
         ]
       },
       "entryFilePath": "query.sql",

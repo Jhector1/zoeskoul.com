@@ -275,20 +275,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\[\\s*0\\s*\\].*\\[\\s*-1\\s*\\]",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -379,20 +365,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\[\\s*1\\s*:\\s*4\\s*\\]",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.sourceChecks.1.message"
           }
         ]
       },
@@ -485,20 +457,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\[\\s*:\\s*3\\s*\\].*\\[\\s*3\\s*:\\s*\\]",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -590,20 +548,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\[\\s*-2\\s*:\\s*\\]",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -694,20 +638,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\[\\s*0\\s*\\].*\\[\\s*-1\\s*\\]",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.sourceChecks.1.message"
           }
         ]
       },

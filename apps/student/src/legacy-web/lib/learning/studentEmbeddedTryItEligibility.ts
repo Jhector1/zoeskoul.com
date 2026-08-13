@@ -900,7 +900,6 @@ function validationChecksUseOnlyLearnerFiles(
 ): boolean {
   for (const value of [
     exercise.sourceChecks,
-    recipe?.sourceChecks,
     exercise.semanticChecks,
     recipe?.semanticChecks,
   ]) {
@@ -941,7 +940,6 @@ function sourceChecksCoverCreatableFiles(
 
   for (const value of [
     exercise.sourceChecks,
-    recipe?.sourceChecks,
   ]) {
     if (!Array.isArray(value)) {
       continue;

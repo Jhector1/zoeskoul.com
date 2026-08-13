@@ -318,7 +318,6 @@ export type ManifestRecipe =
       }>;
       solutionCode?: string;
       solutionFiles?: ManifestStarterFiles;
-      sourceChecks?: unknown[];
     }
   | {
       type: "sql_query";
@@ -348,7 +347,6 @@ export type ManifestRecipe =
       language: Exclude<WorkspaceLanguage, "sql" | "bash" | "web">;
       solutionCode: string;
       solutionFiles?: ManifestStarterFiles;
-      sourceChecks?: unknown[];
       semanticChecks: SemanticCheck[];
     }
   | {

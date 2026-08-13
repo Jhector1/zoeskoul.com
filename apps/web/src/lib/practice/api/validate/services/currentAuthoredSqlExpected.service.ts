@@ -61,7 +61,7 @@ export function buildCurrentAuthoredSqlExpectedFromExercise(exercise: any) {
         exercise.recipe.sqlFileOrder ?? exercise.sqlFileOrder,
     );
     const sourceChecks = objectArray(
-        exercise.recipe.sourceChecks ?? exercise.sourceChecks,
+        exercise.sourceChecks,
     );
     const solutionFiles = objectArray(
         exercise.recipe.solutionFiles ?? exercise.solutionFiles,

@@ -235,14 +235,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Welcome to Python[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -323,14 +316,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*#[^\\n]+\\n\\s*print\\(\\s*[\"\\']Ready[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -411,14 +397,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Hello[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",

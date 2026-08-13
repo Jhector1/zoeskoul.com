@@ -292,14 +292,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*n\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\)\\s*\\n\\s*if\\s+n\\s*>\\s*0\\s*:\\s*\\n\\s+print\\s*\\(\\s*[\"\\']positive[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -389,14 +381,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+score\\s*>=\\s*60\\s*:.*print\\s*\\(\\s*[\"\\']pass[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']fail[\"\\']\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -493,14 +477,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+score\\s*>=\\s*90\\s*:.*elif\\s+score\\s*>=\\s*80\\s*:.*elif\\s+score\\s*>=\\s*70\\s*:.*else\\s*:",
-            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -591,14 +567,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+text\\s*:.*print\\s*\\(\\s*[\"\\']text[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']empty[\"\\']\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -688,14 +656,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+n\\s*%\\s*2\\s*==\\s*0\\s*:.*print\\s*\\(\\s*[\"\\']even[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']odd[\"\\']\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

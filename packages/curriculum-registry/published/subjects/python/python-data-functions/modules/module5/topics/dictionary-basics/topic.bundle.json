@@ -254,23 +254,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bprofile\\s*=\\s*\\{",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "name",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "age",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.2.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -364,8 +347,7 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": []
+        ]
       },
       "sourceChecks": []
     },
@@ -442,8 +424,7 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": []
+        ]
       },
       "sourceChecks": []
     }

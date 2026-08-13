@@ -196,14 +196,6 @@
             "constructorArgs": [],
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.checks.1.message"
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+pass\\b",
-            "path": "models/car.py",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.sourceChecks.0.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -317,14 +309,6 @@
             "className": "Car",
             "min": 1,
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.checks.2.message"
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?:\\bfrom\\s+models\\.car\\s+import\\s+Car\\b|\\bimport\\s+models\\.car\\b)",
-            "path": "main.py",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.sourceChecks.0.message"
           }
         ]
       },

@@ -279,20 +279,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\.strip\\s*\\(\\s*\\).*\\.lower\\s*\\(\\s*\\)|\\.lower\\s*\\(\\s*\\).*\\.strip\\s*\\(\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-1.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -383,20 +369,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-2.sourceChecks.0.message"
-          },
-          {
-            "type": "source_contains",
-            "pattern": ".strip(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-2.sourceChecks.1.message"
           }
         ]
       },
@@ -489,20 +461,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-3.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\.replace\\s*\\(\\s*[\\\"']cat[\\\"']\\s*,\\s*[\\\"']dog[\\\"']\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-3.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -594,20 +552,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-4.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\.strip\\s*\\(\\s*\\).*\\.lower\\s*\\(\\s*\\).*\\.replace\\s*\\(\\s*[\\\"']_[\\\"']\\s*,\\s*[\\\"']-[\\\"']\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-4.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -698,26 +642,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-5.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\.strip\\s*\\(\\s*\\).*\\.split\\s*\\(\\s*[\\\"'],[\\\"']\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-5.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "[\\\"'] \\| [\\\"']\\.join\\s*\\(",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.string-methods.quiz.code-5.sourceChecks.2.message"
           }
         ]
       },

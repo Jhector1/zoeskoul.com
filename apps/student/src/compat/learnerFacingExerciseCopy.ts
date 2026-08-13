@@ -34,11 +34,9 @@ function collectSourceCheckMessages(
   value: unknown,
 ) {
   const record = asRecord(value);
-  const recipe = asRecord(record?.recipe);
 
   const rawChecks = [
     record?.sourceChecks,
-    recipe?.sourceChecks,
   ];
 
   const messages = new Set<string>();

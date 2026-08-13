@@ -300,38 +300,7 @@
             "entry": false
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "models/pantry_request.py",
-            "pattern": "\\bclass\\s+PantryRequest\\s*\\(\\s*ABC\\s*\\)\\s*:",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "models/pantry_request.py",
-            "pattern": "(?s)@property\\s+def\\s+household\\s*\\(\\s*self\\s*\\)[\\s\\S]*?@household\\.setter\\s+def\\s+household",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "models/pantry_request.py",
-            "pattern": "(?s)@property\\s+def\\s+priority\\s*\\(\\s*self\\s*\\)[\\s\\S]*?@priority\\.setter\\s+def\\s+priority",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "models/pantry_request.py",
-            "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+category\\s*\\(\\s*self\\s*\\)[\\s\\S]*?@abstractmethod\\s*\\n[ \\t]*def\\s+details",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.3.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "models/food_request.py",
-            "pattern": "\\bclass\\s+FoodRequest\\s*\\(\\s*PantryRequest\\s*\\)\\s*:[\\s\\S]*?\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.sourceChecks.4.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "main.py"
@@ -541,26 +510,7 @@
             "entry": false
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "models/hygiene_request.py",
-            "pattern": "\\bclass\\s+HygieneRequest\\s*\\(\\s*PantryRequest\\s*\\)\\s*:[\\s\\S]*?\\bsuper\\s*\\(\\s*\\)\\s*\\.\\s*__init__\\s*\\(",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "models/hygiene_request.py",
-            "pattern": "\\bdef\\s+category\\s*\\(\\s*self\\s*\\)[\\s\\S]*?\\bdef\\s+details\\s*\\(\\s*self\\s*\\)",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "main.py",
-            "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+requests\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.summary\\s*\\(\\s*\\)\\s*\\)",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.sourceChecks.2.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "main.py"
@@ -811,32 +761,7 @@
             "entry": false
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "services/pantry_service.py",
-            "pattern": "(?s)\\bself\\._requests\\s*=\\s*\\[\\][\\s\\S]*?@property\\s+def\\s+requests\\s*\\(\\s*self\\s*\\)[\\s\\S]*?tuple\\s*\\(\\s*self\\._requests\\s*\\)",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "services/pantry_service.py",
-            "pattern": "(?s)\\bdef\\s+add_request\\s*\\(\\s*self\\s*,\\s*request\\s*\\)[\\s\\S]*?isinstance\\s*\\(\\s*request\\s*,\\s*PantryRequest\\s*\\)[\\s\\S]*?self\\._requests\\.append\\s*\\(\\s*request\\s*\\)",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "services/pantry_service.py",
-            "pattern": "(?s)\\bdef\\s+mark_fulfilled\\b[\\s\\S]*?request\\.mark_fulfilled\\s*\\(\\s*\\)[\\s\\S]*?\\bdef\\s+count_open_requests\\b[\\s\\S]*?request\\.is_open\\s*\\(\\s*\\)[\\s\\S]*?\\bdef\\s+summary_lines\\b[\\s\\S]*?request\\.summary\\s*\\(\\s*\\)",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "main.py",
-            "pattern": "^(?![\\s\\S]*\\._requests\\b)[\\s\\S]*PantryService\\s*\\(",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.sourceChecks.3.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "main.py"
@@ -1182,32 +1107,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "path": "storage/request_storage.py",
-            "module": "csv",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "storage/request_storage.py",
-            "pattern": "(?s)\\bdef\\s+parse_fulfilled\\s*\\(\\s*value\\s*\\)[\\s\\S]*?strip\\s*\\(\\s*\\)[\\s\\S]*?lower\\s*\\(\\s*\\)[\\s\\S]*?[\\\"']true[\\\"'][\\s\\S]*?[\\\"']1[\\\"'][\\s\\S]*?[\\\"']yes[\\\"']",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "storage/request_storage.py",
-            "pattern": "\\bcsv\\.DictReader\\s*\\(",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "storage/request_storage.py",
-            "pattern": "(?s)FoodRequest\\s*\\([\\s\\S]*?HygieneRequest\\s*\\([\\s\\S]*?raise\\s+ValueError",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.sourceChecks.3.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_storage.py"
@@ -1629,38 +1529,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "reports/summary.py",
-            "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+build_summary\\s*\\(\\s*requests\\s*\\)\\s*:(?=[\\s\\S]*?\\.summary\\s*\\(\\s*\\))(?=[\\s\\S]*?\\.is_open\\s*\\(\\s*\\))[\\s\\S]*",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_requests.py",
-            "pattern": "(?s)PantryRequest\\s*\\(\\s*[\\\"']Test family[\\\"']\\s*,\\s*[\\\"']low[\\\"']\\s*\\)[\\s\\S]*?except\\s+TypeError\\s*:",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_requests.py",
-            "pattern": "(?s)FoodRequest\\s*\\(\\s*[\\\"'][\\\"']\\s*,[\\s\\S]*?except\\s+ValueError\\s*:[\\s\\S]*?HygieneRequest\\s*\\([^)]*,\\s*0\\s*\\)[\\s\\S]*?except\\s+ValueError\\s*:",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_requests.py",
-            "pattern": "(?s)assert\\s+service\\.summary_lines\\s*\\(\\s*\\)[\\s\\S]*?assert\\s+service\\.mark_fulfilled[\\s\\S]*?assert\\s+service\\.count_open_requests[\\s\\S]*?assert\\s+build_summary\\s*\\(",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.3.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "main.py",
-            "pattern": "(?s)load_requests\\s*\\(\\s*[\\\"']data/requests\\.csv[\\\"']\\s*\\)[\\s\\S]*?print\\s*\\(\\s*build_summary\\s*\\(\\s*requests\\s*\\)\\s*\\)",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.sourceChecks.4.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_requests.py"
@@ -2105,26 +1974,7 @@
             "entry": false
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "main.py",
-            "pattern": "^(?![\\s\\S]*\\bfrom\\s+tests(?:\\.|\\s))(?![\\s\\S]*\\bimport\\s+tests(?:\\.|\\s))[\\s\\S]*?PantryService\\s*\\(\\s*load_requests\\s*\\(\\s*[\\\"']data/requests\\.csv[\\\"']\\s*\\)\\s*\\)[\\s\\S]*?mark_fulfilled\\s*\\(\\s*[\\\"']Rivera family[\\\"']\\s*\\)[\\s\\S]*?mark_fulfilled\\s*\\(\\s*[\\\"']Chen family[\\\"']\\s*\\)[\\s\\S]*?HygieneRequest\\s*\\(\\s*[\\\"']Davis family[\\\"']\\s*,\\s*[\\\"']medium[\\\"']\\s*,\\s*2\\s*,\\s*True\\s*\\)[\\s\\S]*?print\\s*\\(\\s*build_summary\\s*\\(\\s*service\\.requests\\s*\\)\\s*\\)[\\s\\S]*?PANTRY REQUEST COORDINATOR READY",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "README.md",
-            "pattern": "(?is)models/[\\s\\S]*services/[\\s\\S]*storage/[\\s\\S]*reports/[\\s\\S]*tests/[\\s\\S]*main\\.py",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "README.md",
-            "pattern": "(?is)(?:@property|validated\\s+propert(?:y|ies))[\\s\\S]*ABC[\\s\\S]*@abstractmethod[\\s\\S]*super[\\s\\S]*polymorph[\\s\\S]*python\\s+main\\.py",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.sourceChecks.2.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "main.py"

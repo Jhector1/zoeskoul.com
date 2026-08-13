@@ -279,18 +279,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_subscript",
-            "index": 1,
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_subscript",
-            "index": 1,
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.1.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -379,8 +367,7 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": []
+        ]
       },
       "sourceChecks": []
     },
@@ -456,23 +443,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_dict_key",
-            "key": "students",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "append",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*course\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\s*\\)",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.2.message"
           }
         ]
       },
@@ -566,13 +536,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_for_loop",
-            "iterable": "students",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.0.message"
           }
         ]
       },

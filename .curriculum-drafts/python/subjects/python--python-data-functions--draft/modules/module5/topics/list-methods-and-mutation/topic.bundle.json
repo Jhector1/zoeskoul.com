@@ -308,18 +308,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bscores\\s*\\[\\s*[^\\]\\n]+\\s*\\]\\s*=\\s*corrected_score\\b",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bprint\\s*\\(\\s*scores\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.1.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -407,18 +395,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_method",
-            "method": "append",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*attendees\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
           }
         ]
       },
@@ -508,18 +484,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_method",
-            "method": "remove",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*workshops\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.1.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -602,23 +566,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_method",
-            "method": "pop",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*next_ticket\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*tickets\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch3.sourceChecks.2.message"
           }
         ]
       },
@@ -712,18 +659,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_method",
-            "method": "sort",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*times\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch4.sourceChecks.1.message"
           }
         ]
       },

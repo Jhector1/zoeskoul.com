@@ -291,32 +291,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "message.txt",
-            "normalizeWhitespace": true,
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "read",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bmessage\\s*=\\s*file\\s*\\.\\s*read\\s*\\(\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?:^|\\n)[ \\t]*print\\s*\\(\\s*message\\s*\\)",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.3.message"
-          }
         ]
       },
       "workspaceExpectations": {
@@ -462,14 +436,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_for_loop",
-            "iterable": "file",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message"
-          }
         ]
       },
       "workspaceExpectations": {
@@ -598,33 +564,6 @@
             "language": "text",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "data/city.txt",
-            "normalizeWhitespace": true,
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "read",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "strip",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.2.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "title",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.3.message"
           }
         ]
       },

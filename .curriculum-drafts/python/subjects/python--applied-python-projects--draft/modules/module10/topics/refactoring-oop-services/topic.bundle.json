@@ -248,27 +248,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "path": "main.py",
-            "module": "services.report_service",
-            "importName": "ReportService",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "main.py",
-            "pattern": "^(?![\\s\\S]*\\bfor\\s+[A-Za-z_]\\w*\\s+in\\b)[\\s\\S]*\\b(?:print\\s*\\(\\s*ReportService\\s*\\(\\s*\\)\\.build_report\\s*\\(\\s*books\\s*\\)\\s*\\)|(?:[A-Za-z_]\\w*\\s*=\\s*ReportService\\s*\\(\\s*\\)[\\s\\S]*?print\\s*\\(\\s*[A-Za-z_]\\w*\\.build_report\\s*\\(\\s*books\\s*\\)\\s*\\)))",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "services/report_service.py",
-            "pattern": "(?s)\\bdef\\s+build_report\\s*\\(\\s*self\\s*,\\s*books\\s*\\)\\s*:[\\s\\S]*?\\.display_line\\s*\\(\\s*\\)",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.sourceChecks.2.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -441,27 +420,6 @@
             "language": "python",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "path": "main.py",
-            "module": "services.catalog_service",
-            "importName": "CatalogService",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "main.py",
-            "pattern": "^(?![\\s\\S]*\\bfor\\s+[A-Za-z_]\\w*\\s+in\\b)[\\s\\S]*\\b(?:[A-Za-z_]\\w*\\s*=\\s*CatalogService\\s*\\(\\s*\\)\\.affordable_titles\\s*\\(\\s*books\\s*,\\s*max_price\\s*\\)|[A-Za-z_]\\w*\\s*=\\s*CatalogService\\s*\\(\\s*\\)[\\s\\S]*?[A-Za-z_]\\w*\\s*=\\s*[A-Za-z_]\\w*\\.affordable_titles\\s*\\(\\s*books\\s*,\\s*max_price\\s*\\))",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "services/catalog_service.py",
-            "pattern": "(?s)\\bdef\\s+affordable_titles\\s*\\(\\s*self\\s*,\\s*books\\s*,\\s*max_price\\s*\\)\\s*:[\\s\\S]*?\\.is_affordable\\s*\\(\\s*max_price\\s*\\)[\\s\\S]*?\\.title\\b",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.sourceChecks.2.message"
           }
         ]
       },

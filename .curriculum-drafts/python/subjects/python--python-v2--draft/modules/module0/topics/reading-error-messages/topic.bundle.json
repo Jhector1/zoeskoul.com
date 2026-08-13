@@ -239,14 +239,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Start[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Done[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -327,14 +320,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']banana[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-nameerror-clue.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -415,14 +401,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']One[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Two[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Three[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Four[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",

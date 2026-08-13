@@ -239,20 +239,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "tests/check_book.py",
-            "pattern": "(?m)^[ \\t]*assert[ \\t]+isinstance\\(\\s*book\\s*,\\s*CatalogItem\\s*\\)[ \\t]*$",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_book.py",
-            "pattern": "(?m)^[ \\t]*assert[ \\t]+book\\.label\\s*\\(\\s*\\)[ \\t]*==[ \\t]*[\"']Book: Dune by Frank Herbert[\"'][ \\t]*$",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "tests/check_book.py",
@@ -528,20 +514,6 @@
             "language": "python",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "tests/check_catalog_report.py",
-            "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*mixed_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Book: Dune by Frank Herbert[\"'][\\s\\S]*?[\"']Game: Portal 2 on PC[\"'][\\s\\S]*?\\][ \\t]*$",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_catalog_report.py",
-            "pattern": "(?ms)^[ \\t]*assert[ \\t]+build_labels\\s*\\(\\s*edge_items\\s*\\)[ \\t]*==[ \\t]*\\[[\\s\\S]*?[\"']Game: Untitled on Switch[\"'][\\s\\S]*?[\"']Book: Beloved by Toni Morrison[\"'][\\s\\S]*?\\][ \\t]*$",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.1.message"
           }
         ]
       },

@@ -140,7 +140,7 @@ describe("pythonProfile", () => {
             },
         ]);
         expect((manifest.recipe as any).solutionFiles).toEqual(manifest.solutionFiles);
-        expect((manifest.recipe as any).sourceChecks).toEqual((manifest as any).sourceChecks);
+        expect((manifest.recipe as any).sourceChecks).toBeUndefined();
         expect(manifest.starterCode).toBe(
             "@:topics.python.python-1.helper-modules.quiz.code-1.starterCode",
         );

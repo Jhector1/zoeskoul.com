@@ -284,14 +284,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)while\\s+True\\s*:.*number\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*if\\s+number\\s*==\\s*0\\s*:.*break.*print\\s*\\(\\s*number\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -381,14 +373,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)stop\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+number\\s+in\\s+range\\s*\\(\\s*1\\s*,\\s*stop\\s*\\)\\s*:.*if\\s+number\\s*%\\s*3\\s*==\\s*0\\s*:.*continue.*print\\s*\\(\\s*number\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -480,14 +464,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s*==\\s*[\"\\'] [\"\\']\\s*:.*continue.*if\\s+ch\\s*==\\s*[\"\\']#[\"\\']\\s*:.*break.*print\\s*\\(\\s*ch\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-break-first-negative.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -578,14 +554,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)while\\s+True\\s*:.*guess\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*if\\s+guess\\s*==\\s*7\\s*:.*print\\s*\\(\\s*[\"\\']correct[\"\\']\\s*\\).*break.*print\\s*\\(\\s*[\"\\']try again[\"\\']\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-break-guess-game.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -675,14 +643,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+word\\s*:.*if\\s+ch\\s*==\\s*[\"\\']a[\"\\']\\s*:.*continue.*print\\s*\\(\\s*ch\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

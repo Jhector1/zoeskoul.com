@@ -619,10 +619,8 @@ describe("draft subject code_input goldens", () => {
                         );
                     }
 
-                    const sourceChecks = [
-                        ...(exercise.sourceChecks ?? []),
-                        ...(exercise.recipe?.sourceChecks ?? []),
-                    ];
+                    const sourceChecks =
+                        exercise.sourceChecks ?? [];
                     const hasImportCheck = sourceChecks.some(
                         (check: JsonObject) =>
                             check?.type === "uses_import" ||

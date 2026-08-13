@@ -225,20 +225,6 @@
             "stdout": "Book: Beloved\nMovie: Spirited Away\n",
             "match": "exact"
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_for_loop",
-            "iterable": "catalog",
-            "path": "main.py",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+catalog\\s*:\\s*\\n(?:[ \\t]+[^\\n]*\\n)*?[ \\t]+print\\s*\\(\\s*\\1\\.label\\s*\\(\\s*\\)\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.sourceChecks.1.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -408,14 +394,6 @@
             "stdin": "book\nCoraline\nSpirited Away\n",
             "stdout": "Book: Coraline\nMovie: Spirited Away\n",
             "match": "exact"
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+build_labels\\s*\\(\\s*([A-Za-z_]\\w*)\\s*\\)\\s*:[\\s\\S]*\\bfor\\s+([A-Za-z_]\\w*)\\s+in\\s+\\1\\s*:[\\s\\S]*\\.append\\s*\\(\\s*\\2\\.label\\s*\\(\\s*\\)\\s*\\)[\\s\\S]*\\breturn\\b",
-            "path": "services/catalog_report.py",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.sourceChecks.0.message"
           }
         ]
       },

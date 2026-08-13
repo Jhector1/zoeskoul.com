@@ -261,8 +261,7 @@
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0.checks.3.message",
             "path": "main.py"
           }
-        ],
-        "sourceChecks": []
+        ]
       },
       "sourceChecks": []
     },
@@ -396,21 +395,7 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true,
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bprint\\s*\\(\\s*corolla_car\\s*\\.\\s*make\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bprint\\s*\\(\\s*mazda_car\\s*\\.\\s*miles\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.sourceChecks.1.message"
-          }
-        ]
+        "semanticFirst": true
       },
       "sourceChecks": [
         {
@@ -556,21 +541,7 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true,
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bcar\\s*\\.\\s*drive\\s*\\(\\s*50\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bprint\\s*\\(\\s*car\\s*\\.\\s*summary\\s*\\(\\s*\\)\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.sourceChecks.1.message"
-          }
-        ]
+        "semanticFirst": true
       },
       "sourceChecks": [
         {

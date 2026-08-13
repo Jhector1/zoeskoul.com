@@ -208,14 +208,6 @@
         ],
         "sqlFileOrder": [
           "query.sql"
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
         ]
       },
       "entryFilePath": "query.sql",
@@ -354,20 +346,6 @@
         "sqlFileOrder": [
           "operations.sql",
           "query.sql"
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-            "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
         ]
       },
       "entryFilePath": "operations.sql",
@@ -514,20 +492,6 @@
         "sqlFileOrder": [
           "operations.sql",
           "query.sql"
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-            "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
         ]
       },
       "entryFilePath": "operations.sql",
@@ -674,26 +638,6 @@
         "sqlFileOrder": [
           "operations.sql",
           "query.sql"
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-            "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-            "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
         ]
       },
       "entryFilePath": "operations.sql",
@@ -846,26 +790,6 @@
         "sqlFileOrder": [
           "operations.sql",
           "query.sql"
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-            "message": "Write the required scoped UPDATE for `inventory_items` in operations.sql and keep its WHERE clause.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+inventory_items\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-            "message": "Write the required scoped DELETE for `inventory_items` in operations.sql and keep its WHERE clause.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
         ]
       },
       "entryFilePath": "operations.sql",
@@ -1018,14 +942,6 @@
         "sqlFileOrder": [
           "operations.sql",
           "query.sql"
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+inventory_items\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `inventory_items`.",
-            "path": "query.sql"
-          }
         ]
       },
       "entryFilePath": "query.sql",

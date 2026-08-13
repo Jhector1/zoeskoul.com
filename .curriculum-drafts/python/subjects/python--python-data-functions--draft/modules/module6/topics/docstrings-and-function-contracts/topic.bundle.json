@@ -254,13 +254,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+normalize_city\\s*\\(\\s*text\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return text stripped and title-cased\\.[\\\"']{3}",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.sourceChecks.0.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -343,13 +336,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+total_price\\s*\\(\\s*price\\s*,\\s*tax\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return price plus tax\\.[\\\"']{3}",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.sourceChecks.0.message"
           }
         ]
       },
@@ -438,13 +424,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+is_passing\\s*\\(\\s*score\\s*\\)\\s*:\\s*\\n[ \\t]+[\\\"']{3}Return True when score is 70 or higher\\.[\\\"']{3}",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.0.message"
           }
         ]
       },

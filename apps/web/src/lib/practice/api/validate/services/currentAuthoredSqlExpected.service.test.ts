@@ -9,6 +9,11 @@ describe("buildCurrentAuthoredSqlExpectedFromExercise", () => {
             workspaceExpectations: {
                 requiredFiles: ["schema.sql", "query.sql"],
             },
+            sourceChecks: [{
+                type: "source_regex",
+                pattern: "CREATE\\s+TABLE",
+                message: "Create the table.",
+            }],
             recipe: {
                 type: "sql_query",
                 datasetId: "ddl_blank",
@@ -21,11 +26,6 @@ describe("buildCurrentAuthoredSqlExpectedFromExercise", () => {
                 ].join("\n"),
                 checkSql: "SELECT sql FROM sqlite_master;",
                 sqlFileOrder: ["schema.sql", "query.sql"],
-                sourceChecks: [{
-                    type: "source_regex",
-                    pattern: "CREATE\\s+TABLE",
-                    message: "Create the table.",
-                }],
                 solutionFiles: [
                     { path: "schema.sql", content: "CREATE TABLE products (id INTEGER);" },
                     { path: "query.sql", content: "SELECT sql FROM sqlite_master;" },

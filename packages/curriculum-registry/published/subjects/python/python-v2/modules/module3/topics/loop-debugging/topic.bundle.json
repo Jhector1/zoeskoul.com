@@ -269,14 +269,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?ms)^\\s*count\\s*=\\s*1\\s*$\\n^\\s*while\\s+count\\s*<=\\s*3\\s*:\\s*$\\n^    print\\s*\\(\\s*count\\s*\\)\\s*$\\n^    (?:count\\s*=\\s*count\\s*\\+\\s*1|count\\s*\\+=\\s*1)\\s*$",
-            "message": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -372,14 +365,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)n\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+value\\s+in\\s+range\\s*\\(\\s*1\\s*,\\s*n\\s*\\+\\s*1\\s*\\)\\s*:.*print\\s*\\(\\s*value\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -455,14 +440,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?ms)^\\s*count\\s*=\\s*1\\s*$\\n^\\s*while\\s+count\\s*<=\\s*3\\s*:\\s*$\\n^    print\\s*\\(\\s*count\\s*\\)\\s*$\\n^    (?:count\\s*=\\s*count\\s*\\+\\s*1|count\\s*\\+=\\s*1)\\s*$",
-            "message": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -558,14 +536,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*times\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*count\\s*=\\s*0.*while\\s+count\\s*<\\s*times\\s*:.*print\\s*\\(\\s*word\\s*\\).*?(?:count\\s*=\\s*count\\s*\\+\\s*1|count\\s*\\+=\\s*1)",
-            "message": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -655,14 +625,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)start\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+n\\s+in\\s+range\\s*\\(\\s*start\\s*,\\s*0\\s*,\\s*-1\\s*\\)\\s*:.*print\\s*\\(\\s*n\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

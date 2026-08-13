@@ -151,14 +151,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*score\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "tests": [
           {
             "stdin": "70\n",
@@ -265,14 +258,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)score\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*if\\s+score\\s*>=\\s*70\\s*:.*print\\s*\\(\\s*[\"\\']Passing[\"\\']\\s*\\).*else\\s*:.*print\\s*\\(\\s*[\"\\']Needs practice[\"\\']\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "solutionFiles": [
@@ -368,14 +353,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)member\\s*=\\s*input\\s*\\(\\s*\\).*if\\s+score\\s*>=\\s*70\\s+and\\s+member\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*elif\\s+member\\s*!=\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "solutionFiles": [
@@ -470,14 +447,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)code\\s*=\\s*input\\s*\\(\\s*\\).*if\\s+code\\s*==\\s*[\"\\']{2}\\s*:.*elif\\s+score\\s*>=\\s*70\\s+and\\s+member\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*elif\\s+member\\s*!=\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -588,14 +557,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+code\\s*==\\s*[\"\\']{2}\\s*:.*elif\\s+score\\s*<\\s*0\\s*:.*elif\\s+member\\s*!=\\s*[\"\\']yes[\"\\']\\s*:.*elif\\s+score\\s*>=\\s*90\\s*:.*elif\\s+score\\s*>=\\s*70\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

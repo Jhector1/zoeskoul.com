@@ -274,21 +274,6 @@
             "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.names_py.content",
             "language": "python"
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "names",
-            "importName": "clean_name",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
-            "path": "names.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.1.message"
-          }
         ]
       },
       "workspaceExpectations": {
@@ -404,27 +389,6 @@
             "path": "text_tools.py",
             "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.text_tools_py.content",
             "language": "python"
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "text_tools",
-            "importName": "clean_word",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+clean_word\\s*\\(\\s*text\\s*\\)\\s*:",
-            "path": "text_tools.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+make_label\\s*\\(\\s*word\\s*\\)\\s*:",
-            "path": "text_tools.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.2.message"
           }
         ]
       },
@@ -583,32 +547,6 @@
             "path": "badges.py",
             "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.badges_py.content",
             "language": "python"
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "names",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_import",
-            "module": "badges",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "clean_name",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.2.message"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "make_badge",
-            "path": "main.py",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.3.message"
           }
         ]
       },

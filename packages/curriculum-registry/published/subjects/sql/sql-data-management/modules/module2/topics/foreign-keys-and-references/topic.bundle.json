@@ -332,20 +332,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='departments';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?departments\\b",
-            "message": "Create the `departments` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
-            "message": "Write the required learner-authored inspection in query.sql.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -493,20 +480,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='order_items';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?order_items\\b",
-            "message": "Create the `order_items` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[pP][rR][aA][gG][mM][aA]\\s+[fF][oO][rR][eE][iI][gG][nN]_[kK][eE][yY]_[lL][iI][sS][tT]\\s*\\(",
-            "message": "Write the required learner-authored inspection in query.sql.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",

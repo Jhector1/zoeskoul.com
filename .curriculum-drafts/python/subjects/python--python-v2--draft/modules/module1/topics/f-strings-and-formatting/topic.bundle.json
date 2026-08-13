@@ -297,14 +297,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*name\\s*=\\s*[\"\\']Mila[\"\\']\\s*\\n\\s*age\\s*=\\s*13\\s*\\n\\s*print\\(\\s*f[\"\\']\\{name\\} is \\{age\\} years old[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -385,14 +378,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*price\\s*=\\s*4\\.5\\s*\\n\\s*print\\(\\s*f[\"\\']Price: \\$\\{price:\\.2f\\}[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -449,20 +435,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "f[\"\\']Hello,\\s*\\{name\\}![\"\\']",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.sourceChecks.1.message"
           }
         ]
       },
@@ -555,20 +527,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "f[\"\\'][^\"\\']*\\{name\\}[^\"\\']*\\{city\\}[^\"\\']*[\"\\']",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -659,20 +617,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\{[^{}]+:\\.1f\\}",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.sourceChecks.1.message"
           }
         ]
       },

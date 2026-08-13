@@ -232,14 +232,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?m)^\\s*print\\(\\s*[\"\\']Ready[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_run_first_edit.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -320,14 +313,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']First[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Second[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Third[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -408,14 +394,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Status[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Version 2[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -496,14 +475,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Start[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Middle[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']End[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -584,14 +556,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']North[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']East[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']South[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']West[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -672,14 +637,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Red[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Gold[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Green[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_change_middle.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -760,14 +718,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Step 1[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Step 2[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Step 3[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Step 4[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_extend_program.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",

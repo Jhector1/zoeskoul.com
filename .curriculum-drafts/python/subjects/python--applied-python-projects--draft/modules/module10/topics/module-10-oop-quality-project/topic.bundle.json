@@ -291,26 +291,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "tests/check_model.py",
-            "pattern": "(?s)assert\\s+pet\\.name\\s*==\\s*[\\\"']Milo[\\\"'][\\s\\S]*?assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_model.py",
-            "pattern": "(?s)assert\\s+isinstance\\s*\\(\\s*foster\\s*,\\s*ShelterPet\\s*\\)[\\s\\S]*?assert\\s+foster\\.adoption_label\\s*\\(\\s*\\)\\s*==\\s*[\\\"']Pepper \\(foster\\)[\\\"']",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_model.py",
-            "pattern": "(?s)ShelterPet\\s*\\([^)]*,\\s*-1\\s*\\)[\\s\\S]*?except\\s+ValueError\\s*:",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.sourceChecks.2.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_model.py",
@@ -580,32 +561,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "services/reporting.py",
-            "pattern": "^(?![\\s\\S]*\\b(?:isinstance|type)\\s*\\()(?![\\s\\S]*\\.__class__\\b)[\\s\\S]*\\bdef\\s+adoption_labels\\s*\\(\\s*pets\\s*\\)\\s*:[\\s\\S]*?\\.adoption_label\\s*\\(\\s*\\)",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "main.py",
-            "pattern": "^(?![\\s\\S]*\\bfor\\s+[A-Za-z_]\\w*\\s+in\\s+pets\\b)[\\s\\S]*\\badoption_labels\\s*\\(\\s*pets\\s*\\)",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_reporting.py",
-            "pattern": "(?s)assert\\s+adoption_labels\\s*\\(\\s*mixed\\s*\\)\\s*==\\s*\\[[^\\]]*[\\\"']Milo[\\\"'][^\\]]*[\\\"']Pepper \\(foster\\)[\\\"'][^\\]]*\\][\\s\\S]*?assert\\s+adoption_labels\\s*\\(\\s*reverse_mixed\\s*\\)",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_reporting.py",
-            "pattern": "(?s)assert\\s+young_pet_names\\s*\\(\\s*mixed\\s*,\\s*2\\s*\\)\\s*==\\s*\\[[\\\"']Pepper[\\\"']\\][\\s\\S]*?assert\\s+young_pet_names\\s*\\(\\s*reverse_mixed\\s*,\\s*2\\s*\\)\\s*==\\s*\\[[\\\"']Rex[\\\"']\\]",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_report_service_tests.sourceChecks.3.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_reporting.py",
@@ -986,34 +942,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "path": "storage/pet_loader.py",
-            "module": "models.shelter_pet",
-            "importName": "ShelterPet",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_import",
-            "path": "storage/pet_loader.py",
-            "module": "models.foster_pet",
-            "importName": "FosterPet",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_loader.py",
-            "pattern": "(?s)assert\\s+\\[pet\\.name\\s+for\\s+pet\\s+in\\s+pets\\]\\s*==\\s*\\[[\\\"']Milo[\\\"']\\s*,\\s*[\\\"']Luna[\\\"']\\s*,\\s*[\\\"']Pepper[\\\"']\\][\\s\\S]*?assert\\s+\\[pet\\.age\\s+for\\s+pet\\s+in\\s+pets\\]\\s*==\\s*\\[3\\s*,\\s*5\\s*,\\s*1\\]",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_loader.py",
-            "pattern": "(?s)assert\\s+isinstance\\s*\\(\\s*pets\\[2\\]\\s*,\\s*FosterPet\\s*\\)[\\s\\S]*?assert\\s+pets\\[2\\]\\.adoption_label\\s*\\(\\s*\\)\\s*==\\s*[\\\"']Pepper \\(foster\\)[\\\"']",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.sourceChecks.3.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_loader.py",
@@ -1431,20 +1360,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "models/shelter_pet.py",
-            "pattern": "(?ms)^[ \\t]+def[ \\t]+mark_adopted\\s*\\(\\s*self\\s*\\)\\s*:(?:(?!^[ \\t]+def\\b|^class\\b)[\\s\\S])*?^[ \\t]+self\\.adopted[ \\t]*=[ \\t]*True[ \\t]*$",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_adoption.py",
-            "pattern": "(?s)assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True[\\s\\S]*?assert\\s+pet\\.mark_adopted\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True[\\s\\S]*?assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*False[\\s\\S]*?pet\\.mark_adopted\\s*\\(\\s*\\)[\\s\\S]*?assert\\s+pet\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*False",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.sourceChecks.1.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_adoption.py",
@@ -1883,20 +1799,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "services/reporting.py",
-            "pattern": "(?s)\\bdef\\s+build_summary\\s*\\(\\s*pets\\s*,\\s*max_age\\s*\\)\\s*:(?=[\\s\\S]*?\\.is_available\\s*\\(\\s*\\))(?=[\\s\\S]*?\\.adoption_label\\s*\\(\\s*\\))(?=[\\s\\S]*?young_pet_names\\s*\\(\\s*pets\\s*,\\s*max_age\\s*\\))[\\s\\S]*",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_summary.py",
-            "pattern": "(?s)assert\\s+summary\\s*==\\s*\\{[\\s\\S]*?[\\\"']total_pets[\\\"']\\s*:\\s*3[\\s\\S]*?[\\\"']available_labels[\\\"']\\s*:\\s*\\[[\\\"']Milo[\\\"']\\s*,\\s*[\\\"']Pepper \\(foster\\)[\\\"']\\][\\s\\S]*?[\\\"']young_pet_count[\\\"']\\s*:\\s*2",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.sourceChecks.1.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_summary.py",
@@ -2405,26 +2308,7 @@
             "entry": false
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "tests/check_regression.py",
-            "pattern": "(?s)load_pets\\s*\\(\\s*[\\\"']data/pets\\.csv[\\\"']\\s*\\)[\\s\\S]*?assert\\s+isinstance\\s*\\(\\s*pets\\[2\\]\\s*,\\s*FosterPet\\s*\\)[\\s\\S]*?assert\\s+adoption_labels\\s*\\(\\s*pets\\s*\\)[\\s\\S]*?assert\\s+young_pet_names\\s*\\(\\s*pets\\s*,\\s*3\\s*\\)",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_regression.py",
-            "pattern": "(?s)assert\\s+pets\\[1\\]\\.mark_adopted\\s*\\(\\s*\\)\\s*(?:is|==)\\s*True[\\s\\S]*?assert\\s+pets\\[1\\]\\.is_available\\s*\\(\\s*\\)\\s*(?:is|==)\\s*False[\\s\\S]*?assert\\s+build_summary\\s*\\(\\s*pets\\s*,\\s*3\\s*\\)",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "README.md",
-            "pattern": "(?is)models/[\\s\\S]*services/[\\s\\S]*storage/[\\s\\S]*tests/[\\s\\S]*main\\.py",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_final_regression.sourceChecks.2.message"
-          }
-        ],
+
         "semanticChecks": []
       },
       "entryFilePath": "tests/check_regression.py",

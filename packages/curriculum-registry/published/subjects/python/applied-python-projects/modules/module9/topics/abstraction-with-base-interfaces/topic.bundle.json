@@ -187,26 +187,6 @@
             "stdout": "CatalogItem blocked\nIncompleteItem blocked\nReady\n",
             "match": "exact"
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "models/catalog_item.py",
-            "pattern": "(?m)^\\s*from\\s+abc\\s+import\\s+(?=[^\\n]*\\bABC\\b)(?=[^\\n]*\\babstractmethod\\b)[^\\n]+$",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "models/catalog_item.py",
-            "pattern": "\\bclass\\s+CatalogItem\\s*\\(\\s*ABC\\s*\\)\\s*:",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "models/catalog_item.py",
-            "pattern": "@abstractmethod\\s*\\n[ \\t]*def\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.sourceChecks.2.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -389,21 +369,7 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true,
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "models/book.py",
-            "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "models/book.py",
-            "pattern": "\\bdef\\s+label\\s*\\(\\s*self\\s*\\)\\s*:",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.sourceChecks.1.message"
-          }
-        ]
+        "semanticFirst": true
       },
       "sourceChecks": [
         {

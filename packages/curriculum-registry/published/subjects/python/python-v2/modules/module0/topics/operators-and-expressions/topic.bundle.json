@@ -236,14 +236,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*12\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*-\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*/\\s*3\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -324,14 +317,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\*\\s*4\\s*\\)\\s*\\n\\s*print\\(\\s*18\\s*-\\s*8\\s*/\\s*2\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -412,14 +398,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*\\(\\s*2\\s*\\+\\s*3\\s*\\)\\s*\\*\\s*4\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -500,14 +479,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*8\\s*\\*\\s*4\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -588,14 +560,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*10\\s*-\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*\\(\\s*10\\s*-\\s*2\\s*\\)\\s*\\*\\s*3\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -676,14 +641,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*20\\s*-\\s*12\\s*/\\s*3\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",

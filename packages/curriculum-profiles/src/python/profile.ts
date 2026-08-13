@@ -617,7 +617,6 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                     language: "python",
                     solutionCode: solutionCodeTag,
                     solutionFiles,
-                    ...(sourceChecks?.length ? { sourceChecks } : {}),
                     semanticChecks: requireSemanticChecks(
                         withSemanticCheckMessageRefs(
                             args.exercise.semanticChecks,
@@ -631,7 +630,6 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                     tests: requireProgrammingTests(args.exercise, args.seed.topicId),
                     solutionCode: solutionCodeTag,
                     solutionFiles,
-                    ...(sourceChecks?.length ? { sourceChecks } : {}),
                 },
         };
     },};

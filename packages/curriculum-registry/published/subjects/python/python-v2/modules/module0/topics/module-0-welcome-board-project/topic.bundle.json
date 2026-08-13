@@ -158,14 +158,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -246,14 +239,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -334,14 +320,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -422,14 +401,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -510,14 +482,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Helpers ready[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*2\\s*\\*\\s*3\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -598,14 +563,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Helpers ready[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Bring your questions![\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",

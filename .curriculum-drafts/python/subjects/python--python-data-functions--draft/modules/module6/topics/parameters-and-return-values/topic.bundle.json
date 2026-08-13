@@ -254,18 +254,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+make_badge\\s*\\(\\s*name\\s*\\)\\s*:",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "make_badge",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.sourceChecks.1.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -354,18 +342,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+difference\\s*\\(\\s*high\\s*,\\s*low\\s*\\)\\s*:",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "difference",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.sourceChecks.1.message"
-          }
         ]
       },
       "sourceChecks": [
@@ -453,18 +429,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+rectangle_area\\s*\\(\\s*width\\s*,\\s*height\\s*\\)\\s*:",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "rectangle_area",
-            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
           }
         ]
       },

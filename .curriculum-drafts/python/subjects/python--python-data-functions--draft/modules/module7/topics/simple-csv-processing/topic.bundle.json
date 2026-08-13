@@ -334,32 +334,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "csv.DictReader",
-            "normalizeWhitespace": true,
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_for_loop",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "name",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.2.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "score",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.3.message"
-          }
         ]
       },
       "workspaceExpectations": {
@@ -550,39 +524,6 @@
             "language": "text",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "csv.DictReader",
-            "normalizeWhitespace": true,
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "score",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "strip",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.2.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "title",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.3.message"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "int",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.4.message"
           }
         ]
       },
@@ -781,15 +722,6 @@
             "language": "text",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "csv.DictReader",
-            "normalizeWhitespace": true,
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message"
           }
         ]
       },

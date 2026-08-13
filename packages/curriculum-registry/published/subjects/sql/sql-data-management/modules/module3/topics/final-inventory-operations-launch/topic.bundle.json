@@ -253,20 +253,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'products';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-            "message": "Define the `products` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -413,27 +400,7 @@
           "schema.sql",
           "query.sql"
         ],
-        "checkSql": "SELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name IN ('products', 'stock_events')\nORDER BY name;",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-            "message": "Define the `products` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_events\\b",
-            "message": "Define the `stock_events` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ]
+        "checkSql": "SELECT name, sql\nFROM sqlite_master\nWHERE type = 'table' AND name IN ('products', 'stock_events')\nORDER BY name;"
       },
       "entryFilePath": "schema.sql",
       "sqlFileOrder": [
@@ -620,21 +587,7 @@
           "seed.sql",
           "query.sql"
         ],
-        "checkSql": "SELECT id, sku, name, category, price, status, notes\nFROM products\nORDER BY id;",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+products\\s*\\(",
-            "message": "Load the approved `products` rows in seed.sql with an explicit column list.",
-            "path": "seed.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+products\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `products`.",
-            "path": "query.sql"
-          }
-        ]
+        "checkSql": "SELECT id, sku, name, category, price, status, notes\nFROM products\nORDER BY id;"
       },
       "entryFilePath": "seed.sql",
       "sqlFileOrder": [
@@ -817,27 +770,7 @@
           "seed.sql",
           "query.sql"
         ],
-        "checkSql": "SELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+products\\s*\\(",
-            "message": "Load the approved `products` rows in seed.sql with an explicit column list.",
-            "path": "seed.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[iI][nN][sS][eE][rR][tT]\\s+[iI][nN][tT][oO]\\s+stock_events\\s*\\(",
-            "message": "Load the approved `stock_events` rows in seed.sql with an explicit column list.",
-            "path": "seed.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+stock_events\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `stock_events`.",
-            "path": "query.sql"
-          }
-        ]
+        "checkSql": "SELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;"
       },
       "entryFilePath": "seed.sql",
       "sqlFileOrder": [
@@ -1062,20 +995,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT id, sku, price, status\nFROM products\nWHERE id = 1;",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+products\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-            "message": "Write the required scoped UPDATE for `products` in operations.sql and keep its WHERE clause.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+products\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `products`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "operations.sql",
@@ -1296,27 +1216,7 @@
           "operations.sql",
           "query.sql"
         ],
-        "checkSql": "SELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[uU][pP][dD][aA][tT][eE]\\s+products\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-            "message": "Write the required scoped UPDATE for `products` in operations.sql and keep its WHERE clause.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[dD][eE][lL][eE][tT][eE]\\s+[fF][rR][oO][mM]\\s+stock_events\\b[\\s\\S]*?\\b[wW][hH][eE][rR][eE]\\b",
-            "message": "Write the required scoped DELETE for `stock_events` in operations.sql and keep its WHERE clause.",
-            "path": "operations.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+stock_events\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `stock_events`.",
-            "path": "query.sql"
-          }
-        ]
+        "checkSql": "SELECT id, product_id, quantity_change, event_type, note\nFROM stock_events\nORDER BY id;"
       },
       "entryFilePath": "operations.sql",
       "sqlFileOrder": [

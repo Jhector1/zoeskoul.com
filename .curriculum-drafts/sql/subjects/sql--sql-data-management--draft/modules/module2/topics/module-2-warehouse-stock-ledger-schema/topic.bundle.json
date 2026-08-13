@@ -251,20 +251,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='warehouses';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-            "message": "Define the `warehouses` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -412,20 +399,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-            "message": "Define the `warehouses` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -573,20 +547,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='warehouses';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-            "message": "Define the `warehouses` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -734,26 +695,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='stock_movements';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-            "message": "Define the `warehouses` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_movements\\b",
-            "message": "Define the `stock_movements` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -907,26 +849,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-            "message": "Define the `warehouses` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_movements\\b",
-            "message": "Define the `stock_movements` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -1080,26 +1003,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT sql FROM sqlite_master WHERE type='table' AND name='stock_movements';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?warehouses\\b",
-            "message": "Define the `warehouses` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?stock_movements\\b",
-            "message": "Define the `stock_movements` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",

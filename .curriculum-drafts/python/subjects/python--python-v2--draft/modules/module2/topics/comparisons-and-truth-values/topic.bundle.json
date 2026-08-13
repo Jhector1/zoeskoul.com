@@ -261,14 +261,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*8\\s*>\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*8\\s*==\\s*10\\s*\\)\\s*$",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -363,20 +356,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*age\\s*>=\\s*18\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.sourceChecks.1.message"
           }
         ]
       },
@@ -474,20 +453,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?s)print\\s*\\(\\s*first\\s*==\\s*second\\s*\\).*print\\s*\\(\\s*first\\s*!=\\s*second\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -584,20 +549,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*first\\s*>=\\s*second\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -688,20 +639,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python--python-v2--draft.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*name\\s*==\\s*[\"\\']Ava[\"\\']\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python--python-v2--draft.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.sourceChecks.1.message"
           }
         ]
       },

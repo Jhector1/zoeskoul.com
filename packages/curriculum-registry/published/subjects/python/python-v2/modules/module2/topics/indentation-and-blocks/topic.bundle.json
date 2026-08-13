@@ -276,14 +276,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?m)^if n > 10:\\s*$\\n^    print\\([\"\\']big[\"\\']\\)\\s*$\\n^print\\([\"\\']done[\"\\']\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -368,14 +360,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?m)^if n >= 5:\\s*$\\n^    print\\([\"\\']high[\"\\']\\)\\s*$\\n^    print\\([\"\\']checked[\"\\']\\)\\s*$\\n^print\\([\"\\']done[\"\\']\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -467,14 +451,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?m)^if n > 0:\\s*$\\n^    print\\([\"\\']positive[\"\\']\\)\\s*$\\n^elif n < 0:\\s*$\\n^    print\\([\"\\']negative[\"\\']\\)\\s*$\\n^else:\\s*$\\n^    print\\([\"\\']zero[\"\\']\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -565,14 +541,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?m)^if age >= 13:\\s*$\\n^    if age >= 18:\\s*$\\n^        print\\([\"\\']adult[\"\\']\\)\\s*$\\n^    else:\\s*$\\n^        print\\([\"\\']teen[\"\\']\\)\\s*$\\n^else:\\s*$\\n^    print\\([\"\\']child[\"\\']\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -657,14 +625,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?m)^if score >= 60:\\s*$\\n^    print\\([\"\\']pass[\"\\']\\)\\s*$\\n^else:\\s*$\\n^    print\\([\"\\']retry[\"\\']\\)\\s*$\\n^print\\([\"\\']checked[\"\\']\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

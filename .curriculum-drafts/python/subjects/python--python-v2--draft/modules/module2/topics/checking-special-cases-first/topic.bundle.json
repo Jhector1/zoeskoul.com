@@ -283,14 +283,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+age\\s*<\\s*0\\s*:.*elif\\s+age\\s*<\\s*13\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -386,14 +378,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+score\\s*==\\s*100\\s*:.*elif\\s+score\\s*>=\\s*60\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -484,14 +468,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+text\\s*==\\s*[\"\\']{2}\\s*:.*elif\\s+text\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -581,14 +557,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+code\\s*<\\s*0\\s*:.*elif\\s+code\\s*==\\s*0\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -684,14 +652,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+n\\s*==\\s*0\\s*:.*elif\\s+n\\s*<=\\s*10\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

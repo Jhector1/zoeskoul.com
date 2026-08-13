@@ -377,6 +377,38 @@ function normalizeCurrentOutputSemanticCheckMessageRefs(args: {
     });
 }
 
+function canonicalizeCurrentOutputSourceChecks(
+    exercise: Record<string, unknown>,
+) {
+    const recipe = isCurrentOutputRecord(exercise.recipe)
+        ? exercise.recipe
+        : null;
+
+    if (!recipe || !Array.isArray(recipe.sourceChecks)) {
+        return;
+    }
+
+    const recipeChecks = recipe.sourceChecks;
+    const exerciseChecks = Array.isArray(exercise.sourceChecks)
+        ? exercise.sourceChecks
+        : null;
+
+    if (
+        exerciseChecks &&
+        JSON.stringify(exerciseChecks) !== JSON.stringify(recipeChecks)
+    ) {
+        throw new Error(
+            `Conflicting exercise-level and recipe-level sourceChecks for current output exercise "${String(exercise.id ?? "")}".`,
+        );
+    }
+
+    if (!exerciseChecks && recipeChecks.length > 0) {
+        exercise.sourceChecks = recipeChecks;
+    }
+
+    delete recipe.sourceChecks;
+}
+
 function normalizeCurrentOutputSourceCheckMessageRefs(args: {
     value: unknown;
     messageBase: string;
@@ -477,6 +509,8 @@ function normalizeCurrentOutputLearnerFacingRefs(
             fallbackEntrySolutionRef: solutionCodeRef,
         });
 
+        canonicalizeCurrentOutputSourceChecks(exercise);
+
         normalizeCurrentOutputSourceCheckMessageRefs({
             value: exercise.sourceChecks,
             messageBase,
@@ -517,11 +551,6 @@ function normalizeCurrentOutputLearnerFacingRefs(
                 messagesByLocale,
             });
 
-            normalizeCurrentOutputSourceCheckMessageRefs({
-                value: exercise.recipe.sourceChecks,
-                messageBase,
-                messagesByLocale,
-            });
         }
     }
 }

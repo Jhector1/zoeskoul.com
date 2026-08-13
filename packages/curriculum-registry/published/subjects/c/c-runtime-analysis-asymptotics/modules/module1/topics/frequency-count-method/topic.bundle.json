@@ -730,6 +730,29 @@
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "n * width",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "n * n",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "analysis.c",
+          "pattern": "n * (n - 1) / 2",
+          "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -761,29 +784,6 @@
             "language": "c",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "path": "analysis.c",
-            "pattern": "n * width",
-            "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.0.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "analysis.c",
-            "pattern": "n * n",
-            "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.1.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "analysis.c",
-            "pattern": "n * (n - 1) / 2",
-            "message": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.checks.2.message",
-            "normalizeWhitespace": false
           }
         ]
       }

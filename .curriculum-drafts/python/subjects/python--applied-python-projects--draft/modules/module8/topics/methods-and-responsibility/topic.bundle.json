@@ -295,15 +295,7 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true,
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+drive\\s*\\(\\s*self\\s*,\\s*miles\\s*\\)\\s*:",
-            "path": "models/car.py",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.sourceChecks.0.message"
-          }
-        ]
+        "semanticFirst": true
       },
       "sourceChecks": [
         {
@@ -462,15 +454,7 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true,
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+summary\\s*\\(\\s*self\\s*\\)\\s*:",
-            "path": "models/car.py",
-            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.sourceChecks.0.message"
-          }
-        ]
+        "semanticFirst": true
       },
       "sourceChecks": [
         {

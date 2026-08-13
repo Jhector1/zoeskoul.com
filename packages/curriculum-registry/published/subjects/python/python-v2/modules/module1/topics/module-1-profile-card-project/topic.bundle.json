@@ -119,14 +119,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*name\\s*=\\s*[\"\\']Ava[\"\\']\\s*\\n\\s*print\\(\\s*name\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -207,14 +200,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)student_name\\s*=\\s*[\"\\']Maya[\"\\'].*level\\s*=\\s*7.*print\\(\\s*f[\"\\']Profile for \\{student_name\\}[\"\\']\\s*\\).*print\\(\\s*f[\"\\']Level: \\{level\\}[\"\\']\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -304,20 +290,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)input\\s*\\(\\s*\\).*input\\s*\\(\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?s)Profile for.*Level:.*City:",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.sourceChecks.1.message"
           }
         ]
       },
@@ -410,20 +382,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)\\.strip\\s*\\(\\s*\\).*\\.strip\\s*\\(\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?s)Profile for.*Level:.*City:",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -514,26 +472,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)\\.strip\\s*\\(\\s*\\).*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*\\.strip\\s*\\(\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "age\\s*\\+\\s*1",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "f[\"\\']",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.sourceChecks.2.message"
           }
         ]
       },

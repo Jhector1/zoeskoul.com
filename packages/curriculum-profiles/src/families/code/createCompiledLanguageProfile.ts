@@ -277,7 +277,6 @@ export function createCompiledLanguageProfile(args: {
                     tests: requireTests(buildArgs.exercise.tests, buildArgs.exercise.id, minimumFixedTests),
                     solutionCode: solutionCodeTag,
                     solutionFiles,
-                    ...(sourceChecks?.length ? { sourceChecks } : {}),
                 },
             };
         },

@@ -283,14 +283,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -380,14 +372,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*print\\s*\\(\\s*ch\\.upper\\s*\\(\\s*\\)\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -479,14 +463,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s+in\\s*[\"\\']aeiou[\"\\']\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -577,14 +553,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s*==\\s*ch\\.upper\\s*\\(\\s*\\)\\s+and\\s+ch\\s*!=\\s*ch\\.lower\\s*\\(\\s*\\)\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -674,14 +642,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)text\\s*=\\s*input\\s*\\(\\s*\\).*for\\s+ch\\s+in\\s+text\\s*:.*if\\s+ch\\s*!=\\s*[\"\\'] [\"\\']\\s*:.*print\\s*\\(\\s*ch\\s*\\)",
-            "message": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

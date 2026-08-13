@@ -140,14 +140,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)student\\s*=\\s*input\\s*\\(\\s*\\)\\.strip\\s*\\(\\s*\\).*count\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*Student:.*Scores entered:",
-            "message": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -237,14 +229,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)total\\s*=\\s*0.*for\\s+i\\s+in\\s+range\\s*\\(\\s*count\\s*\\)\\s*:.*score\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*(?:total\\s*=\\s*total\\s*\\+\\s*score|total\\s*\\+=\\s*score).*Total:",
-            "message": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -336,14 +320,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)highest\\s*=\\s*0.*if\\s+score\\s*>\\s*highest\\s*:.*highest\\s*=\\s*score.*Highest score:",
-            "message": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -433,14 +409,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)average\\s*=\\s*total\\s*/\\s*count.*Average:.*\\.1f",
-            "message": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -532,14 +500,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+average\\s*>=\\s*90\\s*:.*excellent.*elif\\s+average\\s*>=\\s*70\\s*:.*passing.*else\\s*:.*needs practice",
-            "message": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -630,14 +590,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)passing_count\\s*=\\s*0.*if\\s+score\\s*>=\\s*70\\s*:.*(?:passing_count\\s*=\\s*passing_count\\s*\\+\\s*1|passing_count\\s*\\+=\\s*1).*Passing scores:",
-            "message": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -727,14 +679,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)student\\s*=\\s*input\\s*\\(\\s*\\)\\.strip\\s*\\(\\s*\\).*highest.*passing_count.*average\\s*=\\s*total\\s*/\\s*count.*Status:",
-            "message": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

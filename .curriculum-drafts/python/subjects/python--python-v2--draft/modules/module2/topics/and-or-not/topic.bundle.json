@@ -296,14 +296,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+age\\s*>=\\s*18\\s+and\\s+has_id\\s*==\\s*[\"\\']yes[\"\\']\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_ticket_check.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -399,14 +391,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+is_weekend\\s+or\\s+is_holiday\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_free_day.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -491,14 +475,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+not\\s+logged_in\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_not_logged_in.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -595,14 +571,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+n\\s*>=\\s*10\\s+and\\s+n\\s*<=\\s*20\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_range_check.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -692,14 +660,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)if\\s+score\\s*>=\\s*80\\s+and\\s+not\\s+late\\s*:.*else\\s*:",
-            "message": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_score_certificate.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

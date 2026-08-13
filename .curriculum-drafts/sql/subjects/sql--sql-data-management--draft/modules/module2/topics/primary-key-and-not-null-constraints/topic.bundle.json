@@ -231,20 +231,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='products';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?products\\b",
-            "message": "Define the `products` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",
@@ -392,20 +379,7 @@
           "query.sql"
         ],
         "checkSql": "SELECT name FROM sqlite_master WHERE type='table' AND name='orders';",
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\b[cC][rR][eE][aA][tT][eE]\\s+[tT][aA][bB][lL][eE]\\s+(?:[iI][fF]\\s+[nN][oO][tT]\\s+[eE][xX][iI][sS][tT][sS]\\s+)?orders\\b",
-            "message": "Define the `orders` table in schema.sql.",
-            "path": "schema.sql"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\b[sS][eE][lL][eE][cC][tT]\\b[\\s\\S]*?\\b[fF][rR][oO][mM]\\s+sqlite_master\\b",
-            "message": "Write the required result-returning SELECT in query.sql for `sqlite_master`.",
-            "path": "query.sql"
-          }
-        ],
+
         "ignoreRowOrder": true
       },
       "entryFilePath": "schema.sql",

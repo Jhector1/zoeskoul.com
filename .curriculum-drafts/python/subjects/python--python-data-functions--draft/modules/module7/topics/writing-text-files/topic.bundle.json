@@ -296,8 +296,7 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": []
+        ]
       },
       "workspaceExpectations": {
         "requiredFolders": [],
@@ -422,26 +421,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "with\\s+open\\s*\\(\\s*[\\\"']log\\.txt[\\\"']\\s*,\\s*[\\\"']a[\\\"']\\s*\\)\\s+as\\s+file\\s*:",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "write",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "read",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.sourceChecks.2.message"
-          }
         ]
       },
       "workspaceExpectations": {
@@ -549,8 +528,7 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": []
+        ]
       },
       "workspaceExpectations": {
         "requiredFolders": [],

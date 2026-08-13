@@ -234,14 +234,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Zoe[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*7\\s*\\)\\s*\\n\\s*print\\(\\s*2\\.5\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -322,14 +315,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*1\\.5\\s*\\+\\s*2\\.5\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -410,14 +396,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*print\\(\\s*[\"\\']hello[\"\\']\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",

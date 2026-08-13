@@ -279,20 +279,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*bool\\s*\\(\\s*text\\s*\\)\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -389,20 +375,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*bool\\s*\\(\\s*number\\s*\\)\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -484,14 +456,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*value\\s*=\\s*None\\s*\\n\\s*print\\s*\\(\\s*bool\\s*\\(\\s*value\\s*\\)\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -586,20 +551,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "print\\s*\\(\\s*bool\\s*\\(\\s*points\\s*\\)\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.sourceChecks.1.message"
           }
         ]
       },
@@ -696,20 +647,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)input\\s*\\(\\s*\\).*input\\s*\\(\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "(?s)print\\s*\\(\\s*bool\\s*\\(\\s*first\\s*\\)\\s*\\).*print\\s*\\(\\s*bool\\s*\\(\\s*second\\s*\\)\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.sourceChecks.1.message"
           }
         ]
       },

@@ -297,14 +297,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*age\\s*=\\s*12\\s*\\n\\s*print\\(\\s*age\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -385,14 +378,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*student_name\\s*=\\s*[\\\"']Maya[\\\"']\\s*\\n\\s*print\\(\\s*student_name\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -473,14 +459,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*level\\s*=\\s*3\\s*\\n\\s*level\\s*=\\s*4\\s*\\n\\s*print\\(\\s*level\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",
@@ -561,14 +540,7 @@
             "entry": true
           }
         ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)^\\s*color\\s*=\\s*[\\\"']red[\\\"']\\s*\\n\\s*print\\(\\s*color\\s*\\)\\s*\\n\\s*color\\s*=\\s*[\\\"']green[\\\"']\\s*\\n\\s*print\\(\\s*color\\s*\\)\\s*$",
-            "message": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
-        ],
+
         "semanticChecks": [
           {
             "type": "printed_line_count",

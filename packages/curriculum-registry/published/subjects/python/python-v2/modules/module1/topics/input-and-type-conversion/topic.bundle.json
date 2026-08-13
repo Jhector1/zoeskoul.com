@@ -279,20 +279,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bname\\b",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -383,20 +369,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages.sourceChecks.0.message"
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages.sourceChecks.1.message"
           }
         ]
       },
@@ -489,20 +461,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price.sourceChecks.0.message"
-          },
-          {
-            "type": "source_contains",
-            "pattern": "float(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price.sourceChecks.1.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -593,26 +551,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.sourceChecks.0.message"
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bstr\\s*\\(\\s*age\\s*\\)",
-            "normalizeWhitespace": false,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.sourceChecks.2.message"
           }
         ]
       },
@@ -710,20 +648,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year.sourceChecks.0.message"
-          },
-          {
-            "type": "source_contains",
-            "pattern": "str(",
-            "normalizeWhitespace": true,
-            "message": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year.sourceChecks.1.message"
           }
         ]
       },

@@ -238,14 +238,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "main.py",
-            "pattern": "(?m)^[ \\t]*(?:from[ \\t]+models\\.book[ \\t]+import[ \\t]+Book|import[ \\t]+models\\.book(?:[ \\t]+as[ \\t]+[A-Za-z_]\\w*)?)[ \\t]*$",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.sourceChecks.0.message"
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -370,20 +362,6 @@
             "language": "python",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "models/reading_list.py",
-            "pattern": "(?m)^[ \\t]*def[ \\t]+__init__\\(\\s*self\\s*,\\s*owner\\s*,\\s*books\\s*=\\s*None\\s*\\)[ \\t]*:",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "models/reading_list.py",
-            "pattern": "(?m)^[ \\t]*(?:if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]*:|self\\.books[ \\t]*=[ \\t]*\\[\\][ \\t]+if[ \\t]+books[ \\t]+is[ \\t]+None[ \\t]+else[ \\t]+books)[ \\t]*$",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.sourceChecks.1.message"
           }
         ]
       },
@@ -515,14 +493,6 @@
             "language": "python",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "models/task.py",
-            "pattern": "(?ms)^[ \\t]+def[ \\t]+complete\\s*\\(\\s*self\\s*\\)\\s*:(?:(?!^[ \\t]+def\\b|^class\\b)[\\s\\S])*?^[ \\t]+self\\.done[ \\t]*=[ \\t]*True[ \\t]*$",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.sourceChecks.0.message"
           }
         ]
       },

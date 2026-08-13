@@ -229,14 +229,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "tests/check_book.py",
-            "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Book\\s*\\([^)]*\\).*?assert\\s+\\1\\.available\\s*(?:is|==)\\s*True.*?\\1\\.checkout\\s*\\(\\s*\\).*?assert\\s+(?:\\1\\.available\\s*(?:is|==)\\s*False|not\\s+\\1\\.available\\b)",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.sourceChecks.0.message"
-          }
         ]
       },
       "entryFilePath": "tests/check_book.py",
@@ -352,20 +344,6 @@
             "language": "python",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "tests/check_task.py",
-            "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*2\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*2\\b",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "path": "tests/check_task.py",
-            "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Task\\s*\\([^,\\n]+,\\s*-5\\s*\\).*?assert\\s+\\1\\.priority\\s*==\\s*0\\b",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.sourceChecks.1.message"
           }
         ]
       },
@@ -488,14 +466,6 @@
             "language": "python",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "path": "tests/check_counter.py",
-            "pattern": "(?s)\\b([A-Za-z_]\\w*)\\s*=\\s*Counter\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*0\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*1\\b.*?\\1\\.increment\\s*\\(\\s*\\).*?assert\\s+\\1\\.count\\s*==\\s*2\\b",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.sourceChecks.0.message"
           }
         ]
       },

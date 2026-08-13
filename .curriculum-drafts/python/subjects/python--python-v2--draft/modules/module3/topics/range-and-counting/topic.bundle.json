@@ -282,14 +282,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)stop\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+n\\s+in\\s+range\\s*\\(\\s*stop\\s*\\)\\s*:.*print\\s*\\(\\s*n\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -379,14 +371,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)start\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*stop\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+n\\s+in\\s+range\\s*\\(\\s*start\\s*,\\s*stop\\s*\\)\\s*:.*print\\s*\\(\\s*n\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.range-and-counting.quiz.ci-print-one-to-five.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -478,14 +462,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)stop\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+n\\s+in\\s+range\\s*\\(\\s*0\\s*,\\s*stop\\s*,\\s*2\\s*\\)\\s*:.*print\\s*\\(\\s*n\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.range-and-counting.quiz.ci-even-under-ten.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -576,14 +552,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)start\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+n\\s+in\\s+range\\s*\\(\\s*start\\s*,\\s*0\\s*,\\s*-1\\s*\\)\\s*:.*print\\s*\\(\\s*n\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -673,14 +641,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)n\\s*=\\s*int\\s*\\(\\s*input\\s*\\(\\s*\\)\\s*\\).*for\\s+value\\s+in\\s+range\\s*\\(\\s*1\\s*,\\s*n\\s*\\+\\s*1\\s*\\)\\s*:.*print\\s*\\(\\s*value\\s*\\*\\s*value\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },

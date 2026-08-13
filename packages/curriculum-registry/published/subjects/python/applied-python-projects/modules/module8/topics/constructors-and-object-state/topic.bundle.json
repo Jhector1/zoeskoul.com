@@ -255,33 +255,7 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true,
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+__init__\\s*\\(\\s*self\\s*,\\s*make\\s*,\\s*model\\s*,\\s*miles\\s*\\)\\s*:",
-            "path": "models/car.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bself\\.make\\s*=\\s*make\\b",
-            "path": "models/car.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bself\\.model\\s*=\\s*model\\b",
-            "path": "models/car.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bself\\.miles\\s*=\\s*miles\\b",
-            "path": "models/car.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.sourceChecks.3.message"
-          }
-        ]
+        "semanticFirst": true
       },
       "sourceChecks": [
         {
@@ -447,33 +421,7 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true,
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bclass\\s+Car\\s*:\\s*\\n[ \\t]+wheels\\s*=\\s*4\\b",
-            "path": "models/car.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bprint\\s*\\(\\s*Car\\.wheels\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bprint\\s*\\(\\s*outback\\.make\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.2.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bprint\\s*\\(\\s*mini\\.make\\s*\\)",
-            "path": "main.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.sourceChecks.3.message"
-          }
-        ]
+        "semanticFirst": true
       },
       "sourceChecks": [
         {
@@ -640,15 +588,7 @@
             "match": "exact"
           }
         ],
-        "semanticFirst": true,
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+__init__\\s*\\([^)]*\\)\\s*:[\\s\\S]*?\\bself\\.service_notes\\s*=\\s*\\[\\s*\\]",
-            "path": "models/car.py",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.sourceChecks.0.message"
-          }
-        ]
+        "semanticFirst": true
       },
       "sourceChecks": [
         {

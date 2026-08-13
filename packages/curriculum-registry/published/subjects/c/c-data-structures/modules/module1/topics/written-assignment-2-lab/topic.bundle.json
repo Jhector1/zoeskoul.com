@@ -1769,6 +1769,29 @@
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "algorithms/recursion.c",
+          "pattern": "if (i == n)",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "algorithms/recursion.c",
+          "pattern": "bits[i] = true",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "algorithms/recursion.c",
+          "pattern": "bits[i] = false",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -1800,29 +1823,6 @@
             "language": "c",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "path": "algorithms/recursion.c",
-            "pattern": "if (i == n)",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.checks.0.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "algorithms/recursion.c",
-            "pattern": "bits[i] = true",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.checks.1.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "algorithms/recursion.c",
-            "pattern": "bits[i] = false",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.checks.2.message",
-            "normalizeWhitespace": false
           }
         ]
       }
@@ -1933,6 +1933,29 @@
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "algorithms/pair_sums.c",
+          "pattern": "for (size_t i = 0",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "algorithms/pair_sums.c",
+          "pattern": "for (size_t j = i + 1",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "algorithms/pair_sums.c",
+          "pattern": "2 * k",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -1964,29 +1987,6 @@
             "language": "c",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "path": "algorithms/pair_sums.c",
-            "pattern": "for (size_t i = 0",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.checks.0.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "algorithms/pair_sums.c",
-            "pattern": "for (size_t j = i + 1",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.checks.1.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "algorithms/pair_sums.c",
-            "pattern": "2 * k",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.checks.2.message",
-            "normalizeWhitespace": false
           }
         ]
       }
@@ -2097,6 +2097,29 @@
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "structures/bst.c",
+          "pattern": "(end - begin) / 2",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "structures/bst.c",
+          "pattern": "inorder_fill",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "structures/bst.c",
+          "pattern": "bst_build_balanced(values, n)",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -2128,29 +2151,6 @@
             "language": "c",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "path": "structures/bst.c",
-            "pattern": "(end - begin) / 2",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.checks.0.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/bst.c",
-            "pattern": "inorder_fill",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.checks.1.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/bst.c",
-            "pattern": "bst_build_balanced(values, n)",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.checks.2.message",
-            "normalizeWhitespace": false
           }
         ]
       }
@@ -2317,6 +2317,29 @@
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "structures/priority_queue.c",
+          "pattern": "while (stack_pop(&queue->data",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "structures/priority_queue.c",
+          "pattern": "stack_push(&queue->scratch",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "structures/priority_queue.c",
+          "pattern": "*priority = minimum",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -2362,29 +2385,6 @@
             "language": "c",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "path": "structures/priority_queue.c",
-            "pattern": "while (stack_pop(&queue->data",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.checks.0.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/priority_queue.c",
-            "pattern": "stack_push(&queue->scratch",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.checks.1.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/priority_queue.c",
-            "pattern": "*priority = minimum",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.checks.2.message",
-            "normalizeWhitespace": false
           }
         ]
       }
@@ -2495,6 +2495,29 @@
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "structures/heap.c",
+          "pattern": "const size_t index = n + 1",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.checks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "structures/heap.c",
+          "pattern": "highest_bit",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.checks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_contains",
+          "path": "structures/heap.c",
+          "pattern": "node->parent",
+          "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.checks.2.message",
+          "normalizeWhitespace": false
+        }
+      ],
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -2526,29 +2549,6 @@
             "language": "c",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "path": "structures/heap.c",
-            "pattern": "const size_t index = n + 1",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.checks.0.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/heap.c",
-            "pattern": "highest_bit",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.checks.1.message",
-            "normalizeWhitespace": false
-          },
-          {
-            "type": "source_contains",
-            "path": "structures/heap.c",
-            "pattern": "node->parent",
-            "message": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.checks.2.message",
-            "normalizeWhitespace": false
           }
         ]
       }

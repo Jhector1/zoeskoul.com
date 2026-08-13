@@ -28,12 +28,13 @@ vi.mock(
 import { buildSqlQueryRecipe } from "./sqlQuery";
 
 describe("sql_query authored sourceChecks", () => {
-  it("copies recipe sourceChecks into the generated expected contract", () => {
+  it("copies top-level sourceChecks into the generated expected contract", () => {
     const sourceChecks = [
       {
         type: "source_regex",
         pattern: "\\bFROM\\s+products\\b",
-        message: "Use the `products` table in the FROM clause.",
+        message:
+          "Use the `products` table in the FROM clause.",
       },
       {
         type: "source_regex",
@@ -50,70 +51,93 @@ describe("sql_query authored sourceChecks", () => {
         kind: "code_input",
         language: "sql",
         fixedSqlDialect: "sqlite",
-        starterCode: "SELECT * FROM products;",
+        starterCode:
+          "SELECT * FROM products;",
+        sourceChecks,
         recipe: {
           type: "sql_query",
-          datasetId: "products_catalog",
+          datasetId:
+            "products_catalog",
           solutionCode:
             "SELECT category, stock, created_at FROM products;",
           resultShape: "table",
           ignoreRowOrder: true,
-          sourceChecks,
         },
       } as any,
       {
-        id: "try-what_select_does-sketch0",
-        topic: "sqlv2_1.what_select_does",
+        id:
+          "try-what_select_does-sketch0",
+        topic:
+          "sqlv2_1.what_select_does",
         diff: "easy",
       } as any,
       {
-        title: "Selecting Data with SELECT and FROM",
+        title:
+          "Selecting Data with SELECT and FROM",
         prompt:
           "Return category, stock, and created_at from products, in that column order.",
-        starterCode: "SELECT * FROM products;",
+        starterCode:
+          "SELECT * FROM products;",
       } as any,
     );
 
-    expect((result.expected as any).sourceChecks).toEqual(sourceChecks);
+    expect(
+      (result.expected as any)
+        .sourceChecks,
+    ).toEqual(sourceChecks);
   });
 
-  it("falls back to top-level sourceChecks when the recipe has none", () => {
-    const sourceChecks = [
+  it("does not read legacy recipe-level sourceChecks", () => {
+    const legacySourceChecks = [
       {
         type: "source_regex",
-        pattern: "\\bFROM\\s+products\\b",
-        message: "Use the `products` table in the FROM clause.",
+        pattern:
+          "\\bFROM\\s+products\\b",
+        message:
+          "Legacy recipe check.",
       },
     ];
 
     const result = buildSqlQueryRecipe(
       {
-        id: "sql-top-level-source-check",
+        id:
+          "legacy-recipe-source-check",
         kind: "code_input",
         language: "sql",
         fixedSqlDialect: "sqlite",
-        starterCode: "SELECT * FROM products;",
-        sourceChecks,
+        starterCode:
+          "SELECT * FROM products;",
         recipe: {
           type: "sql_query",
-          datasetId: "products_catalog",
-          solutionCode: "SELECT id FROM products;",
+          datasetId:
+            "products_catalog",
+          solutionCode:
+            "SELECT id FROM products;",
           resultShape: "table",
           ignoreRowOrder: true,
-        },
+          sourceChecks:
+            legacySourceChecks,
+        } as any,
       } as any,
       {
-        id: "sql-top-level-source-check",
-        topic: "sqlv2_1.what_select_does",
+        id:
+          "legacy-recipe-source-check",
+        topic:
+          "sqlv2_1.what_select_does",
         diff: "easy",
       } as any,
       {
         title: "SQL",
-        prompt: "Return id from products.",
-        starterCode: "SELECT * FROM products;",
+        prompt:
+          "Return id from products.",
+        starterCode:
+          "SELECT * FROM products;",
       } as any,
     );
 
-    expect((result.expected as any).sourceChecks).toEqual(sourceChecks);
+    expect(
+      (result.expected as any)
+        .sourceChecks,
+    ).toBeUndefined();
   });
 });

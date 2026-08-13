@@ -238,23 +238,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bshipment\\s*=\\s*\\(\\s*product\\s*,\\s*quantity\\s*\\)",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_subscript",
-            "index": 0,
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_subscript",
-            "index": 1,
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.sourceChecks.2.message"
-          }
         ]
       },
       "solutionFiles": [
@@ -345,13 +328,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\btitle\\s*,\\s*seats\\s*,\\s*day\\s*=\\s*booking\\b",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.sourceChecks.0.message"
-          }
         ]
       },
       "solutionFiles": [
@@ -436,13 +412,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_for_loop",
-            "iterable": "registrations",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.sourceChecks.0.message"
           }
         ]
       },

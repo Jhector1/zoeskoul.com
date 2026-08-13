@@ -300,20 +300,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "csv.DictReader",
-            "normalizeWhitespace": true,
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_for_loop",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.sourceChecks.1.message"
-          }
         ]
       },
       "workspaceExpectations": {
@@ -526,56 +512,6 @@
             "language": "text",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.0.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "name",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.1.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "event",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.2.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "seats",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.3.message"
-          },
-          {
-            "type": "uses_dict_key",
-            "key": "email",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.4.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "strip",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.5.message"
-          },
-          {
-            "type": "uses_method",
-            "method": "title",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.6.message"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "int",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.sourceChecks.7.message"
           }
         ]
       },
@@ -826,14 +762,6 @@
             "isEntry": false,
             "entry": false
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_call",
-            "functionName": "clean_row",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.sourceChecks.0.message"
-          }
         ]
       },
       "workspaceExpectations": {
@@ -1061,21 +989,6 @@
             "language": "text",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "cleaning",
-            "importName": "clean_row",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+clean_row\\s*\\(\\s*row\\s*\\)\\s*:",
-            "path": "cleaning.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.sourceChecks.1.message"
           }
         ]
       },
@@ -1347,36 +1260,6 @@
             "language": "text",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "summary",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+total_seats\\s*\\(\\s*records\\s*\\)\\s*:",
-            "path": "summary.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+event_counts\\s*\\(\\s*records\\s*\\)\\s*:",
-            "path": "summary.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.2.message"
-          },
-          {
-            "type": "uses_for_loop",
-            "path": "summary.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.3.message"
-          },
-          {
-            "type": "uses_for_loop",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.sourceChecks.4.message"
           }
         ]
       },
@@ -1700,40 +1583,6 @@
             "language": "text",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "reports",
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.0.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+write_clean_registrations\\s*\\(\\s*records\\s*\\)\\s*:",
-            "path": "reports.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.1.message"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bdef\\s+write_summary\\s*\\(\\s*total\\s*,\\s*counts\\s*\\)\\s*:",
-            "path": "reports.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.2.message"
-          },
-          {
-            "type": "source_contains",
-            "pattern": "output/clean_registrations.csv",
-            "normalizeWhitespace": true,
-            "path": "reports.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.3.message"
-          },
-          {
-            "type": "source_contains",
-            "pattern": "output/summary.txt",
-            "normalizeWhitespace": true,
-            "path": "reports.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.sourceChecks.4.message"
           }
         ]
       },
@@ -2077,22 +1926,6 @@
             "language": "text",
             "isEntry": false,
             "entry": false
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "output/clean_registrations.csv",
-            "normalizeWhitespace": true,
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.0.message"
-          },
-          {
-            "type": "source_contains",
-            "pattern": "output/summary.txt",
-            "normalizeWhitespace": true,
-            "path": "main.py",
-            "message": "@:topics.python--python-data-functions--draft.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.sourceChecks.1.message"
           }
         ]
       },

@@ -284,14 +284,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)parts\\s*=\\s*input\\s*\\(\\s*\\)\\.split\\s*\\(\\s*\\).*total\\s*=\\s*0.*for\\s+part\\s+in\\s+parts\\s*:.*(?:total\\s*=\\s*total\\s*\\+\\s*int\\s*\\(\\s*part\\s*\\)|total\\s*\\+=\\s*int\\s*\\(\\s*part\\s*\\)).*print\\s*\\(\\s*total\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex9.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -381,14 +373,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*vowel_count\\s*=\\s*0.*for\\s+ch\\s+in\\s+word\\s*:.*if\\s+ch\\s+in\\s*[\"\\']aeiou[\"\\']\\s*:.*(?:vowel_count\\s*=\\s*vowel_count\\s*\\+\\s*1|vowel_count\\s*\\+=\\s*1).*print\\s*\\(\\s*vowel_count\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex10.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
@@ -480,14 +464,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)parts\\s*=\\s*input\\s*\\(\\s*\\)\\.split\\s*\\(\\s*\\).*even_total\\s*=\\s*0.*for\\s+part\\s+in\\s+parts\\s*:.*n\\s*=\\s*int\\s*\\(\\s*part\\s*\\).*if\\s+n\\s*%\\s*2\\s*==\\s*0\\s*:.*(?:even_total\\s*=\\s*even_total\\s*\\+\\s*n|even_total\\s*\\+=\\s*n).*print\\s*\\(\\s*even_total\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex11.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -578,14 +554,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)parts\\s*=\\s*input\\s*\\(\\s*\\)\\.split\\s*\\(\\s*\\).*count\\s*=\\s*0.*for\\s+part\\s+in\\s+parts\\s*:.*n\\s*=\\s*int\\s*\\(\\s*part\\s*\\).*if\\s+n\\s*>\\s*0\\s*:.*(?:count\\s*=\\s*count\\s*\\+\\s*1|count\\s*\\+=\\s*1).*print\\s*\\(\\s*count\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex12.sourceChecks.0.message",
-            "normalizeWhitespace": false
-          }
         ]
       },
       "entryFilePath": "main.py",
@@ -675,14 +643,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "(?s)word\\s*=\\s*input\\s*\\(\\s*\\).*result\\s*=\\s*[\"\\']{2}.*for\\s+ch\\s+in\\s+word\\s*:.*(?:result\\s*=\\s*result\\s*\\+\\s*ch\\s*\\+\\s*[\"\\']-[\"\\']|result\\s*\\+=\\s*ch\\s*\\+\\s*[\"\\']-[\"\\']).*print\\s*\\(\\s*result\\s*\\)",
-            "message": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex13.sourceChecks.0.message",
-            "normalizeWhitespace": false
           }
         ]
       },
