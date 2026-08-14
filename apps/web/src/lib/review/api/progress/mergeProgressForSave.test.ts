@@ -191,4 +191,88 @@ describe("mergeReviewProgressForSave", () => {
     expect(merged.topics?.old?.completed).toBe(true);
     expect(merged.topics?.newer?.completed).toBe(true);
   });
+
+  it("promotes legacy workspace aliases and writes canonical workspace only", () => {
+    const workspace = {
+      version: 2,
+      language: "python",
+      nodes: [
+        {
+          id: "main",
+          kind: "file",
+          name: "main.py",
+          content: "print('saved')",
+        },
+      ],
+      openTabs: ["main"],
+      activeFileId: "main",
+      entryFileId: "main",
+      stdin: "",
+      expanded: [],
+      leftPct: 40,
+    };
+
+    const merged = mergeReviewProgressForSave({
+      previousState: state({
+        topics: {
+          first: {
+            runtimeStateV2: {
+              exercises: {
+                exercise: {
+                  codeWorkspace: workspace,
+                  ideWorkspace: workspace,
+                  userEdited: true,
+                  updatedAt: 10,
+                },
+              },
+            },
+          },
+        },
+      }),
+      incomingState: state({
+        topics: {
+          first: {
+            quizState: {
+              card: {
+                answers: {},
+                checkedById: {},
+                practiceItemPatch: {
+                  exercise: {
+                    ideWorkspace: workspace,
+                    code: "print('saved')",
+                  },
+                },
+              },
+            },
+            toolState: {
+              "card:general": {
+                toolWorkspace: workspace,
+              },
+            },
+          },
+        },
+      }),
+      saveRevision: 14,
+    });
+
+    const runtimeExercise =
+      merged.topics?.first?.runtimeStateV2?.exercises?.exercise as any;
+    const practicePatch =
+      (merged.topics?.first as any)?.quizState?.card?.practiceItemPatch
+        ?.exercise;
+    const toolEntry = (merged.topics?.first as any)?.toolState?.[
+      "card:general"
+    ];
+
+    expect(runtimeExercise.workspace).toEqual(workspace);
+    expect(runtimeExercise).not.toHaveProperty("codeWorkspace");
+    expect(runtimeExercise).not.toHaveProperty("ideWorkspace");
+
+    expect(practicePatch.workspace).toEqual(workspace);
+    expect(practicePatch).not.toHaveProperty("codeWorkspace");
+    expect(practicePatch).not.toHaveProperty("ideWorkspace");
+
+    expect(toolEntry.toolWorkspace).toEqual(workspace);
+  });
+
 });

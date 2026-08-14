@@ -117,6 +117,8 @@ export {
   normalizeReviewProgressTopicScope,
   reviewProgressStateBytes,
   scopeReviewProgressToTopics,
+  canonicalizeReviewProgressWorkspaceAliases,
+  canonicalizeReviewWorkspaceCarrier,
 } from "./progressSaveMerge";
 
 export {

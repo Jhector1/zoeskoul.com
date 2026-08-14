@@ -1,5 +1,6 @@
 import {
   createEmptyReviewProgress,
+  canonicalizeReviewProgressWorkspaceAliases,
   normalizeProgressTopics,
   normalizeReviewProgressTopicScope,
   normalizeTopicProgressKey,
@@ -236,13 +237,14 @@ export function buildReviewProgressPayload(args: {
       : {}),
   };
 
-  const state =
+  const state = canonicalizeReviewProgressWorkspaceAliases(
     moduleTopicIds.length > 0
       ? scopeReviewProgressToTopics(
           stateWithActiveTopic,
           moduleTopicIds,
         )
-      : stateWithActiveTopic;
+      : stateWithActiveTopic,
+  );
 
   return {
     subjectSlug: args.subjectSlug,

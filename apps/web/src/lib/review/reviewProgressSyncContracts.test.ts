@@ -229,4 +229,63 @@ describe("review progress synchronization contracts", () => {
     expect(payload.moduleTopicIds).toBeUndefined();
     expect(payload.state.topics?.legacy?.completed).toBe(true);
   });
+
+  it("serializes canonical workspace while keeping legacy aliases readable", () => {
+    const workspace = makeWorkspace({});
+
+    const payload = buildReviewProgressPayload({
+      subjectSlug: "python",
+      moduleSlug: "module-1",
+      locale: "en",
+      state: {
+        topics: {
+          topic: {
+            runtimeStateV2: {
+              exercises: {
+                exercise: {
+                  codeWorkspace: workspace,
+                  ideWorkspace: workspace,
+                  userEdited: true,
+                },
+              },
+            },
+            quizState: {
+              card: {
+                practiceItemPatch: {
+                  exercise: {
+                    codeWorkspace: workspace,
+                    code: "a",
+                  },
+                },
+              },
+            },
+            toolState: {
+              "card:general": {
+                toolWorkspace: workspace,
+              },
+            },
+          },
+        },
+      } as any,
+    });
+
+    const exercise =
+      (payload.state.topics as any).topic.runtimeStateV2.exercises.exercise;
+    const practicePatch =
+      (payload.state.topics as any).topic.quizState.card.practiceItemPatch
+        .exercise;
+    const toolEntry =
+      (payload.state.topics as any).topic.toolState["card:general"];
+
+    expect(exercise.workspace).toEqual(workspace);
+    expect(exercise).not.toHaveProperty("codeWorkspace");
+    expect(exercise).not.toHaveProperty("ideWorkspace");
+
+    expect(practicePatch.workspace).toEqual(workspace);
+    expect(practicePatch).not.toHaveProperty("codeWorkspace");
+    expect(practicePatch).not.toHaveProperty("ideWorkspace");
+
+    expect(toolEntry.toolWorkspace).toEqual(workspace);
+  });
+
 });

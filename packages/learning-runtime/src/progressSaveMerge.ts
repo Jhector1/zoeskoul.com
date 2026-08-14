@@ -129,6 +129,178 @@ export function scopeReviewProgressToTopics(
   };
 }
 
+type WorkspaceCarrierRecord = Record<string, any>;
+
+function asWorkspaceCarrierRecord(value: unknown): WorkspaceCarrierRecord | null {
+  return value && typeof value === "object" && !Array.isArray(value)
+    ? (value as WorkspaceCarrierRecord)
+    : null;
+}
+
+/**
+ * Canonicalize one persisted workspace carrier.
+ *
+ * `workspace` is current. `codeWorkspace` and `ideWorkspace` remain readable
+ * as legacy inputs, but new persisted state must not mirror the same full
+ * workspace object under multiple keys.
+ */
+export function canonicalizeReviewWorkspaceCarrier<T>(value: T): T {
+  const record = asWorkspaceCarrierRecord(value);
+  if (!record) return value;
+
+  const hasCodeWorkspace = Object.prototype.hasOwnProperty.call(
+    record,
+    "codeWorkspace",
+  );
+  const hasIdeWorkspace = Object.prototype.hasOwnProperty.call(
+    record,
+    "ideWorkspace",
+  );
+
+  if (!hasCodeWorkspace && !hasIdeWorkspace) return value;
+
+  const next: WorkspaceCarrierRecord = { ...record };
+
+  if (next.workspace == null) {
+    if (next.codeWorkspace != null) {
+      next.workspace = next.codeWorkspace;
+    } else if (next.ideWorkspace != null) {
+      next.workspace = next.ideWorkspace;
+    }
+  }
+
+  delete next.codeWorkspace;
+  delete next.ideWorkspace;
+
+  return next as T;
+}
+
+function canonicalizeWorkspaceCarrierMap(value: unknown) {
+  const record = asWorkspaceCarrierRecord(value);
+  if (!record) return value;
+
+  let changed = false;
+  const next: WorkspaceCarrierRecord = {};
+
+  for (const [key, entry] of Object.entries(record)) {
+    const canonical = canonicalizeReviewWorkspaceCarrier(entry);
+    next[key] = canonical;
+    if (canonical !== entry) changed = true;
+  }
+
+  return changed ? next : value;
+}
+
+function canonicalizeQuizWorkspaceAliases(value: unknown) {
+  const quizState = asWorkspaceCarrierRecord(value);
+  if (!quizState) return value;
+
+  let changed = false;
+  const nextQuiz: WorkspaceCarrierRecord = {};
+
+  for (const [cardKey, rawCard] of Object.entries(quizState)) {
+    const card = asWorkspaceCarrierRecord(rawCard);
+    if (!card) {
+      nextQuiz[cardKey] = rawCard;
+      continue;
+    }
+
+    const practiceItemPatch = canonicalizeWorkspaceCarrierMap(
+      card.practiceItemPatch,
+    );
+
+    if (practiceItemPatch === card.practiceItemPatch) {
+      nextQuiz[cardKey] = rawCard;
+      continue;
+    }
+
+    changed = true;
+    nextQuiz[cardKey] = {
+      ...card,
+      practiceItemPatch,
+    };
+  }
+
+  return changed ? nextQuiz : value;
+}
+
+function canonicalizeRuntimeWorkspaceAliases(value: unknown) {
+  const runtimeState = asWorkspaceCarrierRecord(value);
+  if (!runtimeState) return value;
+
+  const cards = canonicalizeWorkspaceCarrierMap(runtimeState.cards);
+  const exercises = canonicalizeWorkspaceCarrierMap(runtimeState.exercises);
+
+  if (
+    cards === runtimeState.cards &&
+    exercises === runtimeState.exercises
+  ) {
+    return value;
+  }
+
+  return {
+    ...runtimeState,
+    ...(cards !== runtimeState.cards ? { cards } : {}),
+    ...(exercises !== runtimeState.exercises ? { exercises } : {}),
+  };
+}
+
+/**
+ * Normalize legacy workspace aliases at the review-progress persistence
+ * boundary while preserving legacy read compatibility elsewhere.
+ *
+ * `toolWorkspace` is intentionally untouched: it is distinct card/sketch
+ * Tools runtime state, not an alias of an exercise workspace.
+ */
+export function canonicalizeReviewProgressWorkspaceAliases(
+  state: ReviewProgressState | null | undefined,
+): ReviewProgressState {
+  const normalized = normalizeProgressTopics(state ?? {});
+  const topics = normalized.topics ?? {};
+
+  let changed = false;
+  const nextTopics: Record<string, ReviewTopicProgress> = {};
+
+  for (const [topicKey, rawTopic] of Object.entries(topics)) {
+    const topic = rawTopic as ReviewTopicProgress & WorkspaceCarrierRecord;
+
+    const quizState = canonicalizeQuizWorkspaceAliases(topic.quizState);
+    const toolState = canonicalizeWorkspaceCarrierMap(topic.toolState);
+    const sketchState = canonicalizeWorkspaceCarrierMap(topic.sketchState);
+    const runtimeStateV2 = canonicalizeRuntimeWorkspaceAliases(
+      topic.runtimeStateV2,
+    );
+
+    if (
+      quizState === topic.quizState &&
+      toolState === topic.toolState &&
+      sketchState === topic.sketchState &&
+      runtimeStateV2 === topic.runtimeStateV2
+    ) {
+      nextTopics[topicKey] = rawTopic;
+      continue;
+    }
+
+    changed = true;
+    nextTopics[topicKey] = {
+      ...topic,
+      ...(quizState !== topic.quizState ? { quizState } : {}),
+      ...(toolState !== topic.toolState ? { toolState } : {}),
+      ...(sketchState !== topic.sketchState ? { sketchState } : {}),
+      ...(runtimeStateV2 !== topic.runtimeStateV2
+        ? { runtimeStateV2 }
+        : {}),
+    } as ReviewTopicProgress;
+  }
+
+  return changed
+    ? {
+        ...normalized,
+        topics: nextTopics,
+      }
+    : normalized;
+}
+
 function timeMs(value: unknown) {
   const n = Number(new Date(String(value ?? "")));
   return Number.isFinite(n) ? n : 0;
@@ -154,21 +326,23 @@ export function mergeReviewProgressForSave(args: {
   const moduleTopicIds =
     normalizeReviewProgressTopicScope(args.moduleTopicIds);
 
-  const previous =
+  const previous = canonicalizeReviewProgressWorkspaceAliases(
     moduleTopicIds.length > 0
       ? scopeReviewProgressToTopics(
           args.previousState ?? {},
           moduleTopicIds,
         )
-      : normalizeProgressTopics(args.previousState ?? {});
+      : normalizeProgressTopics(args.previousState ?? {}),
+  );
 
-  const incoming =
+  const incoming = canonicalizeReviewProgressWorkspaceAliases(
     moduleTopicIds.length > 0
       ? scopeReviewProgressToTopics(
           args.incomingState ?? {},
           moduleTopicIds,
         )
-      : normalizeProgressTopics(args.incomingState ?? {});
+      : normalizeProgressTopics(args.incomingState ?? {}),
+  );
 
   if (isAuthoritativeModuleReset({ previous, incoming })) {
     return {

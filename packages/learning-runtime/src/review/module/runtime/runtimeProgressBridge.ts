@@ -1,5 +1,6 @@
 import type { ReviewProgressState } from "@zoeskoul/learning-runtime";
 import { normalizeTopicProgressKey } from "../../progressTopicKeys";
+import { canonicalizeReviewWorkspaceCarrier } from "../../../progressSaveMerge";
 import type {
   CardRuntimeState,
   ExerciseRuntimeState,
@@ -227,8 +228,6 @@ function getExercisePatchForQuizState(
 
     if (workspace) {
       patch.workspace = workspace;
-      patch.codeWorkspace = workspace;
-      patch.ideWorkspace = workspace;
     }
   }
 
@@ -299,7 +298,9 @@ export function mergeRuntimeIntoProgress(
         ...oldRuntime,
         exercises: {
           ...oldRuntimeExercises,
-          [exerciseKey]: clonePlain(estate),
+          [exerciseKey]: clonePlain(
+            canonicalizeReviewWorkspaceCarrier(estate),
+          ),
         },
         cards: {
           ...(oldRuntime.cards ?? {}),

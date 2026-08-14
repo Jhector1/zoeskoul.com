@@ -180,8 +180,17 @@ describe("/api/review/progress route", () => {
             ];
 
         expect(savedExercise.workspace).toEqual(workspace);
-        expect(savedExercise.codeWorkspace).toEqual(workspace);
-        expect(savedExercise.ideWorkspace).toEqual(workspace);
+        expect(savedExercise).not.toHaveProperty("codeWorkspace");
+        expect(savedExercise).not.toHaveProperty("ideWorkspace");
+
+        const savedPracticePatch =
+            putJson.state.topics["what-update-does"].quizState.q1
+                .practiceItemPatch[
+                    "sql:sql_module_12:section_12_1:what-update-does:q1"
+                ];
+        expect(savedPracticePatch.workspace).toEqual(workspace);
+        expect(savedPracticePatch).not.toHaveProperty("codeWorkspace");
+        expect(savedPracticePatch).not.toHaveProperty("ideWorkspace");
 
         const getReq = new Request(
             "http://localhost:3000/api/review/progress?subjectSlug=sql&moduleSlug=sql_module_12&locale=en",
@@ -198,8 +207,8 @@ describe("/api/review/progress route", () => {
             ];
 
         expect(restoredExercise.workspace).toEqual(workspace);
-        expect(restoredExercise.codeWorkspace).toEqual(workspace);
-        expect(restoredExercise.ideWorkspace).toEqual(workspace);
+        expect(restoredExercise).not.toHaveProperty("codeWorkspace");
+        expect(restoredExercise).not.toHaveProperty("ideWorkspace");
         expect(restoredExercise.stdin).toBe("9\n");
         expect(restoredExercise.codeStdin).toBe("9\n");
         expect(restoredExercise.workspace.activeFileId).toBe("src/helper.py");
