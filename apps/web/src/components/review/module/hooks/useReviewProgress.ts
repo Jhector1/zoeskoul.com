@@ -166,7 +166,6 @@ export function useReviewProgress(args: {
         _setActiveTopicId(id);
     }, []);
 
-    const store = useReviewRuntimeStore();
     const runtimeExerciseContractsKey = useReviewRuntimeStore((state) =>
         Object.entries(state.exercises ?? {})
             .map(([key, value]) =>
@@ -182,8 +181,10 @@ export function useReviewProgress(args: {
     );
 
     useEffect(() => {
-        store.setTopicIds(activeTopicId, viewTopicId);
-    }, [activeTopicId, viewTopicId]); // eslint-disable-line react-hooks/exhaustive-deps
+        useReviewRuntimeStore
+            .getState()
+            .setTopicIds(activeTopicId, viewTopicId);
+    }, [activeTopicId, viewTopicId]);
 
     const setProgressSafe = useCallback<ReviewProgressSetter>((updater) => {
         setProgress((prev) => {

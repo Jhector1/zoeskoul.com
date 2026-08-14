@@ -573,7 +573,9 @@ export function useReviewModuleController({
             workspaceCapabilities.canMutateProgress,
         ],
     );
-    const store = useReviewRuntimeStore();
+    const resetRevision = useReviewRuntimeStore(
+        (state) => state.resetRevision,
+    );
     const flushToolLatestRef = useRef<null | (() => Promise<void>)>(null);
 
     const [isRouteTransitioning, setIsRouteTransitioning] = useState(false);
@@ -791,14 +793,14 @@ export function useReviewModuleController({
         runtimeStore.setTargetRegistry(targetRegistry);
     }, [targetRegistry]);
     const flushAll = useCallback(async () => {
-        store.flushToolSnapshot();
+        useReviewRuntimeStore.getState().flushToolSnapshot();
 
         await flushToolLatestRef.current?.();
 
-        store.flushToolSnapshot();
+        useReviewRuntimeStore.getState().flushToolSnapshot();
 
         await flush();
-    }, [store, flush]);
+    }, [flush]);
 
     const initialRouteTarget = useMemo<ReviewResolvedRouteTarget | null>(() => {
         const resolved = resolveReviewRouteTarget({
@@ -1310,10 +1312,11 @@ export function useReviewModuleController({
             const href = buildRoutePathForCurrentSurface(target);
             const navigationGeneration = ++navigationGenerationRef.current;
             const leavingTarget = routeTargetRef.current;
+            const runtimeStore = useReviewRuntimeStore.getState();
             const leavingExerciseIdentity =
                 leavingTarget?.kind === "exercise"
                     ? leavingTarget.exerciseStateKey ?? leavingTarget.exerciseId
-                    : store.tool.boundExerciseKey ?? null;
+                    : runtimeStore.tool.boundExerciseKey ?? null;
 
             if (typeof performance !== "undefined" && typeof performance.mark === "function") {
                 performance.mark("exercise_navigation_click", {
@@ -1336,7 +1339,7 @@ export function useReviewModuleController({
              * exercise being left before publishing the destination; the save
              * queue can persist it without reading mutable destination state.
              */
-            store.flushToolSnapshot();
+            runtimeStore.flushToolSnapshot();
             const progressSnapshot = captureNavigationProgressSnapshot({
                 cardIdentity: leavingTarget?.cardId ?? null,
                 exerciseIdentity: leavingExerciseIdentity,
@@ -1393,7 +1396,6 @@ export function useReviewModuleController({
             progressiveUnlock.unlockedTargetKeys,
             showProgressiveLockMessage,
             subjectSlug,
-            store,
             targetRegistry,
             navigationUnlockAll,
         ],
@@ -1512,7 +1514,7 @@ export function useReviewModuleController({
     const moduleV = (progress as any)?.quizVersion ?? 0;
     const topicV = (viewProg as any)?.quizVersion ?? 0;
     const versionStr = `${moduleV}.${topicV}`;
-    const toolsResetKey = `${viewTid}:${versionStr}:reset:${store.resetRevision}`;
+    const toolsResetKey = `${viewTid}:${versionStr}:reset:${resetRevision}`;
 
     const scrollSync = useReviewScrollSync({
         subjectSlug,
@@ -1569,8 +1571,6 @@ export function useReviewModuleController({
             : null;
     const [activeMobileWorkspaceTab, setActiveMobileWorkspaceTab] = useState<"lesson" | "code">("lesson");
 
-    const runtimeExercises = useReviewRuntimeStore((s) => s.exercises);
-
     useEffect(() => {
         useReviewRuntimeStore.getState().goToCard(Math.max(0, activeCardIndex));
     }, [activeCardIndex]);
@@ -1587,18 +1587,22 @@ export function useReviewModuleController({
         return null;
     }, [routeTarget]);
 
-    const activeCardWorkspaceExercise = useMemo(() => {
+    const activeCardWorkspaceExerciseKey = useReviewRuntimeStore((state) => {
         if (!activeCard?.id) return null;
 
-        return Object.values(runtimeExercises)
-            .filter(
-                (exercise) =>
-                    exercise.topicId === viewTid &&
-                    exercise.cardId === activeCard.id,
-            )
-            .sort((a, b) => Number(b.updatedAt ?? 0) - Number(a.updatedAt ?? 0))
-            .find((exercise) =>
-                shouldUseWorkspaceCodeSurface({
+        let latestExerciseKey: string | null = null;
+        let latestUpdatedAt = Number.NEGATIVE_INFINITY;
+
+        for (const exercise of Object.values(state.exercises)) {
+            if (
+                exercise.topicId !== viewTid ||
+                exercise.cardId !== activeCard.id
+            ) {
+                continue;
+            }
+
+            if (
+                !shouldUseWorkspaceCodeSurface({
                     exercise:
                         ((exercise.manifest as Record<string, unknown> | null) ??
                             ({
@@ -1611,9 +1615,30 @@ export function useReviewModuleController({
                                 sqlSeedSql: exercise.sqlSeedSql,
                                 sqlInitialTableSnapshots: exercise.sqlInitialTableSnapshots,
                             } as any)) as any,
-                }),
-            ) ?? null;
-    }, [runtimeExercises, viewTid, activeCard?.id]);
+                })
+            ) {
+                continue;
+            }
+
+            const updatedAt = Number(exercise.updatedAt ?? 0);
+            if (
+                latestExerciseKey !== null &&
+                updatedAt <= latestUpdatedAt
+            ) {
+                continue;
+            }
+
+            latestExerciseKey = exercise.exerciseKey;
+            latestUpdatedAt = updatedAt;
+        }
+
+        return latestExerciseKey;
+    });
+    const activeCardWorkspaceExerciseManifest = useReviewRuntimeStore((state) =>
+        activeCardWorkspaceExerciseKey
+            ? state.exercises[activeCardWorkspaceExerciseKey]?.manifest ?? null
+            : null,
+    );
 
     const activeCardRegistryExerciseEntry = useMemo(() => {
         if (!targetRegistry || !activeCard?.id || !viewTid) return null;
@@ -1642,16 +1667,16 @@ export function useReviewModuleController({
         );
     }, [targetRegistry, activeExerciseTarget?.exerciseStateKey]);
     const activeWorkspaceRegistryExerciseEntry = useMemo(() => {
-        if (!targetRegistry || !activeCardWorkspaceExercise?.exerciseKey) {
+        if (!targetRegistry || !activeCardWorkspaceExerciseKey) {
             return null;
         }
 
         return (
             targetRegistry.byKey[
-                `exercise:${activeCardWorkspaceExercise.exerciseKey}`
+                `exercise:${activeCardWorkspaceExerciseKey}`
             ] ?? null
         );
-    }, [targetRegistry, activeCardWorkspaceExercise?.exerciseKey]);
+    }, [targetRegistry, activeCardWorkspaceExerciseKey]);
 
     const activeExerciseRegistryEntry =
         activeRouteRegistryExerciseEntry ??
@@ -1662,7 +1687,7 @@ export function useReviewModuleController({
             activeExerciseRegistryEntry?.toolManifest,
         ),
         toolPresentationPolicyFromManifest(
-            activeCardWorkspaceExercise?.manifest,
+            activeCardWorkspaceExerciseManifest,
         ),
     );
     const activeTopicTools = toolPresentationPolicyFromTopic(viewTopic);
@@ -1685,7 +1710,7 @@ export function useReviewModuleController({
         routeTargetKind: routeTarget?.kind ?? null,
         routeTargetTargetKind: routeTarget?.targetKind ?? null,
         cardHasEmbeddedTryIt,
-        hasWorkspaceExercise: Boolean(activeCardWorkspaceExercise),
+        hasWorkspaceExercise: Boolean(activeCardWorkspaceExerciseKey),
         hasRegistryWorkspaceExercise,
     });
     const toolsRailVisibility = resolveToolsRailVisibility({
@@ -1695,7 +1720,7 @@ export function useReviewModuleController({
         routeTargetKind: routeTarget?.kind ?? null,
         routeTargetTargetKind: routeTarget?.targetKind ?? null,
         cardHasEmbeddedTryIt,
-        hasWorkspaceExercise: Boolean(activeCardWorkspaceExercise),
+        hasWorkspaceExercise: Boolean(activeCardWorkspaceExerciseKey),
         hasRegistryWorkspaceExercise,
     });
     const routeExerciseStateKey =
@@ -1715,7 +1740,7 @@ export function useReviewModuleController({
                 routeExerciseStateKey,
                 activeCard?.type ?? "",
                 activeCardRegistryExerciseEntry?.exerciseStateKey ?? "",
-                activeCardWorkspaceExercise?.exerciseKey ?? "",
+                activeCardWorkspaceExerciseKey ?? "",
                 activeCardTryItKey,
                 shouldDefaultCollapseRightRail ? "collapsed" : "open",
             ].join("::"),
@@ -1723,7 +1748,7 @@ export function useReviewModuleController({
             activeCard?.id,
             activeCard?.type,
             activeCardTryItKey,
-            activeCardWorkspaceExercise?.exerciseKey,
+            activeCardWorkspaceExerciseKey,
             activeCardRegistryExerciseEntry?.exerciseStateKey,
             routeTarget?.cardId,
             routeTarget?.kind,
@@ -1751,7 +1776,7 @@ export function useReviewModuleController({
     const fallbackCardId = activeCard?.id ?? routeTarget?.cardId ?? null;
     const activeToolScopeKey = resolveActiveToolScopeKey({
         activeExerciseStateKey: activeExerciseTarget?.exerciseStateKey ?? null,
-        activeCardWorkspaceExerciseKey: activeCardWorkspaceExercise?.exerciseKey ?? null,
+        activeCardWorkspaceExerciseKey,
         fallbackWorkspaceScopeKey: fallbackCardId
             ? getCardToolScopeKey(
                 getCardStateKey({
@@ -2782,7 +2807,7 @@ export function useReviewModuleController({
     );
     const shouldRenderStackedTools = Boolean(
         toolsRailVisibility.isAvailable &&
-        (boardEnabled || routeWorkspaceExercise || activeCardWorkspaceExercise || activeCardRegistryExerciseEntry),
+        (boardEnabled || routeWorkspaceExercise || activeCardWorkspaceExerciseKey || activeCardRegistryExerciseEntry),
     );
 
     useEffect(() => {
@@ -2798,7 +2823,7 @@ export function useReviewModuleController({
     const stackedToolsExerciseKey =
         activeExerciseTarget?.exerciseStateKey ??
         activeCardRegistryExerciseEntry?.exerciseStateKey ??
-        activeCardWorkspaceExercise?.exerciseKey ??
+        activeCardWorkspaceExerciseKey ??
         routeWorkspaceExercise?.exerciseStateKey ??
         null;
     const runtimeBoundExerciseKey = useReviewRuntimeStore((s) => s.tool.boundExerciseKey);
@@ -2814,7 +2839,7 @@ export function useReviewModuleController({
         activeExerciseTarget?.exerciseStateKey ??
         activeCardRegistryExerciseEntry?.exerciseStateKey ??
         routeWorkspaceExercise?.exerciseStateKey ??
-        activeCardWorkspaceExercise?.exerciseKey ??
+        activeCardWorkspaceExerciseKey ??
         null;
     const hasExpectedExerciseSurface = Boolean(
         expectedExerciseBindingKey ||
@@ -2859,7 +2884,7 @@ export function useReviewModuleController({
         (
             routeTransitionEditorReady?.identity === pendingTransitionHref &&
             routeTransitionEditorReady?.ownerKey === expectedExerciseBindingKey &&
-            routeTransitionEditorReady?.generation === store.resetRevision &&
+            routeTransitionEditorReady?.generation === resetRevision &&
             destinationPublished
         ),
     );
@@ -3026,7 +3051,7 @@ export function useReviewModuleController({
         destinationTransition: {
             ...destinationTransitionPresentation,
             expectedExerciseOwnerKey: expectedExerciseBindingKey,
-            expectedGeneration: store.resetRevision,
+            expectedGeneration: resetRevision,
             reportExerciseReady: (args: {
                 destinationIdentity: string;
                 ownerKey: string | null;
