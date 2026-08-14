@@ -14,6 +14,7 @@ import {
     mergeReviewProgressForConflictRetry as mergeProgressStatesForSave,
     normalizeReviewProgressForClientSync as normalizeProgressTopics,
     normalizeTopicProgressKey,
+    scopeReviewProgressToTopics,
     isReviewWorkspaceState as isWorkspaceState,
     reviewSavedStateUpdatedAt as numericUpdatedAt,
     withoutReviewProgressSaveRevision as withoutSaveRevision,
@@ -110,6 +111,7 @@ export function useReviewProgress(args: {
     moduleSlug: string;
     locale: string;
     firstTopicId: string;
+    moduleTopicIds: readonly string[];
     endpoint?: string;
     gamificationEnabled?: boolean;
     readOnly?: boolean;
@@ -121,6 +123,7 @@ export function useReviewProgress(args: {
         moduleSlug,
         locale,
         firstTopicId,
+        moduleTopicIds,
         endpoint = "/api/review/progress",
         gamificationEnabled = endpoint === "/api/review/progress",
         readOnly = false,
@@ -213,21 +216,28 @@ export function useReviewProgress(args: {
                 subjectSlug,
                 moduleSlug,
                 locale,
+                moduleTopicIds,
                 state: progress,
                 activeTopicId: normalizeTopicProgressKey(activeTopicId),
             }),
-        [subjectSlug, moduleSlug, locale, progress, activeTopicId],
+        [subjectSlug, moduleSlug, locale, moduleTopicIds, progress, activeTopicId],
     );
 
     function makeSaveState(state: ReviewProgressState): ReviewProgressState {
         const latestRuntime = useReviewRuntimeStore.getState();
         const stateWithRuntime = mergeRuntimeIntoProgress(state, latestRuntime);
 
-        const previousRevision = getSaveRevision(stateWithRuntime);
+        const scopedStateWithRuntime =
+            scopeReviewProgressToTopics(
+                stateWithRuntime,
+                moduleTopicIds,
+            );
+
+        const previousRevision = getSaveRevision(scopedStateWithRuntime);
         const nextRevision = nextWorkspaceSaveRevision({ previousRevision });
 
         const stateToSave = {
-            ...(stateWithRuntime as any),
+            ...(scopedStateWithRuntime as any),
             __saveRevision: nextRevision,
         } as ReviewProgressState;
 
@@ -242,11 +252,12 @@ export function useReviewProgress(args: {
                 subjectSlug,
                 moduleSlug,
                 locale,
+                moduleTopicIds,
                 state,
                 activeTopicId: normalizeTopicProgressKey(activeTopicIdRef.current),
             });
         },
-        [subjectSlug, moduleSlug, locale],
+        [subjectSlug, moduleSlug, locale, moduleTopicIds],
     );
 
     const meaningfulBodyForPayload = useCallback((nextPayload: typeof payload) => {
@@ -349,12 +360,16 @@ export function useReviewProgress(args: {
                     throw error;
                 }
 
-                const latestRemote = await fetchReviewProgressGET({
-                    subjectSlug: payloadToSave.subjectSlug,
-                    moduleSlug: payloadToSave.moduleSlug,
-                    locale: payloadToSave.locale,
-                    endpoint,
-                });
+                const latestRemote =
+                    scopeReviewProgressToTopics(
+                        await fetchReviewProgressGET({
+                            subjectSlug: payloadToSave.subjectSlug,
+                            moduleSlug: payloadToSave.moduleSlug,
+                            locale: payloadToSave.locale,
+                            endpoint,
+                        }),
+                        moduleTopicIds,
+                    );
                 const mergedState = mergeProgressStatesForSave(
                     latestRemote,
                     payloadToSave.state as ReviewProgressState,
@@ -363,6 +378,7 @@ export function useReviewProgress(args: {
                     subjectSlug: payloadToSave.subjectSlug,
                     moduleSlug: payloadToSave.moduleSlug,
                     locale: payloadToSave.locale,
+                    moduleTopicIds,
                     state: mergedState,
                     activeTopicId: normalizeTopicProgressKey(
                         (payloadToSave.state as any).activeTopicId ??
@@ -376,11 +392,16 @@ export function useReviewProgress(args: {
             }
 
             const data = saveResult.data;
-            const canonicalState = saveResult.state;
+            const canonicalState =
+                scopeReviewProgressToTopics(
+                    saveResult.state,
+                    moduleTopicIds,
+                );
             const canonicalPayload = buildReviewProgressPayload({
                 subjectSlug: payloadToSave.subjectSlug,
                 moduleSlug: payloadToSave.moduleSlug,
                 locale: payloadToSave.locale,
+                moduleTopicIds,
                 state: canonicalState,
                 activeTopicId: normalizeTopicProgressKey(
                     (canonicalState as any).activeTopicId ?? activeTopicIdRef.current,
@@ -412,7 +433,7 @@ export function useReviewProgress(args: {
                 });
             }
         },
-        [endpoint, gamificationEnabled, meaningfulBodyForPayload, readOnly],
+        [endpoint, gamificationEnabled, meaningfulBodyForPayload, moduleTopicIds, readOnly],
     );
 
     const drainSaveQueueRef = useRef<() => Promise<void>>(async () => undefined);
@@ -1278,7 +1299,11 @@ export function useReviewProgress(args: {
                     return;
                 }
 
-                const normalizedProgress = normalizeProgressTopics(fetchedProgress);
+                const normalizedProgress =
+                    scopeReviewProgressToTopics(
+                        normalizeProgressTopics(fetchedProgress),
+                        moduleTopicIds,
+                    );
 
                 setProgressSafe(normalizedProgress);
                 hydrateRuntimeFromProgress(normalizedProgress, "initial", startedGeneration);
@@ -1294,6 +1319,7 @@ export function useReviewProgress(args: {
                     subjectSlug,
                     moduleSlug,
                     locale,
+                    moduleTopicIds,
                     state: normalizedProgress,
                     activeTopicId: nextActive,
                 });
@@ -1315,6 +1341,7 @@ export function useReviewProgress(args: {
                     subjectSlug,
                     moduleSlug,
                     locale,
+                    moduleTopicIds,
                     state: ep,
                     activeTopicId: normalizeTopicProgressKey(firstTopicId),
                 });
@@ -1335,6 +1362,7 @@ export function useReviewProgress(args: {
     }, [
         subjectSlug,
         moduleSlug,
+        moduleTopicIds,
         locale,
         endpoint,
         firstTopicId,
@@ -1385,15 +1413,19 @@ export function useReviewProgress(args: {
                 }
 
                 const startedGeneration = useReviewRuntimeStore.getState().resetRevision;
-                const remoteProgress = normalizeProgressTopics(
-                    await fetchReviewProgressGET({
-                        subjectSlug,
-                        moduleSlug,
-                        locale,
-                        signal,
-                        endpoint,
-                    }),
-                );
+                const remoteProgress =
+                    scopeReviewProgressToTopics(
+                        normalizeProgressTopics(
+                            await fetchReviewProgressGET({
+                                subjectSlug,
+                                moduleSlug,
+                                locale,
+                                signal,
+                                endpoint,
+                            }),
+                        ),
+                        moduleTopicIds,
+                    );
                 if (signal?.aborted) return;
                 if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) {
                     return;
@@ -1405,6 +1437,7 @@ export function useReviewProgress(args: {
                     subjectSlug,
                     moduleSlug,
                     locale,
+                    moduleTopicIds,
                     state: remoteProgress,
                     activeTopicId: normalizeTopicProgressKey(
                         (remoteProgress as any).activeTopicId || activeTopicIdRef.current || firstTopicId,
@@ -1415,6 +1448,7 @@ export function useReviewProgress(args: {
                     subjectSlug,
                     moduleSlug,
                     locale,
+                    moduleTopicIds,
                     state: progressRef.current,
                     activeTopicId: normalizeTopicProgressKey(
                         (progressRef.current as any).activeTopicId || activeTopicIdRef.current || firstTopicId,
@@ -1460,6 +1494,7 @@ export function useReviewProgress(args: {
                     subjectSlug,
                     moduleSlug,
                     locale,
+                    moduleTopicIds,
                     state: remoteProgress,
                     activeTopicId: nextActive,
                 });
@@ -1483,6 +1518,7 @@ export function useReviewProgress(args: {
         [
             subjectSlug,
             moduleSlug,
+            moduleTopicIds,
             locale,
             endpoint,
             hydrated,

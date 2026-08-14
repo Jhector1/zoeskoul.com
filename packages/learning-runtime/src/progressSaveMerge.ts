@@ -68,6 +68,67 @@ export function reviewProgressStateBytes(state: unknown) {
   }
 }
 
+/**
+ * Normalize the authored topic ids that define one module's persistence scope.
+ * This is intentionally small metadata, not learner state.
+ */
+export function normalizeReviewProgressTopicScope(
+  topicIds: readonly string[] | null | undefined,
+): string[] {
+  const seen = new Set<string>();
+  const normalized: string[] = [];
+
+  for (const value of topicIds ?? []) {
+    if (typeof value !== "string" || !value.trim()) continue;
+
+    const topicId = normalizeTopicProgressKey(value);
+    if (!topicId || seen.has(topicId)) continue;
+
+    seen.add(topicId);
+    normalized.push(topicId);
+  }
+
+  return normalized;
+}
+
+/**
+ * Project progress onto the complete authored topic set for the module being
+ * loaded/saved. Old rows remain readable; only the canonical in-memory/save
+ * representation is narrowed.
+ */
+export function scopeReviewProgressToTopics(
+  state: ReviewProgressState | null | undefined,
+  moduleTopicIds: readonly string[] | null | undefined,
+): ReviewProgressState {
+  const normalized = normalizeProgressTopics(state ?? {});
+  const topicScope = normalizeReviewProgressTopicScope(moduleTopicIds);
+
+  if (topicScope.length === 0) {
+    return normalized;
+  }
+
+  const allowed = new Set(topicScope);
+  const topics: Record<string, ReviewTopicProgress> = {};
+
+  for (const [topicKey, topic] of Object.entries(normalized.topics ?? {})) {
+    const canonicalTopicKey = normalizeTopicProgressKey(topicKey);
+    if (!allowed.has(canonicalTopicKey)) continue;
+    topics[canonicalTopicKey] = topic as ReviewTopicProgress;
+  }
+
+  const activeTopicId =
+    typeof normalized.activeTopicId === "string" &&
+    allowed.has(normalizeTopicProgressKey(normalized.activeTopicId))
+      ? normalizeTopicProgressKey(normalized.activeTopicId)
+      : undefined;
+
+  return {
+    ...normalized,
+    activeTopicId,
+    topics,
+  };
+}
+
 function timeMs(value: unknown) {
   const n = Number(new Date(String(value ?? "")));
   return Number.isFinite(n) ? n : 0;
@@ -88,9 +149,26 @@ export function mergeReviewProgressForSave(args: {
   previousState: ReviewProgressState | null;
   incomingState: ReviewProgressState;
   saveRevision: number;
+  moduleTopicIds?: readonly string[];
 }) {
-  const previous = normalizeProgressTopics(args.previousState ?? {});
-  const incoming = normalizeProgressTopics(args.incomingState ?? {});
+  const moduleTopicIds =
+    normalizeReviewProgressTopicScope(args.moduleTopicIds);
+
+  const previous =
+    moduleTopicIds.length > 0
+      ? scopeReviewProgressToTopics(
+          args.previousState ?? {},
+          moduleTopicIds,
+        )
+      : normalizeProgressTopics(args.previousState ?? {});
+
+  const incoming =
+    moduleTopicIds.length > 0
+      ? scopeReviewProgressToTopics(
+          args.incomingState ?? {},
+          moduleTopicIds,
+        )
+      : normalizeProgressTopics(args.incomingState ?? {});
 
   if (isAuthoritativeModuleReset({ previous, incoming })) {
     return {

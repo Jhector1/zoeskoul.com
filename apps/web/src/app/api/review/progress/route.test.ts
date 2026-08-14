@@ -537,4 +537,73 @@ describe("/api/review/progress route", () => {
             reason: "concurrent_write",
         });
     });
+
+    it("self-cleans foreign topics while preserving other current-module tab progress", async () => {
+        const route = await import("./route");
+
+        mockDb.row = {
+            id: "review-progress-1",
+            updatedAt: new Date("2026-05-07T12:00:00.000Z"),
+            state: {
+                activeTopicId: "foreign-topic",
+                topics: {
+                    "current-a": {
+                        completed: true,
+                    },
+                    "current-b": {
+                        completed: true,
+                    },
+                    "foreign-topic": {
+                        completed: true,
+                    },
+                },
+                __saveRevision: 10,
+            },
+        };
+
+        const response = await route.PUT(
+            new Request("http://localhost:3000/api/review/progress", {
+                method: "PUT",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify({
+                    subjectSlug: "sql",
+                    moduleSlug: "sql_module_12",
+                    locale: "en",
+                    moduleTopicIds: [
+                        "current-a",
+                        "current-b",
+                    ],
+                    state: {
+                        activeTopicId: "current-a",
+                        topics: {
+                            "current-a": {
+                                readingDone: {
+                                    intro: true,
+                                },
+                            },
+                        },
+                        __saveRevision: 11,
+                    },
+                }),
+            }),
+        );
+
+        expect(response.status).toBe(200);
+
+        const json = await response.json();
+
+        expect(Object.keys(json.state.topics).sort()).toEqual([
+            "current-a",
+            "current-b",
+        ]);
+        expect(json.state.topics["current-a"].completed).toBe(true);
+        expect(json.state.topics["current-a"].readingDone).toEqual({
+            intro: true,
+        });
+        expect(json.state.topics["current-b"].completed).toBe(true);
+        expect(json.state.topics["foreign-topic"]).toBeUndefined();
+        expect(mockDb.row?.state.topics["foreign-topic"]).toBeUndefined();
+    });
 });

@@ -124,4 +124,71 @@ describe("mergeReviewProgressForSave", () => {
     expect(saved!.workspace.activeFileId).toBe("created");
     expect(saved!.workspace.entryFileId).toBe("renamed");
   });
+
+  it("prunes foreign-module topics while preserving another current-module tab", () => {
+    const merged = mergeReviewProgressForSave({
+      previousState: state({
+        activeTopicId: "foreign-topic",
+        topics: {
+          "current-a": {
+            completed: true,
+          },
+          "current-b": {
+            completed: true,
+          },
+          "foreign-topic": {
+            completed: true,
+          },
+        },
+      }),
+      incomingState: state({
+        activeTopicId: "current-a",
+        topics: {
+          "current-a": {
+            readingDone: {
+              intro: true,
+            },
+          },
+        },
+      }),
+      moduleTopicIds: [
+        "current-a",
+        "current-b",
+      ],
+      saveRevision: 13,
+    });
+
+    expect(Object.keys(merged.topics ?? {}).sort()).toEqual([
+      "current-a",
+      "current-b",
+    ]);
+    expect(merged.topics?.["current-a"]?.completed).toBe(true);
+    expect(merged.topics?.["current-a"]?.readingDone?.intro).toBe(true);
+    expect(merged.topics?.["current-b"]?.completed).toBe(true);
+    expect(merged.topics?.["foreign-topic"]).toBeUndefined();
+    expect(merged.activeTopicId).toBe("current-a");
+  });
+
+  it("preserves legacy merge behavior when an old client sends no scope", () => {
+    const merged = mergeReviewProgressForSave({
+      previousState: state({
+        topics: {
+          old: {
+            completed: true,
+          },
+        },
+      }),
+      incomingState: state({
+        topics: {
+          newer: {
+            completed: true,
+          },
+        },
+      }),
+      saveRevision: 14,
+    });
+
+    expect(merged.topics?.old?.completed).toBe(true);
+    expect(merged.topics?.newer?.completed).toBe(true);
+  });
 });

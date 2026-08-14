@@ -458,6 +458,13 @@ export function useReviewModuleController({
 
     const topics = Array.isArray(mod?.topics) ? mod.topics : [];
     const firstTopicId = topics[0]?.id ?? "";
+    const moduleTopicIds = useMemo(
+        () =>
+            (Array.isArray(mod?.topics) ? mod.topics : [])
+                .map((topic) => String(topic?.id ?? "").trim())
+                .filter(Boolean),
+        [mod?.topics],
+    );
 
     const {
         hydrated: progressHydrated,
@@ -478,6 +485,7 @@ export function useReviewModuleController({
         moduleSlug,
         locale,
         firstTopicId,
+        moduleTopicIds,
         endpoint: tutoringProgressEndpoint,
         gamificationEnabled: !isTutoringSession,
         readOnly: !workspaceCapabilities.canMutateProgress,

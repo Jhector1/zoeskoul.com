@@ -222,6 +222,7 @@ export async function PUT(
           previousState,
           incomingState: state,
           saveRevision: nextSaveRevision,
+          moduleTopicIds: parsed.data.moduleTopicIds,
         });
         const serialized = JSON.stringify(stateToPersist);
         const byteSize = utf8Bytes(serialized);

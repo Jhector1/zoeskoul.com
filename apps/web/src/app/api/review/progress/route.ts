@@ -280,6 +280,7 @@ export async function PUT(req: Request) {
         previousState,
         incomingState: state as ReviewProgressState,
         saveRevision: nextRevision,
+        moduleTopicIds: parsed.data.moduleTopicIds,
     });
 
     let saved;

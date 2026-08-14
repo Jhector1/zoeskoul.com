@@ -513,6 +513,15 @@ export const ReviewProgressWriteSchema = z
         moduleId: z.string().trim().optional(),
         moduleRef: z.string().trim().optional(),
         locale: z.string().trim().min(1).max(16).default("en"),
+        moduleTopicIds: z
+            .array(
+                z.string()
+                    .trim()
+                    .min(1)
+                    .max(REVIEW_PROGRESS_LIMITS.maxStringFieldBytes),
+            )
+            .max(REVIEW_PROGRESS_LIMITS.maxTopics)
+            .optional(),
         state: z.custom<ReviewProgressState>(
             (value) => !!value && typeof value === "object" && !Array.isArray(value),
             "Missing/invalid state.",

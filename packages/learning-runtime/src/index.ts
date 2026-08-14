@@ -114,7 +114,9 @@ export {
 export {
   getReviewProgressSaveRevision,
   mergeReviewProgressForSave,
+  normalizeReviewProgressTopicScope,
   reviewProgressStateBytes,
+  scopeReviewProgressToTopics,
 } from "./progressSaveMerge";
 
 export {

@@ -1,7 +1,9 @@
 import {
   createEmptyReviewProgress,
   normalizeProgressTopics,
+  normalizeReviewProgressTopicScope,
   normalizeTopicProgressKey,
+  scopeReviewProgressToTopics,
   type ReviewProgressState,
 } from "@zoeskoul/learning-runtime";
 
@@ -9,6 +11,7 @@ export type ReviewProgressPayload = {
   subjectSlug: string;
   moduleSlug: string;
   locale: string;
+  moduleTopicIds?: string[];
   state: ReviewProgressState;
 };
 
@@ -215,23 +218,40 @@ export function buildReviewProgressPayload(args: {
   subjectSlug: string;
   moduleSlug: string;
   locale: string;
+  moduleTopicIds?: readonly string[];
   state: ReviewProgressState;
   activeTopicId?: string;
 }): ReviewProgressPayload {
+  const moduleTopicIds =
+    normalizeReviewProgressTopicScope(args.moduleTopicIds);
+
+  const stateWithActiveTopic = {
+    ...normalizeProgressTopics(args.state),
+    ...(args.activeTopicId
+      ? {
+          activeTopicId: normalizeTopicProgressKey(
+            args.activeTopicId,
+          ),
+        }
+      : {}),
+  };
+
+  const state =
+    moduleTopicIds.length > 0
+      ? scopeReviewProgressToTopics(
+          stateWithActiveTopic,
+          moduleTopicIds,
+        )
+      : stateWithActiveTopic;
+
   return {
     subjectSlug: args.subjectSlug,
     moduleSlug: args.moduleSlug,
     locale: args.locale,
-    state: {
-      ...normalizeProgressTopics(args.state),
-      ...(args.activeTopicId
-        ? {
-            activeTopicId: normalizeTopicProgressKey(
-              args.activeTopicId,
-            ),
-          }
-        : {}),
-    },
+    ...(moduleTopicIds.length > 0
+      ? { moduleTopicIds }
+      : {}),
+    state,
   };
 }
 

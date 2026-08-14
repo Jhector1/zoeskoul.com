@@ -1,5 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import {
+  buildReviewProgressPayload,
+} from "@zoeskoul/learning-client/legacy-compatible/review/progressClient";
+import {
   mergeReviewProgressForConflictRetry,
   normalizeReviewProgressForClientSync,
   withoutReviewProgressSaveRevision,
@@ -168,5 +171,62 @@ describe("review progress synchronization contracts", () => {
         existingWorkspace: current,
       }),
     ).toBe(true);
+  });
+
+  it("projects outgoing progress to the complete authored module topic scope", () => {
+    const payload = buildReviewProgressPayload({
+      subjectSlug: "sql-data-management",
+      moduleSlug: "module-1",
+      locale: "en",
+      moduleTopicIds: [
+        "section-1.current-a",
+        "current-b",
+        "section-1.current-a",
+      ],
+      state: {
+        activeTopicId: "foreign-topic",
+        topics: {
+          "section-1.current-a": {
+            completed: true,
+          },
+          "current-b": {
+            completed: true,
+          },
+          "foreign-topic": {
+            completed: true,
+          },
+        },
+      },
+      activeTopicId: "section-1.current-a",
+    });
+
+    expect(payload.moduleTopicIds).toEqual([
+      "current-a",
+      "current-b",
+    ]);
+    expect(Object.keys(payload.state.topics ?? {}).sort()).toEqual([
+      "current-a",
+      "current-b",
+    ]);
+    expect(payload.state.activeTopicId).toBe("current-a");
+    expect(payload.state.topics?.["foreign-topic"]).toBeUndefined();
+  });
+
+  it("keeps legacy payload behavior when no module topic scope is supplied", () => {
+    const payload = buildReviewProgressPayload({
+      subjectSlug: "sql",
+      moduleSlug: "legacy-module",
+      locale: "en",
+      state: {
+        topics: {
+          legacy: {
+            completed: true,
+          },
+        },
+      },
+    });
+
+    expect(payload.moduleTopicIds).toBeUndefined();
+    expect(payload.state.topics?.legacy?.completed).toBe(true);
   });
 });
