@@ -55,6 +55,20 @@ import {
     shouldApplyRemoteReviewWorkspace,
     shouldTrackReviewRuntimeMutation,
 } from "./reviewProgressRemoteSyncPolicy";
+import {
+    REVIEW_AUTOSAVE_RETRY_DELAYS_MS,
+    reviewAutosaveRetryDelayMs,
+    shouldAutoRetryReviewProgressSave,
+    shouldQuarantineReviewProgressSaveFailure,
+} from "./reviewAutosaveRetryPolicy";
+import {
+    sanitizeReviewProgressWorkspaceReferences,
+} from "./reviewProgressWorkspaceSanitizer";
+import {
+    REVIEW_PROGRESS_STANDARD_REMOTE_POLL_MS,
+    rebaseReviewProgressStateRevisionForSend,
+    reviewProgressSaveRevisionOf,
+} from "./reviewProgressSaveCoordinator";
 
 function isPersistedCardToolKey(toolKey: string) {
     if (typeof toolKey !== "string" || !toolKey.trim()) return false;
@@ -114,6 +128,7 @@ export function useReviewProgress(args: {
     gamificationEnabled?: boolean;
     readOnly?: boolean;
     followRemoteNavigation?: boolean;
+    remotePollMs?: number;
 }) {
     const {
         subjectSlug,
@@ -124,6 +139,7 @@ export function useReviewProgress(args: {
         gamificationEnabled = endpoint === "/api/review/progress",
         readOnly = false,
         followRemoteNavigation = true,
+        remotePollMs = REVIEW_PROGRESS_STANDARD_REMOTE_POLL_MS,
     } = args;
 
     const [progress, setProgress] = useState<ReviewProgressState>(
@@ -147,6 +163,12 @@ export function useReviewProgress(args: {
     const navigationSaveQueueRef = useRef<ReviewNavigationProgressSnapshot[]>([]);
     const pendingSaveTimerRef = useRef<number | null>(null);
     const runtimeSaveTimerRef = useRef<number | null>(null);
+    const autosaveRetryTimerRef = useRef<number | null>(null);
+    const autosaveRetryCountRef = useRef(0);
+    const autosaveRetryMeaningfulBodyRef = useRef<string | null>(null);
+    const lastPermanentRejectedMeaningfulBodyRef =
+        useRef<string | null>(null);
+    const lastAcceptedSaveRevisionRef = useRef(0);
     const lastSavedMeaningfulBodyRef = useRef<string>("");
     const lastCommittedRef = useRef<string>("");
     const [saveStatus, setSaveStatus] = useState<ReviewSaveStatus>("idle");
@@ -211,7 +233,8 @@ export function useReviewProgress(args: {
                 subjectSlug,
                 moduleSlug,
                 locale,
-                state: progress,
+                state:
+                    sanitizeReviewProgressWorkspaceReferences(progress),
                 activeTopicId: normalizeTopicProgressKey(activeTopicId),
             }),
         [subjectSlug, moduleSlug, locale, progress, activeTopicId],
@@ -219,7 +242,10 @@ export function useReviewProgress(args: {
 
     function makeSaveState(state: ReviewProgressState): ReviewProgressState {
         const latestRuntime = useReviewRuntimeStore.getState();
-        const stateWithRuntime = mergeRuntimeIntoProgress(state, latestRuntime);
+        const stateWithRuntime =
+            sanitizeReviewProgressWorkspaceReferences(
+                mergeRuntimeIntoProgress(state, latestRuntime),
+            );
 
         const previousRevision = getSaveRevision(stateWithRuntime);
         const nextRevision = nextWorkspaceSaveRevision({ previousRevision });
@@ -236,11 +262,14 @@ export function useReviewProgress(args: {
 
     const buildPayloadFromState = useCallback(
         (state: ReviewProgressState) => {
+            const sanitizedState =
+                sanitizeReviewProgressWorkspaceReferences(state);
+
             return buildReviewProgressPayload({
                 subjectSlug,
                 moduleSlug,
                 locale,
-                state,
+                state: sanitizedState,
                 activeTopicId: normalizeTopicProgressKey(activeTopicIdRef.current),
             });
         },
@@ -258,8 +287,20 @@ export function useReviewProgress(args: {
         (nextPayload: typeof payload) => {
             const body = stableJson(nextPayload);
             lastCommittedRef.current = body;
-            lastSavedMeaningfulBodyRef.current = meaningfulBodyForPayload(nextPayload);
+            lastSavedMeaningfulBodyRef.current =
+                meaningfulBodyForPayload(nextPayload);
+            lastAcceptedSaveRevisionRef.current = Math.max(
+                lastAcceptedSaveRevisionRef.current,
+                reviewProgressSaveRevisionOf(nextPayload.state),
+            );
             pendingSavePayloadRef.current = null;
+            if (autosaveRetryTimerRef.current != null) {
+                window.clearTimeout(autosaveRetryTimerRef.current);
+                autosaveRetryTimerRef.current = null;
+            }
+            autosaveRetryCountRef.current = 0;
+            autosaveRetryMeaningfulBodyRef.current = null;
+            lastPermanentRejectedMeaningfulBodyRef.current = null;
             localDirtyRef.current = false;
             setSaveStatus("saved");
             setLastSaveError(null);
@@ -278,6 +319,13 @@ export function useReviewProgress(args: {
             window.clearTimeout(runtimeSaveTimerRef.current);
             runtimeSaveTimerRef.current = null;
         }
+        if (autosaveRetryTimerRef.current != null) {
+            window.clearTimeout(autosaveRetryTimerRef.current);
+            autosaveRetryTimerRef.current = null;
+        }
+        autosaveRetryCountRef.current = 0;
+        autosaveRetryMeaningfulBodyRef.current = null;
+        lastPermanentRejectedMeaningfulBodyRef.current = null;
     }, []);
 
     useEffect(() => {
@@ -308,6 +356,15 @@ export function useReviewProgress(args: {
                 setLastSaveError(null);
                 return;
             }
+
+            payloadToSave = {
+                ...payloadToSave,
+                state: rebaseReviewProgressStateRevisionForSend(
+                    payloadToSave.state as ReviewProgressState,
+                    lastAcceptedSaveRevisionRef.current,
+                ),
+            } as typeof payload;
+            body = stableJson(payloadToSave);
 
             /**
              * Fast path: do not GET the latest progress before every autosave.
@@ -353,10 +410,17 @@ export function useReviewProgress(args: {
                     locale: payloadToSave.locale,
                     endpoint,
                 });
-                const mergedState = mergeProgressStatesForSave(
-                    latestRemote,
-                    payloadToSave.state as ReviewProgressState,
+                lastAcceptedSaveRevisionRef.current = Math.max(
+                    lastAcceptedSaveRevisionRef.current,
+                    reviewProgressSaveRevisionOf(latestRemote),
                 );
+                const mergedState =
+                    sanitizeReviewProgressWorkspaceReferences(
+                        mergeProgressStatesForSave(
+                            latestRemote,
+                            payloadToSave.state as ReviewProgressState,
+                        ),
+                    );
                 payloadToSave = buildReviewProgressPayload({
                     subjectSlug: payloadToSave.subjectSlug,
                     moduleSlug: payloadToSave.moduleSlug,
@@ -367,6 +431,13 @@ export function useReviewProgress(args: {
                             activeTopicIdRef.current,
                     ),
                 }) as typeof payload;
+                payloadToSave = {
+                    ...payloadToSave,
+                    state: rebaseReviewProgressStateRevisionForSend(
+                        payloadToSave.state as ReviewProgressState,
+                        lastAcceptedSaveRevisionRef.current,
+                    ),
+                } as typeof payload;
                 body = stableJson(payloadToSave);
                 meaningfulBody =
                     meaningfulBodyForPayload(payloadToSave);
@@ -375,6 +446,10 @@ export function useReviewProgress(args: {
 
             const data = saveResult.data;
             const canonicalState = saveResult.state;
+            lastAcceptedSaveRevisionRef.current = Math.max(
+                lastAcceptedSaveRevisionRef.current,
+                reviewProgressSaveRevisionOf(canonicalState),
+            );
             const canonicalPayload = buildReviewProgressPayload({
                 subjectSlug: payloadToSave.subjectSlug,
                 moduleSlug: payloadToSave.moduleSlug,
@@ -394,7 +469,15 @@ export function useReviewProgress(args: {
                 progressRef.current = canonicalState;
             }
             lastCommittedRef.current = stableJson(canonicalPayload);
-            lastSavedMeaningfulBodyRef.current = meaningfulBodyForPayload(canonicalPayload);
+            lastSavedMeaningfulBodyRef.current =
+                meaningfulBodyForPayload(canonicalPayload);
+            if (autosaveRetryTimerRef.current != null) {
+                window.clearTimeout(autosaveRetryTimerRef.current);
+                autosaveRetryTimerRef.current = null;
+            }
+            autosaveRetryCountRef.current = 0;
+            autosaveRetryMeaningfulBodyRef.current = null;
+            lastPermanentRejectedMeaningfulBodyRef.current = null;
             localDirtyRef.current = hasNewerQueuedState;
             setSaveStatus(hasNewerQueuedState ? "saving" : "saved");
             setLastSaveError(null);
@@ -425,6 +508,19 @@ export function useReviewProgress(args: {
         if (!nextPayload) return;
 
         const meaningfulBody = meaningfulBodyForPayload(nextPayload);
+
+        if (
+            meaningfulBody ===
+            lastPermanentRejectedMeaningfulBodyRef.current
+        ) {
+            if (!navigationSnapshot) {
+                pendingSavePayloadRef.current = null;
+            }
+            localDirtyRef.current = true;
+            setSaveStatus("error");
+            return;
+        }
+
         if (meaningfulBody === lastSavedMeaningfulBodyRef.current) {
             if (!navigationSnapshot) pendingSavePayloadRef.current = null;
             const hasMoreQueuedState = Boolean(
@@ -452,14 +548,99 @@ export function useReviewProgress(args: {
         } catch (error: any) {
             failed = true;
             const status = Number(error?.status ?? 0);
-            setSaveStatus(status === 409 ? "conflict" : "error");
-            setLastSaveError(error?.message ?? String(error));
+            const message = error?.message ?? String(error);
+
             localDirtyRef.current = true;
-            if (navigationSnapshot) {
-                navigationSaveQueueRef.current.unshift(navigationSnapshot);
+
+            if (shouldQuarantineReviewProgressSaveFailure(error)) {
+                lastPermanentRejectedMeaningfulBodyRef.current =
+                    meaningfulBody;
+
+                // Permanent 4xx: never seed the identical poison payload back
+                // into the automatic queue.
+                if (
+                    pendingSavePayloadRef.current &&
+                    meaningfulBodyForPayload(
+                        pendingSavePayloadRef.current,
+                    ) === meaningfulBody
+                ) {
+                    pendingSavePayloadRef.current = null;
+                }
+
+                if (autosaveRetryTimerRef.current != null) {
+                    window.clearTimeout(autosaveRetryTimerRef.current);
+                    autosaveRetryTimerRef.current = null;
+                }
+                autosaveRetryCountRef.current = 0;
+                autosaveRetryMeaningfulBodyRef.current = null;
+
+                setSaveStatus("error");
+                setLastSaveError(message);
+            } else if (shouldAutoRetryReviewProgressSave(error)) {
+                if (
+                    autosaveRetryMeaningfulBodyRef.current !==
+                    meaningfulBody
+                ) {
+                    autosaveRetryMeaningfulBodyRef.current =
+                        meaningfulBody;
+                    autosaveRetryCountRef.current = 0;
+                }
+
+                const retryDelay = reviewAutosaveRetryDelayMs(
+                    autosaveRetryCountRef.current,
+                );
+
+                if (retryDelay == null) {
+                    setSaveStatus("error");
+                    setLastSaveError(
+                        `${message} Automatic retries exhausted.`,
+                    );
+                } else {
+                    autosaveRetryCountRef.current += 1;
+
+                    if (navigationSnapshot) {
+                        navigationSaveQueueRef.current.unshift(
+                            navigationSnapshot,
+                        );
+                    } else {
+                        pendingSavePayloadRef.current =
+                            pendingSavePayloadRef.current ??
+                            nextPayload;
+                    }
+
+                    setSaveStatus("unsaved");
+                    setLastSaveError(
+                        `${message} Retrying automatically ` +
+                        `(${autosaveRetryCountRef.current}/` +
+                        `${REVIEW_AUTOSAVE_RETRY_DELAYS_MS.length}).`,
+                    );
+
+                    if (autosaveRetryTimerRef.current != null) {
+                        window.clearTimeout(
+                            autosaveRetryTimerRef.current,
+                        );
+                    }
+                    autosaveRetryTimerRef.current =
+                        window.setTimeout(() => {
+                            autosaveRetryTimerRef.current = null;
+                            void drainSaveQueueRef.current();
+                        }, retryDelay);
+                }
             } else {
-                // Preserve the newest known payload. Do not overwrite it with older snapshots.
-                pendingSavePayloadRef.current = pendingSavePayloadRef.current ?? nextPayload;
+                setSaveStatus(
+                    status === 409 ? "conflict" : "error",
+                );
+                setLastSaveError(message);
+
+                if (navigationSnapshot) {
+                    navigationSaveQueueRef.current.unshift(
+                        navigationSnapshot,
+                    );
+                } else {
+                    pendingSavePayloadRef.current =
+                        pendingSavePayloadRef.current ??
+                        nextPayload;
+                }
             }
         } finally {
             saveInFlightRef.current = false;
@@ -546,12 +727,45 @@ export function useReviewProgress(args: {
 
             const latestRuntime = useReviewRuntimeStore.getState();
             const mergedState = mergeRuntimeIntoProgress(nextState, latestRuntime);
-            const meaningfulPayload = buildPayloadFromState(withoutSaveRevision(mergedState) as ReviewProgressState);
-            const meaningfulBody = meaningfulBodyForPayload(meaningfulPayload as any);
+            const meaningfulPayload = buildPayloadFromState(
+                withoutSaveRevision(mergedState) as ReviewProgressState,
+            );
+            const meaningfulBody =
+                meaningfulBodyForPayload(meaningfulPayload as any);
 
             if (meaningfulBody === lastSavedMeaningfulBodyRef.current) {
                 localDirtyRef.current = false;
                 return;
+            }
+
+            if (
+                meaningfulBody ===
+                lastPermanentRejectedMeaningfulBodyRef.current
+            ) {
+                if (options?.reason === "flush") {
+                    // Explicit Retry/flush gets one fresh request.
+                    lastPermanentRejectedMeaningfulBodyRef.current =
+                        null;
+                } else {
+                    localDirtyRef.current = true;
+                    setSaveStatus("error");
+                    return;
+                }
+            }
+
+            if (
+                autosaveRetryMeaningfulBodyRef.current !==
+                meaningfulBody
+            ) {
+                if (autosaveRetryTimerRef.current != null) {
+                    window.clearTimeout(
+                        autosaveRetryTimerRef.current,
+                    );
+                    autosaveRetryTimerRef.current = null;
+                }
+                autosaveRetryCountRef.current = 0;
+                autosaveRetryMeaningfulBodyRef.current =
+                    meaningfulBody;
             }
 
             const stateToSave = makeSaveState(mergedState);
@@ -699,9 +913,30 @@ export function useReviewProgress(args: {
                     }
                 } catch (error: any) {
                     const status = Number(error?.status ?? 0);
-                    setSaveStatus(status === 409 ? "conflict" : "error");
-                    setLastSaveError(error?.message ?? String(error));
-                    pendingSavePayloadRef.current = nextPayload as any;
+                    const message =
+                        error?.message ?? String(error);
+                    const rejectedMeaningfulBody =
+                        meaningfulBodyForPayload(
+                            nextPayload as any,
+                        );
+
+                    if (
+                        shouldQuarantineReviewProgressSaveFailure(
+                            error,
+                        )
+                    ) {
+                        lastPermanentRejectedMeaningfulBodyRef.current =
+                            rejectedMeaningfulBody;
+                        pendingSavePayloadRef.current = null;
+                    } else {
+                        pendingSavePayloadRef.current =
+                            nextPayload as any;
+                    }
+
+                    setSaveStatus(
+                        status === 409 ? "conflict" : "error",
+                    );
+                    setLastSaveError(message);
                     localDirtyRef.current = true;
                 } finally {
                     saveInFlightRef.current = false;
@@ -1496,7 +1731,7 @@ export function useReviewProgress(args: {
                 hasPendingSave: Boolean(pendingSavePayloadRef.current),
             })) return;
             poll("poll");
-        }, 4000);
+        }, remotePollMs);
 
         const onVisibilityChange = () => {
             if (document.visibilityState === "visible") {
@@ -1518,7 +1753,14 @@ export function useReviewProgress(args: {
             window.removeEventListener("online", onOnline);
             ctrl.abort();
         };
-    }, [subjectSlug, moduleSlug, hydrated, readOnly, syncRemoteProgress]);
+    }, [
+        subjectSlug,
+        moduleSlug,
+        hydrated,
+        readOnly,
+        remotePollMs,
+        syncRemoteProgress,
+    ]);
 
     useEffect(() => {
         if (!hydrated || !hydrationCompleteRef.current) return;

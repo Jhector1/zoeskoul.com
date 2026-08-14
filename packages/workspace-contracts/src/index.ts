@@ -149,6 +149,98 @@ export type WorkspaceStateV2 = {
 };
 
 /**
+ * Canonicalize view/navigation references without changing learner file
+ * contents or node identities.
+ *
+ * Persisted workspaces may only reference file nodes from openTabs,
+ * activeFileId, and entryFileId. Structural merges can otherwise preserve
+ * stale tab ids or even folder ids after the node tree changes.
+ */
+export function normalizeWorkspaceViewReferences<T extends WorkspaceStateV2>(
+  workspace: T,
+): T {
+  if (
+    !workspace ||
+    workspace.version !== 2 ||
+    !Array.isArray(workspace.nodes)
+  ) {
+    return workspace;
+  }
+
+  const nodeIds = new Set(
+    workspace.nodes.map((node) => String(node?.id ?? "")),
+  );
+  const fileIds = new Set(
+    workspace.nodes
+      .filter((node) => node?.kind === "file")
+      .map((node) => String(node?.id ?? "")),
+  );
+
+  const firstFileId =
+    workspace.nodes.find((node) => node?.kind === "file")?.id ?? null;
+
+  if (!firstFileId) {
+    return workspace;
+  }
+
+  const currentEntryFileId = String(workspace.entryFileId ?? "");
+  const currentActiveFileId = String(workspace.activeFileId ?? "");
+
+  const openTabs = Array.from(
+    new Set(
+      (Array.isArray(workspace.openTabs) ? workspace.openTabs : [])
+        .map((id) => String(id))
+        .filter((id) => fileIds.has(id)),
+    ),
+  );
+  const preferredOpenFileId = openTabs[0] ?? "";
+
+  const entryFileId = fileIds.has(currentEntryFileId)
+    ? currentEntryFileId
+    : fileIds.has(currentActiveFileId)
+      ? currentActiveFileId
+      : fileIds.has(preferredOpenFileId)
+        ? preferredOpenFileId
+        : String(firstFileId);
+
+  const activeFileId = fileIds.has(currentActiveFileId)
+    ? currentActiveFileId
+    : fileIds.has(preferredOpenFileId)
+      ? preferredOpenFileId
+      : entryFileId;
+
+  if (!openTabs.includes(activeFileId)) {
+    openTabs.unshift(activeFileId);
+  }
+
+  const expanded = Array.from(
+    new Set(
+      (Array.isArray(workspace.expanded) ? workspace.expanded : [])
+        .map((id) => String(id))
+        .filter((id) => nodeIds.has(id)),
+    ),
+  );
+
+  const unchanged =
+    String(workspace.entryFileId ?? "") === entryFileId &&
+    String(workspace.activeFileId ?? "") === activeFileId &&
+    JSON.stringify(workspace.openTabs ?? []) === JSON.stringify(openTabs) &&
+    JSON.stringify(workspace.expanded ?? []) === JSON.stringify(expanded);
+
+  if (unchanged) {
+    return workspace;
+  }
+
+  return {
+    ...workspace,
+    entryFileId,
+    activeFileId,
+    openTabs,
+    expanded,
+  };
+}
+
+/**
  * Shared timing and ordering rules for every persisted learning workspace.
  *
  * The editor-to-runtime hop owns the text debounce. The runtime-to-database
@@ -157,7 +249,7 @@ export type WorkspaceStateV2 = {
  */
 export const WORKSPACE_TEXT_SAVE_DEBOUNCE_MS = 600;
 export const WORKSPACE_PROGRESS_SAVE_DEBOUNCE_MS = 600;
-export const WORKSPACE_RUNTIME_SAVE_COALESCE_MS = 0;
+export const WORKSPACE_RUNTIME_SAVE_COALESCE_MS = 250;
 
 export type CanonicalWorkspaceIdentityInput = {
   endpoint: string;
@@ -291,28 +383,49 @@ export function preserveLocalWorkspaceNavigation(
         return incomingWorkspace;
     }
 
-    const incomingIds = new Set(
-        incomingWorkspace.nodes.map((node: any) => String(node?.id ?? "")),
+    const normalizedIncoming =
+        normalizeWorkspaceViewReferences(incomingWorkspace);
+
+    const incomingNodeIds = new Set(
+        normalizedIncoming.nodes.map((node: any) => String(node?.id ?? "")),
     );
+    const incomingFileIds = new Set(
+        normalizedIncoming.nodes
+            .filter((node: any) => node?.kind === "file")
+            .map((node: any) => String(node?.id ?? "")),
+    );
+
     const localActiveFileId = String(localWorkspace.activeFileId ?? "");
-    const activeFileId = incomingIds.has(localActiveFileId)
+    const activeFileId = incomingFileIds.has(localActiveFileId)
         ? localActiveFileId
-        : incomingWorkspace.activeFileId;
+        : normalizedIncoming.activeFileId;
+
     const localTabs = Array.isArray(localWorkspace.openTabs)
-        ? localWorkspace.openTabs.filter((id: unknown) => incomingIds.has(String(id)))
+        ? localWorkspace.openTabs
+            .map((id: unknown) => String(id))
+            .filter((id: string) => incomingFileIds.has(id))
         : [];
-    const incomingTabs = Array.isArray(incomingWorkspace.openTabs)
-        ? incomingWorkspace.openTabs
+    const incomingTabs = Array.isArray(normalizedIncoming.openTabs)
+        ? normalizedIncoming.openTabs
         : [];
 
-    return {
-        ...incomingWorkspace,
+    const expandedSource = Array.isArray(localWorkspace.expanded)
+        ? localWorkspace.expanded
+        : normalizedIncoming.expanded;
+    const expanded = Array.from(
+        new Set(
+            (expandedSource ?? [])
+                .map((id: unknown) => String(id))
+                .filter((id: string) => incomingNodeIds.has(id)),
+        ),
+    );
+
+    return normalizeWorkspaceViewReferences({
+        ...normalizedIncoming,
         activeFileId,
         openTabs: [...new Set([...localTabs, ...incomingTabs])],
-        expanded: Array.isArray(localWorkspace.expanded)
-            ? localWorkspace.expanded
-            : incomingWorkspace.expanded,
-    };
+        expanded,
+    });
 }
 
 export function savedStarterHashMatchesRuntimeStarter(args: {

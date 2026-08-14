@@ -47,7 +47,7 @@ describe("workspace persistence contract", () => {
     expect(WORKSPACE_TEXT_SAVE_DEBOUNCE_MS).toBeGreaterThanOrEqual(500);
     expect(WORKSPACE_TEXT_SAVE_DEBOUNCE_MS).toBeLessThanOrEqual(700);
     expect(WORKSPACE_PROGRESS_SAVE_DEBOUNCE_MS).toBeLessThanOrEqual(700);
-    expect(WORKSPACE_RUNTIME_SAVE_COALESCE_MS).toBe(0);
+    expect(WORKSPACE_RUNTIME_SAVE_COALESCE_MS).toBe(250);
   });
 
   it("creates monotonic revisions even for multiple mutations in one millisecond", () => {

@@ -482,6 +482,7 @@ export function useReviewModuleController({
         gamificationEnabled: !isTutoringSession,
         readOnly: !workspaceCapabilities.canMutateProgress,
         followRemoteNavigation: tutoringSession?.followTutor !== false,
+        remotePollMs: isTutoringSession ? 4_000 : 30_000,
     });
     const setProgress = useCallback<React.Dispatch<React.SetStateAction<ReviewProgressState>>>(
         (update) => {
