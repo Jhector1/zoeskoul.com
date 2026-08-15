@@ -1060,10 +1060,22 @@ export function useReviewModuleController({
 
     useEffect(() => {
         if (!routeTarget?.topicId) return;
+
         if (viewTopicId !== routeTarget.topicId) {
             setViewTopicId(routeTarget.topicId);
         }
-        if (activeTopicId !== routeTarget.topicId) {
+
+        const routeTopicIndex = topics.findIndex(
+            (topic) => topic.id === routeTarget.topicId,
+        );
+        const activeTopicIndex = topics.findIndex(
+            (topic) => topic.id === activeTopicId,
+        );
+
+        if (
+            routeTopicIndex >= 0 &&
+            (activeTopicIndex < 0 || routeTopicIndex > activeTopicIndex)
+        ) {
             setActiveTopicId(routeTarget.topicId);
         }
     }, [
@@ -1071,6 +1083,7 @@ export function useReviewModuleController({
         routeTarget?.topicId,
         setActiveTopicId,
         setViewTopicId,
+        topics,
         viewTopicId,
     ]);
 
