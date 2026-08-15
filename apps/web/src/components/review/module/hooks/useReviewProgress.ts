@@ -1336,10 +1336,6 @@ export function useReviewProgress(args: {
                     activeTopicId: nextActive,
                 });
                 prime(hydratedPayload);
-                lastSavedMeaningfulBodyRef.current = stableJson({
-                    ...hydratedPayload,
-                    state: withoutSaveRevision(hydratedPayload.state),
-                });
                 localDirtyRef.current = false;
             } catch (error: any) {
                 if (ctrl.signal.aborted || error?.name === "AbortError") return;
@@ -1358,10 +1354,6 @@ export function useReviewProgress(args: {
                     activeTopicId: normalizeTopicProgressKey(firstTopicId),
                 });
                 prime(emptyPayload);
-                lastSavedMeaningfulBodyRef.current = stableJson({
-                    ...emptyPayload,
-                    state: withoutSaveRevision(emptyPayload.state),
-                });
                 localDirtyRef.current = false;
             } finally {
                 if (ctrl.signal.aborted) return;
@@ -1511,10 +1503,6 @@ export function useReviewProgress(args: {
                     activeTopicId: nextActive,
                 });
                 prime(canonicalRemotePayload);
-                lastSavedMeaningfulBodyRef.current = stableJson({
-                    ...canonicalRemotePayload,
-                    state: withoutSaveRevision(canonicalRemotePayload.state),
-                });
 
             } catch (error: any) {
                 if (signal?.aborted || error?.name === "AbortError") return;
