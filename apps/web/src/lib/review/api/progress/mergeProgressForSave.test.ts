@@ -275,4 +275,115 @@ describe("mergeReviewProgressForSave", () => {
     expect(toolEntry.toolWorkspace).toEqual(workspace);
   });
 
+
+  it("drops flat exercise scalars only when workspace is authoritative", () => {
+    const workspace = {
+      version: 2,
+      language: "python",
+      nodes: [
+        {
+          id: "main",
+          kind: "file",
+          name: "main.py",
+          content: "print('workspace')",
+        },
+      ],
+      openTabs: ["main"],
+      activeFileId: "main",
+      entryFileId: "main",
+      stdin: "input\n",
+      expanded: [],
+      leftPct: 40,
+    };
+
+    const merged = mergeReviewProgressForSave({
+      previousState: state({}),
+      incomingState: state({
+        topics: {
+          first: {
+            quizState: {
+              card: {
+                answers: {},
+                checkedById: {},
+                practiceItemPatch: {
+                  exact: {
+                    workspace,
+                    code: "print('workspace')",
+                    source: "print('workspace')",
+                    language: "python",
+                    lang: "python",
+                    codeLang: "python",
+                    stdin: "input\n",
+                    codeStdin: "input\n",
+                    userEdited: true,
+                  },
+                  inconsistent: {
+                    workspace,
+                    code: "print('legacy-only')",
+                    source: "print('legacy-only')",
+                    language: "python",
+                    stdin: "input\n",
+                    userEdited: true,
+                  },
+                  scalarOnly: {
+                    code: "print('scalar-only')",
+                    source: "print('scalar-only')",
+                    language: "python",
+                    stdin: "",
+                    userEdited: true,
+                  },
+                },
+              },
+            },
+            runtimeStateV2: {
+              exercises: {
+                exactRuntime: {
+                  workspace,
+                  code: "print('workspace')",
+                  source: "print('workspace')",
+                  language: "python",
+                  lang: "python",
+                  codeLang: "python",
+                  stdin: "input\n",
+                  codeStdin: "input\n",
+                  userEdited: true,
+                  updatedAt: 20,
+                },
+              },
+            },
+          },
+        },
+      }),
+      saveRevision: 20,
+    });
+
+    const patch =
+      (merged.topics?.first as any).quizState.card.practiceItemPatch;
+
+    expect(patch.exact.workspace).toEqual(workspace);
+    for (const key of [
+      "code",
+      "source",
+      "language",
+      "lang",
+      "codeLang",
+      "stdin",
+      "codeStdin",
+    ]) {
+      expect(patch.exact).not.toHaveProperty(key);
+    }
+
+    expect(patch.inconsistent.code).toBe("print('legacy-only')");
+    expect(patch.inconsistent.source).toBe("print('legacy-only')");
+    expect(patch.scalarOnly.code).toBe("print('scalar-only')");
+
+    const runtimeExercise =
+      (merged.topics?.first as any).runtimeStateV2.exercises.exactRuntime;
+    expect(runtimeExercise.workspace).toEqual(workspace);
+    expect(runtimeExercise).not.toHaveProperty("code");
+    expect(runtimeExercise).not.toHaveProperty("source");
+    expect(runtimeExercise).not.toHaveProperty("language");
+    expect(runtimeExercise).not.toHaveProperty("stdin");
+  });
+
 });

@@ -7,6 +7,7 @@ import {
   normalizeProgressTopics,
   normalizeTopicProgressKey,
 } from "./progressNormalization";
+import { getWorkspaceEntryCode } from "@zoeskoul/workspace-contracts";
 
 function numericVersion(value: unknown) {
   const n = Number(value ?? 0);
@@ -175,6 +176,123 @@ export function canonicalizeReviewWorkspaceCarrier<T>(value: T): T {
   return next as T;
 }
 
+
+function isCanonicalReviewWorkspace(value: unknown) {
+  const workspace = asWorkspaceCarrierRecord(value);
+  return Boolean(
+    workspace &&
+      workspace.version === 2 &&
+      Array.isArray(workspace.nodes),
+  );
+}
+
+function allPresentStringMirrorsMatch(
+  record: WorkspaceCarrierRecord,
+  keys: readonly string[],
+  canonicalValue: string,
+) {
+  for (const key of keys) {
+    if (!Object.prototype.hasOwnProperty.call(record, key)) continue;
+    const value = record[key];
+    if (typeof value !== "string" || value !== canonicalValue) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/**
+ * Remove flat exercise editor mirrors only when the canonical workspace proves
+ * they are exact duplicates.
+ *
+ * This is deliberately conservative for legacy rows:
+ * - no workspace => keep scalars;
+ * - malformed workspace => keep scalars;
+ * - any scalar disagrees with workspace => keep scalars.
+ *
+ * Runtime state is unchanged. This only reduces persisted review progress.
+ */
+function canonicalizeReviewExerciseScalarMirrors<T>(value: T): T {
+  const canonicalWorkspaceCarrier =
+    canonicalizeReviewWorkspaceCarrier(value);
+  const record = asWorkspaceCarrierRecord(canonicalWorkspaceCarrier);
+  if (!record || !isCanonicalReviewWorkspace(record.workspace)) {
+    return canonicalWorkspaceCarrier;
+  }
+
+  const workspace = record.workspace as WorkspaceCarrierRecord;
+  const workspaceCode = getWorkspaceEntryCode(workspace);
+  if (typeof workspaceCode !== "string") {
+    return canonicalWorkspaceCarrier;
+  }
+
+  const workspaceLanguage =
+    typeof workspace.language === "string" ? workspace.language : "";
+  const workspaceStdin =
+    typeof workspace.stdin === "string" ? workspace.stdin : "";
+
+  if (
+    !allPresentStringMirrorsMatch(
+      record,
+      ["code", "source"],
+      workspaceCode,
+    ) ||
+    !allPresentStringMirrorsMatch(
+      record,
+      ["language", "lang", "codeLang"],
+      workspaceLanguage,
+    ) ||
+    !allPresentStringMirrorsMatch(
+      record,
+      ["stdin", "codeStdin"],
+      workspaceStdin,
+    )
+  ) {
+    return canonicalWorkspaceCarrier;
+  }
+
+  const mirrorKeys = [
+    "code",
+    "source",
+    "language",
+    "lang",
+    "codeLang",
+    "stdin",
+    "codeStdin",
+  ] as const;
+
+  if (
+    !mirrorKeys.some((key) =>
+      Object.prototype.hasOwnProperty.call(record, key),
+    )
+  ) {
+    return canonicalWorkspaceCarrier;
+  }
+
+  const next: WorkspaceCarrierRecord = { ...record };
+  for (const key of mirrorKeys) {
+    delete next[key];
+  }
+
+  return next as T;
+}
+
+function canonicalizeReviewExerciseCarrierMap(value: unknown) {
+  const record = asWorkspaceCarrierRecord(value);
+  if (!record) return value;
+
+  let changed = false;
+  const next: WorkspaceCarrierRecord = {};
+
+  for (const [key, entry] of Object.entries(record)) {
+    const canonical = canonicalizeReviewExerciseScalarMirrors(entry);
+    next[key] = canonical;
+    if (canonical !== entry) changed = true;
+  }
+
+  return changed ? next : value;
+}
+
 function canonicalizeWorkspaceCarrierMap(value: unknown) {
   const record = asWorkspaceCarrierRecord(value);
   if (!record) return value;
@@ -205,9 +323,10 @@ function canonicalizeQuizWorkspaceAliases(value: unknown) {
       continue;
     }
 
-    const practiceItemPatch = canonicalizeWorkspaceCarrierMap(
-      card.practiceItemPatch,
-    );
+    const practiceItemPatch =
+      canonicalizeReviewExerciseCarrierMap(
+        card.practiceItemPatch,
+      );
 
     if (practiceItemPatch === card.practiceItemPatch) {
       nextQuiz[cardKey] = rawCard;
@@ -229,7 +348,9 @@ function canonicalizeRuntimeWorkspaceAliases(value: unknown) {
   if (!runtimeState) return value;
 
   const cards = canonicalizeWorkspaceCarrierMap(runtimeState.cards);
-  const exercises = canonicalizeWorkspaceCarrierMap(runtimeState.exercises);
+  const exercises = canonicalizeReviewExerciseCarrierMap(
+    runtimeState.exercises,
+  );
 
   if (
     cards === runtimeState.cards &&

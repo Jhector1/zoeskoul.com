@@ -288,4 +288,76 @@ describe("review progress synchronization contracts", () => {
     expect(toolEntry.toolWorkspace).toEqual(workspace);
   });
 
+
+  it("removes workspace-derived scalar mirrors before serialization", () => {
+    const workspace = makeWorkspace({
+      nodes: [
+        {
+          id: "a",
+          kind: "file",
+          name: "a.py",
+          content: "print('workspace')",
+        },
+      ],
+      activeFileId: "a",
+      openTabs: ["a"],
+    });
+
+    const payload = buildReviewProgressPayload({
+      subjectSlug: "python",
+      moduleSlug: "module-1",
+      locale: "en",
+      state: {
+        topics: {
+          topic: {
+            quizState: {
+              card: {
+                answers: {},
+                checkedById: {},
+                practiceItemPatch: {
+                  exact: {
+                    workspace,
+                    code: "print('workspace')",
+                    source: "print('workspace')",
+                    language: "python",
+                    lang: "python",
+                    codeLang: "python",
+                    stdin: "",
+                    codeStdin: "",
+                    userEdited: true,
+                  },
+                  inconsistent: {
+                    workspace,
+                    code: "print('keep-me')",
+                    language: "python",
+                    stdin: "",
+                    userEdited: true,
+                  },
+                },
+              },
+            },
+          },
+        },
+      } as any,
+    });
+
+    const patch =
+      (payload.state.topics as any).topic.quizState.card.practiceItemPatch;
+
+    for (const key of [
+      "code",
+      "source",
+      "language",
+      "lang",
+      "codeLang",
+      "stdin",
+      "codeStdin",
+    ]) {
+      expect(patch.exact).not.toHaveProperty(key);
+    }
+
+    expect(patch.exact.workspace).toEqual(workspace);
+    expect(patch.inconsistent.code).toBe("print('keep-me')");
+  });
+
 });
