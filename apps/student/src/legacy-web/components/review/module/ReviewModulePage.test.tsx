@@ -228,6 +228,9 @@ vi.mock("./context/ReviewToolsContext", () => ({
     ReviewToolsProvider: ({ children }: { children: React.ReactNode }) => (
         <div data-testid="review-tools-provider">{children}</div>
     ),
+    ReviewToolsProviderWithSketch: ({ children }: { children: React.ReactNode }) => (
+        <div data-testid="review-tools-provider">{children}</div>
+    ),
 }));
 
 describe("ReviewModulePage responsive tools mount", () => {
