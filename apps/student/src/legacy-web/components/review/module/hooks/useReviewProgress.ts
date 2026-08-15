@@ -245,11 +245,18 @@ export function useReviewProgress(args: {
         [subjectSlug, moduleSlug, locale, moduleTopicIds, progress, activeTopicId],
     );
 
-    function makeSaveState(state: ReviewProgressState): ReviewProgressState {
-        const latestRuntime = useReviewRuntimeStore.getState();
+    function makeSaveState(
+        state: ReviewProgressState,
+        options?: { runtimeAlreadyMerged?: boolean },
+    ): ReviewProgressState {
         const stateWithRuntime =
             sanitizeReviewProgressWorkspaceReferences(
-                mergeRuntimeIntoProgress(state, latestRuntime),
+                options?.runtimeAlreadyMerged
+                    ? state
+                    : mergeRuntimeIntoProgress(
+                          state,
+                          useReviewRuntimeStore.getState(),
+                      ),
             );
 
         const scopedStateWithRuntime =
@@ -358,11 +365,10 @@ export function useReviewProgress(args: {
                 return;
             }
             let payloadToSave = nextPayload;
-            let body = stableJson(payloadToSave);
             let meaningfulBody = meaningfulBodyForPayload(payloadToSave);
 
             if (meaningfulBody === lastSavedMeaningfulBodyRef.current) {
-                lastCommittedRef.current = body;
+                lastCommittedRef.current = stableJson(payloadToSave);
                 localDirtyRef.current = false;
                 setSaveStatus("saved");
                 setLastSaveError(null);
@@ -376,8 +382,6 @@ export function useReviewProgress(args: {
                     lastAcceptedSaveRevisionRef.current,
                 ),
             } as typeof payload;
-            body = stableJson(payloadToSave);
-
             /**
              * Fast path: do not GET the latest progress before every autosave.
              * The server already merges incoming state with the stored row and
@@ -455,7 +459,6 @@ export function useReviewProgress(args: {
                         lastAcceptedSaveRevisionRef.current,
                     ),
                 } as typeof payload;
-                body = stableJson(payloadToSave);
                 meaningfulBody =
                     meaningfulBodyForPayload(payloadToSave);
                 saveResult = await putOnce(payloadToSave);
@@ -701,7 +704,9 @@ export function useReviewProgress(args: {
                 progressRef.current,
                 useReviewRuntimeStore.getState(),
             );
-            const stateToSave = makeSaveState(stateWithRuntime);
+            const stateToSave = makeSaveState(stateWithRuntime, {
+                runtimeAlreadyMerged: true,
+            });
             const nextPayload = buildPayloadFromState(stateToSave);
 
             progressRef.current = stateToSave;
@@ -790,7 +795,9 @@ export function useReviewProgress(args: {
                     meaningfulBody;
             }
 
-            const stateToSave = makeSaveState(mergedState);
+            const stateToSave = makeSaveState(mergedState, {
+                runtimeAlreadyMerged: true,
+            });
             const nextPayload = buildPayloadFromState(stateToSave);
 
             pendingSavePayloadRef.current = nextPayload as any;
@@ -922,7 +929,9 @@ export function useReviewProgress(args: {
             }
 
             const saveSeq = ++saveSeqRef.current;
-            const stateToSave = makeSaveState(stateForSave);
+            const stateToSave = makeSaveState(stateForSave, {
+                runtimeAlreadyMerged: mergeRuntime,
+            });
             const nextPayload = buildPayloadFromState(stateToSave);
 
             if (options?.keepalive) {
