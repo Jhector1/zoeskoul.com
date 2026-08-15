@@ -1092,21 +1092,9 @@ function CodeInputWithTools(props: {
 
     const exerciseKey = commonExerciseKey;
 
-    const routeTargetEntry = useReviewRuntimeStore((s) => {
-        const registry = s.targetRegistry;
-        if (!registry) return null;
-
-        return (
-            registry.byKey[`exercise:${exerciseKey}`] ??
-            registry.byKey[exerciseKey] ??
-            Object.values(registry.byKey).find(
-                (entry: any) =>
-                    entry?.targetKind === "exercise" &&
-                    entry?.exerciseStateKey === exerciseKey,
-            ) ??
-            null
-        );
-    });
+    const routeTargetEntry = useReviewRuntimeStore(
+        (s) => s.targetRegistry?.byKey[`exercise:${exerciseKey}`] ?? null,
+    );
 
     const exerciseManifest = mergeRenderedExerciseWithRouteManifest(
         exercise,
