@@ -386,4 +386,141 @@ describe("mergeReviewProgressForSave", () => {
     expect(runtimeExercise).not.toHaveProperty("stdin");
   });
 
+
+  it("trims runtime card sketch and tool mirrors only when canonical copies match", () => {
+    const toolWorkspace = {
+      version: 2,
+      language: "sql",
+      nodes: [
+        {
+          id: "main",
+          kind: "file",
+          name: "query.sql",
+          content: "select 1;",
+        },
+      ],
+      openTabs: ["main"],
+      activeFileId: "main",
+      entryFileId: "main",
+      stdin: "",
+      expanded: [],
+      leftPct: 40,
+    };
+
+    const exactCardKey =
+      "sql:sql_module_12:section_12_1:what-update-does:sk1";
+    const inconsistentCardKey =
+      "sql:sql_module_12:section_12_1:what-update-does:sk2";
+    const orphanCardKey =
+      "sql:sql_module_12:section_12_1:what-update-does:sk3";
+
+    const exactSketch = { kind: "sql-sketch", value: "same" };
+    const canonicalSecondSketch = {
+      kind: "sql-sketch",
+      value: "canonical",
+    };
+
+    const merged = mergeReviewProgressForSave({
+      previousState: state({}),
+      incomingState: state({
+        topics: {
+          first: {
+            runtimeStateV2: {
+              cards: {
+                [exactCardKey]: {
+                  cardId: "sk1",
+                  sketch: exactSketch,
+                  toolWorkspace,
+                  toolCode: "select 1;",
+                  toolStdin: "",
+                  toolLang: "sql",
+                  updatedAt: 10,
+                },
+                [inconsistentCardKey]: {
+                  cardId: "sk2",
+                  sketch: {
+                    kind: "sql-sketch",
+                    value: "runtime-only",
+                  },
+                  toolWorkspace,
+                  toolCode: "select 999;",
+                  toolStdin: "",
+                  toolLang: "sql",
+                  updatedAt: 11,
+                },
+                [orphanCardKey]: {
+                  cardId: "sk3",
+                  sketch: {
+                    kind: "sql-sketch",
+                    value: "orphan",
+                  },
+                  toolWorkspace,
+                  toolCode: "select 3;",
+                  toolStdin: "",
+                  toolLang: "sql",
+                  updatedAt: 12,
+                },
+              },
+            },
+            sketchState: {
+              sk1: exactSketch,
+              sk2: canonicalSecondSketch,
+            },
+            toolState: {
+              [`card:${exactCardKey}`]: {
+                workspace: toolWorkspace,
+                code: "select 1;",
+                stdin: "",
+                lang: "sql",
+              },
+              [`card:${inconsistentCardKey}`]: {
+                workspace: toolWorkspace,
+                code: "select 2;",
+                stdin: "",
+                lang: "sql",
+              },
+            },
+          },
+        },
+      }),
+      saveRevision: 21,
+    });
+
+    const topic = merged.topics?.first as any;
+    const exact = topic.runtimeStateV2.cards[exactCardKey];
+    const inconsistent =
+      topic.runtimeStateV2.cards[inconsistentCardKey];
+    const orphan = topic.runtimeStateV2.cards[orphanCardKey];
+
+    expect(exact).not.toHaveProperty("sketch");
+    expect(exact).not.toHaveProperty("toolWorkspace");
+    expect(exact).not.toHaveProperty("toolCode");
+    expect(exact).not.toHaveProperty("toolStdin");
+    expect(exact).not.toHaveProperty("toolLang");
+    expect(exact.cardId).toBe("sk1");
+    expect(exact.updatedAt).toBe(10);
+
+    expect(topic.sketchState.sk1).toEqual(exactSketch);
+    expect(topic.toolState[`card:${exactCardKey}`].workspace).toEqual(
+      toolWorkspace,
+    );
+    expect(topic.toolState[`card:${exactCardKey}`].code).toBe(
+      "select 1;",
+    );
+
+    expect(inconsistent.sketch).toEqual({
+      kind: "sql-sketch",
+      value: "runtime-only",
+    });
+    expect(inconsistent.toolWorkspace).toEqual(toolWorkspace);
+    expect(inconsistent.toolCode).toBe("select 999;");
+
+    expect(orphan.sketch).toEqual({
+      kind: "sql-sketch",
+      value: "orphan",
+    });
+    expect(orphan.toolWorkspace).toEqual(toolWorkspace);
+    expect(orphan.toolCode).toBe("select 3;");
+  });
+
 });

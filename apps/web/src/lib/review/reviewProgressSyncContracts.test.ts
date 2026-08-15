@@ -360,4 +360,105 @@ describe("review progress synchronization contracts", () => {
     expect(patch.inconsistent.code).toBe("print('keep-me')");
   });
 
+
+  it("serializes canonical card sketch and tool state without matching runtime mirrors", () => {
+    const toolWorkspace = makeWorkspace({
+      nodes: [
+        {
+          id: "a",
+          kind: "file",
+          name: "query.sql",
+          content: "select 1;",
+        },
+      ],
+    });
+
+    const exactCardKey =
+      "sql:sql_module_12:section_12_1:what-update-does:sk1";
+    const inconsistentCardKey =
+      "sql:sql_module_12:section_12_1:what-update-does:sk2";
+    const exactSketch = { kind: "sql-sketch", value: "same" };
+
+    const payload = buildReviewProgressPayload({
+      subjectSlug: "sql",
+      moduleSlug: "sql_module_12",
+      locale: "en",
+      state: {
+        topics: {
+          topic: {
+            runtimeStateV2: {
+              cards: {
+                [exactCardKey]: {
+                  cardId: "sk1",
+                  sketch: exactSketch,
+                  toolWorkspace,
+                  toolCode: "select 1;",
+                  toolStdin: "",
+                  toolLang: "python",
+                  updatedAt: 10,
+                },
+                [inconsistentCardKey]: {
+                  cardId: "sk2",
+                  sketch: {
+                    kind: "sql-sketch",
+                    value: "runtime-only",
+                  },
+                  toolWorkspace,
+                  toolCode: "select 999;",
+                  toolStdin: "",
+                  toolLang: "python",
+                  updatedAt: 11,
+                },
+              },
+            },
+            sketchState: {
+              sk1: exactSketch,
+              sk2: {
+                kind: "sql-sketch",
+                value: "canonical",
+              },
+            },
+            toolState: {
+              [`card:${exactCardKey}`]: {
+                workspace: toolWorkspace,
+                code: "select 1;",
+                stdin: "",
+                lang: "python",
+              },
+              [`card:${inconsistentCardKey}`]: {
+                workspace: toolWorkspace,
+                code: "select 2;",
+                stdin: "",
+                lang: "python",
+              },
+            },
+          },
+        },
+      } as any,
+    });
+
+    const topic = (payload.state.topics as any).topic;
+    const exact = topic.runtimeStateV2.cards[exactCardKey];
+    const inconsistent =
+      topic.runtimeStateV2.cards[inconsistentCardKey];
+
+    expect(exact).not.toHaveProperty("sketch");
+    expect(exact).not.toHaveProperty("toolWorkspace");
+    expect(exact).not.toHaveProperty("toolCode");
+    expect(exact).not.toHaveProperty("toolStdin");
+    expect(exact).not.toHaveProperty("toolLang");
+
+    expect(topic.sketchState.sk1).toEqual(exactSketch);
+    expect(topic.toolState[`card:${exactCardKey}`].workspace).toEqual(
+      toolWorkspace,
+    );
+
+    expect(inconsistent.sketch).toEqual({
+      kind: "sql-sketch",
+      value: "runtime-only",
+    });
+    expect(inconsistent.toolWorkspace).toEqual(toolWorkspace);
+    expect(inconsistent.toolCode).toBe("select 999;");
+  });
+
 });

@@ -343,11 +343,147 @@ function canonicalizeQuizWorkspaceAliases(value: unknown) {
   return changed ? nextQuiz : value;
 }
 
-function canonicalizeRuntimeWorkspaceAliases(value: unknown) {
+function plainPersistenceValueEqual(a: unknown, b: unknown): boolean {
+  if (Object.is(a, b)) return true;
+
+  if (Array.isArray(a) || Array.isArray(b)) {
+    if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) {
+      return false;
+    }
+
+    return a.every((value, index) =>
+      plainPersistenceValueEqual(value, b[index]),
+    );
+  }
+
+  const aRecord = asWorkspaceCarrierRecord(a);
+  const bRecord = asWorkspaceCarrierRecord(b);
+
+  if (!aRecord || !bRecord) return false;
+
+  const aKeys = Object.keys(aRecord);
+  const bKeys = Object.keys(bRecord);
+  if (aKeys.length !== bKeys.length) return false;
+
+  return aKeys.every(
+    (key) =>
+      Object.prototype.hasOwnProperty.call(bRecord, key) &&
+      plainPersistenceValueEqual(aRecord[key], bRecord[key]),
+  );
+}
+
+/**
+ * runtimeStateV2.cards remains useful runtime metadata, but its sketch and
+ * Tools editor snapshots are also persisted canonically in sketchState and
+ * toolState. Trim only exact duplicate mirrors; ambiguous legacy state stays.
+ */
+function canonicalizeRuntimeCardPersistenceMirrors(
+  cardKey: string,
+  value: unknown,
+  toolStateValue: unknown,
+  sketchStateValue: unknown,
+) {
+  const canonicalWorkspaceCarrier =
+    canonicalizeReviewWorkspaceCarrier(value);
+  const card = asWorkspaceCarrierRecord(canonicalWorkspaceCarrier);
+  if (!card) return canonicalWorkspaceCarrier;
+
+  let next: WorkspaceCarrierRecord | null = null;
+  const mutable = () => {
+    if (!next) next = { ...card };
+    return next;
+  };
+
+  const cardId =
+    typeof card.cardId === "string" && card.cardId
+      ? card.cardId
+      : cardKey;
+
+  const sketchState = asWorkspaceCarrierRecord(sketchStateValue);
+  if (
+    Object.prototype.hasOwnProperty.call(card, "sketch") &&
+    sketchState &&
+    Object.prototype.hasOwnProperty.call(sketchState, cardId) &&
+    plainPersistenceValueEqual(card.sketch, sketchState[cardId])
+  ) {
+    delete mutable().sketch;
+  }
+
+  const toolState = asWorkspaceCarrierRecord(toolStateValue);
+  const canonicalToolEntry = asWorkspaceCarrierRecord(
+    toolState?.[`card:${cardKey}`],
+  );
+
+  if (
+    Object.prototype.hasOwnProperty.call(card, "toolWorkspace") &&
+    canonicalToolEntry &&
+    plainPersistenceValueEqual(
+      card.toolWorkspace,
+      canonicalToolEntry.workspace,
+    )
+  ) {
+    const toolScalarPairs = [
+      ["toolCode", "code"],
+      ["toolStdin", "stdin"],
+      ["toolLang", "lang"],
+    ] as const;
+
+    const allPresentScalarsMatch = toolScalarPairs.every(
+      ([runtimeKey, canonicalKey]) =>
+        !Object.prototype.hasOwnProperty.call(card, runtimeKey) ||
+        Object.is(card[runtimeKey], canonicalToolEntry[canonicalKey]),
+    );
+
+    if (allPresentScalarsMatch) {
+      const target = mutable();
+      delete target.toolWorkspace;
+      delete target.toolCode;
+      delete target.toolStdin;
+      delete target.toolLang;
+    }
+  }
+
+  return next ?? canonicalWorkspaceCarrier;
+}
+
+function canonicalizeRuntimeCardMap(
+  value: unknown,
+  toolStateValue: unknown,
+  sketchStateValue: unknown,
+) {
+  const record = asWorkspaceCarrierRecord(value);
+  if (!record) return value;
+
+  let changed = false;
+  const next: WorkspaceCarrierRecord = {};
+
+  for (const [cardKey, entry] of Object.entries(record)) {
+    const canonical = canonicalizeRuntimeCardPersistenceMirrors(
+      cardKey,
+      entry,
+      toolStateValue,
+      sketchStateValue,
+    );
+    next[cardKey] = canonical;
+    if (canonical !== entry) changed = true;
+  }
+
+  return changed ? next : value;
+}
+
+function canonicalizeRuntimeWorkspaceAliases(
+  value: unknown,
+  toolStateValue: unknown,
+  sketchStateValue: unknown,
+) {
   const runtimeState = asWorkspaceCarrierRecord(value);
   if (!runtimeState) return value;
 
-  const cards = canonicalizeWorkspaceCarrierMap(runtimeState.cards);
+  const cards = canonicalizeRuntimeCardMap(
+    runtimeState.cards,
+    toolStateValue,
+    sketchStateValue,
+  );
   const exercises = canonicalizeReviewExerciseCarrierMap(
     runtimeState.exercises,
   );
@@ -370,8 +506,9 @@ function canonicalizeRuntimeWorkspaceAliases(value: unknown) {
  * Normalize legacy workspace aliases at the review-progress persistence
  * boundary while preserving legacy read compatibility elsewhere.
  *
- * `toolWorkspace` is intentionally untouched: it is distinct card/sketch
- * Tools runtime state, not an alias of an exercise workspace.
+ * `toolState[*].toolWorkspace` remains canonical card/sketch Tools state.
+ * Matching copies inside runtimeStateV2.cards are trimmed only when proven
+ * identical; missing or inconsistent legacy mirrors remain readable.
  */
 export function canonicalizeReviewProgressWorkspaceAliases(
   state: ReviewProgressState | null | undefined,
@@ -390,6 +527,8 @@ export function canonicalizeReviewProgressWorkspaceAliases(
     const sketchState = canonicalizeWorkspaceCarrierMap(topic.sketchState);
     const runtimeStateV2 = canonicalizeRuntimeWorkspaceAliases(
       topic.runtimeStateV2,
+      toolState,
+      sketchState,
     );
 
     if (
