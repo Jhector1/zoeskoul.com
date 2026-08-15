@@ -130,7 +130,6 @@ export default function ReviewTopicCards({
   onBeforeCardNavigate,
   onCompactQuizNavigationChange,
 }: Props) {
-  const storeCards = useReviewRuntimeStore((s) => s.cards);
   const freeNavigation = resolveReviewFreeNavigation({
     unlockAll,
     usesProgressGating: workspaceCapabilities.usesProgressGating,
@@ -287,9 +286,7 @@ export default function ReviewTopicCards({
               const savedQuiz = (tp?.quizState?.[card.id] ??
                 null) as SavedQuizState | null;
 
-              const storeCard = storeCards[cardKey];
               const savedSketch =
-                storeCard?.sketch ??
                 tp?.sketchState?.[card.id] ??
                 null;
 
