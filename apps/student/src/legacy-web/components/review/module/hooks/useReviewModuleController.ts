@@ -2776,7 +2776,13 @@ export function useReviewModuleController({
     );
     const shouldRenderStackedTools = Boolean(
         toolsRailVisibility.isAvailable &&
-        (boardEnabled || routeWorkspaceExercise || activeCardWorkspaceExerciseKey || activeCardRegistryExerciseEntry),
+        (
+            boardEnabled ||
+            cardHasEmbeddedTryIt ||
+            routeWorkspaceExercise ||
+            activeCardWorkspaceExerciseKey ||
+            activeCardRegistryExerciseEntry
+        ),
     );
 
     useEffect(() => {
