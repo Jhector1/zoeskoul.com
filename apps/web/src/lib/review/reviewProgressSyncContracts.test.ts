@@ -461,4 +461,59 @@ describe("review progress synchronization contracts", () => {
     expect(inconsistent.toolCode).toBe("select 999;");
   });
 
+
+  it("serializes scoped practice keys without exact short-key duplicates", () => {
+    const scopedKey =
+      "python:python-1:section-a:topic-a:q1:exercise-1";
+
+    const canonicalPatch = {
+      exerciseKey: scopedKey,
+      exerciseId: "exercise-1",
+      topicId: "topic-a",
+      cardId: "q1",
+      userEdited: true,
+      updatedAt: 20,
+    };
+
+    const payload = buildReviewProgressPayload({
+      subjectSlug: "python",
+      moduleSlug: "python-1",
+      locale: "en",
+      state: {
+        topics: {
+          topic: {
+            quizState: {
+              q1: {
+                answers: {},
+                checkedById: {},
+                practiceItemPatch: {
+                  [scopedKey]: canonicalPatch,
+                  "exercise-1": { ...canonicalPatch },
+                  "legacy-only": {
+                    exerciseKey: "legacy-only",
+                    exerciseId: "legacy-only",
+                    userEdited: true,
+                    updatedAt: 10,
+                  },
+                  "legacy-different": {
+                    ...canonicalPatch,
+                    code: "older divergent learner state",
+                  },
+                },
+              },
+            },
+          },
+        },
+      } as any,
+    });
+
+    const patch =
+      (payload.state.topics as any).topic.quizState.q1.practiceItemPatch;
+
+    expect(patch[scopedKey]).toEqual(canonicalPatch);
+    expect(patch).not.toHaveProperty("exercise-1");
+    expect(patch["legacy-only"]).toBeDefined();
+    expect(patch["legacy-different"]).toBeDefined();
+  });
+
 });

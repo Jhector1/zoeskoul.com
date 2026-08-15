@@ -309,6 +309,61 @@ function canonicalizeWorkspaceCarrierMap(value: unknown) {
   return changed ? next : value;
 }
 
+
+function isScopedPersistedExerciseKey(value: unknown) {
+  if (typeof value !== "string") return false;
+  const raw = value.trim();
+  if (!raw) return false;
+  return raw.split(":").filter(Boolean).length >= 6;
+}
+
+/**
+ * Remove only provable short-key duplicates from practiceItemPatch.
+ *
+ * Old short-only rows remain readable. A short entry is deleted only when:
+ * - it declares a scoped exerciseKey;
+ * - that scoped key exists in the same patch map; and
+ * - both normalized entries are structurally identical.
+ */
+function canonicalizePracticePatchKeyAliases(value: unknown) {
+  const canonicalized = canonicalizeReviewExerciseCarrierMap(value);
+  const record = asWorkspaceCarrierRecord(canonicalized);
+  if (!record) return canonicalized;
+
+  let changed = canonicalized !== value;
+  const next: WorkspaceCarrierRecord = {};
+
+  for (const [key, entry] of Object.entries(record)) {
+    if (isScopedPersistedExerciseKey(key)) {
+      next[key] = entry;
+      continue;
+    }
+
+    const entryRecord = asWorkspaceCarrierRecord(entry);
+    const scopedExerciseKey =
+      typeof entryRecord?.exerciseKey === "string"
+        ? entryRecord.exerciseKey.trim()
+        : "";
+
+    const scopedEntry =
+      isScopedPersistedExerciseKey(scopedExerciseKey)
+        ? record[scopedExerciseKey]
+        : undefined;
+
+    if (
+      scopedEntry !== undefined &&
+      plainPersistenceValueEqual(entry, scopedEntry)
+    ) {
+      changed = true;
+      continue;
+    }
+
+    next[key] = entry;
+  }
+
+  return changed ? next : canonicalized;
+}
+
 function canonicalizeQuizWorkspaceAliases(value: unknown) {
   const quizState = asWorkspaceCarrierRecord(value);
   if (!quizState) return value;
@@ -324,7 +379,7 @@ function canonicalizeQuizWorkspaceAliases(value: unknown) {
     }
 
     const practiceItemPatch =
-      canonicalizeReviewExerciseCarrierMap(
+      canonicalizePracticePatchKeyAliases(
         card.practiceItemPatch,
       );
 

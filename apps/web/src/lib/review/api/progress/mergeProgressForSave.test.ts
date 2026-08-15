@@ -523,4 +523,58 @@ describe("mergeReviewProgressForSave", () => {
     expect(orphan.toolCode).toBe("select 3;");
   });
 
+
+  it("removes exact short practice aliases while preserving legacy-only and inconsistent rows", () => {
+    const scopedKey =
+      "python:python-1:section-a:topic-a:q1:exercise-1";
+
+    const canonicalPatch = {
+      exerciseKey: scopedKey,
+      exerciseId: "exercise-1",
+      topicId: "topic-a",
+      cardId: "q1",
+      userEdited: true,
+      updatedAt: 20,
+    };
+
+    const merged = mergeReviewProgressForSave({
+      previousState: state({}),
+      incomingState: state({
+        topics: {
+          first: {
+            quizState: {
+              q1: {
+                answers: {},
+                checkedById: {},
+                practiceItemPatch: {
+                  [scopedKey]: canonicalPatch,
+                  "exercise-1": { ...canonicalPatch },
+                  "legacy-only": {
+                    exerciseKey: "legacy-only",
+                    exerciseId: "legacy-only",
+                    userEdited: true,
+                    updatedAt: 10,
+                  },
+                  "legacy-different": {
+                    ...canonicalPatch,
+                    code: "older divergent learner state",
+                  },
+                },
+              },
+            },
+          },
+        },
+      }),
+      saveRevision: 30,
+    });
+
+    const patch =
+      (merged.topics?.first as any).quizState.q1.practiceItemPatch;
+
+    expect(patch[scopedKey]).toEqual(canonicalPatch);
+    expect(patch).not.toHaveProperty("exercise-1");
+    expect(patch["legacy-only"]).toBeDefined();
+    expect(patch["legacy-different"]).toBeDefined();
+  });
+
 });

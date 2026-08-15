@@ -55,7 +55,7 @@ function buildWorkspace(language: WorkspaceStateV2["language"] = "python"): Work
 describe("mergeRuntimeIntoProgress", () => {
     it("persists multi-file exercise workspaces into runtimeStateV2 and quiz compatibility patches", () => {
         const workspace = buildWorkspace("python");
-        const exerciseKey = "python:python-1:section-a:topic-a:q1";
+        const exerciseKey = "python:python-1:section-a:topic-a:q1:q1";
 
         const next = mergeRuntimeIntoProgress(
             { topics: {} },
@@ -107,26 +107,10 @@ describe("mergeRuntimeIntoProgress", () => {
         expect(practicePatch.lang).toBe("python");
         expect(practicePatch.code).toBe("print('persist me')\n");
         expect(practicePatch.source).toBe("print('persist me')\n");
-        const legacyPatch = topic.quizState!.q1.practiceItemPatch!["q1"];
-
-        expect(legacyPatch).toMatchObject({
+        expect(topic.quizState!.q1.practiceItemPatch).not.toHaveProperty("q1");
+        expect(Object.keys(topic.quizState!.q1.practiceItemPatch!)).toEqual([
             exerciseKey,
-            exerciseId: "q1",
-            topicId: "topic-a",
-            cardId: "q1",
-            code: "print('persist me')\n",
-            source: "print('persist me')\n",
-            stdin: "9\n",
-            codeStdin: "9\n",
-            language: "python",
-            lang: "python",
-            userEdited: true,
-            workspaceOrigin: "user",
-        });
-
-        expect(legacyPatch.workspace).toEqual(workspace);
-        expect(legacyPatch).not.toHaveProperty("codeWorkspace");
-        expect(legacyPatch).not.toHaveProperty("ideWorkspace");
+        ]);
     });
 
     it("persists sketch/card tool workspaces for refresh and navigation restore", () => {

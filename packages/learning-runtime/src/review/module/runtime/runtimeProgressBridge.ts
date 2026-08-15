@@ -96,31 +96,6 @@ function isScopedExerciseStateKey(value: unknown) {
   return raw.split(":").filter(Boolean).length >= 6;
 }
 
-function lastKeySegment(value: unknown) {
-  if (typeof value !== "string") return "";
-  const raw = value.trim();
-  if (!raw) return "";
-  const parts = raw.split(":").filter(Boolean);
-  return parts[parts.length - 1] ?? raw;
-}
-
-function getLegacyExerciseAliasKeys(
-  exerciseKey: string,
-  estate: RuntimeExerciseLike,
-) {
-  const keys = new Set<string>();
-  addAlias(keys, lastKeySegment(exerciseKey));
-  addAlias(keys, estate?.exerciseId);
-  addAlias(keys, lastKeySegment(estate?.exerciseId));
-  addAlias(keys, lastKeySegment(estate?.exerciseKey));
-  addAlias(keys, lastKeySegment(estate?.stableExerciseId));
-  addAlias(keys, lastKeySegment(estate?.exerciseStateId));
-  addAlias(keys, lastKeySegment(estate?.slotId));
-  addAlias(keys, lastKeySegment(estate?.key));
-  addAlias(keys, lastKeySegment(estate?.id));
-  return [...keys].filter((key) => !isScopedExerciseStateKey(key));
-}
-
 function getExerciseAliasKeys(
   exerciseKey: string,
   estate: RuntimeExerciseLike,
@@ -340,29 +315,15 @@ export function mergeRuntimeIntoProgress(
       });
 
       const nextPracticePatch = { ...oldPracticePatch };
-      const legacyAliases = getLegacyExerciseAliasKeys(exerciseKey, estate);
 
+      /**
+       * New writes use scoped exercise identities only. Legacy short-key rows
+       * remain readable through restore compatibility, but are no longer
+       * mirrored on every learner save.
+       */
       for (const alias of aliases) {
         nextPracticePatch[alias] = {
           ...(oldPracticePatch[alias] ?? {}),
-          ...patch,
-        };
-      }
-
-      /**
-       * Compatibility write:
-       *
-       * Keep the canonical scoped aliases above as the restore source of truth.
-       * Also mirror learner-owned patches onto short legacy ids so older save
-       * readers and E2E payload inspections can still find the active exercise
-       * workspace without depending on the scoped manifest key.
-       *
-       * Restore no longer trusts these short aliases for authored contract
-       * hydration, so this does not reopen the old cross-exercise collision.
-       */
-      for (const legacyAlias of legacyAliases) {
-        nextPracticePatch[legacyAlias] = {
-          ...(oldPracticePatch[legacyAlias] ?? {}),
           ...patch,
         };
       }
