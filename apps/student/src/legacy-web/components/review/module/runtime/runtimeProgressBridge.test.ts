@@ -91,13 +91,13 @@ describe("mergeRuntimeIntoProgress", () => {
         }
 
         expect(topic.runtimeStateV2!.exercises![exerciseKey].workspace).toEqual(workspace);
-        expect(topic.runtimeStateV2!.exercises![exerciseKey].codeWorkspace).toEqual(workspace);
-        expect(topic.runtimeStateV2!.exercises![exerciseKey].ideWorkspace).toEqual(workspace);
+        expect(topic.runtimeStateV2!.exercises![exerciseKey]).not.toHaveProperty("codeWorkspace");
+        expect(topic.runtimeStateV2!.exercises![exerciseKey]).not.toHaveProperty("ideWorkspace");
 
         const practicePatch = topic.quizState!.q1.practiceItemPatch![exerciseKey];
         expect(practicePatch.workspace).toEqual(workspace);
-        expect(practicePatch.codeWorkspace).toEqual(workspace);
-        expect(practicePatch.ideWorkspace).toEqual(workspace);
+        expect(practicePatch).not.toHaveProperty("codeWorkspace");
+        expect(practicePatch).not.toHaveProperty("ideWorkspace");
         expect(practicePatch.exerciseKey).toBe(exerciseKey);
         expect(practicePatch.topicId).toBe("topic-a");
         expect(practicePatch.cardId).toBe("q1");
@@ -125,8 +125,8 @@ describe("mergeRuntimeIntoProgress", () => {
         });
 
         expect(legacyPatch.workspace).toEqual(workspace);
-        expect(legacyPatch.codeWorkspace).toEqual(workspace);
-        expect(legacyPatch.ideWorkspace).toEqual(workspace);
+        expect(legacyPatch).not.toHaveProperty("codeWorkspace");
+        expect(legacyPatch).not.toHaveProperty("ideWorkspace");
     });
 
     it("persists sketch/card tool workspaces for refresh and navigation restore", () => {
