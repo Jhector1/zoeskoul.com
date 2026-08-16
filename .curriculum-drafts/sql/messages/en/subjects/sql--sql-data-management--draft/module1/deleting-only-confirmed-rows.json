@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_deleting_only_confirmed_rows_sketch0": {
               "title": "Remove One Approved Test Row",
-              "prompt": "The audit approved test row `4` for removal. In `operations.sql`, use a `DELETE` with a `WHERE` condition that limits the deletion to that item only. In `query.sql`, inspect item 4 again so an empty result confirms the approved row is gone.",
+              "prompt": "The audit approved test row `4` for removal. In `operations.sql`, use a `DELETE` with a `WHERE` condition that limits the deletion to that item only. In `query.sql`, inspect item 4 again so an empty result confirms the approved row is gone. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Keep the deletion boundary as narrow as the approval.",
               "help": {
                 "concept": "A scoped DELETE removes only the rows named by its WHERE condition.",
@@ -106,8 +106,8 @@
               "hint": "Consider the sequence from preview to verification.",
               "help": {
                 "concept": "Safe deletion involves previewing, executing, and verifying.",
-                "hint_1": "Start with previewing the target rows.",
-                "hint_2": "End with verifying the deletion."
+                "hint_1": "Start with “Preview the target rows”.",
+                "hint_2": "Finish with “Verify the deletion”."
               },
               "tokens": {
                 "t1": "Preview the target rows",
@@ -151,7 +151,7 @@
             },
             "practice-delete-confirmed-row-set": {
               "title": "Practice: Remove Only Confirmed Test Data",
-              "prompt": "Operations approved removal of rows that are both inactive and test data. In `operations.sql`, use one `DELETE` with a `WHERE` condition that expresses both parts of that approval. In `query.sql`, inspect the same target set and confirm that no approved rows remain.",
+              "prompt": "Operations approved removal of rows that are both inactive and test data. In `operations.sql`, use one `DELETE` with a `WHERE` condition that expresses both parts of that approval. In `query.sql`, inspect the same target set and confirm that no approved rows remain. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "The deletion should require both the inactive status and the test-data flag.",
               "help": {
                 "concept": "Compound deletion conditions prevent a broad cleanup from removing legitimate rows.",

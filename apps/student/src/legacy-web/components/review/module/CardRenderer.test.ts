@@ -61,8 +61,16 @@ vi.mock("@student/i18n/tagged", () => ({
 }));
 
 vi.mock("@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore", () => ({
-    useReviewRuntimeStore: (selector: (state: { ensureCard: typeof mocked.ensureCard }) => unknown) =>
-        selector({ ensureCard: mocked.ensureCard }),
+    useReviewRuntimeStore: (
+        selector: (state: {
+            ensureCard: typeof mocked.ensureCard;
+            cards: Record<string, never>;
+        }) => unknown,
+    ) =>
+        selector({
+            ensureCard: mocked.ensureCard,
+            cards: {},
+        }),
 }));
 
 function baseProps(card: ReviewCard) {

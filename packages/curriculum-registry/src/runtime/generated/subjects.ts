@@ -4667,8 +4667,7 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "meta": {
         "curriculum": {
           "plannedModuleCount": 6,
-          "isTerminalRelease": false,
-          "moreComingMessageKey": "subjects.sql-v2.moreComingSoon"
+          "isTerminalRelease": true
         },
         "completionPolicy": {
           "requireAllPublishedModules": true,

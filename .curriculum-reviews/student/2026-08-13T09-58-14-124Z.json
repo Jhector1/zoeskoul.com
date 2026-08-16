@@ -1,0 +1,24 @@
+{
+  "status": "blocked",
+  "startUrl": "http://localhost:3002/PUT-THE-ACTUAL-LEARNER-ROUTE-HERE",
+  "endUrl": "http://localhost:3002/PUT-THE-ACTUAL-LEARNER-ROUTE-HERE",
+  "pagesVisited": [],
+  "exercisesAttempted": 0,
+  "quizzesAttempted": 0,
+  "projectStepsAttempted": 0,
+  "findings": [
+    {
+      "severity": "critical",
+      "category": "broken_flow",
+      "url": "http://localhost:3002/PUT-THE-ACTUAL-LEARNER-ROUTE-HERE",
+      "lessonOrExercise": null,
+      "problem": "The learner UI could not be observed, so the module could not be started.",
+      "evidence": "Three consecutive Student UI observations failed: first due to a destroyed execution context, then twice with “ReferenceError: __name is not defined.”",
+      "learnerImpact": "No course content or controls were accessible; no activities could be attempted.",
+      "attemptedAction": "Retried observing the Student UI twice after the initial failure."
+    }
+  ],
+  "strongestParts": [],
+  "summary": "Blocked before entering the curriculum because the Student UI tool repeatedly failed and the supplied URL remained a placeholder route.",
+  "stoppedReason": "The learner UI was inaccessible after repeated observation attempts."
+}

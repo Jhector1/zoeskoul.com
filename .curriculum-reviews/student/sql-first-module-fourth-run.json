@@ -1,0 +1,263 @@
+{
+  "status": "blocked",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+  "pagesVisited": [
+    "http://localhost:3002/en/subjects/sql-v2/modules",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/sketch/what-sql-means",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/sketch/what-a-database-is",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/sketch/where-sql-runs",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2"
+  ],
+  "exercisesAttempted": 1,
+  "quizzesAttempted": 1,
+  "projectStepsAttempted": 0,
+  "findings": [
+    {
+      "severity": "critical",
+      "category": "broken_flow",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+      "lessonOrExercise": "Run a different one-row query",
+      "problem": "The visible SQL editor could not accept edits through its normal learner interaction path.",
+      "evidence": "The editor displayed an incomplete starter statement ending in SELECT. Opening the editor succeeded, but repeated normal editor replacement attempts reported that Monaco did not expose its keyboard input area; the forward action remained disabled.",
+      "learnerImpact": "The learner cannot enter the required query, complete the exercise, unlock the project, or finish the module.",
+      "attemptedAction": "Opened the visible Editor control, retried editor replacement, and tried normal keyboard focus and typing."
+    },
+    {
+      "severity": "minor",
+      "category": "repetition",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+      "lessonOrExercise": "SQL, Databases, and Tables quiz",
+      "problem": "Each quiz prompt was repeated multiple times in slightly different wording.",
+      "evidence": "For example, the screen showed “What does a column usually represent?” twice, followed by “What does a column usually represent in a table?”",
+      "learnerImpact": "Adds visual noise to otherwise simple questions.",
+      "attemptedAction": null
+    }
+  ],
+  "strongestParts": [
+    "The opening lessons establish a clear mental model of SQL, databases, rows, and columns before introducing syntax.",
+    "The workspace lesson gives a concise, reusable write → run → inspect workflow.",
+    "The Try-It includes a concrete expected result with both the required heading and value."
+  ],
+  "summary": "The first incomplete module was opened and its initial lessons and quiz were completed/read. Progress stopped at the first SQL Try-It because the learner-visible Monaco editor could not be edited.",
+  "stoppedReason": "A genuine learner-visible editor interaction failure prevented entering the required SQL and left Next disabled.",
+  "browserEvidence": {
+    "clickCount": 9,
+    "checkAnswerClicks": 0,
+    "runClicks": 0,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "at": "2026-08-13T19:28:01.389Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 2,
+        "at": "2026-08-13T19:28:24.756Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 3,
+        "at": "2026-08-13T19:28:28.372Z",
+        "kind": "click",
+        "action": "e16",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn",
+        "detail": "Continue →"
+      },
+      {
+        "sequence": 4,
+        "at": "2026-08-13T19:28:33.898Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/sketch/what-sql-means",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/sketch/what-sql-means",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 5,
+        "at": "2026-08-13T19:28:37.302Z",
+        "kind": "click",
+        "action": "e18",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/sketch/what-sql-means",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/sketch/what-a-database-is",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 6,
+        "at": "2026-08-13T19:28:39.325Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/sketch/what-a-database-is",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/sketch/what-a-database-is",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 7,
+        "at": "2026-08-13T19:28:42.629Z",
+        "kind": "click",
+        "action": "e13",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/sketch/what-a-database-is",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "detail": "Quiz→"
+      },
+      {
+        "sequence": 8,
+        "at": "2026-08-13T19:28:46.163Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 9,
+        "at": "2026-08-13T19:28:53.335Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 10,
+        "at": "2026-08-13T19:28:55.354Z",
+        "kind": "click",
+        "action": "e23",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 11,
+        "at": "2026-08-13T19:29:00.151Z",
+        "kind": "click",
+        "action": "e23",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 12,
+        "at": "2026-08-13T19:29:02.113Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 13,
+        "at": "2026-08-13T19:29:05.891Z",
+        "kind": "click",
+        "action": "e23",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 14,
+        "at": "2026-08-13T19:29:07.811Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 15,
+        "at": "2026-08-13T19:29:11.136Z",
+        "kind": "click",
+        "action": "e23",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/what-sql-is/quiz/what-sql-is-q2",
+        "detail": "Next topic→"
+      },
+      {
+        "sequence": 16,
+        "at": "2026-08-13T19:29:16.116Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/sketch/where-sql-runs",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/sketch/where-sql-runs",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 17,
+        "at": "2026-08-13T19:29:19.154Z",
+        "kind": "click",
+        "action": "e19",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/sketch/where-sql-runs",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/sketch/running-your-first-query",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 18,
+        "at": "2026-08-13T19:29:24.395Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 19,
+        "at": "2026-08-13T19:29:34.944Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 20,
+        "at": "2026-08-13T19:29:37.263Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "detail": "Editor"
+      },
+      {
+        "sequence": 21,
+        "at": "2026-08-13T19:29:40.329Z",
+        "kind": "press",
+        "action": "Tab",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "detail": null
+      },
+      {
+        "sequence": 22,
+        "at": "2026-08-13T19:29:43.187Z",
+        "kind": "press",
+        "action": "Control+A",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "detail": null
+      },
+      {
+        "sequence": 23,
+        "at": "2026-08-13T19:29:46.550Z",
+        "kind": "type",
+        "action": "keyboard_type",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-0/learn/sql-v2-sql-v2-0-1/first-sql-environment/exercise/try-first-sql-environment-sketch2",
+        "detail": "36 characters"
+      }
+    ]
+  }
+}

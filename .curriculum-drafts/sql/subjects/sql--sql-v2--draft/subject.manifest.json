@@ -16,8 +16,7 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 6,
-        "isTerminalRelease": false,
-        "moreComingMessageKey": "subjects.sql--sql-v2--draft.moreComingSoon"
+        "isTerminalRelease": true
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,

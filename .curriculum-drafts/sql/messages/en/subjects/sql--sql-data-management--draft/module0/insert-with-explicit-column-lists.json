@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_insert_with_explicit_column_lists_sketch0": {
               "title": "Add a Notebook with Explicit Columns",
-              "prompt": "In `operations.sql`, add one inventory item with name `Notebook`, category `Stationery`, price `3.99`, and status `active`. Use an explicit column list rather than relying on the table's column order. In `query.sql`, return the stored Notebook row so the Results tab proves the change.",
+              "prompt": "In `operations.sql`, add one inventory item with name `Notebook`, category `Stationery`, price `3.99`, and status `active`. Use an explicit column list rather than relying on the table's column order. In `query.sql`, return the stored Notebook row so the Results tab proves the change. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Match each supplied value to a named destination column, then verify the row by its name.",
               "help": {
                 "concept": "An explicit insert column list documents where every supplied value belongs.",
@@ -90,8 +90,8 @@
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "hint_1": "Start with “INSERT INTO”.",
+                "hint_2": "Finish with “(value list)”."
               },
               "tokens": {
                 "t1": "INSERT INTO",
@@ -119,40 +119,40 @@
               ]
             },
             "insert-with-explicit-column-lists-policy-single_choice-2": {
-              "title": "Choose the Explicit INSERT",
-              "prompt": "Which option correctly applies the SQL behavior described in this lesson?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "Recognize an Explicit-Column INSERT",
+              "prompt": "Which statement follows the explicit-column INSERT pattern taught in this lesson?",
+              "hint": "Look for an INSERT that names the destination columns before its VALUES list.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "The explicit-column form names the table, then the destination columns, then supplies values in the same order.",
+                "hint_1": "The column list belongs immediately after the table name.",
+                "hint_2": "The VALUES list must line up with those named columns."
               },
               "options": {
-                "a": "Write INSERT INTO with a parenthesized column list.",
-                "b": "Ignore the requested result grain.",
-                "c": "Reuse a different topic's rule without checking the requirement.",
-                "d": "Choose SQL only because it is shorter."
+                "a": "INSERT INTO inventory_items (name, price) VALUES ('Notebook', 3.99);",
+                "b": "INSERT inventory_items VALUES ('Notebook', 3.99);",
+                "c": "INSERT INTO inventory_items VALUES name = 'Notebook', price = 3.99;",
+                "d": "UPDATE inventory_items SET name = 'Notebook', price = 3.99;"
               }
             },
             "insert-with-explicit-column-lists-policy-multi_choice-2": {
-              "title": "Apply Explicit INSERT Rules",
-              "prompt": "Which option correctly applies the SQL behavior described in this lesson?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "Keep an INSERT Reviewable",
+              "prompt": "Which practices make an explicit-column INSERT easier to review and less dependent on table order? Select all that apply.",
+              "hint": "Focus on making the destination of each supplied value visible.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "An explicit-column INSERT is reviewable when the destination columns are named and every value lines up with the corresponding column.",
+                "hint_1": "Do not rely on the table's physical column order.",
+                "hint_2": "Only name columns this insert is actually responsible for supplying."
               },
               "options": {
-                "a": "Write INSERT INTO with a parenthesized column list.",
-                "b": "Match each VALUES entry to the corresponding named column.",
-                "c": "Ignore duplicate-producing relationships when choosing a count.",
-                "d": "Use an adjacent topic's technique even when it changes the requested metric."
+                "a": "Name the destination columns after the table name.",
+                "b": "Keep each VALUES entry aligned with its corresponding named column.",
+                "c": "Rely on the table's physical column order instead of naming columns.",
+                "d": "Include unrelated columns even when the schema should supply them."
               }
             },
             "practice-explicit-column-intake": {
               "title": "Practice: Use Explicit Columns for an Intake Batch",
-              "prompt": "In `operations.sql`, add the approved stationery items `Pen` at `1.50` and `Eraser` at `0.99`; both have status `active`. Use an explicit column list so each supplied value has a visible destination. In `query.sql`, show only the two new rows and sort them by name.",
+              "prompt": "In `operations.sql`, add the approved stationery items `Pen` at `1.50` and `Eraser` at `0.99`; both have status `active`. Use an explicit column list so each supplied value has a visible destination. In `query.sql`, show only the two new rows and sort them by name. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Declare the destinations before the values and keep the same mapping for both approved rows.",
               "help": {
                 "concept": "Explicit column lists keep value-to-column mapping reviewable even when several rows are added.",

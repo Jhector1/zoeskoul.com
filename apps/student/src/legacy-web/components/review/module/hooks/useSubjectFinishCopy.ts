@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { getOptionalClientMessage } from "../i18n/getOptionalClientMessage";
+import { resolveSubjectFinishDisplayMessage } from "../subjectFinishMessage";
 import type { SubjectFinishState } from "../types/subjectFinish.types";
 
 export function useSubjectFinishCopy(args: {
@@ -90,7 +91,7 @@ export function useSubjectFinishCopy(args: {
                         ? headlineCertificateReady
                         : headlineKeepGoing;
 
-        const body =
+        const statusBody =
             status === "more_coming"
                 ? subjectMoreComing
                 : status === "reward_ready"
@@ -98,6 +99,12 @@ export function useSubjectFinishCopy(args: {
                     : status === "certificate_ready" || status === "certificate_issued"
                         ? certificateReady
                         : keepGoing;
+
+        const body = resolveSubjectFinishDisplayMessage({
+            serverMessage: subjectFinish?.message,
+            fallback: statusBody,
+            t: t as any,
+        });
 
         const certificateCta = subjectFinish?.certificateIssued
             ? viewCertificate
@@ -108,5 +115,11 @@ export function useSubjectFinishCopy(args: {
             body,
             certificateCta,
         };
-    }, [t, subjectSlug, subjectFinish?.status, subjectFinish?.certificateIssued]);
+    }, [
+        t,
+        subjectSlug,
+        subjectFinish?.status,
+        subjectFinish?.certificateIssued,
+        subjectFinish?.message,
+    ]);
 }

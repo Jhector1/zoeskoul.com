@@ -139,6 +139,7 @@ export default function CardRenderer(props: {
     const mayMutateProgress = workspaceCapabilities.canMutateProgress;
 
     const ensureCard = useReviewRuntimeStore((s) => s.ensureCard);
+    const runtimeCard = useReviewRuntimeStore((s) => s.cards[cardKey]);
 
     React.useEffect(() => {
         const cardSpec = ("spec" in card ? card.spec : null) as ReviewCardSpecRecord;
@@ -469,7 +470,7 @@ export default function CardRenderer(props: {
                     sketchId={card.sketchId}
                     height={card.height}
                     propsPatch={card.props}
-                    initialState={savedSketch}
+                    initialState={runtimeCard?.sketch ?? savedSketch}
                     onStateChange={workspaceCapabilities.canEditWorkspace
                         ? (s) => onSketchStateChange(card.id, s)
                         : undefined}

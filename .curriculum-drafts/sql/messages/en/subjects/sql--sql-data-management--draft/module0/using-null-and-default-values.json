@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_using_null_and_default_values_sketch0": {
               "title": "Use a Default Status and NULL Notes",
-              "prompt": "In `operations.sql`, add `Gadget`, an Electronics item priced at `19.99`. Let the database provide its normal status instead of supplying one, and deliberately store no notes with SQL `NULL`. In `query.sql`, show the new row including its resulting status, test flag, and notes.",
+              "prompt": "In `operations.sql`, insert `Gadget` into `inventory_items` as an Electronics item priced at `19.99`. Omit `status` so SQLite applies the table default, and include `notes` with SQL `NULL` because no notes are known. In `query.sql`, show the new row including its resulting status, test flag, and notes. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Omit the column whose value should come from the schema, but include the column whose missing value is deliberate.",
               "help": {
                 "concept": "A default comes from omission; NULL is an explicit stored value.",
@@ -70,13 +70,13 @@
               }
             },
             "single-choice-2": {
-              "title": "Using DEFAULT in SQL",
-              "prompt": "How can you use a column's default value in an INSERT statement?",
-              "hint": "Consider what happens when you omit a column from the INSERT statement.",
+              "title": "Trigger a DEFAULT in SQLite",
+              "prompt": "In this course's SQLite runtime, how do you use a column's default value in an INSERT?",
+              "hint": "Think about what happens when the INSERT does not supply that column at all.",
               "help": {
-                "concept": "Omitting a column from the INSERT statement allows SQL to use the column's default value.",
-                "hint_1": "If you don't specify a value for a column, SQL will use its default value if one is set.",
-                "hint_2": "Omitting the column from the INSERT column list triggers the default."
+                "concept": "SQLite applies a column default when the INSERT omits that column.",
+                "hint_1": "An explicit NULL asks SQLite to store NULL instead.",
+                "hint_2": "DEFAULT is not used as an individual VALUES expression in the SQLite syntax taught here."
               },
               "options": {
                 "a": "Omit the column from the INSERT statement",
@@ -102,19 +102,19 @@
               }
             },
             "multi-choice-2": {
-              "title": "Choosing Between NULL and DEFAULT",
-              "prompt": "When should you choose to use NULL over a DEFAULT value in SQL? Select all that apply.",
-              "hint": "Think about scenarios where data might be intentionally missing.",
+              "title": "Choose NULL Instead of a Routine Default",
+              "prompt": "Which situations make SQL NULL more appropriate than relying on a routine default? Select all that apply.",
+              "hint": "Use NULL when the absence of an actual value is itself meaningful.",
               "help": {
-                "concept": "Choosing between NULL and DEFAULT depends on whether the absence of data is intentional or a default value is appropriate.",
-                "hint_1": "NULL is used when data is intentionally missing or unknown.",
-                "hint_2": "DEFAULT is used when a standard value is appropriate for missing data."
+                "concept": "NULL represents missing, unknown, or not-applicable information; a DEFAULT supplies a routine substitute chosen by the schema.",
+                "hint_1": "Do not use a routine default when it would pretend that an unknown value is known.",
+                "hint_2": "A normal starting value is a reason to use the default, not NULL."
               },
               "options": {
-                "a": "When the data is intentionally missing",
-                "b": "When the data is unknown",
-                "c": "When a standard value is not appropriate",
-                "d": "When you want to use a predefined value"
+                "a": "The actual value is unknown.",
+                "b": "The value does not apply to this row.",
+                "c": "Using the routine default would misrepresent the data.",
+                "d": "The business rule calls for the schema's normal starting value."
               }
             },
             "drag-reorder-1": {
@@ -123,8 +123,8 @@
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "hint_1": "Start with “Prepare the INSERT statement”.",
+                "hint_2": "Finish with “Verify the result”."
               },
               "tokens": {
                 "t1": "Prepare the INSERT statement",
@@ -151,7 +151,7 @@
             },
             "practice-default-status-null-notes-batch": {
               "title": "Practice: Combine Defaults and NULL in a Batch",
-              "prompt": "In `operations.sql`, add `Widget` in Tools at `5.99` and `Device` in Gadgets at `12.49`. For both rows, let the database provide status and deliberately record no notes with SQL `NULL`. In `query.sql`, show the two resulting rows and sort them by name.",
+              "prompt": "In `operations.sql`, insert two rows into `inventory_items`: `Widget` in Tools at `5.99` and `Device` in Gadgets at `12.49`. For both rows, omit `status` so SQLite applies the table default and store SQL `NULL` in `notes`. In `query.sql`, show only these two rows and sort them by name. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "The same omission-versus-NULL decision applies to both rows in the batch.",
               "help": {
                 "concept": "Defaults and explicit NULLs can be combined across several inserted rows.",
@@ -193,7 +193,7 @@
         "using-null-and-default-values": {
           "sketch-using-null-default-1": {
             "title": "Omitting a column and storing NULL are different decisions",
-            "bodyMarkdown": "`NULL` means that the row intentionally has no known value for a column. A default is different: the schema supplies a value when the insert does not supply that column.\n\nIf `status` has a default, leaving `status` out of the insert allows the schema to choose it. Supplying `NULL` for `status` instead asks SQL to store a missing value.\n\nChoose between omission and `NULL` from the meaning of the incoming data, not because the two happen to look similar in an unfinished row."
+            "bodyMarkdown": "`NULL` means that the row intentionally has no known value for a column. A default is different: the schema supplies a value when the insert does not supply that column.\n\nIf `status` has a default, leaving `status` out of the insert allows the schema to choose it. Supplying `NULL` for `status` instead asks SQL to store a missing value.\n\nChoose between omission and `NULL` from the meaning of the incoming data, not because the two happen to look similar in an unfinished row.\n\nIn this course's SQLite runtime, trigger a column default by omitting that column from the `INSERT` column list. Do not write `DEFAULT` as an individual value inside a `VALUES` tuple."
           },
           "sketch-using-null-default-2": {
             "title": "A row can use a default and an explicit NULL together",

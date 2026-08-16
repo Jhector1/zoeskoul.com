@@ -4,7 +4,6 @@ import { computeMaxAttemptsCore } from "./attempts";
 
 const envNames = [
   "ASSIGNMENT_QUESTION_DEFAULT_MAX_ATTEMPTS",
-  "SESSION_DEFAULT_MAX_ATTEMPTS",
   "PRACTICE_DEFAULT_MAX_ATTEMPTS",
 ] as const;
 
@@ -38,14 +37,14 @@ describe("attempt policy", () => {
     },
   );
 
-  it("keeps onboarding trial on the finite session cap", () => {
-    expect(computeMaxAttemptsCore({ mode: "onboarding_trial" })).toBe(3);
+  it("keeps onboarding trial unlimited even when old session metadata has a cap", () => {
+    expect(computeMaxAttemptsCore({ mode: "onboarding_trial" })).toBeNull();
     expect(
       computeMaxAttemptsCore({
         mode: "onboarding_trial",
         sessionMaxAttempts: 2,
       }),
-    ).toBe(2);
+    ).toBeNull();
   });
 
   it("keeps subscriber and ad-hoc practice unlimited by default", () => {

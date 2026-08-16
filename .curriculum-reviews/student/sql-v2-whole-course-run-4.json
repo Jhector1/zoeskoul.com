@@ -1,0 +1,682 @@
+{
+  "status": "partial",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+  "pagesVisited": [
+    "http://localhost:3002/en/subjects/sql-v2/modules",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/sketch/order-by-clause-position",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/sketch/sketch-project-brief",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/project/module-3-sales-leaderboard-project-p1",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0"
+  ],
+  "exercisesAttempted": 3,
+  "quizzesAttempted": 8,
+  "projectStepsAttempted": 3,
+  "findings": [],
+  "strongestParts": [
+    "ORDER BY and LIMIT instruction clearly distinguished sorting from filtering and limiting.",
+    "The three-step leaderboard project effectively built one query incrementally through ranking, tie-breaking, and limiting.",
+    "Expected-result tables made it easy to validate Run output before grading."
+  ],
+  "summary": "Resumed at module 3, completed its remaining lessons, exercises, eight quiz questions, and all three project steps. Continued through the completion popup into module 4, but the overall course remains unfinished.",
+  "stoppedReason": "Run ended after reaching the first remaining module 4 exercise; no learner-visible blocker was encountered.",
+  "browserEvidence": {
+    "clickCount": 16,
+    "checkAnswerClicks": 13,
+    "runClicks": 5,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "at": "2026-08-13T21:24:47.098Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 2,
+        "at": "2026-08-13T21:24:52.239Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 3,
+        "at": "2026-08-13T21:24:54.967Z",
+        "kind": "click",
+        "action": "e8",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn",
+        "detail": "Continue lesson"
+      },
+      {
+        "sequence": 4,
+        "at": "2026-08-13T21:25:06.209Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 5,
+        "at": "2026-08-13T21:25:09.790Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "detail": "attempting 62 characters"
+      },
+      {
+        "sequence": 6,
+        "at": "2026-08-13T21:25:11.919Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_failed",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "detail": "The learner-visible Monaco editor did not exactly match Agent 1's intended text after typing. inputMode=native-edit-context expected=\"SELECT id, name, category\\nFROM products\\nORDER BY category ASC;\" actual=\"SELECT id, name, category FROM products ORDER BY category ASC;\" mountedMonaco=1 visibleMonaco=1 url=http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0"
+      },
+      {
+        "sequence": 7,
+        "at": "2026-08-13T21:25:18.122Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "detail": "Run"
+      },
+      {
+        "sequence": 8,
+        "at": "2026-08-13T21:25:19.828Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 9,
+        "at": "2026-08-13T21:25:24.308Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/sketch/order-by-clause-position",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 10,
+        "at": "2026-08-13T21:25:25.706Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/sketch/order-by-clause-position",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/sketch/order-by-clause-position",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 11,
+        "at": "2026-08-13T21:25:29.073Z",
+        "kind": "click",
+        "action": "e12",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/sketch/order-by-clause-position",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "Mark as read"
+      },
+      {
+        "sequence": 12,
+        "at": "2026-08-13T21:25:30.648Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 13,
+        "at": "2026-08-13T21:25:32.557Z",
+        "kind": "click",
+        "action": "e12",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "It sorts the returned rows"
+      },
+      {
+        "sequence": 14,
+        "at": "2026-08-13T21:25:35.032Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 15,
+        "at": "2026-08-13T21:25:47.510Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 16,
+        "at": "2026-08-13T21:25:49.822Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "It sorts prices from lowest to highest."
+      },
+      {
+        "sequence": 17,
+        "at": "2026-08-13T21:25:52.871Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 18,
+        "at": "2026-08-13T21:26:00.910Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 19,
+        "at": "2026-08-13T21:26:02.345Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "category"
+      },
+      {
+        "sequence": 20,
+        "at": "2026-08-13T21:26:05.697Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 21,
+        "at": "2026-08-13T21:26:13.120Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 22,
+        "at": "2026-08-13T21:26:16.732Z",
+        "kind": "click",
+        "action": "e12",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "The first column in ORDER BY is the main sorting rule."
+      },
+      {
+        "sequence": 23,
+        "at": "2026-08-13T21:26:16.864Z",
+        "kind": "click",
+        "action": "e13",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "A second sort column can break ties after the first sort column is applied."
+      },
+      {
+        "sequence": 24,
+        "at": "2026-08-13T21:26:19.711Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 25,
+        "at": "2026-08-13T21:26:21.771Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 26,
+        "at": "2026-08-13T21:26:23.688Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/quiz/order-by-q2",
+        "detail": "Next topic→"
+      },
+      {
+        "sequence": 27,
+        "at": "2026-08-13T21:26:29.184Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 28,
+        "at": "2026-08-13T21:26:31.472Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "detail": "attempting 100 characters"
+      },
+      {
+        "sequence": 29,
+        "at": "2026-08-13T21:26:33.951Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "detail": "typed 100 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 30,
+        "at": "2026-08-13T21:26:36.227Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "detail": "Run"
+      },
+      {
+        "sequence": 31,
+        "at": "2026-08-13T21:26:38.138Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 32,
+        "at": "2026-08-13T21:26:41.669Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/exercise/try-combining-order-by-with-limit-sketch1",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 33,
+        "at": "2026-08-13T21:26:47.564Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 34,
+        "at": "2026-08-13T21:26:51.092Z",
+        "kind": "click",
+        "action": "e15",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "It sorts the rows before LIMIT keeps only some of them"
+      },
+      {
+        "sequence": 35,
+        "at": "2026-08-13T21:26:55.124Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 36,
+        "at": "2026-08-13T21:27:02.461Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 37,
+        "at": "2026-08-13T21:27:04.666Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "ORDER BY price DESC"
+      },
+      {
+        "sequence": 38,
+        "at": "2026-08-13T21:27:09.423Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 39,
+        "at": "2026-08-13T21:27:21.208Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 40,
+        "at": "2026-08-13T21:27:23.303Z",
+        "kind": "click",
+        "action": "e12",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "LIMIT 3 keeps only three rows in the final result"
+      },
+      {
+        "sequence": 41,
+        "at": "2026-08-13T21:27:25.443Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 42,
+        "at": "2026-08-13T21:27:28.329Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "ORDER BY price DESC can place the highest prices first"
+      },
+      {
+        "sequence": 43,
+        "at": "2026-08-13T21:27:32.580Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 44,
+        "at": "2026-08-13T21:27:43.896Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 45,
+        "at": "2026-08-13T21:27:45.947Z",
+        "kind": "click",
+        "action": "e16",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "↑"
+      },
+      {
+        "sequence": 46,
+        "at": "2026-08-13T21:27:48.380Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 47,
+        "at": "2026-08-13T21:27:51.359Z",
+        "kind": "click",
+        "action": "e18",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "↑"
+      },
+      {
+        "sequence": 48,
+        "at": "2026-08-13T21:27:55.110Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 49,
+        "at": "2026-08-13T21:27:57.575Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 50,
+        "at": "2026-08-13T21:28:00.353Z",
+        "kind": "click",
+        "action": "e31",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/combining-order-by-with-limit/quiz/combining-order-by-with-limit-q1",
+        "detail": "Next topic→"
+      },
+      {
+        "sequence": 51,
+        "at": "2026-08-13T21:28:07.709Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/sketch/sketch-project-brief",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 52,
+        "at": "2026-08-13T21:28:12.710Z",
+        "kind": "click",
+        "action": "e13",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/project/module-3-sales-leaderboard-project-p1",
+        "detail": "Mark as read"
+      },
+      {
+        "sequence": 53,
+        "at": "2026-08-13T21:28:18.417Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 54,
+        "at": "2026-08-13T21:28:20.550Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "detail": "attempting 53 characters"
+      },
+      {
+        "sequence": 55,
+        "at": "2026-08-13T21:28:21.693Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "detail": "typed 53 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 56,
+        "at": "2026-08-13T21:28:26.431Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "detail": "Run"
+      },
+      {
+        "sequence": 57,
+        "at": "2026-08-13T21:28:29.412Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 58,
+        "at": "2026-08-13T21:28:38.140Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 59,
+        "at": "2026-08-13T21:28:39.930Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 60,
+        "at": "2026-08-13T21:28:42.382Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "detail": "attempting 71 characters"
+      },
+      {
+        "sequence": 61,
+        "at": "2026-08-13T21:28:44.250Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "detail": "typed 71 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 62,
+        "at": "2026-08-13T21:28:47.466Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "detail": "Run"
+      },
+      {
+        "sequence": 63,
+        "at": "2026-08-13T21:28:50.165Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 64,
+        "at": "2026-08-13T21:28:56.057Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 65,
+        "at": "2026-08-13T21:28:59.161Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 66,
+        "at": "2026-08-13T21:29:01.707Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "detail": "attempting 79 characters"
+      },
+      {
+        "sequence": 67,
+        "at": "2026-08-13T21:29:03.539Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "detail": "typed 79 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 68,
+        "at": "2026-08-13T21:29:06.868Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "detail": "Run"
+      },
+      {
+        "sequence": 69,
+        "at": "2026-08-13T21:29:08.697Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 70,
+        "at": "2026-08-13T21:29:13.289Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 71,
+        "at": "2026-08-13T21:29:17.689Z",
+        "kind": "semantic",
+        "action": "continue_to_next_module",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-module-project/module-3-sales-leaderboard-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn",
+        "detail": "normal navigation: Next module button"
+      }
+    ]
+  }
+}

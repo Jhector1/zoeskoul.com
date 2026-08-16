@@ -28,6 +28,7 @@ import {useToolCodeRunnerState} from "../hooks/useToolCodeRunnerState";
 import {useSkeletonGate} from "@/components/review/module/hooks/useSkeletonGate";
 import {useReduceMotion} from "../hooks/useReduceMotion";
 import {useSubjectFinish} from "../hooks/useSubjectFinish";
+import {useSubjectFinishCopy} from "../hooks/useSubjectFinishCopy";
 import {useGamificationSummary} from "@/components/review/module/hooks/useGamificationSummary";
 
 import {useReviewModuleRuntime} from "./useReviewModuleRuntime";
@@ -83,7 +84,7 @@ import {resolveFlowNavigationConfig} from "@/components/review/navigation/FlowNa
 import {useTaggedT} from "@student/i18n/tagged";
 import {
     computeProgressiveUnlock, firstRouteTargetForUnlockedTopic,
-    getTargetKeyForRouteTarget, maxUnlockedCardIndexForTopic
+    getTargetKeyForRouteTarget, isTrustedProgressiveRouteLease, maxUnlockedCardIndexForTopic
 } from "@zoeskoul/learning-runtime/review/module/runtime/progressiveUnlock";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import {resolveRightRailSqlProps} from "@zoeskoul/learning-runtime/review/module/runtime/resolveRightRailSqlProps";
@@ -833,8 +834,10 @@ export function useReviewModuleController({
     );
 
     const routeTargetTrustedBypass =
-        Boolean(routeTargetKey) &&
-        trustedProgressiveBypassTargetKeyRef.current === routeTargetKey;
+        isTrustedProgressiveRouteLease({
+            trustedTargetKey: trustedProgressiveBypassTargetKeyRef.current,
+            currentTargetKey: routeTargetKey,
+        });
 
     const routeTargetUnlocked =
         routeTargetTrustedBypass ||
@@ -842,23 +845,14 @@ export function useReviewModuleController({
         !progressHydrated ||
         !routeTargetKey ||
         progressiveUnlock.unlockedTargetKeys.has(routeTargetKey);
-    useEffect(() => {
-        const trustedKey = trustedProgressiveBypassTargetKeyRef.current;
-
-        if (!trustedKey) return;
-
-        if (progressiveUnlock.unlockedTargetKeys.has(trustedKey)) {
-            trustedProgressiveBypassTargetKeyRef.current = null;
-        }
-    }, [progressiveUnlock.unlockedTargetKeys]);
-    const firstUnlockedRouteTarget = useMemo(() => {
+    const frontierUnlockedRouteTarget = useMemo(() => {
         if (!targetRegistry) return null;
 
-        const key = progressiveUnlock.earliestUnlockedTargetKey;
+        const key = progressiveUnlock.furthestUnlockedTargetKey;
         const entry = key ? targetRegistry.byKey[key] ?? null : null;
 
         return registryEntryToRouteTarget(entry);
-    }, [progressiveUnlock.earliestUnlockedTargetKey, targetRegistry]);
+    }, [progressiveUnlock.furthestUnlockedTargetKey, targetRegistry]);
 
     const showProgressiveLockMessage = useCallback(() => {
         /**
@@ -954,6 +948,11 @@ export function useReviewModuleController({
 
             if (nextIsBrowserHistoryExercise && nextTargetKey) {
                 trustedProgressiveBypassTargetKeyRef.current = nextTargetKey;
+            } else if (
+                trustedProgressiveBypassTargetKeyRef.current &&
+                trustedProgressiveBypassTargetKeyRef.current !== nextTargetKey
+            ) {
+                trustedProgressiveBypassTargetKeyRef.current = null;
             }
 
             const nextIsUnlocked =
@@ -964,12 +963,12 @@ export function useReviewModuleController({
                 !nextTargetKey ||
                 progressiveUnlock.unlockedTargetKeys.has(nextTargetKey);
 
-            if (!nextIsUnlocked && firstUnlockedRouteTarget) {
-                nextResolved = firstUnlockedRouteTarget;
-                const fallbackHref = buildRoutePathForCurrentSurface(firstUnlockedRouteTarget);
+            if (!nextIsUnlocked && frontierUnlockedRouteTarget) {
+                nextResolved = frontierUnlockedRouteTarget;
+                const fallbackHref = buildRoutePathForCurrentSurface(frontierUnlockedRouteTarget);
                 const fallbackTargetKey = getTargetKeyForRouteTarget(
                     targetRegistry,
-                    firstUnlockedRouteTarget,
+                    frontierUnlockedRouteTarget,
                 );
 
                 publishNavigation(fallbackHref, {
@@ -999,7 +998,7 @@ export function useReviewModuleController({
     }, [
         buildRoutePathForCurrentSurface,
         catalogSlug,
-        firstUnlockedRouteTarget,
+        frontierUnlockedRouteTarget,
         locale,
         mod,
         moduleSlug,
@@ -1060,10 +1059,22 @@ export function useReviewModuleController({
 
     useEffect(() => {
         if (!routeTarget?.topicId) return;
+
         if (viewTopicId !== routeTarget.topicId) {
             setViewTopicId(routeTarget.topicId);
         }
-        if (activeTopicId !== routeTarget.topicId) {
+
+        const routeTopicIndex = topics.findIndex(
+            (topic) => topic.id === routeTarget.topicId,
+        );
+        const activeTopicIndex = topics.findIndex(
+            (topic) => topic.id === activeTopicId,
+        );
+
+        if (
+            routeTopicIndex >= 0 &&
+            (activeTopicIndex < 0 || routeTopicIndex > activeTopicIndex)
+        ) {
             setActiveTopicId(routeTarget.topicId);
         }
     }, [
@@ -1071,6 +1082,7 @@ export function useReviewModuleController({
         routeTarget?.topicId,
         setActiveTopicId,
         setViewTopicId,
+        topics,
         viewTopicId,
     ]);
 
@@ -1105,6 +1117,11 @@ export function useReviewModuleController({
             `${subjectSlug}:${moduleSlug}:${String(moduleCompleteFromProgress(progress, topics))}:${String(
                 (progress as any)?.moduleCompleted,
             )}`,
+    });
+
+    const subjectFinishCopy = useSubjectFinishCopy({
+        subjectSlug,
+        subjectFinish,
     });
 
 
@@ -1261,8 +1278,8 @@ export function useReviewModuleController({
             if (!nextIsUnlocked) {
                 showProgressiveLockMessage();
 
-                if (firstUnlockedRouteTarget && mode === "replace") {
-                    target = firstUnlockedRouteTarget;
+                if (frontierUnlockedRouteTarget && mode === "replace") {
+                    target = frontierUnlockedRouteTarget;
                     nextTargetKey = getTargetKeyForRouteTarget(targetRegistry, target);
                 } else {
                     return;
@@ -1357,7 +1374,7 @@ export function useReviewModuleController({
             cancelRouteTransition,
             captureNavigationProgressSnapshot,
             enqueueNavigationProgressSnapshot,
-            firstUnlockedRouteTarget,
+            frontierUnlockedRouteTarget,
             moduleSlug,
             progressHydrated,
             progressiveUnlock.unlockedTargetKeys,
@@ -1402,15 +1419,17 @@ export function useReviewModuleController({
 
     useEffect(() => {
         if (!progressHydrated) return;
+        if (isRouteTransitioning) return;
         if (!targetRegistry) return;
         if (!routeTarget) return;
         if (routeTargetUnlocked) return;
-        if (!firstUnlockedRouteTarget) return;
+        if (!frontierUnlockedRouteTarget) return;
 
-        void navigateToResolvedTarget(firstUnlockedRouteTarget, "replace");
+        void navigateToResolvedTarget(frontierUnlockedRouteTarget, "replace");
         showProgressiveLockMessage();
     }, [
-        firstUnlockedRouteTarget,
+        frontierUnlockedRouteTarget,
+        isRouteTransitioning,
         navigateToResolvedTarget,
         progressHydrated,
         routeTarget,
@@ -2559,6 +2578,7 @@ export function useReviewModuleController({
         navError,
         nextModuleId: nav?.nextModuleId ?? null,
         nextTopicId: topicFlow.nextTopic?.id ?? null,
+        hasNextNestedStep,
         activeCardIndex,
         cardCount: viewCards.length,
         topicComplete: viewIsComplete,
@@ -3423,7 +3443,7 @@ export function useReviewModuleController({
 
             canGetCertificate: canOpenCertificate,
             certificateLabel,
-            certificateHint: subjectFinish?.message ?? null,
+            certificateHint: subjectFinishCopy.body,
         },
         celebrations: {
             reduceMotion,

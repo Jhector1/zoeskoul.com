@@ -140,22 +140,22 @@ export function useReviewPanels({
         }
 
         setMobileTopicsOpen(true);
-    }, [showDesktopLeft, panels]);
+    }, [panels.setLeftCollapsed, showDesktopLeft]);
 
     const handleToggleRightPanel = useCallback(() => {
         rightRailChoiceTouchedRef.current = true;
         panels.setRightCollapsed((v) => !v);
-    }, [panels]);
+    }, [panels.setRightCollapsed]);
 
     const handleCollapseLeft = useCallback(() => {
         leftSidebarChoiceTouchedRef.current = true;
         panels.setLeftCollapsed(true);
-    }, [panels]);
+    }, [panels.setLeftCollapsed]);
 
     const handleCollapseRight = useCallback(() => {
         rightRailChoiceTouchedRef.current = true;
         panels.setRightCollapsed(true);
-    }, [panels]);
+    }, [panels.setRightCollapsed]);
 
     return {
         ...panels,

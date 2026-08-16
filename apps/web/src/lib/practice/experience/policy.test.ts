@@ -44,6 +44,7 @@ describe("practice experience policy", () => {
     expect(challenge.rewards.rankedXp).toBe(false);
 
     expect(onboarding.targetCount).toBe(3);
+    expect(onboarding.maxAttempts).toBeNull();
     expect(onboarding.rewards.learningXp).toBe(false);
     expect(onboarding.rewards.rankedXp).toBe(false);
   });

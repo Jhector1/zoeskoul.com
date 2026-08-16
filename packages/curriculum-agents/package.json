@@ -1,0 +1,24 @@
+{
+  "name": "@zoeskoul/curriculum-agents",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --root ../.. packages/curriculum-agents/src",
+    "student": "tsx src/cli/student.ts",
+    "auth": "tsx src/cli/auth.ts"
+  },
+  "dependencies": {
+    "@openai/agents": "latest",
+    "@playwright/test": "^1.59.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
+  }
+}

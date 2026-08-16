@@ -691,7 +691,6 @@ export function useToolCodeRunnerState(args: {
         toolSaveDelayMs = 700,
     } = args;
 
-    const exercises = useReviewRuntimeStore((s) => s.exercises);
     const patchCard = useReviewRuntimeStore((s) => s.patchCard);
     const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
     const runtimeResetRevision = useReviewRuntimeStore((s) => s.resetRevision);
@@ -737,6 +736,28 @@ export function useToolCodeRunnerState(args: {
         : scopeKeyIsExercise
             ? `exercise:${scopeKey}`
             : scopeKey;
+
+    const boundRuntimeExercise = useReviewRuntimeStore((state) => {
+        if (!effectiveBoundId) return null;
+
+        const storeKey = resolveExerciseStoreKey(
+            state.exercises,
+            effectiveBoundId,
+        );
+        return storeKey ? state.exercises[storeKey] ?? null : null;
+    });
+
+    const pendingRuntimeExercise = useReviewRuntimeStore((state) => {
+        if (isCardToolKey(effectiveToolKey)) return null;
+
+        const storeKey = resolveExerciseStoreKey(
+            state.exercises,
+            effectiveToolKey,
+            scopeKey,
+        );
+        return storeKey ? state.exercises[storeKey] ?? null : null;
+    });
+
     const effectiveDefaultCode = useMemo(
         () =>
             resolveHydrationFallbackCode({
@@ -755,9 +776,7 @@ export function useToolCodeRunnerState(args: {
             return null;
         }
         if (effectiveBoundId) {
-            const storeKey = resolveExerciseStoreKey(exercises, effectiveBoundId);
-            const found = storeKey ? exercises[storeKey] ?? null : null;
-            if (found) return found;
+            if (boundRuntimeExercise) return boundRuntimeExercise;
 
             if (effectiveBoundId.includes(":")) return null;
         }
@@ -801,30 +820,19 @@ export function useToolCodeRunnerState(args: {
         }
 
         if (effectiveBoundId) {
-            const storeKey = resolveExerciseStoreKey(exercises, effectiveBoundId);
-            const found = storeKey ? exercises[storeKey] ?? null : null;
-
-            if (isUserWork(progressSaved) && !isUserWork(found)) {
+            if (isUserWork(progressSaved) && !isUserWork(boundRuntimeExercise)) {
                 return progressSaved;
             }
 
-            if (found) return found;
+            if (boundRuntimeExercise) return boundRuntimeExercise;
 
             if (effectiveBoundId.includes(":")) return null;
         }
 
-        const pendingExerciseStoreKey = resolveExerciseStoreKey(
-            exercises,
-            effectiveToolKey,
-            scopeKey,
-        );
-        const pendingExercise =
-            pendingExerciseStoreKey ? exercises[pendingExerciseStoreKey] ?? null : null;
-
         const resolvedSaved =
-            isUserWork(progressSaved) && !isUserWork(pendingExercise)
+            isUserWork(progressSaved) && !isUserWork(pendingRuntimeExercise)
                 ? progressSaved
-                : pendingExercise ?? progressSaved;
+                : pendingRuntimeExercise ?? progressSaved;
 
         if (
             isExerciseToolKey(effectiveToolKey) &&
@@ -837,7 +845,15 @@ export function useToolCodeRunnerState(args: {
         }
 
         return resolvedSaved;
-    }, [progress, viewTid, effectiveToolKey, effectiveBoundId, exercises, scopeKey, defaultCode]);
+    }, [
+        progress,
+        viewTid,
+        effectiveToolKey,
+        effectiveBoundId,
+        boundRuntimeExercise,
+        pendingRuntimeExercise,
+        defaultCode,
+    ]);
 
     const {
         compatibleSaved,
@@ -1255,17 +1271,10 @@ export function useToolCodeRunnerState(args: {
 
         let s: any = null;
         if (effectiveBoundId) {
-            const storeKey = resolveExerciseStoreKey(exercises, effectiveBoundId);
-            s = storeKey ? exercises[storeKey] ?? null : null;
+            s = boundRuntimeExercise;
         } else {
-            const pendingExerciseStoreKey = !isCardToolKey(effectiveToolKey)
-                ? resolveExerciseStoreKey(exercises, effectiveToolKey, scopeKey)
-                : null;
-            const pendingExercise =
-                pendingExerciseStoreKey ? exercises[pendingExerciseStoreKey] ?? null : null;
-
-            if (pendingExercise) {
-                s = pendingExercise;
+            if (pendingRuntimeExercise) {
+                s = pendingRuntimeExercise;
             } else {
                 const cardKey = isCardToolKey(effectiveToolKey)
                     ? getCardStateKeyFromToolScopeKey(effectiveToolKey)
@@ -1416,7 +1425,8 @@ export function useToolCodeRunnerState(args: {
         defaultSqlDialect,
         prime,
         hydratedToolIdentity,
-        exercises,
+        boundRuntimeExercise,
+        pendingRuntimeExercise,
         effectiveBoundId,
     ]);
 
@@ -1455,8 +1465,9 @@ export function useToolCodeRunnerState(args: {
             });
 
             const inputId = args2.id;
+            const runtimeExercises = useReviewRuntimeStore.getState().exercises;
             const targetKey = resolveExerciseStoreKey(
-                exercises,
+                runtimeExercises,
                 inputId,
                 args2.exerciseKey ?? null,
             ) ?? inputId;
@@ -1480,7 +1491,7 @@ export function useToolCodeRunnerState(args: {
 
 
 
-            const runtimeSaved = exercises[targetKey] ?? null;
+            const runtimeSaved = runtimeExercises[targetKey] ?? null;
 
             const topicProgressForBind =
                 getTopicProgressState((progress as any)?.topics ?? {}, viewTid).topic as any;
@@ -1646,7 +1657,7 @@ export function useToolCodeRunnerState(args: {
                     String(savedWorkspaceCode ?? "").trim() === "" &&
                     String(incomingWorkspaceCode ?? "").trim() !== ""
                 );
-            const existingExerciseForBind = exercises[targetKey] ?? null;
+            const existingExerciseForBind = runtimeExercises[targetKey] ?? null;
             const existingExerciseForBindIsUserWork = isSavedUserWork(existingExerciseForBind);
             const existingExerciseForBindWorkspaceKey = workspaceKeyOf(
                 existingExerciseForBind?.workspace ?? null,
@@ -1918,7 +1929,6 @@ export function useToolCodeRunnerState(args: {
             versionStr,
             hydratedToolIdentity,
             progress,
-            exercises,
             patchExercise,
             flushLatest,
         ],

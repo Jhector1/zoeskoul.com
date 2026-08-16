@@ -18,6 +18,21 @@ function actorWhere(actor: Actor) {
     throw new Error("Actor must have either userId or guestId.");
 }
 
+async function prepareOnboardingSaveActor(actor: Actor): Promise<Actor> {
+    if (!actor.userId) return actor;
+
+    if (actor.guestId) {
+        await claimGuestOnboardingForUser({
+            guestId: actor.guestId,
+            userId: actor.userId,
+        });
+    }
+
+    // Authenticated onboarding is canonically user-owned. Keeping the guest id
+    // on a user profile can collide with the existing guest onboarding row.
+    return { userId: actor.userId, guestId: null };
+}
+
 export async function getOnboardingProfile(actor: Actor) {
     if (!actor.userId && !actor.guestId) return null;
 
@@ -44,7 +59,8 @@ export async function upsertOnboardingProfile(
     actor: Actor,
     input: SaveOnboardingInput,
 ) {
-    const where = actorWhere(actor);
+    const saveActor = await prepareOnboardingSaveActor(actor);
+    const where = actorWhere(saveActor);
 
     const existing = await prisma.userOnboardingProfile.findFirst({
         where,
@@ -60,19 +76,19 @@ export async function upsertOnboardingProfile(
                 studyTime: input.studyTime,
                 completedAt: input.completed ? new Date() : undefined,
                 skippedAt: input.skipped ? new Date() : undefined,
-                expiresAt: actor.userId ? null : guestExpiryDate(),
+                expiresAt: saveActor.userId ? null : guestExpiryDate(),
             },
         })
         : await prisma.userOnboardingProfile.create({
             data: {
-                userId: actor.userId,
-                guestId: actor.guestId,
+                userId: saveActor.userId,
+                guestId: saveActor.guestId,
                 preferredLanguage: input.preferredLanguage,
                 level: input.level,
                 studyTime: input.studyTime,
                 completedAt: input.completed ? new Date() : undefined,
                 skippedAt: input.skipped ? new Date() : undefined,
-                expiresAt: actor.userId ? null : guestExpiryDate(),
+                expiresAt: saveActor.userId ? null : guestExpiryDate(),
             },
         });
 

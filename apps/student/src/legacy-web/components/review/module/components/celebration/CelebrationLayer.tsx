@@ -7,6 +7,7 @@ import CourseCompleteConfetti from "@/components/review/module/components/Course
 import CourseCelebrateModal from "./CourseCelebrateModal";
 import ModuleCelebrateModal from "./ModuleCelebrateModal";
 import TopicCelebrateToast from "./TopicCelebrateToast";
+import { resolveCelebrationModalKind } from "./celebrationModalPriority";
 
 import type {
     CelebrateCopy,
@@ -57,6 +58,11 @@ export default function CelebrationLayer({
                                              setTopicToastPaused,
                                              dismissTopicToast,
                                          }: Props) {
+    const activeCelebrationModal = resolveCelebrationModalKind({
+        courseCelebrateOpen,
+        moduleCelebrateOpen,
+    });
+
     return (
         <>
             <CourseCompleteConfetti
@@ -67,7 +73,7 @@ export default function CelebrationLayer({
             />
 
             <AnimatePresence>
-                {courseCelebrateOpen ? (
+                {activeCelebrationModal === "course" ? (
                     <CourseCelebrateModal
                         reduceMotion={reduceMotion}
                         copy={courseCelebrateCopy}
@@ -81,7 +87,7 @@ export default function CelebrationLayer({
             </AnimatePresence>
 
             <AnimatePresence>
-                {moduleCelebrateOpen ? (
+                {activeCelebrationModal === "module" ? (
                     <ModuleCelebrateModal
                         reduceMotion={reduceMotion}
                         copy={moduleCelebrateCopy}

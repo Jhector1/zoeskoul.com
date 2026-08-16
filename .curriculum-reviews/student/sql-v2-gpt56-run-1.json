@@ -1,0 +1,1005 @@
+{
+  "status": "completed",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+  "pagesVisited": [
+    "http://localhost:3002/en/subjects/sql-v2/modules",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/exercise/try-in-list-filter-sketch0",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/sketch/not-in-value-list",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/sketch/is-null-syntax",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/sketch/sketch-project-brief",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-1",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/sketch/sketch-project-brief",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4"
+  ],
+  "exercisesAttempted": 8,
+  "quizzesAttempted": 7,
+  "projectStepsAttempted": 7,
+  "findings": [
+    {
+      "severity": "minor",
+      "category": "broken_flow",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+      "lessonOrExercise": "LIKE and Wildcards quiz",
+      "problem": "Next→ did not advance from the quiz despite being enabled.",
+      "evidence": "Clicking Next→ twice left me on the same URL with no change; I had to use the sidebar to proceed to the next topic.",
+      "learnerImpact": "Confusing progression; learners may think the button is broken.",
+      "attemptedAction": "Used the sidebar topic link to continue."
+    },
+    {
+      "severity": "major",
+      "category": "unexpected_feedback",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+      "lessonOrExercise": "Find Customers Missing an Email",
+      "problem": "Editor merged comment and SQL into one line; grader marked a correct query as wrong due to the inline comment swallowing the SQL.",
+      "evidence": "With text “-- Keep customer rows… SELECT full_name, status FROM customers WHERE email IS NULL;” Check returned Attempts: 1✕ Not correct and showed a SQL error. Removing the comment and submitting “SELECT full_name, status FROM customers WHERE email IS NULL;” passed and advanced.",
+      "learnerImpact": "Valid SQL with a comment can fail grading, causing unnecessary retries and confusion.",
+      "attemptedAction": "Removed the comment and resubmitted; passed."
+    }
+  ],
+  "strongestParts": [
+    "Clear, incremental scaffolding from LIKE/IN/NULL into combined filters.",
+    "Project and capstone steps mirror realistic stakeholder changes and enforce carrying prior requirements.",
+    "Auto-advancing after correct checks generally worked and kept momentum."
+  ],
+  "summary": "Resumed at Module 4, finished all remaining topics, completed Module 4 project, then completed the full Module 5 capstone. All practice, quiz, and project steps attempted and passed.",
+  "stoppedReason": "Course complete",
+  "browserEvidence": {
+    "clickCount": 20,
+    "checkAnswerClicks": 17,
+    "runClicks": 10,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "at": "2026-08-13T22:44:25.380Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 2,
+        "at": "2026-08-13T22:44:29.210Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 3,
+        "at": "2026-08-13T22:44:32.473Z",
+        "kind": "click",
+        "action": "e8",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn",
+        "detail": "Continue lesson"
+      },
+      {
+        "sequence": 4,
+        "at": "2026-08-13T22:44:46.081Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 5,
+        "at": "2026-08-13T22:44:48.783Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 6,
+        "at": "2026-08-13T22:44:51.718Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 7,
+        "at": "2026-08-13T22:44:54.196Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Quiz→"
+      },
+      {
+        "sequence": 8,
+        "at": "2026-08-13T22:44:56.723Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 9,
+        "at": "2026-08-13T22:44:58.916Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 10,
+        "at": "2026-08-13T22:45:01.473Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 11,
+        "at": "2026-08-13T22:45:04.122Z",
+        "kind": "click",
+        "action": "e9",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/sketch/in-value-list",
+        "detail": "IN and BETWEEN Use IN for exact value sets and BETWEEN for inclusive ranges. Match exact sets with IN"
+      },
+      {
+        "sequence": 12,
+        "at": "2026-08-13T22:45:09.280Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/exercise/try-in-list-filter-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/exercise/try-in-list-filter-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 13,
+        "at": "2026-08-13T22:45:11.419Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/exercise/try-in-list-filter-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/sketch/not-in-value-list",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 14,
+        "at": "2026-08-13T22:45:13.512Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/sketch/not-in-value-list",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "Quiz→"
+      },
+      {
+        "sequence": 15,
+        "at": "2026-08-13T22:45:15.967Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 16,
+        "at": "2026-08-13T22:45:19.594Z",
+        "kind": "click",
+        "action": "e15",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "Emma Reed"
+      },
+      {
+        "sequence": 17,
+        "at": "2026-08-13T22:45:22.187Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 18,
+        "at": "2026-08-13T22:45:29.486Z",
+        "kind": "scroll",
+        "action": "down",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "700"
+      },
+      {
+        "sequence": 19,
+        "at": "2026-08-13T22:45:31.014Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 20,
+        "at": "2026-08-13T22:45:34.422Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "Dates from 2026-01-12 through 2026-01-22, including both ends"
+      },
+      {
+        "sequence": 21,
+        "at": "2026-08-13T22:45:37.856Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 22,
+        "at": "2026-08-13T22:45:39.833Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 23,
+        "at": "2026-08-13T22:45:41.753Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "signup_date >= '2026-01-15' AND signup_date <= '2026-01-25'"
+      },
+      {
+        "sequence": 24,
+        "at": "2026-08-13T22:45:45.694Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 25,
+        "at": "2026-08-13T22:45:47.738Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/in-list-filter/quiz/in-list-filter-q2",
+        "detail": "Next topic→"
+      },
+      {
+        "sequence": 26,
+        "at": "2026-08-13T22:45:54.880Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "attempting 106 characters"
+      },
+      {
+        "sequence": 27,
+        "at": "2026-08-13T22:45:57.325Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_failed",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "The learner-visible Monaco editor did not exactly match Agent 1's intended text after typing. inputMode=native-edit-context expected=\"-- Keep customer rows where email is missing.\\nSELECT full_name, status\\nFROM customers\\nWHERE email IS NULL;\" actual=\"-- Keep customer rows where email is missing. SELECT full_name, status FROM customers WHERE email IS NULL;\" mountedMonaco=1 visibleMonaco=1 url=http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0"
+      },
+      {
+        "sequence": 28,
+        "at": "2026-08-13T22:45:59.782Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "attempting 106 characters"
+      },
+      {
+        "sequence": 29,
+        "at": "2026-08-13T22:46:02.359Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "typed 106 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 30,
+        "at": "2026-08-13T22:46:04.964Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "Run"
+      },
+      {
+        "sequence": 31,
+        "at": "2026-08-13T22:46:08.218Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 32,
+        "at": "2026-08-13T22:46:11.487Z",
+        "kind": "semantic",
+        "action": "open_editor_surface",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "Editor button"
+      },
+      {
+        "sequence": 33,
+        "at": "2026-08-13T22:46:14.036Z",
+        "kind": "scroll",
+        "action": "up",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "900"
+      },
+      {
+        "sequence": 34,
+        "at": "2026-08-13T22:46:15.966Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 35,
+        "at": "2026-08-13T22:46:22.161Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "attempting 106 characters"
+      },
+      {
+        "sequence": 36,
+        "at": "2026-08-13T22:46:24.606Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_failed",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "The learner-visible Monaco editor did not exactly match Agent 1's intended text after typing. inputMode=native-edit-context expected=\"-- Keep customer rows where email is missing.\\nSELECT full_name, status\\nFROM customers\\nWHERE email IS NULL;\" actual=\"--Keep customer rows where email is missing. SELECT full_name, status FROM customers WHERE email IS NULL;\" mountedMonaco=1 visibleMonaco=1 url=http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0"
+      },
+      {
+        "sequence": 37,
+        "at": "2026-08-13T22:46:27.902Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "attempting 60 characters"
+      },
+      {
+        "sequence": 38,
+        "at": "2026-08-13T22:46:29.409Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "typed 60 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 39,
+        "at": "2026-08-13T22:46:32.138Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "detail": "Run"
+      },
+      {
+        "sequence": 40,
+        "at": "2026-08-13T22:46:35.904Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/exercise/try-what-null-means-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/sketch/is-null-syntax",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 41,
+        "at": "2026-08-13T22:46:37.824Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/sketch/is-null-syntax",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/sketch/is-null-syntax",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 42,
+        "at": "2026-08-13T22:46:41.390Z",
+        "kind": "click",
+        "action": "e13",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/sketch/is-null-syntax",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "Mark as read"
+      },
+      {
+        "sequence": 43,
+        "at": "2026-08-13T22:46:43.225Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 44,
+        "at": "2026-08-13T22:46:45.697Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "The value is missing or unknown"
+      },
+      {
+        "sequence": 45,
+        "at": "2026-08-13T22:46:48.393Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 46,
+        "at": "2026-08-13T22:46:54.769Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 47,
+        "at": "2026-08-13T22:46:57.641Z",
+        "kind": "click",
+        "action": "e15",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "city IS NULL"
+      },
+      {
+        "sequence": 48,
+        "at": "2026-08-13T22:47:01.733Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 49,
+        "at": "2026-08-13T22:47:03.820Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 50,
+        "at": "2026-08-13T22:47:06.089Z",
+        "kind": "click",
+        "action": "e16",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "email IS NOT NULL"
+      },
+      {
+        "sequence": 51,
+        "at": "2026-08-13T22:47:09.397Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 52,
+        "at": "2026-08-13T22:47:11.743Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 53,
+        "at": "2026-08-13T22:47:13.749Z",
+        "kind": "click",
+        "action": "e13",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "OR"
+      },
+      {
+        "sequence": 54,
+        "at": "2026-08-13T22:47:17.680Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 55,
+        "at": "2026-08-13T22:47:20.780Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/what-null-means/quiz/what-null-means-q2",
+        "detail": "Next topic→"
+      },
+      {
+        "sequence": 56,
+        "at": "2026-08-13T22:47:24.873Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/sketch/sketch-project-brief",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 57,
+        "at": "2026-08-13T22:47:28.344Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/project/module-4-customer-cleanup-project-p1",
+        "detail": "Mark as read"
+      },
+      {
+        "sequence": 58,
+        "at": "2026-08-13T22:47:36.226Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-1",
+        "detail": "attempting 63 characters"
+      },
+      {
+        "sequence": 59,
+        "at": "2026-08-13T22:47:38.023Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-1",
+        "detail": "typed 63 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 60,
+        "at": "2026-08-13T22:47:41.006Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-1",
+        "detail": "Run"
+      },
+      {
+        "sequence": 61,
+        "at": "2026-08-13T22:47:45.893Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 62,
+        "at": "2026-08-13T22:47:49.013Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 63,
+        "at": "2026-08-13T22:47:53.266Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "detail": "attempting 95 characters"
+      },
+      {
+        "sequence": 64,
+        "at": "2026-08-13T22:47:55.672Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "detail": "typed 95 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 65,
+        "at": "2026-08-13T22:47:59.940Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "detail": "Run"
+      },
+      {
+        "sequence": 66,
+        "at": "2026-08-13T22:48:06.088Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 67,
+        "at": "2026-08-13T22:48:08.349Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 68,
+        "at": "2026-08-13T22:48:12.385Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "detail": "attempting 158 characters"
+      },
+      {
+        "sequence": 69,
+        "at": "2026-08-13T22:48:15.979Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_failed",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "detail": "The learner-visible Monaco editor did not exactly match Agent 1's intended text after typing. inputMode=native-edit-context expected=\"SELECT id, full_name, email, city, status\\nFROM customers\\nWHERE email IS NULL\\n  AND status = 'inactive'\\n  AND city LIKE 'H%'\\n  AND full_name NOT LIKE '%Test%';\" actual=\"SELECT id, full_name, email, city, status FROM customers WHERE email IS NULL AND status = 'inactive' AND city LIKE 'H%' AND full_name NOT LIKE '%Test%';\" mountedMonaco=1 visibleMonaco=1 url=http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3"
+      },
+      {
+        "sequence": 70,
+        "at": "2026-08-13T22:48:18.683Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "detail": "attempting 152 characters"
+      },
+      {
+        "sequence": 71,
+        "at": "2026-08-13T22:48:22.187Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "detail": "typed 152 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 72,
+        "at": "2026-08-13T22:48:25.837Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "detail": "Run"
+      },
+      {
+        "sequence": 73,
+        "at": "2026-08-13T22:48:30.362Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 74,
+        "at": "2026-08-13T22:48:34.238Z",
+        "kind": "semantic",
+        "action": "continue_to_next_module",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-module-project/module-4-customer-cleanup-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn",
+        "detail": "normal navigation: Next module button"
+      },
+      {
+        "sequence": 75,
+        "at": "2026-08-13T22:48:40.020Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/sketch/sketch-project-brief",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 76,
+        "at": "2026-08-13T22:48:44.101Z",
+        "kind": "click",
+        "action": "e10",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/project/module-5-customer-follow-up-capstone-p1",
+        "detail": "Mark as read"
+      },
+      {
+        "sequence": 77,
+        "at": "2026-08-13T22:48:49.330Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "detail": "attempting 81 characters"
+      },
+      {
+        "sequence": 78,
+        "at": "2026-08-13T22:48:51.220Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_failed",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "detail": "The learner-visible Monaco editor did not exactly match Agent 1's intended text after typing. inputMode=native-edit-context expected=\"SELECT full_name, city, status FROM customers WHERE status IN ('active','draft');\" actual=\"SELECT full_name, city, status FROM customers WHERE status IN ('active', 'draft');\" mountedMonaco=1 visibleMonaco=1 url=http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1"
+      },
+      {
+        "sequence": 79,
+        "at": "2026-08-13T22:48:53.738Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "detail": "attempting 82 characters"
+      },
+      {
+        "sequence": 80,
+        "at": "2026-08-13T22:48:55.596Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "detail": "typed 82 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 81,
+        "at": "2026-08-13T22:48:59.384Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "detail": "Run"
+      },
+      {
+        "sequence": 82,
+        "at": "2026-08-13T22:49:05.485Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 83,
+        "at": "2026-08-13T22:49:08.723Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 84,
+        "at": "2026-08-13T22:49:12.530Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "attempting 143 characters"
+      },
+      {
+        "sequence": 85,
+        "at": "2026-08-13T22:49:15.665Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "typed 143 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 86,
+        "at": "2026-08-13T22:49:18.738Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "Run"
+      },
+      {
+        "sequence": 87,
+        "at": "2026-08-13T22:49:22.020Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 88,
+        "at": "2026-08-13T22:49:29.200Z",
+        "kind": "semantic",
+        "action": "open_editor_surface",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "Editor button"
+      },
+      {
+        "sequence": 89,
+        "at": "2026-08-13T22:49:32.761Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "attempting 131 characters"
+      },
+      {
+        "sequence": 90,
+        "at": "2026-08-13T22:49:35.627Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_failed",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "The learner-visible Monaco editor did not exactly match Agent 1's intended text after typing. inputMode=native-edit-context expected=\"SELECT full_name, email, city, status FROM customers WHERE status = 'active' AND email IS NOT NULL AND full_name NOT LIKE '%Test%';\" actual=\"SLECT full_name, email, city, status FROM customers WHERE status = 'active' AND email IS NOT NULL AND full_name NOT LIKE '%Test%';\" mountedMonaco=1 visibleMonaco=1 url=http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2"
+      },
+      {
+        "sequence": 91,
+        "at": "2026-08-13T22:49:38.459Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "attempting 131 characters"
+      },
+      {
+        "sequence": 92,
+        "at": "2026-08-13T22:49:41.336Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "typed 131 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 93,
+        "at": "2026-08-13T22:49:45.358Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "Run"
+      },
+      {
+        "sequence": 94,
+        "at": "2026-08-13T22:49:49.138Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 95,
+        "at": "2026-08-13T22:49:55.757Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 96,
+        "at": "2026-08-13T22:49:59.446Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+        "detail": "attempting 229 characters"
+      },
+      {
+        "sequence": 97,
+        "at": "2026-08-13T22:50:03.844Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+        "detail": "typed 229 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 98,
+        "at": "2026-08-13T22:50:06.709Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+        "detail": "Run"
+      },
+      {
+        "sequence": 99,
+        "at": "2026-08-13T22:50:13.768Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 100,
+        "at": "2026-08-13T22:50:16.486Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 101,
+        "at": "2026-08-13T22:50:20.535Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "detail": "attempting 302 characters"
+      },
+      {
+        "sequence": 102,
+        "at": "2026-08-13T22:50:26.637Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "detail": "typed 302 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 103,
+        "at": "2026-08-13T22:50:30.195Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "detail": "Run"
+      },
+      {
+        "sequence": 104,
+        "at": "2026-08-13T22:50:34.574Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-5/learn/sql-v2-sql-v2-5-capstone-project/module-5-customer-follow-up-capstone/exercise/cp-4",
+        "detail": "Check this answer"
+      }
+    ]
+  }
+}

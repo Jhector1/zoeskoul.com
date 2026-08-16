@@ -404,12 +404,13 @@ function defer(fn: () => void) {
   else Promise.resolve().then(fn);
 }
 
-export function ReviewToolsProvider({
+export function ReviewToolsProviderWithSketch({
   children,
   ensureVisible,
   onBindToToolsPanel,
   onUnbindFromToolsPanel,
   externalBoundId,
+  sketch,
   enabled = true,
   mode = "manual",
   resetKey,
@@ -419,6 +420,7 @@ export function ReviewToolsProvider({
   onBindToToolsPanel: (args: { id: string } & RegisterArgs) => void | boolean | Promise<void | boolean>;
   onUnbindFromToolsPanel?: () => void;
   externalBoundId?: string | null;
+  sketch: ReturnType<typeof useDebouncedSketchState>;
   enabled?: boolean;
   mode?: "manual" | "first_unanswered" | "first_registered";
   resetKey?: string;
@@ -445,8 +447,6 @@ export function ReviewToolsProvider({
   const currentResetRevision = useReviewRuntimeStore((s) => s.resetRevision);
   const setFlushToolSnapshotCallback = useReviewRuntimeStore((s) => s.setFlushToolSnapshotCallback);
   const flushToolSnapshot = useReviewRuntimeStore((s) => s.flushToolSnapshot);
-
-  const sketch = useDebouncedSketchState({});
 
   useEffect(() => {
     enabledRef.current = Boolean(enabled);
@@ -1631,6 +1631,16 @@ export function ReviewToolsProvider({
   );
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
+}
+
+type ReviewToolsProviderProps = Omit<
+  React.ComponentProps<typeof ReviewToolsProviderWithSketch>,
+  "sketch"
+>;
+
+export function ReviewToolsProvider(props: ReviewToolsProviderProps) {
+  const sketch = useDebouncedSketchState({});
+  return <ReviewToolsProviderWithSketch {...props} sketch={sketch} />;
 }
 
 export function useReviewTools() {

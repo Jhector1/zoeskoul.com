@@ -129,7 +129,6 @@ export default function ReviewTopicCards({
   onBeforeCardNavigate,
   onCompactQuizNavigationChange,
 }: Props) {
-  const storeCards = useReviewRuntimeStore((s) => s.cards);
   const freeNavigation = !workspaceCapabilities.usesProgressGating;
   const safeMaxUnlockedCardIndex = unlockAll || freeNavigation
     ? Math.max(0, viewCards.length - 1)
@@ -283,9 +282,7 @@ export default function ReviewTopicCards({
               const savedQuiz = (tp?.quizState?.[card.id] ??
                 null) as SavedQuizState | null;
 
-              const storeCard = storeCards[cardKey];
               const savedSketch =
-                storeCard?.sketch ??
                 tp?.sketchState?.[card.id] ??
                 null;
 

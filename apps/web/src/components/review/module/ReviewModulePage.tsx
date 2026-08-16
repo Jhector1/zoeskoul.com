@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import {ReviewToolsProvider} from "@/components/review/module/context/ReviewToolsContext";
+import {ReviewToolsProviderWithSketch} from "@/components/review/module/context/ReviewToolsContext";
 
 import type {ReviewModulePageProps} from "./types";
 import {useReviewModuleController} from "./hooks/useReviewModuleController";
@@ -76,8 +76,9 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
         <ReviewDestinationTransitionProvider
             value={vm.destinationTransition}
         >
-            <ReviewToolsProvider
+            <ReviewToolsProviderWithSketch
                 enabled={vm.toolsProvider.enabled}
+                sketch={vm.topicStage.sketch}
                 mode="manual"
                 resetKey={vm.toolsProvider.resetKey}
                 externalBoundId={vm.toolsProvider.externalBoundId}
@@ -86,7 +87,7 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
                 onUnbindFromToolsPanel={vm.toolsProvider.onUnbindFromToolsPanel}
             >
                 {page}
-            </ReviewToolsProvider>
+            </ReviewToolsProviderWithSketch>
         </ReviewDestinationTransitionProvider>
     );
 }

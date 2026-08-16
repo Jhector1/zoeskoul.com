@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 
 export function useDebouncedSketchState(args: {
@@ -83,5 +83,10 @@ export function useDebouncedSketchState(args: {
         };
     }, [flushAll]);
 
-    return { saveSketchDebounced, flushAll };
+    const api = useMemo(
+        () => ({ saveSketchDebounced, flushAll }),
+        [saveSketchDebounced, flushAll],
+    );
+
+    return api;
 }

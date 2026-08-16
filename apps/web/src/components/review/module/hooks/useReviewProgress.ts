@@ -166,8 +166,10 @@ export function useReviewProgress(args: {
         _setActiveTopicId(id);
     }, []);
 
-    const runtimeExerciseContractsKey = useReviewRuntimeStore((state) =>
-        Object.entries(state.exercises ?? {})
+    const runtimeExerciseContractsKey = useReviewRuntimeStore((state) => {
+        if (!pendingRuntimeHydrationRef.current) return "";
+
+        return Object.entries(state.exercises ?? {})
             .map(([key, value]) =>
                 [
                     key,
@@ -177,8 +179,8 @@ export function useReviewProgress(args: {
                 ].join("::"),
             )
             .sort()
-            .join("|"),
-    );
+            .join("|");
+    });
 
     useEffect(() => {
         useReviewRuntimeStore

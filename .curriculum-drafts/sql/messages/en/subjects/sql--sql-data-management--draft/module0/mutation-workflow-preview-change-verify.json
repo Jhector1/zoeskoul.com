@@ -34,19 +34,19 @@
               }
             },
             "mc-preview-change-verify": {
-              "title": "Evidence in a Safe Mutation",
-              "prompt": "Which actions provide useful evidence before or after a data change? Select all that apply.",
-              "hint": "Choose the actions that help you identify the target or confirm the result.",
+              "title": "Actions in a Safe Mutation Workflow",
+              "prompt": "Which actions belong to the safe mutation workflow taught in this module? Select all that apply.",
+              "hint": "Choose the actions that establish scope, confirm it, make the approved change, or verify the result.",
               "help": {
-                "concept": "A safe mutation is supported by evidence: preview the target, review the returned rows, make the approved change, and verify the final state.",
-                "hint_1": "A preview answers which rows are in scope.",
-                "hint_2": "A verification query answers whether the intended result was reached."
+                "concept": "A safe mutation uses evidence before and after the change instead of skipping directly to a write.",
+                "hint_1": "The workflow begins by identifying and reviewing the intended rows.",
+                "hint_2": "A successful write still needs a verification step afterward."
               },
               "options": {
                 "a": "Preview the target rows",
-                "b": "Review the preview result",
-                "c": "Apply the approved change",
-                "d": "Verify the final state"
+                "b": "Review the preview before changing data",
+                "c": "Apply the approved change after the target is confirmed",
+                "d": "Skip verification when the mutation reports success"
               }
             },
             "dr-mutation-workflow-order": {
@@ -55,8 +55,8 @@
               "hint": "Identify the target before applying the mutation, then inspect the final state.",
               "help": {
                 "concept": "A careful change moves from evidence to action and back to evidence.",
-                "hint_1": "Begin by identifying the intended rows.",
-                "hint_2": "Finish by confirming the database now matches the request."
+                "hint_1": "Start with “Preview the target rows”.",
+                "hint_2": "Finish with “Verify the final state”."
               },
               "tokens": {
                 "t1": "Preview the target rows",

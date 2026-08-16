@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_updating_controlled_row_sets_sketch0": {
               "title": "Correct Two Fields on One Item",
-              "prompt": "The audit approved two changes for item `3`: its price should become `50.00` and its status should become `inactive`. Apply both assignments in one scoped `UPDATE`. In `query.sql`, verify the resulting price and status for item 3.",
+              "prompt": "The audit approved two changes for item `3`: its price should become `50.00` and its status should become `inactive`. Apply both assignments in one scoped `UPDATE`. In `query.sql`, verify the resulting price and status for item 3. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Keep the related assignments together and restrict the change to one id.",
               "help": {
                 "concept": "One UPDATE can apply several related assignments to the same approved row.",
@@ -120,18 +120,18 @@
             },
             "multi-choice-1": {
               "title": "Benefits of Compound WHERE Conditions",
-              "prompt": "What are the benefits of using compound `WHERE` conditions in an `UPDATE` statement? Select all that apply.",
+              "prompt": "Which benefits can a well-written compound WHERE condition provide in an UPDATE? Select all that apply.",
               "hint": "Consider how compound conditions affect the update operation.",
               "help": {
-                "concept": "Compound `WHERE` conditions allow precise targeting of rows.",
-                "hint_1": "They help in targeting specific rows based on multiple criteria.",
-                "hint_2": "They ensure only the intended rows are updated."
+                "concept": "Compound WHERE conditions combine criteria so a row is changed only when it satisfies the complete target rule.",
+                "hint_1": "Think about row selection, not the number of SET assignments.",
+                "hint_2": "The WHERE condition defines the mutation boundary."
               },
               "options": {
-                "a": "They allow updating multiple columns at once",
-                "b": "They help target specific rows based on multiple criteria",
-                "c": "They ensure only intended rows are updated",
-                "d": "They automatically create new tables"
+                "a": "It changes multiple columns automatically.",
+                "b": "It can require several criteria before a row is targeted.",
+                "c": "It can narrow the mutation to the approved row set when the criteria are correct.",
+                "d": "It automatically creates a backup table."
               }
             },
             "drag-reorder-1": {
@@ -140,8 +140,8 @@
               "hint": "Think about the logical sequence of actions in an update operation.",
               "help": {
                 "concept": "A controlled update involves previewing, updating, and verifying.",
-                "hint_1": "Start with previewing the intended rows.",
-                "hint_2": "End with verifying the update results."
+                "hint_1": "Start with “Preview the intended rows with a SELECT”.",
+                "hint_2": "Finish with “Verify the update results with a SELECT”."
               },
               "tokens": {
                 "t1": "Preview the intended rows with a SELECT",
@@ -151,7 +151,7 @@
             },
             "practice-compound-update-scope": {
               "title": "Practice: Update a Compound Target Set",
-              "prompt": "The test Kitchen catalog is being retired. Change the status of Kitchen rows that are test data to `archived`. Use one scoped `UPDATE` whose condition requires both parts of that target. In `query.sql`, verify the affected rows.",
+              "prompt": "The test Kitchen catalog is being retired. Change the status of Kitchen rows that are test data to `archived`. Use one scoped `UPDATE` whose condition requires both parts of that target. In `query.sql`, verify the affected rows. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Neither category alone nor the test flag alone is narrow enough.",
               "help": {
                 "concept": "A compound WHERE condition expresses a multi-part business approval.",

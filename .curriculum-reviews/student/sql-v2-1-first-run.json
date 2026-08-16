@@ -1,0 +1,23 @@
+{
+  "status": "blocked",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn",
+  "pagesVisited": [],
+  "exercisesAttempted": 0,
+  "quizzesAttempted": 0,
+  "projectStepsAttempted": 0,
+  "findings": [],
+  "strongestParts": [],
+  "summary": "Unable to begin the learner run because both learner-state inspection tools repeatedly failed with a page.evaluate ReferenceError before the UI could be read or used.",
+  "stoppedReason": "Learner UI tooling failed repeatedly: ReferenceError: __name is not defined.",
+  "browserEvidence": {
+    "clickCount": 0,
+    "checkAnswerClicks": 0,
+    "runClicks": 0,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": []
+  }
+}
