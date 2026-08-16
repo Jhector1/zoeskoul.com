@@ -7,6 +7,13 @@ import type {
   ReviewModule,
 } from "@zoeskoul/curriculum-contracts/subjects/types";
 import ReviewModulePageClient from "@student/features/learning/ReviewModulePageClient";
+import {
+  buildReviewModuleRequestUrl,
+} from "./reviewModuleRequestUrl";
+import {
+  buildReviewModuleBootstrapIdentity,
+  canRenderReviewModuleBootstrapData,
+} from "./reviewModuleBootstrapIdentity";
 
 type PageData =
   | {
@@ -23,9 +30,9 @@ type PageData =
     };
 
 type State =
-  | { status: "loading" }
-  | { status: "ready"; data: PageData }
-  | { status: "error"; error: string };
+  | { status: "loading"; requestIdentity: string }
+  | { status: "ready"; requestIdentity: string; data: PageData }
+  | { status: "error"; requestIdentity: string; error: string };
 
 export function ExactReviewModuleView(props: {
   apiOrigin: string;
@@ -33,22 +40,34 @@ export function ExactReviewModuleView(props: {
   subjectSlug: string;
   moduleSlug: string;
 }) {
-  const [state, setState] = useState<State>({
+  const requestIdentity =
+    buildReviewModuleBootstrapIdentity({
+      locale: props.locale,
+      subjectSlug: props.subjectSlug,
+      moduleSlug: props.moduleSlug,
+    });
+
+  const [state, setState] = useState<State>(() => ({
     status: "loading",
-  });
+    requestIdentity,
+  }));
 
   useEffect(() => {
+    setState({
+      status: "loading",
+      requestIdentity,
+    });
     const controller = new AbortController();
-    const url = new URL(
-      `/api/student-ui/review-modules/${encodeURIComponent(
-        props.subjectSlug,
-      )}/${encodeURIComponent(props.moduleSlug)}`,
-      props.apiOrigin,
-    );
+    const requestUrl =
+      buildReviewModuleRequestUrl({
+        apiOrigin: props.apiOrigin,
+        browserUrl: window.location.href,
+        locale: props.locale,
+        subjectSlug: props.subjectSlug,
+        moduleSlug: props.moduleSlug,
+      });
 
-    url.searchParams.set("locale", props.locale);
-
-    void fetch(url, {
+    void fetch(requestUrl, {
       credentials: "include",
       cache: "no-store",
       signal: controller.signal,
@@ -69,7 +88,11 @@ export function ExactReviewModuleView(props: {
       })
       .then((data) => {
         if (!controller.signal.aborted) {
-          setState({ status: "ready", data });
+          setState({
+            status: "ready",
+            requestIdentity,
+            data,
+          });
         }
       })
       .catch((error) => {
@@ -82,6 +105,7 @@ export function ExactReviewModuleView(props: {
 
         setState({
           status: "error",
+          requestIdentity,
           error:
             error instanceof Error
               ? error.message
@@ -95,9 +119,16 @@ export function ExactReviewModuleView(props: {
     props.locale,
     props.moduleSlug,
     props.subjectSlug,
+    requestIdentity,
   ]);
 
-  if (state.status === "loading") {
+  const stateMatchesRequest =
+    state.requestIdentity === requestIdentity;
+
+  if (
+    !stateMatchesRequest ||
+    state.status === "loading"
+  ) {
     return (
       <div className="h-screen w-screen bg-[#0b0d12] text-white">
         <div className="grid h-full place-items-center">
@@ -124,8 +155,21 @@ export function ExactReviewModuleView(props: {
     );
   }
 
+  if (
+    !canRenderReviewModuleBootstrapData({
+      requestIdentity,
+      stateIdentity: state.requestIdentity,
+      status: state.status,
+    })
+  ) {
+    throw new Error(
+      "Review module bootstrap attempted to render stale data.",
+    );
+  }
+
   return (
     <ReviewModulePageClient
+      key={requestIdentity}
       canUnlockAll={
         state.data.canUnlockAll
       }

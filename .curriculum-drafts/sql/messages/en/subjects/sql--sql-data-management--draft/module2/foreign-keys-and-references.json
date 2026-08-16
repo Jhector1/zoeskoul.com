@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_foreign_keys_and_references_sketch0": {
               "title": "Link Departments to Their Managers",
-              "prompt": "The `employees` parent table is already provided. Create a `departments` child table with its own id and name, plus a manager id that must reference an employee id. Inspect the declared relationship afterward.",
+              "prompt": "The `employees` parent table is already provided. Create a `departments` child table with its own id and name, plus a manager id that must reference an employee id. Inspect the declared relationship afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "Leave the parent table unchanged and define the relationship on the child table.",
               "help": {
                 "concept": "A foreign key records which parent key a child column may reference.",
@@ -85,28 +85,28 @@
               }
             },
             "drag-reorder-foreign-key-steps": {
-              "title": "Steps to Implement FOREIGN KEY",
-              "prompt": "Arrange the steps to implement a FOREIGN KEY constraint in the correct order.",
-              "hint": "Start with defining the parent table and end with defining the foreign key constraint.",
+              "title": "Build the Parent-Child Schema in Order",
+              "prompt": "Arrange the schema steps so a child table can reference a parent key that already exists.",
+              "hint": "Create the referenced table before defining the child relationship.",
               "help": {
-                "concept": "Implementing a FOREIGN KEY involves creating the parent table, then the child table, and finally defining the FOREIGN KEY constraint.",
-                "hint_1": "Begin with creating the parent table.",
-                "hint_2": "End with defining the FOREIGN KEY in the child table."
+                "concept": "The parent key must exist before the child table definition can declare a reference to it.",
+                "hint_1": "Start with “Create the parent table and its key”.",
+                "hint_2": "Finish with “Declare the child FOREIGN KEY reference”."
               },
               "tokens": {
-                "t1": "Create the parent table",
-                "t2": "Create the child table",
-                "t3": "Define the FOREIGN KEY constraint"
+                "t1": "Create the parent table and its key",
+                "t2": "Begin the child table definition",
+                "t3": "Declare the child FOREIGN KEY reference"
               }
             },
             "fill-blank-choice-foreign-key-syntax": {
-              "title": "FOREIGN KEY Syntax",
-              "prompt": "Complete the syntax for declaring a FOREIGN KEY constraint.",
-              "hint": "Remember the structure of a FOREIGN KEY declaration.",
+              "title": "FOREIGN KEY Column in the Child Table",
+              "prompt": "Complete the pattern: FOREIGN KEY ([blank1]) REFERENCES parent_table(parent_column).",
+              "hint": "The blank names the column stored in the child table.",
               "help": {
-                "concept": "A FOREIGN KEY declaration specifies the child column and the parent table and column it references.",
-                "hint_1": "The syntax involves the FOREIGN KEY keyword followed by the column and REFERENCES clause.",
-                "hint_2": "Ensure you specify both the child column and the parent table and column."
+                "concept": "The FOREIGN KEY clause starts with the child column, then REFERENCES names the parent table and parent key.",
+                "hint_1": "Look inside the parentheses immediately after FOREIGN KEY.",
+                "hint_2": "That column belongs to the child table being defined."
               },
               "template": "FOREIGN KEY ([blank1]) REFERENCES parent_table(parent_column)",
               "choices": [
@@ -117,41 +117,41 @@
               ]
             },
             "fill-blank-choice-foreign-key-constraint": {
-              "title": "FOREIGN KEY Constraint",
-              "prompt": "Identify the correct keyword to declare a FOREIGN KEY constraint in SQL.",
-              "hint": "This keyword is used to establish a relationship between two tables.",
+              "title": "FOREIGN KEY Keyword",
+              "prompt": "Which SQL phrase declares a foreign-key relationship in a table definition?",
+              "hint": "Choose the phrase that explicitly names this relationship constraint.",
               "help": {
-                "concept": "The FOREIGN KEY clause declares a relationship from a child column to a parent key.",
-                "hint_1": "This keyword is part of the SQL syntax for defining relationships.",
-                "hint_2": "It is used to ensure referential integrity between tables."
+                "concept": "FOREIGN KEY introduces the child-side relationship before REFERENCES names the parent key.",
+                "hint_1": "PRIMARY KEY identifies rows in the current table.",
+                "hint_2": "UNIQUE controls duplicates rather than declaring a relationship."
               },
               "template": "[blank1] KEY (column_name) REFERENCES other_table(column_name)",
               "choices": [
-                "FOREIGN",
-                "PRIMARY",
+                "FOREIGN KEY",
+                "PRIMARY KEY",
                 "UNIQUE",
                 "CHECK"
               ]
             },
             "multi-choice-foreign-key-requirements": {
-              "title": "FOREIGN KEY Requirements",
-              "prompt": "What are the requirements for a column to be a FOREIGN KEY? Select all that apply.",
-              "hint": "Consider the relationship between the child and parent tables.",
+              "title": "Requirements of an Enforced SQLite Foreign Key",
+              "prompt": "With SQLite foreign-key enforcement enabled, which statements about a valid foreign-key relationship are correct? Select all that apply.",
+              "hint": "Focus on the parent key being referenceable and the child value having a valid parent when it is not NULL.",
               "help": {
-                "concept": "A FOREIGN KEY must reference a column in another table, and both columns must have compatible data types.",
-                "hint_1": "The referenced column must exist in the parent table.",
-                "hint_2": "The data types of the foreign key and the referenced column must be compatible."
+                "concept": "The referenced parent columns must be a PRIMARY KEY or otherwise UNIQUE in a compatible way. Each non-NULL child key must match a parent key. The child column itself need not be UNIQUE or indexed for the constraint to exist.",
+                "hint_1": "A foreign key may point to a PRIMARY KEY or an eligible UNIQUE parent key.",
+                "hint_2": "Indexing the child key can help performance but is not what makes the relationship valid."
               },
               "options": {
-                "a": "The column must be unique",
-                "b": "The column must reference a primary key",
-                "c": "The column must have the same data type as the referenced column",
-                "d": "The column must be indexed"
+                "a": "The referenced parent key must be PRIMARY KEY or otherwise UNIQUE in a compatible way.",
+                "b": "Each non-NULL child key must match an existing referenced parent key.",
+                "c": "The child foreign-key column must itself be UNIQUE.",
+                "d": "The child foreign-key column must be indexed for the constraint to work."
               }
             },
             "practice-two-foreign-key-relationships": {
               "title": "Practice: Give Order Items Two Parent Relationships",
-              "prompt": "The `orders` and `products` parent tables are provided. Create `order_items` so each line can identify both the order it belongs to and the product it represents. Declare both parent relationships and inspect them afterward.",
+              "prompt": "The `orders` and `products` parent tables are provided. Create `order_items` so each line can identify both the order it belongs to and the product it represents. Declare both parent relationships and inspect them afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "The two relationship columns have different parent tables.",
               "help": {
                 "concept": "One child table can carry multiple independent foreign-key relationships.",

@@ -40,13 +40,11 @@ function parseEnvInt(name: string, fallback: number | null) {
 /**
  * Attempts policy (server truth):
  * - assignment: finite default 3 (override by assignmentQuestionMaxAttempts)
- * - onboarding trial: finite
- * - daily practice, public challenge, subscriber practice, and ad-hoc practice: unlimited
+ * - onboarding trial, daily practice, public challenge, subscriber practice,
+ *   and ad-hoc practice: unlimited
  *
  * If you want a global finite cap for free practice, set:
  *   PRACTICE_DEFAULT_MAX_ATTEMPTS="5"
- * If you want a different onboarding-trial default:
- *   SESSION_DEFAULT_MAX_ATTEMPTS="3"
  */
 export function computeMaxAttemptsCore(args: {
     mode: RunMode;
@@ -58,7 +56,6 @@ export function computeMaxAttemptsCore(args: {
     const mode = args.mode;
 
     const assignmentDefault = parseEnvInt("ASSIGNMENT_QUESTION_DEFAULT_MAX_ATTEMPTS", 3);
-    const sessionDefault = parseEnvInt("SESSION_DEFAULT_MAX_ATTEMPTS", 3);
     const practiceDefault = parseEnvInt("PRACTICE_DEFAULT_MAX_ATTEMPTS", null); // null => unlimited
 
     if (mode === "assignment") {
@@ -72,7 +69,9 @@ export function computeMaxAttemptsCore(args: {
     }
 
     if (mode === "onboarding_trial") {
-        return parseMaxAttemptsAny(args.sessionMaxAttempts) ?? sessionDefault;
+        // Onboarding is instructional: stale finite session metadata must not
+        // reintroduce retry scarcity.
+        return null;
     }
 
     // standard subscriber practice and non-session practice are unlimited by default.

@@ -1,0 +1,74 @@
+{
+  "status": "completed",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+  "pagesVisited": [
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2"
+  ],
+  "exercisesAttempted": 0,
+  "quizzesAttempted": 1,
+  "projectStepsAttempted": 0,
+  "findings": [],
+  "strongestParts": [
+    "The topic summary clearly states that _ matches exactly one character.",
+    "A correct answer advanced automatically from Question 3 to Question 4 and awarded XP."
+  ],
+  "summary": "Answered the visible LIKE quiz question correctly and confirmed successful progression to Question 4.",
+  "stoppedReason": null,
+  "browserEvidence": {
+    "clickCount": 1,
+    "checkAnswerClicks": 1,
+    "runClicks": 0,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "at": "2026-08-13T22:10:42.350Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 2,
+        "at": "2026-08-13T22:10:48.030Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 3,
+        "at": "2026-08-13T22:10:50.791Z",
+        "kind": "click",
+        "action": "e15",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Exactly one character"
+      },
+      {
+        "sequence": 4,
+        "at": "2026-08-13T22:10:53.808Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 5,
+        "at": "2026-08-13T22:11:00.155Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      }
+    ]
+  }
+}

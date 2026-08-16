@@ -104,7 +104,23 @@ export function resolveToolsRailVisibility(args: ResolveToolsRailVisibilityArgs)
         args.hasRegistryWorkspaceExercise,
     );
 
-    const defaultVisible = authoredDefaultVisible ?? isExerciseBound;
+    /**
+     * Quiz ownership is intentionally stricter than inherited topic policy.
+     *
+     * A pure conceptual/choice/reorder quiz should not auto-open a reusable
+     * workspace merely because its topic inherited `defaultVisible: true`.
+     * The learner may still open Tools manually when `allowOpen` permits it.
+     *
+     * A quiz may still opt in explicitly at card/exercise scope, and a quiz
+     * genuinely bound to a workspace exercise opens by default.
+     */
+    const quizScopedDefaultVisible =
+        authoredBoolean(args.exerciseTools, "defaultVisible") ??
+        authoredBoolean(args.activeCard?.tools, "defaultVisible");
+
+    const defaultVisible = isQuizCard
+        ? quizScopedDefaultVisible ?? isExerciseBound
+        : authoredDefaultVisible ?? isExerciseBound;
     const allowOpen = authoredAllowOpen ?? true;
 
     // Explicitly setting both fields false removes Tools entirely. Otherwise a

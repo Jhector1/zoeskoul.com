@@ -178,7 +178,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "FOREIGN"
+        "value": "FOREIGN KEY"
       }
     },
     {
@@ -196,8 +196,8 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
-          "b",
-          "c"
+          "a",
+          "b"
         ]
       }
     },

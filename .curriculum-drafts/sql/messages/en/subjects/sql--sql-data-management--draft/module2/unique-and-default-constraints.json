@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_unique_and_default_constraints_sketch0": {
               "title": "Protect Customer Phone Numbers",
-              "prompt": "Create a `customers` table with an integer primary id, a required name, and a phone number that may not be duplicated across customer records. Inspect the resulting definition.",
+              "prompt": "Create a `customers` table with an integer primary id, a required name, and a phone number that may not be duplicated across customer records. Inspect the resulting definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "The business rule concerns duplicate phone numbers.",
               "help": {
                 "concept": "UNIQUE protects a business identifier from duplicate non-null values.",
@@ -107,8 +107,8 @@
               "hint": "Start with the column name and type, then add its constraints.",
               "help": {
                 "concept": "A column definition begins with a name and type, followed by constraints such as NOT NULL and DEFAULT.",
-                "hint_1": "The column name comes first.",
-                "hint_2": "The default expression follows the required-value rule."
+                "hint_1": "Start with “status”.",
+                "hint_2": "Finish with “DEFAULT 'pending'”."
               },
               "tokens": {
                 "t1": "status",
@@ -138,9 +138,9 @@
               "prompt": "A new order should begin with status 'pending' when the INSERT omits the status column. The appropriate constraint is [blank1].",
               "hint": "Choose the rule that supplies a value for an omitted column.",
               "help": {
-                "concept": "DEFAULT supplies the starting value declared in the table definition.",
+                "concept": "DEFAULT supplies the starting value declared in the table definition when the INSERT omits that column.",
                 "hint_1": "UNIQUE controls duplicates, not omitted values.",
-                "hint_2": "NOT NULL rejects NULL but does not choose a value."
+                "hint_2": "FOREIGN KEY controls relationships, while CHECK validates a condition."
               },
               "template": "A new order should begin with status 'pending' when the INSERT omits the status column. The appropriate constraint is [blank1].",
               "choices": [
@@ -152,7 +152,7 @@
             },
             "practice-default-order-status": {
               "title": "Practice: Give New Orders a Default Status",
-              "prompt": "Create an `orders` table with an integer primary id, a required customer id, and a status that automatically begins as `pending` when the column is omitted. Inspect the final definition.",
+              "prompt": "Create an `orders` table with an integer primary id, a required customer id, and a status that automatically begins as `pending` when the column is omitted. Inspect the final definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "The status column needs a database-supplied initial value.",
               "help": {
                 "concept": "DEFAULT supplies a value when an INSERT omits that column.",

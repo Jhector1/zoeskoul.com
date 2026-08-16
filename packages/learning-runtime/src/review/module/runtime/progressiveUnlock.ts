@@ -120,6 +120,31 @@ export function getTargetKeyForRouteTarget(
     );
 }
 
+export function isTrustedProgressiveRouteLease(args: {
+    trustedTargetKey: string | null | undefined;
+    currentTargetKey: string | null | undefined;
+}) {
+    return Boolean(
+        args.trustedTargetKey &&
+        args.currentTargetKey &&
+        args.trustedTargetKey === args.currentTargetKey
+    );
+}
+
+export function resolveFurthestUnlockedTargetKey(args: {
+    orderedKeys: readonly string[];
+    unlockedTargetKeys: ReadonlySet<string>;
+}) {
+    for (let index = args.orderedKeys.length - 1; index >= 0; index -= 1) {
+        const key = args.orderedKeys[index];
+        if (key && args.unlockedTargetKeys.has(key)) {
+            return key;
+        }
+    }
+
+    return null;
+}
+
 export function computeProgressiveUnlock(args: {
     registry: ReviewTargetRegistry | null | undefined;
     progress: any;
@@ -136,6 +161,7 @@ export function computeProgressiveUnlock(args: {
             unlockedTargetKeys,
             lockedTargetKeys,
             earliestUnlockedTargetKey: null as string | null,
+            furthestUnlockedTargetKey: null as string | null,
         };
     }
 
@@ -153,6 +179,8 @@ export function computeProgressiveUnlock(args: {
             unlockedTargetKeys,
             lockedTargetKeys,
             earliestUnlockedTargetKey: registry.orderedKeys[0] ?? null,
+            furthestUnlockedTargetKey:
+                registry.orderedKeys[registry.orderedKeys.length - 1] ?? null,
         };
     }
 
@@ -211,6 +239,10 @@ export function computeProgressiveUnlock(args: {
             registry.orderedKeys.find((key) => unlockedTargetKeys.has(key)) ??
             registry.orderedKeys[0] ??
             null,
+        furthestUnlockedTargetKey: resolveFurthestUnlockedTargetKey({
+            orderedKeys: registry.orderedKeys,
+            unlockedTargetKeys,
+        }),
     };
 }
 

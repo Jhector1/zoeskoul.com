@@ -7,6 +7,7 @@ const finalState = {
     navError: null,
     nextModuleId: null,
     nextTopicId: null,
+    hasNextNestedStep: false,
     activeCardIndex: 2,
     cardCount: 3,
     topicComplete: true,
@@ -16,6 +17,15 @@ const finalState = {
 describe("shouldShowFinalCertificateCta", () => {
     it("shows the certificate only after the final card of the final topic is complete", () => {
         expect(shouldShowFinalCertificateCta(finalState)).toBe(true);
+    });
+
+    it("keeps the certificate hidden while a nested capstone step remains", () => {
+        expect(
+            shouldShowFinalCertificateCta({
+                ...finalState,
+                hasNextNestedStep: true,
+            }),
+        ).toBe(false);
     });
 
     it("keeps normal Next navigation on earlier capstone cards", () => {

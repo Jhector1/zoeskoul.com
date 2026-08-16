@@ -1,0 +1,46 @@
+{
+  "status": "blocked",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn",
+  "pagesVisited": [
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn"
+  ],
+  "exercisesAttempted": 0,
+  "quizzesAttempted": 0,
+  "projectStepsAttempted": 0,
+  "findings": [
+    {
+      "severity": "critical",
+      "category": "broken_flow",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn",
+      "lessonOrExercise": null,
+      "problem": "The requested module cannot be opened.",
+      "evidence": "The learner page displays: “Review module not found. Subject sql-v2, module sql-v2-1 is not registered.” No learner controls are available.",
+      "learnerImpact": "A student cannot access any lesson or begin the module.",
+      "attemptedAction": "Opened and inspected the supplied Start URL."
+    }
+  ],
+  "strongestParts": [],
+  "summary": "The module was unavailable at the supplied URL, so no curriculum activities could be attempted.",
+  "stoppedReason": "A learner-visible “Review module not found” error prevents continuation.",
+  "browserEvidence": {
+    "clickCount": 0,
+    "checkAnswerClicks": 0,
+    "runClicks": 0,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "at": "2026-08-13T19:03:11.333Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn",
+        "detail": "ZoeSkoul Student"
+      }
+    ]
+  }
+}

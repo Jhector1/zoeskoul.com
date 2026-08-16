@@ -34,7 +34,7 @@ export default function SubjectFinishBanner(props: {
             </div>
 
             <div className="mt-1 text-emerald-900/80 dark:text-emerald-100/80">
-                {subjectFinish.message ?? copy.body}
+                {copy.body}
             </div>
 
             {showCertificateReady ? (

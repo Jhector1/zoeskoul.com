@@ -281,10 +281,37 @@ done
 cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
 
 pnpm dlx dotenv-cli \
-  -e /Users/admin/Documents/NextJSProject/zoeskoul.com/apps/web/.env.development.local \
-  -- pnpm --filter @zoeskoul/web build
+  -e /Users/admin/Documents/NextJSProject/zoeskoul-web-infra/apps/web/.env.development.local \
+  -- pnpm --filter @zoeskoul/web dev
 
 
   cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
 
   pnpm --filter @zoeskoul/student dev
+
+  cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
+
+  pnpm curriculum:agent:student -- \
+    --url "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn" \
+    --storage-state ".curriculum-reviews/auth/student.storage-state.json" \
+    --allow-origin "http://localhost:3000" \
+    --scope "Take this entire module exactly like a real student. Read every lesson in order. Attempt every Try-It, practice exercise, quiz, and project step. Do not inspect solutions or hidden implementation. Continue until the module is complete or a genuine learner-visible blocker prevents progress." \
+    --headed \
+    --max-turns 300
+
+
+
+    cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
+
+   cd /Users/admin/Documents/NextJSProject/zoeskoul-web-infra
+
+
+   pnpm curriculum:agent:student -- \
+     --url "http://localhost:3002/en/subjects/sql-data-management/modules" \
+     --storage-state "/Users/admin/Documents/NextJSProject/zoeskoul-web-infra/.curriculum-reviews/auth/student.storage-state.json" \
+     --allow-origin "http://localhost:3000" \
+     --model "gpt-5-nano" \
+     --scope "Take this SQL Data Management course as a real learner from the current saved progress and continue through every available module in order. Complete every lesson, practice exercise, quiz, and project step. Do not redo activities ZoeSkoul already marks complete unless required. For coding exercises, use only the learner-visible editor and file tabs. When an exercise has multiple editable files such as schema.sql, operations.sql, or query.sql, inspect the visible instructions and edit every required file through the Student UI. Verify the visible editor content after editing, then Run, inspect the visible results, and Check when required. Stay inside the normal learner flow and use Finish, Next, Next topic, Quiz, Mark as read, Continue, and the module-completion controls as appropriate. When a module genuinely finishes, continue into the next available module. Stop only when the course is complete or a genuine learner-visible blocker prevents progress. Do not inspect solutions, hidden tests, graders, curriculum files, source code, developer tools, server logs, or network payloads." \
+     --report "/Users/admin/Documents/NextJSProject/zoeskoul-web-infra/.curriculum-reviews/student/sql-data-management-gpt5-run-1.json" \
+     --headed \
+     --max-turns 800

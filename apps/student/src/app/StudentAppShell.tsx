@@ -175,6 +175,7 @@ export function StudentAppShell(props: {
   if (location.kind === "lesson") {
     return (
       <ExactReviewModuleView
+        key={`${location.locale}:${location.subjectSlug}:${location.moduleSlug}`}
         apiOrigin={props.apiOrigin}
         locale={location.locale}
         subjectSlug={location.subjectSlug}

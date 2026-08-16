@@ -1,0 +1,170 @@
+{
+  "cookies": [
+    {
+      "name": "AUTH_SESSION_ID",
+      "value": "aabf0914-7df0-4d71-857c-7c1bf3e9e10a.e5422991eb4f-48665",
+      "domain": "accounts.ziledigital.com",
+      "path": "/realms/ziledigital/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "KEYCLOAK_IDENTITY",
+      "value": "eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIyYTU4YWNlMi1jZTU1LTRkOWQtYWVkMi01Mzg3MjBiNDM3MDgifQ.eyJleHAiOjE3ODY2ODI2MjUsImlhdCI6MTc4NjY0NjYyNSwianRpIjoiMjNmMWQ3NDAtNmVlYS00N2EzLWI2MTctNDhiZWZkNDkwODA4IiwiaXNzIjoiaHR0cHM6Ly9hY2NvdW50cy56aWxlZGlnaXRhbC5jb20vcmVhbG1zL3ppbGVkaWdpdGFsIiwic3ViIjoiNzJkNDY5ZTItMzEwZS00MzY0LWEzMWYtNjMyMjJjNzQwY2I5IiwidHlwIjoiU2VyaWFsaXplZC1JRCIsInNpZCI6ImFhYmYwOTE0LTdkZjAtNGQ3MS04NTdjLTdjMWJmM2U5ZTEwYSIsInN0YXRlX2NoZWNrZXIiOiJ3aklaMGZGek0wSnNsdVEycVRUUnZfYnZqMmVyNUxMbHFqMkRVRDVVN2Y4In0.uZddGbqXjgKMN469ql-g9G-UsyTmTCLsYA93xF2uz_Ss_TLU2SKfQQ2PTb5Xz0Wp_R0f78Nt8DHQ__RpOjD_MA",
+      "domain": "accounts.ziledigital.com",
+      "path": "/realms/ziledigital/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "KEYCLOAK_SESSION",
+      "value": "\"ziledigital/72d469e2-310e-4364-a31f-63222c740cb9/aabf0914-7df0-4d71-857c-7c1bf3e9e10a\"",
+      "domain": "accounts.ziledigital.com",
+      "path": "/realms/ziledigital/",
+      "expires": 1786682625.931817,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "NEXT_LOCALE",
+      "value": "en",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1818182474.630766,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "zoeskoul.preferences",
+      "value": "v1.en.s.16.1",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1818182474.476043,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "authjs.csrf-token",
+      "value": "b8794afe6a83be96fe52aa63f68b438c429c5f0947f7b7f3adece3dc57e949f4%7Cf24502827b18a644c8916966e6c75ddb9cbe93d07e41eed1d17273b1e061aeb6",
+      "domain": "localhost",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "authjs.callback-url",
+      "value": "http%3A%2F%2Flocalhost%3A3002%2Fen%2Fsubjects",
+      "domain": "localhost",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__Host-GAPS",
+      "value": "1:FLTLxafpYI3_G_CfF1iY_IMxZGo6rw:wedEnUsi-muduU5Y",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1821206416.886752,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "OTZ",
+      "value": "8739040_76_80_104160_76_446820",
+      "domain": "accounts.google.com",
+      "path": "/",
+      "expires": 1789238424,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "NID",
+      "value": "533=jYAi7zsRYh85mHaGfVlK5J9JFIp8tlSQ5se-a6eBPO9o_PiBs4Z3eeKjJ_kLb2vAoJxZYs3YMluhM-CuAzQVzUhoMY6kUiKPOvtU4Q7K2yd0DVAa8HTNT22bGIXQB70aaJAVfxhDgciItc3IsaNpZuK3BnXB2BrIVpbX1aPcPCNLmW3ocS0Dz-49G_9fLbJC3SmoOV44VeY",
+      "domain": ".google.com",
+      "path": "/",
+      "expires": 1802457624.938369,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "cf_clearance",
+      "value": "GwcdW2LFn4tAaitrQ7kiLlUSA4HxlZEJZWtcaH9ZxEM-1786646479-1.2.1.1-4vhJvJC30iPNyQmFu7qS.gcSvZbp66VkzJqL1bg_z6rZyWV9DuqeymAgNpgkpTCtBBcgLGUbrojnI9OFdarYlR8wJ4q6tZFsI.9aXsoV3Xy78rMkr73PI6Gzh8GwqquD8xO4He87H6MLhIokQYHf7OaXRcMVZY.6mDoWlT2HjT4F6PW29yQGsLHxiGBft9eo0byUIUIyXVRc8VlXkT3hHi6Qk77l2y8_TfYNArl4WocPj03sKN5VjH65P__JiWOmcPwXZ8zTDc4v9tVVcC.BAluJ_Oz5Us2y8ATnR.RZJL0VVmufx2oJjrUXPb8oHbc_eiPFwjN0_Qv6sUMyuozy5Ev9Qbwd8QGBPXrmGZI24NQ",
+      "domain": ".ziledigital.com",
+      "path": "/",
+      "expires": 1818182479.865604,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://ziledigital.com",
+      "_crHasCrossSiteAncestor": false
+    },
+    {
+      "name": "authjs.session-token",
+      "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwia2lkIjoiYTlwRTBxamNpR2hJa013dEdXRTJvTmdydlFyWThzNkowR2wwT1JGblFhQzV4OHBNYlU4bzdVTllEMjhWeXI4aHdCbE5uVVVjdVpvOFNYOEk4OWo2RncifQ..cEbY3c84QVtKXaLhsmlfZg.zjZGVgX63XABxeDLY3Qs1wU9xXr1Kx402VcXzthfYnY6LJ6113oWgyY3UmN7lxyI7Ljlm1-GSgpGrQ02y15ycoJcCroZpb0br7ryX9CTZDnlLIsnNTI49JmvtBXxhI5mNrZe0aIcS6V_xjQw29ncUfO9MThkkrRKPkIiF25xMxr0Dr83qGL304958uJOmgsADoayzOxK3Yzstdvuxle69SJs_8PFrkgxduCkIzKTLGOpoZjYp44uvcNHLA57m4Ygl6F3e1RsdBLrhRRNeT1TouIzLFYdues1APA6igtLEijaYVNeuEB2didxjLfnIP4gi7SRp1aTHLkMvQ3ycoyYwM7iMSgxwr92qdQNTesyKj5OwWYQQ_-xU6CZkKboueMQc0BrI64Md1rsBvjA8DVYgH7v7PP1jPwzTid3P6w2uGPGrk9N7_SGncPO8bA5Cru_T1EK4skstGqhhOI4UjK32P8-Mh5d4sMTrlJqUGjiRjL5QB9XfPkVY6FIBxyhtFXfgpAJg4th0UDdOmV-qJq64a3KjeY-oqsh3bAmvfLzKfIwWRmET8CObTJuX9UKIZW-ApqhSXyutmTgWst43ofeOklZPAamdfwbQhDoK0HbHcNQ7RBeYJb6dAh3boP_8-OnGbxQWgif_-0W51sXyYKFNrOR9qxaD6GFMhV_pNEbJYnO_qtOQArQm4CTIZjI6jUBu0lVI04gqQ66Ap2wI491WvC9H7YZxpcNyJjVIuGV4i1gXUgoJVfl9goYUUThR6L0utPwi41F3Kp6BcC-DVdoHifC5BtlHuOl9pK0r5gpqRtQ8vZnsx0wmYURysugYctpVD10G-D12cxP0F4hs534AhNwio1iDi8KyNn2oPHurgeLYenPN9ZCRBjR5TNaRxGWxl4RXiszO7A9cF_DGl6ygvkSTMu5PGZyjVc0KfCU0XHA43nMqMJShRpl23Xmfzs4F4ujGUmUV1vtQLf0f5E7IV8MnB32Drod2sp9G1u-C1fU4P8xpjtPNwFOmZNhWKPafRK5o2ITsza-qZ4T5NqXC5XApG1xJC73CLEZmWqULTX7FuoYlOxG0X3NYn2i-89mKMjkzqkJOjlmAwA5cebZR75v6D9ZIs2xREnguKvpau4CB8k2t7SbS2xc0b4vo3b60COuNY_qee9nF_Hx8hsmFFfzca9RsL0SqC_izQokxTLc_MTEjoLH7eCOuL-xSyJ8IB3hVo4WEIMEYyOZ93-oZWHfHCo5jcxxSVnfQlMmR6YLBS1PRUJ8YgLD5di_1RePwAMkfs3B-nTuMscjM4ySMeKQTBT9bMa8GncdXYPT6FPqHkOYGNiCEQnhyyH6A0-yBQ0ea1fYJFDlhWYFBkXpWoLJDmkRpkGeN3-3b4g-SKsUPJ1GV4gi1T3BSJrHXfcZ3Gz-dywi_jucu10IhfuQp_G9tT9I6o1i8CRvsEo95uLF0YYQm5-lSRSOuek096hg_N_NCO8nMLVNrC1EBIC5KHbBkjPdgiV5UXzkgO7nfeDfcODstGhXIOoJpnts1U0cwEttG0ayEvUQFanTNhCLUvkrJmMMExZ54wUxzEhlgAO1Ni0Mw9MeKLUqjBFiaLKuTZ636tjYZe5MxnbI0tlM-djHL7PFCBDqvOfRA21RdB2n4NQrhAOIjPLejI9RnYHJjElFkdp60PJyWQyDFTlRddwsjo06mm-_4-o7i1iO0kNtKWnnCbIEcVt1G7TdZevU41KZ19X4CdZoUM-e_qNRMC7PArRPF5ModsJDPT6jTfPIOt5AMzGKkdAspz-vZ6jqSfSRM76Ed4Sfxxw94kATm4SymZbQ3CO-aGaXt55fYoFo_KpgWk_S9zhfOcygICItRWr8LO-ycBajTe16mfOTyw.u0iGp54z_Khf5uWNxVHgn_VX8bLnNC6KEbwfnNNMuIw",
+      "domain": "localhost",
+      "path": "/",
+      "expires": 1789238626.940848,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "http://localhost:3002",
+      "localStorage": [
+        {
+          "name": "learnoir.sfx",
+          "value": "{\"enabled\":true,\"volume\":0.7}"
+        },
+        {
+          "name": "APP_FONT_SIZE_PX",
+          "value": "16"
+        },
+        {
+          "name": "learnoir:locale",
+          "value": "en"
+        },
+        {
+          "name": "zoeskoul-theme",
+          "value": "system"
+        }
+      ]
+    },
+    {
+      "origin": "http://localhost:3000",
+      "localStorage": [
+        {
+          "name": "learnoir.sfx",
+          "value": "{\"enabled\":true,\"volume\":0.7}"
+        },
+        {
+          "name": "APP_FONT_SIZE_PX",
+          "value": "16"
+        },
+        {
+          "name": "learnoir:locale",
+          "value": "en"
+        },
+        {
+          "name": "zoeskoul-theme",
+          "value": "system"
+        }
+      ]
+    }
+  ]
+}

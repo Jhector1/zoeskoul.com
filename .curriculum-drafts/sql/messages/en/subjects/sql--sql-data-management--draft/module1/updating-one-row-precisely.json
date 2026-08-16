@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_updating_one_row_precisely_sketch0": {
               "title": "Activate the Trial Tote",
-              "prompt": "The Trial Tote, item `6`, passed review. Change only that item's status to `active` with a scoped `UPDATE`. In `query.sql`, show items 5 and 6 in id order so the target and a nearby row can be compared.",
+              "prompt": "The Trial Tote, item `6`, passed review. Change only that item's status to `active` with a scoped `UPDATE`. In `query.sql`, show items 5 and 6 in id order so the target and a nearby row can be compared. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Use the item's id as the mutation boundary.",
               "help": {
                 "concept": "A unique id is a strong boundary for a one-row correction.",
@@ -85,13 +85,13 @@
               }
             },
             "multi-choice-1": {
-              "title": "Components of an UPDATE Statement",
-              "prompt": "Select all components that are part of a typical UPDATE statement.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "Parts of the Simple UPDATE Form",
+              "prompt": "Which parts appear in the simple single-table UPDATE form taught in this lesson? Select all that apply.",
+              "hint": "Think about the command, the assignments, and the row filter used in the examples.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "The simple form taught here uses UPDATE, SET, and WHERE. More advanced UPDATE forms can add other clauses, but they are outside this lesson.",
+                "hint_1": "SET holds the assignments.",
+                "hint_2": "WHERE limits the affected rows."
               },
               "options": {
                 "a": "UPDATE keyword",
@@ -106,8 +106,8 @@
               "hint": "Start with the keyword that initiates the update process.",
               "help": {
                 "concept": "The order of clauses in an SQL statement is important for correct execution.",
-                "hint_1": "Begin with the action keyword.",
-                "hint_2": "Follow with the details of the change and the condition."
+                "hint_1": "Start with “UPDATE clause”.",
+                "hint_2": "Finish with “WHERE clause”."
               },
               "tokens": {
                 "t1": "UPDATE clause",
@@ -151,7 +151,7 @@
             },
             "practice-precise-single-row-update": {
               "title": "Practice: Reclassify One Item",
-              "prompt": "The Sample Poster, item `4`, was reclassified as `Art`. Use a scoped `UPDATE` so only that item receives the new category. In `query.sql`, show items 3 through 5 in id order to verify the correction beside unchanged rows.",
+              "prompt": "The Sample Poster, item `4`, was reclassified as `Art`. Use a scoped `UPDATE` so only that item receives the new category. In `query.sql`, show items 3 through 5 in id order to verify the correction beside unchanged rows. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Use the stable item id rather than a broad text match.",
               "help": {
                 "concept": "A one-row correction should use a predicate that identifies exactly that record.",

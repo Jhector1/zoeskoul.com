@@ -3,6 +3,7 @@ export type FinalCertificateCtaState = {
     navError: unknown;
     nextModuleId: string | null;
     nextTopicId: string | null;
+    hasNextNestedStep: boolean;
     activeCardIndex: number;
     cardCount: number;
     topicComplete: boolean;
@@ -19,6 +20,7 @@ export function shouldShowFinalCertificateCta(
     if (state.navLoading || Boolean(state.navError)) return false;
     if (!state.atEndOfPublishedTrack) return false;
     if (state.nextModuleId || state.nextTopicId) return false;
+    if (state.hasNextNestedStep) return false;
     if (!state.topicComplete || state.cardCount <= 0) return false;
 
     return state.activeCardIndex === state.cardCount - 1;

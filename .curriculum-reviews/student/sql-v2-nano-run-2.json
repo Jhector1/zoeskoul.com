@@ -1,0 +1,222 @@
+{
+  "status": "blocked",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+  "pagesVisited": [
+    "http://localhost:3002/en/subjects/sql-v2/modules",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2"
+  ],
+  "exercisesAttempted": 2,
+  "quizzesAttempted": 1,
+  "projectStepsAttempted": 0,
+  "findings": [
+    {
+      "severity": "major",
+      "category": "broken_flow",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+      "lessonOrExercise": "Module navigation",
+      "problem": "Unable to access Next module / module navigation due to a backdrop overlay on the Modules drawer.",
+      "evidence": "Attempted to click 'Modules' to go to the modules list; a backdrop overlay prevented interaction with the drawer's controls.",
+      "learnerImpact": "Cannot progress to the next module; must resolve UI interaction blocker.",
+      "attemptedAction": "Clicked 'Modules' button; attempted to close overlay; retried click; navigation blocked."
+    }
+  ],
+  "strongestParts": [
+    "Monaco editor becomes visible for code tasks",
+    "Quiz/lesson flow loads content and shows correct feedback when completed",
+    "Clear labeling of navigation controls (Modules, Quiz, Finish) "
+  ],
+  "summary": "Progress was made through the Intro to Like lesson and a quiz, but navigation to the next module is blocked by a UI overlay on the Modules drawer. A UI fix is needed to allow progression.",
+  "stoppedReason": "Blocked by learner-visible UI overlay preventing navigation to next module.",
+  "browserEvidence": {
+    "clickCount": 7,
+    "checkAnswerClicks": 1,
+    "runClicks": 1,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "at": "2026-08-13T22:14:48.124Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 2,
+        "at": "2026-08-13T22:14:53.443Z",
+        "kind": "click",
+        "action": "e7",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn",
+        "detail": "Continue lesson"
+      },
+      {
+        "sequence": 3,
+        "at": "2026-08-13T22:15:10.028Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "detail": "attempting 87 characters"
+      },
+      {
+        "sequence": 4,
+        "at": "2026-08-13T22:15:12.576Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_failed",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "detail": "The learner-visible Monaco editor did not exactly match Agent 1's intended text after typing. inputMode=native-edit-context expected=\"SELECT id, full_name, city\\nFROM customers\\nWHERE full_name LIKE 'M%'\\nORDER BY full_name;\" actual=\"SELECT id, full_name, city FROM customers WHERE full_name LIKE 'M%' ORDER BY full_name;\" mountedMonaco=1 visibleMonaco=1 url=http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0"
+      },
+      {
+        "sequence": 5,
+        "at": "2026-08-13T22:15:15.119Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "detail": "attempting 87 characters"
+      },
+      {
+        "sequence": 6,
+        "at": "2026-08-13T22:15:17.441Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "detail": "typed 87 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 7,
+        "at": "2026-08-13T22:15:22.533Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "detail": "Run"
+      },
+      {
+        "sequence": 8,
+        "at": "2026-08-13T22:15:26.083Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 9,
+        "at": "2026-08-13T22:15:29.475Z",
+        "kind": "click",
+        "action": "e21",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 10,
+        "at": "2026-08-13T22:15:32.292Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 11,
+        "at": "2026-08-13T22:15:33.974Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Quiz→"
+      },
+      {
+        "sequence": 12,
+        "at": "2026-08-13T22:15:35.865Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 13,
+        "at": "2026-08-13T22:15:41.114Z",
+        "kind": "click",
+        "action": "e13",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "____"
+      },
+      {
+        "sequence": 14,
+        "at": "2026-08-13T22:15:43.990Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 15,
+        "at": "2026-08-13T22:16:18.100Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 16,
+        "at": "2026-08-13T22:16:24.060Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Finish practice→"
+      },
+      {
+        "sequence": 17,
+        "at": "2026-08-13T22:16:27.112Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 18,
+        "at": "2026-08-13T22:16:28.524Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Finish practice→"
+      },
+      {
+        "sequence": 19,
+        "at": "2026-08-13T22:16:30.634Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 20,
+        "at": "2026-08-13T22:16:36.343Z",
+        "kind": "click",
+        "action": "e2",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Modules"
+      }
+    ]
+  }
+}

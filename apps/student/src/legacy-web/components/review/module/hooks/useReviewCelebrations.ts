@@ -125,6 +125,12 @@ export function useReviewCelebrations({
         }
 
         if (courseComplete && !prevCourseCompleteRef.current) {
+            // Final-course completion outranks the transient module milestone.
+            // The module can become locally complete one render before
+            // subjectFinish refreshes to certificate_ready/certificate_issued.
+            // Clear the stale module modal before showing the course modal so
+            // learners see exactly one final completion state.
+            setModuleCelebrateOpen(false);
             setCourseCelebrateBurstKey((k) => k + 1);
             setCourseCelebrateOpen(true);
         }

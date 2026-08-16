@@ -1,0 +1,179 @@
+{
+  "status": "blocked",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+  "pagesVisited": [
+    "http://localhost:3002/en/subjects/sql-v2/modules",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2"
+  ],
+  "exercisesAttempted": 2,
+  "quizzesAttempted": 2,
+  "projectStepsAttempted": 0,
+  "findings": [
+    {
+      "severity": "major",
+      "category": "broken_flow",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+      "lessonOrExercise": "Question 2 of 4",
+      "problem": "After selecting the visibly correct option '%a%', Check this answer stayed disabled; after selecting the visibly correct option '%a%', the UI advanced to a different question, but the subsequent check action produced no visible feedback and the question remained stuck with Attempts: 0.",
+      "evidence": "The question displayed choices '%a', '_a_', 'a%', '%a%'. Selecting '%a%' enabled Check this answer. After checking, the page still showed Question 2 of 4, Attempts: 0, Check this answer disabled, and Next disabled, with no success or error feedback.",
+      "learnerImpact": "The learner cannot progress through the quiz or unlock later topics/modules.",
+      "attemptedAction": "Selected '%a%' and clicked Check this answer, then waited and re-inspected the learner UI."
+    }
+  ],
+  "strongestParts": [
+    "Teaching clearly explained the distinction between % for variable-length matches and _ for exactly one character.",
+    "The starter SQL exercise was already visibly marked correct and showed a concrete expected result."
+  ],
+  "summary": "Resumed at module 4. The learner flow reached the LIKE quiz but became blocked when checking the second question; no feedback or progress was shown.",
+  "stoppedReason": "Quiz question remained stuck with Next disabled and no visible feedback after a genuine correct attempt.",
+  "browserEvidence": {
+    "clickCount": 5,
+    "checkAnswerClicks": 2,
+    "runClicks": 1,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "at": "2026-08-13T22:02:46.174Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 2,
+        "at": "2026-08-13T22:02:50.485Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 3,
+        "at": "2026-08-13T22:02:53.274Z",
+        "kind": "click",
+        "action": "e7",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn",
+        "detail": "Continue lesson"
+      },
+      {
+        "sequence": 4,
+        "at": "2026-08-13T22:02:54.354Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 5,
+        "at": "2026-08-13T22:03:07.951Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 6,
+        "at": "2026-08-13T22:03:10.741Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "detail": "Run"
+      },
+      {
+        "sequence": 7,
+        "at": "2026-08-13T22:03:12.729Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/exercise/try-intro-to-like-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 8,
+        "at": "2026-08-13T22:03:14.013Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 9,
+        "at": "2026-08-13T22:03:16.216Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/sketch/percent-wildcard-patterns",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Quiz→"
+      },
+      {
+        "sequence": 10,
+        "at": "2026-08-13T22:03:18.114Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 11,
+        "at": "2026-08-13T22:03:19.593Z",
+        "kind": "click",
+        "action": "e16",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "LIKE 'Chi%'"
+      },
+      {
+        "sequence": 12,
+        "at": "2026-08-13T22:03:21.850Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 13,
+        "at": "2026-08-13T22:03:26.065Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 14,
+        "at": "2026-08-13T22:03:27.397Z",
+        "kind": "click",
+        "action": "e16",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "'%a%'"
+      },
+      {
+        "sequence": 15,
+        "at": "2026-08-13T22:03:30.342Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-4/learn/sql-v2-sql-v2-4-1/intro-to-like/quiz/intro-to-like-q2",
+        "detail": "Check this answer"
+      }
+    ]
+  }
+}

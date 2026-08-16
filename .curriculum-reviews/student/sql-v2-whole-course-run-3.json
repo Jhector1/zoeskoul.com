@@ -1,0 +1,691 @@
+{
+  "status": "blocked",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+  "pagesVisited": [
+    "http://localhost:3002/en/subjects/sql-v2/modules",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/sketch/where-clause-order",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/sketch/or-alternatives",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/sketch/sketch-project-brief",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0"
+  ],
+  "exercisesAttempted": 5,
+  "quizzesAttempted": 8,
+  "projectStepsAttempted": 3,
+  "findings": [
+    {
+      "severity": "critical",
+      "category": "broken_flow",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+      "lessonOrExercise": "Sorting with ORDER BY — Lesson 1",
+      "problem": "The next module remains permanently in a loading state.",
+      "evidence": "The page continuously shows “Loading...” and “Loading editor…”; repeated waits totaling over 10 seconds did not settle it, no Check action appeared, and Next remained disabled.",
+      "learnerImpact": "The learner cannot submit the first exercise or continue through the remaining course.",
+      "attemptedAction": "Waited repeatedly and inspected the learner-visible state; loading never completed."
+    }
+  ],
+  "strongestParts": [
+    "The WHERE and comparison explanation is concise and directly supports the exercises.",
+    "The project effectively preserves and extends one query across three realistic milestones.",
+    "Expected-result tables make Run output easy to compare before grading."
+  ],
+  "summary": "Resumed at module 2, completed both topics and all three project milestones, then continued via the module-completion flow. Module 3’s first exercise never finished loading, blocking further progress.",
+  "stoppedReason": "Module 3’s first exercise remained stuck on “Loading editor…” with forward navigation disabled.",
+  "browserEvidence": {
+    "clickCount": 15,
+    "checkAnswerClicks": 13,
+    "runClicks": 5,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "at": "2026-08-13T21:03:24.338Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 2,
+        "at": "2026-08-13T21:03:30.109Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 3,
+        "at": "2026-08-13T21:03:34.069Z",
+        "kind": "click",
+        "action": "e8",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn",
+        "detail": "Continue lesson"
+      },
+      {
+        "sequence": 4,
+        "at": "2026-08-13T21:03:40.275Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 5,
+        "at": "2026-08-13T21:03:44.265Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "detail": "attempting 70 characters"
+      },
+      {
+        "sequence": 6,
+        "at": "2026-08-13T21:03:46.000Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "detail": "typed 70 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 7,
+        "at": "2026-08-13T21:03:48.563Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "detail": "Run"
+      },
+      {
+        "sequence": 8,
+        "at": "2026-08-13T21:03:50.069Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 9,
+        "at": "2026-08-13T21:03:54.954Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/sketch/where-clause-order",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 10,
+        "at": "2026-08-13T21:03:56.700Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/sketch/where-clause-order",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/sketch/where-clause-order",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 11,
+        "at": "2026-08-13T21:03:59.248Z",
+        "kind": "click",
+        "action": "e12",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/sketch/where-clause-order",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "Mark as read"
+      },
+      {
+        "sequence": 12,
+        "at": "2026-08-13T21:04:00.753Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 13,
+        "at": "2026-08-13T21:04:03.079Z",
+        "kind": "click",
+        "action": "e13",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "It chooses which rows appear in the result"
+      },
+      {
+        "sequence": 14,
+        "at": "2026-08-13T21:04:08.617Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 15,
+        "at": "2026-08-13T21:04:12.573Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 16,
+        "at": "2026-08-13T21:04:14.986Z",
+        "kind": "click",
+        "action": "e15",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "It keeps rows where the value exactly matches."
+      },
+      {
+        "sequence": 17,
+        "at": "2026-08-13T21:04:18.579Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 18,
+        "at": "2026-08-13T21:04:29.204Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 19,
+        "at": "2026-08-13T21:04:31.688Z",
+        "kind": "click",
+        "action": "e15",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "No, because 15 is not larger than 15"
+      },
+      {
+        "sequence": 20,
+        "at": "2026-08-13T21:04:34.570Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 21,
+        "at": "2026-08-13T21:04:42.194Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 22,
+        "at": "2026-08-13T21:04:44.286Z",
+        "kind": "click",
+        "action": "e12",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "Home"
+      },
+      {
+        "sequence": 23,
+        "at": "2026-08-13T21:04:48.357Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 24,
+        "at": "2026-08-13T21:04:51.586Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 25,
+        "at": "2026-08-13T21:04:55.057Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/quiz/why-filtering-matters-q2",
+        "detail": "Next topic→"
+      },
+      {
+        "sequence": 26,
+        "at": "2026-08-13T21:05:01.806Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 27,
+        "at": "2026-08-13T21:05:04.128Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "detail": "attempting 89 characters"
+      },
+      {
+        "sequence": 28,
+        "at": "2026-08-13T21:05:05.849Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "detail": "typed 89 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 29,
+        "at": "2026-08-13T21:05:10.614Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "detail": "Run"
+      },
+      {
+        "sequence": 30,
+        "at": "2026-08-13T21:05:13.947Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 31,
+        "at": "2026-08-13T21:05:18.851Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/exercise/try-and-conditions-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/sketch/or-alternatives",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 32,
+        "at": "2026-08-13T21:05:21.970Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/sketch/or-alternatives",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/sketch/or-alternatives",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 33,
+        "at": "2026-08-13T21:05:24.144Z",
+        "kind": "click",
+        "action": "e12",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/sketch/or-alternatives",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "Mark as read"
+      },
+      {
+        "sequence": 34,
+        "at": "2026-08-13T21:05:26.759Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 35,
+        "at": "2026-08-13T21:05:28.602Z",
+        "kind": "click",
+        "action": "e15",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "It returns rows only if all conditions are true."
+      },
+      {
+        "sequence": 36,
+        "at": "2026-08-13T21:05:32.103Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 37,
+        "at": "2026-08-13T21:05:37.996Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 38,
+        "at": "2026-08-13T21:05:40.308Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "AND"
+      },
+      {
+        "sequence": 39,
+        "at": "2026-08-13T21:05:45.054Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 40,
+        "at": "2026-08-13T21:05:52.098Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 41,
+        "at": "2026-08-13T21:05:55.103Z",
+        "kind": "click",
+        "action": "e13",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "It groups the OR conditions so the stock rule applies to the whole category group."
+      },
+      {
+        "sequence": 42,
+        "at": "2026-08-13T21:06:00.222Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 43,
+        "at": "2026-08-13T21:06:06.374Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 44,
+        "at": "2026-08-13T21:06:08.335Z",
+        "kind": "click",
+        "action": "e12",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "category = 'Home' AND stock < 10"
+      },
+      {
+        "sequence": 45,
+        "at": "2026-08-13T21:06:10.651Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 46,
+        "at": "2026-08-13T21:06:13.917Z",
+        "kind": "click",
+        "action": "e14",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "stock < 10 AND category = 'Home'"
+      },
+      {
+        "sequence": 47,
+        "at": "2026-08-13T21:06:16.841Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 48,
+        "at": "2026-08-13T21:06:19.337Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 49,
+        "at": "2026-08-13T21:06:22.146Z",
+        "kind": "click",
+        "action": "e25",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/and-conditions/quiz/and-conditions-q2",
+        "detail": "Next topic→"
+      },
+      {
+        "sequence": 50,
+        "at": "2026-08-13T21:06:27.638Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/sketch/sketch-project-brief",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 51,
+        "at": "2026-08-13T21:06:30.764Z",
+        "kind": "click",
+        "action": "e13",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/project/module-2-inventory-watchlist-project-p1",
+        "detail": "Mark as read"
+      },
+      {
+        "sequence": 52,
+        "at": "2026-08-13T21:06:38.786Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 53,
+        "at": "2026-08-13T21:06:41.680Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "detail": "attempting 54 characters"
+      },
+      {
+        "sequence": 54,
+        "at": "2026-08-13T21:06:42.684Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "detail": "typed 54 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 55,
+        "at": "2026-08-13T21:06:45.613Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "detail": "Run"
+      },
+      {
+        "sequence": 56,
+        "at": "2026-08-13T21:06:48.530Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 57,
+        "at": "2026-08-13T21:06:53.264Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 58,
+        "at": "2026-08-13T21:06:56.785Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 59,
+        "at": "2026-08-13T21:06:59.099Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "detail": "attempting 82 characters"
+      },
+      {
+        "sequence": 60,
+        "at": "2026-08-13T21:07:00.875Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "detail": "typed 82 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 61,
+        "at": "2026-08-13T21:07:03.821Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "detail": "Run"
+      },
+      {
+        "sequence": 62,
+        "at": "2026-08-13T21:07:07.180Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 63,
+        "at": "2026-08-13T21:07:11.049Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 64,
+        "at": "2026-08-13T21:07:16.491Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 65,
+        "at": "2026-08-13T21:07:19.985Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "detail": "attempting 105 characters"
+      },
+      {
+        "sequence": 66,
+        "at": "2026-08-13T21:07:21.773Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "detail": "typed 105 characters via native-edit-context and verified exact visible text"
+      },
+      {
+        "sequence": 67,
+        "at": "2026-08-13T21:07:24.591Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "detail": "Run"
+      },
+      {
+        "sequence": 68,
+        "at": "2026-08-13T21:07:28.054Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 69,
+        "at": "2026-08-13T21:07:32.564Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 70,
+        "at": "2026-08-13T21:07:43.775Z",
+        "kind": "semantic",
+        "action": "continue_to_next_module",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-module-project/module-2-inventory-watchlist-project/exercise/mp-3",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "detail": "normal navigation: Next module button"
+      },
+      {
+        "sequence": 71,
+        "at": "2026-08-13T21:08:06.071Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-3/learn/sql-v2-sql-v2-3-1/order-by/exercise/try-order-by-sketch0",
+        "detail": "ZoeSkoul Student"
+      }
+    ]
+  }
+}

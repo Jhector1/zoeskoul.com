@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_creating_tables_and_defining_columns_sketch0": {
               "title": "Build a Products Table",
-              "prompt": "The catalog needs a `products` table with three fields: an integer product id, a text product name, and a real-valued price. Define that table in `schema.sql`. Then inspect the stored table definition in `query.sql`.",
+              "prompt": "The catalog needs a `products` table with three fields: an integer product id, a text product name, and a real-valued price. Define that table in `schema.sql`. Then inspect the stored table definition in `query.sql`. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "Focus on the table name, column names, and data types.",
               "help": {
                 "concept": "CREATE TABLE defines the columns and data types that make up each record.",
@@ -101,13 +101,13 @@
               }
             },
             "multi-choice-2": {
-              "title": "Data Types in SQL",
-              "prompt": "Which of the following are valid SQL data types?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "SQLite Storage Classes",
+              "prompt": "Which of these are SQLite storage classes? Select all that apply.",
+              "hint": "Distinguish SQLite storage classes from convenient declared type names such as BOOLEAN.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "SQLite storage classes include INTEGER, REAL, TEXT, BLOB, and NULL. BOOLEAN is commonly declared but is not a separate storage class.",
+                "hint_1": "A declared type name and a storage class are not the same thing in SQLite.",
+                "hint_2": "Choose the names SQLite uses for stored values themselves."
               },
               "options": {
                 "a": "INTEGER",
@@ -117,19 +117,19 @@
               }
             },
             "drag-reorder-1": {
-              "title": "Order of SQL Clauses",
-              "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT statement.",
-              "hint": "Consider the typical flow of a SQL query.",
+              "title": "Build a Basic CREATE TABLE Statement",
+              "prompt": "Arrange the fragments so they form a valid basic CREATE TABLE statement.",
+              "hint": "Open the table definition, list the columns inside it, then close it.",
               "help": {
-                "concept": "SQL queries follow a specific order of clauses.",
-                "hint_1": "Start with the clause that specifies what to retrieve.",
-                "hint_2": "Finish with the clause that orders the results."
+                "concept": "A CREATE TABLE statement names the table, opens a parenthesized column list, defines the columns, and closes the statement.",
+                "hint_1": "Start with “CREATE TABLE products (”.",
+                "hint_2": "Finish with “);”."
               },
               "tokens": {
-                "t1": "SELECT",
-                "t2": "FROM",
-                "t3": "WHERE",
-                "t4": "ORDER BY"
+                "t1": "CREATE TABLE products (",
+                "t2": "id INTEGER,",
+                "t3": "name TEXT",
+                "t4": ");"
               }
             },
             "single-choice-1": {
@@ -150,7 +150,7 @@
             },
             "practice-create-orders-table": {
               "title": "Practice: Build an Orders Table",
-              "prompt": "Create an `orders` table with an integer order id, a text customer name, and a real-valued total amount. Define it in `schema.sql`, then inspect its stored definition in `query.sql`.",
+              "prompt": "Create an `orders` table with an integer order id, a text customer name, and a real-valued total amount. Define it in `schema.sql`, then inspect its stored definition in `query.sql`. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "Translate the three field requirements into typed columns.",
               "help": {
                 "concept": "A table definition turns a record design into named, typed columns.",

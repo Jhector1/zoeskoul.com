@@ -6,6 +6,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter as useNextRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
+import { useAppPreferences } from "@zoeskoul/preferences/react";
 import {
     ArrowRight,
     ArrowUpRight,
@@ -1584,7 +1585,8 @@ export default function HomePageAvatarOnboardingClient({
 }) {
     const { t, resolve } = useTaggedT("homeOnboarding");
     const reduceMotion = useReducedMotion();
-    const { setTheme, resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme();
+    const { updatePreferences } = useAppPreferences();
     const router = useRouter();
     const nextRouter = useNextRouter();
     const searchParams = useSearchParams();
@@ -1623,12 +1625,9 @@ export default function HomePageAvatarOnboardingClient({
 
     const applyThemeChoice = React.useCallback(
         (theme: "light" | "dark") => {
-            if (typeof window === "undefined") return;
-            window.requestAnimationFrame(() => {
-                setTheme(theme);
-            });
+            void updatePreferences({ theme }).catch(() => undefined);
         },
-        [setTheme],
+        [updatePreferences],
     );
 // 3) add these handlers near your other handlers
 

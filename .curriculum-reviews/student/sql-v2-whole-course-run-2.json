@@ -1,0 +1,352 @@
+{
+  "status": "blocked",
+  "startUrl": "http://localhost:3002/en/subjects/sql-v2/modules",
+  "endUrl": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+  "pagesVisited": [
+    "http://localhost:3002/en/subjects/sql-v2/modules",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/exercise/try-what-select-does-sketch0",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+    "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0"
+  ],
+  "exercisesAttempted": 1,
+  "quizzesAttempted": 0,
+  "projectStepsAttempted": 1,
+  "findings": [
+    {
+      "severity": "critical",
+      "category": "broken_flow",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+      "lessonOrExercise": "Filtering with WHERE and Comparisons, lesson 1",
+      "problem": "The next module remains permanently in a loading state.",
+      "evidence": "After continuing from the module-completion dialog, the page displayed “Loading...” and “Loading editor…” for over 25 seconds. Next remained disabled despite Monaco being visible.",
+      "learnerImpact": "The learner cannot complete the current lesson or advance through the remaining course.",
+      "attemptedAction": "Waited repeatedly and settled the client state, but loading never completed."
+    },
+    {
+      "severity": "major",
+      "category": "broken_flow",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+      "lessonOrExercise": "Module 1 Product Handoff Project, step 2",
+      "problem": "Progress saving visibly failed.",
+      "evidence": "The header showed “Save failed Retry” while the project answer was being edited, run, and checked.",
+      "learnerImpact": "A returning learner may lose completed work or be unsure whether progress is durable.",
+      "attemptedAction": "Continued after the answer was accepted and the module completion dialog appeared."
+    },
+    {
+      "severity": "minor",
+      "category": "accessibility",
+      "url": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/sketch/from-source-table",
+      "lessonOrExercise": "Selecting Data with SELECT and FROM",
+      "problem": "Collapsed editor text is exposed one character per line in learner-visible text.",
+      "evidence": "The page rendered the SQL/editor content as sequences such as “W r i t e t h e...” rather than readable lines.",
+      "learnerImpact": "Screen-reader and text-navigation users may encounter noisy, unintelligible editor content.",
+      "attemptedAction": null
+    }
+  ],
+  "strongestParts": [
+    "The SELECT/FROM teaching clearly separates choosing result columns from naming the source table.",
+    "Expected result tables made SQL output requirements concrete.",
+    "The Module 1 project meaningfully extended one working query from merchandising to warehouse needs."
+  ],
+  "summary": "Resumed saved progress, completed the remaining Module 1 project step correctly, and continued through the learner-visible completion dialog. Module 2 then became permanently stuck loading, preventing further progress.",
+  "stoppedReason": "Module 2 remained visibly stuck on “Loading...”/“Loading editor…” with forward navigation disabled.",
+  "browserEvidence": {
+    "clickCount": 13,
+    "checkAnswerClicks": 1,
+    "runClicks": 1,
+    "revealClicks": 0,
+    "practiceNextClicks": 0,
+    "finishClicks": 0,
+    "modulesClicks": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "at": "2026-08-13T20:53:17.350Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 2,
+        "at": "2026-08-13T20:53:24.545Z",
+        "kind": "click",
+        "action": "e7",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn",
+        "detail": "Continue lesson"
+      },
+      {
+        "sequence": 3,
+        "at": "2026-08-13T20:53:34.940Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/exercise/try-what-select-does-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/exercise/try-what-select-does-sketch0",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 4,
+        "at": "2026-08-13T20:53:37.156Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/exercise/try-what-select-does-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/sketch/from-source-table",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 5,
+        "at": "2026-08-13T20:53:38.660Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/sketch/from-source-table",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/sketch/from-source-table",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 6,
+        "at": "2026-08-13T20:53:41.271Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/sketch/from-source-table",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "detail": "Quiz→"
+      },
+      {
+        "sequence": 7,
+        "at": "2026-08-13T20:53:43.826Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 8,
+        "at": "2026-08-13T20:53:45.864Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 9,
+        "at": "2026-08-13T20:53:47.583Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 10,
+        "at": "2026-08-13T20:53:52.604Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 11,
+        "at": "2026-08-13T20:53:54.504Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 12,
+        "at": "2026-08-13T20:53:57.746Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 13,
+        "at": "2026-08-13T20:53:59.564Z",
+        "kind": "click",
+        "action": "e23",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/what-select-does/quiz/what-select-does-q2",
+        "detail": "Next topic→"
+      },
+      {
+        "sequence": 14,
+        "at": "2026-08-13T20:54:06.405Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/exercise/try-common-beginner-syntax-mistakes-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/exercise/try-common-beginner-syntax-mistakes-sketch1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 15,
+        "at": "2026-08-13T20:54:10.238Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/exercise/try-common-beginner-syntax-mistakes-sketch1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "detail": "Quiz→"
+      },
+      {
+        "sequence": 16,
+        "at": "2026-08-13T20:54:11.964Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 17,
+        "at": "2026-08-13T20:54:13.826Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 18,
+        "at": "2026-08-13T20:54:16.909Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 19,
+        "at": "2026-08-13T20:54:19.582Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 20,
+        "at": "2026-08-13T20:54:23.028Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "detail": "Next→"
+      },
+      {
+        "sequence": 21,
+        "at": "2026-08-13T20:54:24.630Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 22,
+        "at": "2026-08-13T20:54:27.113Z",
+        "kind": "click",
+        "action": "e24",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-1/common-beginner-syntax-mistakes/quiz/common-beginner-syntax-mistakes-q1",
+        "detail": "Next topic→"
+      },
+      {
+        "sequence": 23,
+        "at": "2026-08-13T20:54:30.974Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/sketch/sketch-project-brief",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 24,
+        "at": "2026-08-13T20:54:35.020Z",
+        "kind": "click",
+        "action": "e20",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/sketch/sketch-project-brief",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/project/module-1-product-starter-sheet-project-p1",
+        "detail": "Module project→"
+      },
+      {
+        "sequence": 25,
+        "at": "2026-08-13T20:54:40.637Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 26,
+        "at": "2026-08-13T20:54:43.415Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_attempt",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "detail": "attempting 54 characters"
+      },
+      {
+        "sequence": 27,
+        "at": "2026-08-13T20:54:44.626Z",
+        "kind": "type",
+        "action": "replace_primary_code_editor_failed",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "detail": "The learner-visible Monaco editor did not exactly match Agent 1's intended text after typing. inputMode=native-edit-context expected=\"SELECT id, name, category, price, stock\\nFROM products;\" actual=\"SELECT id, name, category, price, stock FROM products;\" mountedMonaco=1 visibleMonaco=1 url=http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2"
+      },
+      {
+        "sequence": 28,
+        "at": "2026-08-13T20:54:50.471Z",
+        "kind": "semantic",
+        "action": "run",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "detail": "Run"
+      },
+      {
+        "sequence": 29,
+        "at": "2026-08-13T20:54:52.327Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "detail": "ZoeSkoul Student"
+      },
+      {
+        "sequence": 30,
+        "at": "2026-08-13T20:54:55.989Z",
+        "kind": "semantic",
+        "action": "check_answer",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "detail": "Check this answer"
+      },
+      {
+        "sequence": 31,
+        "at": "2026-08-13T20:55:10.143Z",
+        "kind": "semantic",
+        "action": "continue_to_next_module",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-1/learn/sql-v2-sql-v2-1-module-project/module-1-product-starter-sheet-project/exercise/mp-2",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "detail": "normal navigation: Next module button"
+      },
+      {
+        "sequence": 32,
+        "at": "2026-08-13T20:55:37.733Z",
+        "kind": "observe",
+        "action": "observe_student_ui",
+        "urlBefore": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "urlAfter": "http://localhost:3002/en/subjects/sql-v2/modules/sql-v2-2/learn/sql-v2-sql-v2-2-1/why-filtering-matters/exercise/try-why-filtering-matters-sketch0",
+        "detail": "ZoeSkoul Student"
+      }
+    ]
+  }
+}

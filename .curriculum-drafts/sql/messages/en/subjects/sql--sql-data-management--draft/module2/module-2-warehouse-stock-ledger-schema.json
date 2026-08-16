@@ -37,7 +37,7 @@
             "steps": {
               "ci_warehouse_schema_step1": {
                 "title": "Create the Warehouse Table",
-                "prompt": "Start the ledger with a `warehouses` table containing an integer id and a text name. Inspect the table afterward to confirm that the first schema object exists.",
+                "prompt": "Start the ledger with a `warehouses` table containing an integer id and a text name. Inspect the table afterward to confirm that the first schema object exists. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "This first milestone establishes only the basic table shape.",
                 "help": {
                   "concept": "The project grows one valid schema state at a time.",
@@ -69,7 +69,7 @@
               },
               "ci_warehouse_schema_step2": {
                 "title": "Strengthen Warehouse Identity",
-                "prompt": "Carry the warehouse table forward. Make its id the primary key, require every warehouse to have a name, and prevent duplicate warehouse names. Inspect the resulting definition.",
+                "prompt": "The `warehouses` table now exists. Strengthen it so `id` is the primary key, every warehouse has a name, and duplicate warehouse names are rejected. Inspect the resulting definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Edit the existing table definition rather than creating a second warehouses table.",
                 "help": {
                   "concept": "A cumulative schema project strengthens the same definition as requirements grow.",
@@ -101,7 +101,7 @@
               },
               "ci_warehouse_schema_step3": {
                 "title": "Add the Warehouse Operating Default",
-                "prompt": "Carry the constrained warehouse table forward. Add a required text status whose value defaults to `active` when a new warehouse omits it. Inspect the updated definition.",
+                "prompt": "With the warehouse identity rules in place, add a required text `status` that defaults to `active` when a new warehouse omits it. Inspect the updated definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Preserve all existing warehouse rules while adding the new status field.",
                 "help": {
                   "concept": "A default can establish a consistent initial state without weakening required-data rules.",
@@ -133,7 +133,7 @@
               },
               "ci_warehouse_schema_step4": {
                 "title": "Create the Movement Table",
-                "prompt": "Keep the completed warehouse definition. Add a `stock_movements` table with an integer id, integer warehouse id, text sku, real quantity change, text movement type, and optional text note. Inspect the new table afterward.",
+                "prompt": "Keep the completed warehouse definition. Add a `stock_movements` table with an integer id, integer warehouse id, text sku, real quantity change, text movement type, and optional text note. Inspect the new table afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "This milestone establishes the movement record shape before adding stricter rules.",
                 "help": {
                   "concept": "Create the basic child-table structure before adding its integrity constraints.",
@@ -165,7 +165,7 @@
               },
               "ci_warehouse_schema_step5": {
                 "title": "Protect Required Movement Data",
-                "prompt": "Carry both tables forward. Make the movement id the primary key, and require warehouse id, sku, quantity change, and movement type on every movement record. The note may remain optional. Inspect the strengthened movement definition.",
+                "prompt": "Both tables now exist. Strengthen `stock_movements`: make its id the primary key and require warehouse id, sku, quantity change, and movement type on every record. Keep `note` optional, then inspect the updated definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Strengthen the existing movement table instead of adding another table.",
                 "help": {
                   "concept": "Required operational fields belong in the schema so incomplete movements are rejected consistently.",
@@ -197,7 +197,7 @@
               },
               "ci_warehouse_schema_step6": {
                 "title": "Connect Movements to Warehouses",
-                "prompt": "Finish the ledger schema. Give new movement records a default movement type of `receipt`, and require each movement's warehouse id to reference the id of an existing warehouse. Inspect the final movement definition.",
+                "prompt": "Finish the ledger schema. Give new movement records a default movement type of `receipt`, and require each movement's warehouse id to reference the id of an existing warehouse. Inspect the final movement definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Preserve every earlier constraint while adding the default and relationship.",
                 "help": {
                   "concept": "The final schema combines row identity, required data, defaults, uniqueness, and referential integrity.",

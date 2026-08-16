@@ -91,7 +91,7 @@ export function getPracticeExperiencePolicy(args: {
         mode: "onboarding_trial",
         label: "Onboarding trial",
         targetCount: args.targetCount ?? ONBOARDING_TRIAL_TARGET_COUNT,
-        maxAttempts: 3,
+        maxAttempts: null,
         allowReveal: FULL_HELP,
         lockDifficulty: difficulty,
         lockTopic: topic,
