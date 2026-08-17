@@ -212,15 +212,15 @@
         "what-the-terminal-is": {
           "course-introduction": {
             "title": "The Terminal Is a Text Interface",
-            "bodyMarkdown": "A terminal lets you control the computer by typing commands instead of clicking through windows. A command asks the shell to perform one specific action."
+            "bodyMarkdown": "A terminal is a text-based way to work with your computer. Instead of opening folders and choosing menu items with a mouse, you type a command and the shell interprets it.\n\nA simple terminal interaction can look like this:\n\n```text\n$ pwd\n/home/zoe\n```\n\nHere, `pwd` is the command you asked the shell to run, and `/home/zoe` is the result it printed. You do not need to memorize every command at once. The important idea is that terminal work is a conversation: give one clear instruction, read what happened, and then decide what to do next."
           },
           "terminal-command-output": {
             "title": "Commands Produce Results",
-            "bodyMarkdown": "Type a command, press Enter, and read the result before continuing. Some commands print information; others change the current terminal state."
+            "bodyMarkdown": "When you press **Enter**, the shell runs the command you typed. What happens next depends on the command: some commands print information, some change something, and some do both.\n\nFor example:\n\n```text\n$ pwd\n/home/zoe/projects\n```\n\nThe line `/home/zoe/projects` is **output**. It is information produced by the command. Other commands may succeed without printing anything, so an empty screen does not always mean nothing happened.\n\nA good terminal habit is to avoid guessing. Read any output you receive, and after a command changes files or your location, use an inspection command to confirm the new state."
           },
           "prompt-and-command": {
             "title": "Prompt Versus Command",
-            "bodyMarkdown": "The prompt shows that the terminal is ready for input. Type your command after the prompt; do not copy the prompt itself."
+            "bodyMarkdown": "The **prompt** is the terminal's signal that it is ready for your next command. Depending on the computer, a prompt may contain a username, computer name, folder, and a final symbol such as `$`.\n\nFor example:\n\n```text\nzoe@laptop:~/projects$ pwd\n/home/zoe/projects\nzoe@laptop:~/projects$\n```\n\nThe first line contains the prompt followed by the command `pwd`. The second line is the command's output. The last line is a new prompt, which means the shell is ready again.\n\nWhen an exercise tells you to run `pwd`, type only `pwd`. The prompt is already supplied by the terminal; it is not part of the command."
           }
         }
       }

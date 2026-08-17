@@ -261,15 +261,15 @@
         "viewing-file-contents": {
           "cat-whole-file": {
             "title": "Read a Small File with `cat`",
-            "bodyMarkdown": "`cat` prints the complete contents of a text file without changing it. It works best for short files."
+            "bodyMarkdown": "`cat` reads a text file and prints its complete contents to the terminal. It does not open an editor and it does not change the file.\n\nSuppose `status.txt` contains two lines. Running:\n\n```text\n$ cat status.txt\nReady\nWaiting\n```\n\nshows exactly what is stored in the file, in order.\n\n`cat` is especially useful for small files because you can inspect the whole thing at once. For a long file, however, printing every line can flood the terminal and make the useful part harder to find.\n\nThink of `cat` as a quick read-only check: use it when the file is short enough that seeing all of its contents is helpful."
           },
           "head-tail-preview": {
             "title": "Preview the Beginning and End",
-            "bodyMarkdown": "`head` shows the beginning of a file and `tail` shows the end. They are useful when printing an entire long file would be noisy."
+            "bodyMarkdown": "When a text file is long, you often do not need to print the whole thing. `head` previews the beginning of a file, while `tail` previews the end.\n\nFor example:\n\n```bash\nhead events.log\n```\n\nlets you inspect the first part of `events.log`, while:\n\n```bash\ntail events.log\n```\n\nshows the most recent-looking lines at the bottom of that file.\n\nBy default, these commands show a small section rather than everything. That makes them useful for logs, reports, and other files where the beginning or ending tells you what you need.\n\nUse `cat` when the whole file is small enough to read comfortably; use `head` or `tail` when a focused preview is clearer."
           },
           "wc-line-count": {
             "title": "Count Lines with `wc -l`",
-            "bodyMarkdown": "`wc -l file` reports how many lines the file contains. Use it when the number of line-based records matters."
+            "bodyMarkdown": "`wc` can count parts of a text file. With the `-l` option, it reports the number of lines.\n\nFor example:\n\n```text\n$ wc -l guests.txt\n4 guests.txt\n```\n\nThe first value, `4`, is the line count. The filename is printed beside it so you know which file the count belongs to.\n\nThis is useful when each line represents one item, record, or entry and you want a quick measurement without reading the whole file.\n\n`wc -l` answers \"how many lines are here?\" It does not show what those lines contain, so combine it with a reading command such as `cat`, `head`, or `tail` when you also need to inspect the text."
           }
         }
       }

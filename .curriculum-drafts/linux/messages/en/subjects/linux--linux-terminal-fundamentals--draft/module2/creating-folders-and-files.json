@@ -255,15 +255,15 @@
         "creating-folders-and-files": {
           "mkdir-one-folder": {
             "title": "Create a Folder with `mkdir`",
-            "bodyMarkdown": "`mkdir` creates a directory without moving you into it.\n\n```bash\nmkdir reading-list\n```\n\nList the parent directory afterward to verify the new name."
+            "bodyMarkdown": "`mkdir` means **make directory**. It creates a new folder inside the location you specify, but it does not automatically move your terminal into that folder.\n\nFor example:\n\n```bash\nmkdir photos-2026\n```\n\nIf you run this from your current directory, a new folder named `photos-2026` is created there. Your working directory stays the same.\n\nYou can verify the result with:\n\n```bash\nls\n```\n\nand then enter the folder later with `cd photos-2026` if needed.\n\nKeeping creation and navigation as separate actions is useful: first create the structure you want, confirm it exists, and then decide whether you need to move into it."
           },
           "mkdir-p-nested": {
             "title": "Create Nested Paths with `mkdir -p`",
-            "bodyMarkdown": "`mkdir -p` creates missing parent directories along with the requested nested path.\n\n```bash\nmkdir -p travel-pack/tickets\n```\n\nIt is useful when the parent path may not exist yet."
+            "bodyMarkdown": "A nested path can name several directories at once. Plain `mkdir` expects the parent directory to already exist, but `mkdir -p` can create any missing directories along the path.\n\nFor example:\n\n```bash\nmkdir -p projects/demo/assets\n```\n\nIf `projects` or `demo` does not exist yet, `-p` creates those directories before creating `assets`. The finished structure is:\n\n```text\nprojects/\n\u2514\u2500\u2500 demo/\n    \u2514\u2500\u2500 assets/\n```\n\nThe `-p` option is useful when you care about the complete path and do not want to create each level one command at a time.\n\nEven with `-p`, read the path carefully first. One mistyped folder name can create a perfectly valid structure in the wrong place."
           },
           "touch-files": {
             "title": "Create Empty Files with `touch`",
-            "bodyMarkdown": "`touch` creates an empty file when the named file does not already exist.\n\n```bash\ntouch research/links.txt\n```\n\nThe parent directory must already exist."
+            "bodyMarkdown": "`touch` can create an empty file when that file does not already exist. It is useful when you need the file itself before you are ready to put content inside it.\n\nFor example:\n\n```bash\ntouch ideas.txt\n```\n\nAfterward, `ls` can show `ideas.txt`, but the file contains no text yet. `touch` creates the file; it does not write a message into it.\n\nThe parent directory must already exist. For example, `touch notes/ideas.txt` works only if `notes` is already there.\n\nOne extra detail: if the named file already exists, `touch` normally updates its timestamp rather than erasing its contents. So do not treat `touch` as a command for clearing a file."
           }
         }
       }

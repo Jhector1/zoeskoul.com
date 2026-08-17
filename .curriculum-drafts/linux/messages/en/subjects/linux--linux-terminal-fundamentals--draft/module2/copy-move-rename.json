@@ -270,15 +270,15 @@
         "copy-move-rename": {
           "copy-with-cp": {
             "title": "Copy a File with `cp`",
-            "bodyMarkdown": "`cp source destination` creates another file while keeping the source in place.\n\n```bash\ncp itinerary.txt backups/itinerary.txt\n```\n\nVerify that both source and destination exist afterward."
+            "bodyMarkdown": "`cp` copies data from a **source** path to a **destination** path. The important idea is that copying leaves the original in place and creates another file at the destination.\n\nAssume `archive` already exists:\n\n```bash\ncp report.txt archive/report.txt\n```\n\nAfter the command succeeds, `report.txt` is still in the current directory and another copy exists as `archive/report.txt`.\n\nThe order matters: source first, destination second. A useful way to read the command is, \"copy **this** file **to here**.\"\n\nAfter copying, inspect both locations when the result matters. That confirms you created the new copy without accidentally losing the original."
           },
           "move-with-mv": {
             "title": "Move a File with `mv`",
-            "bodyMarkdown": "`mv source destination` relocates a file. After a successful move, the old path is gone and the destination path exists."
+            "bodyMarkdown": "`mv` moves a file from a **source** path to a **destination** path. Unlike `cp`, a successful move does not leave another copy at the old path.\n\nAssume an `archive` directory already exists:\n\n```bash\nmv notes.txt archive/notes.txt\n```\n\nBefore the command, `notes.txt` is in the current directory. Afterward, that old path is gone and the file is found at `archive/notes.txt`.\n\nThis is still the same file content; its location changed.\n\nWhen moving something important, inspect the source and destination before you run `mv`, then verify the destination afterward. That makes the change deliberate instead of relying on memory about where the file went."
           },
           "rename-with-mv": {
             "title": "Rename a File with `mv`",
-            "bodyMarkdown": "`mv` also renames a file when the destination is a different name in the same directory.\n\n```bash\nmv draft.txt final.txt\n```"
+            "bodyMarkdown": "`mv` is also the command used to rename a file. A rename is simply a move where the file stays in the same directory but receives a different destination name.\n\nFor example:\n\n```bash\nmv agenda-old.txt agenda.txt\n```\n\nBefore the command, the file is named `agenda-old.txt`. Afterward, that name is gone and the same file is available as `agenda.txt`.\n\nThe `mv` command does not have a separate \"rename mode.\" The destination path determines what happens. If the destination is another directory, the file moves there; if it is a new name in the same directory, the file is renamed.\n\nCheck the destination name carefully before pressing **Enter**, especially if a file with that name may already exist."
           }
         }
       }

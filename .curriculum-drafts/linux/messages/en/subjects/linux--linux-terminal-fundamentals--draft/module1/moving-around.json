@@ -267,15 +267,15 @@
         "moving-around": {
           "cd-into-folder": {
             "title": "Move Into a Folder",
-            "bodyMarkdown": "`cd` changes the terminal's current working directory. A folder name can be used when that folder is inside the current location."
+            "bodyMarkdown": "`cd` means **change directory**. It changes the terminal's current working directory; it does not move or rename the folder itself.\n\nSuppose you are here:\n\n```text\n$ pwd\n/home/zoe/projects\n```\n\nand `ls` shows a folder named `website`. You can enter it with:\n\n```text\n$ cd website\n$ pwd\n/home/zoe/projects/website\n```\n\nThe name `website` works because that folder is directly inside the current directory. After `cd`, commands that use relative names will start from the new location.\n\nThink of `cd` as changing your point of view in the filesystem: the files stay where they are, but your terminal is now working from a different folder."
           },
           "cd-up-one-level": {
             "title": "Move to the Parent Folder",
-            "bodyMarkdown": "`cd ..` moves one directory level upward to the current folder's parent."
+            "bodyMarkdown": "Every directory except the filesystem root has a **parent directory**: the folder one level above it. In a relative path, `..` is the special name for that parent.\n\nSuppose your current directory is:\n\n```text\n/home/zoe/projects/website\n```\n\nRunning:\n\n```text\n$ cd ..\n$ pwd\n/home/zoe/projects\n```\n\nmoves the terminal up exactly one level, from `website` to `projects`.\n\nThe two dots are not a folder you created, and they do not mean \"go home.\" They mean \"the parent of my current directory.\" If you are unsure where that will take you, run `pwd` before and after the move."
           },
           "relative-paths": {
             "title": "Navigate With Relative Paths",
-            "bodyMarkdown": "A relative path starts from the current directory. It can cross more than one folder level without requiring the full absolute path."
+            "bodyMarkdown": "A **relative path** describes a location starting from the current working directory. Because the starting point is already known, you do not have to type the full path from the top of the filesystem.\n\nSuppose `pwd` shows:\n\n```text\n/home/zoe/projects\n```\n\nand inside `projects` there is a folder `site` containing `assets`. You can move through both levels at once:\n\n```text\n$ cd site/assets\n$ pwd\n/home/zoe/projects/site/assets\n```\n\n`site/assets` is relative because it starts from the current directory and has no leading `/`.\n\nRelative paths are convenient, but they depend on where you are. The same relative path can refer to a different place if your working directory changes."
           }
         }
       }
