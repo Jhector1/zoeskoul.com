@@ -58,6 +58,7 @@ export default async function ModulePracticePage({
   const { locale, subjectSlug, moduleSlug } = await params;
   const sp = await searchParams;
   const practiceSessionId = scalar(sp, "sessionId");
+  if (!practiceSessionId) notFound();
 
   const [authSession, actor] = await Promise.all([auth(), getActor()]);
   const sessionUser: any = (authSession as any)?.user ?? null;

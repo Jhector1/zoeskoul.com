@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
+  readInstanceIdFromSignedPracticeKey,
+  resolvePracticeExerciseRequestKey,
   resolveStablePracticeExerciseId,
   samePracticeExerciseIdentity,
 } from "./exerciseIdentity";
@@ -71,6 +73,45 @@ describe("resolveStablePracticeExerciseId", () => {
 
     expect(first).toBe("instance:instance-42");
     expect(refreshed).toBe(first);
+  });
+
+
+  it("reads the exact PracticeQuestionInstance from an expired signed key", () => {
+    const body = Buffer.from(
+      JSON.stringify({
+        instanceId: "instance-q5",
+        exp: 1,
+      }),
+    ).toString("base64url");
+
+    expect(
+      readInstanceIdFromSignedPracticeKey(`${body}.expired-signature`),
+    ).toBe("instance-q5");
+  });
+
+  it("returns the exact authored key for signed-key refresh requests", () => {
+    expect(
+      resolvePracticeExerciseRequestKey({
+        item: { key: "expired.signed.token" } as any,
+        exercise: {
+          exerciseKey: "Practice-Q5-Code",
+          id: "fallback-id",
+          kind: "code_input",
+        } as any,
+      }),
+    ).toBe("Practice-Q5-Code");
+  });
+
+  it("does not manufacture a server request key from semantic fallback identity", () => {
+    expect(
+      resolvePracticeExerciseRequestKey({
+        exercise: {
+          topic: "joins",
+          kind: "code_input",
+          title: "Join customers and orders",
+        } as any,
+      }),
+    ).toBeNull();
   });
 
 });

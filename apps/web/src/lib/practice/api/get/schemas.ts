@@ -13,6 +13,11 @@ includeMissed: z.enum(["true", "false"]).optional(),
   allowReveal: z.enum(["true", "false"]).optional(),
   sessionId: z.string().optional(),
   statusOnly: z.enum(["true", "false"]).optional(),
+  // Exact signed-key refresh only. Normal exercise loading must never inherit
+  // the stricter "same open instance" failure semantics.
+  keyRefreshOnly: z.enum(["true", "false"]).optional(),
+  // Exact PracticeQuestionInstance encoded by the signed key being refreshed.
+  keyRefreshInstanceId: z.string().min(1).optional(),
     // ✅ add this
     // preferPurpose: z.enum(["quiz", "project"]).optional(),
   // ✅ NEW: persisted on PracticeSession so completion redirect survives refresh

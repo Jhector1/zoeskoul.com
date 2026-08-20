@@ -44,6 +44,83 @@ export function authoredPracticeHistoryExerciseKey(args: {
   return authoredId || String(args.exerciseKey ?? "").trim();
 }
 
+function collectPracticeHistoryStrings(
+  values: readonly unknown[],
+) {
+  const result = new Set<string>();
+
+  for (const value of values) {
+    const normalized = String(value ?? "").trim();
+    if (normalized) result.add(normalized);
+  }
+
+  return result;
+}
+
+function authoredPracticeHistoryKeyMatches(
+  authoredExerciseKey: string,
+  historyKey: string,
+) {
+  return (
+    historyKey === authoredExerciseKey ||
+    historyKey.endsWith(`:${authoredExerciseKey}`)
+  );
+}
+
+/**
+ * Resolve any persisted Practice instance back to the current canonical
+ * authored target. This is the single identity rule used by module history,
+ * completed-prefix progress, and next-target dedupe across every entry origin.
+ *
+ * Legacy/runtime-scoped keys are accepted only when they resolve uniquely
+ * inside the current authored candidate pool. We never guess an ambiguous
+ * key-only match across topics.
+ */
+export function resolveAuthoredPracticeHistoryTarget(args: {
+  item: UsedAuthoredPracticeTarget;
+  candidates: readonly AuthoredPracticeTarget[];
+}): AuthoredPracticeTarget | null {
+  const payload = asRecord(args.item.publicPayload);
+  const payloadExercise = asRecord(payload?.exercise);
+
+  const keyCandidates = collectPracticeHistoryStrings([
+    payload?.exerciseKey,
+    payload?.id,
+    payloadExercise?.exerciseKey,
+    payloadExercise?.id,
+    args.item.exerciseKey,
+  ]);
+  if (!keyCandidates.size) return null;
+
+  const topicCandidates = collectPracticeHistoryStrings([
+    args.item.topic?.slug,
+    payload?.topicSlug,
+    payload?.topic,
+    payloadExercise?.topicSlug,
+    payloadExercise?.topic,
+  ]);
+
+  const keyMatches = args.candidates.filter((candidate) =>
+    [...keyCandidates].some((historyKey) =>
+      authoredPracticeHistoryKeyMatches(
+        candidate.exerciseKey,
+        historyKey,
+      ),
+    ),
+  );
+
+  if (!keyMatches.length) return null;
+
+  if (topicCandidates.size) {
+    const exactTopicMatches = keyMatches.filter((candidate) =>
+      topicCandidates.has(candidate.topicSlug),
+    );
+    if (exactTopicMatches.length === 1) return exactTopicMatches[0];
+  }
+
+  return keyMatches.length === 1 ? keyMatches[0] : null;
+}
+
 export function normalizeAuthoredPracticePurpose(
   purpose: PublishedPracticeExerciseOption["exercisePurpose"] | unknown,
 ): AuthoredPracticePurpose {
@@ -186,28 +263,21 @@ export function resolveNextAuthoredPracticeTarget(args: {
 }) {
   const usedIdentities = new Set(
     args.usedTargets
-      .map((item) => {
-        const exerciseKey = authoredPracticeHistoryExerciseKey(item);
-        const topicSlug = String(item.topic?.slug ?? "").trim();
-        return exerciseKey && topicSlug ? `${topicSlug}|${exerciseKey}` : "";
-      })
-      .filter(Boolean),
-  );
-  const usedKeysWithoutTopic = new Set(
-    args.usedTargets
-      .filter((item) => !String(item.topic?.slug ?? "").trim())
-      .map((item) => authoredPracticeHistoryExerciseKey(item))
-      .filter(Boolean),
+      .map((item) =>
+        resolveAuthoredPracticeHistoryTarget({
+          item,
+          candidates: args.queue,
+        }),
+      )
+      .filter((target): target is AuthoredPracticeTarget => Boolean(target))
+      .map(authoredPracticeTargetIdentity),
   );
 
   return (
-    args.queue.find((target) => {
-      const identity = authoredPracticeTargetIdentity(target);
-      return (
-        !usedIdentities.has(identity) &&
-        !usedKeysWithoutTopic.has(target.exerciseKey)
-      );
-    }) ?? null
+    args.queue.find(
+      (target) =>
+        !usedIdentities.has(authoredPracticeTargetIdentity(target)),
+    ) ?? null
   );
 }
 

@@ -59,15 +59,14 @@ function resolveLearnerText(
 }
 
 /**
- * The original KindHelper displayed only exercise.prompt.
+ * Render only the authored exercise prompt.
  *
- * Standalone practice has a separate page header for exercise.title, but the
- * review lesson card does not. In the Vite lesson player that left learners
- * seeing only short text such as "Define the function before you call it."
- * while the authored task title ("Define and call greet") was omitted.
+ * Exercise titles are owned by their surrounding learner surface (for example,
+ * standalone practice headers or real project cards). Rendering exercise.title
+ * here duplicates assessment/quiz headings because this compatibility helper
+ * is also used inside the Student review lesson player.
  *
- * Keep validation metadata and hints separate. Display only the two authored
- * learner-facing fields: title and prompt.
+ * Keep validation metadata and hints separate.
  */
 export function ExercisePrompt({
   exercise,
@@ -76,46 +75,24 @@ export function ExercisePrompt({
 }) {
   const tagged = useTaggedT();
 
-  const title = resolveLearnerText(
-    exercise?.title,
-    tagged,
-  );
   const prompt = resolveLearnerText(
     exercise?.prompt,
     tagged,
   );
 
-  if (!title && !prompt) {
+  if (!prompt) {
     return null;
   }
 
   return (
-    <div
-      className="space-y-2"
-      data-testid="exercise-prompt"
-    >
-      {title ? (
-        <MathMarkdown
-          className={[
-            "ui-title-sm",
-            "text-[rgb(var(--ui-text)/0.96)]",
-            "[&_.katex-display]:overflow-x-auto",
-          ].join(" ")}
-          content={normalizeMath(title)}
-        />
-      ) : null}
-
-      {prompt && prompt !== title ? (
-        <MathMarkdown
-          className={[
-            "text-sm ui-text-muted",
-            "[&_.katex]:text-[rgb(var(--ui-text)/0.96)]",
-            "[&_.katex-display]:overflow-x-auto",
-            "[&_.katex-display]:py-2",
-          ].join(" ")}
-          content={normalizeMath(prompt)}
-        />
-      ) : null}
-    </div>
+    <MathMarkdown
+      className={[
+        "text-sm ui-text-muted",
+        "[&_.katex]:text-[rgb(var(--ui-text)/0.96)]",
+        "[&_.katex-display]:overflow-x-auto",
+        "[&_.katex-display]:py-2",
+      ].join(" ")}
+      content={normalizeMath(prompt)}
+    />
   );
 }

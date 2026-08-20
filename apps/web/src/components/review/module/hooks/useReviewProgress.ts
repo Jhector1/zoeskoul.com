@@ -106,6 +106,12 @@ export function createReviewNavigationProgressSnapshot(args: {
     });
 }
 
+export function reviewModuleTopicIdsDependencyKey(
+    moduleTopicIds: readonly string[],
+) {
+    return stableJson(Array.from(moduleTopicIds));
+}
+
 export function useReviewProgress(args: {
     subjectSlug: string;
     moduleSlug: string;
@@ -123,13 +129,39 @@ export function useReviewProgress(args: {
         moduleSlug,
         locale,
         firstTopicId,
-        moduleTopicIds,
+        moduleTopicIds: moduleTopicIdsInput,
         endpoint = "/api/review/progress",
         gamificationEnabled = endpoint === "/api/review/progress",
         readOnly = false,
         followRemoteNavigation = true,
         remoteSyncEnabled = true,
     } = args;
+
+    /**
+     * Review progress is scoped by topic values, not by a caller-created array
+     * identity. Standalone Practice passes an inline empty list; without this
+     * stable owner, a successful GET updates state, re-renders, receives a new
+     * [], and restarts hydration indefinitely.
+     */
+    const moduleTopicIdsKey =
+        reviewModuleTopicIdsDependencyKey(moduleTopicIdsInput);
+    const stableModuleTopicIdsRef = useRef<{
+        key: string;
+        value: readonly string[];
+    }>({
+        key: moduleTopicIdsKey,
+        value: Array.from(moduleTopicIdsInput),
+    });
+
+    if (stableModuleTopicIdsRef.current.key !== moduleTopicIdsKey) {
+        stableModuleTopicIdsRef.current = {
+            key: moduleTopicIdsKey,
+            value: Array.from(moduleTopicIdsInput),
+        };
+    }
+
+    const moduleTopicIds = stableModuleTopicIdsRef.current.value;
+
 
     const [progress, setProgress] = useState<ReviewProgressState>(
         emptyReviewProgress(),

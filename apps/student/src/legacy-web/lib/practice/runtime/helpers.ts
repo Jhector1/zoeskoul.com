@@ -268,7 +268,10 @@ export function historyRowToQItem(h: SessionHistoryRow): QItem {
         ...(h.publicPayload ?? {}),
     } as any;
 
-    const key = `history:${String(h.instanceId)}`;
+    const key =
+        typeof h.key === "string" && h.key.trim()
+            ? h.key.trim()
+            : `history:${String(h.instanceId)}`;
     const item = initItemFromExercise(ex, key);
 
     item.attempts = Number(h.attempts ?? 0);

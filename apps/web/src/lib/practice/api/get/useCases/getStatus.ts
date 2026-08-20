@@ -10,6 +10,28 @@ import {
     getAssignmentDifficulty,
 } from "../policies/session.policy";
 import { buildRevealForInstance } from "../../help/reveal/buildRevealForInstance";
+import { signKey } from "../mappers/key.mapper";
+
+export function buildInteractiveHistoryPracticeKey(args: {
+    instanceId: string;
+    answeredAt: unknown;
+    sessionId: string;
+    actor: {
+        userId?: string | null;
+        guestId?: string | null;
+    };
+    allowReveal: boolean;
+}) {
+    if (args.answeredAt) return null;
+
+    return signKey({
+        instanceId: args.instanceId,
+        sessionId: args.sessionId,
+        userId: args.actor.userId ?? null,
+        guestId: args.actor.guestId ?? null,
+        allowReveal: args.allowReveal,
+    });
+}
 
 export function canRevealExpectedForStatusOnly(
     session: any,
@@ -278,6 +300,13 @@ export async function getPracticeStatus(
 
             return {
                 instanceId: row.id,
+                key: buildInteractiveHistoryPracticeKey({
+                    instanceId: row.id,
+                    answeredAt: row.answeredAt,
+                    sessionId: session.id,
+                    actor,
+                    allowReveal: allowRevealEffective,
+                }),
                 createdAt: row.createdAt,
                 answeredAt: row.answeredAt,
                 topic: row.topic?.slug ?? "all",

@@ -39,7 +39,10 @@ import {
   submitPracticeItem,
 } from "@/lib/practice/runtime";
 import { PurposeMode, PurposePolicy } from "@zoeskoul/curriculum-contracts/subjects/types";
-import { samePracticeExerciseIdentity } from "@/lib/practice/exerciseIdentity";
+import {
+  readInstanceIdFromSignedPracticeKey,
+  samePracticeExerciseIdentity,
+} from "@/lib/practice/exerciseIdentity";
 import { resolveRevealCompletionTransition } from "@/lib/practice/experience/revealCompletion";
 import {
   canRevealPracticeAnswer,
@@ -332,25 +335,51 @@ export function usePracticeEngine(args: {
     appliedRunCountRef.current = true;
   }, [hydrated, run, setSessionSize]);
 
-  function updateCurrent(patch: Partial<QItem>) {
+  function updatePracticeItemForIdentity(args: {
+    sourceItem: QItem;
+    sourceExercise: Exercise;
+    patch: Partial<QItem>;
+  }) {
     setStack((prev) => {
       if (idx < 0 || idx >= prev.length) return prev;
+
+      const targetItem = prev[idx];
+      if (
+        !samePracticeExerciseIdentity({
+          leftItem: args.sourceItem,
+          leftExercise: args.sourceExercise,
+          rightItem: targetItem,
+          rightExercise: targetItem?.exercise ?? null,
+        })
+      ) {
+        return prev;
+      }
+
       const next = prev.slice();
       next[idx] = {
-        ...next[idx],
-        ...patch,
-        help: patch.help
+        ...targetItem,
+        ...args.patch,
+        help: args.patch.help
             ? {
-              ...next[idx].help,
-              ...patch.help,
+              ...targetItem.help,
+              ...args.patch.help,
               entries: {
-                ...next[idx].help.entries,
-                ...(patch.help.entries ?? {}),
+                ...targetItem.help.entries,
+                ...(args.patch.help.entries ?? {}),
               },
             }
-            : next[idx].help,
+            : targetItem.help,
       };
       return next;
+    });
+  }
+
+  function updateCurrent(patch: Partial<QItem>) {
+    if (!current || !exercise) return;
+    updatePracticeItemForIdentity({
+      sourceItem: current,
+      sourceExercise: exercise,
+      patch,
     });
   }
 
@@ -420,10 +449,9 @@ export function usePracticeEngine(args: {
   });
 
   function buildPracticeRequest(args: {
-    sid: string | null;
+    sid: string;
     signal?: AbortSignal;
   }) {
-    const useSession = Boolean(args.sid);
     const purposeRequest = resolvePracticePurposeRequestParams({
       sessionId: args.sid,
       preferPurpose: preferPurpose as PurposeMode | undefined,
@@ -431,15 +459,9 @@ export function usePracticeEngine(args: {
     });
 
     return {
-      sessionId: useSession ? args.sid ?? undefined : undefined,
+      sessionId: args.sid,
       allowReveal: allowReveal ? true : undefined,
       signal: args.signal,
-      subject: useSession ? undefined : subjectSlug,
-      module: useSession ? undefined : moduleSlug,
-      topic: useSession ? undefined : String(topic === "all" ? "" : topic),
-      difficulty:
-        useSession || difficulty === "all" ? undefined : difficulty,
-      section: useSession ? undefined : section ?? undefined,
       ...purposeRequest,
     };
   }
@@ -482,6 +504,13 @@ export function usePracticeEngine(args: {
   async function refreshCurrentPracticeKey() {
     if (!current || !exercise) return null;
 
+    const sourceItem = current;
+    const sourceExercise = exercise;
+    const refreshInstanceId = readInstanceIdFromSignedPracticeKey(sourceItem.key);
+    if (!refreshInstanceId) {
+      throw new Error("Unable to refresh this practice authorization identity.");
+    }
+
     const sid = getEffectiveSid({
       sessionId,
       resolvedSessionIdRef,
@@ -490,9 +519,11 @@ export function usePracticeEngine(args: {
     });
     if (!sid) return null;
 
-    const response = await fetchPracticeExercise(
-      buildPracticeRequest({ sid }),
-    );
+    const response = await fetchPracticeExercise({
+      ...buildPracticeRequest({ sid }),
+      keyRefreshOnly: true,
+      keyRefreshInstanceId: refreshInstanceId,
+    });
 
     const runFromApi = (response as any)?.run;
     if (runFromApi?.mode && !acceptRunMeta(runFromApi)) return null;
@@ -525,50 +556,49 @@ export function usePracticeEngine(args: {
     const freshBase = initItemFromExercise(freshExercise, freshKey, {
       resolveText: (value) => resolveTextRef.current(value),
     });
-    const sameExercise = samePracticeExerciseIdentity({
-      leftItem: current,
-      leftExercise: exercise,
-      rightItem: freshBase,
-      rightExercise: freshExercise,
-    });
 
-    const freshItem: QItem = sameExercise
-      ? {
-          ...freshBase,
-          ...current,
-          key: freshKey,
-          exercise: freshExercise,
-          help: {
-            ...freshBase.help,
-            ...current.help,
-            entries: {
-              ...freshBase.help.entries,
-              ...current.help.entries,
-            },
-          },
-        }
-      : freshBase;
-
-    setStack((prev) => {
-      if (idx < 0 || idx >= prev.length) return prev;
-      const next = prev.slice();
-      next[idx] = freshItem;
-      return next;
-    });
-
-    if (!sameExercise) {
-      padRef.current.a = cloneVec(freshItem.dragA) as any;
-      padRef.current.b = cloneVec(freshItem.dragB) as any;
+    if (
+      !samePracticeExerciseIdentity({
+        leftItem: sourceItem,
+        leftExercise: sourceExercise,
+        rightItem: freshBase,
+        rightExercise: freshExercise,
+      })
+    ) {
+      throw new Error(
+        "Practice exercise changed while refreshing its authorization. Please retry.",
+      );
     }
+
+    const freshItem: QItem = {
+      ...freshBase,
+      ...sourceItem,
+      key: freshKey,
+      exercise: freshExercise,
+      help: {
+        ...freshBase.help,
+        ...sourceItem.help,
+        entries: {
+          ...freshBase.help.entries,
+          ...sourceItem.help.entries,
+        },
+      },
+    };
+
+    updatePracticeItemForIdentity({
+      sourceItem,
+      sourceExercise,
+      patch: freshItem,
+    });
 
     return { item: freshItem, exercise: freshExercise };
   }
 
-  async function loadNextExercise(opts?: { forceNew?: boolean }) {
-    if (phase === "summary" && !opts?.forceNew) return;
-    if (completed && !opts?.forceNew) return;
+  async function loadNextExercise() {
+    if (phase === "summary") return;
+    if (completed) return;
     if (loadLockRef.current) return;
-    if (answeredCount >= sessionSize && !opts?.forceNew) return;
+    if (answeredCount >= sessionSize) return;
 
     loadLockRef.current = true;
 
@@ -586,9 +616,13 @@ export function usePracticeEngine(args: {
         authoritativeSessionId,
         initialSessionId,
       });
-      const sid = opts?.forceNew ? null : effectiveSid;
-      const useSession = Boolean(sid);
+      if (!effectiveSid) {
+        throw new Error(
+          "Practice session is required. Start Practice from a supported entry point.",
+        );
+      }
 
+      const sid = effectiveSid;
       const response = await fetchPracticeExercise(
         buildPracticeRequest({ sid, signal: controller.signal }),
       );
@@ -754,7 +788,15 @@ export function usePracticeEngine(args: {
         return;
       }
 
-      await loadNextExercise({ forceNew: !effectiveSid });
+      if (!effectiveSid) {
+        bootCompleteRef.current = true;
+        setLoadErr(
+          "Practice session is required. Start Practice from a supported entry point.",
+        );
+        return;
+      }
+
+      await loadNextExercise();
       if (alive) bootCompleteRef.current = true;
     })();
 
@@ -956,19 +998,23 @@ export function usePracticeEngine(args: {
 
       emitSfx(submitted.ok ? "answer:correct" : "answer:wrong");
 
-      updateCurrent({
-        ...(submitted.statePatch ?? {}),
-        result: {
-          ...(submitted.data as any),
-          ok: submitted.ok,
-          finalized: submitted.finalized,
-        },
-        attempts: submitted.used,
-        submitted: submitted.finalized,
+      updatePracticeItemForIdentity({
+        sourceItem: activeItem,
+        sourceExercise: activeExercise,
+        patch: {
+          ...(submitted.statePatch ?? {}),
+          result: {
+            ...(submitted.data as any),
+            ok: submitted.ok,
+            finalized: submitted.finalized,
+          },
+          attempts: submitted.used,
+          submitted: submitted.finalized,
 
-        // Every new validation result must control feedback visibility.
-        // Wrong feedback remains visible until the learner makes another real edit.
-        feedbackDismissed: submitted.ok,
+          // Every new validation result must control feedback visibility.
+          // Wrong feedback remains visible until the learner makes another real edit.
+          feedbackDismissed: submitted.ok,
+        },
       });
 
       if ((submitted.data as any)?.sessionComplete) {
@@ -1067,35 +1113,39 @@ export function usePracticeEngine(args: {
         ? previousHelp.openedStepKeys
         : [...previousHelp.openedStepKeys, chosenKey];
 
-      updateCurrent({
-        ...(!openingReveal && opened.dragA ? { dragA: opened.dragA } : {}),
-        ...(!openingReveal && opened.dragB ? { dragB: opened.dragB } : {}),
-        ...(opened.data.finalized
-          ? {
-              revealed: true,
-              submitted: true,
-              result: {
-                ok: false,
-                finalized: true,
-                revealUsed: true,
-                explanation: opened.data.content ?? null,
-                sessionComplete: Boolean(opened.data.sessionComplete),
-                returnUrl:
-                  (opened.data as any)?.returnUrl ??
-                  (opened.data as any)?.run?.returnUrl ??
-                  null,
-              } as any,
-            }
-          : {}),
-        help: {
-          ...previousHelp,
-          openedStepKeys: nextOpenedKeys,
-          activeStepKey: chosenKey,
-          busyStepKey: null,
-          error: null,
-          entries: {
-            ...previousHelp.entries,
-            [chosenKey]: opened.entry,
+      updatePracticeItemForIdentity({
+        sourceItem: activeItem,
+        sourceExercise: activeExercise,
+        patch: {
+          ...(!openingReveal && opened.dragA ? { dragA: opened.dragA } : {}),
+          ...(!openingReveal && opened.dragB ? { dragB: opened.dragB } : {}),
+          ...(opened.data.finalized
+            ? {
+                revealed: true,
+                submitted: true,
+                result: {
+                  ok: false,
+                  finalized: true,
+                  revealUsed: true,
+                  explanation: opened.data.content ?? null,
+                  sessionComplete: Boolean(opened.data.sessionComplete),
+                  returnUrl:
+                    (opened.data as any)?.returnUrl ??
+                    (opened.data as any)?.run?.returnUrl ??
+                    null,
+                } as any,
+              }
+            : {}),
+          help: {
+            ...previousHelp,
+            openedStepKeys: nextOpenedKeys,
+            activeStepKey: chosenKey,
+            busyStepKey: null,
+            error: null,
+            entries: {
+              ...previousHelp.entries,
+              [chosenKey]: opened.entry,
+            },
           },
         },
       });
@@ -1151,10 +1201,6 @@ export function usePracticeEngine(args: {
     loadNextExercise,
     actionErr: (args as any).actionErr ?? null,
     setActionErr,
-    sessionId,
-    resolvedSessionIdRef,
-    authoritativeSessionId,
-    initialSessionId,
   });
 
   const badge = useMemo(() => {
@@ -1175,7 +1221,7 @@ export function usePracticeEngine(args: {
     updateCurrent,
     resetCurrentExercise,
     loadNextExercise,
-    retryLoad: () => loadNextExercise({ forceNew: false }),
+    retryLoad: () => loadNextExercise(),
 
     canGoPrev: canGoPrev(),
     canGoNext: canGoNext(),

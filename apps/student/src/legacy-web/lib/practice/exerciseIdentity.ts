@@ -9,7 +9,7 @@ function firstText(...values: unknown[]) {
 }
 
 
-function readInstanceIdFromSignedPracticeKey(value: unknown) {
+export function readInstanceIdFromSignedPracticeKey(value: unknown) {
   if (typeof value !== "string") return null;
   const body = value.split(".", 1)[0];
   if (!body) return null;
@@ -45,6 +45,22 @@ function normalizeIdentityPart(value: unknown) {
  * be used as a React key, tool scope, editor owner, or persisted workspace id.
  * Refreshing that token should not remount the exercise or reset the editor.
  */
+export function resolvePracticeExerciseRequestKey(args: {
+  item?: QItem | null;
+  exercise?: Exercise | null;
+}) {
+  const item = args.item as any;
+  const exercise = args.exercise as any;
+
+  return firstText(
+    exercise?.exerciseKey,
+    item?.exerciseKey,
+    exercise?.id,
+    item?.exercise?.exerciseKey,
+    item?.exercise?.id,
+  );
+}
+
 export function resolveStablePracticeExerciseId(args: {
   item?: QItem | null;
   exercise?: Exercise | null;
@@ -53,13 +69,7 @@ export function resolveStablePracticeExerciseId(args: {
   const item = args.item as any;
   const exercise = args.exercise as any;
 
-  const authored = firstText(
-    exercise?.exerciseKey,
-    item?.exerciseKey,
-    exercise?.id,
-    item?.exercise?.exerciseKey,
-    item?.exercise?.id,
-  );
+  const authored = resolvePracticeExerciseRequestKey(args);
 
   if (authored) return normalizeIdentityPart(authored);
 

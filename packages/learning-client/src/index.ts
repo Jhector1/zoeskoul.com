@@ -323,3 +323,5 @@ export function createStudentPracticeClient(
 
 export type StudentPracticeClient =
   ReturnType<typeof createStudentPracticeClient>;
+
+export * from "./selfPacedPractice";

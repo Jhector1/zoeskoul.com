@@ -13,7 +13,7 @@ import type {
   PracticeChooserSelection,
   SubscriberPracticeSessionSummary,
 } from "@/lib/practice/experience/practiceChooserTypes";
-import { buildSubscriberPracticeHref } from "@/lib/practice/experience/subscriberPracticeHref";
+import { startSelfPacedPractice } from "@zoeskoul/learning-client";
 
 type StartResult = {
   sessionId: string;
@@ -113,55 +113,28 @@ export default function DailyFivePracticeClient(props: {
       setError(null);
 
       try {
-        const response = await fetch("/api/practice/session/start", {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            locale: props.locale,
-            subjectSlug: selection.subjectSlug,
-            moduleSlug: selection.moduleSlug,
-            sectionSlug: selection.sectionSlug,
-            topicSlug: selection.topicSlug,
-            targetCount,
-          }),
+        const started = await startSelfPacedPractice({
+          locale: props.locale,
+          subjectSlug: selection.subjectSlug,
+          moduleSlug: selection.moduleSlug,
+          sectionSlug: selection.sectionSlug,
+          topicSlug: selection.topicSlug,
+          targetCount,
         });
-        const data = await response.json().catch(() => null);
 
-        if (
-          response.ok &&
-          data?.sessionId &&
-          data?.experienceMode === "standard"
-        ) {
-          const resolvedTargetCount = Number(data?.targetCount);
-          const href = buildSubscriberPracticeHref({
-            locale: props.locale,
-            selection: {
-              ...selection,
-              subjectSlug: String(data.subjectSlug ?? selection.subjectSlug),
-              moduleSlug: String(data.moduleSlug ?? selection.moduleSlug),
-            },
-            targetCount:
-              Number.isFinite(resolvedTargetCount) && resolvedTargetCount > 0
-                ? resolvedTargetCount
-                : targetCount,
-            sessionId: String(data.sessionId),
-          });
-          startGlobalNavigationPending({
-            label: data.resumed ? t("continuing") : t("starting"),
-            source: "subscriber-practice-session",
-            targetHref: href,
-            minVisibleMs: 350,
-          });
-          router.push(href);
-          return;
-        }
-
+        startGlobalNavigationPending({
+          label: started.resumed ? t("continuing") : t("starting"),
+          source: "subscriber-practice-session",
+          targetHref: started.href,
+          minVisibleMs: 350,
+        });
+        router.push(started.href);
+      } catch (error) {
         setError(
-          String(data?.message ?? "Could not start this practice session."),
+          error instanceof Error
+            ? error.message
+            : "Could not start this practice session.",
         );
-      } catch {
-        setError("Could not start this practice session.");
       } finally {
         setBusy(false);
       }

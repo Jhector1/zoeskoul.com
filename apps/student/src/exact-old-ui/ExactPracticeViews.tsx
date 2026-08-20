@@ -182,6 +182,17 @@ export function ExactModulePracticeView(
     PRACTICE_MODES.has(rawMode)
       ? rawMode
       : "standard";
+  const sessionId =
+    query.get("sessionId");
+
+  if (!sessionId) {
+    return (
+      <PracticeState
+        title="Practice session unavailable"
+        message="This Practice route requires an active practice session."
+      />
+    );
+  }
 
   return (
     <PracticeClient
@@ -191,9 +202,7 @@ export function ExactModulePracticeView(
       moduleSlug={
         props.moduleSlug
       }
-      sessionId={
-        query.get("sessionId")
-      }
+      sessionId={sessionId}
       initialExperienceMode={
         mode as ComponentProps<
           typeof PracticeClient

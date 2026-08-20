@@ -225,12 +225,6 @@ export default function CardRenderer(props: {
         const tryItDone = Boolean(tp?.quizzesDone?.[tryItId]);
         const savedTryIt = (tp?.quizState?.[tryItId] ?? null) as SavedQuizState | null;
 
-        const title = tt.resolve(
-            tryIt.title ?? null,
-            {},
-            tryIt.title ?? reviewT("tryItYourself"),
-        );
-
         const resolvedTryItSpec = resolveDeepTagged(
             tryIt.spec,
             (key) => tt.resolve(`@:${key}`),
@@ -248,10 +242,6 @@ export default function CardRenderer(props: {
 
         return (
             <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/40 p-3 dark:border-emerald-400/20 dark:bg-emerald-950/20">
-                {showExpandedTitles ? (
-                    <div className="ui-title-sm">{title || reviewT("tryItYourself")}</div>
-                ) : null}
-
                 {process.env.NODE_ENV !== "production" ? (
                     <textarea
                         data-testid="cardrenderer-tryit-spec-e2e-input"
@@ -377,7 +367,7 @@ export default function CardRenderer(props: {
 
         return (
             <div className={wrapCls}>
-                <CardTitle title={visibleCardTitle} />
+                {displayKind === "project" ? <CardTitle title={visibleCardTitle} /> : null}
 
                 {showGate ? <GateBanner text={gateText} /> : null}
 

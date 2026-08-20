@@ -12,8 +12,7 @@ import type { PracticeExperienceMode } from "./types";
 export type PracticeRuntimeSurface =
   | "module_practice"
   | "daily_practice"
-  | "trial_practice"
-  | "lesson_review";
+  | "trial_practice";
 
 export type PracticeRuntimeSurfacePolicy = {
   surface: PracticeRuntimeSurface;
@@ -42,7 +41,9 @@ const POLICIES: Record<PracticeRuntimeSurface, PracticeRuntimeSurfacePolicy> = {
   module_practice: {
     surface: "module_practice",
     defaultMode: "standard",
-    allowedModes: ["practice", "standard", "assignment"],
+    // Header and Lesson/Review self-paced Practice are both persisted
+    // `standard` runs. Assignment is the only alternate module-route mode.
+    allowedModes: ["standard", "assignment"],
   },
   daily_practice: {
     surface: "daily_practice",
@@ -53,11 +54,6 @@ const POLICIES: Record<PracticeRuntimeSurface, PracticeRuntimeSurfacePolicy> = {
     surface: "trial_practice",
     defaultMode: "onboarding_trial",
     allowedModes: ["onboarding_trial", "public_challenge"],
-  },
-  lesson_review: {
-    surface: "lesson_review",
-    defaultMode: "practice",
-    allowedModes: ["practice"],
   },
 };
 

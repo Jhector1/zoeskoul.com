@@ -367,6 +367,8 @@ export async function generatePracticeExercise(
         preferKind,
         salt,
         exerciseKey,
+        keyRefreshOnly,
+        keyRefreshInstanceId,
         seedPolicy,
     } = params;
 
@@ -391,27 +393,106 @@ export async function generatePracticeExercise(
 
     const { reqSalt } = resolveRequestSalt(salt);
 
-    // Persisted sessions must resume their current unanswered instance instead
-    // of silently creating a second question on refresh or React retry. This is
-    // especially important for public challenges and daily-practice uniqueness.
+    // Normal session loading may resume the newest unanswered instance when it
+    // matches the requested authored exercise. Signed-key refresh is different:
+    // refresh the exact PracticeQuestionInstance encoded by the key already owned
+    // by the visible exercise. Do not infer authorization identity from queue
+    // order, authored exercise-key aliases, or answeredAt lifecycle.
     if (session?.id) {
-        const openInstance = await prisma.practiceQuestionInstance.findFirst({
-            where: {
-                sessionId: session.id,
-                answeredAt: null,
-            },
-            orderBy: { createdAt: "desc" },
-            select: {
-                id: true,
-                sessionId: true,
-                publicPayload: true,
-            },
-        });
+        const exactKeyRefresh = keyRefreshOnly === "true";
+        const selectOpenInstance = {
+            id: true,
+            sessionId: true,
+            exerciseKey: true,
+            publicPayload: true,
+        } as const;
+
+        if (exactKeyRefresh) {
+            const refreshInstanceId = String(
+                keyRefreshInstanceId ?? "",
+            ).trim();
+
+            if (!refreshInstanceId) {
+                return {
+                    kind: "json",
+                    status: 400,
+                    body: {
+                        code: "PRACTICE_KEY_REFRESH_INSTANCE_REQUIRED",
+                        message:
+                            "An exact practice instance is required to refresh authorization.",
+                    },
+                };
+            }
+
+            const refreshInstance =
+                await prisma.practiceQuestionInstance.findFirst({
+                    where: {
+                        id: refreshInstanceId,
+                        sessionId: session.id,
+                    },
+                    select: selectOpenInstance,
+                });
+
+            if (!refreshInstance) {
+                return {
+                    kind: "json",
+                    status: 409,
+                    body: {
+                        code: "PRACTICE_KEY_REFRESH_INSTANCE_MISSING",
+                        message:
+                            "Unable to refresh authorization for this practice instance.",
+                    },
+                };
+            }
+
+            const key = signKey({
+                instanceId: refreshInstance.id,
+                sessionId: refreshInstance.sessionId ?? null,
+                userId: actor.userId ?? null,
+                guestId: actor.guestId ?? null,
+                allowReveal: allowRevealEffective,
+            });
+            const run = await buildRunMetaWithChallengeAttempts({
+                prisma,
+                actor,
+                session,
+                diff,
+                allowRevealEffective,
+            });
+
+            return {
+                kind: "json",
+                status: 200,
+                body: {
+                    exercise: refreshInstance.publicPayload as any,
+                    key,
+                    sessionId: session.id,
+                    run,
+                    meta: {
+                        resumedOpenInstance: true,
+                        exactKeyRefresh: true,
+                    },
+                },
+            };
+        }
+
+        const openInstance =
+            await prisma.practiceQuestionInstance.findFirst({
+                where: {
+                    sessionId: session.id,
+                    answeredAt: null,
+                },
+                orderBy: { createdAt: "desc" },
+                select: selectOpenInstance,
+            });
 
         if (
             openInstance &&
             openPracticeInstanceMatchesRequestedExercise(
-                openInstance.publicPayload,
+                {
+                    exerciseKey: openInstance.exerciseKey,
+                    exercise: openInstance.publicPayload,
+                },
                 exerciseKey,
             )
         ) {
@@ -438,10 +519,16 @@ export async function generatePracticeExercise(
                     key,
                     sessionId: session.id,
                     run,
-                    meta: { resumedOpenInstance: true },
+                    meta: {
+                        resumedOpenInstance: true,
+                        exactKeyRefresh: false,
+                    },
                 },
             };
         }
+
+        // A different unanswered instance must not block a requested authored
+        // queue item. Normal generation continues below.
     }
 
     const purposeMode = decision.effective;

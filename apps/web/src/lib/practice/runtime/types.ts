@@ -21,6 +21,11 @@ export type PracticeRuntimeTextResolvers = {
 
 export type SessionHistoryRow = {
     instanceId: string;
+    /**
+     * Unanswered server-history rows carry a fresh signed authorization key so
+     * a resumed current exercise is immediately interactive.
+     */
+    key?: string | null;
     createdAt?: string | null;
     answeredAt?: string | null;
 

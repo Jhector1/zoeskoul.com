@@ -2,7 +2,7 @@ import type { MutableRefObject } from "react";
 import type { QItem, TopicValue } from "@/lib/practice/uiTypes";
 import type { Difficulty } from "@/lib/practice/types";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
-import { STORAGE_VERSION } from "./constants";
+import { SESSION_DEFAULT, STORAGE_VERSION } from "./constants";
 
 /** canonical: no n in key (recommended) */
 export function storageKeyV6(args: {
@@ -49,6 +49,57 @@ export function storageKeyForState(args: {
 
 export function lastSessionKey(subjectSlug: string, moduleSlug: string) {
   return `practice:v${STORAGE_VERSION}:lastSession:${subjectSlug}:${moduleSlug}`;
+}
+
+/**
+ * Keep the exact Practice session authoritative across reloads. Locked/fixed
+ * runs still own a session id even though their scope filters are immutable.
+ * Only unlocked runs may rewrite mutable scope controls.
+ */
+export function buildPracticeUrlSyncSearch(args: {
+  currentSearch: string;
+  sessionId: string | null;
+  isLockedRun: boolean;
+  section: string | null;
+  topic: TopicValue | string;
+  difficulty: Difficulty | "all" | string;
+  preferPurpose?: string | null;
+  purposePolicy?: string | null;
+  sessionSize: number;
+}) {
+  const qs = new URLSearchParams(args.currentSearch);
+  const sessionId = String(args.sessionId ?? "").trim();
+
+  if (sessionId) qs.set("sessionId", sessionId);
+  else qs.delete("sessionId");
+
+  if (!args.isLockedRun) {
+    if (args.section) qs.set("section", args.section);
+    else qs.delete("section");
+
+    qs.set("topic", String(args.topic));
+    qs.set("difficulty", String(args.difficulty));
+
+    if (args.preferPurpose) {
+      qs.set("preferPurpose", args.preferPurpose);
+    } else {
+      qs.delete("preferPurpose");
+    }
+
+    if (args.purposePolicy) {
+      qs.set("purposePolicy", args.purposePolicy);
+    } else {
+      qs.delete("purposePolicy");
+    }
+
+    if (args.sessionSize && args.sessionSize !== SESSION_DEFAULT) {
+      qs.set("questionCount", String(args.sessionSize));
+    } else {
+      qs.delete("questionCount");
+    }
+  }
+
+  return qs.toString();
 }
 
 /* ---------------- Expiry pruning (safe no-op if not JWT-like) ---------------- */

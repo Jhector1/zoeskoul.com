@@ -45,10 +45,10 @@ import {
 } from "./practice-kind-helper";
 
 describe(
-  "full learner-facing exercise prompt",
+  "learner-facing exercise prompt",
   () => {
     it(
-      "shows both the authored title and prompt",
+      "shows the authored prompt without duplicating the exercise title",
       () => {
         const html =
           renderToStaticMarkup(
@@ -62,7 +62,7 @@ describe(
             />,
           );
 
-        expect(html).toContain(
+        expect(html).not.toContain(
           "Define and call greet",
         );
         expect(html).toContain(
@@ -92,8 +92,11 @@ describe(
             />,
           );
 
-        expect(html).toContain(
+        expect(html).not.toContain(
           "Call a square function",
+        );
+        expect(html).toContain(
+          "Call the function and print its return value.",
         );
         expect(html).not.toContain(
           "Use one print call.",
@@ -102,7 +105,7 @@ describe(
     );
 
     it(
-      "does not duplicate identical title and prompt",
+      "renders the prompt even when title and prompt are identical",
       () => {
         const html =
           renderToStaticMarkup(

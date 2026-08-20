@@ -2,10 +2,8 @@
 "use client";
 
 import { useCallback } from "react";
-import type { MutableRefObject } from "react";
 import type { QItem } from "@/components/practice/practiceType";
 import { excusePracticeItem, isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
-import { getEffectiveSid } from "@student/features/practice/client/storage";
 
 export function usePracticeExcuseActions(args: {
     current: QItem | null;
@@ -14,15 +12,10 @@ export function usePracticeExcuseActions(args: {
     setStack: (updater: (prev: QItem[]) => QItem[]) => void;
 
     goNext: () => Promise<void>;
-    loadNextExercise: (opts?: { forceNew?: boolean }) => Promise<void>;
+    loadNextExercise: () => Promise<void>;
 
     actionErr: string | null;
     setActionErr: (v: string | null) => void;
-
-    sessionId: string | null;
-    resolvedSessionIdRef: MutableRefObject<string | null>;
-    authoritativeSessionId?: boolean;
-    initialSessionId?: string | null;
 }) {
     const {
         current,
@@ -32,10 +25,6 @@ export function usePracticeExcuseActions(args: {
         loadNextExercise,
         actionErr,
         setActionErr,
-        sessionId,
-        resolvedSessionIdRef,
-        authoritativeSessionId = false,
-        initialSessionId = null,
     } = args;
 
     const excuseCurrent = useCallback(
@@ -70,20 +59,8 @@ export function usePracticeExcuseActions(args: {
     );
 
     const skipLoadError = useCallback(async () => {
-        const effectiveSid = getEffectiveSid({
-            sessionId,
-            resolvedSessionIdRef,
-            authoritativeSessionId,
-            initialSessionId,
-        });
-        await loadNextExercise({ forceNew: !effectiveSid });
-    }, [
-        sessionId,
-        resolvedSessionIdRef,
-        authoritativeSessionId,
-        initialSessionId,
-        loadNextExercise,
-    ]);
+        await loadNextExercise();
+    }, [loadNextExercise]);
 
     return { excuseCurrent, excuseAndNext, skipLoadError };
 }

@@ -3,10 +3,14 @@ import "server-only";
 import { PracticeSessionStatus } from "@zoeskoul/db";
 
 import { prisma } from "@/lib/prisma";
-import { listPublishedPracticeExerciseOptions } from "@/lib/practice/challenges/publishedCatalog";
 import {
-  authoredPracticeHistoryExerciseKey,
+  listPublishedPracticeExerciseOptions,
+  type PublishedPracticeExerciseOption,
+} from "@/lib/practice/challenges/publishedCatalog";
+import {
+  authoredPracticeTargetFromOption,
   authoredPracticeTargetIdentity,
+  resolveAuthoredPracticeHistoryTarget,
 } from "./authoredPracticeQueue";
 import type {
   PracticeChooserCatalog,
@@ -16,6 +20,7 @@ import {
   listSubscriberPracticePoolOptions,
   readSubscriberPracticeMeta,
   subscriberPracticeScopeFromMeta,
+  type SubscriberPracticeHistoryItem,
 } from "./subscriberPractice";
 
 function resolveScopeTitles(
@@ -60,6 +65,80 @@ export type SubscriberModulePracticeProgress = {
   pct: number;
 };
 
+export async function loadSubscriberModulePracticeHistory(args: {
+  userId?: string | null;
+  subjectSlug: string;
+  moduleSlug: string;
+  moduleId?: string | null;
+  publishedOptions?: readonly PublishedPracticeExerciseOption[];
+}): Promise<SubscriberPracticeHistoryItem[]> {
+  if (!args.userId) return [];
+
+  const publishedOptions =
+    args.publishedOptions ?? (await listPublishedPracticeExerciseOptions());
+  const candidates = listSubscriberPracticePoolOptions({
+    options: publishedOptions,
+    subjectSlug: args.subjectSlug,
+    moduleSlug: args.moduleSlug,
+  }).map(authoredPracticeTargetFromOption);
+  if (!candidates.length) return [];
+
+  const moduleId =
+    String(args.moduleId ?? "").trim() ||
+    (
+      await prisma.practiceModule.findFirst({
+        where: {
+          slug: args.moduleSlug,
+          subject: {
+            slug: args.subjectSlug,
+          },
+        },
+        select: { id: true },
+      })
+    )?.id ||
+    null;
+  if (!moduleId) return [];
+
+  const rows = await prisma.practiceQuestionInstance.findMany({
+    where: {
+      session: {
+        userId: args.userId,
+        moduleId,
+      },
+    },
+    select: {
+      sessionId: true,
+      exerciseKey: true,
+      publicPayload: true,
+      answeredAt: true,
+      createdAt: true,
+      topic: {
+        select: { slug: true },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+    take: 1000,
+  });
+
+  return rows.flatMap((row) => {
+    const target = resolveAuthoredPracticeHistoryTarget({
+      item: row,
+      candidates,
+    });
+    if (!target) return [];
+
+    return [
+      {
+        exerciseKey: target.exerciseKey,
+        topicSlug: target.topicSlug,
+        seenAt: row.answeredAt ?? row.createdAt,
+        completedAt: row.answeredAt,
+        sessionId: row.sessionId,
+      },
+    ];
+  });
+}
+
 export async function loadSubscriberModulePracticeProgress(args: {
   userId?: string | null;
   subjectSlug: string;
@@ -72,58 +151,25 @@ export async function loadSubscriberModulePracticeProgress(args: {
     moduleSlug: args.moduleSlug,
   });
   const total = pool.length;
-  const poolIdentities = new Set(
-    pool.map((option) =>
-      authoredPracticeTargetIdentity({
-        topicSlug: option.topicSlug,
-        exerciseKey: option.exerciseKey,
-      }),
-    ),
-  );
   if (!total || !args.userId) {
     return { completed: 0, total, pct: 0 };
   }
 
-  const moduleRecord = await prisma.practiceModule.findFirst({
-    where: {
-      slug: args.moduleSlug,
-      subject: {
-        slug: args.subjectSlug,
-      },
-    },
-    select: { id: true },
-  });
-  if (!moduleRecord) {
-    return { completed: 0, total, pct: 0 };
-  }
-
-  const rows = await prisma.practiceQuestionInstance.findMany({
-    where: {
-      exerciseKey: { not: null },
-      answeredAt: { not: null },
-      session: {
-        userId: args.userId,
-        moduleId: moduleRecord.id,
-      },
-    },
-    select: {
-      exerciseKey: true,
-      publicPayload: true,
-      topic: {
-        select: { slug: true },
-      },
-    },
+  const history = await loadSubscriberModulePracticeHistory({
+    userId: args.userId,
+    subjectSlug: args.subjectSlug,
+    moduleSlug: args.moduleSlug,
+    publishedOptions,
   });
   const completedIdentities = new Set(
-    rows
-      .filter((row) => Boolean(row.exerciseKey && row.topic?.slug))
-      .map((row) =>
+    history
+      .filter((item) => Boolean(item.completedAt))
+      .map((item) =>
         authoredPracticeTargetIdentity({
-          topicSlug: row.topic.slug,
-          exerciseKey: authoredPracticeHistoryExerciseKey(row),
+          topicSlug: item.topicSlug,
+          exerciseKey: item.exerciseKey,
         }),
-      )
-      .filter((identity) => poolIdentities.has(identity)),
+      ),
   );
   const completed = pool.filter((option) =>
     completedIdentities.has(

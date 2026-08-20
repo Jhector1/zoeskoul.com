@@ -313,10 +313,26 @@ export function pickSubscriberPracticeQueue(args: {
     .map(authoredPracticeTargetFromOption);
 }
 
-export function buildSubscriberModulePracticeContinuationPlan(args: {
+/**
+ * Canonical self-paced Practice planner.
+ *
+ * Every entry origin uses this exact planner:
+ * - Lesson/Review passes module scope and no target-count cap.
+ * - Header Practice may narrow section/topic and optionally cap new questions.
+ *
+ * Completion/seen history is still module-wide and origin-independent. Scope
+ * only changes the candidate projection and its denominator.
+ *
+ * `moduleTotal` is retained as the persisted compatibility field name. For a
+ * focused Header scope it represents that selected scope's total.
+ */
+export function buildSubscriberPracticePlan(args: {
   options: readonly PublishedPracticeExerciseOption[];
   subjectSlug: string;
   moduleSlug: string;
+  sectionSlug?: string | null;
+  topicSlug?: string | null;
+  targetCount?: number | null;
   history?: readonly SubscriberPracticeHistoryItem[];
   seed?: string;
 }) {
@@ -324,6 +340,8 @@ export function buildSubscriberModulePracticeContinuationPlan(args: {
     options: args.options,
     subjectSlug: args.subjectSlug,
     moduleSlug: args.moduleSlug,
+    sectionSlug: args.sectionSlug,
+    topicSlug: args.topicSlug,
   });
   const completedIdentities = new Set(
     (args.history ?? [])
@@ -352,6 +370,14 @@ export function buildSubscriberModulePracticeContinuationPlan(args: {
         }),
       ),
   );
+  const targetCount =
+    args.targetCount == null
+      ? remainingOptions.length
+      : resolveAvailablePracticeTargetCount({
+          requested: args.targetCount,
+          available: remainingOptions.length,
+          fallback: args.targetCount,
+        });
 
   return {
     moduleTotal: pool.length,
@@ -360,11 +386,31 @@ export function buildSubscriberModulePracticeContinuationPlan(args: {
       options: remainingOptions,
       subjectSlug: args.subjectSlug,
       moduleSlug: args.moduleSlug,
-      targetCount: remainingOptions.length,
+      sectionSlug: args.sectionSlug,
+      topicSlug: args.topicSlug,
+      targetCount,
       history: args.history,
       seed: args.seed,
     }),
   };
+}
+
+/**
+ * Compatibility alias only. There is no second module planner anymore.
+ */
+export function buildSubscriberModulePracticeContinuationPlan(args: {
+  options: readonly PublishedPracticeExerciseOption[];
+  subjectSlug: string;
+  moduleSlug: string;
+  history?: readonly SubscriberPracticeHistoryItem[];
+  seed?: string;
+}) {
+  return buildSubscriberPracticePlan({
+    ...args,
+    sectionSlug: null,
+    topicSlug: null,
+    targetCount: null,
+  });
 }
 
 export function buildSubscriberPracticeMeta(args: {
@@ -420,15 +466,14 @@ export function readSubscriberPracticeMeta(
   const scope =
     normalizeSubscriberPracticeScope(record.scope) ??
     legacyScopeFromQueue(queue);
-  const completedModuleView =
+  const completedScopeView =
     targetCount === 0 &&
     planVersion === 2 &&
     completedPrefix.length > 0 &&
     moduleTotal === completedPrefix.length &&
-    scope?.sectionSlug === null &&
-    scope?.topicSlug === null;
+    Boolean(scope);
 
-  if (targetCount === 0 && !completedModuleView) return null;
+  if (targetCount === 0 && !completedScopeView) return null;
 
   const rawLastOpenedAt = String(record.lastOpenedAt ?? "").trim();
   const lastOpenedAt = Number.isNaN(Date.parse(rawLastOpenedAt))

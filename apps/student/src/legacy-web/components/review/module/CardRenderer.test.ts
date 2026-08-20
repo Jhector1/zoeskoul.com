@@ -244,6 +244,43 @@ describe("CardRenderer try it handling", () => {
         expect(mocked.quizBlockProps[2]?.unlimitedAttempts).toBe(true);
     });
 
+    it("hides quiz and Try It assessment titles while keeping real project titles", () => {
+        const quizHtml = renderToStaticMarkup(
+            React.createElement(
+                CardRenderer,
+                baseProps(quizCard()),
+            ),
+        );
+
+        const tryItHtml = renderToStaticMarkup(
+            React.createElement(
+                CardRenderer,
+                baseProps(
+                    projectCard({
+                        id: "try-follow-run-cycle",
+                        title: "Follow the run cycle",
+                    }),
+                ),
+            ),
+        );
+
+        const projectHtml = renderToStaticMarkup(
+            React.createElement(
+                CardRenderer,
+                baseProps(
+                    projectCard({
+                        id: "build-command-workflow",
+                        title: "Project card",
+                    }),
+                ),
+            ),
+        );
+
+        expect(quizHtml).not.toContain("Quiz card");
+        expect(tryItHtml).not.toContain("Follow the run cycle");
+        expect(projectHtml).toContain("Project card");
+    });
+
     it("forwards whether the containing card is the last card in the topic", () => {
         renderToStaticMarkup(
             React.createElement(
@@ -307,7 +344,7 @@ describe("CardRenderer try it handling", () => {
         expect(projectGateHtml).not.toContain("try it yourself task");
     });
 
-    it("shows local card and try-it titles only outside compact learner UI", () => {
+    it("shows local card titles outside compact learner UI but never shows embedded Try It titles", () => {
         mutableLearnerUiFlags.compactLearnerUi = true;
 
         const compactHtml = renderToStaticMarkup(
@@ -331,7 +368,7 @@ describe("CardRenderer try it handling", () => {
         );
 
         expect(expandedHtml).toContain("Text card");
-        expect(expandedHtml).toContain("Embedded Try It");
+        expect(expandedHtml).not.toContain("Embedded Try It");
     });
 
     it("renders embedded try it inside a text card, disables Mark as done before pass, and stores state under the tryIt id", () => {
@@ -345,7 +382,7 @@ describe("CardRenderer try it handling", () => {
             ),
         );
 
-        expect(html).toContain("Embedded Try It");
+        expect(html).not.toContain("Embedded Try It");
         expect(html).toContain("Mark as done");
         expect(html).toContain("disabled");
         expect(mocked.quizBlockProps.at(-1)?.quizCardId).toBe("text-card");

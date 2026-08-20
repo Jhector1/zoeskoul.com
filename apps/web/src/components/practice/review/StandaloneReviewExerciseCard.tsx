@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import type { ReviewQuestion } from "@zoeskoul/curriculum-contracts/subjects/types";
 import type { PracticeState } from "@/components/review/quiz/hooks/useQuizPracticeBank";
@@ -8,10 +8,7 @@ import QuizPracticeCard from "@/components/review/quiz/components/QuizPracticeCa
 import type { PracticeShellProps } from "@/components/practice/PracticeShell";
 import type { ReviewFinalizedPracticeAction } from "@zoeskoul/learning-runtime/review/quiz/reviewQuizCompletion";
 import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
-import {
-  resolveStablePracticeExerciseId,
-  samePracticeExerciseIdentity,
-} from "@/lib/practice/exerciseIdentity";
+import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
 import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 
 function firstText(...values: unknown[]) {
@@ -35,15 +32,6 @@ export default function StandaloneReviewExerciseCard({
   onFinalizedNext?: () => void | Promise<void>;
 }) {
   const t = useTranslations("Practice.workspace");
-  const activePracticeRef = useRef({
-    item: props.current,
-    exercise: props.exercise,
-  });
-  activePracticeRef.current = {
-    item: props.current,
-    exercise: props.exercise,
-  };
-
   const question = useMemo<Extract<ReviewQuestion, { kind: "practice" }> | null>(() => {
     if (!props.exercise || !props.current) return null;
 
@@ -100,33 +88,6 @@ export default function StandaloneReviewExerciseCard({
   const questionExerciseKey = (
     question as { exerciseKey?: string } | null
   )?.exerciseKey;
-
-  /**
-   * Match Review/Lesson editor ownership: a patch belongs to the exercise that
-   * produced it. A previous exercise can flush while the next exercise is being
-   * committed; that old callback must never patch the newly active QItem.
-   */
-  const sourcePracticeItem = props.current;
-  const sourcePracticeExercise = props.exercise;
-  const updateVisibleExercise = useCallback(
-    (patch: any) => {
-      const active = activePracticeRef.current;
-
-      if (
-        !samePracticeExerciseIdentity({
-          leftItem: sourcePracticeItem,
-          leftExercise: sourcePracticeExercise,
-          rightItem: active.item,
-          rightExercise: active.exercise,
-        })
-      ) {
-        return;
-      }
-
-      props.updateCurrent(patch);
-    },
-    [props.updateCurrent, sourcePracticeExercise, sourcePracticeItem],
-  );
 
   const practiceState = useMemo<PracticeState | undefined>(() => {
     if (!props.exercise || !props.current) return undefined;
@@ -211,7 +172,7 @@ export default function StandaloneReviewExerciseCard({
         excused={isExcusedPracticeItem(props.current)}
         onRetryExercise={props.retryLoad}
         onExcused={() => props.excuseAndNext?.("exercise_load_failed")}
-        onUpdateItem={updateVisibleExercise}
+        onUpdateItem={props.updateCurrent}
         onSubmit={() => {
           onSubmitStart?.();
           void props.submit();

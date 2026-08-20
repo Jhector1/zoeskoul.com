@@ -287,4 +287,249 @@ describe("generatePracticeExercise authored project resolution", () => {
         ).toBe(false);
     });
 
+
+    it("refreshes the exact signed-key instance instead of scanning queue identities", async () => {
+        const findFirst = vi.fn().mockResolvedValue({
+            id: "instance-code",
+            sessionId: "session-1",
+            exerciseKey:
+                "python-v2:module:section:topic:standalone-standard:code-input-q5",
+            publicPayload: {
+                id: "code-input-q5",
+                exerciseKey: "code-input-q5",
+                kind: "code_input",
+            },
+        });
+
+        const result = await generatePracticeExercise(
+            {
+                prisma: {
+                    practiceQuestionInstance: {
+                        findFirst,
+                    },
+                } as any,
+                actor: { userId: "user-1", guestId: null } as any,
+                locale: "en",
+                params: {
+                    difficulty: "easy",
+                    keyRefreshOnly: "true",
+                    keyRefreshInstanceId: "instance-code",
+                    preferPurpose: "practice",
+                    purposePolicy: "strict",
+                } as any,
+                session: {
+                    id: "session-1",
+                    mode: "standard",
+                    difficulty: "easy",
+                    assignmentId: null,
+                } as any,
+            },
+            {
+                ok: true,
+                effective: "practice",
+                requested: "practice",
+                allowed: ["practice"],
+                policy: "strict",
+                source: "request",
+                reason: null,
+            } as any,
+        );
+
+        expect(findFirst).toHaveBeenCalledWith({
+            where: {
+                id: "instance-code",
+                sessionId: "session-1",
+            },
+            select: expect.objectContaining({
+                id: true,
+                sessionId: true,
+                exerciseKey: true,
+                publicPayload: true,
+            }),
+        });
+        expect(signKeyMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                instanceId: "instance-code",
+                sessionId: "session-1",
+            }),
+        );
+        expect(result).toMatchObject({
+            kind: "json",
+            status: 200,
+            body: {
+                exercise: {
+                    exerciseKey: "code-input-q5",
+                    kind: "code_input",
+                },
+                meta: {
+                    resumedOpenInstance: true,
+                    exactKeyRefresh: true,
+                },
+            },
+        });
+        expect(createPracticeInstanceMock).not.toHaveBeenCalled();
+    });
+
+    it("does not couple signed-key refresh to unanswered lifecycle state", async () => {
+        const findFirst = vi.fn().mockResolvedValue({
+            id: "instance-reveal",
+            sessionId: "session-1",
+            exerciseKey: "code-input-q5",
+            publicPayload: {
+                id: "code-input-q5",
+                exerciseKey: "code-input-q5",
+                kind: "code_input",
+            },
+        });
+
+        await generatePracticeExercise(
+            {
+                prisma: {
+                    practiceQuestionInstance: {
+                        findFirst,
+                    },
+                } as any,
+                actor: { userId: "user-1", guestId: null } as any,
+                locale: "en",
+                params: {
+                    keyRefreshOnly: "true",
+                    keyRefreshInstanceId: "instance-reveal",
+                } as any,
+                session: {
+                    id: "session-1",
+                    mode: "standard",
+                    difficulty: "easy",
+                    assignmentId: null,
+                } as any,
+            },
+            {
+                ok: true,
+                effective: "practice",
+                requested: "practice",
+                allowed: ["practice"],
+                policy: "strict",
+                source: "request",
+                reason: null,
+            } as any,
+        );
+
+        const query = findFirst.mock.calls[0]?.[0];
+        expect(query?.where).toEqual({
+            id: "instance-reveal",
+            sessionId: "session-1",
+        });
+        expect(query?.where).not.toHaveProperty("answeredAt");
+    });
+
+    it("rejects signed-key refresh only when that exact instance is absent from the session", async () => {
+        const findFirst = vi.fn().mockResolvedValue(null);
+
+        const result = await generatePracticeExercise(
+            {
+                prisma: {
+                    practiceQuestionInstance: {
+                        findFirst,
+                    },
+                } as any,
+                actor: { userId: "user-1", guestId: null } as any,
+                locale: "en",
+                params: {
+                    keyRefreshOnly: "true",
+                    keyRefreshInstanceId: "instance-code",
+                } as any,
+                session: {
+                    id: "session-1",
+                    mode: "standard",
+                    difficulty: "easy",
+                    assignmentId: null,
+                } as any,
+            },
+            {
+                ok: true,
+                effective: "practice",
+                requested: "practice",
+                allowed: ["practice"],
+                policy: "strict",
+                source: "request",
+                reason: null,
+            } as any,
+        );
+
+        expect(result).toEqual({
+            kind: "json",
+            status: 409,
+            body: {
+                code: "PRACTICE_KEY_REFRESH_INSTANCE_MISSING",
+                message:
+                    "Unable to refresh authorization for this practice instance.",
+            },
+        });
+        expect(createPracticeInstanceMock).not.toHaveBeenCalled();
+    });
+
+    it("does not let a different unanswered instance block normal authored queue loading", async () => {
+        const findFirst = vi.fn().mockResolvedValue({
+            id: "instance-drag",
+            sessionId: "session-1",
+            exerciseKey: "drag-reorder-q6",
+            publicPayload: {
+                id: "drag-reorder-q6",
+                exerciseKey: "drag-reorder-q6",
+                kind: "drag_reorder",
+            },
+        });
+
+        const result = await generatePracticeExercise(
+            {
+                prisma: {
+                    practiceQuestionInstance: {
+                        findFirst,
+                    },
+                } as any,
+                actor: { userId: "user-1", guestId: null } as any,
+                locale: "en",
+                params: {
+                    subject: "python-data-functions",
+                    module: "python-6-functions-and-modularity",
+                    section: "python-data-functions-python-6-function-design",
+                    topic: "py6.using-imports-and-helper-files",
+                    difficulty: "easy",
+                    exerciseKey: "using-imports-create-name-module",
+                    preferPurpose: "practice",
+                    purposePolicy: "strict",
+                    seedPolicy: "global",
+                } as any,
+                session: {
+                    id: "session-1",
+                    mode: "standard",
+                    difficulty: "easy",
+                    assignmentId: null,
+                    section: {
+                        slug: "python-data-functions-python-6-function-design",
+                        subjectId: "subject-1",
+                        moduleId: "module-1",
+                        subject: {
+                            slug: "python-data-functions",
+                        },
+                    },
+                } as any,
+            },
+            {
+                ok: true,
+                effective: "practice",
+                requested: "practice",
+                allowed: ["practice"],
+                policy: "strict",
+                source: "request",
+                reason: null,
+            } as any,
+        );
+
+        expect(result).toMatchObject({
+            kind: "json",
+            status: 200,
+        });
+        expect(createPracticeInstanceMock).toHaveBeenCalled();
+    });
+
 });

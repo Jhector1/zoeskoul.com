@@ -90,7 +90,7 @@ import { resolveTopicStageRuntimeDefaults } from "@zoeskoul/learning-runtime/rev
 import { shouldUseWorkspaceCodeSurface } from "@/components/practice/workspaceExercise";
 import { resolveRightRailIdeConfig } from "./rightRailIdeConfig";
 import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
-import { buildModulePracticeHref } from "@/lib/practice/experience/modulePracticeHref";
+import { startSelfPacedPractice } from "@zoeskoul/learning-client";
 import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import {
     resolveReviewWorkspacePersistencePolicy,
@@ -1897,43 +1897,20 @@ export function useReviewModuleController({
         const practiceModuleSlug = (mod as any).practiceSectionSlug ?? moduleSlug;
 
         await flushAll();
-        beginRouteTransition();
 
-        let sessionId: string | null = null;
         try {
-            const response = await fetch("/api/practice/session/start", {
-                method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    locale,
-                    subjectSlug,
-                    moduleSlug: practiceModuleSlug,
-                    returnTo: returnToLesson,
-                }),
-            });
-            const data = response.ok ? await response.json() : null;
-            sessionId =
-                typeof data?.sessionId === "string" && data.sessionId.trim()
-                    ? data.sessionId.trim()
-                    : null;
-        } catch {
-            sessionId = null;
-        }
-
-        router.push(
-            buildModulePracticeHref({
+            const started = await startSelfPacedPractice({
+                locale,
                 subjectSlug,
                 moduleSlug: practiceModuleSlug,
-                sessionId,
-                mode: "standard",
                 returnTo: returnToLesson,
-                preferPurpose: "practice",
-                purposePolicy: "strict",
-            }),
-        );
+            });
+
+            beginRouteTransition();
+            router.push(started.href);
+        } catch (error) {
+            console.error("[review-practice-start]", error);
+        }
     }, [
         locale,
         subjectSlug,

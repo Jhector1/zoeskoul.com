@@ -141,15 +141,23 @@ describe("review progress synchronization contracts", () => {
   });
 
   it("preserves valid local navigation only", () => {
+    const nodes = [
+      { id: "local", kind: "folder", name: "local", children: ["a", "b"] },
+      { id: "a", kind: "file", name: "a.py", content: "a" },
+      { id: "b", kind: "file", name: "b.py", content: "b" },
+    ];
+
     const incoming = makeWorkspace({
       activeFileId: "a",
       openTabs: ["a"],
       expanded: ["incoming"],
+      nodes,
     });
     const local = makeWorkspace({
       activeFileId: "b",
       openTabs: ["b", "missing"],
-      expanded: ["local"],
+      expanded: ["local", "missing"],
+      nodes,
     });
 
     expect(

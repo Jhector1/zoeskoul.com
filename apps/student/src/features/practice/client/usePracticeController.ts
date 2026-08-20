@@ -16,13 +16,14 @@ import {
 import { usePracticeEngine } from "./usePracticeEngine";
 import { useVectorPadRef } from "./useVectorPadRef";
 import { SESSION_DEFAULT } from "./constants";
-import {lastSessionKey} from "@student/features/practice/client/storage";
+import { buildPracticeUrlSyncSearch } from "@student/features/practice/client/storage";
 import {coercePurposeMode, coercePurposePolicy} from "@zoeskoul/curriculum-contracts/subjects/quizClient";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { getPracticeRuntimeSurfacePolicy, type PracticeRuntimeSurface } from "@/lib/practice/experience/routePolicy";
 import { resolvePracticeResumePolicy } from "./assignmentResumePolicy";
 import { resolvePracticePurposeDefaults } from "./experienceModePolicy";
 import type { SessionStatus } from "./sessionStatus";
+import { startSelfPacedPractice } from "@zoeskoul/learning-client";
 
 type PendingChange =
   | { kind: "topic"; value: TopicValue }
@@ -267,122 +268,40 @@ export function usePracticeController(args: {
     setPhase("summary");
   }, [hydrated, completed]);
 
-  // filter-change reset (unlocked only)
+  // Scope selection belongs to the shared self-paced start contract.
+  // Active normal Practice never clears sessionId and regenerates directly.
+  // Header chooses module/section/topic before start; Lesson/Review supplies
+  // whole-module scope.
+
+  // URL sync: session identity is always authoritative; only mutable filters
+  // are unlocked. A fixed independent Practice run must retain sessionId so a
+  // browser reload resumes the same queue and progress.
   useEffect(() => {
     if (!hydrated) return;
-    if (isLockedRun) return;
 
-    if (firstFiltersEffectRef.current) {
-      firstFiltersEffectRef.current = false;
-      return;
-    }
-
-    setLoadErr(null);
-
-    // ✅ changing filters starts a new run; clear completion
-    setCompleted(false);
-    forcedSummaryOnceRef.current = false;
-
-    setPhase("practice");
-    setAutoSummarized(false);
-
-    setShowMissed(true);
-    setSessionId(null);
-    setStack([]);
-    setIdx(0);
-
-    void engine.loadNextExercise({ forceNew: true });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topic, difficulty, section, preferPurpose, purposePolicy, hydrated, isLockedRun]);
-
-
-
-
-
-
-
-
-
-  // import { lastSessionKey } from "./storage"; // you already have this helper
-
-  useEffect(() => {
-    if (!hydrated) return;
-    if (isLockedRun) return;
-
-    // wait until options are real (beyond "all")
-    if (!Array.isArray(effectiveTopicOptions) || effectiveTopicOptions.length <= 1) return;
-
-    const valid = new Set(effectiveTopicOptions.map((o: any) => String(o.id)));
-    const cur = String(topic);
-
-    if (cur !== "all" && !valid.has(cur)) {
-      // ✅ reset filters + kill stale session pointer
-      setTopic("all" as any);
-      setSessionId(null);
-      setStack([]);
-      setIdx(0);
-
-      // ✅ remove the stale "last session" pointer
-      try {
-        if (subjectSlug && moduleSlug) {
-          localStorage.removeItem(lastSessionKey(subjectSlug, moduleSlug));
-        }
-      } catch {}
-
-      // ✅ also remove stale topic from the URL so refresh can’t re-inject it
-      const qs = new URLSearchParams(sp.toString());
-      qs.set("topic", "all");
-      qs.delete("sessionId"); // prevents resurrecting old session
-      router.replace(`${pathname}?${qs.toString()}`, { scroll: false });
-    }
-  }, [
-    hydrated,
-    isLockedRun,
-    effectiveTopicOptions,
-    topic,
-    subjectSlug,
-    moduleSlug,
-    router,
-    pathname,
-    sp,
-  ]);
-
-
-
-
-
-  // URL sync (unlocked only)
-  useEffect(() => {
-    if (!hydrated) return;
-    if (isLockedRun) return;
+    const currentSearch = sp.toString();
+    const normalizedSessionId = String(sessionId ?? "").trim() || null;
+    const currentSessionId =
+      String(sp.get("sessionId") ?? "").trim() || null;
+    const needsSessionIdentitySync =
+      currentSessionId !== normalizedSessionId;
 
     if (skipUrlSyncRef.current) {
       skipUrlSyncRef.current = false;
-      return;
+      if (!needsSessionIdentitySync) return;
     }
 
-    const qs = new URLSearchParams(sp.toString());
-
-    if (sessionId) qs.set("sessionId", sessionId);
-    else qs.delete("sessionId");
-
-    if (section) qs.set("section", section);
-    else qs.delete("section");
-
-    qs.set("topic", String(topic));
-    qs.set("difficulty", String(difficulty));
-    // ✅ purpose controls (only for unlocked runs)
-    if (preferPurpose) qs.set("preferPurpose", preferPurpose);
-    else qs.delete("preferPurpose");
-
-    if (purposePolicy) qs.set("purposePolicy", purposePolicy);
-    else qs.delete("purposePolicy");
-    if (sessionSize && sessionSize !== SESSION_DEFAULT)
-      qs.set("questionCount", String(sessionSize));
-    else qs.delete("questionCount");
-
-    const desired = qs.toString();
-    const currentSearch = sp.toString();
+    const desired = buildPracticeUrlSyncSearch({
+      currentSearch,
+      sessionId: normalizedSessionId,
+      isLockedRun,
+      section,
+      topic,
+      difficulty,
+      preferPurpose,
+      purposePolicy,
+      sessionSize,
+    });
     if (desired === currentSearch) return;
 
     router.replace(`${pathname}?${desired}`, { scroll: false });
@@ -394,9 +313,8 @@ export function usePracticeController(args: {
     section,
     topic,
     difficulty,
-    preferPurpose,    // ✅ ADD
-    purposePolicy,    // ✅ ADD
-
+    preferPurpose,
+    purposePolicy,
     sessionSize,
     router,
     pathname,
@@ -443,30 +361,68 @@ export function usePracticeController(args: {
     setPendingChange(null);
   }
   const restartPractice = useCallback(async () => {
+    if (
+      surface !== "module_practice" ||
+      isAssignmentRun ||
+      !subjectSlug ||
+      !moduleSlug
+    ) {
+      return;
+    }
+
     setLoadErr(null);
     setActionErr(null);
-    setCompleted(false);
-    forcedSummaryOnceRef.current = false;
-    setPhase("practice");
-    setAutoSummarized(false);
-    setShowMissed(true);
-    setSessionId(null);
-    resolvedSessionIdRef.current = null;
-    setStack([]);
-    setIdx(0);
-    await engine.loadNextExercise({ forceNew: true });
+
+    const locale = pathname.split("/").filter(Boolean)[0] || "en";
+    const rawTargetCount = Number(sp.get("questionCount"));
+    const requestedTargetCount =
+      Number.isFinite(rawTargetCount) && rawTargetCount > 0
+        ? Math.floor(rawTargetCount)
+        : null;
+
+    try {
+      setBusy(true);
+      const started = await startSelfPacedPractice({
+        locale,
+        subjectSlug,
+        moduleSlug,
+        sectionSlug: section,
+        topicSlug: topic === "all" ? null : String(topic),
+        targetCount: requestedTargetCount,
+        difficulty:
+          difficulty === "easy" ||
+          difficulty === "medium" ||
+          difficulty === "hard"
+            ? difficulty
+            : null,
+        returnTo: returnUrlFromQuery,
+      });
+
+      router.replace(started.href, { scroll: false });
+    } catch (error) {
+      setLoadErr(
+        error instanceof Error
+          ? error.message
+          : "Could not restart Practice.",
+      );
+    } finally {
+      setBusy(false);
+    }
   }, [
-    engine.loadNextExercise,
-    resolvedSessionIdRef,
+    surface,
+    isAssignmentRun,
+    subjectSlug,
+    moduleSlug,
+    pathname,
+    sp,
+    section,
+    topic,
+    difficulty,
+    returnUrlFromQuery,
+    router,
     setActionErr,
-    setAutoSummarized,
-    setCompleted,
-    setIdx,
+    setBusy,
     setLoadErr,
-    setPhase,
-    setSessionId,
-    setShowMissed,
-    setStack,
   ]);
 
   const resolvedReturnUrl = completionReturnUrl || returnUrlFromQuery || null;

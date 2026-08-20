@@ -15,7 +15,7 @@ export default function PracticeClient({
 }: {
   subjectSlug: string;
   moduleSlug: string;
-  sessionId: string | null;
+  sessionId: string;
   initialExperienceMode: PracticeExperienceMode;
 }) {
   const t = useTranslations("Practice");
@@ -23,8 +23,8 @@ export default function PracticeClient({
   const { shellProps } = usePracticeController({
     subjectSlug,
     moduleSlug,
-    sessionId: sessionId ?? undefined,
-    authoritativeSessionId: Boolean(sessionId),
+    sessionId,
+    authoritativeSessionId: true,
     surface: "module_practice",
     initialExperienceMode,
   });
