@@ -13,6 +13,7 @@ import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 import { resolveSubjectRuntimeWindow } from "@/lib/review/api/shared/resolveSubjectFinishState";
 import { SUBJECTS } from "@/lib/subjects";
 import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
+import { loadSubscriberModulePracticeProgress } from "@/lib/practice/experience/subscriberPracticeSessions.server";
 
 function cleanSegment(value: string | null | undefined, fallback = "") {
     const normalized = String(value ?? "").trim();
@@ -191,6 +192,11 @@ export async function GET(req: Request) {
 
     const prev = visibleIndex > 0 ? modules[visibleIndex - 1] : null;
     const next = visibleIndex < modules.length - 1 ? modules[visibleIndex + 1] : null;
+    const practiceProgress = await loadSubscriberModulePracticeProgress({
+        userId: actor.userId ?? null,
+        subjectSlug: subject.slug,
+        moduleSlug: resolved.module.slug,
+    });
 
     return bodyJsonWithGuestCookie(
         {
@@ -201,6 +207,7 @@ export async function GET(req: Request) {
             nextLocked: Boolean(next?.locked),
             nextBillingHref: next?.billingHref ?? null,
             modules,
+            practiceProgress,
         },
         200,
         setGuestId,

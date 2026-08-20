@@ -1,6 +1,5 @@
 import { readSharedChallengeMeta } from "@/lib/practice/challenges/session";
 import type { PracticeExperienceMode } from "./types";
-import { isModuleAssignmentMeta } from "./moduleAssignment";
 
 type SessionShape = {
   id?: string | null;
@@ -28,9 +27,8 @@ function readMetaKind(meta: unknown): string | null {
  *
  * Product intent is resolved separately from the raw storage mode:
  * - teacher assignments use mode="assignment" plus assignmentId;
- * - review-module assignments intentionally use mode="standard" plus
- *   module_assignment metadata because they are not Assignment rows;
- * - compatibility fallbacks keep older assignment/challenge rows readable.
+ * - normal learner Practice stays standard/daily practice;
+ * - compatibility fallbacks keep older challenge rows readable.
  */
 export function resolvePracticeExperienceMode(
   session: SessionShape | null | undefined,
@@ -38,12 +36,6 @@ export function resolvePracticeExperienceMode(
   if (!session?.id) return "practice";
 
   if (session.assignmentId) return "assignment";
-
-  // Review-module assignments are deliberately stored as standard sessions:
-  // the database assignment-mode constraint requires a real assignmentId.
-  if (isModuleAssignmentMeta(session.meta)) {
-    return "assignment";
-  }
 
   if (readSharedChallengeMeta(session.meta)) {
     return "public_challenge";
@@ -60,12 +52,8 @@ export function assertPracticeExperienceInvariant(
 
   const mode = resolvePracticeExperienceMode(session);
 
-  const moduleAssignment = isModuleAssignmentMeta(session.meta);
-
-  if (mode === "assignment" && !session.assignmentId && !moduleAssignment) {
-    const error = new Error(
-      "Assignment sessions must have assignmentId or module_assignment metadata.",
-    );
+  if (mode === "assignment" && !session.assignmentId) {
+    const error = new Error("Assignment sessions must have assignmentId.");
     (error as any).status = 500;
     (error as any).code = "INVALID_ASSIGNMENT_SESSION";
     throw error;

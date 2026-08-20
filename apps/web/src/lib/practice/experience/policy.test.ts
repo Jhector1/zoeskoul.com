@@ -73,8 +73,9 @@ describe("practice experience policy", () => {
     expect(subscriber.filters).toEqual({
       topicEditable: true,
       difficultyEditable: true,
-      purposeEditable: true,
+      purposeEditable: false,
       countEditable: true,
     });
+    expect(subscriber.eligibility.allowedPurposes).toEqual(["practice"]);
   });
 });

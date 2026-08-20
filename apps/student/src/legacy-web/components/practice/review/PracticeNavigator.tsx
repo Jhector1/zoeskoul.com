@@ -105,6 +105,23 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
     reviewStack: props.reviewStack,
     answeredCount: props.answeredCount,
   });
+  const completedPrefix =
+    props.experienceMode === "standard"
+      ? props.modulePracticeProgress?.completedPrefix ?? []
+      : [];
+  const completedPrefixCount = completedPrefix.length;
+  const modulePracticeTotal =
+    props.experienceMode === "standard"
+      ? props.modulePracticeProgress?.moduleTotal ?? null
+      : null;
+  const displayTotal =
+    modulePracticeTotal && modulePracticeTotal > 0
+      ? modulePracticeTotal
+      : props.sessionSize;
+  const displayAnswered = Math.min(
+    displayTotal,
+    completedPrefixCount + props.answeredCount,
+  );
   const resolvedTopicOptions = React.useMemo(
     () =>
       props.topicOptionsFixed.map((option) => ({
@@ -201,7 +218,7 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
             <div className="rounded-xl border border-[rgb(var(--ui-border)/0.78)] bg-[rgb(var(--ui-surface)/0.9)] p-3">
               <div className="ui-meta">{tw("navigator.progress")}</div>
               <div className="mt-1 text-base font-black tabular-nums">
-                {props.answeredCount}/{props.sessionSize}
+                {displayAnswered}/{displayTotal}
               </div>
             </div>
             <div className="rounded-xl border border-[rgb(var(--ui-border)/0.78)] bg-[rgb(var(--ui-surface)/0.9)] p-3">
@@ -263,46 +280,68 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
               </span>
             </div>
             <ol className="grid gap-1.5">
-              {Array.from({ length: Math.max(1, props.sessionSize) }).map(
-                (_, index) => {
-                  const item = queueStack[index] ?? null;
+              {Array.from({ length: Math.max(1, displayTotal) }).map(
+                (_, displayIndex) => {
+                  const priorCompleted =
+                    displayIndex < completedPrefixCount
+                      ? completedPrefix[displayIndex] ?? null
+                      : null;
+                  const sessionIndex = displayIndex - completedPrefixCount;
+                  const item =
+                    sessionIndex >= 0 ? queueStack[sessionIndex] ?? null : null;
                   const isActive =
-                    index === props.idx && props.phase === "practice";
-                  const queueStatus = item
-                    ? resolvePracticeQueueStatus(item)
-                    : resolvePracticeQueuePlaceholderStatus({
-                        index,
-                        answeredCount: props.answeredCount,
-                      });
+                    !priorCompleted &&
+                    sessionIndex === props.idx &&
+                    props.phase === "practice";
+                  const queueStatus = priorCompleted
+                    ? "completed"
+                    : item
+                      ? resolvePracticeQueueStatus(item)
+                      : resolvePracticeQueuePlaceholderStatus({
+                          index: Math.max(0, sessionIndex),
+                          answeredCount: props.answeredCount,
+                        });
                   const isCorrect = queueStatus === "correct";
                   const isRevealed = queueStatus === "revealed";
-                  const isFinalized = queueStatus === "completed";
+                  const isFinalized =
+                    queueStatus === "completed" || Boolean(priorCompleted);
                   const isInProgress = queueStatus === "in_progress";
+                  const sessionItemAvailable =
+                    sessionIndex >= 0 &&
+                    sessionIndex < queueStack.length &&
+                    sessionIndex < props.stack.length;
+                  const disabled = Boolean(priorCompleted) || !sessionItemAvailable;
 
                   return (
-                    <li key={index}>
+                    <li
+                      key={
+                        priorCompleted
+                          ? `completed:${priorCompleted.topicSlug}:${priorCompleted.exerciseKey}`
+                          : `session:${displayIndex}`
+                      }
+                    >
                       <button
                         type="button"
                         onClick={() => {
-                          if (index < queueStack.length && index < props.stack.length) {
-                            props.setIdx(index);
+                          if (sessionItemAvailable) {
+                            props.setIdx(sessionIndex);
                           }
                         }}
-                        disabled={index >= queueStack.length || index >= props.stack.length}
+                        disabled={disabled}
                         className={[
                           "flex w-full items-center gap-3 rounded-xl border px-3 py-2.5 text-left transition",
                           isActive
                             ? "border-emerald-300/70 bg-emerald-50/80 dark:border-emerald-300/30 dark:bg-emerald-300/10"
                             : "border-[rgb(var(--ui-border)/0.72)] bg-[rgb(var(--ui-surface)/0.82)]",
-                          index >= queueStack.length || index >= props.stack.length
-                            ? "cursor-default opacity-55"
+                          disabled
+                            ? "cursor-default opacity-70"
                             : "hover:bg-[rgb(var(--ui-muted)/0.72)]",
                         ].join(" ")}
                       >
                         <span
                           className={[
                             "grid h-6 w-6 shrink-0 place-items-center rounded-full text-[11px] font-black",
-                            isCorrect
+                            priorCompleted || isCorrect
                               ? "bg-emerald-500 text-white"
                               : isRevealed || isFinalized
                                 ? "bg-amber-100 text-amber-900 dark:bg-amber-300/20 dark:text-amber-100"
@@ -311,34 +350,44 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                                   : "bg-[rgb(var(--ui-muted)/0.9)] text-[rgb(var(--ui-text-muted))]",
                           ].join(" ")}
                         >
-                          {isCorrect ? "✓" : index + 1}
+                          {priorCompleted || isCorrect ? "✓" : displayIndex + 1}
                         </span>
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-sm font-bold">
-                            {item
+                            {priorCompleted
                               ? resolvePracticeDisplayTitle({
-                                  title: item.exercise.title,
+                                  title: priorCompleted.exerciseTitle,
                                   resolve,
                                   fallback: tw("navigator.exerciseFallback", {
-                                    number: index + 1,
+                                    number: displayIndex + 1,
                                   }),
                                 })
-                              : tw("navigator.exerciseFallback", {
-                                  number: index + 1,
-                                })}
+                              : item
+                                ? resolvePracticeDisplayTitle({
+                                    title: item.exercise.title,
+                                    resolve,
+                                    fallback: tw("navigator.exerciseFallback", {
+                                      number: displayIndex + 1,
+                                    }),
+                                  })
+                                : tw("navigator.exerciseFallback", {
+                                    number: displayIndex + 1,
+                                  })}
                           </span>
                           <span className="mt-0.5 block truncate text-[11px] text-[rgb(var(--ui-text-muted)/0.84)]">
-                            {isCorrect
-                              ? tw("navigator.statusCorrect")
-                              : isRevealed
-                                ? tw("navigator.statusRevealed")
-                                : isFinalized
-                                  ? tw("navigator.statusCompleted")
-                                  : isInProgress
-                                    ? tw("navigator.statusInProgress")
-                                    : isActive
-                                      ? tw("navigator.statusCurrent")
-                                      : tw("navigator.statusNotStarted")}
+                            {priorCompleted
+                              ? tw("navigator.statusCompleted")
+                              : isCorrect
+                                ? tw("navigator.statusCorrect")
+                                : isRevealed
+                                  ? tw("navigator.statusRevealed")
+                                  : isFinalized
+                                    ? tw("navigator.statusCompleted")
+                                    : isInProgress
+                                      ? tw("navigator.statusInProgress")
+                                      : isActive
+                                        ? tw("navigator.statusCurrent")
+                                        : tw("navigator.statusNotStarted")}
                           </span>
                         </span>
                       </button>

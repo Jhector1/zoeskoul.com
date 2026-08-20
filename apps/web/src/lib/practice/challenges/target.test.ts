@@ -9,13 +9,6 @@ import {
   resolveSharedChallengeTarget,
 } from "./target";
 
-const base = {
-  subjectSlug: "python-v2",
-  moduleSlug: "python-v2-0",
-  sectionSlug: "python-v2-python-v2-0-setup-and-first-programs",
-  topicSlug: "what-python-is",
-};
-
 function asRecord(value: unknown): Record<string, unknown> | null {
   return value && typeof value === "object" && !Array.isArray(value)
     ? (value as Record<string, unknown>)
@@ -66,18 +59,83 @@ function findPublishedNonPtyProjectTarget() {
   throw new Error("Expected at least one published non-PTY project exercise.");
 }
 
+function findPublishedPracticeOnlyTarget() {
+  for (const [subjectSlug, source] of Object.entries(SUBJECT_GENERATOR_SOURCES)) {
+    const topicManifests = source.topicManifests as Record<string, unknown>;
+
+    for (const [topicSlug, topicValue] of Object.entries(topicManifests)) {
+      const topic = asRecord(topicValue);
+      if (!topic) continue;
+
+      const moduleSlug = String(topic.moduleSlug ?? "").trim();
+      const sectionSlug = String(topic.sectionSlug ?? "").trim();
+      const exercises = Array.isArray(topic.exercises) ? topic.exercises : [];
+      if (!moduleSlug || !sectionSlug) continue;
+
+      for (const exerciseValue of exercises) {
+        const exercise = asRecord(exerciseValue);
+        if (exercise?.purpose !== "practice") continue;
+
+        const exerciseKey = String(exercise.id ?? "").trim();
+        if (!exerciseKey) continue;
+
+        return resolvePublishedPracticeTarget({
+          subjectSlug,
+          moduleSlug,
+          sectionSlug,
+          topicSlug,
+          exerciseKey,
+          exercisePurpose: "practice",
+        });
+      }
+    }
+  }
+
+  throw new Error("Expected at least one published practice-purpose exercise.");
+}
+
+function findPublishedQuizTarget() {
+  for (const [subjectSlug, source] of Object.entries(SUBJECT_GENERATOR_SOURCES)) {
+    const topicManifests = source.topicManifests as Record<string, unknown>;
+
+    for (const [topicSlug, topicValue] of Object.entries(topicManifests)) {
+      const topic = asRecord(topicValue);
+      if (!topic) continue;
+
+      const moduleSlug = String(topic.moduleSlug ?? "").trim();
+      const sectionSlug = String(topic.sectionSlug ?? "").trim();
+      const exercises = Array.isArray(topic.exercises) ? topic.exercises : [];
+      if (!moduleSlug || !sectionSlug) continue;
+
+      for (const exerciseValue of exercises) {
+        const exercise = asRecord(exerciseValue);
+        if (exercise?.purpose !== "quiz") continue;
+
+        const exerciseKey = String(exercise.id ?? "").trim();
+        if (!exerciseKey) continue;
+
+        try {
+          return resolveSharedChallengeTarget({
+            subjectSlug,
+            moduleSlug,
+            sectionSlug,
+            topicSlug,
+            exerciseKey,
+          });
+        } catch {
+          // Keep scanning if this authored quiz is not anonymously shareable.
+        }
+      }
+    }
+  }
+
+  throw new Error("Expected at least one published shareable quiz exercise.");
+}
+
 describe("published shared challenge targets", () => {
   it("accepts a published quiz exercise", () => {
-    expect(
-      resolveSharedChallengeTarget({
-        ...base,
-        exerciseKey: "sc-python-use-general",
-      }),
-    ).toMatchObject({
-      ...base,
-      exerciseKey: "sc-python-use-general",
+    expect(findPublishedQuizTarget()).toMatchObject({
       exercisePurpose: "quiz",
-      exerciseKind: "single_choice",
     });
   });
 
@@ -88,6 +146,27 @@ describe("published shared challenge targets", () => {
     });
   });
 
+
+  it("accepts an authored practice-purpose exercise for authenticated practice", () => {
+    expect(findPublishedPracticeOnlyTarget()).toMatchObject({
+      exercisePurpose: "practice",
+    });
+  });
+
+  it("keeps authored practice exercises out of anonymous shared challenges", () => {
+    const target = findPublishedPracticeOnlyTarget();
+
+    expect(() =>
+      resolveSharedChallengeTarget({
+        subjectSlug: target.subjectSlug,
+        moduleSlug: target.moduleSlug,
+        sectionSlug: target.sectionSlug,
+        topicSlug: target.topicSlug,
+        exerciseKey: target.exerciseKey,
+        exercisePurpose: "practice",
+      } as any),
+    ).toThrow(/authored practice exercise/i);
+  });
 
   it("accepts an authored try-it for authenticated practice", () => {
     expect(

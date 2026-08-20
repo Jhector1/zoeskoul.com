@@ -53,7 +53,10 @@ export function buildServerResumePlan<T>(args: {
 
   return {
     seedStack,
-    shouldLoadCurrent: true,
-    nextQuestionIndex: seedStack?.length ?? 0,
+    // Status history includes the currently owned instance, even when it is
+    // unanswered. Re-loading here would manufacture the next question and can
+    // move a learner away from a just-revealed exercise on refresh.
+    shouldLoadCurrent: seedStack === null,
+    nextQuestionIndex: seedStack ? seedStack.length - 1 : 0,
   };
 }

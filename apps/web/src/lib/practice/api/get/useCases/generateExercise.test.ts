@@ -234,6 +234,43 @@ describe("generatePracticeExercise authored project resolution", () => {
         });
         expect(getExerciseWithExpectedMock).not.toHaveBeenCalled();
     });
+    it("persists an exact authored practice target as practice purpose", async () => {
+        await generatePracticeExercise(
+            {
+                prisma: {} as any,
+                actor: { userId: "user-1", guestId: null } as any,
+                locale: "en",
+                params: {
+                    subject: "python-data-functions",
+                    module: "python-6-functions-and-modularity",
+                    section: "python-data-functions-python-6-function-design",
+                    topic: "py6.using-imports-and-helper-files",
+                    difficulty: "easy",
+                    exerciseKey: "using-imports-create-name-module",
+                    preferPurpose: "practice",
+                    seedPolicy: "global",
+                } as any,
+                session: null,
+            },
+            {
+                ok: true,
+                effective: "practice",
+                requested: "practice",
+                allowed: ["practice"],
+                policy: "strict",
+                source: "request",
+                reason: null,
+            } as any,
+        );
+
+        expect(getExerciseWithExpectedMock).not.toHaveBeenCalled();
+        expect(createPracticeInstanceMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                purpose: "practice",
+            }),
+        );
+    });
+
     it("does not reuse an open instance for a different exact exercise key", () => {
         expect(
             openPracticeInstanceMatchesRequestedExercise(

@@ -26,6 +26,17 @@ export type PracticeChallengeRunMeta = {
   attemptsUsed?: number;
 };
 
+export type PracticeSubscriberRunMeta = {
+  moduleTotal: number | null;
+  completedPrefix: Array<{
+    exerciseKey: string;
+    exerciseTitle: string;
+    exerciseKind: string;
+    topicSlug: string;
+    sectionSlug: string;
+  }>;
+};
+
 /**
  * One run contract for every practice experience. Components should branch on
  * `mode`, never on assignmentId or ad-hoc JSON metadata.
@@ -44,6 +55,7 @@ export type PracticeRunMetaApi = {
   viewer: PracticeRunViewer;
   challenge?: PracticeChallengeRunMeta | null;
   daily?: PracticeDailyRunMeta | null;
+  subscriberPractice?: PracticeSubscriberRunMeta | null;
   help?: { stepKeys: string[] } | null;
 };
 

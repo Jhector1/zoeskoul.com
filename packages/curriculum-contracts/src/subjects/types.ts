@@ -69,7 +69,7 @@ export type ReviewVideoProvider = "auto" | "youtube" | "vimeo" | "iframe" | "fil
 
 export type SeedPolicy = "actor" | "global";
 export type Difficulty = "easy" | "medium" | "hard";
-export type PurposeMode = "quiz" | "project" | "mixed";
+export type PurposeMode = "quiz" | "project" | "practice" | "mixed";
 export type PurposePolicy = "strict" | "fallback";
 
 export type ReviewProjectStep = {

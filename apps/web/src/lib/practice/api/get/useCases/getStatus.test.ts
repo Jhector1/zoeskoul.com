@@ -5,7 +5,7 @@ vi.mock("server-only", () => ({}));
 import { canRevealExpectedForStatusOnly } from "./getStatus";
 
 describe("practice status expected-answer policy", () => {
-  it("does not leak expected answers for review-module assignments", () => {
+  it("treats retired module-assignment metadata as normal practice", () => {
     expect(
       canRevealExpectedForStatusOnly(
         {
@@ -16,7 +16,7 @@ describe("practice status expected-answer policy", () => {
         },
         false,
       ),
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it("follows the authored reveal policy for teacher assignments", () => {

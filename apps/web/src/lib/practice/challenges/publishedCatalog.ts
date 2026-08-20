@@ -32,7 +32,7 @@ export type PublishedPracticeExerciseOption = {
   exerciseKey: string;
   exerciseTitle: string;
   exerciseKind: string;
-  exercisePurpose: "quiz" | "project" | "try_it";
+  exercisePurpose: "quiz" | "project" | "try_it" | "practice";
   isMultiFile: boolean;
   requiresTerminal: boolean;
   isStandaloneTryIt: boolean;
@@ -167,7 +167,12 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
             for (let exerciseIndex = 0; exerciseIndex < topic.exercises.length; exerciseIndex += 1) {
               const exercise = topic.exercises[exerciseIndex] as Record<string, unknown>;
               const purpose = String(exercise.purpose ?? "");
-              if (purpose !== "quiz" && purpose !== "project" && purpose !== "try_it") continue;
+              if (
+                purpose !== "quiz" &&
+                purpose !== "project" &&
+                purpose !== "try_it" &&
+                purpose !== "practice"
+              ) continue;
 
               try {
                 const capabilities = resolvePublishedExerciseCapabilities(

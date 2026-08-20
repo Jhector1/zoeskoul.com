@@ -4,6 +4,10 @@ import React, { useMemo } from "react";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import DailyResetCountdown from "@/components/practice/completion/DailyResetCountdown";
 import { resolvePracticeDisplayStack } from "@/lib/practice/experience/reviewDisplayStack";
+import {
+  MODULE_PRACTICE_RETURN_LABEL,
+  shouldReturnToLessonAfterModulePractice,
+} from "@/lib/practice/experience/completion";
 import type { PracticeShellProps } from "../PracticeShell";
 import PracticeReviewList from "@/components/practice/MissedPracticeCard";
 import SummaryViewSkeleton from "@/components/practice/shell/SummaryViewSkeleton";
@@ -97,6 +101,11 @@ function completionCopy(props: PracticeShellProps, challengePassed: boolean) {
 }
 
 function CompletionAction(props: PracticeShellProps) {
+  const returnToLesson = shouldReturnToLessonAfterModulePractice({
+    mode: props.experienceMode,
+    returnUrl: props.returnUrl,
+  });
+
   if (props.experienceMode === "assignment") {
     return (
       <div className="flex justify-start">
@@ -196,7 +205,9 @@ function CompletionAction(props: PracticeShellProps) {
               ? "Practice more like this"
               : props.experienceMode === "daily_five"
                 ? props.t("completion.daily.subscriberPrimary")
-                : "Practice more"}
+                : returnToLesson
+                  ? MODULE_PRACTICE_RETURN_LABEL
+                  : "Practice more"}
           </button>
           {props.experienceMode === "daily_five" && props.leaderboardUrl ? (
             <a

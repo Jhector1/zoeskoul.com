@@ -12,6 +12,12 @@ export type CourseModuleNavItem = {
     billingHref: string | null;
 };
 
+export type ModulePracticeProgress = {
+    completed: number;
+    total: number;
+    pct: number;
+};
+
 export type ModuleNavInfo = {
     prevModuleId: string | null;
     nextModuleId: string | null;
@@ -20,6 +26,7 @@ export type ModuleNavInfo = {
     index: number;
     total: number;
     modules: CourseModuleNavItem[];
+    practiceProgress?: ModulePracticeProgress | null;
 } | null;
 
 export function useModuleNav(args: {

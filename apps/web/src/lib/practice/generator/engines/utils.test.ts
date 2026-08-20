@@ -2,7 +2,17 @@ import { describe, expect, it } from "vitest";
 
 import type { WorkspaceLanguage } from "@/lib/practice/types";
 
-import { makeCodeInputOut } from "./utils";
+import { makeCodeInputOut, normalizePracticePurpose } from "./utils";
+
+describe("normalizePracticePurpose", () => {
+    it("keeps authored practice distinct while preserving project-like Try It and capstone behavior", () => {
+        expect(normalizePracticePurpose("quiz")).toBe("quiz");
+        expect(normalizePracticePurpose("practice")).toBe("practice");
+        expect(normalizePracticePurpose("project")).toBe("project");
+        expect(normalizePracticePurpose("try_it")).toBe("project");
+        expect(normalizePracticePurpose("capstone")).toBe("project");
+    });
+});
 
 describe("makeCodeInputOut", () => {
     it("preserves future workspace languages from the canonical type", () => {

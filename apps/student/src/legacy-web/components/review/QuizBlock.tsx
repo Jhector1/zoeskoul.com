@@ -2178,6 +2178,23 @@ export default function QuizBlock({
                   }}
                   onHelp={async (stepKey) => {
                     if (readOnly) return;
+
+                    if (stepKey === "reveal") {
+                      /**
+                       * The previous Check action remains in lastActionQidRef while
+                       * Reveal is pending. Revealing makes the question flow-complete,
+                       * so leaving that stale action key in place can make the shared
+                       * auto-advance controller interpret Reveal as the completion of
+                       * the previous Check and navigate away automatically.
+                       *
+                       * Reveal is a deliberate study action. Clear the stale Check
+                       * action before opening it; QuizPracticeCard will render its
+                       * explicit Next/Finish action after reveal.
+                       */
+                      lastActionQidRef.current = null;
+                      setAwaitNextQid(null);
+                    }
+
                     scheduleScroll(q.id, "end");
                     await practiceBank.openPracticeHelp(
                       q,

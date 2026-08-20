@@ -9,7 +9,11 @@ import type {
   PracticeExperienceMode,
   PracticeRunViewer,
 } from "@/lib/practice/experience/types";
-import { resolvePracticeCompletionIntent } from "@/lib/practice/experience/completion";
+import {
+  MODULE_PRACTICE_RETURN_LABEL,
+  resolvePracticeCompletionIntent,
+  shouldReturnToLessonAfterModulePractice,
+} from "@/lib/practice/experience/completion";
 import DailyResetCountdown from "@/components/practice/completion/DailyResetCountdown";
 
 export default function PracticeCompletionCelebration(props: {
@@ -23,6 +27,7 @@ export default function PracticeCompletionCelebration(props: {
   targetCount: number;
   dailyResetAt?: string | null;
   leaderboardUrl?: string | null;
+  returnUrl?: string | null;
   onPrimary: () => void;
   onClose: () => void;
 }) {
@@ -33,12 +38,18 @@ export default function PracticeCompletionCelebration(props: {
   });
 
   const isDaily = props.experienceMode === "daily_five";
+  const returnToLesson = shouldReturnToLessonAfterModulePractice({
+    mode: props.experienceMode,
+    returnUrl: props.returnUrl,
+  });
   const primaryLabel =
     intent === "daily_free"
       ? t("daily.freePrimary")
       : intent === "daily_subscriber"
         ? t("daily.subscriberPrimary")
-        : t("defaultPrimary");
+        : returnToLesson
+          ? MODULE_PRACTICE_RETURN_LABEL
+          : t("defaultPrimary");
 
   return (
     <>

@@ -38,6 +38,7 @@ export type SessionHistoryRow = {
     attempts?: number | null;
     lastOk?: boolean | null;
     lastRevealUsed?: boolean | null;
+    revealAnswer?: any;
     lastAnswerPayload?: any;
     lastAttemptAt?: string | null;
     helpUsedKeys?: string[];

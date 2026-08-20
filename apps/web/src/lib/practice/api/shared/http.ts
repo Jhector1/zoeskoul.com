@@ -82,7 +82,7 @@ export function exceedsContentLength(req: Request, maxBytes: number) {
 
 export function safeSameOriginUrl(req: Request, input: string | null | undefined) {
     if (!input) return null;
-    if (input.startsWith("/")) return input;
+    if (input.startsWith("/") && !input.startsWith("//")) return input;
 
     const allowedOrigin = process.env.APP_ORIGIN ?? new URL(req.url).origin;
 

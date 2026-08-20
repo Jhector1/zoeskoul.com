@@ -120,7 +120,11 @@ export async function POST(req: Request) {
   });
 
   if (existing) {
-    if (!isValidDailySession(existing)) {
+    if (isValidDailySession(existing)) {
+      return dailySessionResponse(existing, { resumed: true });
+    }
+
+    if (resolvePracticeExperienceMode(existing) !== "daily_five") {
       console.error("[daily-practice] invalid session behind daily experience key", {
         sessionId: existing.id,
         experienceKey,
@@ -136,7 +140,17 @@ export async function POST(req: Request) {
       );
     }
 
-    return dailySessionResponse(existing, { resumed: true });
+    // Daily Practice now owns authored practice-purpose work, not Try It/project.
+    // Retire today's legacy queue and immediately create a fresh practice-only
+    // session under the same daily experience key.
+    await prisma.practiceSession.update({
+      where: { id: existing.id },
+      data: {
+        status: "completed",
+        completedAt: new Date(),
+        experienceKey: null,
+      },
+    });
   }
 
   const publishedOptions = await listPublishedPracticeExerciseOptions();

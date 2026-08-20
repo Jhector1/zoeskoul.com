@@ -7,9 +7,9 @@ import type {
     ReviewModuleSection,
     ReviewTopicShape,
 } from "@zoeskoul/curriculum-contracts/subjects/types";
-import RingButton from "@/components/review/module/RingButton";
 import {useTaggedT} from "@/i18n/tagged";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
+import RingButton from "../RingButton";
 
 export type SidebarTopicItemVm = {
     id: string;
@@ -392,16 +392,13 @@ function ModuleSidebar({
                            sectionItems,
                            unlockAll,
                            moduleProgress,
+                           practiceProgress,
                            onGoToTopic,
                            onCollapse,
-                           assignmentPct,
-                           assignmentMissedPct = 0,
+                           showPracticeCta = true,
+                           onPracticeClick,
                            navLoading = false,
                            navError = false,
-                           assignmentLabel,
-                           assignmentSublabel,
-                           showAssignmentCta = true,
-                           onAssignmentClick,
                            hasNextModule,
                            canGoNextModule,
                        }: {
@@ -410,14 +407,11 @@ function ModuleSidebar({
     sectionItems?: SidebarSectionItemVm[];
     unlockAll: boolean;
     moduleProgress: { done: number; total: number; pct: number };
+    practiceProgress?: { completed: number; total: number; pct: number } | null;
     onGoToTopic: (tid: string) => void;
     onCollapse: () => void;
-    assignmentPct: number;
-    assignmentMissedPct?: number;
-    assignmentLabel: string;
-    assignmentSublabel?: string;
-    showAssignmentCta?: boolean;
-    onAssignmentClick: () => void;
+    showPracticeCta?: boolean;
+    onPracticeClick: () => void;
     navLoading?: boolean;
     navError?: boolean;
     hasNextModule: boolean;
@@ -563,19 +557,21 @@ function ModuleSidebar({
 
             <div
                 className="shrink-0 border-t border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] p-2.5 sm:p-3">
-                {showAssignmentCta ? (
+                {showPracticeCta ? (
                     <RingButton
-                        pct={assignmentPct}
-                        missedPct={assignmentMissedPct}
-                        label={assignmentLabel}
-                        sublabel={assignmentSublabel || undefined}
-                        onClick={onAssignmentClick}
-                        disabled={false}
+                        onClick={onPracticeClick}
+                        pct={practiceProgress?.pct ?? 0}
+                        label={ui.t("practiceModule", {}, "Practice this module")}
+                        sublabel={ui.t(
+                            "practiceModuleOptional",
+                            {},
+                            "Optional extra practice",
+                        )}
                     />
                 ) : null}
 
                 {navLoading ? (
-                    <div className={cn("ui-review-note", showAssignmentCta ? "mt-2.5" : "")}>
+                    <div className={cn("ui-review-note", showPracticeCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
                             {t("nextModuleTitle")}
                         </div>
@@ -584,7 +580,7 @@ function ModuleSidebar({
                         </div>
                     </div>
                 ) : navError ? (
-                    <div className={cn("ui-review-note-danger", showAssignmentCta ? "mt-2.5" : "")}>
+                    <div className={cn("ui-review-note-danger", showPracticeCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
                             {t("nextModuleTitle")}
                         </div>
@@ -593,16 +589,14 @@ function ModuleSidebar({
                         </div>
                     </div>
                 ) : hasNextModule ? (
-                    <div className={cn("ui-review-note", showAssignmentCta ? "mt-2.5" : "")}>
+                    <div className={cn("ui-review-note", showPracticeCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
                             {t("nextModuleTitle")}
                         </div>
 
                         <div className="mt-1 ui-meta">
                             {canGoNextModule
-                                ? unlockAll
-                                    ? t("nextModuleUnlocked")
-                                    : t("nextModuleUnlockedAfterAssignment")
+                                ? t("nextModuleUnlocked")
                                 : t("nextModuleLocked")}
                         </div>
                     </div>
@@ -620,14 +614,11 @@ export default React.memo(
         prev.sectionItems === next.sectionItems &&
         prev.unlockAll === next.unlockAll &&
         prev.moduleProgress === next.moduleProgress &&
+        prev.practiceProgress === next.practiceProgress &&
         prev.onGoToTopic === next.onGoToTopic &&
         prev.onCollapse === next.onCollapse &&
-        prev.assignmentPct === next.assignmentPct &&
-        prev.assignmentMissedPct === next.assignmentMissedPct &&
-        prev.assignmentLabel === next.assignmentLabel &&
-        prev.assignmentSublabel === next.assignmentSublabel &&
-        prev.showAssignmentCta === next.showAssignmentCta &&
-        prev.onAssignmentClick === next.onAssignmentClick &&
+        prev.showPracticeCta === next.showPracticeCta &&
+        prev.onPracticeClick === next.onPracticeClick &&
         prev.navLoading === next.navLoading &&
         prev.navError === next.navError &&
         prev.hasNextModule === next.hasNextModule &&

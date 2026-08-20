@@ -162,12 +162,12 @@ export function getPracticeExperiencePolicy(args: {
         filters: {
           topicEditable: editable,
           difficultyEditable: editable,
-          purposeEditable: editable,
+          purposeEditable: false,
           countEditable: editable,
         },
         eligibility: {
           allowedKinds: null,
-          allowedPurposes: editable ? ["quiz", "project"] : ["project"],
+          allowedPurposes: ["practice"],
           allowMultiFile: true,
           allowTerminal: true,
         },

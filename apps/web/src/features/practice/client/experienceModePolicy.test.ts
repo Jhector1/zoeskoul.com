@@ -46,13 +46,17 @@ describe("client practice experience mode", () => {
     ).toBe("assignment");
   });
 
-  it("uses mixed fallback practice for configurable subscriber sessions", () => {
-    expect(
-      resolvePracticePurposeDefaults({
-        experienceMode: "standard",
-        isLockedRun: false,
-      }),
-    ).toEqual({ preferPurpose: "mixed", purposePolicy: "fallback" });
+  it("uses strict authored practice purpose for open practice sessions", () => {
+    for (const experienceMode of ["standard", "practice"] as const) {
+      expect(
+        resolvePracticePurposeDefaults({
+          experienceMode,
+          requestedPurpose: "project",
+          requestedPolicy: "fallback",
+          isLockedRun: false,
+        }),
+      ).toEqual({ preferPurpose: "practice", purposePolicy: "strict" });
+    }
   });
 
   it("keeps daily practice on authored project exercises", () => {

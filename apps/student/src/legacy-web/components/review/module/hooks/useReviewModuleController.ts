@@ -18,7 +18,6 @@ import type {ReviewProgressState} from "@/lib/subjects/progressTypes";
 import { ROUTES } from "@zoeskoul/app-config";
 
 import {useReviewProgress} from "@/components/review/module/hooks/useReviewProgress";
-import {useAssignmentStatus} from "@/components/review/module/hooks/useAssignmentStatus";
 import {
     useModuleNav,
     type CourseModuleNavItem,
@@ -102,7 +101,6 @@ import {
     shouldRightRailUseBoundExercise,
 } from "./rightRailExerciseBinding";
 import { resolveActiveToolScopeKey } from "./activeToolScopeKey";
-import { resolveCompactAssignmentCtaVisibility } from "../assignmentCtaVisibility";
 import {
     COMPACT_PRACTICE_NAV_LABEL,
     isAtFinalModuleNavigationStep,
@@ -1154,36 +1152,6 @@ export function useReviewModuleController({
         setProgress((p: any) => buildTopicCompletedProgress(p, viewTid, nowIso));
     }, [progressHydrated, viewTid, viewCards, progress, setProgress]);
 
-    const assignmentSessionId = (progress as any)?.assignmentSessionId
-        ? String((progress as any).assignmentSessionId)
-        : null;
-    const assignmentStatusEnabled = progressHydrated && Boolean(assignmentSessionId);
-
-    const {
-        status: assignmentStatus,
-        rightPct: assignmentRightPct,
-        missedPct: assignmentMissedPct,
-    } = useAssignmentStatus({
-        sessionId: assignmentSessionId,
-        enabled: assignmentStatusEnabled,
-        subject: subjectSlug,
-        module: moduleSlug,
-    });
-
-    const assignmentLabel =
-        assignmentStatus.phase === "complete"
-            ? "✓ Assignment complete"
-            : assignmentStatus.phase === "in_progress"
-                ? "Assignment in progress"
-                : "Start module assignment";
-
-    const assignmentSublabel =
-        assignmentStatus.phase === "in_progress"
-            ? `${assignmentStatus.answeredCount}/${assignmentStatus.targetCount} questions`
-            : assignmentStatus.phase === "complete"
-                ? `${assignmentStatus.answeredCount}/${assignmentStatus.targetCount} questions`
-                : undefined;
-
     const nav = useModuleNav({
         subjectSlug,
         moduleSlug,
@@ -1896,79 +1864,59 @@ export function useReviewModuleController({
             void navigateToResolvedTarget(firstTarget, "replace");
         },
     });
-    const handleAssignmentClick = useCallback(async () => {
-        const returnToCurrentModule = `/${locale}${ROUTES.learningPath(
-            encodeURIComponent(subjectSlug),
-            encodeURIComponent(moduleSlug),
-        )}`;
-
-        // Always resolve the module-assignment session through the dedicated
-        // start/resume endpoint. Older builds stored a subscriber-practice
-        // session id in assignmentSessionId; routing directly to that id caused
-        // the assignment CTA to open the configurable subscriber workspace.
+    const handlePracticeClick = useCallback(async () => {
+        const returnToLesson =
+            typeof window === "undefined"
+                ? pathname
+                : `${window.location.pathname}${window.location.search}${window.location.hash}`;
         const practiceModuleSlug = (mod as any).practiceSectionSlug ?? moduleSlug;
-        const r = await fetch(`/api/modules/${encodeURIComponent(practiceModuleSlug)}/practice/start`, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                returnUrl: returnToCurrentModule,
-                resumeSessionId: assignmentSessionId || null,
-            }),
-        });
 
-        const rawResponse = await r.text();
-        let data: any = null;
-        try {
-            data = rawResponse ? JSON.parse(rawResponse) : null;
-        } catch {
-            data = null;
-        }
-
-        if (!r.ok) {
-            const fallback = rawResponse.trim().startsWith("<")
-                ? `Unable to start the assignment (${r.status}).`
-                : rawResponse.trim() || `Unable to start the assignment (${r.status}).`;
-            alert(data?.message ?? fallback);
-            return;
-        }
-
-        if (!data?.sessionId) {
-            alert("The assignment started without returning a session. Please try again.");
-            return;
-        }
-
-        const newSid = String(data.sessionId);
-
-        const next: ReviewProgressState = {
-            ...(progress as any),
-            assignmentSessionId: newSid as any,
-        };
-        setProgress(next);
-        await flushNow(next, {
-            discardPendingSaves: true,
-            mergeRuntime: true,
-            reason: "module-assignment-session",
-        });
+        await flushAll();
         beginRouteTransition();
+
+        let sessionId: string | null = null;
+        try {
+            const response = await fetch("/api/practice/session/start", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    locale,
+                    subjectSlug,
+                    moduleSlug: practiceModuleSlug,
+                    returnTo: returnToLesson,
+                }),
+            });
+            const data = response.ok ? await response.json() : null;
+            sessionId =
+                typeof data?.sessionId === "string" && data.sessionId.trim()
+                    ? data.sessionId.trim()
+                    : null;
+        } catch {
+            sessionId = null;
+        }
+
         router.push(
             buildModulePracticeHref({
                 subjectSlug,
                 moduleSlug: practiceModuleSlug,
-                sessionId: newSid,
-                mode: "assignment",
-                returnTo: returnToCurrentModule,
+                sessionId,
+                mode: "standard",
+                returnTo: returnToLesson,
+                preferPurpose: "practice",
+                purposePolicy: "strict",
             }),
         );
     }, [
         locale,
         subjectSlug,
         moduleSlug,
+        pathname,
         router,
         mod,
-        progress,
-        assignmentSessionId,
-        setProgress,
-        flushNow,
+        flushAll,
         beginRouteTransition,
     ]);
 
@@ -2513,15 +2461,7 @@ export function useReviewModuleController({
         (progress as any)?.topics?.[viewTid],
         viewTid,
     );
-    const showAssignmentCta = !isTutoringSession && resolveCompactAssignmentCtaVisibility({
-        compactLearnerUi: learnerUiFlags.compactLearnerUi,
-        showDebugLearningUi: learnerUiFlags.showDebugLearningUi,
-        topics,
-        progress,
-        assignmentPhase: assignmentStatus.phase,
-        activeCard,
-        moduleComplete,
-    });
+    const showPracticeCta = !isTutoringSession;
     const hasActiveTopic = Boolean(viewTid);
     const isAtModuleEnd = !topicFlow.nextTopic?.id;
     const shouldHideModuleNavInCompactMode =
@@ -3173,6 +3113,7 @@ export function useReviewModuleController({
                 topicItems: sidebarTopicItems,
                 unlockAll: navigationUnlockAll,
                 moduleProgress,
+                practiceProgress: nav?.practiceProgress ?? null,
                 onGoToTopic: (tid: string) => {
                     const unlockedEntry = firstRouteTargetForUnlockedTopic({
                         registry: targetRegistry,
@@ -3206,12 +3147,8 @@ export function useReviewModuleController({
                     }
                 },
                 onCollapse: panels.handleCollapseLeft,
-                assignmentPct: assignmentRightPct,
-                assignmentMissedPct: assignmentMissedPct,
-                assignmentLabel,
-                assignmentSublabel,
-                showAssignmentCta,
-                onAssignmentClick: handleAssignmentClick,
+                showPracticeCta,
+                onPracticeClick: handlePracticeClick,
                 hasNextModule: !!nav && !!nav.nextModuleId,
                 navLoading,
                 navError,
@@ -3318,6 +3255,7 @@ export function useReviewModuleController({
                 topicItems: sidebarTopicItems,
                 unlockAll: navigationUnlockAll,
                 moduleProgress,
+                practiceProgress: nav?.practiceProgress ?? null,
                 onGoToTopic: (tid: string) => {
                     const unlockedEntry = firstRouteTargetForUnlockedTopic({
                         registry: targetRegistry,
@@ -3351,12 +3289,8 @@ export function useReviewModuleController({
                     }
                 },
                 onCollapse: () => panels.setMobileTopicsOpen(false),
-                assignmentPct: assignmentRightPct,
-                assignmentMissedPct: assignmentMissedPct,
-                assignmentLabel,
-                assignmentSublabel,
-                showAssignmentCta,
-                onAssignmentClick: handleAssignmentClick,
+                showPracticeCta,
+                onPracticeClick: handlePracticeClick,
                 hasNextModule: !!nav && !!nav.nextModuleId,
                 navLoading,
                 navError,

@@ -50,15 +50,15 @@ describe("practice experience resolution", () => {
   });
 
 
-  it("treats review module assignments as assignment intent", () => {
+  it("does not promote legacy module-assignment metadata into assignment intent", () => {
     const session = {
-      id: "module-assignment",
+      id: "legacy-module-assignment",
       mode: "standard",
       assignmentId: null,
       meta: { kind: "module_assignment", moduleSlug: "python-v2-0" },
     };
 
-    expect(resolvePracticeExperienceMode(session)).toBe("assignment");
+    expect(resolvePracticeExperienceMode(session)).toBe("standard");
     expect(() => assertPracticeExperienceInvariant(session)).not.toThrow();
   });
 

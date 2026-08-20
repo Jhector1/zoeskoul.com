@@ -445,7 +445,7 @@ export async function generatePracticeExercise(
     }
 
     const purposeMode = decision.effective;
-    const preferPurposeForGenerator: "quiz" | "project" | null =
+    const preferPurposeForGenerator: "quiz" | "project" | "practice" | null =
         isOnboardingTrial && !isSharedChallenge
             ? "quiz"
             : purposeMode === "mixed"
@@ -505,14 +505,20 @@ export async function generatePracticeExercise(
 
     const canResolveExactAuthoredExercise =
         (!isOnboardingTrial || isSharedChallenge) &&
-        (purposeMode === "project" || purposeMode === "quiz") &&
+        (purposeMode === "project" ||
+            purposeMode === "quiz" ||
+            purposeMode === "practice") &&
         hasRequestedTopic &&
         hasRequestedExerciseKey &&
         Boolean(effectiveSubjectSlug);
 
     if (canResolveExactAuthoredExercise) {
-        const authoredPurpose: "quiz" | "project" =
-            purposeMode === "quiz" ? "quiz" : "project";
+        const authoredPurpose: "quiz" | "project" | "practice" =
+            purposeMode === "practice"
+                ? "practice"
+                : purposeMode === "quiz"
+                    ? "quiz"
+                    : "project";
         let authoredResolved = await resolveTopicFromScope({
             prisma,
             subjectSlug: scopedSubjectSlug,
@@ -589,7 +595,7 @@ export async function generatePracticeExercise(
             kind: "json",
             status: 200,
             body: {
-                exercise: authored.exercise,
+                exercise: (instance.publicPayload as Exercise) ?? authored.exercise,
                 key,
                 sessionId: session?.id ?? null,
                 run,
@@ -777,17 +783,23 @@ export async function generatePracticeExercise(
 
     const exercise = { ...(ex0 as any), topic: topicSlug } as Exercise;
 
-    const chosenPurpose: "quiz" | "project" =
-        (out as any)?.meta?.purpose === "project" ? "project" : "quiz";
+    const chosenPurpose: "quiz" | "project" | "practice" =
+        (out as any)?.meta?.purpose === "practice"
+            ? "practice"
+            : (out as any)?.meta?.purpose === "project"
+                ? "project"
+                : "quiz";
 
-    const persistedPurpose: "quiz" | "project" =
+    const persistedPurpose: "quiz" | "project" | "practice" =
         isOnboardingTrial && !isSharedChallenge
             ? "quiz"
             : purposeMode === "mixed"
                 ? chosenPurpose
-                : purposeMode === "project"
-                    ? "project"
-                    : "quiz";
+                : purposeMode === "practice"
+                    ? "practice"
+                    : purposeMode === "project"
+                        ? "project"
+                        : "quiz";
 
     const instance = await createPracticeInstance({
         prisma,
@@ -815,7 +827,7 @@ export async function generatePracticeExercise(
         kind: "json",
         status: 200,
         body: {
-            exercise,
+            exercise: (instance.publicPayload as Exercise) ?? exercise,
             key,
             sessionId: session?.id ?? null,
             run,

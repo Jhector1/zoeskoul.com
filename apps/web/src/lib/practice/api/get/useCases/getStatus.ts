@@ -9,6 +9,7 @@ import {
     computeAllowRevealEffective,
     getAssignmentDifficulty,
 } from "../policies/session.policy";
+import { buildRevealForInstance } from "../../help/reveal/buildRevealForInstance";
 
 export function canRevealExpectedForStatusOnly(
     session: any,
@@ -16,9 +17,8 @@ export function canRevealExpectedForStatusOnly(
 ): boolean {
     if (!session) return false;
 
-    // Product intent is not equivalent to assignmentId. Review-module
-    // assignments are stored as standard sessions with module_assignment meta,
-    // so assignmentId-only checks leak expected answers in status/history JSON.
+    // Teacher-created assignments keep expected answers behind the authored
+    // reveal policy. Standard and Daily Practice retain normal completion review.
     if (resolvePracticeExperienceMode(session) === "assignment") {
         return allowRevealEffective;
     }
@@ -239,8 +239,8 @@ export async function getPracticeStatus(
             }
         }
         const instances = await prisma.practiceQuestionInstance.findMany({
-            where: { sessionId: session.id, answeredAt: { not: null } },
-            orderBy: { answeredAt: "asc" },
+            where: { sessionId: session.id },
+            orderBy: { createdAt: "asc" },
             select: {
                 id: true,
                 createdAt: true,
@@ -255,12 +255,26 @@ export async function getPracticeStatus(
             },
         });
 
-        history = instances.map((row) => {
+        history = await Promise.all(instances.map(async (row) => {
             const last = lastNonReveal.get(row.id) ?? null;
-            const expectedAnswerPayload = canRevealExpected
+            const lastRevealUsed = Boolean(revealUsedAny.get(row.id) ?? false);
+            const canReviewCompletedAnswer = canRevealExpected && Boolean(row.answeredAt);
+            const expectedAnswerPayload = canReviewCompletedAnswer
                 ? pickExpectedPayload(row.kind, row.secretPayload)
                 : null;
-            const explanation = canRevealExpected ? pickExplanation(row.kind, row.secretPayload) : null;
+            const explanation = canReviewCompletedAnswer
+                ? pickExplanation(row.kind, row.secretPayload)
+                : null;
+            const revealAnswer =
+                canReviewCompletedAnswer && lastRevealUsed
+                    ? (
+                        await buildRevealForInstance({
+                            instance: row as any,
+                            expectedCanon: (row.secretPayload as any)?.expected,
+                            showDebug: false,
+                        })
+                    ).revealAnswer
+                    : null;
 
             return {
                 instanceId: row.id,
@@ -277,14 +291,15 @@ export async function getPracticeStatus(
                 lastAttemptAt: last?.createdAt ?? null,
                 expectedAnswerPayload,
                 explanation,
+                revealAnswer,
 
 
                 attempts: countMap.get(row.id) ?? 0,
                 lastOk: last ? Boolean(last.ok) : null,
                 helpUsedKeys: helpUsedKeysMap.get(row.id) ?? [],
-                lastRevealUsed: Boolean(revealUsedAny.get(row.id) ?? false),
+                lastRevealUsed,
             };
-        });
+        }));
     }
 
     return {

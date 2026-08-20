@@ -20,7 +20,7 @@ import {ExerciseHelpSpec} from "@/lib/practice/types";
 
 export type HelpStepKey = "concept" | "hint_1" | "hint_2";
 
-export type PracticePurpose = "quiz" | "project";
+export type PracticePurpose = "quiz" | "project" | "practice";
 
 export function normalizePracticePurpose(
     value: unknown,
@@ -31,7 +31,8 @@ export function normalizePracticePurpose(
     const normalizedKind = String(kind ?? "").trim();
 
     if (raw === "quiz") return "quiz";
-    if (raw === "project" || raw === "try_it" || raw === "try-it" || raw === "practice" || raw === "capstone") {
+    if (raw === "practice") return "practice";
+    if (raw === "project" || raw === "try_it" || raw === "try-it" || raw === "capstone") {
         return "project";
     }
 

@@ -12,6 +12,39 @@ export type PracticeCompletionIntent =
   | "assignment"
   | "standard";
 
+export const MODULE_PRACTICE_RETURN_LABEL = "Return to lesson";
+
+export function isLessonPracticeReturnUrl(value: string | null | undefined) {
+  const raw = String(value ?? "").trim();
+  if (!raw.startsWith("/") || raw.startsWith("//")) return false;
+
+  try {
+    const url = new URL(raw, "https://zoeskoul.local");
+    if (url.origin !== "https://zoeskoul.local") return false;
+
+    const segments = url.pathname.split("/").filter(Boolean);
+    const subjectsIndex = segments.indexOf("subjects");
+    return (
+      subjectsIndex >= 1 &&
+      Boolean(segments[subjectsIndex + 1]) &&
+      segments[subjectsIndex + 2] === "modules" &&
+      Boolean(segments[subjectsIndex + 3]) &&
+      segments[subjectsIndex + 4] === "learn"
+    );
+  } catch {
+    return false;
+  }
+}
+
+export function shouldReturnToLessonAfterModulePractice(args: {
+  mode: PracticeExperienceMode;
+  returnUrl?: string | null;
+}) {
+  if (args.mode !== "standard") return false;
+
+  return isLessonPracticeReturnUrl(args.returnUrl);
+}
+
 export function resolvePracticeCompletionIntent(args: {
   mode: PracticeExperienceMode;
   viewer: PracticeRunViewer;

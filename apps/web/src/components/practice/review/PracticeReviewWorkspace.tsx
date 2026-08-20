@@ -8,6 +8,7 @@ import SummaryView from "@/components/practice/shell/SummaryView";
 import PracticeNavigator from "./PracticeNavigator";
 import PracticeCompletionCelebration from "@/components/practice/completion/PracticeCompletionCelebration";
 import { resolvePracticeDisplayStack } from "@/lib/practice/experience/reviewDisplayStack";
+import { isLessonPracticeReturnUrl } from "@/lib/practice/experience/completion";
 import StandaloneReviewExerciseFlow from "./StandaloneReviewExerciseFlow";
 
 import ReviewModuleLayout from "@/components/review/module/components/layout/ReviewModuleLayout";
@@ -45,6 +46,10 @@ function safeReturnHref(props: PracticeShellProps) {
   }
 
   return `/${locale}/subjects`;
+}
+
+function hasExplicitLessonReturn(props: PracticeShellProps) {
+  return isLessonPracticeReturnUrl(props.returnUrl);
 }
 
 function stageCopy(
@@ -145,12 +150,28 @@ function PracticeStage({
   const [activeTab, setActiveTab] = useState<"lesson" | "code">("lesson");
   const t = useTranslations("Practice.workspace");
   const copy = stageCopy(props, t);
+  const completedPrefixCount =
+    props.experienceMode === "standard"
+      ? props.modulePracticeProgress?.completedPrefix?.length ?? 0
+      : 0;
+  const modulePracticeTotal =
+    props.experienceMode === "standard"
+      ? props.modulePracticeProgress?.moduleTotal ?? null
+      : null;
+  const displayTotal =
+    modulePracticeTotal && modulePracticeTotal > 0
+      ? modulePracticeTotal
+      : props.sessionSize;
+  const displayIndex = Math.min(
+    Math.max(0, displayTotal - 1),
+    completedPrefixCount + props.idx,
+  );
   const slots = useMemo(
     () =>
-      Array.from({ length: Math.max(1, props.sessionSize) }, (_, index) => ({
+      Array.from({ length: Math.max(1, displayTotal) }, (_, index) => ({
         index,
       })),
-    [props.sessionSize],
+    [displayTotal],
   );
 
   const exerciseCard = (
@@ -166,9 +187,12 @@ function PracticeStage({
           <FlowNavigator
             items={slots}
             mode="slideshow"
-            activeIndex={props.idx}
+            activeIndex={displayIndex}
             onActiveIndexChange={(index) => {
-              if (index < props.stack.length) props.setIdx(index);
+              const sessionIndex = index - completedPrefixCount;
+              if (sessionIndex >= 0 && sessionIndex < props.stack.length) {
+                props.setIdx(sessionIndex);
+              }
             }}
             reduceMotion={reduceMotion}
             getKey={(slot) => `practice-slot-${slot.index}`}
@@ -340,6 +364,7 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
         levelProgressPct: gamificationSummary.levelProgressPct,
       }
     : null;
+  const showLessonReturn = hasExplicitLessonReturn(props);
 
   const handleResetCurrentExercise = useCallback(() => {
     if (!props.exercise || !props.current) return;
@@ -411,7 +436,10 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
           leftCollapsed={panels.leftCollapsedEff}
           rightCollapsed={panels.rightCollapsedEff}
           modulesHref={safeReturnHref(props)}
-          showModulesButton={false}
+          showModulesButton={showLessonReturn}
+          modulesButtonLabel="Return to lesson"
+          modulesButtonTitle="Return to lesson"
+          modulesButtonLoadingText="Returning…"
           showResetButton={false}
           onToggleLeftPanel={panels.handleToggleLeftPanel}
           onToggleRightPanel={() => {
@@ -510,6 +538,7 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
         targetCount={props.sessionSize}
         dailyResetAt={props.dailyResetAt}
         leaderboardUrl={props.leaderboardUrl}
+        returnUrl={props.returnUrl}
         onPrimary={() => props.onReturn?.()}
         onClose={() => setCompletionOpen(false)}
       />

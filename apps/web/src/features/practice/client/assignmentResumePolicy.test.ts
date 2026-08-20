@@ -62,7 +62,7 @@ describe("resolvePracticeResumePolicy", () => {
 });
 
 describe("buildServerResumePlan", () => {
-  it("seeds answered questions before loading the next unanswered question", () => {
+  it("restores the server-owned current question without loading another", () => {
     const plan = buildServerResumePlan({
       enabled: true,
       complete: false,
@@ -71,8 +71,21 @@ describe("buildServerResumePlan", () => {
     });
 
     expect(plan.seedStack).toEqual(["q1", "q2", "q3", "q4"]);
+    expect(plan.shouldLoadCurrent).toBe(false);
+    expect(plan.nextQuestionIndex).toBe(3);
+  });
+
+  it("loads the first question when the server has no owned instance", () => {
+    const plan = buildServerResumePlan({
+      enabled: true,
+      complete: false,
+      localStack: [],
+      history: [],
+    });
+
+    expect(plan.seedStack).toBeNull();
     expect(plan.shouldLoadCurrent).toBe(true);
-    expect(plan.nextQuestionIndex).toBe(4);
+    expect(plan.nextQuestionIndex).toBe(0);
   });
 
   it("does not replace an already hydrated local stack", () => {

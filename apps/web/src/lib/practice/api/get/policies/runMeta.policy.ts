@@ -48,7 +48,7 @@ export function buildRunMeta(args: {
         ...basePolicy,
         targetCount: subscriberPractice.targetCount,
         lockDifficulty: diff,
-        lockTopic: subscriberPractice.queue[0]?.topicSlug ?? "all",
+        lockTopic: subscriberPractice.scope?.topicSlug ?? "all",
         filters: {
           topicEditable: false,
           difficultyEditable: false,
@@ -57,7 +57,13 @@ export function buildRunMeta(args: {
         },
         eligibility: {
           ...basePolicy.eligibility,
-          allowedPurposes: ["quiz", "project"] as Array<"quiz" | "project">,
+          allowedPurposes: Array.from(
+            new Set(
+              subscriberPractice.queue.map(
+                (target) => target.exercisePurpose,
+              ),
+            ),
+          ),
         },
       }
     : basePolicy;
@@ -101,6 +107,18 @@ export function buildRunMeta(args: {
           nextResetAt:
             nextUtcDayStartIso(daily.dayKey) ?? new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
           targetCount: daily.targetCount,
+        }
+      : null,
+    subscriberPractice: subscriberPractice
+      ? {
+          moduleTotal: subscriberPractice.moduleTotal,
+          completedPrefix: subscriberPractice.completedPrefix.map((target) => ({
+            exerciseKey: target.exerciseKey,
+            exerciseTitle: target.exerciseTitle,
+            exerciseKind: target.exerciseKind,
+            topicSlug: target.topicSlug,
+            sectionSlug: target.sectionSlug,
+          })),
         }
       : null,
   };

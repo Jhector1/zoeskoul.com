@@ -112,7 +112,6 @@ export async function handlePracticeGet(
     const isSharedChallenge = experienceMode === "public_challenge" && Boolean(
         readSharedChallengeMeta(session?.meta ?? null),
     );
-    const isDailyFive = experienceMode === "daily_five";
 
     const decision = computePurposeDecision({
         session,
@@ -130,7 +129,13 @@ export async function handlePracticeGet(
 
     const purposeMode = decision.effective;
 
-    if (session && !session.assignmentId && (purposeMode === "quiz" || purposeMode === "project")) {
+    if (
+        session &&
+        !session.assignmentId &&
+        (purposeMode === "quiz" ||
+            purposeMode === "project" ||
+            purposeMode === "practice")
+    ) {
         const cur = String(session.preferPurpose ?? "quiz");
         if (cur !== purposeMode) {
             await prisma.practiceSession.update({
@@ -162,21 +167,6 @@ export async function handlePracticeGet(
                 body: { message: "Standard trial sessions only allow quiz questions." },
             };
         }
-    }
-
-    if (
-        isDailyFive &&
-        purposeMode !== "quiz" &&
-        purposeMode !== "project"
-    ) {
-        return {
-            kind: "json",
-            status: 403,
-            body: {
-                message:
-                    "Daily practice only allows its queued standalone single-file code exercises.",
-            },
-        };
     }
 
     if (statusOnly === "true") {

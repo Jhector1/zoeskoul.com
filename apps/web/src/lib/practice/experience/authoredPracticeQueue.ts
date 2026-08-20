@@ -1,7 +1,7 @@
 import type { GetParams } from "@/lib/practice/api/get/schemas";
 import type { PublishedPracticeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
 
-export type AuthoredPracticePurpose = "quiz" | "project";
+export type AuthoredPracticePurpose = "quiz" | "project" | "practice";
 
 export type AuthoredPracticeTarget = {
   subjectSlug: string;
@@ -14,8 +14,18 @@ export type AuthoredPracticeTarget = {
   exercisePurpose: AuthoredPracticePurpose;
 };
 
+export function isAuthoredLessonPracticeOption(
+  option: PublishedPracticeExerciseOption,
+) {
+  return (
+    option.sectionRole === "lesson" &&
+    option.exercisePurpose === "practice"
+  );
+}
+
 type UsedAuthoredPracticeTarget = {
   exerciseKey?: string | null;
+  publicPayload?: unknown;
   topic?: { slug?: string | null } | null;
 };
 
@@ -25,10 +35,21 @@ function asRecord(value: unknown): Record<string, unknown> | null {
     : null;
 }
 
+export function authoredPracticeHistoryExerciseKey(args: {
+  exerciseKey?: string | null;
+  publicPayload?: unknown;
+}) {
+  const payload = asRecord(args.publicPayload);
+  const authoredId = String(payload?.id ?? "").trim();
+  return authoredId || String(args.exerciseKey ?? "").trim();
+}
+
 export function normalizeAuthoredPracticePurpose(
   purpose: PublishedPracticeExerciseOption["exercisePurpose"] | unknown,
 ): AuthoredPracticePurpose {
-  return purpose === "quiz" ? "quiz" : "project";
+  if (purpose === "quiz") return "quiz";
+  if (purpose === "practice") return "practice";
+  return "project";
 }
 
 export function authoredPracticeTargetFromOption(
@@ -50,6 +71,81 @@ export function authoredPracticeTargetIdentity(
   target: Pick<AuthoredPracticeTarget, "topicSlug" | "exerciseKey">,
 ) {
   return `${target.topicSlug}|${target.exerciseKey}`;
+}
+
+export function stableAuthoredPracticeSelectionScore(
+  seed: string,
+  key: string,
+) {
+  let hash = 2166136261;
+  const input = `${seed}|${key}`;
+
+  for (let index = 0; index < input.length; index += 1) {
+    hash ^= input.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return (hash >>> 0).toString(16).padStart(8, "0");
+}
+
+export function uniquePublishedPracticeOptions(
+  options: readonly PublishedPracticeExerciseOption[],
+) {
+  const unique = new Map<string, PublishedPracticeExerciseOption>();
+
+  for (const option of options) {
+    const identity = authoredPracticeTargetIdentity(
+      authoredPracticeTargetFromOption(option),
+    );
+    if (!unique.has(identity)) unique.set(identity, option);
+  }
+
+  return [...unique.values()];
+}
+
+export function deterministicPublishedPracticeOrder(
+  seed: string,
+  options: readonly PublishedPracticeExerciseOption[],
+) {
+  return [...options].sort((left, right) => {
+    const leftIdentity = authoredPracticeTargetIdentity(
+      authoredPracticeTargetFromOption(left),
+    );
+    const rightIdentity = authoredPracticeTargetIdentity(
+      authoredPracticeTargetFromOption(right),
+    );
+
+    return (
+      stableAuthoredPracticeSelectionScore(seed, leftIdentity).localeCompare(
+        stableAuthoredPracticeSelectionScore(seed, rightIdentity),
+      ) || leftIdentity.localeCompare(rightIdentity)
+    );
+  });
+}
+
+export function roundRobinPracticeGroups<T>(
+  groups: readonly { rows: readonly T[] }[],
+  targetCount: number,
+) {
+  const selected: T[] = [];
+  let round = 0;
+
+  while (selected.length < targetCount) {
+    let added = false;
+
+    for (const group of groups) {
+      const row = group.rows[round];
+      if (row === undefined) continue;
+      selected.push(row);
+      added = true;
+      if (selected.length >= targetCount) break;
+    }
+
+    if (!added) break;
+    round += 1;
+  }
+
+  return selected;
 }
 
 export function normalizeAuthoredPracticeQueue(
@@ -91,7 +187,7 @@ export function resolveNextAuthoredPracticeTarget(args: {
   const usedIdentities = new Set(
     args.usedTargets
       .map((item) => {
-        const exerciseKey = String(item.exerciseKey ?? "").trim();
+        const exerciseKey = authoredPracticeHistoryExerciseKey(item);
         const topicSlug = String(item.topic?.slug ?? "").trim();
         return exerciseKey && topicSlug ? `${topicSlug}|${exerciseKey}` : "";
       })
@@ -100,7 +196,7 @@ export function resolveNextAuthoredPracticeTarget(args: {
   const usedKeysWithoutTopic = new Set(
     args.usedTargets
       .filter((item) => !String(item.topic?.slug ?? "").trim())
-      .map((item) => String(item.exerciseKey ?? "").trim())
+      .map((item) => authoredPracticeHistoryExerciseKey(item))
       .filter(Boolean),
   );
 

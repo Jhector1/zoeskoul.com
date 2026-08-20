@@ -3,8 +3,12 @@ import "server-only";
 import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 import { resolveTopicBundleManifest } from "@/lib/curriculum/resolveTopicBundleManifest";
 
-export type PublishedPracticePurpose = "quiz" | "project" | "try_it";
-export type SharedChallengePurpose = Exclude<PublishedPracticePurpose, "try_it">;
+export type PublishedPracticePurpose =
+  | "quiz"
+  | "project"
+  | "try_it"
+  | "practice";
+export type SharedChallengePurpose = "quiz" | "project";
 
 export type PublishedPracticeTargetInput = {
   subjectSlug: string;
@@ -75,12 +79,17 @@ function resolvePublishedPurpose(
 ): PublishedPracticePurpose {
   const purpose = String(exercise.purpose ?? "").trim();
 
-  if (purpose === "quiz" || purpose === "project" || purpose === "try_it") {
+  if (
+    purpose === "quiz" ||
+    purpose === "project" ||
+    purpose === "try_it" ||
+    purpose === "practice"
+  ) {
     return purpose;
   }
 
   throw new Error(
-    `Only quiz, project, and try-it exercises can be used for practice. This exercise uses purpose "${purpose || "unknown"}".`,
+    `Only quiz, project, try-it, and practice exercises can be used for authenticated practice. This exercise uses purpose "${purpose || "unknown"}".`,
   );
 }
 
@@ -210,6 +219,12 @@ export function resolveSharedChallengeTarget(
   if (resolved.exercisePurpose === "try_it") {
     throw new Error(
       `"${resolved.exerciseKey}" is an authenticated lesson try-it and cannot be shared as an anonymous public challenge.`,
+    );
+  }
+
+  if (resolved.exercisePurpose === "practice") {
+    throw new Error(
+      `"${resolved.exerciseKey}" is an authored practice exercise and cannot be shared as an anonymous public challenge.`,
     );
   }
 

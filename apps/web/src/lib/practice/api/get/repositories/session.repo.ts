@@ -48,6 +48,7 @@ export const practiceGetSessionSelect = {
         select: {
             id: true,
             exerciseKey: true,
+            publicPayload: true,
             answeredAt: true,
             topic: { select: { slug: true } },
         },

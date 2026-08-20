@@ -15,6 +15,7 @@ import AiTutorFloating from "@/components/ai-tutor/AiTutorFloating";
 import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 import { isPracticeItemFinalized } from "@/lib/practice/runtime";
 import type { PracticeExperienceMode, PracticeRunViewer } from "@/lib/practice/experience/types";
+import type { PracticeSubscriberRunMeta } from "@/lib/practice/apiTypes";
 import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";
 import { resolvePracticeExerciseSurface } from "@/lib/practice/experience/surface";
 import {
@@ -46,6 +47,7 @@ export type PracticeShellProps = {
   isDailyFive?: boolean;
   challengeTitle?: string | null;
   helpPolicy?: PracticeHelpPolicy | null;
+  modulePracticeProgress?: PracticeSubscriberRunMeta | null;
 
   allowReveal: boolean;
   showDebug: boolean;

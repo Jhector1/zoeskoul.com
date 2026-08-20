@@ -70,7 +70,9 @@ export function buildReviewQuizKey(
 
 export function coercePurposeMode(v: any): PurposeMode | null {
     const s = String(v ?? "").trim();
-    return s === "quiz" || s === "project" || s === "mixed" ? (s as PurposeMode) : null;
+    return s === "quiz" || s === "project" || s === "practice" || s === "mixed"
+        ? (s as PurposeMode)
+        : null;
 }
 
 export function coercePurposePolicy(v: any): PurposePolicy | null {

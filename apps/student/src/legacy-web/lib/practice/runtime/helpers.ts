@@ -10,6 +10,7 @@ import {
     initItemFromExercise,
 } from "@/lib/practice/uiHelpers";
 import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
+import { resolveExerciseWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 import type { SessionHistoryRow } from "./types";
 
 export function coerceMaxAttempts(v: unknown): number | null {
@@ -152,7 +153,25 @@ export function applyAnswerPayloadToItem(item: QItem, payload: any) {
             break;
 
         case "matrix_input":
-            if (Array.isArray(payload.raw)) (item as any).mat = payload.raw;
+            if (Array.isArray(payload.raw ?? payload.values)) {
+                (item as any).mat = payload.raw ?? payload.values;
+            }
+            break;
+
+        case "pseudocode_input":
+            (item as any).pseudocode = String(payload.value ?? payload.solution ?? "");
+            break;
+
+        case "text_input":
+            (item as any).text = String(payload.value ?? "");
+            break;
+
+        case "voice_input":
+            (item as any).voiceTranscript = String(payload.transcript ?? payload.value ?? "");
+            break;
+
+        case "drag_reorder":
+            (item as any).reorder = Array.isArray(payload.order) ? payload.order : [];
             break;
 
         case "code_input": {
@@ -180,6 +199,25 @@ export function applyAnswerPayloadToItem(item: QItem, payload: any) {
             if (lang) (item as any).codeLang = lang;
             (item as any).code = code;
             (item as any).codeStdin = stdin;
+            if (Array.isArray(payload.files) && payload.files.length > 0) {
+                const submittedFiles = payload.files.map((file: any) =>
+                    file?.path === payload.entry ? { ...file, entry: true } : file,
+                );
+                const workspace = resolveExerciseWorkspace({
+                    language: lang ?? "python",
+                    manifest: {
+                        ...((item as any).exercise ?? {}),
+                        entryFile: payload.entry,
+                        starterCode: code,
+                        starterFiles: submittedFiles,
+                    },
+                });
+                (item as any).workspace = workspace;
+                (item as any).codeWorkspace = workspace;
+                (item as any).ideWorkspace = workspace;
+                (item as any).userEdited = true;
+                (item as any).workspaceOrigin = "saved";
+            }
             if (payload.terminalEvidence && typeof payload.terminalEvidence === "object") {
                 (item as any).terminalEvidence = payload.terminalEvidence;
             }
@@ -235,12 +273,15 @@ export function historyRowToQItem(h: SessionHistoryRow): QItem {
 
     item.attempts = Number(h.attempts ?? 0);
 
-    const finalized = Boolean(h.answeredAt) || Number(h.attempts ?? 0) > 0;
+    const finalized = Boolean(h.answeredAt);
     item.submitted = finalized;
+    item.revealed = Boolean(h.lastRevealUsed);
 
     item.result = {
         ok: h.lastOk === null ? undefined : Boolean(h.lastOk),
         finalized,
+        revealUsed: Boolean(h.lastRevealUsed),
+        revealAnswer: h.revealAnswer ?? null,
         expected: h.expectedAnswerPayload ?? null,
         explanation: h.explanation ?? null,
     } as any;

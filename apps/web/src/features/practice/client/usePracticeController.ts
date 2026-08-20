@@ -493,6 +493,7 @@ export function usePracticeController(args: {
       isDailyFive: isDailyFiveRun,
       challengeTitle: run?.challenge?.title ?? null,
       helpPolicy: run?.help ?? null,
+      modulePracticeProgress: run?.subscriberPractice ?? null,
 
       // ...existing props...
       excuseAndNext: (reason?: string | null) => engine.excuseAndNext?.(reason),

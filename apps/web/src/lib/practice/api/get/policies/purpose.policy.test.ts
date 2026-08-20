@@ -2,56 +2,72 @@ import { describe, expect, it } from "vitest";
 
 import { computePurposeDecision } from "./purpose.policy";
 
+const target = (
+  exerciseKey: string,
+  exercisePurpose: "quiz" | "project" | "practice",
+) => ({
+  subjectSlug: "python-v2",
+  moduleSlug: "python-v2-1",
+  sectionSlug: "section-1",
+  topicSlug: "topic-1",
+  exerciseKey,
+  exerciseTitle: exerciseKey,
+  exerciseKind: exercisePurpose === "quiz" ? "single_choice" : "code_input",
+  exercisePurpose,
+});
+
 describe("practice purpose policy", () => {
-  it("lets a daily queue use a project-purpose standalone try-it even under a quiz-only module preset", () => {
+  it("keeps Daily Practice on authored practice purpose", () => {
     const decision = computePurposeDecision({
       session: {
+        id: "daily-session",
         mode: "daily_five",
-        preferPurpose: "quiz",
+        preferPurpose: "practice",
         meta: { kind: "daily_five" },
         section: {
           module: {
-            practicePreset: { allowedPurposes: ["quiz"] },
+            practicePreset: { allowedPurposes: ["quiz", "project"] },
           },
         },
       },
-      preferPurposeParam: "project",
+      preferPurposeParam: "practice",
       purposePolicyParam: "strict",
     });
 
     expect(decision).toMatchObject({
       ok: true,
-      effective: "project",
-      allowed: ["project"],
+      effective: "practice",
+      allowed: ["practice"],
       source: "session",
-      reason: "practice_modes_use_project_purpose",
+      reason: "daily_practice_uses_practice_purpose",
     });
   });
 
-  it("forces subscriber practice to project purpose even under a quiz-only module preset", () => {
+  it("makes normal Practice strict practice purpose", () => {
     const decision = computePurposeDecision({
       session: {
         mode: "standard",
-        preferPurpose: "quiz",
+        preferPurpose: "project",
         section: {
           module: {
-            practicePreset: { allowedPurposes: ["quiz"] },
+            practicePreset: { allowedPurposes: ["quiz", "project"] },
           },
         },
       },
       preferPurposeParam: "project",
-      purposePolicyParam: "strict",
+      purposePolicyParam: "fallback",
     });
 
     expect(decision).toMatchObject({
       ok: true,
-      effective: "project",
-      allowed: ["project"],
-      reason: "practice_modes_use_project_purpose",
+      effective: "practice",
+      allowed: ["practice"],
+      policy: "strict",
+      reason: "practice_modes_use_practice_purpose",
     });
   });
 
-  it("uses each exact authored purpose in a subscriber queue", () => {
+  it("uses practice purpose from a new subscriber authored queue", () => {
     const session = {
       id: "subscriber-session",
       mode: "standard",
@@ -59,26 +75,36 @@ describe("practice purpose policy", () => {
         kind: "subscriber_practice",
         targetCount: 2,
         queue: [
-          {
-            subjectSlug: "python-v2",
-            moduleSlug: "python-v2-1",
-            sectionSlug: "section-1",
-            topicSlug: "topic-1",
-            exerciseKey: "quiz-1",
-            exerciseTitle: "Quiz",
-            exerciseKind: "single_choice",
-            exercisePurpose: "quiz",
-          },
-          {
-            subjectSlug: "python-v2",
-            moduleSlug: "python-v2-1",
-            sectionSlug: "section-1",
-            topicSlug: "topic-1",
-            exerciseKey: "code-1",
-            exerciseTitle: "Try it",
-            exerciseKind: "code_input",
-            exercisePurpose: "project",
-          },
+          target("practice-1", "practice"),
+          target("practice-2", "practice"),
+        ],
+      },
+    };
+
+    expect(
+      computePurposeDecision({
+        session,
+        preferPurposeParam: "practice",
+        purposePolicyParam: "strict",
+      }),
+    ).toMatchObject({
+      ok: true,
+      effective: "practice",
+      allowed: ["practice"],
+      reason: "subscriber_practice_uses_authored_queue_purpose",
+    });
+  });
+
+  it("keeps old subscriber quiz/project queues resumable", () => {
+    const session = {
+      id: "legacy-subscriber-session",
+      mode: "standard",
+      meta: {
+        kind: "subscriber_practice",
+        targetCount: 2,
+        queue: [
+          target("quiz-1", "quiz"),
+          target("project-1", "project"),
         ],
       },
     };
@@ -93,7 +119,6 @@ describe("practice purpose policy", () => {
       ok: true,
       effective: "quiz",
       allowed: ["quiz", "project"],
-      reason: "subscriber_practice_uses_authored_queue_purpose",
     });
 
     expect(
@@ -109,7 +134,7 @@ describe("practice purpose policy", () => {
     });
   });
 
-  it("forces onboarding trials back to quiz purpose even when stale client or session state says project", () => {
+  it("forces onboarding trials back to quiz purpose", () => {
     const decision = computePurposeDecision({
       session: {
         id: "trial-session",
@@ -122,7 +147,7 @@ describe("practice purpose policy", () => {
           },
         },
       },
-      preferPurposeParam: "project",
+      preferPurposeParam: "practice",
       purposePolicyParam: "strict",
     });
 

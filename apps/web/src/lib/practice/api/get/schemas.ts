@@ -20,8 +20,8 @@ includeMissed: z.enum(["true", "false"]).optional(),
   returnTo: z.string().optional(), // alias (optional)
     // back: z.string().optional(), // alias (optional)
 
-    // ✅ NEW: quiz | project | mixed
-    preferPurpose: z.enum(["quiz", "project", "mixed"]).optional(),
+    // ✅ NEW: quiz | project | practice | mixed
+    preferPurpose: z.enum(["quiz", "project", "practice", "mixed"]).optional(),
 
     // ✅ NEW: strict = error if not allowed, fallback = auto-pick allowed
     purposePolicy: z.enum(["strict", "fallback"]).optional(),

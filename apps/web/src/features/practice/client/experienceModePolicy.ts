@@ -34,16 +34,20 @@ export function resolvePracticePurposeDefaults(args: {
   const openPracticeRun =
     args.experienceMode === "standard" || args.experienceMode === "practice";
 
-  const preferPurpose: PurposeMode = dailyProjectRun
-    ? "project"
-    : args.requestedPurpose ?? (openPracticeRun ? "mixed" : "quiz");
-  const purposePolicy: PurposePolicy = dailyProjectRun
-    ? "strict"
-    : args.requestedPolicy ?? "fallback";
+  if (openPracticeRun) {
+    return { preferPurpose: "practice", purposePolicy: "strict" };
+  }
 
-  if (args.isLockedRun && !dailyProjectRun) {
+  if (dailyProjectRun) {
+    return { preferPurpose: "project", purposePolicy: "strict" };
+  }
+
+  if (args.isLockedRun) {
     return { preferPurpose: "quiz", purposePolicy: "fallback" };
   }
 
-  return { preferPurpose, purposePolicy };
+  return {
+    preferPurpose: args.requestedPurpose ?? "quiz",
+    purposePolicy: args.requestedPolicy ?? "fallback",
+  };
 }

@@ -5,6 +5,7 @@ import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import QuizPracticeCard, {
     applyPracticeWorkspaceHydration,
     flushReviewToolsBeforeSubmit,
+    practiceSnapshotMatchesVisibleExercise,
     workspaceStableKey,
 } from "./QuizPracticeCard";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
@@ -1177,9 +1178,136 @@ describe("QuizPracticeCard runner outage visibility", () => {
     });
 });
 
+describe("practiceSnapshotMatchesVisibleExercise", () => {
+    it("rejects the completed previous exercise snapshot after the visible exercise advances", () => {
+        const previousExercise = makeCodeInputExercise({
+            id: "change-one-operator",
+        } as any, {
+            exerciseKey: "practice-change-one-operator",
+        });
+        const nextExercise = makeCodeInputExercise({
+            id: "reorder-four-lines",
+        } as any, {
+            exerciseKey: "practice-reorder-four-lines",
+        });
+
+        expect(
+            practiceSnapshotMatchesVisibleExercise({
+                livePracticeItem: {
+                    exercise: previousExercise,
+                    result: { ok: true },
+                    userEdited: true,
+                    code: "print(8 * 4)",
+                },
+                livePracticeManifest: nextExercise,
+                stableExerciseSlotId: "practice-reorder-four-lines",
+            }),
+        ).toBe(false);
+    });
+
+    it("accepts learner work only when the item snapshot belongs to the visible exercise", () => {
+        const exercise = makeCodeInputExercise({
+            id: "reorder-four-lines",
+        } as any, {
+            exerciseKey: "practice-reorder-four-lines",
+        });
+
+        expect(
+            practiceSnapshotMatchesVisibleExercise({
+                livePracticeItem: {
+                    exercise,
+                    userEdited: true,
+                    code: "print('North')",
+                },
+                livePracticeManifest: exercise,
+                stableExerciseSlotId: "practice-reorder-four-lines",
+            }),
+        ).toBe(true);
+    });
+});
+
 describe("applyPracticeWorkspaceHydration", () => {
     beforeEach(() => {
         resetRuntimeStore();
+    });
+
+    it("uses the visible exercise starter when a completed previous item snapshot is stale", () => {
+        const exerciseKey =
+            "python:python-v2-0:section:running-python-code:standalone-standard:practice-reorder-four-lines";
+        const previousWorkspace = makeWorkspace([
+            { path: "main.py", content: "print(8 * 4)\n" },
+        ]);
+        const nextStarterWorkspace = makeWorkspace([
+            { path: "main.py", content: 'print("West")\nprint("North")\nprint("South")\nprint("East")\n' },
+        ]);
+
+        const runtime = useReviewRuntimeStore.getState();
+        runtime.ensureEditorSource({
+            ownerKey: exerciseKey,
+            ownerKind: "exercise",
+            targetKey: exerciseKey,
+            toolScopeKey: exerciseKey,
+            language: "python",
+            manifest: { workspace: nextStarterWorkspace } as any,
+            entry: {
+                targetKey: exerciseKey,
+                routeKey: exerciseKey,
+                targetKind: "exercise",
+                sectionSlug: "section",
+                topicId: "running-python-code",
+                topicSlug: "running-python-code",
+                cardId: "standalone-standard",
+                cardType: "project",
+                targetSlug: "practice-reorder-four-lines",
+                ownerKind: "exercise",
+                ownerKey: exerciseKey,
+                cardKey: "running-python-code:standalone-standard",
+                toolScopeKey: exerciseKey,
+                exerciseId: "practice-reorder-four-lines",
+                exerciseStateKey: exerciseKey,
+                language: "python",
+                item: { workspace: nextStarterWorkspace },
+            } as any,
+            workspaceSeedMode: "starter",
+        });
+
+        applyPracticeWorkspaceHydration({
+            exerciseKeyForTools: exerciseKey,
+            generation: 0,
+            runtimeExercise: useReviewRuntimeStore.getState().exercises[exerciseKey] ?? null,
+            livePracticeItem: {
+                exercise: {
+                    id: "change-one-operator",
+                    exerciseKey: "practice-change-one-operator",
+                    kind: "code_input",
+                },
+                workspace: previousWorkspace,
+                workspaceOrigin: "user",
+                userEdited: true,
+                result: { ok: true },
+            },
+            livePracticeManifest: {
+                id: "reorder-four-lines",
+                exerciseKey: "practice-reorder-four-lines",
+                kind: "code_input",
+                language: "python",
+                starterCode:
+                    'print("West")\nprint("North")\nprint("South")\nprint("East")\n',
+                workspace: nextStarterWorkspace,
+            } as any,
+            allowLivePracticeItemWorkspace: false,
+            patchRuntimeExercise: useReviewRuntimeStore.getState().patchExercise,
+            patchEditorWorkspace: useReviewRuntimeStore.getState().patchEditorWorkspace,
+        });
+
+        expect(
+            fileContent(
+                useReviewRuntimeStore.getState().editorRuntimes[exerciseKey]?.workspace,
+                "main.py",
+            ),
+        ).toBe(
+            'print("West")\nprint("North")\nprint("South")\nprint("East")\n',
+        );
     });
 
     it("replays the practice hydration path through the real runtime store and rejects stale blank snapshots after reset", () => {
@@ -1279,6 +1407,7 @@ describe("applyPracticeWorkspaceHydration", () => {
                 language: "python",
                 starterCode: 'from models.car import Car\nprint("starter")\n',
             } as any,
+            allowLivePracticeItemWorkspace: false,
             patchRuntimeExercise: useReviewRuntimeStore.getState().patchExercise,
             patchEditorWorkspace: useReviewRuntimeStore.getState().patchEditorWorkspace,
         });

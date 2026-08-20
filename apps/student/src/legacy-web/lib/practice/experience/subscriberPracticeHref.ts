@@ -16,7 +16,7 @@ export function buildSubscriberPracticeHref(args: {
     sectionSlug: args.selection.sectionSlug,
     topicSlug: args.selection.topicSlug,
     questionCount: args.targetCount,
-    preferPurpose: "mixed",
-    purposePolicy: "fallback",
+    preferPurpose: "practice",
+    purposePolicy: "strict",
   });
 }

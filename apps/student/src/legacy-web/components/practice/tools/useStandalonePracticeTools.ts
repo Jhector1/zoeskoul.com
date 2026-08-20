@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback, useMemo, useState, type ComponentProps } from "react";
+import { useCallback, useMemo, useRef, useState, type ComponentProps } from "react";
 
 import type { PracticeShellProps } from "@/components/practice/PracticeShell";
 import type { ExerciseToolsValue, RegisterExerciseToolArgs } from "@/components/tools/context/ExerciseToolsContext";
 import type ToolsPanel from "@/components/tools/ToolsPanel";
 import { useToolCodeRunnerState } from "@/components/review/module/hooks/useToolCodeRunnerState";
+import { useReviewProgress } from "@/components/review/module/hooks/useReviewProgress";
 import { getExerciseStateKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
@@ -92,7 +93,7 @@ export function useStandalonePracticeTools(args: {
   onEnsureVisible: () => void;
 }) {
   const { props, rightCollapsed, rightW, onCollapse, onEnsureVisible } = args;
-  const [toolProgress, setToolProgress] = useState<{
+  const [ephemeralToolProgress, setEphemeralToolProgress] = useState<{
     topics: Record<string, unknown>;
     [key: string]: unknown;
   }>({ topics: {} });
@@ -118,6 +119,57 @@ export function useStandalonePracticeTools(args: {
       ) ?? "all",
     [props.current, props.exercise?.topic, props.topic],
   );
+
+  const persistenceFirstTopicRef = useRef<string | null>(null);
+  if (
+    persistenceFirstTopicRef.current == null &&
+    topicId !== "all"
+  ) {
+    persistenceFirstTopicRef.current = topicId;
+  }
+
+  const persistModulePracticeWorkspace =
+    props.experienceMode === "standard" &&
+    Boolean(props.subjectSlug) &&
+    Boolean(props.moduleSlug) &&
+    persistenceFirstTopicRef.current != null;
+
+  /**
+   * Reuse the exact Review/Lesson persistence owner for standard module
+   * Practice. The PracticeSession remains the canonical queue/attempt owner;
+   * Review progress owns only the exercise-scoped editor/runtime workspace.
+   *
+   * moduleTopicIds=[] intentionally means "the module's canonical progress row"
+   * here. Practice can round-robin across authored topics and does not own a
+   * separate topic inventory. Exact exerciseStateKey identity prevents Practice
+   * workspaces from colliding with lesson exercises.
+   */
+  const persistedReviewProgress = useReviewProgress({
+    // Both Review/Lesson hooks already no-op when the persistence scope is
+    // empty. Use that shared contract instead of depending on the Web-only
+    // remoteSyncEnabled option.
+    subjectSlug: persistModulePracticeWorkspace
+      ? (props.subjectSlug ?? "")
+      : "",
+    moduleSlug: persistModulePracticeWorkspace
+      ? (props.moduleSlug ?? "")
+      : "",
+    locale: props.locale ?? "en",
+    firstTopicId: persistenceFirstTopicRef.current ?? topicId,
+    moduleTopicIds: [],
+    gamificationEnabled: false,
+    followRemoteNavigation: false,
+  });
+
+  const toolProgress = persistModulePracticeWorkspace
+    ? persistedReviewProgress.progress
+    : ephemeralToolProgress;
+  const setToolProgress = persistModulePracticeWorkspace
+    ? persistedReviewProgress.setProgress
+    : setEphemeralToolProgress;
+  const toolProgressHydrated = persistModulePracticeWorkspace
+    ? persistedReviewProgress.hydrated
+    : true;
 
   const cardId = useMemo(
     () => `standalone-${props.experienceMode}`,
@@ -154,23 +206,29 @@ export function useStandalonePracticeTools(args: {
 
   const tool = useToolCodeRunnerState({
     progress: toolProgress,
-    progressHydrated: true,
+    progressHydrated: toolProgressHydrated,
     setProgress: setToolProgress,
     viewTid: topicId,
     scopeKey: exerciseStateKey,
+    /**
+     * Same contract as Review/Lesson: defaults are authored defaults. Exact
+     * learner work is restored by useToolCodeRunnerState from the scoped saved
+     * runtime/progress state, never by feeding mutable current code back as a default.
+     */
     defaultLang:
-      props.current?.codeLang ??
       (props.exercise?.kind === "code_input"
         ? props.exercise.language
         : undefined) ??
       "python",
     defaultCode:
-      props.current?.code ??
       (props.exercise?.kind === "code_input"
         ? props.exercise.starterCode
         : undefined) ??
       "",
-    defaultStdin: props.current?.codeStdin ?? props.current?.stdin ?? "",
+    defaultStdin:
+      props.exercise?.kind === "code_input"
+        ? ((props.exercise as any).starterStdin ?? "")
+        : "",
     rightCollapsed,
     rightW,
     toolSaveDelayMs: 250,
@@ -256,10 +314,9 @@ export function useStandalonePracticeTools(args: {
       moduleId: props.moduleSlug ?? props.experienceMode,
       locale: props.locale ?? "en",
       codeEnabled: codeToolEnabled,
-      // Only the standard review/practice experience exposes Notes and the
-      // collapse menu. Daily Practice and public challenges stay task-focused.
-      showHeader:
-        props.experienceMode === "standard" || props.experienceMode === "practice",
+      // Match the lesson/review workspace: keep the editor/output surface,
+      // but hide the secondary Tools/Run/More chrome in standalone Practice.
+      showHeader: false,
       showLanguagePicker: false,
       showSqlDialectPicker: false,
       toolSqlDialect: tool.toolSqlDialect,

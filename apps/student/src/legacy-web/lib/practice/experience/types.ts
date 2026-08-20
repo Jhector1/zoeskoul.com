@@ -2,9 +2,9 @@ import type { Difficulty, TopicSlug } from "@/lib/practice/types";
 
 /**
  * Stable product experiences. These are product-level intents, not always a
- * one-to-one mirror of PracticeSession.mode. In particular, a review-module
- * assignment is stored as mode="standard" with module_assignment metadata
- * because it has no Assignment row/assignmentId.
+ * one-to-one mirror of PracticeSession.mode. Teacher-created assignments use
+ * the persisted assignment mode plus a real assignmentId; normal self-paced
+ * modules use optional Practice instead of a separate assignment product.
  *
  * `practice` is the only non-persisted experience.
  */
@@ -27,7 +27,7 @@ export type PracticeExperienceFilters = {
 
 export type PracticeExperienceEligibility = {
   allowedKinds: string[] | null;
-  allowedPurposes: Array<"quiz" | "project"> | null;
+  allowedPurposes: Array<"quiz" | "project" | "practice"> | null;
   allowMultiFile: boolean;
   allowTerminal: boolean;
 };

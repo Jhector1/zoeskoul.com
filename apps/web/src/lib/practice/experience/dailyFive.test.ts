@@ -35,25 +35,25 @@ function option(
     exerciseKey,
     exerciseTitle: exerciseKey,
     exerciseKind: "code_input",
-    exercisePurpose: "project",
+    exercisePurpose: "practice",
     isMultiFile: false,
     requiresTerminal: false,
-    isStandaloneTryIt: true,
+    isStandaloneTryIt: false,
     ...overrides,
   };
 }
 
 describe("daily practice selection", () => {
-  it("accepts only standalone single-file project code try-its", () => {
+  it("uses the same authored lesson-practice pool as optional Practice", () => {
+    expect(isDailyFiveEligible(option("practice"))).toBe(true);
     expect(
       isDailyFiveEligible(option("quiz", { exercisePurpose: "quiz" })),
     ).toBe(false);
-    expect(isDailyFiveEligible(option("project"))).toBe(true);
+    expect(
+      isDailyFiveEligible(option("project", { exercisePurpose: "project" })),
+    ).toBe(false);
     expect(
       isDailyFiveEligible(option("try-it", { exercisePurpose: "try_it" })),
-    ).toBe(true);
-    expect(
-      isDailyFiveEligible(option("not-try-it", { isStandaloneTryIt: false })),
     ).toBe(false);
     expect(
       isDailyFiveEligible(
@@ -63,13 +63,13 @@ describe("daily practice selection", () => {
     expect(
       isDailyFiveEligible(option("capstone", { sectionRole: "capstone" })),
     ).toBe(false);
-    expect(isDailyFiveEligible(option("multi", { isMultiFile: true }))).toBe(false);
-    expect(isDailyFiveEligible(option("pty", { requiresTerminal: true }))).toBe(false);
+    expect(isDailyFiveEligible(option("multi", { isMultiFile: true }))).toBe(true);
+    expect(isDailyFiveEligible(option("pty", { requiresTerminal: true }))).toBe(true);
     expect(
       isDailyFiveEligible(
         option("choice", { exerciseKind: "single_choice" }),
       ),
-    ).toBe(false);
+    ).toBe(true);
   });
 
   it("builds the configured number of deterministic unique targets", () => {
@@ -249,10 +249,8 @@ describe("daily practice selection", () => {
   });
 
 
-  it("locks each queued target to its authored purpose", () => {
-    const projectTarget = option("project-try-it", {
-      exercisePurpose: "project",
-    });
+  it("locks each queued target to practice purpose", () => {
+    const practiceTarget = option("daily-practice");
     const params = applyDailyFiveParams(
       { sessionId: "session-1" } as any,
       {
@@ -260,7 +258,7 @@ describe("daily practice selection", () => {
           kind: "daily_five",
           dayKey: "2026-07-05",
           locale: "en",
-          queue: [projectTarget],
+          queue: [practiceTarget],
           targetCount: 1,
           maxAttempts: null,
         },
@@ -268,8 +266,8 @@ describe("daily practice selection", () => {
       },
     );
 
-    expect(params.exerciseKey).toBe("project-try-it");
-    expect(params.preferPurpose).toBe("project");
+    expect(params.exerciseKey).toBe("daily-practice");
+    expect(params.preferPurpose).toBe("practice");
     expect(params.purposePolicy).toBe("strict");
   });
 

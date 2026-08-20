@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { resolveStablePracticeExerciseId } from "./exerciseIdentity";
+import {
+  resolveStablePracticeExerciseId,
+  samePracticeExerciseIdentity,
+} from "./exerciseIdentity";
 
 describe("resolveStablePracticeExerciseId", () => {
   it("prefers authored exerciseKey over the expiring practice token", () => {
@@ -28,6 +31,29 @@ describe("resolveStablePracticeExerciseId", () => {
       }),
     ).toBe("joins:code_input:join-customers-and-orders");
   });
+  it("keeps consecutive authored Practice exercises as separate editor owners", () => {
+    expect(
+      samePracticeExerciseIdentity({
+        leftItem: {
+          exerciseKey: "practice-question-2",
+          code: "print('learner work from q2')",
+          userEdited: true,
+        } as any,
+        leftExercise: {
+          exerciseKey: "practice-question-2",
+          kind: "code_input",
+        } as any,
+        rightItem: {
+          exerciseKey: "practice-question-3",
+        } as any,
+        rightExercise: {
+          exerciseKey: "practice-question-3",
+          kind: "code_input",
+        } as any,
+      }),
+    ).toBe(false);
+  });
+
   it("keeps the same tool scope when only token expiry and signature change", () => {
     const token = (exp: number, signature: string) => {
       const body = Buffer.from(

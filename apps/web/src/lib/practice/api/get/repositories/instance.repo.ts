@@ -15,8 +15,32 @@ import {
 import { normalizeExpectedForSave } from "../mappers/normalizeExpected.mapper";
 import { buildExpectedAnswerPayload } from "../mappers/expectedAnswerPayload.mapper";
 
-function toDbPurpose(purpose?: "quiz" | "project" | PracticePurpose | null) {
-    return purpose === "project" ? PracticePurpose.project : PracticePurpose.quiz;
+export function toDbPurpose(
+    purpose?: "quiz" | "project" | "practice" | PracticePurpose | null,
+) {
+    if (purpose === "practice") return PracticePurpose.practice;
+    if (purpose === "project") return PracticePurpose.project;
+    return PracticePurpose.quiz;
+}
+
+export function buildPracticeExperienceItemKey(args: {
+    sessionId: string | null;
+    sessionMode?: string | null;
+    answeredCount?: number | null;
+    topicSlug: string;
+    exerciseKey: string | null;
+}) {
+    if (!args.sessionId || !args.exerciseKey) return null;
+
+    if (args.sessionMode === "daily_five") {
+        return `daily-five:${args.sessionId}:${args.topicSlug}:${args.exerciseKey}`;
+    }
+
+    if (args.sessionMode) {
+        return `practice-session:${args.sessionId}:slot:${Math.max(0, Number(args.answeredCount ?? 0))}`;
+    }
+
+    return null;
 }
 
 export async function createPracticeInstance(args: {
@@ -106,10 +130,19 @@ export async function createPracticeInstance(args: {
         typeof exerciseKeyRaw === "string" && exerciseKeyRaw.trim()
             ? exerciseKeyRaw.trim()
             : null;
-    const experienceItemKey =
-        sessionMode === "daily_five" && sessionId && exerciseKey
-            ? `daily-five:${sessionId}:${dbTopicSlug}:${exerciseKey}`
+    const answeredCount =
+        sessionId && sessionMode && sessionMode !== "daily_five"
+            ? await prisma.practiceQuestionInstance.count({
+                where: { sessionId, answeredAt: { not: null } },
+            })
             : null;
+    const experienceItemKey = buildPracticeExperienceItemKey({
+        sessionId,
+        sessionMode,
+        answeredCount,
+        topicSlug: String(dbTopicSlug),
+        exerciseKey,
+    });
 
     const data = {
         sessionId,
@@ -134,12 +167,12 @@ export async function createPracticeInstance(args: {
             where: { experienceItemKey },
             update: {},
             create: data,
-            select: { id: true, sessionId: true },
+            select: { id: true, sessionId: true, publicPayload: true },
         });
     }
 
     return prisma.practiceQuestionInstance.create({
         data,
-        select: { id: true, sessionId: true },
+        select: { id: true, sessionId: true, publicPayload: true },
     });
 }

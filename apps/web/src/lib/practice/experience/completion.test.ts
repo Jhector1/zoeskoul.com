@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 import {
   countdownParts,
+  isLessonPracticeReturnUrl,
   nextUtcDayStartIso,
   resolvePracticeCompletionIntent,
+  shouldReturnToLessonAfterModulePractice,
 } from "./completion";
 
 describe("practice completion intent", () => {
@@ -30,5 +32,26 @@ describe("practice completion intent", () => {
     expect(
       countdownParts("2026-07-07T00:00:00.000Z", Date.parse("2026-07-06T22:29:29.000Z")),
     ).toMatchObject({ hours: 1, minutes: 30, seconds: 31, ready: false });
+  });
+
+  it("only treats a real lesson path as a lesson-origin return", () => {
+    const exactLesson =
+      "/en/subjects/python-v2/modules/python-v2-1/learn/topic/card/exercise/q9?panel=topics#editor";
+
+    expect(isLessonPracticeReturnUrl(exactLesson)).toBe(true);
+    expect(
+      shouldReturnToLessonAfterModulePractice({
+        mode: "standard",
+        returnUrl: exactLesson,
+      }),
+    ).toBe(true);
+    expect(isLessonPracticeReturnUrl("/en/practice/daily")).toBe(false);
+    expect(isLessonPracticeReturnUrl("//evil.example/learn")).toBe(false);
+    expect(
+      shouldReturnToLessonAfterModulePractice({
+        mode: "daily_five",
+        returnUrl: exactLesson,
+      }),
+    ).toBe(false);
   });
 });

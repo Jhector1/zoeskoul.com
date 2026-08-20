@@ -15,7 +15,6 @@ import {
 } from "@/lib/practice/experience/routePolicy";
 import { buildModulePracticeHref } from "@/lib/practice/experience/modulePracticeHref";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
-import { isModuleAssignmentMeta } from "@/lib/practice/experience/moduleAssignment";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -145,8 +144,9 @@ export default async function ModulePracticePage({
         preferPurpose:
           scalar(sp, "preferPurpose") === "quiz" ||
           scalar(sp, "preferPurpose") === "project" ||
+          scalar(sp, "preferPurpose") === "practice" ||
           scalar(sp, "preferPurpose") === "mixed"
-            ? (scalar(sp, "preferPurpose") as "quiz" | "project" | "mixed")
+            ? (scalar(sp, "preferPurpose") as "quiz" | "project" | "practice" | "mixed")
             : null,
         purposePolicy:
           scalar(sp, "purposePolicy") === "strict" ||
@@ -158,15 +158,10 @@ export default async function ModulePracticePage({
   }
 
   const isAssignment = initialExperienceMode === "assignment";
-  const isModuleAssignment = Boolean(
-    isAssignment && routeSession && isModuleAssignmentMeta(routeSession.meta),
-  );
 
   // Teacher assignments own access through the published Assignment and the
-  // learner-owned session. Review-module assignments still follow the module's
-  // normal free/paid entitlement, but never require an unlimited-practice
-  // subscription. Subscriber practice requires both subscription and module
-  // entitlement.
+  // learner-owned session. Subscriber Practice requires both subscription and
+  // the module's normal free/paid entitlement.
   if (!isAssignment) {
     const viewer = await resolvePracticeViewer(prisma, {
       userId,
@@ -178,7 +173,7 @@ export default async function ModulePracticePage({
     }
   }
 
-  if (!isAssignment || isModuleAssignment) {
+  if (!isAssignment) {
     const nextPath = buildModulePracticeHref({
       locale,
       subjectSlug,
@@ -192,8 +187,9 @@ export default async function ModulePracticePage({
       preferPurpose:
         scalar(sp, "preferPurpose") === "quiz" ||
         scalar(sp, "preferPurpose") === "project" ||
+        scalar(sp, "preferPurpose") === "practice" ||
         scalar(sp, "preferPurpose") === "mixed"
-          ? (scalar(sp, "preferPurpose") as "quiz" | "project" | "mixed")
+          ? (scalar(sp, "preferPurpose") as "quiz" | "project" | "practice" | "mixed")
           : null,
       purposePolicy:
         scalar(sp, "purposePolicy") === "strict" ||

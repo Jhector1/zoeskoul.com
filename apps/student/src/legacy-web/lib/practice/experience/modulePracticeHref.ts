@@ -15,7 +15,7 @@ export function buildModulePracticeHref(args: {
   sectionSlug?: string | null;
   topicSlug?: string | null;
   questionCount?: number | null;
-  preferPurpose?: "quiz" | "project" | "mixed" | null;
+  preferPurpose?: "quiz" | "project" | "practice" | "mixed" | null;
   purposePolicy?: "strict" | "fallback" | null;
 }) {
   const query = new URLSearchParams();

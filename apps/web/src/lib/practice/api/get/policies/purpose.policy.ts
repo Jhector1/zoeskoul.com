@@ -6,12 +6,14 @@ import {
 import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 import { readSubscriberPracticeMeta } from "@/lib/practice/experience/subscriberPractice";
 
+type AtomicPracticePurpose = Exclude<PurposeMode, "mixed">;
+
 export type PracticePurposeDecision =
     | {
     ok: true;
     effective: PurposeMode;
     requested: PurposeMode | null;
-    allowed: Array<"quiz" | "project">;
+    allowed: AtomicPracticePurpose[];
     policy: PurposePolicy;
     source: "assignment" | "param" | "session" | "default";
     reason?: string | null;
@@ -23,25 +25,48 @@ export type PracticePurposeDecision =
     detail?: any;
 };
 
-function pickAllowedPurposesFromSession(session: any): Array<"quiz" | "project"> {
+function normalizeAllowedPurposes(value: unknown): AtomicPracticePurpose[] {
+    if (!Array.isArray(value)) return [];
+
+    return Array.from(
+        new Set(
+            value
+                .map((item) => coercePurposeMode(item))
+                .filter(
+                    (item): item is AtomicPracticePurpose =>
+                        item === "quiz" ||
+                        item === "project" ||
+                        item === "practice",
+                ),
+        ),
+    );
+}
+
+function pickAllowedPurposesFromSession(session: any): AtomicPracticePurpose[] {
     const experienceMode = resolvePracticeExperienceMode(session);
-    if (experienceMode === "standard" && readSubscriberPracticeMeta(session?.meta)) {
-        return ["quiz", "project"];
+    const subscriberPractice = readSubscriberPracticeMeta(session?.meta);
+
+    if (experienceMode === "standard" && subscriberPractice) {
+        return normalizeAllowedPurposes(
+            subscriberPractice.queue.map((target) => target.exercisePurpose),
+        );
     }
 
-    if (experienceMode === "daily_five" || experienceMode === "standard" || experienceMode === "practice") {
-        return ["project"];
+    if (experienceMode === "daily_five") {
+        return ["practice"];
     }
 
-    const p1 = session?.preset?.allowedPurposes;
-    if (Array.isArray(p1) && p1.length) {
-        return p1.map(String) as Array<"quiz" | "project">;
+    if (experienceMode === "standard" || experienceMode === "practice") {
+        return ["practice"];
     }
 
-    const p2 = session?.section?.module?.practicePreset?.allowedPurposes;
-    if (Array.isArray(p2) && p2.length) {
-        return p2.map(String) as Array<"quiz" | "project">;
-    }
+    const p1 = normalizeAllowedPurposes(session?.preset?.allowedPurposes);
+    if (p1.length) return p1;
+
+    const p2 = normalizeAllowedPurposes(
+        session?.section?.module?.practicePreset?.allowedPurposes,
+    );
+    if (p2.length) return p2;
 
     return [];
 }
@@ -82,37 +107,55 @@ export function computePurposeDecision(args: {
         };
     }
 
-    if (experienceMode === "standard" && readSubscriberPracticeMeta(session?.meta)) {
+    const subscriberPractice = readSubscriberPracticeMeta(session?.meta);
+    if (experienceMode === "standard" && subscriberPractice) {
         const requested = coercePurposeMode(args.preferPurposeParam);
-        const effective = requested === "quiz" ? "quiz" : "project";
+        const requestedAtomic =
+            requested && requested !== "mixed" ? requested : null;
+        const effective =
+            requestedAtomic && allowed.includes(requestedAtomic)
+                ? requestedAtomic
+                : allowed[0] ?? "practice";
 
         return {
             ok: true,
             effective,
             requested,
-            allowed: ["quiz", "project"],
+            allowed,
             policy: "strict",
-            source: requested ? "param" : "session",
+            source: requestedAtomic ? "param" : "session",
             reason: "subscriber_practice_uses_authored_queue_purpose",
         };
     }
 
-    if (experienceMode === "daily_five" || experienceMode === "standard" || experienceMode === "practice") {
+    if (experienceMode === "daily_five") {
         return {
             ok: true,
-            effective: "project",
+            effective: "practice",
             requested: coercePurposeMode(args.preferPurposeParam),
-            allowed: ["project"],
+            allowed: ["practice"],
             policy: "strict",
             source: session ? "session" : "default",
-            reason: "practice_modes_use_project_purpose",
+            reason: "daily_practice_uses_practice_purpose",
+        };
+    }
+
+    if (experienceMode === "standard" || experienceMode === "practice") {
+        return {
+            ok: true,
+            effective: "practice",
+            requested: coercePurposeMode(args.preferPurposeParam),
+            allowed: ["practice"],
+            policy: "strict",
+            source: session ? "session" : "default",
+            reason: "practice_modes_use_practice_purpose",
         };
     }
 
     const requested = coercePurposeMode(args.preferPurposeParam);
-
-    const fromSession: PurposeMode =
-        String(session?.preferPurpose ?? "quiz") === "project" ? "project" : "quiz";
+    const sessionPurpose = coercePurposeMode(session?.preferPurpose);
+    const fromSession: AtomicPracticePurpose =
+        sessionPurpose && sessionPurpose !== "mixed" ? sessionPurpose : "quiz";
 
     const desired: PurposeMode = requested ?? (session ? fromSession : "quiz");
     const allowAll = allowed.length === 0;
@@ -142,7 +185,7 @@ export function computePurposeDecision(args: {
             };
         }
 
-        if (!allowAll && !allowed.includes(requested as any)) {
+        if (!allowAll && !allowed.includes(requested)) {
             return {
                 ok: false,
                 status: 403,
@@ -201,6 +244,18 @@ export function computePurposeDecision(args: {
             };
         }
 
+        if (allowed.includes("practice")) {
+            return {
+                ok: true,
+                effective: "practice",
+                requested,
+                allowed,
+                policy,
+                source: requested ? "param" : "default",
+                reason: "mixed_not_allowed_fallback_to_practice",
+            };
+        }
+
         return {
             ok: true,
             effective: "quiz",
@@ -212,7 +267,7 @@ export function computePurposeDecision(args: {
         };
     }
 
-    if (allowAll || allowed.includes(desired as any)) {
+    if (allowAll || allowed.includes(desired)) {
         return {
             ok: true,
             effective: desired,
@@ -245,6 +300,18 @@ export function computePurposeDecision(args: {
             policy,
             source: requested ? "param" : "session",
             reason: "purpose_not_allowed_fallback_to_project",
+        };
+    }
+
+    if (allowed.includes("practice")) {
+        return {
+            ok: true,
+            effective: "practice",
+            requested,
+            allowed,
+            policy,
+            source: requested ? "param" : "session",
+            reason: "purpose_not_allowed_fallback_to_practice",
         };
     }
 
