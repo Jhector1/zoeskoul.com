@@ -220,7 +220,7 @@
           },
           "prompt-and-command": {
             "title": "Prompt Versus Command",
-            "bodyMarkdown": "The **prompt** is the terminal's signal that it is ready for your next command. Depending on the computer, a prompt may contain a username, computer name, folder, and a final symbol such as `$`.\n\nFor example:\n\n```text\nzoe@laptop:~/projects$ pwd\n/home/zoe/projects\nzoe@laptop:~/projects$\n```\n\nThe first line contains the prompt followed by the command `pwd`. The second line is the command's output. The last line is a new prompt, which means the shell is ready again.\n\nWhen an exercise tells you to run `pwd`, type only `pwd`. The prompt is already supplied by the terminal; it is not part of the command."
+            "bodyMarkdown": "The **prompt** is the terminal's signal that it is ready for your next command. Depending on the computer, a prompt may contain a username, computer name, folder, and a final symbol such as `$`.\n\nFor example:\n\n```text\nzoe@laptop:~/workshop$ ls\nagenda.txt  supplies\nzoe@laptop:~/workshop$\n```\n\nOn the first line, `zoe@laptop:~/workshop$` is the prompt and `ls` is the command you typed. The second line is the output: the names currently inside that folder. The last line is a new prompt, which means the shell is ready again.\n\nWhen a task asks you to list what is in the current folder, type only `ls`. Do not copy the prompt symbols or the folder information that appears before the command."
           }
         }
       }

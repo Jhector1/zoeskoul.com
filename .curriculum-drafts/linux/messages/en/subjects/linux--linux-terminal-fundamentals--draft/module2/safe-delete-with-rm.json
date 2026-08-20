@@ -215,7 +215,7 @@
           },
           "move-to-trash-alternative": {
             "title": "When Unsure, Move to Review",
-            "bodyMarkdown": "If you are unsure whether a file can be deleted, do not use `rm` yet. A safer choice is to move the file into a holding folder so it stays available while you review it.\n\nFor example:\n\n```bash\nmkdir -p review\nmv old-notes.txt review/old-notes.txt\n```\n\nThe file is no longer in the original location, but its contents are still preserved inside `review`.\n\nThis is not the same as sending a file to your operating system's Trash. It is simply a deliberate filesystem workflow that gives you another chance to inspect the file before permanent removal.\n\nWhen the cost of a mistaken deletion is high, preserving first is usually better than guessing."
+            "bodyMarkdown": "If you are unsure whether a file can be deleted, do not use `rm` yet. A safer choice is to move the file into a holding folder so it stays available while you review it.\n\nFor example:\n\n```text\n$ mkdir -p review\n$ mv old-notes.txt review/old-notes.txt\n$ ls review\nold-notes.txt\n```\n\nFirst, `mkdir -p` makes sure the holding folder exists. Then `mv` preserves the uncertain file by relocating it, and `ls review` verifies its new location.\n\nThis is not the same as the operating system's Trash. It is a deliberate filesystem workflow that keeps the file available. When you are uncertain, preserve first and confirm where the file went before considering permanent deletion."
           }
         }
       }

@@ -259,7 +259,7 @@
           },
           "mkdir-p-nested": {
             "title": "Create Nested Paths with `mkdir -p`",
-            "bodyMarkdown": "A nested path can name several directories at once. Plain `mkdir` expects the parent directory to already exist, but `mkdir -p` can create any missing directories along the path.\n\nFor example:\n\n```bash\nmkdir -p projects/demo/assets\n```\n\nIf `projects` or `demo` does not exist yet, `-p` creates those directories before creating `assets`. The finished structure is:\n\n```text\nprojects/\n\u2514\u2500\u2500 demo/\n    \u2514\u2500\u2500 assets/\n```\n\nThe `-p` option is useful when you care about the complete path and do not want to create each level one command at a time.\n\nEven with `-p`, read the path carefully first. One mistyped folder name can create a perfectly valid structure in the wrong place."
+            "bodyMarkdown": "A nested path can name several directories at once. Plain `mkdir` expects the parent directory to exist, while `mkdir -p` can create missing parent directories along the path.\n\nFor example:\n\n```text\n$ mkdir -p projects/demo/assets\n$ ls projects/demo\nassets\n```\n\nIf `projects` or `demo` did not exist, `-p` created them before creating `assets`. The follow-up `ls` verifies the part of the structure you expected to build.\n\nYou can run `mkdir -p` more than once when several nested branches are needed under the same parent. Read each path carefully, then inspect the parent directory afterward so a typo does not leave an unnoticed folder in the wrong place."
           },
           "touch-files": {
             "title": "Create Empty Files with `touch`",

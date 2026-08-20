@@ -275,7 +275,7 @@
           },
           "relative-paths": {
             "title": "Navigate With Relative Paths",
-            "bodyMarkdown": "A **relative path** describes a location starting from the current working directory. Because the starting point is already known, you do not have to type the full path from the top of the filesystem.\n\nSuppose `pwd` shows:\n\n```text\n/home/zoe/projects\n```\n\nand inside `projects` there is a folder `site` containing `assets`. You can move through both levels at once:\n\n```text\n$ cd site/assets\n$ pwd\n/home/zoe/projects/site/assets\n```\n\n`site/assets` is relative because it starts from the current directory and has no leading `/`.\n\nRelative paths are convenient, but they depend on where you are. The same relative path can refer to a different place if your working directory changes."
+            "bodyMarkdown": "A **relative path** describes a location starting from the current working directory. Because the starting point is already known, you do not have to type the full path from the top of the filesystem.\n\nSuppose `pwd` shows `/home/zoe/projects`, and inside `projects` there is a folder `site` containing `assets`. You can move through both levels and then inspect the destination:\n\n```text\n$ cd site/assets\n$ ls\nicons  logo.svg\n```\n\n`site/assets` is relative because it starts from the current directory and has no leading `/`. The `cd` command changes into that nested location, and `ls` confirms what is inside after you arrive.\n\nRelative paths depend on where you start. Check your current location first when the same path name could exist in more than one place."
           }
         }
       }

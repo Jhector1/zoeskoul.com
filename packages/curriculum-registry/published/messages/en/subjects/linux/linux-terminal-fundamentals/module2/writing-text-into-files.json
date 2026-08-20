@@ -255,15 +255,15 @@
         "writing-text-into-files": {
           "echo-prints-text": {
             "title": "`echo` Produces Text",
-            "bodyMarkdown": "`echo` writes text to terminal output.\n\n```bash\necho \"Workshop opens at 9\"\n```\n\nBy itself, it does not save that text to a file."
+            "bodyMarkdown": "`echo` sends text to standard terminal output. In its simplest form, it displays the text you give it.\n\nFor example:\n\n```text\n$ echo \"System ready\"\nSystem ready\n```\n\nThe first line is the command; the second line is its output. Nothing has been saved to a file yet.\n\nThis distinction matters because seeing text in the terminal is not the same as storing that text on disk. `echo` produces the text, and redirection operators such as `>` or `>>` can send that output into a file.\n\nSo first understand the source of the text: `echo` creates the output. Then decide where that output should go."
           },
           "write-with-greater-than": {
             "title": "Write or Replace with `>`",
-            "bodyMarkdown": "`>` redirects command output into a file. It creates the file when needed and replaces existing content when the file already exists."
+            "bodyMarkdown": "`>` is a **redirection operator**. Instead of letting a command's output appear only in the terminal, it sends that output into a file.\n\nFor example:\n\n```bash\necho \"First note\" > journal.txt\n```\n\nIf `journal.txt` does not exist, the shell creates it. You can verify the result with:\n\n```text\n$ cat journal.txt\nFirst note\n```\n\nThe important caution is that `>` **replaces existing file content**. If `journal.txt` already contained older lines, they would be overwritten by this command.\n\nThe `>` belongs to the shell's redirection syntax; it is not part of `echo`. Use it when you intend to establish or replace the complete contents of a file."
           },
           "append-with-double-greater-than": {
             "title": "Append with `>>`",
-            "bodyMarkdown": "`>>` redirects output to the end of a file while preserving the content already there. Read the finished file to verify the line order."
+            "bodyMarkdown": "`>>` redirects command output to the end of a file, so the content already there is preserved.\n\nSuppose `journal.txt` already contains `First note`. Append another line and then read the finished file:\n\n```text\n$ echo \"Second note\" >> journal.txt\n$ cat journal.txt\nFirst note\nSecond note\n```\n\nThe `echo` command produces the new text, `>>` appends it instead of replacing the old line, and `cat` verifies the complete result.\n\nThat is the key difference between the redirection operators: `>` starts or replaces file content, while `>>` preserves existing content and adds more. After appending, read the file so you can confirm both the old and new lines are present in the intended order."
           }
         }
       }

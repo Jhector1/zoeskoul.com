@@ -270,15 +270,15 @@
         "copy-move-rename": {
           "copy-with-cp": {
             "title": "Copy a File with `cp`",
-            "bodyMarkdown": "`cp source destination` creates another file while keeping the source in place.\n\n```bash\ncp itinerary.txt backups/itinerary.txt\n```\n\nVerify that both source and destination exist afterward."
+            "bodyMarkdown": "`cp` copies data from a **source** path to a **destination** path. Copying leaves the original in place and creates another file at the destination.\n\nAssume `archive` already exists:\n\n```text\n$ cp report.txt archive/report.txt\n$ ls\narchive  report.txt\n$ ls archive\nreport.txt\n```\n\nThe first `ls` confirms that the original `report.txt` is still present. The second confirms that a copy now exists inside `archive`.\n\nThe order in `cp source destination` matters: source first, destination second. After a copy, verify the result instead of assuming it worked. The important evidence is that both the original path and the new destination path exist."
           },
           "move-with-mv": {
             "title": "Move a File with `mv`",
-            "bodyMarkdown": "`mv source destination` relocates a file. After a successful move, the old path is gone and the destination path exists."
+            "bodyMarkdown": "`mv` moves a file from a **source** path to a **destination** path. Unlike `cp`, a successful move does not leave another copy at the old path.\n\nAssume an `archive` directory already exists:\n\n```text\n$ mv notes.txt archive/notes.txt\n$ ls archive\nnotes.txt\n```\n\nThe `mv` command relocates the file, and `ls archive` verifies that the destination now contains it. The old `notes.txt` path in the starting directory is no longer the file's location.\n\nRead `mv source destination` as \"move this item to this place.\" After moving a file, inspect the destination so you have direct evidence that it landed where you intended."
           },
           "rename-with-mv": {
             "title": "Rename a File with `mv`",
-            "bodyMarkdown": "`mv` also renames a file when the destination is a different name in the same directory.\n\n```bash\nmv draft.txt final.txt\n```"
+            "bodyMarkdown": "`mv` is also the command used to rename a file. A rename is a move where the file stays in the same directory but receives a different destination name.\n\nFor example:\n\n```text\n$ mv agenda-old.txt agenda.txt\n$ ls\nagenda.txt  notes.txt\n```\n\nBefore the command, the file is named `agenda-old.txt`. Afterward, `ls` shows the new name `agenda.txt`, which verifies the rename.\n\n`mv` does not have a separate rename mode. The destination determines the result: a destination in another directory moves the file there, while a new name in the same directory renames it. Check the final listing so you know the intended name is actually present."
           }
         }
       }

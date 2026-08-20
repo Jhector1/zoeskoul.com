@@ -38609,39 +38609,39 @@ const messages: Record<string, any> = {
         "moving-around": {
           "cd-into-folder": {
             "title": "Move Into a Folder",
-            "bodyMarkdown": "`cd` changes the terminal's current working directory. A folder name can be used when that folder is inside the current location."
+            "bodyMarkdown": "`cd` means **change directory**. It changes the terminal's current working directory; it does not move or rename the folder itself.\n\nSuppose you are here:\n\n```text\n$ pwd\n/home/zoe/projects\n```\n\nand `ls` shows a folder named `website`. You can enter it with:\n\n```text\n$ cd website\n$ pwd\n/home/zoe/projects/website\n```\n\nThe name `website` works because that folder is directly inside the current directory. After `cd`, commands that use relative names will start from the new location.\n\nThink of `cd` as changing your point of view in the filesystem: the files stay where they are, but your terminal is now working from a different folder."
           },
           "cd-up-one-level": {
             "title": "Move to the Parent Folder",
-            "bodyMarkdown": "`cd ..` moves one directory level upward to the current folder's parent."
+            "bodyMarkdown": "Every directory except the filesystem root has a **parent directory**: the folder one level above it. In a relative path, `..` is the special name for that parent.\n\nSuppose your current directory is:\n\n```text\n/home/zoe/projects/website\n```\n\nRunning:\n\n```text\n$ cd ..\n$ pwd\n/home/zoe/projects\n```\n\nmoves the terminal up exactly one level, from `website` to `projects`.\n\nThe two dots are not a folder you created, and they do not mean \"go home.\" They mean \"the parent of my current directory.\" If you are unsure where that will take you, run `pwd` before and after the move."
           },
           "relative-paths": {
             "title": "Navigate With Relative Paths",
-            "bodyMarkdown": "A relative path starts from the current directory. It can cross more than one folder level without requiring the full absolute path."
+            "bodyMarkdown": "A **relative path** describes a location starting from the current working directory. Because the starting point is already known, you do not have to type the full path from the top of the filesystem.\n\nSuppose `pwd` shows `/home/zoe/projects`, and inside `projects` there is a folder `site` containing `assets`. You can move through both levels and then inspect the destination:\n\n```text\n$ cd site/assets\n$ ls\nicons  logo.svg\n```\n\n`site/assets` is relative because it starts from the current directory and has no leading `/`. The `cd` command changes into that nested location, and `ls` confirms what is inside after you arrive.\n\nRelative paths depend on where you start. Check your current location first when the same path name could exist in more than one place."
           }
         },
         "what-the-terminal-is": {
           "course-introduction": {
             "title": "The Terminal Is a Text Interface",
-            "bodyMarkdown": "A terminal lets you control the computer by typing commands instead of clicking through windows. A command asks the shell to perform one specific action."
+            "bodyMarkdown": "A terminal is a text-based way to work with your computer. Instead of opening folders and choosing menu items with a mouse, you type a command and the shell interprets it.\n\nA simple terminal interaction can look like this:\n\n```text\n$ pwd\n/home/zoe\n```\n\nHere, `pwd` is the command you asked the shell to run, and `/home/zoe` is the result it printed. You do not need to memorize every command at once. The important idea is that terminal work is a conversation: give one clear instruction, read what happened, and then decide what to do next."
           },
           "terminal-command-output": {
             "title": "Commands Produce Results",
-            "bodyMarkdown": "Type a command, press Enter, and read the result before continuing. Some commands print information; others change the current terminal state."
+            "bodyMarkdown": "When you press **Enter**, the shell runs the command you typed. What happens next depends on the command: some commands print information, some change something, and some do both.\n\nFor example:\n\n```text\n$ pwd\n/home/zoe/projects\n```\n\nThe line `/home/zoe/projects` is **output**. It is information produced by the command. Other commands may succeed without printing anything, so an empty screen does not always mean nothing happened.\n\nA good terminal habit is to avoid guessing. Read any output you receive, and after a command changes files or your location, use an inspection command to confirm the new state."
           },
           "prompt-and-command": {
             "title": "Prompt Versus Command",
-            "bodyMarkdown": "The prompt shows that the terminal is ready for input. Type your command after the prompt; do not copy the prompt itself."
+            "bodyMarkdown": "The **prompt** is the terminal's signal that it is ready for your next command. Depending on the computer, a prompt may contain a username, computer name, folder, and a final symbol such as `$`.\n\nFor example:\n\n```text\nzoe@laptop:~/workshop$ ls\nagenda.txt  supplies\nzoe@laptop:~/workshop$\n```\n\nOn the first line, `zoe@laptop:~/workshop$` is the prompt and `ls` is the command you typed. The second line is the output: the names currently inside that folder. The last line is a new prompt, which means the shell is ready again.\n\nWhen a task asks you to list what is in the current folder, type only `ls`. Do not copy the prompt symbols or the folder information that appears before the command."
           }
         },
         "where-am-i": {
           "pwd-current-folder": {
             "title": "Know Your Current Folder",
-            "bodyMarkdown": "`pwd` prints the full path of the directory where the terminal is currently working."
+            "bodyMarkdown": "Your terminal always has a **current working directory**: the folder it is operating from right now. This matters because many commands interpret file and folder names relative to that location.\n\nUse `pwd` — short for **print working directory** — to ask where you are:\n\n```text\n$ pwd\n/home/zoe/projects/site\n```\n\nThis output says the current folder is `site`, inside `projects`, inside `/home/zoe`. If you run a command that refers to a nearby file without giving a full path, the shell starts from this directory.\n\nUse `pwd` whenever you are unsure of your location. It is safer to confirm the path than to rely on memory."
           },
           "ls-current-folder": {
             "title": "Inspect the Current Folder",
-            "bodyMarkdown": "`ls` lists the names available in the current directory so you can inspect a location before acting."
+            "bodyMarkdown": "`ls` shows the names of files and folders in the current working directory. It answers a different question from `pwd`: `pwd` tells you **where you are**, while `ls` tells you **what is there**.\n\nFor example:\n\n```text\n$ ls\nnotes.txt  photos  scripts\n```\n\nThis tells you that the current directory contains three named items. It does not, by itself, tell you the full path of that directory.\n\nChecking with `ls` before copying, moving, or deleting something helps prevent mistakes. You can first confirm that the name you intend to use actually exists in the location where you are working."
           }
         }
       },
@@ -38649,29 +38649,29 @@ const messages: Record<string, any> = {
         "copy-move-rename": {
           "copy-with-cp": {
             "title": "Copy a File with `cp`",
-            "bodyMarkdown": "`cp source destination` creates another file while keeping the source in place.\n\n```bash\ncp itinerary.txt backups/itinerary.txt\n```\n\nVerify that both source and destination exist afterward."
+            "bodyMarkdown": "`cp` copies data from a **source** path to a **destination** path. Copying leaves the original in place and creates another file at the destination.\n\nAssume `archive` already exists:\n\n```text\n$ cp report.txt archive/report.txt\n$ ls\narchive  report.txt\n$ ls archive\nreport.txt\n```\n\nThe first `ls` confirms that the original `report.txt` is still present. The second confirms that a copy now exists inside `archive`.\n\nThe order in `cp source destination` matters: source first, destination second. After a copy, verify the result instead of assuming it worked. The important evidence is that both the original path and the new destination path exist."
           },
           "move-with-mv": {
             "title": "Move a File with `mv`",
-            "bodyMarkdown": "`mv source destination` relocates a file. After a successful move, the old path is gone and the destination path exists."
+            "bodyMarkdown": "`mv` moves a file from a **source** path to a **destination** path. Unlike `cp`, a successful move does not leave another copy at the old path.\n\nAssume an `archive` directory already exists:\n\n```text\n$ mv notes.txt archive/notes.txt\n$ ls archive\nnotes.txt\n```\n\nThe `mv` command relocates the file, and `ls archive` verifies that the destination now contains it. The old `notes.txt` path in the starting directory is no longer the file's location.\n\nRead `mv source destination` as \"move this item to this place.\" After moving a file, inspect the destination so you have direct evidence that it landed where you intended."
           },
           "rename-with-mv": {
             "title": "Rename a File with `mv`",
-            "bodyMarkdown": "`mv` also renames a file when the destination is a different name in the same directory.\n\n```bash\nmv draft.txt final.txt\n```"
+            "bodyMarkdown": "`mv` is also the command used to rename a file. A rename is a move where the file stays in the same directory but receives a different destination name.\n\nFor example:\n\n```text\n$ mv agenda-old.txt agenda.txt\n$ ls\nagenda.txt  notes.txt\n```\n\nBefore the command, the file is named `agenda-old.txt`. Afterward, `ls` shows the new name `agenda.txt`, which verifies the rename.\n\n`mv` does not have a separate rename mode. The destination determines the result: a destination in another directory moves the file there, while a new name in the same directory renames it. Check the final listing so you know the intended name is actually present."
           }
         },
         "creating-folders-and-files": {
           "mkdir-one-folder": {
             "title": "Create a Folder with `mkdir`",
-            "bodyMarkdown": "`mkdir` creates a directory without moving you into it.\n\n```bash\nmkdir reading-list\n```\n\nList the parent directory afterward to verify the new name."
+            "bodyMarkdown": "`mkdir` means **make directory**. It creates a new folder inside the location you specify, but it does not automatically move your terminal into that folder.\n\nFor example:\n\n```bash\nmkdir photos-2026\n```\n\nIf you run this from your current directory, a new folder named `photos-2026` is created there. Your working directory stays the same.\n\nYou can verify the result with:\n\n```bash\nls\n```\n\nand then enter the folder later with `cd photos-2026` if needed.\n\nKeeping creation and navigation as separate actions is useful: first create the structure you want, confirm it exists, and then decide whether you need to move into it."
           },
           "mkdir-p-nested": {
             "title": "Create Nested Paths with `mkdir -p`",
-            "bodyMarkdown": "`mkdir -p` creates missing parent directories along with the requested nested path.\n\n```bash\nmkdir -p travel-pack/tickets\n```\n\nIt is useful when the parent path may not exist yet."
+            "bodyMarkdown": "A nested path can name several directories at once. Plain `mkdir` expects the parent directory to exist, while `mkdir -p` can create missing parent directories along the path.\n\nFor example:\n\n```text\n$ mkdir -p projects/demo/assets\n$ ls projects/demo\nassets\n```\n\nIf `projects` or `demo` did not exist, `-p` created them before creating `assets`. The follow-up `ls` verifies the part of the structure you expected to build.\n\nYou can run `mkdir -p` more than once when several nested branches are needed under the same parent. Read each path carefully, then inspect the parent directory afterward so a typo does not leave an unnoticed folder in the wrong place."
           },
           "touch-files": {
             "title": "Create Empty Files with `touch`",
-            "bodyMarkdown": "`touch` creates an empty file when the named file does not already exist.\n\n```bash\ntouch research/links.txt\n```\n\nThe parent directory must already exist."
+            "bodyMarkdown": "`touch` can create an empty file when that file does not already exist. It is useful when you need the file itself before you are ready to put content inside it.\n\nFor example:\n\n```bash\ntouch ideas.txt\n```\n\nAfterward, `ls` can show `ideas.txt`, but the file contains no text yet. `touch` creates the file; it does not write a message into it.\n\nThe parent directory must already exist. For example, `touch notes/ideas.txt` works only if `notes` is already there.\n\nOne extra detail: if the named file already exists, `touch` normally updates its timestamp rather than erasing its contents. So do not treat `touch` as a command for clearing a file."
           }
         },
         "module-2-notes-organizer-project": {
@@ -38683,39 +38683,39 @@ const messages: Record<string, any> = {
         "safe-delete-with-rm": {
           "rm-one-file": {
             "title": "Delete One Exact File Safely",
-            "bodyMarkdown": "Before `rm`, inspect the directory and confirm the exact temporary filename. Then remove only that file and list the directory again to verify the result.\n\nAvoid recursive flags and broad wildcards in this course."
+            "bodyMarkdown": "`rm` removes a file at the path you give it. Terminal deletion deserves extra care because `rm` commonly removes the file directly instead of placing it in a desktop Trash or Recycle Bin.\n\nA safe routine is to inspect first:\n\n```text\n$ ls\nnotes.txt  temp.log\n```\n\nIf `temp.log` is the exact disposable file, remove only that name:\n\n```bash\nrm temp.log\n```\n\nThen run `ls` again and confirm that `notes.txt` remains while `temp.log` is gone.\n\nThe important skill is not typing `rm` quickly; it is being certain about the target before pressing **Enter**. In this course, avoid recursive removal flags and broad wildcards so one command cannot accidentally reach many files."
           },
           "move-to-trash-alternative": {
             "title": "When Unsure, Move to Review",
-            "bodyMarkdown": "If you are not certain a file should be deleted, preserve it. Create a review or archive directory and move the file there instead. Delete only when the target is known to be disposable."
+            "bodyMarkdown": "If you are unsure whether a file can be deleted, do not use `rm` yet. A safer choice is to move the file into a holding folder so it stays available while you review it.\n\nFor example:\n\n```text\n$ mkdir -p review\n$ mv old-notes.txt review/old-notes.txt\n$ ls review\nold-notes.txt\n```\n\nFirst, `mkdir -p` makes sure the holding folder exists. Then `mv` preserves the uncertain file by relocating it, and `ls review` verifies its new location.\n\nThis is not the same as the operating system's Trash. It is a deliberate filesystem workflow that keeps the file available. When you are uncertain, preserve first and confirm where the file went before considering permanent deletion."
           }
         },
         "viewing-file-contents": {
           "cat-whole-file": {
             "title": "Read a Small File with `cat`",
-            "bodyMarkdown": "`cat` prints the complete contents of a text file without changing it. It works best for short files."
+            "bodyMarkdown": "`cat` reads a text file and prints its complete contents to the terminal. It does not open an editor and it does not change the file.\n\nSuppose `status.txt` contains two lines. Running:\n\n```text\n$ cat status.txt\nReady\nWaiting\n```\n\nshows exactly what is stored in the file, in order.\n\n`cat` is especially useful for small files because you can inspect the whole thing at once. For a long file, however, printing every line can flood the terminal and make the useful part harder to find.\n\nThink of `cat` as a quick read-only check: use it when the file is short enough that seeing all of its contents is helpful."
           },
           "head-tail-preview": {
             "title": "Preview the Beginning and End",
-            "bodyMarkdown": "`head` shows the beginning of a file and `tail` shows the end. They are useful when printing an entire long file would be noisy."
+            "bodyMarkdown": "When a text file is long, you often do not need to print the whole thing. `head` previews the beginning of a file, while `tail` previews the end.\n\nFor example:\n\n```bash\nhead events.log\n```\n\nlets you inspect the first part of `events.log`, while:\n\n```bash\ntail events.log\n```\n\nshows the most recent-looking lines at the bottom of that file.\n\nBy default, these commands show a small section rather than everything. That makes them useful for logs, reports, and other files where the beginning or ending tells you what you need.\n\nUse `cat` when the whole file is small enough to read comfortably; use `head` or `tail` when a focused preview is clearer."
           },
           "wc-line-count": {
             "title": "Count Lines with `wc -l`",
-            "bodyMarkdown": "`wc -l file` reports how many lines the file contains. Use it when the number of line-based records matters."
+            "bodyMarkdown": "`wc` can count parts of a text file. With the `-l` option, it reports the number of lines.\n\nFor example:\n\n```text\n$ wc -l guests.txt\n4 guests.txt\n```\n\nThe first value, `4`, is the line count. The filename is printed beside it so you know which file the count belongs to.\n\nThis is useful when each line represents one item, record, or entry and you want a quick measurement without reading the whole file.\n\n`wc -l` answers \"how many lines are here?\" It does not show what those lines contain, so combine it with a reading command such as `cat`, `head`, or `tail` when you also need to inspect the text."
           }
         },
         "writing-text-into-files": {
           "echo-prints-text": {
             "title": "`echo` Produces Text",
-            "bodyMarkdown": "`echo` writes text to terminal output.\n\n```bash\necho \"Workshop opens at 9\"\n```\n\nBy itself, it does not save that text to a file."
+            "bodyMarkdown": "`echo` sends text to standard terminal output. In its simplest form, it displays the text you give it.\n\nFor example:\n\n```text\n$ echo \"System ready\"\nSystem ready\n```\n\nThe first line is the command; the second line is its output. Nothing has been saved to a file yet.\n\nThis distinction matters because seeing text in the terminal is not the same as storing that text on disk. `echo` produces the text, and redirection operators such as `>` or `>>` can send that output into a file.\n\nSo first understand the source of the text: `echo` creates the output. Then decide where that output should go."
           },
           "write-with-greater-than": {
             "title": "Write or Replace with `>`",
-            "bodyMarkdown": "`>` redirects command output into a file. It creates the file when needed and replaces existing content when the file already exists."
+            "bodyMarkdown": "`>` is a **redirection operator**. Instead of letting a command's output appear only in the terminal, it sends that output into a file.\n\nFor example:\n\n```bash\necho \"First note\" > journal.txt\n```\n\nIf `journal.txt` does not exist, the shell creates it. You can verify the result with:\n\n```text\n$ cat journal.txt\nFirst note\n```\n\nThe important caution is that `>` **replaces existing file content**. If `journal.txt` already contained older lines, they would be overwritten by this command.\n\nThe `>` belongs to the shell's redirection syntax; it is not part of `echo`. Use it when you intend to establish or replace the complete contents of a file."
           },
           "append-with-double-greater-than": {
             "title": "Append with `>>`",
-            "bodyMarkdown": "`>>` redirects output to the end of a file while preserving the content already there. Read the finished file to verify the line order."
+            "bodyMarkdown": "`>>` redirects command output to the end of a file, so the content already there is preserved.\n\nSuppose `journal.txt` already contains `First note`. Append another line and then read the finished file:\n\n```text\n$ echo \"Second note\" >> journal.txt\n$ cat journal.txt\nFirst note\nSecond note\n```\n\nThe `echo` command produces the new text, `>>` appends it instead of replacing the old line, and `cat` verifies the complete result.\n\nThat is the key difference between the redirection operators: `>` starts or replaces file content, while `>>` preserves existing content and adds more. After appending, read the file so you can confirm both the old and new lines are present in the intended order."
           }
         }
       },

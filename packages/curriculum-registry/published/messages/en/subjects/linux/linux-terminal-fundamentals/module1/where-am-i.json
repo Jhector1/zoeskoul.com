@@ -208,11 +208,11 @@
         "where-am-i": {
           "pwd-current-folder": {
             "title": "Know Your Current Folder",
-            "bodyMarkdown": "`pwd` prints the full path of the directory where the terminal is currently working."
+            "bodyMarkdown": "Your terminal always has a **current working directory**: the folder it is operating from right now. This matters because many commands interpret file and folder names relative to that location.\n\nUse `pwd` — short for **print working directory** — to ask where you are:\n\n```text\n$ pwd\n/home/zoe/projects/site\n```\n\nThis output says the current folder is `site`, inside `projects`, inside `/home/zoe`. If you run a command that refers to a nearby file without giving a full path, the shell starts from this directory.\n\nUse `pwd` whenever you are unsure of your location. It is safer to confirm the path than to rely on memory."
           },
           "ls-current-folder": {
             "title": "Inspect the Current Folder",
-            "bodyMarkdown": "`ls` lists the names available in the current directory so you can inspect a location before acting."
+            "bodyMarkdown": "`ls` shows the names of files and folders in the current working directory. It answers a different question from `pwd`: `pwd` tells you **where you are**, while `ls` tells you **what is there**.\n\nFor example:\n\n```text\n$ ls\nnotes.txt  photos  scripts\n```\n\nThis tells you that the current directory contains three named items. It does not, by itself, tell you the full path of that directory.\n\nChecking with `ls` before copying, moving, or deleting something helps prevent mistakes. You can first confirm that the name you intend to use actually exists in the location where you are working."
           }
         }
       }

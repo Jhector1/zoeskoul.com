@@ -211,11 +211,11 @@
         "safe-delete-with-rm": {
           "rm-one-file": {
             "title": "Delete One Exact File Safely",
-            "bodyMarkdown": "Before `rm`, inspect the directory and confirm the exact temporary filename. Then remove only that file and list the directory again to verify the result.\n\nAvoid recursive flags and broad wildcards in this course."
+            "bodyMarkdown": "`rm` removes a file at the path you give it. Terminal deletion deserves extra care because `rm` commonly removes the file directly instead of placing it in a desktop Trash or Recycle Bin.\n\nA safe routine is to inspect first:\n\n```text\n$ ls\nnotes.txt  temp.log\n```\n\nIf `temp.log` is the exact disposable file, remove only that name:\n\n```bash\nrm temp.log\n```\n\nThen run `ls` again and confirm that `notes.txt` remains while `temp.log` is gone.\n\nThe important skill is not typing `rm` quickly; it is being certain about the target before pressing **Enter**. In this course, avoid recursive removal flags and broad wildcards so one command cannot accidentally reach many files."
           },
           "move-to-trash-alternative": {
             "title": "When Unsure, Move to Review",
-            "bodyMarkdown": "If you are not certain a file should be deleted, preserve it. Create a review or archive directory and move the file there instead. Delete only when the target is known to be disposable."
+            "bodyMarkdown": "If you are unsure whether a file can be deleted, do not use `rm` yet. A safer choice is to move the file into a holding folder so it stays available while you review it.\n\nFor example:\n\n```text\n$ mkdir -p review\n$ mv old-notes.txt review/old-notes.txt\n$ ls review\nold-notes.txt\n```\n\nFirst, `mkdir -p` makes sure the holding folder exists. Then `mv` preserves the uncertain file by relocating it, and `ls review` verifies its new location.\n\nThis is not the same as the operating system's Trash. It is a deliberate filesystem workflow that keeps the file available. When you are uncertain, preserve first and confirm where the file went before considering permanent deletion."
           }
         }
       }

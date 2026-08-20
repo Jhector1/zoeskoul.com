@@ -263,7 +263,7 @@
           },
           "append-with-double-greater-than": {
             "title": "Append with `>>`",
-            "bodyMarkdown": "`>>` also redirects command output into a file, but it **appends** instead of replacing what is already there.\n\nSuppose `journal.txt` currently contains:\n\n```text\nFirst note\n```\n\nNow run:\n\n```bash\necho \"Second note\" >> journal.txt\n```\n\nReading the file afterward shows:\n\n```text\nFirst note\nSecond note\n```\n\nThe original line remains, and the new output is added at the end.\n\nThat is the key difference between the two operators: `>` starts or replaces file content, while `>>` preserves existing content and adds more. Before redirecting output, decide whether the old content should survive; that decision tells you which operator is appropriate."
+            "bodyMarkdown": "`>>` redirects command output to the end of a file, so the content already there is preserved.\n\nSuppose `journal.txt` already contains `First note`. Append another line and then read the finished file:\n\n```text\n$ echo \"Second note\" >> journal.txt\n$ cat journal.txt\nFirst note\nSecond note\n```\n\nThe `echo` command produces the new text, `>>` appends it instead of replacing the old line, and `cat` verifies the complete result.\n\nThat is the key difference between the redirection operators: `>` starts or replaces file content, while `>>` preserves existing content and adds more. After appending, read the file so you can confirm both the old and new lines are present in the intended order."
           }
         }
       }
