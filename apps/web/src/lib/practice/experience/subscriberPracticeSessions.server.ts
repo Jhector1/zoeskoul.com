@@ -11,6 +11,7 @@ import {
   authoredPracticeTargetFromOption,
   authoredPracticeTargetIdentity,
   resolveAuthoredPracticeHistoryTarget,
+  selfPacedPracticeExperienceOwnerPrefix,
 } from "./authoredPracticeQueue";
 import type {
   PracticeChooserCatalog,
@@ -99,25 +100,49 @@ export async function loadSubscriberModulePracticeHistory(args: {
     null;
   if (!moduleId) return [];
 
+  const canonicalPrefix = selfPacedPracticeExperienceOwnerPrefix({
+    userId: args.userId,
+    moduleSlug: args.moduleSlug,
+  });
   const rows = await prisma.practiceQuestionInstance.findMany({
     where: {
-      session: {
-        userId: args.userId,
-        moduleId,
-      },
+      OR: [
+        {
+          experienceItemKey: { startsWith: canonicalPrefix },
+        },
+        // Legacy standard Practice rows remain readable so existing learner
+        // completions are never lost. New normal self-paced Practice does not
+        // create PracticeSession rows.
+        {
+          session: {
+            userId: args.userId,
+            moduleId,
+          },
+        },
+      ],
     },
     select: {
       sessionId: true,
       exerciseKey: true,
+      experienceItemKey: true,
       publicPayload: true,
       answeredAt: true,
       createdAt: true,
       topic: {
         select: { slug: true },
       },
+      attempts: {
+        where: {
+          userId: args.userId,
+          revealUsed: false,
+        },
+        orderBy: { createdAt: "desc" },
+        take: 1,
+        select: { ok: true },
+      },
     },
     orderBy: { createdAt: "desc" },
-    take: 1000,
+    take: 2000,
   });
 
   return rows.flatMap((row) => {
@@ -133,6 +158,7 @@ export async function loadSubscriberModulePracticeHistory(args: {
         topicSlug: target.topicSlug,
         seenAt: row.answeredAt ?? row.createdAt,
         completedAt: row.answeredAt,
+        lastOk: row.attempts[0]?.ok ?? null,
         sessionId: row.sessionId,
       },
     ];
@@ -192,71 +218,8 @@ export async function loadActiveSubscriberPracticeSessions(args: {
   catalogs: readonly PracticeChooserCatalog[];
   limit?: number;
 }): Promise<SubscriberPracticeSessionSummary[]> {
-  const sessions = await prisma.practiceSession.findMany({
-    where: {
-      userId: args.userId,
-      mode: "standard",
-      status: PracticeSessionStatus.active,
-    },
-    select: {
-      id: true,
-      targetCount: true,
-      total: true,
-      startedAt: true,
-      meta: true,
-    },
-    orderBy: { startedAt: "desc" },
-    take: 100,
-  });
-
-  const summaries: SubscriberPracticeSessionSummary[] = [];
-
-  for (const session of sessions) {
-    if (session.total >= session.targetCount) continue;
-
-    const meta = readSubscriberPracticeMeta(session.meta);
-    const scope = subscriberPracticeScopeFromMeta(session.meta);
-    const representativeTarget = meta?.queue[0] ?? null;
-    if (!meta || !scope || !representativeTarget) continue;
-
-    const displayScope = {
-      subjectSlug: scope.subjectSlug,
-      moduleSlug: scope.moduleSlug,
-      sectionSlug: scope.sectionSlug ?? representativeTarget.sectionSlug,
-      topicSlug: scope.topicSlug ?? representativeTarget.topicSlug,
-    };
-    const titles = resolveScopeTitles(args.catalogs, displayScope);
-    if (!titles) continue;
-
-    summaries.push({
-      sessionId: session.id,
-      selection: {
-        catalogSlug: titles.catalog.slug,
-        subjectSlug: scope.subjectSlug,
-        moduleSlug: scope.moduleSlug,
-        sectionSlug: displayScope.sectionSlug,
-        topicSlug: displayScope.topicSlug,
-      },
-      catalogTitle: titles.catalog.title,
-      catalogTitleKey: titles.catalog.titleKey,
-      courseTitle: titles.course.title,
-      courseTitleKey: titles.course.titleKey,
-      moduleTitle: titles.module.title,
-      moduleTitleKey: titles.module.titleKey,
-      sectionTitle: titles.section.title,
-      sectionTitleKey: titles.section.titleKey,
-      topicTitle: titles.topic.title,
-      topicTitleKey: titles.topic.titleKey,
-      completedCount: Math.min(session.total, session.targetCount),
-      totalCount: session.targetCount,
-      lastOpenedAt: meta.lastOpenedAt ?? session.startedAt.toISOString(),
-    });
-  }
-
-  summaries.sort(
-    (left, right) =>
-      Date.parse(right.lastOpenedAt) - Date.parse(left.lastOpenedAt),
-  );
-
-  return summaries.slice(0, Math.max(1, args.limit ?? 5));
+  void args;
+  // Normal self-paced Practice is canonical learner/module history, not a
+  // resumable PracticeSession product. Legacy rows remain history-only.
+  return [];
 }

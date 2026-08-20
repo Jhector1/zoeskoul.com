@@ -6,6 +6,7 @@ import {
 } from "@zoeskoul/db";
 
 import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
+import { selfPacedPracticeExperienceItemKey } from "@/lib/practice/experience/authoredPracticeQueue";
 import type { Difficulty, Exercise, TopicSlug } from "@/lib/practice/types";
 
 import {
@@ -27,10 +28,29 @@ export function buildPracticeExperienceItemKey(args: {
     sessionId: string | null;
     sessionMode?: string | null;
     answeredCount?: number | null;
+    ownerUserId?: string | null;
+    ownerModuleSlug?: string | null;
+    purpose?: PracticePurpose | null;
     topicSlug: string;
     exerciseKey: string | null;
 }) {
-    if (!args.sessionId || !args.exerciseKey) return null;
+    if (!args.exerciseKey) return null;
+
+    if (
+        !args.sessionId &&
+        args.ownerUserId &&
+        args.ownerModuleSlug &&
+        args.purpose === PracticePurpose.practice
+    ) {
+        return selfPacedPracticeExperienceItemKey({
+            userId: args.ownerUserId,
+            moduleSlug: args.ownerModuleSlug,
+            topicSlug: args.topicSlug,
+            exerciseKey: args.exerciseKey,
+        });
+    }
+
+    if (!args.sessionId) return null;
 
     if (args.sessionMode === "daily_five") {
         return `daily-five:${args.sessionId}:${args.topicSlug}:${args.exerciseKey}`;
@@ -47,6 +67,8 @@ export async function createPracticeInstance(args: {
     prisma: PrismaClient;
     sessionId: string | null;
     sessionMode?: string | null;
+    ownerUserId?: string | null;
+    ownerModuleSlug?: string | null;
     exercise: Exercise;
     expected: unknown;
     topicSlug: TopicSlug;
@@ -58,6 +80,8 @@ export async function createPracticeInstance(args: {
         prisma,
         sessionId,
         sessionMode,
+        ownerUserId,
+        ownerModuleSlug,
         exercise,
         expected,
         topicSlug,
@@ -140,6 +164,9 @@ export async function createPracticeInstance(args: {
         sessionId,
         sessionMode,
         answeredCount,
+        ownerUserId,
+        ownerModuleSlug,
+        purpose: dbPurpose,
         topicSlug: String(dbTopicSlug),
         exerciseKey,
     });
@@ -163,9 +190,16 @@ export async function createPracticeInstance(args: {
     };
 
     if (experienceItemKey) {
+        const canonicalSelfPaced =
+            !sessionId &&
+            Boolean(ownerUserId) &&
+            Boolean(ownerModuleSlug) &&
+            dbPurpose === PracticePurpose.practice;
         return prisma.practiceQuestionInstance.upsert({
             where: { experienceItemKey },
-            update: {},
+            // Canonical self-paced rows survive across entry origins/runs, so
+            // refresh authored runtime payloads without clearing answeredAt.
+            update: canonicalSelfPaced ? data : {},
             create: data,
             select: { id: true, sessionId: true, publicPayload: true },
         });

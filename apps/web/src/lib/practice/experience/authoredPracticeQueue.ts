@@ -150,6 +150,36 @@ export function authoredPracticeTargetIdentity(
   return `${target.topicSlug}|${target.exerciseKey}`;
 }
 
+export function selfPacedPracticeExperienceOwnerPrefix(args: {
+  userId: string;
+  moduleSlug: string;
+}) {
+  const userId = String(args.userId ?? "").trim();
+  const moduleSlug = String(args.moduleSlug ?? "").trim();
+  if (!userId || !moduleSlug) return "";
+  return (
+    `self-paced:user:${encodeURIComponent(userId)}:` +
+    `module:${encodeURIComponent(moduleSlug)}:`
+  );
+}
+
+export function selfPacedPracticeExperienceItemKey(args: {
+  userId: string;
+  moduleSlug: string;
+  topicSlug: string;
+  exerciseKey: string;
+}) {
+  const prefix = selfPacedPracticeExperienceOwnerPrefix(args);
+  const topicSlug = String(args.topicSlug ?? "").trim();
+  const exerciseKey = String(args.exerciseKey ?? "").trim();
+  if (!prefix || !topicSlug || !exerciseKey) return null;
+  return (
+    `${prefix}` +
+    `topic:${encodeURIComponent(topicSlug)}:` +
+    `exercise:${encodeURIComponent(exerciseKey)}`
+  );
+}
+
 export function stableAuthoredPracticeSelectionScore(
   seed: string,
   key: string,

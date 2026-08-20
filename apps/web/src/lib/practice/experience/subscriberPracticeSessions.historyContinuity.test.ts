@@ -75,9 +75,10 @@ describe("canonical module Practice history across entry origins", () => {
     });
     mocks.practiceQuestionInstanceFindMany.mockResolvedValue([
       {
-        sessionId: "independent-session",
-        exerciseKey:
-          "python-v2:python-v2-1:unknown:common-variable-mistakes:standalone-standard:observe-reassignment",
+        sessionId: null,
+        experienceItemKey:
+          "self-paced:user:learner-1:module:python-v2-1:topic:common-variable-mistakes:exercise:observe-reassignment",
+        exerciseKey: "observe-reassignment",
         publicPayload: {
           id: "observe-reassignment",
           topicSlug: "common-variable-mistakes",
@@ -85,11 +86,12 @@ describe("canonical module Practice history across entry origins", () => {
         answeredAt: new Date("2026-08-20T06:40:00.000Z"),
         createdAt: new Date("2026-08-20T06:35:00.000Z"),
         topic: null,
+        attempts: [{ ok: true }],
       },
     ]);
   });
 
-  it("keeps an independent completion even when the DB topic relation is absent", async () => {
+  it("reads one sessionless completion for Header and Lesson/Review", async () => {
     await expect(
       loadSubscriberModulePracticeHistory({
         userId: "learner-1",
@@ -102,21 +104,23 @@ describe("canonical module Practice history across entry origins", () => {
         topicSlug: "common-variable-mistakes",
         seenAt: new Date("2026-08-20T06:40:00.000Z"),
         completedAt: new Date("2026-08-20T06:40:00.000Z"),
-        sessionId: "independent-session",
+        lastOk: true,
+        sessionId: null,
       },
     ]);
 
     const query =
       mocks.practiceQuestionInstanceFindMany.mock.calls[0]?.[0] ?? null;
-    expect(query?.where?.session).toEqual({
+    expect(query?.where?.OR?.[0]?.experienceItemKey?.startsWith).toContain(
+      "self-paced:user:learner-1:module:python-v2-1:",
+    );
+    expect(query?.where?.OR?.[1]?.session).toEqual({
       userId: "learner-1",
       moduleId: "module-db-id",
     });
-    expect(query?.where).not.toHaveProperty("answeredAt");
-    expect(query?.where).not.toHaveProperty("topic");
   });
 
-  it("uses that same history for module/sidebar percentage", async () => {
+  it("uses that same canonical history for module/sidebar percentage", async () => {
     await expect(
       loadSubscriberModulePracticeProgress({
         userId: "learner-1",

@@ -12,7 +12,7 @@ describe("practice runtime surface policy", () => {
   it("lets the shared module route render subscriber practice and assignments", () => {
     expect(
       getPracticeRuntimeSurfacePolicy("module_practice").allowedModes,
-    ).toEqual(["standard", "assignment"]);
+    ).toEqual(["practice", "standard", "assignment"]);
   });
 
   it("keeps daily and trial routes narrowly owned", () => {

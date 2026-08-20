@@ -26,6 +26,7 @@ import {
 import { resolveTopicFromScope } from "../services/topicResolver.service";
 import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
 import { readSharedChallengeMeta } from "@/lib/practice/challenges/session";
+import { selfPacedPracticeExperienceOwnerPrefix } from "@/lib/practice/experience/authoredPracticeQueue";
 
 export function openPracticeInstanceMatchesRequestedExercise(
     publicPayload: unknown,
@@ -355,7 +356,14 @@ export async function generatePracticeExercise(
     ctx: PracticeGetContext,
     decision: Extract<PracticePurposeDecision, { ok: true }>,
 ): Promise<PracticeGetResult> {
-    const { prisma, actor, params, locale, session } = ctx;
+    const {
+        prisma,
+        actor,
+        params,
+        locale,
+        session,
+        selfPacedPractice = null,
+    } = ctx;
 
     const {
         subject,
@@ -392,6 +400,132 @@ export async function generatePracticeExercise(
             }).pick(DIFFICULTIES));
 
     const { reqSalt } = resolveRequestSalt(salt);
+
+    async function buildResponseRun() {
+        const base = await buildRunMetaWithChallengeAttempts({
+            prisma,
+            actor,
+            session,
+            diff,
+            allowRevealEffective,
+        });
+        if (!selfPacedPractice) return base;
+
+        return {
+            ...base,
+            mode: "practice" as const,
+            label: "Practice",
+            targetCount: selfPacedPractice.targetCount,
+            returnUrl:
+                String(params.returnTo ?? params.returnUrl ?? "").trim() || null,
+            lockDifficulty: diff,
+            lockTopic: selfPacedPractice.scope.topicSlug ?? "all",
+            filters: {
+                topicEditable: false,
+                difficultyEditable: false,
+                purposeEditable: false,
+                countEditable: false,
+            },
+            subscriberPractice: {
+                moduleTotal: selfPacedPractice.targetCount,
+                completedPrefix: selfPacedPractice.completedPrefix.map(
+                    (target) => ({
+                        exerciseKey: target.exerciseKey,
+                        exerciseTitle: target.exerciseTitle,
+                        exerciseKind: target.exerciseKind,
+                        topicSlug: target.topicSlug,
+                        sectionSlug: target.sectionSlug,
+                        correct: target.correct,
+                    }),
+                ),
+            },
+        };
+    }
+
+    if (selfPacedPractice && keyRefreshOnly === "true") {
+        const refreshInstanceId = String(
+            keyRefreshInstanceId ?? "",
+        ).trim();
+        if (!refreshInstanceId || !actor.userId) {
+            return {
+                kind: "json",
+                status: 400,
+                body: {
+                    code: "PRACTICE_KEY_REFRESH_INSTANCE_REQUIRED",
+                    message:
+                        "An exact practice instance is required to refresh authorization.",
+                },
+            };
+        }
+
+        const refreshInstance = await prisma.practiceQuestionInstance.findFirst({
+            where: {
+                id: refreshInstanceId,
+                sessionId: null,
+                experienceItemKey: {
+                    startsWith: selfPacedPracticeExperienceOwnerPrefix({
+                        userId: actor.userId,
+                        moduleSlug: selfPacedPractice.scope.moduleSlug,
+                    }),
+                },
+            },
+            select: { id: true, sessionId: true, publicPayload: true },
+        });
+        if (!refreshInstance) {
+            return {
+                kind: "json",
+                status: 409,
+                body: {
+                    code: "PRACTICE_KEY_REFRESH_INSTANCE_MISSING",
+                    message:
+                        "Unable to refresh authorization for this practice instance.",
+                },
+            };
+        }
+
+        const key = signKey({
+            instanceId: refreshInstance.id,
+            sessionId: null,
+            userId: actor.userId,
+            guestId: null,
+            allowReveal: allowRevealEffective,
+        });
+        return {
+            kind: "json",
+            status: 200,
+            body: {
+                exercise: refreshInstance.publicPayload as any,
+                key,
+                sessionId: null,
+                run: await buildResponseRun(),
+                meta: {
+                    resumedOpenInstance: true,
+                    exactKeyRefresh: true,
+                    canonicalSelfPaced: true,
+                },
+            },
+        };
+    }
+
+    if (selfPacedPractice?.complete) {
+        const run = await buildResponseRun();
+        return {
+            kind: "json",
+            status: 200,
+            body: {
+                complete: true,
+                sessionId: null,
+                answeredCount: selfPacedPractice.completedPrefix.length,
+                totalCount: selfPacedPractice.targetCount,
+                correctCount: selfPacedPractice.completedPrefix.filter(
+                    (target) => target.correct,
+                ).length,
+                targetCount: selfPacedPractice.targetCount,
+                run,
+                returnUrl: run.returnUrl ?? null,
+            },
+        };
+    }
 
     // Normal session loading may resume the newest unanswered instance when it
     // matches the requested authored exercise. Signed-key refresh is different:
@@ -452,13 +586,7 @@ export async function generatePracticeExercise(
                 guestId: actor.guestId ?? null,
                 allowReveal: allowRevealEffective,
             });
-            const run = await buildRunMetaWithChallengeAttempts({
-                prisma,
-                actor,
-                session,
-                diff,
-                allowRevealEffective,
-            });
+            const run = await buildResponseRun();
 
             return {
                 kind: "json",
@@ -503,13 +631,7 @@ export async function generatePracticeExercise(
                 guestId: actor.guestId ?? null,
                 allowReveal: allowRevealEffective,
             });
-            const run = await buildRunMetaWithChallengeAttempts({
-                prisma,
-                actor,
-                session,
-                diff,
-                allowRevealEffective,
-            });
+            const run = await buildResponseRun();
 
             return {
                 kind: "json",
@@ -660,6 +782,8 @@ export async function generatePracticeExercise(
             prisma,
             sessionId: session?.id ?? null,
             sessionMode: session?.mode ?? null,
+            ownerUserId: selfPacedPractice ? actor.userId ?? null : null,
+            ownerModuleSlug: selfPacedPractice?.scope.moduleSlug ?? null,
             exercise: authored.exercise,
             expected: authored.expected,
             topicSlug: authoredResolved.topicSlug as TopicSlug,
@@ -676,7 +800,7 @@ export async function generatePracticeExercise(
             allowReveal: allowRevealEffective,
         });
 
-        const run = await buildRunMetaWithChallengeAttempts({ prisma, actor, session, diff, allowRevealEffective });
+        const run = await buildResponseRun();
 
         return {
             kind: "json",
@@ -892,6 +1016,8 @@ export async function generatePracticeExercise(
         prisma,
         sessionId: session?.id ?? null,
         sessionMode: session?.mode ?? null,
+        ownerUserId: selfPacedPractice ? actor.userId ?? null : null,
+        ownerModuleSlug: selfPacedPractice?.scope.moduleSlug ?? null,
         exercise,
         expected: out?.expected,
         topicSlug,
@@ -908,7 +1034,7 @@ export async function generatePracticeExercise(
         allowReveal: allowRevealEffective,
     });
 
-    const run = await buildRunMetaWithChallengeAttempts({ prisma, actor, session, diff, allowRevealEffective });
+    const run = await buildResponseRun();
 
     return {
         kind: "json",

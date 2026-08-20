@@ -30,6 +30,7 @@ export function usePracticeStatePersistence(args: {
   topic: TopicValue;
   difficulty: Difficulty | "all";
   sessionId: string | null;
+  practiceRunId?: string | null;
   initialSessionId?: string | null;
   authoritativeSessionId?: boolean;
   expectedExperienceMode?: PracticeExperienceMode;
@@ -73,6 +74,7 @@ export function usePracticeStatePersistence(args: {
     topic,
     difficulty,
     sessionId,
+    practiceRunId = null,
     initialSessionId = null,
     authoritativeSessionId = false,
     expectedExperienceMode,
@@ -208,6 +210,7 @@ export function usePracticeStatePersistence(args: {
           difficulty: String(nextDifficulty),
           n: initialSize,
           sessionId: sidParam ?? null,
+          practiceRunId,
         });
       } catch {
         loaded = null;
@@ -366,6 +369,7 @@ export function usePracticeStatePersistence(args: {
             difficulty: String(difficulty),
             n: sessionSize,
             sessionId,
+            practiceRunId,
           }),
           JSON.stringify(payload),
       );

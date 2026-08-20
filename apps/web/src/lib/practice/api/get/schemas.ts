@@ -12,6 +12,9 @@ includeMissed: z.enum(["true", "false"]).optional(),
   includeHistory: z.string().optional(),  // ✅ ADD THIS
   allowReveal: z.enum(["true", "false"]).optional(),
   sessionId: z.string().optional(),
+  practiceRunId: z.string().min(1).optional(),
+  practiceRunStartedAt: z.string().datetime().optional(),
+  questionCount: z.coerce.number().int().positive().max(100).optional(),
   statusOnly: z.enum(["true", "false"]).optional(),
   // Exact signed-key refresh only. Normal exercise loading must never inherit
   // the stricter "same open instance" failure semantics.

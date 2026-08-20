@@ -73,6 +73,7 @@ function experienceCopy(
         title: props.challengeTitle || t("navigator.challengeDefaultTitle"),
         subtitle: t("navigator.challengeSubtitle"),
       };
+    case "practice":
     case "standard":
       return {
         eyebrow: props.viewer.subscribed
@@ -105,13 +106,34 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
     reviewStack: props.reviewStack,
     answeredCount: props.answeredCount,
   });
+  const stackAuthoredIdentities = new Set(
+    queueStack
+      .map((item) => {
+        const exercise = item?.exercise as any;
+        const topicSlug = String(
+          exercise?.topicSlug ?? exercise?.topic ?? "",
+        ).trim();
+        const exerciseKey = String(
+          exercise?.exerciseKey ?? exercise?.id ?? "",
+        ).trim();
+        return topicSlug && exerciseKey
+          ? `${topicSlug}|${exerciseKey}`
+          : "";
+      })
+      .filter(Boolean),
+  );
   const completedPrefix =
-    props.experienceMode === "standard"
-      ? props.modulePracticeProgress?.completedPrefix ?? []
+    props.experienceMode === "practice" || props.experienceMode === "standard"
+      ? (props.modulePracticeProgress?.completedPrefix ?? []).filter(
+          (target) =>
+            !stackAuthoredIdentities.has(
+              `${target.topicSlug}|${target.exerciseKey}`,
+            ),
+        )
       : [];
   const completedPrefixCount = completedPrefix.length;
   const modulePracticeTotal =
-    props.experienceMode === "standard"
+    props.experienceMode === "practice" || props.experienceMode === "standard"
       ? props.modulePracticeProgress?.moduleTotal ?? null
       : null;
   const displayTotal =
@@ -121,6 +143,11 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
   const displayAnswered = Math.min(
     displayTotal,
     completedPrefixCount + props.answeredCount,
+  );
+  const displayCorrect = Math.min(
+    displayTotal,
+    completedPrefix.filter((target) => target.correct === true).length +
+      props.correctCount,
   );
   const resolvedTopicOptions = React.useMemo(
     () =>
@@ -136,10 +163,10 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
     [props.topicOptionsFixed, resolve],
   );
   const canChooseCatalog =
-    props.experienceMode === "standard" && props.viewer.subscribed;
+    (props.experienceMode === "practice" || props.experienceMode === "standard") && props.viewer.subscribed;
   const catalogVisible =
-    props.experienceMode === "standard" || isDailyPractice;
-  const filtersFixed = props.experienceMode !== "standard";
+    props.experienceMode === "practice" || props.experienceMode === "standard" || isDailyPractice;
+  const filtersFixed = props.experienceMode !== "practice" && props.experienceMode !== "standard";
   const showLeaderboard = Boolean(
     props.leaderboardUrl &&
       shouldShowPracticeLeaderboard(props.experienceMode),
@@ -224,7 +251,7 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
             <div className="rounded-xl border border-[rgb(var(--ui-border)/0.78)] bg-[rgb(var(--ui-surface)/0.9)] p-3">
               <div className="ui-meta">{tw("navigator.correct")}</div>
               <div className="mt-1 text-base font-black tabular-nums">
-                {props.correctCount}
+                {displayCorrect}
               </div>
             </div>
           </div>

@@ -34,6 +34,7 @@ export type PracticeSubscriberRunMeta = {
     exerciseKind: string;
     topicSlug: string;
     sectionSlug: string;
+    correct?: boolean;
   }>;
 };
 

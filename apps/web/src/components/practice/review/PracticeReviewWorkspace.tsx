@@ -150,12 +150,33 @@ function PracticeStage({
   const [activeTab, setActiveTab] = useState<"lesson" | "code">("lesson");
   const t = useTranslations("Practice.workspace");
   const copy = stageCopy(props, t);
+  const stackAuthoredIdentities = new Set(
+    props.stack
+      .map((item) => {
+        const exercise = item?.exercise as any;
+        const topicSlug = String(
+          exercise?.topicSlug ?? exercise?.topic ?? "",
+        ).trim();
+        const exerciseKey = String(
+          exercise?.exerciseKey ?? exercise?.id ?? "",
+        ).trim();
+        return topicSlug && exerciseKey
+          ? `${topicSlug}|${exerciseKey}`
+          : "";
+      })
+      .filter(Boolean),
+  );
   const completedPrefixCount =
-    props.experienceMode === "standard"
-      ? props.modulePracticeProgress?.completedPrefix?.length ?? 0
+    props.experienceMode === "practice" || props.experienceMode === "standard"
+      ? (props.modulePracticeProgress?.completedPrefix ?? []).filter(
+          (target) =>
+            !stackAuthoredIdentities.has(
+              `${target.topicSlug}|${target.exerciseKey}`,
+            ),
+        ).length
       : 0;
   const modulePracticeTotal =
-    props.experienceMode === "standard"
+    props.experienceMode === "practice" || props.experienceMode === "standard"
       ? props.modulePracticeProgress?.moduleTotal ?? null
       : null;
   const displayTotal =

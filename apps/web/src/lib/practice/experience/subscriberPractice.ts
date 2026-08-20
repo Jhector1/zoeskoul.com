@@ -28,6 +28,7 @@ export type SubscriberPracticeHistoryItem = {
   topicSlug: string;
   seenAt: Date | string;
   completedAt?: Date | string | null;
+  lastOk?: boolean | null;
   sessionId?: string | null;
 };
 

@@ -39,9 +39,14 @@ export function storageKeyForState(args: {
   difficulty: Difficulty | "all" | string;
   n: number;
   sessionId: string | null;
+  practiceRunId?: string | null;
 }) {
   if (args.sessionId) {
     return `practice:v${STORAGE_VERSION}:session:${args.sessionId}`;
+  }
+  const practiceRunId = String(args.practiceRunId ?? "").trim();
+  if (practiceRunId) {
+    return `practice:v${STORAGE_VERSION}:run:${practiceRunId}`;
   }
 
   return storageKeyV6(args);
@@ -211,9 +216,14 @@ export function buildSavedStateLookupKeys(args: {
   difficulty: Difficulty | "all" | string;
   n: number;
   sessionId: string | null;
+  practiceRunId?: string | null;
 }) {
   if (args.sessionId) {
     return [`practice:v${STORAGE_VERSION}:session:${args.sessionId}`];
+  }
+  const practiceRunId = String(args.practiceRunId ?? "").trim();
+  if (practiceRunId) {
+    return [`practice:v${STORAGE_VERSION}:run:${practiceRunId}`];
   }
 
   return [storageKeyV6(args), storageKeyV6Legacy(args)];
@@ -263,6 +273,7 @@ export function loadSavedState(args: {
   difficulty: Difficulty | "all" | string;
   n: number;
   sessionId: string | null;
+  practiceRunId?: string | null;
 }) {
   const keysToTry = buildSavedStateLookupKeys(args);
 

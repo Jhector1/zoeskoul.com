@@ -2,7 +2,7 @@ import type { PracticeExperienceMode } from "./types";
 
 type ModulePracticeMode = Extract<
   PracticeExperienceMode,
-  "standard" | "assignment"
+  "practice" | "standard" | "assignment"
 >;
 
 export function buildModulePracticeHref(args: {
@@ -10,6 +10,8 @@ export function buildModulePracticeHref(args: {
   subjectSlug: string;
   moduleSlug: string;
   sessionId?: string | null;
+  practiceRunId?: string | null;
+  practiceRunStartedAt?: string | null;
   mode: ModulePracticeMode;
   returnTo?: string | null;
   sectionSlug?: string | null;
@@ -21,6 +23,11 @@ export function buildModulePracticeHref(args: {
   const query = new URLSearchParams();
 
   if (args.sessionId) query.set("sessionId", args.sessionId);
+  if (args.practiceRunId) query.set("practiceRunId", args.practiceRunId);
+  if (args.practiceRunStartedAt) {
+    query.set("practiceRunStartedAt", args.practiceRunStartedAt);
+  }
+  if (args.mode === "practice") query.set("mode", "practice");
   if (args.mode === "assignment") query.set("type", "assignment");
   if (args.returnTo) query.set("returnTo", args.returnTo);
   if (args.sectionSlug) query.set("section", args.sectionSlug);

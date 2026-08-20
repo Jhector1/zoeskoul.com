@@ -61,7 +61,7 @@ describe("LegacyApiBridge URL routing", () => {
   it.each([
     "/api/student-ui/practice/daily?locale=fr&source=home",
     "/api/practice/daily/start",
-    "/api/practice/session/start",
+    "/api/practice/start",
   ])(
     "rewrites the Daily Practice request %s to Web in production",
     (rawUrl) => {

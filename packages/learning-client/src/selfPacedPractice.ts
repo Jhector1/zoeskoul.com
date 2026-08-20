@@ -10,11 +10,12 @@ export type SelfPacedPracticeStartInput = {
 };
 
 export type SelfPacedPracticeStartResult = {
-  sessionId: string;
+  practiceRunId: string;
+  practiceRunStartedAt: string;
   subjectSlug: string;
   moduleSlug: string;
   targetCount: number | null;
-  resumed: boolean;
+  resumed: false;
   returnUrl: string | null;
   href: string;
 };
@@ -41,10 +42,7 @@ function optionalPositiveInt(value: unknown) {
   return Math.floor(parsed);
 }
 
-function practiceStartError(
-  status: number,
-  data: unknown,
-) {
+function practiceStartError(status: number, data: unknown) {
   const record =
     data && typeof data === "object"
       ? (data as Record<string, unknown>)
@@ -67,7 +65,8 @@ export function buildSelfPacedPracticeHref(args: {
   locale: string;
   subjectSlug: string;
   moduleSlug: string;
-  sessionId: string;
+  practiceRunId: string;
+  practiceRunStartedAt: string;
   sectionSlug?: string | null;
   topicSlug?: string | null;
   targetCount?: number | null;
@@ -77,13 +76,18 @@ export function buildSelfPacedPracticeHref(args: {
   const locale = requiredText(args.locale, "locale");
   const subjectSlug = requiredText(args.subjectSlug, "subjectSlug");
   const moduleSlug = requiredText(args.moduleSlug, "moduleSlug");
-  const sessionId = requiredText(args.sessionId, "sessionId");
+  const practiceRunId = requiredText(args.practiceRunId, "practiceRunId");
+  const practiceRunStartedAt = requiredText(
+    args.practiceRunStartedAt,
+    "practiceRunStartedAt",
+  );
 
   const qs = new URLSearchParams({
-    sessionId,
-    mode: "standard",
+    mode: "practice",
     preferPurpose: "practice",
     purposePolicy: "strict",
+    practiceRunId,
+    practiceRunStartedAt,
   });
 
   const sectionSlug = optionalText(args.sectionSlug);
@@ -107,15 +111,12 @@ export function buildSelfPacedPracticeHref(args: {
 }
 
 /**
- * The single client entrypoint for normal self-paced Practice.
+ * The one normal self-paced Practice entrypoint.
  *
- * Header Practice and Lesson/Review call this exact function. Their only
- * difference is scope:
- * - Lesson/Review supplies module scope.
- * - Header may additionally supply section/topic and targetCount.
- *
- * The returned sessionId is authoritative. The Practice runtime never creates
- * a normal self-paced exercise before this contract succeeds.
+ * Header and Lesson/Review differ only in requested scope. This function never
+ * creates a PracticeSession row. `practiceRunId` is URL-only run identity for
+ * deterministic queue/reload behavior; learner progress is canonical DB
+ * history keyed by learner + module + authored exercise identity.
  */
 export async function startSelfPacedPractice(
   args: SelfPacedPracticeStartInput,
@@ -131,12 +132,10 @@ export async function startSelfPacedPractice(
   const difficulty = optionalText(args.difficulty);
   const fetchImpl = options.fetchImpl ?? fetch;
 
-  const response = await fetchImpl("/api/practice/session/start", {
+  const response = await fetchImpl("/api/practice/start", {
     method: "POST",
     credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       locale,
       subjectSlug,
@@ -150,53 +149,44 @@ export async function startSelfPacedPractice(
   });
 
   const data = await response.json().catch(() => null);
-  if (!response.ok) {
-    throw practiceStartError(response.status, data);
-  }
+  if (!response.ok) throw practiceStartError(response.status, data);
 
   const record =
     data && typeof data === "object"
       ? (data as Record<string, unknown>)
       : null;
-  const sessionId = optionalText(record?.sessionId);
+  const practiceRunId = optionalText(record?.practiceRunId);
+  const practiceRunStartedAt = optionalText(record?.practiceRunStartedAt);
   const experienceMode = optionalText(record?.experienceMode);
 
-  if (!sessionId || experienceMode !== "standard") {
-    throw new Error(
-      "Practice start did not return an authoritative self-paced session.",
-    );
+  if (!practiceRunId || !practiceRunStartedAt || experienceMode !== "practice") {
+    throw new Error("Practice start did not return a canonical self-paced run.");
   }
 
-  const resolvedSubjectSlug =
-    optionalText(record?.subjectSlug) ?? subjectSlug;
-  const resolvedModuleSlug =
-    optionalText(record?.moduleSlug) ?? moduleSlug;
-  const resolvedTargetCount =
-    optionalPositiveInt(record?.targetCount);
-  const returnUrl =
-    optionalText(record?.returnUrl) ?? returnTo;
+  const resolvedSubjectSlug = optionalText(record?.subjectSlug) ?? subjectSlug;
+  const resolvedModuleSlug = optionalText(record?.moduleSlug) ?? moduleSlug;
+  const resolvedTargetCount = optionalPositiveInt(record?.targetCount);
+  const returnUrl = optionalText(record?.returnUrl) ?? returnTo;
 
   return {
-    sessionId,
+    practiceRunId,
+    practiceRunStartedAt,
     subjectSlug: resolvedSubjectSlug,
     moduleSlug: resolvedModuleSlug,
     targetCount: resolvedTargetCount,
-    resumed: Boolean(record?.resumed),
+    resumed: false,
     returnUrl,
     href: buildSelfPacedPracticeHref({
       locale,
       subjectSlug: resolvedSubjectSlug,
       moduleSlug: resolvedModuleSlug,
-      sessionId,
+      practiceRunId,
+      practiceRunStartedAt,
       sectionSlug,
       topicSlug,
-      // Preserve only a learner-selected cap in the URL. The server-owned
-      // targetCount remains available through the session status.
       targetCount,
       difficulty:
-        difficulty === "easy" ||
-        difficulty === "medium" ||
-        difficulty === "hard"
+        difficulty === "easy" || difficulty === "medium" || difficulty === "hard"
           ? difficulty
           : null,
       returnTo: returnUrl,

@@ -33,7 +33,7 @@ type PendingChange =
 export function usePracticeController(args: {
   subjectSlug?: string;
   moduleSlug?: string;
-  sessionId?: string;
+  sessionId?: string | null;
   isTrial?: boolean;
   authoritativeSessionId?: boolean;
   surface: PracticeRuntimeSurface;
@@ -125,6 +125,17 @@ export function usePracticeController(args: {
   const skipUrlSyncRef = useRef(true);
   const preferPurposeFromQuery = coercePurposeMode((sp as any)?.get?.("preferPurpose"));
   const purposePolicyFromQuery = coercePurposePolicy((sp as any)?.get?.("purposePolicy"));
+  const practiceRunId =
+    String((sp as any)?.get?.("practiceRunId") ?? "").trim() || null;
+  const practiceRunStartedAt =
+    String((sp as any)?.get?.("practiceRunStartedAt") ?? "").trim() || null;
+  const rawPracticeQuestionCount = Number(
+    (sp as any)?.get?.("questionCount"),
+  );
+  const practiceQuestionCount =
+    Number.isFinite(rawPracticeQuestionCount) && rawPracticeQuestionCount > 0
+      ? Math.floor(rawPracticeQuestionCount)
+      : null;
 
   const { preferPurpose, purposePolicy } = resolvePracticePurposeDefaults({
     experienceMode,
@@ -148,6 +159,7 @@ export function usePracticeController(args: {
     topic,
     difficulty,
     sessionId,
+    practiceRunId,
     initialSessionId: initialSessionId ?? null,
     authoritativeSessionId,
     expectedExperienceMode: resumePolicy.expectedExperienceMode,
@@ -243,6 +255,9 @@ export function usePracticeController(args: {
     authoritativeSessionId,
     initialSessionId: initialSessionId ?? null,
     initialSessionStatus,
+    practiceRunId,
+    practiceRunStartedAt,
+    practiceQuestionCount,
   } as any);
 
   // lock selected values when run says so
@@ -269,13 +284,11 @@ export function usePracticeController(args: {
   }, [hydrated, completed]);
 
   // Scope selection belongs to the shared self-paced start contract.
-  // Active normal Practice never clears sessionId and regenerates directly.
+  // Normal self-paced Practice has no DB session; URL run identity owns only deterministic browser-run selection.
   // Header chooses module/section/topic before start; Lesson/Review supplies
   // whole-module scope.
 
-  // URL sync: session identity is always authoritative; only mutable filters
-  // are unlocked. A fixed independent Practice run must retain sessionId so a
-  // browser reload resumes the same queue and progress.
+  // URL sync preserves the stateless run query. Real sessionId remains authoritative only for legacy/assignment/session-backed experiences.
   useEffect(() => {
     if (!hydrated) return;
 

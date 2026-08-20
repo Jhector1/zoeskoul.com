@@ -166,6 +166,9 @@ export function usePracticeEngine(args: {
   authoritativeSessionId?: boolean;
   initialSessionId?: string | null;
   initialSessionStatus?: SessionStatus | null;
+  practiceRunId?: string | null;
+  practiceRunStartedAt?: string | null;
+  practiceQuestionCount?: number | null;
 
   hydrated: boolean;
   resolvedSessionIdRef: MutableRefObject<string | null>;
@@ -232,6 +235,9 @@ export function usePracticeEngine(args: {
     authoritativeSessionId = false,
     initialSessionId = null,
     initialSessionStatus = null,
+    practiceRunId = null,
+    practiceRunStartedAt = null,
+    practiceQuestionCount = null,
     phase,
     setPhase,
     autoSummarized,
@@ -449,17 +455,33 @@ export function usePracticeEngine(args: {
   });
 
   function buildPracticeRequest(args: {
-    sid: string;
+    sid?: string | null;
     signal?: AbortSignal;
   }) {
+    const sid = String(args.sid ?? "").trim() || null;
     const purposeRequest = resolvePracticePurposeRequestParams({
-      sessionId: args.sid,
+      sessionId: sid,
       preferPurpose: preferPurpose as PurposeMode | undefined,
       purposePolicy: purposePolicy as PurposePolicy | undefined,
     });
+    if (sid) {
+      return {
+        sessionId: sid,
+        allowReveal: allowReveal ? true : undefined,
+        signal: args.signal,
+        ...purposeRequest,
+      };
+    }
 
     return {
-      sessionId: args.sid,
+      subject: subjectSlug,
+      module: moduleSlug,
+      section: section ?? undefined,
+      topic: topic === "all" ? undefined : topic,
+      difficulty: difficulty === "all" ? undefined : difficulty,
+      questionCount: practiceQuestionCount ?? undefined,
+      practiceRunId: practiceRunId ?? undefined,
+      practiceRunStartedAt: practiceRunStartedAt ?? undefined,
       allowReveal: allowReveal ? true : undefined,
       signal: args.signal,
       ...purposeRequest,
@@ -517,8 +539,12 @@ export function usePracticeEngine(args: {
       authoritativeSessionId,
       initialSessionId,
     });
-    if (!sid) return null;
-
+    if (
+      !sid &&
+      (!practiceRunId || !practiceRunStartedAt)
+    ) {
+      return null;
+    }
     const response = await fetchPracticeExercise({
       ...buildPracticeRequest({ sid }),
       keyRefreshOnly: true,
@@ -616,9 +642,12 @@ export function usePracticeEngine(args: {
         authoritativeSessionId,
         initialSessionId,
       });
-      if (!effectiveSid) {
+      if (
+        !effectiveSid &&
+        (!practiceRunId || !practiceRunStartedAt)
+      ) {
         throw new Error(
-          "Practice session is required. Start Practice from a supported entry point.",
+          "Practice run identity is missing. Start Practice from a supported entry point.",
         );
       }
 
@@ -637,12 +666,15 @@ export function usePracticeEngine(args: {
         if (sid2) setSessionId(String(sid2));
 
         try {
-          const st = await getSessionStatus(String(sid2 ?? sid), {
-            includeMissed: true,
-            includeHistory: true,
-            subject: subjectSlug,
-            module: moduleSlug,
-          });
+          const completionSid = sid2 ?? sid;
+          const st = completionSid
+            ? await getSessionStatus(String(completionSid), {
+                includeMissed: true,
+                includeHistory: true,
+                subject: subjectSlug,
+                module: moduleSlug,
+              })
+            : null;
 
           if (st) {
             if (st?.history?.length) {
@@ -788,10 +820,13 @@ export function usePracticeEngine(args: {
         return;
       }
 
-      if (!effectiveSid) {
+      if (
+        !effectiveSid &&
+        (!practiceRunId || !practiceRunStartedAt)
+      ) {
         bootCompleteRef.current = true;
         setLoadErr(
-          "Practice session is required. Start Practice from a supported entry point.",
+          "Practice run identity is missing. Start Practice from a supported entry point.",
         );
         return;
       }

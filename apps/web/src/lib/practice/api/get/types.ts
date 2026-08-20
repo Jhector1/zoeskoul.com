@@ -4,6 +4,7 @@ import type { Actor } from "@/lib/practice/actor";
 
 import type { GetParams } from "./schemas";
 import type { PracticeGetSession } from "./repositories/session.repo";
+import type { SelfPacedPracticeState } from "@/lib/practice/experience/selfPacedPracticeState.server";
 
 export type PracticeGetContext = {
     prisma: PrismaClient;
@@ -11,6 +12,7 @@ export type PracticeGetContext = {
     params: GetParams;
     locale?: string;
     session: PracticeGetSession | null;
+    selfPacedPractice?: SelfPacedPracticeState | null;
 };
 
 export type PracticeGetResult =

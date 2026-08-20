@@ -40,10 +40,10 @@ const EXPERIENCE_POLICIES: Record<
 const POLICIES: Record<PracticeRuntimeSurface, PracticeRuntimeSurfacePolicy> = {
   module_practice: {
     surface: "module_practice",
-    defaultMode: "standard",
-    // Header and Lesson/Review self-paced Practice are both persisted
-    // `standard` runs. Assignment is the only alternate module-route mode.
-    allowedModes: ["standard", "assignment"],
+    defaultMode: "practice",
+    // Normal self-paced Practice is non-persisted. `standard` remains accepted
+    // only for legacy URLs; teacher assignments remain session-backed.
+    allowedModes: ["practice", "standard", "assignment"],
   },
   daily_practice: {
     surface: "daily_practice",

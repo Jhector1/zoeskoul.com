@@ -50,19 +50,6 @@ export async function GET(req: Request) {
         createIfMissing: !Boolean(params.sessionId),
     });
 
-    if (!params.sessionId && params.preferPurpose === "practice") {
-        const res = bodyJsonWithGuestCookie(
-            {
-                message: "Practice session is required. Start Practice from a supported entry point.",
-                code: "PRACTICE_SESSION_REQUIRED",
-                requestId,
-            },
-            409,
-            setGuestId,
-        );
-        res.headers.set("X-Request-Id", requestId);
-        return hardenApiResponse(res as Response);
-    }
 
     const ip = getClientIp(req);
     const rlKey = `practice:${actorKeyOf(actor)}:${ip}`;

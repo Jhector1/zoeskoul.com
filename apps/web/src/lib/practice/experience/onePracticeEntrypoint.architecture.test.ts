@@ -8,14 +8,14 @@ function read(relativePath: string) {
   return fs.readFileSync(path.join(repoRoot, relativePath), "utf8");
 }
 
-function productionSessionStartOwners() {
+function productionStartOwners() {
   const roots = [
     "apps/web/src",
     "apps/student/src",
     "packages/learning-client/src",
   ];
   const owners: string[] = [];
-  const endpoint = "/api/practice/session/start";
+  const endpoint = "/api/practice/start";
 
   function visit(relativePath: string) {
     const absolutePath = path.join(repoRoot, relativePath);
@@ -38,62 +38,68 @@ function productionSessionStartOwners() {
   return owners.sort();
 }
 
-describe("one self-paced Practice entrypoint", () => {
-  it("keeps one production owner for session start", () => {
-    expect(productionSessionStartOwners()).toEqual([
+describe("one sessionless self-paced Practice entrypoint", () => {
+  it("keeps one production owner for normal Practice start", () => {
+    expect(productionStartOwners()).toEqual([
       "packages/learning-client/src/selfPacedPractice.ts",
     ]);
   });
 
-  it("keeps normal Practice loading session-backed in both engines", () => {
+  it("does not create a PracticeSession for normal self-paced Practice", () => {
+    const startRoute = read("apps/web/src/app/api/practice/start/route.ts");
+    expect(startRoute).not.toContain("prisma.practiceSession.create");
+    expect(startRoute).not.toContain('mode: "standard"');
+    expect(startRoute).toContain('experienceMode: "practice"');
+    expect(startRoute).toContain("practiceRunId");
+  });
+
+  it("removes the old normal-Practice session-start route", () => {
+    expect(
+      fs.existsSync(
+        path.join(
+          repoRoot,
+          "apps/web/src/app/api/practice/session/start/route.ts",
+        ),
+      ),
+    ).toBe(false);
+  });
+
+  it("persists canonical learner+module+authored identity without sessionId", () => {
+    const repo = read(
+      "apps/web/src/lib/practice/api/get/repositories/instance.repo.ts",
+    );
+    expect(repo).toContain("selfPacedPracticeExperienceItemKey");
+    expect(repo).toContain("ownerUserId");
+    expect(repo).toContain("ownerModuleSlug");
+  });
+
+  it("allows normal authored Practice GETs without sessionId", () => {
+    expect(read("apps/web/src/app/api/practice/route.ts")).not.toContain(
+      "PRACTICE_SESSION_REQUIRED",
+    );
     for (const file of [
       "apps/web/src/features/practice/client/usePracticeEngine.ts",
       "apps/student/src/features/practice/client/usePracticeEngine.ts",
     ]) {
       const source = read(file);
-      expect(source).not.toContain("forceNew");
-      expect(source).toContain("async function loadNextExercise()");
-      expect(source).toContain(
+      expect(source).not.toContain(
         "Practice session is required. Start Practice from a supported entry point.",
       );
+      expect(source).toContain("practiceRunId");
+      expect(source).toContain("practiceRunStartedAt");
     }
   });
 
-  it("keeps retry/excuse behavior free of session selection in both apps", () => {
-    for (const file of [
-      "apps/web/src/lib/flow/usePracticeExcuseActions.ts",
-      "apps/student/src/legacy-web/lib/flow/usePracticeExcuseActions.ts",
-    ]) {
-      const source = read(file);
-      expect(source).not.toContain("getEffectiveSid");
-      expect(source).not.toContain("forceNew");
-      expect(source).toContain("await loadNextExercise();");
-    }
-  });
-
-  it("requires an authoritative session at the module Practice surface", () => {
-    const page = read(
-      "apps/web/src/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/practice/page.tsx",
-    );
-    expect(page).toContain("if (!practiceSessionId) notFound();");
+  it("keeps legacy/assignment sessions compatible but defaults module Practice to practice", () => {
+    const policy = read("apps/web/src/lib/practice/experience/routePolicy.ts");
+    expect(policy).toContain('defaultMode: "practice"');
+    expect(policy).toContain('["practice", "standard", "assignment"]');
 
     for (const file of [
       "apps/web/src/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/practice/practice-client.tsx",
       "apps/student/src/features/practice/client/PracticeClient.tsx",
     ]) {
-      const source = read(file);
-      expect(source).toContain("sessionId: string;");
-      expect(source).toContain("authoritativeSessionId: true");
-      expect(source).not.toContain("sessionId: string | null;");
-      expect(source).not.toContain("authoritativeSessionId: Boolean(sessionId)");
+      expect(read(file)).toContain("sessionId: string | null;");
     }
-  });
-
-  it("rejects the legacy sessionless authored-practice GET contract", () => {
-    const source = read("apps/web/src/app/api/practice/route.ts");
-    expect(source).toContain(
-      'if (!params.sessionId && params.preferPurpose === "practice")',
-    );
-    expect(source).toContain('code: "PRACTICE_SESSION_REQUIRED"');
   });
 });

@@ -58,7 +58,14 @@ export default async function ModulePracticePage({
   const { locale, subjectSlug, moduleSlug } = await params;
   const sp = await searchParams;
   const practiceSessionId = scalar(sp, "sessionId");
-  if (!practiceSessionId) notFound();
+  const practiceRunId = scalar(sp, "practiceRunId");
+  const practiceRunStartedAt = scalar(sp, "practiceRunStartedAt");
+  if (
+    !practiceSessionId &&
+    (!practiceRunId || !practiceRunStartedAt)
+  ) {
+    notFound();
+  }
 
   const [authSession, actor] = await Promise.all([auth(), getActor()]);
   const sessionUser: any = (authSession as any)?.user ?? null;
@@ -180,7 +187,9 @@ export default async function ModulePracticePage({
       subjectSlug,
       moduleSlug,
       sessionId: practiceSessionId,
-      mode: isAssignment ? "assignment" : "standard",
+      practiceRunId,
+      practiceRunStartedAt,
+      mode: practiceSessionId ? "standard" : "practice",
       returnTo: scalar(sp, "returnTo"),
       sectionSlug: scalar(sp, "section"),
       topicSlug: scalar(sp, "topic"),

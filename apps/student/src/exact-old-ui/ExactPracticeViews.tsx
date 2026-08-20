@@ -154,6 +154,7 @@ export function ExactDailyPracticeView(
 
 const PRACTICE_MODES =
   new Set([
+    "practice",
     "standard",
     "assignment",
     "daily_five",
@@ -177,19 +178,25 @@ export function ExactModulePracticeView(
   const rawMode =
     query.get("mode") ??
     query.get("experienceMode") ??
-    "standard";
+    (query.get("sessionId") ? "standard" : "practice");
   const mode =
     PRACTICE_MODES.has(rawMode)
       ? rawMode
-      : "standard";
+      : "practice";
   const sessionId =
     query.get("sessionId");
-
-  if (!sessionId) {
+  const practiceRunId =
+    query.get("practiceRunId");
+  const practiceRunStartedAt =
+    query.get("practiceRunStartedAt");
+  if (
+    !sessionId &&
+    (!practiceRunId || !practiceRunStartedAt)
+  ) {
     return (
       <PracticeState
-        title="Practice session unavailable"
-        message="This Practice route requires an active practice session."
+        title="Practice run unavailable"
+        message="Start Practice from the Practice entry point."
       />
     );
   }

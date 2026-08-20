@@ -15,7 +15,7 @@ export default function PracticeClient({
 }: {
   subjectSlug: string;
   moduleSlug: string;
-  sessionId: string;
+  sessionId: string | null;
   initialExperienceMode: PracticeExperienceMode;
 }) {
   const t = useTranslations("Practice");

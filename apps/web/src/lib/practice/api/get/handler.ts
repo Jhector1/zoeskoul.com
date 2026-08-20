@@ -12,6 +12,8 @@ import {
     assertPracticeExperienceInvariant,
     resolvePracticeExperienceMode,
 } from "@/lib/practice/experience/resolve";
+import { applyAuthoredPracticeTarget } from "@/lib/practice/experience/authoredPracticeQueue";
+import { loadSelfPacedPracticeState } from "@/lib/practice/experience/selfPacedPracticeState.server";
 
 function statusOf(err: any, fallback = 500) {
     return Number(err?.status) || fallback;
@@ -183,6 +185,75 @@ export async function handlePracticeGet(
                 body: { message: e.message },
             };
         }
+    }
+
+    if (!session && decision.effective === "practice") {
+        if (!actor.userId) {
+            return {
+                kind: "json",
+                status: 401,
+                body: {
+                    code: "PRACTICE_LEARNER_REQUIRED",
+                    message:
+                        "An authenticated learner is required for canonical Practice progress.",
+                },
+            };
+        }
+
+        const subjectSlug = String(params.subject ?? "").trim();
+        const moduleSlug = String(params.module ?? "").trim();
+        const practiceRunId = String(params.practiceRunId ?? "").trim();
+        const practiceRunStartedAt = String(
+            params.practiceRunStartedAt ?? "",
+        ).trim();
+        if (
+            !subjectSlug ||
+            !moduleSlug ||
+            !practiceRunId ||
+            !practiceRunStartedAt
+        ) {
+            return {
+                kind: "json",
+                status: 400,
+                body: {
+                    code: "PRACTICE_RUN_REQUIRED",
+                    message:
+                        "Start Practice from the shared Practice entrypoint before loading exercises.",
+                },
+            };
+        }
+
+        const selfPacedPractice = await loadSelfPacedPracticeState({
+            userId: actor.userId,
+            subjectSlug,
+            moduleSlug,
+            sectionSlug: params.section ?? null,
+            topicSlug: params.topic ?? null,
+            targetCount: params.questionCount ?? null,
+            practiceRunId,
+            practiceRunStartedAt,
+        });
+        const nextParams =
+            selfPacedPractice.nextTarget &&
+            params.keyRefreshOnly !== "true"
+                ? applyAuthoredPracticeTarget({
+                    params,
+                    target: selfPacedPractice.nextTarget,
+                    salt:
+                        `self-paced:${practiceRunId}:` +
+                        `${selfPacedPractice.nextTarget.topicSlug}:` +
+                        `${selfPacedPractice.nextTarget.exerciseKey}`,
+                })
+                : params;
+
+        return generatePracticeExercise(
+            {
+                ...ctx,
+                params: nextParams,
+                selfPacedPractice,
+            },
+            decision,
+        );
     }
 
     return generatePracticeExercise(ctx, decision);

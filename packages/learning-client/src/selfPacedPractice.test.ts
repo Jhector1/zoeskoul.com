@@ -5,128 +5,77 @@ import {
   startSelfPacedPractice,
 } from "./selfPacedPractice";
 
-describe("single self-paced Practice start contract", () => {
-  it("starts Lesson/Review module scope through the canonical endpoint", async () => {
-    const fetchImpl = vi.fn<typeof fetch>(
-      async () =>
-        Response.json({
-          sessionId: "lesson-session",
-          subjectSlug: "python-v2",
-          moduleSlug: "python-v2-1",
-          experienceMode: "standard",
-          targetCount: 8,
-          resumed: false,
-          returnUrl: "/en/subjects/python-v2/modules/python-v2-1/learn",
-        }),
+describe("sessionless self-paced Practice start", () => {
+  it("uses one stateless endpoint for Lesson/Review", async () => {
+    const fetchImpl = vi.fn<typeof fetch>(async () =>
+      Response.json({
+        practiceRunId: "lesson-run",
+        practiceRunStartedAt: "2026-08-20T17:00:00.000Z",
+        subjectSlug: "python-v2",
+        moduleSlug: "python-v2-2",
+        experienceMode: "practice",
+        targetCount: 12,
+        resumed: false,
+        returnUrl: "/en/subjects/python-v2/modules/python-v2-2/learn",
+      }),
     );
 
     const result = await startSelfPacedPractice(
       {
         locale: "en",
         subjectSlug: "python-v2",
-        moduleSlug: "python-v2-1",
-        returnTo: "/en/subjects/python-v2/modules/python-v2-1/learn",
+        moduleSlug: "python-v2-2",
+        returnTo: "/en/subjects/python-v2/modules/python-v2-2/learn",
       },
       { fetchImpl },
     );
 
-    expect(fetchImpl).toHaveBeenCalledTimes(1);
-    expect(fetchImpl.mock.calls[0]?.[0]).toBe(
-      "/api/practice/session/start",
-    );
-    expect(
-      JSON.parse(String(fetchImpl.mock.calls[0]?.[1]?.body)),
-    ).toEqual({
-      locale: "en",
-      subjectSlug: "python-v2",
-      moduleSlug: "python-v2-1",
-      returnTo: "/en/subjects/python-v2/modules/python-v2-1/learn",
-    });
-    expect(result.sessionId).toBe("lesson-session");
-    expect(result.href).toContain("sessionId=lesson-session");
-    expect(result.href).toContain("mode=standard");
-    expect(result.href).not.toContain("section=");
-    expect(result.href).not.toContain("topic=");
+    expect(fetchImpl.mock.calls[0]?.[0]).toBe("/api/practice/start");
+    expect(result.href).toContain("practiceRunId=lesson-run");
+    expect(result.href).toContain("mode=practice");
+    expect(result.href).not.toContain("sessionId=");
   });
 
-  it("starts Header-selected scope through the exact same function", async () => {
-    const fetchImpl = vi.fn<typeof fetch>(
-      async () =>
-        Response.json({
-          sessionId: "header-session",
-          subjectSlug: "python-v2",
-          moduleSlug: "python-v2-1",
-          experienceMode: "standard",
-          targetCount: 2,
-          resumed: false,
-          returnUrl: null,
-        }),
+  it("uses the exact same contract for Header scope", async () => {
+    const fetchImpl = vi.fn<typeof fetch>(async () =>
+      Response.json({
+        practiceRunId: "header-run",
+        practiceRunStartedAt: "2026-08-20T17:01:00.000Z",
+        subjectSlug: "python-v2",
+        moduleSlug: "python-v2-2",
+        experienceMode: "practice",
+        targetCount: 2,
+        resumed: false,
+        returnUrl: null,
+      }),
     );
 
     const result = await startSelfPacedPractice(
       {
         locale: "en",
         subjectSlug: "python-v2",
-        moduleSlug: "python-v2-1",
-        sectionSlug: "variables",
-        topicSlug: "input-and-type-conversion",
+        moduleSlug: "python-v2-2",
+        topicSlug: "if-elif-else",
         targetCount: 2,
       },
       { fetchImpl },
     );
 
-    expect(fetchImpl).toHaveBeenCalledTimes(1);
-    expect(fetchImpl.mock.calls[0]?.[0]).toBe(
-      "/api/practice/session/start",
-    );
-    expect(
-      JSON.parse(String(fetchImpl.mock.calls[0]?.[1]?.body)),
-    ).toEqual({
-      locale: "en",
-      subjectSlug: "python-v2",
-      moduleSlug: "python-v2-1",
-      sectionSlug: "variables",
-      topicSlug: "input-and-type-conversion",
-      targetCount: 2,
-    });
-    expect(result.href).toContain("sessionId=header-session");
-    expect(result.href).toContain("section=variables");
-    expect(result.href).toContain(
-      "topic=input-and-type-conversion",
-    );
+    expect(result.href).toContain("practiceRunId=header-run");
+    expect(result.href).toContain("topic=if-elif-else");
     expect(result.href).toContain("questionCount=2");
+    expect(result.href).not.toContain("sessionId=");
   });
 
-  it("never returns a self-paced href without a session id", async () => {
-    const fetchImpl = vi.fn<typeof fetch>(
-      async () =>
-        Response.json({
-          experienceMode: "standard",
-        }),
-    );
-
-    await expect(
-      startSelfPacedPractice(
-        {
-          locale: "en",
-          subjectSlug: "python-v2",
-          moduleSlug: "python-v2-1",
-        },
-        { fetchImpl },
-      ),
-    ).rejects.toThrow(
-      "authoritative self-paced session",
-    );
-  });
-
-  it("builds no sessionless self-paced route", () => {
+  it("requires URL run identity rather than a database session id", () => {
     expect(() =>
       buildSelfPacedPracticeHref({
         locale: "en",
         subjectSlug: "python-v2",
-        moduleSlug: "python-v2-1",
-        sessionId: "",
+        moduleSlug: "python-v2-2",
+        practiceRunId: "",
+        practiceRunStartedAt: "2026-08-20T17:00:00.000Z",
       }),
-    ).toThrow("sessionId is required");
+    ).toThrow("practiceRunId is required");
   });
 });
