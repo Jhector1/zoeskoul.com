@@ -140,14 +140,17 @@ export function computePurposeDecision(args: {
         };
     }
 
-    if (experienceMode === "standard" || experienceMode === "practice") {
+    if (
+        session &&
+        (experienceMode === "standard" || experienceMode === "practice")
+    ) {
         return {
             ok: true,
             effective: "practice",
             requested: coercePurposeMode(args.preferPurposeParam),
             allowed: ["practice"],
             policy: "strict",
-            source: session ? "session" : "default",
+            source: "session",
             reason: "practice_modes_use_practice_purpose",
         };
     }

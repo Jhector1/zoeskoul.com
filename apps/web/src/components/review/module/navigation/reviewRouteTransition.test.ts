@@ -204,6 +204,7 @@ function readiness(
         browserHref: "/en/course/next",
         progressHydrated: true,
         hasExpectedExerciseSurface: false,
+        hasExpectedEditorBinding: false,
         pendingExerciseBinding: false,
         toolHydrated: undefined,
         exerciseReady: true,
@@ -246,6 +247,7 @@ describe("review route transition readiness", () => {
             isReviewRouteTransitionReady(
                 readiness({
                     hasExpectedExerciseSurface: true,
+                    hasExpectedEditorBinding: true,
                     pendingExerciseBinding: true,
                     toolHydrated: false,
                     exerciseReady: false,
@@ -258,6 +260,7 @@ describe("review route transition readiness", () => {
             isReviewRouteTransitionReady(
                 readiness({
                     hasExpectedExerciseSurface: true,
+                    hasExpectedEditorBinding: true,
                     pendingExerciseBinding: false,
                     toolHydrated: false,
                     exerciseReady: true,
@@ -270,6 +273,7 @@ describe("review route transition readiness", () => {
             isReviewRouteTransitionReady(
                 readiness({
                     hasExpectedExerciseSurface: true,
+                    hasExpectedEditorBinding: true,
                     pendingExerciseBinding: false,
                     toolHydrated: true,
                     exerciseReady: true,
@@ -284,6 +288,7 @@ describe("review route transition readiness", () => {
             isReviewRouteTransitionReady(
                 readiness({
                     hasExpectedExerciseSurface: true,
+                    hasExpectedEditorBinding: true,
                     toolHydrated: true,
                     exerciseReady: true,
                     editorReady: false,
@@ -297,9 +302,38 @@ describe("review route transition readiness", () => {
             isReviewRouteTransitionReady(
                 readiness({
                     hasExpectedExerciseSurface: true,
+                    hasExpectedEditorBinding: true,
                     toolHydrated: true,
                     exerciseReady: false,
                     editorReady: true,
+                }),
+            ),
+        ).toBe(false);
+    });
+
+    it("reveals an authored destination once its prompt is ready even before a concrete editor owner is known", () => {
+        expect(
+            isReviewRouteTransitionReady(
+                readiness({
+                    hasExpectedExerciseSurface: true,
+                    hasExpectedEditorBinding: false,
+                    pendingExerciseBinding: false,
+                    toolHydrated: false,
+                    exerciseReady: true,
+                    editorReady: false,
+                }),
+            ),
+        ).toBe(true);
+
+        expect(
+            isReviewRouteTransitionReady(
+                readiness({
+                    hasExpectedExerciseSurface: true,
+                    hasExpectedEditorBinding: false,
+                    pendingExerciseBinding: false,
+                    toolHydrated: false,
+                    exerciseReady: false,
+                    editorReady: false,
                 }),
             ),
         ).toBe(false);

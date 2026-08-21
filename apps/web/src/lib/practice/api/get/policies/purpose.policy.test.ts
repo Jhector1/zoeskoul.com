@@ -43,6 +43,39 @@ describe("practice purpose policy", () => {
     });
   });
 
+  it("keeps sessionless exact authored project requests outside self-paced Practice", () => {
+    const decision = computePurposeDecision({
+      session: null,
+      preferPurposeParam: "project",
+      purposePolicyParam: "fallback",
+    });
+
+    expect(decision).toMatchObject({
+      ok: true,
+      effective: "project",
+      requested: "project",
+      allowed: [],
+      source: "param",
+    });
+  });
+
+  it("keeps explicit sessionless self-paced Practice requests on practice purpose", () => {
+    const decision = computePurposeDecision({
+      session: null,
+      preferPurposeParam: "practice",
+      purposePolicyParam: "strict",
+    });
+
+    expect(decision).toMatchObject({
+      ok: true,
+      effective: "practice",
+      requested: "practice",
+      allowed: [],
+      policy: "strict",
+      source: "param",
+    });
+  });
+
   it("makes normal Practice strict practice purpose", () => {
     const decision = computePurposeDecision({
       session: {

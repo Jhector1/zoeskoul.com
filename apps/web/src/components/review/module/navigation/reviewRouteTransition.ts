@@ -4,6 +4,7 @@ export type ReviewRouteTransitionReadiness = {
     browserHref: string | null;
     progressHydrated: boolean;
     hasExpectedExerciseSurface: boolean;
+    hasExpectedEditorBinding: boolean;
     pendingExerciseBinding: boolean;
     toolHydrated: boolean | undefined;
     exerciseReady: boolean;
@@ -98,13 +99,26 @@ export function isReviewRouteTransitionReady(
     }
 
     if (!state.progressHydrated) return false;
-    if (state.pendingExerciseBinding) return false;
 
+    /**
+     * Prompt/content readiness and editor readiness are related but are not
+     * the same gate. An authored destination can publish before its concrete
+     * editor owner key has registered. Waiting for editor hydration in that
+     * unnamed state creates a cycle: the transition waits for an editor
+     * binding that the destination has not had a chance to publish yet.
+     */
     if (
         state.hasExpectedExerciseSurface &&
+        !state.exerciseReady
+    ) {
+        return false;
+    }
+
+    if (
+        state.hasExpectedEditorBinding &&
         (
+            state.pendingExerciseBinding ||
             state.toolHydrated !== true ||
-            !state.exerciseReady ||
             !state.editorReady
         )
     ) {

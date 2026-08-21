@@ -2758,13 +2758,16 @@ export function useReviewModuleController({
         routeOwnsExercise ||
         cardHasAuthoredExerciseSurface(activeCard)
     );
+    const hasExpectedEditorBinding = Boolean(
+        expectedExerciseBindingKey,
+    );
     const runtimeBindingMatchesExpectedExercise = Boolean(
         expectedExerciseBindingKey &&
         runtimeBoundExerciseKey &&
         runtimeBoundExerciseKey === expectedExerciseBindingKey,
     );
     const pendingExerciseBinding = Boolean(
-        hasExpectedExerciseSurface &&
+        hasExpectedEditorBinding &&
         !runtimeBindingMatchesExpectedExercise &&
         !boundExerciseMatchesActiveCard,
     );
@@ -2792,7 +2795,7 @@ export function useReviewModuleController({
         ),
     );
     const transitionEditorReady = Boolean(
-        !hasExpectedExerciseSurface ||
+        !hasExpectedEditorBinding ||
         (
             routeTransitionEditorReady?.identity === pendingTransitionHref &&
             routeTransitionEditorReady?.ownerKey === expectedExerciseBindingKey &&
@@ -2806,6 +2809,7 @@ export function useReviewModuleController({
         browserHref: browserTransitionHref,
         progressHydrated,
         hasExpectedExerciseSurface,
+        hasExpectedEditorBinding,
         pendingExerciseBinding,
         toolHydrated: tool.toolHydrated,
         exerciseReady: transitionExerciseReady,
@@ -2838,6 +2842,7 @@ export function useReviewModuleController({
                 browserHref,
                 progressHydrated,
                 hasExpectedExerciseSurface,
+                hasExpectedEditorBinding,
                 pendingExerciseBinding,
                 toolHydrated: tool.toolHydrated,
                 exerciseReady: transitionExerciseReady,
@@ -2922,6 +2927,7 @@ export function useReviewModuleController({
     }, [
         buildRoutePathForCurrentSurface,
         clearRouteTransitionFrame,
+        hasExpectedEditorBinding,
         hasExpectedExerciseSurface,
         isRouteTransitioning,
         pendingExerciseBinding,
