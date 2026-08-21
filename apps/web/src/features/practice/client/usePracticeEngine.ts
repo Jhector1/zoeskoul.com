@@ -44,6 +44,7 @@ import {
   samePracticeExerciseIdentity,
 } from "@/lib/practice/exerciseIdentity";
 import { resolveRevealCompletionTransition } from "@/lib/practice/experience/revealCompletion";
+import { reconcileSelfPacedCompletionStack } from "@/lib/practice/experience/selfPacedCompletionReconciliation";
 import {
   canRevealPracticeAnswer,
   isRevealStepKey,
@@ -620,6 +621,16 @@ export function usePracticeEngine(args: {
       patch: freshItem,
     });
 
+    if (runFromApi?.mode === "practice") {
+      setStack((prev) =>
+        reconcileSelfPacedCompletionStack({
+          stack: prev,
+          completedPrefix:
+            runFromApi?.subscriberPractice?.completedPrefix ?? [],
+        }),
+      );
+    }
+
     return { item: freshItem, exercise: freshExercise };
   }
 
@@ -818,6 +829,25 @@ export function usePracticeEngine(args: {
         }
       }
 
+      if (
+        !effectiveSid &&
+        stack.length > 0 &&
+        practiceRunId &&
+        practiceRunStartedAt
+      ) {
+        try {
+          // A restored stateless run can be older than canonical learner
+          // history. Refresh the exact current key: the server returns the
+          // same exercise plus a freshly loaded canonical completedPrefix,
+          // without generating or reordering this browser run.
+          await refreshCurrentPracticeKey();
+        } catch {
+          // Keep the restored run usable if this opportunistic reconciliation
+          // fails. The normal signed-key recovery path will retry later.
+        }
+        if (!alive) return;
+      }
+
       if (!shouldLoadCurrent) {
         bootCompleteRef.current = true;
         return;
@@ -850,6 +880,8 @@ export function usePracticeEngine(args: {
     completed,
     subjectSlug,
     moduleSlug,
+    practiceRunId,
+    practiceRunStartedAt,
     resolvedSessionIdRef,
     setRun,
     expectedExperienceMode,
