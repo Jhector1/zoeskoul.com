@@ -215,6 +215,17 @@
                   "message": "Assign red to color, print it, reassign green to the same variable, and print it again."
                 }
               }
+            },
+            "q12": {
+              "title": "Read input into a variable",
+              "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints it.\n\nExample: if the input is `Tokyo`, the output should be `Tokyo`.\n\nType code in the code editor, click Run, and check the output panel.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "# Read one line into city\n# Print city"
             }
           },
           "practice": {
@@ -239,23 +250,6 @@
                   "content": "score = 12\nbonus = 5\nscore = score + bonus\nprint(score)\n"
                 }
               }
-            }
-          }
-        }
-      },
-      "python--python-v2--draft-1": {
-        "naming-and-assigning-variables": {
-          "quiz": {
-            "q12": {
-              "title": "Read input into a variable",
-              "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints it.\n\nExample: if the input is `Tokyo`, the output should be `Tokyo`.\n\nType code in the code editor, click Run, and check the output panel.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "# Read one line into city\n# Print city"
             }
           }
         }

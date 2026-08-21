@@ -118,13 +118,7 @@
                 "t3": "Add decisions and repetition",
                 "t4": "Combine skills in projects"
               }
-            }
-          }
-        }
-      },
-      "python--python-v2--draft-0": {
-        "what-python-is": {
-          "quiz": {
+            },
             "ci-beginner-message": {
               "title": "Print a beginner-friendly message",
               "prompt": "Write Python code that prints exactly these two lines:\nPython is beginner-friendly.\nIt is used in many fields.",

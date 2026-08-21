@@ -3,7 +3,171 @@
     "python-v2": {
       "python-v2-0": {
         "reading-error-messages": {
+          "label": "Reading Error Messages",
+          "summary": "Use traceback clues—especially the reported line, error type, and message—to decide what to inspect and fix.",
+          "cards": {
+            "sketch0": {
+              "title": "Find the useful clues in a traceback"
+            },
+            "sketch1": {
+              "title": "Use the error type to classify the problem"
+            },
+            "sketch2": {
+              "title": "Use the reported line to narrow the search"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
           "quiz": {
+            "sc-bottom-of-traceback": {
+              "title": "Find the error summary",
+              "prompt": "A traceback contains several lines. Which part usually gives the best first summary of what kind of error occurred?",
+              "hint": "Look for the part that names the error category and describes it.",
+              "help": {
+                "concept": "Near the bottom of a Python traceback, Python usually shows the error type followed by a short message. That tells you what kind of problem Python encountered.",
+                "hint_1": "The reported line helps with location; the final error line helps with classification.",
+                "hint_2": "Choose the part containing a name such as `NameError` or `SyntaxError` and its message."
+              },
+              "options": {
+                "a": "The final error type and message",
+                "b": "Only the filename at the top",
+                "c": "Whichever code line is longest",
+                "d": "The number of spaces in the traceback"
+              }
+            },
+            "sc-nameerror-meaning": {
+              "title": "Interpret NameError",
+              "prompt": "Python ends a traceback with `NameError: name 'score' is not defined`. What should you investigate first?",
+              "hint": "The message says Python tried to use a name it does not know.",
+              "help": {
+                "concept": "`NameError` means Python tried to evaluate a name that has not been defined in the current program state.",
+                "hint_1": "This is different from an unmatched quote or parenthesis.",
+                "hint_2": "Look for where `score` is used and whether it should have been defined earlier or written as literal text."
+              },
+              "options": {
+                "a": "Where `score` is used and whether that name exists",
+                "b": "Whether the reported line has unmatched quotes or parentheses",
+                "c": "Whether an arithmetic operation divided by zero",
+                "d": "Whether a value has an unexpected type for an operation"
+              }
+            },
+            "mc-traceback-clues": {
+              "title": "Use traceback evidence",
+              "prompt": "Which clues can directly help you decide where to look and what kind of problem to investigate? Choose all correct answers.",
+              "hint": "Separate location clues from problem-type clues.",
+              "help": {
+                "concept": "The reported file/line helps locate the problem. The error type and message describe what Python encountered.",
+                "hint_1": "One useful clue tells you where; another tells you what kind.",
+                "hint_2": "Visual preferences such as editor colors do not explain a Python error."
+              },
+              "options": {
+                "a": "The reported line number",
+                "b": "The error type, such as `NameError`",
+                "c": "The error message text",
+                "d": "The total number of unrelated functions elsewhere in the program"
+              }
+            },
+            "mc-syntaxerror-signs": {
+              "title": "Classify two beginner errors",
+              "prompt": "Which situations are best classified as syntax problems rather than unknown-name problems? Choose all correct answers.",
+              "hint": "Syntax problems prevent Python from reading the code structure.",
+              "help": {
+                "concept": "`SyntaxError` concerns invalid Python structure. `NameError` happens after Python can read the code but cannot resolve a name.",
+                "hint_1": "Look for broken punctuation or an incomplete statement.",
+                "hint_2": "An undefined variable name belongs to `NameError`, not `SyntaxError`."
+              },
+              "options": {
+                "a": "A `print(` call with no closing `)`",
+                "b": "A string with no closing quote",
+                "c": "Using `score` when no name `score` exists",
+                "d": "An unfinished `print(\"Hello\"` statement"
+              }
+            },
+            "dr-read-traceback-order": {
+              "title": "Use a traceback systematically",
+              "prompt": "Arrange these debugging actions into a useful beginner workflow.",
+              "hint": "Gather evidence before editing.",
+              "help": {
+                "concept": "A reliable debugging workflow uses the traceback to locate and classify the problem before changing code.",
+                "hint_1": "Read the reported location and error summary before making a fix.",
+                "hint_2": "Run the program again only after making a targeted correction."
+              },
+              "tokens": {
+                "t1": "Find the reported file and line",
+                "t2": "Read the error type and message",
+                "t3": "Inspect that line and nearby code using those clues",
+                "t4": "Make one targeted fix and run again"
+              }
+            },
+            "fb-nameerror-fill": {
+              "title": "Match the error type",
+              "prompt": "The code shape is valid, but `print(word)` uses `word` before that name exists. Choose the likely error type.",
+              "hint": "Python can read the statement; the problem is the unknown name.",
+              "help": {
+                "concept": "When valid Python code refers to an undefined name, Python raises `NameError`.",
+                "hint_1": "Do not choose a syntax category when the punctuation is valid.",
+                "hint_2": "Choose the error category specifically associated with unknown names."
+              },
+              "template": "The likely error type is [blank1].",
+              "choices": [
+                "NameError",
+                "SyntaxError",
+                "TypeError",
+                "ValueError"
+              ]
+            },
+            "ci-use-syntaxerror-clue": {
+              "title": "Use a SyntaxError clue",
+              "prompt": "Run the starter program. The traceback points to line 2 and identifies a syntax problem. Use those clues to repair the incomplete second statement so the program prints exactly:\n\n`Start`\n`Done`",
+              "hint": "Inspect line 2 and compare its punctuation with line 1.",
+              "help": {
+                "concept": "The reported line narrows your search, and `SyntaxError` tells you to inspect the structure of the statement.",
+                "hint_1": "The string on line 2 is already complete.",
+                "hint_2": "The `print(` call on line 2 needs its matching closing parenthesis."
+              },
+              "starterCode": "print(\"Start\")\nprint(\"Done\"\n",
+              "solutionCode": "print(\"Start\")\nprint(\"Done\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Repair only the incomplete second print call so Start and Done both run."
+                }
+              }
+            },
+            "ci-use-nameerror-clue": {
+              "title": "Use a NameError clue",
+              "prompt": "Run the starter program. The traceback ends with a `NameError` for `banana`. The program is meant to print the word `banana` as text. Use the error type and message to make the smallest correction.",
+              "hint": "`NameError` means Python is treating `banana` as a name.",
+              "help": {
+                "concept": "When text is written without quotes, Python interprets it as a name. The `NameError` message tells you that this name does not exist.",
+                "hint_1": "Keep the `print()` call.",
+                "hint_2": "Change the argument so Python reads `banana` as literal text."
+              },
+              "starterCode": "print(banana)\n",
+              "solutionCode": "print(\"banana\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the NameError clue to turn banana into quoted literal text."
+                }
+              }
+            },
+            "ci-use-line-number-clue": {
+              "title": "Use the reported line",
+              "prompt": "This four-line program should print `One`, `Two`, `Three`, and `Four`. When you run it, the traceback points to line 3 and reports an unknown name. Inspect line 3 first and make the smallest fix so all four lines run.",
+              "hint": "The first, second, and fourth lines already use quoted text.",
+              "help": {
+                "concept": "A reported line number gives you a starting point. Combine that location with the error type instead of scanning the whole file randomly.",
+                "hint_1": "Compare line 3 with the surrounding valid `print()` calls.",
+                "hint_2": "The word `Three` should be text, not an undefined name."
+              },
+              "starterCode": "print(\"One\")\nprint(\"Two\")\nprint(Three)\nprint(\"Four\")\n",
+              "solutionCode": "print(\"One\")\nprint(\"Two\")\nprint(\"Three\")\nprint(\"Four\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep the working lines and repair line 3 so Three is quoted text."
+                }
+              }
+            },
             "ci-fix-missing-paren": {
               "title": "Fix a missing parenthesis",
               "prompt": "Write Python code that prints `Hello` exactly. The starter code has a syntax problem. Fix it, then click Run and check the output panel.",

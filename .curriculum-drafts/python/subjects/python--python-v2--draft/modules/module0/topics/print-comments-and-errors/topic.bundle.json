@@ -458,9 +458,9 @@
       "kind": "code_input",
       "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-personal-intro",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -499,7 +499,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -517,11 +517,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -551,9 +551,9 @@
       "kind": "code_input",
       "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-two-lines",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-two-lines",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -592,7 +592,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -610,11 +610,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

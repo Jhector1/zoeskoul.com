@@ -457,9 +457,9 @@
       "kind": "code_input",
       "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-and-print",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -504,7 +504,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -522,11 +522,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -562,9 +562,9 @@
       "kind": "code_input",
       "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-number-text",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -614,7 +614,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -632,11 +632,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -677,9 +677,9 @@
       "kind": "code_input",
       "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-three-lines",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -718,7 +718,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -736,11 +736,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

@@ -200,9 +200,9 @@
       "kind": "code_input",
       "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-beginner-message",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -241,7 +241,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -259,11 +259,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -293,9 +293,9 @@
       "kind": "code_input",
       "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-personal-usecase-label",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -334,7 +334,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -352,11 +352,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -386,9 +386,9 @@
       "kind": "code_input",
       "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-print-usecase-automation",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -427,7 +427,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -445,11 +445,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

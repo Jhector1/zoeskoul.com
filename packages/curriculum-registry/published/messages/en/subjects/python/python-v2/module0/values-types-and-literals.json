@@ -3,7 +3,171 @@
     "python-v2": {
       "python-v2-0": {
         "values-types-and-literals": {
+          "label": "Values, Types, and Literals",
+          "summary": "Distinguish strings, integers, and floats, recognize literals, and see how simple expressions produce values.",
+          "cards": {
+            "sketch0": {
+              "title": "What a value is"
+            },
+            "sketch1": {
+              "title": "Literals are values written directly"
+            },
+            "sketch2": {
+              "title": "Expressions produce values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
           "quiz": {
+            "sc-string-literal": {
+              "title": "Recognize a string literal",
+              "prompt": "Which value would Python treat as text?",
+              "hint": "Text written directly in Python must be inside quotes.",
+              "help": {
+                "concept": "A string is text. A string literal is text written directly in code inside matching quotes.",
+                "hint_1": "`7` and `3.5` are numeric literals because they are not quoted.",
+                "hint_2": "Look for the value whose letters are surrounded by quote marks."
+              },
+              "options": {
+                "a": "7",
+                "b": "\"cat\"",
+                "c": "3.5",
+                "d": "cat"
+              }
+            },
+            "sc-float-value": {
+              "title": "Recognize a float literal",
+              "prompt": "Which option is a float value rather than an integer or string?",
+              "hint": "Look for an unquoted number containing a decimal point.",
+              "help": {
+                "concept": "A float represents a number with a decimal component. For example, `3.5` is a float, while `3` is an integer.",
+                "hint_1": "Quotes would make the value a string even if the text looks numeric.",
+                "hint_2": "Choose the decimal number that is written without quotes."
+              },
+              "options": {
+                "a": "\"3.0\"",
+                "b": "3",
+                "c": "3.5",
+                "d": "\"cat\""
+              }
+            },
+            "mc-valid-literals": {
+              "title": "Same characters, different types",
+              "prompt": "Which pairs contain values with different Python types? Choose all correct answers.",
+              "hint": "Quotes can make two values that look similar represent different types.",
+              "help": {
+                "concept": "The characters you see are not enough to determine a value's type. `42` is an integer, while `\"42\"` is a string.",
+                "hint_1": "Compare whether each value is quoted or unquoted.",
+                "hint_2": "A quoted number and the same unquoted number have different types."
+              },
+              "options": {
+                "a": "42 and \"42\"",
+                "b": "3.5 and \"3.5\"",
+                "c": "\"cat\" and \"dog\"",
+                "d": "7 and 8"
+              }
+            },
+            "dr-expression-steps": {
+              "title": "Trace an expression to its output",
+              "prompt": "Arrange what happens when Python runs `print(2 + 3)`.",
+              "hint": "The addition must produce a value before `print()` can display it.",
+              "help": {
+                "concept": "Python evaluates the expression passed to `print()` first. The resulting value is then passed to `print()` and displayed.",
+                "hint_1": "Start with evaluating `2 + 3`.",
+                "hint_2": "After the expression produces `5`, `print()` receives and displays that value."
+              },
+              "tokens": {
+                "t1": "Evaluate `2 + 3`",
+                "t2": "Produce the value `5`",
+                "t3": "Pass the value `5` to `print()`",
+                "t4": "Display `5`"
+              }
+            },
+            "fb-quoted-text": {
+              "title": "Write text as a literal",
+              "prompt": "Complete the code so Python treats `hello` as text and prints it.",
+              "hint": "The letters must be inside quotes in the completed code.",
+              "help": {
+                "concept": "Without quotes, `hello` is treated as a name. With quotes, `\"hello\"` is a string literal.",
+                "hint_1": "The blank replaces the entire value passed to `print(...)`.",
+                "hint_2": "Choose the version of `hello` that includes its quote marks."
+              },
+              "template": "print([blank1])",
+              "choices": [
+                "hello",
+                "\"hello\"",
+                "5",
+                "3.5"
+              ]
+            },
+            "ci-print-literals": {
+              "title": "Print three kinds of values",
+              "prompt": "Write three `print()` statements. Print these values on separate lines in this exact order:\n1. the string `\"Zoe\"`\n2. the integer `7`\n3. the float `2.5`",
+              "hint": "Only the string needs quotes.",
+              "help": {
+                "concept": "Strings, integers, and floats use different literal syntax even though all three can be passed directly to `print()`.",
+                "hint_1": "Write `\"Zoe\"` with quotes so it is text.",
+                "hint_2": "Write `7` and `2.5` without quotes so they remain numbers."
+              },
+              "starterCode": "# Print the string, integer, and float on separate lines.\n",
+              "solutionCode": "print(\"Zoe\")\nprint(7)\nprint(2.5)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Print Zoe as a string, then 7 as an integer, then 2.5 as a float."
+                }
+              }
+            },
+            "ci-print-expression": {
+              "title": "Evaluate and print two expressions",
+              "prompt": "Write two `print()` statements:\n- print the value produced by `2 + 3`\n- print the value produced by `1.5 + 2.5`\n\nUse the expressions themselves inside `print(...)`; do not replace them with the final answers.",
+              "hint": "Python evaluates what is inside `print(...)` before displaying it.",
+              "help": {
+                "concept": "An expression produces a value. `2 + 3` produces an integer, while `1.5 + 2.5` produces a float.",
+                "hint_1": "The first line should contain `print(2 + 3)`.",
+                "hint_2": "Use the decimal expression directly on the second line."
+              },
+              "starterCode": "# Print the result of each expression.\n",
+              "solutionCode": "print(2 + 3)\nprint(1.5 + 2.5)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the two addition expressions themselves inside print calls."
+                }
+              }
+            },
+            "mc-number-literals": {
+              "title": "Recognize number literals",
+              "prompt": "Which options are numeric literals that Python can use directly in arithmetic? Choose all correct answers.",
+              "hint": "Numeric literals are numbers written without quotes.",
+              "help": {
+                "concept": "Integers and floats are numeric values. Quoting a number changes it into a string.",
+                "hint_1": "`7` is numeric, but `\"7\"` is text.",
+                "hint_2": "Choose both the whole number and decimal number that have no quotes."
+              },
+              "options": {
+                "a": "7",
+                "b": "\"7\"",
+                "c": "2.5",
+                "d": "\"two\""
+              }
+            },
+            "ci-fix-string-quotes": {
+              "title": "Fix the missing string quotes",
+              "prompt": "The starter code tries to print the word `hello`, but Python treats `hello` as a name because the quotes are missing. Fix the line so the program prints:\n\n`hello`",
+              "hint": "Turn `hello` into a string literal.",
+              "help": {
+                "concept": "Text written directly in Python must be surrounded by quotes. Without quotes, Python interprets the word as a variable name.",
+                "hint_1": "Keep the `print(...)` call.",
+                "hint_2": "Place matching quotes around `hello`."
+              },
+              "starterCode": "print(hello)\n",
+              "solutionCode": "print(\"hello\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Put hello inside matching quotes so Python treats it as a string literal."
+                }
+              }
+            },
             "ci-read-and-print": {
               "title": "Read text and print it",
               "prompt": "Write Python code that reads one line of input and prints it exactly as it was entered.",

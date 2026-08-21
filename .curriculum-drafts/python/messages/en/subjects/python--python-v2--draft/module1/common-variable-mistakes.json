@@ -214,6 +214,17 @@
                   "message": "Store 12 in age without quotes, then print the variable."
                 }
               }
+            },
+            "ci-read-and-store-input": {
+              "title": "Store input before printing",
+              "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints `city`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "# Read one line into city\n# Then print city"
             }
           },
           "practice": {
@@ -238,23 +249,6 @@
                   "content": "total = 5\ntotal = total + 3\nprint(total)\n"
                 }
               }
-            }
-          }
-        }
-      },
-      "python--python-v2--draft-1": {
-        "common-variable-mistakes": {
-          "quiz": {
-            "ci-read-and-store-input": {
-              "title": "Store input before printing",
-              "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints `city`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "# Read one line into city\n# Then print city"
             }
           }
         }

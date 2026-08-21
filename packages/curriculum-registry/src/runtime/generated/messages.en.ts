@@ -20070,7 +20070,171 @@ const messages: Record<string, any> = {
           }
         },
         "print-comments-and-errors": {
+          "label": "Print, Comments, and First Errors",
+          "summary": "Display text with print(), add comments for readers, and repair simple syntax mistakes.",
+          "cards": {
+            "sketch0": {
+              "title": "Use print() to display output"
+            },
+            "sketch1": {
+              "title": "Comments explain code without producing output"
+            },
+            "sketch2": {
+              "title": "Repair a simple syntax error"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
           "quiz": {
+            "sc-print-purpose": {
+              "title": "What print() does",
+              "prompt": "What happens when Python runs `print(\"Hello\")`?",
+              "hint": "`print()` is used when a program needs to show a value.",
+              "help": {
+                "concept": "`print()` displays the value passed inside its parentheses. The quote marks make `Hello` a string value.",
+                "hint_1": "The line runs normally; it is neither a comment nor an input request.",
+                "hint_2": "Choose the result that would appear in the output panel."
+              },
+              "options": {
+                "a": "Hello appears in the output.",
+                "b": "Hello is stored for later without being shown.",
+                "c": "The line becomes a comment.",
+                "d": "Python waits for the user to type Hello."
+              }
+            },
+            "sc-comment-line": {
+              "title": "Recognize a Python comment",
+              "prompt": "Which line is a Python comment?",
+              "hint": "Python uses `#` to begin a comment.",
+              "help": {
+                "concept": "A comment begins with `#`. Python ignores the comment text when it runs the program.",
+                "hint_1": "A quoted string is still a value, not a comment.",
+                "hint_2": "Look for the line whose first meaningful character is `#`."
+              },
+              "options": {
+                "a": "print(\"Note\")",
+                "b": "# Note for the reader",
+                "c": "\"Note for the reader\"",
+                "d": "// Note for the reader"
+              }
+            },
+            "mc-valid-print-lines": {
+              "title": "Find valid print calls",
+              "prompt": "Which lines are valid Python `print()` calls? Choose all correct answers.",
+              "hint": "Check the parentheses and quote marks in every line.",
+              "help": {
+                "concept": "A basic `print()` call needs the function name, an opening `(`, a valid value such as a quoted string, and a matching closing `)`.",
+                "hint_1": "Python accepts both single and double quotes for strings.",
+                "hint_2": "Reject lines with an unclosed string or an unclosed function call."
+              },
+              "options": {
+                "a": "print(\"Hi\")",
+                "b": "print('Bye')",
+                "c": "print(\"Hi\"",
+                "d": "print(\"Bye)"
+              }
+            },
+            "mc-comments-behavior": {
+              "title": "Understand comment behavior",
+              "prompt": "Which statements about Python comments are true? Choose all correct answers.",
+              "hint": "Think about both Python's behavior and why programmers write comments.",
+              "help": {
+                "concept": "Comments begin with `#`, are ignored during execution, and can document code for people reading it.",
+                "hint_1": "Comments do not appear as normal program output.",
+                "hint_2": "Select the syntax fact, the execution fact, and the reader-facing purpose."
+              },
+              "options": {
+                "a": "A comment can begin with `#`.",
+                "b": "A comment is automatically printed as program output.",
+                "c": "Python ignores comment text when executing the program.",
+                "d": "A comment can explain code to someone reading it."
+              }
+            },
+            "dr-build-valid-print": {
+              "title": "Build a print call",
+              "prompt": "Arrange the tokens to create valid Python code that prints `Hi`.",
+              "hint": "Start with the function name, then open the call.",
+              "help": {
+                "concept": "A function call follows the pattern `name(value)`.",
+                "hint_1": "The string value belongs between the opening and closing parentheses.",
+                "hint_2": "The completed line should read `print(\"Hi\")`."
+              },
+              "tokens": {
+                "t1": "print",
+                "t2": "(",
+                "t3": "\"Hi\"",
+                "t4": ")"
+              }
+            },
+            "ci-print-one-line": {
+              "title": "Print one exact line",
+              "prompt": "Write one line of Python that prints exactly:\n\n`Welcome to Python`",
+              "hint": "Pass a quoted string to `print()`.",
+              "help": {
+                "concept": "`print()` displays the string value passed to it.",
+                "hint_1": "Capitalization and spaces must match the required output.",
+                "hint_2": "Use one `print(...)` call containing the complete message in quotes."
+              },
+              "starterCode": "# Print the required message below.\n",
+              "solutionCode": "print(\"Welcome to Python\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use one print call containing the exact string Welcome to Python."
+                }
+              }
+            },
+            "ci-comment-and-output": {
+              "title": "Add a useful comment without changing output",
+              "prompt": "The starter program already prints `Ready`. Add one useful Python comment on the line above the existing `print()` statement describing what the program is showing.\n\nDo not change the program output. Only `Ready` should appear.",
+              "hint": "Add a line beginning with `#` above the existing print statement.",
+              "help": {
+                "concept": "A comment documents the source code for a reader without becoming normal program output.",
+                "hint_1": "Keep the working `print(\"Ready\")` line.",
+                "hint_2": "Your new first line should start with `#` and explain the purpose."
+              },
+              "starterCode": "print(\"Ready\")\n",
+              "solutionCode": "# Show that the program is ready\nprint(\"Ready\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Add one non-empty comment above the existing print call and keep the output Ready."
+                }
+              }
+            },
+            "ci-fix-missing-paren": {
+              "title": "Repair a missing parenthesis",
+              "prompt": "The starter code has a syntax error because the `print()` call is not closed. Fix the code so it prints exactly:\n\n`Hello`",
+              "hint": "Match the opening `(` with its closing symbol.",
+              "help": {
+                "concept": "Python must be able to match the opening and closing parentheses of a function call before it can run the program.",
+                "hint_1": "Do not change the word `Hello`.",
+                "hint_2": "Add the missing closing parenthesis at the end of the line."
+              },
+              "starterCode": "print(\"Hello\"\n",
+              "solutionCode": "print(\"Hello\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Close the existing print call so it displays Hello."
+                }
+              }
+            },
+            "fb-close-print-call": {
+              "title": "Close the print call",
+              "prompt": "Choose the missing symbol that makes this line valid Python.",
+              "hint": "The opening parenthesis after `print` needs a matching partner.",
+              "help": {
+                "concept": "Parentheses in a function call must be balanced. A missing closing parenthesis prevents Python from reading the statement correctly.",
+                "hint_1": "The string itself is already complete.",
+                "hint_2": "Choose the symbol that closes the `(` after `print`."
+              },
+              "template": "print(\"Hello\"[blank1]",
+              "choices": [
+                ")",
+                "]",
+                "\"",
+                "#"
+              ]
+            },
             "ci-personal-intro": {
               "title": "Build a tiny introduction",
               "prompt": "Write Python code that prints these three lines exactly:\n`About me`\n`Name: Sam`\n`Favorite color: Green`",
@@ -20093,10 +20257,198 @@ const messages: Record<string, any> = {
               },
               "starterCode": "# Print the two required lines"
             }
+          },
+          "practice": {
+            "practice-comment-and-ready": {
+              "title": "Add a comment and print a status",
+              "prompt": "Add a Python comment that explains the output line, then print `Ready to run` exactly.",
+              "hint": "A comment starts with `#` and does not appear in the output.",
+              "help": {
+                "concept": "Comments explain code for readers while `print(...)` sends visible text to the output panel.",
+                "hint_1": "A comment starts with `#` and does not appear in the output.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "# Add a short comment above the print call.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Add a short comment above the print call.\n"
+                }
+              },
+              "solutionCode": "# Show the program status.\nprint(\"Ready to run\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "# Show the program status.\nprint(\"Ready to run\")\n"
+                }
+              }
+            }
           }
         },
         "reading-error-messages": {
+          "label": "Reading Error Messages",
+          "summary": "Use traceback clues—especially the reported line, error type, and message—to decide what to inspect and fix.",
+          "cards": {
+            "sketch0": {
+              "title": "Find the useful clues in a traceback"
+            },
+            "sketch1": {
+              "title": "Use the error type to classify the problem"
+            },
+            "sketch2": {
+              "title": "Use the reported line to narrow the search"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
           "quiz": {
+            "sc-bottom-of-traceback": {
+              "title": "Find the error summary",
+              "prompt": "A traceback contains several lines. Which part usually gives the best first summary of what kind of error occurred?",
+              "hint": "Look for the part that names the error category and describes it.",
+              "help": {
+                "concept": "Near the bottom of a Python traceback, Python usually shows the error type followed by a short message. That tells you what kind of problem Python encountered.",
+                "hint_1": "The reported line helps with location; the final error line helps with classification.",
+                "hint_2": "Choose the part containing a name such as `NameError` or `SyntaxError` and its message."
+              },
+              "options": {
+                "a": "The final error type and message",
+                "b": "Only the filename at the top",
+                "c": "Whichever code line is longest",
+                "d": "The number of spaces in the traceback"
+              }
+            },
+            "sc-nameerror-meaning": {
+              "title": "Interpret NameError",
+              "prompt": "Python ends a traceback with `NameError: name 'score' is not defined`. What should you investigate first?",
+              "hint": "The message says Python tried to use a name it does not know.",
+              "help": {
+                "concept": "`NameError` means Python tried to evaluate a name that has not been defined in the current program state.",
+                "hint_1": "This is different from an unmatched quote or parenthesis.",
+                "hint_2": "Look for where `score` is used and whether it should have been defined earlier or written as literal text."
+              },
+              "options": {
+                "a": "Where `score` is used and whether that name exists",
+                "b": "Whether the reported line has unmatched quotes or parentheses",
+                "c": "Whether an arithmetic operation divided by zero",
+                "d": "Whether a value has an unexpected type for an operation"
+              }
+            },
+            "mc-traceback-clues": {
+              "title": "Use traceback evidence",
+              "prompt": "Which clues can directly help you decide where to look and what kind of problem to investigate? Choose all correct answers.",
+              "hint": "Separate location clues from problem-type clues.",
+              "help": {
+                "concept": "The reported file/line helps locate the problem. The error type and message describe what Python encountered.",
+                "hint_1": "One useful clue tells you where; another tells you what kind.",
+                "hint_2": "Visual preferences such as editor colors do not explain a Python error."
+              },
+              "options": {
+                "a": "The reported line number",
+                "b": "The error type, such as `NameError`",
+                "c": "The error message text",
+                "d": "The total number of unrelated functions elsewhere in the program"
+              }
+            },
+            "mc-syntaxerror-signs": {
+              "title": "Classify two beginner errors",
+              "prompt": "Which situations are best classified as syntax problems rather than unknown-name problems? Choose all correct answers.",
+              "hint": "Syntax problems prevent Python from reading the code structure.",
+              "help": {
+                "concept": "`SyntaxError` concerns invalid Python structure. `NameError` happens after Python can read the code but cannot resolve a name.",
+                "hint_1": "Look for broken punctuation or an incomplete statement.",
+                "hint_2": "An undefined variable name belongs to `NameError`, not `SyntaxError`."
+              },
+              "options": {
+                "a": "A `print(` call with no closing `)`",
+                "b": "A string with no closing quote",
+                "c": "Using `score` when no name `score` exists",
+                "d": "An unfinished `print(\"Hello\"` statement"
+              }
+            },
+            "dr-read-traceback-order": {
+              "title": "Use a traceback systematically",
+              "prompt": "Arrange these debugging actions into a useful beginner workflow.",
+              "hint": "Gather evidence before editing.",
+              "help": {
+                "concept": "A reliable debugging workflow uses the traceback to locate and classify the problem before changing code.",
+                "hint_1": "Read the reported location and error summary before making a fix.",
+                "hint_2": "Run the program again only after making a targeted correction."
+              },
+              "tokens": {
+                "t1": "Find the reported file and line",
+                "t2": "Read the error type and message",
+                "t3": "Inspect that line and nearby code using those clues",
+                "t4": "Make one targeted fix and run again"
+              }
+            },
+            "fb-nameerror-fill": {
+              "title": "Match the error type",
+              "prompt": "The code shape is valid, but `print(word)` uses `word` before that name exists. Choose the likely error type.",
+              "hint": "Python can read the statement; the problem is the unknown name.",
+              "help": {
+                "concept": "When valid Python code refers to an undefined name, Python raises `NameError`.",
+                "hint_1": "Do not choose a syntax category when the punctuation is valid.",
+                "hint_2": "Choose the error category specifically associated with unknown names."
+              },
+              "template": "The likely error type is [blank1].",
+              "choices": [
+                "NameError",
+                "SyntaxError",
+                "TypeError",
+                "ValueError"
+              ]
+            },
+            "ci-use-syntaxerror-clue": {
+              "title": "Use a SyntaxError clue",
+              "prompt": "Run the starter program. The traceback points to line 2 and identifies a syntax problem. Use those clues to repair the incomplete second statement so the program prints exactly:\n\n`Start`\n`Done`",
+              "hint": "Inspect line 2 and compare its punctuation with line 1.",
+              "help": {
+                "concept": "The reported line narrows your search, and `SyntaxError` tells you to inspect the structure of the statement.",
+                "hint_1": "The string on line 2 is already complete.",
+                "hint_2": "The `print(` call on line 2 needs its matching closing parenthesis."
+              },
+              "starterCode": "print(\"Start\")\nprint(\"Done\"\n",
+              "solutionCode": "print(\"Start\")\nprint(\"Done\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Repair only the incomplete second print call so Start and Done both run."
+                }
+              }
+            },
+            "ci-use-nameerror-clue": {
+              "title": "Use a NameError clue",
+              "prompt": "Run the starter program. The traceback ends with a `NameError` for `banana`. The program is meant to print the word `banana` as text. Use the error type and message to make the smallest correction.",
+              "hint": "`NameError` means Python is treating `banana` as a name.",
+              "help": {
+                "concept": "When text is written without quotes, Python interprets it as a name. The `NameError` message tells you that this name does not exist.",
+                "hint_1": "Keep the `print()` call.",
+                "hint_2": "Change the argument so Python reads `banana` as literal text."
+              },
+              "starterCode": "print(banana)\n",
+              "solutionCode": "print(\"banana\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the NameError clue to turn banana into quoted literal text."
+                }
+              }
+            },
+            "ci-use-line-number-clue": {
+              "title": "Use the reported line",
+              "prompt": "This four-line program should print `One`, `Two`, `Three`, and `Four`. When you run it, the traceback points to line 3 and reports an unknown name. Inspect line 3 first and make the smallest fix so all four lines run.",
+              "hint": "The first, second, and fourth lines already use quoted text.",
+              "help": {
+                "concept": "A reported line number gives you a starting point. Combine that location with the error type instead of scanning the whole file randomly.",
+                "hint_1": "Compare line 3 with the surrounding valid `print()` calls.",
+                "hint_2": "The word `Three` should be text, not an undefined name."
+              },
+              "starterCode": "print(\"One\")\nprint(\"Two\")\nprint(Three)\nprint(\"Four\")\n",
+              "solutionCode": "print(\"One\")\nprint(\"Two\")\nprint(\"Three\")\nprint(\"Four\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep the working lines and repair line 3 so Three is quoted text."
+                }
+              }
+            },
             "ci-fix-missing-paren": {
               "title": "Fix a missing parenthesis",
               "prompt": "Write Python code that prints `Hello` exactly. The starter code has a syntax problem. Fix it, then click Run and check the output panel.",
@@ -20367,7 +20719,171 @@ const messages: Record<string, any> = {
           }
         },
         "values-types-and-literals": {
+          "label": "Values, Types, and Literals",
+          "summary": "Distinguish strings, integers, and floats, recognize literals, and see how simple expressions produce values.",
+          "cards": {
+            "sketch0": {
+              "title": "What a value is"
+            },
+            "sketch1": {
+              "title": "Literals are values written directly"
+            },
+            "sketch2": {
+              "title": "Expressions produce values"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
           "quiz": {
+            "sc-string-literal": {
+              "title": "Recognize a string literal",
+              "prompt": "Which value would Python treat as text?",
+              "hint": "Text written directly in Python must be inside quotes.",
+              "help": {
+                "concept": "A string is text. A string literal is text written directly in code inside matching quotes.",
+                "hint_1": "`7` and `3.5` are numeric literals because they are not quoted.",
+                "hint_2": "Look for the value whose letters are surrounded by quote marks."
+              },
+              "options": {
+                "a": "7",
+                "b": "\"cat\"",
+                "c": "3.5",
+                "d": "cat"
+              }
+            },
+            "sc-float-value": {
+              "title": "Recognize a float literal",
+              "prompt": "Which option is a float value rather than an integer or string?",
+              "hint": "Look for an unquoted number containing a decimal point.",
+              "help": {
+                "concept": "A float represents a number with a decimal component. For example, `3.5` is a float, while `3` is an integer.",
+                "hint_1": "Quotes would make the value a string even if the text looks numeric.",
+                "hint_2": "Choose the decimal number that is written without quotes."
+              },
+              "options": {
+                "a": "\"3.0\"",
+                "b": "3",
+                "c": "3.5",
+                "d": "\"cat\""
+              }
+            },
+            "mc-valid-literals": {
+              "title": "Same characters, different types",
+              "prompt": "Which pairs contain values with different Python types? Choose all correct answers.",
+              "hint": "Quotes can make two values that look similar represent different types.",
+              "help": {
+                "concept": "The characters you see are not enough to determine a value's type. `42` is an integer, while `\"42\"` is a string.",
+                "hint_1": "Compare whether each value is quoted or unquoted.",
+                "hint_2": "A quoted number and the same unquoted number have different types."
+              },
+              "options": {
+                "a": "42 and \"42\"",
+                "b": "3.5 and \"3.5\"",
+                "c": "\"cat\" and \"dog\"",
+                "d": "7 and 8"
+              }
+            },
+            "dr-expression-steps": {
+              "title": "Trace an expression to its output",
+              "prompt": "Arrange what happens when Python runs `print(2 + 3)`.",
+              "hint": "The addition must produce a value before `print()` can display it.",
+              "help": {
+                "concept": "Python evaluates the expression passed to `print()` first. The resulting value is then passed to `print()` and displayed.",
+                "hint_1": "Start with evaluating `2 + 3`.",
+                "hint_2": "After the expression produces `5`, `print()` receives and displays that value."
+              },
+              "tokens": {
+                "t1": "Evaluate `2 + 3`",
+                "t2": "Produce the value `5`",
+                "t3": "Pass the value `5` to `print()`",
+                "t4": "Display `5`"
+              }
+            },
+            "fb-quoted-text": {
+              "title": "Write text as a literal",
+              "prompt": "Complete the code so Python treats `hello` as text and prints it.",
+              "hint": "The letters must be inside quotes in the completed code.",
+              "help": {
+                "concept": "Without quotes, `hello` is treated as a name. With quotes, `\"hello\"` is a string literal.",
+                "hint_1": "The blank replaces the entire value passed to `print(...)`.",
+                "hint_2": "Choose the version of `hello` that includes its quote marks."
+              },
+              "template": "print([blank1])",
+              "choices": [
+                "hello",
+                "\"hello\"",
+                "5",
+                "3.5"
+              ]
+            },
+            "ci-print-literals": {
+              "title": "Print three kinds of values",
+              "prompt": "Write three `print()` statements. Print these values on separate lines in this exact order:\n1. the string `\"Zoe\"`\n2. the integer `7`\n3. the float `2.5`",
+              "hint": "Only the string needs quotes.",
+              "help": {
+                "concept": "Strings, integers, and floats use different literal syntax even though all three can be passed directly to `print()`.",
+                "hint_1": "Write `\"Zoe\"` with quotes so it is text.",
+                "hint_2": "Write `7` and `2.5` without quotes so they remain numbers."
+              },
+              "starterCode": "# Print the string, integer, and float on separate lines.\n",
+              "solutionCode": "print(\"Zoe\")\nprint(7)\nprint(2.5)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Print Zoe as a string, then 7 as an integer, then 2.5 as a float."
+                }
+              }
+            },
+            "ci-print-expression": {
+              "title": "Evaluate and print two expressions",
+              "prompt": "Write two `print()` statements:\n- print the value produced by `2 + 3`\n- print the value produced by `1.5 + 2.5`\n\nUse the expressions themselves inside `print(...)`; do not replace them with the final answers.",
+              "hint": "Python evaluates what is inside `print(...)` before displaying it.",
+              "help": {
+                "concept": "An expression produces a value. `2 + 3` produces an integer, while `1.5 + 2.5` produces a float.",
+                "hint_1": "The first line should contain `print(2 + 3)`.",
+                "hint_2": "Use the decimal expression directly on the second line."
+              },
+              "starterCode": "# Print the result of each expression.\n",
+              "solutionCode": "print(2 + 3)\nprint(1.5 + 2.5)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the two addition expressions themselves inside print calls."
+                }
+              }
+            },
+            "mc-number-literals": {
+              "title": "Recognize number literals",
+              "prompt": "Which options are numeric literals that Python can use directly in arithmetic? Choose all correct answers.",
+              "hint": "Numeric literals are numbers written without quotes.",
+              "help": {
+                "concept": "Integers and floats are numeric values. Quoting a number changes it into a string.",
+                "hint_1": "`7` is numeric, but `\"7\"` is text.",
+                "hint_2": "Choose both the whole number and decimal number that have no quotes."
+              },
+              "options": {
+                "a": "7",
+                "b": "\"7\"",
+                "c": "2.5",
+                "d": "\"two\""
+              }
+            },
+            "ci-fix-string-quotes": {
+              "title": "Fix the missing string quotes",
+              "prompt": "The starter code tries to print the word `hello`, but Python treats `hello` as a name because the quotes are missing. Fix the line so the program prints:\n\n`hello`",
+              "hint": "Turn `hello` into a string literal.",
+              "help": {
+                "concept": "Text written directly in Python must be surrounded by quotes. Without quotes, Python interprets the word as a variable name.",
+                "hint_1": "Keep the `print(...)` call.",
+                "hint_2": "Place matching quotes around `hello`."
+              },
+              "starterCode": "print(hello)\n",
+              "solutionCode": "print(\"hello\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Put hello inside matching quotes so Python treats it as a string literal."
+                }
+              }
+            },
             "ci-read-and-print": {
               "title": "Read text and print it",
               "prompt": "Write Python code that reads one line of input and prints it exactly as it was entered.",
@@ -20404,7 +20920,122 @@ const messages: Record<string, any> = {
           }
         },
         "what-python-is": {
+          "label": "What Python Is",
+          "summary": "Understand Python as a general-purpose programming language, see where it is used, and preview how the course builds practical skill.",
+          "cards": {
+            "course-introduction": {
+              "title": "Start here"
+            },
+            "sketch0": {
+              "title": "Python is a programming language"
+            },
+            "sketch1": {
+              "title": "General-purpose means many kinds of work"
+            },
+            "sketch2": {
+              "title": "From first programs to real projects"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
           "quiz": {
+            "sc-python-language": {
+              "title": "Identify what Python is",
+              "prompt": "Which statement best describes Python?",
+              "hint": "Python is something people use to write instructions for computers.",
+              "help": {
+                "concept": "Python is a programming language. People write Python code to describe instructions and computations that a computer can execute.",
+                "hint_1": "Do not confuse the language with a website, operating system, or physical device.",
+                "hint_2": "Choose the answer that identifies Python as a language for writing programs."
+              },
+              "options": {
+                "a": "A programming language used to write programs",
+                "b": "A program that only installs Python packages",
+                "c": "A data-analysis library used inside another language",
+                "d": "A markup format used only to describe webpage structure"
+              }
+            },
+            "sc-general-purpose-meaning": {
+              "title": "Understand general-purpose",
+              "prompt": "What does it mean when Python is called a general-purpose language?",
+              "hint": "The phrase describes the range of problems the language can be used to solve.",
+              "help": {
+                "concept": "A general-purpose language is designed for many kinds of software and problem-solving tasks rather than one narrow job.",
+                "hint_1": "Python is not limited to only data work or only websites.",
+                "hint_2": "Choose the answer about using one language across many kinds of projects."
+              },
+              "options": {
+                "a": "It can be used for many different kinds of programming work",
+                "b": "It is designed for exactly one type of application",
+                "c": "It can only display text",
+                "d": "It only works for school exercises"
+              }
+            },
+            "sc-automation-example": {
+              "title": "Recognize automation",
+              "prompt": "Which task is the best example of using Python for automation?",
+              "hint": "Automation is useful when the same kind of work has to be repeated.",
+              "help": {
+                "concept": "Automation uses code to perform routine or repeated steps that would otherwise require manual work.",
+                "hint_1": "Look for a repetitive computer-based task.",
+                "hint_2": "The automated task should be something software can perform repeatedly."
+              },
+              "options": {
+                "a": "Rename hundreds of files using a consistent rule",
+                "b": "Rename one file manually one time",
+                "c": "Open each of hundreds of files and rename them manually",
+                "d": "Write the renaming rule down without executing it"
+              }
+            },
+            "mc-common-uses": {
+              "title": "Recognize common Python fields",
+              "prompt": "Which are common areas where Python is used? Choose all correct answers.",
+              "hint": "Think about software, data, automation, and intelligent systems.",
+              "help": {
+                "concept": "Python is used in areas including automation, web development, data analysis, and AI or machine learning.",
+                "hint_1": "Choose areas where software can process information or perform computations.",
+                "hint_2": "A manual physical chore is not itself a programming field."
+              },
+              "options": {
+                "a": "Automation",
+                "b": "Web applications",
+                "c": "Data analysis and AI",
+                "d": "A document file format such as PDF"
+              }
+            },
+            "mc-beginner-friendly-reasons": {
+              "title": "Why Python is a common first language",
+              "prompt": "Which qualities can make Python approachable for beginners? Choose all correct answers.",
+              "hint": "Think about reading code and getting feedback from small programs.",
+              "help": {
+                "concept": "Python is often chosen as a first language because many basic programs are readable and learners can begin experimenting with short pieces of code.",
+                "hint_1": "Look for qualities that reduce the barrier to starting.",
+                "hint_2": "Needing complex setup for every tiny program would not be a beginner advantage."
+              },
+              "options": {
+                "a": "Many basic Python statements are relatively readable",
+                "b": "Learners can start experimenting with small programs",
+                "c": "Every tiny program requires many files and packages",
+                "d": "Beginners must learn advanced AI before writing basic code"
+              }
+            },
+            "dr-course-progression": {
+              "title": "See how the course builds",
+              "prompt": "Arrange these course stages from earliest foundation to later application.",
+              "hint": "Start with running small programs and end with combining skills in projects.",
+              "help": {
+                "concept": "The course builds in layers: first you run and read small programs, then work with values and text, then add decisions and repetition, and finally combine ideas in projects.",
+                "hint_1": "Foundational interaction with code comes before larger programming structures.",
+                "hint_2": "Projects belong at the end because they combine skills learned earlier."
+              },
+              "tokens": {
+                "t1": "Run and read small Python programs",
+                "t2": "Work with values and text",
+                "t3": "Add decisions and repetition",
+                "t4": "Combine skills in projects"
+              }
+            },
             "ci-beginner-message": {
               "title": "Print a beginner-friendly message",
               "prompt": "Write Python code that prints exactly these two lines:\nPython is beginner-friendly.\nIt is used in many fields.",
@@ -20443,7 +21074,218 @@ const messages: Record<string, any> = {
       },
       "python-v2-1": {
         "common-variable-mistakes": {
+          "label": "Common Variable Mistakes",
+          "summary": "Recognize and repair common variable mistakes: using a name too early, quoting a variable name by accident, and changing its spelling.",
+          "cards": {
+            "sketch0": {
+              "title": "Using a variable before it exists"
+            },
+            "sketch1": {
+              "title": "Strings by accident"
+            },
+            "sketch2": {
+              "title": "Clear names and exact spelling"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
           "quiz": {
+            "sc-undefined-name": {
+              "title": "Find the use-before-assignment mistake",
+              "prompt": "Which program tries to use `score` before `score` has been assigned a value?",
+              "hint": "Read each program from top to bottom and find the first use of `score`.",
+              "help": {
+                "concept": "A name must be assigned before a line tries to read its stored value.",
+                "hint_1": "An assignment such as `score = 5` creates the value for later use.",
+                "hint_2": "Look for a `print(score)` that appears before any assignment to `score`."
+              },
+              "options": {
+                "a": "score = 5\nprint(score)",
+                "b": "print(score)\nscore = 5",
+                "c": "score = 5\nscore = 6\nprint(score)"
+              }
+            },
+            "sc-quotes-vs-variable": {
+              "title": "Quotes change the meaning",
+              "prompt": "If `name = \"Ava\"`, what does `print(\"name\")` show?",
+              "hint": "Quotes make `\"name\"` literal text instead of a variable lookup.",
+              "help": {
+                "concept": "`name` asks Python for the stored value; `\"name\"` is the literal string containing those four letters.",
+                "hint_1": "The variable contains `Ava`, but the print call does not reference the variable.",
+                "hint_2": "Read exactly what appears between the quotes."
+              },
+              "options": {
+                "a": "Ava",
+                "b": "name",
+                "c": "an error",
+                "d": "nothing"
+              }
+            },
+            "mc-valid-variable-uses": {
+              "title": "Choose all valid variable uses",
+              "prompt": "Which code snippets use variables correctly? Choose all that apply.",
+              "hint": "For each snippet, check that the exact variable name is assigned before it is printed.",
+              "help": {
+                "concept": "Correct variable use requires both execution order and exact name matching.",
+                "hint_1": "Reject code that prints a name before assigning it.",
+                "hint_2": "Reject code whose printed name is spelled differently from the assigned name."
+              },
+              "options": {
+                "a": "city = \"Rome\"\nprint(city)",
+                "b": "print(city)\ncity = \"Rome\"",
+                "c": "user_name = \"Kai\"\nprint(user_name)",
+                "d": "user_name = \"Kai\"\nprint(username)"
+              }
+            },
+            "mc-confusing-name-mistakes": {
+              "title": "Spot the likely mistakes",
+              "prompt": "Which examples show common variable mistakes? Choose all that apply.",
+              "hint": "Look for quoted variable names and mismatched spellings.",
+              "help": {
+                "concept": "Two common mistakes are printing the name as literal text and referring to a different spelling than the one assigned.",
+                "hint_1": "`print(\"name\")` does not read the variable `name`.",
+                "hint_2": "`first_name` and `firstname` are different identifiers."
+              },
+              "options": {
+                "a": "name = \"Lia\"\nprint(\"name\")",
+                "b": "age = 12\nprint(age)",
+                "c": "first_name = \"Noah\"\nprint(firstname)",
+                "d": "color = \"blue\"\nprint(color)"
+              }
+            },
+            "dr-order-assignment-then-use": {
+              "title": "Repair the execution order",
+              "prompt": "Arrange the ideas so `score` is created before its value is printed.",
+              "hint": "Choose the name, assign its value, then use the variable.",
+              "help": {
+                "concept": "A variable must be established before later code can read it.",
+                "hint_1": "The assignment belongs before the print step.",
+                "hint_2": "The final step should use the stored value."
+              },
+              "tokens": {
+                "t1": "Choose the variable name `score`",
+                "t2": "Assign `10` to `score`",
+                "t3": "Print `score`"
+              }
+            },
+            "dr-fix-quoted-name-thinking": {
+              "title": "Explain the quoted-name mistake",
+              "prompt": "Arrange the ideas to explain what Python does with `print(\"name\")`.",
+              "hint": "Start with what quotes mean, then follow that meaning to the output.",
+              "help": {
+                "concept": "Quotes change a possible variable name into a string literal.",
+                "hint_1": "First identify the value created by the quotes.",
+                "hint_2": "Then connect that literal value to what `print()` displays."
+              },
+              "tokens": {
+                "t1": "Quotes make `\"name\"` a string literal",
+                "t2": "Python treats it as text, not a variable lookup",
+                "t3": "`print(\"name\")` shows the letters name"
+              }
+            },
+            "fb-variable-name": {
+              "title": "Use a variable name, not text",
+              "prompt": "Choose the correct item for the blank.\n\n```python\n___ = 10\n```",
+              "hint": "The left side of an assignment needs a variable name.",
+              "help": {
+                "concept": "A basic assignment stores the right-side value under a valid name on the left.",
+                "hint_1": "Do not put quotation marks around the variable name.",
+                "hint_2": "Choose the identifier that describes the stored value."
+              },
+              "template": "[blank1] = 10",
+              "choices": [
+                "age",
+                "print",
+                "\"age\"",
+                "10"
+              ]
+            },
+            "fb-print-variable-value": {
+              "title": "Print the stored value",
+              "prompt": "Choose the correct item for the blank so the stored value is printed.\n\n```python\nname = \"Ava\"\nprint(___)\n```",
+              "hint": "Use the variable itself, without quotes.",
+              "help": {
+                "concept": "A bare variable name retrieves its stored value; quoted text prints the literal characters.",
+                "hint_1": "The value is already stored in `name`.",
+                "hint_2": "Putting quotes around `name` would print the word instead of `Ava`."
+              },
+              "template": "print([blank1])",
+              "choices": [
+                "name",
+                "\"name\"",
+                "print",
+                "="
+              ]
+            },
+            "ci-fix-undefined-name": {
+              "title": "Fix a variable used too early",
+              "prompt": "The starter program tries to print `count` before `count` exists. Repair the program so it assigns `7` to `count` first and then prints `count`.",
+              "hint": "Move the assignment before the line that reads the variable.",
+              "help": {
+                "concept": "Python must execute the assignment before a later statement can read the variable.",
+                "hint_1": "The final program should have two lines.",
+                "hint_2": "The assignment belongs above `print(count)`."
+              },
+              "starterCode": "print(count)\ncount = 7\n",
+              "solutionCode": "count = 7\nprint(count)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign 7 to count before print(count) uses the variable."
+                }
+              }
+            },
+            "ci-print-variable-not-text": {
+              "title": "Remove accidental quotes around a variable",
+              "prompt": "The starter stores `\"Mila\"` in `name`, but it prints the word `name` instead of the stored value. Fix only the print line so the output is `Mila`.",
+              "hint": "The assignment is correct. The mistake is the quotes inside `print()`.",
+              "help": {
+                "concept": "Quoted `\"name\"` is literal text; unquoted `name` retrieves the variable's value.",
+                "hint_1": "Keep `name = \"Mila\"` unchanged.",
+                "hint_2": "The print call should use the variable name without quotes."
+              },
+              "starterCode": "name = \"Mila\"\nprint(\"name\")\n",
+              "solutionCode": "name = \"Mila\"\nprint(name)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Keep the assignment and print the variable name without quotes."
+                }
+              }
+            },
+            "ci-match-variable-spelling": {
+              "title": "Fix a misspelled variable use",
+              "prompt": "The starter creates `favorite_color` but tries to print a different spelling. Fix the print line so it uses the exact variable that was assigned.",
+              "hint": "Compare the spelling on the assignment line with the spelling inside `print()`.",
+              "help": {
+                "concept": "Python requires an exact identifier match when code refers to a variable.",
+                "hint_1": "Keep the assignment line unchanged.",
+                "hint_2": "Use `favorite_color` inside `print()` with the underscore included."
+              },
+              "starterCode": "favorite_color = \"green\"\nprint(favoriteColor)\n",
+              "solutionCode": "favorite_color = \"green\"\nprint(favorite_color)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use favorite_color with the exact same spelling in the assignment and print call."
+                }
+              }
+            },
+            "ci-fix-accidental-string-number": {
+              "title": "Turn number-looking text into a number",
+              "prompt": "The starter stores `\"12\"` in `age`, which makes the value a string. Fix the assignment so `age` stores the number `12` instead, then keep printing `age`.",
+              "hint": "The digits are correct; the quotes are what make the value text.",
+              "help": {
+                "concept": "Removing quotes changes the literal from the string `\"12\"` to the integer `12`.",
+                "hint_1": "Keep the variable name `age`.",
+                "hint_2": "The corrected assignment should use `12` without quotation marks."
+              },
+              "starterCode": "age = \"12\"\nprint(age)\n",
+              "solutionCode": "age = 12\nprint(age)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Store 12 in age without quotes, then print the variable."
+                }
+              }
+            },
             "ci-read-and-store-input": {
               "title": "Store input before printing",
               "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints `city`.",
@@ -20454,6 +21296,30 @@ const messages: Record<string, any> = {
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "starterCode": "# Read one line into city\n# Then print city"
+            }
+          },
+          "practice": {
+            "practice-fix-variable-case": {
+              "title": "Fix inconsistent variable spelling",
+              "prompt": "The starter intends to add `3` to `total`, but it creates a different variable named `Total`. Fix the variable name so the program updates `total` and prints `8`.",
+              "hint": "Python treats `total` and `Total` as different names.",
+              "help": {
+                "concept": "Variable names are case-sensitive, so changing capitalization accidentally creates or refers to a different name.",
+                "hint_1": "Python treats `total` and `Total` as different names.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "total = 5\nTotal = total + 3\nprint(total)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "total = 5\nTotal = total + 3\nprint(total)\n"
+                }
+              },
+              "solutionCode": "total = 5\ntotal = total + 3\nprint(total)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "total = 5\ntotal = total + 3\nprint(total)\n"
+                }
+              }
             }
           }
         },
@@ -21132,7 +21998,219 @@ const messages: Record<string, any> = {
           }
         },
         "naming-and-assigning-variables": {
+          "label": "Naming and Assigning Variables",
+          "summary": "Create variables with clear names, store values with `=`, and update stored values by assigning to the same name again.",
+          "cards": {
+            "sketch0": {
+              "title": "What a variable does"
+            },
+            "sketch1": {
+              "title": "Choose clear variable names"
+            },
+            "sketch2": {
+              "title": "Reassignment updates a variable"
+            },
+            "quiz": {
+              "title": "Quiz"
+            }
+          },
           "quiz": {
+            "q1": {
+              "title": "What assignment does",
+              "prompt": "What does `score = 10` do in Python?",
+              "hint": "Look at what `=` means when creating or updating a variable.",
+              "help": {
+                "concept": "Assignment stores a value in a variable name so the program can use that value later.",
+                "hint_1": "The name is on the left and the value is on the right.",
+                "hint_2": "This line does not print anything by itself; it stores `10` under a name."
+              },
+              "options": {
+                "a": "It stores the value 10 in the variable `score`.",
+                "b": "It prints 10 to the output panel.",
+                "c": "It compares `score` and 10 to see if they are equal.",
+                "d": "It turns `score` into a string."
+              }
+            },
+            "q2": {
+              "title": "Best variable name",
+              "prompt": "Which variable name is the clearest choice for storing a person's age?",
+              "hint": "Pick the name that tells you what the value means.",
+              "help": {
+                "concept": "Clear variable names make code easier to read because the name describes the stored value.",
+                "hint_1": "A descriptive word is better than a single letter when both are allowed.",
+                "hint_2": "Choose the option that directly says what number is being stored."
+              },
+              "options": {
+                "a": "x",
+                "b": "n",
+                "c": "age",
+                "d": "thing"
+              }
+            },
+            "q3": {
+              "title": "Valid Python variable names",
+              "prompt": "Choose all names that are valid Python variable names.",
+              "hint": "Check for spaces and whether the name starts with a number.",
+              "help": {
+                "concept": "Python variable names can use letters, numbers, and underscores, but they cannot contain spaces or begin with a digit.",
+                "hint_1": "An underscore is allowed in a name.",
+                "hint_2": "Reject any option with a space or one that starts with `2`."
+              },
+              "options": {
+                "a": "user_name",
+                "b": "2score",
+                "c": "favorite color",
+                "d": "level1"
+              }
+            },
+            "q4": {
+              "title": "Effects of reassignment",
+              "prompt": "Choose all true statements about this code:\n\n```python\npoints = 5\npoints = 8\n```",
+              "hint": "Think about what value the variable has after the second assignment.",
+              "help": {
+                "concept": "Reassignment replaces the previous value stored in the same variable name.",
+                "hint_1": "After the second line, the variable keeps the newer value, not both values.",
+                "hint_2": "One statement should mention replacement, and another should mention the final stored value."
+              },
+              "options": {
+                "a": "`points` ends with the value 8.",
+                "b": "The value 5 is replaced by the new assignment.",
+                "c": "`points` stores both 5 and 8 at the same time.",
+                "d": "The second line prints 8 automatically."
+              }
+            },
+            "q5": {
+              "title": "Assign before using a variable",
+              "prompt": "Put the two lines in the order that stores the name first and then prints the stored value.",
+              "hint": "A variable must receive a value before this program can print it.",
+              "help": {
+                "concept": "Python executes from top to bottom, so the assignment must happen before `print(name)` uses the variable.",
+                "hint_1": "Find the line that creates `name`.",
+                "hint_2": "Place `print(name)` after the assignment."
+              },
+              "tokens": {
+                "t1": "print(name)",
+                "t2": "name = \"Lina\""
+              }
+            },
+            "q6": {
+              "title": "Trace reassignment in order",
+              "prompt": "Arrange the four lines so the program prints `1` first and `2` second.",
+              "hint": "Print the first stored value before replacing it, then print the new value.",
+              "help": {
+                "concept": "To observe both values, use the variable once before reassignment and once after reassignment.",
+                "hint_1": "Start with `count = 1`, then print it.",
+                "hint_2": "Only after the first print should `count = 2` run."
+              },
+              "tokens": {
+                "t1": "count = 1",
+                "t2": "print(count)",
+                "t3": "count = 2",
+                "t4": "print(count)"
+              }
+            },
+            "q7": {
+              "title": "Choose a clear variable name",
+              "prompt": "Choose the best value for the blank so the assignment clearly stores a person's age.\n\n```python\n___ = 14\n```",
+              "hint": "Choose a valid name that describes what the value `14` means.",
+              "help": {
+                "concept": "A descriptive variable name communicates the meaning of its value.",
+                "hint_1": "`print` is used for output, not as the intended name here.",
+                "hint_2": "The name should describe a person's age."
+              },
+              "template": "[blank1] = 16",
+              "choices": [
+                "print",
+                "age",
+                "hello world",
+                "=="
+              ]
+            },
+            "q8": {
+              "title": "Complete a reassignment",
+              "prompt": "Choose the value that updates `score` from `5` to `7`.\n\n```python\nscore = 5\nscore = ___\n```",
+              "hint": "The right side of `=` is the new value that will be stored.",
+              "help": {
+                "concept": "Reassignment uses the same variable name on the left and a new value on the right.",
+                "hint_1": "The target value is the number `7`.",
+                "hint_2": "Do not quote the number."
+              },
+              "template": "score = [blank1]",
+              "choices": [
+                "score",
+                "7",
+                "print",
+                "\"score\""
+              ]
+            },
+            "q9": {
+              "title": "Assign a number, then use the variable",
+              "prompt": "Store the number `12` in a variable named `age`, then print `age`.\n\nDo not print `12` directly—the output should come from the variable.",
+              "hint": "Assign `12` to `age` first, then pass `age` to `print()`.",
+              "help": {
+                "concept": "The point is to store a value under a name and then use that name to retrieve the value.",
+                "hint_1": "Your first line should assign to `age`.",
+                "hint_2": "Your second line should print the variable, not the literal `12`."
+              },
+              "starterCode": "# Store 12 in age\n# Print the variable\n",
+              "solutionCode": "age = 12\nprint(age)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign 12 to age, then print the variable age rather than printing 12 directly."
+                }
+              }
+            },
+            "q10": {
+              "title": "Use a descriptive name for text",
+              "prompt": "Store the string `\"Maya\"` in a variable named `student_name`, then print `student_name`.",
+              "hint": "Use the exact descriptive name `student_name` for the assignment and print.",
+              "help": {
+                "concept": "A descriptive variable name should communicate what the stored value represents.",
+                "hint_1": "Assign the quoted text `\"Maya\"` to `student_name`.",
+                "hint_2": "Print `student_name`, not the literal text directly."
+              },
+              "starterCode": "# Store \"Maya\" in student_name\n# Print the variable\n",
+              "solutionCode": "student_name = \"Maya\"\nprint(student_name)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign Maya to student_name, then print the variable student_name."
+                }
+              }
+            },
+            "q11": {
+              "title": "Replace a stored value",
+              "prompt": "Create `level` with the value `3`, reassign the same variable to `4`, then print `level`.\n\nOnly the final value should be printed.",
+              "hint": "Use two assignments to `level`, followed by one print call.",
+              "help": {
+                "concept": "Reassignment replaces the value associated with the same variable name.",
+                "hint_1": "First write `level = 3`, then `level = 4`.",
+                "hint_2": "Print `level` after the second assignment."
+              },
+              "starterCode": "# Create level\n# Reassign level\n# Print the final value\n",
+              "solutionCode": "level = 3\nlevel = 4\nprint(level)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign 3 to level, reassign 4 to the same variable, then print level."
+                }
+              }
+            },
+            "q13": {
+              "title": "Observe a value before and after reassignment",
+              "prompt": "Write a program that:\n\n1. stores the string `\"red\"` in a variable named `color`\n2. prints `color`\n3. changes `color` to `\"green\"`\n4. prints `color` again\n\nThe output should show `red` first and `green` second.",
+              "hint": "Print the variable once before and once after the second assignment.",
+              "help": {
+                "concept": "Printing before and after reassignment lets you observe the old stored value and then the new one.",
+                "hint_1": "The first assignment should be `color = \"red\"`.",
+                "hint_2": "Reassign `color` to `\"green\"` between the two print calls."
+              },
+              "starterCode": "# Store \"red\" in color\n# Print color\n# Change color to \"green\"\n# Print color again\n",
+              "solutionCode": "color = \"red\"\nprint(color)\ncolor = \"green\"\nprint(color)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Assign red to color, print it, reassign green to the same variable, and print it again."
+                }
+              }
+            },
             "q12": {
               "title": "Read input into a variable",
               "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints it.\n\nExample: if the input is `Tokyo`, the output should be `Tokyo`.\n\nType code in the code editor, click Run, and check the output panel.",
@@ -21143,6 +22221,30 @@ const messages: Record<string, any> = {
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
               "starterCode": "# Read one line into city\n# Print city"
+            }
+          },
+          "practice": {
+            "practice-update-score-from-bonus": {
+              "title": "Update a stored score",
+              "prompt": "Store `12` in `score` and `5` in `bonus`. Update `score` by adding `bonus`, then print the updated `score`.",
+              "hint": "Reuse the same `score` name on the left side of the second assignment.",
+              "help": {
+                "concept": "Reassignment replaces the value stored under an existing variable name using a new expression.",
+                "hint_1": "Reuse the same `score` name on the left side of the second assignment.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "# Create score and bonus, update score, then print it.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Create score and bonus, update score, then print it.\n"
+                }
+              },
+              "solutionCode": "score = 12\nbonus = 5\nscore = score + bonus\nprint(score)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "score = 12\nbonus = 5\nscore = score + bonus\nprint(score)\n"
+                }
+              }
             }
           }
         },

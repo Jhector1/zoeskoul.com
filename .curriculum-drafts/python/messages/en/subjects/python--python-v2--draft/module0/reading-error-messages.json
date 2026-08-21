@@ -167,13 +167,7 @@
                   "message": "Keep the working lines and repair line 3 so Three is quoted text."
                 }
               }
-            }
-          }
-        }
-      },
-      "python--python-v2--draft-0": {
-        "reading-error-messages": {
-          "quiz": {
+            },
             "ci-fix-missing-paren": {
               "title": "Fix a missing parenthesis",
               "prompt": "Write Python code that prints `Hello` exactly. The starter code has a syntax problem. Fix it, then click Run and check the output panel.",

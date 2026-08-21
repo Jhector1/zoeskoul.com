@@ -567,9 +567,9 @@
       "kind": "code_input",
       "purpose": "practice",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-1.naming-and-assigning-variables.quiz.q12",
+      "messageBase": "topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q12",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-1.naming-and-assigning-variables.quiz.q12.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -614,7 +614,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-1.naming-and-assigning-variables.quiz.q12.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -632,11 +632,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-1.naming-and-assigning-variables.quiz.q12.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-1.naming-and-assigning-variables.quiz.q12.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

@@ -167,13 +167,7 @@
                   "message": "Put hello inside matching quotes so Python treats it as a string literal."
                 }
               }
-            }
-          }
-        }
-      },
-      "python--python-v2--draft-0": {
-        "values-types-and-literals": {
-          "quiz": {
+            },
             "ci-read-and-print": {
               "title": "Read text and print it",
               "prompt": "Write Python code that reads one line of input and prints it exactly as it was entered.",
