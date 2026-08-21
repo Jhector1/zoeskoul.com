@@ -146,6 +146,60 @@
                   "message": "Use `stops[-1]` to read the final stop instead of printing `stop4` directly."
                 }
               }
+            },
+            "ci-build-and-show-list": {
+              "title": "Build a list from input",
+              "prompt": "A paint shelf needs a quick inventory. Collect the three input colors into one list and print the finished list.\n\nFor example, if the inputs are `red`, `blue`, and `green`, your program should print:\n`['red', 'blue', 'green']`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+              "solutionCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Create a list with color1, color2, and color3 before printing it."
+                }
+              }
+            },
+            "ci-print-first-last": {
+              "title": "Print the first and last list items",
+              "prompt": "Three fruit labels come in one at a time. Store the inputs in a list, then print the first fruit and the last fruit on separate lines.\n\nFor example, if the inputs are `apple`, `banana`, and `cherry`, your program should print:\n`apple`\n`cherry`.",
+              "hint": "Read the task \"Print the first and last list items\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+              "solutionCode": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use index 0 to read the first item instead of printing the input directly."
+                },
+                "1": {
+                  "message": "Use an index to read the last item from the list."
+                }
+              }
+            },
+            "ci-print-second-number": {
+              "title": "Print the second number",
+              "prompt": "A scoreboard sends three numbers in order. Put them into a list, then print the second item from that list.\n\nFor example, if the inputs are `4`, `9`, and `2`, your program should print:\n`9`.",
+              "hint": "The second item in a list is at index 1.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use index 1 to read the second item from the list."
+                }
+              }
             }
           },
           "tryIt": {

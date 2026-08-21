@@ -180,6 +180,64 @@
               "sourceCheckMessages": {
                 "orderItemRelationships": "Link `order_id` to `orders.id` and `product_id` to `products.id`."
               }
+            },
+            "practice-create-team-member-foreign-key": {
+              "title": "Practice: Connect Team Members to Teams",
+              "prompt": "Create a `teams` table and a `team_members` table. `team_members.team_id` must reference `teams.id`. Verify the foreign-key definition.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies FOREIGN KEY and REFERENCES in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE teams (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE team_members (\n    id INTEGER PRIMARY KEY,\n    member_name TEXT NOT NULL,\n    team_id INTEGER,\n    FOREIGN KEY (team_id) REFERENCES teams(id)\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE teams (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE team_members (\n    id INTEGER PRIMARY KEY,\n    member_name TEXT NOT NULL,\n    team_id INTEGER,\n    FOREIGN KEY (team_id) REFERENCES teams(id)\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA foreign_key_list(team_members);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE teams (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE team_members (\n    id INTEGER PRIMARY KEY,\n    member_name TEXT NOT NULL,\n    team_id INTEGER,\n    FOREIGN KEY (team_id) REFERENCES teams(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(team_members);"
+            },
+            "practice-create-payment-order-foreign-key": {
+              "title": "Practice: Connect Payments to Orders",
+              "prompt": "Create an `orders` table and a `payments` table. `payments.order_id` must reference `orders.id`. Verify the foreign-key definition.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies FOREIGN KEY and REFERENCES in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);\n\nCREATE TABLE payments (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER NOT NULL,\n    amount REAL NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id)\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);\n\nCREATE TABLE payments (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER NOT NULL,\n    amount REAL NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id)\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA foreign_key_list(payments);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);\n\nCREATE TABLE payments (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER NOT NULL,\n    amount REAL NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(payments);"
             }
           }
         }

@@ -222,7 +222,7 @@
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -302,7 +302,7 @@
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -382,7 +382,7 @@
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -462,7 +462,7 @@
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -542,7 +542,7 @@
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -622,7 +622,7 @@
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",

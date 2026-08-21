@@ -152,6 +152,20 @@
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
+          },
+          "practice": {
+            "practice-cheapest-two-products": {
+              "title": "Practice: Find the Two Cheapest Products",
+              "prompt": "Return name and price for the two cheapest products. Sort by price ascending, then name ascending, and limit the result to 2 rows.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Ranked Results with LIMIT in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC, name ASC\nLIMIT 2;"
+            }
           }
         }
       },

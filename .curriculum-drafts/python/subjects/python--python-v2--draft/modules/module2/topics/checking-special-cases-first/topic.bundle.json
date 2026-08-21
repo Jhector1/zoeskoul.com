@@ -249,7 +249,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -344,7 +344,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -439,7 +439,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -529,7 +529,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -619,7 +619,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -705,6 +705,96 @@
           "normalizeWhitespace": false
         }
       ]
+    },
+    {
+      "id": "practice-missing-score-first",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-1\n",
+            "stdout": "Missing\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "95\n",
+            "stdout": "Excellent\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "72\n",
+            "stdout": "Recorded\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

@@ -245,6 +245,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-truthy-provided-message": {
+              "title": "Use truthiness to detect provided text",
+              "prompt": "Read one line and remove surrounding whitespace. Use the cleaned string directly in an `if` condition. Print `provided` when it is non-empty and `empty` otherwise.",
+              "hint": "You do not need to compare the string with `\"\"`; a string can be used directly as the condition.",
+              "help": {
+                "concept": "Empty strings are falsy and non-empty strings are truthy, so a cleaned string can drive a branch directly.",
+                "hint_1": "You do not need to compare the string with `\"\"`; a string can be used directly as the condition.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "text = input().strip()\n\n# Use text directly as the condition.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\n\n# Use text directly as the condition.\n"
+                }
+              },
+              "solutionCode": "text = input().strip()\nif text:\n    print(\"provided\")\nelse:\n    print(\"empty\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\nif text:\n    print(\"provided\")\nelse:\n    print(\"empty\")\n"
+                }
+              }
+            }
           }
         }
       }

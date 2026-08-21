@@ -172,6 +172,64 @@
                 "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;"
+            },
+            "practice-preview-inactive-test-targets": {
+              "title": "Practice: Preview Inactive Test Targets",
+              "prompt": "Before any mutation, return the id, name, status, and is_test values for rows that are both inactive and test items. Sort by id.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Previewing Mutation Targets in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- No mutation is required for this preview-only practice.\n",
+              "solutionCode": "",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- No mutation is required for this preview-only practice.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": ""
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, status, is_test\nFROM inventory_items\nWHERE status = 'inactive' AND is_test = 1\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\n\n\n-- file: query.sql\nSELECT id, name, status, is_test\nFROM inventory_items\nWHERE status = 'inactive' AND is_test = 1\nORDER BY id;"
+            },
+            "practice-preview-accessory-price-targets": {
+              "title": "Practice: Preview Accessory Price Targets",
+              "prompt": "Preview the rows that would be affected by a price update limited to non-test `Accessories` items. Return id, name, category, price, and is_test, sorted by id.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Previewing Mutation Targets in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- No mutation is required for this preview-only practice.\n",
+              "solutionCode": "",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- No mutation is required for this preview-only practice.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": ""
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, category, price, is_test\nFROM inventory_items\nWHERE category = 'Accessories' AND is_test = 0\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\n\n\n-- file: query.sql\nSELECT id, name, category, price, is_test\nFROM inventory_items\nWHERE category = 'Accessories' AND is_test = 0\nORDER BY id;"
             }
           }
         }

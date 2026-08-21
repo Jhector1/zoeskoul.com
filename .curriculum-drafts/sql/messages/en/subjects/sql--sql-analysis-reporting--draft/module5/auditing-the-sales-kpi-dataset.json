@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    MIN(order_date) AS first_order_date,\n    MAX(order_date) AS last_order_date,\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity,\n    ROUND(MIN(unit_price), 2) AS minimum_unit_price,\n    ROUND(MAX(unit_price), 2) AS maximum_unit_price\nFROM sales_reporting;"
+            },
+            "practice-retained-auditing-the-sales-kpi-dataset-sketch1": {
+              "title": "Practice: Identify Missing Customer Ratings",
+              "prompt": "Write a query to find all records in the `sales_reporting` table where the `customer_rating` is missing. This will help you identify incomplete data.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Auditing the Sales Reporting Table in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT * FROM sales_reporting WHERE customer_rating IS NULL;"
+            },
+            "practice-retained-auditing-the-sales-kpi-dataset-sketch2": {
+              "title": "Practice: Calculate Total Sales per Region",
+              "prompt": "Write a query to calculate the total sales for each region in the `sales_reporting` table. This will help you understand regional sales performance.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Auditing the Sales Reporting Table in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region;"
             }
           },
           "tryIt": {

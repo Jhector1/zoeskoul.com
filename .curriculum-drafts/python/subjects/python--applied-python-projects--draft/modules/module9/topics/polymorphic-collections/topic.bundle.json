@@ -454,6 +454,435 @@
         "kind": "fill_blank_choice",
         "value": "label"
       }
+    },
+    {
+      "id": "project-polymorphic-collections-step4",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/magazine.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterFiles.models_magazine_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/magazine.py",
+          "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Magazine: {self.title}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/magazine.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterFiles.models_magazine_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/magazine.py",
+            "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Magazine: {self.title}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "solutionCode": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/magazine.py",
+            "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Magazine: {self.title}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: Refactoring\nVideo: Git Basics\nMagazine: Science Weekly\n",
+            "match": "exact"
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
+    },
+    {
+      "id": "project-polymorphic-collections-step5",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book_rental.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterFiles.models_book_rental_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie_rental.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterFiles.models_movie_rental_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book_rental.py",
+          "content": "class BookRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Book rental: {self.title} ({self.days} days)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie_rental.py",
+          "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Movie rental: {self.title} ({self.days} days)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book_rental.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterFiles.models_book_rental_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie_rental.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterFiles.models_movie_rental_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book_rental.py",
+            "content": "class BookRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Book rental: {self.title} ({self.days} days)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie_rental.py",
+            "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Movie rental: {self.title} ({self.days} days)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "solutionCode": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book_rental.py",
+            "content": "class BookRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Book rental: {self.title} ({self.days} days)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie_rental.py",
+            "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Movie rental: {self.title} ({self.days} days)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book rental: Refactoring (7 days)\nMovie rental: Design Talk (3 days)\n",
+            "match": "exact"
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
+    },
+    {
+      "id": "project-polymorphic-collections-step6",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.models_book_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/supply_item.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.models_supply_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/alert_service.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.services_alert_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "class BookItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Book {self.title} has {self.quantity} left\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/supply_item.py",
+          "content": "class SupplyItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Supply {self.name} has {self.quantity} left\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/alert_service.py",
+          "content": "def low_stock_lines(items):\n    return [item.alert_line() for item in items if item.quantity < 3]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.models_book_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/supply_item.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.models_supply_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/alert_service.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.services_alert_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "class BookItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Book {self.title} has {self.quantity} left\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/supply_item.py",
+            "content": "class SupplyItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Supply {self.name} has {self.quantity} left\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/alert_service.py",
+            "content": "def low_stock_lines(items):\n    return [item.alert_line() for item in items if item.quantity < 3]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "solutionCode": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "class BookItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Book {self.title} has {self.quantity} left\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/supply_item.py",
+            "content": "class SupplyItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Supply {self.name} has {self.quantity} left\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/alert_service.py",
+            "content": "def low_stock_lines(items):\n    return [item.alert_line() for item in items if item.quantity < 3]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "LOW STOCK: Book API Design has 2 left\nLOW STOCK: Supply Sticky Notes has 1 left\n",
+            "match": "exact"
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
     }
   ]
 }

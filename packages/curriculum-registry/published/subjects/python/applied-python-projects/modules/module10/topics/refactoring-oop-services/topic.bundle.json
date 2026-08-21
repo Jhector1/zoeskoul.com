@@ -205,7 +205,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -378,7 +378,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -503,6 +503,734 @@
         "kind": "single_choice",
         "optionId": "a"
       }
+    },
+    {
+      "id": "ci-refactor-discount-service",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/pricing_service.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterFiles.services_pricing_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/pricing_service.py",
+          "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        total = sum(book.price for book in books)\n        return total * (1 - percent / 100)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/pricing_service.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterFiles.services_pricing_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/pricing_service.py",
+            "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        total = sum(book.price for book in books)\n        return total * (1 - percent / 100)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/pricing_service.py",
+            "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        total = sum(book.price for book in books)\n        return total * (1 - percent / 100)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "PricingService",
+            "message": "Define a PricingService class in services/pricing_service.py."
+          },
+          {
+            "type": "constructible",
+            "className": "PricingService",
+            "constructorArgs": [],
+            "message": "PricingService should be constructible with no arguments."
+          },
+          {
+            "type": "method_returns",
+            "className": "PricingService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "discounted_total",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Python Basics"
+                  ],
+                  [
+                    "price",
+                    20
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Debugging Guide"
+                  ],
+                  [
+                    "price",
+                    30
+                  ]
+                ]
+              ],
+              10
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries",
+              "value"
+            ],
+            "expected": 45,
+            "expectedKind": "value",
+            "message": "discounted_total should apply the percentage discount to the full total."
+          },
+          {
+            "type": "method_returns",
+            "className": "PricingService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "discounted_total",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "One"
+                  ],
+                  [
+                    "price",
+                    10
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Two"
+                  ],
+                  [
+                    "price",
+                    5
+                  ]
+                ]
+              ],
+              20
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries",
+              "value"
+            ],
+            "expected": 12,
+            "expectedKind": "value",
+            "message": "discounted_total should work with a different total and discount percent."
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
+    },
+    {
+      "id": "ci-refactor-filter-service",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/inventory_service.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterFiles.services_inventory_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/inventory_service.py",
+          "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        return [book.title for book in books if book.price <= max_price]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/inventory_service.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterFiles.services_inventory_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/inventory_service.py",
+            "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        return [book.title for book in books if book.price <= max_price]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/inventory_service.py",
+            "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        return [book.title for book in books if book.price <= max_price]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "InventoryService",
+            "message": "Define an InventoryService class in services/inventory_service.py."
+          },
+          {
+            "type": "constructible",
+            "className": "InventoryService",
+            "constructorArgs": [],
+            "message": "InventoryService should be constructible with no arguments."
+          },
+          {
+            "type": "method_returns",
+            "className": "InventoryService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "affordable_titles",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Python Basics"
+                  ],
+                  [
+                    "price",
+                    12
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Debugging Guide"
+                  ],
+                  [
+                    "price",
+                    18
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Testing Notes"
+                  ],
+                  [
+                    "price",
+                    10
+                  ]
+                ]
+              ],
+              12
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries",
+              "value"
+            ],
+            "expected": [
+              "Python Basics",
+              "Testing Notes"
+            ],
+            "expectedKind": "value",
+            "message": "affordable_titles should return titles whose prices are at or below the limit."
+          },
+          {
+            "type": "method_returns",
+            "className": "InventoryService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "affordable_titles",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "One"
+                  ],
+                  [
+                    "price",
+                    5
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Two"
+                  ],
+                  [
+                    "price",
+                    8
+                  ]
+                ]
+              ],
+              4
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries",
+              "value"
+            ],
+            "expected": [],
+            "expectedKind": "value",
+            "message": "affordable_titles should return an empty list when nothing matches."
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
+    },
+    {
+      "id": "ci-refactor-summary-service",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/summary_service.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterFiles.services_summary_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/summary_service.py",
+          "content": "class SummaryService:\n    def build_summary(self, books):\n        total = sum(book.price for book in books)\n        return f\"Books: {len(books)} | Total: ${total}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/summary_service.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterFiles.services_summary_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/summary_service.py",
+            "content": "class SummaryService:\n    def build_summary(self, books):\n        total = sum(book.price for book in books)\n        return f\"Books: {len(books)} | Total: ${total}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/summary_service.py",
+            "content": "class SummaryService:\n    def build_summary(self, books):\n        total = sum(book.price for book in books)\n        return f\"Books: {len(books)} | Total: ${total}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "SummaryService",
+            "message": "Define a SummaryService class in services/summary_service.py."
+          },
+          {
+            "type": "constructible",
+            "className": "SummaryService",
+            "constructorArgs": [],
+            "message": "SummaryService should be constructible with no arguments."
+          },
+          {
+            "type": "method_returns",
+            "className": "SummaryService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "build_summary",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Python Basics"
+                  ],
+                  [
+                    "price",
+                    12
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Debugging Guide"
+                  ],
+                  [
+                    "price",
+                    18
+                  ]
+                ]
+              ]
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": "Books: 2 | Total: $30",
+            "expectedKind": "value",
+            "message": "build_summary should return the exact summary format for the catalog."
+          },
+          {
+            "type": "method_returns",
+            "className": "SummaryService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "build_summary",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Only"
+                  ],
+                  [
+                    "price",
+                    7
+                  ]
+                ]
+              ]
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": "Books: 1 | Total: $7",
+            "expectedKind": "value",
+            "message": "build_summary should work for a one-book catalog."
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
     }
   ]
 }

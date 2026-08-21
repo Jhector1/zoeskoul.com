@@ -248,6 +248,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-slice-inner-characters": {
+              "title": "Slice away the first and last characters",
+              "prompt": "Read one word with at least three characters. Print everything except its first and last characters using one slice.",
+              "hint": "A slice can start at index `1` and stop before the final character with `-1`.",
+              "help": {
+                "concept": "Slices can combine a positive start index with a negative stop index to select the middle of a string.",
+                "hint_1": "A slice can start at index `1` and stop before the final character with `-1`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "word = input().strip()\n\n# Print the inner characters with one slice.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "word = input().strip()\n\n# Print the inner characters with one slice.\n"
+                }
+              },
+              "solutionCode": "word = input().strip()\nprint(word[1:-1])\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "word = input().strip()\nprint(word[1:-1])\n"
+                }
+              }
+            }
           }
         }
       }

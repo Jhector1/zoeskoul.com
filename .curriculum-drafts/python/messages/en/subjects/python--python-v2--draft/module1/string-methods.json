@@ -253,6 +253,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-split-and-join-tags": {
+              "title": "Split and join tags",
+              "prompt": "Read one comma-separated line such as `red,blue,green`. Split it on commas, join the pieces with ` | `, and print the result.",
+              "hint": "Use `.split(\",\")` first, then call `\" | \".join(...)` on the pieces.",
+              "help": {
+                "concept": "`split` turns one string into pieces and `join` combines those pieces with a chosen separator.",
+                "hint_1": "Use `.split(\",\")` first, then call `\" | \".join(...)` on the pieces.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "text = input().strip()\n\n# Split on commas, join with \" | \", and print the result.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\n\n# Split on commas, join with \" | \", and print the result.\n"
+                }
+              },
+              "solutionCode": "text = input().strip()\nparts = text.split(\",\")\nresult = \" | \".join(parts)\nprint(result)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\nparts = text.split(\",\")\nresult = \" | \".join(parts)\nprint(result)\n"
+                }
+              }
+            }
           }
         }
       }

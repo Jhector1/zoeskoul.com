@@ -113,6 +113,42 @@
                 "department_id",
                 "name"
               ]
+            },
+            "practice-retained-7": {
+              "title": "Practice: Join Students and Enrollments",
+              "prompt": "Write a query to join the `students` and `enrollments` tables to list student names and their enrolled course IDs.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading Keys and Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;"
+            },
+            "practice-retained-8": {
+              "title": "Practice: Join Courses and Departments",
+              "prompt": "Write a query to join the `courses` and `departments` tables to list course titles and their department names.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading Keys and Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT courses.title, departments.name\nFROM courses\nINNER JOIN departments ON courses.department_id = departments.id;"
+            },
+            "practice-follow-student-course-keys": {
+              "title": "Practice: Follow Keys from Students to Courses",
+              "prompt": "List each student name, course title, and enrollment term by following the student and course keys through the enrollments table. Sort by student name, then course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading Keys and Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT s.name AS student_name, c.title AS course_title, e.term\nFROM students AS s\nINNER JOIN enrollments AS e ON s.id = e.student_id\nINNER JOIN courses AS c ON e.course_id = c.id\nORDER BY s.name, c.title;"
             }
           }
         }

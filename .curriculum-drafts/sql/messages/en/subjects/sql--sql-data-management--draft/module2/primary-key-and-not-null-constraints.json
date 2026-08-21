@@ -181,6 +181,64 @@
               "sourceCheckMessages": {
                 "requiredOrderRules": "Make `order_id` the primary key and require `customer_name`."
               }
+            },
+            "practice-author-required-columns": {
+              "title": "Practice: Require an Author Name",
+              "prompt": "Create an `authors` table with `author_id` as INTEGER PRIMARY KEY and `author_name` as TEXT NOT NULL. Verify the column metadata.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies PRIMARY KEY and NOT NULL Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE authors (\n    author_id INTEGER PRIMARY KEY,\n    author_name TEXT NOT NULL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE authors (\n    author_id INTEGER PRIMARY KEY,\n    author_name TEXT NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA table_info(authors);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE authors (\n    author_id INTEGER PRIMARY KEY,\n    author_name TEXT NOT NULL\n);\n\n-- file: query.sql\nPRAGMA table_info(authors);"
+            },
+            "practice-ticket-required-summary": {
+              "title": "Practice: Require a Ticket Summary",
+              "prompt": "Create a `tickets` table with `ticket_id` as INTEGER PRIMARY KEY and `summary` as TEXT NOT NULL. Verify the column metadata.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies PRIMARY KEY and NOT NULL Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA table_info(tickets);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL\n);\n\n-- file: query.sql\nPRAGMA table_info(tickets);"
             }
           }
         }

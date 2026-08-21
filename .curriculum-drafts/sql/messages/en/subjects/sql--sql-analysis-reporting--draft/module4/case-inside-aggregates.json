@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
+            },
+            "practice-retained-case-inside-aggregates-sketch1": {
+              "title": "Practice: Calculate Total Sales for Completed Orders",
+              "prompt": "Write a query to calculate the total sales for completed orders in the `sales_reporting` table using a `CASE` statement inside the `SUM` function.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies CASE Inside Aggregate Functions in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT SUM(CASE WHEN order_status = 'Completed' THEN quantity * unit_price ELSE 0 END) AS total_completed_sales\nFROM sales_reporting;"
+            },
+            "practice-count-rated-orders-by-region": {
+              "title": "Practice: Count Rated Orders with CASE",
+              "prompt": "For each region, count all orders and count how many have a non-NULL customer rating using CASE inside SUM. Sort by region.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies CASE Inside Aggregate Functions in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN customer_rating IS NOT NULL THEN 1 ELSE 0 END) AS rated_orders\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
             }
           },
           "tryIt": {

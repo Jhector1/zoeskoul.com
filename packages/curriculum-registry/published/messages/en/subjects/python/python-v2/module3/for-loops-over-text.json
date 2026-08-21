@@ -234,6 +234,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-print-vowels": {
+              "title": "Print only lowercase vowels",
+              "prompt": "Read one lowercase word. Loop through its characters and print only the vowels `a`, `e`, `i`, `o`, or `u`, one per line.",
+              "hint": "Inside the loop, use `if character in \"aeiou\":` before printing.",
+              "help": {
+                "concept": "A `for` loop can inspect one character at a time and conditionally act only on characters that match a rule.",
+                "hint_1": "Inside the loop, use `if character in \"aeiou\":` before printing.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "word = input().strip()\n\n# Print only lowercase vowels, one per line.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "word = input().strip()\n\n# Print only lowercase vowels, one per line.\n"
+                }
+              },
+              "solutionCode": "word = input().strip()\nfor character in word:\n    if character in \"aeiou\":\n        print(character)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "word = input().strip()\nfor character in word:\n    if character in \"aeiou\":\n        print(character)\n"
+                }
+              }
+            }
           }
         }
       }

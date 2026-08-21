@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_deleting_only_confirmed_rows_sketch0": {
               "title": "Remove One Approved Test Row",
-              "prompt": "The audit approved test row `4` for removal. In `operations.sql`, use a `DELETE` with a `WHERE` condition that limits the deletion to that item only. In `query.sql`, inspect item 4 again so an empty result confirms the approved row is gone.",
+              "prompt": "The audit approved test row `4` for removal. In `operations.sql`, use a `DELETE` with a `WHERE` condition that limits the deletion to that item only. In `query.sql`, inspect item 4 again so an empty result confirms the approved row is gone. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Keep the deletion boundary as narrow as the approval.",
               "help": {
                 "concept": "A scoped DELETE removes only the rows named by its WHERE condition.",
@@ -106,8 +106,8 @@
               "hint": "Consider the sequence from preview to verification.",
               "help": {
                 "concept": "Safe deletion involves previewing, executing, and verifying.",
-                "hint_1": "Start with previewing the target rows.",
-                "hint_2": "End with verifying the deletion."
+                "hint_1": "Start with “Preview the target rows”.",
+                "hint_2": "Finish with “Verify the deletion”."
               },
               "tokens": {
                 "t1": "Preview the target rows",
@@ -151,7 +151,7 @@
             },
             "practice-delete-confirmed-row-set": {
               "title": "Practice: Remove Only Confirmed Test Data",
-              "prompt": "Operations approved removal of rows that are both inactive and test data. In `operations.sql`, use one `DELETE` with a `WHERE` condition that expresses both parts of that approval. In `query.sql`, inspect the same target set and confirm that no approved rows remain.",
+              "prompt": "Operations approved removal of rows that are both inactive and test data. In `operations.sql`, use one `DELETE` with a `WHERE` condition that expresses both parts of that approval. In `query.sql`, inspect the same target set and confirm that no approved rows remain. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "The deletion should require both the inactive status and the test-data flag.",
               "help": {
                 "concept": "Compound deletion conditions prevent a broad cleanup from removing legitimate rows.",
@@ -180,6 +180,64 @@
                 "scopedDelete": "Use a scoped DELETE on `inventory_items` with a WHERE condition in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\n-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- file: query.sql\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;"
+            },
+            "practice-delete-reviewed-decor-tests": {
+              "title": "Practice: Delete Only Reviewed Decor Test Rows",
+              "prompt": "Delete rows only when category is `Decor` and `is_test = 1`. Verify that no rows matching that exact condition remain.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Deleting Only Confirmed Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "DELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "DELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
+            },
+            "practice-delete-one-confirmed-id": {
+              "title": "Practice: Delete One Confirmed Row by ID",
+              "prompt": "Delete only the inventory row with `id = 5`. Verify the deletion by querying that same id.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Deleting Only Confirmed Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "DELETE FROM inventory_items\nWHERE id = 5;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "DELETE FROM inventory_items\nWHERE id = 5;"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE id = 5;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nDELETE FROM inventory_items\nWHERE id = 5;\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE id = 5;"
             }
           }
         }

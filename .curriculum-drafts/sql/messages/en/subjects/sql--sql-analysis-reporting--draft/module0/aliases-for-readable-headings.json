@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region AS \"Sales Region\",\n    category AS \"Product Category\",\n    sales_rep AS \"Account Owner\"\nFROM sales_reporting;"
+            },
+            "practice-retained-aliases-for-readable-headings-sketch1": {
+              "title": "Practice: Alias in Calculated Column",
+              "prompt": "Write a query to calculate the total sales for each product by multiplying `quantity` by `unit_price`, and use an alias to name this column `Total Sales`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Aliases for Readable Headings in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, quantity * unit_price AS 'Total Sales'\nFROM sales_reporting;"
+            },
+            "practice-alias-representative-status-headings": {
+              "title": "Practice: Rename Report Headings",
+              "prompt": "Return sales representative and order status with readable aliases `Sales Representative` and `Order Status`. Sort by representative, then status.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Aliases for Readable Headings in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    sales_rep AS \"Sales Representative\",\n    order_status AS \"Order Status\"\nFROM sales_reporting\nORDER BY sales_rep, order_status;"
             }
           },
           "tryIt": {

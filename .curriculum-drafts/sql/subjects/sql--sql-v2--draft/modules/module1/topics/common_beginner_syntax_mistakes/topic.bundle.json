@@ -463,6 +463,105 @@
           "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.sourceChecks.1.message"
         }
       ]
+    },
+    {
+      "id": "practice-repair-missing-from",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "products_catalog",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        },
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "products_catalog",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.solutionCode",
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true,
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     }
   ]
 }

@@ -121,6 +121,45 @@
             }
           }
         }
+      },
+      "python--python-v2--draft-0": {
+        "what-python-is": {
+          "quiz": {
+            "ci-beginner-message": {
+              "title": "Print a beginner-friendly message",
+              "prompt": "Write Python code that prints exactly these two lines:\nPython is beginner-friendly.\nIt is used in many fields.",
+              "hint": "Use two print statements and match the punctuation exactly.",
+              "help": {
+                "concept": "Exact output exercises check whether your printed text matches the required lines character by character.",
+                "hint_1": "There are two sentences, each ending with a period.",
+                "hint_2": "Print the first sentence on one line and the second sentence on the next line."
+              },
+              "starterCode": "# TODO: print both required lines"
+            },
+            "ci-personal-usecase-label": {
+              "title": "Label a Python use",
+              "prompt": "Write Python code that prints exactly: One Python use: web apps",
+              "hint": "Read the coding task and identify what the program should print.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "# TODO: print the required labeled sentence"
+            },
+            "ci-print-usecase-automation": {
+              "title": "Print an automation message",
+              "prompt": "Write Python code that prints exactly: Python helps automate repeated tasks.",
+              "hint": "Use one print statement with the full sentence inside quotes.",
+              "help": {
+                "concept": "The `print()` statement sends text to the output panel exactly as written, including spaces and punctuation.",
+                "hint_1": "You need one line of code that prints the whole sentence.",
+                "hint_2": "Put the message inside parentheses and quotation marks so Python treats it as text."
+              },
+              "starterCode": "# TODO: print the required sentence"
+            }
+          }
+        }
       }
     }
   },

@@ -37,7 +37,7 @@
             "steps": {
               "try_module_1_inventory_correction_cleanup_sketch1": {
                 "title": "Correct One Item Precisely",
-                "prompt": "Begin the approved cleanup by correcting item `2`. Its price should become `8.25` and its status should become `active`. Add one scoped `UPDATE` in `operations.sql`, then verify item 2 in `query.sql`.",
+                "prompt": "Begin the approved cleanup by correcting item `2`. Its price should become `8.25` and its status should become `active`. Add one scoped `UPDATE` in `operations.sql`, then verify item 2 in `query.sql`. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "The first project mutation should affect only item 2.",
                 "help": {
                   "concept": "The project carries each approved mutation forward.",
@@ -69,7 +69,7 @@
               },
               "try_module_1_inventory_correction_cleanup_sketch2": {
                 "title": "Apply the Approved Decor Audit Date",
-                "prompt": "Carry the first correction forward. Add another scoped `UPDATE` so legitimate Decor inventory receives `2026-02-10` as its audit date. Test rows must not be included. In `query.sql`, inspect the legitimate Decor rows and their resulting date.",
+                "prompt": "Keep the item 2 correction in `operations.sql`. Add another scoped `UPDATE` so legitimate Decor inventory receives `2026-02-10` as its audit date; test rows must stay out of the target. In `query.sql`, inspect the legitimate Decor rows and their resulting date. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Preserve the first mutation and add only the new approved group update.",
                 "help": {
                   "concept": "A cumulative project preserves earlier working mutations while adding the next requirement.",
@@ -101,7 +101,7 @@
               },
               "try_module_1_inventory_correction_cleanup_sketch3": {
                 "title": "Delete the First Confirmed Test Item",
-                "prompt": "Carry both approved updates forward. The audit board now authorizes deletion of item `4`. Add one scoped `DELETE` for that item only, then verify in `query.sql` that item 4 no longer exists.",
+                "prompt": "Leave both approved updates in place. The audit board now authorizes deletion of item `4`. Add one scoped `DELETE` for that item only, then use `query.sql` to confirm item 4 no longer exists. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Do not rewrite the earlier updates; add only the newly approved deletion.",
                 "help": {
                   "concept": "A deletion milestone should add one narrow mutation without disturbing earlier project work.",
@@ -133,7 +133,7 @@
               },
               "try_module_1_inventory_correction_cleanup_sketch4": {
                 "title": "Remove the Remaining Draft Test Row",
-                "prompt": "Carry the existing cleanup forward. Item `6` may now be removed, but only while it is still both test data and in draft status. Add one `DELETE` whose condition keeps all three requirements in the safety boundary. Verify item 6 afterward.",
+                "prompt": "Keep the earlier corrections and deletion. Item `6` may now be removed, but only while it is still test data and still in draft status. Add one `DELETE` whose WHERE condition includes the id, test flag, and status requirements. Verify item 6 afterward. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "The new deletion must identify the id and preserve both approval conditions.",
                 "help": {
                   "concept": "Extra conditions can protect a deletion from acting on a row whose state has changed.",
@@ -165,7 +165,7 @@
               },
               "try_module_1_inventory_correction_cleanup_sketch5": {
                 "title": "Complete the Operational Handoff",
-                "prompt": "The approved mutations are complete. Leave `operations.sql` unchanged. In `query.sql`, return the full remaining inventory and sort it by id for the final handoff.",
+                "prompt": "The approved mutations are complete. Leave `operations.sql` unchanged. In `query.sql`, return the full remaining inventory and sort it by id for the final handoff. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "This final milestone changes only the report query.",
                 "help": {
                   "concept": "A mutation workflow ends with a deterministic view of the resulting table.",

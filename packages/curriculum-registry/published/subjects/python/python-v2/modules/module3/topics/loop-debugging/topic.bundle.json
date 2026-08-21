@@ -255,7 +255,7 @@
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -335,7 +335,7 @@
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -425,7 +425,7 @@
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -505,7 +505,7 @@
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -595,7 +595,7 @@
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -676,6 +676,96 @@
           "normalizeWhitespace": false
         }
       ]
+    },
+    {
+      "id": "practice-fix-while-update-direction",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "3\n",
+            "stdout": "3\n2\n1\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1\n",
+            "stdout": "1\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

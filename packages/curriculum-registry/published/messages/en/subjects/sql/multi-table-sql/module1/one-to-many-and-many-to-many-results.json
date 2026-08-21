@@ -140,6 +140,30 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.grade_level,\n       courses.title AS course_title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY enrollments.id;"
+            },
+            "practice-retained-one-to-many-and-many-to-many-results-sketch1": {
+              "title": "Practice: List Students and Their Courses",
+              "prompt": "Write a query to list each student along with the courses they are enrolled in. Use the `students`, `enrollments`, and `courses` tables.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies One-to-Many and Many-to-Many Results in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "SELECT \nFROM students\nJOIN enrollments ON \nJOIN courses ON ;",
+              "solutionCode": "SELECT students.name AS student_name, courses.title AS course_title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;"
+            },
+            "practice-show-department-course-many-side": {
+              "title": "Practice: Show the Many Side of Department Courses",
+              "prompt": "List each department with every course that belongs to it. Keep one result row per department-course relationship and sort by department name, then course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies One-to-Many and Many-to-Many Results in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT d.name AS department_name, c.title AS course_title\nFROM departments AS d\nINNER JOIN courses AS c ON d.id = c.department_id\nORDER BY d.name, c.title;"
             }
           }
         }

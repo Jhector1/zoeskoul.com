@@ -205,7 +205,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "language": "python",
@@ -467,7 +467,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "language": "python",
@@ -532,6 +532,233 @@
           "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.sourceChecks.1.message"
         }
       ]
+    },
+    {
+      "id": "policy_code_input_3",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-2\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "3\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "practice-test-inherited-method",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "tests passed\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
+    },
+    {
+      "id": "practice-test-polymorphic-sounds",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "tests passed\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

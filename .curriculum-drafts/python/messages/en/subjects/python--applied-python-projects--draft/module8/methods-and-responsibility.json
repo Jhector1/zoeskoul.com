@@ -176,6 +176,66 @@
                 "40",
                 "9960"
               ]
+            },
+            "ci-methods-and-responsibility-report-line": {
+              "title": "Build a report line from object methods",
+              "prompt": "You are preparing a simple daily report for the account tracker. Finish the `deposit` and `report_line` methods in `models/account.py`. `deposit` should update the balance, and `report_line` should return text in this exact format: `Rae | balance: $95`. `main.py` already creates the account, deposits money, and prints the report line. When you click Run, the output panel should show `Rae | balance: $95`. This matters because the class should both manage state changes and provide account-specific display text.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass\n\n    def report_line(self):\n        pass"
+                }
+              }
+            },
+            "ci-methods-and-responsibility-validate-withdrawal": {
+              "title": "Keep validation inside the method",
+              "prompt": "You are improving the account tracker so invalid withdrawals do not change the balance. In `models/account.py`, finish `withdraw` so it subtracts the amount only when the amount is less than or equal to the current balance. If the amount is too large, leave the balance unchanged. The method should return the current balance after the attempt. `main.py` already prints two results. When you click Run, the output panel should show `60` and then `60`. This matters because validation should live with the object state it protects.",
+              "hint": "Check the amount against `self.balance` before subtracting.",
+              "help": {
+                "concept": "Encapsulation means the class protects its own state. A withdrawal rule belongs inside the method because the method controls balance changes.",
+                "hint_1": "The first call should reduce the balance, but the second call should not make it negative.",
+                "hint_2": "Use a conditional inside `withdraw`; only update `self.balance` when the requested amount is allowed, then return the balance either way."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance"
+                }
+              }
+            },
+            "practice-cart-total-method": {
+              "title": "Put total behavior on the object",
+              "prompt": "Define a `Cart` class that stores a list of prices. Add a `total()` method that returns the sum of those prices. Create `Cart([4, 7, 9])` and print `cart.total()`.",
+              "hint": "The `Cart` object already owns the price list, so the method should use `self.prices`.",
+              "help": {
+                "concept": "A method belongs on an object when the behavior primarily uses and represents that object's own state.",
+                "hint_1": "The `Cart` object already owns the price list, so the method should use `self.prices`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Cart:\n    def __init__(self, prices):\n        self.prices = prices\n\n    def total(self):\n        # return the total of this cart\n        pass\n\ncart = Cart([4, 7, 9])\nprint(cart.total())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Cart:\n    def __init__(self, prices):\n        self.prices = prices\n\n    def total(self):\n        # return the total of this cart\n        pass\n\ncart = Cart([4, 7, 9])\nprint(cart.total())\n"
+                }
+              },
+              "solutionCode": "class Cart:\n    def __init__(self, prices):\n        self.prices = prices\n\n    def total(self):\n        return sum(self.prices)\n\ncart = Cart([4, 7, 9])\nprint(cart.total())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Cart:\n    def __init__(self, prices):\n        self.prices = prices\n\n    def total(self):\n        return sum(self.prices)\n\ncart = Cart([4, 7, 9])\nprint(cart.total())\n"
+                }
+              }
             }
           }
         }

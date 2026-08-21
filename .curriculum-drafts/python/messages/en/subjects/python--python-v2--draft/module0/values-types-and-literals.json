@@ -170,6 +170,45 @@
             }
           }
         }
+      },
+      "python--python-v2--draft-0": {
+        "values-types-and-literals": {
+          "quiz": {
+            "ci-read-and-print": {
+              "title": "Read text and print it",
+              "prompt": "Write Python code that reads one line of input and prints it exactly as it was entered.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "# TODO: read one line and print it"
+            },
+            "ci-read-number-text": {
+              "title": "Read a number-looking input",
+              "prompt": "Write Python code that reads one line of input and prints `You typed:` followed by the exact input on the same line. Treat the input as text.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "# TODO: read input and print it after the label"
+            },
+            "ci-three-lines": {
+              "title": "Print mixed values",
+              "prompt": "Write Python code that prints three lines: the string `\"start\"`, then the result of `4 + 1`, then the string `\"done\"`.",
+              "hint": "Use three `print()` lines.",
+              "help": {
+                "concept": "A program can print different kinds of values one after another, including strings and expression results.",
+                "hint_1": "Use one `print()` statement per line of output.",
+                "hint_2": "Print the text first, then the computed number, then the final text."
+              },
+              "starterCode": "# TODO: print the required three lines"
+            }
+          }
+        }
       }
     }
   },

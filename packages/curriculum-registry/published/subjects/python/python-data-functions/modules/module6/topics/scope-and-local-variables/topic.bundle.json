@@ -434,6 +434,301 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.try-scope-and-local-variables-sketch2.sourceChecks.0.message"
         }
       ]
+    },
+    {
+      "id": "code-q1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_tax(price):\n    total = price + 5\n    return total",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "add_tax",
+            "args": [
+              10
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 15,
+            "expectedKind": "value",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.checks.0.message"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "add_tax",
+            "args": [
+              23
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 28,
+            "expectedKind": "value",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.checks.1.message"
+          },
+          {
+            "type": "no_stdout",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.checks.2.message"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "code-q2",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Book"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Item: Book",
+            "expectedKind": "value",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.checks.0.message"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Pen"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Item: Pen",
+            "expectedKind": "value",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.checks.1.message"
+          },
+          {
+            "type": "no_stdout",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.checks.2.message"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "code-q3",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def rectangle_area(width, height):\n    area = width * height\n    return area",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "rectangle_area",
+            "args": [
+              3,
+              4
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 12,
+            "expectedKind": "value",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.checks.0.message"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "rectangle_area",
+            "args": [
+              5,
+              2
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 10,
+            "expectedKind": "value",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.checks.1.message"
+          },
+          {
+            "type": "no_stdout",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.checks.2.message"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.scope-and-local-variables.quiz.code-q3.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     }
   ]
 }

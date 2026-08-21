@@ -234,6 +234,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-fix-if-else-indentation": {
+              "title": "Repair an if/else block",
+              "prompt": "Fix the starter indentation so the `if` branch prints `positive`, the `else` branch prints `not positive`, and `checked` always prints after the conditional.",
+              "hint": "Indent the two branch outputs, then dedent the final `print(\"checked\")` line.",
+              "help": {
+                "concept": "Indentation controls which statements belong to each branch, while dedenting moves execution back outside the conditional block.",
+                "hint_1": "Indent the two branch outputs, then dedent the final `print(\"checked\")` line.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "number = int(input())\nif number > 0:\nprint(\"positive\")\nelse:\nprint(\"not positive\")\nprint(\"checked\")\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nif number > 0:\nprint(\"positive\")\nelse:\nprint(\"not positive\")\nprint(\"checked\")\n"
+                }
+              },
+              "solutionCode": "number = int(input())\nif number > 0:\n    print(\"positive\")\nelse:\n    print(\"not positive\")\nprint(\"checked\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nif number > 0:\n    print(\"positive\")\nelse:\n    print(\"not positive\")\nprint(\"checked\")\n"
+                }
+              }
+            }
           }
         }
       }

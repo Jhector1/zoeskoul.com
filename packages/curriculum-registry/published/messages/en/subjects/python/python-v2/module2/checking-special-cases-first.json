@@ -233,6 +233,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-missing-score-first": {
+              "title": "Handle a missing score before ranges",
+              "prompt": "Read one integer score. Treat `-1` as a special missing-value marker and print `Missing`. Otherwise print `Excellent` for scores at least 90 and `Recorded` for all remaining scores.",
+              "hint": "Check `score == -1` before the broader score ranges.",
+              "help": {
+                "concept": "A narrow sentinel case should be checked before broader conditions so it cannot be swallowed by normal classification logic.",
+                "hint_1": "Check `score == -1` before the broader score ranges.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "score = int(input())\n\n# Check the missing-value marker first, then classify the score.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "score = int(input())\n\n# Check the missing-value marker first, then classify the score.\n"
+                }
+              },
+              "solutionCode": "score = int(input())\nif score == -1:\n    print(\"Missing\")\nelif score >= 90:\n    print(\"Excellent\")\nelse:\n    print(\"Recorded\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "score = int(input())\nif score == -1:\n    print(\"Missing\")\nelif score >= 90:\n    print(\"Excellent\")\nelse:\n    print(\"Recorded\")\n"
+                }
+              }
+            }
           }
         }
       }

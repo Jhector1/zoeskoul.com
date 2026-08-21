@@ -487,6 +487,274 @@
         "kind": "single_choice",
         "optionId": "b"
       }
+    },
+    {
+      "id": "practice-create-suppliers-table",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'suppliers';",
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "schema.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-create-shipments-table",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'shipments';",
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "schema.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

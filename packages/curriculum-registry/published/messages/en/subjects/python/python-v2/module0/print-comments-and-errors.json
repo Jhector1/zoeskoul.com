@@ -3,170 +3,28 @@
     "python-v2": {
       "python-v2-0": {
         "print-comments-and-errors": {
-          "label": "Print, Comments, and First Errors",
-          "summary": "Display text with print(), add comments for readers, and repair simple syntax mistakes.",
-          "cards": {
-            "sketch0": {
-              "title": "Use print() to display output"
-            },
-            "sketch1": {
-              "title": "Comments explain code without producing output"
-            },
-            "sketch2": {
-              "title": "Repair a simple syntax error"
-            },
-            "quiz": {
-              "title": "Quiz"
-            }
-          },
           "quiz": {
-            "sc-print-purpose": {
-              "title": "What print() does",
-              "prompt": "What happens when Python runs `print(\"Hello\")`?",
-              "hint": "`print()` is used when a program needs to show a value.",
+            "ci-personal-intro": {
+              "title": "Build a tiny introduction",
+              "prompt": "Write Python code that prints these three lines exactly:\n`About me`\n`Name: Sam`\n`Favorite color: Green`",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "`print()` displays the value passed inside its parentheses. The quote marks make `Hello` a string value.",
-                "hint_1": "The line runs normally; it is neither a comment nor an input request.",
-                "hint_2": "Choose the result that would appear in the output panel."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "options": {
-                "a": "Hello appears in the output.",
-                "b": "Hello is stored for later without being shown.",
-                "c": "The line becomes a comment.",
-                "d": "Python waits for the user to type Hello."
-              }
+              "starterCode": "# Write your introduction program below"
             },
-            "sc-comment-line": {
-              "title": "Recognize a Python comment",
-              "prompt": "Which line is a Python comment?",
-              "hint": "Python uses `#` to begin a comment.",
+            "ci-two-lines": {
+              "title": "Print two lines",
+              "prompt": "Write Python code that prints `Name: Alex` on the first line and `City: Lima` on the second line.",
+              "hint": "Read the task \"Print two lines\" and identify the required result.",
               "help": {
-                "concept": "A comment begins with `#`. Python ignores the comment text when it runs the program.",
-                "hint_1": "A quoted string is still a value, not a comment.",
-                "hint_2": "Look for the line whose first meaningful character is `#`."
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print two lines\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "options": {
-                "a": "print(\"Note\")",
-                "b": "# Note for the reader",
-                "c": "\"Note for the reader\"",
-                "d": "// Note for the reader"
-              }
-            },
-            "mc-valid-print-lines": {
-              "title": "Find valid print calls",
-              "prompt": "Which lines are valid Python `print()` calls? Choose all correct answers.",
-              "hint": "Check the parentheses and quote marks in every line.",
-              "help": {
-                "concept": "A basic `print()` call needs the function name, an opening `(`, a valid value such as a quoted string, and a matching closing `)`.",
-                "hint_1": "Python accepts both single and double quotes for strings.",
-                "hint_2": "Reject lines with an unclosed string or an unclosed function call."
-              },
-              "options": {
-                "a": "print(\"Hi\")",
-                "b": "print('Bye')",
-                "c": "print(\"Hi\"",
-                "d": "print(\"Bye)"
-              }
-            },
-            "mc-comments-behavior": {
-              "title": "Understand comment behavior",
-              "prompt": "Which statements about Python comments are true? Choose all correct answers.",
-              "hint": "Think about both Python's behavior and why programmers write comments.",
-              "help": {
-                "concept": "Comments begin with `#`, are ignored during execution, and can document code for people reading it.",
-                "hint_1": "Comments do not appear as normal program output.",
-                "hint_2": "Select the syntax fact, the execution fact, and the reader-facing purpose."
-              },
-              "options": {
-                "a": "A comment can begin with `#`.",
-                "b": "A comment is automatically printed as program output.",
-                "c": "Python ignores comment text when executing the program.",
-                "d": "A comment can explain code to someone reading it."
-              }
-            },
-            "dr-build-valid-print": {
-              "title": "Build a print call",
-              "prompt": "Arrange the tokens to create valid Python code that prints `Hi`.",
-              "hint": "Start with the function name, then open the call.",
-              "help": {
-                "concept": "A function call follows the pattern `name(value)`.",
-                "hint_1": "The string value belongs between the opening and closing parentheses.",
-                "hint_2": "The completed line should read `print(\"Hi\")`."
-              },
-              "tokens": {
-                "t1": "print",
-                "t2": "(",
-                "t3": "\"Hi\"",
-                "t4": ")"
-              }
-            },
-            "ci-print-one-line": {
-              "title": "Print one exact line",
-              "prompt": "Write one line of Python that prints exactly:\n\n`Welcome to Python`",
-              "hint": "Pass a quoted string to `print()`.",
-              "help": {
-                "concept": "`print()` displays the string value passed to it.",
-                "hint_1": "Capitalization and spaces must match the required output.",
-                "hint_2": "Use one `print(...)` call containing the complete message in quotes."
-              },
-              "starterCode": "# Print the required message below.\n",
-              "solutionCode": "print(\"Welcome to Python\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use one print call containing the exact string Welcome to Python."
-                }
-              }
-            },
-            "ci-comment-and-output": {
-              "title": "Add a useful comment without changing output",
-              "prompt": "The starter program already prints `Ready`. Add one useful Python comment on the line above the existing `print()` statement describing what the program is showing.\n\nDo not change the program output. Only `Ready` should appear.",
-              "hint": "Add a line beginning with `#` above the existing print statement.",
-              "help": {
-                "concept": "A comment documents the source code for a reader without becoming normal program output.",
-                "hint_1": "Keep the working `print(\"Ready\")` line.",
-                "hint_2": "Your new first line should start with `#` and explain the purpose."
-              },
-              "starterCode": "print(\"Ready\")\n",
-              "solutionCode": "# Show that the program is ready\nprint(\"Ready\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Add one non-empty comment above the existing print call and keep the output Ready."
-                }
-              }
-            },
-            "ci-fix-missing-paren": {
-              "title": "Repair a missing parenthesis",
-              "prompt": "The starter code has a syntax error because the `print()` call is not closed. Fix the code so it prints exactly:\n\n`Hello`",
-              "hint": "Match the opening `(` with its closing symbol.",
-              "help": {
-                "concept": "Python must be able to match the opening and closing parentheses of a function call before it can run the program.",
-                "hint_1": "Do not change the word `Hello`.",
-                "hint_2": "Add the missing closing parenthesis at the end of the line."
-              },
-              "starterCode": "print(\"Hello\"\n",
-              "solutionCode": "print(\"Hello\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Close the existing print call so it displays Hello."
-                }
-              }
-            },
-            "fb-close-print-call": {
-              "title": "Close the print call",
-              "prompt": "Choose the missing symbol that makes this line valid Python.",
-              "hint": "The opening parenthesis after `print` needs a matching partner.",
-              "help": {
-                "concept": "Parentheses in a function call must be balanced. A missing closing parenthesis prevents Python from reading the statement correctly.",
-                "hint_1": "The string itself is already complete.",
-                "hint_2": "Choose the symbol that closes the `(` after `print`."
-              },
-              "template": "print(\"Hello\"[blank1]",
-              "choices": [
-                ")",
-                "]",
-                "\"",
-                "#"
-              ]
+              "starterCode": "# Print the two required lines"
             }
           }
         }

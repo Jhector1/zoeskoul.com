@@ -141,6 +141,30 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id\n AND enrollments.course_id = 1\nWHERE enrollments.id IS NULL\nORDER BY students.id;"
+            },
+            "practice-retained-finding-missing-relationships-sketch1": {
+              "title": "Practice: Identify Students Without Enrollments",
+              "prompt": "Write a SQL query to list all students who are not enrolled in any courses. Use a LEFT JOIN and check for NULL values in the enrollments table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Finding Missing Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nWHERE enrollments.id IS NULL;"
+            },
+            "practice-find-departments-without-courses": {
+              "title": "Practice: Find Departments Without Courses",
+              "prompt": "Find departments that do not have any related courses. Use a LEFT JOIN and a NULL check, then sort by department name.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Finding Missing Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT d.name AS department_name\nFROM departments AS d\nLEFT JOIN courses AS c ON d.id = c.department_id\nWHERE c.id IS NULL\nORDER BY d.name;"
             }
           }
         }

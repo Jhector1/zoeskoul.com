@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    sales_rep,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY sales_rep\nORDER BY completed_orders DESC, sales_rep ASC;"
+            },
+            "practice-retained-sorting-aggregate-results-sketch1": {
+              "title": "Practice: Rank Regions by Average Customer Rating",
+              "prompt": "Write a query to calculate the average customer rating for each region and sort the results in descending order of average rating. Use the region name as a secondary sort criterion to ensure deterministic ordering.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Sorting Aggregate Results in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY region\nORDER BY avg_rating DESC, region ASC;"
+            },
+            "practice-rank-regions-by-units": {
+              "title": "Practice: Rank Regions by Units Sold",
+              "prompt": "Sum quantity for each region and sort from the highest total units to the lowest. Use region ascending as a tie-breaker.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Sorting Aggregate Results in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    region,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY region\nORDER BY total_units DESC, region ASC;"
             }
           },
           "tryIt": {

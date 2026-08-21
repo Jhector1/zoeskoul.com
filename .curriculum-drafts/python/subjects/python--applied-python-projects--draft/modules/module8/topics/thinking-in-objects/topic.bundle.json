@@ -611,6 +611,246 @@
         "c",
         "d"
       ]
+    },
+    {
+      "id": "practice-book-object-description",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Orbit - 240 pages\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
+    },
+    {
+      "id": "practice-two-pet-instances",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Milo: meow\nRex: woof\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
+    },
+    {
+      "id": "practice-task-state-method",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Submit report\nTrue\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

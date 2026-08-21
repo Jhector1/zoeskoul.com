@@ -142,6 +142,32 @@
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-like-name-ending-a": {
+              "title": "Practice: Match Names Ending in a",
+              "prompt": "Return id and full_name for customers whose full name ends with the letter `a`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies LIKE and Wildcards in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a';"
+            },
+            "practice-like-city-starting-s": {
+              "title": "Practice: Match Cities Starting with S",
+              "prompt": "Return full_name and city for customers whose city starts with `S`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies LIKE and Wildcards in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city LIKE 'S%';"
+            }
           }
         }
       },

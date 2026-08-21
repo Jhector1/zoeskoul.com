@@ -154,6 +154,20 @@
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-select-name-price-stock": {
+              "title": "Practice: Select Three Product Columns",
+              "prompt": "Return product `name`, `price`, and `stock`, in that order, from the products table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Selecting Data with SELECT and FROM in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price, stock\nFROM products;"
+            }
           }
         }
       },

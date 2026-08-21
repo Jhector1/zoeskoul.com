@@ -235,6 +235,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-fix-while-update-direction": {
+              "title": "Fix a while-loop update direction",
+              "prompt": "The starter should count down from the input value to `1`, but its update moves the number in the wrong direction. Fix only the update so the loop stops correctly.",
+              "hint": "A positive countdown must make `number` smaller on every iteration.",
+              "help": {
+                "concept": "A `while` loop must update its state toward the stopping condition; moving in the wrong direction can create an infinite loop.",
+                "hint_1": "A positive countdown must make `number` smaller on every iteration.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "number = int(input())\nwhile number > 0:\n    print(number)\n    number += 1\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nwhile number > 0:\n    print(number)\n    number += 1\n"
+                }
+              },
+              "solutionCode": "number = int(input())\nwhile number > 0:\n    print(number)\n    number -= 1\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nwhile number > 0:\n    print(number)\n    number -= 1\n"
+                }
+              }
+            }
           }
         }
       }

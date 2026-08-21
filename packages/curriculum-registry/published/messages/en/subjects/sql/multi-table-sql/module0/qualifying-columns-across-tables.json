@@ -141,6 +141,30 @@
               },
               "starterCode": "-- Return a readable course-to-department result\n",
               "solutionCode": "SELECT courses.id AS course_id,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id\nORDER BY courses.id;\n"
+            },
+            "practice-retained-qualifying-columns-across-tables-sketch1": {
+              "title": "Practice: Using Aliases in Queries",
+              "prompt": "Write a query to list student names and the terms they are enrolled in, using table aliases for simplicity.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Qualifying Columns Across Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT s.name, e.term\nFROM students AS s\nJOIN enrollments AS e ON s.id = e.student_id;"
+            },
+            "practice-qualify-student-enrollment-columns": {
+              "title": "Practice: Qualify Student and Enrollment Columns",
+              "prompt": "List each student name with the enrollment term. Qualify the selected columns with table aliases so it is clear which table supplies each value. Sort by student name, then term.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Qualifying Columns Across Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT s.name AS student_name, e.term AS enrollment_term\nFROM students AS s\nINNER JOIN enrollments AS e ON s.id = e.student_id\nORDER BY s.name, e.term;"
             }
           }
         }

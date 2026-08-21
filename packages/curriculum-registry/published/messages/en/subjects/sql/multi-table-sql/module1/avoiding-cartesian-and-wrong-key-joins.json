@@ -140,6 +140,30 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT e.id AS enrollment_id,\n       s.name AS student_name,\n       c.title AS course_title\nFROM enrollments AS e\nINNER JOIN students AS s\n  ON e.student_id = s.id\nINNER JOIN courses AS c\n  ON e.course_id = c.id\nORDER BY e.id;\n"
+            },
+            "practice-retained-avoiding-cartesian-and-wrong-key-joins-sketch1": {
+              "title": "Practice: Correct Wrong-Key Join",
+              "prompt": "Write a query to correctly join `students` and `courses` using the `enrollments` table as a bridge. List each student's name and the title of the courses they are enrolled in.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Avoiding Cartesian and Wrong-Key Joins in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "SELECT students.name, courses.title\nFROM students\n-- Complete the JOINs here\n;",
+              "solutionCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;"
+            },
+            "practice-use-correct-course-department-key": {
+              "title": "Practice: Use the Correct Course-to-Department Key",
+              "prompt": "Join courses to departments using the real key relationship, then list each course title with its department name. Sort by course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Avoiding Cartesian and Wrong-Key Joins in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT c.title AS course_title, d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d ON c.department_id = d.id\nORDER BY c.title;"
             }
           }
         }

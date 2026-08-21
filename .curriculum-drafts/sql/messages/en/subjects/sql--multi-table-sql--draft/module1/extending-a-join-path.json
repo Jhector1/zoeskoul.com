@@ -141,6 +141,30 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;"
+            },
+            "practice-extend-student-path-to-department": {
+              "title": "Practice: Extend a Student Join Path to Departments",
+              "prompt": "Start from students and extend the join path through enrollments and courses to departments. Return student name, course title, and department name. Sort by student name, then course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Extending a Join Path in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT s.name AS student_name, c.title AS course_title, d.name AS department_name\nFROM students AS s\nINNER JOIN enrollments AS e ON s.id = e.student_id\nINNER JOIN courses AS c ON e.course_id = c.id\nINNER JOIN departments AS d ON c.department_id = d.id\nORDER BY s.name, c.title;"
+            },
+            "practice-extend-department-path-to-students": {
+              "title": "Practice: Extend a Department Join Path to Students",
+              "prompt": "Start from departments and follow the relationship path through courses and enrollments to students. Return department name, course title, student name, and enrollment term. Sort by department, course, then student.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Extending a Join Path in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT d.name AS department_name, c.title AS course_title, s.name AS student_name, e.term\nFROM departments AS d\nINNER JOIN courses AS c ON d.id = c.department_id\nINNER JOIN enrollments AS e ON c.id = e.course_id\nINNER JOIN students AS s ON e.student_id = s.id\nORDER BY d.name, c.title, s.name;"
             }
           }
         }

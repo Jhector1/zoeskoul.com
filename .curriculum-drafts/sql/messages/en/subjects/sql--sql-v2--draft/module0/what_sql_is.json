@@ -81,6 +81,44 @@
                 "d": "A programming command"
               }
             }
+          },
+          "practice": {
+            "practice-ask-for-student-names": {
+              "title": "Practice: Ask the Database for Student Names",
+              "prompt": "Use SQL to ask the students table for each student name.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies SQL, Databases, and Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name\nFROM students;"
+            },
+            "practice-ask-for-student-grades": {
+              "title": "Practice: Ask for Student Grades",
+              "prompt": "Return each student name and grade from the students table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies SQL, Databases, and Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, grade\nFROM students;"
+            },
+            "practice-inspect-student-record-columns": {
+              "title": "Practice: Inspect a Student Record",
+              "prompt": "Return id, name, grade, and city from the students table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies SQL, Databases, and Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, name, grade, city\nFROM students;"
+            }
           }
         }
       },

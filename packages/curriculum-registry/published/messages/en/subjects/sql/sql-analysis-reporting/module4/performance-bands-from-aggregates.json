@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    CASE\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable'\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed'\n        ELSE 'At risk'\n    END AS completion_band\nFROM sales_reporting\nGROUP BY category\nORDER BY completion_rate DESC, category ASC;"
+            },
+            "practice-region-order-volume-bands": {
+              "title": "Practice: Band Regions by Order Volume",
+              "prompt": "Count orders for each region and label the region `High volume` when it has at least 6 orders, `Medium volume` when it has at least 3, and `Low volume` otherwise. Sort by order count descending, then region.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Performance Bands from Aggregates in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS order_count,\n    CASE\n        WHEN COUNT(*) >= 6 THEN 'High volume'\n        WHEN COUNT(*) >= 3 THEN 'Medium volume'\n        ELSE 'Low volume'\n    END AS volume_band\nFROM sales_reporting\nGROUP BY region\nORDER BY order_count DESC, region ASC;"
+            },
+            "practice-sales-rep-revenue-bands": {
+              "title": "Practice: Band Sales Representatives by Gross Sales",
+              "prompt": "Calculate gross sales for each sales representative and label performance `Top` at 700 or more, `Steady` at 350 or more, and `Developing` otherwise. Sort by gross sales descending, then sales representative.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Performance Bands from Aggregates in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    sales_rep,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    CASE\n        WHEN SUM(quantity * unit_price) >= 700 THEN 'Top'\n        WHEN SUM(quantity * unit_price) >= 350 THEN 'Steady'\n        ELSE 'Developing'\n    END AS performance_band\nFROM sales_reporting\nGROUP BY sales_rep\nORDER BY gross_sales DESC, sales_rep ASC;"
             }
           },
           "tryIt": {

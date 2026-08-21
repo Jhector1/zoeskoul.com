@@ -194,6 +194,285 @@
           "t4"
         ]
       }
+    },
+    {
+      "id": "ci-beginner-message",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message",
+      "language": "python",
+      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Python is beginner-friendly.\nIt is used in many fields.\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Python is beginner-friendly.\nIt is used in many fields.\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"Python is beginner-friendly.\")\nprint(\"It is used in many fields.\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Python is beginner-friendly.\")\nprint(\"It is used in many fields.\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "print(\"Python is beginner-friendly.\")\nprint(\"It is used in many fields.\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-beginner-message.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Python is beginner-friendly.\")\nprint(\"It is used in many fields.\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "ci-personal-usecase-label",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label",
+      "language": "python",
+      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "One Python use: web apps\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "One Python use: web apps\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"One Python use: web apps\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"One Python use: web apps\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "print(\"One Python use: web apps\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"One Python use: web apps\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "ci-print-usecase-automation",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation",
+      "language": "python",
+      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Python helps automate repeated tasks.\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Python helps automate repeated tasks.\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"Python helps automate repeated tasks.\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Python helps automate repeated tasks.\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "print(\"Python helps automate repeated tasks.\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Python helps automate repeated tasks.\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        }
+      ]
     }
   ]
 }

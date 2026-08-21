@@ -140,6 +140,30 @@
               },
               "starterCode": "-- Build a concise two-table student enrollment query\n",
               "solutionCode": "SELECT s.name AS student_name,\n       e.term AS enrollment_term,\n       e.course_id\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id\nORDER BY s.name, e.course_id;\n"
+            },
+            "practice-retained-table-aliases-for-join-queries-sketch1": {
+              "title": "Practice: Combining Table Aliases with Additional Joins",
+              "prompt": "Write a query to list all students, the courses they are enrolled in, and the department of each course using table aliases.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Table Aliases for Join Queries in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT s.name AS student_name, c.title AS course_title, d.name AS department_name\nFROM students AS s\nJOIN enrollments AS e ON s.id = e.student_id\nJOIN courses AS c ON e.course_id = c.id\nJOIN departments AS d ON c.department_id = d.id;"
+            },
+            "practice-alias-course-department-join": {
+              "title": "Practice: Alias a Course-to-Department Join",
+              "prompt": "Use short table aliases to list each course title with its department name. Sort the result by course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Table Aliases for Join Queries in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT c.title AS course_title, d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d ON c.department_id = d.id\nORDER BY c.title;"
             }
           }
         }

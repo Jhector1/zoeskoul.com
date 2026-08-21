@@ -262,7 +262,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_ticket_check",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -357,7 +357,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_free_day",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -452,7 +452,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_not_logged_in",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -537,7 +537,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_range_check",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -632,7 +632,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_score_certificate",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -713,6 +713,96 @@
           "normalizeWhitespace": false
         }
       ]
+    },
+    {
+      "id": "practice-weekend-or-holiday",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.and-or-not.practice.practice-weekend-or-holiday",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Saturday\nno\n",
+            "stdout": "rest\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Monday\nyes\n",
+            "stdout": "rest\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Monday\nno\n",
+            "stdout": "work\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

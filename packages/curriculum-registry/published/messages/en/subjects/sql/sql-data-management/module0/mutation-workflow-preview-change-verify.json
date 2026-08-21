@@ -34,19 +34,19 @@
               }
             },
             "mc-preview-change-verify": {
-              "title": "Evidence in a Safe Mutation",
-              "prompt": "Which actions provide useful evidence before or after a data change? Select all that apply.",
-              "hint": "Choose the actions that help you identify the target or confirm the result.",
+              "title": "Actions in a Safe Mutation Workflow",
+              "prompt": "Which actions belong to the safe mutation workflow taught in this module? Select all that apply.",
+              "hint": "Choose the actions that establish scope, confirm it, make the approved change, or verify the result.",
               "help": {
-                "concept": "A safe mutation is supported by evidence: preview the target, review the returned rows, make the approved change, and verify the final state.",
-                "hint_1": "A preview answers which rows are in scope.",
-                "hint_2": "A verification query answers whether the intended result was reached."
+                "concept": "A safe mutation uses evidence before and after the change instead of skipping directly to a write.",
+                "hint_1": "The workflow begins by identifying and reviewing the intended rows.",
+                "hint_2": "A successful write still needs a verification step afterward."
               },
               "options": {
                 "a": "Preview the target rows",
-                "b": "Review the preview result",
-                "c": "Apply the approved change",
-                "d": "Verify the final state"
+                "b": "Review the preview before changing data",
+                "c": "Apply the approved change after the target is confirmed",
+                "d": "Skip verification when the mutation reports success"
               }
             },
             "dr-mutation-workflow-order": {
@@ -55,8 +55,8 @@
               "hint": "Identify the target before applying the mutation, then inspect the final state.",
               "help": {
                 "concept": "A careful change moves from evidence to action and back to evidence.",
-                "hint_1": "Begin by identifying the intended rows.",
-                "hint_2": "Finish by confirming the database now matches the request."
+                "hint_1": "Start with “Preview the target rows”.",
+                "hint_2": "Finish with “Verify the final state”."
               },
               "tokens": {
                 "t1": "Preview the target rows",
@@ -113,6 +113,93 @@
                 "c": "It creates a backup table",
                 "d": "It changes the database schema"
               }
+            },
+            "practice-preview-update-verify-id-five": {
+              "title": "Practice: Preview, Update, Verify One Row",
+              "prompt": "Use a preview SELECT before changing row `id = 5`, then set its status to `active`. Finish with a verification query that returns id, name, and status for row 5.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Preview, Change, Verify in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;\n\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 5;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;\n\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 5;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nSELECT id, name, status\nFROM inventory_items\nWHERE id = 5;\n\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 5;\n\n-- file: query.sql\nSELECT id, name, status\nFROM inventory_items\nWHERE id = 5;"
+            },
+            "practice-preview-price-change-id-three": {
+              "title": "Practice: Preview and Verify a Price Change",
+              "prompt": "Preview row `id = 3`, update its price to `42.00`, then verify the final id, name, and price for that row.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Preview, Change, Verify in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;\n\nUPDATE inventory_items\nSET price = 42.00\nWHERE id = 3;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;\n\nUPDATE inventory_items\nSET price = 42.00\nWHERE id = 3;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id = 3;\n\nUPDATE inventory_items\nSET price = 42.00\nWHERE id = 3;\n\n-- file: query.sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id = 3;"
+            },
+            "practice-preview-delete-test-decor": {
+              "title": "Practice: Preview, Delete, Verify a Target Set",
+              "prompt": "Preview rows in category `Decor` that are test items, delete exactly that reviewed set, then verify that no matching rows remain.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Preview, Change, Verify in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nSELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\n-- file: query.sql\nSELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
             }
           }
         }

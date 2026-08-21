@@ -247,7 +247,7 @@
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -327,7 +327,7 @@
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -423,7 +423,7 @@
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -519,7 +519,7 @@
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -615,7 +615,7 @@
       "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -697,6 +697,96 @@
           "message": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.sourceChecks.1.message"
         }
       ]
+    },
+    {
+      "id": "practice-not-equal-zero",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.practice.practice-not-equal-zero",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.practice.practice-not-equal-zero.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.practice.practice-not-equal-zero.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.practice.practice-not-equal-zero.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.practice.practice-not-equal-zero.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.practice.practice-not-equal-zero.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.practice.practice-not-equal-zero.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "7\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "False\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-2\n",
+            "stdout": "True\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.practice.practice-not-equal-zero.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.practice.practice-not-equal-zero.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

@@ -142,6 +142,30 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name,\n       COUNT(DISTINCT courses.department_id) AS department_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id\nGROUP BY students.id, students.name\nORDER BY students.id;"
+            },
+            "practice-retained-counting-related-rows-without-inflation-sketch1": {
+              "title": "Practice: Count Unique Students per Department",
+              "prompt": "Write a SQL query to list each department and the number of unique students enrolled in its courses. Use COUNT(DISTINCT) to ensure each student is counted only once per department.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Counting Related Rows Without Inflation in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name, COUNT(DISTINCT enrollments.student_id) AS unique_students\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nGROUP BY departments.name;"
+            },
+            "practice-count-distinct-courses-per-student": {
+              "title": "Practice: Count Distinct Courses per Student",
+              "prompt": "Count how many distinct courses each student is enrolled in. Keep students with no enrollments by using a LEFT JOIN. Sort by student id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Counting Related Rows Without Inflation in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT s.name AS student_name, COUNT(DISTINCT e.course_id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e ON s.id = e.student_id\nGROUP BY s.id, s.name\nORDER BY s.id;"
             }
           }
         }

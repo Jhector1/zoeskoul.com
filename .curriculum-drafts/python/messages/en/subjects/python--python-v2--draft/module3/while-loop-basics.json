@@ -235,6 +235,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-while-countdown-by-two": {
+              "title": "Count down by two with while",
+              "prompt": "Read one nonnegative integer. Use a `while` loop to print the value, then subtract `2` each turn. Continue while the value is at least `0`.",
+              "hint": "The loop condition can be `number >= 0`, and the update should subtract 2.",
+              "help": {
+                "concept": "A `while` loop can use any consistent state change as long as each update moves the state toward a false condition.",
+                "hint_1": "The loop condition can be `number >= 0`, and the update should subtract 2.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "number = int(input())\n\n# Use a while loop to print number and subtract 2 each turn.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "number = int(input())\n\n# Use a while loop to print number and subtract 2 each turn.\n"
+                }
+              },
+              "solutionCode": "number = int(input())\nwhile number >= 0:\n    print(number)\n    number -= 2\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nwhile number >= 0:\n    print(number)\n    number -= 2\n"
+                }
+              }
+            }
           }
         }
       }

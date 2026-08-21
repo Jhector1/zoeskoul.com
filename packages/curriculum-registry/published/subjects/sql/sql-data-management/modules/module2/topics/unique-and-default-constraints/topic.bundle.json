@@ -485,8 +485,276 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "learning goals"
+        "value": "DEFAULT"
       }
+    },
+    {
+      "id": "practice-unique-user-email",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "PRAGMA index_list(users);",
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "schema.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-default-task-status",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "PRAGMA table_info(tasks);",
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "schema.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

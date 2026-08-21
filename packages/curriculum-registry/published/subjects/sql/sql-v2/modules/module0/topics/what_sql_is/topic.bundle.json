@@ -206,6 +206,303 @@
         "kind": "single_choice",
         "optionId": "a"
       }
+    },
+    {
+      "id": "practice-ask-for-student-names",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        },
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.solutionCode",
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true,
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "practice-ask-for-student-grades",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        },
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.solutionCode",
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true,
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "practice-inspect-student-record-columns",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns",
+      "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "students_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        },
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "students_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.solutionCode",
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true,
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     }
   ]
 }

@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS active_gross_sales\nFROM sales_reporting\nWHERE order_status IN ('Completed', 'Pending')\nGROUP BY category\nORDER BY active_gross_sales DESC, category ASC;"
+            },
+            "practice-retained-where-before-grouping-sketch1": {
+              "title": "Practice: Average Rating for Completed Tech Products",
+              "prompt": "Write a query to find the average customer rating for each product in the 'Tech' category, but only for completed orders. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies WHERE Before Grouping in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "SELECT product_name, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE \nGROUP BY product_name;",
+              "solutionCode": "SELECT product_name, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE category = 'Tech' AND order_status = 'Completed'\nGROUP BY product_name;"
+            },
+            "practice-completed-units-by-category": {
+              "title": "Practice: Filter Before Grouping Completed Units",
+              "prompt": "For completed orders only, sum quantity for each category. Filter rows before grouping and sort by total units descending, then category.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies WHERE Before Grouping in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    category,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nORDER BY completed_units DESC, category ASC;"
             }
           },
           "tryIt": {

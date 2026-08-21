@@ -202,7 +202,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -327,7 +327,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -458,7 +458,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -562,6 +562,435 @@
           "b"
         ]
       }
+    },
+    {
+      "id": "ci-debugging-imports-and-state-4",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterFiles.models_catalog_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "from models.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterFiles.models_catalog_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "from models.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "from models.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Program should print one formatted report line."
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
+    },
+    {
+      "id": "ci-debugging-imports-and-state-5",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/cart.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.models_cart_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/__init__.py",
+          "content": "# package marker",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/cart.py",
+          "content": "class Cart:\n    def __init__(self, owner, items=None):\n        self.owner = owner\n        self.items = [] if items is None else list(items)\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/cart.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.models_cart_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "# package marker",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/cart.py",
+            "content": "class Cart:\n    def __init__(self, owner, items=None):\n        self.owner = owner\n        self.items = [] if items is None else list(items)\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "solutionCode": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+        "solutionFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "# package marker",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/cart.py",
+            "content": "class Cart:\n    def __init__(self, owner, items=None):\n        self.owner = owner\n        self.items = [] if items is None else list(items)\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n0\n",
+            "match": "exact"
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
+    },
+    {
+      "id": "ci-debugging-imports-and-state-6",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/task.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.models_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/__init__.py",
+          "content": "# package marker",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/task.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\n    def is_done(self):\n        return self.done",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/task.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.models_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "# package marker",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\n    def is_done(self):\n        return self.done",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "solutionCode": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+        "solutionFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "# package marker",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\n    def is_done(self):\n        return self.done",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "False\nTrue\n",
+            "match": "exact"
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
     }
   ]
 }

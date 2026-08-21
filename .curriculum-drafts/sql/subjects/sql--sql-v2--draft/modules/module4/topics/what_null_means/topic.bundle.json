@@ -486,6 +486,105 @@
           "message": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.quiz.practice-present-emails.sourceChecks.2.message"
         }
       ]
+    },
+    {
+      "id": "practice-find-missing-email-active-customers",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.practice.practice-find-missing-email-active-customers",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.practice.practice-find-missing-email-active-customers.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "customers_cleanup",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.practice.practice-find-missing-email-active-customers.starterCode",
+        "starterFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.practice.practice-find-missing-email-active-customers.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "query.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "query.sql"
+          ]
+        },
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.practice.practice-find-missing-email-active-customers.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "customers_cleanup",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.practice.practice-find-missing-email-active-customers.solutionCode",
+        "sqlFileOrder": [
+          "query.sql"
+        ],
+        "solutionFiles": [
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.practice.practice-find-missing-email-active-customers.solutionCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sqlFileOrder": [
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true,
+      "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.practice.practice-find-missing-email-active-customers.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-v2--draft.sql--sql-v2--draft-4.what_null_means.practice.practice-find-missing-email-active-customers.solutionCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     }
   ]
 }

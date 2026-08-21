@@ -434,6 +434,296 @@
           "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.sourceChecks.0.message"
         }
       ]
+    },
+    {
+      "id": "ci-add-docstring",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "make_lower",
+            "args": [
+              "HELLO"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "hello",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "make_lower",
+            "args": [
+              "PyThOn"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "python",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "ci-fix-print-vs-return",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "total_price",
+            "args": [
+              10,
+              2
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 12,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "total_price",
+            "args": [
+              7,
+              0.5
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 7.5,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "ci-write-contract-function",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "repeat_word",
+            "args": [
+              "ha",
+              3
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "hahaha",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "repeat_word",
+            "args": [
+              "go",
+              1
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "go",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     }
   ]
 }

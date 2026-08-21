@@ -243,6 +243,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-not-equal-zero": {
+              "title": "Check whether a number is nonzero",
+              "prompt": "Read one integer and print the boolean result of checking whether it is not equal to `0`.",
+              "hint": "Use the `!=` comparison operator.",
+              "help": {
+                "concept": "A comparison expression produces a boolean value directly, including `True` for values that are not equal and `False` for values that are equal.",
+                "hint_1": "Use the `!=` comparison operator.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "number = int(input())\n\n# Print whether number is not equal to 0.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "number = int(input())\n\n# Print whether number is not equal to 0.\n"
+                }
+              },
+              "solutionCode": "number = int(input())\nprint(number != 0)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nprint(number != 0)\n"
+                }
+              }
+            }
           }
         }
       }

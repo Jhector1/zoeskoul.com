@@ -113,6 +113,93 @@
                 "c": "It creates a backup table",
                 "d": "It changes the database schema"
               }
+            },
+            "practice-preview-update-verify-id-five": {
+              "title": "Practice: Preview, Update, Verify One Row",
+              "prompt": "Use a preview SELECT before changing row `id = 5`, then set its status to `active`. Finish with a verification query that returns id, name, and status for row 5.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Preview, Change, Verify in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;\n\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 5;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;\n\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 5;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nSELECT id, name, status\nFROM inventory_items\nWHERE id = 5;\n\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 5;\n\n-- file: query.sql\nSELECT id, name, status\nFROM inventory_items\nWHERE id = 5;"
+            },
+            "practice-preview-price-change-id-three": {
+              "title": "Practice: Preview and Verify a Price Change",
+              "prompt": "Preview row `id = 3`, update its price to `42.00`, then verify the final id, name, and price for that row.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Preview, Change, Verify in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;\n\nUPDATE inventory_items\nSET price = 42.00\nWHERE id = 3;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;\n\nUPDATE inventory_items\nSET price = 42.00\nWHERE id = 3;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id = 3;\n\nUPDATE inventory_items\nSET price = 42.00\nWHERE id = 3;\n\n-- file: query.sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id = 3;"
+            },
+            "practice-preview-delete-test-decor": {
+              "title": "Practice: Preview, Delete, Verify a Target Set",
+              "prompt": "Preview rows in category `Decor` that are test items, delete exactly that reviewed set, then verify that no matching rows remain.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Preview, Change, Verify in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nSELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\n-- file: query.sql\nSELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
             }
           }
         }

@@ -476,6 +476,274 @@
         "kind": "fill_blank_choice",
         "value": "'Sticker Pack'"
       }
+    },
+    {
+      "id": "practice-update-one-row-price",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-price.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT id, name, price\nFROM inventory_items\nWHERE id IN (4, 5, 6)\nORDER BY id;",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-update-one-row-status",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-1-controlled-updates-deletes.updating-one-row-precisely.practice.practice-update-one-row-status.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT id, name, status\nFROM inventory_items\nWHERE id IN (2, 3, 4)\nORDER BY id;",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

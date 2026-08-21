@@ -77,35 +77,35 @@
               ]
             },
             "multi-choice-verify": {
-              "title": "Verifying Changes",
-              "prompt": "After executing an UPDATE or DELETE, what should you verify? Select all that apply.",
-              "hint": "Consider both the affected and unaffected rows.",
+              "title": "What Successful Verification Confirms",
+              "prompt": "Which outcomes should a successful post-mutation verification confirm? Select all that apply.",
+              "hint": "Check both the intended target and rows that were supposed to stay untouched.",
               "help": {
-                "concept": "Verification ensures both intended changes and data integrity.",
-                "hint_1": "Check that only the intended rows were changed.",
-                "hint_2": "Ensure that unaffected rows remain unchanged."
+                "concept": "Verification confirms the intended final values and protects against collateral changes outside the approved target set.",
+                "hint_1": "Inspect the rows you meant to change.",
+                "hint_2": "Also confirm that unrelated rows still look as expected."
               },
               "options": {
-                "a": "The affected rows were updated correctly",
-                "b": "Unintended rows were also changed",
-                "c": "Unchanged rows remain as expected",
-                "d": "The SQL syntax was correct"
+                "a": "The intended rows now have the approved values.",
+                "b": "Every row in the table was changed.",
+                "c": "Rows outside the target still have their expected values.",
+                "d": "The SQL statement was shorter than the preview query."
               }
             },
             "drag-reorder-mutation-steps": {
-              "title": "Order the Steps: Safe Mutation",
-              "prompt": "Arrange the steps for safely executing a data mutation in SQL.",
-              "hint": "Start with previewing the target rows.",
+              "title": "Order the Verification Workflow",
+              "prompt": "Arrange the steps for a reviewed UPDATE or DELETE from first action to final safety check.",
+              "hint": "Begin with the read-only preview and end by checking rows outside the target.",
               "help": {
-                "concept": "Following a structured process ensures safe data mutations.",
-                "hint_1": "Begin with a SELECT to preview the target rows.",
-                "hint_2": "End with verifying the changes made."
+                "concept": "The workflow establishes the target, performs the approved mutation, verifies the changed rows, and then checks that unrelated rows stayed untouched.",
+                "hint_1": "Start with “Preview target rows with SELECT”.",
+                "hint_2": "Finish with “Check that unrelated rows stayed unchanged”."
               },
               "tokens": {
                 "t1": "Preview target rows with SELECT",
-                "t2": "Execute the mutation with UPDATE or DELETE",
-                "t3": "Verify the changes made",
-                "t4": "Ensure no unintended rows are affected"
+                "t2": "Execute the approved UPDATE or DELETE",
+                "t3": "Re-run a SELECT for the changed rows",
+                "t4": "Check that unrelated rows stayed unchanged"
               }
             },
             "single-choice-where": {
@@ -143,7 +143,7 @@
             },
             "practice-update-reviewed-target-set": {
               "title": "Practice: Update a Reviewed Target Set",
-              "prompt": "The pricing team approved a price of `10.99` for legitimate Accessories inventory. In `operations.sql`, use an `UPDATE` with a `WHERE` condition that limits the change to Accessories rows that are not test data. In `query.sql`, inspect the affected rows after the change.",
+              "prompt": "The pricing team approved a price of `10.99` for legitimate Accessories inventory. In `operations.sql`, use an `UPDATE` with a `WHERE` condition that limits the change to Accessories rows that are not test data. In `query.sql`, inspect the affected rows after the change. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "The approved target needs both the category and non-test conditions.",
               "help": {
                 "concept": "A reviewed filter should remain the mutation's safety boundary.",
@@ -172,6 +172,64 @@
                 "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;"
+            },
+            "practice-preview-inactive-test-targets": {
+              "title": "Practice: Preview Inactive Test Targets",
+              "prompt": "Before any mutation, return the id, name, status, and is_test values for rows that are both inactive and test items. Sort by id.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Previewing Mutation Targets in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- No mutation is required for this preview-only practice.\n",
+              "solutionCode": "",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- No mutation is required for this preview-only practice.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": ""
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, status, is_test\nFROM inventory_items\nWHERE status = 'inactive' AND is_test = 1\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\n\n\n-- file: query.sql\nSELECT id, name, status, is_test\nFROM inventory_items\nWHERE status = 'inactive' AND is_test = 1\nORDER BY id;"
+            },
+            "practice-preview-accessory-price-targets": {
+              "title": "Practice: Preview Accessory Price Targets",
+              "prompt": "Preview the rows that would be affected by a price update limited to non-test `Accessories` items. Return id, name, category, price, and is_test, sorted by id.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Previewing Mutation Targets in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- No mutation is required for this preview-only practice.\n",
+              "solutionCode": "",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- No mutation is required for this preview-only practice.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": ""
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, category, price, is_test\nFROM inventory_items\nWHERE category = 'Accessories' AND is_test = 0\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\n\n\n-- file: query.sql\nSELECT id, name, category, price, is_test\nFROM inventory_items\nWHERE category = 'Accessories' AND is_test = 0\nORDER BY id;"
             }
           }
         }

@@ -220,7 +220,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-print-literals",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -300,7 +300,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-print-expression",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -380,7 +380,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -449,6 +449,319 @@
           "pattern": "(?s)^\\s*print\\(\\s*[\"\\']hello[\"\\']\\s*\\)\\s*$",
           "message": "@:topics.python--python-v2--draft.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.sourceChecks.0.message",
           "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-read-and-print",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print",
+      "language": "python",
+      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "hello\n",
+            "stdout": "hello\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Python is fun\n",
+            "stdout": "Python is fun\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "text = input()\nprint(text)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "text = input()\nprint(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "text = input()\nprint(text)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "text = input()\nprint(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "ci-read-number-text",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text",
+      "language": "python",
+      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "42\n",
+            "stdout": "You typed: 42\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "3.14\n",
+            "stdout": "You typed: 3.14\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "value = input()\nprint(\"You typed:\", value)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "value = input()\nprint(\"You typed:\", value)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bvalue\\b",
+            "message": "Use the variable name `value` in your solution."
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "value = input()\nprint(\"You typed:\", value)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "value = input()\nprint(\"You typed:\", value)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bvalue\\b",
+          "message": "Use the variable name `value` in your solution."
+        }
+      ]
+    },
+    {
+      "id": "ci-three-lines",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines",
+      "language": "python",
+      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "start\n5\ndone\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "start\n5\ndone\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"start\")\nprint(4 + 1)\nprint(\"done\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"start\")\nprint(4 + 1)\nprint(\"done\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "print(\"start\")\nprint(4 + 1)\nprint(\"done\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"start\")\nprint(4 + 1)\nprint(\"done\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
         }
       ]
     }

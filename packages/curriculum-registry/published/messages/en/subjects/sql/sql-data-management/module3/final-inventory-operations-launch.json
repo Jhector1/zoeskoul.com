@@ -37,7 +37,7 @@
             "steps": {
               "ci_final_capstone_step1": {
                 "title": "Build the Product Catalog",
-                "prompt": "Start the launch database with a `products` table. Use an integer primary id. Require a unique SKU, name, category, price, and status. New products should begin with a `draft` status when no status is supplied, while notes may remain empty. Inspect the stored product definition in `query.sql`.",
+                "prompt": "Start the launch database with a `products` table. Use an integer primary id. Require a unique SKU, name, category, price, and status. New products should begin with a `draft` status when no status is supplied, while notes may remain empty. Inspect the stored product definition in `query.sql`. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "This first milestone establishes the complete product catalog rules before any rows are loaded.",
                 "help": {
                   "concept": "A launch schema should encode identity, required values, uniqueness, and defaults before data arrives.",
@@ -69,7 +69,7 @@
               },
               "ci_final_capstone_step2": {
                 "title": "Add the Stock Event Ledger",
-                "prompt": "Carry the product schema forward. Add `stock_events` with an integer primary id, a required product id, a required integer quantity change, and a required event type that defaults to `receipt`. Notes may remain empty. Connect each event's product id to the product table, then inspect both stored table definitions.",
+                "prompt": "Keep the completed `products` definition. Add `stock_events` with an integer primary id, a required product id, a required integer quantity change, and a required event type that defaults to `receipt`. Notes may remain NULL. Connect each event's product id to `products(id)`, then inspect both table definitions. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Preserve the completed product table and add only the new event-ledger definition.",
                 "help": {
                   "concept": "The child table records stock history while the foreign key protects its relationship to products.",
@@ -104,7 +104,7 @@
               },
               "ci_final_capstone_step3": {
                 "title": "Load the Approved Products",
-                "prompt": "Carry the completed schema forward. In `seed.sql`, load the three approved catalog rows using one multi-row INSERT with an explicit column list. Let the product status default apply rather than supplying status values. In `query.sql`, verify the loaded products in id order.",
+                "prompt": "With both tables defined, use `seed.sql` to load the three approved catalog rows in one multi-row INSERT with an explicit column list. Omit `status` so SQLite applies the product default. In `query.sql`, verify the loaded products in id order. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, and finally `query.sql`.",
                 "hint": "The schema is complete; this milestone adds only the approved product seed data.",
                 "help": {
                   "concept": "Seed data belongs in its own file and should rely on schema defaults when the approved input omits them.",
@@ -142,7 +142,7 @@
               },
               "ci_final_capstone_step4": {
                 "title": "Load the Opening Stock Events",
-                "prompt": "Carry the product seed forward. Add the four approved opening stock events in `seed.sql` using one multi-row INSERT with an explicit column list. Keep the completed schema and product rows unchanged. Verify the event ledger in id order.",
+                "prompt": "Keep the three approved product rows in `seed.sql`, then add the four opening stock events with one multi-row INSERT and an explicit column list. Leave the schema and product batch unchanged. Verify the event ledger in id order. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, and finally `query.sql`.",
                 "hint": "Append the event batch after the existing product seed.",
                 "help": {
                   "concept": "A cumulative seed file preserves earlier approved rows while adding the next approved batch.",
@@ -183,7 +183,7 @@
               },
               "ci_final_capstone_step5": {
                 "title": "Apply the Launch Correction",
-                "prompt": "Carry the schema and seed files forward. The launch review approved a correction for product 1: its price should become `24.99` and its status should become `active`. Apply one scoped update in `operations.sql` that changes only that product, then verify product 1.",
+                "prompt": "The schema and seed data are now fixed. The launch review approved one correction for product 1: set its price to `24.99` and its status to `active`. Add a scoped UPDATE in `operations.sql` that changes only that product, then verify product 1. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, then `operations.sql`, and finally `query.sql`.",
                 "hint": "Use the stable product id as the safety boundary.",
                 "help": {
                   "concept": "A production correction should combine the approved assignments with a narrow row condition.",
@@ -227,7 +227,7 @@
               },
               "ci_final_capstone_step6": {
                 "title": "Remove the Placeholder and Finalize",
-                "prompt": "Carry the approved product correction forward. Quality assurance now authorizes removal of the stock event whose note is `Test event`. Add one scoped delete for that placeholder only. In `query.sql`, return the remaining stock events in id order for the final operational handoff.",
+                "prompt": "Keep the approved product correction. Quality assurance now authorizes removal of the stock event whose note is `Test event`. Add one scoped DELETE for that placeholder only. In `query.sql`, return the remaining stock events in id order for the final operational handoff. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, then `operations.sql`, and finally `query.sql`.",
                 "hint": "Preserve the earlier update and add only the newly approved deletion.",
                 "help": {
                   "concept": "The final milestone preserves earlier approved mutations while removing one confirmed placeholder.",
@@ -274,7 +274,7 @@
           "practice": {
             "practice-launch-review-mutations": {
               "title": "Practice: Rehearse the Launch Review",
-              "prompt": "Before the capstone, rehearse a smaller launch review. The schema and seed data are already complete. In `operations.sql`, change product 2 so its price becomes `22.50` and its status becomes `active`, using its id as the safety boundary. Then remove the stock event whose note is `Placeholder`. In `query.sql`, verify product 2's final price and status and confirm that no placeholder event remains.",
+              "prompt": "Before the capstone, rehearse a smaller launch review. The schema and seed data are already complete. In `operations.sql`, change product 2 so its price becomes `22.50` and its status becomes `active`, using its id as the safety boundary. Then remove the stock event whose note is `Placeholder`. In `query.sql`, verify product 2's final price and status and confirm that no placeholder event remains. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, then `operations.sql`, and finally `query.sql`.",
               "hint": "Preserve the supplied schema and seed data. Add one scoped update and one scoped delete.",
               "help": {
                 "concept": "A launch review combines precise mutations with final state verification.",

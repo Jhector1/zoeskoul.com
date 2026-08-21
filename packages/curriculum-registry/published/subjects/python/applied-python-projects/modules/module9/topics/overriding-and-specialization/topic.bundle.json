@@ -326,6 +326,512 @@
         "kind": "single_choice",
         "optionId": "b"
       }
+    },
+    {
+      "id": "catalog-step-book-and-movie",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.models_catalog_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.models_book_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.models_movie_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.models_catalog_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.models_book_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.models_movie_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BookItem",
+            "message": "Define a BookItem class."
+          },
+          {
+            "type": "defines_class",
+            "className": "MovieItem",
+            "message": "Define a MovieItem class."
+          },
+          {
+            "type": "method_returns",
+            "className": "BookItem",
+            "constructorArgs": [
+              "Clean Code",
+              "Robert C. Martin"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "display_name",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Clean Code by Robert C. Martin",
+            "expectedKind": "value",
+            "message": "BookItem.display_name() should return the book label."
+          },
+          {
+            "type": "method_returns",
+            "className": "MovieItem",
+            "constructorArgs": [
+              "Arrival",
+              116
+            ],
+            "constructorArgKinds": [],
+            "methodName": "display_name",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Arrival (116 min)",
+            "expectedKind": "value",
+            "message": "MovieItem.display_name() should return the movie label."
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
+    },
+    {
+      "id": "catalog-step-mixed-report",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.models_catalog_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.models_book_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.models_movie_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.services_reporting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "def build_display_report(items):\n    return [item.display_name() for item in items]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.models_catalog_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.models_book_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.models_movie_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.services_reporting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "def build_display_report(items):\n    return [item.display_name() for item in items]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "solutionCode": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "def build_display_report(items):\n    return [item.display_name() for item in items]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Notebook\nRefactoring by Martin Fowler\nUp (96 min)\n",
+            "match": "exact"
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
+    },
+    {
+      "id": "practice-specialized-display-label",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Item: Guide\nSong: Sunrise\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

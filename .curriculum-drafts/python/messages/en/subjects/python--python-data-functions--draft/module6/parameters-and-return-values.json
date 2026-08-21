@@ -143,6 +143,42 @@
                   "message": "Call `rectangle_area(...)` because that function call is explicitly required by the prompt."
                 }
               }
+            },
+            "ci-calculate-tip": {
+              "title": "Return a tip amount",
+              "prompt": "Write `calculate_tip(bill, percent)` so it returns just the tip amount for that bill and percent.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
+              "solutionCode": "def calculate_tip(bill, percent):\n    return bill * percent / 100"
+            },
+            "ci-first-item": {
+              "title": "Return the first list item",
+              "prompt": "Write `first_item(items)` so it returns the first element from the list.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass",
+              "solutionCode": "def first_item(items):\n    return items[0]"
+            },
+            "ci-make-label": {
+              "title": "Return a label string",
+              "prompt": "Write `make_label(item, count)` so it returns a label string like `Apples: 3`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
+              "solutionCode": "def make_label(item, count):\n    return item + \": \" + str(count)"
             }
           },
           "tryIt": {

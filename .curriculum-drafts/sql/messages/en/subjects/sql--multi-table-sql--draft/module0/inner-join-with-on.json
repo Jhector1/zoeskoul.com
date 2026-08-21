@@ -140,6 +140,30 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id;"
+            },
+            "practice-retained-inner-join-sketch0": {
+              "title": "Practice: INNER JOIN with Students and Enrollments",
+              "prompt": "Write a query to list all students and the courses they are enrolled in using INNER JOIN.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies INNER JOIN with ON in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;"
+            },
+            "practice-retained-inner-join-sketch1": {
+              "title": "Practice: INNER JOIN with Courses and Departments",
+              "prompt": "Write a query to list all courses along with their department names using INNER JOIN.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies INNER JOIN with ON in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT courses.title, departments.name\nFROM courses\nINNER JOIN departments ON courses.department_id = departments.id;"
             }
           }
         }

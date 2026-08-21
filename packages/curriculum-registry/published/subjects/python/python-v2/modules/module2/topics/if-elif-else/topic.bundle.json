@@ -263,7 +263,7 @@
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -353,7 +353,7 @@
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -443,7 +443,7 @@
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -538,7 +538,7 @@
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -628,7 +628,7 @@
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -709,6 +709,96 @@
           "normalizeWhitespace": false
         }
       ]
+    },
+    {
+      "id": "practice-temperature-branches",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-3\n",
+            "stdout": "freezing\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "12\n",
+            "stdout": "cool\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "25\n",
+            "stdout": "warm\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

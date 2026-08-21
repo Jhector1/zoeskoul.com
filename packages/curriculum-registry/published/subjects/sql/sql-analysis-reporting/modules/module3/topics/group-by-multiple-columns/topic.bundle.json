@@ -313,6 +313,130 @@
         ]
       },
       "showExpectedExample": true
+    },
+    {
+      "id": "practice-retained-group-by-multiple-columns-sketch1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-retained-group-by-multiple-columns-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-retained-group-by-multiple-columns-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "sales_reporting",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-retained-group-by-multiple-columns-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-retained-group-by-multiple-columns-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_reporting",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-retained-group-by-multiple-columns-sketch1.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-region-status-order-counts",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-region-status-order-counts",
+      "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-region-status-order-counts.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "sales_reporting",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-region-status-order-counts.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-region-status-order-counts.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_reporting",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-multiple-columns.practice.practice-region-status-order-counts.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

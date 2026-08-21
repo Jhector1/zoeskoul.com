@@ -116,7 +116,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -201,7 +201,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -291,7 +291,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -381,7 +381,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -471,7 +471,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -561,7 +561,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -651,7 +651,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [

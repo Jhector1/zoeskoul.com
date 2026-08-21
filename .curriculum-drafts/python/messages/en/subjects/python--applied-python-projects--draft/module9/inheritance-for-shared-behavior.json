@@ -185,6 +185,78 @@
                 "c": "Let `CatalogItem` initialize title, then let `Book` add author after calling `super().__init__(title)`.",
                 "d": "Put both values in `main.py` and keep them off the objects."
               }
+            },
+            "ci-inheritance-mixed-count-service": {
+              "title": "Count mixed catalog items with one shared method",
+              "prompt": "You are building a quick inventory summary. `Book` and `Movie` should both inherit from `CatalogItem`, and `CatalogItem` should define `is_available()` that returns `True` when `stock > 0`. In `services/inventory_service.py`, complete `count_available(items)` so it returns how many objects in the mixed list are available. In `main.py`, use `Book(\"Dune\", 3)` and `Movie(\"Arrival\", 0)` and print the count. This matters because one shared base method lets a service work across different subclasses.",
+              "hint": "Give both subclasses the same inherited availability rule, then count how many return `True`.",
+              "help": {
+                "concept": "A shared base-class method creates a common contract for subclasses. Services can then loop through mixed objects and call the same method on each one.",
+                "hint_1": "`is_available()` should check the stored `stock` value in the base class.",
+                "hint_2": "In the service function, increase the count only when `item.is_available()` is true."
+              },
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, stock):\n        self.title = title\n        self.stock = stock\n\n    def is_available(self):\n        return self.stock > 0"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    pass"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    pass"
+                },
+                "services_inventory_service_py": {
+                  "content": "def count_available(items):\n    pass"
+                }
+              }
+            },
+            "ci-inheritance-shared-price-method": {
+              "title": "Share a discount method through inheritance",
+              "prompt": "You are updating prices in a shop catalog. In `models/base_item.py`, complete `CatalogItem` so it stores `title` and `price`, and add `discounted_price(percent)` that returns the reduced price. In `models/book.py`, make `Book` inherit from `CatalogItem` and add `author`. In `main.py`, create `Book(\"Clean Code\", 30, \"Robert C. Martin\")` and print the result of `discounted_price(20)`. This matters because shared business rules belong in the base class instead of being copied into every subclass.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self):\n        pass"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def discounted_price(self, amount):\n        pass"
+                }
+              }
+            },
+            "practice-inherit-shared-label": {
+              "title": "Inherit a shared label method",
+              "prompt": "Define a base class `Vehicle` that stores `name` and has `label()` returning `Vehicle: <name>`. Define `Bike(Vehicle)` without rewriting `label()`. Create `Bike(\"Comet\")` and print its inherited label.",
+              "hint": "The subclass can use the base constructor and method without defining them again.",
+              "help": {
+                "concept": "Inheritance lets a subclass reuse behavior that is genuinely shared with its base class.",
+                "hint_1": "The subclass can use the base constructor and method without defining them again.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Vehicle:\n    def __init__(self, name):\n        # store the shared name\n        pass\n\n    def label(self):\n        # return Vehicle: <name>\n        pass\n\nclass Bike(Vehicle):\n    pass\n\nbike = Bike(\"Comet\")\nprint(bike.label())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Vehicle:\n    def __init__(self, name):\n        # store the shared name\n        pass\n\n    def label(self):\n        # return Vehicle: <name>\n        pass\n\nclass Bike(Vehicle):\n    pass\n\nbike = Bike(\"Comet\")\nprint(bike.label())\n"
+                }
+              },
+              "solutionCode": "class Vehicle:\n    def __init__(self, name):\n        self.name = name\n\n    def label(self):\n        return f\"Vehicle: {self.name}\"\n\nclass Bike(Vehicle):\n    pass\n\nbike = Bike(\"Comet\")\nprint(bike.label())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Vehicle:\n    def __init__(self, name):\n        self.name = name\n\n    def label(self):\n        return f\"Vehicle: {self.name}\"\n\nclass Bike(Vehicle):\n    pass\n\nbike = Bike(\"Comet\")\nprint(bike.label())\n"
+                }
+              }
             }
           }
         }

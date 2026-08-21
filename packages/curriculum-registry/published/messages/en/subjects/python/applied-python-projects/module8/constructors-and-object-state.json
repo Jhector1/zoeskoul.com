@@ -239,6 +239,39 @@
                 "constructor",
                 "self"
               ]
+            },
+            "ci-constructors-and-object-state-add-method": {
+              "title": "Add a summary method that reads object state",
+              "prompt": "The tracker wants a readable summary for each transaction. In `models/transaction.py`, keep the constructor and add a `summary` method that returns text in this format: `Coffee: -4` or `Paycheck: 1200`. The method should build the string from the object's stored attributes.",
+              "hint": "Read the task \"Add a summary method that reads object state\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add a summary method that reads object state\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Write your code below."
+            },
+            "ci-constructors-and-object-state-deposit-method": {
+              "title": "Track deposits on an account object",
+              "prompt": "Return to `models/account.py`. Define an `Account` class with a constructor that stores `owner` and `balance`, then add a `deposit` method that increases the balance. The provided workspace will create an account, make one or more deposits, and inspect the final stored balance.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your code below."
+            },
+            "ci-constructors-and-object-state-ledger-step": {
+              "title": "Build a ledger account that keeps owner, balance, and note",
+              "prompt": "The tracker now wants a slightly richer account model. In `models/account.py`, define an `Account` class whose constructor accepts `owner`, `balance`, and `note`. Store all three as attributes. Then add a `deposit` method that increases `balance` and a `describe` method that returns text in this format: `Rae | 90 | starter fund`. The workspace will create an object, update it, and call `describe()`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your code below."
             }
           }
         }

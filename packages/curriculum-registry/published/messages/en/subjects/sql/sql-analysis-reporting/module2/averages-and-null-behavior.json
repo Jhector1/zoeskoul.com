@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    ROUND(AVG(customer_rating), 2) AS rated_only_average,\n    ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average\nFROM sales_reporting;"
+            },
+            "practice-retained-averages-null-sketch0": {
+              "title": "Practice: Calculate Average Customer Rating",
+              "prompt": "Write a query to calculate the average `customer_rating` for all completed orders in the `sales_reporting` table. Remember to ignore `NULL` values.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Averages and NULL Behavior in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            },
+            "practice-retained-averages-null-sketch1": {
+              "title": "Practice: Calculate Average Unit Price",
+              "prompt": "Write a query to find the average `unit_price` for all completed orders in the `sales_reporting` table. Ensure that `NULL` values are not included in the calculation.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Averages and NULL Behavior in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT AVG(unit_price) AS average_price\nFROM sales_reporting\nWHERE order_status = 'Completed';"
             }
           },
           "tryIt": {

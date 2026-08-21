@@ -231,6 +231,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-range-step-three": {
+              "title": "Count by threes with range",
+              "prompt": "Read one integer `stop`. Use `range(0, stop, 3)` to print `0`, `3`, `6`, and so on while each value is less than `stop`.",
+              "hint": "Use all three `range` arguments: start, stop, and step.",
+              "help": {
+                "concept": "The third argument to `range` controls the step size, allowing a loop to advance by more than one each iteration.",
+                "hint_1": "Use all three `range` arguments: start, stop, and step.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "stop = int(input())\n\n# Use range(0, stop, 3) and print each value.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "stop = int(input())\n\n# Use range(0, stop, 3) and print each value.\n"
+                }
+              },
+              "solutionCode": "stop = int(input())\nfor number in range(0, stop, 3):\n    print(number)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "stop = int(input())\nfor number in range(0, stop, 3):\n    print(number)\n"
+                }
+              }
+            }
           }
         }
       }

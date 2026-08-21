@@ -173,6 +173,72 @@
                 "movie_label",
                 "__class__"
               ]
+            },
+            "project-polymorphic-collections-step4": {
+              "title": "Add a new subclass without changing the service",
+              "prompt": "Add a `Magazine` object to a mixed collection that already contains book and video objects. Complete `Magazine.display_name()` so the same loop can call `display_name()` on every item and print three labels. The magazine label should be `Magazine: Science Weekly`.",
+              "hint": "Give `Magazine` the same method name used by the other objects in the collection.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())"
+                },
+                "models_magazine_py": {
+                  "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        pass"
+                }
+              }
+            },
+            "project-polymorphic-collections-step5": {
+              "title": "Build a checkout summary from mixed rentals",
+              "prompt": "A rental desk stores book and movie rentals in the same list. Complete `checkout_line()` in both classes so one loop can print a line for each object without checking its type. Use the formats `Book rental: <title> (<days> days)` and `Movie rental: <title> (<days> days)`.",
+              "hint": "Both classes need the same method name, but each can format its own label.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())"
+                },
+                "models_book_rental_py": {
+                  "content": "class BookRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        pass"
+                },
+                "models_movie_rental_py": {
+                  "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        pass"
+                }
+              }
+            },
+            "project-polymorphic-collections-step6": {
+              "title": "Create a stock alert service for mixed inventory items",
+              "prompt": "A store keeps book and supply objects in one inventory list. Complete each class's `alert_line()` method and `low_stock_lines(items)` so the service returns alerts only for objects whose `quantity` is below 3. The service should call the shared `alert_line()` method instead of checking item types.",
+              "hint": "Filter by the shared `quantity` attribute, then call `alert_line()` on each matching object.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)"
+                },
+                "models_book_item_py": {
+                  "content": "class BookItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity\n\n    def alert_line(self):\n        pass"
+                },
+                "models_supply_item_py": {
+                  "content": "class SupplyItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def alert_line(self):\n        pass"
+                },
+                "services_alert_service_py": {
+                  "content": "def low_stock_lines(items):\n    pass"
+                }
+              }
             }
           }
         }

@@ -399,8 +399,8 @@
         "tokenIds": [
           "t1",
           "t2",
-          "t4",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
@@ -432,6 +432,274 @@
         "kind": "fill_blank_choice",
         "value": "'Decor'"
       }
+    },
+    {
+      "id": "practice-preview-inactive-test-targets",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT id, name, status, is_test\nFROM inventory_items\nWHERE status = 'inactive' AND is_test = 1\nORDER BY id;",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-preview-accessory-price-targets",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT id, name, category, price, is_test\nFROM inventory_items\nWHERE category = 'Accessories' AND is_test = 0\nORDER BY id;",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

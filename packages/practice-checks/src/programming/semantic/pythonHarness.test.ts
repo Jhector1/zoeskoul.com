@@ -97,7 +97,6 @@ describe("buildPythonSemanticHarness", () => {
                             ],
                         ],
                     ],
-                    argKinds: ["dict_entries"],
                     expected: false,
                     expectedKind: "value",
                 },
@@ -108,7 +107,34 @@ describe("buildPythonSemanticHarness", () => {
             ok: true,
             userStdout: "",
         });
-    });it("compares returned class instances to expected list_of_dict_entries", () => {
+    });
+
+    it("decodes a one-entry dict_entries argument before calling the function", () => {
+        const result = runHarness({
+            userCode: [
+                "def set_price(prices, item, amount):",
+                "    prices[item] = amount",
+                "    return prices",
+            ].join("\n"),
+            semanticChecks: [
+                {
+                    type: "function_returns",
+                    functionName: "set_price",
+                    args: [[["apple", 2]], "orange", 5],
+                    argKinds: ["dict_entries", "value", "value"],
+                    expected: [["apple", 2], ["orange", 5]],
+                    expectedKind: "dict_entries",
+                },
+            ],
+        });
+
+        expect(result).toEqual({
+            ok: true,
+            userStdout: "",
+        });
+    });
+
+    it("compares returned class instances to expected list_of_dict_entries", () => {
         const result = runHarness({
             userCode: [
                 "class Task:",

@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_primary_key_and_not_null_constraints_sketch0": {
               "title": "Give Products Identity and a Required Name",
-              "prompt": "Create a `products` table where `product_id` is the stable primary identifier and `product_name` is required text. Inspect the completed table afterward.",
+              "prompt": "Create a `products` table where `product_id` is the stable primary identifier and `product_name` is required text. Inspect the completed table afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "The schema needs one identity rule and one required-value rule.",
               "help": {
                 "concept": "PRIMARY KEY identifies rows; NOT NULL makes a value mandatory.",
@@ -85,30 +85,30 @@
               }
             },
             "fill-blank-primary-key": {
-              "title": "PRIMARY KEY Declaration",
-              "prompt": "Fill in the blank to declare a PRIMARY KEY for the `id` column.",
-              "hint": "Use the correct SQL syntax for declaring a PRIMARY KEY.",
+              "title": "Define an Integer Row Identifier",
+              "prompt": "Complete the column definition `id [blank1]` so `id` is the integer primary identifier used in this course's SQLite tables.",
+              "hint": "The blank needs both the integer type and the row-identity constraint.",
               "help": {
-                "concept": "A PRIMARY KEY is declared to ensure unique identification of rows.",
-                "hint_1": "The PRIMARY KEY is declared in the column definition.",
-                "hint_2": "Use PRIMARY KEY for the `id` column."
+                "concept": "In these SQLite schemas, `INTEGER PRIMARY KEY` declares the integer id column as the table's primary row identifier.",
+                "hint_1": "A type alone would not make the column the primary key.",
+                "hint_2": "The course uses integer ids for these row identities."
               },
               "template": "CREATE TABLE example (id [blank1], name TEXT);",
               "choices": [
                 "INTEGER PRIMARY KEY",
                 "TEXT PRIMARY KEY",
                 "REAL PRIMARY KEY",
-                "PRIMARY KEY"
+                "INTEGER"
               ]
             },
             "fill-blank-not-null": {
-              "title": "NOT NULL Constraint",
-              "prompt": "Fill in the blank to enforce a NOT NULL constraint on the `name` column.",
-              "hint": "Use the correct SQL syntax for NOT NULL.",
+              "title": "Define a Required Text Name",
+              "prompt": "Complete the column definition `name [blank1]` so `name` stores text and cannot be NULL.",
+              "hint": "The blank needs the text type plus the constraint that rejects NULL.",
               "help": {
-                "concept": "NOT NULL ensures that a column must have a value, preventing NULL entries.",
-                "hint_1": "The NOT NULL constraint is added after the column type.",
-                "hint_2": "Use NOT NULL for the required `name` column."
+                "concept": "`TEXT NOT NULL` declares a text column and requires every stored row to provide a non-NULL value.",
+                "hint_1": "TEXT provides the data type.",
+                "hint_2": "NOT NULL provides the required-value rule."
               },
               "template": "CREATE TABLE example (id INTEGER, name [blank1]);",
               "choices": [
@@ -135,24 +135,24 @@
               }
             },
             "drag-reorder-table-creation": {
-              "title": "Steps to Create a Table",
-              "prompt": "Arrange the steps to create a table with a PRIMARY KEY and NOT NULL constraint.",
-              "hint": "Start with defining the table and end with specifying constraints.",
+              "title": "Build a Constrained Table Definition",
+              "prompt": "Arrange the fragments so they form a table with an integer primary id and a required text name.",
+              "hint": "Open the CREATE TABLE statement, define the id, define the name, then close the table definition.",
               "help": {
-                "concept": "Creating a table involves defining columns and constraints in order.",
-                "hint_1": "Begin with the CREATE TABLE statement.",
-                "hint_2": "End with specifying the PRIMARY KEY and NOT NULL constraints."
+                "concept": "The table definition contains complete column definitions, including each column's type and constraints.",
+                "hint_1": "Start with “CREATE TABLE products (”.",
+                "hint_2": "Finish with “);”."
               },
               "tokens": {
-                "t1": "Define table name",
-                "t2": "Specify column types",
-                "t3": "Declare PRIMARY KEY",
-                "t4": "Add NOT NULL constraint"
+                "t1": "CREATE TABLE products (",
+                "t2": "id INTEGER PRIMARY KEY,",
+                "t3": "name TEXT NOT NULL",
+                "t4": ");"
               }
             },
             "practice-required-order-columns": {
               "title": "Practice: Protect Required Order Data",
-              "prompt": "Create an `orders` table where `order_id` uniquely identifies each row and every order must include a customer name. Inspect the stored definition afterward.",
+              "prompt": "Create an `orders` table where `order_id` uniquely identifies each row and every order must include a customer name. Inspect the stored definition afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "Use one identity constraint and one required-value constraint.",
               "help": {
                 "concept": "Identity and completeness rules belong in the schema.",
@@ -181,6 +181,64 @@
               "sourceCheckMessages": {
                 "requiredOrderRules": "Make `order_id` the primary key and require `customer_name`."
               }
+            },
+            "practice-author-required-columns": {
+              "title": "Practice: Require an Author Name",
+              "prompt": "Create an `authors` table with `author_id` as INTEGER PRIMARY KEY and `author_name` as TEXT NOT NULL. Verify the column metadata.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies PRIMARY KEY and NOT NULL Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE authors (\n    author_id INTEGER PRIMARY KEY,\n    author_name TEXT NOT NULL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE authors (\n    author_id INTEGER PRIMARY KEY,\n    author_name TEXT NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA table_info(authors);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE authors (\n    author_id INTEGER PRIMARY KEY,\n    author_name TEXT NOT NULL\n);\n\n-- file: query.sql\nPRAGMA table_info(authors);"
+            },
+            "practice-ticket-required-summary": {
+              "title": "Practice: Require a Ticket Summary",
+              "prompt": "Create a `tickets` table with `ticket_id` as INTEGER PRIMARY KEY and `summary` as TEXT NOT NULL. Verify the column metadata.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies PRIMARY KEY and NOT NULL Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA table_info(tickets);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL\n);\n\n-- file: query.sql\nPRAGMA table_info(tickets);"
             }
           }
         }

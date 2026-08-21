@@ -240,6 +240,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-weekend-or-holiday": {
+              "title": "Combine weekend and holiday rules",
+              "prompt": "Read a day name and then `yes` or `no` for whether it is a holiday. Print `rest` when the day is `Saturday` or `Sunday`, or when the holiday answer is `yes`. Otherwise print `work`.",
+              "hint": "Combine the weekend checks and the holiday check with `or`.",
+              "help": {
+                "concept": "`or` makes a combined condition true when at least one of its parts is true.",
+                "hint_1": "Combine the weekend checks and the holiday check with `or`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "day = input().strip()\nholiday = input().strip()\n\n# Print rest or work from the combined rule.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "day = input().strip()\nholiday = input().strip()\n\n# Print rest or work from the combined rule.\n"
+                }
+              },
+              "solutionCode": "day = input().strip()\nholiday = input().strip()\nif day == \"Saturday\" or day == \"Sunday\" or holiday == \"yes\":\n    print(\"rest\")\nelse:\n    print(\"work\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "day = input().strip()\nholiday = input().strip()\nif day == \"Saturday\" or day == \"Sunday\" or holiday == \"yes\":\n    print(\"rest\")\nelse:\n    print(\"work\")\n"
+                }
+              }
+            }
           }
         }
       }

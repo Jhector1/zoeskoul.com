@@ -221,6 +221,72 @@
                 "c": "50",
                 "d": "29950"
               }
+            },
+            "practice-book-object-description": {
+              "title": "Create an object with its own data",
+              "prompt": "Define a `Book` class whose constructor stores `title` and `pages`. Add a `description()` method that returns `<title> - <pages> pages`. Create `Book(\"Orbit\", 240)` and print its description.",
+              "hint": "Store the constructor arguments on `self`, then let the method read those attributes.",
+              "help": {
+                "concept": "An object bundles related state with behavior that uses that state.",
+                "hint_1": "Store the constructor arguments on `self`, then let the method read those attributes.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Book:\n    def __init__(self, title, pages):\n        # store both values\n        pass\n\n    def description(self):\n        # return the formatted description\n        pass\n\nbook = Book(\"Orbit\", 240)\nprint(book.description())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Book:\n    def __init__(self, title, pages):\n        # store both values\n        pass\n\n    def description(self):\n        # return the formatted description\n        pass\n\nbook = Book(\"Orbit\", 240)\nprint(book.description())\n"
+                }
+              },
+              "solutionCode": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def description(self):\n        return f\"{self.title} - {self.pages} pages\"\n\nbook = Book(\"Orbit\", 240)\nprint(book.description())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def description(self):\n        return f\"{self.title} - {self.pages} pages\"\n\nbook = Book(\"Orbit\", 240)\nprint(book.description())\n"
+                }
+              }
+            },
+            "practice-two-pet-instances": {
+              "title": "Keep separate state in two objects",
+              "prompt": "Define a `Pet` class that stores `name` and `sound`, with a `speak()` method returning `<name>: <sound>`. Create `Pet(\"Milo\", \"meow\")` and `Pet(\"Rex\", \"woof\")`, then print both `speak()` results.",
+              "hint": "Each instance should store its own `name` and `sound` attributes.",
+              "help": {
+                "concept": "Different instances of the same class keep separate state while sharing the same method definitions.",
+                "hint_1": "Each instance should store its own `name` and `sound` attributes.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Pet:\n    def __init__(self, name, sound):\n        pass\n\n    def speak(self):\n        pass\n\nfirst = Pet(\"Milo\", \"meow\")\nsecond = Pet(\"Rex\", \"woof\")\nprint(first.speak())\nprint(second.speak())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Pet:\n    def __init__(self, name, sound):\n        pass\n\n    def speak(self):\n        pass\n\nfirst = Pet(\"Milo\", \"meow\")\nsecond = Pet(\"Rex\", \"woof\")\nprint(first.speak())\nprint(second.speak())\n"
+                }
+              },
+              "solutionCode": "class Pet:\n    def __init__(self, name, sound):\n        self.name = name\n        self.sound = sound\n\n    def speak(self):\n        return f\"{self.name}: {self.sound}\"\n\nfirst = Pet(\"Milo\", \"meow\")\nsecond = Pet(\"Rex\", \"woof\")\nprint(first.speak())\nprint(second.speak())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Pet:\n    def __init__(self, name, sound):\n        self.name = name\n        self.sound = sound\n\n    def speak(self):\n        return f\"{self.name}: {self.sound}\"\n\nfirst = Pet(\"Milo\", \"meow\")\nsecond = Pet(\"Rex\", \"woof\")\nprint(first.speak())\nprint(second.speak())\n"
+                }
+              }
+            },
+            "practice-task-state-method": {
+              "title": "Let a method change object state",
+              "prompt": "Define a `Task` class that stores `title` and starts with `done = False`. Add `complete()` so it sets `done` to `True`. Create one task, call `complete()`, and print its `title` and `done` value on separate lines.",
+              "hint": "The method should update `self.done` on the existing object.",
+              "help": {
+                "concept": "Methods can change the state stored on an object, allowing the object to manage related data and behavior together.",
+                "hint_1": "The method should update `self.done` on the existing object.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Task:\n    def __init__(self, title):\n        # store title and start done as False\n        pass\n\n    def complete(self):\n        # mark this task complete\n        pass\n\ntask = Task(\"Submit report\")\ntask.complete()\nprint(task.title)\nprint(task.done)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        # store title and start done as False\n        pass\n\n    def complete(self):\n        # mark this task complete\n        pass\n\ntask = Task(\"Submit report\")\ntask.complete()\nprint(task.title)\nprint(task.done)\n"
+                }
+              },
+              "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\ntask = Task(\"Submit report\")\ntask.complete()\nprint(task.title)\nprint(task.done)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\ntask = Task(\"Submit report\")\ntask.complete()\nprint(task.title)\nprint(task.done)\n"
+                }
+              }
             }
           }
         }

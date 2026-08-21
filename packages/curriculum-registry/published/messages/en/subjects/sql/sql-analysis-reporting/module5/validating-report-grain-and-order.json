@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    sales_rep,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY sales_rep\nORDER BY completed_net_sales DESC, sales_rep ASC;"
+            },
+            "practice-retained-validating-report-grain-sketch0": {
+              "title": "Practice: Determine Report Grain",
+              "prompt": "Write a query to find the total sales for each category in the `sales_reporting` table. Group the results by category and order them by total sales in descending order.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Validating Report Grain and Order in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category\nORDER BY total_sales DESC;"
+            },
+            "practice-retained-validating-report-grain-sketch1": {
+              "title": "Practice: Sort by Customer Rating",
+              "prompt": "Write a query to list all products with their average customer rating, sorted by the average rating in descending order. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Validating Report Grain and Order in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nORDER BY avg_rating DESC;"
             }
           },
           "tryIt": {

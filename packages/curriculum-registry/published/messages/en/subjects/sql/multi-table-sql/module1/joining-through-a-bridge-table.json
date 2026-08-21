@@ -140,6 +140,30 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.grade_level,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id\nORDER BY students.grade_level, courses.title;"
+            },
+            "practice-retained-joining-bridge-table-sketch0": {
+              "title": "Practice: Querying Student Enrollments",
+              "prompt": "Write a SQL query to list all students and the courses they are enrolled in, using the `enrollments` table as a bridge.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Joining Through a Bridge Table in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;"
+            },
+            "practice-retained-joining-bridge-table-sketch1": {
+              "title": "Practice: Extending Queries with Departments",
+              "prompt": "Write a SQL query to list all students, the courses they are enrolled in, and the corresponding department for each course.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Joining Through a Bridge Table in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, courses.title, departments.name AS department\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;"
             }
           }
         }

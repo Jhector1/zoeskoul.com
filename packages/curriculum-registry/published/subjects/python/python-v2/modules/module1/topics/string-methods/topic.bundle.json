@@ -255,7 +255,7 @@
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-1",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-1.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -346,7 +346,7 @@
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-2",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-2.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -437,7 +437,7 @@
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-3",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-3.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -528,7 +528,7 @@
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-4",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-4.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -619,7 +619,7 @@
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-5",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-5.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -707,6 +707,91 @@
           "message": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-5.sourceChecks.2.message"
         }
       ]
+    },
+    {
+      "id": "practice-split-and-join-tags",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "red,blue,green\n",
+            "stdout": "red | blue | green\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "one,two\n",
+            "stdout": "one | two\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

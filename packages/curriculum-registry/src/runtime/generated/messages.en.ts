@@ -9211,16 +9211,22 @@ const messages: Record<string, any> = {
             "ci-debugging-imports-and-state-4": {
               "title": "Fix a service import and keep the report working",
               "prompt": "A classroom catalog app has a report service that should import `CatalogItem` from the models package and format one line of text. Fix the broken import in `services/report_service.py` so `main.py` prints `Marker: 8`. Keep the existing function and class names.",
-              "hint": "Identify the concept being tested, then compare every option with that concept.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Focus on why Python reaches the result, not only on the final answer shown in the output.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity"
+                },
+                "services_report_service_py": {
+                  "content": "from model.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\""
                 }
               }
             },
@@ -9233,26 +9239,38 @@ const messages: Record<string, any> = {
                 "hint_1": "Avoid using `[]` directly as the default parameter value.",
                 "hint_2": "Use a placeholder default, then create a fresh list inside `__init__` when needed."
               },
-              "starterCode": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+              "starterCode": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
               "starterFiles": {
+                "models_init_py": {
+                  "content": "# package marker"
+                },
+                "models_cart_py": {
+                  "content": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)"
+                },
                 "main_py": {
-                  "content": "# TODO: Update main.py to complete this step: Repair independent cart state in a model file.\nclass Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)"
+                  "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())"
                 }
               }
             },
             "ci-debugging-imports-and-state-6": {
               "title": "Fix a state-changing method in a task model",
               "prompt": "A project tracker has a `Task` class with a `complete()` method. Right now the method returns `True` but forgets to update the object's `done` attribute. Fix the method so the object's state changes correctly and repeated calls still leave it completed.",
-              "hint": "Match each choice against the precise rule introduced in the lesson.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Focus on why Python reaches the result, not only on the final answer shown in the output.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done",
+              "starterCode": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
               "starterFiles": {
+                "models_init_py": {
+                  "content": "# package marker"
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done"
+                },
                 "main_py": {
-                  "content": "# TODO: Update main.py to complete this step: Fix a state-changing method in a task model.\nclass Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done"
+                  "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())"
                 }
               }
             }
@@ -9917,19 +9935,22 @@ const messages: Record<string, any> = {
             "ci-refactor-discount-service": {
               "title": "Create a pricing service method",
               "prompt": "The catalog app now needs a separate pricing service. Complete `PricingService.discounted_total(books, percent)` in `services/pricing_service.py`. It should add all book prices, apply the percentage discount to the total, and return the discounted amount. For example, a 10 percent discount on a total of 50 should return 45.0.",
-              "hint": "Match each choice against the precise rule introduced in the lesson.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
                 },
                 "services_pricing_service_py": {
-                  "content": "# TODO: Update services/pricing_service.py to complete this step: Create a pricing service method.\nclass PricingService:\n    def __init__(self):\n        pass\n\n    def discounted_total(self, value, amount):\n        pass"
+                  "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        pass"
                 }
               }
             },
@@ -9952,19 +9973,22 @@ const messages: Record<string, any> = {
             "ci-refactor-summary-service": {
               "title": "Build a one-line catalog summary service",
               "prompt": "Complete `SummaryService.build_summary(books)` in `services/summary_service.py`. It should return a single string in this exact format: `Books: <count> | Total: $<sum>`. For example, two books priced 12 and 18 should produce `Books: 2 | Total: $30`. This combines two pieces of orchestration logic in one service method.",
-              "hint": "Look for the choice that satisfies both the syntax and behavior described.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Treat the starter and expected behavior as one contract; every required name and output should be accounted for.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
                 },
                 "services_summary_service_py": {
-                  "content": "# TODO: Update services/summary_service.py to complete this step: Build a one-line catalog summary service.\nclass SummaryService:\n    def __init__(self):\n        pass\n\n    def build_summary(self, value):\n        pass"
+                  "content": "class SummaryService:\n    def build_summary(self, books):\n        pass"
                 }
               }
             },
@@ -9987,19 +10011,22 @@ const messages: Record<string, any> = {
             "ci-refactor-filter-service": {
               "title": "Move filtering logic into InventoryService",
               "prompt": "A catalog screen should show only affordable books. Complete `InventoryService.affordable_titles(books, max_price)` in `services/inventory_service.py`. Return a list of titles for every book whose price is less than or equal to `max_price`. This refactor moves filtering logic for a whole list into a service.",
-              "hint": "Translate the question into a Python rule before selecting an answer.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
                 },
                 "services_inventory_service_py": {
-                  "content": "# TODO: Update services/inventory_service.py to complete this step: Move filtering logic into InventoryService.\nclass InventoryService:\n    def __init__(self):\n        pass\n\n    def affordable_titles(self, value, amount):\n        pass"
+                  "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        pass"
                 }
               }
             }
@@ -10171,6 +10198,61 @@ const messages: Record<string, any> = {
                 "game_label",
                 "__class__"
               ]
+            },
+            "policy_code_input_3": {
+              "title": "Print whether a number is negative",
+              "prompt": "Read one integer. Print `True` when the number is less than 0 and `False` otherwise.",
+              "hint": "Compare the value with zero.",
+              "help": {
+                "concept": "A less-than comparison can detect negative numbers.",
+                "hint_1": "Use < 0 inside an if statement.",
+                "hint_2": "Print False for zero or positive values."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            },
+            "practice-test-inherited-method": {
+              "title": "Make an inherited method pass its test",
+              "prompt": "The test expects a `Book` object to inherit `label()` from `Item`. Complete the base `label()` method so the assertion passes, then keep the final `tests passed` output.",
+              "hint": "The shared method should return `Item: <title>` using the stored title.",
+              "help": {
+                "concept": "A focused test can verify that a subclass correctly receives shared behavior from its base class.",
+                "hint_1": "The shared method should return `Item: <title>` using the stored title.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Item:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        pass\n\nclass Book(Item):\n    pass\n\nbook = Book(\"Dune\")\nassert book.label() == \"Item: Dune\"\nprint(\"tests passed\")\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Item:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        pass\n\nclass Book(Item):\n    pass\n\nbook = Book(\"Dune\")\nassert book.label() == \"Item: Dune\"\nprint(\"tests passed\")\n"
+                }
+              },
+              "solutionCode": "class Item:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Item: {self.title}\"\n\nclass Book(Item):\n    pass\n\nbook = Book(\"Dune\")\nassert book.label() == \"Item: Dune\"\nprint(\"tests passed\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Item:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Item: {self.title}\"\n\nclass Book(Item):\n    pass\n\nbook = Book(\"Dune\")\nassert book.label() == \"Item: Dune\"\nprint(\"tests passed\")\n"
+                }
+              }
+            },
+            "practice-test-polymorphic-sounds": {
+              "title": "Make a polymorphic collection test pass",
+              "prompt": "Complete `collect_sounds(animals)` so it calls `speak()` on every object and returns the resulting list. The provided `Cat` and `Dog` classes override `speak()`. Keep the assertion and final `tests passed` output.",
+              "hint": "Loop through the mixed objects and append `animal.speak()` for each one.",
+              "help": {
+                "concept": "A polymorphism test checks common behavior through the shared method name instead of branching on each concrete class type.",
+                "hint_1": "Loop through the mixed objects and append `animal.speak()` for each one.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Animal:\n    def speak(self):\n        return \"?\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"meow\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"woof\"\n\ndef collect_sounds(animals):\n    sounds = []\n    # append each object's speak() result\n    return sounds\n\nanimals = [Cat(), Dog(), Cat()]\nassert collect_sounds(animals) == [\"meow\", \"woof\", \"meow\"]\nprint(\"tests passed\")\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Animal:\n    def speak(self):\n        return \"?\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"meow\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"woof\"\n\ndef collect_sounds(animals):\n    sounds = []\n    # append each object's speak() result\n    return sounds\n\nanimals = [Cat(), Dog(), Cat()]\nassert collect_sounds(animals) == [\"meow\", \"woof\", \"meow\"]\nprint(\"tests passed\")\n"
+                }
+              },
+              "solutionCode": "class Animal:\n    def speak(self):\n        return \"?\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"meow\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"woof\"\n\ndef collect_sounds(animals):\n    sounds = []\n    for animal in animals:\n        sounds.append(animal.speak())\n    return sounds\n\nanimals = [Cat(), Dog(), Cat()]\nassert collect_sounds(animals) == [\"meow\", \"woof\", \"meow\"]\nprint(\"tests passed\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Animal:\n    def speak(self):\n        return \"?\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"meow\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"woof\"\n\ndef collect_sounds(animals):\n    sounds = []\n    for animal in animals:\n        sounds.append(animal.speak())\n    return sounds\n\nanimals = [Cat(), Dog(), Cat()]\nassert collect_sounds(animals) == [\"meow\", \"woof\", \"meow\"]\nprint(\"tests passed\")\n"
+                }
+              }
             }
           }
         },
@@ -10357,29 +10439,35 @@ const messages: Record<string, any> = {
               "hint": "Read the task \"Fix a broken return method after state changes\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix a broken return method after state changes\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
-                "hint_2": "Use the output panel to verify the exact behavior before submitting."
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
               "starterCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False",
               "starterFiles": {
                 "models_book_py": {
-                  "content": "# TODO: Update models/book.py to complete this step: Fix a broken return method after state changes.\nclass Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False"
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False"
+                },
+                "tests_check_book_return_py": {
+                  "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")"
                 }
               }
             },
             "ci-testing-object-state-fix-wallet-validation": {
               "title": "Fix wallet validation so balance never starts negative",
               "prompt": "A budgeting app has a `Wallet` class in `models/wallet.py`. The constructor should store the given balance when it is zero or more, but negative starting balances should become `0`. The current code stores negative values by mistake. Fix the class so the provided tests in `tests/check_wallet.py` pass when you click Run.",
-              "hint": "Trace the relevant value or branch before deciding which option fits.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
               "starterCode": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance",
               "starterFiles": {
                 "models_wallet_py": {
-                  "content": "# TODO: Update models/wallet.py to complete this step: Fix wallet validation so balance never starts negative.\nclass Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance"
+                  "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance"
+                },
+                "tests_check_wallet_py": {
+                  "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")"
                 }
               }
             },
@@ -10389,13 +10477,16 @@ const messages: Record<string, any> = {
               "hint": "Read the task \"Fix a method that updates score incorrectly\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix a method that updates score incorrectly\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
-                "hint_2": "Test the change in the runner and correct any mismatch before checking the answer."
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
               "starterCode": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points",
               "starterFiles": {
                 "models_scoreboard_py": {
-                  "content": "# TODO: Update models/scoreboard.py to complete this step: Fix a method that updates score incorrectly.\nclass Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points"
+                  "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points"
+                },
+                "tests_check_scoreboard_py": {
+                  "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")"
                 }
               }
             }
@@ -11332,6 +11423,54 @@ const messages: Record<string, any> = {
                 "car",
                 "main"
               ]
+            },
+            "project-step-account-class": {
+              "title": "Create the Account class",
+              "prompt": "Practice creating a small account model. Define an `Account` class in `models/account.py` with an `__init__(self, owner, balance)` constructor that stores `owner` and `balance`. In the main code, create `Account(\"Ava\", 120)` and print the owner on one line and the balance on the next line.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\n# Create Ava's account and print owner then balance.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\n# Create Ava's account and print owner then balance."
+                }
+              }
+            },
+            "project-step-account-methods": {
+              "title": "Add account methods",
+              "prompt": "Practice putting account behavior on the model. Keep the provided `Account` class with `owner` and `balance`, then add a `deposit(self, amount)` method that increases the balance and a `summary(self)` method that returns `<owner>: $<balance>`. The main code creates `Account(\"Ava\", 120)`, deposits `30`, and prints the summary.",
+              "hint": "One method changes state, and the other reports the current state.",
+              "help": {
+                "concept": "This step checks that methods can both update object state and return text based on the updated attributes.",
+                "hint_1": "`deposit` should add the incoming amount to `self.balance`.",
+                "hint_2": "After calling `deposit(30)`, the summary should reflect the new balance, not the original one."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\naccount = Account(\"Ava\", 120)\n\n# Deposit 30, then print the summary.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\n\n# Deposit 30, then print the summary."
+                }
+              }
+            },
+            "project-step-two-accounts": {
+              "title": "Keep state separate across two accounts",
+              "prompt": "Practice working with two instances of the same class. Keep the provided `Account` class with `owner`, `balance`, `deposit`, and `summary`. The main code creates Ava and Noah accounts and deposits into Ava's account only. Finish the code so the two printed summaries show that each object keeps its own state.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\n# Deposit 30 into Ava's account only.\n# Print Ava's summary, then Noah's summary.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\n# Deposit 30 into Ava's account only.\n# Print Ava's summary, then Noah's summary."
+                }
+              }
             }
           }
         },
@@ -11572,6 +11711,39 @@ const messages: Record<string, any> = {
                 "constructor",
                 "self"
               ]
+            },
+            "ci-constructors-and-object-state-add-method": {
+              "title": "Add a summary method that reads object state",
+              "prompt": "The tracker wants a readable summary for each transaction. In `models/transaction.py`, keep the constructor and add a `summary` method that returns text in this format: `Coffee: -4` or `Paycheck: 1200`. The method should build the string from the object's stored attributes.",
+              "hint": "Read the task \"Add a summary method that reads object state\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add a summary method that reads object state\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Write your code below."
+            },
+            "ci-constructors-and-object-state-deposit-method": {
+              "title": "Track deposits on an account object",
+              "prompt": "Return to `models/account.py`. Define an `Account` class with a constructor that stores `owner` and `balance`, then add a `deposit` method that increases the balance. The provided workspace will create an account, make one or more deposits, and inspect the final stored balance.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your code below."
+            },
+            "ci-constructors-and-object-state-ledger-step": {
+              "title": "Build a ledger account that keeps owner, balance, and note",
+              "prompt": "The tracker now wants a slightly richer account model. In `models/account.py`, define an `Account` class whose constructor accepts `owner`, `balance`, and `note`. Store all three as attributes. Then add a `deposit` method that increases `balance` and a `describe` method that returns text in this format: `Rae | 90 | starter fund`. The workspace will create an object, update it, and call `describe()`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your code below."
             }
           }
         },
@@ -11743,6 +11915,66 @@ const messages: Record<string, any> = {
                 "0",
                 "170"
               ]
+            },
+            "ci-account-summary-method": {
+              "title": "Create a summary method for account state",
+              "prompt": "A volunteer dashboard needs a readable account summary. In `models/account.py`, complete `summary` so it returns a string in this exact format: `Owner: <owner>, Balance: <balance>`. Do not print inside the method; return the string instead. `main.py` already prints the returned summary for two accounts.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        pass"
+                }
+              }
+            },
+            "ci-account-withdraw": {
+              "title": "Add a validated withdraw method",
+              "prompt": "Your club account tracker now needs withdrawals. In `models/account.py`, complete `withdraw` so it subtracts the amount only when the amount is greater than 0 and no larger than the current balance. Return `True` for a successful withdrawal and `False` otherwise. `main.py` already checks one valid and one invalid withdrawal.",
+              "hint": "Read the task \"Add a validated withdraw method\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add a validated withdraw method\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        # subtract only when the amount is valid\n        pass",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        # subtract only when the amount is valid\n        pass"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def withdraw(self, amount):\n        pass"
+                }
+              }
+            },
+            "ci-helper-is_positive_amount": {
+              "title": "Build a helper that checks positive amounts",
+              "prompt": "Your team wants a reusable validation helper. In `helpers/validation.py`, complete `is_positive_amount` so it returns `True` when the number is greater than 0 and `False` otherwise. `main.py` uses that helper inside `Account.deposit`, so the helper must work for both valid and invalid amounts.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# main.py\nfrom helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)\n\n# helpers/validation.py\ndef is_positive_amount(amount):\n    # return True only for amounts greater than 0\n    pass\n\n# models/account.py\nfrom helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)\n\n# helpers/validation.py\ndef is_positive_amount(amount):\n    # return True only for amounts greater than 0\n    pass\n\n# models/account.py\nfrom helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass"
+                },
+                "helpers_validation_py": {
+                  "content": "def is_positive_amount(amount):\n    pass"
+                }
+              }
             }
           }
         },
@@ -11920,6 +12152,66 @@ const messages: Record<string, any> = {
                 "40",
                 "9960"
               ]
+            },
+            "ci-methods-and-responsibility-report-line": {
+              "title": "Build a report line from object methods",
+              "prompt": "You are preparing a simple daily report for the account tracker. Finish the `deposit` and `report_line` methods in `models/account.py`. `deposit` should update the balance, and `report_line` should return text in this exact format: `Rae | balance: $95`. `main.py` already creates the account, deposits money, and prints the report line. When you click Run, the output panel should show `Rae | balance: $95`. This matters because the class should both manage state changes and provide account-specific display text.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass\n\n    def report_line(self):\n        pass"
+                }
+              }
+            },
+            "ci-methods-and-responsibility-validate-withdrawal": {
+              "title": "Keep validation inside the method",
+              "prompt": "You are improving the account tracker so invalid withdrawals do not change the balance. In `models/account.py`, finish `withdraw` so it subtracts the amount only when the amount is less than or equal to the current balance. If the amount is too large, leave the balance unchanged. The method should return the current balance after the attempt. `main.py` already prints two results. When you click Run, the output panel should show `60` and then `60`. This matters because validation should live with the object state it protects.",
+              "hint": "Check the amount against `self.balance` before subtracting.",
+              "help": {
+                "concept": "Encapsulation means the class protects its own state. A withdrawal rule belongs inside the method because the method controls balance changes.",
+                "hint_1": "The first call should reduce the balance, but the second call should not make it negative.",
+                "hint_2": "Use a conditional inside `withdraw`; only update `self.balance` when the requested amount is allowed, then return the balance either way."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance"
+                }
+              }
+            },
+            "practice-cart-total-method": {
+              "title": "Put total behavior on the object",
+              "prompt": "Define a `Cart` class that stores a list of prices. Add a `total()` method that returns the sum of those prices. Create `Cart([4, 7, 9])` and print `cart.total()`.",
+              "hint": "The `Cart` object already owns the price list, so the method should use `self.prices`.",
+              "help": {
+                "concept": "A method belongs on an object when the behavior primarily uses and represents that object's own state.",
+                "hint_1": "The `Cart` object already owns the price list, so the method should use `self.prices`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Cart:\n    def __init__(self, prices):\n        self.prices = prices\n\n    def total(self):\n        # return the total of this cart\n        pass\n\ncart = Cart([4, 7, 9])\nprint(cart.total())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Cart:\n    def __init__(self, prices):\n        self.prices = prices\n\n    def total(self):\n        # return the total of this cart\n        pass\n\ncart = Cart([4, 7, 9])\nprint(cart.total())\n"
+                }
+              },
+              "solutionCode": "class Cart:\n    def __init__(self, prices):\n        self.prices = prices\n\n    def total(self):\n        return sum(self.prices)\n\ncart = Cart([4, 7, 9])\nprint(cart.total())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Cart:\n    def __init__(self, prices):\n        self.prices = prices\n\n    def total(self):\n        return sum(self.prices)\n\ncart = Cart([4, 7, 9])\nprint(cart.total())\n"
+                }
+              }
             }
           }
         },
@@ -12393,6 +12685,72 @@ const messages: Record<string, any> = {
                 "c": "50",
                 "d": "29950"
               }
+            },
+            "practice-book-object-description": {
+              "title": "Create an object with its own data",
+              "prompt": "Define a `Book` class whose constructor stores `title` and `pages`. Add a `description()` method that returns `<title> - <pages> pages`. Create `Book(\"Orbit\", 240)` and print its description.",
+              "hint": "Store the constructor arguments on `self`, then let the method read those attributes.",
+              "help": {
+                "concept": "An object bundles related state with behavior that uses that state.",
+                "hint_1": "Store the constructor arguments on `self`, then let the method read those attributes.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Book:\n    def __init__(self, title, pages):\n        # store both values\n        pass\n\n    def description(self):\n        # return the formatted description\n        pass\n\nbook = Book(\"Orbit\", 240)\nprint(book.description())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Book:\n    def __init__(self, title, pages):\n        # store both values\n        pass\n\n    def description(self):\n        # return the formatted description\n        pass\n\nbook = Book(\"Orbit\", 240)\nprint(book.description())\n"
+                }
+              },
+              "solutionCode": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def description(self):\n        return f\"{self.title} - {self.pages} pages\"\n\nbook = Book(\"Orbit\", 240)\nprint(book.description())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def description(self):\n        return f\"{self.title} - {self.pages} pages\"\n\nbook = Book(\"Orbit\", 240)\nprint(book.description())\n"
+                }
+              }
+            },
+            "practice-two-pet-instances": {
+              "title": "Keep separate state in two objects",
+              "prompt": "Define a `Pet` class that stores `name` and `sound`, with a `speak()` method returning `<name>: <sound>`. Create `Pet(\"Milo\", \"meow\")` and `Pet(\"Rex\", \"woof\")`, then print both `speak()` results.",
+              "hint": "Each instance should store its own `name` and `sound` attributes.",
+              "help": {
+                "concept": "Different instances of the same class keep separate state while sharing the same method definitions.",
+                "hint_1": "Each instance should store its own `name` and `sound` attributes.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Pet:\n    def __init__(self, name, sound):\n        pass\n\n    def speak(self):\n        pass\n\nfirst = Pet(\"Milo\", \"meow\")\nsecond = Pet(\"Rex\", \"woof\")\nprint(first.speak())\nprint(second.speak())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Pet:\n    def __init__(self, name, sound):\n        pass\n\n    def speak(self):\n        pass\n\nfirst = Pet(\"Milo\", \"meow\")\nsecond = Pet(\"Rex\", \"woof\")\nprint(first.speak())\nprint(second.speak())\n"
+                }
+              },
+              "solutionCode": "class Pet:\n    def __init__(self, name, sound):\n        self.name = name\n        self.sound = sound\n\n    def speak(self):\n        return f\"{self.name}: {self.sound}\"\n\nfirst = Pet(\"Milo\", \"meow\")\nsecond = Pet(\"Rex\", \"woof\")\nprint(first.speak())\nprint(second.speak())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Pet:\n    def __init__(self, name, sound):\n        self.name = name\n        self.sound = sound\n\n    def speak(self):\n        return f\"{self.name}: {self.sound}\"\n\nfirst = Pet(\"Milo\", \"meow\")\nsecond = Pet(\"Rex\", \"woof\")\nprint(first.speak())\nprint(second.speak())\n"
+                }
+              }
+            },
+            "practice-task-state-method": {
+              "title": "Let a method change object state",
+              "prompt": "Define a `Task` class that stores `title` and starts with `done = False`. Add `complete()` so it sets `done` to `True`. Create one task, call `complete()`, and print its `title` and `done` value on separate lines.",
+              "hint": "The method should update `self.done` on the existing object.",
+              "help": {
+                "concept": "Methods can change the state stored on an object, allowing the object to manage related data and behavior together.",
+                "hint_1": "The method should update `self.done` on the existing object.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Task:\n    def __init__(self, title):\n        # store title and start done as False\n        pass\n\n    def complete(self):\n        # mark this task complete\n        pass\n\ntask = Task(\"Submit report\")\ntask.complete()\nprint(task.title)\nprint(task.done)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        # store title and start done as False\n        pass\n\n    def complete(self):\n        # mark this task complete\n        pass\n\ntask = Task(\"Submit report\")\ntask.complete()\nprint(task.title)\nprint(task.done)\n"
+                }
+              },
+              "solutionCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\ntask = Task(\"Submit report\")\ntask.complete()\nprint(task.title)\nprint(task.done)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\ntask = Task(\"Submit report\")\ntask.complete()\nprint(task.title)\nprint(task.done)\n"
+                }
+              }
             }
           }
         }
@@ -12555,6 +12913,78 @@ const messages: Record<string, any> = {
                 "b": "Python raises `TypeError` because the child is still abstract.",
                 "c": "Python automatically copies a `label()` implementation into the child.",
                 "d": "Python removes `CatalogItem` from the inheritance chain."
+              }
+            },
+            "ci-catalog-add-audio-subclass": {
+              "title": "Add an audio item that fits the contract",
+              "prompt": "The catalog is expanding again. Add an `Audio` subclass that fits the same base-class contract used by the report service.\n\nTasks:\n- In `models/audio.py`, create `Audio(BaseItem)`.\n- Its constructor should accept `title` and `speaker`, call `super().__init__(title)`, and store `speaker`.\n- Override `display_line()` to return `Audio: <title> by <speaker>`.\n- Do not change `services/report_service.py` or `main.py`.\n\nClick Run and confirm the output panel shows lines for a book, a video, and the new audio item.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n# models/audio.py\nfrom models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        pass\n\n    def display_line(self):\n        pass\n\n# services/report_service.py\ndef build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n# models/audio.py\nfrom models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        pass\n\n    def display_line(self):\n        pass\n\n# services/report_service.py\ndef build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines"
+                },
+                "models_audio_py": {
+                  "content": "class Audio:\n    def __init__(self, title, speaker):\n        self.title = title\n        self.speaker = speaker\n\n    def display_line(self):\n        pass"
+                }
+              }
+            },
+            "ci-catalog-baseitem-checkout": {
+              "title": "Add a checkout message contract",
+              "prompt": "Practice a shared checkout-message contract in a small media catalog. In `models/base_item.py`, add `checkout_message()` that returns `<title> is ready`. In `models/book.py`, override it to return `Borrow book: <title>`. In `models/video.py`, override it to return `Play video: <title>`. Keep `services/checkout_service.py` generic so it loops through mixed objects and calls the shared method.",
+              "hint": "Read the task \"Add a checkout message contract\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add a checkout message contract\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        pass\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        pass\n\n# services/checkout_service.py\ndef collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        pass\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        pass\n\n# services/checkout_service.py\ndef collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages"
+                },
+                "models_base_item_py": {
+                  "content": "class BaseItem:\n    def __init__(self, value_1):\n        pass\n\n    def checkout_message(self):\n        pass"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def checkout_message(self):\n        pass"
+                },
+                "models_video_py": {
+                  "content": "class Video:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def checkout_message(self):\n        pass"
+                }
+              }
+            },
+            "ci-catalog-export-labels": {
+              "title": "Build export labels from mixed items",
+              "prompt": "The catalog app now needs export labels for storage. Finish the service so it works with mixed objects through the shared contract.\n\nTasks:\n- Keep `export_label()` in the base class and both subclasses.\n- In `services/export_service.py`, complete `join_labels(items)` so it returns one string with labels joined by ` | `.\n- The service must call `item.export_label()` on each object in the list.\n\nDo not change `main.py`. Click Run and check the output panel for the joined label string.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))"
+                },
+                "models_base_item_py": {
+                  "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def export_label(self):\n        return self.title"
+                },
+                "models_book_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def export_label(self):\n        return f\"BOOK-{self.title}\""
+                },
+                "models_video_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def export_label(self):\n        return f\"VIDEO-{self.title}\""
+                },
+                "services_export_service_py": {
+                  "content": "def join_labels(items):\n    pass"
+                }
               }
             }
           }
@@ -12741,6 +13171,78 @@ const messages: Record<string, any> = {
                 "b": "Store title independently in every child and leave the parent empty.",
                 "c": "Let `CatalogItem` initialize title, then let `Book` add author after calling `super().__init__(title)`.",
                 "d": "Put both values in `main.py` and keep them off the objects."
+              }
+            },
+            "ci-inheritance-mixed-count-service": {
+              "title": "Count mixed catalog items with one shared method",
+              "prompt": "You are building a quick inventory summary. `Book` and `Movie` should both inherit from `CatalogItem`, and `CatalogItem` should define `is_available()` that returns `True` when `stock > 0`. In `services/inventory_service.py`, complete `count_available(items)` so it returns how many objects in the mixed list are available. In `main.py`, use `Book(\"Dune\", 3)` and `Movie(\"Arrival\", 0)` and print the count. This matters because one shared base method lets a service work across different subclasses.",
+              "hint": "Give both subclasses the same inherited availability rule, then count how many return `True`.",
+              "help": {
+                "concept": "A shared base-class method creates a common contract for subclasses. Services can then loop through mixed objects and call the same method on each one.",
+                "hint_1": "`is_available()` should check the stored `stock` value in the base class.",
+                "hint_2": "In the service function, increase the count only when `item.is_available()` is true."
+              },
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, stock):\n        self.title = title\n        self.stock = stock\n\n    def is_available(self):\n        return self.stock > 0"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    pass"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    pass"
+                },
+                "services_inventory_service_py": {
+                  "content": "def count_available(items):\n    pass"
+                }
+              }
+            },
+            "ci-inheritance-shared-price-method": {
+              "title": "Share a discount method through inheritance",
+              "prompt": "You are updating prices in a shop catalog. In `models/base_item.py`, complete `CatalogItem` so it stores `title` and `price`, and add `discounted_price(percent)` that returns the reduced price. In `models/book.py`, make `Book` inherit from `CatalogItem` and add `author`. In `main.py`, create `Book(\"Clean Code\", 30, \"Robert C. Martin\")` and print the result of `discounted_price(20)`. This matters because shared business rules belong in the base class instead of being copied into every subclass.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self):\n        pass"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def discounted_price(self, amount):\n        pass"
+                }
+              }
+            },
+            "practice-inherit-shared-label": {
+              "title": "Inherit a shared label method",
+              "prompt": "Define a base class `Vehicle` that stores `name` and has `label()` returning `Vehicle: <name>`. Define `Bike(Vehicle)` without rewriting `label()`. Create `Bike(\"Comet\")` and print its inherited label.",
+              "hint": "The subclass can use the base constructor and method without defining them again.",
+              "help": {
+                "concept": "Inheritance lets a subclass reuse behavior that is genuinely shared with its base class.",
+                "hint_1": "The subclass can use the base constructor and method without defining them again.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Vehicle:\n    def __init__(self, name):\n        # store the shared name\n        pass\n\n    def label(self):\n        # return Vehicle: <name>\n        pass\n\nclass Bike(Vehicle):\n    pass\n\nbike = Bike(\"Comet\")\nprint(bike.label())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Vehicle:\n    def __init__(self, name):\n        # store the shared name\n        pass\n\n    def label(self):\n        # return Vehicle: <name>\n        pass\n\nclass Bike(Vehicle):\n    pass\n\nbike = Bike(\"Comet\")\nprint(bike.label())\n"
+                }
+              },
+              "solutionCode": "class Vehicle:\n    def __init__(self, name):\n        self.name = name\n\n    def label(self):\n        return f\"Vehicle: {self.name}\"\n\nclass Bike(Vehicle):\n    pass\n\nbike = Bike(\"Comet\")\nprint(bike.label())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Vehicle:\n    def __init__(self, name):\n        self.name = name\n\n    def label(self):\n        return f\"Vehicle: {self.name}\"\n\nclass Bike(Vehicle):\n    pass\n\nbike = Bike(\"Comet\")\nprint(bike.label())\n"
+                }
               }
             }
           }
@@ -13165,6 +13667,81 @@ const messages: Record<string, any> = {
                 "c": "CatalogItem: Coraline",
                 "d": "Python raises an error because both classes define `label()`"
               }
+            },
+            "catalog-step-book-and-movie": {
+              "title": "Specialize labels for two catalog subclasses",
+              "prompt": "You are extending a media catalog. The base `CatalogItem` already stores `title`. Complete both subclasses so they reuse the parent constructor and override `display_name()`: `BookItem` should return `\"<title> by <author>\"`, and `MovieItem` should return `\"<title> (<minutes> min)\"`. The workspace already includes a small `main.py` that prints both labels.",
+              "hint": "Both subclasses share the same method name, but each one formats the result differently.",
+              "help": {
+                "concept": "Different subclasses can override the same base method in different ways while still fitting the same base-class contract.",
+                "hint_1": "Use `super().__init__(title)` in both subclass constructors before storing the extra field.",
+                "hint_2": "Write one `display_name()` method in each subclass, each returning its own specialized string format."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title"
+                },
+                "models_book_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        pass"
+                },
+                "models_movie_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        pass"
+                }
+              }
+            },
+            "catalog-step-mixed-report": {
+              "title": "Build a report from mixed specialized items",
+              "prompt": "Build a mixed catalog report without checking object types manually. The workspace includes a base `CatalogItem` plus `BookItem` and `MovieItem` subclasses that all provide `display_name()`. Complete `build_display_report(items)` in `services/reporting.py` so it returns each item's display label in order. `main.py` will print the returned lines.",
+              "hint": "Loop through the mixed list and call the same `display_name()` method on every item.",
+              "help": {
+                "concept": "Polymorphic services work by calling the same method on mixed related objects, while overriding lets each subclass provide its own specialized output.",
+                "hint_1": "Make sure each subclass overrides `display_name()` correctly before writing the service loop.",
+                "hint_2": "In the service function, iterate through `items` and append `item.display_name()` for each object in order."
+              },
+              "starterCode": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title"
+                },
+                "models_book_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\""
+                },
+                "models_movie_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\""
+                },
+                "services_reporting_py": {
+                  "content": "def build_display_report(items):\n    pass"
+                }
+              }
+            },
+            "practice-specialized-display-label": {
+              "title": "Override a display label in one subclass",
+              "prompt": "Define a base class `MediaItem` that stores `title` and has `display()` returning `Item: <title>`. Define `Song(MediaItem)` and override `display()` so it returns `Song: <title>`. Print the display text for one base item and one song.",
+              "hint": "Keep the shared version on the base class, then redefine only `display()` inside `Song`.",
+              "help": {
+                "concept": "Overriding lets a subclass specialize one inherited behavior while keeping the rest of the shared base-class structure.",
+                "hint_1": "Keep the shared version on the base class, then redefine only `display()` inside `Song`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class MediaItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display(self):\n        # return Item: <title>\n        pass\n\nclass Song(MediaItem):\n    def display(self):\n        # return Song: <title>\n        pass\n\nitem = MediaItem(\"Guide\")\nsong = Song(\"Sunrise\")\nprint(item.display())\nprint(song.display())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class MediaItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display(self):\n        # return Item: <title>\n        pass\n\nclass Song(MediaItem):\n    def display(self):\n        # return Song: <title>\n        pass\n\nitem = MediaItem(\"Guide\")\nsong = Song(\"Sunrise\")\nprint(item.display())\nprint(song.display())\n"
+                }
+              },
+              "solutionCode": "class MediaItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display(self):\n        return f\"Item: {self.title}\"\n\nclass Song(MediaItem):\n    def display(self):\n        return f\"Song: {self.title}\"\n\nitem = MediaItem(\"Guide\")\nsong = Song(\"Sunrise\")\nprint(item.display())\nprint(song.display())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class MediaItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display(self):\n        return f\"Item: {self.title}\"\n\nclass Song(MediaItem):\n    def display(self):\n        return f\"Song: {self.title}\"\n\nitem = MediaItem(\"Guide\")\nsong = Song(\"Sunrise\")\nprint(item.display())\nprint(song.display())\n"
+                }
+              }
             }
           }
         },
@@ -13339,6 +13916,72 @@ const messages: Record<string, any> = {
                 "movie_label",
                 "__class__"
               ]
+            },
+            "project-polymorphic-collections-step4": {
+              "title": "Add a new subclass without changing the service",
+              "prompt": "Add a `Magazine` object to a mixed collection that already contains book and video objects. Complete `Magazine.display_name()` so the same loop can call `display_name()` on every item and print three labels. The magazine label should be `Magazine: Science Weekly`.",
+              "hint": "Give `Magazine` the same method name used by the other objects in the collection.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())"
+                },
+                "models_magazine_py": {
+                  "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        pass"
+                }
+              }
+            },
+            "project-polymorphic-collections-step5": {
+              "title": "Build a checkout summary from mixed rentals",
+              "prompt": "A rental desk stores book and movie rentals in the same list. Complete `checkout_line()` in both classes so one loop can print a line for each object without checking its type. Use the formats `Book rental: <title> (<days> days)` and `Movie rental: <title> (<days> days)`.",
+              "hint": "Both classes need the same method name, but each can format its own label.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())"
+                },
+                "models_book_rental_py": {
+                  "content": "class BookRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        pass"
+                },
+                "models_movie_rental_py": {
+                  "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        pass"
+                }
+              }
+            },
+            "project-polymorphic-collections-step6": {
+              "title": "Create a stock alert service for mixed inventory items",
+              "prompt": "A store keeps book and supply objects in one inventory list. Complete each class's `alert_line()` method and `low_stock_lines(items)` so the service returns alerts only for objects whose `quantity` is below 3. The service should call the shared `alert_line()` method instead of checking item types.",
+              "hint": "Filter by the shared `quantity` attribute, then call `alert_line()` on each matching object.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)"
+                },
+                "models_book_item_py": {
+                  "content": "class BookItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity\n\n    def alert_line(self):\n        pass"
+                },
+                "models_supply_item_py": {
+                  "content": "class SupplyItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def alert_line(self):\n        pass"
+                },
+                "services_alert_service_py": {
+                  "content": "def low_stock_lines(items):\n    pass"
+                }
+              }
             }
           }
         }
@@ -13490,6 +14133,60 @@ const messages: Record<string, any> = {
                   "message": "Use `stops[-1]` to read the final stop instead of printing `stop4` directly."
                 }
               }
+            },
+            "ci-build-and-show-list": {
+              "title": "Build a list from input",
+              "prompt": "A paint shelf needs a quick inventory. Collect the three input colors into one list and print the finished list.\n\nFor example, if the inputs are `red`, `blue`, and `green`, your program should print:\n`['red', 'blue', 'green']`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+              "solutionCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Create a list with color1, color2, and color3 before printing it."
+                }
+              }
+            },
+            "ci-print-first-last": {
+              "title": "Print the first and last list items",
+              "prompt": "Three fruit labels come in one at a time. Store the inputs in a list, then print the first fruit and the last fruit on separate lines.\n\nFor example, if the inputs are `apple`, `banana`, and `cherry`, your program should print:\n`apple`\n`cherry`.",
+              "hint": "Read the task \"Print the first and last list items\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+              "solutionCode": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use index 0 to read the first item instead of printing the input directly."
+                },
+                "1": {
+                  "message": "Use an index to read the last item from the list."
+                }
+              }
+            },
+            "ci-print-second-number": {
+              "title": "Print the second number",
+              "prompt": "A scoreboard sends three numbers in order. Put them into a list, then print the second item from that list.\n\nFor example, if the inputs are `4`, `9`, and `2`, your program should print:\n`9`.",
+              "hint": "The second item in a list is at index 1.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use index 1 to read the second item from the list."
+                }
+              }
             }
           },
           "tryIt": {
@@ -13638,6 +14335,42 @@ const messages: Record<string, any> = {
               "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# Print \"found\" if key exists in settings.\n# Otherwise print \"missing\".\n",
               "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    print(\"found\")\nelse:\n    print(\"missing\")\n",
               "sourceChecks": {}
+            },
+            "ci-get-score": {
+              "title": "Look up a value in a dictionary",
+              "prompt": "Write `get_score(scores, name)` so it looks up `name` in the `scores` dictionary and returns that score.",
+              "hint": "Read the task \"Look up a value in a dictionary\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+              "solutionCode": "def get_score(scores, name):\n    return scores[name]"
+            },
+            "ci-make-dictionary": {
+              "title": "Return a simple dictionary",
+              "prompt": "Write `make_book(title, pages)` so it returns one dictionary describing the book. The dictionary should use the keys `\"title\"` and `\"pages\"`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+              "solutionCode": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}"
+            },
+            "ci-update-dictionary": {
+              "title": "Add or update a dictionary entry",
+              "prompt": "Write `set_price(prices, item, amount)` so it updates the `prices` dictionary with the given item and amount, then returns the updated dictionary.",
+              "hint": "Read the task \"Add or update a dictionary entry\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+              "solutionCode": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices"
             }
           },
           "tryIt": {
@@ -13846,6 +14579,57 @@ const messages: Record<string, any> = {
                   "message": "Print the sorted `times` list itself after sorting it in place."
                 }
               }
+            },
+            "ci-1": {
+              "title": "Add an item and print the list",
+              "prompt": "A pencil case already has `pen` and `pencil`. Read one more item from input, add it to `items`, and print the updated list.\n\nFor example, if the input is `eraser`, your program should print:\n`['pen', 'pencil', 'eraser']`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
+              "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use items.append(item) so the list is really mutated."
+                }
+              }
+            },
+            "ci-2": {
+              "title": "Remove a value and show the result",
+              "prompt": "The list `colors` starts as `['red', 'blue', 'green']`. Read one color from input, remove that value from the list, and print the updated list.\n\nFor example, if the input is `blue`, your program should print:\n`['red', 'green']`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
+              "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use colors.remove(color) so the list is really mutated."
+                }
+              }
+            },
+            "ci-3": {
+              "title": "Sort numbers from input",
+              "prompt": "Three quiz scores arrive out of order. Put the input numbers into `numbers`, sort the list from smallest to largest, and print the sorted list.\n\nFor example, if the inputs are `9`, `2`, and `5`, your program should print:\n`[2, 5, 9]`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use numbers.sort() so the list is really sorted in place."
+                }
+              }
             }
           },
           "tryIt": {
@@ -14022,6 +14806,47 @@ const messages: Record<string, any> = {
               "sourceChecks": {
                 "0": {
                   "message": "Use a `for` loop over `scores` as the prompt requests."
+                }
+              }
+            },
+            "ci-count-long-words": {
+              "title": "Count words longer than 4 letters",
+              "prompt": "Write `count_long_words(words)` so it returns how many words in the list are longer than 4 letters.",
+              "hint": "Read the task \"Count words longer than 4 letters\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+              "solutionCode": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count"
+            },
+            "ci-double-list-function": {
+              "title": "Return a doubled list",
+              "prompt": "Write `double_numbers(numbers)` so it builds a new list containing each number doubled, then returns that new list.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
+              "solutionCode": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result"
+            },
+            "ci-print-each-item": {
+              "title": "Print each item in a list",
+              "prompt": "A shelter roll call stores three animal names in `animals`. Loop through `animals` and print each name on its own line.\n\nFor example, if the inputs are `cat`, `dog`, and `fox`, your program should print:\n`cat`\n`dog`\n`fox`.",
+              "hint": "Build the list from the three input values before the loop starts.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
+              "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a for loop over animals instead of printing each variable manually."
                 }
               }
             }
@@ -14315,6 +15140,42 @@ const messages: Record<string, any> = {
                   "message": "Use a `for` loop over `students` as the prompt requests."
                 }
               }
+            },
+            "code-1": {
+              "title": "Return all names",
+              "prompt": "Each item in `records` stores a person's data. Finish `get_names(records)` by adding every record's `\"name\"` value to the `names` list, then return `names`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
+              "solutionCode": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names"
+            },
+            "code-2": {
+              "title": "Count total stock",
+              "prompt": "Finish `total_stock(items)` so it loops through the item dictionaries, adds each `\"stock\"` value into `total`, and returns the final total.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
+              "solutionCode": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total"
+            },
+            "code-3": {
+              "title": "Find the highest score",
+              "prompt": "Finish `highest_score(players)` so it compares each later player's `\"score\"` with `best` and returns the highest score in the list.",
+              "hint": "Read the task \"Find the highest score\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+              "solutionCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best"
             }
           },
           "tryIt": {
@@ -14491,6 +15352,74 @@ const messages: Record<string, any> = {
               "prompt": "Build two tuple records from input, store them in a list, and unpack each record in a loop."
             },
             "allowReveal": true
+          },
+          "practice": {
+            "practice-unpack-name-score": {
+              "title": "Unpack a name and score record",
+              "prompt": "Read a name and a whole-number score. Store them together in a tuple named `record`, unpack the tuple into `name` and `score`, then print `NAME: SCORE`.",
+              "hint": "Create `(name_input, score_input)`, then assign `name, score = record`.",
+              "help": {
+                "concept": "Tuple unpacking assigns each fixed record field to a matching variable in one statement.",
+                "hint_1": "Create `(name_input, score_input)`, then assign `name, score = record`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "name_input = input().strip()\nscore_input = int(input())\n\n# Build record, unpack it, and print NAME: SCORE.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "name_input = input().strip()\nscore_input = int(input())\n\n# Build record, unpack it, and print NAME: SCORE.\n"
+                }
+              },
+              "solutionCode": "name_input = input().strip()\nscore_input = int(input())\nrecord = (name_input, score_input)\nname, score = record\nprint(f\"{name}: {score}\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "name_input = input().strip()\nscore_input = int(input())\nrecord = (name_input, score_input)\nname, score = record\nprint(f\"{name}: {score}\")\n"
+                }
+              }
+            },
+            "practice-tuple-first-and-last": {
+              "title": "Read fields from a tuple record",
+              "prompt": "Read a city, a day, and a temperature. Store them as `(city, day, temperature)` in `record`, then print the first field and the last field on separate lines using tuple indexes.",
+              "hint": "The first field is index `0`; the last field can be accessed with `-1`.",
+              "help": {
+                "concept": "A tuple keeps record fields in a stable order, so indexes can retrieve known positions directly.",
+                "hint_1": "The first field is index `0`; the last field can be accessed with `-1`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "city = input().strip()\nday = input().strip()\ntemperature = int(input())\n\n# Build record and print its first and last fields.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "city = input().strip()\nday = input().strip()\ntemperature = int(input())\n\n# Build record and print its first and last fields.\n"
+                }
+              },
+              "solutionCode": "city = input().strip()\nday = input().strip()\ntemperature = int(input())\nrecord = (city, day, temperature)\nprint(record[0])\nprint(record[-1])\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "city = input().strip()\nday = input().strip()\ntemperature = int(input())\nrecord = (city, day, temperature)\nprint(record[0])\nprint(record[-1])\n"
+                }
+              }
+            },
+            "practice-loop-unpack-two-records": {
+              "title": "Loop through tuple records with unpacking",
+              "prompt": "Read two names and two scores. Build a list containing two `(name, score)` tuples. Loop with `for name, score in records:` and print each record as `NAME -> SCORE`.",
+              "hint": "Build two tuples first, then unpack each tuple directly in the `for` loop header.",
+              "help": {
+                "concept": "A loop can unpack each tuple record as it is visited, giving clear names to the fields without separate index lookups.",
+                "hint_1": "Build two tuples first, then unpack each tuple directly in the `for` loop header.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "name1 = input().strip()\nscore1 = int(input())\nname2 = input().strip()\nscore2 = int(input())\n\n# Build two tuple records and loop through them with unpacking.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "name1 = input().strip()\nscore1 = int(input())\nname2 = input().strip()\nscore2 = int(input())\n\n# Build two tuple records and loop through them with unpacking.\n"
+                }
+              },
+              "solutionCode": "name1 = input().strip()\nscore1 = int(input())\nname2 = input().strip()\nscore2 = int(input())\nrecords = [(name1, score1), (name2, score2)]\nfor name, score in records:\n    print(f\"{name} -> {score}\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "name1 = input().strip()\nscore1 = int(input())\nname2 = input().strip()\nscore2 = int(input())\nrecords = [(name1, score1), (name2, score2)]\nfor name, score in records:\n    print(f\"{name} -> {score}\")\n"
+                }
+              }
+            }
           }
         },
         "updating-and-looping-dictionaries": {
@@ -14667,6 +15596,42 @@ const messages: Record<string, any> = {
                   "message": "Use a `for` loop over `words` as the prompt requests."
                 }
               }
+            },
+            "ci-format-items": {
+              "title": "Build lines from dictionary pairs",
+              "prompt": "Write `format_inventory(items)` so it builds and returns a list of strings in the format `\"name: count\"`, such as `\"pens: 3\"`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+              "solutionCode": "def format_inventory(items):\n    result = []\n    for name, count in items.items():\n        result.append(f\"{name}: {count}\")\n    return result"
+            },
+            "ci-remove-key": {
+              "title": "Remove a key if it exists",
+              "prompt": "Write `remove_item(data, key_name)` so it removes `key_name` from the dictionary when that key is present, then returns the dictionary.",
+              "hint": "Read the task \"Remove a key if it exists\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+              "solutionCode": "def remove_item(data, key_name):\n    if key_name in data:\n        del data[key_name]\n    return data"
+            },
+            "ci-update-score": {
+              "title": "Update one score and return the dictionary",
+              "prompt": "Write `update_score(scores, name, new_score)` so it updates the existing entry for `name` or adds it if it is missing, then returns the `scores` dictionary.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+              "solutionCode": "def update_score(scores, name, new_score):\n    scores[name] = new_score\n    return scores"
             }
           },
           "tryIt": {
@@ -14836,6 +15801,42 @@ const messages: Record<string, any> = {
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "ci-1": {
+              "title": "Extract a cleaning helper",
+              "prompt": "Write `clean_name(name)` so it returns the cleaned version of `name`. This helper should do the name-cleaning work instead of leaving it repeated elsewhere.",
+              "hint": "Read the task \"Extract a cleaning helper\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
+              "solutionCode": "def clean_name(name):\n    return name.strip().title()"
+            },
+            "ci-2": {
+              "title": "Build a summary with helpers",
+              "prompt": "Split this job into two helpers. `word_count(text)` should return the number of words, and `summary(text)` should call that helper and return a string like `Words: 3`.",
+              "hint": "Read the task \"Build a summary with helpers\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
+              "solutionCode": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\""
+            },
+            "ci-3": {
+              "title": "Refactor repeated math into helpers",
+              "prompt": "Finish `double(number)` and `triple(number)`, then use those helper functions inside `combined_total(a, b)` instead of repeating the math there.",
+              "hint": "Read the task \"Refactor repeated math into helpers\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
+              "solutionCode": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)"
             }
           },
           "tryIt": {
@@ -14992,6 +15993,42 @@ const messages: Record<string, any> = {
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "ci-full-name": {
+              "title": "Combine first and last name",
+              "prompt": "Write `full_name(first, last)` so it returns the first and last name joined into one string.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+              "solutionCode": "def full_name(first, last):\n    return first + \" \" + last"
+            },
+            "ci-make-greeting": {
+              "title": "Write a greeting function",
+              "prompt": "Write `make_greeting(name)` so it returns a greeting string for that name.",
+              "hint": "Read the task \"Write a greeting function\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
+              "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
+            },
+            "ci-square-number": {
+              "title": "Return the square",
+              "prompt": "Write `square(number)` so it returns the square of `number`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def square(number):\n    # return the square of number\n    pass",
+              "solutionCode": "def square(number):\n    return number * number"
             }
           },
           "tryIt": {
@@ -15142,6 +16179,42 @@ const messages: Record<string, any> = {
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "ci-add-docstring": {
+              "title": "Add a matching docstring",
+              "prompt": "Add a docstring under `make_lower(text)` that clearly says what the function returns.",
+              "hint": "Read the task \"Add a matching docstring\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
+              "solutionCode": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()"
+            },
+            "ci-fix-print-vs-return": {
+              "title": "Fix the contract mismatch",
+              "prompt": "The docstring says `total_price(price, tax)` should return the total, but the starter code prints it instead. Fix the function so its behavior matches the docstring.",
+              "hint": "Read the task \"Fix the contract mismatch\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
+              "solutionCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax"
+            },
+            "ci-write-contract-function": {
+              "title": "Write a documented function with a clear contract",
+              "prompt": "Write `repeat_word(word, times)` so it returns the repeated text, and add a docstring that explains that contract clearly.",
+              "hint": "Read the task \"Write a documented function with a clear contract\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
+              "solutionCode": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times"
             }
           },
           "tryIt": {
@@ -15519,6 +16592,42 @@ const messages: Record<string, any> = {
                   "message": "Call `rectangle_area(...)` because that function call is explicitly required by the prompt."
                 }
               }
+            },
+            "ci-calculate-tip": {
+              "title": "Return a tip amount",
+              "prompt": "Write `calculate_tip(bill, percent)` so it returns just the tip amount for that bill and percent.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
+              "solutionCode": "def calculate_tip(bill, percent):\n    return bill * percent / 100"
+            },
+            "ci-first-item": {
+              "title": "Return the first list item",
+              "prompt": "Write `first_item(items)` so it returns the first element from the list.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass",
+              "solutionCode": "def first_item(items):\n    return items[0]"
+            },
+            "ci-make-label": {
+              "title": "Return a label string",
+              "prompt": "Write `make_label(item, count)` so it returns a label string like `Apples: 3`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
+              "solutionCode": "def make_label(item, count):\n    return item + \": \" + str(count)"
             }
           },
           "tryIt": {
@@ -15675,6 +16784,42 @@ const messages: Record<string, any> = {
                   "message": "Call `make_label(...)` because that function call is explicitly required by the prompt."
                 }
               }
+            },
+            "pvrs-code-1": {
+              "title": "Return a doubled value",
+              "prompt": "Write `double_number(n)` so it returns double the input instead of printing it.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def double_number(n):\n    # return double the input\n    pass",
+              "solutionCode": "def double_number(n):\n    return n * 2"
+            },
+            "pvrs-code-2": {
+              "title": "Return a greeting string",
+              "prompt": "Write `make_greeting(name)` so it returns a greeting string like `Hello, Ava`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass",
+              "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
+            },
+            "pvrs-code-3": {
+              "title": "Return a total instead of printing it",
+              "prompt": "Write `add_prices(price1, price2)` so it returns the total of the two prices instead of printing it.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass",
+              "solutionCode": "def add_prices(price1, price2):\n    return price1 + price2"
             }
           },
           "tryIt": {
@@ -15826,6 +16971,75 @@ const messages: Record<string, any> = {
               "sourceChecks": {
                 "0": {
                   "message": "Call `make_message(...)` because that function call is explicitly required by the prompt."
+                }
+              }
+            },
+            "code-q1": {
+              "title": "Return a local calculation",
+              "prompt": "Write `add_tax(price)` so it calculates `price + 5`, stores that result in a local variable named `total`, and then returns `total`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
+              "solutionCode": "def add_tax(price):\n    total = price + 5\n    return total",
+              "checks": {
+                "0": {
+                  "message": "add_tax should return price plus 5."
+                },
+                "1": {
+                  "message": "add_tax should work for a different number too."
+                },
+                "2": {
+                  "message": "Return the value instead of printing it."
+                }
+              }
+            },
+            "code-q2": {
+              "title": "Use a parameter as a local name",
+              "prompt": "Write `make_label(word)` so it builds the finished string in a local variable named `label`, then returns `label`.",
+              "hint": "Read the task \"Use a parameter as a local name\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
+              "solutionCode": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
+              "checks": {
+                "0": {
+                  "message": "make_label should prefix the word with `Item: `."
+                },
+                "1": {
+                  "message": "make_label should work with another input word."
+                },
+                "2": {
+                  "message": "Return the string instead of printing it."
+                }
+              }
+            },
+            "code-q3": {
+              "title": "Compute with two local variables",
+              "prompt": "Write `rectangle_area(width, height)` so it computes the area, stores it in a local variable named `area`, and returns `area`.",
+              "hint": "Read the task \"Compute with two local variables\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
+              "solutionCode": "def rectangle_area(width, height):\n    area = width * height\n    return area",
+              "checks": {
+                "0": {
+                  "message": "rectangle_area should multiply width by height."
+                },
+                "1": {
+                  "message": "rectangle_area should work for another pair of numbers."
+                },
+                "2": {
+                  "message": "Return the area instead of printing it."
                 }
               }
             }
@@ -16044,6 +17258,139 @@ const messages: Record<string, any> = {
                   "message": "Call `make_badge(...)` because that function call is explicitly required by the prompt."
                 }
               }
+            },
+            "q10": {
+              "title": "Add a badge module",
+              "prompt": "The helper folder needs one more tool. Create `tools/badges.py`, import `make_badge` from `tools.badges`, clean the input name, build the badge text, and print it.\n\nFor example, if the inputs are `lina` and `artist`, your program should print:\n`ARTIST badge: Lina`.",
+              "hint": "Create `tools/badges.py`, then import with `from tools.badges import make_badge`.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+                },
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Import from tools.badges."
+                },
+                "1": {
+                  "message": "Define make_badge in tools/badges.py."
+                },
+                "2": {
+                  "message": "make_badge should uppercase the role."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+            },
+            "q11": {
+              "title": "Build a mission report module",
+              "prompt": "Practice connecting helper modules into one report. Create `tools/reports.py`, import `mission_report` from `tools.reports`, and print the finished mission report. For inputs `zoe`, `scout`, and `18`, the output should be `Mission report: SCOUT badge: Zoe has 18 points`.",
+              "hint": "This step combines three files: `tools/names.py`, `tools/badges.py`, and your new `tools/reports.py`.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nraw_name = input()\nrole = input()\npoints = int(input())\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(mission_report(badge, points))\n"
+                },
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                },
+                "tools_reports_py": {
+                  "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Import from tools.reports."
+                },
+                "1": {
+                  "message": "Define mission_report in tools/reports.py."
+                },
+                "2": {
+                  "message": "Call mission_report() from main.py."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nraw_name = input()\nrole = input()\npoints = int(input())\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(mission_report(badge, points))\n"
+            },
+            "q9": {
+              "title": "Create a name-cleaning module",
+              "prompt": "Practice creating and importing a small helper module. Create a `tools` folder, add `tools/names.py`, and define `clean_name(text)` there. Then import `clean_name` from `tools.names` in `main.py`, clean the input name, and print it. For input `aVA`, the output should be `Ava`.",
+              "hint": "The required path is `tools/names.py`. The import line in `main.py` should be `from tools.names import clean_name`.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+                },
+                "tools_init_py": {
+                  "content": "# Tools package for this mini app.\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Import from tools.names."
+                },
+                "1": {
+                  "message": "Define clean_name(text) inside tools/names.py."
+                },
+                "2": {
+                  "message": "clean_name should strip whitespace."
+                },
+                "3": {
+                  "message": "clean_name should title-case the name."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
             }
           },
           "tryIt": {
@@ -16549,6 +17896,57 @@ const messages: Record<string, any> = {
                   "message": "Convert the cleaned city text to title case with `title()`."
                 }
               }
+            },
+            "ci-count-lines": {
+              "title": "Count lines in a text file",
+              "prompt": "Open `data/list.txt`, count how many lines are in the file, and print that number.\n\nYour output should be exactly:\n`3`.",
+              "hint": "Read the task \"Count lines in a text file\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+              "solutionCode": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/list.txt to count the lines."
+                }
+              }
+            },
+            "ci-first-line": {
+              "title": "Print only the first line",
+              "prompt": "Open `data/notes.txt`, read only the first line, and print it without the ending newline character.\n\nYour output should be exactly:\n`Apples`.",
+              "hint": "Read the task \"Print only the first line\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
+              "solutionCode": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/notes.txt to read the file."
+                }
+              }
+            },
+            "ci-read-and-print": {
+              "title": "Print a file's contents",
+              "prompt": "Open `data/message.txt`, read the file's contents, and print the text you find there.\n\nYour output should be exactly:\n`Hello from file reading!`.",
+              "hint": "Read the task \"Print a file's contents\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
+              "solutionCode": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/message.txt to read the file."
+                }
+              }
             }
           },
           "tryIt": {
@@ -16786,6 +18184,63 @@ const messages: Record<string, any> = {
                   "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
+            },
+            "ci-print-clean-names": {
+              "title": "Print cleaned names from a CSV file",
+              "prompt": "Read `students.csv` with `csv.DictReader`, clean each name as you loop through the rows, and print the cleaned names.\n\nYour output should be exactly:\n`Ava`\n`Ben`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass",
+              "solutionCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+              "sourceChecks": {
+                "0": {
+                  "message": "Strip each CSV name before printing it."
+                }
+              }
+            },
+            "ci-sum-valid-scores": {
+              "title": "Sum valid scores from CSV",
+              "prompt": "Read `scores.csv`, clean each score, try to convert it to an integer, and add only the valid numbers to `total`. Print `total` after the loop.\n\nYour output should be exactly:\n`16`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)",
+              "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use try/except for invalid score values."
+                },
+                "1": {
+                  "message": "Convert score text with int()."
+                }
+              }
+            },
+            "ci-write-summary-file": {
+              "title": "Write a CSV summary file",
+              "prompt": "Build a short report from `scores.csv`. As you loop, update `valid_rows` and `total_score` for rows with valid integer scores, then write those results to `summary.txt` and print the file contents.\n\nYour output should be exactly:\n`valid_rows: 2`\n`total_score: 16`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents",
+              "solutionCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use try/except for invalid score values."
+                },
+                "1": {
+                  "message": "Write the summary to summary.txt."
+                }
+              }
             }
           },
           "tryIt": {
@@ -16993,6 +18448,69 @@ const messages: Record<string, any> = {
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "q10": {
+              "title": "Add two inputs safely",
+              "prompt": "Two score entries arrive as text. Convert both values inside `try`, then print the sum or an invalid message if either value cannot be turned into an integer.\n\nFor example, if the inputs are `8` and `5`, your program should print:\n`Sum: 13`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
+              "solutionCode": "first_text = input()\nsecond_text = input()\n\ntry:\n    first_number = int(first_text)\n    second_number = int(second_text)\n    print(f\"Sum: {first_number + second_number}\")\nexcept ValueError:\n    print(\"Invalid input\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
+            },
+            "q11": {
+              "title": "Count valid numbers",
+              "prompt": "A comma-separated list may contain bad entries. Loop through each part, try to convert it to `int`, count only the valid integers, and print the final count.\n\nFor example, if the input is `3,7,bad,10`, your program should print:\n`Valid count: 3`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
+              "solutionCode": "parts = input().split(\",\")\nvalid_count = 0\n\nfor part in parts:\n    try:\n        int(part)\n        valid_count += 1\n    except ValueError:\n        pass\n\nprint(f\"Valid count: {valid_count}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through each part."
+                },
+                "1": {
+                  "message": "Use try/except around the int conversion."
+                },
+                "2": {
+                  "message": "Convert each value with int()."
+                }
+              }
+            },
+            "q9": {
+              "title": "Catch a bad integer input",
+              "prompt": "A number scanner might receive invalid text. Convert the input inside a `try` block, then print either the formatted number or an invalid message.\n\nFor example, if the input is `27`, your program should print:\n`Number: 27`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
+              "solutionCode": "text = input()\n\ntry:\n    number = int(text)\n    print(f\"Number: {number}\")\nexcept ValueError:\n    print(\"Invalid number\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
             }
           },
           "tryIt": {
@@ -17176,6 +18694,42 @@ const messages: Record<string, any> = {
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "ci-clean-name": {
+              "title": "Write a name cleaning function",
+              "prompt": "Write `clean_name(text)` so it returns a cleaned version of the name text.",
+              "hint": "Read the task \"Write a name cleaning function\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
+              "solutionCode": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()"
+            },
+            "ci-clean-row": {
+              "title": "Validate and clean one row",
+              "prompt": "Write `clean_row(row)` for rows shaped like `[name_text, score_text]`. Return a cleaned dictionary when both values are valid, or `None` when the row should be rejected.",
+              "hint": "Read the task \"Validate and clean one row\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
+              "solutionCode": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}"
+            },
+            "ci-parse-age": {
+              "title": "Parse an age safely",
+              "prompt": "Write `parse_age(text)` so it returns an `int` for valid age text and `None` when the text cannot be used as an age.",
+              "hint": "Read the task \"Parse an age safely\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
+              "solutionCode": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None"
             }
           },
           "tryIt": {
@@ -17374,6 +18928,63 @@ const messages: Record<string, any> = {
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "ci-copy-between-paths": {
+              "title": "Copy text to another relative path",
+              "prompt": "Copy the text from `data/source.txt` into `data/copy.txt`, then print the copied text so we can confirm both files match.\n\nYour output should be exactly:\n`apple`\n`banana`.",
+              "hint": "Read the task \"Copy text to another relative path\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+              "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read from data/source.txt."
+                },
+                "1": {
+                  "message": "Write to data/copy.txt."
+                },
+                "2": {
+                  "message": "Use file.write() to create the copy."
+                }
+              }
+            },
+            "ci-count-lines-in-folder": {
+              "title": "Count lines from a file path",
+              "prompt": "Open `data/items.txt`, count how many lines it contains, and print the result.\n\nYour output should be exactly:\n`3`.",
+              "hint": "Read the task \"Count lines from a file path\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+              "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/items.txt to count its lines."
+                }
+              }
+            },
+            "ci-read-nested-file": {
+              "title": "Read from a nested relative path",
+              "prompt": "Open `data/input.txt`, read the text from that relative path, and print it.\n\nYour output should be exactly:\n`Hello paths!`.",
+              "hint": "Read the task \"Read from a nested relative path\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+              "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/input.txt to read the nested file."
+                }
+              }
             }
           },
           "tryIt": {
@@ -17564,6 +19175,66 @@ const messages: Record<string, any> = {
                 }
               },
               "sourceChecks": {}
+            },
+            "ci-append-log-entry": {
+              "title": "Append a log entry",
+              "prompt": "The log already starts with one line. Append the new input entry to `log.txt` on a new line, then print the full file.\n\nFor example, if the input is `Checked sensors`, your program should print:\n`Start shift`\n`Checked sensors`.",
+              "hint": "Opening a file with `\"a\"` keeps the old contents and adds new text at the end.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n",
+              "solutionCode": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Append to log.txt instead of only printing the answer."
+                },
+                "1": {
+                  "message": "Open log.txt in append mode."
+                }
+              }
+            },
+            "ci-overwrite-shopping-list": {
+              "title": "Overwrite a shopping list from input",
+              "prompt": "A shopping list needs to be rewritten from fresh input. Write both items to `shopping.txt`, one per line and in title case, then print the file contents.\n\nFor example, if the inputs are `bread` and `apples`, your program should print:\n`Bread`\n`Apples`.",
+              "hint": "Opening a file with `\"w\"` replaces the old contents.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n",
+              "solutionCode": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Write to shopping.txt instead of only printing the answer."
+                },
+                "1": {
+                  "message": "Use file.write() to write shopping.txt."
+                }
+              }
+            },
+            "ci-write-greeting-file": {
+              "title": "Write a personalized greeting file",
+              "prompt": "Write a greeting into `greeting.txt` using the input name in title case, then open `greeting.txt` and print its contents.\n\nFor example, if the input is `zoe`, your program should print:\n`Hello, Zoe!`.",
+              "hint": "Use `input()` for the name, then write the formatted greeting into the file.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n",
+              "solutionCode": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Write to greeting.txt instead of only printing the answer."
+                },
+                "1": {
+                  "message": "Use file.write() to write greeting.txt."
+                }
+              }
             }
           },
           "tryIt": {
@@ -18399,338 +20070,65 @@ const messages: Record<string, any> = {
           }
         },
         "print-comments-and-errors": {
-          "label": "Print, Comments, and First Errors",
-          "summary": "Display text with print(), add comments for readers, and repair simple syntax mistakes.",
-          "cards": {
-            "sketch0": {
-              "title": "Use print() to display output"
-            },
-            "sketch1": {
-              "title": "Comments explain code without producing output"
-            },
-            "sketch2": {
-              "title": "Repair a simple syntax error"
-            },
-            "quiz": {
-              "title": "Quiz"
-            }
-          },
           "quiz": {
-            "sc-print-purpose": {
-              "title": "What print() does",
-              "prompt": "What happens when Python runs `print(\"Hello\")`?",
-              "hint": "`print()` is used when a program needs to show a value.",
+            "ci-personal-intro": {
+              "title": "Build a tiny introduction",
+              "prompt": "Write Python code that prints these three lines exactly:\n`About me`\n`Name: Sam`\n`Favorite color: Green`",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "`print()` displays the value passed inside its parentheses. The quote marks make `Hello` a string value.",
-                "hint_1": "The line runs normally; it is neither a comment nor an input request.",
-                "hint_2": "Choose the result that would appear in the output panel."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "options": {
-                "a": "Hello appears in the output.",
-                "b": "Hello is stored for later without being shown.",
-                "c": "The line becomes a comment.",
-                "d": "Python waits for the user to type Hello."
-              }
+              "starterCode": "# Write your introduction program below"
             },
-            "sc-comment-line": {
-              "title": "Recognize a Python comment",
-              "prompt": "Which line is a Python comment?",
-              "hint": "Python uses `#` to begin a comment.",
+            "ci-two-lines": {
+              "title": "Print two lines",
+              "prompt": "Write Python code that prints `Name: Alex` on the first line and `City: Lima` on the second line.",
+              "hint": "Read the task \"Print two lines\" and identify the required result.",
               "help": {
-                "concept": "A comment begins with `#`. Python ignores the comment text when it runs the program.",
-                "hint_1": "A quoted string is still a value, not a comment.",
-                "hint_2": "Look for the line whose first meaningful character is `#`."
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print two lines\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "options": {
-                "a": "print(\"Note\")",
-                "b": "# Note for the reader",
-                "c": "\"Note for the reader\"",
-                "d": "// Note for the reader"
-              }
-            },
-            "mc-valid-print-lines": {
-              "title": "Find valid print calls",
-              "prompt": "Which lines are valid Python `print()` calls? Choose all correct answers.",
-              "hint": "Check the parentheses and quote marks in every line.",
-              "help": {
-                "concept": "A basic `print()` call needs the function name, an opening `(`, a valid value such as a quoted string, and a matching closing `)`.",
-                "hint_1": "Python accepts both single and double quotes for strings.",
-                "hint_2": "Reject lines with an unclosed string or an unclosed function call."
-              },
-              "options": {
-                "a": "print(\"Hi\")",
-                "b": "print('Bye')",
-                "c": "print(\"Hi\"",
-                "d": "print(\"Bye)"
-              }
-            },
-            "mc-comments-behavior": {
-              "title": "Understand comment behavior",
-              "prompt": "Which statements about Python comments are true? Choose all correct answers.",
-              "hint": "Think about both Python's behavior and why programmers write comments.",
-              "help": {
-                "concept": "Comments begin with `#`, are ignored during execution, and can document code for people reading it.",
-                "hint_1": "Comments do not appear as normal program output.",
-                "hint_2": "Select the syntax fact, the execution fact, and the reader-facing purpose."
-              },
-              "options": {
-                "a": "A comment can begin with `#`.",
-                "b": "A comment is automatically printed as program output.",
-                "c": "Python ignores comment text when executing the program.",
-                "d": "A comment can explain code to someone reading it."
-              }
-            },
-            "dr-build-valid-print": {
-              "title": "Build a print call",
-              "prompt": "Arrange the tokens to create valid Python code that prints `Hi`.",
-              "hint": "Start with the function name, then open the call.",
-              "help": {
-                "concept": "A function call follows the pattern `name(value)`.",
-                "hint_1": "The string value belongs between the opening and closing parentheses.",
-                "hint_2": "The completed line should read `print(\"Hi\")`."
-              },
-              "tokens": {
-                "t1": "print",
-                "t2": "(",
-                "t3": "\"Hi\"",
-                "t4": ")"
-              }
-            },
-            "ci-print-one-line": {
-              "title": "Print one exact line",
-              "prompt": "Write one line of Python that prints exactly:\n\n`Welcome to Python`",
-              "hint": "Pass a quoted string to `print()`.",
-              "help": {
-                "concept": "`print()` displays the string value passed to it.",
-                "hint_1": "Capitalization and spaces must match the required output.",
-                "hint_2": "Use one `print(...)` call containing the complete message in quotes."
-              },
-              "starterCode": "# Print the required message below.\n",
-              "solutionCode": "print(\"Welcome to Python\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use one print call containing the exact string Welcome to Python."
-                }
-              }
-            },
-            "ci-comment-and-output": {
-              "title": "Add a useful comment without changing output",
-              "prompt": "The starter program already prints `Ready`. Add one useful Python comment on the line above the existing `print()` statement describing what the program is showing.\n\nDo not change the program output. Only `Ready` should appear.",
-              "hint": "Add a line beginning with `#` above the existing print statement.",
-              "help": {
-                "concept": "A comment documents the source code for a reader without becoming normal program output.",
-                "hint_1": "Keep the working `print(\"Ready\")` line.",
-                "hint_2": "Your new first line should start with `#` and explain the purpose."
-              },
-              "starterCode": "print(\"Ready\")\n",
-              "solutionCode": "# Show that the program is ready\nprint(\"Ready\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Add one non-empty comment above the existing print call and keep the output Ready."
-                }
-              }
-            },
-            "ci-fix-missing-paren": {
-              "title": "Repair a missing parenthesis",
-              "prompt": "The starter code has a syntax error because the `print()` call is not closed. Fix the code so it prints exactly:\n\n`Hello`",
-              "hint": "Match the opening `(` with its closing symbol.",
-              "help": {
-                "concept": "Python must be able to match the opening and closing parentheses of a function call before it can run the program.",
-                "hint_1": "Do not change the word `Hello`.",
-                "hint_2": "Add the missing closing parenthesis at the end of the line."
-              },
-              "starterCode": "print(\"Hello\"\n",
-              "solutionCode": "print(\"Hello\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Close the existing print call so it displays Hello."
-                }
-              }
-            },
-            "fb-close-print-call": {
-              "title": "Close the print call",
-              "prompt": "Choose the missing symbol that makes this line valid Python.",
-              "hint": "The opening parenthesis after `print` needs a matching partner.",
-              "help": {
-                "concept": "Parentheses in a function call must be balanced. A missing closing parenthesis prevents Python from reading the statement correctly.",
-                "hint_1": "The string itself is already complete.",
-                "hint_2": "Choose the symbol that closes the `(` after `print`."
-              },
-              "template": "print(\"Hello\"[blank1]",
-              "choices": [
-                ")",
-                "]",
-                "\"",
-                "#"
-              ]
+              "starterCode": "# Print the two required lines"
             }
           }
         },
         "reading-error-messages": {
-          "label": "Reading Error Messages",
-          "summary": "Use traceback clues—especially the reported line, error type, and message—to decide what to inspect and fix.",
-          "cards": {
-            "sketch0": {
-              "title": "Find the useful clues in a traceback"
-            },
-            "sketch1": {
-              "title": "Use the error type to classify the problem"
-            },
-            "sketch2": {
-              "title": "Use the reported line to narrow the search"
-            },
-            "quiz": {
-              "title": "Quiz"
-            }
-          },
           "quiz": {
-            "sc-bottom-of-traceback": {
-              "title": "Find the error summary",
-              "prompt": "A traceback contains several lines. Which part usually gives the best first summary of what kind of error occurred?",
-              "hint": "Look for the part that names the error category and describes it.",
+            "ci-fix-missing-paren": {
+              "title": "Fix a missing parenthesis",
+              "prompt": "Write Python code that prints `Hello` exactly. The starter code has a syntax problem. Fix it, then click Run and check the output panel.",
+              "hint": "This print statement is almost correct; check its closing punctuation.",
               "help": {
-                "concept": "Near the bottom of a Python traceback, Python usually shows the error type followed by a short message. That tells you what kind of problem Python encountered.",
-                "hint_1": "The reported line helps with location; the final error line helps with classification.",
-                "hint_2": "Choose the part containing a name such as `NameError` or `SyntaxError` and its message."
+                "concept": "A missing closing parenthesis makes a print statement invalid and causes a syntax error.",
+                "hint_1": "The string itself is fine. Look just outside the quotes.",
+                "hint_2": "A valid print call needs matching parentheses around its argument."
               },
-              "options": {
-                "a": "The final error type and message",
-                "b": "Only the filename at the top",
-                "c": "Whichever code line is longest",
-                "d": "The number of spaces in the traceback"
-              }
+              "starterCode": "print(\"Hello\""
             },
-            "sc-nameerror-meaning": {
-              "title": "Interpret NameError",
-              "prompt": "Python ends a traceback with `NameError: name 'score' is not defined`. What should you investigate first?",
-              "hint": "The message says Python tried to use a name it does not know.",
+            "ci-fix-missing-quote": {
+              "title": "Fix a missing quote",
+              "prompt": "Write Python code that prints `Python is fun` exactly. The starter code has a string that is not closed correctly. Fix it and run the code.",
+              "hint": "Check whether the string starts and ends with matching quotes.",
               "help": {
-                "concept": "`NameError` means Python tried to evaluate a name that has not been defined in the current program state.",
-                "hint_1": "This is different from an unmatched quote or parenthesis.",
-                "hint_2": "Look for where `score` is used and whether it should have been defined earlier or written as literal text."
+                "concept": "Strings need matching opening and closing quotes. If one is missing, Python cannot read the line correctly.",
+                "hint_1": "The problem is inside the print statement, around the text.",
+                "hint_2": "Make sure the text is fully wrapped in one pair of quotes before the closing parenthesis."
               },
-              "options": {
-                "a": "Where `score` is used and whether that name exists",
-                "b": "Whether the reported line has unmatched quotes or parentheses",
-                "c": "Whether an arithmetic operation divided by zero",
-                "d": "Whether a value has an unexpected type for an operation"
-              }
+              "starterCode": "print(\"Python is fun)"
             },
-            "mc-traceback-clues": {
-              "title": "Use traceback evidence",
-              "prompt": "Which clues can directly help you decide where to look and what kind of problem to investigate? Choose all correct answers.",
-              "hint": "Separate location clues from problem-type clues.",
+            "ci-fix-nameerror-string": {
+              "title": "Turn a missing name into a string",
+              "prompt": "The starter code tries to print a word as if it were a variable. Fix the code so it prints `banana` exactly.",
+              "hint": "If you want to print text directly, it needs quotes.",
               "help": {
-                "concept": "The reported file/line helps locate the problem. The error type and message describe what Python encountered.",
-                "hint_1": "One useful clue tells you where; another tells you what kind.",
-                "hint_2": "Visual preferences such as editor colors do not explain a Python error."
+                "concept": "Without quotes, Python treats a word like a variable name. With quotes, Python treats it as a string value.",
+                "hint_1": "The word should be printed as text, not looked up as a variable.",
+                "hint_2": "Keep the print call, but change the argument so Python reads it as a string."
               },
-              "options": {
-                "a": "The reported line number",
-                "b": "The error type, such as `NameError`",
-                "c": "The error message text",
-                "d": "The total number of unrelated functions elsewhere in the program"
-              }
-            },
-            "mc-syntaxerror-signs": {
-              "title": "Classify two beginner errors",
-              "prompt": "Which situations are best classified as syntax problems rather than unknown-name problems? Choose all correct answers.",
-              "hint": "Syntax problems prevent Python from reading the code structure.",
-              "help": {
-                "concept": "`SyntaxError` concerns invalid Python structure. `NameError` happens after Python can read the code but cannot resolve a name.",
-                "hint_1": "Look for broken punctuation or an incomplete statement.",
-                "hint_2": "An undefined variable name belongs to `NameError`, not `SyntaxError`."
-              },
-              "options": {
-                "a": "A `print(` call with no closing `)`",
-                "b": "A string with no closing quote",
-                "c": "Using `score` when no name `score` exists",
-                "d": "An unfinished `print(\"Hello\"` statement"
-              }
-            },
-            "dr-read-traceback-order": {
-              "title": "Use a traceback systematically",
-              "prompt": "Arrange these debugging actions into a useful beginner workflow.",
-              "hint": "Gather evidence before editing.",
-              "help": {
-                "concept": "A reliable debugging workflow uses the traceback to locate and classify the problem before changing code.",
-                "hint_1": "Read the reported location and error summary before making a fix.",
-                "hint_2": "Run the program again only after making a targeted correction."
-              },
-              "tokens": {
-                "t1": "Find the reported file and line",
-                "t2": "Read the error type and message",
-                "t3": "Inspect that line and nearby code using those clues",
-                "t4": "Make one targeted fix and run again"
-              }
-            },
-            "fb-nameerror-fill": {
-              "title": "Match the error type",
-              "prompt": "The code shape is valid, but `print(word)` uses `word` before that name exists. Choose the likely error type.",
-              "hint": "Python can read the statement; the problem is the unknown name.",
-              "help": {
-                "concept": "When valid Python code refers to an undefined name, Python raises `NameError`.",
-                "hint_1": "Do not choose a syntax category when the punctuation is valid.",
-                "hint_2": "Choose the error category specifically associated with unknown names."
-              },
-              "template": "The likely error type is [blank1].",
-              "choices": [
-                "NameError",
-                "SyntaxError",
-                "TypeError",
-                "ValueError"
-              ]
-            },
-            "ci-use-syntaxerror-clue": {
-              "title": "Use a SyntaxError clue",
-              "prompt": "Run the starter program. The traceback points to line 2 and identifies a syntax problem. Use those clues to repair the incomplete second statement so the program prints exactly:\n\n`Start`\n`Done`",
-              "hint": "Inspect line 2 and compare its punctuation with line 1.",
-              "help": {
-                "concept": "The reported line narrows your search, and `SyntaxError` tells you to inspect the structure of the statement.",
-                "hint_1": "The string on line 2 is already complete.",
-                "hint_2": "The `print(` call on line 2 needs its matching closing parenthesis."
-              },
-              "starterCode": "print(\"Start\")\nprint(\"Done\"\n",
-              "solutionCode": "print(\"Start\")\nprint(\"Done\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Repair only the incomplete second print call so Start and Done both run."
-                }
-              }
-            },
-            "ci-use-nameerror-clue": {
-              "title": "Use a NameError clue",
-              "prompt": "Run the starter program. The traceback ends with a `NameError` for `banana`. The program is meant to print the word `banana` as text. Use the error type and message to make the smallest correction.",
-              "hint": "`NameError` means Python is treating `banana` as a name.",
-              "help": {
-                "concept": "When text is written without quotes, Python interprets it as a name. The `NameError` message tells you that this name does not exist.",
-                "hint_1": "Keep the `print()` call.",
-                "hint_2": "Change the argument so Python reads `banana` as literal text."
-              },
-              "starterCode": "print(banana)\n",
-              "solutionCode": "print(\"banana\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use the NameError clue to turn banana into quoted literal text."
-                }
-              }
-            },
-            "ci-use-line-number-clue": {
-              "title": "Use the reported line",
-              "prompt": "This four-line program should print `One`, `Two`, `Three`, and `Four`. When you run it, the traceback points to line 3 and reports an unknown name. Inspect line 3 first and make the smallest fix so all four lines run.",
-              "hint": "The first, second, and fourth lines already use quoted text.",
-              "help": {
-                "concept": "A reported line number gives you a starting point. Combine that location with the error type instead of scanning the whole file randomly.",
-                "hint_1": "Compare line 3 with the surrounding valid `print()` calls.",
-                "hint_2": "The word `Three` should be text, not an undefined name."
-              },
-              "starterCode": "print(\"One\")\nprint(\"Two\")\nprint(Three)\nprint(\"Four\")\n",
-              "solutionCode": "print(\"One\")\nprint(\"Two\")\nprint(\"Three\")\nprint(\"Four\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Keep the working lines and repair line 3 so Three is quoted text."
-                }
-              }
+              "starterCode": "print(banana)"
             }
           }
         },
@@ -18969,506 +20367,93 @@ const messages: Record<string, any> = {
           }
         },
         "values-types-and-literals": {
-          "label": "Values, Types, and Literals",
-          "summary": "Distinguish strings, integers, and floats, recognize literals, and see how simple expressions produce values.",
-          "cards": {
-            "sketch0": {
-              "title": "What a value is"
-            },
-            "sketch1": {
-              "title": "Literals are values written directly"
-            },
-            "sketch2": {
-              "title": "Expressions produce values"
-            },
-            "quiz": {
-              "title": "Quiz"
-            }
-          },
           "quiz": {
-            "sc-string-literal": {
-              "title": "Recognize a string literal",
-              "prompt": "Which value would Python treat as text?",
-              "hint": "Text written directly in Python must be inside quotes.",
+            "ci-read-and-print": {
+              "title": "Read text and print it",
+              "prompt": "Write Python code that reads one line of input and prints it exactly as it was entered.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "A string is text. A string literal is text written directly in code inside matching quotes.",
-                "hint_1": "`7` and `3.5` are numeric literals because they are not quoted.",
-                "hint_2": "Look for the value whose letters are surrounded by quote marks."
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "options": {
-                "a": "7",
-                "b": "\"cat\"",
-                "c": "3.5",
-                "d": "cat"
-              }
+              "starterCode": "# TODO: read one line and print it"
             },
-            "sc-float-value": {
-              "title": "Recognize a float literal",
-              "prompt": "Which option is a float value rather than an integer or string?",
-              "hint": "Look for an unquoted number containing a decimal point.",
+            "ci-read-number-text": {
+              "title": "Read a number-looking input",
+              "prompt": "Write Python code that reads one line of input and prints `You typed:` followed by the exact input on the same line. Treat the input as text.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "A float represents a number with a decimal component. For example, `3.5` is a float, while `3` is an integer.",
-                "hint_1": "Quotes would make the value a string even if the text looks numeric.",
-                "hint_2": "Choose the decimal number that is written without quotes."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "options": {
-                "a": "\"3.0\"",
-                "b": "3",
-                "c": "3.5",
-                "d": "\"cat\""
-              }
+              "starterCode": "# TODO: read input and print it after the label"
             },
-            "mc-valid-literals": {
-              "title": "Same characters, different types",
-              "prompt": "Which pairs contain values with different Python types? Choose all correct answers.",
-              "hint": "Quotes can make two values that look similar represent different types.",
+            "ci-three-lines": {
+              "title": "Print mixed values",
+              "prompt": "Write Python code that prints three lines: the string `\"start\"`, then the result of `4 + 1`, then the string `\"done\"`.",
+              "hint": "Use three `print()` lines.",
               "help": {
-                "concept": "The characters you see are not enough to determine a value's type. `42` is an integer, while `\"42\"` is a string.",
-                "hint_1": "Compare whether each value is quoted or unquoted.",
-                "hint_2": "A quoted number and the same unquoted number have different types."
+                "concept": "A program can print different kinds of values one after another, including strings and expression results.",
+                "hint_1": "Use one `print()` statement per line of output.",
+                "hint_2": "Print the text first, then the computed number, then the final text."
               },
-              "options": {
-                "a": "42 and \"42\"",
-                "b": "3.5 and \"3.5\"",
-                "c": "\"cat\" and \"dog\"",
-                "d": "7 and 8"
-              }
-            },
-            "dr-expression-steps": {
-              "title": "Trace an expression to its output",
-              "prompt": "Arrange what happens when Python runs `print(2 + 3)`.",
-              "hint": "The addition must produce a value before `print()` can display it.",
-              "help": {
-                "concept": "Python evaluates the expression passed to `print()` first. The resulting value is then passed to `print()` and displayed.",
-                "hint_1": "Start with evaluating `2 + 3`.",
-                "hint_2": "After the expression produces `5`, `print()` receives and displays that value."
-              },
-              "tokens": {
-                "t1": "Evaluate `2 + 3`",
-                "t2": "Produce the value `5`",
-                "t3": "Pass the value `5` to `print()`",
-                "t4": "Display `5`"
-              }
-            },
-            "fb-quoted-text": {
-              "title": "Write text as a literal",
-              "prompt": "Complete the code so Python treats `hello` as text and prints it.",
-              "hint": "The letters must be inside quotes in the completed code.",
-              "help": {
-                "concept": "Without quotes, `hello` is treated as a name. With quotes, `\"hello\"` is a string literal.",
-                "hint_1": "The blank replaces the entire value passed to `print(...)`.",
-                "hint_2": "Choose the version of `hello` that includes its quote marks."
-              },
-              "template": "print([blank1])",
-              "choices": [
-                "hello",
-                "\"hello\"",
-                "5",
-                "3.5"
-              ]
-            },
-            "ci-print-literals": {
-              "title": "Print three kinds of values",
-              "prompt": "Write three `print()` statements. Print these values on separate lines in this exact order:\n1. the string `\"Zoe\"`\n2. the integer `7`\n3. the float `2.5`",
-              "hint": "Only the string needs quotes.",
-              "help": {
-                "concept": "Strings, integers, and floats use different literal syntax even though all three can be passed directly to `print()`.",
-                "hint_1": "Write `\"Zoe\"` with quotes so it is text.",
-                "hint_2": "Write `7` and `2.5` without quotes so they remain numbers."
-              },
-              "starterCode": "# Print the string, integer, and float on separate lines.\n",
-              "solutionCode": "print(\"Zoe\")\nprint(7)\nprint(2.5)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Print Zoe as a string, then 7 as an integer, then 2.5 as a float."
-                }
-              }
-            },
-            "ci-print-expression": {
-              "title": "Evaluate and print two expressions",
-              "prompt": "Write two `print()` statements:\n- print the value produced by `2 + 3`\n- print the value produced by `1.5 + 2.5`\n\nUse the expressions themselves inside `print(...)`; do not replace them with the final answers.",
-              "hint": "Python evaluates what is inside `print(...)` before displaying it.",
-              "help": {
-                "concept": "An expression produces a value. `2 + 3` produces an integer, while `1.5 + 2.5` produces a float.",
-                "hint_1": "The first line should contain `print(2 + 3)`.",
-                "hint_2": "Use the decimal expression directly on the second line."
-              },
-              "starterCode": "# Print the result of each expression.\n",
-              "solutionCode": "print(2 + 3)\nprint(1.5 + 2.5)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use the two addition expressions themselves inside print calls."
-                }
-              }
-            },
-            "mc-number-literals": {
-              "title": "Recognize number literals",
-              "prompt": "Which options are numeric literals that Python can use directly in arithmetic? Choose all correct answers.",
-              "hint": "Numeric literals are numbers written without quotes.",
-              "help": {
-                "concept": "Integers and floats are numeric values. Quoting a number changes it into a string.",
-                "hint_1": "`7` is numeric, but `\"7\"` is text.",
-                "hint_2": "Choose both the whole number and decimal number that have no quotes."
-              },
-              "options": {
-                "a": "7",
-                "b": "\"7\"",
-                "c": "2.5",
-                "d": "\"two\""
-              }
-            },
-            "ci-fix-string-quotes": {
-              "title": "Fix the missing string quotes",
-              "prompt": "The starter code tries to print the word `hello`, but Python treats `hello` as a name because the quotes are missing. Fix the line so the program prints:\n\n`hello`",
-              "hint": "Turn `hello` into a string literal.",
-              "help": {
-                "concept": "Text written directly in Python must be surrounded by quotes. Without quotes, Python interprets the word as a variable name.",
-                "hint_1": "Keep the `print(...)` call.",
-                "hint_2": "Place matching quotes around `hello`."
-              },
-              "starterCode": "print(hello)\n",
-              "solutionCode": "print(\"hello\")",
-              "sourceChecks": {
-                "0": {
-                  "message": "Put hello inside matching quotes so Python treats it as a string literal."
-                }
-              }
+              "starterCode": "# TODO: print the required three lines"
             }
           }
         },
         "what-python-is": {
-          "label": "What Python Is",
-          "summary": "Understand Python as a general-purpose programming language, see where it is used, and preview how the course builds practical skill.",
-          "cards": {
-            "course-introduction": {
-              "title": "Start here"
-            },
-            "sketch0": {
-              "title": "Python is a programming language"
-            },
-            "sketch1": {
-              "title": "General-purpose means many kinds of work"
-            },
-            "sketch2": {
-              "title": "From first programs to real projects"
-            },
-            "quiz": {
-              "title": "Quiz"
-            }
-          },
           "quiz": {
-            "sc-python-language": {
-              "title": "Identify what Python is",
-              "prompt": "Which statement best describes Python?",
-              "hint": "Python is something people use to write instructions for computers.",
+            "ci-beginner-message": {
+              "title": "Print a beginner-friendly message",
+              "prompt": "Write Python code that prints exactly these two lines:\nPython is beginner-friendly.\nIt is used in many fields.",
+              "hint": "Use two print statements and match the punctuation exactly.",
               "help": {
-                "concept": "Python is a programming language. People write Python code to describe instructions and computations that a computer can execute.",
-                "hint_1": "Do not confuse the language with a website, operating system, or physical device.",
-                "hint_2": "Choose the answer that identifies Python as a language for writing programs."
+                "concept": "Exact output exercises check whether your printed text matches the required lines character by character.",
+                "hint_1": "There are two sentences, each ending with a period.",
+                "hint_2": "Print the first sentence on one line and the second sentence on the next line."
               },
-              "options": {
-                "a": "A programming language used to write programs",
-                "b": "A program that only installs Python packages",
-                "c": "A data-analysis library used inside another language",
-                "d": "A markup format used only to describe webpage structure"
-              }
+              "starterCode": "# TODO: print both required lines"
             },
-            "sc-general-purpose-meaning": {
-              "title": "Understand general-purpose",
-              "prompt": "What does it mean when Python is called a general-purpose language?",
-              "hint": "The phrase describes the range of problems the language can be used to solve.",
+            "ci-personal-usecase-label": {
+              "title": "Label a Python use",
+              "prompt": "Write Python code that prints exactly: One Python use: web apps",
+              "hint": "Read the coding task and identify what the program should print.",
               "help": {
-                "concept": "A general-purpose language is designed for many kinds of software and problem-solving tasks rather than one narrow job.",
-                "hint_1": "Python is not limited to only data work or only websites.",
-                "hint_2": "Choose the answer about using one language across many kinds of projects."
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "options": {
-                "a": "It can be used for many different kinds of programming work",
-                "b": "It is designed for exactly one type of application",
-                "c": "It can only display text",
-                "d": "It only works for school exercises"
-              }
+              "starterCode": "# TODO: print the required labeled sentence"
             },
-            "sc-automation-example": {
-              "title": "Recognize automation",
-              "prompt": "Which task is the best example of using Python for automation?",
-              "hint": "Automation is useful when the same kind of work has to be repeated.",
+            "ci-print-usecase-automation": {
+              "title": "Print an automation message",
+              "prompt": "Write Python code that prints exactly: Python helps automate repeated tasks.",
+              "hint": "Use one print statement with the full sentence inside quotes.",
               "help": {
-                "concept": "Automation uses code to perform routine or repeated steps that would otherwise require manual work.",
-                "hint_1": "Look for a repetitive computer-based task.",
-                "hint_2": "The automated task should be something software can perform repeatedly."
+                "concept": "The `print()` statement sends text to the output panel exactly as written, including spaces and punctuation.",
+                "hint_1": "You need one line of code that prints the whole sentence.",
+                "hint_2": "Put the message inside parentheses and quotation marks so Python treats it as text."
               },
-              "options": {
-                "a": "Rename hundreds of files using a consistent rule",
-                "b": "Rename one file manually one time",
-                "c": "Open each of hundreds of files and rename them manually",
-                "d": "Write the renaming rule down without executing it"
-              }
-            },
-            "mc-common-uses": {
-              "title": "Recognize common Python fields",
-              "prompt": "Which are common areas where Python is used? Choose all correct answers.",
-              "hint": "Think about software, data, automation, and intelligent systems.",
-              "help": {
-                "concept": "Python is used in areas including automation, web development, data analysis, and AI or machine learning.",
-                "hint_1": "Choose areas where software can process information or perform computations.",
-                "hint_2": "A manual physical chore is not itself a programming field."
-              },
-              "options": {
-                "a": "Automation",
-                "b": "Web applications",
-                "c": "Data analysis and AI",
-                "d": "A document file format such as PDF"
-              }
-            },
-            "mc-beginner-friendly-reasons": {
-              "title": "Why Python is a common first language",
-              "prompt": "Which qualities can make Python approachable for beginners? Choose all correct answers.",
-              "hint": "Think about reading code and getting feedback from small programs.",
-              "help": {
-                "concept": "Python is often chosen as a first language because many basic programs are readable and learners can begin experimenting with short pieces of code.",
-                "hint_1": "Look for qualities that reduce the barrier to starting.",
-                "hint_2": "Needing complex setup for every tiny program would not be a beginner advantage."
-              },
-              "options": {
-                "a": "Many basic Python statements are relatively readable",
-                "b": "Learners can start experimenting with small programs",
-                "c": "Every tiny program requires many files and packages",
-                "d": "Beginners must learn advanced AI before writing basic code"
-              }
-            },
-            "dr-course-progression": {
-              "title": "See how the course builds",
-              "prompt": "Arrange these course stages from earliest foundation to later application.",
-              "hint": "Start with running small programs and end with combining skills in projects.",
-              "help": {
-                "concept": "The course builds in layers: first you run and read small programs, then work with values and text, then add decisions and repetition, and finally combine ideas in projects.",
-                "hint_1": "Foundational interaction with code comes before larger programming structures.",
-                "hint_2": "Projects belong at the end because they combine skills learned earlier."
-              },
-              "tokens": {
-                "t1": "Run and read small Python programs",
-                "t2": "Work with values and text",
-                "t3": "Add decisions and repetition",
-                "t4": "Combine skills in projects"
-              }
+              "starterCode": "# TODO: print the required sentence"
             }
           }
         }
       },
       "python-v2-1": {
         "common-variable-mistakes": {
-          "label": "Common Variable Mistakes",
-          "summary": "Recognize and repair common variable mistakes: using a name too early, quoting a variable name by accident, and changing its spelling.",
-          "cards": {
-            "sketch0": {
-              "title": "Using a variable before it exists"
-            },
-            "sketch1": {
-              "title": "Strings by accident"
-            },
-            "sketch2": {
-              "title": "Clear names and exact spelling"
-            },
-            "quiz": {
-              "title": "Quiz"
-            }
-          },
           "quiz": {
-            "sc-undefined-name": {
-              "title": "Find the use-before-assignment mistake",
-              "prompt": "Which program tries to use `score` before `score` has been assigned a value?",
-              "hint": "Read each program from top to bottom and find the first use of `score`.",
+            "ci-read-and-store-input": {
+              "title": "Store input before printing",
+              "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints `city`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "A name must be assigned before a line tries to read its stored value.",
-                "hint_1": "An assignment such as `score = 5` creates the value for later use.",
-                "hint_2": "Look for a `print(score)` that appears before any assignment to `score`."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "options": {
-                "a": "score = 5\nprint(score)",
-                "b": "print(score)\nscore = 5",
-                "c": "score = 5\nscore = 6\nprint(score)"
-              }
-            },
-            "sc-quotes-vs-variable": {
-              "title": "Quotes change the meaning",
-              "prompt": "If `name = \"Ava\"`, what does `print(\"name\")` show?",
-              "hint": "Quotes make `\"name\"` literal text instead of a variable lookup.",
-              "help": {
-                "concept": "`name` asks Python for the stored value; `\"name\"` is the literal string containing those four letters.",
-                "hint_1": "The variable contains `Ava`, but the print call does not reference the variable.",
-                "hint_2": "Read exactly what appears between the quotes."
-              },
-              "options": {
-                "a": "Ava",
-                "b": "name",
-                "c": "an error",
-                "d": "nothing"
-              }
-            },
-            "mc-valid-variable-uses": {
-              "title": "Choose all valid variable uses",
-              "prompt": "Which code snippets use variables correctly? Choose all that apply.",
-              "hint": "For each snippet, check that the exact variable name is assigned before it is printed.",
-              "help": {
-                "concept": "Correct variable use requires both execution order and exact name matching.",
-                "hint_1": "Reject code that prints a name before assigning it.",
-                "hint_2": "Reject code whose printed name is spelled differently from the assigned name."
-              },
-              "options": {
-                "a": "city = \"Rome\"\nprint(city)",
-                "b": "print(city)\ncity = \"Rome\"",
-                "c": "user_name = \"Kai\"\nprint(user_name)",
-                "d": "user_name = \"Kai\"\nprint(username)"
-              }
-            },
-            "mc-confusing-name-mistakes": {
-              "title": "Spot the likely mistakes",
-              "prompt": "Which examples show common variable mistakes? Choose all that apply.",
-              "hint": "Look for quoted variable names and mismatched spellings.",
-              "help": {
-                "concept": "Two common mistakes are printing the name as literal text and referring to a different spelling than the one assigned.",
-                "hint_1": "`print(\"name\")` does not read the variable `name`.",
-                "hint_2": "`first_name` and `firstname` are different identifiers."
-              },
-              "options": {
-                "a": "name = \"Lia\"\nprint(\"name\")",
-                "b": "age = 12\nprint(age)",
-                "c": "first_name = \"Noah\"\nprint(firstname)",
-                "d": "color = \"blue\"\nprint(color)"
-              }
-            },
-            "dr-order-assignment-then-use": {
-              "title": "Repair the execution order",
-              "prompt": "Arrange the ideas so `score` is created before its value is printed.",
-              "hint": "Choose the name, assign its value, then use the variable.",
-              "help": {
-                "concept": "A variable must be established before later code can read it.",
-                "hint_1": "The assignment belongs before the print step.",
-                "hint_2": "The final step should use the stored value."
-              },
-              "tokens": {
-                "t1": "Choose the variable name `score`",
-                "t2": "Assign `10` to `score`",
-                "t3": "Print `score`"
-              }
-            },
-            "dr-fix-quoted-name-thinking": {
-              "title": "Explain the quoted-name mistake",
-              "prompt": "Arrange the ideas to explain what Python does with `print(\"name\")`.",
-              "hint": "Start with what quotes mean, then follow that meaning to the output.",
-              "help": {
-                "concept": "Quotes change a possible variable name into a string literal.",
-                "hint_1": "First identify the value created by the quotes.",
-                "hint_2": "Then connect that literal value to what `print()` displays."
-              },
-              "tokens": {
-                "t1": "Quotes make `\"name\"` a string literal",
-                "t2": "Python treats it as text, not a variable lookup",
-                "t3": "`print(\"name\")` shows the letters name"
-              }
-            },
-            "fb-variable-name": {
-              "title": "Use a variable name, not text",
-              "prompt": "Choose the correct item for the blank.\n\n```python\n___ = 10\n```",
-              "hint": "The left side of an assignment needs a variable name.",
-              "help": {
-                "concept": "A basic assignment stores the right-side value under a valid name on the left.",
-                "hint_1": "Do not put quotation marks around the variable name.",
-                "hint_2": "Choose the identifier that describes the stored value."
-              },
-              "template": "[blank1] = 10",
-              "choices": [
-                "age",
-                "print",
-                "\"age\"",
-                "10"
-              ]
-            },
-            "fb-print-variable-value": {
-              "title": "Print the stored value",
-              "prompt": "Choose the correct item for the blank so the stored value is printed.\n\n```python\nname = \"Ava\"\nprint(___)\n```",
-              "hint": "Use the variable itself, without quotes.",
-              "help": {
-                "concept": "A bare variable name retrieves its stored value; quoted text prints the literal characters.",
-                "hint_1": "The value is already stored in `name`.",
-                "hint_2": "Putting quotes around `name` would print the word instead of `Ava`."
-              },
-              "template": "print([blank1])",
-              "choices": [
-                "name",
-                "\"name\"",
-                "print",
-                "="
-              ]
-            },
-            "ci-fix-undefined-name": {
-              "title": "Fix a variable used too early",
-              "prompt": "The starter program tries to print `count` before `count` exists. Repair the program so it assigns `7` to `count` first and then prints `count`.",
-              "hint": "Move the assignment before the line that reads the variable.",
-              "help": {
-                "concept": "Python must execute the assignment before a later statement can read the variable.",
-                "hint_1": "The final program should have two lines.",
-                "hint_2": "The assignment belongs above `print(count)`."
-              },
-              "starterCode": "print(count)\ncount = 7\n",
-              "solutionCode": "count = 7\nprint(count)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Assign 7 to count before print(count) uses the variable."
-                }
-              }
-            },
-            "ci-print-variable-not-text": {
-              "title": "Remove accidental quotes around a variable",
-              "prompt": "The starter stores `\"Mila\"` in `name`, but it prints the word `name` instead of the stored value. Fix only the print line so the output is `Mila`.",
-              "hint": "The assignment is correct. The mistake is the quotes inside `print()`.",
-              "help": {
-                "concept": "Quoted `\"name\"` is literal text; unquoted `name` retrieves the variable's value.",
-                "hint_1": "Keep `name = \"Mila\"` unchanged.",
-                "hint_2": "The print call should use the variable name without quotes."
-              },
-              "starterCode": "name = \"Mila\"\nprint(\"name\")\n",
-              "solutionCode": "name = \"Mila\"\nprint(name)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Keep the assignment and print the variable name without quotes."
-                }
-              }
-            },
-            "ci-match-variable-spelling": {
-              "title": "Fix a misspelled variable use",
-              "prompt": "The starter creates `favorite_color` but tries to print a different spelling. Fix the print line so it uses the exact variable that was assigned.",
-              "hint": "Compare the spelling on the assignment line with the spelling inside `print()`.",
-              "help": {
-                "concept": "Python requires an exact identifier match when code refers to a variable.",
-                "hint_1": "Keep the assignment line unchanged.",
-                "hint_2": "Use `favorite_color` inside `print()` with the underscore included."
-              },
-              "starterCode": "favorite_color = \"green\"\nprint(favoriteColor)\n",
-              "solutionCode": "favorite_color = \"green\"\nprint(favorite_color)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Use favorite_color with the exact same spelling in the assignment and print call."
-                }
-              }
-            },
-            "ci-fix-accidental-string-number": {
-              "title": "Turn number-looking text into a number",
-              "prompt": "The starter stores `\"12\"` in `age`, which makes the value a string. Fix the assignment so `age` stores the number `12` instead, then keep printing `age`.",
-              "hint": "The digits are correct; the quotes are what make the value text.",
-              "help": {
-                "concept": "Removing quotes changes the literal from the string `\"12\"` to the integer `12`.",
-                "hint_1": "Keep the variable name `age`.",
-                "hint_2": "The corrected assignment should use `12` without quotation marks."
-              },
-              "starterCode": "age = \"12\"\nprint(age)\n",
-              "solutionCode": "age = 12\nprint(age)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Store 12 in age without quotes, then print the variable."
-                }
-              }
+              "starterCode": "# Read one line into city\n# Then print city"
             }
           }
         },
@@ -19708,6 +20693,30 @@ const messages: Record<string, any> = {
                 },
                 "1": {
                   "message": "Use an f-string with :.1f when printing the average."
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-item-quantity-fstring": {
+              "title": "Format an item and quantity",
+              "prompt": "Read an item name and then a whole-number quantity. Print `ITEM x QUANTITY` using one f-string. For example, `Notebook` and `3` should produce `Notebook x 3`.",
+              "hint": "Place both variables inside `{}` in the same f-string.",
+              "help": {
+                "concept": "An f-string can combine text and multiple variables into one readable output line.",
+                "hint_1": "Place both variables inside `{}` in the same f-string.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "item = input().strip()\nquantity = int(input())\n\n# Print ITEM x QUANTITY with one f-string.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "item = input().strip()\nquantity = int(input())\n\n# Print ITEM x QUANTITY with one f-string.\n"
+                }
+              },
+              "solutionCode": "item = input().strip()\nquantity = int(input())\nprint(f\"{item} x {quantity}\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "item = input().strip()\nquantity = int(input())\nprint(f\"{item} x {quantity}\")\n"
                 }
               }
             }
@@ -19964,6 +20973,30 @@ const messages: Record<string, any> = {
                 }
               }
             }
+          },
+          "practice": {
+            "practice-price-times-quantity": {
+              "title": "Convert two inputs for a total",
+              "prompt": "Read a decimal price and then a whole-number quantity. Convert the inputs with `float()` and `int()`, multiply them, and print the numeric total.",
+              "hint": "Convert each input before multiplying so Python performs numeric work instead of text operations.",
+              "help": {
+                "concept": "`input()` returns text, so numeric calculations require converting that text to the appropriate number type first.",
+                "hint_1": "Convert each input before multiplying so Python performs numeric work instead of text operations.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "price_text = input().strip()\nquantity_text = input().strip()\n\n# Convert both inputs, multiply them, and print the total.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "price_text = input().strip()\nquantity_text = input().strip()\n\n# Convert both inputs, multiply them, and print the total.\n"
+                }
+              },
+              "solutionCode": "price_text = input().strip()\nquantity_text = input().strip()\nprice = float(price_text)\nquantity = int(quantity_text)\ntotal = price * quantity\nprint(total)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "price_text = input().strip()\nquantity_text = input().strip()\nprice = float(price_text)\nquantity = int(quantity_text)\ntotal = price * quantity\nprint(total)\n"
+                }
+              }
+            }
           }
         },
         "module-1-profile-card-project": {
@@ -20099,218 +21132,17 @@ const messages: Record<string, any> = {
           }
         },
         "naming-and-assigning-variables": {
-          "label": "Naming and Assigning Variables",
-          "summary": "Create variables with clear names, store values with `=`, and update stored values by assigning to the same name again.",
-          "cards": {
-            "sketch0": {
-              "title": "What a variable does"
-            },
-            "sketch1": {
-              "title": "Choose clear variable names"
-            },
-            "sketch2": {
-              "title": "Reassignment updates a variable"
-            },
-            "quiz": {
-              "title": "Quiz"
-            }
-          },
           "quiz": {
-            "q1": {
-              "title": "What assignment does",
-              "prompt": "What does `score = 10` do in Python?",
-              "hint": "Look at what `=` means when creating or updating a variable.",
+            "q12": {
+              "title": "Read input into a variable",
+              "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints it.\n\nExample: if the input is `Tokyo`, the output should be `Tokyo`.\n\nType code in the code editor, click Run, and check the output panel.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Assignment stores a value in a variable name so the program can use that value later.",
-                "hint_1": "The name is on the left and the value is on the right.",
-                "hint_2": "This line does not print anything by itself; it stores `10` under a name."
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "options": {
-                "a": "It stores the value 10 in the variable `score`.",
-                "b": "It prints 10 to the output panel.",
-                "c": "It compares `score` and 10 to see if they are equal.",
-                "d": "It turns `score` into a string."
-              }
-            },
-            "q2": {
-              "title": "Best variable name",
-              "prompt": "Which variable name is the clearest choice for storing a person's age?",
-              "hint": "Pick the name that tells you what the value means.",
-              "help": {
-                "concept": "Clear variable names make code easier to read because the name describes the stored value.",
-                "hint_1": "A descriptive word is better than a single letter when both are allowed.",
-                "hint_2": "Choose the option that directly says what number is being stored."
-              },
-              "options": {
-                "a": "x",
-                "b": "n",
-                "c": "age",
-                "d": "thing"
-              }
-            },
-            "q3": {
-              "title": "Valid Python variable names",
-              "prompt": "Choose all names that are valid Python variable names.",
-              "hint": "Check for spaces and whether the name starts with a number.",
-              "help": {
-                "concept": "Python variable names can use letters, numbers, and underscores, but they cannot contain spaces or begin with a digit.",
-                "hint_1": "An underscore is allowed in a name.",
-                "hint_2": "Reject any option with a space or one that starts with `2`."
-              },
-              "options": {
-                "a": "user_name",
-                "b": "2score",
-                "c": "favorite color",
-                "d": "level1"
-              }
-            },
-            "q4": {
-              "title": "Effects of reassignment",
-              "prompt": "Choose all true statements about this code:\n\n```python\npoints = 5\npoints = 8\n```",
-              "hint": "Think about what value the variable has after the second assignment.",
-              "help": {
-                "concept": "Reassignment replaces the previous value stored in the same variable name.",
-                "hint_1": "After the second line, the variable keeps the newer value, not both values.",
-                "hint_2": "One statement should mention replacement, and another should mention the final stored value."
-              },
-              "options": {
-                "a": "`points` ends with the value 8.",
-                "b": "The value 5 is replaced by the new assignment.",
-                "c": "`points` stores both 5 and 8 at the same time.",
-                "d": "The second line prints 8 automatically."
-              }
-            },
-            "q5": {
-              "title": "Assign before using a variable",
-              "prompt": "Put the two lines in the order that stores the name first and then prints the stored value.",
-              "hint": "A variable must receive a value before this program can print it.",
-              "help": {
-                "concept": "Python executes from top to bottom, so the assignment must happen before `print(name)` uses the variable.",
-                "hint_1": "Find the line that creates `name`.",
-                "hint_2": "Place `print(name)` after the assignment."
-              },
-              "tokens": {
-                "t1": "print(name)",
-                "t2": "name = \"Lina\""
-              }
-            },
-            "q6": {
-              "title": "Trace reassignment in order",
-              "prompt": "Arrange the four lines so the program prints `1` first and `2` second.",
-              "hint": "Print the first stored value before replacing it, then print the new value.",
-              "help": {
-                "concept": "To observe both values, use the variable once before reassignment and once after reassignment.",
-                "hint_1": "Start with `count = 1`, then print it.",
-                "hint_2": "Only after the first print should `count = 2` run."
-              },
-              "tokens": {
-                "t1": "count = 1",
-                "t2": "print(count)",
-                "t3": "count = 2",
-                "t4": "print(count)"
-              }
-            },
-            "q7": {
-              "title": "Choose a clear variable name",
-              "prompt": "Choose the best value for the blank so the assignment clearly stores a person's age.\n\n```python\n___ = 14\n```",
-              "hint": "Choose a valid name that describes what the value `14` means.",
-              "help": {
-                "concept": "A descriptive variable name communicates the meaning of its value.",
-                "hint_1": "`print` is used for output, not as the intended name here.",
-                "hint_2": "The name should describe a person's age."
-              },
-              "template": "[blank1] = 16",
-              "choices": [
-                "print",
-                "age",
-                "hello world",
-                "=="
-              ]
-            },
-            "q8": {
-              "title": "Complete a reassignment",
-              "prompt": "Choose the value that updates `score` from `5` to `7`.\n\n```python\nscore = 5\nscore = ___\n```",
-              "hint": "The right side of `=` is the new value that will be stored.",
-              "help": {
-                "concept": "Reassignment uses the same variable name on the left and a new value on the right.",
-                "hint_1": "The target value is the number `7`.",
-                "hint_2": "Do not quote the number."
-              },
-              "template": "score = [blank1]",
-              "choices": [
-                "score",
-                "7",
-                "print",
-                "\"score\""
-              ]
-            },
-            "q9": {
-              "title": "Assign a number, then use the variable",
-              "prompt": "Store the number `12` in a variable named `age`, then print `age`.\n\nDo not print `12` directly—the output should come from the variable.",
-              "hint": "Assign `12` to `age` first, then pass `age` to `print()`.",
-              "help": {
-                "concept": "The point is to store a value under a name and then use that name to retrieve the value.",
-                "hint_1": "Your first line should assign to `age`.",
-                "hint_2": "Your second line should print the variable, not the literal `12`."
-              },
-              "starterCode": "# Store 12 in age\n# Print the variable\n",
-              "solutionCode": "age = 12\nprint(age)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Assign 12 to age, then print the variable age rather than printing 12 directly."
-                }
-              }
-            },
-            "q10": {
-              "title": "Use a descriptive name for text",
-              "prompt": "Store the string `\"Maya\"` in a variable named `student_name`, then print `student_name`.",
-              "hint": "Use the exact descriptive name `student_name` for the assignment and print.",
-              "help": {
-                "concept": "A descriptive variable name should communicate what the stored value represents.",
-                "hint_1": "Assign the quoted text `\"Maya\"` to `student_name`.",
-                "hint_2": "Print `student_name`, not the literal text directly."
-              },
-              "starterCode": "# Store \"Maya\" in student_name\n# Print the variable\n",
-              "solutionCode": "student_name = \"Maya\"\nprint(student_name)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Assign Maya to student_name, then print the variable student_name."
-                }
-              }
-            },
-            "q11": {
-              "title": "Replace a stored value",
-              "prompt": "Create `level` with the value `3`, reassign the same variable to `4`, then print `level`.\n\nOnly the final value should be printed.",
-              "hint": "Use two assignments to `level`, followed by one print call.",
-              "help": {
-                "concept": "Reassignment replaces the value associated with the same variable name.",
-                "hint_1": "First write `level = 3`, then `level = 4`.",
-                "hint_2": "Print `level` after the second assignment."
-              },
-              "starterCode": "# Create level\n# Reassign level\n# Print the final value\n",
-              "solutionCode": "level = 3\nlevel = 4\nprint(level)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Assign 3 to level, reassign 4 to the same variable, then print level."
-                }
-              }
-            },
-            "q13": {
-              "title": "Observe a value before and after reassignment",
-              "prompt": "Write a program that:\n\n1. stores the string `\"red\"` in a variable named `color`\n2. prints `color`\n3. changes `color` to `\"green\"`\n4. prints `color` again\n\nThe output should show `red` first and `green` second.",
-              "hint": "Print the variable once before and once after the second assignment.",
-              "help": {
-                "concept": "Printing before and after reassignment lets you observe the old stored value and then the new one.",
-                "hint_1": "The first assignment should be `color = \"red\"`.",
-                "hint_2": "Reassign `color` to `\"green\"` between the two print calls."
-              },
-              "starterCode": "# Store \"red\" in color\n# Print color\n# Change color to \"green\"\n# Print color again\n",
-              "solutionCode": "color = \"red\"\nprint(color)\ncolor = \"green\"\nprint(color)",
-              "sourceChecks": {
-                "0": {
-                  "message": "Assign red to color, print it, reassign green to the same variable, and print it again."
-                }
-              }
+              "starterCode": "# Read one line into city\n# Print city"
             }
           }
         },
@@ -20557,6 +21389,30 @@ const messages: Record<string, any> = {
                 },
                 "1": {
                   "message": "Use word[0] for the first character and word[-1] for the last."
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-slice-inner-characters": {
+              "title": "Slice away the first and last characters",
+              "prompt": "Read one word with at least three characters. Print everything except its first and last characters using one slice.",
+              "hint": "A slice can start at index `1` and stop before the final character with `-1`.",
+              "help": {
+                "concept": "Slices can combine a positive start index with a negative stop index to select the middle of a string.",
+                "hint_1": "A slice can start at index `1` and stop before the final character with `-1`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "word = input().strip()\n\n# Print the inner characters with one slice.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "word = input().strip()\n\n# Print the inner characters with one slice.\n"
+                }
+              },
+              "solutionCode": "word = input().strip()\nprint(word[1:-1])\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "word = input().strip()\nprint(word[1:-1])\n"
                 }
               }
             }
@@ -20813,6 +21669,30 @@ const messages: Record<string, any> = {
                 }
               }
             }
+          },
+          "practice": {
+            "practice-split-and-join-tags": {
+              "title": "Split and join tags",
+              "prompt": "Read one comma-separated line such as `red,blue,green`. Split it on commas, join the pieces with ` | `, and print the result.",
+              "hint": "Use `.split(\",\")` first, then call `\" | \".join(...)` on the pieces.",
+              "help": {
+                "concept": "`split` turns one string into pieces and `join` combines those pieces with a chosen separator.",
+                "hint_1": "Use `.split(\",\")` first, then call `\" | \".join(...)` on the pieces.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "text = input().strip()\n\n# Split on commas, join with \" | \", and print the result.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\n\n# Split on commas, join with \" | \", and print the result.\n"
+                }
+              },
+              "solutionCode": "text = input().strip()\nparts = text.split(\",\")\nresult = \" | \".join(parts)\nprint(result)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\nparts = text.split(\",\")\nresult = \" | \".join(parts)\nprint(result)\n"
+                }
+              }
+            }
           }
         }
       },
@@ -21055,6 +21935,30 @@ const messages: Record<string, any> = {
                 }
               }
             }
+          },
+          "practice": {
+            "practice-weekend-or-holiday": {
+              "title": "Combine weekend and holiday rules",
+              "prompt": "Read a day name and then `yes` or `no` for whether it is a holiday. Print `rest` when the day is `Saturday` or `Sunday`, or when the holiday answer is `yes`. Otherwise print `work`.",
+              "hint": "Combine the weekend checks and the holiday check with `or`.",
+              "help": {
+                "concept": "`or` makes a combined condition true when at least one of its parts is true.",
+                "hint_1": "Combine the weekend checks and the holiday check with `or`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "day = input().strip()\nholiday = input().strip()\n\n# Print rest or work from the combined rule.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "day = input().strip()\nholiday = input().strip()\n\n# Print rest or work from the combined rule.\n"
+                }
+              },
+              "solutionCode": "day = input().strip()\nholiday = input().strip()\nif day == \"Saturday\" or day == \"Sunday\" or holiday == \"yes\":\n    print(\"rest\")\nelse:\n    print(\"work\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "day = input().strip()\nholiday = input().strip()\nif day == \"Saturday\" or day == \"Sunday\" or holiday == \"yes\":\n    print(\"rest\")\nelse:\n    print(\"work\")\n"
+                }
+              }
+            }
           }
         },
         "checking-special-cases-first": {
@@ -21285,6 +22189,30 @@ const messages: Record<string, any> = {
               "sourceChecks": {
                 "0": {
                   "message": "Check `code < 0` before `code == 0` and the fallback."
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-missing-score-first": {
+              "title": "Handle a missing score before ranges",
+              "prompt": "Read one integer score. Treat `-1` as a special missing-value marker and print `Missing`. Otherwise print `Excellent` for scores at least 90 and `Recorded` for all remaining scores.",
+              "hint": "Check `score == -1` before the broader score ranges.",
+              "help": {
+                "concept": "A narrow sentinel case should be checked before broader conditions so it cannot be swallowed by normal classification logic.",
+                "hint_1": "Check `score == -1` before the broader score ranges.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "score = int(input())\n\n# Check the missing-value marker first, then classify the score.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "score = int(input())\n\n# Check the missing-value marker first, then classify the score.\n"
+                }
+              },
+              "solutionCode": "score = int(input())\nif score == -1:\n    print(\"Missing\")\nelif score >= 90:\n    print(\"Excellent\")\nelse:\n    print(\"Recorded\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "score = int(input())\nif score == -1:\n    print(\"Missing\")\nelif score >= 90:\n    print(\"Excellent\")\nelse:\n    print(\"Recorded\")\n"
                 }
               }
             }
@@ -21531,6 +22459,30 @@ const messages: Record<string, any> = {
                 }
               }
             }
+          },
+          "practice": {
+            "practice-not-equal-zero": {
+              "title": "Check whether a number is nonzero",
+              "prompt": "Read one integer and print the boolean result of checking whether it is not equal to `0`.",
+              "hint": "Use the `!=` comparison operator.",
+              "help": {
+                "concept": "A comparison expression produces a boolean value directly, including `True` for values that are not equal and `False` for values that are equal.",
+                "hint_1": "Use the `!=` comparison operator.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "number = int(input())\n\n# Print whether number is not equal to 0.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "number = int(input())\n\n# Print whether number is not equal to 0.\n"
+                }
+              },
+              "solutionCode": "number = int(input())\nprint(number != 0)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nprint(number != 0)\n"
+                }
+              }
+            }
           }
         },
         "if-elif-else": {
@@ -21772,6 +22724,30 @@ const messages: Record<string, any> = {
                 }
               }
             }
+          },
+          "practice": {
+            "practice-temperature-branches": {
+              "title": "Classify a temperature with three branches",
+              "prompt": "Read one integer temperature. Print `freezing` when it is below 0, `cool` when it is below 20, and `warm` otherwise. Use `if`, `elif`, and `else`.",
+              "hint": "After the below-zero case, the `elif` only needs to check whether the remaining value is below 20.",
+              "help": {
+                "concept": "An `if`/`elif`/`else` chain chooses the first matching branch, so ordering narrower ranges before later fallbacks keeps the conditions simple.",
+                "hint_1": "After the below-zero case, the `elif` only needs to check whether the remaining value is below 20.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "temperature = int(input())\n\n# Print freezing, cool, or warm.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "temperature = int(input())\n\n# Print freezing, cool, or warm.\n"
+                }
+              },
+              "solutionCode": "temperature = int(input())\nif temperature < 0:\n    print(\"freezing\")\nelif temperature < 20:\n    print(\"cool\")\nelse:\n    print(\"warm\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "temperature = int(input())\nif temperature < 0:\n    print(\"freezing\")\nelif temperature < 20:\n    print(\"cool\")\nelse:\n    print(\"warm\")\n"
+                }
+              }
+            }
           }
         },
         "indentation-and-blocks": {
@@ -22003,6 +22979,30 @@ const messages: Record<string, any> = {
               "sourceChecks": {
                 "0": {
                   "message": "Use two indentation levels inside the nested branch and one level inside the outer else."
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-fix-if-else-indentation": {
+              "title": "Repair an if/else block",
+              "prompt": "Fix the starter indentation so the `if` branch prints `positive`, the `else` branch prints `not positive`, and `checked` always prints after the conditional.",
+              "hint": "Indent the two branch outputs, then dedent the final `print(\"checked\")` line.",
+              "help": {
+                "concept": "Indentation controls which statements belong to each branch, while dedenting moves execution back outside the conditional block.",
+                "hint_1": "Indent the two branch outputs, then dedent the final `print(\"checked\")` line.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "number = int(input())\nif number > 0:\nprint(\"positive\")\nelse:\nprint(\"not positive\")\nprint(\"checked\")\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nif number > 0:\nprint(\"positive\")\nelse:\nprint(\"not positive\")\nprint(\"checked\")\n"
+                }
+              },
+              "solutionCode": "number = int(input())\nif number > 0:\n    print(\"positive\")\nelse:\n    print(\"not positive\")\nprint(\"checked\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nif number > 0:\n    print(\"positive\")\nelse:\n    print(\"not positive\")\nprint(\"checked\")\n"
                 }
               }
             }
@@ -22371,6 +23371,30 @@ const messages: Record<string, any> = {
                 }
               }
             }
+          },
+          "practice": {
+            "practice-truthy-provided-message": {
+              "title": "Use truthiness to detect provided text",
+              "prompt": "Read one line and remove surrounding whitespace. Use the cleaned string directly in an `if` condition. Print `provided` when it is non-empty and `empty` otherwise.",
+              "hint": "You do not need to compare the string with `\"\"`; a string can be used directly as the condition.",
+              "help": {
+                "concept": "Empty strings are falsy and non-empty strings are truthy, so a cleaned string can drive a branch directly.",
+                "hint_1": "You do not need to compare the string with `\"\"`; a string can be used directly as the condition.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "text = input().strip()\n\n# Use text directly as the condition.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\n\n# Use text directly as the condition.\n"
+                }
+              },
+              "solutionCode": "text = input().strip()\nif text:\n    print(\"provided\")\nelse:\n    print(\"empty\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "text = input().strip()\nif text:\n    print(\"provided\")\nelse:\n    print(\"empty\")\n"
+                }
+              }
+            }
           }
         }
       },
@@ -22605,6 +23629,30 @@ const messages: Record<string, any> = {
               "sourceChecks": {
                 "0": {
                   "message": "Initialize `result` to an empty string before the loop and extend it from its previous value inside the loop."
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-sum-even-values": {
+              "title": "Accumulate only even values",
+              "prompt": "Read one line of space-separated integers. Add only the even values to a running total, then print the final total.",
+              "hint": "Initialize `total = 0` before the loop and add a number only when `number % 2 == 0`.",
+              "help": {
+                "concept": "An accumulator starts with an initial value and updates only for items that meet the exercise rule.",
+                "hint_1": "Initialize `total = 0` before the loop and add a number only when `number % 2 == 0`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "numbers = input().split()\ntotal = 0\n\n# Convert each value, add only evens to total, then print total.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "numbers = input().split()\ntotal = 0\n\n# Convert each value, add only evens to total, then print total.\n"
+                }
+              },
+              "solutionCode": "numbers = input().split()\ntotal = 0\nfor value in numbers:\n    number = int(value)\n    if number % 2 == 0:\n        total += number\nprint(total)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "numbers = input().split()\ntotal = 0\nfor value in numbers:\n    number = int(value)\n    if number % 2 == 0:\n        total += number\nprint(total)\n"
                 }
               }
             }
@@ -22843,6 +23891,30 @@ const messages: Record<string, any> = {
                 }
               }
             }
+          },
+          "practice": {
+            "practice-skip-negatives-stop-zero": {
+              "title": "Skip negatives and stop at zero",
+              "prompt": "Read one line of space-separated integers. Loop through them in order. Use `continue` to skip negative values, use `break` when the value is `0`, and print positive values that appear before the zero.",
+              "hint": "Check for `0` before the negative-value `continue` case.",
+              "help": {
+                "concept": "`continue` skips only the current iteration, while `break` ends the loop completely when a stop value is reached.",
+                "hint_1": "Check for `0` before the negative-value `continue` case.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "values = input().split()\n\n# Skip negatives, stop at 0, and print positive values before 0.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "values = input().split()\n\n# Skip negatives, stop at 0, and print positive values before 0.\n"
+                }
+              },
+              "solutionCode": "values = input().split()\nfor value in values:\n    number = int(value)\n    if number == 0:\n        break\n    if number < 0:\n        continue\n    print(number)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "values = input().split()\nfor value in values:\n    number = int(value)\n    if number == 0:\n        break\n    if number < 0:\n        continue\n    print(number)\n"
+                }
+              }
+            }
           }
         },
         "for-loops-over-text": {
@@ -23074,6 +24146,30 @@ const messages: Record<string, any> = {
               "sourceChecks": {
                 "0": {
                   "message": "Loop over `text` and print `ch` only when it is not a space."
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-print-vowels": {
+              "title": "Print only lowercase vowels",
+              "prompt": "Read one lowercase word. Loop through its characters and print only the vowels `a`, `e`, `i`, `o`, or `u`, one per line.",
+              "hint": "Inside the loop, use `if character in \"aeiou\":` before printing.",
+              "help": {
+                "concept": "A `for` loop can inspect one character at a time and conditionally act only on characters that match a rule.",
+                "hint_1": "Inside the loop, use `if character in \"aeiou\":` before printing.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "word = input().strip()\n\n# Print only lowercase vowels, one per line.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "word = input().strip()\n\n# Print only lowercase vowels, one per line.\n"
+                }
+              },
+              "solutionCode": "word = input().strip()\nfor character in word:\n    if character in \"aeiou\":\n        print(character)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "word = input().strip()\nfor character in word:\n    if character in \"aeiou\":\n        print(character)\n"
                 }
               }
             }
@@ -23309,6 +24405,30 @@ const messages: Record<string, any> = {
               "sourceChecks": {
                 "0": {
                   "message": "Use `range(start, 0, -1)` so the descending range includes 1."
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-fix-while-update-direction": {
+              "title": "Fix a while-loop update direction",
+              "prompt": "The starter should count down from the input value to `1`, but its update moves the number in the wrong direction. Fix only the update so the loop stops correctly.",
+              "hint": "A positive countdown must make `number` smaller on every iteration.",
+              "help": {
+                "concept": "A `while` loop must update its state toward the stopping condition; moving in the wrong direction can create an infinite loop.",
+                "hint_1": "A positive countdown must make `number` smaller on every iteration.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "number = int(input())\nwhile number > 0:\n    print(number)\n    number += 1\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nwhile number > 0:\n    print(number)\n    number += 1\n"
+                }
+              },
+              "solutionCode": "number = int(input())\nwhile number > 0:\n    print(number)\n    number -= 1\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nwhile number > 0:\n    print(number)\n    number -= 1\n"
                 }
               }
             }
@@ -23663,6 +24783,30 @@ const messages: Record<string, any> = {
                 }
               }
             }
+          },
+          "practice": {
+            "practice-range-step-three": {
+              "title": "Count by threes with range",
+              "prompt": "Read one integer `stop`. Use `range(0, stop, 3)` to print `0`, `3`, `6`, and so on while each value is less than `stop`.",
+              "hint": "Use all three `range` arguments: start, stop, and step.",
+              "help": {
+                "concept": "The third argument to `range` controls the step size, allowing a loop to advance by more than one each iteration.",
+                "hint_1": "Use all three `range` arguments: start, stop, and step.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "stop = int(input())\n\n# Use range(0, stop, 3) and print each value.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "stop = int(input())\n\n# Use range(0, stop, 3) and print each value.\n"
+                }
+              },
+              "solutionCode": "stop = int(input())\nfor number in range(0, stop, 3):\n    print(number)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "stop = int(input())\nfor number in range(0, stop, 3):\n    print(number)\n"
+                }
+              }
+            }
           }
         },
         "while-loop-basics": {
@@ -23895,6 +25039,30 @@ const messages: Record<string, any> = {
               "sourceChecks": {
                 "0": {
                   "message": "Use `while word != \"stop\":` and update `word` with another `input()` inside the loop."
+                }
+              }
+            }
+          },
+          "practice": {
+            "practice-while-countdown-by-two": {
+              "title": "Count down by two with while",
+              "prompt": "Read one nonnegative integer. Use a `while` loop to print the value, then subtract `2` each turn. Continue while the value is at least `0`.",
+              "hint": "The loop condition can be `number >= 0`, and the update should subtract 2.",
+              "help": {
+                "concept": "A `while` loop can use any consistent state change as long as each update moves the state toward a false condition.",
+                "hint_1": "The loop condition can be `number >= 0`, and the update should subtract 2.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "number = int(input())\n\n# Use a while loop to print number and subtract 2 each turn.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "number = int(input())\n\n# Use a while loop to print number and subtract 2 each turn.\n"
+                }
+              },
+              "solutionCode": "number = int(input())\nwhile number >= 0:\n    print(number)\n    number -= 2\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "number = int(input())\nwhile number >= 0:\n    print(number)\n    number -= 2\n"
                 }
               }
             }
@@ -25219,6 +26387,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT departments.name, courses.id\nFROM departments\nINNER JOIN courses ON departments.id = courses.department_id;"
+            },
+            "practice-retained-inner-join-sketch0": {
+              "title": "Practice: INNER JOIN with Students and Enrollments",
+              "prompt": "Write a query to list all students and the courses they are enrolled in using INNER JOIN.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies INNER JOIN with ON in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;"
+            },
+            "practice-retained-inner-join-sketch1": {
+              "title": "Practice: INNER JOIN with Courses and Departments",
+              "prompt": "Write a query to list all courses along with their department names using INNER JOIN.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies INNER JOIN with ON in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT courses.title, departments.name\nFROM courses\nINNER JOIN departments ON courses.department_id = departments.id;"
             }
           }
         },
@@ -25494,6 +26686,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Return a readable course-to-department result\n",
               "solutionCode": "SELECT courses.id AS course_id,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM courses\nINNER JOIN departments\n  ON courses.department_id = departments.id\nORDER BY courses.id;\n"
+            },
+            "practice-retained-qualifying-columns-across-tables-sketch1": {
+              "title": "Practice: Using Aliases in Queries",
+              "prompt": "Write a query to list student names and the terms they are enrolled in, using table aliases for simplicity.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Qualifying Columns Across Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT s.name, e.term\nFROM students AS s\nJOIN enrollments AS e ON s.id = e.student_id;"
+            },
+            "practice-qualify-student-enrollment-columns": {
+              "title": "Practice: Qualify Student and Enrollment Columns",
+              "prompt": "List each student name with the enrollment term. Qualify the selected columns with table aliases so it is clear which table supplies each value. Sort by student name, then term.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Qualifying Columns Across Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT s.name AS student_name, e.term AS enrollment_term\nFROM students AS s\nINNER JOIN enrollments AS e ON s.id = e.student_id\nORDER BY s.name, e.term;"
             }
           }
         },
@@ -25608,6 +26824,42 @@ const messages: Record<string, any> = {
                 "department_id",
                 "name"
               ]
+            },
+            "practice-retained-7": {
+              "title": "Practice: Join Students and Enrollments",
+              "prompt": "Write a query to join the `students` and `enrollments` tables to list student names and their enrolled course IDs.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading Keys and Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, enrollments.course_id\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id;"
+            },
+            "practice-retained-8": {
+              "title": "Practice: Join Courses and Departments",
+              "prompt": "Write a query to join the `courses` and `departments` tables to list course titles and their department names.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading Keys and Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT courses.title, departments.name\nFROM courses\nINNER JOIN departments ON courses.department_id = departments.id;"
+            },
+            "practice-follow-student-course-keys": {
+              "title": "Practice: Follow Keys from Students to Courses",
+              "prompt": "List each student name, course title, and enrollment term by following the student and course keys through the enrollments table. Sort by student name, then course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading Keys and Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT s.name AS student_name, c.title AS course_title, e.term\nFROM students AS s\nINNER JOIN enrollments AS e ON s.id = e.student_id\nINNER JOIN courses AS c ON e.course_id = c.id\nORDER BY s.name, c.title;"
             }
           }
         },
@@ -25749,6 +27001,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Build a concise two-table student enrollment query\n",
               "solutionCode": "SELECT s.name AS student_name,\n       e.term AS enrollment_term,\n       e.course_id\nFROM students AS s\nINNER JOIN enrollments AS e\n  ON s.id = e.student_id\nORDER BY s.name, e.course_id;\n"
+            },
+            "practice-retained-table-aliases-for-join-queries-sketch1": {
+              "title": "Practice: Combining Table Aliases with Additional Joins",
+              "prompt": "Write a query to list all students, the courses they are enrolled in, and the department of each course using table aliases.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Table Aliases for Join Queries in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT s.name AS student_name, c.title AS course_title, d.name AS department_name\nFROM students AS s\nJOIN enrollments AS e ON s.id = e.student_id\nJOIN courses AS c ON e.course_id = c.id\nJOIN departments AS d ON c.department_id = d.id;"
+            },
+            "practice-alias-course-department-join": {
+              "title": "Practice: Alias a Course-to-Department Join",
+              "prompt": "Use short table aliases to list each course title with its department name. Sort the result by course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Table Aliases for Join Queries in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT c.title AS course_title, d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d ON c.department_id = d.id\nORDER BY c.title;"
             }
           }
         }
@@ -25892,6 +27168,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT e.id AS enrollment_id,\n       s.name AS student_name,\n       c.title AS course_title\nFROM enrollments AS e\nINNER JOIN students AS s\n  ON e.student_id = s.id\nINNER JOIN courses AS c\n  ON e.course_id = c.id\nORDER BY e.id;\n"
+            },
+            "practice-retained-avoiding-cartesian-and-wrong-key-joins-sketch1": {
+              "title": "Practice: Correct Wrong-Key Join",
+              "prompt": "Write a query to correctly join `students` and `courses` using the `enrollments` table as a bridge. List each student's name and the title of the courses they are enrolled in.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Avoiding Cartesian and Wrong-Key Joins in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "SELECT students.name, courses.title\nFROM students\n-- Complete the JOINs here\n;",
+              "solutionCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;"
+            },
+            "practice-use-correct-course-department-key": {
+              "title": "Practice: Use the Correct Course-to-Department Key",
+              "prompt": "Join courses to departments using the real key relationship, then list each course title with its department name. Sort by course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Avoiding Cartesian and Wrong-Key Joins in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT c.title AS course_title, d.name AS department_name\nFROM courses AS c\nINNER JOIN departments AS d ON c.department_id = d.id\nORDER BY c.title;"
             }
           }
         },
@@ -26034,6 +27334,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name, courses.title, departments.name AS department_name, enrollments.term\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;"
+            },
+            "practice-extend-student-path-to-department": {
+              "title": "Practice: Extend a Student Join Path to Departments",
+              "prompt": "Start from students and extend the join path through enrollments and courses to departments. Return student name, course title, and department name. Sort by student name, then course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Extending a Join Path in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT s.name AS student_name, c.title AS course_title, d.name AS department_name\nFROM students AS s\nINNER JOIN enrollments AS e ON s.id = e.student_id\nINNER JOIN courses AS c ON e.course_id = c.id\nINNER JOIN departments AS d ON c.department_id = d.id\nORDER BY s.name, c.title;"
+            },
+            "practice-extend-department-path-to-students": {
+              "title": "Practice: Extend a Department Join Path to Students",
+              "prompt": "Start from departments and follow the relationship path through courses and enrollments to students. Return department name, course title, student name, and enrollment term. Sort by department, course, then student.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Extending a Join Path in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT d.name AS department_name, c.title AS course_title, s.name AS student_name, e.term\nFROM departments AS d\nINNER JOIN courses AS c ON d.id = c.department_id\nINNER JOIN enrollments AS e ON c.id = e.course_id\nINNER JOIN students AS s ON e.student_id = s.id\nORDER BY d.name, c.title, s.name;"
             }
           }
         },
@@ -26175,6 +27499,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.grade_level,\n       courses.title AS course_title,\n       departments.name AS department_name\nFROM students\nINNER JOIN enrollments ON students.id = enrollments.student_id\nINNER JOIN courses ON enrollments.course_id = courses.id\nINNER JOIN departments ON courses.department_id = departments.id\nORDER BY students.grade_level, courses.title;"
+            },
+            "practice-retained-joining-bridge-table-sketch0": {
+              "title": "Practice: Querying Student Enrollments",
+              "prompt": "Write a SQL query to list all students and the courses they are enrolled in, using the `enrollments` table as a bridge.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Joining Through a Bridge Table in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, courses.title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;"
+            },
+            "practice-retained-joining-bridge-table-sketch1": {
+              "title": "Practice: Extending Queries with Departments",
+              "prompt": "Write a SQL query to list all students, the courses they are enrolled in, and the corresponding department for each course.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Joining Through a Bridge Table in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, courses.title, departments.name AS department\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id\nJOIN departments ON courses.department_id = departments.id;"
             }
           }
         },
@@ -26449,6 +27797,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT enrollments.id AS enrollment_id,\n       students.grade_level,\n       courses.title AS course_title\nFROM enrollments\nINNER JOIN students ON enrollments.student_id = students.id\nINNER JOIN courses ON enrollments.course_id = courses.id\nORDER BY enrollments.id;"
+            },
+            "practice-retained-one-to-many-and-many-to-many-results-sketch1": {
+              "title": "Practice: List Students and Their Courses",
+              "prompt": "Write a query to list each student along with the courses they are enrolled in. Use the `students`, `enrollments`, and `courses` tables.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies One-to-Many and Many-to-Many Results in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "SELECT \nFROM students\nJOIN enrollments ON \nJOIN courses ON ;",
+              "solutionCode": "SELECT students.name AS student_name, courses.title AS course_title\nFROM students\nJOIN enrollments ON students.id = enrollments.student_id\nJOIN courses ON enrollments.course_id = courses.id;"
+            },
+            "practice-show-department-course-many-side": {
+              "title": "Practice: Show the Many Side of Department Courses",
+              "prompt": "List each department with every course that belongs to it. Keep one result row per department-course relationship and sort by department name, then course title.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies One-to-Many and Many-to-Many Results in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT d.name AS department_name, c.title AS course_title\nFROM departments AS d\nINNER JOIN courses AS c ON d.id = c.department_id\nORDER BY d.name, c.title;"
             }
           }
         }
@@ -26594,6 +27966,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name,\n       COUNT(DISTINCT courses.department_id) AS department_count\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id\nGROUP BY students.id, students.name\nORDER BY students.id;"
+            },
+            "practice-retained-counting-related-rows-without-inflation-sketch1": {
+              "title": "Practice: Count Unique Students per Department",
+              "prompt": "Write a SQL query to list each department and the number of unique students enrolled in its courses. Use COUNT(DISTINCT) to ensure each student is counted only once per department.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Counting Related Rows Without Inflation in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name, COUNT(DISTINCT enrollments.student_id) AS unique_students\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nGROUP BY departments.name;"
+            },
+            "practice-count-distinct-courses-per-student": {
+              "title": "Practice: Count Distinct Courses per Student",
+              "prompt": "Count how many distinct courses each student is enrolled in. Keep students with no enrollments by using a LEFT JOIN. Sort by student id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Counting Related Rows Without Inflation in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT s.name AS student_name, COUNT(DISTINCT e.course_id) AS course_count\nFROM students AS s\nLEFT JOIN enrollments AS e ON s.id = e.student_id\nGROUP BY s.id, s.name\nORDER BY s.id;"
             }
           }
         },
@@ -26736,6 +28132,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\nWHERE c.title LIKE '%History%'\nORDER BY d.name;\n"
+            },
+            "practice-retained-filtering-left-joins-with-on-and-where-sketch1": {
+              "title": "Practice: List All Departments and Their Courses",
+              "prompt": "Write a query to list all departments and their courses, ensuring departments without courses are included. Use LEFT JOIN and place the condition in the ON clause.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Filtering LEFT JOINs with ON and WHERE in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name, courses.title\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id;"
+            },
+            "practice-filter-course-match-in-on": {
+              "title": "Practice: Filter a LEFT JOIN in ON",
+              "prompt": "List every department and any course with `History` in its title. Put the course-title filter in the ON clause so departments without a matching course are still preserved. Sort by department name.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Filtering LEFT JOINs with ON and WHERE in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT d.name AS department_name, c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\n AND c.title LIKE '%History%'\nORDER BY d.name, c.title;"
             }
           }
         },
@@ -26878,6 +28298,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments\n  ON students.id = enrollments.student_id\n AND enrollments.course_id = 1\nWHERE enrollments.id IS NULL\nORDER BY students.id;"
+            },
+            "practice-retained-finding-missing-relationships-sketch1": {
+              "title": "Practice: Identify Students Without Enrollments",
+              "prompt": "Write a SQL query to list all students who are not enrolled in any courses. Use a LEFT JOIN and check for NULL values in the enrollments table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Finding Missing Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nWHERE enrollments.id IS NULL;"
+            },
+            "practice-find-departments-without-courses": {
+              "title": "Practice: Find Departments Without Courses",
+              "prompt": "Find departments that do not have any related courses. Use a LEFT JOIN and a NULL check, then sort by department name.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Finding Missing Relationships in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT d.name AS department_name\nFROM departments AS d\nLEFT JOIN courses AS c ON d.id = c.department_id\nWHERE c.id IS NULL\nORDER BY d.name;"
             }
           }
         },
@@ -27020,6 +28464,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT departments.name AS department_name,\n       students.name AS student_name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nLEFT JOIN students ON enrollments.student_id = students.id\nORDER BY departments.id, students.name;"
+            },
+            "practice-retained-left-join-sketch0": {
+              "title": "Practice: LEFT JOIN with Students and Enrollments",
+              "prompt": "Write a query to list all students and their enrollment details. Ensure that students without enrollments are still included in the results.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies LEFT JOIN Preserves Unmatched Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, enrollments.course_id\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id;"
+            },
+            "practice-retained-left-join-sketch1": {
+              "title": "Practice: Preserve All Students in Course Listings",
+              "prompt": "Write a query to list all students and the courses they are enrolled in. Ensure that students without enrollments are still included in the results.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies LEFT JOIN Preserves Unmatched Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, courses.title\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id;"
             }
           }
         },
@@ -27418,6 +28886,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region AS \"Sales Region\",\n    category AS \"Product Category\",\n    sales_rep AS \"Account Owner\"\nFROM sales_reporting;"
+            },
+            "practice-retained-aliases-for-readable-headings-sketch1": {
+              "title": "Practice: Alias in Calculated Column",
+              "prompt": "Write a query to calculate the total sales for each product by multiplying `quantity` by `unit_price`, and use an alias to name this column `Total Sales`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Aliases for Readable Headings in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, quantity * unit_price AS 'Total Sales'\nFROM sales_reporting;"
+            },
+            "practice-alias-representative-status-headings": {
+              "title": "Practice: Rename Report Headings",
+              "prompt": "Return sales representative and order status with readable aliases `Sales Representative` and `Order Status`. Sort by representative, then status.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Aliases for Readable Headings in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    sales_rep AS \"Sales Representative\",\n    order_status AS \"Order Status\"\nFROM sales_reporting\nORDER BY sales_rep, order_status;"
             }
           },
           "tryIt": {
@@ -27559,6 +29051,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS merchandise_value,\n    quantity * unit_price + 4.00 AS prepared_value\nFROM sales_reporting;"
+            },
+            "practice-retained-arithmetic-expressions-in-select-sketch1": {
+              "title": "Practice: Round Total Sales",
+              "prompt": "Modify the previous query to round the total sales to two decimal places.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Arithmetic Expressions in SELECT in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "SELECT product_name, quantity, unit_price, \n-- Calculate and round total sales\nFROM sales_reporting;",
+              "solutionCode": "SELECT product_name, quantity, unit_price, ROUND(quantity * unit_price, 2) AS total_sales\nFROM sales_reporting;"
+            },
+            "practice-calculate-order-line-value": {
+              "title": "Practice: Calculate Order Line Value",
+              "prompt": "Return order id, quantity, unit price, and a calculated `line_value` equal to quantity multiplied by unit price. Sort by order id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Arithmetic Expressions in SELECT in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    order_id,\n    quantity,\n    unit_price,\n    quantity * unit_price AS line_value\nFROM sales_reporting\nORDER BY order_id;"
             }
           },
           "tryIt": {
@@ -27699,6 +29215,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT DISTINCT region, sales_rep\nFROM sales_reporting\nORDER BY region, sales_rep;"
+            },
+            "practice-retained-distinct-values-for-report-categories-sketch1": {
+              "title": "Practice: Unique Region-Category Pairs",
+              "prompt": "Write a SQL query to find all unique combinations of region and category from the `sales_reporting` table. This will help you see how products are distributed across regions.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Distinct Values for Report Categories in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT DISTINCT region, category\nFROM sales_reporting;"
+            },
+            "practice-distinct-status-region-pairs": {
+              "title": "Practice: Find Distinct Status-Region Pairs",
+              "prompt": "Return each distinct combination of order status and region from the sales report. Sort by order status, then region.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Distinct Values for Report Categories in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT DISTINCT order_status, region\nFROM sales_reporting\nORDER BY order_status, region;"
             }
           },
           "tryIt": {
@@ -27983,6 +29523,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value\nFROM sales_reporting;"
+            },
+            "practice-retained-rounding-sketch0": {
+              "title": "Practice: Round Total Sales",
+              "prompt": "Write a query to calculate the total sales for each product in the `sales_reporting` table, rounding the result to two decimal places. Alias the result as `total_sales`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Rounding Report Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, ROUND(quantity * unit_price, 2) AS total_sales\nFROM sales_reporting;"
+            },
+            "practice-retained-rounding-sketch1": {
+              "title": "Practice: Round Average Ratings",
+              "prompt": "Write a query to find the average customer rating for each product category in the `sales_reporting` table, rounding the result to one decimal place. Alias the result as `avg_rating`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Rounding Report Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, ROUND(AVG(customer_rating), 1) AS avg_rating\nFROM sales_reporting\nGROUP BY category;"
             }
           },
           "tryIt": {
@@ -28126,6 +29690,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 130 THEN 'High value'\n        WHEN quantity * unit_price >= 80 THEN 'Mid value'\n        ELSE 'Low value'\n    END AS value_band\nFROM sales_reporting;"
+            },
+            "practice-retained-case-for-readable-labels-sketch1": {
+              "title": "Practice: Calculate Total Sales for High Ratings",
+              "prompt": "Write a SQL query to calculate the total sales amount for orders with a 'High' customer rating (4.5 and above) in the `sales_reporting` table. Use the `CASE` statement to conditionally sum the sales amounts.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies CASE for Readable Labels in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT SUM(CASE WHEN customer_rating >= 4.5 THEN quantity * unit_price ELSE 0 END) AS total_high_rating_sales\nFROM sales_reporting;"
+            },
+            "practice-label-rating-availability": {
+              "title": "Practice: Label Rating Availability",
+              "prompt": "Return order id and a `rating_status` label. Use `No rating` when customer_rating is NULL, `Strong` when it is at least 4, and `Recorded` otherwise. Sort by order id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies CASE for Readable Labels in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    order_id,\n    CASE\n        WHEN customer_rating IS NULL THEN 'No rating'\n        WHEN customer_rating >= 4 THEN 'Strong'\n        ELSE 'Recorded'\n    END AS rating_status\nFROM sales_reporting\nORDER BY order_id;"
             }
           },
           "tryIt": {
@@ -28267,6 +29855,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    order_status,\n    COALESCE(discount_pct, 0) AS review_discount_pct\nFROM sales_reporting;"
+            },
+            "practice-retained-coalesce-for-missing-values-sketch1": {
+              "title": "Practice: Calculate Total Sales with COALESCE",
+              "prompt": "Write a query to calculate the total sales for each order in `sales_reporting`, assuming a 0% discount if `discount_pct` is NULL. Select `order_id` and the calculated `total_sales`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies COALESCE for Missing Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "SELECT order_id, quantity * unit_price AS total_sales\nFROM sales_reporting;",
+              "solutionCode": "SELECT order_id, quantity * unit_price * (1 - COALESCE(discount_pct, 0) / 100) AS total_sales\nFROM sales_reporting;"
+            },
+            "practice-coalesce-missing-rating": {
+              "title": "Practice: Replace Missing Ratings",
+              "prompt": "Return order id and customer rating, replacing NULL ratings with 0 in a column named `rating_for_review`. Sort by order id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies COALESCE for Missing Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    order_id,\n    COALESCE(customer_rating, 0) AS rating_for_review\nFROM sales_reporting\nORDER BY order_id;"
             }
           },
           "tryIt": {
@@ -28408,6 +30020,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    unit_price,\n    discount_pct,\n    unit_price - unit_price * discount_pct / 100 AS raw_discounted_unit_price\nFROM sales_reporting;"
+            },
+            "practice-retained-how-null-affects-calculations-sketch1": {
+              "title": "Practice: Calculating Discounts Safely",
+              "prompt": "Write a query to calculate the discount amount for each order in the `sales_reporting` table, ensuring that any NULL `discount_pct` is treated as 0. Use COALESCE to handle NULL values.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies How NULL Affects Calculations in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT order_id, quantity * unit_price * COALESCE(discount_pct, 0) / 100 AS discount_amount\nFROM sales_reporting;"
+            },
+            "practice-observe-null-net-value": {
+              "title": "Practice: Observe NULL in a Calculation",
+              "prompt": "Return order id, discount percentage, and a raw `net_value` calculation using quantity, unit price, and discount_pct without replacing NULL. Sort by order id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies How NULL Affects Calculations in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    quantity * unit_price * (1 - discount_pct / 100.0) AS net_value\nFROM sales_reporting\nORDER BY order_id;"
             }
           },
           "tryIt": {
@@ -28717,6 +30353,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    product_name,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Pending';"
+            },
+            "practice-retained-percentage-and-discount-calculations-sketch1": {
+              "title": "Practice: Calculate Net Sales",
+              "prompt": "Write a SQL query to calculate the net sales for each product in the `sales_reporting` table. Use COALESCE to handle NULL values in `discount_pct`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Percentage and Discount Calculations in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, unit_price, COALESCE(discount_pct, 0) AS discount_pct, \n       unit_price * (COALESCE(discount_pct, 0) / 100) AS discount_amount, \n       unit_price - (unit_price * (COALESCE(discount_pct, 0) / 100)) AS net_sales\nFROM sales_reporting;"
+            },
+            "practice-calculate-order-discount-amount": {
+              "title": "Practice: Calculate Order Discount Amount",
+              "prompt": "Return order id and the total discount amount for the whole order. Treat a missing discount percentage as 0 and round the result to two decimal places. Sort by order id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Percentage and Discount Calculations in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * unit_price * COALESCE(discount_pct, 0) / 100.0, 2) AS discount_amount\nFROM sales_reporting\nORDER BY order_id;"
             }
           },
           "tryIt": {
@@ -28860,6 +30520,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    ROUND(AVG(customer_rating), 2) AS rated_only_average,\n    ROUND(AVG(COALESCE(customer_rating, 0)), 2) AS zero_fallback_average\nFROM sales_reporting;"
+            },
+            "practice-retained-averages-null-sketch0": {
+              "title": "Practice: Calculate Average Customer Rating",
+              "prompt": "Write a query to calculate the average `customer_rating` for all completed orders in the `sales_reporting` table. Remember to ignore `NULL` values.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Averages and NULL Behavior in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            },
+            "practice-retained-averages-null-sketch1": {
+              "title": "Practice: Calculate Average Unit Price",
+              "prompt": "Write a query to find the average `unit_price` for all completed orders in the `sales_reporting` table. Ensure that `NULL` values are not included in the calculation.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Averages and NULL Behavior in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT AVG(unit_price) AS average_price\nFROM sales_reporting\nWHERE order_status = 'Completed';"
             }
           },
           "tryIt": {
@@ -29000,6 +30684,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    COUNT(*) AS total_orders,\n    COUNT(discount_pct) AS orders_with_discount_data\nFROM sales_reporting;"
+            },
+            "practice-retained-counting-rows-and-values-sketch1": {
+              "title": "Practice: Count Rated Orders",
+              "prompt": "Write a query to count the number of orders with a non-null customer rating in the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Counting Rows and Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT COUNT(customer_rating) FROM sales_reporting;"
+            },
+            "practice-count-distinct-sales-reps": {
+              "title": "Practice: Count Distinct Sales Representatives",
+              "prompt": "Count how many distinct sales representatives appear in the sales_reporting table. Name the result `sales_rep_count`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Counting Rows and Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT COUNT(DISTINCT sales_rep) AS sales_rep_count\nFROM sales_reporting;"
             }
           },
           "tryIt": {
@@ -29141,6 +30849,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS minimum_net_sales,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS maximum_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            },
+            "practice-retained-minimums-and-maximums-sketch1": {
+              "title": "Practice: Minimum and Maximum Ratings for Completed Orders",
+              "prompt": "Write a query to find the minimum and maximum `customer_rating` for orders with the status 'Completed'.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Minimums and Maximums in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT MIN(customer_rating) AS min_rating, MAX(customer_rating) AS max_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            },
+            "practice-unit-price-range": {
+              "title": "Practice: Find the Unit Price Range",
+              "prompt": "Return the minimum and maximum unit price in the report as `minimum_unit_price` and `maximum_unit_price`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Minimums and Maximums in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    MIN(unit_price) AS minimum_unit_price,\n    MAX(unit_price) AS maximum_unit_price\nFROM sales_reporting;"
             }
           },
           "tryIt": {
@@ -29450,6 +31182,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT ROUND(\n    SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100),\n    2\n) AS total_discount_amount\nFROM sales_reporting;"
+            },
+            "practice-retained-summing-business-metrics-sketch1": {
+              "title": "Practice: Calculate Total Revenue",
+              "prompt": "Write a query to calculate the total revenue from the `sales_reporting` table by multiplying `quantity` and `unit_price`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Summing Business Metrics in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT SUM(quantity * unit_price) FROM sales_reporting;"
+            },
+            "practice-sum-completed-gross-sales": {
+              "title": "Practice: Sum Completed Gross Sales",
+              "prompt": "Calculate gross sales for completed orders by summing quantity multiplied by unit price. Name the result `completed_gross_sales`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Summing Business Metrics in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT SUM(quantity * unit_price) AS completed_gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
             }
           },
           "tryIt": {
@@ -29593,6 +31349,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;"
+            },
+            "practice-retained-avoiding-grouping-mistakes-sketch1": {
+              "title": "Practice: Identify Grouping Errors",
+              "prompt": "Write a query to find the average customer rating for each product category. Ensure your query does not include non-aggregated columns that aren't part of the grouping.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Avoiding Grouping Mistakes in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nGROUP BY category;"
+            },
+            "practice-group-only-selected-dimension": {
+              "title": "Practice: Keep the Grouping Grain Consistent",
+              "prompt": "Return category and the number of rows in each category. Group only at the category grain and sort by category.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Avoiding Grouping Mistakes in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    category,\n    COUNT(*) AS order_count\nFROM sales_reporting\nGROUP BY category\nORDER BY category;"
             }
           },
           "tryIt": {
@@ -29734,6 +31514,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    order_status,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY category, order_status\nORDER BY category, order_status;"
+            },
+            "practice-retained-group-by-multiple-columns-sketch1": {
+              "title": "Practice: Sort Grouped Results by Total Sales",
+              "prompt": "Write a query to find the total sales amount for each combination of region and category, and sort the results by total sales in descending order.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies GROUP BY Multiple Columns in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY total_sales DESC;"
+            },
+            "practice-region-status-order-counts": {
+              "title": "Practice: Group by Region and Status",
+              "prompt": "Count orders for each region and order-status combination. Sort by region, then order status.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies GROUP BY Multiple Columns in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    region,\n    order_status,\n    COUNT(*) AS order_count\nFROM sales_reporting\nGROUP BY region, order_status\nORDER BY region, order_status;"
             }
           },
           "tryIt": {
@@ -29875,6 +31679,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;"
+            },
+            "practice-retained-group-by-one-column-sketch1": {
+              "title": "Practice: Count Orders by Region",
+              "prompt": "Write a query to count the number of orders for each region in the `sales_reporting` table. Use the `COUNT` function and group the results by `region`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies GROUP BY One Column in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, COUNT(order_id) AS order_count\nFROM sales_reporting\nGROUP BY region;"
+            },
+            "practice-average-rating-by-sales-rep": {
+              "title": "Practice: Average Rating by Sales Representative",
+              "prompt": "Calculate the average customer rating for each sales representative. Round it to two decimal places and sort by sales representative.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies GROUP BY One Column in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    sales_rep,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY sales_rep\nORDER BY sales_rep;"
             }
           },
           "tryIt": {
@@ -30184,6 +32012,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    sales_rep,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY sales_rep\nORDER BY completed_orders DESC, sales_rep ASC;"
+            },
+            "practice-retained-sorting-aggregate-results-sketch1": {
+              "title": "Practice: Rank Regions by Average Customer Rating",
+              "prompt": "Write a query to calculate the average customer rating for each region and sort the results in descending order of average rating. Use the region name as a secondary sort criterion to ensure deterministic ordering.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Sorting Aggregate Results in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY region\nORDER BY avg_rating DESC, region ASC;"
+            },
+            "practice-rank-regions-by-units": {
+              "title": "Practice: Rank Regions by Units Sold",
+              "prompt": "Sum quantity for each region and sort from the highest total units to the lowest. Use region ascending as a tie-breaker.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Sorting Aggregate Results in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    region,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY region\nORDER BY total_units DESC, region ASC;"
             }
           },
           "tryIt": {
@@ -30327,6 +32179,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
+            },
+            "practice-retained-case-inside-aggregates-sketch1": {
+              "title": "Practice: Calculate Total Sales for Completed Orders",
+              "prompt": "Write a query to calculate the total sales for completed orders in the `sales_reporting` table using a `CASE` statement inside the `SUM` function.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies CASE Inside Aggregate Functions in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT SUM(CASE WHEN order_status = 'Completed' THEN quantity * unit_price ELSE 0 END) AS total_completed_sales\nFROM sales_reporting;"
+            },
+            "practice-count-rated-orders-by-region": {
+              "title": "Practice: Count Rated Orders with CASE",
+              "prompt": "For each region, count all orders and count how many have a non-NULL customer rating using CASE inside SUM. Sort by region.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies CASE Inside Aggregate Functions in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS total_orders,\n    SUM(CASE WHEN customer_rating IS NOT NULL THEN 1 ELSE 0 END) AS rated_orders\nFROM sales_reporting\nGROUP BY region\nORDER BY region;"
             }
           },
           "tryIt": {
@@ -30468,6 +32344,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY category\nHAVING SUM(quantity * unit_price) > 550\nORDER BY gross_sales DESC, category ASC;"
+            },
+            "practice-retained-having-after-grouping-sketch1": {
+              "title": "Practice: Count Completed Orders by Sales Rep",
+              "prompt": "Write a query to find sales representatives with more than 3 completed orders. Use the `sales_reporting` table and group by `sales_rep`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies HAVING After Grouping in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT sales_rep, COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders\nFROM sales_reporting\nGROUP BY sales_rep\nHAVING completed_orders > 3;"
+            },
+            "practice-filter-sales-reps-by-gross-sales": {
+              "title": "Practice: Filter Sales Representatives with HAVING",
+              "prompt": "Return sales representatives whose gross sales exceed 500. Calculate gross sales with SUM, filter groups with HAVING, and sort from highest gross sales to lowest.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies HAVING After Grouping in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    sales_rep,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY sales_rep\nHAVING SUM(quantity * unit_price) > 500\nORDER BY gross_sales DESC, sales_rep ASC;"
             }
           },
           "tryIt": {
@@ -30802,6 +32702,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    ROUND(\n        100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*),\n        1\n    ) AS completion_rate,\n    CASE\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 70 THEN 'Reliable'\n        WHEN 100.0 * SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) / COUNT(*) >= 55 THEN 'Mixed'\n        ELSE 'At risk'\n    END AS completion_band\nFROM sales_reporting\nGROUP BY category\nORDER BY completion_rate DESC, category ASC;"
+            },
+            "practice-region-order-volume-bands": {
+              "title": "Practice: Band Regions by Order Volume",
+              "prompt": "Count orders for each region and label the region `High volume` when it has at least 6 orders, `Medium volume` when it has at least 3, and `Low volume` otherwise. Sort by order count descending, then region.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Performance Bands from Aggregates in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    region,\n    COUNT(*) AS order_count,\n    CASE\n        WHEN COUNT(*) >= 6 THEN 'High volume'\n        WHEN COUNT(*) >= 3 THEN 'Medium volume'\n        ELSE 'Low volume'\n    END AS volume_band\nFROM sales_reporting\nGROUP BY region\nORDER BY order_count DESC, region ASC;"
+            },
+            "practice-sales-rep-revenue-bands": {
+              "title": "Practice: Band Sales Representatives by Gross Sales",
+              "prompt": "Calculate gross sales for each sales representative and label performance `Top` at 700 or more, `Steady` at 350 or more, and `Developing` otherwise. Sort by gross sales descending, then sales representative.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Performance Bands from Aggregates in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    sales_rep,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales,\n    CASE\n        WHEN SUM(quantity * unit_price) >= 700 THEN 'Top'\n        WHEN SUM(quantity * unit_price) >= 350 THEN 'Steady'\n        ELSE 'Developing'\n    END AS performance_band\nFROM sales_reporting\nGROUP BY sales_rep\nORDER BY gross_sales DESC, sales_rep ASC;"
             }
           },
           "tryIt": {
@@ -30943,6 +32867,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS active_gross_sales\nFROM sales_reporting\nWHERE order_status IN ('Completed', 'Pending')\nGROUP BY category\nORDER BY active_gross_sales DESC, category ASC;"
+            },
+            "practice-retained-where-before-grouping-sketch1": {
+              "title": "Practice: Average Rating for Completed Tech Products",
+              "prompt": "Write a query to find the average customer rating for each product in the 'Tech' category, but only for completed orders. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies WHERE Before Grouping in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "SELECT product_name, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE \nGROUP BY product_name;",
+              "solutionCode": "SELECT product_name, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nWHERE category = 'Tech' AND order_status = 'Completed'\nGROUP BY product_name;"
+            },
+            "practice-completed-units-by-category": {
+              "title": "Practice: Filter Before Grouping Completed Units",
+              "prompt": "For completed orders only, sum quantity for each category. Filter rows before grouping and sort by total units descending, then category.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies WHERE Before Grouping in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    category,\n    SUM(quantity) AS completed_units\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category\nORDER BY completed_units DESC, category ASC;"
             }
           },
           "tryIt": {
@@ -31086,6 +33034,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    MIN(order_date) AS first_order_date,\n    MAX(order_date) AS last_order_date,\n    MIN(quantity) AS minimum_quantity,\n    MAX(quantity) AS maximum_quantity,\n    ROUND(MIN(unit_price), 2) AS minimum_unit_price,\n    ROUND(MAX(unit_price), 2) AS maximum_unit_price\nFROM sales_reporting;"
+            },
+            "practice-retained-auditing-the-sales-kpi-dataset-sketch1": {
+              "title": "Practice: Identify Missing Customer Ratings",
+              "prompt": "Write a query to find all records in the `sales_reporting` table where the `customer_rating` is missing. This will help you identify incomplete data.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Auditing the Sales Reporting Table in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT * FROM sales_reporting WHERE customer_rating IS NULL;"
+            },
+            "practice-retained-auditing-the-sales-kpi-dataset-sketch2": {
+              "title": "Practice: Calculate Total Sales per Region",
+              "prompt": "Write a query to calculate the total sales for each region in the `sales_reporting` table. This will help you understand regional sales performance.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Auditing the Sales Reporting Table in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales FROM sales_reporting GROUP BY region;"
             }
           },
           "tryIt": {
@@ -31215,6 +33187,42 @@ const messages: Record<string, any> = {
                 "/",
                 "="
               ]
+            },
+            "practice-retained-capstone-metric-map-step1": {
+              "title": "Practice: Calculate Total Sales",
+              "prompt": "Write a query to calculate the total sales for each region. Use the `sales_reporting` table and consider the `quantity` and `unit_price` columns.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Building a Metric Map in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region;"
+            },
+            "practice-retained-capstone-metric-map-step2": {
+              "title": "Practice: Average Customer Rating by Category",
+              "prompt": "Write a query to find the average customer rating for each product category. Use the `sales_reporting` table and handle any null values appropriately.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Building a Metric Map in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, AVG(COALESCE(customer_rating, 0)) AS avg_rating\nFROM sales_reporting\nGROUP BY category;"
+            },
+            "practice-retained-capstone-metric-map-step3": {
+              "title": "Practice: Identify Top Sales Rep",
+              "prompt": "Write a query to identify the sales representative with the highest total sales. Use the `sales_reporting` table and consider both `quantity` and `unit_price`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Building a Metric Map in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT sales_rep, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY sales_rep\nORDER BY total_sales DESC\nLIMIT 1;"
             }
           }
         },
@@ -31329,6 +33337,42 @@ const messages: Record<string, any> = {
                 "product_name",
                 "date"
               ]
+            },
+            "practice-retained-capstone-step1": {
+              "title": "Practice: Step 1: Basic Sales Report",
+              "prompt": "Create a basic sales report that lists the total sales amount for each product category. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading the Capstone Reporting Brief in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category;"
+            },
+            "practice-retained-capstone-step2": {
+              "title": "Practice: Step 2: Filter by Completed Orders",
+              "prompt": "Modify the report to include only completed orders. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading the Capstone Reporting Brief in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;"
+            },
+            "practice-retained-capstone-step3": {
+              "title": "Practice: Step 3: Include Average Customer Rating",
+              "prompt": "Enhance the report to include the average customer rating for each category. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading the Capstone Reporting Brief in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;"
             }
           }
         },
@@ -31576,6 +33620,30 @@ const messages: Record<string, any> = {
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    sales_rep,\n    SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders,\n    ROUND(SUM(\n        CASE\n            WHEN order_status = 'Completed' THEN\n                quantity * unit_price\n                - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n            ELSE 0\n        END\n    ), 2) AS completed_net_sales\nFROM sales_reporting\nWHERE order_date BETWEEN '2026-01-01' AND '2026-01-31'\nGROUP BY sales_rep\nORDER BY completed_net_sales DESC, sales_rep ASC;"
+            },
+            "practice-retained-validating-report-grain-sketch0": {
+              "title": "Practice: Determine Report Grain",
+              "prompt": "Write a query to find the total sales for each category in the `sales_reporting` table. Group the results by category and order them by total sales in descending order.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Validating Report Grain and Order in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category\nORDER BY total_sales DESC;"
+            },
+            "practice-retained-validating-report-grain-sketch1": {
+              "title": "Practice: Sort by Customer Rating",
+              "prompt": "Write a query to list all products with their average customer rating, sorted by the average rating in descending order. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Validating Report Grain and Order in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nGROUP BY product_name\nORDER BY avg_rating DESC;"
             }
           },
           "tryIt": {
@@ -31616,7 +33684,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_insert_with_explicit_column_lists_sketch0": {
               "title": "Add a Notebook with Explicit Columns",
-              "prompt": "In `operations.sql`, add one inventory item with name `Notebook`, category `Stationery`, price `3.99`, and status `active`. Use an explicit column list rather than relying on the table's column order. In `query.sql`, return the stored Notebook row so the Results tab proves the change.",
+              "prompt": "In `operations.sql`, add one inventory item with name `Notebook`, category `Stationery`, price `3.99`, and status `active`. Use an explicit column list rather than relying on the table's column order. In `query.sql`, return the stored Notebook row so the Results tab proves the change. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Match each supplied value to a named destination column, then verify the row by its name.",
               "help": {
                 "concept": "An explicit insert column list documents where every supplied value belongs.",
@@ -31686,8 +33754,8 @@ const messages: Record<string, any> = {
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "hint_1": "Start with “INSERT INTO”.",
+                "hint_2": "Finish with “(value list)”."
               },
               "tokens": {
                 "t1": "INSERT INTO",
@@ -31715,40 +33783,40 @@ const messages: Record<string, any> = {
               ]
             },
             "insert-with-explicit-column-lists-policy-single_choice-2": {
-              "title": "Choose the Explicit INSERT",
-              "prompt": "Which option correctly applies the SQL behavior described in this lesson?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "Recognize an Explicit-Column INSERT",
+              "prompt": "Which statement follows the explicit-column INSERT pattern taught in this lesson?",
+              "hint": "Look for an INSERT that names the destination columns before its VALUES list.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "The explicit-column form names the table, then the destination columns, then supplies values in the same order.",
+                "hint_1": "The column list belongs immediately after the table name.",
+                "hint_2": "The VALUES list must line up with those named columns."
               },
               "options": {
-                "a": "Write INSERT INTO with a parenthesized column list.",
-                "b": "Ignore the requested result grain.",
-                "c": "Reuse a different topic's rule without checking the requirement.",
-                "d": "Choose SQL only because it is shorter."
+                "a": "INSERT INTO inventory_items (name, price) VALUES ('Notebook', 3.99);",
+                "b": "INSERT inventory_items VALUES ('Notebook', 3.99);",
+                "c": "INSERT INTO inventory_items VALUES name = 'Notebook', price = 3.99;",
+                "d": "UPDATE inventory_items SET name = 'Notebook', price = 3.99;"
               }
             },
             "insert-with-explicit-column-lists-policy-multi_choice-2": {
-              "title": "Apply Explicit INSERT Rules",
-              "prompt": "Which option correctly applies the SQL behavior described in this lesson?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "Keep an INSERT Reviewable",
+              "prompt": "Which practices make an explicit-column INSERT easier to review and less dependent on table order? Select all that apply.",
+              "hint": "Focus on making the destination of each supplied value visible.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "An explicit-column INSERT is reviewable when the destination columns are named and every value lines up with the corresponding column.",
+                "hint_1": "Do not rely on the table's physical column order.",
+                "hint_2": "Only name columns this insert is actually responsible for supplying."
               },
               "options": {
-                "a": "Write INSERT INTO with a parenthesized column list.",
-                "b": "Match each VALUES entry to the corresponding named column.",
-                "c": "Ignore duplicate-producing relationships when choosing a count.",
-                "d": "Use an adjacent topic's technique even when it changes the requested metric."
+                "a": "Name the destination columns after the table name.",
+                "b": "Keep each VALUES entry aligned with its corresponding named column.",
+                "c": "Rely on the table's physical column order instead of naming columns.",
+                "d": "Include unrelated columns even when the schema should supply them."
               }
             },
             "practice-explicit-column-intake": {
               "title": "Practice: Use Explicit Columns for an Intake Batch",
-              "prompt": "In `operations.sql`, add the approved stationery items `Pen` at `1.50` and `Eraser` at `0.99`; both have status `active`. Use an explicit column list so each supplied value has a visible destination. In `query.sql`, show only the two new rows and sort them by name.",
+              "prompt": "In `operations.sql`, add the approved stationery items `Pen` at `1.50` and `Eraser` at `0.99`; both have status `active`. Use an explicit column list so each supplied value has a visible destination. In `query.sql`, show only the two new rows and sort them by name. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Declare the destinations before the values and keep the same mapping for both approved rows.",
               "help": {
                 "concept": "Explicit column lists keep value-to-column mapping reviewable even when several rows are added.",
@@ -31777,6 +33845,64 @@ const messages: Record<string, any> = {
                 "explicitInsert": "Use an INSERT into `inventory_items` with an explicit column list in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser')\nORDER BY name;"
+            },
+            "practice-explicit-column-desk-lamp": {
+              "title": "Practice: Insert One Item with Explicit Columns",
+              "prompt": "In `operations.sql`, insert `Desk Lamp` in category `Home` with price `24.50` and status `active`, using an explicit column list. In `query.sql`, return only the new row.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies INSERT with Explicit Column Lists in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES ('Desk Lamp', 'Home', 24.50, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES ('Desk Lamp', 'Home', 24.50, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name = 'Desk Lamp';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES ('Desk Lamp', 'Home', 24.50, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name = 'Desk Lamp';"
+            },
+            "practice-explicit-column-water-bottle": {
+              "title": "Practice: Insert Another Item with Explicit Columns",
+              "prompt": "In `operations.sql`, insert `Water Bottle` in category `Kitchen` with price `11.25` and status `active`, naming the destination columns explicitly. In `query.sql`, return only the new row.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies INSERT with Explicit Column Lists in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES ('Water Bottle', 'Kitchen', 11.25, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES ('Water Bottle', 'Kitchen', 11.25, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name = 'Water Bottle';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES ('Water Bottle', 'Kitchen', 11.25, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name = 'Water Bottle';"
             }
           }
         },
@@ -31798,7 +33924,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_inserting_multiple_rows_sketch0": {
               "title": "Add a Two-Item Intake Batch",
-              "prompt": "In `operations.sql`, add `Sketchbook` and `Marker Set` as one multi-row insert. Both are `Stationery`, active, not test items, have no notes, and were updated on `2026-02-10`; their prices are `8.00` and `12.00` respectively. In `query.sql`, show those two rows with their inventory fields and sort by name.",
+              "prompt": "In `operations.sql`, add `Sketchbook` and `Marker Set` as one multi-row insert. Both are `Stationery`, active, not test items, have no notes, and were updated on `2026-02-10`; their prices are `8.00` and `12.00` respectively. In `query.sql`, show those two rows with their inventory fields and sort by name. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Use one shared column list and one statement containing two value tuples.",
               "help": {
                 "concept": "A multi-row insert uses one column contract for several value tuples.",
@@ -31847,13 +33973,13 @@ const messages: Record<string, any> = {
               }
             },
             "multi-choice-1": {
-              "title": "Components of a Multi-row INSERT",
-              "prompt": "Which components are necessary for a multi-row INSERT statement? Select all that apply.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "Pieces of the Taught Multi-row INSERT Pattern",
+              "prompt": "For the explicit-column, multi-row INSERT pattern taught in this course, which pieces are required? Select all that apply.",
+              "hint": "Think about the one shared destination list followed by several row-value groups.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "This course uses one explicit column list, the VALUES keyword, and multiple value tuples for a reviewable batch insert.",
+                "hint_1": "The shared column list defines the meaning of every tuple.",
+                "hint_2": "A WHERE clause does not belong to an INSERT VALUES statement."
               },
               "options": {
                 "a": "Column list",
@@ -31868,8 +33994,8 @@ const messages: Record<string, any> = {
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "hint_1": "Start with “INSERT INTO”.",
+                "hint_2": "Finish with “value tuples”."
               },
               "tokens": {
                 "t1": "INSERT INTO",
@@ -31880,13 +34006,13 @@ const messages: Record<string, any> = {
               }
             },
             "fill-blank-choice-1": {
-              "title": "Default Value Handling",
-              "prompt": "In a multi-row INSERT, how do you use a column's default value?",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "title": "Use a SQLite Default in a Batch",
+              "prompt": "In this course's SQLite runtime, how do you let a column's DEFAULT apply to every row in a multi-row INSERT?",
+              "hint": "The shared column list applies to every tuple in the batch.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "SQLite applies the column default when that column is omitted from the INSERT column list.",
+                "hint_1": "Every tuple must follow the same shared column list.",
+                "hint_2": "Do not place DEFAULT as an individual value inside a SQLite VALUES tuple."
               },
               "template": "To use a column's default value in an INSERT, [blank1] the column from the column list.",
               "choices": [
@@ -31913,24 +34039,24 @@ const messages: Record<string, any> = {
               }
             },
             "multi-choice-2": {
-              "title": "Benefits of Using Defaults",
-              "prompt": "What are the benefits of using default values in an INSERT statement? Select all that apply.",
-              "hint": "Consider how defaults simplify data entry.",
+              "title": "Why Defaults Help an INSERT",
+              "prompt": "Which are useful effects of relying on a schema default when a column is intentionally omitted? Select all that apply.",
+              "hint": "Choose effects that come from letting the table provide one routine value consistently.",
               "help": {
-                "concept": "Defaults reduce the need to specify every column value explicitly.",
-                "hint_1": "Defaults can simplify the INSERT statement.",
-                "hint_2": "They ensure consistent values for omitted columns."
+                "concept": "Defaults reduce repeated literals and give omitted columns a consistent starting value; they do not require every column to be supplied.",
+                "hint_1": "A default can make repeated inserts shorter and more consistent.",
+                "hint_2": "A default does not mean every column must be named."
               },
               "options": {
-                "a": "Simplifies the INSERT statement",
-                "b": "Ensures consistent default values",
-                "c": "Reduces the chance of errors",
-                "d": "Requires specifying every column"
+                "a": "It reduces repeated literal values in INSERT statements.",
+                "b": "It gives omitted columns a consistent starting value.",
+                "c": "It reduces opportunities to mistype the same routine value repeatedly.",
+                "d": "It requires every table column to appear in the INSERT."
               }
             },
             "practice-multi-row-supply-batch": {
               "title": "Practice: Add Another Batch in One Statement",
-              "prompt": "In `operations.sql`, add two approved Stationery items as one batch: `Binder Clips` at `2.50` and `Index Cards` at `3.25`. Both are active, not test items, have no notes, and use `2026-02-11` as `last_updated`. In `query.sql`, show only these two rows and sort by name.",
+              "prompt": "In `operations.sql`, add two approved Stationery items as one batch: `Binder Clips` at `2.50` and `Index Cards` at `3.25`. Both are active, not test items, have no notes, and use `2026-02-11` as `last_updated`. In `query.sql`, show only these two rows and sort by name. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Keep one column list for the batch and place both rows in the same VALUES list.",
               "help": {
                 "concept": "Independent practice should create the batch, not only inspect data that another exercise created.",
@@ -31959,6 +34085,64 @@ const messages: Record<string, any> = {
               "sourceCheckMessages": {
                 "multiRowInsert": "Add both approved rows with one multi-row INSERT in operations.sql."
               }
+            },
+            "practice-insert-two-office-items": {
+              "title": "Practice: Insert Two Office Items Together",
+              "prompt": "In `operations.sql`, insert `Folder` at `2.25` and `Tape` at `3.50` as active `Office` items in one INSERT statement. In `query.sql`, return the two new rows sorted by name.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Adding Several Rows in One Statement in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Folder', 'Office', 2.25, 'active'),\n    ('Tape', 'Office', 3.50, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Folder', 'Office', 2.25, 'active'),\n    ('Tape', 'Office', 3.50, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name IN ('Folder', 'Tape')\nORDER BY name;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Folder', 'Office', 2.25, 'active'),\n    ('Tape', 'Office', 3.50, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name IN ('Folder', 'Tape')\nORDER BY name;"
+            },
+            "practice-insert-two-kitchen-items": {
+              "title": "Practice: Insert a Two-Row Kitchen Batch",
+              "prompt": "In `operations.sql`, insert `Measuring Cup` at `6.75` and `Dish Towel` at `4.25` as active `Kitchen` items in one INSERT statement. In `query.sql`, verify only those rows, sorted by name.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Adding Several Rows in One Statement in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Measuring Cup', 'Kitchen', 6.75, 'active'),\n    ('Dish Towel', 'Kitchen', 4.25, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Measuring Cup', 'Kitchen', 6.75, 'active'),\n    ('Dish Towel', 'Kitchen', 4.25, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name IN ('Measuring Cup', 'Dish Towel')\nORDER BY name;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Measuring Cup', 'Kitchen', 6.75, 'active'),\n    ('Dish Towel', 'Kitchen', 4.25, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name IN ('Measuring Cup', 'Dish Towel')\nORDER BY name;"
             }
           }
         },
@@ -31994,7 +34178,7 @@ const messages: Record<string, any> = {
             "steps": {
               "ci_module_0_step1": {
                 "title": "Add the First Approved Item",
-                "prompt": "Start the intake script by adding item `101`: `Desk Organizer`, category `Office`, price `12.99`, status `active`, test flag `0`, notes `New stock`, and `last_updated` of `2026-02-10`. Use an explicit column list. In `query.sql`, verify only item 101.",
+                "prompt": "Start the intake script by adding item `101`: `Desk Organizer`, category `Office`, price `12.99`, status `active`, test flag `0`, notes `New stock`, and `last_updated` of `2026-02-10`. Use an explicit column list. In `query.sql`, verify only item 101. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Create the approved row in operations.sql and use its id as the narrow verification target.",
                 "help": {
                   "concept": "The project grows cumulatively from approved inserts.",
@@ -32026,7 +34210,7 @@ const messages: Record<string, any> = {
               },
               "ci_module_0_step2": {
                 "title": "Record an Item with No Notes",
-                "prompt": "Carry the intake script forward and add item `102`: `Cable Labels`, category `Office`, price `5.99`, status `active`, test flag `0`, no notes, and `last_updated` of `2026-02-11`. Record the missing notes deliberately as SQL `NULL`. In `query.sql`, verify item 102.",
+                "prompt": "Keep the approved item 101 insert in place, then add item `102`: `Cable Labels`, category `Office`, price `5.99`, status `active`, test flag `0`, no notes, and `last_updated` of `2026-02-11`. Record the missing notes deliberately as SQL `NULL`. In `query.sql`, verify item 102. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Preserve item 101 and add one new insert for item 102; the missing notes are intentional data.",
                 "help": {
                   "concept": "A deliberate missing value should be represented as NULL rather than an invented placeholder string.",
@@ -32059,7 +34243,7 @@ const messages: Record<string, any> = {
               },
               "ci_module_0_step3": {
                 "title": "Use the Approved Defaults",
-                "prompt": "Carry the intake script forward and add item `103`: `Shipping Pouch`, category `Office`, price `3.49`, test flag `0`, and notes `Durable material`. Let the database supply fields governed by its defaults instead of hard-coding those values. In `query.sql`, verify item 103.",
+                "prompt": "Keep the first two approved inserts and add item `103`: `Shipping Pouch`, category `Office`, price `3.49`, test flag `0`, and notes `Durable material`. In this SQLite course, let the schema supply `status` and `last_updated` by omitting those columns from this new INSERT instead of writing `DEFAULT` in the VALUES list. In `query.sql`, verify item 103. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Preserve the earlier inserts and omit the defaulted field from this new insert's column list.",
                 "help": {
                   "concept": "A schema default is used by omitting that column from the insert.",
@@ -32091,7 +34275,7 @@ const messages: Record<string, any> = {
               },
               "ci_module_0_step4": {
                 "title": "Add Two Items as One Batch",
-                "prompt": "Carry the intake script forward and add items `104` and `105` with one multi-row insert. Item 104 is `Packing Tape`, Office, `2.99`, active, test flag 0, notes `Strong adhesive`, updated `2026-02-12`. Item 105 is `Label Roll`, Office, `1.99`, active, test flag 0, notes `Easy to peel`, updated `2026-02-12`. In `query.sql`, verify only these two ids in id order.",
+                "prompt": "Items 101–103 are already approved. Add items `104` and `105` with one multi-row INSERT. Item 104 is `Packing Tape`, Office, `2.99`, active, test flag 0, notes `Strong adhesive`, updated `2026-02-12`. Item 105 is `Label Roll`, Office, `1.99`, active, test flag 0, notes `Easy to peel`, updated `2026-02-12`. In `query.sql`, verify only these two ids in id order. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Keep items 101–103 intact and use one shared column list for the final two approved rows.",
                 "help": {
                   "concept": "A batch insert groups rows governed by one column contract.",
@@ -32123,7 +34307,7 @@ const messages: Record<string, any> = {
               },
               "ci_module_0_step5": {
                 "title": "Finish the Intake Handoff",
-                "prompt": "The mutation script is complete. Leave `operations.sql` unchanged. In `query.sql`, return the full inventory and order it by id so the intake can be reviewed as one final handoff.",
+                "prompt": "The mutation script is complete. Leave `operations.sql` unchanged. In `query.sql`, return the full inventory and order it by id so the intake can be reviewed as one final handoff. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "This final step changes only the verification query.",
                 "help": {
                   "concept": "A completed mutation workflow ends with a clear inspection of the resulting state.",
@@ -32185,19 +34369,19 @@ const messages: Record<string, any> = {
               }
             },
             "mc-preview-change-verify": {
-              "title": "Evidence in a Safe Mutation",
-              "prompt": "Which actions provide useful evidence before or after a data change? Select all that apply.",
-              "hint": "Choose the actions that help you identify the target or confirm the result.",
+              "title": "Actions in a Safe Mutation Workflow",
+              "prompt": "Which actions belong to the safe mutation workflow taught in this module? Select all that apply.",
+              "hint": "Choose the actions that establish scope, confirm it, make the approved change, or verify the result.",
               "help": {
-                "concept": "A safe mutation is supported by evidence: preview the target, review the returned rows, make the approved change, and verify the final state.",
-                "hint_1": "A preview answers which rows are in scope.",
-                "hint_2": "A verification query answers whether the intended result was reached."
+                "concept": "A safe mutation uses evidence before and after the change instead of skipping directly to a write.",
+                "hint_1": "The workflow begins by identifying and reviewing the intended rows.",
+                "hint_2": "A successful write still needs a verification step afterward."
               },
               "options": {
                 "a": "Preview the target rows",
-                "b": "Review the preview result",
-                "c": "Apply the approved change",
-                "d": "Verify the final state"
+                "b": "Review the preview before changing data",
+                "c": "Apply the approved change after the target is confirmed",
+                "d": "Skip verification when the mutation reports success"
               }
             },
             "dr-mutation-workflow-order": {
@@ -32206,8 +34390,8 @@ const messages: Record<string, any> = {
               "hint": "Identify the target before applying the mutation, then inspect the final state.",
               "help": {
                 "concept": "A careful change moves from evidence to action and back to evidence.",
-                "hint_1": "Begin by identifying the intended rows.",
-                "hint_2": "Finish by confirming the database now matches the request."
+                "hint_1": "Start with “Preview the target rows”.",
+                "hint_2": "Finish with “Verify the final state”."
               },
               "tokens": {
                 "t1": "Preview the target rows",
@@ -32264,6 +34448,93 @@ const messages: Record<string, any> = {
                 "c": "It creates a backup table",
                 "d": "It changes the database schema"
               }
+            },
+            "practice-preview-update-verify-id-five": {
+              "title": "Practice: Preview, Update, Verify One Row",
+              "prompt": "Use a preview SELECT before changing row `id = 5`, then set its status to `active`. Finish with a verification query that returns id, name, and status for row 5.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Preview, Change, Verify in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;\n\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 5;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;\n\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 5;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nSELECT id, name, status\nFROM inventory_items\nWHERE id = 5;\n\nUPDATE inventory_items\nSET status = 'active'\nWHERE id = 5;\n\n-- file: query.sql\nSELECT id, name, status\nFROM inventory_items\nWHERE id = 5;"
+            },
+            "practice-preview-price-change-id-three": {
+              "title": "Practice: Preview and Verify a Price Change",
+              "prompt": "Preview row `id = 3`, update its price to `42.00`, then verify the final id, name, and price for that row.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Preview, Change, Verify in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;\n\nUPDATE inventory_items\nSET price = 42.00\nWHERE id = 3;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;\n\nUPDATE inventory_items\nSET price = 42.00\nWHERE id = 3;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id = 3;\n\nUPDATE inventory_items\nSET price = 42.00\nWHERE id = 3;\n\n-- file: query.sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id = 3;"
+            },
+            "practice-preview-delete-test-decor": {
+              "title": "Practice: Preview, Delete, Verify a Target Set",
+              "prompt": "Preview rows in category `Decor` that are test items, delete exactly that reviewed set, then verify that no matching rows remain.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Preview, Change, Verify in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nSELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\n-- file: query.sql\nSELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
             }
           }
         },
@@ -32285,7 +34556,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_using_null_and_default_values_sketch0": {
               "title": "Use a Default Status and NULL Notes",
-              "prompt": "In `operations.sql`, add `Gadget`, an Electronics item priced at `19.99`. Let the database provide its normal status instead of supplying one, and deliberately store no notes with SQL `NULL`. In `query.sql`, show the new row including its resulting status, test flag, and notes.",
+              "prompt": "In `operations.sql`, insert `Gadget` into `inventory_items` as an Electronics item priced at `19.99`. Omit `status` so SQLite applies the table default, and include `notes` with SQL `NULL` because no notes are known. In `query.sql`, show the new row including its resulting status, test flag, and notes. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Omit the column whose value should come from the schema, but include the column whose missing value is deliberate.",
               "help": {
                 "concept": "A default comes from omission; NULL is an explicit stored value.",
@@ -32335,13 +34606,13 @@ const messages: Record<string, any> = {
               }
             },
             "single-choice-2": {
-              "title": "Using DEFAULT in SQL",
-              "prompt": "How can you use a column's default value in an INSERT statement?",
-              "hint": "Consider what happens when you omit a column from the INSERT statement.",
+              "title": "Trigger a DEFAULT in SQLite",
+              "prompt": "In this course's SQLite runtime, how do you use a column's default value in an INSERT?",
+              "hint": "Think about what happens when the INSERT does not supply that column at all.",
               "help": {
-                "concept": "Omitting a column from the INSERT statement allows SQL to use the column's default value.",
-                "hint_1": "If you don't specify a value for a column, SQL will use its default value if one is set.",
-                "hint_2": "Omitting the column from the INSERT column list triggers the default."
+                "concept": "SQLite applies a column default when the INSERT omits that column.",
+                "hint_1": "An explicit NULL asks SQLite to store NULL instead.",
+                "hint_2": "DEFAULT is not used as an individual VALUES expression in the SQLite syntax taught here."
               },
               "options": {
                 "a": "Omit the column from the INSERT statement",
@@ -32367,19 +34638,19 @@ const messages: Record<string, any> = {
               }
             },
             "multi-choice-2": {
-              "title": "Choosing Between NULL and DEFAULT",
-              "prompt": "When should you choose to use NULL over a DEFAULT value in SQL? Select all that apply.",
-              "hint": "Think about scenarios where data might be intentionally missing.",
+              "title": "Choose NULL Instead of a Routine Default",
+              "prompt": "Which situations make SQL NULL more appropriate than relying on a routine default? Select all that apply.",
+              "hint": "Use NULL when the absence of an actual value is itself meaningful.",
               "help": {
-                "concept": "Choosing between NULL and DEFAULT depends on whether the absence of data is intentional or a default value is appropriate.",
-                "hint_1": "NULL is used when data is intentionally missing or unknown.",
-                "hint_2": "DEFAULT is used when a standard value is appropriate for missing data."
+                "concept": "NULL represents missing, unknown, or not-applicable information; a DEFAULT supplies a routine substitute chosen by the schema.",
+                "hint_1": "Do not use a routine default when it would pretend that an unknown value is known.",
+                "hint_2": "A normal starting value is a reason to use the default, not NULL."
               },
               "options": {
-                "a": "When the data is intentionally missing",
-                "b": "When the data is unknown",
-                "c": "When a standard value is not appropriate",
-                "d": "When you want to use a predefined value"
+                "a": "The actual value is unknown.",
+                "b": "The value does not apply to this row.",
+                "c": "Using the routine default would misrepresent the data.",
+                "d": "The business rule calls for the schema's normal starting value."
               }
             },
             "drag-reorder-1": {
@@ -32388,8 +34659,8 @@ const messages: Record<string, any> = {
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "hint_1": "Start with “Prepare the INSERT statement”.",
+                "hint_2": "Finish with “Verify the result”."
               },
               "tokens": {
                 "t1": "Prepare the INSERT statement",
@@ -32416,7 +34687,7 @@ const messages: Record<string, any> = {
             },
             "practice-default-status-null-notes-batch": {
               "title": "Practice: Combine Defaults and NULL in a Batch",
-              "prompt": "In `operations.sql`, add `Widget` in Tools at `5.99` and `Device` in Gadgets at `12.49`. For both rows, let the database provide status and deliberately record no notes with SQL `NULL`. In `query.sql`, show the two resulting rows and sort them by name.",
+              "prompt": "In `operations.sql`, insert two rows into `inventory_items`: `Widget` in Tools at `5.99` and `Device` in Gadgets at `12.49`. For both rows, omit `status` so SQLite applies the table default and store SQL `NULL` in `notes`. In `query.sql`, show only these two rows and sort them by name. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "The same omission-versus-NULL decision applies to both rows in the batch.",
               "help": {
                 "concept": "Defaults and explicit NULLs can be combined across several inserted rows.",
@@ -32446,6 +34717,64 @@ const messages: Record<string, any> = {
                 "explicitNull": "Store the missing notes deliberately with SQL NULL in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device')\nORDER BY name;"
+            },
+            "practice-default-status-with-null-notes": {
+              "title": "Practice: Use the Default Status and NULL Notes",
+              "prompt": "Insert `USB Cable` in category `Electronics` at `7.99`. Do not supply a status so the table default is used, and explicitly store NULL in notes. Verify the stored values.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Using NULL and DEFAULT Intentionally in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES ('USB Cable', 'Electronics', 7.99, NULL);",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES ('USB Cable', 'Electronics', 7.99, NULL);"
+                },
+                "query_sql": {
+                  "content": "SELECT name, category, price, status, notes\nFROM inventory_items\nWHERE name = 'USB Cable';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes)\nVALUES ('USB Cable', 'Electronics', 7.99, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, notes\nFROM inventory_items\nWHERE name = 'USB Cable';"
+            },
+            "practice-default-status-two-row-batch": {
+              "title": "Practice: Use Defaults in a Two-Row Batch",
+              "prompt": "Insert `Adapter` at `9.50` and `Charger` at `18.75` as `Electronics` items. Omit status for both rows so the default applies and store NULL notes. Verify both rows sorted by name.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Using NULL and DEFAULT Intentionally in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES\n    ('Adapter', 'Electronics', 9.50, NULL),\n    ('Charger', 'Electronics', 18.75, NULL);",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES\n    ('Adapter', 'Electronics', 9.50, NULL),\n    ('Charger', 'Electronics', 18.75, NULL);"
+                },
+                "query_sql": {
+                  "content": "SELECT name, category, price, status, notes\nFROM inventory_items\nWHERE name IN ('Adapter', 'Charger')\nORDER BY name;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes)\nVALUES\n    ('Adapter', 'Electronics', 9.50, NULL),\n    ('Charger', 'Electronics', 18.75, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, notes\nFROM inventory_items\nWHERE name IN ('Adapter', 'Charger')\nORDER BY name;"
             }
           }
         }
@@ -32469,7 +34798,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_deleting_only_confirmed_rows_sketch0": {
               "title": "Remove One Approved Test Row",
-              "prompt": "The audit approved test row `4` for removal. In `operations.sql`, use a `DELETE` with a `WHERE` condition that limits the deletion to that item only. In `query.sql`, inspect item 4 again so an empty result confirms the approved row is gone.",
+              "prompt": "The audit approved test row `4` for removal. In `operations.sql`, use a `DELETE` with a `WHERE` condition that limits the deletion to that item only. In `query.sql`, inspect item 4 again so an empty result confirms the approved row is gone. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Keep the deletion boundary as narrow as the approval.",
               "help": {
                 "concept": "A scoped DELETE removes only the rows named by its WHERE condition.",
@@ -32555,8 +34884,8 @@ const messages: Record<string, any> = {
               "hint": "Consider the sequence from preview to verification.",
               "help": {
                 "concept": "Safe deletion involves previewing, executing, and verifying.",
-                "hint_1": "Start with previewing the target rows.",
-                "hint_2": "End with verifying the deletion."
+                "hint_1": "Start with “Preview the target rows”.",
+                "hint_2": "Finish with “Verify the deletion”."
               },
               "tokens": {
                 "t1": "Preview the target rows",
@@ -32600,7 +34929,7 @@ const messages: Record<string, any> = {
             },
             "practice-delete-confirmed-row-set": {
               "title": "Practice: Remove Only Confirmed Test Data",
-              "prompt": "Operations approved removal of rows that are both inactive and test data. In `operations.sql`, use one `DELETE` with a `WHERE` condition that expresses both parts of that approval. In `query.sql`, inspect the same target set and confirm that no approved rows remain.",
+              "prompt": "Operations approved removal of rows that are both inactive and test data. In `operations.sql`, use one `DELETE` with a `WHERE` condition that expresses both parts of that approval. In `query.sql`, inspect the same target set and confirm that no approved rows remain. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "The deletion should require both the inactive status and the test-data flag.",
               "help": {
                 "concept": "Compound deletion conditions prevent a broad cleanup from removing legitimate rows.",
@@ -32629,6 +34958,64 @@ const messages: Record<string, any> = {
                 "scopedDelete": "Use a scoped DELETE on `inventory_items` with a WHERE condition in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\n-- Delete inactive test items\nDELETE FROM inventory_items\nWHERE status = 'inactive' AND is_test = 1;\n\n-- file: query.sql\n-- Verify the deletion\nSELECT * FROM inventory_items WHERE status = 'inactive' AND is_test = 1;"
+            },
+            "practice-delete-reviewed-decor-tests": {
+              "title": "Practice: Delete Only Reviewed Decor Test Rows",
+              "prompt": "Delete rows only when category is `Decor` and `is_test = 1`. Verify that no rows matching that exact condition remain.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Deleting Only Confirmed Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "DELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "DELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nDELETE FROM inventory_items\nWHERE category = 'Decor' AND is_test = 1;\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
+            },
+            "practice-delete-one-confirmed-id": {
+              "title": "Practice: Delete One Confirmed Row by ID",
+              "prompt": "Delete only the inventory row with `id = 5`. Verify the deletion by querying that same id.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Deleting Only Confirmed Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "DELETE FROM inventory_items\nWHERE id = 5;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "DELETE FROM inventory_items\nWHERE id = 5;"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE id = 5;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nDELETE FROM inventory_items\nWHERE id = 5;\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE id = 5;"
             }
           }
         },
@@ -32667,7 +35054,7 @@ const messages: Record<string, any> = {
             "steps": {
               "try_module_1_inventory_correction_cleanup_sketch1": {
                 "title": "Correct One Item Precisely",
-                "prompt": "Begin the approved cleanup by correcting item `2`. Its price should become `8.25` and its status should become `active`. Add one scoped `UPDATE` in `operations.sql`, then verify item 2 in `query.sql`.",
+                "prompt": "Begin the approved cleanup by correcting item `2`. Its price should become `8.25` and its status should become `active`. Add one scoped `UPDATE` in `operations.sql`, then verify item 2 in `query.sql`. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "The first project mutation should affect only item 2.",
                 "help": {
                   "concept": "The project carries each approved mutation forward.",
@@ -32699,7 +35086,7 @@ const messages: Record<string, any> = {
               },
               "try_module_1_inventory_correction_cleanup_sketch2": {
                 "title": "Apply the Approved Decor Audit Date",
-                "prompt": "Carry the first correction forward. Add another scoped `UPDATE` so legitimate Decor inventory receives `2026-02-10` as its audit date. Test rows must not be included. In `query.sql`, inspect the legitimate Decor rows and their resulting date.",
+                "prompt": "Keep the item 2 correction in `operations.sql`. Add another scoped `UPDATE` so legitimate Decor inventory receives `2026-02-10` as its audit date; test rows must stay out of the target. In `query.sql`, inspect the legitimate Decor rows and their resulting date. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Preserve the first mutation and add only the new approved group update.",
                 "help": {
                   "concept": "A cumulative project preserves earlier working mutations while adding the next requirement.",
@@ -32731,7 +35118,7 @@ const messages: Record<string, any> = {
               },
               "try_module_1_inventory_correction_cleanup_sketch3": {
                 "title": "Delete the First Confirmed Test Item",
-                "prompt": "Carry both approved updates forward. The audit board now authorizes deletion of item `4`. Add one scoped `DELETE` for that item only, then verify in `query.sql` that item 4 no longer exists.",
+                "prompt": "Leave both approved updates in place. The audit board now authorizes deletion of item `4`. Add one scoped `DELETE` for that item only, then use `query.sql` to confirm item 4 no longer exists. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Do not rewrite the earlier updates; add only the newly approved deletion.",
                 "help": {
                   "concept": "A deletion milestone should add one narrow mutation without disturbing earlier project work.",
@@ -32763,7 +35150,7 @@ const messages: Record<string, any> = {
               },
               "try_module_1_inventory_correction_cleanup_sketch4": {
                 "title": "Remove the Remaining Draft Test Row",
-                "prompt": "Carry the existing cleanup forward. Item `6` may now be removed, but only while it is still both test data and in draft status. Add one `DELETE` whose condition keeps all three requirements in the safety boundary. Verify item 6 afterward.",
+                "prompt": "Keep the earlier corrections and deletion. Item `6` may now be removed, but only while it is still test data and still in draft status. Add one `DELETE` whose WHERE condition includes the id, test flag, and status requirements. Verify item 6 afterward. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "The new deletion must identify the id and preserve both approval conditions.",
                 "help": {
                   "concept": "Extra conditions can protect a deletion from acting on a row whose state has changed.",
@@ -32795,7 +35182,7 @@ const messages: Record<string, any> = {
               },
               "try_module_1_inventory_correction_cleanup_sketch5": {
                 "title": "Complete the Operational Handoff",
-                "prompt": "The approved mutations are complete. Leave `operations.sql` unchanged. In `query.sql`, return the full remaining inventory and sort it by id for the final handoff.",
+                "prompt": "The approved mutations are complete. Leave `operations.sql` unchanged. In `query.sql`, return the full remaining inventory and sort it by id for the final handoff. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "This final milestone changes only the report query.",
                 "help": {
                   "concept": "A mutation workflow ends with a deterministic view of the resulting table.",
@@ -32925,35 +35312,35 @@ const messages: Record<string, any> = {
               ]
             },
             "multi-choice-verify": {
-              "title": "Verifying Changes",
-              "prompt": "After executing an UPDATE or DELETE, what should you verify? Select all that apply.",
-              "hint": "Consider both the affected and unaffected rows.",
+              "title": "What Successful Verification Confirms",
+              "prompt": "Which outcomes should a successful post-mutation verification confirm? Select all that apply.",
+              "hint": "Check both the intended target and rows that were supposed to stay untouched.",
               "help": {
-                "concept": "Verification ensures both intended changes and data integrity.",
-                "hint_1": "Check that only the intended rows were changed.",
-                "hint_2": "Ensure that unaffected rows remain unchanged."
+                "concept": "Verification confirms the intended final values and protects against collateral changes outside the approved target set.",
+                "hint_1": "Inspect the rows you meant to change.",
+                "hint_2": "Also confirm that unrelated rows still look as expected."
               },
               "options": {
-                "a": "The affected rows were updated correctly",
-                "b": "Unintended rows were also changed",
-                "c": "Unchanged rows remain as expected",
-                "d": "The SQL syntax was correct"
+                "a": "The intended rows now have the approved values.",
+                "b": "Every row in the table was changed.",
+                "c": "Rows outside the target still have their expected values.",
+                "d": "The SQL statement was shorter than the preview query."
               }
             },
             "drag-reorder-mutation-steps": {
-              "title": "Order the Steps: Safe Mutation",
-              "prompt": "Arrange the steps for safely executing a data mutation in SQL.",
-              "hint": "Start with previewing the target rows.",
+              "title": "Order the Verification Workflow",
+              "prompt": "Arrange the steps for a reviewed UPDATE or DELETE from first action to final safety check.",
+              "hint": "Begin with the read-only preview and end by checking rows outside the target.",
               "help": {
-                "concept": "Following a structured process ensures safe data mutations.",
-                "hint_1": "Begin with a SELECT to preview the target rows.",
-                "hint_2": "End with verifying the changes made."
+                "concept": "The workflow establishes the target, performs the approved mutation, verifies the changed rows, and then checks that unrelated rows stayed untouched.",
+                "hint_1": "Start with “Preview target rows with SELECT”.",
+                "hint_2": "Finish with “Check that unrelated rows stayed unchanged”."
               },
               "tokens": {
                 "t1": "Preview target rows with SELECT",
-                "t2": "Execute the mutation with UPDATE or DELETE",
-                "t3": "Verify the changes made",
-                "t4": "Ensure no unintended rows are affected"
+                "t2": "Execute the approved UPDATE or DELETE",
+                "t3": "Re-run a SELECT for the changed rows",
+                "t4": "Check that unrelated rows stayed unchanged"
               }
             },
             "single-choice-where": {
@@ -32991,7 +35378,7 @@ const messages: Record<string, any> = {
             },
             "practice-update-reviewed-target-set": {
               "title": "Practice: Update a Reviewed Target Set",
-              "prompt": "The pricing team approved a price of `10.99` for legitimate Accessories inventory. In `operations.sql`, use an `UPDATE` with a `WHERE` condition that limits the change to Accessories rows that are not test data. In `query.sql`, inspect the affected rows after the change.",
+              "prompt": "The pricing team approved a price of `10.99` for legitimate Accessories inventory. In `operations.sql`, use an `UPDATE` with a `WHERE` condition that limits the change to Accessories rows that are not test data. In `query.sql`, inspect the affected rows after the change. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "The approved target needs both the category and non-test conditions.",
               "help": {
                 "concept": "A reviewed filter should remain the mutation's safety boundary.",
@@ -33020,6 +35407,64 @@ const messages: Record<string, any> = {
                 "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items SET price = 10.99 WHERE category = 'Accessories' AND is_test = 0;\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE category = 'Accessories' AND is_test = 0;"
+            },
+            "practice-preview-inactive-test-targets": {
+              "title": "Practice: Preview Inactive Test Targets",
+              "prompt": "Before any mutation, return the id, name, status, and is_test values for rows that are both inactive and test items. Sort by id.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Previewing Mutation Targets in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- No mutation is required for this preview-only practice.\n",
+              "solutionCode": "",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- No mutation is required for this preview-only practice.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": ""
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, status, is_test\nFROM inventory_items\nWHERE status = 'inactive' AND is_test = 1\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\n\n\n-- file: query.sql\nSELECT id, name, status, is_test\nFROM inventory_items\nWHERE status = 'inactive' AND is_test = 1\nORDER BY id;"
+            },
+            "practice-preview-accessory-price-targets": {
+              "title": "Practice: Preview Accessory Price Targets",
+              "prompt": "Preview the rows that would be affected by a price update limited to non-test `Accessories` items. Return id, name, category, price, and is_test, sorted by id.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Previewing Mutation Targets in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- No mutation is required for this preview-only practice.\n",
+              "solutionCode": "",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- No mutation is required for this preview-only practice.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": ""
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, category, price, is_test\nFROM inventory_items\nWHERE category = 'Accessories' AND is_test = 0\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\n\n\n-- file: query.sql\nSELECT id, name, category, price, is_test\nFROM inventory_items\nWHERE category = 'Accessories' AND is_test = 0\nORDER BY id;"
             }
           }
         },
@@ -33041,7 +35486,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_updating_controlled_row_sets_sketch0": {
               "title": "Correct Two Fields on One Item",
-              "prompt": "The audit approved two changes for item `3`: its price should become `50.00` and its status should become `inactive`. Apply both assignments in one scoped `UPDATE`. In `query.sql`, verify the resulting price and status for item 3.",
+              "prompt": "The audit approved two changes for item `3`: its price should become `50.00` and its status should become `inactive`. Apply both assignments in one scoped `UPDATE`. In `query.sql`, verify the resulting price and status for item 3. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Keep the related assignments together and restrict the change to one id.",
               "help": {
                 "concept": "One UPDATE can apply several related assignments to the same approved row.",
@@ -33141,18 +35586,18 @@ const messages: Record<string, any> = {
             },
             "multi-choice-1": {
               "title": "Benefits of Compound WHERE Conditions",
-              "prompt": "What are the benefits of using compound `WHERE` conditions in an `UPDATE` statement? Select all that apply.",
+              "prompt": "Which benefits can a well-written compound WHERE condition provide in an UPDATE? Select all that apply.",
               "hint": "Consider how compound conditions affect the update operation.",
               "help": {
-                "concept": "Compound `WHERE` conditions allow precise targeting of rows.",
-                "hint_1": "They help in targeting specific rows based on multiple criteria.",
-                "hint_2": "They ensure only the intended rows are updated."
+                "concept": "Compound WHERE conditions combine criteria so a row is changed only when it satisfies the complete target rule.",
+                "hint_1": "Think about row selection, not the number of SET assignments.",
+                "hint_2": "The WHERE condition defines the mutation boundary."
               },
               "options": {
-                "a": "They allow updating multiple columns at once",
-                "b": "They help target specific rows based on multiple criteria",
-                "c": "They ensure only intended rows are updated",
-                "d": "They automatically create new tables"
+                "a": "It changes multiple columns automatically.",
+                "b": "It can require several criteria before a row is targeted.",
+                "c": "It can narrow the mutation to the approved row set when the criteria are correct.",
+                "d": "It automatically creates a backup table."
               }
             },
             "drag-reorder-1": {
@@ -33161,8 +35606,8 @@ const messages: Record<string, any> = {
               "hint": "Think about the logical sequence of actions in an update operation.",
               "help": {
                 "concept": "A controlled update involves previewing, updating, and verifying.",
-                "hint_1": "Start with previewing the intended rows.",
-                "hint_2": "End with verifying the update results."
+                "hint_1": "Start with “Preview the intended rows with a SELECT”.",
+                "hint_2": "Finish with “Verify the update results with a SELECT”."
               },
               "tokens": {
                 "t1": "Preview the intended rows with a SELECT",
@@ -33172,7 +35617,7 @@ const messages: Record<string, any> = {
             },
             "practice-compound-update-scope": {
               "title": "Practice: Update a Compound Target Set",
-              "prompt": "The test Kitchen catalog is being retired. Change the status of Kitchen rows that are test data to `archived`. Use one scoped `UPDATE` whose condition requires both parts of that target. In `query.sql`, verify the affected rows.",
+              "prompt": "The test Kitchen catalog is being retired. Change the status of Kitchen rows that are test data to `archived`. Use one scoped `UPDATE` whose condition requires both parts of that target. In `query.sql`, verify the affected rows. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Neither category alone nor the test flag alone is narrow enough.",
               "help": {
                 "concept": "A compound WHERE condition expresses a multi-part business approval.",
@@ -33201,6 +35646,64 @@ const messages: Record<string, any> = {
                 "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Kitchen' AND is_test = 1;\n\n-- file: query.sql\nSELECT id, status FROM inventory_items WHERE category = 'Kitchen' AND is_test = 1;"
+            },
+            "practice-adjust-accessory-prices": {
+              "title": "Practice: Update a Controlled Accessory Set",
+              "prompt": "Increase price by `2.00` only for non-test items in the `Accessories` category. Verify the affected rows with id, name, price, and is_test.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Updating Multiple Columns and Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "UPDATE inventory_items\nSET price = price + 2.00\nWHERE category = 'Accessories' AND is_test = 0;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items\nSET price = price + 2.00\nWHERE category = 'Accessories' AND is_test = 0;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, price, is_test\nFROM inventory_items\nWHERE category = 'Accessories' AND is_test = 0\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET price = price + 2.00\nWHERE category = 'Accessories' AND is_test = 0;\n\n-- file: query.sql\nSELECT id, name, price, is_test\nFROM inventory_items\nWHERE category = 'Accessories' AND is_test = 0\nORDER BY id;"
+            },
+            "practice-update-decor-test-status": {
+              "title": "Practice: Update Only Decor Test Items",
+              "prompt": "Set status to `archived` only for rows that are both in category `Decor` and marked as test items. Verify the affected rows sorted by id.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Updating Multiple Columns and Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Decor' AND is_test = 1;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Decor' AND is_test = 1;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, category, status, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET status = 'archived'\nWHERE category = 'Decor' AND is_test = 1;\n\n-- file: query.sql\nSELECT id, name, category, status, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;"
             }
           }
         },
@@ -33222,7 +35725,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_updating_one_row_precisely_sketch0": {
               "title": "Activate the Trial Tote",
-              "prompt": "The Trial Tote, item `6`, passed review. Change only that item's status to `active` with a scoped `UPDATE`. In `query.sql`, show items 5 and 6 in id order so the target and a nearby row can be compared.",
+              "prompt": "The Trial Tote, item `6`, passed review. Change only that item's status to `active` with a scoped `UPDATE`. In `query.sql`, show items 5 and 6 in id order so the target and a nearby row can be compared. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Use the item's id as the mutation boundary.",
               "help": {
                 "concept": "A unique id is a strong boundary for a one-row correction.",
@@ -33287,13 +35790,13 @@ const messages: Record<string, any> = {
               }
             },
             "multi-choice-1": {
-              "title": "Components of an UPDATE Statement",
-              "prompt": "Select all components that are part of a typical UPDATE statement.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "Parts of the Simple UPDATE Form",
+              "prompt": "Which parts appear in the simple single-table UPDATE form taught in this lesson? Select all that apply.",
+              "hint": "Think about the command, the assignments, and the row filter used in the examples.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "The simple form taught here uses UPDATE, SET, and WHERE. More advanced UPDATE forms can add other clauses, but they are outside this lesson.",
+                "hint_1": "SET holds the assignments.",
+                "hint_2": "WHERE limits the affected rows."
               },
               "options": {
                 "a": "UPDATE keyword",
@@ -33308,8 +35811,8 @@ const messages: Record<string, any> = {
               "hint": "Start with the keyword that initiates the update process.",
               "help": {
                 "concept": "The order of clauses in an SQL statement is important for correct execution.",
-                "hint_1": "Begin with the action keyword.",
-                "hint_2": "Follow with the details of the change and the condition."
+                "hint_1": "Start with “UPDATE clause”.",
+                "hint_2": "Finish with “WHERE clause”."
               },
               "tokens": {
                 "t1": "UPDATE clause",
@@ -33353,7 +35856,7 @@ const messages: Record<string, any> = {
             },
             "practice-precise-single-row-update": {
               "title": "Practice: Reclassify One Item",
-              "prompt": "The Sample Poster, item `4`, was reclassified as `Art`. Use a scoped `UPDATE` so only that item receives the new category. In `query.sql`, show items 3 through 5 in id order to verify the correction beside unchanged rows.",
+              "prompt": "The Sample Poster, item `4`, was reclassified as `Art`. Use a scoped `UPDATE` so only that item receives the new category. In `query.sql`, show items 3 through 5 in id order to verify the correction beside unchanged rows. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Use the stable item id rather than a broad text match.",
               "help": {
                 "concept": "A one-row correction should use a predicate that identifies exactly that record.",
@@ -33382,6 +35885,64 @@ const messages: Record<string, any> = {
                 "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\n-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;\n\n-- file: query.sql\n-- Verify the change\nSELECT id, name, category\nFROM inventory_items\nWHERE id IN (3, 4, 5)\nORDER BY id;"
+            },
+            "practice-update-one-row-price": {
+              "title": "Practice: Update One Row by ID",
+              "prompt": "Set the price of row `id = 5` to `25.00` and verify rows 4 through 6 so the one-row scope is visible.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Updating One Row Precisely in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "UPDATE inventory_items\nSET price = 25.00\nWHERE id = 5;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items\nSET price = 25.00\nWHERE id = 5;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, price\nFROM inventory_items\nWHERE id IN (4, 5, 6)\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET price = 25.00\nWHERE id = 5;\n\n-- file: query.sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id IN (4, 5, 6)\nORDER BY id;"
+            },
+            "practice-update-one-row-status": {
+              "title": "Practice: Change One Row Status Precisely",
+              "prompt": "Set status to `inactive` only for row `id = 3`. Verify rows 2 through 4 so the one-row scope is visible.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Updating One Row Precisely in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "UPDATE inventory_items\nSET status = 'inactive'\nWHERE id = 3;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items\nSET status = 'inactive'\nWHERE id = 3;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, status\nFROM inventory_items\nWHERE id IN (2, 3, 4)\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET status = 'inactive'\nWHERE id = 3;\n\n-- file: query.sql\nSELECT id, name, status\nFROM inventory_items\nWHERE id IN (2, 3, 4)\nORDER BY id;"
             }
           }
         }
@@ -33405,7 +35966,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_creating_tables_and_defining_columns_sketch0": {
               "title": "Build a Products Table",
-              "prompt": "The catalog needs a `products` table with three fields: an integer product id, a text product name, and a real-valued price. Define that table in `schema.sql`. Then inspect the stored table definition in `query.sql`.",
+              "prompt": "The catalog needs a `products` table with three fields: an integer product id, a text product name, and a real-valued price. Define that table in `schema.sql`. Then inspect the stored table definition in `query.sql`. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "Focus on the table name, column names, and data types.",
               "help": {
                 "concept": "CREATE TABLE defines the columns and data types that make up each record.",
@@ -33486,13 +36047,13 @@ const messages: Record<string, any> = {
               }
             },
             "multi-choice-2": {
-              "title": "Data Types in SQL",
-              "prompt": "Which of the following are valid SQL data types?",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "SQLite Storage Classes",
+              "prompt": "Which of these are SQLite storage classes? Select all that apply.",
+              "hint": "Distinguish SQLite storage classes from convenient declared type names such as BOOLEAN.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "SQLite storage classes include INTEGER, REAL, TEXT, BLOB, and NULL. BOOLEAN is commonly declared but is not a separate storage class.",
+                "hint_1": "A declared type name and a storage class are not the same thing in SQLite.",
+                "hint_2": "Choose the names SQLite uses for stored values themselves."
               },
               "options": {
                 "a": "INTEGER",
@@ -33502,19 +36063,19 @@ const messages: Record<string, any> = {
               }
             },
             "drag-reorder-1": {
-              "title": "Order of SQL Clauses",
-              "prompt": "Arrange the SQL clauses in the correct order for a basic SELECT statement.",
-              "hint": "Consider the typical flow of a SQL query.",
+              "title": "Build a Basic CREATE TABLE Statement",
+              "prompt": "Arrange the fragments so they form a valid basic CREATE TABLE statement.",
+              "hint": "Open the table definition, list the columns inside it, then close it.",
               "help": {
-                "concept": "SQL queries follow a specific order of clauses.",
-                "hint_1": "Start with the clause that specifies what to retrieve.",
-                "hint_2": "Finish with the clause that orders the results."
+                "concept": "A CREATE TABLE statement names the table, opens a parenthesized column list, defines the columns, and closes the statement.",
+                "hint_1": "Start with “CREATE TABLE products (”.",
+                "hint_2": "Finish with “);”."
               },
               "tokens": {
-                "t1": "SELECT",
-                "t2": "FROM",
-                "t3": "WHERE",
-                "t4": "ORDER BY"
+                "t1": "CREATE TABLE products (",
+                "t2": "id INTEGER,",
+                "t3": "name TEXT",
+                "t4": ");"
               }
             },
             "single-choice-1": {
@@ -33535,7 +36096,7 @@ const messages: Record<string, any> = {
             },
             "practice-create-orders-table": {
               "title": "Practice: Build an Orders Table",
-              "prompt": "Create an `orders` table with an integer order id, a text customer name, and a real-valued total amount. Define it in `schema.sql`, then inspect its stored definition in `query.sql`.",
+              "prompt": "Create an `orders` table with an integer order id, a text customer name, and a real-valued total amount. Define it in `schema.sql`, then inspect its stored definition in `query.sql`. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "Translate the three field requirements into typed columns.",
               "help": {
                 "concept": "A table definition turns a record design into named, typed columns.",
@@ -33564,6 +36125,64 @@ const messages: Record<string, any> = {
               "sourceCheckMessages": {
                 "ordersShape": "Define `orders` with integer `order_id`, text `customer_name`, and real `total_amount` columns."
               }
+            },
+            "practice-create-suppliers-table": {
+              "title": "Practice: Create a Suppliers Table",
+              "prompt": "Create a `suppliers` table with `supplier_id` INTEGER, `supplier_name` TEXT, and `active` INTEGER. In the verification query, return the stored CREATE TABLE statement.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Creating Tables and Defining Columns in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE suppliers (\n    supplier_id INTEGER,\n    supplier_name TEXT,\n    active INTEGER\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE suppliers (\n    supplier_id INTEGER,\n    supplier_name TEXT,\n    active INTEGER\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'suppliers';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE suppliers (\n    supplier_id INTEGER,\n    supplier_name TEXT,\n    active INTEGER\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'suppliers';"
+            },
+            "practice-create-shipments-table": {
+              "title": "Practice: Create a Shipments Table",
+              "prompt": "Create a `shipments` table with `shipment_id` INTEGER, `carrier` TEXT, and `shipped_at` TEXT. Verify the table by returning its CREATE TABLE statement.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Creating Tables and Defining Columns in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE shipments (\n    shipment_id INTEGER,\n    carrier TEXT,\n    shipped_at TEXT\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE shipments (\n    shipment_id INTEGER,\n    carrier TEXT,\n    shipped_at TEXT\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'shipments';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE shipments (\n    shipment_id INTEGER,\n    carrier TEXT,\n    shipped_at TEXT\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'shipments';"
             }
           }
         },
@@ -33585,7 +36204,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_foreign_keys_and_references_sketch0": {
               "title": "Link Departments to Their Managers",
-              "prompt": "The `employees` parent table is already provided. Create a `departments` child table with its own id and name, plus a manager id that must reference an employee id. Inspect the declared relationship afterward.",
+              "prompt": "The `employees` parent table is already provided. Create a `departments` child table with its own id and name, plus a manager id that must reference an employee id. Inspect the declared relationship afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "Leave the parent table unchanged and define the relationship on the child table.",
               "help": {
                 "concept": "A foreign key records which parent key a child column may reference.",
@@ -33650,28 +36269,28 @@ const messages: Record<string, any> = {
               }
             },
             "drag-reorder-foreign-key-steps": {
-              "title": "Steps to Implement FOREIGN KEY",
-              "prompt": "Arrange the steps to implement a FOREIGN KEY constraint in the correct order.",
-              "hint": "Start with defining the parent table and end with defining the foreign key constraint.",
+              "title": "Build the Parent-Child Schema in Order",
+              "prompt": "Arrange the schema steps so a child table can reference a parent key that already exists.",
+              "hint": "Create the referenced table before defining the child relationship.",
               "help": {
-                "concept": "Implementing a FOREIGN KEY involves creating the parent table, then the child table, and finally defining the FOREIGN KEY constraint.",
-                "hint_1": "Begin with creating the parent table.",
-                "hint_2": "End with defining the FOREIGN KEY in the child table."
+                "concept": "The parent key must exist before the child table definition can declare a reference to it.",
+                "hint_1": "Start with “Create the parent table and its key”.",
+                "hint_2": "Finish with “Declare the child FOREIGN KEY reference”."
               },
               "tokens": {
-                "t1": "Create the parent table",
-                "t2": "Create the child table",
-                "t3": "Define the FOREIGN KEY constraint"
+                "t1": "Create the parent table and its key",
+                "t2": "Begin the child table definition",
+                "t3": "Declare the child FOREIGN KEY reference"
               }
             },
             "fill-blank-choice-foreign-key-syntax": {
-              "title": "FOREIGN KEY Syntax",
-              "prompt": "Complete the syntax for declaring a FOREIGN KEY constraint.",
-              "hint": "Remember the structure of a FOREIGN KEY declaration.",
+              "title": "FOREIGN KEY Column in the Child Table",
+              "prompt": "Complete the pattern: FOREIGN KEY ([blank1]) REFERENCES parent_table(parent_column).",
+              "hint": "The blank names the column stored in the child table.",
               "help": {
-                "concept": "A FOREIGN KEY declaration specifies the child column and the parent table and column it references.",
-                "hint_1": "The syntax involves the FOREIGN KEY keyword followed by the column and REFERENCES clause.",
-                "hint_2": "Ensure you specify both the child column and the parent table and column."
+                "concept": "The FOREIGN KEY clause starts with the child column, then REFERENCES names the parent table and parent key.",
+                "hint_1": "Look inside the parentheses immediately after FOREIGN KEY.",
+                "hint_2": "That column belongs to the child table being defined."
               },
               "template": "FOREIGN KEY ([blank1]) REFERENCES parent_table(parent_column)",
               "choices": [
@@ -33682,41 +36301,41 @@ const messages: Record<string, any> = {
               ]
             },
             "fill-blank-choice-foreign-key-constraint": {
-              "title": "FOREIGN KEY Constraint",
-              "prompt": "Identify the correct keyword to declare a FOREIGN KEY constraint in SQL.",
-              "hint": "This keyword is used to establish a relationship between two tables.",
+              "title": "FOREIGN KEY Keyword",
+              "prompt": "Which SQL phrase declares a foreign-key relationship in a table definition?",
+              "hint": "Choose the phrase that explicitly names this relationship constraint.",
               "help": {
-                "concept": "The FOREIGN KEY clause declares a relationship from a child column to a parent key.",
-                "hint_1": "This keyword is part of the SQL syntax for defining relationships.",
-                "hint_2": "It is used to ensure referential integrity between tables."
+                "concept": "FOREIGN KEY introduces the child-side relationship before REFERENCES names the parent key.",
+                "hint_1": "PRIMARY KEY identifies rows in the current table.",
+                "hint_2": "UNIQUE controls duplicates rather than declaring a relationship."
               },
               "template": "[blank1] KEY (column_name) REFERENCES other_table(column_name)",
               "choices": [
-                "FOREIGN",
-                "PRIMARY",
+                "FOREIGN KEY",
+                "PRIMARY KEY",
                 "UNIQUE",
                 "CHECK"
               ]
             },
             "multi-choice-foreign-key-requirements": {
-              "title": "FOREIGN KEY Requirements",
-              "prompt": "What are the requirements for a column to be a FOREIGN KEY? Select all that apply.",
-              "hint": "Consider the relationship between the child and parent tables.",
+              "title": "Requirements of an Enforced SQLite Foreign Key",
+              "prompt": "With SQLite foreign-key enforcement enabled, which statements about a valid foreign-key relationship are correct? Select all that apply.",
+              "hint": "Focus on the parent key being referenceable and the child value having a valid parent when it is not NULL.",
               "help": {
-                "concept": "A FOREIGN KEY must reference a column in another table, and both columns must have compatible data types.",
-                "hint_1": "The referenced column must exist in the parent table.",
-                "hint_2": "The data types of the foreign key and the referenced column must be compatible."
+                "concept": "The referenced parent columns must be a PRIMARY KEY or otherwise UNIQUE in a compatible way. Each non-NULL child key must match a parent key. The child column itself need not be UNIQUE or indexed for the constraint to exist.",
+                "hint_1": "A foreign key may point to a PRIMARY KEY or an eligible UNIQUE parent key.",
+                "hint_2": "Indexing the child key can help performance but is not what makes the relationship valid."
               },
               "options": {
-                "a": "The column must be unique",
-                "b": "The column must reference a primary key",
-                "c": "The column must have the same data type as the referenced column",
-                "d": "The column must be indexed"
+                "a": "The referenced parent key must be PRIMARY KEY or otherwise UNIQUE in a compatible way.",
+                "b": "Each non-NULL child key must match an existing referenced parent key.",
+                "c": "The child foreign-key column must itself be UNIQUE.",
+                "d": "The child foreign-key column must be indexed for the constraint to work."
               }
             },
             "practice-two-foreign-key-relationships": {
               "title": "Practice: Give Order Items Two Parent Relationships",
-              "prompt": "The `orders` and `products` parent tables are provided. Create `order_items` so each line can identify both the order it belongs to and the product it represents. Declare both parent relationships and inspect them afterward.",
+              "prompt": "The `orders` and `products` parent tables are provided. Create `order_items` so each line can identify both the order it belongs to and the product it represents. Declare both parent relationships and inspect them afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "The two relationship columns have different parent tables.",
               "help": {
                 "concept": "One child table can carry multiple independent foreign-key relationships.",
@@ -33745,6 +36364,64 @@ const messages: Record<string, any> = {
               "sourceCheckMessages": {
                 "orderItemRelationships": "Link `order_id` to `orders.id` and `product_id` to `products.id`."
               }
+            },
+            "practice-create-team-member-foreign-key": {
+              "title": "Practice: Connect Team Members to Teams",
+              "prompt": "Create a `teams` table and a `team_members` table. `team_members.team_id` must reference `teams.id`. Verify the foreign-key definition.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies FOREIGN KEY and REFERENCES in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE teams (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE team_members (\n    id INTEGER PRIMARY KEY,\n    member_name TEXT NOT NULL,\n    team_id INTEGER,\n    FOREIGN KEY (team_id) REFERENCES teams(id)\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE teams (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE team_members (\n    id INTEGER PRIMARY KEY,\n    member_name TEXT NOT NULL,\n    team_id INTEGER,\n    FOREIGN KEY (team_id) REFERENCES teams(id)\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA foreign_key_list(team_members);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE teams (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL\n);\n\nCREATE TABLE team_members (\n    id INTEGER PRIMARY KEY,\n    member_name TEXT NOT NULL,\n    team_id INTEGER,\n    FOREIGN KEY (team_id) REFERENCES teams(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(team_members);"
+            },
+            "practice-create-payment-order-foreign-key": {
+              "title": "Practice: Connect Payments to Orders",
+              "prompt": "Create an `orders` table and a `payments` table. `payments.order_id` must reference `orders.id`. Verify the foreign-key definition.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies FOREIGN KEY and REFERENCES in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);\n\nCREATE TABLE payments (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER NOT NULL,\n    amount REAL NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id)\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);\n\nCREATE TABLE payments (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER NOT NULL,\n    amount REAL NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id)\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA foreign_key_list(payments);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE orders (\n    id INTEGER PRIMARY KEY,\n    customer_name TEXT NOT NULL\n);\n\nCREATE TABLE payments (\n    id INTEGER PRIMARY KEY,\n    order_id INTEGER NOT NULL,\n    amount REAL NOT NULL,\n    FOREIGN KEY (order_id) REFERENCES orders(id)\n);\n\n-- file: query.sql\nPRAGMA foreign_key_list(payments);"
             }
           }
         },
@@ -33783,7 +36460,7 @@ const messages: Record<string, any> = {
             "steps": {
               "ci_warehouse_schema_step1": {
                 "title": "Create the Warehouse Table",
-                "prompt": "Start the ledger with a `warehouses` table containing an integer id and a text name. Inspect the table afterward to confirm that the first schema object exists.",
+                "prompt": "Start the ledger with a `warehouses` table containing an integer id and a text name. Inspect the table afterward to confirm that the first schema object exists. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "This first milestone establishes only the basic table shape.",
                 "help": {
                   "concept": "The project grows one valid schema state at a time.",
@@ -33815,7 +36492,7 @@ const messages: Record<string, any> = {
               },
               "ci_warehouse_schema_step2": {
                 "title": "Strengthen Warehouse Identity",
-                "prompt": "Carry the warehouse table forward. Make its id the primary key, require every warehouse to have a name, and prevent duplicate warehouse names. Inspect the resulting definition.",
+                "prompt": "The `warehouses` table now exists. Strengthen it so `id` is the primary key, every warehouse has a name, and duplicate warehouse names are rejected. Inspect the resulting definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Edit the existing table definition rather than creating a second warehouses table.",
                 "help": {
                   "concept": "A cumulative schema project strengthens the same definition as requirements grow.",
@@ -33847,7 +36524,7 @@ const messages: Record<string, any> = {
               },
               "ci_warehouse_schema_step3": {
                 "title": "Add the Warehouse Operating Default",
-                "prompt": "Carry the constrained warehouse table forward. Add a required text status whose value defaults to `active` when a new warehouse omits it. Inspect the updated definition.",
+                "prompt": "With the warehouse identity rules in place, add a required text `status` that defaults to `active` when a new warehouse omits it. Inspect the updated definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Preserve all existing warehouse rules while adding the new status field.",
                 "help": {
                   "concept": "A default can establish a consistent initial state without weakening required-data rules.",
@@ -33879,7 +36556,7 @@ const messages: Record<string, any> = {
               },
               "ci_warehouse_schema_step4": {
                 "title": "Create the Movement Table",
-                "prompt": "Keep the completed warehouse definition. Add a `stock_movements` table with an integer id, integer warehouse id, text sku, real quantity change, text movement type, and optional text note. Inspect the new table afterward.",
+                "prompt": "Keep the completed warehouse definition. Add a `stock_movements` table with an integer id, integer warehouse id, text sku, real quantity change, text movement type, and optional text note. Inspect the new table afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "This milestone establishes the movement record shape before adding stricter rules.",
                 "help": {
                   "concept": "Create the basic child-table structure before adding its integrity constraints.",
@@ -33911,7 +36588,7 @@ const messages: Record<string, any> = {
               },
               "ci_warehouse_schema_step5": {
                 "title": "Protect Required Movement Data",
-                "prompt": "Carry both tables forward. Make the movement id the primary key, and require warehouse id, sku, quantity change, and movement type on every movement record. The note may remain optional. Inspect the strengthened movement definition.",
+                "prompt": "Both tables now exist. Strengthen `stock_movements`: make its id the primary key and require warehouse id, sku, quantity change, and movement type on every record. Keep `note` optional, then inspect the updated definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Strengthen the existing movement table instead of adding another table.",
                 "help": {
                   "concept": "Required operational fields belong in the schema so incomplete movements are rejected consistently.",
@@ -33943,7 +36620,7 @@ const messages: Record<string, any> = {
               },
               "ci_warehouse_schema_step6": {
                 "title": "Connect Movements to Warehouses",
-                "prompt": "Finish the ledger schema. Give new movement records a default movement type of `receipt`, and require each movement's warehouse id to reference the id of an existing warehouse. Inspect the final movement definition.",
+                "prompt": "Finish the ledger schema. Give new movement records a default movement type of `receipt`, and require each movement's warehouse id to reference the id of an existing warehouse. Inspect the final movement definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Preserve every earlier constraint while adding the default and relationship.",
                 "help": {
                   "concept": "The final schema combines row identity, required data, defaults, uniqueness, and referential integrity.",
@@ -33994,7 +36671,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_primary_key_and_not_null_constraints_sketch0": {
               "title": "Give Products Identity and a Required Name",
-              "prompt": "Create a `products` table where `product_id` is the stable primary identifier and `product_name` is required text. Inspect the completed table afterward.",
+              "prompt": "Create a `products` table where `product_id` is the stable primary identifier and `product_name` is required text. Inspect the completed table afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "The schema needs one identity rule and one required-value rule.",
               "help": {
                 "concept": "PRIMARY KEY identifies rows; NOT NULL makes a value mandatory.",
@@ -34059,30 +36736,30 @@ const messages: Record<string, any> = {
               }
             },
             "fill-blank-primary-key": {
-              "title": "PRIMARY KEY Declaration",
-              "prompt": "Fill in the blank to declare a PRIMARY KEY for the `id` column.",
-              "hint": "Use the correct SQL syntax for declaring a PRIMARY KEY.",
+              "title": "Define an Integer Row Identifier",
+              "prompt": "Complete the column definition `id [blank1]` so `id` is the integer primary identifier used in this course's SQLite tables.",
+              "hint": "The blank needs both the integer type and the row-identity constraint.",
               "help": {
-                "concept": "A PRIMARY KEY is declared to ensure unique identification of rows.",
-                "hint_1": "The PRIMARY KEY is declared in the column definition.",
-                "hint_2": "Use PRIMARY KEY for the `id` column."
+                "concept": "In these SQLite schemas, `INTEGER PRIMARY KEY` declares the integer id column as the table's primary row identifier.",
+                "hint_1": "A type alone would not make the column the primary key.",
+                "hint_2": "The course uses integer ids for these row identities."
               },
               "template": "CREATE TABLE example (id [blank1], name TEXT);",
               "choices": [
                 "INTEGER PRIMARY KEY",
                 "TEXT PRIMARY KEY",
                 "REAL PRIMARY KEY",
-                "PRIMARY KEY"
+                "INTEGER"
               ]
             },
             "fill-blank-not-null": {
-              "title": "NOT NULL Constraint",
-              "prompt": "Fill in the blank to enforce a NOT NULL constraint on the `name` column.",
-              "hint": "Use the correct SQL syntax for NOT NULL.",
+              "title": "Define a Required Text Name",
+              "prompt": "Complete the column definition `name [blank1]` so `name` stores text and cannot be NULL.",
+              "hint": "The blank needs the text type plus the constraint that rejects NULL.",
               "help": {
-                "concept": "NOT NULL ensures that a column must have a value, preventing NULL entries.",
-                "hint_1": "The NOT NULL constraint is added after the column type.",
-                "hint_2": "Use NOT NULL for the required `name` column."
+                "concept": "`TEXT NOT NULL` declares a text column and requires every stored row to provide a non-NULL value.",
+                "hint_1": "TEXT provides the data type.",
+                "hint_2": "NOT NULL provides the required-value rule."
               },
               "template": "CREATE TABLE example (id INTEGER, name [blank1]);",
               "choices": [
@@ -34109,24 +36786,24 @@ const messages: Record<string, any> = {
               }
             },
             "drag-reorder-table-creation": {
-              "title": "Steps to Create a Table",
-              "prompt": "Arrange the steps to create a table with a PRIMARY KEY and NOT NULL constraint.",
-              "hint": "Start with defining the table and end with specifying constraints.",
+              "title": "Build a Constrained Table Definition",
+              "prompt": "Arrange the fragments so they form a table with an integer primary id and a required text name.",
+              "hint": "Open the CREATE TABLE statement, define the id, define the name, then close the table definition.",
               "help": {
-                "concept": "Creating a table involves defining columns and constraints in order.",
-                "hint_1": "Begin with the CREATE TABLE statement.",
-                "hint_2": "End with specifying the PRIMARY KEY and NOT NULL constraints."
+                "concept": "The table definition contains complete column definitions, including each column's type and constraints.",
+                "hint_1": "Start with “CREATE TABLE products (”.",
+                "hint_2": "Finish with “);”."
               },
               "tokens": {
-                "t1": "Define table name",
-                "t2": "Specify column types",
-                "t3": "Declare PRIMARY KEY",
-                "t4": "Add NOT NULL constraint"
+                "t1": "CREATE TABLE products (",
+                "t2": "id INTEGER PRIMARY KEY,",
+                "t3": "name TEXT NOT NULL",
+                "t4": ");"
               }
             },
             "practice-required-order-columns": {
               "title": "Practice: Protect Required Order Data",
-              "prompt": "Create an `orders` table where `order_id` uniquely identifies each row and every order must include a customer name. Inspect the stored definition afterward.",
+              "prompt": "Create an `orders` table where `order_id` uniquely identifies each row and every order must include a customer name. Inspect the stored definition afterward. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "Use one identity constraint and one required-value constraint.",
               "help": {
                 "concept": "Identity and completeness rules belong in the schema.",
@@ -34155,6 +36832,64 @@ const messages: Record<string, any> = {
               "sourceCheckMessages": {
                 "requiredOrderRules": "Make `order_id` the primary key and require `customer_name`."
               }
+            },
+            "practice-author-required-columns": {
+              "title": "Practice: Require an Author Name",
+              "prompt": "Create an `authors` table with `author_id` as INTEGER PRIMARY KEY and `author_name` as TEXT NOT NULL. Verify the column metadata.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies PRIMARY KEY and NOT NULL Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE authors (\n    author_id INTEGER PRIMARY KEY,\n    author_name TEXT NOT NULL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE authors (\n    author_id INTEGER PRIMARY KEY,\n    author_name TEXT NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA table_info(authors);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE authors (\n    author_id INTEGER PRIMARY KEY,\n    author_name TEXT NOT NULL\n);\n\n-- file: query.sql\nPRAGMA table_info(authors);"
+            },
+            "practice-ticket-required-summary": {
+              "title": "Practice: Require a Ticket Summary",
+              "prompt": "Create a `tickets` table with `ticket_id` as INTEGER PRIMARY KEY and `summary` as TEXT NOT NULL. Verify the column metadata.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies PRIMARY KEY and NOT NULL Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA table_info(tickets);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE tickets (\n    ticket_id INTEGER PRIMARY KEY,\n    summary TEXT NOT NULL\n);\n\n-- file: query.sql\nPRAGMA table_info(tickets);"
             }
           }
         },
@@ -34176,7 +36911,7 @@ const messages: Record<string, any> = {
             "allowReveal": true,
             "try_unique_and_default_constraints_sketch0": {
               "title": "Protect Customer Phone Numbers",
-              "prompt": "Create a `customers` table with an integer primary id, a required name, and a phone number that may not be duplicated across customer records. Inspect the resulting definition.",
+              "prompt": "Create a `customers` table with an integer primary id, a required name, and a phone number that may not be duplicated across customer records. Inspect the resulting definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "The business rule concerns duplicate phone numbers.",
               "help": {
                 "concept": "UNIQUE protects a business identifier from duplicate non-null values.",
@@ -34263,8 +36998,8 @@ const messages: Record<string, any> = {
               "hint": "Start with the column name and type, then add its constraints.",
               "help": {
                 "concept": "A column definition begins with a name and type, followed by constraints such as NOT NULL and DEFAULT.",
-                "hint_1": "The column name comes first.",
-                "hint_2": "The default expression follows the required-value rule."
+                "hint_1": "Start with “status”.",
+                "hint_2": "Finish with “DEFAULT 'pending'”."
               },
               "tokens": {
                 "t1": "status",
@@ -34294,9 +37029,9 @@ const messages: Record<string, any> = {
               "prompt": "A new order should begin with status 'pending' when the INSERT omits the status column. The appropriate constraint is [blank1].",
               "hint": "Choose the rule that supplies a value for an omitted column.",
               "help": {
-                "concept": "DEFAULT supplies the starting value declared in the table definition.",
+                "concept": "DEFAULT supplies the starting value declared in the table definition when the INSERT omits that column.",
                 "hint_1": "UNIQUE controls duplicates, not omitted values.",
-                "hint_2": "NOT NULL rejects NULL but does not choose a value."
+                "hint_2": "FOREIGN KEY controls relationships, while CHECK validates a condition."
               },
               "template": "A new order should begin with status 'pending' when the INSERT omits the status column. The appropriate constraint is [blank1].",
               "choices": [
@@ -34308,7 +37043,7 @@ const messages: Record<string, any> = {
             },
             "practice-default-order-status": {
               "title": "Practice: Give New Orders a Default Status",
-              "prompt": "Create an `orders` table with an integer primary id, a required customer id, and a status that automatically begins as `pending` when the column is omitted. Inspect the final definition.",
+              "prompt": "Create an `orders` table with an integer primary id, a required customer id, and a status that automatically begins as `pending` when the column is omitted. Inspect the final definition. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
               "hint": "The status column needs a database-supplied initial value.",
               "help": {
                 "concept": "DEFAULT supplies a value when an INSERT omits that column.",
@@ -34337,6 +37072,64 @@ const messages: Record<string, any> = {
               "sourceCheckMessages": {
                 "pendingDefault": "Give `status` a default value of `pending`."
               }
+            },
+            "practice-unique-user-email": {
+              "title": "Practice: Make User Email Unique",
+              "prompt": "Create a `users` table with id INTEGER PRIMARY KEY, name TEXT NOT NULL, and email TEXT UNIQUE. Verify the unique index created for the table.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies UNIQUE and DEFAULT Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE users (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE users (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA index_list(users);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE users (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);\n\n-- file: query.sql\nPRAGMA index_list(users);"
+            },
+            "practice-default-task-status": {
+              "title": "Practice: Give Tasks a Default Status",
+              "prompt": "Create a `tasks` table with id INTEGER PRIMARY KEY, title TEXT NOT NULL, and status TEXT DEFAULT `open`. Verify the column metadata and default.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies UNIQUE and DEFAULT Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE tasks (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    status TEXT DEFAULT 'open'\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE tasks (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    status TEXT DEFAULT 'open'\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA table_info(tasks);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE tasks (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    status TEXT DEFAULT 'open'\n);\n\n-- file: query.sql\nPRAGMA table_info(tasks);"
             }
           }
         }
@@ -34377,7 +37170,7 @@ const messages: Record<string, any> = {
             "steps": {
               "ci_final_capstone_step1": {
                 "title": "Build the Product Catalog",
-                "prompt": "Start the launch database with a `products` table. Use an integer primary id. Require a unique SKU, name, category, price, and status. New products should begin with a `draft` status when no status is supplied, while notes may remain empty. Inspect the stored product definition in `query.sql`.",
+                "prompt": "Start the launch database with a `products` table. Use an integer primary id. Require a unique SKU, name, category, price, and status. New products should begin with a `draft` status when no status is supplied, while notes may remain empty. Inspect the stored product definition in `query.sql`. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "This first milestone establishes the complete product catalog rules before any rows are loaded.",
                 "help": {
                   "concept": "A launch schema should encode identity, required values, uniqueness, and defaults before data arrives.",
@@ -34409,7 +37202,7 @@ const messages: Record<string, any> = {
               },
               "ci_final_capstone_step2": {
                 "title": "Add the Stock Event Ledger",
-                "prompt": "Carry the product schema forward. Add `stock_events` with an integer primary id, a required product id, a required integer quantity change, and a required event type that defaults to `receipt`. Notes may remain empty. Connect each event's product id to the product table, then inspect both stored table definitions.",
+                "prompt": "Keep the completed `products` definition. Add `stock_events` with an integer primary id, a required product id, a required integer quantity change, and a required event type that defaults to `receipt`. Notes may remain NULL. Connect each event's product id to `products(id)`, then inspect both table definitions. To test it in the workspace, run `schema.sql` before `query.sql` so the table definition exists when you inspect it.",
                 "hint": "Preserve the completed product table and add only the new event-ledger definition.",
                 "help": {
                   "concept": "The child table records stock history while the foreign key protects its relationship to products.",
@@ -34444,7 +37237,7 @@ const messages: Record<string, any> = {
               },
               "ci_final_capstone_step3": {
                 "title": "Load the Approved Products",
-                "prompt": "Carry the completed schema forward. In `seed.sql`, load the three approved catalog rows using one multi-row INSERT with an explicit column list. Let the product status default apply rather than supplying status values. In `query.sql`, verify the loaded products in id order.",
+                "prompt": "With both tables defined, use `seed.sql` to load the three approved catalog rows in one multi-row INSERT with an explicit column list. Omit `status` so SQLite applies the product default. In `query.sql`, verify the loaded products in id order. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, and finally `query.sql`.",
                 "hint": "The schema is complete; this milestone adds only the approved product seed data.",
                 "help": {
                   "concept": "Seed data belongs in its own file and should rely on schema defaults when the approved input omits them.",
@@ -34482,7 +37275,7 @@ const messages: Record<string, any> = {
               },
               "ci_final_capstone_step4": {
                 "title": "Load the Opening Stock Events",
-                "prompt": "Carry the product seed forward. Add the four approved opening stock events in `seed.sql` using one multi-row INSERT with an explicit column list. Keep the completed schema and product rows unchanged. Verify the event ledger in id order.",
+                "prompt": "Keep the three approved product rows in `seed.sql`, then add the four opening stock events with one multi-row INSERT and an explicit column list. Leave the schema and product batch unchanged. Verify the event ledger in id order. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, and finally `query.sql`.",
                 "hint": "Append the event batch after the existing product seed.",
                 "help": {
                   "concept": "A cumulative seed file preserves earlier approved rows while adding the next approved batch.",
@@ -34523,7 +37316,7 @@ const messages: Record<string, any> = {
               },
               "ci_final_capstone_step5": {
                 "title": "Apply the Launch Correction",
-                "prompt": "Carry the schema and seed files forward. The launch review approved a correction for product 1: its price should become `24.99` and its status should become `active`. Apply one scoped update in `operations.sql` that changes only that product, then verify product 1.",
+                "prompt": "The schema and seed data are now fixed. The launch review approved one correction for product 1: set its price to `24.99` and its status to `active`. Add a scoped UPDATE in `operations.sql` that changes only that product, then verify product 1. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, then `operations.sql`, and finally `query.sql`.",
                 "hint": "Use the stable product id as the safety boundary.",
                 "help": {
                   "concept": "A production correction should combine the approved assignments with a narrow row condition.",
@@ -34567,7 +37360,7 @@ const messages: Record<string, any> = {
               },
               "ci_final_capstone_step6": {
                 "title": "Remove the Placeholder and Finalize",
-                "prompt": "Carry the approved product correction forward. Quality assurance now authorizes removal of the stock event whose note is `Test event`. Add one scoped delete for that placeholder only. In `query.sql`, return the remaining stock events in id order for the final operational handoff.",
+                "prompt": "Keep the approved product correction. Quality assurance now authorizes removal of the stock event whose note is `Test event`. Add one scoped DELETE for that placeholder only. In `query.sql`, return the remaining stock events in id order for the final operational handoff. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, then `operations.sql`, and finally `query.sql`.",
                 "hint": "Preserve the earlier update and add only the newly approved deletion.",
                 "help": {
                   "concept": "The final milestone preserves earlier approved mutations while removing one confirmed placeholder.",
@@ -34614,7 +37407,7 @@ const messages: Record<string, any> = {
           "practice": {
             "practice-launch-review-mutations": {
               "title": "Practice: Rehearse the Launch Review",
-              "prompt": "Before the capstone, rehearse a smaller launch review. The schema and seed data are already complete. In `operations.sql`, change product 2 so its price becomes `22.50` and its status becomes `active`, using its id as the safety boundary. Then remove the stock event whose note is `Placeholder`. In `query.sql`, verify product 2's final price and status and confirm that no placeholder event remains.",
+              "prompt": "Before the capstone, rehearse a smaller launch review. The schema and seed data are already complete. In `operations.sql`, change product 2 so its price becomes `22.50` and its status becomes `active`, using its id as the safety boundary. Then remove the stock event whose note is `Placeholder`. In `query.sql`, verify product 2's final price and status and confirm that no placeholder event remains. For a visible Run check in a fresh workspace, run `schema.sql`, then `seed.sql`, then `operations.sql`, and finally `query.sql`.",
               "hint": "Preserve the supplied schema and seed data. Add one scoped update and one scoped delete.",
               "help": {
                 "concept": "A launch review combines precise mutations with final state verification.",
@@ -40424,7 +43217,7 @@ const messages: Record<string, any> = {
           },
           "sketch1": {
             "title": "Every row in the batch follows the same column contract",
-            "bodyMarkdown": "A multi-row insert is one statement, not several unrelated inserts placed next to each other. The single column list defines the meaning of every tuple that follows it.\n\nBefore running the statement, compare the tuples vertically: the first position should describe the same field in every row, the second position should describe the same field, and each tuple should contain the same number of values.\n\nAfter the change, verify only the new batch so an unexpected row is easy to notice."
+            "bodyMarkdown": "A multi-row insert is one statement, not several unrelated inserts placed next to each other. The single column list defines the meaning of every tuple that follows it.\n\nBefore running the statement, compare the tuples vertically: the first position should describe the same field in every row, the second position should describe the same field, and each tuple should contain the same number of values.\n\nAfter the change, verify only the new batch so an unexpected row is easy to notice.\n\nIf every row in a SQLite batch should use the same schema default, omit that column from the shared column list so the default applies to every tuple."
           }
         },
         "module-0-inventory-intake-batch": {
@@ -40446,7 +43239,7 @@ const messages: Record<string, any> = {
         "using-null-and-default-values": {
           "sketch-using-null-default-1": {
             "title": "Omitting a column and storing NULL are different decisions",
-            "bodyMarkdown": "`NULL` means that the row intentionally has no known value for a column. A default is different: the schema supplies a value when the insert does not supply that column.\n\nIf `status` has a default, leaving `status` out of the insert allows the schema to choose it. Supplying `NULL` for `status` instead asks SQL to store a missing value.\n\nChoose between omission and `NULL` from the meaning of the incoming data, not because the two happen to look similar in an unfinished row."
+            "bodyMarkdown": "`NULL` means that the row intentionally has no known value for a column. A default is different: the schema supplies a value when the insert does not supply that column.\n\nIf `status` has a default, leaving `status` out of the insert allows the schema to choose it. Supplying `NULL` for `status` instead asks SQL to store a missing value.\n\nChoose between omission and `NULL` from the meaning of the incoming data, not because the two happen to look similar in an unfinished row.\n\nIn this course's SQLite runtime, trigger a column default by omitting that column from the `INSERT` column list. Do not write `DEFAULT` as an individual value inside a `VALUES` tuple."
           },
           "sketch-using-null-default-2": {
             "title": "A row can use a default and an explicit NULL together",

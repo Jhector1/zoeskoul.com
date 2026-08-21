@@ -253,7 +253,7 @@
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -343,7 +343,7 @@
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -433,7 +433,7 @@
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -523,7 +523,7 @@
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -613,7 +613,7 @@
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -694,6 +694,96 @@
           "normalizeWhitespace": false
         }
       ]
+    },
+    {
+      "id": "practice-range-step-three",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "8\n",
+            "stdout": "0\n3\n6\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1\n",
+            "stdout": "0\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

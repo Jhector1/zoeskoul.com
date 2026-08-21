@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT ROUND(\n    SUM(quantity * unit_price * COALESCE(discount_pct, 0) / 100),\n    2\n) AS total_discount_amount\nFROM sales_reporting;"
+            },
+            "practice-retained-summing-business-metrics-sketch1": {
+              "title": "Practice: Calculate Total Revenue",
+              "prompt": "Write a query to calculate the total revenue from the `sales_reporting` table by multiplying `quantity` and `unit_price`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Summing Business Metrics in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT SUM(quantity * unit_price) FROM sales_reporting;"
+            },
+            "practice-sum-completed-gross-sales": {
+              "title": "Practice: Sum Completed Gross Sales",
+              "prompt": "Calculate gross sales for completed orders by summing quantity multiplied by unit price. Name the result `completed_gross_sales`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Summing Business Metrics in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT SUM(quantity * unit_price) AS completed_gross_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
             }
           },
           "tryIt": {

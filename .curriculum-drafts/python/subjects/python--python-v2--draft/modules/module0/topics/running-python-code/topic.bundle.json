@@ -218,7 +218,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_run_first_edit",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_run_first_edit.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -298,7 +298,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -378,7 +378,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -458,7 +458,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -538,7 +538,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_reorder_output",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -618,7 +618,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_change_middle",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_change_middle.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -698,7 +698,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_extend_program",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.running-python-code.quiz.ci_practice_extend_program.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",

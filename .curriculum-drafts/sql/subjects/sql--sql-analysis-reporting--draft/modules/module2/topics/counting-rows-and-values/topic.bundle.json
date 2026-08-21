@@ -313,6 +313,130 @@
         ]
       },
       "showExpectedExample": true
+    },
+    {
+      "id": "practice-retained-counting-rows-and-values-sketch1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-retained-counting-rows-and-values-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-retained-counting-rows-and-values-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "sales_reporting",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-retained-counting-rows-and-values-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-retained-counting-rows-and-values-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_reporting",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-retained-counting-rows-and-values-sketch1.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-count-distinct-sales-reps",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-distinct-sales-reps",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-distinct-sales-reps.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "sales_reporting",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-distinct-sales-reps.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-distinct-sales-reps.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_reporting",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.practice.practice-count-distinct-sales-reps.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

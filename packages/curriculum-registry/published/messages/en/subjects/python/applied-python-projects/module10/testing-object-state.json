@@ -185,29 +185,35 @@
               "hint": "Read the task \"Fix a broken return method after state changes\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix a broken return method after state changes\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
-                "hint_2": "Use the output panel to verify the exact behavior before submitting."
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
               "starterCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False",
               "starterFiles": {
                 "models_book_py": {
-                  "content": "# TODO: Update models/book.py to complete this step: Fix a broken return method after state changes.\nclass Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False"
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False"
+                },
+                "tests_check_book_return_py": {
+                  "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")"
                 }
               }
             },
             "ci-testing-object-state-fix-wallet-validation": {
               "title": "Fix wallet validation so balance never starts negative",
               "prompt": "A budgeting app has a `Wallet` class in `models/wallet.py`. The constructor should store the given balance when it is zero or more, but negative starting balances should become `0`. The current code stores negative values by mistake. Fix the class so the provided tests in `tests/check_wallet.py` pass when you click Run.",
-              "hint": "Trace the relevant value or branch before deciding which option fits.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
               "starterCode": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance",
               "starterFiles": {
                 "models_wallet_py": {
-                  "content": "# TODO: Update models/wallet.py to complete this step: Fix wallet validation so balance never starts negative.\nclass Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance"
+                  "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance"
+                },
+                "tests_check_wallet_py": {
+                  "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")"
                 }
               }
             },
@@ -217,13 +223,16 @@
               "hint": "Read the task \"Fix a method that updates score incorrectly\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix a method that updates score incorrectly\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
-                "hint_2": "Test the change in the runner and correct any mismatch before checking the answer."
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
               },
               "starterCode": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points",
               "starterFiles": {
                 "models_scoreboard_py": {
-                  "content": "# TODO: Update models/scoreboard.py to complete this step: Fix a method that updates score incorrectly.\nclass Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points"
+                  "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points"
+                },
+                "tests_check_scoreboard_py": {
+                  "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")"
                 }
               }
             }

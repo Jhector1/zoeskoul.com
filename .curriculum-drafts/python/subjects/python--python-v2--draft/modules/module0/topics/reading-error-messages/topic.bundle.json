@@ -225,7 +225,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -305,7 +305,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-nameerror-clue",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-nameerror-clue.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -385,7 +385,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -454,6 +454,285 @@
           "pattern": "(?s)^\\s*print\\(\\s*[\"\\']One[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Two[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Three[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Four[\"\\']\\s*\\)\\s*$",
           "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.sourceChecks.0.message",
           "normalizeWhitespace": false
+        }
+      ]
+    },
+    {
+      "id": "ci-fix-missing-paren",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-paren",
+      "language": "python",
+      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Hello\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"Hello\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Hello\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "print(\"Hello\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Hello\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "ci-fix-missing-quote",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-quote",
+      "language": "python",
+      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Python is fun\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "Python is fun\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"Python is fun\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Python is fun\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "print(\"Python is fun\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Python is fun\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "ci-fix-nameerror-string",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-nameerror-string",
+      "language": "python",
+      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "banana\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "banana\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(\"banana\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"banana\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "print(\"banana\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"banana\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
         }
       ]
     }

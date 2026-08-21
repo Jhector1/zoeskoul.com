@@ -167,6 +167,42 @@
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "ci-clean-name": {
+              "title": "Write a name cleaning function",
+              "prompt": "Write `clean_name(text)` so it returns a cleaned version of the name text.",
+              "hint": "Read the task \"Write a name cleaning function\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
+              "solutionCode": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()"
+            },
+            "ci-clean-row": {
+              "title": "Validate and clean one row",
+              "prompt": "Write `clean_row(row)` for rows shaped like `[name_text, score_text]`. Return a cleaned dictionary when both values are valid, or `None` when the row should be rejected.",
+              "hint": "Read the task \"Validate and clean one row\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
+              "solutionCode": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}"
+            },
+            "ci-parse-age": {
+              "title": "Parse an age safely",
+              "prompt": "Write `parse_age(text)` so it returns an `int` for valid age text and `None` when the text cannot be used as an age.",
+              "hint": "Read the task \"Parse an age safely\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
+              "solutionCode": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None"
             }
           },
           "tryIt": {

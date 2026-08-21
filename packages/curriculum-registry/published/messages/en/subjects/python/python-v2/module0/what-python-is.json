@@ -3,121 +3,39 @@
     "python-v2": {
       "python-v2-0": {
         "what-python-is": {
-          "label": "What Python Is",
-          "summary": "Understand Python as a general-purpose programming language, see where it is used, and preview how the course builds practical skill.",
-          "cards": {
-            "course-introduction": {
-              "title": "Start here"
-            },
-            "sketch0": {
-              "title": "Python is a programming language"
-            },
-            "sketch1": {
-              "title": "General-purpose means many kinds of work"
-            },
-            "sketch2": {
-              "title": "From first programs to real projects"
-            },
-            "quiz": {
-              "title": "Quiz"
-            }
-          },
           "quiz": {
-            "sc-python-language": {
-              "title": "Identify what Python is",
-              "prompt": "Which statement best describes Python?",
-              "hint": "Python is something people use to write instructions for computers.",
+            "ci-beginner-message": {
+              "title": "Print a beginner-friendly message",
+              "prompt": "Write Python code that prints exactly these two lines:\nPython is beginner-friendly.\nIt is used in many fields.",
+              "hint": "Use two print statements and match the punctuation exactly.",
               "help": {
-                "concept": "Python is a programming language. People write Python code to describe instructions and computations that a computer can execute.",
-                "hint_1": "Do not confuse the language with a website, operating system, or physical device.",
-                "hint_2": "Choose the answer that identifies Python as a language for writing programs."
+                "concept": "Exact output exercises check whether your printed text matches the required lines character by character.",
+                "hint_1": "There are two sentences, each ending with a period.",
+                "hint_2": "Print the first sentence on one line and the second sentence on the next line."
               },
-              "options": {
-                "a": "A programming language used to write programs",
-                "b": "A program that only installs Python packages",
-                "c": "A data-analysis library used inside another language",
-                "d": "A markup format used only to describe webpage structure"
-              }
+              "starterCode": "# TODO: print both required lines"
             },
-            "sc-general-purpose-meaning": {
-              "title": "Understand general-purpose",
-              "prompt": "What does it mean when Python is called a general-purpose language?",
-              "hint": "The phrase describes the range of problems the language can be used to solve.",
+            "ci-personal-usecase-label": {
+              "title": "Label a Python use",
+              "prompt": "Write Python code that prints exactly: One Python use: web apps",
+              "hint": "Read the coding task and identify what the program should print.",
               "help": {
-                "concept": "A general-purpose language is designed for many kinds of software and problem-solving tasks rather than one narrow job.",
-                "hint_1": "Python is not limited to only data work or only websites.",
-                "hint_2": "Choose the answer about using one language across many kinds of projects."
+                "concept": "This coding exercise checks whether the program produces the requested output.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "options": {
-                "a": "It can be used for many different kinds of programming work",
-                "b": "It is designed for exactly one type of application",
-                "c": "It can only display text",
-                "d": "It only works for school exercises"
-              }
+              "starterCode": "# TODO: print the required labeled sentence"
             },
-            "sc-automation-example": {
-              "title": "Recognize automation",
-              "prompt": "Which task is the best example of using Python for automation?",
-              "hint": "Automation is useful when the same kind of work has to be repeated.",
+            "ci-print-usecase-automation": {
+              "title": "Print an automation message",
+              "prompt": "Write Python code that prints exactly: Python helps automate repeated tasks.",
+              "hint": "Use one print statement with the full sentence inside quotes.",
               "help": {
-                "concept": "Automation uses code to perform routine or repeated steps that would otherwise require manual work.",
-                "hint_1": "Look for a repetitive computer-based task.",
-                "hint_2": "The automated task should be something software can perform repeatedly."
+                "concept": "The `print()` statement sends text to the output panel exactly as written, including spaces and punctuation.",
+                "hint_1": "You need one line of code that prints the whole sentence.",
+                "hint_2": "Put the message inside parentheses and quotation marks so Python treats it as text."
               },
-              "options": {
-                "a": "Rename hundreds of files using a consistent rule",
-                "b": "Rename one file manually one time",
-                "c": "Open each of hundreds of files and rename them manually",
-                "d": "Write the renaming rule down without executing it"
-              }
-            },
-            "mc-common-uses": {
-              "title": "Recognize common Python fields",
-              "prompt": "Which are common areas where Python is used? Choose all correct answers.",
-              "hint": "Think about software, data, automation, and intelligent systems.",
-              "help": {
-                "concept": "Python is used in areas including automation, web development, data analysis, and AI or machine learning.",
-                "hint_1": "Choose areas where software can process information or perform computations.",
-                "hint_2": "A manual physical chore is not itself a programming field."
-              },
-              "options": {
-                "a": "Automation",
-                "b": "Web applications",
-                "c": "Data analysis and AI",
-                "d": "A document file format such as PDF"
-              }
-            },
-            "mc-beginner-friendly-reasons": {
-              "title": "Why Python is a common first language",
-              "prompt": "Which qualities can make Python approachable for beginners? Choose all correct answers.",
-              "hint": "Think about reading code and getting feedback from small programs.",
-              "help": {
-                "concept": "Python is often chosen as a first language because many basic programs are readable and learners can begin experimenting with short pieces of code.",
-                "hint_1": "Look for qualities that reduce the barrier to starting.",
-                "hint_2": "Needing complex setup for every tiny program would not be a beginner advantage."
-              },
-              "options": {
-                "a": "Many basic Python statements are relatively readable",
-                "b": "Learners can start experimenting with small programs",
-                "c": "Every tiny program requires many files and packages",
-                "d": "Beginners must learn advanced AI before writing basic code"
-              }
-            },
-            "dr-course-progression": {
-              "title": "See how the course builds",
-              "prompt": "Arrange these course stages from earliest foundation to later application.",
-              "hint": "Start with running small programs and end with combining skills in projects.",
-              "help": {
-                "concept": "The course builds in layers: first you run and read small programs, then work with values and text, then add decisions and repetition, and finally combine ideas in projects.",
-                "hint_1": "Foundational interaction with code comes before larger programming structures.",
-                "hint_2": "Projects belong at the end because they combine skills learned earlier."
-              },
-              "tokens": {
-                "t1": "Run and read small Python programs",
-                "t2": "Work with values and text",
-                "t3": "Add decisions and repetition",
-                "t4": "Combine skills in projects"
-              }
+              "starterCode": "# TODO: print the required sentence"
             }
           }
         }

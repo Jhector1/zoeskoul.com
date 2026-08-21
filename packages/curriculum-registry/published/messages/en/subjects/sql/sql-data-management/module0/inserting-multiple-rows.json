@@ -20,7 +20,7 @@
             "allowReveal": true,
             "try_inserting_multiple_rows_sketch0": {
               "title": "Add a Two-Item Intake Batch",
-              "prompt": "In `operations.sql`, add `Sketchbook` and `Marker Set` as one multi-row insert. Both are `Stationery`, active, not test items, have no notes, and were updated on `2026-02-10`; their prices are `8.00` and `12.00` respectively. In `query.sql`, show those two rows with their inventory fields and sort by name.",
+              "prompt": "In `operations.sql`, add `Sketchbook` and `Marker Set` as one multi-row insert. Both are `Stationery`, active, not test items, have no notes, and were updated on `2026-02-10`; their prices are `8.00` and `12.00` respectively. In `query.sql`, show those two rows with their inventory fields and sort by name. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Use one shared column list and one statement containing two value tuples.",
               "help": {
                 "concept": "A multi-row insert uses one column contract for several value tuples.",
@@ -69,13 +69,13 @@
               }
             },
             "multi-choice-1": {
-              "title": "Components of a Multi-row INSERT",
-              "prompt": "Which components are necessary for a multi-row INSERT statement? Select all that apply.",
-              "hint": "Match each choice to the command, clause, or constraint described in the question.",
+              "title": "Pieces of the Taught Multi-row INSERT Pattern",
+              "prompt": "For the explicit-column, multi-row INSERT pattern taught in this course, which pieces are required? Select all that apply.",
+              "hint": "Think about the one shared destination list followed by several row-value groups.",
               "help": {
-                "concept": "Use the SQL behavior described in the lesson to separate the valid choice from statements about a different command, clause, or constraint.",
-                "hint_1": "Identify the job the SQL must perform before comparing the choices.",
-                "hint_2": "Eliminate choices that belong to a different SQL concept."
+                "concept": "This course uses one explicit column list, the VALUES keyword, and multiple value tuples for a reviewable batch insert.",
+                "hint_1": "The shared column list defines the meaning of every tuple.",
+                "hint_2": "A WHERE clause does not belong to an INSERT VALUES statement."
               },
               "options": {
                 "a": "Column list",
@@ -90,8 +90,8 @@
               "hint": "Read each piece and arrange them in the order the statement should be understood.",
               "help": {
                 "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
+                "hint_1": "Start with “INSERT INTO”.",
+                "hint_2": "Finish with “value tuples”."
               },
               "tokens": {
                 "t1": "INSERT INTO",
@@ -102,13 +102,13 @@
               }
             },
             "fill-blank-choice-1": {
-              "title": "Default Value Handling",
-              "prompt": "In a multi-row INSERT, how do you use a column's default value?",
-              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "title": "Use a SQLite Default in a Batch",
+              "prompt": "In this course's SQLite runtime, how do you let a column's DEFAULT apply to every row in a multi-row INSERT?",
+              "hint": "The shared column list applies to every tuple in the batch.",
               "help": {
-                "concept": "The blank should be filled with the term that makes the statement accurate.",
-                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
-                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+                "concept": "SQLite applies the column default when that column is omitted from the INSERT column list.",
+                "hint_1": "Every tuple must follow the same shared column list.",
+                "hint_2": "Do not place DEFAULT as an individual value inside a SQLite VALUES tuple."
               },
               "template": "To use a column's default value in an INSERT, [blank1] the column from the column list.",
               "choices": [
@@ -135,24 +135,24 @@
               }
             },
             "multi-choice-2": {
-              "title": "Benefits of Using Defaults",
-              "prompt": "What are the benefits of using default values in an INSERT statement? Select all that apply.",
-              "hint": "Consider how defaults simplify data entry.",
+              "title": "Why Defaults Help an INSERT",
+              "prompt": "Which are useful effects of relying on a schema default when a column is intentionally omitted? Select all that apply.",
+              "hint": "Choose effects that come from letting the table provide one routine value consistently.",
               "help": {
-                "concept": "Defaults reduce the need to specify every column value explicitly.",
-                "hint_1": "Defaults can simplify the INSERT statement.",
-                "hint_2": "They ensure consistent values for omitted columns."
+                "concept": "Defaults reduce repeated literals and give omitted columns a consistent starting value; they do not require every column to be supplied.",
+                "hint_1": "A default can make repeated inserts shorter and more consistent.",
+                "hint_2": "A default does not mean every column must be named."
               },
               "options": {
-                "a": "Simplifies the INSERT statement",
-                "b": "Ensures consistent default values",
-                "c": "Reduces the chance of errors",
-                "d": "Requires specifying every column"
+                "a": "It reduces repeated literal values in INSERT statements.",
+                "b": "It gives omitted columns a consistent starting value.",
+                "c": "It reduces opportunities to mistype the same routine value repeatedly.",
+                "d": "It requires every table column to appear in the INSERT."
               }
             },
             "practice-multi-row-supply-batch": {
               "title": "Practice: Add Another Batch in One Statement",
-              "prompt": "In `operations.sql`, add two approved Stationery items as one batch: `Binder Clips` at `2.50` and `Index Cards` at `3.25`. Both are active, not test items, have no notes, and use `2026-02-11` as `last_updated`. In `query.sql`, show only these two rows and sort by name.",
+              "prompt": "In `operations.sql`, add two approved Stationery items as one batch: `Binder Clips` at `2.50` and `Index Cards` at `3.25`. Both are active, not test items, have no notes, and use `2026-02-11` as `last_updated`. In `query.sql`, show only these two rows and sort by name. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
               "hint": "Keep one column list for the batch and place both rows in the same VALUES list.",
               "help": {
                 "concept": "Independent practice should create the batch, not only inspect data that another exercise created.",
@@ -181,6 +181,64 @@
               "sourceCheckMessages": {
                 "multiRowInsert": "Add both approved rows with one multi-row INSERT in operations.sql."
               }
+            },
+            "practice-insert-two-office-items": {
+              "title": "Practice: Insert Two Office Items Together",
+              "prompt": "In `operations.sql`, insert `Folder` at `2.25` and `Tape` at `3.50` as active `Office` items in one INSERT statement. In `query.sql`, return the two new rows sorted by name.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Adding Several Rows in One Statement in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Folder', 'Office', 2.25, 'active'),\n    ('Tape', 'Office', 3.50, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Folder', 'Office', 2.25, 'active'),\n    ('Tape', 'Office', 3.50, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name IN ('Folder', 'Tape')\nORDER BY name;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Folder', 'Office', 2.25, 'active'),\n    ('Tape', 'Office', 3.50, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name IN ('Folder', 'Tape')\nORDER BY name;"
+            },
+            "practice-insert-two-kitchen-items": {
+              "title": "Practice: Insert a Two-Row Kitchen Batch",
+              "prompt": "In `operations.sql`, insert `Measuring Cup` at `6.75` and `Dish Towel` at `4.25` as active `Kitchen` items in one INSERT statement. In `query.sql`, verify only those rows, sorted by name.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Adding Several Rows in One Statement in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Measuring Cup', 'Kitchen', 6.75, 'active'),\n    ('Dish Towel', 'Kitchen', 4.25, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Measuring Cup', 'Kitchen', 6.75, 'active'),\n    ('Dish Towel', 'Kitchen', 4.25, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name IN ('Measuring Cup', 'Dish Towel')\nORDER BY name;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Measuring Cup', 'Kitchen', 6.75, 'active'),\n    ('Dish Towel', 'Kitchen', 4.25, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name IN ('Measuring Cup', 'Dish Towel')\nORDER BY name;"
             }
           }
         }
@@ -197,7 +255,7 @@
           },
           "sketch1": {
             "title": "Every row in the batch follows the same column contract",
-            "bodyMarkdown": "A multi-row insert is one statement, not several unrelated inserts placed next to each other. The single column list defines the meaning of every tuple that follows it.\n\nBefore running the statement, compare the tuples vertically: the first position should describe the same field in every row, the second position should describe the same field, and each tuple should contain the same number of values.\n\nAfter the change, verify only the new batch so an unexpected row is easy to notice."
+            "bodyMarkdown": "A multi-row insert is one statement, not several unrelated inserts placed next to each other. The single column list defines the meaning of every tuple that follows it.\n\nBefore running the statement, compare the tuples vertically: the first position should describe the same field in every row, the second position should describe the same field, and each tuple should contain the same number of values.\n\nAfter the change, verify only the new batch so an unexpected row is easy to notice.\n\nIf every row in a SQLite batch should use the same schema default, omit that column from the shared column list so the default applies to every tuple."
           }
         }
       }

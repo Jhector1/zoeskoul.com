@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    unit_price,\n    discount_pct,\n    unit_price - unit_price * discount_pct / 100 AS raw_discounted_unit_price\nFROM sales_reporting;"
+            },
+            "practice-retained-how-null-affects-calculations-sketch1": {
+              "title": "Practice: Calculating Discounts Safely",
+              "prompt": "Write a query to calculate the discount amount for each order in the `sales_reporting` table, ensuring that any NULL `discount_pct` is treated as 0. Use COALESCE to handle NULL values.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies How NULL Affects Calculations in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT order_id, quantity * unit_price * COALESCE(discount_pct, 0) / 100 AS discount_amount\nFROM sales_reporting;"
+            },
+            "practice-observe-null-net-value": {
+              "title": "Practice: Observe NULL in a Calculation",
+              "prompt": "Return order id, discount percentage, and a raw `net_value` calculation using quantity, unit price, and discount_pct without replacing NULL. Sort by order id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies How NULL Affects Calculations in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    order_id,\n    discount_pct,\n    quantity * unit_price * (1 - discount_pct / 100.0) AS net_value\nFROM sales_reporting\nORDER BY order_id;"
             }
           },
           "tryIt": {

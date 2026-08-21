@@ -235,6 +235,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-sum-even-values": {
+              "title": "Accumulate only even values",
+              "prompt": "Read one line of space-separated integers. Add only the even values to a running total, then print the final total.",
+              "hint": "Initialize `total = 0` before the loop and add a number only when `number % 2 == 0`.",
+              "help": {
+                "concept": "An accumulator starts with an initial value and updates only for items that meet the exercise rule.",
+                "hint_1": "Initialize `total = 0` before the loop and add a number only when `number % 2 == 0`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "numbers = input().split()\ntotal = 0\n\n# Convert each value, add only evens to total, then print total.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "numbers = input().split()\ntotal = 0\n\n# Convert each value, add only evens to total, then print total.\n"
+                }
+              },
+              "solutionCode": "numbers = input().split()\ntotal = 0\nfor value in numbers:\n    number = int(value)\n    if number % 2 == 0:\n        total += number\nprint(total)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "numbers = input().split()\ntotal = 0\nfor value in numbers:\n    number = int(value)\n    if number % 2 == 0:\n        total += number\nprint(total)\n"
+                }
+              }
+            }
           }
         }
       }

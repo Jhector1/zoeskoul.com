@@ -488,6 +488,274 @@
           "b"
         ]
       }
+    },
+    {
+      "id": "practice-explicit-column-desk-lamp",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT *\nFROM inventory_items\nWHERE name = 'Desk Lamp';",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-explicit-column-water-bottle",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT *\nFROM inventory_items\nWHERE name = 'Water Bottle';",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

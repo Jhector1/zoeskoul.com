@@ -34,7 +34,7 @@
             "steps": {
               "ci_module_0_step1": {
                 "title": "Add the First Approved Item",
-                "prompt": "Start the intake script by adding item `101`: `Desk Organizer`, category `Office`, price `12.99`, status `active`, test flag `0`, notes `New stock`, and `last_updated` of `2026-02-10`. Use an explicit column list. In `query.sql`, verify only item 101.",
+                "prompt": "Start the intake script by adding item `101`: `Desk Organizer`, category `Office`, price `12.99`, status `active`, test flag `0`, notes `New stock`, and `last_updated` of `2026-02-10`. Use an explicit column list. In `query.sql`, verify only item 101. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Create the approved row in operations.sql and use its id as the narrow verification target.",
                 "help": {
                   "concept": "The project grows cumulatively from approved inserts.",
@@ -66,7 +66,7 @@
               },
               "ci_module_0_step2": {
                 "title": "Record an Item with No Notes",
-                "prompt": "Carry the intake script forward and add item `102`: `Cable Labels`, category `Office`, price `5.99`, status `active`, test flag `0`, no notes, and `last_updated` of `2026-02-11`. Record the missing notes deliberately as SQL `NULL`. In `query.sql`, verify item 102.",
+                "prompt": "Keep the approved item 101 insert in place, then add item `102`: `Cable Labels`, category `Office`, price `5.99`, status `active`, test flag `0`, no notes, and `last_updated` of `2026-02-11`. Record the missing notes deliberately as SQL `NULL`. In `query.sql`, verify item 102. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Preserve item 101 and add one new insert for item 102; the missing notes are intentional data.",
                 "help": {
                   "concept": "A deliberate missing value should be represented as NULL rather than an invented placeholder string.",
@@ -99,7 +99,7 @@
               },
               "ci_module_0_step3": {
                 "title": "Use the Approved Defaults",
-                "prompt": "Carry the intake script forward and add item `103`: `Shipping Pouch`, category `Office`, price `3.49`, test flag `0`, and notes `Durable material`. Let the database supply fields governed by its defaults instead of hard-coding those values. In `query.sql`, verify item 103.",
+                "prompt": "Keep the first two approved inserts and add item `103`: `Shipping Pouch`, category `Office`, price `3.49`, test flag `0`, and notes `Durable material`. In this SQLite course, let the schema supply `status` and `last_updated` by omitting those columns from this new INSERT instead of writing `DEFAULT` in the VALUES list. In `query.sql`, verify item 103. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Preserve the earlier inserts and omit the defaulted field from this new insert's column list.",
                 "help": {
                   "concept": "A schema default is used by omitting that column from the insert.",
@@ -131,7 +131,7 @@
               },
               "ci_module_0_step4": {
                 "title": "Add Two Items as One Batch",
-                "prompt": "Carry the intake script forward and add items `104` and `105` with one multi-row insert. Item 104 is `Packing Tape`, Office, `2.99`, active, test flag 0, notes `Strong adhesive`, updated `2026-02-12`. Item 105 is `Label Roll`, Office, `1.99`, active, test flag 0, notes `Easy to peel`, updated `2026-02-12`. In `query.sql`, verify only these two ids in id order.",
+                "prompt": "Items 101–103 are already approved. Add items `104` and `105` with one multi-row INSERT. Item 104 is `Packing Tape`, Office, `2.99`, active, test flag 0, notes `Strong adhesive`, updated `2026-02-12`. Item 105 is `Label Roll`, Office, `1.99`, active, test flag 0, notes `Easy to peel`, updated `2026-02-12`. In `query.sql`, verify only these two ids in id order. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "Keep items 101–103 intact and use one shared column list for the final two approved rows.",
                 "help": {
                   "concept": "A batch insert groups rows governed by one column contract.",
@@ -163,7 +163,7 @@
               },
               "ci_module_0_step5": {
                 "title": "Finish the Intake Handoff",
-                "prompt": "The mutation script is complete. Leave `operations.sql` unchanged. In `query.sql`, return the full inventory and order it by id so the intake can be reviewed as one final handoff.",
+                "prompt": "The mutation script is complete. Leave `operations.sql` unchanged. In `query.sql`, return the full inventory and order it by id so the intake can be reviewed as one final handoff. To test it in the workspace, run `operations.sql` before `query.sql`; the query file only reads the resulting database state.",
                 "hint": "This final step changes only the verification query.",
                 "help": {
                   "concept": "A completed mutation workflow ends with a clear inspection of the resulting state.",

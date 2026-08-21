@@ -518,6 +518,508 @@
         "kind": "fill_blank_choice",
         "value": "150"
       }
+    },
+    {
+      "id": "ci-account-summary-method",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"Owner: {self.owner}, Balance: {self.balance}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"Owner: {self.owner}, Balance: {self.balance}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"Owner: {self.owner}, Balance: {self.balance}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define the Account class."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Owner: Mina, Balance: 125",
+            "expectedKind": "value",
+            "message": "summary should return the formatted string for Mina's account."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Leo",
+              40
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Owner: Leo, Balance: 40",
+            "expectedKind": "value",
+            "message": "summary should return the formatted string for Leo's account."
+          }
+        ]
+      },
+      "entryFilePath": "main.py"
+    },
+    {
+      "id": "ci-account-withdraw",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define the Account class."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Trip Fund",
+              90
+            ],
+            "message": "Account should be constructible with owner and balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Trip Fund",
+              90
+            ],
+            "constructorArgKinds": [],
+            "methodName": "withdraw",
+            "methodArgs": [
+              30
+            ],
+            "methodArgKinds": [],
+            "expected": true,
+            "expectedKind": "value",
+            "message": "A valid withdrawal should return True."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Trip Fund",
+              90
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  30
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 60,
+            "expectedKind": "value",
+            "message": "A valid withdrawal should reduce the balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Supplies",
+              20
+            ],
+            "constructorArgKinds": [],
+            "methodName": "withdraw",
+            "methodArgs": [
+              25
+            ],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "An oversized withdrawal should return False."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Supplies",
+              20
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 20,
+            "expectedKind": "value",
+            "message": "An invalid withdrawal should leave the balance unchanged."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-helper-is_positive_amount",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "helpers/validation.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterFiles.helpers_validation_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "from helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "helpers/validation.py",
+          "content": "def is_positive_amount(amount):\n    return amount > 0",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "helpers/validation.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterFiles.helpers_validation_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "helpers/validation.py",
+            "content": "def is_positive_amount(amount):\n    return amount > 0",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "is_positive_amount",
+            "args": [
+              10
+            ],
+            "argKinds": [],
+            "expected": true,
+            "expectedKind": "value",
+            "message": "10 should be treated as a positive amount."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "is_positive_amount",
+            "args": [
+              0
+            ],
+            "argKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "0 should not be treated as a positive amount."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "is_positive_amount",
+            "args": [
+              -3
+            ],
+            "argKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "Negative numbers should return False."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Club",
+              50
+            ],
+            "constructorArgKinds": [],
+            "methodName": "deposit",
+            "methodArgs": [
+              10
+            ],
+            "methodArgKinds": [],
+            "expected": true,
+            "expectedKind": "value",
+            "message": "The helper should support a valid deposit."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Snacks",
+              50
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  0
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 50,
+            "expectedKind": "value",
+            "message": "A non-positive amount should leave the balance unchanged."
+          }
+        ]
+      }
     }
   ]
 }

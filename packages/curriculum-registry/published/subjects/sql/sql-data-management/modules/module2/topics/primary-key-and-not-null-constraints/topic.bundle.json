@@ -484,6 +484,274 @@
           "t4"
         ]
       }
+    },
+    {
+      "id": "practice-author-required-columns",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "PRAGMA table_info(authors);",
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "schema.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-ticket-required-summary",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary",
+      "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.solutionFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "ddl_blank",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "schema.sql",
+        "entryFile": "schema.sql",
+        "openTabs": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterCode",
+        "starterFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "schema.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "ddl_blank",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "schema.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.solutionFiles.schema_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "PRAGMA table_info(tickets);",
+        "sqlFileOrder": [
+          "schema.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "schema.sql",
+      "sqlFileOrder": [
+        "schema.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "schema.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

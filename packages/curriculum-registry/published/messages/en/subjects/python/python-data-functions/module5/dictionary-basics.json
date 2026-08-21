@@ -132,6 +132,42 @@
               "starterCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\n# Print \"found\" if key exists in settings.\n# Otherwise print \"missing\".\n",
               "solutionCode": "settings = {\"theme\": \"dark\", \"sound\": True, \"font_size\": 16}\nkey = input()\n\nif key in settings:\n    print(\"found\")\nelse:\n    print(\"missing\")\n",
               "sourceChecks": {}
+            },
+            "ci-get-score": {
+              "title": "Look up a value in a dictionary",
+              "prompt": "Write `get_score(scores, name)` so it looks up `name` in the `scores` dictionary and returns that score.",
+              "hint": "Read the task \"Look up a value in a dictionary\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+              "solutionCode": "def get_score(scores, name):\n    return scores[name]"
+            },
+            "ci-make-dictionary": {
+              "title": "Return a simple dictionary",
+              "prompt": "Write `make_book(title, pages)` so it returns one dictionary describing the book. The dictionary should use the keys `\"title\"` and `\"pages\"`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+              "solutionCode": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}"
+            },
+            "ci-update-dictionary": {
+              "title": "Add or update a dictionary entry",
+              "prompt": "Write `set_price(prices, item, amount)` so it updates the `prices` dictionary with the given item and amount, then returns the updated dictionary.",
+              "hint": "Read the task \"Add or update a dictionary entry\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+              "solutionCode": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices"
             }
           },
           "tryIt": {

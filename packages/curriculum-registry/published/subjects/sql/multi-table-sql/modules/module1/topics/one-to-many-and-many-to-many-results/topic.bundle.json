@@ -301,6 +301,130 @@
           "t3"
         ]
       }
+    },
+    {
+      "id": "practice-retained-one-to-many-and-many-to-many-results-sketch1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-retained-one-to-many-and-many-to-many-results-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-retained-one-to-many-and-many-to-many-results-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-retained-one-to-many-and-many-to-many-results-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-retained-one-to-many-and-many-to-many-results-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-retained-one-to-many-and-many-to-many-results-sketch1.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-show-department-course-many-side",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-show-department-course-many-side",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-show-department-course-many-side.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-show-department-course-many-side.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-show-department-course-many-side.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.one-to-many-and-many-to-many-results.practice.practice-show-department-course-many-side.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

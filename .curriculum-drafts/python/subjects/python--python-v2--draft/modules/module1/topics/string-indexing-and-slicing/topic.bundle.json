@@ -251,7 +251,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -342,7 +342,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -433,7 +433,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -524,7 +524,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_last_two",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -615,7 +615,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -697,6 +697,91 @@
           "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.sourceChecks.1.message"
         }
       ]
+    },
+    {
+      "id": "practice-slice-inner-characters",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.practice.practice-slice-inner-characters",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.practice.practice-slice-inner-characters.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.practice.practice-slice-inner-characters.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.practice.practice-slice-inner-characters.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.practice.practice-slice-inner-characters.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.practice.practice-slice-inner-characters.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.practice.practice-slice-inner-characters.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "robot\n",
+            "stdout": "obo\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "python\n",
+            "stdout": "ytho\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.practice.practice-slice-inner-characters.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.practice.practice-slice-inner-characters.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

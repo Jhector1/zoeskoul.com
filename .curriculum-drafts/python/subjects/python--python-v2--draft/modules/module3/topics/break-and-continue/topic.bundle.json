@@ -255,7 +255,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-break-stop-at-number",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -345,7 +345,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -435,7 +435,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-break-first-negative",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -525,7 +525,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-break-guess-game",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -615,7 +615,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-continue-skip-letter",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -696,6 +696,96 @@
           "normalizeWhitespace": false
         }
       ]
+    },
+    {
+      "id": "practice-skip-negatives-stop-zero",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "3 -1 5 0 9\n",
+            "stdout": "3\n5\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-2 -4 7\n",
+            "stdout": "7\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0 4 5\n",
+            "stdout": "",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

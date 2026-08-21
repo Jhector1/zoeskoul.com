@@ -133,19 +133,22 @@
             "ci-refactor-discount-service": {
               "title": "Create a pricing service method",
               "prompt": "The catalog app now needs a separate pricing service. Complete `PricingService.discounted_total(books, percent)` in `services/pricing_service.py`. It should add all book prices, apply the percentage discount to the total, and return the discounted amount. For example, a 10 percent discount on a total of 50 should return 45.0.",
-              "hint": "Match each choice against the precise rule introduced in the lesson.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
                 },
                 "services_pricing_service_py": {
-                  "content": "# TODO: Update services/pricing_service.py to complete this step: Create a pricing service method.\nclass PricingService:\n    def __init__(self):\n        pass\n\n    def discounted_total(self, value, amount):\n        pass"
+                  "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        pass"
                 }
               }
             },
@@ -168,19 +171,22 @@
             "ci-refactor-summary-service": {
               "title": "Build a one-line catalog summary service",
               "prompt": "Complete `SummaryService.build_summary(books)` in `services/summary_service.py`. It should return a single string in this exact format: `Books: <count> | Total: $<sum>`. For example, two books priced 12 and 18 should produce `Books: 2 | Total: $30`. This combines two pieces of orchestration logic in one service method.",
-              "hint": "Look for the choice that satisfies both the syntax and behavior described.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Treat the starter and expected behavior as one contract; every required name and output should be accounted for.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
                 },
                 "services_summary_service_py": {
-                  "content": "# TODO: Update services/summary_service.py to complete this step: Build a one-line catalog summary service.\nclass SummaryService:\n    def __init__(self):\n        pass\n\n    def build_summary(self, value):\n        pass"
+                  "content": "class SummaryService:\n    def build_summary(self, books):\n        pass"
                 }
               }
             },
@@ -203,19 +209,22 @@
             "ci-refactor-filter-service": {
               "title": "Move filtering logic into InventoryService",
               "prompt": "A catalog screen should show only affordable books. Complete `InventoryService.affordable_titles(books, max_price)` in `services/inventory_service.py`. Return a list of titles for every book whose price is less than or equal to `max_price`. This refactor moves filtering logic for a whole list into a service.",
-              "hint": "Translate the question into a Python rule before selecting an answer.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
                 },
                 "services_inventory_service_py": {
-                  "content": "# TODO: Update services/inventory_service.py to complete this step: Move filtering logic into InventoryService.\nclass InventoryService:\n    def __init__(self):\n        pass\n\n    def affordable_titles(self, value, amount):\n        pass"
+                  "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        pass"
                 }
               }
             }

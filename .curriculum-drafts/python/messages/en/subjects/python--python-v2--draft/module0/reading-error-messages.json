@@ -170,6 +170,45 @@
             }
           }
         }
+      },
+      "python--python-v2--draft-0": {
+        "reading-error-messages": {
+          "quiz": {
+            "ci-fix-missing-paren": {
+              "title": "Fix a missing parenthesis",
+              "prompt": "Write Python code that prints `Hello` exactly. The starter code has a syntax problem. Fix it, then click Run and check the output panel.",
+              "hint": "This print statement is almost correct; check its closing punctuation.",
+              "help": {
+                "concept": "A missing closing parenthesis makes a print statement invalid and causes a syntax error.",
+                "hint_1": "The string itself is fine. Look just outside the quotes.",
+                "hint_2": "A valid print call needs matching parentheses around its argument."
+              },
+              "starterCode": "print(\"Hello\""
+            },
+            "ci-fix-missing-quote": {
+              "title": "Fix a missing quote",
+              "prompt": "Write Python code that prints `Python is fun` exactly. The starter code has a string that is not closed correctly. Fix it and run the code.",
+              "hint": "Check whether the string starts and ends with matching quotes.",
+              "help": {
+                "concept": "Strings need matching opening and closing quotes. If one is missing, Python cannot read the line correctly.",
+                "hint_1": "The problem is inside the print statement, around the text.",
+                "hint_2": "Make sure the text is fully wrapped in one pair of quotes before the closing parenthesis."
+              },
+              "starterCode": "print(\"Python is fun)"
+            },
+            "ci-fix-nameerror-string": {
+              "title": "Turn a missing name into a string",
+              "prompt": "The starter code tries to print a word as if it were a variable. Fix the code so it prints `banana` exactly.",
+              "hint": "If you want to print text directly, it needs quotes.",
+              "help": {
+                "concept": "Without quotes, Python treats a word like a variable name. With quotes, Python treats it as a string value.",
+                "hint_1": "The word should be printed as text, not looked up as a variable.",
+                "hint_2": "Keep the print call, but change the argument so Python reads it as a string."
+              },
+              "starterCode": "print(banana)"
+            }
+          }
+        }
       }
     }
   },

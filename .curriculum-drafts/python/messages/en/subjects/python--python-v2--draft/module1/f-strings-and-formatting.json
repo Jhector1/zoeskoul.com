@@ -241,6 +241,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-item-quantity-fstring": {
+              "title": "Format an item and quantity",
+              "prompt": "Read an item name and then a whole-number quantity. Print `ITEM x QUANTITY` using one f-string. For example, `Notebook` and `3` should produce `Notebook x 3`.",
+              "hint": "Place both variables inside `{}` in the same f-string.",
+              "help": {
+                "concept": "An f-string can combine text and multiple variables into one readable output line.",
+                "hint_1": "Place both variables inside `{}` in the same f-string.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "item = input().strip()\nquantity = int(input())\n\n# Print ITEM x QUANTITY with one f-string.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "item = input().strip()\nquantity = int(input())\n\n# Print ITEM x QUANTITY with one f-string.\n"
+                }
+              },
+              "solutionCode": "item = input().strip()\nquantity = int(input())\nprint(f\"{item} x {quantity}\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "item = input().strip()\nquantity = int(input())\nprint(f\"{item} x {quantity}\")\n"
+                }
+              }
+            }
           }
         }
       }

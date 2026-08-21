@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    quantity * unit_price AS gross_sales,\n    CASE\n        WHEN quantity * unit_price >= 130 THEN 'High value'\n        WHEN quantity * unit_price >= 80 THEN 'Mid value'\n        ELSE 'Low value'\n    END AS value_band\nFROM sales_reporting;"
+            },
+            "practice-retained-case-for-readable-labels-sketch1": {
+              "title": "Practice: Calculate Total Sales for High Ratings",
+              "prompt": "Write a SQL query to calculate the total sales amount for orders with a 'High' customer rating (4.5 and above) in the `sales_reporting` table. Use the `CASE` statement to conditionally sum the sales amounts.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies CASE for Readable Labels in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT SUM(CASE WHEN customer_rating >= 4.5 THEN quantity * unit_price ELSE 0 END) AS total_high_rating_sales\nFROM sales_reporting;"
+            },
+            "practice-label-rating-availability": {
+              "title": "Practice: Label Rating Availability",
+              "prompt": "Return order id and a `rating_status` label. Use `No rating` when customer_rating is NULL, `Strong` when it is at least 4, and `Recorded` otherwise. Sort by order id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies CASE for Readable Labels in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    order_id,\n    CASE\n        WHEN customer_rating IS NULL THEN 'No rating'\n        WHEN customer_rating >= 4 THEN 'Strong'\n        ELSE 'Recorded'\n    END AS rating_status\nFROM sales_reporting\nORDER BY order_id;"
             }
           },
           "tryIt": {

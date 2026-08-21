@@ -444,6 +444,303 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.sourceChecks.1.message"
         }
       ]
+    },
+    {
+      "id": "ci-calculate-tip",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def calculate_tip(bill, percent):\n    return bill * percent / 100",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "calculate_tip",
+            "args": [
+              50,
+              20
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 10,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "calculate_tip",
+            "args": [
+              80,
+              15
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": 12,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "ci-first-item",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def first_item(items):\n    return items[0]",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "first_item",
+            "args": [
+              [
+                4,
+                5,
+                6
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 4,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "first_item",
+            "args": [
+              [
+                "red",
+                "blue"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "red",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "ci-make-label",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_label(item, count):\n    return item + \": \" + str(count)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Apples",
+              3
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Apples: 3",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "make_label",
+            "args": [
+              "Pens",
+              12
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Pens: 12",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     }
   ]
 }

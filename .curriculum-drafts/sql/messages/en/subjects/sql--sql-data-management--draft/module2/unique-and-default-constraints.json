@@ -181,6 +181,64 @@
               "sourceCheckMessages": {
                 "pendingDefault": "Give `status` a default value of `pending`."
               }
+            },
+            "practice-unique-user-email": {
+              "title": "Practice: Make User Email Unique",
+              "prompt": "Create a `users` table with id INTEGER PRIMARY KEY, name TEXT NOT NULL, and email TEXT UNIQUE. Verify the unique index created for the table.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies UNIQUE and DEFAULT Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE users (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE users (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA index_list(users);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE users (\n    id INTEGER PRIMARY KEY,\n    name TEXT NOT NULL,\n    email TEXT UNIQUE\n);\n\n-- file: query.sql\nPRAGMA index_list(users);"
+            },
+            "practice-default-task-status": {
+              "title": "Practice: Give Tasks a Default Status",
+              "prompt": "Create a `tasks` table with id INTEGER PRIMARY KEY, title TEXT NOT NULL, and status TEXT DEFAULT `open`. Verify the column metadata and default.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies UNIQUE and DEFAULT Constraints in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE tasks (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    status TEXT DEFAULT 'open'\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE tasks (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    status TEXT DEFAULT 'open'\n);"
+                },
+                "query_sql": {
+                  "content": "PRAGMA table_info(tasks);"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE tasks (\n    id INTEGER PRIMARY KEY,\n    title TEXT NOT NULL,\n    status TEXT DEFAULT 'open'\n);\n\n-- file: query.sql\nPRAGMA table_info(tasks);"
             }
           }
         }

@@ -168,6 +168,58 @@
                 "#"
               ]
             }
+          },
+          "practice": {
+            "practice-comment-and-ready": {
+              "title": "Add a comment and print a status",
+              "prompt": "Add a Python comment that explains the output line, then print `Ready to run` exactly.",
+              "hint": "A comment starts with `#` and does not appear in the output.",
+              "help": {
+                "concept": "Comments explain code for readers while `print(...)` sends visible text to the output panel.",
+                "hint_1": "A comment starts with `#` and does not appear in the output.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "# Add a short comment above the print call.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Add a short comment above the print call.\n"
+                }
+              },
+              "solutionCode": "# Show the program status.\nprint(\"Ready to run\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "# Show the program status.\nprint(\"Ready to run\")\n"
+                }
+              }
+            }
+          }
+        }
+      },
+      "python--python-v2--draft-0": {
+        "print-comments-and-errors": {
+          "quiz": {
+            "ci-personal-intro": {
+              "title": "Build a tiny introduction",
+              "prompt": "Write Python code that prints these three lines exactly:\n`About me`\n`Name: Sam`\n`Favorite color: Green`",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "# Write your introduction program below"
+            },
+            "ci-two-lines": {
+              "title": "Print two lines",
+              "prompt": "Write Python code that prints `Name: Alex` on the first line and `City: Lima` on the second line.",
+              "hint": "Read the task \"Print two lines\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print two lines\".",
+                "hint_1": "Write the code that creates exactly the requested output.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Print the two required lines"
+            }
           }
         }
       }

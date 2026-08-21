@@ -255,7 +255,7 @@
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -335,7 +335,7 @@
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -425,7 +425,7 @@
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -515,7 +515,7 @@
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -605,7 +605,7 @@
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -686,6 +686,96 @@
           "normalizeWhitespace": false
         }
       ]
+    },
+    {
+      "id": "practice-while-countdown-by-two",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.practice.practice-while-countdown-by-two",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.practice.practice-while-countdown-by-two.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.practice.practice-while-countdown-by-two.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.practice.practice-while-countdown-by-two.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.practice.practice-while-countdown-by-two.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.practice.practice-while-countdown-by-two.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.practice.practice-while-countdown-by-two.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "6\n",
+            "stdout": "6\n4\n2\n0\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n",
+            "stdout": "5\n3\n1\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.while-loop-basics.practice.practice-while-countdown-by-two.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.while-loop-basics.practice.practice-while-countdown-by-two.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

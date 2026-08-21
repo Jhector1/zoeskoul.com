@@ -253,6 +253,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-price-times-quantity": {
+              "title": "Convert two inputs for a total",
+              "prompt": "Read a decimal price and then a whole-number quantity. Convert the inputs with `float()` and `int()`, multiply them, and print the numeric total.",
+              "hint": "Convert each input before multiplying so Python performs numeric work instead of text operations.",
+              "help": {
+                "concept": "`input()` returns text, so numeric calculations require converting that text to the appropriate number type first.",
+                "hint_1": "Convert each input before multiplying so Python performs numeric work instead of text operations.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "price_text = input().strip()\nquantity_text = input().strip()\n\n# Convert both inputs, multiply them, and print the total.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "price_text = input().strip()\nquantity_text = input().strip()\n\n# Convert both inputs, multiply them, and print the total.\n"
+                }
+              },
+              "solutionCode": "price_text = input().strip()\nquantity_text = input().strip()\nprice = float(price_text)\nquantity = int(quantity_text)\ntotal = price * quantity\nprint(total)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "price_text = input().strip()\nquantity_text = input().strip()\nprice = float(price_text)\nquantity = int(quantity_text)\ntotal = price * quantity\nprint(total)\n"
+                }
+              }
+            }
           }
         }
       }

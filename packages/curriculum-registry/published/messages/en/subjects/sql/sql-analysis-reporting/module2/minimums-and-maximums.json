@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    ROUND(MIN(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS minimum_net_sales,\n    ROUND(MAX(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100\n    ), 2) AS maximum_net_sales\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            },
+            "practice-retained-minimums-and-maximums-sketch1": {
+              "title": "Practice: Minimum and Maximum Ratings for Completed Orders",
+              "prompt": "Write a query to find the minimum and maximum `customer_rating` for orders with the status 'Completed'.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Minimums and Maximums in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT MIN(customer_rating) AS min_rating, MAX(customer_rating) AS max_rating\nFROM sales_reporting\nWHERE order_status = 'Completed';"
+            },
+            "practice-unit-price-range": {
+              "title": "Practice: Find the Unit Price Range",
+              "prompt": "Return the minimum and maximum unit price in the report as `minimum_unit_price` and `maximum_unit_price`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Minimums and Maximums in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    MIN(unit_price) AS minimum_unit_price,\n    MAX(unit_price) AS maximum_unit_price\nFROM sales_reporting;"
             }
           },
           "tryIt": {

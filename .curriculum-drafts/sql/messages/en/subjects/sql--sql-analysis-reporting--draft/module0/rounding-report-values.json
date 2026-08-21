@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * (unit_price + 1.25), 2) AS packed_order_value\nFROM sales_reporting;"
+            },
+            "practice-retained-rounding-sketch0": {
+              "title": "Practice: Round Total Sales",
+              "prompt": "Write a query to calculate the total sales for each product in the `sales_reporting` table, rounding the result to two decimal places. Alias the result as `total_sales`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Rounding Report Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, ROUND(quantity * unit_price, 2) AS total_sales\nFROM sales_reporting;"
+            },
+            "practice-retained-rounding-sketch1": {
+              "title": "Practice: Round Average Ratings",
+              "prompt": "Write a query to find the average customer rating for each product category in the `sales_reporting` table, rounding the result to one decimal place. Alias the result as `avg_rating`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Rounding Report Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, ROUND(AVG(customer_rating), 1) AS avg_rating\nFROM sales_reporting\nGROUP BY category;"
             }
           },
           "tryIt": {

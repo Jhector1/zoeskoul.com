@@ -124,6 +124,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT DISTINCT region, sales_rep\nFROM sales_reporting\nORDER BY region, sales_rep;"
+            },
+            "practice-retained-distinct-values-for-report-categories-sketch1": {
+              "title": "Practice: Unique Region-Category Pairs",
+              "prompt": "Write a SQL query to find all unique combinations of region and category from the `sales_reporting` table. This will help you see how products are distributed across regions.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Distinct Values for Report Categories in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT DISTINCT region, category\nFROM sales_reporting;"
+            },
+            "practice-distinct-status-region-pairs": {
+              "title": "Practice: Find Distinct Status-Region Pairs",
+              "prompt": "Return each distinct combination of order status and region from the sales report. Sort by order status, then region.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Distinct Values for Report Categories in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT DISTINCT order_status, region\nFROM sales_reporting\nORDER BY order_status, region;"
             }
           },
           "tryIt": {

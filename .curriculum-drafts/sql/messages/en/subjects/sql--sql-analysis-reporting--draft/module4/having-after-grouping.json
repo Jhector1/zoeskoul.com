@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY category\nHAVING SUM(quantity * unit_price) > 550\nORDER BY gross_sales DESC, category ASC;"
+            },
+            "practice-retained-having-after-grouping-sketch1": {
+              "title": "Practice: Count Completed Orders by Sales Rep",
+              "prompt": "Write a query to find sales representatives with more than 3 completed orders. Use the `sales_reporting` table and group by `sales_rep`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies HAVING After Grouping in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT sales_rep, COUNT(CASE WHEN order_status = 'Completed' THEN 1 END) AS completed_orders\nFROM sales_reporting\nGROUP BY sales_rep\nHAVING completed_orders > 3;"
+            },
+            "practice-filter-sales-reps-by-gross-sales": {
+              "title": "Practice: Filter Sales Representatives with HAVING",
+              "prompt": "Return sales representatives whose gross sales exceed 500. Calculate gross sales with SUM, filter groups with HAVING, and sort from highest gross sales to lowest.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies HAVING After Grouping in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    sales_rep,\n    ROUND(SUM(quantity * unit_price), 2) AS gross_sales\nFROM sales_reporting\nGROUP BY sales_rep\nHAVING SUM(quantity * unit_price) > 500\nORDER BY gross_sales DESC, sales_rep ASC;"
             }
           },
           "tryIt": {

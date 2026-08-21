@@ -179,6 +179,64 @@
               "sourceCheckMessages": {
                 "ordersShape": "Define `orders` with integer `order_id`, text `customer_name`, and real `total_amount` columns."
               }
+            },
+            "practice-create-suppliers-table": {
+              "title": "Practice: Create a Suppliers Table",
+              "prompt": "Create a `suppliers` table with `supplier_id` INTEGER, `supplier_name` TEXT, and `active` INTEGER. In the verification query, return the stored CREATE TABLE statement.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Creating Tables and Defining Columns in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE suppliers (\n    supplier_id INTEGER,\n    supplier_name TEXT,\n    active INTEGER\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE suppliers (\n    supplier_id INTEGER,\n    supplier_name TEXT,\n    active INTEGER\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'suppliers';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE suppliers (\n    supplier_id INTEGER,\n    supplier_name TEXT,\n    active INTEGER\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'suppliers';"
+            },
+            "practice-create-shipments-table": {
+              "title": "Practice: Create a Shipments Table",
+              "prompt": "Create a `shipments` table with `shipment_id` INTEGER, `carrier` TEXT, and `shipped_at` TEXT. Verify the table by returning its CREATE TABLE statement.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Creating Tables and Defining Columns in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Define the requested table below.\n",
+              "solutionCode": "CREATE TABLE shipments (\n    shipment_id INTEGER,\n    carrier TEXT,\n    shipped_at TEXT\n);",
+              "starterFiles": {
+                "schema_sql": {
+                  "content": "-- Define the requested table below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Verification query is provided by the exercise.\n"
+                }
+              },
+              "solutionFiles": {
+                "schema_sql": {
+                  "content": "CREATE TABLE shipments (\n    shipment_id INTEGER,\n    carrier TEXT,\n    shipped_at TEXT\n);"
+                },
+                "query_sql": {
+                  "content": "SELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'shipments';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: schema.sql\nCREATE TABLE shipments (\n    shipment_id INTEGER,\n    carrier TEXT,\n    shipped_at TEXT\n);\n\n-- file: query.sql\nSELECT sql\nFROM sqlite_master\nWHERE type = 'table' AND name = 'shipments';"
             }
           }
         }

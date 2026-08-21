@@ -254,7 +254,7 @@
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -344,7 +344,7 @@
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -434,7 +434,7 @@
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -524,7 +524,7 @@
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -614,7 +614,7 @@
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -695,6 +695,96 @@
           "normalizeWhitespace": false
         }
       ]
+    },
+    {
+      "id": "practice-print-vowels",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "robot\n",
+            "stdout": "o\no\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "sky\n",
+            "stdout": "",
+            "match": "exact"
+          },
+          {
+            "stdin": "education\n",
+            "stdout": "e\nu\na\ni\no\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

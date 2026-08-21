@@ -546,6 +546,429 @@
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch3.sourceChecks.0.message"
         }
       ]
+    },
+    {
+      "id": "code-1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "get_names",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Ava"
+                  ],
+                  [
+                    "score",
+                    10
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Ben"
+                  ],
+                  [
+                    "score",
+                    8
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "Ava",
+              "Ben"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "get_names",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Kai"
+                  ],
+                  [
+                    "score",
+                    5
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "Kai"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "code-2",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "total_stock",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Pen"
+                  ],
+                  [
+                    "stock",
+                    4
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Book"
+                  ],
+                  [
+                    "stock",
+                    6
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 10,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "total_stock",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Bag"
+                  ],
+                  [
+                    "stock",
+                    1
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Box"
+                  ],
+                  [
+                    "stock",
+                    2
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Cup"
+                  ],
+                  [
+                    "stock",
+                    3
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 6,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "code-3",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "highest_score",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "Mia"
+                  ],
+                  [
+                    "score",
+                    7
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Leo"
+                  ],
+                  [
+                    "score",
+                    11
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "Noor"
+                  ],
+                  [
+                    "score",
+                    9
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 11,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "highest_score",
+            "args": [
+              [
+                [
+                  [
+                    "name",
+                    "A"
+                  ],
+                  [
+                    "score",
+                    3
+                  ]
+                ],
+                [
+                  [
+                    "name",
+                    "B"
+                  ],
+                  [
+                    "score",
+                    3
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 3,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     }
   ]
 }

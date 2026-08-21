@@ -159,6 +159,42 @@
                   "message": "Use a `for` loop over `students` as the prompt requests."
                 }
               }
+            },
+            "code-1": {
+              "title": "Return all names",
+              "prompt": "Each item in `records` stores a person's data. Finish `get_names(records)` by adding every record's `\"name\"` value to the `names` list, then return `names`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
+              "solutionCode": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names"
+            },
+            "code-2": {
+              "title": "Count total stock",
+              "prompt": "Finish `total_stock(items)` so it loops through the item dictionaries, adds each `\"stock\"` value into `total`, and returns the final total.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
+              "solutionCode": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total"
+            },
+            "code-3": {
+              "title": "Find the highest score",
+              "prompt": "Finish `highest_score(players)` so it compares each later player's `\"score\"` with `best` and returns the highest score in the list.",
+              "hint": "Read the task \"Find the highest score\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+              "solutionCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best"
             }
           },
           "tryIt": {

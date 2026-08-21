@@ -301,6 +301,130 @@
         "kind": "fill_blank_choice",
         "value": "courses.id"
       }
+    },
+    {
+      "id": "practice-retained-avoiding-cartesian-and-wrong-key-joins-sketch1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-retained-avoiding-cartesian-and-wrong-key-joins-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-retained-avoiding-cartesian-and-wrong-key-joins-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-retained-avoiding-cartesian-and-wrong-key-joins-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-retained-avoiding-cartesian-and-wrong-key-joins-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-retained-avoiding-cartesian-and-wrong-key-joins-sketch1.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-use-correct-course-department-key",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-use-correct-course-department-key",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-use-correct-course-department-key.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-use-correct-course-department-key.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-use-correct-course-department-key.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.avoiding-cartesian-and-wrong-key-joins.practice.practice-use-correct-course-department-key.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

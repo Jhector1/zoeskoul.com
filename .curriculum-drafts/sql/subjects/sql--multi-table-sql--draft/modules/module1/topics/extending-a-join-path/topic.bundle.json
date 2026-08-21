@@ -305,6 +305,130 @@
         "kind": "fill_blank_choice",
         "value": "enrollments.term"
       }
+    },
+    {
+      "id": "practice-extend-student-path-to-department",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-student-path-to-department",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-student-path-to-department.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-student-path-to-department.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-student-path-to-department.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-student-path-to-department.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-extend-department-path-to-students",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-department-path-to-students",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-department-path-to-students.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-department-path-to-students.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-department-path-to-students.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-department-path-to-students.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

@@ -489,6 +489,274 @@
           "c"
         ]
       }
+    },
+    {
+      "id": "practice-insert-two-office-items",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-office-items.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT *\nFROM inventory_items\nWHERE name IN ('Folder', 'Tape')\nORDER BY name;",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-insert-two-kitchen-items",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.inserting-multiple-rows.practice.practice-insert-two-kitchen-items.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT *\nFROM inventory_items\nWHERE name IN ('Measuring Cup', 'Dish Towel')\nORDER BY name;",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

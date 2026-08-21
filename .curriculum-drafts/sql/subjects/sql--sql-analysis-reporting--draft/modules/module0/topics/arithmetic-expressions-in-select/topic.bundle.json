@@ -315,6 +315,130 @@
         ]
       },
       "showExpectedExample": true
+    },
+    {
+      "id": "practice-retained-arithmetic-expressions-in-select-sketch1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-retained-arithmetic-expressions-in-select-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-retained-arithmetic-expressions-in-select-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "sales_reporting",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-retained-arithmetic-expressions-in-select-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-retained-arithmetic-expressions-in-select-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_reporting",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-retained-arithmetic-expressions-in-select-sketch1.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-calculate-order-line-value",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-calculate-order-line-value",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-calculate-order-line-value.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "sales_reporting",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-calculate-order-line-value.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-calculate-order-line-value.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_reporting",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.arithmetic-expressions-in-select.practice.practice-calculate-order-line-value.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

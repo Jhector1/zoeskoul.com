@@ -290,15 +290,20 @@ def _decode_args(args, kinds, class_name=None):
     for index, value in enumerate(args):
         kind = kinds[index] if index < len(kinds) else None
 
-        # Some generated semantic checks accidentally encode a single list
+        # Some generated semantic checks accidentally encode a single plain-list
         # argument with one extra array layer:
         #   args: [[["Study Report", "Completed: 2/3"]]]
         # The learner function expects:
         #   validate_report(["Study Report", "Completed: 2/3"])
         #
-        # This also protects against an incorrect argKind such as dict_entries
-        # on a plain list-of-lines argument.
-        if _looks_like_single_wrapped_primitive_list(value):
+        # An explicit structured kind must win over this compatibility heuristic.
+        # In particular, a valid one-entry dictionary is encoded as:
+        #   [[["apple", 2]]]
+        # with argKinds: ["dict_entries"] and must decode to {"apple": 2}.
+        if (
+            kind not in ("dict_entries", "list_of_dict_entries")
+            and _looks_like_single_wrapped_primitive_list(value)
+        ):
             decoded.append(value[0])
             continue
 

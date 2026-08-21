@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    product_name,\n    quantity * unit_price AS merchandise_value,\n    quantity * unit_price + 4.00 AS prepared_value\nFROM sales_reporting;"
+            },
+            "practice-retained-arithmetic-expressions-in-select-sketch1": {
+              "title": "Practice: Round Total Sales",
+              "prompt": "Modify the previous query to round the total sales to two decimal places.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Arithmetic Expressions in SELECT in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "SELECT product_name, quantity, unit_price, \n-- Calculate and round total sales\nFROM sales_reporting;",
+              "solutionCode": "SELECT product_name, quantity, unit_price, ROUND(quantity * unit_price, 2) AS total_sales\nFROM sales_reporting;"
+            },
+            "practice-calculate-order-line-value": {
+              "title": "Practice: Calculate Order Line Value",
+              "prompt": "Return order id, quantity, unit price, and a calculated `line_value` equal to quantity multiplied by unit price. Sort by order id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Arithmetic Expressions in SELECT in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    order_id,\n    quantity,\n    unit_price,\n    quantity * unit_price AS line_value\nFROM sales_reporting\nORDER BY order_id;"
             }
           },
           "tryIt": {

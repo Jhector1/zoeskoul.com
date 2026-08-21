@@ -181,6 +181,64 @@
                 "explicitInsert": "Use an INSERT into `inventory_items` with an explicit column list in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status) VALUES \n  ('Pen', 'Stationery', 1.50, 'active'),\n  ('Eraser', 'Stationery', 0.99, 'active');\n\n-- file: query.sql\nSELECT * FROM inventory_items WHERE name IN ('Pen', 'Eraser')\nORDER BY name;"
+            },
+            "practice-explicit-column-desk-lamp": {
+              "title": "Practice: Insert One Item with Explicit Columns",
+              "prompt": "In `operations.sql`, insert `Desk Lamp` in category `Home` with price `24.50` and status `active`, using an explicit column list. In `query.sql`, return only the new row.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies INSERT with Explicit Column Lists in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES ('Desk Lamp', 'Home', 24.50, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES ('Desk Lamp', 'Home', 24.50, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name = 'Desk Lamp';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES ('Desk Lamp', 'Home', 24.50, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name = 'Desk Lamp';"
+            },
+            "practice-explicit-column-water-bottle": {
+              "title": "Practice: Insert Another Item with Explicit Columns",
+              "prompt": "In `operations.sql`, insert `Water Bottle` in category `Kitchen` with price `11.25` and status `active`, naming the destination columns explicitly. In `query.sql`, return only the new row.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies INSERT with Explicit Column Lists in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES ('Water Bottle', 'Kitchen', 11.25, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES ('Water Bottle', 'Kitchen', 11.25, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name = 'Water Bottle';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES ('Water Bottle', 'Kitchen', 11.25, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name = 'Water Bottle';"
             }
           }
         }

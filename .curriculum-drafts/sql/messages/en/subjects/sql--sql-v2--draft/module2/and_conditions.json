@@ -155,6 +155,20 @@
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
             }
+          },
+          "practice": {
+            "practice-home-products-in-stock": {
+              "title": "Practice: Combine Category and Stock Conditions",
+              "prompt": "Return name, category, and stock for products in the `Home` category with stock of at least 10.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Combining Conditions in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Home'\n  AND stock >= 10;"
+            }
           }
         }
       },

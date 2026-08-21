@@ -313,6 +313,130 @@
         "kind": "fill_blank_choice",
         "value": "AS"
       }
+    },
+    {
+      "id": "practice-retained-table-aliases-for-join-queries-sketch1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-retained-table-aliases-for-join-queries-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-retained-table-aliases-for-join-queries-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-retained-table-aliases-for-join-queries-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-retained-table-aliases-for-join-queries-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-retained-table-aliases-for-join-queries-sketch1.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-alias-course-department-join",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-alias-course-department-join",
+      "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-alias-course-department-join.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-alias-course-department-join.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-alias-course-department-join.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-alias-course-department-join.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

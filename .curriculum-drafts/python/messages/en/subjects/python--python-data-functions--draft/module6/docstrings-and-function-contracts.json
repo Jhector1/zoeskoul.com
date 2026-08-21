@@ -134,6 +134,42 @@
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "ci-add-docstring": {
+              "title": "Add a matching docstring",
+              "prompt": "Add a docstring under `make_lower(text)` that clearly says what the function returns.",
+              "hint": "Read the task \"Add a matching docstring\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
+              "solutionCode": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()"
+            },
+            "ci-fix-print-vs-return": {
+              "title": "Fix the contract mismatch",
+              "prompt": "The docstring says `total_price(price, tax)` should return the total, but the starter code prints it instead. Fix the function so its behavior matches the docstring.",
+              "hint": "Read the task \"Fix the contract mismatch\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
+              "solutionCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax"
+            },
+            "ci-write-contract-function": {
+              "title": "Write a documented function with a clear contract",
+              "prompt": "Write `repeat_word(word, times)` so it returns the repeated text, and add a docstring that explains that contract clearly.",
+              "hint": "Read the task \"Write a documented function with a clear contract\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
+              "solutionCode": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times"
             }
           },
           "tryIt": {

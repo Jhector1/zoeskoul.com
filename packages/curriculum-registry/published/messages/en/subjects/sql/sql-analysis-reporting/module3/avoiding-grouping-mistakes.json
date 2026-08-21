@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    category,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY region, category\nORDER BY region, category;"
+            },
+            "practice-retained-avoiding-grouping-mistakes-sketch1": {
+              "title": "Practice: Identify Grouping Errors",
+              "prompt": "Write a query to find the average customer rating for each product category. Ensure your query does not include non-aggregated columns that aren't part of the grouping.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Avoiding Grouping Mistakes in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, AVG(customer_rating) AS average_rating\nFROM sales_reporting\nGROUP BY category;"
+            },
+            "practice-group-only-selected-dimension": {
+              "title": "Practice: Keep the Grouping Grain Consistent",
+              "prompt": "Return category and the number of rows in each category. Group only at the category grain and sort by category.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Avoiding Grouping Mistakes in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    category,\n    COUNT(*) AS order_count\nFROM sales_reporting\nGROUP BY category\nORDER BY category;"
             }
           },
           "tryIt": {

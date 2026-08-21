@@ -122,6 +122,81 @@
                 "c": "CatalogItem: Coraline",
                 "d": "Python raises an error because both classes define `label()`"
               }
+            },
+            "catalog-step-book-and-movie": {
+              "title": "Specialize labels for two catalog subclasses",
+              "prompt": "You are extending a media catalog. The base `CatalogItem` already stores `title`. Complete both subclasses so they reuse the parent constructor and override `display_name()`: `BookItem` should return `\"<title> by <author>\"`, and `MovieItem` should return `\"<title> (<minutes> min)\"`. The workspace already includes a small `main.py` that prints both labels.",
+              "hint": "Both subclasses share the same method name, but each one formats the result differently.",
+              "help": {
+                "concept": "Different subclasses can override the same base method in different ways while still fitting the same base-class contract.",
+                "hint_1": "Use `super().__init__(title)` in both subclass constructors before storing the extra field.",
+                "hint_2": "Write one `display_name()` method in each subclass, each returning its own specialized string format."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title"
+                },
+                "models_book_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        pass"
+                },
+                "models_movie_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        pass"
+                }
+              }
+            },
+            "catalog-step-mixed-report": {
+              "title": "Build a report from mixed specialized items",
+              "prompt": "Build a mixed catalog report without checking object types manually. The workspace includes a base `CatalogItem` plus `BookItem` and `MovieItem` subclasses that all provide `display_name()`. Complete `build_display_report(items)` in `services/reporting.py` so it returns each item's display label in order. `main.py` will print the returned lines.",
+              "hint": "Loop through the mixed list and call the same `display_name()` method on every item.",
+              "help": {
+                "concept": "Polymorphic services work by calling the same method on mixed related objects, while overriding lets each subclass provide its own specialized output.",
+                "hint_1": "Make sure each subclass overrides `display_name()` correctly before writing the service loop.",
+                "hint_2": "In the service function, iterate through `items` and append `item.display_name()` for each object in order."
+              },
+              "starterCode": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title"
+                },
+                "models_book_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\""
+                },
+                "models_movie_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\""
+                },
+                "services_reporting_py": {
+                  "content": "def build_display_report(items):\n    pass"
+                }
+              }
+            },
+            "practice-specialized-display-label": {
+              "title": "Override a display label in one subclass",
+              "prompt": "Define a base class `MediaItem` that stores `title` and has `display()` returning `Item: <title>`. Define `Song(MediaItem)` and override `display()` so it returns `Song: <title>`. Print the display text for one base item and one song.",
+              "hint": "Keep the shared version on the base class, then redefine only `display()` inside `Song`.",
+              "help": {
+                "concept": "Overriding lets a subclass specialize one inherited behavior while keeping the rest of the shared base-class structure.",
+                "hint_1": "Keep the shared version on the base class, then redefine only `display()` inside `Song`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class MediaItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display(self):\n        # return Item: <title>\n        pass\n\nclass Song(MediaItem):\n    def display(self):\n        # return Song: <title>\n        pass\n\nitem = MediaItem(\"Guide\")\nsong = Song(\"Sunrise\")\nprint(item.display())\nprint(song.display())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class MediaItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display(self):\n        # return Item: <title>\n        pass\n\nclass Song(MediaItem):\n    def display(self):\n        # return Song: <title>\n        pass\n\nitem = MediaItem(\"Guide\")\nsong = Song(\"Sunrise\")\nprint(item.display())\nprint(song.display())\n"
+                }
+              },
+              "solutionCode": "class MediaItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display(self):\n        return f\"Item: {self.title}\"\n\nclass Song(MediaItem):\n    def display(self):\n        return f\"Song: {self.title}\"\n\nitem = MediaItem(\"Guide\")\nsong = Song(\"Sunrise\")\nprint(item.display())\nprint(song.display())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class MediaItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display(self):\n        return f\"Item: {self.title}\"\n\nclass Song(MediaItem):\n    def display(self):\n        return f\"Song: {self.title}\"\n\nitem = MediaItem(\"Guide\")\nsong = Song(\"Sunrise\")\nprint(item.display())\nprint(song.display())\n"
+                }
+              }
             }
           }
         }

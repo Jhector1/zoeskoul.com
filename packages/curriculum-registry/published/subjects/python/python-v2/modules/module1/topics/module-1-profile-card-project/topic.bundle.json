@@ -105,7 +105,7 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -185,7 +185,7 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -265,7 +265,7 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -356,7 +356,7 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -447,7 +447,7 @@
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [

@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    region,\n    COUNT(*) AS completed_orders\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY region\nORDER BY region;"
+            },
+            "practice-retained-group-by-one-column-sketch1": {
+              "title": "Practice: Count Orders by Region",
+              "prompt": "Write a query to count the number of orders for each region in the `sales_reporting` table. Use the `COUNT` function and group the results by `region`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies GROUP BY One Column in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, COUNT(order_id) AS order_count\nFROM sales_reporting\nGROUP BY region;"
+            },
+            "practice-average-rating-by-sales-rep": {
+              "title": "Practice: Average Rating by Sales Representative",
+              "prompt": "Calculate the average customer rating for each sales representative. Round it to two decimal places and sort by sales representative.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies GROUP BY One Column in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    sales_rep,\n    ROUND(AVG(customer_rating), 2) AS average_rating\nFROM sales_reporting\nGROUP BY sales_rep\nORDER BY sales_rep;"
             }
           },
           "tryIt": {

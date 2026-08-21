@@ -180,6 +180,64 @@
                 "scopedUpdate": "Use a scoped UPDATE on `inventory_items` with a WHERE condition in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\n-- Change the category of 'Sample Poster' to 'Art'\nUPDATE inventory_items\nSET category = 'Art'\nWHERE id = 4;\n\n-- file: query.sql\n-- Verify the change\nSELECT id, name, category\nFROM inventory_items\nWHERE id IN (3, 4, 5)\nORDER BY id;"
+            },
+            "practice-update-one-row-price": {
+              "title": "Practice: Update One Row by ID",
+              "prompt": "Set the price of row `id = 5` to `25.00` and verify rows 4 through 6 so the one-row scope is visible.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Updating One Row Precisely in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "UPDATE inventory_items\nSET price = 25.00\nWHERE id = 5;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items\nSET price = 25.00\nWHERE id = 5;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, price\nFROM inventory_items\nWHERE id IN (4, 5, 6)\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET price = 25.00\nWHERE id = 5;\n\n-- file: query.sql\nSELECT id, name, price\nFROM inventory_items\nWHERE id IN (4, 5, 6)\nORDER BY id;"
+            },
+            "practice-update-one-row-status": {
+              "title": "Practice: Change One Row Status Precisely",
+              "prompt": "Set status to `inactive` only for row `id = 3`. Verify rows 2 through 4 so the one-row scope is visible.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Updating One Row Precisely in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "UPDATE inventory_items\nSET status = 'inactive'\nWHERE id = 3;",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "UPDATE inventory_items\nSET status = 'inactive'\nWHERE id = 3;"
+                },
+                "query_sql": {
+                  "content": "SELECT id, name, status\nFROM inventory_items\nWHERE id IN (2, 3, 4)\nORDER BY id;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nUPDATE inventory_items\nSET status = 'inactive'\nWHERE id = 3;\n\n-- file: query.sql\nSELECT id, name, status\nFROM inventory_items\nWHERE id IN (2, 3, 4)\nORDER BY id;"
             }
           }
         }

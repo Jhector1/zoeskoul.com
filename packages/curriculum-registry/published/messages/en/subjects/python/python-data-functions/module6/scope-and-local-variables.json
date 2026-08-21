@@ -137,6 +137,75 @@
                   "message": "Call `make_message(...)` because that function call is explicitly required by the prompt."
                 }
               }
+            },
+            "code-q1": {
+              "title": "Return a local calculation",
+              "prompt": "Write `add_tax(price)` so it calculates `price + 5`, stores that result in a local variable named `total`, and then returns `total`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
+              "solutionCode": "def add_tax(price):\n    total = price + 5\n    return total",
+              "checks": {
+                "0": {
+                  "message": "add_tax should return price plus 5."
+                },
+                "1": {
+                  "message": "add_tax should work for a different number too."
+                },
+                "2": {
+                  "message": "Return the value instead of printing it."
+                }
+              }
+            },
+            "code-q2": {
+              "title": "Use a parameter as a local name",
+              "prompt": "Write `make_label(word)` so it builds the finished string in a local variable named `label`, then returns `label`.",
+              "hint": "Read the task \"Use a parameter as a local name\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
+              "solutionCode": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
+              "checks": {
+                "0": {
+                  "message": "make_label should prefix the word with `Item: `."
+                },
+                "1": {
+                  "message": "make_label should work with another input word."
+                },
+                "2": {
+                  "message": "Return the string instead of printing it."
+                }
+              }
+            },
+            "code-q3": {
+              "title": "Compute with two local variables",
+              "prompt": "Write `rectangle_area(width, height)` so it computes the area, stores it in a local variable named `area`, and returns `area`.",
+              "hint": "Read the task \"Compute with two local variables\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
+              "solutionCode": "def rectangle_area(width, height):\n    area = width * height\n    return area",
+              "checks": {
+                "0": {
+                  "message": "rectangle_area should multiply width by height."
+                },
+                "1": {
+                  "message": "rectangle_area should work for another pair of numbers."
+                },
+                "2": {
+                  "message": "Return the area instead of printing it."
+                }
+              }
             }
           },
           "tryIt": {

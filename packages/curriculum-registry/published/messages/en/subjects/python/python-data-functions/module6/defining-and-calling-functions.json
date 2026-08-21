@@ -140,6 +140,42 @@
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "ci-full-name": {
+              "title": "Combine first and last name",
+              "prompt": "Write `full_name(first, last)` so it returns the first and last name joined into one string.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+              "solutionCode": "def full_name(first, last):\n    return first + \" \" + last"
+            },
+            "ci-make-greeting": {
+              "title": "Write a greeting function",
+              "prompt": "Write `make_greeting(name)` so it returns a greeting string for that name.",
+              "hint": "Read the task \"Write a greeting function\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
+              "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
+            },
+            "ci-square-number": {
+              "title": "Return the square",
+              "prompt": "Write `square(number)` so it returns the square of `number`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "def square(number):\n    # return the square of number\n    pass",
+              "solutionCode": "def square(number):\n    return number * number"
             }
           },
           "tryIt": {

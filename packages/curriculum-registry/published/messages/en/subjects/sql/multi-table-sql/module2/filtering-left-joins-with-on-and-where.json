@@ -141,6 +141,30 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT d.name AS department_name,\n       c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\nWHERE c.title LIKE '%History%'\nORDER BY d.name;\n"
+            },
+            "practice-retained-filtering-left-joins-with-on-and-where-sketch1": {
+              "title": "Practice: List All Departments and Their Courses",
+              "prompt": "Write a query to list all departments and their courses, ensuring departments without courses are included. Use LEFT JOIN and place the condition in the ON clause.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Filtering LEFT JOINs with ON and WHERE in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT departments.name, courses.title\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id;"
+            },
+            "practice-filter-course-match-in-on": {
+              "title": "Practice: Filter a LEFT JOIN in ON",
+              "prompt": "List every department and any course with `History` in its title. Put the course-title filter in the ON clause so departments without a matching course are still preserved. Sort by department name.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Filtering LEFT JOINs with ON and WHERE in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT d.name AS department_name, c.title AS history_course\nFROM departments AS d\nLEFT JOIN courses AS c\n  ON d.id = c.department_id\n AND c.title LIKE '%History%'\nORDER BY d.name, c.title;"
             }
           }
         }

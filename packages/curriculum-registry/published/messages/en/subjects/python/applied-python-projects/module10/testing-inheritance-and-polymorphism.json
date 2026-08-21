@@ -168,6 +168,61 @@
                 "game_label",
                 "__class__"
               ]
+            },
+            "policy_code_input_3": {
+              "title": "Print whether a number is negative",
+              "prompt": "Read one integer. Print `True` when the number is less than 0 and `False` otherwise.",
+              "hint": "Compare the value with zero.",
+              "help": {
+                "concept": "A less-than comparison can detect negative numbers.",
+                "hint_1": "Use < 0 inside an if statement.",
+                "hint_2": "Print False for zero or positive values."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            },
+            "practice-test-inherited-method": {
+              "title": "Make an inherited method pass its test",
+              "prompt": "The test expects a `Book` object to inherit `label()` from `Item`. Complete the base `label()` method so the assertion passes, then keep the final `tests passed` output.",
+              "hint": "The shared method should return `Item: <title>` using the stored title.",
+              "help": {
+                "concept": "A focused test can verify that a subclass correctly receives shared behavior from its base class.",
+                "hint_1": "The shared method should return `Item: <title>` using the stored title.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Item:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        pass\n\nclass Book(Item):\n    pass\n\nbook = Book(\"Dune\")\nassert book.label() == \"Item: Dune\"\nprint(\"tests passed\")\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Item:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        pass\n\nclass Book(Item):\n    pass\n\nbook = Book(\"Dune\")\nassert book.label() == \"Item: Dune\"\nprint(\"tests passed\")\n"
+                }
+              },
+              "solutionCode": "class Item:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Item: {self.title}\"\n\nclass Book(Item):\n    pass\n\nbook = Book(\"Dune\")\nassert book.label() == \"Item: Dune\"\nprint(\"tests passed\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Item:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Item: {self.title}\"\n\nclass Book(Item):\n    pass\n\nbook = Book(\"Dune\")\nassert book.label() == \"Item: Dune\"\nprint(\"tests passed\")\n"
+                }
+              }
+            },
+            "practice-test-polymorphic-sounds": {
+              "title": "Make a polymorphic collection test pass",
+              "prompt": "Complete `collect_sounds(animals)` so it calls `speak()` on every object and returns the resulting list. The provided `Cat` and `Dog` classes override `speak()`. Keep the assertion and final `tests passed` output.",
+              "hint": "Loop through the mixed objects and append `animal.speak()` for each one.",
+              "help": {
+                "concept": "A polymorphism test checks common behavior through the shared method name instead of branching on each concrete class type.",
+                "hint_1": "Loop through the mixed objects and append `animal.speak()` for each one.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "class Animal:\n    def speak(self):\n        return \"?\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"meow\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"woof\"\n\ndef collect_sounds(animals):\n    sounds = []\n    # append each object's speak() result\n    return sounds\n\nanimals = [Cat(), Dog(), Cat()]\nassert collect_sounds(animals) == [\"meow\", \"woof\", \"meow\"]\nprint(\"tests passed\")\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Animal:\n    def speak(self):\n        return \"?\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"meow\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"woof\"\n\ndef collect_sounds(animals):\n    sounds = []\n    # append each object's speak() result\n    return sounds\n\nanimals = [Cat(), Dog(), Cat()]\nassert collect_sounds(animals) == [\"meow\", \"woof\", \"meow\"]\nprint(\"tests passed\")\n"
+                }
+              },
+              "solutionCode": "class Animal:\n    def speak(self):\n        return \"?\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"meow\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"woof\"\n\ndef collect_sounds(animals):\n    sounds = []\n    for animal in animals:\n        sounds.append(animal.speak())\n    return sounds\n\nanimals = [Cat(), Dog(), Cat()]\nassert collect_sounds(animals) == [\"meow\", \"woof\", \"meow\"]\nprint(\"tests passed\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Animal:\n    def speak(self):\n        return \"?\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"meow\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"woof\"\n\ndef collect_sounds(animals):\n    sounds = []\n    for animal in animals:\n        sounds.append(animal.speak())\n    return sounds\n\nanimals = [Cat(), Dog(), Cat()]\nassert collect_sounds(animals) == [\"meow\", \"woof\", \"meow\"]\nprint(\"tests passed\")\n"
+                }
+              }
             }
           }
         }

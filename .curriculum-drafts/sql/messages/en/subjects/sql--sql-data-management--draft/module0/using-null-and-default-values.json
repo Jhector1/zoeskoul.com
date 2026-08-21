@@ -181,6 +181,64 @@
                 "explicitNull": "Store the missing notes deliberately with SQL NULL in operations.sql."
               },
               "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes) VALUES\n('Widget', 'Tools', 5.99, NULL),\n('Device', 'Gadgets', 12.49, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, is_test, notes FROM inventory_items WHERE name IN ('Widget', 'Device')\nORDER BY name;"
+            },
+            "practice-default-status-with-null-notes": {
+              "title": "Practice: Use the Default Status and NULL Notes",
+              "prompt": "Insert `USB Cable` in category `Electronics` at `7.99`. Do not supply a status so the table default is used, and explicitly store NULL in notes. Verify the stored values.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Using NULL and DEFAULT Intentionally in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES ('USB Cable', 'Electronics', 7.99, NULL);",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES ('USB Cable', 'Electronics', 7.99, NULL);"
+                },
+                "query_sql": {
+                  "content": "SELECT name, category, price, status, notes\nFROM inventory_items\nWHERE name = 'USB Cable';"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes)\nVALUES ('USB Cable', 'Electronics', 7.99, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, notes\nFROM inventory_items\nWHERE name = 'USB Cable';"
+            },
+            "practice-default-status-two-row-batch": {
+              "title": "Practice: Use Defaults in a Two-Row Batch",
+              "prompt": "Insert `Adapter` at `9.50` and `Charger` at `18.75` as `Electronics` items. Omit status for both rows so the default applies and store NULL notes. Verify both rows sorted by name.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Using NULL and DEFAULT Intentionally in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES\n    ('Adapter', 'Electronics', 9.50, NULL),\n    ('Charger', 'Electronics', 18.75, NULL);",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, notes)\nVALUES\n    ('Adapter', 'Electronics', 9.50, NULL),\n    ('Charger', 'Electronics', 18.75, NULL);"
+                },
+                "query_sql": {
+                  "content": "SELECT name, category, price, status, notes\nFROM inventory_items\nWHERE name IN ('Adapter', 'Charger')\nORDER BY name;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, notes)\nVALUES\n    ('Adapter', 'Electronics', 9.50, NULL),\n    ('Charger', 'Electronics', 18.75, NULL);\n\n-- file: query.sql\nSELECT name, category, price, status, notes\nFROM inventory_items\nWHERE name IN ('Adapter', 'Charger')\nORDER BY name;"
             }
           }
         }

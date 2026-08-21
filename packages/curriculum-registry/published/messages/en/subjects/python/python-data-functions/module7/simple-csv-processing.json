@@ -221,6 +221,63 @@
                   "message": "Use the literal expression or path that the prompt explicitly asks for."
                 }
               }
+            },
+            "ci-print-clean-names": {
+              "title": "Print cleaned names from a CSV file",
+              "prompt": "Read `students.csv` with `csv.DictReader`, clean each name as you loop through the rows, and print the cleaned names.\n\nYour output should be exactly:\n`Ava`\n`Ben`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass",
+              "solutionCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+              "sourceChecks": {
+                "0": {
+                  "message": "Strip each CSV name before printing it."
+                }
+              }
+            },
+            "ci-sum-valid-scores": {
+              "title": "Sum valid scores from CSV",
+              "prompt": "Read `scores.csv`, clean each score, try to convert it to an integer, and add only the valid numbers to `total`. Print `total` after the loop.\n\nYour output should be exactly:\n`16`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)",
+              "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use try/except for invalid score values."
+                },
+                "1": {
+                  "message": "Convert score text with int()."
+                }
+              }
+            },
+            "ci-write-summary-file": {
+              "title": "Write a CSV summary file",
+              "prompt": "Build a short report from `scores.csv`. As you loop, update `valid_rows` and `total_score` for rows with valid integer scores, then write those results to `summary.txt` and print the file contents.\n\nYour output should be exactly:\n`valid_rows: 2`\n`total_score: 16`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents",
+              "solutionCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use try/except for invalid score values."
+                },
+                "1": {
+                  "message": "Write the summary to summary.txt."
+                }
+              }
             }
           },
           "tryIt": {

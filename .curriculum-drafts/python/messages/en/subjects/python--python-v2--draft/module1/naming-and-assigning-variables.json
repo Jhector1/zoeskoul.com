@@ -216,6 +216,47 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-update-score-from-bonus": {
+              "title": "Update a stored score",
+              "prompt": "Store `12` in `score` and `5` in `bonus`. Update `score` by adding `bonus`, then print the updated `score`.",
+              "hint": "Reuse the same `score` name on the left side of the second assignment.",
+              "help": {
+                "concept": "Reassignment replaces the value stored under an existing variable name using a new expression.",
+                "hint_1": "Reuse the same `score` name on the left side of the second assignment.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "# Create score and bonus, update score, then print it.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Create score and bonus, update score, then print it.\n"
+                }
+              },
+              "solutionCode": "score = 12\nbonus = 5\nscore = score + bonus\nprint(score)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "score = 12\nbonus = 5\nscore = score + bonus\nprint(score)\n"
+                }
+              }
+            }
+          }
+        }
+      },
+      "python--python-v2--draft-1": {
+        "naming-and-assigning-variables": {
+          "quiz": {
+            "q12": {
+              "title": "Read input into a variable",
+              "prompt": "Write Python code that reads one line of input into a variable named `city` and then prints it.\n\nExample: if the input is `Tokyo`, the output should be `Tokyo`.\n\nType code in the code editor, click Run, and check the output panel.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
+                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+              },
+              "starterCode": "# Read one line into city\n# Print city"
+            }
           }
         }
       }

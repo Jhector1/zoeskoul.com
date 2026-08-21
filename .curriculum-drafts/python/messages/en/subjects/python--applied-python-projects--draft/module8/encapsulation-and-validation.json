@@ -170,6 +170,66 @@
                 "0",
                 "170"
               ]
+            },
+            "ci-account-summary-method": {
+              "title": "Create a summary method for account state",
+              "prompt": "A volunteer dashboard needs a readable account summary. In `models/account.py`, complete `summary` so it returns a string in this exact format: `Owner: <owner>, Balance: <balance>`. Do not print inside the method; return the string instead. `main.py` already prints the returned summary for two accounts.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        pass"
+                }
+              }
+            },
+            "ci-account-withdraw": {
+              "title": "Add a validated withdraw method",
+              "prompt": "Your club account tracker now needs withdrawals. In `models/account.py`, complete `withdraw` so it subtracts the amount only when the amount is greater than 0 and no larger than the current balance. Return `True` for a successful withdrawal and `False` otherwise. `main.py` already checks one valid and one invalid withdrawal.",
+              "hint": "Read the task \"Add a validated withdraw method\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add a validated withdraw method\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        # subtract only when the amount is valid\n        pass",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        # subtract only when the amount is valid\n        pass"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def withdraw(self, amount):\n        pass"
+                }
+              }
+            },
+            "ci-helper-is_positive_amount": {
+              "title": "Build a helper that checks positive amounts",
+              "prompt": "Your team wants a reusable validation helper. In `helpers/validation.py`, complete `is_positive_amount` so it returns `True` when the number is greater than 0 and `False` otherwise. `main.py` uses that helper inside `Account.deposit`, so the helper must work for both valid and invalid amounts.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# main.py\nfrom helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)\n\n# helpers/validation.py\ndef is_positive_amount(amount):\n    # return True only for amounts greater than 0\n    pass\n\n# models/account.py\nfrom helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)\n\n# helpers/validation.py\ndef is_positive_amount(amount):\n    # return True only for amounts greater than 0\n    pass\n\n# models/account.py\nfrom helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass"
+                },
+                "helpers_validation_py": {
+                  "content": "def is_positive_amount(amount):\n    pass"
+                }
+              }
             }
           }
         }

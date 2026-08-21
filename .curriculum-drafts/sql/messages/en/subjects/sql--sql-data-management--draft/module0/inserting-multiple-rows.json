@@ -181,6 +181,64 @@
               "sourceCheckMessages": {
                 "multiRowInsert": "Add both approved rows with one multi-row INSERT in operations.sql."
               }
+            },
+            "practice-insert-two-office-items": {
+              "title": "Practice: Insert Two Office Items Together",
+              "prompt": "In `operations.sql`, insert `Folder` at `2.25` and `Tape` at `3.50` as active `Office` items in one INSERT statement. In `query.sql`, return the two new rows sorted by name.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Adding Several Rows in One Statement in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Folder', 'Office', 2.25, 'active'),\n    ('Tape', 'Office', 3.50, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Folder', 'Office', 2.25, 'active'),\n    ('Tape', 'Office', 3.50, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name IN ('Folder', 'Tape')\nORDER BY name;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Folder', 'Office', 2.25, 'active'),\n    ('Tape', 'Office', 3.50, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name IN ('Folder', 'Tape')\nORDER BY name;"
+            },
+            "practice-insert-two-kitchen-items": {
+              "title": "Practice: Insert a Two-Row Kitchen Batch",
+              "prompt": "In `operations.sql`, insert `Measuring Cup` at `6.75` and `Dish Towel` at `4.25` as active `Kitchen` items in one INSERT statement. In `query.sql`, verify only those rows, sorted by name.",
+              "hint": "Apply the requested change to only the intended target, then verify the final state.",
+              "help": {
+                "concept": "This practice applies Adding Several Rows in One Statement in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Apply the approved data change below.\n",
+              "solutionCode": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Measuring Cup', 'Kitchen', 6.75, 'active'),\n    ('Dish Towel', 'Kitchen', 4.25, 'active');",
+              "starterFiles": {
+                "operations_sql": {
+                  "content": "-- Apply the approved data change below.\n"
+                },
+                "query_sql": {
+                  "content": "-- Write or inspect the verification query below.\n"
+                }
+              },
+              "solutionFiles": {
+                "operations_sql": {
+                  "content": "INSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Measuring Cup', 'Kitchen', 6.75, 'active'),\n    ('Dish Towel', 'Kitchen', 4.25, 'active');"
+                },
+                "query_sql": {
+                  "content": "SELECT *\nFROM inventory_items\nWHERE name IN ('Measuring Cup', 'Dish Towel')\nORDER BY name;"
+                }
+              },
+              "runtimeSolutionCode": "-- file: operations.sql\nINSERT INTO inventory_items (name, category, price, status)\nVALUES\n    ('Measuring Cup', 'Kitchen', 6.75, 'active'),\n    ('Dish Towel', 'Kitchen', 4.25, 'active');\n\n-- file: query.sql\nSELECT *\nFROM inventory_items\nWHERE name IN ('Measuring Cup', 'Dish Towel')\nORDER BY name;"
             }
           }
         }

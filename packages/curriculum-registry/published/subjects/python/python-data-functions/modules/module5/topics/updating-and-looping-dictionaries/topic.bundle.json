@@ -644,6 +644,383 @@
           "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch4.sourceChecks.0.message"
         }
       ]
+    },
+    {
+      "id": "ci-format-items",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_inventory(items):\n    result = []\n    for name, count in items.items():\n        result.append(f\"{name}: {count}\")\n    return result",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_inventory",
+            "args": [
+              [
+                [
+                  "pens",
+                  3
+                ],
+                [
+                  "paper",
+                  2
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": [
+              "pens: 3",
+              "paper: 2"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_inventory",
+            "args": [
+              [
+                [
+                  "apple",
+                  1
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": [
+              "apple: 1"
+            ],
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "ci-remove-key",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def remove_item(data, key_name):\n    if key_name in data:\n        del data[key_name]\n    return data",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "remove_item",
+            "args": [
+              [
+                [
+                  "pens",
+                  10
+                ],
+                [
+                  "paper",
+                  4
+                ]
+              ],
+              "pens"
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value"
+            ],
+            "expected": [
+              [
+                "paper",
+                4
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "remove_item",
+            "args": [
+              [
+                [
+                  "pens",
+                  10
+                ],
+                [
+                  "paper",
+                  4
+                ]
+              ],
+              "eraser"
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value"
+            ],
+            "expected": [
+              [
+                "pens",
+                10
+              ],
+              [
+                "paper",
+                4
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "ci-update-score",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def update_score(scores, name, new_score):\n    scores[name] = new_score\n    return scores",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "update_score",
+            "args": [
+              [
+                [
+                  "Ava",
+                  8
+                ],
+                [
+                  "Ben",
+                  5
+                ]
+              ],
+              "Ben",
+              6
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "Ava",
+                8
+              ],
+              [
+                "Ben",
+                6
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "update_score",
+            "args": [
+              [
+                [
+                  "Ava",
+                  8
+                ]
+              ],
+              "Cara",
+              7
+            ],
+            "argKinds": [
+              "dict_entries",
+              "value",
+              "value"
+            ],
+            "expected": [
+              [
+                "Ava",
+                8
+              ],
+              [
+                "Cara",
+                7
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     }
   ]
 }

@@ -113,6 +113,42 @@
                 "product_name",
                 "date"
               ]
+            },
+            "practice-retained-capstone-step1": {
+              "title": "Practice: Step 1: Basic Sales Report",
+              "prompt": "Create a basic sales report that lists the total sales amount for each product category. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading the Capstone Reporting Brief in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY category;"
+            },
+            "practice-retained-capstone-step2": {
+              "title": "Practice: Step 2: Filter by Completed Orders",
+              "prompt": "Modify the report to include only completed orders. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading the Capstone Reporting Brief in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;"
+            },
+            "practice-retained-capstone-step3": {
+              "title": "Practice: Step 3: Include Average Customer Rating",
+              "prompt": "Enhance the report to include the average customer rating for each category. Use the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading the Capstone Reporting Brief in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT category, SUM(quantity * unit_price) AS total_sales, AVG(customer_rating) AS avg_rating\nFROM sales_reporting\nWHERE order_status = 'Completed'\nGROUP BY category;"
             }
           }
         }

@@ -153,6 +153,54 @@
                 "car",
                 "main"
               ]
+            },
+            "project-step-account-class": {
+              "title": "Create the Account class",
+              "prompt": "Practice creating a small account model. Define an `Account` class in `models/account.py` with an `__init__(self, owner, balance)` constructor that stores `owner` and `balance`. In the main code, create `Account(\"Ava\", 120)` and print the owner on one line and the balance on the next line.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\n# Create Ava's account and print owner then balance.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\n# Create Ava's account and print owner then balance."
+                }
+              }
+            },
+            "project-step-account-methods": {
+              "title": "Add account methods",
+              "prompt": "Practice putting account behavior on the model. Keep the provided `Account` class with `owner` and `balance`, then add a `deposit(self, amount)` method that increases the balance and a `summary(self)` method that returns `<owner>: $<balance>`. The main code creates `Account(\"Ava\", 120)`, deposits `30`, and prints the summary.",
+              "hint": "One method changes state, and the other reports the current state.",
+              "help": {
+                "concept": "This step checks that methods can both update object state and return text based on the updated attributes.",
+                "hint_1": "`deposit` should add the incoming amount to `self.balance`.",
+                "hint_2": "After calling `deposit(30)`, the summary should reflect the new balance, not the original one."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\naccount = Account(\"Ava\", 120)\n\n# Deposit 30, then print the summary.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\n\n# Deposit 30, then print the summary."
+                }
+              }
+            },
+            "project-step-two-accounts": {
+              "title": "Keep state separate across two accounts",
+              "prompt": "Practice working with two instances of the same class. Keep the provided `Account` class with `owner`, `balance`, `deposit`, and `summary`. The main code creates Ava and Noah accounts and deposits into Ava's account only. Finish the code so the two printed summaries show that each object keeps its own state.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\n# Deposit 30 into Ava's account only.\n# Print Ava's summary, then Noah's summary.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\n# Deposit 30 into Ava's account only.\n# Print Ava's summary, then Noah's summary."
+                }
+              }
             }
           }
         }

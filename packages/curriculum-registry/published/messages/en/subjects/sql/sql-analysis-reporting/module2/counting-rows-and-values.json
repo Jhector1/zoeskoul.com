@@ -124,6 +124,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    COUNT(*) AS total_orders,\n    COUNT(discount_pct) AS orders_with_discount_data\nFROM sales_reporting;"
+            },
+            "practice-retained-counting-rows-and-values-sketch1": {
+              "title": "Practice: Count Rated Orders",
+              "prompt": "Write a query to count the number of orders with a non-null customer rating in the `sales_reporting` table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Counting Rows and Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT COUNT(customer_rating) FROM sales_reporting;"
+            },
+            "practice-count-distinct-sales-reps": {
+              "title": "Practice: Count Distinct Sales Representatives",
+              "prompt": "Count how many distinct sales representatives appear in the sales_reporting table. Name the result `sales_rep_count`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Counting Rows and Values in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT COUNT(DISTINCT sales_rep) AS sales_rep_count\nFROM sales_reporting;"
             }
           },
           "tryIt": {

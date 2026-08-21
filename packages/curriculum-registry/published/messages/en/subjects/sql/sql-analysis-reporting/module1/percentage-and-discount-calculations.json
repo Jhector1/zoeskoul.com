@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    order_id,\n    product_name,\n    ROUND(\n        quantity * unit_price\n        - quantity * unit_price * COALESCE(discount_pct, 0) / 100,\n        2\n    ) AS net_sales\nFROM sales_reporting\nWHERE order_status = 'Pending';"
+            },
+            "practice-retained-percentage-and-discount-calculations-sketch1": {
+              "title": "Practice: Calculate Net Sales",
+              "prompt": "Write a SQL query to calculate the net sales for each product in the `sales_reporting` table. Use COALESCE to handle NULL values in `discount_pct`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Percentage and Discount Calculations in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT product_name, unit_price, COALESCE(discount_pct, 0) AS discount_pct, \n       unit_price * (COALESCE(discount_pct, 0) / 100) AS discount_amount, \n       unit_price - (unit_price * (COALESCE(discount_pct, 0) / 100)) AS net_sales\nFROM sales_reporting;"
+            },
+            "practice-calculate-order-discount-amount": {
+              "title": "Practice: Calculate Order Discount Amount",
+              "prompt": "Return order id and the total discount amount for the whole order. Treat a missing discount percentage as 0 and round the result to two decimal places. Sort by order id.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Percentage and Discount Calculations in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    order_id,\n    ROUND(quantity * unit_price * COALESCE(discount_pct, 0) / 100.0, 2) AS discount_amount\nFROM sales_reporting\nORDER BY order_id;"
             }
           },
           "tryIt": {

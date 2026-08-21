@@ -141,6 +141,30 @@
               },
               "starterCode": "-- Write your SQL answer below",
               "solutionCode": "SELECT departments.name AS department_name,\n       students.name AS student_name\nFROM departments\nLEFT JOIN courses ON departments.id = courses.department_id\nLEFT JOIN enrollments ON courses.id = enrollments.course_id\nLEFT JOIN students ON enrollments.student_id = students.id\nORDER BY departments.id, students.name;"
+            },
+            "practice-retained-left-join-sketch0": {
+              "title": "Practice: LEFT JOIN with Students and Enrollments",
+              "prompt": "Write a query to list all students and their enrollment details. Ensure that students without enrollments are still included in the results.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies LEFT JOIN Preserves Unmatched Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, enrollments.course_id\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id;"
+            },
+            "practice-retained-left-join-sketch1": {
+              "title": "Practice: Preserve All Students in Course Listings",
+              "prompt": "Write a query to list all students and the courses they are enrolled in. Ensure that students without enrollments are still included in the results.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies LEFT JOIN Preserves Unmatched Rows in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT students.name, courses.title\nFROM students\nLEFT JOIN enrollments ON students.id = enrollments.student_id\nLEFT JOIN courses ON enrollments.course_id = courses.id;"
             }
           }
         }

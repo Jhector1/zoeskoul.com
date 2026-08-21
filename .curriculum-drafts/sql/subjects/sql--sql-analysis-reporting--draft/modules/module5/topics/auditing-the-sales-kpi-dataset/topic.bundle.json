@@ -314,6 +314,130 @@
         ]
       },
       "showExpectedExample": true
+    },
+    {
+      "id": "practice-retained-auditing-the-sales-kpi-dataset-sketch1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "sales_reporting",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_reporting",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch1.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-retained-auditing-the-sales-kpi-dataset-sketch2",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch2",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch2.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "sales_reporting",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch2.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "sales_reporting",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch2.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

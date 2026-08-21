@@ -283,7 +283,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -363,7 +363,7 @@
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -410,7 +410,7 @@
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -501,7 +501,7 @@
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -592,7 +592,7 @@
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal",
       "language": "python",
       "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -674,6 +674,91 @@
           "message": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.sourceChecks.1.message"
         }
       ]
+    },
+    {
+      "id": "practice-item-quantity-fstring",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Notebook\n3\n",
+            "stdout": "Notebook x 3\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Pen\n12\n",
+            "stdout": "Pen x 12\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

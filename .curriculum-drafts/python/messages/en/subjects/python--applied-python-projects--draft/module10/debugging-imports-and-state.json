@@ -182,16 +182,22 @@
             "ci-debugging-imports-and-state-4": {
               "title": "Fix a service import and keep the report working",
               "prompt": "A classroom catalog app has a report service that should import `CatalogItem` from the models package and format one line of text. Fix the broken import in `services/report_service.py` so `main.py` prints `Marker: 8`. Keep the existing function and class names.",
-              "hint": "Identify the concept being tested, then compare every option with that concept.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Focus on why Python reaches the result, not only on the final answer shown in the output.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity"
+                },
+                "services_report_service_py": {
+                  "content": "from model.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\""
                 }
               }
             },
@@ -204,26 +210,38 @@
                 "hint_1": "Avoid using `[]` directly as the default parameter value.",
                 "hint_2": "Use a placeholder default, then create a fresh list inside `__init__` when needed."
               },
-              "starterCode": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+              "starterCode": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
               "starterFiles": {
+                "models_init_py": {
+                  "content": "# package marker"
+                },
+                "models_cart_py": {
+                  "content": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)"
+                },
                 "main_py": {
-                  "content": "# TODO: Update main.py to complete this step: Repair independent cart state in a model file.\nclass Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)"
+                  "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())"
                 }
               }
             },
             "ci-debugging-imports-and-state-6": {
               "title": "Fix a state-changing method in a task model",
               "prompt": "A project tracker has a `Task` class with a `complete()` method. Right now the method returns `True` but forgets to update the object's `done` attribute. Fix the method so the object's state changes correctly and repeated calls still leave it completed.",
-              "hint": "Match each choice against the precise rule introduced in the lesson.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
               "help": {
-                "concept": "Focus on why Python reaches the result, not only on the final answer shown in the output.",
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done",
+              "starterCode": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
               "starterFiles": {
+                "models_init_py": {
+                  "content": "# package marker"
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done"
+                },
                 "main_py": {
-                  "content": "# TODO: Update main.py to complete this step: Fix a state-changing method in a task model.\nclass Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done"
+                  "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())"
                 }
               }
             }

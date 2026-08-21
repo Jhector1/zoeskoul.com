@@ -182,6 +182,63 @@
                   "message": "Follow the exact code structure that is explicitly shown in the prompt."
                 }
               }
+            },
+            "ci-copy-between-paths": {
+              "title": "Copy text to another relative path",
+              "prompt": "Copy the text from `data/source.txt` into `data/copy.txt`, then print the copied text so we can confirm both files match.\n\nYour output should be exactly:\n`apple`\n`banana`.",
+              "hint": "Read the task \"Copy text to another relative path\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+              "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read from data/source.txt."
+                },
+                "1": {
+                  "message": "Write to data/copy.txt."
+                },
+                "2": {
+                  "message": "Use file.write() to create the copy."
+                }
+              }
+            },
+            "ci-count-lines-in-folder": {
+              "title": "Count lines from a file path",
+              "prompt": "Open `data/items.txt`, count how many lines it contains, and print the result.\n\nYour output should be exactly:\n`3`.",
+              "hint": "Read the task \"Count lines from a file path\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+              "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/items.txt to count its lines."
+                }
+              }
+            },
+            "ci-read-nested-file": {
+              "title": "Read from a nested relative path",
+              "prompt": "Open `data/input.txt`, read the text from that relative path, and print it.\n\nYour output should be exactly:\n`Hello paths!`.",
+              "hint": "Read the task \"Read from a nested relative path\" and identify the required result.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+              "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/input.txt to read the nested file."
+                }
+              }
             }
           },
           "tryIt": {

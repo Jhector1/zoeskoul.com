@@ -190,6 +190,408 @@
         "kind": "single_choice",
         "optionId": "a"
       }
+    },
+    {
+      "id": "practice-preview-update-verify-id-five",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT id, name, status\nFROM inventory_items\nWHERE id = 5;",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-preview-price-change-id-three",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT id, name, price\nFROM inventory_items\nWHERE id = 3;",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-preview-delete-test-decor",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor",
+      "language": "sql",
+      "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterCode",
+      "starterFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "operations.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.solutionFiles.operations_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.solutionFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": false,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "datasetId": "inventory_ops",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "operations.sql",
+        "entryFile": "operations.sql",
+        "openTabs": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "starterCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterCode",
+        "starterFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "operations.sql",
+            "query.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "inventory_ops",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.runtimeSolutionCode",
+        "solutionFiles": [
+          {
+            "path": "operations.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.solutionFiles.operations_sql.content",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          },
+          {
+            "path": "query.sql",
+            "content": "@:topics.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.solutionFiles.query_sql.content",
+            "language": "sql",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": false
+          }
+        ],
+        "checkSql": "SELECT id, name, category, is_test\nFROM inventory_items\nWHERE category = 'Decor' AND is_test = 1\nORDER BY id;",
+        "sqlFileOrder": [
+          "operations.sql",
+          "query.sql"
+        ],
+        "ignoreRowOrder": true
+      },
+      "entryFilePath": "operations.sql",
+      "sqlFileOrder": [
+        "operations.sql",
+        "query.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "operations.sql",
+          "query.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

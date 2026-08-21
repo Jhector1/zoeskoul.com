@@ -255,7 +255,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex9",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex9.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -345,7 +345,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex10",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex10.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -435,7 +435,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex11",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex11.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -525,7 +525,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex12",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex12.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -615,7 +615,7 @@
       "messageBase": "topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex13",
       "language": "python",
       "starterCode": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.quiz.ex13.starterCode",
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
@@ -696,6 +696,96 @@
           "normalizeWhitespace": false
         }
       ]
+    },
+    {
+      "id": "practice-sum-even-values",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.practice.practice-sum-even-values",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.practice.practice-sum-even-values.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.practice.practice-sum-even-values.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.practice.practice-sum-even-values.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.practice.practice-sum-even-values.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.practice.practice-sum-even-values.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.practice.practice-sum-even-values.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [],
+          "requiredFiles": []
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "1 2 3 4\n",
+            "stdout": "6\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "2 6 9\n",
+            "stdout": "8\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "1 3 5\n",
+            "stdout": "0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.practice.practice-sum-even-values.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.accumulators-and-counters.practice.practice-sum-even-values.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [],
+        "requiredFiles": []
+      }
     }
   ]
 }

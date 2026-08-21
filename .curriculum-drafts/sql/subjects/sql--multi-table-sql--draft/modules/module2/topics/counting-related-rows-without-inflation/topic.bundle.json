@@ -308,6 +308,130 @@
           "b"
         ]
       }
+    },
+    {
+      "id": "practice-retained-counting-related-rows-without-inflation-sketch1",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-retained-counting-related-rows-without-inflation-sketch1",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-retained-counting-related-rows-without-inflation-sketch1.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-retained-counting-related-rows-without-inflation-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-retained-counting-related-rows-without-inflation-sketch1.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-retained-counting-related-rows-without-inflation-sketch1.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
+    },
+    {
+      "id": "practice-count-distinct-courses-per-student",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-distinct-courses-per-student",
+      "language": "sql",
+      "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-distinct-courses-per-student.starterCode",
+      "fixedSqlDialect": "sqlite",
+      "runtime": {
+        "kind": "sql",
+        "showSchema": true,
+        "showErd": true,
+        "showChen": false,
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "datasetId": "school_relations_intro",
+        "fixedSqlDialect": "sqlite",
+        "resultShape": "table"
+      },
+      "workspace": {
+        "language": "sql",
+        "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-distinct-courses-per-student.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sql",
+            "content": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-distinct-courses-per-student.starterCode",
+            "language": "sql",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "openTabs": [
+          "main.sql"
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "main.sql"
+          ]
+        }
+      },
+      "recipe": {
+        "type": "sql_query",
+        "datasetId": "school_relations_intro",
+        "resultShape": "table",
+        "solutionCode": "@:topics.sql--multi-table-sql--draft.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-distinct-courses-per-student.solutionCode",
+        "sqlFileOrder": [
+          "main.sql"
+        ]
+      },
+      "sqlFileOrder": [
+        "main.sql"
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "main.sql"
+        ]
+      },
+      "showExpectedExample": true
     }
   ]
 }

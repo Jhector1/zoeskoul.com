@@ -125,6 +125,30 @@
               },
               "starterCode": "-- Write the query below.",
               "solutionCode": "SELECT\n    category,\n    order_status,\n    SUM(quantity) AS total_units\nFROM sales_reporting\nGROUP BY category, order_status\nORDER BY category, order_status;"
+            },
+            "practice-retained-group-by-multiple-columns-sketch1": {
+              "title": "Practice: Sort Grouped Results by Total Sales",
+              "prompt": "Write a query to find the total sales amount for each combination of region and category, and sort the results by total sales in descending order.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies GROUP BY Multiple Columns in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below",
+              "solutionCode": "SELECT region, category, SUM(quantity * unit_price) AS total_sales\nFROM sales_reporting\nGROUP BY region, category\nORDER BY total_sales DESC;"
+            },
+            "practice-region-status-order-counts": {
+              "title": "Practice: Group by Region and Status",
+              "prompt": "Count orders for each region and order-status combination. Sort by region, then order status.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies GROUP BY Multiple Columns in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT\n    region,\n    order_status,\n    COUNT(*) AS order_count\nFROM sales_reporting\nGROUP BY region, order_status\nORDER BY region, order_status;"
             }
           },
           "tryIt": {

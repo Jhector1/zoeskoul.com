@@ -156,6 +156,74 @@
               "prompt": "Build two tuple records from input, store them in a list, and unpack each record in a loop."
             },
             "allowReveal": true
+          },
+          "practice": {
+            "practice-unpack-name-score": {
+              "title": "Unpack a name and score record",
+              "prompt": "Read a name and a whole-number score. Store them together in a tuple named `record`, unpack the tuple into `name` and `score`, then print `NAME: SCORE`.",
+              "hint": "Create `(name_input, score_input)`, then assign `name, score = record`.",
+              "help": {
+                "concept": "Tuple unpacking assigns each fixed record field to a matching variable in one statement.",
+                "hint_1": "Create `(name_input, score_input)`, then assign `name, score = record`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "name_input = input().strip()\nscore_input = int(input())\n\n# Build record, unpack it, and print NAME: SCORE.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "name_input = input().strip()\nscore_input = int(input())\n\n# Build record, unpack it, and print NAME: SCORE.\n"
+                }
+              },
+              "solutionCode": "name_input = input().strip()\nscore_input = int(input())\nrecord = (name_input, score_input)\nname, score = record\nprint(f\"{name}: {score}\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "name_input = input().strip()\nscore_input = int(input())\nrecord = (name_input, score_input)\nname, score = record\nprint(f\"{name}: {score}\")\n"
+                }
+              }
+            },
+            "practice-tuple-first-and-last": {
+              "title": "Read fields from a tuple record",
+              "prompt": "Read a city, a day, and a temperature. Store them as `(city, day, temperature)` in `record`, then print the first field and the last field on separate lines using tuple indexes.",
+              "hint": "The first field is index `0`; the last field can be accessed with `-1`.",
+              "help": {
+                "concept": "A tuple keeps record fields in a stable order, so indexes can retrieve known positions directly.",
+                "hint_1": "The first field is index `0`; the last field can be accessed with `-1`.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "city = input().strip()\nday = input().strip()\ntemperature = int(input())\n\n# Build record and print its first and last fields.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "city = input().strip()\nday = input().strip()\ntemperature = int(input())\n\n# Build record and print its first and last fields.\n"
+                }
+              },
+              "solutionCode": "city = input().strip()\nday = input().strip()\ntemperature = int(input())\nrecord = (city, day, temperature)\nprint(record[0])\nprint(record[-1])\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "city = input().strip()\nday = input().strip()\ntemperature = int(input())\nrecord = (city, day, temperature)\nprint(record[0])\nprint(record[-1])\n"
+                }
+              }
+            },
+            "practice-loop-unpack-two-records": {
+              "title": "Loop through tuple records with unpacking",
+              "prompt": "Read two names and two scores. Build a list containing two `(name, score)` tuples. Loop with `for name, score in records:` and print each record as `NAME -> SCORE`.",
+              "hint": "Build two tuples first, then unpack each tuple directly in the `for` loop header.",
+              "help": {
+                "concept": "A loop can unpack each tuple record as it is visited, giving clear names to the fields without separate index lookups.",
+                "hint_1": "Build two tuples first, then unpack each tuple directly in the `for` loop header.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "name1 = input().strip()\nscore1 = int(input())\nname2 = input().strip()\nscore2 = int(input())\n\n# Build two tuple records and loop through them with unpacking.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "name1 = input().strip()\nscore1 = int(input())\nname2 = input().strip()\nscore2 = int(input())\n\n# Build two tuple records and loop through them with unpacking.\n"
+                }
+              },
+              "solutionCode": "name1 = input().strip()\nscore1 = int(input())\nname2 = input().strip()\nscore2 = int(input())\nrecords = [(name1, score1), (name2, score2)]\nfor name, score in records:\n    print(f\"{name} -> {score}\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "name1 = input().strip()\nscore1 = int(input())\nname2 = input().strip()\nscore2 = int(input())\nrecords = [(name1, score1), (name2, score2)]\nfor name, score in records:\n    print(f\"{name} -> {score}\")\n"
+                }
+              }
+            }
           }
         }
       }

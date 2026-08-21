@@ -424,6 +424,292 @@
           "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.sourceChecks.1.message"
         }
       ]
+    },
+    {
+      "id": "ci-full-name",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def full_name(first, last):\n    return first + \" \" + last",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "full_name",
+            "args": [
+              "Ada",
+              "Lovelace"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Ada Lovelace",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "full_name",
+            "args": [
+              "Sam",
+              "Lee"
+            ],
+            "argKinds": [
+              "value",
+              "value"
+            ],
+            "expected": "Sam Lee",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "ci-make-greeting",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_greeting(name):\n    return \"Hello, \" + name",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "make_greeting",
+            "args": [
+              "Ava"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Hello, Ava",
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "make_greeting",
+            "args": [
+              "Leo"
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": "Hello, Leo",
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "ci-square-number",
+      "kind": "code_input",
+      "purpose": "practice",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number",
+      "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def square(number):\n    return number * number",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "square",
+            "args": [
+              4
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 16,
+            "expectedKind": "value"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "square",
+            "args": [
+              7
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 49,
+            "expectedKind": "value"
+          },
+          {
+            "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     }
   ]
 }

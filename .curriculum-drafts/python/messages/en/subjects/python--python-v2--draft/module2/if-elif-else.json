@@ -241,6 +241,30 @@
                 }
               }
             }
+          },
+          "practice": {
+            "practice-temperature-branches": {
+              "title": "Classify a temperature with three branches",
+              "prompt": "Read one integer temperature. Print `freezing` when it is below 0, `cool` when it is below 20, and `warm` otherwise. Use `if`, `elif`, and `else`.",
+              "hint": "After the below-zero case, the `elif` only needs to check whether the remaining value is below 20.",
+              "help": {
+                "concept": "An `if`/`elif`/`else` chain chooses the first matching branch, so ordering narrower ranges before later fallbacks keeps the conditions simple.",
+                "hint_1": "After the below-zero case, the `elif` only needs to check whether the remaining value is below 20.",
+                "hint_2": "Run the program and compare the output with the expected example."
+              },
+              "starterCode": "temperature = int(input())\n\n# Print freezing, cool, or warm.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "temperature = int(input())\n\n# Print freezing, cool, or warm.\n"
+                }
+              },
+              "solutionCode": "temperature = int(input())\nif temperature < 0:\n    print(\"freezing\")\nelif temperature < 20:\n    print(\"cool\")\nelse:\n    print(\"warm\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "temperature = int(input())\nif temperature < 0:\n    print(\"freezing\")\nelif temperature < 20:\n    print(\"cool\")\nelse:\n    print(\"warm\")\n"
+                }
+              }
+            }
           }
         }
       }

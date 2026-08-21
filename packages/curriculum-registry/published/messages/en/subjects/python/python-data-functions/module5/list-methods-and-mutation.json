@@ -192,6 +192,57 @@
                   "message": "Print the sorted `times` list itself after sorting it in place."
                 }
               }
+            },
+            "ci-1": {
+              "title": "Add an item and print the list",
+              "prompt": "A pencil case already has `pen` and `pencil`. Read one more item from input, add it to `items`, and print the updated list.\n\nFor example, if the input is `eraser`, your program should print:\n`['pen', 'pencil', 'eraser']`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
+              "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use items.append(item) so the list is really mutated."
+                }
+              }
+            },
+            "ci-2": {
+              "title": "Remove a value and show the result",
+              "prompt": "The list `colors` starts as `['red', 'blue', 'green']`. Read one color from input, remove that value from the list, and print the updated list.\n\nFor example, if the input is `blue`, your program should print:\n`['red', 'green']`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
+              "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use colors.remove(color) so the list is really mutated."
+                }
+              }
+            },
+            "ci-3": {
+              "title": "Sort numbers from input",
+              "prompt": "Three quiz scores arrive out of order. Put the input numbers into `numbers`, sort the list from smallest to largest, and print the sorted list.\n\nFor example, if the inputs are `9`, `2`, and `5`, your program should print:\n`[2, 5, 9]`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use numbers.sort() so the list is really sorted in place."
+                }
+              }
             }
           },
           "tryIt": {
