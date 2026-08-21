@@ -52,8 +52,17 @@ import {
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { buildServerResumePlan } from "./assignmentResumePolicy";
 import { resolvePracticePurposeRequestParams } from "./practiceRequestPolicy";
+import { resolvePracticeProgressCounts } from "./practiceProgressCounts";
 
 export type Phase = "practice" | "summary";
+
+type CompletedPracticeGetResponse = Extract<
+  PracticeGetResponse,
+  { complete: true }
+>;
+type PracticeProgressSnapshot =
+  | SessionStatus
+  | CompletedPracticeGetResponse;
 
 function applyAnswerPayloadToItem(item: QItem, payload: any) {
   if (!payload || typeof payload !== "object") return;
@@ -268,7 +277,8 @@ export function usePracticeEngine(args: {
   const submitLockRef = useRef(false);
   const loadLockRef = useRef(false);
   const bootCompleteRef = useRef(false);
-  const [serverStatus, setServerStatus] = useState<SessionStatus | null>(null);
+  const [serverStatus, setServerStatus] =
+    useState<PracticeProgressSnapshot | null>(null);
 
   const [serverMissed, setServerMissed] = useState<MissedItem[]>([]);
   const [serverHistoryStack, setServerHistoryStack] = useState<QItem[]>([]);
@@ -443,14 +453,20 @@ export function usePracticeEngine(args: {
     return stack;
   }, [stack, serverHistoryStack, serverStatus, completed]);
 
-  const serverAnswered = Math.max(
-      serverStatus?.totalCount ?? 0,
-      serverStatus?.answeredCount ?? 0,
-  );
-  const serverCorrect = serverStatus?.correctCount ?? 0;
+  const canonicalSubscriberPractice =
+    serverStatus?.run?.mode === "practice"
+      ? serverStatus.run.subscriberPractice ?? null
+      : run?.mode === "practice"
+        ? run.subscriberPractice ?? null
+        : null;
 
-  const answeredCount = Math.max(localAnswered, serverAnswered);
-  const correctCount = Math.max(localCorrect, serverCorrect);
+  const { answeredCount, correctCount } =
+    resolvePracticeProgressCounts({
+      localAnswered,
+      localCorrect,
+      serverStatus,
+      subscriberPractice: canonicalSubscriberPractice,
+    });
 
   const pct = computePracticePct({
     answeredCount,
@@ -527,6 +543,37 @@ export function usePracticeEngine(args: {
     }
   }
 
+  function applyCompletedPracticeSnapshot(
+    response: CompletedPracticeGetResponse,
+  ) {
+    setServerStatus(response);
+    setServerMissed(
+      Array.isArray(response.missed) ? response.missed : [],
+    );
+    setServerHistoryStack(
+      Array.isArray(response.history)
+        ? response.history.map(historyRowToQItem)
+        : [],
+    );
+
+    const responseTargetCount = Math.max(
+      Number(response.targetCount ?? 0),
+      Number(response.totalCount ?? 0),
+    );
+    if (
+      Number.isFinite(responseTargetCount) &&
+      responseTargetCount > 0
+    ) {
+      setSessionSize(responseTargetCount);
+    }
+
+    setCompletionReturnUrl(
+      response.returnUrl ||
+      response.run?.returnUrl ||
+      returnUrlFromQuery,
+    );
+  }
+
   async function refreshCurrentPracticeKey() {
     if (!current || !exercise) return null;
 
@@ -559,6 +606,9 @@ export function usePracticeEngine(args: {
     if (runFromApi?.mode && !acceptRunMeta(runFromApi)) return null;
 
     if ((response as any)?.complete) {
+      applyCompletedPracticeSnapshot(
+        response as CompletedPracticeGetResponse,
+      );
       setCompleted(true);
       setAutoSummarized(true);
       setPhase("summary");
@@ -676,6 +726,9 @@ export function usePracticeEngine(args: {
       }
 
       if ((response as any)?.complete) {
+        applyCompletedPracticeSnapshot(
+          response as CompletedPracticeGetResponse,
+        );
         const sid2 = (response as any)?.sessionId;
         if (sid2) setSessionId(String(sid2));
 
@@ -1283,6 +1336,7 @@ export function usePracticeEngine(args: {
     exercise,
     answeredCount,
     correctCount,
+    modulePracticeProgress: canonicalSubscriberPractice,
     missed,
     badge,
     pct,

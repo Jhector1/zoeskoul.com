@@ -8,6 +8,7 @@ import SummaryView from "@/components/practice/shell/SummaryView";
 import PracticeNavigator from "./PracticeNavigator";
 import PracticeCompletionCelebration from "@/components/practice/completion/PracticeCompletionCelebration";
 import { resolvePracticeDisplayStack } from "@/lib/practice/experience/reviewDisplayStack";
+import { resolveCanonicalPracticeQueueRows } from "@/lib/practice/experience/canonicalPracticeQueueProjection";
 import { isLessonPracticeReturnUrl } from "@/lib/practice/experience/completion";
 import StandaloneReviewExerciseFlow from "./StandaloneReviewExerciseFlow";
 
@@ -150,6 +151,18 @@ function PracticeStage({
   const [activeTab, setActiveTab] = useState<"lesson" | "code">("lesson");
   const t = useTranslations("Practice.workspace");
   const copy = stageCopy(props, t);
+  const isSelfPacedPractice =
+    props.experienceMode === "practice" ||
+    props.experienceMode === "standard";
+  const canonicalQueueRows = isSelfPacedPractice
+    ? resolveCanonicalPracticeQueueRows({
+        selectedTargets: props.modulePracticeProgress?.selectedTargets,
+        completedPrefix: props.modulePracticeProgress?.completedPrefix,
+        queueStack: props.stack,
+      })
+    : [];
+  const hasCanonicalQueueRows = canonicalQueueRows.length > 0;
+
   const stackAuthoredIdentities = new Set(
     props.stack
       .map((item) => {
@@ -166,8 +179,8 @@ function PracticeStage({
       })
       .filter(Boolean),
   );
-  const completedPrefixCount =
-    props.experienceMode === "practice" || props.experienceMode === "standard"
+  const legacyCompletedPrefixCount =
+    isSelfPacedPractice && !hasCanonicalQueueRows
       ? (props.modulePracticeProgress?.completedPrefix ?? []).filter(
           (target) =>
             !stackAuthoredIdentities.has(
@@ -175,17 +188,24 @@ function PracticeStage({
             ),
         ).length
       : 0;
-  const modulePracticeTotal =
-    props.experienceMode === "practice" || props.experienceMode === "standard"
-      ? props.modulePracticeProgress?.moduleTotal ?? null
-      : null;
-  const displayTotal =
-    modulePracticeTotal && modulePracticeTotal > 0
+  const modulePracticeTotal = isSelfPacedPractice
+    ? props.modulePracticeProgress?.moduleTotal ?? null
+    : null;
+  const displayTotal = hasCanonicalQueueRows
+    ? canonicalQueueRows.length
+    : modulePracticeTotal && modulePracticeTotal > 0
       ? modulePracticeTotal
       : props.sessionSize;
+  const canonicalDisplayIndex = hasCanonicalQueueRows
+    ? canonicalQueueRows.findIndex(
+        (row) => row.sessionIndex === props.idx,
+      )
+    : -1;
   const displayIndex = Math.min(
     Math.max(0, displayTotal - 1),
-    completedPrefixCount + props.idx,
+    canonicalDisplayIndex >= 0
+      ? canonicalDisplayIndex
+      : legacyCompletedPrefixCount + props.idx,
   );
   const slots = useMemo(
     () =>
@@ -210,7 +230,20 @@ function PracticeStage({
             mode="slideshow"
             activeIndex={displayIndex}
             onActiveIndexChange={(index) => {
-              const sessionIndex = index - completedPrefixCount;
+              if (hasCanonicalQueueRows) {
+                const row = canonicalQueueRows[index] ?? null;
+                if (
+                  row &&
+                  !row.completed &&
+                  row.sessionIndex >= 0 &&
+                  row.sessionIndex < props.stack.length
+                ) {
+                  props.setIdx(row.sessionIndex);
+                }
+                return;
+              }
+
+              const sessionIndex = index - legacyCompletedPrefixCount;
               if (sessionIndex >= 0 && sessionIndex < props.stack.length) {
                 props.setIdx(sessionIndex);
               }

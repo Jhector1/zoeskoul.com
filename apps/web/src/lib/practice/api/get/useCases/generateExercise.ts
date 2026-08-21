@@ -428,6 +428,15 @@ export async function generatePracticeExercise(
             },
             subscriberPractice: {
                 moduleTotal: selfPacedPractice.targetCount,
+                selectedTargets: selfPacedPractice.selectedTargets.map(
+                    (target) => ({
+                        exerciseKey: target.exerciseKey,
+                        exerciseTitle: target.exerciseTitle,
+                        exerciseKind: target.exerciseKind,
+                        topicSlug: target.topicSlug,
+                        sectionSlug: target.sectionSlug,
+                    }),
+                ),
                 completedPrefix: selfPacedPractice.completedPrefix.map(
                     (target) => ({
                         exerciseKey: target.exerciseKey,

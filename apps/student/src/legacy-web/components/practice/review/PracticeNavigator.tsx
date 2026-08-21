@@ -15,6 +15,7 @@ import {
   resolvePracticeDisplayStack,
   resolvePracticeQueuePlaceholderStatus,
 } from "@/lib/practice/experience/reviewDisplayStack";
+import { resolveCanonicalPracticeQueueRows } from "@/lib/practice/experience/canonicalPracticeQueueProjection";
 
 type NavigatorPanel = "controls" | "leaderboard";
 
@@ -106,6 +107,18 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
     reviewStack: props.reviewStack,
     answeredCount: props.answeredCount,
   });
+  const isSelfPacedPractice =
+    props.experienceMode === "practice" ||
+    props.experienceMode === "standard";
+  const canonicalQueueRows = isSelfPacedPractice
+    ? resolveCanonicalPracticeQueueRows({
+        selectedTargets: props.modulePracticeProgress?.selectedTargets,
+        completedPrefix: props.modulePracticeProgress?.completedPrefix,
+        queueStack,
+      })
+    : [];
+  const hasCanonicalQueueRows = canonicalQueueRows.length > 0;
+
   const stackAuthoredIdentities = new Set(
     queueStack
       .map((item) => {
@@ -122,8 +135,8 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
       })
       .filter(Boolean),
   );
-  const completedPrefix =
-    props.experienceMode === "practice" || props.experienceMode === "standard"
+  const legacyCompletedPrefix =
+    isSelfPacedPractice && !hasCanonicalQueueRows
       ? (props.modulePracticeProgress?.completedPrefix ?? []).filter(
           (target) =>
             !stackAuthoredIdentities.has(
@@ -131,24 +144,17 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
             ),
         )
       : [];
-  const completedPrefixCount = completedPrefix.length;
-  const modulePracticeTotal =
-    props.experienceMode === "practice" || props.experienceMode === "standard"
-      ? props.modulePracticeProgress?.moduleTotal ?? null
-      : null;
-  const displayTotal =
-    modulePracticeTotal && modulePracticeTotal > 0
+  const legacyCompletedPrefixCount = legacyCompletedPrefix.length;
+  const modulePracticeTotal = isSelfPacedPractice
+    ? props.modulePracticeProgress?.moduleTotal ?? null
+    : null;
+  const displayTotal = hasCanonicalQueueRows
+    ? canonicalQueueRows.length
+    : modulePracticeTotal && modulePracticeTotal > 0
       ? modulePracticeTotal
       : props.sessionSize;
-  const displayAnswered = Math.min(
-    displayTotal,
-    completedPrefixCount + props.answeredCount,
-  );
-  const displayCorrect = Math.min(
-    displayTotal,
-    completedPrefix.filter((target) => target.correct === true).length +
-      props.correctCount,
-  );
+  const displayAnswered = Math.min(displayTotal, props.answeredCount);
+  const displayCorrect = Math.min(displayTotal, props.correctCount);
   const resolvedTopicOptions = React.useMemo(
     () =>
       props.topicOptionsFixed.map((option) => ({
@@ -309,19 +315,31 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
             <ol className="grid gap-1.5">
               {Array.from({ length: Math.max(1, displayTotal) }).map(
                 (_, displayIndex) => {
-                  const priorCompleted =
-                    displayIndex < completedPrefixCount
-                      ? completedPrefix[displayIndex] ?? null
+                  const canonicalRow = hasCanonicalQueueRows
+                    ? canonicalQueueRows[displayIndex] ?? null
+                    : null;
+                  const canonicalTarget = canonicalRow?.target ?? null;
+                  const priorCompleted = canonicalRow
+                    ? canonicalRow.completed
+                    : displayIndex < legacyCompletedPrefixCount
+                      ? legacyCompletedPrefix[displayIndex] ?? null
                       : null;
-                  const sessionIndex = displayIndex - completedPrefixCount;
-                  const item =
-                    sessionIndex >= 0 ? queueStack[sessionIndex] ?? null : null;
+                  const sessionIndex = canonicalRow
+                    ? canonicalRow.sessionIndex
+                    : displayIndex - legacyCompletedPrefixCount;
+                  const item = canonicalRow
+                    ? canonicalRow.item
+                    : sessionIndex >= 0
+                      ? queueStack[sessionIndex] ?? null
+                      : null;
                   const isActive =
                     !priorCompleted &&
                     sessionIndex === props.idx &&
                     props.phase === "practice";
                   const queueStatus = priorCompleted
-                    ? "completed"
+                    ? priorCompleted.correct === true
+                      ? "correct"
+                      : "completed"
                     : item
                       ? resolvePracticeQueueStatus(item)
                       : resolvePracticeQueuePlaceholderStatus({
@@ -337,14 +355,17 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                     sessionIndex >= 0 &&
                     sessionIndex < queueStack.length &&
                     sessionIndex < props.stack.length;
-                  const disabled = Boolean(priorCompleted) || !sessionItemAvailable;
+                  const disabled =
+                    Boolean(priorCompleted) || !sessionItemAvailable;
 
                   return (
                     <li
                       key={
-                        priorCompleted
-                          ? `completed:${priorCompleted.topicSlug}:${priorCompleted.exerciseKey}`
-                          : `session:${displayIndex}`
+                        canonicalTarget
+                          ? `canonical:${canonicalTarget.topicSlug}:${canonicalTarget.exerciseKey}`
+                          : priorCompleted
+                            ? `completed:${priorCompleted.topicSlug}:${priorCompleted.exerciseKey}`
+                            : `session:${displayIndex}`
                       }
                     >
                       <button
@@ -381,29 +402,39 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                         </span>
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-sm font-bold">
-                            {priorCompleted
+                            {canonicalTarget
                               ? resolvePracticeDisplayTitle({
-                                  title: priorCompleted.exerciseTitle,
+                                  title: canonicalTarget.exerciseTitle,
                                   resolve,
                                   fallback: tw("navigator.exerciseFallback", {
                                     number: displayIndex + 1,
                                   }),
                                 })
-                              : item
+                              : priorCompleted
                                 ? resolvePracticeDisplayTitle({
-                                    title: item.exercise.title,
+                                    title: priorCompleted.exerciseTitle,
                                     resolve,
                                     fallback: tw("navigator.exerciseFallback", {
                                       number: displayIndex + 1,
                                     }),
                                   })
-                                : tw("navigator.exerciseFallback", {
-                                    number: displayIndex + 1,
-                                  })}
+                                : item
+                                  ? resolvePracticeDisplayTitle({
+                                      title: item.exercise.title,
+                                      resolve,
+                                      fallback: tw("navigator.exerciseFallback", {
+                                        number: displayIndex + 1,
+                                      }),
+                                    })
+                                  : tw("navigator.exerciseFallback", {
+                                      number: displayIndex + 1,
+                                    })}
                           </span>
                           <span className="mt-0.5 block truncate text-[11px] text-[rgb(var(--ui-text-muted)/0.84)]">
                             {priorCompleted
-                              ? tw("navigator.statusCompleted")
+                              ? priorCompleted.correct === true
+                                ? tw("navigator.statusCorrect")
+                                : tw("navigator.statusCompleted")
                               : isCorrect
                                 ? tw("navigator.statusCorrect")
                                 : isRevealed

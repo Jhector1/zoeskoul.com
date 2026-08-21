@@ -10,6 +10,7 @@ import {
 } from "./authoredPracticeQueue";
 import {
   buildSubscriberPracticePlan,
+  pickSubscriberPracticeQueue,
   type SubscriberPracticeHistoryItem,
   type SubscriberPracticeScope,
 } from "./subscriberPractice";
@@ -107,22 +108,37 @@ export async function loadSelfPacedPracticeState(args: {
     (item) => historyTime(item) <= startedAt.getTime(),
   );
   const requestedCount = positiveInt(args.targetCount);
-  const baselinePlan = buildSubscriberPracticePlan({
+  const scopePlan = buildSubscriberPracticePlan({
     options,
     subjectSlug,
     moduleSlug,
     sectionSlug,
     topicSlug,
-    targetCount: requestedCount,
+    targetCount: null,
     history: baselineHistory,
     seed: practiceRunId,
   });
 
-  const scopePoolTotal = baselinePlan.moduleTotal;
+  const scopePoolTotal = scopePlan.moduleTotal;
+
+  /**
+   * Completion changes row status, never selected membership.
+   *
+   * Select from the full eligible scope, not only the remaining unfinished
+   * pool. This keeps a Header/Lesson Practice list stable when an authored
+   * exercise was already completed from the other entry origin.
+   */
   const selectedTargets = uniqueTargets(
-    requestedCount == null
-      ? [...baselinePlan.completedPrefix, ...baselinePlan.queue]
-      : baselinePlan.queue,
+    pickSubscriberPracticeQueue({
+      options,
+      subjectSlug,
+      moduleSlug,
+      sectionSlug,
+      topicSlug,
+      targetCount: requestedCount ?? scopePoolTotal,
+      history: baselineHistory,
+      seed: practiceRunId,
+    }),
   );
 
   const latestCompletion = new Map<

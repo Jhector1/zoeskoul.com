@@ -28,6 +28,13 @@ export type PracticeChallengeRunMeta = {
 
 export type PracticeSubscriberRunMeta = {
   moduleTotal: number | null;
+  selectedTargets?: Array<{
+    exerciseKey: string;
+    exerciseTitle: string;
+    exerciseKind: string;
+    topicSlug: string;
+    sectionSlug: string;
+  }>;
   completedPrefix: Array<{
     exerciseKey: string;
     exerciseTitle: string;
