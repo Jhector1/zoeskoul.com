@@ -23,7 +23,11 @@ import { getPracticeRuntimeSurfacePolicy, type PracticeRuntimeSurface } from "@/
 import { resolvePracticeResumePolicy } from "./assignmentResumePolicy";
 import { resolvePracticePurposeDefaults } from "./experienceModePolicy";
 import type { SessionStatus } from "./sessionStatus";
-import { startSelfPacedPractice } from "@zoeskoul/learning-client";
+import {
+  buildSelfPacedPracticeContinuationEntryHref,
+  startSelfPacedPractice,
+} from "@zoeskoul/learning-client";
+import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 
 type PendingChange =
   | { kind: "topic"; value: TopicValue }
@@ -387,27 +391,12 @@ export function usePracticeController(args: {
     setActionErr(null);
 
     const locale = pathname.split("/").filter(Boolean)[0] || "en";
-    const rawTargetCount = Number(sp.get("questionCount"));
-    const requestedTargetCount =
-      Number.isFinite(rawTargetCount) && rawTargetCount > 0
-        ? Math.floor(rawTargetCount)
-        : null;
-
     try {
       setBusy(true);
       const started = await startSelfPacedPractice({
         locale,
         subjectSlug,
         moduleSlug,
-        sectionSlug: section,
-        topicSlug: topic === "all" ? null : String(topic),
-        targetCount: requestedTargetCount,
-        difficulty:
-          difficulty === "easy" ||
-          difficulty === "medium" ||
-          difficulty === "hard"
-            ? difficulty
-            : null,
         returnTo: returnUrlFromQuery,
       });
 
@@ -476,18 +465,50 @@ export function usePracticeController(args: {
         const parts = pathname.split("/").filter(Boolean);
         const locale = parts[0] || "en";
 
-        if (run?.mode === "daily_five") {
+        if (run?.mode === "daily_five" && subjectSlug && moduleSlug) {
           if (!run.viewer.subscribed) {
-            router.replace(`/${locale}/billing`, { scroll: false });
-            return;
-          }
-          if (subjectSlug && moduleSlug) {
+            const next = buildSelfPacedPracticeContinuationEntryHref({
+              locale,
+              subjectSlug,
+              moduleSlug,
+            });
+            const back =
+              `/${locale}/practice/daily?` +
+              new URLSearchParams({
+                subject: subjectSlug,
+                module: moduleSlug,
+              }).toString();
+
             router.replace(
-              `/${locale}/subjects/${encodeURIComponent(subjectSlug)}/modules/${encodeURIComponent(moduleSlug)}/practice`,
+              buildBillingHref({
+                locale,
+                next,
+                back,
+                reason: "module",
+                subject: subjectSlug,
+                module: moduleSlug,
+              }),
               { scroll: false },
             );
             return;
           }
+
+          void startSelfPacedPractice({
+            locale,
+            subjectSlug,
+            moduleSlug,
+          })
+            .then((started) => {
+              router.replace(started.href, { scroll: false });
+            })
+            .catch((error) => {
+              setActionErr(
+                error instanceof Error
+                  ? error.message
+                  : "Could not continue Practice.",
+              );
+            });
+          return;
         }
 
         const raw = String(resolvedReturnUrl ?? "").trim();

@@ -1,9 +1,8 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
-  BookOpen,
   Boxes,
   ChevronLeft,
   ChevronRight,
@@ -19,20 +18,19 @@ import { useTaggedT } from "@student/i18n/tagged";
 import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import {
-  DEFAULT_STANDARD_PRACTICE_TARGET_COUNT,
   resolveAvailablePracticeTargetCount,
 } from "@/lib/practice/experience/availableTargetCount";
 import type {
   PracticeChooserCatalog,
   PracticeChooserMode,
   PracticeChooserSelection,
-  SubscriberPracticeSessionSummary,
+  SubscriberPracticeContinuationSummary,
 } from "@/lib/practice/experience/practiceChooserTypes";
 import {
-  findActiveSubscriberPracticeSession,
-} from "@/lib/practice/experience/subscriberPracticeSessionSummary";
+  findSubscriberPracticeContinuation,
+} from "@/lib/practice/experience/subscriberPracticeContinuationSummary";
 
-type WizardStep = "catalog" | "course" | "module" | "section" | "topic";
+type WizardStep = "catalog" | "course" | "module";
 
 const STEPS: WizardStep[] = ["catalog", "course", "module"];
 
@@ -152,14 +150,17 @@ export default function PracticePathWizard(props: {
   initialSelection: PracticeChooserSelection;
   busy: boolean;
   error: string | null;
-  activeSessions: SubscriberPracticeSessionSummary[];
+  continuations: SubscriberPracticeContinuationSummary[];
   onStart: (
     selection: PracticeChooserSelection,
     targetCount: number,
   ) => void | Promise<void>;
-  onResume: (
-    session: SubscriberPracticeSessionSummary,
+  onContinue: (
+    continuation: SubscriberPracticeContinuationSummary,
   ) => void | Promise<void>;
+  onSelectionChange?: (
+    selection: PracticeChooserSelection,
+  ) => void;
   buildStartHref?: (
     selection: PracticeChooserSelection,
     targetCount: number,
@@ -208,26 +209,60 @@ export default function PracticePathWizard(props: {
       course?.modules.find((item) => item.slug === selection.moduleSlug) ?? null,
     [course, selection.moduleSlug],
   );
-  const section = useMemo(
-    () =>
-      selectedModule?.sections.find(
-        (item) => item.slug === selection.sectionSlug,
-      ) ?? null,
-    [selectedModule, selection.sectionSlug],
-  );
-  const topic = useMemo(
-    () =>
-      section?.topics.find((item) => item.slug === selection.topicSlug) ?? null,
-    [section, selection.topicSlug],
-  );
+
+  useEffect(() => {
+    const nextIndex = initialStepIndex(
+      props.catalogs,
+      props.initialSelection,
+    );
+    setSelection(props.initialSelection);
+    setStepIndex(nextIndex);
+    setFurthestStepIndex(nextIndex);
+  }, [
+    props.catalogs,
+    props.initialSelection.catalogSlug,
+    props.initialSelection.subjectSlug,
+    props.initialSelection.moduleSlug,
+  ]);
+
+  const selectionForStep = (nextIndex: number): PracticeChooserSelection => {
+    if (nextIndex <= 0) {
+      return {
+        catalogSlug: "",
+        subjectSlug: "",
+        moduleSlug: "",
+        sectionSlug: "",
+        topicSlug: "",
+      };
+    }
+
+    if (nextIndex === 1) {
+      return {
+        catalogSlug: selection.catalogSlug,
+        subjectSlug: "",
+        moduleSlug: "",
+        sectionSlug: "",
+        topicSlug: "",
+      };
+    }
+
+    return selection;
+  };
 
   const moveTo = (nextIndex: number, nextDirection: "forward" | "backward") => {
     const boundedIndex = Math.max(0, Math.min(STEPS.length - 1, nextIndex));
     setDirection(nextDirection);
     setStepIndex(boundedIndex);
-    if (nextDirection === "forward") {
-      setFurthestStepIndex((current) => Math.max(current, boundedIndex));
+
+    if (nextDirection === "backward") {
+      const nextSelection = selectionForStep(boundedIndex);
+      setSelection(nextSelection);
+      setFurthestStepIndex(boundedIndex);
+      props.onSelectionChange?.(nextSelection);
+      return;
     }
+
+    setFurthestStepIndex((current) => Math.max(current, boundedIndex));
   };
 
   const replacePathAndAdvance = (
@@ -238,6 +273,7 @@ export default function PracticePathWizard(props: {
     setFurthestStepIndex(nextIndex);
     setDirection("forward");
     setStepIndex(nextIndex);
+    props.onSelectionChange?.(nextSelection);
   };
 
   const chooseCatalog = (slug: string) => {
@@ -277,75 +313,52 @@ export default function PracticePathWizard(props: {
   };
 
   const chooseModule = (slug: string) => {
-    setSelection((current) => ({
-      ...current,
+    const nextSelection = {
+      ...selection,
       moduleSlug: slug,
       sectionSlug: "",
       topicSlug: "",
-    }));
-  };
-
-  const chooseSection = (slug: string) => {
-    if (slug === selection.sectionSlug) {
-      moveTo(4, "forward");
-      return;
-    }
-
-    replacePathAndAdvance(
-      {
-        ...selection,
-        sectionSlug: slug,
-        topicSlug: "",
-      },
-      4,
-    );
+    };
+    setSelection(nextSelection);
+    props.onSelectionChange?.(nextSelection);
   };
 
   const choices = (() => {
     if (step === "catalog") return props.catalogs;
     if (step === "course") return catalog?.courses ?? [];
-    if (step === "module") return course?.modules ?? [];
-    if (step === "section") return selectedModule?.sections ?? [];
-    return section?.topics ?? [];
+    return course?.modules ?? [];
   })();
 
   const titles: Record<WizardStep, string> = {
     catalog: t("chooseCatalog"),
     course: t("chooseCourse"),
     module: t("chooseModule"),
-    section: t("chooseSection"),
-    topic: t("chooseTopic"),
   };
 
   const descriptions: Record<WizardStep, string> = {
     catalog: t("catalogHelp"),
     course: t("courseHelp"),
     module: t("moduleHelp"),
-    section: t("sectionHelp"),
-    topic: t("topicHelp"),
   };
 
   const icons: Record<WizardStep, typeof Boxes> = {
     catalog: Boxes,
     course: GraduationCap,
     module: FolderTree,
-    section: BookOpen,
-    topic: Play,
   };
   const StepIcon = icons[step];
 
   const availableExerciseCount = selectedModule
     ? countForMode(props.mode, selectedModule)
     : 0;
-  const requestedTargetCount =
+  const effectiveTargetCount =
     props.mode === "subscriber"
-      ? DEFAULT_STANDARD_PRACTICE_TARGET_COUNT
-      : props.targetCount;
-  const effectiveTargetCount = resolveAvailablePracticeTargetCount({
-    requested: requestedTargetCount,
-    available: availableExerciseCount,
-    fallback: requestedTargetCount,
-  });
+      ? availableExerciseCount
+      : resolveAvailablePracticeTargetCount({
+          requested: props.targetCount,
+          available: availableExerciseCount,
+          fallback: props.targetCount,
+        });
   const canStart = Boolean(
     catalog &&
       course &&
@@ -361,11 +374,11 @@ export default function PracticePathWizard(props: {
     .map(resolveTitle)
     .filter(Boolean)
     .join(" · ");
-  const activeTopicSession = findActiveSubscriberPracticeSession(
-    props.activeSessions,
+  const activeModuleContinuation = findSubscriberPracticeContinuation(
+    props.continuations,
     selection,
   );
-  const startHref = canStart && !activeTopicSession
+  const startHref = canStart && !activeModuleContinuation
     ? props.buildStartHref?.(selection, effectiveTargetCount)
     : undefined;
 
@@ -374,16 +387,16 @@ export default function PracticePathWizard(props: {
       <div
         className={cn(
           "mx-auto grid max-w-7xl gap-4",
-          props.mode === "subscriber" && props.activeSessions.length
+          props.mode === "subscriber" && props.continuations.length
             ? "lg:grid-cols-[260px_minmax(0,1fr)]"
             : "max-w-6xl",
         )}
       >
         {props.mode === "subscriber" ? (
           <SubscriberPracticeRail
-            sessions={props.activeSessions}
+            continuations={props.continuations}
             busy={props.busy}
-            onResume={props.onResume}
+            onContinue={props.onContinue}
           />
         ) : null}
 
@@ -453,7 +466,7 @@ export default function PracticePathWizard(props: {
 
           <div className="p-4 sm:p-6 lg:p-7">
             <div
-              key={`${step}-${selection.catalogSlug}-${selection.subjectSlug}-${selection.moduleSlug}-${selection.sectionSlug}`}
+              key={`${step}-${selection.catalogSlug}-${selection.subjectSlug}-${selection.moduleSlug}`}
               className={cn(
                 direction === "forward"
                   ? "ui-practice-wizard-enter-forward"
@@ -487,36 +500,17 @@ export default function PracticePathWizard(props: {
                     ? (item as NonNullable<typeof selectedModule>)
                     : null;
                   const locked = moduleItem?.availability === "locked";
-                  const countRequired = step === "section" || step === "topic";
                   const unavailable =
-                    moduleItem?.availability === "unavailable" ||
-                    (countRequired && count <= 0);
+                    moduleItem?.availability === "unavailable";
                   const selected =
                     (step === "catalog" && item.slug === selection.catalogSlug) ||
                     (step === "course" && item.slug === selection.subjectSlug) ||
-                    (step === "module" && item.slug === selection.moduleSlug) ||
-                    (step === "section" && item.slug === selection.sectionSlug) ||
-                    (step === "topic" && item.slug === selection.topicSlug);
-
-                  const topicSession =
-                    step === "topic"
-                      ? findActiveSubscriberPracticeSession(props.activeSessions, {
-                          ...selection,
-                          topicSlug: item.slug,
-                        })
-                      : null;
+                    (step === "module" && item.slug === selection.moduleSlug);
 
                   const select = () => {
                     if (step === "catalog") chooseCatalog(item.slug);
                     else if (step === "course") chooseCourse(item.slug);
-                    else if (step === "module") chooseModule(item.slug);
-                    else if (step === "section") chooseSection(item.slug);
-                    else {
-                      setSelection((current) => ({
-                        ...current,
-                        topicSlug: item.slug,
-                      }));
-                    }
+                    else chooseModule(item.slug);
                   };
 
                   return (
@@ -534,12 +528,7 @@ export default function PracticePathWizard(props: {
                           ? t("paidModule")
                           : unavailable
                             ? t("notAvailable")
-                            : topicSession
-                              ? t("practiceProgress", {
-                                  completed: topicSession.completedCount,
-                                  total: topicSession.totalCount,
-                                })
-                              : t("exerciseCount", { count })
+                            : t("exerciseCount", { count })
                       }
                       selected={selected}
                       disabled={Boolean(unavailable && !locked)}
@@ -549,7 +538,7 @@ export default function PracticePathWizard(props: {
                       unlockLabel={t("unlock")}
                       lockedLabel={t("locked")}
                       openingLabel={t("openingBilling")}
-                      statusLabel={topicSession ? t("inProgress") : null}
+                      statusLabel={null}
                     />
                   );
                 })}
@@ -587,19 +576,19 @@ export default function PracticePathWizard(props: {
                   onClick={
                     startHref
                       ? undefined
-                      : activeTopicSession
-                        ? () => props.onResume(activeTopicSession)
+                      : activeModuleContinuation
+                        ? () => props.onContinue(activeModuleContinuation)
                         : () => props.onStart(selection, effectiveTargetCount)
                   }
                   disabled={!canStart || props.busy}
                   className="ui-btn-info min-h-10 px-5"
                   loadingText={
-                    activeTopicSession ? t("continuing") : t("starting")
+                    activeModuleContinuation ? t("continuing") : t("starting")
                   }
                 >
                   <span className="inline-flex items-center gap-2">
                     <Play className="size-4" />
-                    {activeTopicSession
+                    {activeModuleContinuation
                       ? t("continuePractice")
                       : props.mode === "subscriber"
                         ? t("startUnlimited")

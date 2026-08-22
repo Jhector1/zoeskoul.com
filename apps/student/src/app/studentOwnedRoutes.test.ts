@@ -27,6 +27,44 @@ describe(
     );
 
     it(
+      "resolves the exact Daily Practice chooser hierarchy",
+      () => {
+        expect(
+          resolveStudentLocation(
+            "/en/practice/daily/catalog/python",
+          ),
+        ).toEqual({
+          kind: "daily-practice",
+          locale: "en",
+          catalogSlug: "python",
+        });
+
+        expect(
+          resolveStudentLocation(
+            "/fr/practice/daily/catalog/python/course/python-v2",
+          ),
+        ).toEqual({
+          kind: "daily-practice",
+          locale: "fr",
+          catalogSlug: "python",
+          subjectSlug: "python-v2",
+        });
+
+        expect(
+          resolveStudentLocation(
+            "/ht/practice/daily/catalog/sql/course/sql-v2/module/sql-v2-2",
+          ),
+        ).toEqual({
+          kind: "daily-practice",
+          locale: "ht",
+          catalogSlug: "sql",
+          subjectSlug: "sql-v2",
+          moduleSlug: "sql-v2-2",
+        });
+      },
+    );
+
+    it(
       "does not treat Daily Practice descendants as the cutover route",
       () => {
         expect(

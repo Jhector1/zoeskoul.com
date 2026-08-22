@@ -227,9 +227,6 @@ export async function handlePracticeGet(
             userId: actor.userId,
             subjectSlug,
             moduleSlug,
-            sectionSlug: params.section ?? null,
-            topicSlug: params.topic ?? null,
-            targetCount: params.questionCount ?? null,
             practiceRunId,
             practiceRunStartedAt,
         });

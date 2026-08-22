@@ -12,35 +12,15 @@ type StartSelfPacedPracticeBody = {
   locale?: string;
   subjectSlug?: string;
   moduleSlug?: string;
-  sectionSlug?: string;
-  topicSlug?: string;
-  difficulty?: string;
-  targetCount?: number;
   returnTo?: string;
   returnUrl?: string;
 };
-
-function optionalSlug(value: unknown) {
-  const normalized = String(value ?? "").trim();
-  return normalized || null;
-}
-
-function positiveTargetCount(value: unknown) {
-  if (value === undefined || value === null || value === "") return null;
-  const parsed = Number(value);
-  return Number.isFinite(parsed)
-    ? Math.max(1, Math.min(100, Math.floor(parsed)))
-    : null;
-}
 
 export async function POST(req: Request) {
   const body = (await req.json().catch(() => ({}))) as StartSelfPacedPracticeBody;
   const locale = String(body.locale ?? "en").trim() || "en";
   const subjectSlug = String(body.subjectSlug ?? "").trim();
   const moduleSlug = String(body.moduleSlug ?? "").trim();
-  const sectionSlug = optionalSlug(body.sectionSlug);
-  const topicSlug = optionalSlug(body.topicSlug);
-  const targetCount = positiveTargetCount(body.targetCount);
   const returnUrl = safeSameOriginUrl(
     req,
     body.returnTo ?? body.returnUrl ?? null,
@@ -101,9 +81,6 @@ export async function POST(req: Request) {
     subjectSlug,
     moduleSlug,
     moduleId: moduleRecord.id,
-    sectionSlug,
-    topicSlug,
-    targetCount,
     practiceRunId,
     practiceRunStartedAt,
   });

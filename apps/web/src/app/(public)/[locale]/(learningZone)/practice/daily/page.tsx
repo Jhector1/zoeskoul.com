@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { resolvePracticeViewer } from "@/lib/practice/experience/viewer";
 import { loadPracticeChooser } from "@/lib/practice/experience/practiceChooser.server";
 import { DAILY_PRACTICE_TARGET_COUNT } from "@/lib/practice/experience/config";
-import { loadActiveSubscriberPracticeSessions } from "@/lib/practice/experience/subscriberPracticeSessions.server";
+import { loadSubscriberPracticeContinuations } from "@/lib/practice/experience/subscriberPracticeSessions.server";
 import DailyFivePracticeClient from "./daily-five-practice-client";
 
 export const runtime = "nodejs";
@@ -19,8 +19,7 @@ export default async function DailyFivePage({
     catalog?: string;
     subject?: string;
     module?: string;
-    section?: string;
-    topic?: string;
+    continue?: string;
   }>;
 }) {
   const { locale } = await params;
@@ -33,8 +32,7 @@ export default async function DailyFivePage({
     if (query.catalog) dailyQuery.set("catalog", query.catalog);
     if (query.subject) dailyQuery.set("subject", query.subject);
     if (query.module) dailyQuery.set("module", query.module);
-    if (query.section) dailyQuery.set("section", query.section);
-    if (query.topic) dailyQuery.set("topic", query.topic);
+    if (query.continue) dailyQuery.set("continue", query.continue);
     const suffix = dailyQuery.toString() ? `?${dailyQuery.toString()}` : "";
     const callbackUrl = `/${encodeURIComponent(locale)}/practice/daily${suffix}`;
     redirect(
@@ -57,9 +55,9 @@ export default async function DailyFivePage({
       email: session?.user?.email ?? null,
     },
   });
-  const activeSessions =
+  const continuations =
     mode === "subscriber"
-      ? await loadActiveSubscriberPracticeSessions({
+      ? await loadSubscriberPracticeContinuations({
           userId,
           catalogs,
           limit: 5,
@@ -81,10 +79,13 @@ export default async function DailyFivePage({
         catalogSlug: query.catalog ?? catalogFromSubject?.slug ?? "",
         subjectSlug: query.subject ?? "",
         moduleSlug: query.module ?? "",
-        sectionSlug: query.section ?? "",
-        topicSlug: query.topic ?? "",
+        sectionSlug: "",
+        topicSlug: "",
       }}
-      activeSessions={activeSessions}
+      continuations={continuations}
+      continueToPractice={
+        mode === "subscriber" && query.continue === "practice"
+      }
     />
   );
 }

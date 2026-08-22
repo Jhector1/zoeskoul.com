@@ -61,6 +61,9 @@ export function ExactDailyPracticeView(
   props: {
     apiOrigin: string;
     locale: string;
+    catalogSlug?: string;
+    subjectSlug?: string;
+    moduleSlug?: string;
   },
 ) {
   const [state, setState] =
@@ -148,6 +151,20 @@ export function ExactDailyPracticeView(
   return (
     <DailyFivePracticeClient
       {...state.data}
+      initialSelection={{
+        ...state.data.initialSelection,
+        ...(props.catalogSlug !== undefined
+          ? { catalogSlug: props.catalogSlug }
+          : {}),
+        ...(props.subjectSlug !== undefined
+          ? { subjectSlug: props.subjectSlug }
+          : {}),
+        ...(props.moduleSlug !== undefined
+          ? { moduleSlug: props.moduleSlug }
+          : {}),
+        sectionSlug: "",
+        topicSlug: "",
+      }}
     />
   );
 }

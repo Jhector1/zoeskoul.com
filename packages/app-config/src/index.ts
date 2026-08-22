@@ -582,6 +582,9 @@ export function resolveDesiredAppRouteOwner(args: {
  */
 export const studentRouteCutoverAllowlist: readonly string[] = [
   "/practice/daily",
+  "/practice/daily/catalog/:catalogSlug",
+  "/practice/daily/catalog/:catalogSlug/course/:subjectSlug",
+  "/practice/daily/catalog/:catalogSlug/course/:subjectSlug/module/:moduleSlug",
   "/catalogs",
   "/catalogs/:catalogSlug",
   "/subjects",

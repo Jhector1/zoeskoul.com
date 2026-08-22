@@ -59,8 +59,8 @@ export type PracticeChooserSelection = {
 
 export type PracticeChooserMode = "subscriber" | "free";
 
-export type SubscriberPracticeSessionSummary = {
-  sessionId: string;
+export type SubscriberPracticeContinuationSummary = {
+  continuationKey: string;
   selection: PracticeChooserSelection;
   catalogTitle: string;
   catalogTitleKey: string | null;
@@ -68,10 +68,6 @@ export type SubscriberPracticeSessionSummary = {
   courseTitleKey: string | null;
   moduleTitle: string;
   moduleTitleKey: string | null;
-  sectionTitle: string;
-  sectionTitleKey: string | null;
-  topicTitle: string;
-  topicTitleKey: string | null;
   completedCount: number;
   totalCount: number;
   lastOpenedAt: string;

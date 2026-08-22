@@ -8,13 +8,13 @@ import NavButton from "@/components/ui/NavButton";
 import { useTaggedT } from "@/i18n/tagged";
 import { resolvePracticeDisplayTitle } from "@/lib/practice/displayTitle";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
-import type { SubscriberPracticeSessionSummary } from "@/lib/practice/experience/practiceChooserTypes";
+import type { SubscriberPracticeContinuationSummary } from "@/lib/practice/experience/practiceChooserTypes";
 
 export default function SubscriberPracticeRail(props: {
-  sessions: SubscriberPracticeSessionSummary[];
+  continuations: SubscriberPracticeContinuationSummary[];
   busy: boolean;
-  onResume: (
-    session: SubscriberPracticeSessionSummary,
+  onContinue: (
+    continuation: SubscriberPracticeContinuationSummary,
   ) => void | Promise<void>;
 }) {
   const t = useTranslations("Practice.dailyStart");
@@ -29,7 +29,7 @@ export default function SubscriberPracticeRail(props: {
     [resolve],
   );
 
-  if (!props.sessions.length) return null;
+  if (!props.continuations.length) return null;
 
   return (
     <aside className="ui-page-surface h-fit overflow-hidden lg:sticky lg:top-6">
@@ -50,22 +50,24 @@ export default function SubscriberPracticeRail(props: {
       </header>
 
       <div className="space-y-2 p-3">
-        {props.sessions.map((session, index) => {
-          const topicTitle = resolveTitle(
-            session.topicTitle,
-            session.topicTitleKey,
+        {props.continuations.map((continuation, index) => {
+          const moduleTitle = resolveTitle(
+            continuation.moduleTitle,
+            continuation.moduleTitleKey,
           );
           const courseTitle = resolveTitle(
-            session.courseTitle,
-            session.courseTitleKey,
+            continuation.courseTitle,
+            continuation.courseTitleKey,
           );
           const pct = Math.round(
-            (session.completedCount / Math.max(session.totalCount, 1)) * 100,
+            (continuation.completedCount /
+              Math.max(continuation.totalCount, 1)) *
+              100,
           );
 
           return (
             <article
-              key={session.sessionId}
+              key={continuation.continuationKey}
               className={cn(
                 "rounded-xl border p-3",
                 index === 0
@@ -85,12 +87,12 @@ export default function SubscriberPracticeRail(props: {
                   {index === 0 ? t("currentPractice") : t("inProgress")}
                 </span>
                 <span className="text-[11px] font-medium tabular-nums text-[rgb(var(--ui-text-muted)/0.72)]">
-                  {session.completedCount}/{session.totalCount}
+                  {continuation.completedCount}/{continuation.totalCount}
                 </span>
               </div>
 
               <h3 className="mt-2 line-clamp-2 text-sm font-semibold leading-5 text-[rgb(var(--ui-text)/0.96)]">
-                {topicTitle}
+                {moduleTitle}
               </h3>
               <p className="mt-1 truncate text-xs text-[rgb(var(--ui-text-muted)/0.74)]">
                 {courseTitle}
@@ -104,7 +106,7 @@ export default function SubscriberPracticeRail(props: {
               </div>
 
               <NavButton
-                onClick={() => props.onResume(session)}
+                onClick={() => props.onContinue(continuation)}
                 disabled={props.busy}
                 className="ui-btn-secondary mt-3 min-h-9 w-full px-3"
                 loadingText={t("continuing")}

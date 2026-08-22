@@ -2,10 +2,6 @@ export type SelfPacedPracticeStartInput = {
   locale: string;
   subjectSlug: string;
   moduleSlug: string;
-  sectionSlug?: string | null;
-  topicSlug?: string | null;
-  targetCount?: number | null;
-  difficulty?: "easy" | "medium" | "hard" | null;
   returnTo?: string | null;
 };
 
@@ -61,16 +57,35 @@ function practiceStartError(status: number, data: unknown) {
   return error;
 }
 
+/**
+ * Navigation-only safe re-entry used by billing success.
+ *
+ * This does not own Practice progress or create a queue. Once entitlement is
+ * refreshed, the Daily entry surface calls startSelfPacedPractice for exactly
+ * this learner + module and the canonical DB history remains unchanged.
+ */
+export function buildSelfPacedPracticeContinuationEntryHref(args: {
+  locale: string;
+  subjectSlug: string;
+  moduleSlug: string;
+}) {
+  const locale = requiredText(args.locale, "locale");
+  const subjectSlug = requiredText(args.subjectSlug, "subjectSlug");
+  const moduleSlug = requiredText(args.moduleSlug, "moduleSlug");
+  const qs = new URLSearchParams({
+    subject: subjectSlug,
+    module: moduleSlug,
+    continue: "practice",
+  });
+  return `/${encodeURIComponent(locale)}/practice/daily?${qs.toString()}`;
+}
+
 export function buildSelfPacedPracticeHref(args: {
   locale: string;
   subjectSlug: string;
   moduleSlug: string;
   practiceRunId: string;
   practiceRunStartedAt: string;
-  sectionSlug?: string | null;
-  topicSlug?: string | null;
-  targetCount?: number | null;
-  difficulty?: "easy" | "medium" | "hard" | null;
   returnTo?: string | null;
 }) {
   const locale = requiredText(args.locale, "locale");
@@ -81,6 +96,7 @@ export function buildSelfPacedPracticeHref(args: {
     args.practiceRunStartedAt,
     "practiceRunStartedAt",
   );
+  const returnTo = optionalText(args.returnTo);
 
   const qs = new URLSearchParams({
     mode: "practice",
@@ -89,17 +105,6 @@ export function buildSelfPacedPracticeHref(args: {
     practiceRunId,
     practiceRunStartedAt,
   });
-
-  const sectionSlug = optionalText(args.sectionSlug);
-  const topicSlug = optionalText(args.topicSlug);
-  const returnTo = optionalText(args.returnTo);
-  const targetCount = optionalPositiveInt(args.targetCount);
-  const difficulty = optionalText(args.difficulty);
-
-  if (sectionSlug) qs.set("section", sectionSlug);
-  if (topicSlug) qs.set("topic", topicSlug);
-  if (targetCount) qs.set("questionCount", String(targetCount));
-  if (difficulty) qs.set("difficulty", difficulty);
   if (returnTo) qs.set("returnTo", returnTo);
 
   return (
@@ -113,9 +118,12 @@ export function buildSelfPacedPracticeHref(args: {
 /**
  * The one normal self-paced Practice entrypoint.
  *
- * Header and Lesson/Review differ only in requested scope. This function never
- * creates a PracticeSession row. `practiceRunId` is URL-only run identity for
- * deterministic queue/reload behavior; learner progress is canonical DB
+ * Header and Lesson/Review submit exactly the same learner + module scope.
+ * `returnTo` is navigation metadata only. No section/topic/count namespace is
+ * allowed to change canonical normal Practice membership.
+ *
+ * This function never creates or resumes a normal PracticeSession row.
+ * `practiceRunId` is URL-only run identity; learner progress is canonical DB
  * history keyed by learner + module + authored exercise identity.
  */
 export async function startSelfPacedPractice(
@@ -125,11 +133,7 @@ export async function startSelfPacedPractice(
   const locale = requiredText(args.locale, "locale");
   const subjectSlug = requiredText(args.subjectSlug, "subjectSlug");
   const moduleSlug = requiredText(args.moduleSlug, "moduleSlug");
-  const sectionSlug = optionalText(args.sectionSlug);
-  const topicSlug = optionalText(args.topicSlug);
   const returnTo = optionalText(args.returnTo);
-  const targetCount = optionalPositiveInt(args.targetCount);
-  const difficulty = optionalText(args.difficulty);
   const fetchImpl = options.fetchImpl ?? fetch;
 
   const response = await fetchImpl("/api/practice/start", {
@@ -140,10 +144,6 @@ export async function startSelfPacedPractice(
       locale,
       subjectSlug,
       moduleSlug,
-      ...(sectionSlug ? { sectionSlug } : {}),
-      ...(topicSlug ? { topicSlug } : {}),
-      ...(targetCount ? { targetCount } : {}),
-      ...(difficulty ? { difficulty } : {}),
       ...(returnTo ? { returnTo } : {}),
     }),
   });
@@ -182,13 +182,6 @@ export async function startSelfPacedPractice(
       moduleSlug: resolvedModuleSlug,
       practiceRunId,
       practiceRunStartedAt,
-      sectionSlug,
-      topicSlug,
-      targetCount,
-      difficulty:
-        difficulty === "easy" || difficulty === "medium" || difficulty === "hard"
-          ? difficulty
-          : null,
       returnTo: returnUrl,
     }),
   };

@@ -14,7 +14,7 @@ import {
   loadPracticeChooser,
 } from "@/lib/practice/experience/practiceChooser.server";
 import {
-  loadActiveSubscriberPracticeSessions,
+  loadSubscriberPracticeContinuations,
 } from "@/lib/practice/experience/subscriberPracticeSessions.server";
 import {
   resolvePracticeViewer,
@@ -104,9 +104,9 @@ export async function GET(
         email: access.user.email,
       },
     });
-  const activeSessions =
+  const continuations =
     mode === "subscriber"
-      ? await loadActiveSubscriberPracticeSessions({
+      ? await loadSubscriberPracticeContinuations({
           userId: access.user.id,
           catalogs,
           limit: 5,
@@ -157,7 +157,10 @@ export async function GET(
             "topic",
           ) ?? "",
       },
-      activeSessions,
+      continuations,
+      continueToPractice:
+        mode === "subscriber" &&
+        url.searchParams.get("continue") === "practice",
     },
   );
 }

@@ -10,21 +10,10 @@ import {
 } from "./authoredPracticeQueue";
 import {
   buildSubscriberPracticePlan,
-  pickSubscriberPracticeQueue,
   type SubscriberPracticeHistoryItem,
   type SubscriberPracticeScope,
 } from "./subscriberPractice";
 import { loadSubscriberModulePracticeHistory } from "./subscriberPracticeSessions.server";
-
-function positiveInt(value: unknown) {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) && parsed > 0 ? Math.floor(parsed) : null;
-}
-
-function optionalSlug(value: unknown) {
-  const text = String(value ?? "").trim();
-  return text && text !== "all" ? text : null;
-}
 
 function historyTime(item: SubscriberPracticeHistoryItem) {
   const raw = item.seenAt instanceof Date ? item.seenAt : new Date(item.seenAt);
@@ -58,9 +47,6 @@ export async function loadSelfPacedPracticeState(args: {
   subjectSlug: string;
   moduleSlug: string;
   moduleId?: string | null;
-  sectionSlug?: string | null;
-  topicSlug?: string | null;
-  targetCount?: number | string | null;
   practiceRunId: string;
   practiceRunStartedAt: string;
   publishedOptions?: readonly PublishedPracticeExerciseOption[];
@@ -82,13 +68,11 @@ export async function loadSelfPacedPracticeState(args: {
     );
   }
 
-  const sectionSlug = optionalSlug(args.sectionSlug);
-  const topicSlug = optionalSlug(args.topicSlug);
   const scope: SubscriberPracticeScope = {
     subjectSlug,
     moduleSlug,
-    sectionSlug,
-    topicSlug,
+    sectionSlug: null,
+    topicSlug: null,
   };
 
   const options =
@@ -101,45 +85,26 @@ export async function loadSelfPacedPracticeState(args: {
     publishedOptions: options,
   });
 
-  // Freeze selection against history that existed when this browser run was
-  // started. Later completions from Header/Lesson can update completed state
-  // without changing which capped exercises this run selected.
+  // Browser-run ordering may be frozen against start-time history, but
+  // membership is always the complete authored Practice pool for this module.
   const baselineHistory = fullHistory.filter(
     (item) => historyTime(item) <= startedAt.getTime(),
   );
-  const requestedCount = positiveInt(args.targetCount);
   const scopePlan = buildSubscriberPracticePlan({
     options,
     subjectSlug,
     moduleSlug,
-    sectionSlug,
-    topicSlug,
+    sectionSlug: null,
+    topicSlug: null,
     targetCount: null,
     history: baselineHistory,
     seed: practiceRunId,
   });
 
-  const scopePoolTotal = scopePlan.moduleTotal;
-
-  /**
-   * Completion changes row status, never selected membership.
-   *
-   * Select from the full eligible scope, not only the remaining unfinished
-   * pool. This keeps a Header/Lesson Practice list stable when an authored
-   * exercise was already completed from the other entry origin.
-   */
-  const selectedTargets = uniqueTargets(
-    pickSubscriberPracticeQueue({
-      options,
-      subjectSlug,
-      moduleSlug,
-      sectionSlug,
-      topicSlug,
-      targetCount: requestedCount ?? scopePoolTotal,
-      history: baselineHistory,
-      seed: practiceRunId,
-    }),
-  );
+  const selectedTargets = uniqueTargets([
+    ...scopePlan.completedPrefix,
+    ...scopePlan.queue,
+  ]);
 
   const latestCompletion = new Map<
     string,
@@ -189,7 +154,7 @@ export async function loadSelfPacedPracticeState(args: {
     queue,
     nextTarget: queue[0] ?? null,
     targetCount: selectedTargets.length,
-    scopePoolTotal,
+    scopePoolTotal: scopePlan.moduleTotal,
     complete: selectedTargets.length === 0 || queue.length === 0,
   };
 }

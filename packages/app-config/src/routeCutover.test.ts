@@ -95,6 +95,9 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
   it("activates only the validated Student route patterns", () => {
     expect(studentRouteCutoverAllowlist).toEqual([
       "/practice/daily",
+      "/practice/daily/catalog/:catalogSlug",
+      "/practice/daily/catalog/:catalogSlug/course/:subjectSlug",
+      "/practice/daily/catalog/:catalogSlug/course/:subjectSlug/module/:moduleSlug",
       "/catalogs",
       "/catalogs/:catalogSlug",
       "/subjects",
@@ -122,6 +125,9 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     "/en/practice/daily",
     "/fr/practice/daily?source=home",
     "/ht/practice/daily#today",
+    "/en/practice/daily/catalog/python",
+    "/fr/practice/daily/catalog/python/course/python-v2",
+    "/ht/practice/daily/catalog/sql/course/sql-v2/module/sql-v2-2",
     "/en/catalogs",
     "/fr/catalogs?source=header",
     "/ht/catalogs/core",

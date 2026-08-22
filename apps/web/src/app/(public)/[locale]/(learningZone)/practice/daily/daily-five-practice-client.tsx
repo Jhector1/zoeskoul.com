@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import PracticeShell from "@/components/practice/PracticeShell";
 import PracticePathWizard from "@/components/practice/PracticePathWizard";
@@ -11,9 +11,13 @@ import type {
   PracticeChooserCatalog,
   PracticeChooserMode,
   PracticeChooserSelection,
-  SubscriberPracticeSessionSummary,
+  SubscriberPracticeContinuationSummary,
 } from "@/lib/practice/experience/practiceChooserTypes";
-import { startSelfPacedPractice } from "@zoeskoul/learning-client";
+import {
+  buildPracticeChooserRouteHref,
+  parsePracticeChooserRoutePathname,
+  startSelfPacedPractice,
+} from "@zoeskoul/learning-client";
 
 type StartResult = {
   sessionId: string;
@@ -42,13 +46,42 @@ export default function DailyFivePracticeClient(props: {
   catalogs: PracticeChooserCatalog[];
   initialSelection: PracticeChooserSelection;
   targetCount: number;
-  activeSessions: SubscriberPracticeSessionSummary[];
+  continuations: SubscriberPracticeContinuationSummary[];
+  continueToPractice?: boolean;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const t = useTranslations("Practice.dailyStart");
   const [result, setResult] = useState<StartResult | null>(null);
   const [busy, setBusy] = useState(props.mode === "free");
   const [error, setError] = useState<string | null>(null);
+  const continuationStartedRef = useRef(false);
+  const routeState = useMemo(
+    () => parsePracticeChooserRoutePathname(pathname),
+    [pathname],
+  );
+  const chooserSelection = useMemo<PracticeChooserSelection>(() => {
+    if (routeState && routeState.depth !== "root") {
+      return {
+        ...routeState.selection,
+        sectionSlug: "",
+        topicSlug: "",
+      };
+    }
+    return props.initialSelection;
+  }, [props.initialSelection, routeState]);
+  const navigateChooser = useCallback(
+    (selection: PracticeChooserSelection) => {
+      router.push(
+        buildPracticeChooserRouteHref({
+          locale: props.locale,
+          selection,
+        }),
+        { scroll: false },
+      );
+    },
+    [props.locale, router],
+  );
 
   const startFreePractice = useCallback(
     async (selection?: PracticeChooserSelection | null) => {
@@ -106,7 +139,7 @@ export default function DailyFivePracticeClient(props: {
   }, [props.mode, startFreePractice]);
 
   const startSubscriberPractice = useCallback(
-    async (selection: PracticeChooserSelection, targetCount: number) => {
+    async (selection: PracticeChooserSelection) => {
       setBusy(true);
       setError(null);
 
@@ -115,12 +148,11 @@ export default function DailyFivePracticeClient(props: {
           locale: props.locale,
           subjectSlug: selection.subjectSlug,
           moduleSlug: selection.moduleSlug,
-          targetCount,
         });
 
         startGlobalNavigationPending({
           label: started.resumed ? t("continuing") : t("starting"),
-          source: "subscriber-practice-session",
+          source: "subscriber-practice-continuation",
           targetHref: started.href,
           minVisibleMs: 350,
         });
@@ -138,12 +170,32 @@ export default function DailyFivePracticeClient(props: {
     [props.locale, router, t],
   );
 
+  useEffect(() => {
+    if (
+      props.mode !== "subscriber" ||
+      !props.continueToPractice ||
+      !chooserSelection.subjectSlug ||
+      !chooserSelection.moduleSlug ||
+      continuationStartedRef.current
+    ) {
+      return;
+    }
+
+    continuationStartedRef.current = true;
+    void startSubscriberPractice(chooserSelection);
+  }, [
+    props.continueToPractice,
+    chooserSelection,
+    props.mode,
+    startSubscriberPractice,
+  ]);
+
   const handleStart = async (
     selection: PracticeChooserSelection,
     targetCount: number,
   ) => {
     if (props.mode === "subscriber") {
-      await startSubscriberPractice(selection, targetCount);
+      await startSubscriberPractice(selection);
       return;
     }
 
@@ -159,13 +211,14 @@ export default function DailyFivePracticeClient(props: {
       catalogs={props.catalogs}
       mode={props.mode}
       targetCount={props.targetCount}
-      initialSelection={props.initialSelection}
+      initialSelection={chooserSelection}
+      onSelectionChange={navigateChooser}
       busy={busy}
       error={error}
-      activeSessions={props.activeSessions}
+      continuations={props.continuations}
       onStart={handleStart}
-      onResume={(session) =>
-        startSubscriberPractice(session.selection, session.totalCount)
+      onContinue={(continuation) =>
+        startSubscriberPractice(continuation.selection)
       }
     />
   );

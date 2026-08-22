@@ -194,6 +194,9 @@ export function StudentAppShell(props: {
       <ExactDailyPracticeView
         apiOrigin={props.apiOrigin}
         locale={location.locale}
+        catalogSlug={location.catalogSlug}
+        subjectSlug={location.subjectSlug}
+        moduleSlug={location.moduleSlug}
       />
     ) : location.kind === "module-practice" ? (
       <ExactModulePracticeView

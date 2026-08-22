@@ -1,7 +1,5 @@
 import "server-only";
 
-import { PracticeSessionStatus } from "@zoeskoul/db";
-
 import { prisma } from "@/lib/prisma";
 import {
   listPublishedPracticeExerciseOptions,
@@ -16,50 +14,12 @@ import {
 } from "./authoredPracticeQueue";
 import type {
   PracticeChooserCatalog,
-  SubscriberPracticeSessionSummary,
+  SubscriberPracticeContinuationSummary,
 } from "./practiceChooserTypes";
 import {
   listSubscriberPracticePoolOptions,
-  readSubscriberPracticeMeta,
-  subscriberPracticeScopeFromMeta,
   type SubscriberPracticeHistoryItem,
 } from "./subscriberPractice";
-
-function resolveScopeTitles(
-  catalogs: readonly PracticeChooserCatalog[],
-  scope: {
-    subjectSlug: string;
-    moduleSlug: string;
-    sectionSlug: string;
-    topicSlug: string;
-  },
-) {
-  for (const catalog of catalogs) {
-    const course = catalog.courses.find(
-      (item) => item.slug === scope.subjectSlug,
-    );
-    if (!course) continue;
-
-    const selectedModule = course.modules.find(
-      (item) => item.slug === scope.moduleSlug,
-    );
-    const section = selectedModule?.sections.find(
-      (item) => item.slug === scope.sectionSlug,
-    );
-    const topic = section?.topics.find((item) => item.slug === scope.topicSlug);
-    if (!selectedModule || !section || !topic) return null;
-
-    return {
-      catalog,
-      course,
-      module: selectedModule,
-      section,
-      topic,
-    };
-  }
-
-  return null;
-}
 
 export type SubscriberModulePracticeProgress = {
   completed: number;
@@ -276,13 +236,179 @@ export async function loadSubscriberModulePracticeProgress(args: {
   };
 }
 
-export async function loadActiveSubscriberPracticeSessions(args: {
+type CanonicalContinuationDescriptor = {
+  key: string;
+  canonicalPrefix: string;
+  catalog: PracticeChooserCatalog;
+  course: PracticeChooserCatalog["courses"][number];
+  module: PracticeChooserCatalog["courses"][number]["modules"][number];
+  candidates: AuthoredPracticeTarget[];
+};
+
+/**
+ * Project unfinished module Practice from canonical learner history.
+ *
+ * Normal Practice has no resumable PracticeSession owner. This is one batched
+ * read projection used only to surface Continue affordances. Clicking Continue
+ * goes through startSelfPacedPractice again and therefore reuses the same
+ * canonical learner + module + authored-exercise history.
+ */
+export async function loadSubscriberPracticeContinuations(args: {
   userId: string;
   catalogs: readonly PracticeChooserCatalog[];
   limit?: number;
-}): Promise<SubscriberPracticeSessionSummary[]> {
-  void args;
-  // Normal self-paced Practice is canonical learner/module history, not a
-  // resumable PracticeSession product. Legacy rows remain history-only.
-  return [];
+}): Promise<SubscriberPracticeContinuationSummary[]> {
+  const userId = String(args.userId ?? "").trim();
+  if (!userId) return [];
+
+  const publishedOptions = await listPublishedPracticeExerciseOptions();
+  const descriptors: CanonicalContinuationDescriptor[] = args.catalogs.flatMap(
+    (catalog) =>
+      catalog.courses.flatMap((course) =>
+        course.modules.flatMap((module) => {
+          if (module.availability !== "available" || module.exerciseCount <= 0) {
+            return [];
+          }
+
+          const candidates = listSubscriberPracticePoolOptions({
+            options: publishedOptions,
+            subjectSlug: course.slug,
+            moduleSlug: module.slug,
+          }).map(authoredPracticeTargetFromOption);
+          if (!candidates.length) return [];
+
+          return [{
+            key: `${course.slug}|${module.slug}`,
+            canonicalPrefix: selfPacedPracticeExperienceOwnerPrefix({
+              userId,
+              moduleSlug: module.slug,
+            }),
+            catalog,
+            course,
+            module,
+            candidates,
+          }];
+        }),
+      ),
+  );
+  if (!descriptors.length) return [];
+
+  const dbModules = await prisma.practiceModule.findMany({
+    where: {
+      OR: descriptors.map((descriptor) => ({
+        slug: descriptor.module.slug,
+        subject: { slug: descriptor.course.slug },
+      })),
+    },
+    select: {
+      id: true,
+      slug: true,
+      subject: { select: { slug: true } },
+    },
+  });
+  const descriptorKeyByModuleId = new Map(
+    dbModules.flatMap((row) =>
+      row.subject
+        ? [[row.id, `${row.subject.slug}|${row.slug}`] as const]
+        : [],
+    ),
+  );
+  const moduleIds = [...descriptorKeyByModuleId.keys()];
+
+  const rows = await prisma.practiceQuestionInstance.findMany({
+    where: {
+      OR: [
+        ...descriptors.map((descriptor) => ({
+          experienceItemKey: { startsWith: descriptor.canonicalPrefix },
+        })),
+        ...(moduleIds.length
+          ? [{
+              session: {
+                userId,
+                moduleId: { in: moduleIds },
+              },
+            }]
+          : []),
+      ],
+    },
+    select: {
+      exerciseKey: true,
+      experienceItemKey: true,
+      publicPayload: true,
+      answeredAt: true,
+      createdAt: true,
+      topic: { select: { slug: true } },
+      session: { select: { moduleId: true } },
+    },
+    orderBy: { createdAt: "desc" },
+    take: 2000,
+  });
+
+  const continuations: SubscriberPracticeContinuationSummary[] = [];
+
+  for (const descriptor of descriptors) {
+    const completed = new Set<string>();
+    let hasHistory = false;
+    let lastOpenedMs = 0;
+
+    for (const row of rows) {
+      const canonicalOwner =
+        typeof row.experienceItemKey === "string" &&
+        row.experienceItemKey.startsWith(descriptor.canonicalPrefix);
+      const legacyOwner =
+        row.session?.moduleId != null &&
+        descriptorKeyByModuleId.get(row.session.moduleId) === descriptor.key;
+      if (!canonicalOwner && !legacyOwner) continue;
+
+      const target = resolveAuthoredPracticeHistoryTarget({
+        item: row,
+        candidates: descriptor.candidates,
+      });
+      if (!target) continue;
+
+      hasHistory = true;
+      const seenMs = (row.answeredAt ?? row.createdAt).getTime();
+      if (Number.isFinite(seenMs)) lastOpenedMs = Math.max(lastOpenedMs, seenMs);
+      if (row.answeredAt) {
+        completed.add(authoredPracticeTargetIdentity(target));
+      }
+    }
+
+    if (
+      !hasHistory ||
+      lastOpenedMs <= 0 ||
+      completed.size >= descriptor.candidates.length
+    ) {
+      continue;
+    }
+
+    continuations.push({
+      continuationKey: descriptor.key,
+      selection: {
+        catalogSlug: descriptor.catalog.slug,
+        subjectSlug: descriptor.course.slug,
+        moduleSlug: descriptor.module.slug,
+        sectionSlug: "",
+        topicSlug: "",
+      },
+      catalogTitle: descriptor.catalog.title,
+      catalogTitleKey: descriptor.catalog.titleKey,
+      courseTitle: descriptor.course.title,
+      courseTitleKey: descriptor.course.titleKey,
+      moduleTitle: descriptor.module.title,
+      moduleTitleKey: descriptor.module.titleKey,
+      completedCount: completed.size,
+      totalCount: descriptor.candidates.length,
+      lastOpenedAt: new Date(lastOpenedMs).toISOString(),
+    });
+  }
+
+  continuations.sort(
+    (left, right) =>
+      new Date(right.lastOpenedAt).getTime() -
+      new Date(left.lastOpenedAt).getTime(),
+  );
+
+  const limit = Math.max(1, Math.floor(args.limit ?? 5));
+  return continuations.slice(0, limit);
 }

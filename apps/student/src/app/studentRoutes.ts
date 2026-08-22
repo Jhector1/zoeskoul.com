@@ -7,6 +7,9 @@ import {
   normalizeStudentPathname,
   studentLocaleFromPath,
 } from "../compat/app-route-ownership";
+import {
+  parsePracticeChooserRoutePathname,
+} from "@zoeskoul/learning-client";
 
 export type StudentLocation =
   | {
@@ -63,6 +66,9 @@ export type StudentLocation =
   | {
       kind: "daily-practice";
       locale: string;
+      catalogSlug?: string;
+      subjectSlug?: string;
+      moduleSlug?: string;
     }
   | {
       kind: "module-practice";
@@ -150,14 +156,22 @@ export function resolveStudentLocation(
       !parts[startIndex + 4],
     );
 
-  if (
-    parts[0] === "practice" &&
-    parts[1] === "daily" &&
-    !parts[2]
-  ) {
+  const dailyPracticeRoute =
+    parsePracticeChooserRoutePathname(pathname);
+
+  if (dailyPracticeRoute) {
     return {
       kind: "daily-practice",
       locale,
+      ...(dailyPracticeRoute.selection.catalogSlug
+        ? { catalogSlug: dailyPracticeRoute.selection.catalogSlug }
+        : {}),
+      ...(dailyPracticeRoute.selection.subjectSlug
+        ? { subjectSlug: dailyPracticeRoute.selection.subjectSlug }
+        : {}),
+      ...(dailyPracticeRoute.selection.moduleSlug
+        ? { moduleSlug: dailyPracticeRoute.selection.moduleSlug }
+        : {}),
     };
   }
 

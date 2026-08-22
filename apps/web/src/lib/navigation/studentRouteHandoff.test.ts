@@ -89,6 +89,18 @@ describe("Student route handoff", () => {
     );
   });
 
+  it("hands off the exact Daily Practice module chooser route", () => {
+    expect(
+      resolveStudentRouteHandoff({
+        currentUrl:
+          "https://zoeskoul.com/en/practice/daily/catalog/python/course/python-v2/module/python-v2-2",
+        environment: "production",
+      }),
+    ).toBe(
+      "https://student.zoeskoul.com/en/practice/daily/catalog/python/course/python-v2/module/python-v2-2",
+    );
+  });
+
   it("uses the configured Student origin for a Daily Practice preview", () => {
     expect(
       resolveStudentRouteHandoff({
