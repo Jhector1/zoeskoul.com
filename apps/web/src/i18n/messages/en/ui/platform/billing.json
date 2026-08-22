@@ -53,6 +53,7 @@
         "subscribe": "Subscribe yearly"
       },
       "currentPlan": "Current plan",
+      "resumeSubscription": "Resume subscription",
       "priceKicker": "Price",
       "recommended": "Recommended",
       "startTrial": "Start {days}-day trial",

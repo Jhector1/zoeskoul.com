@@ -5,7 +5,10 @@ import {
 } from "vitest";
 
 import {
+  canResumeScheduledSubscription,
   futureBillingPeriodIsoOrNull,
+  hasCurrentSubscriptionAccess,
+  scheduledCancellationEndIso,
   shouldShowRenewalDate,
 } from "./period";
 
@@ -85,4 +88,70 @@ describe("billing period presentation", () => {
       }),
     ).toBe(false);
   });
+
+  it("uses trial_end, not a later billing period, while trialing", () => {
+    const pastTrial = "2026-08-06T08:00:00.000Z";
+    const laterPeriod = "2026-09-07T08:00:00.000Z";
+
+    expect(
+      hasCurrentSubscriptionAccess({
+        status: "trialing",
+        trialEnd: pastTrial,
+        currentPeriodEnd: laterPeriod,
+        nowMs: NOW,
+      }),
+    ).toBe(false);
+
+    expect(
+      hasCurrentSubscriptionAccess({
+        status: "trialing",
+        trialEnd: "2026-08-08T08:00:00.000Z",
+        currentPeriodEnd: laterPeriod,
+        nowMs: NOW,
+      }),
+    ).toBe(true);
+  });
+
+  it("uses the correct effective end for scheduled cancellation", () => {
+    expect(
+      scheduledCancellationEndIso({
+        status: "trialing",
+        trialEnd: "2026-08-08T08:00:00.000Z",
+        currentPeriodEnd: "2026-09-07T08:00:00.000Z",
+        cancelAtPeriodEnd: true,
+        nowMs: NOW,
+      }),
+    ).toBe("2026-08-08T08:00:00.000Z");
+
+    expect(
+      scheduledCancellationEndIso({
+        status: "active",
+        trialEnd: null,
+        currentPeriodEnd: "2026-09-07T08:00:00.000Z",
+        cancelAtPeriodEnd: true,
+        nowMs: NOW,
+      }),
+    ).toBe("2026-09-07T08:00:00.000Z");
+
+    expect(
+      canResumeScheduledSubscription({
+        status: "trialing",
+        trialEnd: "2026-08-08T08:00:00.000Z",
+        currentPeriodEnd: "2026-09-07T08:00:00.000Z",
+        cancelAtPeriodEnd: true,
+        nowMs: NOW,
+      }),
+    ).toBe(true);
+
+    expect(
+      canResumeScheduledSubscription({
+        status: "trialing",
+        trialEnd: "2026-08-06T08:00:00.000Z",
+        currentPeriodEnd: "2026-09-07T08:00:00.000Z",
+        cancelAtPeriodEnd: true,
+        nowMs: NOW,
+      }),
+    ).toBe(false);
+  });
+
 });

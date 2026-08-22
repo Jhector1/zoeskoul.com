@@ -1,5 +1,6 @@
 // src/lib/billing/entitlement.ts
 import { prisma } from "@/lib/prisma";
+import { hasCurrentSubscriptionAccess } from "@/lib/billing/period";
 import type { StripeSubscriptionStatus } from "@zoeskoul/db";
 
 type DenyReason =
@@ -58,20 +59,13 @@ export async function getEntitlementForUser(userId: string): Promise<Entitlement
 
   // Prefer a subscription that is entitled right now. A stale local row with
   // status=active but no valid Stripe period must never win over fresher data.
-  const preferred =
-    subs.find(
-      (s) =>
-        s.status === "trialing" &&
-        (isFuture(s.trialEnd) || isFuture(s.currentPeriodEnd)),
-    ) ??
-    subs.find(
-      (s) => s.status === "active" && isFuture(s.currentPeriodEnd),
-    ) ??
-    subs.find(
-      (s) =>
-        (s.status === "past_due" || s.status === "canceled") &&
-        isFuture(s.currentPeriodEnd),
-    );
+  const preferred = subs.find((s) =>
+    hasCurrentSubscriptionAccess({
+      status: s.status,
+      trialEnd: s.trialEnd,
+      currentPeriodEnd: s.currentPeriodEnd,
+    }),
+  );
   const sub = preferred ?? subs[0];
 
   const withinPeriod = isFuture(sub.currentPeriodEnd);
@@ -93,7 +87,7 @@ export async function getEntitlementForUser(userId: string): Promise<Entitlement
   if (sub.status === "unpaid") return { ok: false, reason: "unpaid", ...base };
 
   if (sub.status === "trialing") {
-    return withinTrial || withinPeriod
+    return withinTrial
       ? { ok: true, reason: "trialing", ...base }
       : { ok: false, reason: "expired", ...base };
   }

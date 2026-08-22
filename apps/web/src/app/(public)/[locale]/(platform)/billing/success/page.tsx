@@ -285,7 +285,7 @@ export default function BillingSuccessPageClient() {
                           <Badge>{t("pills.trialEnds", { when: formatWhen(data.trialEnd, locale) })}</Badge>
                       ) : null}
 
-                      {data.currentPeriodEnd ? (
+                      {data.status === "active" && data.currentPeriodEnd ? (
                           <Badge>
                             {t("pills.renews", {
                               when: formatWhen(data.currentPeriodEnd, locale),

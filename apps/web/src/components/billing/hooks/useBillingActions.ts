@@ -136,6 +136,49 @@ export function useBillingActions(args: {
     ],
   );
 
+  const resumeSubscription = useCallback(async () => {
+    if (!status?.isAuthenticated) {
+      authRedirect();
+      return false;
+    }
+    if (actionInFlightRef.current) return false;
+
+    actionInFlightRef.current = true;
+    setBusy(true);
+    onError(null);
+
+    try {
+      const response = await fetch(
+        "/api/billing/subscription/resume",
+        { method: "POST" },
+      );
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(
+          data?.message ?? "Could not resume subscription.",
+        );
+      }
+
+      return true;
+    } catch (error: unknown) {
+      onError(
+        errorMessage(
+          error,
+          "Could not resume subscription.",
+        ),
+      );
+      return false;
+    } finally {
+      actionInFlightRef.current = false;
+      setBusy(false);
+    }
+  }, [
+    status?.isAuthenticated,
+    authRedirect,
+    onError,
+  ]);
+
   const openPortal = useCallback(async () => {
     if (!status?.isAuthenticated) {
       authRedirect();
@@ -173,5 +216,5 @@ export function useBillingActions(args: {
     }
   }, [status?.isAuthenticated, authRedirect, onError]);
 
-  return { busy, authRedirect, startCheckout, openPortal };
+  return { busy, authRedirect, startCheckout, resumeSubscription, openPortal };
 }

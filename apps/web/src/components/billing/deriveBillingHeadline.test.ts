@@ -85,4 +85,37 @@ describe("deriveBillingHeadline", () => {
       deriveBillingHeadline(status({ isAuthenticated: false }), "en-US"),
     ).toBeNull();
   });
+
+  it("uses the real trial end for a scheduled trial cancellation", () => {
+    const headline = deriveBillingHeadline(
+      status({
+        stripeStatus: "trialing",
+        isSubscribed: true,
+        cancelAtPeriodEnd: true,
+        trialEndsAt: "2100-01-02T00:00:00.000Z",
+        currentPeriodEnd: "2100-02-02T00:00:00.000Z",
+      }),
+      "en-US",
+    );
+
+    expect(headline).toMatchObject({ tone: "warn" });
+    expect(headline?.text).toContain("Trial ending");
+    expect(headline?.text).not.toContain("Feb");
+  });
+
+  it("shows a scheduled paid cancellation as ending rather than renewing", () => {
+    const headline = deriveBillingHeadline(
+      status({
+        stripeStatus: "active",
+        isSubscribed: true,
+        cancelAtPeriodEnd: true,
+        currentPeriodEnd: "2100-02-02T00:00:00.000Z",
+      }),
+      "en-US",
+    );
+
+    expect(headline).toMatchObject({ tone: "warn" });
+    expect(headline?.text).toContain("Subscription ending");
+  });
+
 });

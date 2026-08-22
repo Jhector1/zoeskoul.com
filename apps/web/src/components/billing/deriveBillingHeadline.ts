@@ -1,6 +1,7 @@
 import type { BillingStatus } from "@/lib/billing/types";
 import type { BadgeTone } from "./Badge";
 import { fmtShortDate } from "@zoeskoul/learner-ui/lib/billing/format";
+import { scheduledCancellationEndIso } from "@/lib/billing/period";
 
 export type BillingHeadline = {
   tone: BadgeTone;
@@ -24,6 +25,44 @@ export function deriveBillingHeadline(
   }
 
   const stripeStatus = status.stripeStatus;
+
+  const scheduledCancellationEnd = scheduledCancellationEndIso({
+    status: stripeStatus,
+    trialEnd: status.trialEndsAt,
+    currentPeriodEnd: status.currentPeriodEnd,
+    cancelAtPeriodEnd: status.cancelAtPeriodEnd,
+  });
+
+  if (
+    stripeStatus === "trialing" &&
+    status.isSubscribed &&
+    scheduledCancellationEnd
+  ) {
+    return {
+      tone: "warn",
+      text: `Trial ending • access until ${fmtShortDate(
+        scheduledCancellationEnd,
+        intlLocale,
+      )}`,
+      href: BILLING_HREF,
+    };
+  }
+
+  if (
+    stripeStatus === "active" &&
+    status.isSubscribed &&
+    scheduledCancellationEnd
+  ) {
+    return {
+      tone: "warn",
+      text: `Subscription ending • access until ${fmtShortDate(
+        scheduledCancellationEnd,
+        intlLocale,
+      )}`,
+      href: BILLING_HREF,
+    };
+  }
+
 
   if (stripeStatus === "trialing" && status.isSubscribed) {
     const end = status.trialEndsAt

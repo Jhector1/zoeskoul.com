@@ -348,6 +348,80 @@ export async function createBillingPortalSession(userId: string) {
     return { url: portal.url };
 }
 
+export async function resumeScheduledSubscriptionForUser(args: {
+    userId: string;
+    subscriptionId: string;
+}) {
+    const local = await prisma.subscription.findFirst({
+        where: {
+            userId: args.userId,
+            stripeSubscriptionId: args.subscriptionId,
+        },
+        select: {
+            stripeCustomerId: true,
+            status: true,
+            cancelAtPeriodEnd: true,
+        },
+    });
+
+    if (!local) return null;
+    if (
+        local.status !== "trialing" &&
+        local.status !== "active"
+    ) {
+        return null;
+    }
+
+    const stripe = getStripe();
+    const remote = await stripe.subscriptions.retrieve(
+        args.subscriptionId,
+    );
+    const remoteCustomerId =
+        typeof remote.customer === "string"
+            ? remote.customer
+            : remote.customer.id;
+
+    if (
+        local.stripeCustomerId &&
+        remoteCustomerId !== local.stripeCustomerId
+    ) {
+        throw new Error("Subscription customer mismatch.");
+    }
+
+    const remoteUserId = remote.metadata?.userId?.trim();
+    if (remoteUserId && remoteUserId !== args.userId) {
+        throw new Error("Subscription ownership mismatch.");
+    }
+
+    if (
+        remote.status !== "trialing" &&
+        remote.status !== "active"
+    ) {
+        await upsertFromStripeSubscription(remote, args.userId);
+        return null;
+    }
+
+    const reconciled = remote.cancel_at_period_end
+        ? await stripe.subscriptions.update(
+            args.subscriptionId,
+            { cancel_at_period_end: false },
+        )
+        : remote;
+
+    const saved = await upsertFromStripeSubscription(
+        reconciled,
+        args.userId,
+    );
+    if (!saved) return null;
+
+    return {
+        ...saved,
+        cancelAtPeriodEnd: Boolean(
+            reconciled.cancel_at_period_end,
+        ),
+    };
+}
+
 export async function upsertFromStripeSubscription(sub: Stripe.Subscription, hintedUserId?: string | null) {
     const customerId = typeof sub.customer === "string" ? sub.customer : sub.customer.id;
 

@@ -53,6 +53,7 @@
         "subscribe": "S’abonner à l’annuel"
       },
       "currentPlan": "Formule actuelle",
+      "resumeSubscription": "Reprendre l’abonnement",
       "priceKicker": "Prix",
       "recommended": "Recommandé",
       "startTrial": "Démarrer l’essai de {days} jours",

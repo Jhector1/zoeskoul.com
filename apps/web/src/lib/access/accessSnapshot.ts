@@ -3,6 +3,7 @@ import type { PrismaClient } from "@/lib/prisma";
 import { Actor, actorKeyOf } from "@/lib/practice/actor";
 import { getAssignedSubjectIdsForUser } from "@/lib/learningAssignments/assignmentAccessServer";
 import { resolveActorRoleCapabilities } from "@/lib/access/roleCapabilitiesServer";
+import { hasCurrentSubscriptionAccess } from "@/lib/billing/period";
 
 function isWithinWindow(now: Date, startsAt?: Date | null, endsAt?: Date | null) {
     if (startsAt && startsAt > now) return false;
@@ -44,6 +45,7 @@ export async function getAccessSnapshot(
                 },
                 select: {
                     currentPeriodEnd: true,
+                    trialEnd: true,
                     status: true,
                 },
                 orderBy: {
@@ -56,7 +58,15 @@ export async function getAccessSnapshot(
         canUnlockAll = capabilities.canUnlockAll;
         isSubscribed = capabilities.canBypassBilling;
 
-        if (sub && (!sub.currentPeriodEnd || sub.currentPeriodEnd > now)) {
+        if (
+            sub &&
+            hasCurrentSubscriptionAccess({
+                status: sub.status,
+                trialEnd: sub.trialEnd,
+                currentPeriodEnd: sub.currentPeriodEnd,
+                nowMs: now.getTime(),
+            })
+        ) {
             isSubscribed = true;
         }
     }

@@ -21,6 +21,7 @@ import {
 
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import { useBillingActions } from "@/components/billing/hooks/useBillingActions";
+import { canResumeScheduledSubscription } from "@/lib/billing/period";
 import {ChartColumn, ClipboardCheck, InfinityIcon, Languages} from "lucide-react";
 
 type PaywallInfo = {
@@ -54,7 +55,7 @@ export default function BillingPageClient({
     const showPaywall = Boolean(paywall?.reason);
     const accessResource = [paywall?.subject, paywall?.module].filter(Boolean).join(" — ") || null;
 
-    const { busy, authRedirect, openPortal, startCheckout } = useBillingActions({
+    const { busy, authRedirect, openPortal, startCheckout, resumeSubscription } = useBillingActions({
         status,
         callbackUrl,
         onError: setError,
@@ -71,6 +72,25 @@ export default function BillingPageClient({
                 : t("paywall.titleGeneric");
 
     const trialDays = status?.trialDays ?? 7;
+
+    const resumePlan =
+        status?.isSubscribed &&
+        canResumeScheduledSubscription({
+            status: status.stripeStatus,
+            trialEnd: status.trialEndsAt,
+            currentPeriodEnd: status.currentPeriodEnd,
+            cancelAtPeriodEnd: status.cancelAtPeriodEnd,
+        })
+            ? status.currentPlan
+            : null;
+
+    const resumeCurrentSubscription = async () => {
+        const resumed = await resumeSubscription();
+        if (resumed) {
+            await reload();
+        }
+    };
+
 
     if (loading) {
         return <BillingPageSkeleton showPaywall={Boolean(paywall?.reason)} />;
@@ -233,12 +253,21 @@ export default function BillingPageClient({
                                     recommendedLabel={t("plans.recommended")}
                                     features={t.raw("plans.monthly.features") as string[]}
                                     ctaLabel={
-                                        status.isSubscribed && status.currentPlan === "monthly"
-                                            ? t("plans.currentPlan")
-                                            : t("plans.monthly.subscribe")
+                                        resumePlan === "monthly"
+                                            ? t("plans.resumeSubscription")
+                                            : status.isSubscribed && status.currentPlan === "monthly"
+                                                ? t("plans.currentPlan")
+                                                : t("plans.monthly.subscribe")
                                     }
-                                    ctaDisabled={busy || status.isSubscribed}
-                                    onCta={() => startCheckout("monthly", false)}
+                                    ctaDisabled={
+                                        busy ||
+                                        (status.isSubscribed && resumePlan !== "monthly")
+                                    }
+                                    onCta={
+                                        resumePlan === "monthly"
+                                            ? resumeCurrentSubscription
+                                            : () => startCheckout("monthly", false)
+                                    }
                                     trialLabel={
                                         canUseTrial
                                             ? t("plans.startTrial", { days: trialDays })
@@ -268,12 +297,21 @@ export default function BillingPageClient({
                                     recommendedLabel={t("plans.recommended")}
                                     features={t.raw("plans.yearly.features") as string[]}
                                     ctaLabel={
-                                        status.isSubscribed && status.currentPlan === "yearly"
-                                            ? t("plans.currentPlan")
-                                            : t("plans.yearly.subscribe")
+                                        resumePlan === "yearly"
+                                            ? t("plans.resumeSubscription")
+                                            : status.isSubscribed && status.currentPlan === "yearly"
+                                                ? t("plans.currentPlan")
+                                                : t("plans.yearly.subscribe")
                                     }
-                                    ctaDisabled={busy || status.isSubscribed}
-                                    onCta={() => startCheckout("yearly", false)}
+                                    ctaDisabled={
+                                        busy ||
+                                        (status.isSubscribed && resumePlan !== "yearly")
+                                    }
+                                    onCta={
+                                        resumePlan === "yearly"
+                                            ? resumeCurrentSubscription
+                                            : () => startCheckout("yearly", false)
+                                    }
                                     trialLabel={
                                         canUseTrial
                                             ? t("plans.startTrial", { days: trialDays })
