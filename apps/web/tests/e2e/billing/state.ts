@@ -318,3 +318,8 @@ export function triggerStripeEventViaCli(
     type,
   ]);
 }
+
+
+export async function checkoutSessionDetails(sessionId: string) {
+  return stripe.checkout.sessions.retrieve(sessionId, { expand: ["line_items"] });
+}

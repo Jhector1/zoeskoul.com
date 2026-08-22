@@ -14,6 +14,7 @@ import { BookOpen, Dumbbell, Settings } from "lucide-react";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import Badge from "@/components/billing/Badge";
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
+import { useBillingActions } from "@/components/billing/hooks/useBillingActions";
 import BillingPromotionCountdown from "@/components/billing/BillingPromotionCountdown";
 import { ROUTES } from "@zoeskoul/app-config";
 import { useSearchParams } from "next/navigation";
@@ -435,7 +436,17 @@ export default function HeaderSlick({
     status: billingStatus,
     headlineBadge,
     reload: reloadBillingStatus,
+    setError: setBillingError,
   } = useBillingStatus();
+
+  const {
+    busy: billingCheckoutBusy,
+    startCheckout: startBillingCheckout,
+  } = useBillingActions({
+    status: billingStatus,
+    callbackUrl: pathname || "/",
+    onError: setBillingError,
+  });
 
   const headerPromotions = useMemo(() => {
     if (billingStatus?.isSubscribed) return [];
@@ -503,7 +514,26 @@ export default function HeaderSlick({
 
         {headlineBadge && isBillingStatus ? (
             <div className="hidden md:block">
-              {headlineBadge.href ? (
+              {headlineBadge.action === "resume_checkout" &&
+              billingStatus?.pendingCheckout ? (
+                  <button
+                      type="button"
+                      data-testid="header-resume-checkout"
+                      aria-label={headlineBadge.text}
+                      disabled={billingCheckoutBusy}
+                      onClick={() => {
+                        void startBillingCheckout(
+                          billingStatus.pendingCheckout!.plan,
+                          billingStatus.pendingCheckout!.useTrial,
+                        );
+                      }}
+                      className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-400/35 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <Badge tone={headlineBadge.tone} className="cursor-pointer whitespace-nowrap">
+                      {headlineBadge.text}
+                    </Badge>
+                  </button>
+              ) : headlineBadge.href ? (
                   <Link
                       href={headlineBadge.href}
                       aria-label={headlineBadge.text}

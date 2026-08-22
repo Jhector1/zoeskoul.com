@@ -3,8 +3,8 @@ set -euo pipefail
 
 ROOT="/Users/admin/Documents/NextJSProject/zoeskoul-web-infra"
 WEB="$ROOT/apps/web"
-EXPECTED_BRANCH="fix/stripe-effective-status-and-checkout-idempotency"
-EXPECTED_HEAD="c6a2cedc6c43c19888bc7a2ffb9e28c5c60cfbc4"
+EXPECTED_BRANCH="main"
+EXPECTED_HEAD="f211ba3f68ef07847659291aa5bdbcd4d555da46"
 
 cd "$ROOT"
 
@@ -175,7 +175,7 @@ echo "  ✓ new paid Checkout"
 echo "  ✓ same-attempt Stripe idempotency/recovery"
 echo "  ✓ rapid duplicate UI click"
 echo "  ✓ two-tab reservation race"
-echo "  ✓ cancel-return reservation release"
+echo "  ✓ cancel-return preserves Checkout + Resume/Switch UI"
 echo "  ✓ real checkout.session.expired via Stripe CLI"
 echo "  ✓ real signed CLI trigger into durable webhook ledger"
 echo "  ✓ real Stripe trial subscription + signed webhook reconciliation"

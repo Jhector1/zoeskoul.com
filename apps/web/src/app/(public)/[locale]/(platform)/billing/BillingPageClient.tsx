@@ -23,7 +23,18 @@ import {
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
 import { useBillingActions } from "@/components/billing/hooks/useBillingActions";
 import { canResumeScheduledSubscription } from "@/lib/billing/period";
-import {ChartColumn, ClipboardCheck, InfinityIcon, Languages} from "lucide-react";
+import {
+    CalendarDays,
+    ChartColumn,
+    ClipboardCheck,
+    Clock3,
+    CreditCard,
+    InfinityIcon,
+    Languages,
+    LockKeyhole,
+    ShieldCheck,
+    ShoppingCart,
+} from "lucide-react";
 
 type PaywallInfo = {
     reason?: string | null;
@@ -101,6 +112,96 @@ export default function BillingPageClient({
 
     const monthlyPromotion = status?.isSubscribed ? null : status?.activePromotions?.monthly ?? null;
     const yearlyPromotion = status?.isSubscribed ? null : status?.activePromotions?.yearly ?? null;
+    const pendingCheckout = status?.isSubscribed ? null : status?.pendingCheckout ?? null;
+    const pendingCheckoutKey = pendingCheckout
+        ? `${pendingCheckout.plan}:${pendingCheckout.useTrial ? "trial" : "paid"}`
+        : null;
+    const [switchingPendingCheckout, setSwitchingPendingCheckout] = React.useState<string | null>(null);
+    const showPlanChoices =
+        !pendingCheckout ||
+        (pendingCheckoutKey !== null && switchingPendingCheckout === pendingCheckoutKey);
+    const pendingPlanTitle = pendingCheckout
+        ? t(`plans.${pendingCheckout.plan}.title`)
+        : "";
+    const pendingBillingValue = pendingCheckout
+        ? pendingCheckout.plan === "yearly"
+            ? t("plans.pendingBillingYearly")
+            : t("plans.pendingBillingMonthly")
+        : "";
+    const pendingBillingNote = pendingCheckout
+        ? pendingCheckout.plan === "yearly"
+            ? t("plans.pendingBillingYearlyNote")
+            : t("plans.pendingBillingMonthlyNote")
+        : "";
+    const pendingCheckoutType = pendingCheckout
+        ? pendingCheckout.useTrial
+            ? t("plans.pendingCheckoutTrial", { days: trialDays })
+            : t("plans.pendingCheckoutPaid")
+        : "";
+    const pendingCheckoutDetails = pendingCheckout
+        ? [
+              {
+                  key: "plan",
+                  label: t("plans.pendingSelectedPlan"),
+                  value: pendingPlanTitle,
+                  note: t("plans.pendingSelectedPlanNote"),
+                  icon: CalendarDays,
+                  iconClassName: "text-emerald-600 dark:text-emerald-300",
+                  iconSurfaceClassName:
+                      "border-emerald-200 bg-emerald-50 dark:border-emerald-400/20 dark:bg-emerald-400/10",
+              },
+              {
+                  key: "billing",
+                  label: t("plans.pendingBilling"),
+                  value: pendingBillingValue,
+                  note: pendingBillingNote,
+                  icon: CreditCard,
+                  iconClassName: "text-blue-600 dark:text-blue-300",
+                  iconSurfaceClassName:
+                      "border-blue-200 bg-blue-50 dark:border-blue-400/20 dark:bg-blue-400/10",
+              },
+              {
+                  key: "checkout",
+                  label: t("plans.pendingCheckoutType"),
+                  value: pendingCheckoutType,
+                  note: t("plans.pendingCheckoutTypeNote"),
+                  icon: Clock3,
+                  iconClassName: "text-amber-600 dark:text-amber-300",
+                  iconSurfaceClassName:
+                      "border-amber-200 bg-amber-50 dark:border-amber-400/20 dark:bg-amber-400/10",
+              },
+              {
+                  key: "access",
+                  label: t("plans.pendingAccess"),
+                  value: t("plans.pendingAccessValue"),
+                  note: t("plans.pendingAccessNote"),
+                  icon: LockKeyhole,
+                  iconClassName: "text-violet-600 dark:text-violet-300",
+                  iconSurfaceClassName:
+                      "border-violet-200 bg-violet-50 dark:border-violet-400/20 dark:bg-violet-400/10",
+              },
+              {
+                  key: "cancel",
+                  label: t("plans.pendingCancellation"),
+                  value: t("plans.pendingCancellationValue"),
+                  note: t("plans.pendingCancellationNote"),
+                  icon: ShieldCheck,
+                  iconClassName: "text-teal-600 dark:text-teal-300",
+                  iconSurfaceClassName:
+                      "border-teal-200 bg-teal-50 dark:border-teal-400/20 dark:bg-teal-400/10",
+              },
+          ]
+        : [];
+    const isPendingCheckoutIntent = (plan: "monthly" | "yearly", useTrial: boolean) =>
+        pendingCheckout?.plan === plan && pendingCheckout.useTrial === useTrial;
+    const startSelectedCheckout = async (
+        plan: "monthly" | "yearly",
+        useTrial: boolean,
+    ) => {
+        setSwitchingPendingCheckout(null);
+        await startCheckout(plan, useTrial);
+    };
+
     if (loading) {
         return <BillingPageSkeleton showPaywall={Boolean(paywall?.reason)} />;
     }
@@ -197,16 +298,44 @@ export default function BillingPageClient({
                 <div className="grid gap-4 lg:grid-cols-3">
                     <BillingCard className="lg:col-span-2">
                         <BillingSectionHeader>
-                            <div className="ui-title-sm">{t("plans.sectionTitle")}</div>
+                            {pendingCheckout && !showPlanChoices ? (
+                                <div className="flex items-start gap-3">
+                                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-emerald-200 bg-emerald-50 dark:border-emerald-400/20 dark:bg-emerald-400/10">
+                                        <ShoppingCart className="h-6 w-6 text-emerald-600 dark:text-emerald-300" />
+                                    </div>
 
-                            <div className="mt-1 ui-meta">
-                                {status?.trialDays
-                                    ? t("plans.trialInfoWithDays", { days: status.trialDays })
-                                    : t("plans.trialInfo")}
-                            </div>
+                                    <div className="min-w-0 flex-1">
+                                        <div className="flex flex-wrap items-center gap-2">
+                                            <div className="text-xl font-semibold tracking-tight text-neutral-950 dark:text-white">
+                                                {t("plans.pendingCheckoutTitle")}
+                                            </div>
+                                            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-200">
+                                                <Clock3 className="h-3.5 w-3.5" />
+                                                {t("plans.pendingBadge")}
+                                            </span>
+                                        </div>
 
-                            <div className="mt-3 flex items-center gap-2">
-                                {(["usd", "htg"] as const).map((cur) => (
+                                        <div className="mt-1 max-w-2xl text-sm text-neutral-600 dark:text-white/65">
+                                            {pendingCheckout.useTrial
+                                                ? t("plans.pendingTrialCheckoutBody", { plan: pendingPlanTitle })
+                                                : t("plans.pendingCheckoutBody", { plan: pendingPlanTitle })}
+                                        </div>
+                                    </div>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="ui-title-sm">{t("plans.sectionTitle")}</div>
+                                    <div className="mt-1 ui-meta">
+                                        {status?.trialDays
+                                            ? t("plans.trialInfoWithDays", { days: status.trialDays })
+                                            : t("plans.trialInfo")}
+                                    </div>
+                                </>
+                            )}
+
+                            {showPlanChoices ? (
+                                <div className="mt-3 flex items-center gap-2">
+                                    {(["usd", "htg"] as const).map((cur) => (
                                     <button
                                         key={cur}
                                         type="button"
@@ -229,11 +358,12 @@ export default function BillingPageClient({
                                     >
                                         {cur.toUpperCase()}
                                     </button>
-                                ))}
-                            </div>
+                                    ))}
+                                </div>
+                            ) : null}
                         </BillingSectionHeader>
 
-                        {!loading && status ? (
+                        {!loading && status && (!pendingCheckout || showPlanChoices) ? (
                             <div className="p-5 pt-4">
                                 <StripeStatusPanel
                                     status={status.stripeStatus ?? "none"}
@@ -250,6 +380,86 @@ export default function BillingPageClient({
 
                         {loading || !status ? (
                             <div className="p-5 ui-meta-strong">{t("plans.loading")}</div>
+                        ) : pendingCheckout && !showPlanChoices ? (
+                            <div className="p-5 pt-4">
+                                <div className="mb-3 text-sm font-semibold text-neutral-800 dark:text-white/85">
+                                    {t("plans.pendingSelectionTitle")}
+                                </div>
+
+                                <BillingSoftPanel className="overflow-hidden p-0">
+                                    <div className="divide-y divide-neutral-200/70 dark:divide-white/10">
+                                        {pendingCheckoutDetails.map((detail) => {
+                                            const Icon = detail.icon;
+                                            return (
+                                                <div
+                                                    key={detail.key}
+                                                    className="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between"
+                                                >
+                                                    <div className="flex min-w-0 items-center gap-3">
+                                                        <div
+                                                            className={cn(
+                                                                "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border",
+                                                                detail.iconSurfaceClassName,
+                                                            )}
+                                                        >
+                                                            <Icon className={cn("h-4 w-4", detail.iconClassName)} />
+                                                        </div>
+                                                        <div className="text-sm font-medium text-neutral-700 dark:text-white/70">
+                                                            {detail.label}
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="min-w-0 text-left sm:max-w-[58%] sm:text-right">
+                                                        <div
+                                                            className={cn(
+                                                                "text-sm font-semibold text-neutral-950 dark:text-white",
+                                                                detail.key === "plan" &&
+                                                                    "text-emerald-700 dark:text-emerald-300",
+                                                            )}
+                                                        >
+                                                            {detail.value}
+                                                        </div>
+                                                        <div className="mt-0.5 text-xs text-neutral-500 dark:text-white/50">
+                                                            {detail.note}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </BillingSoftPanel>
+
+                                <div className="mt-4 rounded-xl border border-neutral-200/80 bg-white/70 p-3 dark:border-white/10 dark:bg-white/[0.03]">
+                                    <div className="grid gap-2 sm:grid-cols-2">
+                                        <button
+                                            type="button"
+                                            className="ui-btn-primary w-full"
+                                            disabled={busy}
+                                            onClick={() =>
+                                                startSelectedCheckout(
+                                                    pendingCheckout.plan,
+                                                    pendingCheckout.useTrial,
+                                                )
+                                            }
+                                        >
+                                            {t("plans.resumeCheckout")}
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="ui-btn-secondary w-full"
+                                            disabled={busy}
+                                            onClick={() => setSwitchingPendingCheckout(pendingCheckoutKey)}
+                                        >
+                                            {t("plans.switchPlan")}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="mt-3 flex items-center gap-2 px-1 text-xs font-medium text-neutral-500 dark:text-white/50">
+                                    <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-300" />
+                                    <span>{t("plans.pendingSecureCheckout")}</span>
+                                </div>
+                            </div>
                         ) : (
                             <div className="grid gap-3 p-5 md:grid-cols-2">
                                 <PlanCard
@@ -267,7 +477,7 @@ export default function BillingPageClient({
                                     ctaLabel={
                                         resumePlan === "monthly"
                                             ? t("plans.resumeSubscription")
-                                            : isCheckoutResume("monthly", false)
+                                            : isCheckoutResume("monthly", false) || isPendingCheckoutIntent("monthly", false)
                                                 ? t("plans.resumeCheckout")
                                                 : status.isSubscribed && status.currentPlan === "monthly"
                                                     ? t("plans.currentPlan")
@@ -280,10 +490,10 @@ export default function BillingPageClient({
                                     onCta={
                                         resumePlan === "monthly"
                                             ? resumeCurrentSubscription
-                                            : () => startCheckout("monthly", false)
+                                            : () => startSelectedCheckout("monthly", false)
                                     }
                                     trialLabel={
-                                        isCheckoutResume("monthly", true)
+                                        isCheckoutResume("monthly", true) || isPendingCheckoutIntent("monthly", true)
                                             ? t("plans.resumeCheckout")
                                             : canUseTrial
                                                 ? t("plans.startTrial", { days: trialDays })
@@ -292,7 +502,7 @@ export default function BillingPageClient({
                                                 : t("plans.trialUnavailable")
                                     }
                                     trialDisabled={busy || !canUseTrial || status.isSubscribed}
-                                    onTrial={() => startCheckout("monthly", true)}
+                                    onTrial={() => startSelectedCheckout("monthly", true)}
                                     trialNote={
                                         !status.trialEligible
                                             ? t("plans.trialNoteUsed")
@@ -318,7 +528,7 @@ export default function BillingPageClient({
                                     ctaLabel={
                                         resumePlan === "yearly"
                                             ? t("plans.resumeSubscription")
-                                            : isCheckoutResume("yearly", false)
+                                            : isCheckoutResume("yearly", false) || isPendingCheckoutIntent("yearly", false)
                                                 ? t("plans.resumeCheckout")
                                                 : status.isSubscribed && status.currentPlan === "yearly"
                                                     ? t("plans.currentPlan")
@@ -331,10 +541,10 @@ export default function BillingPageClient({
                                     onCta={
                                         resumePlan === "yearly"
                                             ? resumeCurrentSubscription
-                                            : () => startCheckout("yearly", false)
+                                            : () => startSelectedCheckout("yearly", false)
                                     }
                                     trialLabel={
-                                        isCheckoutResume("yearly", true)
+                                        isCheckoutResume("yearly", true) || isPendingCheckoutIntent("yearly", true)
                                             ? t("plans.resumeCheckout")
                                             : canUseTrial
                                                 ? t("plans.startTrial", { days: trialDays })
@@ -343,7 +553,7 @@ export default function BillingPageClient({
                                                 : t("plans.trialUnavailable")
                                     }
                                     trialDisabled={busy || !canUseTrial || status.isSubscribed}
-                                    onTrial={() => startCheckout("yearly", true)}
+                                    onTrial={() => startSelectedCheckout("yearly", true)}
                                     trialNote={
                                         !status.trialEligible
                                             ? t("plans.trialNoteUsed")

@@ -37,6 +37,10 @@ export type BillingStatus = {
     trialEndsAt: string | null;
 
     currentPlan?: "monthly" | "yearly" | null;
+    pendingCheckout?: {
+        plan: "monthly" | "yearly";
+        useTrial: boolean;
+    } | null;
 
     activePromotions?: {
         monthly: BillingPromotionProjection | null;

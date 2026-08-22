@@ -4,6 +4,8 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import {
   billingConfig,
+  classifyCheckoutSessionIntent,
+  findExistingCheckoutSessionForAttempt,
   getPricePresentation,
   syncSubscriptionsForUser,
 } from "@/lib/billing/stripeService";
@@ -15,6 +17,7 @@ import { toIntlLocale } from "@/i18n/money";
 import {resolveBillingCurrency} from "@/lib/billing/currency";
 import { futureBillingPeriodIsoOrNull } from "@/lib/billing/period";
 import { resolveRoleCapabilities } from "@/lib/access/roleCapabilities";
+import { isCheckoutAttemptId } from "@/lib/billing/checkoutAttempt";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -46,6 +49,7 @@ export async function GET() {
       priceId: null,
 
       currentPlan: null,
+      pendingCheckout: null,
       trialEligible: false,
       trialEndsAt: null,
       currentPeriodEnd: null,
@@ -63,7 +67,7 @@ export async function GET() {
 
   const u = await prisma.user.findUnique({
     where: { id: userId },
-    select: { trialUsedAt: true, roles: true },
+    select: { trialUsedAt: true, roles: true, billingCheckoutAttemptId: true },
   });
   const capabilities = resolveRoleCapabilities(u?.roles);
   const billingExempt = capabilities.canBypassBilling;
@@ -83,6 +87,54 @@ export async function GET() {
               ? "yearly"
               : null;
 
+  // Presentation-only projection of the one canonical open Checkout.
+  // The checkout route/webhook retain sole ownership of mutation and cleanup.
+  let pendingCheckout: {
+    plan: "monthly" | "yearly";
+    useTrial: boolean;
+  } | null = null;
+  const pendingCheckoutAttemptId = u?.billingCheckoutAttemptId ?? null;
+
+  if (
+    !billingExempt &&
+    !isSubscribed &&
+    isCheckoutAttemptId(pendingCheckoutAttemptId)
+  ) {
+    try {
+      const existingSession = await findExistingCheckoutSessionForAttempt({
+        userId,
+        checkoutAttemptId: pendingCheckoutAttemptId,
+      });
+
+      if (existingSession?.status === "open") {
+        const candidates = [
+          { plan: "monthly" as const, priceId: monthlyPriceId, useTrial: false },
+          { plan: "monthly" as const, priceId: monthlyPriceId, useTrial: true },
+          { plan: "yearly" as const, priceId: yearlyPriceId, useTrial: false },
+          { plan: "yearly" as const, priceId: yearlyPriceId, useTrial: true },
+        ];
+
+        const matchingIntent = candidates.find(
+          (candidate) =>
+            classifyCheckoutSessionIntent({
+              session: existingSession,
+              priceId: candidate.priceId,
+              useTrial: candidate.useTrial,
+            }) === "match",
+        );
+
+        if (matchingIntent) {
+          pendingCheckout = {
+            plan: matchingIntent.plan,
+            useTrial: matchingIntent.useTrial,
+          };
+        }
+      }
+    } catch {
+      // Presentation is best effort. Never guess or mutate on Stripe uncertainty.
+    }
+  }
+
   return NextResponse.json({
     isAuthenticated: true,
     isSubscribed,
@@ -93,6 +145,7 @@ export async function GET() {
     priceId: ent.priceId ?? null,
 
     currentPlan,
+    pendingCheckout,
     trialEligible: !billingExempt && !u?.trialUsedAt,
 
     trialEndsAt: ent.trialEnd ? ent.trialEnd.toISOString() : null,

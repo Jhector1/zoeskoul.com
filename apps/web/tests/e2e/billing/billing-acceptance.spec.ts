@@ -361,7 +361,7 @@ test.describe.serial(
     );
 
     test(
-      "cancel return releases only the matching reservation",
+      "cancel return preserves the open Checkout and exposes Resume/Switch",
       async ({ page }) => {
         await openBilling(page);
         const attemptId =
@@ -384,6 +384,14 @@ test.describe.serial(
           )
           .toBe(attemptId);
 
+        const [sessionBeforeCancel] =
+          await checkoutSessionsForAttempt(
+            attemptId,
+          );
+        expect(
+          sessionBeforeCancel?.status,
+        ).toBe("open");
+
         await page.goto(
           `${origin}/en/billing` +
             `?canceled=1` +
@@ -403,9 +411,60 @@ test.describe.serial(
               timeout: 15_000,
             },
           )
-          .toBeNull();
+          .toBe(attemptId);
 
-        await expireOpenAttempt(attemptId);
+        const [sessionAfterCancel] =
+          await checkoutSessionsForAttempt(
+            attemptId,
+          );
+        expect(
+          sessionAfterCancel?.status,
+        ).toBe("open");
+
+        await expect(
+          page.getByRole("button", {
+            name: "Resume checkout",
+            exact: true,
+          }),
+        ).toBeVisible();
+
+        await expect(
+          page.getByRole("button", {
+            name: "Switch plan",
+            exact: true,
+          }),
+        ).toBeVisible();
+
+        await expect(
+          page.getByRole("button", {
+            name: "Subscribe monthly",
+            exact: true,
+          }),
+        ).toHaveCount(0);
+
+        await expect(
+          page.getByRole("button", {
+            name: "Subscribe yearly",
+            exact: true,
+          }),
+        ).toHaveCount(0);
+
+        await expireOpenAttempt(
+          attemptId,
+        );
+
+        await expect
+          .poll(
+            async () =>
+              (
+                await billingUserRow()
+              )
+                .billingCheckoutAttemptId,
+            {
+              timeout: 30_000,
+            },
+          )
+          .toBeNull();
       },
     );
 

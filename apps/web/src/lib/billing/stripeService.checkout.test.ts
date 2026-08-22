@@ -12,6 +12,8 @@ const mocks = vi.hoisted(() => ({
   customerCreate: vi.fn(),
   checkoutList: vi.fn(),
   checkoutCreate: vi.fn(),
+  checkoutRetrieve: vi.fn(),
+  checkoutExpire: vi.fn(),
   releaseBillingCheckoutReservation: vi.fn(),
 }));
 
@@ -41,12 +43,20 @@ vi.mock("@/lib/stripe", () => ({
       sessions: {
         list: mocks.checkoutList,
         create: mocks.checkoutCreate,
+        retrieve: mocks.checkoutRetrieve,
+        expire: mocks.checkoutExpire,
       },
     },
   }),
 }));
 
-import { createCheckoutSession, findExistingCheckoutSessionForAttempt, upsertFromStripeSubscription } from "./stripeService";
+import {
+  classifyCheckoutSessionIntent,
+  createCheckoutSession,
+  expireOpenCheckoutSession,
+  findExistingCheckoutSessionForAttempt,
+  upsertFromStripeSubscription,
+} from "./stripeService";
 
 describe("createCheckoutSession", () => {
   beforeEach(() => {
@@ -205,6 +215,7 @@ describe("createCheckoutSession", () => {
     expect(mocks.checkoutList).toHaveBeenCalledWith({
       customer: "cus_1",
       limit: 100,
+      expand: ["data.line_items"],
     });
     expect(mocks.customerCreate).not.toHaveBeenCalled();
   });
@@ -216,7 +227,8 @@ describe("createCheckoutSession", () => {
           id: "cs_test_existing",
           mode: "subscription",
           status: "open",
-          metadata: { checkoutAttemptId: ATTEMPT_ID },
+          metadata: { checkoutAttemptId: ATTEMPT_ID, useTrial: "false" },
+          line_items: { data: [{ price: { id: "price_monthly" } }] },
           url: "https://checkout.stripe.test/cs_test_existing",
         },
       ],
@@ -246,7 +258,8 @@ describe("createCheckoutSession", () => {
           id: "cs_test_complete",
           mode: "subscription",
           status: "complete",
-          metadata: { checkoutAttemptId: ATTEMPT_ID },
+          metadata: { checkoutAttemptId: ATTEMPT_ID, useTrial: "false" },
+          line_items: { data: [{ price: { id: "price_monthly" } }] },
           url: null,
         },
       ],
@@ -264,6 +277,69 @@ describe("createCheckoutSession", () => {
 
     expect(out.id).toBe("cs_test_complete");
     expect(out.url).toContain("session_id=cs_test_complete");
+    expect(mocks.checkoutCreate).not.toHaveBeenCalled();
+  });
+});
+
+
+describe("Checkout plan-switch and expiration primitives", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    process.env.STRIPE_PRICE_MONTHLY_ID = "price_monthly";
+    process.env.STRIPE_PRICE_YEARLY_ID = "price_yearly";
+    process.env.TRIAL_DAYS = "7";
+    process.env.AUTH_URL = "https://zoeskoul.test";
+    mocks.userFindUnique.mockResolvedValue({ id: "user_1", email: "learner@example.test", stripeCustomerId: "cus_1", trialUsedAt: null });
+    mocks.customerRetrieve.mockResolvedValue({ id: "cus_1", deleted: false });
+    mocks.checkoutList.mockResolvedValue({ data: [] });
+    mocks.checkoutCreate.mockResolvedValue({ id: "cs_test_created", url: "https://checkout.stripe.test/created", status: "open", mode: "subscription", metadata: {} });
+  });
+
+  it("classifies exact plan/trial intent and detects drift", () => {
+    const session = { metadata: { priceId: "price_monthly", useTrial: "false" }, line_items: { data: [] } } as unknown as Stripe.Checkout.Session;
+    expect(classifyCheckoutSessionIntent({ session, priceId: "price_monthly", useTrial: false })).toBe("match");
+    expect(classifyCheckoutSessionIntent({ session, priceId: "price_yearly", useTrial: false })).toBe("mismatch");
+    expect(classifyCheckoutSessionIntent({ session, priceId: "price_monthly", useTrial: true })).toBe("mismatch");
+  });
+
+  it("uses expanded line items to classify legacy Sessions", () => {
+    const session = { metadata: { useTrial: "false" }, line_items: { data: [{ price: { id: "price_yearly" } }] } } as unknown as Stripe.Checkout.Session;
+    expect(classifyCheckoutSessionIntent({ session, priceId: "price_yearly", useTrial: false })).toBe("match");
+  });
+
+  it("returns unknown rather than guessing incomplete legacy identity", () => {
+    const session = { metadata: {}, line_items: { data: [] } } as unknown as Stripe.Checkout.Session;
+    expect(classifyCheckoutSessionIntent({ session, priceId: "price_monthly", useTrial: false })).toBe("unknown");
+  });
+
+  it("finds an explicitly expired attempt and expands line items", async () => {
+    mocks.checkoutList.mockResolvedValue({ data: [{ id: "cs_test_expired", mode: "subscription", status: "expired", metadata: { checkoutAttemptId: ATTEMPT_ID, useTrial: "false" }, line_items: { data: [{ price: { id: "price_monthly" } }] } }] });
+    const found = await findExistingCheckoutSessionForAttempt({ userId: "user_1", checkoutAttemptId: ATTEMPT_ID });
+    expect(found?.status).toBe("expired");
+    expect(mocks.checkoutList).toHaveBeenCalledWith(expect.objectContaining({ customer: "cus_1", expand: ["data.line_items"] }));
+  });
+
+  it("accepts a concurrent expiration only when Stripe re-read proves expired", async () => {
+    mocks.checkoutExpire.mockRejectedValue(new Error("already changed"));
+    mocks.checkoutRetrieve.mockResolvedValue({ id: "cs_test_race", status: "expired" });
+    await expect(expireOpenCheckoutSession("cs_test_race")).resolves.toMatchObject({ id: "cs_test_race", status: "expired" });
+  });
+
+  it("propagates expiration uncertainty when Stripe still reports open", async () => {
+    mocks.checkoutExpire.mockRejectedValue(new Error("network down"));
+    mocks.checkoutRetrieve.mockResolvedValue({ id: "cs_test_open", status: "open" });
+    await expect(expireOpenCheckoutSession("cs_test_open")).rejects.toThrow("network down");
+  });
+
+  it("stores priceId in Checkout metadata", async () => {
+    await createCheckoutSession({ userId: "user_1", priceId: "price_yearly", useTrial: false, callbackUrl: "/en/billing", currency: "usd", appLocale: "en", checkoutAttemptId: ATTEMPT_ID });
+    const [params] = mocks.checkoutCreate.mock.calls[0];
+    expect(params.metadata).toMatchObject({ checkoutAttemptId: ATTEMPT_ID, priceId: "price_yearly", useTrial: "false" });
+  });
+
+  it("refuses same-attempt recovery when Stripe intent drifted", async () => {
+    mocks.checkoutList.mockResolvedValue({ data: [{ id: "cs_test_wrong", mode: "subscription", status: "open", url: "https://checkout.stripe.test/wrong", metadata: { checkoutAttemptId: ATTEMPT_ID, priceId: "price_yearly", useTrial: "false" }, line_items: { data: [] } }] });
+    await expect(createCheckoutSession({ userId: "user_1", priceId: "price_monthly", useTrial: false, callbackUrl: "/en/billing", currency: "usd", appLocale: "en", checkoutAttemptId: ATTEMPT_ID })).rejects.toThrow("Existing Stripe Checkout intent does not match this attempt.");
     expect(mocks.checkoutCreate).not.toHaveBeenCalled();
   });
 });

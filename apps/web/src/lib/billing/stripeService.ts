@@ -217,6 +217,49 @@ function stripeCheckoutLocaleFromAppLocale(appLocale?: string | null): Stripe.Ch
 }
 
 
+export type CheckoutSessionIntentMatch = "match" | "mismatch" | "unknown";
+
+function checkoutSessionPriceId(session: Stripe.Checkout.Session): string | null {
+    const metadataPriceId = session.metadata?.priceId?.trim();
+    if (metadataPriceId) return metadataPriceId;
+
+    // Sessions created before V76C32 did not have priceId in Checkout metadata.
+    // Expanded line_items is the compatibility proof for Monthly vs Yearly.
+    return session.line_items?.data?.[0]?.price?.id ?? null;
+}
+
+export function classifyCheckoutSessionIntent(args: {
+    session: Stripe.Checkout.Session;
+    priceId: string;
+    useTrial: boolean;
+}): CheckoutSessionIntentMatch {
+    const priceId = checkoutSessionPriceId(args.session);
+    const rawUseTrial = args.session.metadata?.useTrial;
+    if (!priceId || (rawUseTrial !== "true" && rawUseTrial !== "false")) {
+        return "unknown";
+    }
+    return priceId === args.priceId && (rawUseTrial === "true") === args.useTrial
+        ? "match"
+        : "mismatch";
+}
+
+export async function expireOpenCheckoutSession(sessionId: string): Promise<Stripe.Checkout.Session> {
+    const stripe = getStripe();
+    try {
+        return await stripe.checkout.sessions.expire(sessionId);
+    } catch (expireError) {
+        // A signed expiration webhook or another request may win this race.
+        // Only treat it as success if a Stripe re-read proves terminal expired.
+        try {
+            const latest = await stripe.checkout.sessions.retrieve(sessionId);
+            if (latest.status === "expired") return latest;
+        } catch {
+            // Preserve the original error: terminal state is not proven.
+        }
+        throw expireError;
+    }
+}
+
 export async function findExistingCheckoutSessionForAttempt(args: {
     userId: string;
     checkoutAttemptId: string;
@@ -234,12 +277,13 @@ export async function findExistingCheckoutSessionForAttempt(args: {
         const sessions = await getStripe().checkout.sessions.list({
             customer: customerId,
             limit: 100,
+            expand: ["data.line_items"],
         });
         return sessions.data.find(
             (session) =>
                 session.mode === "subscription" &&
                 session.metadata?.checkoutAttemptId === args.checkoutAttemptId &&
-                (session.status === "open" || session.status === "complete"),
+                (session.status === "open" || session.status === "complete" || session.status === "expired"),
         ) ?? null;
     } catch (error) {
         if (isMissingCustomerError(error)) return null;
@@ -304,6 +348,7 @@ export async function createCheckoutSession(args: {
         const recent = await stripe.checkout.sessions.list({
             customer: customerId,
             limit: 10,
+            expand: ["data.line_items"],
         });
         const recovered = recent.data.find(
             (session) =>
@@ -313,6 +358,14 @@ export async function createCheckoutSession(args: {
         );
 
         if (recovered) {
+            const recoveredIntent = classifyCheckoutSessionIntent({
+                session: recovered,
+                priceId: args.priceId,
+                useTrial: args.useTrial,
+            });
+            if (recoveredIntent !== "match") {
+                throw new Error("Existing Stripe Checkout intent does not match this attempt.");
+            }
             return {
                 id: recovered.id,
                 url:
@@ -346,6 +399,7 @@ export async function createCheckoutSession(args: {
                 metadata: {
                     userId: args.userId,
                     checkoutAttemptId: args.checkoutAttemptId,
+                    priceId: args.priceId,
                     useTrial: args.useTrial ? "true" : "false",
                     ...(args.promotion ? {
                         promotionCampaignId: args.promotion.id,

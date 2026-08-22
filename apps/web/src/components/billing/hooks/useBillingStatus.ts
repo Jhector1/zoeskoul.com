@@ -51,6 +51,14 @@ export function useBillingStatus() {
         };
     }, [load]);
 
+    useEffect(() => {
+        const onPageShow = (event: PageTransitionEvent) => {
+            if (event.persisted) void load();
+        };
+        window.addEventListener("pageshow", onPageShow);
+        return () => window.removeEventListener("pageshow", onPageShow);
+    }, [load]);
+
     // ✅ Reformat plan labels instantly when locale changes (no refetch)
     const derivedStatus = useMemo(() => {
         if (!status) return null;

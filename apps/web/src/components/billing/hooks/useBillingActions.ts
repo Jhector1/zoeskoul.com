@@ -1,14 +1,13 @@
 
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { buildAccessGateSearchParams } from "@zoeskoul/permissions/accessGate";
 import {
   clearBrowserCheckoutAttempt,
   getOrCreateBrowserCheckoutAttempt,
-  isCheckoutAttemptId,
 } from "@/lib/billing/checkoutAttempt";
 import type { BillingStatus } from "@/lib/billing/types";
 import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
@@ -59,24 +58,11 @@ export function useBillingActions(args: {
     router.push(`/authenticate?${params.toString()}`);
   }, [router, callbackUrl, accessReason, accessResource]);
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("canceled") !== "1") return;
-
-    const checkoutAttemptId = params.get("checkout_attempt_id");
-    if (!isCheckoutAttemptId(checkoutAttemptId)) return;
-
-    clearBrowserCheckoutAttempt(checkoutAttemptId);
-
-    void fetch("/api/billing/checkout/release", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ checkoutAttemptId }),
-    }).catch(() => {
-      // Stripe checkout.session.expired and the server-side reservation TTL
-      // remain the safety net if this best-effort browser release is lost.
-    });
-  }, []);
+  // A hosted Checkout cancel/back return intentionally preserves the
+  // browser attempt and durable reservation. The Billing status endpoint
+  // projects the still-open Stripe Session as Resume/Switch. True expiration
+  // is cleaned by checkout.session.expired; successful completion is owned by
+  // subscription reconciliation.
 
   const startCheckout = useCallback(
     async (plan: "monthly" | "yearly", useTrial = false) => {
@@ -93,70 +79,56 @@ export function useBillingActions(args: {
       let checkoutAttemptId: string | null = null;
 
       try {
-        checkoutAttemptId = getOrCreateBrowserCheckoutAttempt({
-          plan,
-          useTrial,
-          callbackUrl,
-        });
+        for (let checkoutSubmission = 0; checkoutSubmission < 2; checkoutSubmission += 1) {
+          checkoutAttemptId = getOrCreateBrowserCheckoutAttempt({ plan, useTrial, callbackUrl });
 
-        const response = await fetch("/api/billing/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            plan,
-            useTrial,
-            callbackUrl,
-            checkoutAttemptId,
-          }),
-        });
+          const response = await fetch("/api/billing/checkout", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ plan, useTrial, callbackUrl, checkoutAttemptId }),
+          });
+          const data = await response.json().catch(() => null);
 
-        const data = await response.json().catch(() => null);
+          if (!response.ok) {
+            if (
+              data?.code === "CHECKOUT_ATTEMPT_EXPIRED" &&
+              data?.retryable === true &&
+              checkoutSubmission === 0
+            ) {
+              if (checkoutAttemptId) clearBrowserCheckoutAttempt(checkoutAttemptId);
+              checkoutAttemptId = null;
+              continue;
+            }
 
-        if (!response.ok) {
-          // This browser lost a race to another logical Checkout attempt.
-          // Clear only the rejected local attempt, then expose a real Resume
-          // action. The next click lets the server return the verified open
-          // Stripe Session or safely recover an orphan after the grace period.
-          if (data?.code === "CHECKOUT_ALREADY_IN_PROGRESS") {
-            if (checkoutAttemptId) {
+            if (data?.code === "CHECKOUT_ALREADY_IN_PROGRESS") {
+              if (checkoutAttemptId) clearBrowserCheckoutAttempt(checkoutAttemptId);
+              setCheckoutResumeTarget({ plan, useTrial });
+              onError(null);
+              return;
+            }
+
+            setCheckoutResumeTarget(null);
+            // Preserve 5xx attempts because Stripe outcome can be uncertain.
+            if (response.status < 500 && checkoutAttemptId) {
               clearBrowserCheckoutAttempt(checkoutAttemptId);
             }
-            setCheckoutResumeTarget({ plan, useTrial });
-            onError(null);
-            return;
+            throw new Error(data?.message ?? "Checkout failed");
           }
 
+          if (!data?.url || typeof data.url !== "string") throw new Error("Checkout failed");
           setCheckoutResumeTarget(null);
-
-          // Other 4xx responses definitively rejected this attempt before an
-          // uncertain Stripe create. A 5xx can occur after Stripe accepted the
-          // request, so preserve the attempt for an idempotent retry.
-          if (response.status < 500 && checkoutAttemptId) {
+          if (data?.resumed === true && checkoutAttemptId) {
             clearBrowserCheckoutAttempt(checkoutAttemptId);
           }
-          throw new Error(data?.message ?? "Checkout failed");
+          startGlobalNavigationPending({
+            label: "Opening checkout…",
+            source: "billing-checkout",
+            minVisibleMs: 700,
+          });
+          window.location.href = data.url;
+          return;
         }
-
-        if (!data?.url || typeof data.url !== "string") {
-          throw new Error("Checkout failed");
-        }
-
-        setCheckoutResumeTarget(null);
-
-        // A resumed Stripe Session belongs to the older server reservation,
-        // not the newer browser attempt that discovered the conflict. Remove
-        // that newer local attempt so Stripe's old cancel/success attempt id
-        // remains the only browser-visible owner.
-        if (data?.resumed === true && checkoutAttemptId) {
-          clearBrowserCheckoutAttempt(checkoutAttemptId);
-        }
-
-        startGlobalNavigationPending({
-          label: "Opening checkout…",
-          source: "billing-checkout",
-          minVisibleMs: 700,
-        });
-        window.location.href = data.url;
+        throw new Error("Checkout failed");
       } catch (error: unknown) {
         onError(errorMessage(error, "Checkout failed"));
       } finally {
@@ -164,12 +136,7 @@ export function useBillingActions(args: {
         setBusy(false);
       }
     },
-    [
-      status?.isAuthenticated,
-      callbackUrl,
-      authRedirect,
-      onError,
-    ],
+    [status?.isAuthenticated, callbackUrl, authRedirect, onError],
   );
 
   const resumeSubscription = useCallback(async () => {

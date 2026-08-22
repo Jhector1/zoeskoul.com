@@ -386,6 +386,19 @@ export default function StudentHeaderSlick({
     reload: reloadBillingStatus,
   } = useBillingStatus();
 
+  const resumeCheckoutHref = useMemo(() => {
+    if (!billingStatus?.pendingCheckout) return null;
+
+    try {
+      return new URL(
+        "/api/billing/checkout/resume",
+        websiteOrigin,
+      ).toString();
+    } catch {
+      return null;
+    }
+  }, [billingStatus?.pendingCheckout, websiteOrigin]);
+
   const headerPromotions = useMemo(() => {
     if (billingStatus?.isSubscribed) return [];
 
@@ -448,7 +461,18 @@ export default function StudentHeaderSlick({
 
         {headlineBadge && isBillingStatus ? (
             <div className="hidden md:block">
-              {headlineBadge.href ? (
+              {headlineBadge.action === "resume_checkout" && resumeCheckoutHref ? (
+                  <a
+                      href={resumeCheckoutHref}
+                      data-testid="student-header-resume-checkout"
+                      aria-label={headlineBadge.text}
+                      className="inline-flex rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-400/35"
+                  >
+                    <Badge tone={headlineBadge.tone} className="cursor-pointer whitespace-nowrap">
+                      {headlineBadge.text}
+                    </Badge>
+                  </a>
+              ) : headlineBadge.href ? (
                   <Link
                       href={headlineBadge.href}
                       aria-label={headlineBadge.text}

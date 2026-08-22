@@ -6,6 +6,7 @@ export type BillingHeadline = {
   tone: BadgeTone;
   text: string;
   href?: string;
+  action?: "resume_checkout";
 };
 
 const BILLING_HREF = "/billing";
@@ -76,6 +77,15 @@ export function deriveBillingHeadline(
       tone: "neutral",
       text: end ? `Access until ${end}` : "Subscription ending",
       href: BILLING_HREF,
+    };
+  }
+
+  if (status.pendingCheckout) {
+    return {
+      tone: "good",
+      text: "Resume checkout",
+      href: BILLING_HREF,
+      action: "resume_checkout",
     };
   }
 

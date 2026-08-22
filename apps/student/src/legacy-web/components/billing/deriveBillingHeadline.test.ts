@@ -35,6 +35,26 @@ describe("deriveBillingHeadline", () => {
       ),
     ).toEqual({ tone: "good", text: "Access included" });
   });
+  it("shows Resume checkout when an open Checkout is pending", () => {
+    expect(
+      deriveBillingHeadline(
+        status({
+          trialEligible: true,
+          pendingCheckout: {
+            plan: "yearly",
+            useTrial: false,
+          },
+        }),
+        "en-US",
+      ),
+    ).toMatchObject({
+      tone: "good",
+      text: "Resume checkout",
+      href: "/billing",
+      action: "resume_checkout",
+    });
+  });
+
   it("offers the free trial when the learner has not used it", () => {
     expect(deriveBillingHeadline(status({ trialEligible: true }), "en-US")).toMatchObject({
       text: "Start free trial",

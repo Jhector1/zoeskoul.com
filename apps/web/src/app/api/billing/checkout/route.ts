@@ -14,7 +14,9 @@ import { getActiveBillingPromotionForPlan } from "@/lib/billing/promotion.server
 import { getEntitlementForUser } from "@/lib/billing/entitlement";
 import {
   billingConfig,
+  classifyCheckoutSessionIntent,
   createCheckoutSession,
+  expireOpenCheckoutSession,
   findExistingCheckoutSessionForAttempt,
   isDeterministicStripeCheckoutRequestError,
   syncSubscriptionsForUser,
@@ -111,6 +113,16 @@ export async function POST(req: Request) {
     );
   }
 
+  if (useTrial && (trialDays <= 0 || user.trialUsedAt)) {
+    return NextResponse.json(
+      {
+        message: "The free trial is not available for this account.",
+        code: "TRIAL_NOT_AVAILABLE",
+      },
+      { status: 409 },
+    );
+  }
+
   // Serialize every subscription Checkout for this user before any Stripe
   // customer/session creation. This prevents multi-tab paid and trial races.
   let reservation = await reserveBillingCheckout(
@@ -118,54 +130,77 @@ export async function POST(req: Request) {
     checkoutAttemptId,
   );
 
-  if (
-    reservation.kind === "conflict" &&
-    isCheckoutAttemptId(reservation.checkoutAttemptId)
-  ) {
-    const conflictAgeMs = Math.max(
-      0,
-      Date.now() - reservation.reservedAt.getTime(),
+  const reserveAfterRetiringAttempt = async (oldAttemptId: string) => {
+    // The signed checkout.session.expired webhook may already have released the
+    // exact old attempt. Always let the new atomic reserve decide what exists.
+    await releaseBillingCheckoutReservation(userId, oldAttemptId).catch(() => false);
+    reservation = await reserveBillingCheckout(userId, checkoutAttemptId);
+  };
+
+  const recoveryUnavailable = () =>
+    NextResponse.json(
+      {
+        message: "Could not safely update the existing checkout. Please retry.",
+        code: "CHECKOUT_RECOVERY_UNAVAILABLE",
+      },
+      { status: 503 },
     );
 
-    try {
-      const existingSession =
-        await findExistingCheckoutSessionForAttempt({
-          userId,
-          checkoutAttemptId: reservation.checkoutAttemptId,
-        });
+  const completedCheckoutResponse = () =>
+    NextResponse.json(
+      {
+        message: "Your checkout completed. We are confirming your subscription.",
+        code: "CHECKOUT_COMPLETED_RECONCILING",
+      },
+      { status: 409 },
+    );
 
-      if (
-        existingSession?.status === "open" &&
-        typeof existingSession.url === "string" &&
-        existingSession.url
-      ) {
-        return NextResponse.json({
-          url: existingSession.url,
-          resumed: true,
-        });
+  if (reservation.kind === "conflict" && isCheckoutAttemptId(reservation.checkoutAttemptId)) {
+    const oldAttemptId = reservation.checkoutAttemptId;
+    const conflictAgeMs = Math.max(0, Date.now() - reservation.reservedAt.getTime());
+
+    try {
+      const existingSession = await findExistingCheckoutSessionForAttempt({
+        userId,
+        checkoutAttemptId: oldAttemptId,
+      });
+
+      if (existingSession?.status === "complete") {
+        // A completed Checkout can already own a subscription. Never replace it.
+        return completedCheckoutResponse();
       }
 
-      if (
-        !existingSession &&
-        conflictAgeMs >= BILLING_CHECKOUT_CONFLICT_RECOVERY_GRACE_MS
-      ) {
-        const released = await releaseBillingCheckoutReservation(
-          userId,
-          reservation.checkoutAttemptId,
-        ).catch(() => false);
+      if (existingSession?.status === "open") {
+        const intent = classifyCheckoutSessionIntent({
+          session: existingSession,
+          priceId,
+          useTrial,
+        });
 
-        if (released) {
-          reservation = await reserveBillingCheckout(
-            userId,
-            checkoutAttemptId,
-          );
+        if (intent === "match") {
+          if (typeof existingSession.url === "string" && existingSession.url) {
+            return NextResponse.json({ url: existingSession.url, resumed: true });
+          }
+          return recoveryUnavailable();
         }
+
+        if (intent === "unknown") {
+          // Do not guess plan/trial identity for a live Checkout.
+          return recoveryUnavailable();
+        }
+
+        const expired = await expireOpenCheckoutSession(existingSession.id);
+        if (expired.status !== "expired") return recoveryUnavailable();
+        await reserveAfterRetiringAttempt(oldAttemptId);
+      } else if (existingSession?.status === "expired") {
+        await reserveAfterRetiringAttempt(oldAttemptId);
+      } else if (!existingSession && conflictAgeMs >= BILLING_CHECKOUT_CONFLICT_RECOVERY_GRACE_MS) {
+        // Preserve the established orphan grace for a Stripe lookup with no row.
+        await reserveAfterRetiringAttempt(oldAttemptId);
       }
     } catch (error) {
-      console.error(
-        "[/api/billing/checkout] conflict recovery verification failed",
-        error,
-      );
+      console.error("[/api/billing/checkout] conflict recovery verification failed", error);
+      return recoveryUnavailable();
     }
   }
 
@@ -178,15 +213,33 @@ export async function POST(req: Request) {
       { status: 409 },
     );
   }
+
   if (reservation.kind === "stale_attempt") {
-    return NextResponse.json(
-      {
-        message: "This checkout attempt expired. Please start again.",
-        code: "CHECKOUT_ATTEMPT_EXPIRED",
-      },
-      { status: 409 },
-    );
+    try {
+      const existingSession = await findExistingCheckoutSessionForAttempt({
+        userId,
+        checkoutAttemptId,
+      });
+      if (existingSession?.status === "complete") return completedCheckoutResponse();
+      if (existingSession?.status === "open") {
+        const expired = await expireOpenCheckoutSession(existingSession.id);
+        if (expired.status !== "expired") return recoveryUnavailable();
+      }
+      await releaseBillingCheckoutReservation(userId, checkoutAttemptId).catch(() => false);
+      return NextResponse.json(
+        {
+          message: "This checkout attempt expired. Starting a fresh checkout.",
+          code: "CHECKOUT_ATTEMPT_EXPIRED",
+          retryable: true,
+        },
+        { status: 409 },
+      );
+    } catch (error) {
+      console.error("[/api/billing/checkout] stale attempt recovery failed", error);
+      return recoveryUnavailable();
+    }
   }
+
   if (reservation.kind === "missing_user") {
     return NextResponse.json({ message: "User not found." }, { status: 404 });
   }
