@@ -72,6 +72,28 @@ function authoredPracticeHistoryKeyMatches(
   );
 }
 
+function authoredPracticeRawTopicId(topicSlugOrId: string) {
+  const normalized = String(topicSlugOrId ?? "").trim();
+  if (!normalized) return "";
+  const separator = normalized.indexOf(".");
+  return separator < 0 ? normalized : normalized.slice(separator + 1);
+}
+
+function authoredPracticeTopicIdentityMatches(
+  candidateTopicSlug: string,
+  historyTopicSlug: string,
+) {
+  if (candidateTopicSlug === historyTopicSlug) return true;
+
+  const candidateTopicId = authoredPracticeRawTopicId(candidateTopicSlug);
+  const historyTopicId = authoredPracticeRawTopicId(historyTopicSlug);
+  return Boolean(
+    candidateTopicId &&
+    historyTopicId &&
+    candidateTopicId === historyTopicId,
+  );
+}
+
 /**
  * Resolve any persisted Practice instance back to the current canonical
  * authored target. This is the single identity rule used by module history,
@@ -117,10 +139,15 @@ export function resolveAuthoredPracticeHistoryTarget(args: {
   if (!keyMatches.length) return null;
 
   if (topicCandidates.size) {
-    const exactTopicMatches = keyMatches.filter((candidate) =>
-      topicCandidates.has(candidate.topicSlug),
+    const topicMatches = keyMatches.filter((candidate) =>
+      [...topicCandidates].some((historyTopicSlug) =>
+        authoredPracticeTopicIdentityMatches(
+          candidate.topicSlug,
+          historyTopicSlug,
+        ),
+      ),
     );
-    if (exactTopicMatches.length === 1) return exactTopicMatches[0];
+    if (topicMatches.length === 1) return topicMatches[0];
   }
 
   return keyMatches.length === 1 ? keyMatches[0] : null;

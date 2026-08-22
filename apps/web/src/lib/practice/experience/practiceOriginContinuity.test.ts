@@ -122,14 +122,19 @@ describe("Practice completion continuity across entry origins", () => {
     });
     mocks.practiceQuestionInstanceFindMany.mockResolvedValue([
       {
+        sessionId: "independent-header-practice-session",
+        experienceItemKey: null,
         exerciseKey:
           "python-v2:python-v2-module-0:section-a:topic-a:standalone-standard:done-independent",
         publicPayload: {
           id: "done-independent",
         },
+        answeredAt: new Date("2026-08-19T20:00:00.000Z"),
+        createdAt: new Date("2026-08-19T19:55:00.000Z"),
         topic: {
           slug: "topic-a",
         },
+        attempts: [{ ok: true }],
       },
     ]);
 
@@ -149,13 +154,16 @@ describe("Practice completion continuity across entry origins", () => {
     const query =
       mocks.practiceQuestionInstanceFindMany.mock.calls[0]?.[0] ?? null;
 
-    expect(query?.where?.session).toEqual({
+    expect(query?.where?.OR?.[0]?.experienceItemKey?.startsWith).toContain(
+      "self-paced:user:learner-1:module:python-v2-module-0:",
+    );
+    expect(query?.where?.OR?.[1]?.session).toEqual({
       userId: "learner-1",
       moduleId: "module-db-id",
     });
 
-    expect(query?.where?.session).not.toHaveProperty("id");
-    expect(query?.where?.session).not.toHaveProperty("mode");
-    expect(query?.where?.session).not.toHaveProperty("meta");
+    expect(query?.where?.OR?.[1]?.session).not.toHaveProperty("id");
+    expect(query?.where?.OR?.[1]?.session).not.toHaveProperty("mode");
+    expect(query?.where?.OR?.[1]?.session).not.toHaveProperty("meta");
   });
 });

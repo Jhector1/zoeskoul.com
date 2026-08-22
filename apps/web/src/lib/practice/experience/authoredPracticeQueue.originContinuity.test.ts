@@ -64,6 +64,27 @@ describe("canonical authored Practice history identity", () => {
     ).toEqual(candidates[0]);
   });
 
+  it("uses a legacy raw topic id to disambiguate canonical candidates", () => {
+    const candidates = [
+      target("shared-key", "python_module_1.topic-a"),
+      target("shared-key", "python_module_1.topic-b"),
+    ];
+
+    expect(
+      resolveAuthoredPracticeHistoryTarget({
+        item: {
+          exerciseKey: "runtime:standalone-standard:shared-key",
+          publicPayload: {
+            id: "shared-key",
+            topicSlug: "topic-b",
+          },
+          topic: null,
+        },
+        candidates,
+      }),
+    ).toEqual(candidates[1]);
+  });
+
   it("does not guess a key-only identity when the authored key is ambiguous", () => {
     const candidates = [
       target("shared-key", "topic-a"),

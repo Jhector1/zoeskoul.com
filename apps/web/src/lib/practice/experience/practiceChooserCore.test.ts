@@ -250,6 +250,52 @@ describe("practice chooser hierarchy", () => {
     expect(sql?.availability).toBe("locked");
   });
 
+  it("carries authored topic label keys instead of falling back to the literal word Label", () => {
+    const catalogs = buildPracticeChooserCatalogs({
+      options: [],
+      visibleSubjectSlugs: new Set(["sql-analysis-reporting"]),
+      moduleAccessByKey: new Map(),
+    });
+
+    const module = catalogs
+      .find((catalog) => catalog.slug === "sql")
+      ?.courses.find((course) => course.slug === "sql-analysis-reporting")
+      ?.modules.find(
+        (item) =>
+          item.slug ===
+          "sql-analysis-reporting-module-1-null-safe-calculations",
+      );
+    const section = module?.sections.find(
+      (item) =>
+        item.slug ===
+        "sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations",
+    );
+
+    const percentage = section?.topics.find(
+      (topic) =>
+        topic.slug ===
+        "sql_analysis_reporting_module_1.percentage-and-discount-calculations",
+    );
+    const readableLabels = section?.topics.find(
+      (topic) =>
+        topic.slug ===
+        "sql_analysis_reporting_module_1.case-for-readable-labels",
+    );
+
+    expect(percentage).toMatchObject({
+      title: "Percentage And Discount Calculations",
+      titleKey:
+        "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.label",
+    });
+    expect(readableLabels).toMatchObject({
+      title: "Case For Readable Labels",
+      titleKey:
+        "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.case-for-readable-labels.label",
+    });
+    expect(percentage?.title).not.toBe("Label");
+    expect(readableLabels?.title).not.toBe("Label");
+  });
+
   it("uses the shared subject artifacts so canonical SQL courses do not disappear", () => {
     const catalogs = buildPracticeChooserCatalogs({
       options: [],

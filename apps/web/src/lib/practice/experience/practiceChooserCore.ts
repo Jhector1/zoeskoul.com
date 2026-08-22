@@ -78,12 +78,17 @@ function humanize(value: string) {
 
 function presentationTitle(value: unknown, fallback: string) {
   const text = typeof value === "string" ? value.trim() : "";
-  return text && !text.startsWith("@:") ? text : humanize(text || fallback);
+  return text && !text.startsWith("@:") ? text : humanize(fallback);
 }
 
 function optionalKey(value: unknown) {
   const key = typeof value === "string" ? value.trim() : "";
   return key || null;
+}
+
+function taggedPresentationKey(value: unknown) {
+  const tagged = typeof value === "string" ? value.trim() : "";
+  return tagged.startsWith("@:") ? tagged.slice(2) || null : null;
 }
 
 /**
@@ -124,13 +129,14 @@ function buildPracticeChooserHierarchyFromSharedSubjectArtifacts():
                     topicSlug
                   ] as SharedReviewTopicPresentation | undefined;
 
+                  const presentation = topic?.title ?? topic?.label;
+
                   return {
                     slug: topicSlug,
-                    title: presentationTitle(
-                      topic?.title ?? topic?.label,
-                      topicSlug,
-                    ),
-                    titleKey: optionalKey(topic?.titleKey ?? topic?.labelKey),
+                    title: presentationTitle(presentation, topicSlug),
+                    titleKey:
+                      optionalKey(topic?.titleKey ?? topic?.labelKey) ??
+                      taggedPresentationKey(presentation),
                     description: null,
                   } satisfies PracticeChooserHierarchyTopic;
                 });

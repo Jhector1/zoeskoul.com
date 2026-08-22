@@ -130,6 +130,9 @@ async function listAuthoredPracticeExerciseOptions(args: {
             const topic = source.topicManifests[topicId];
             if (!topic) continue;
 
+            // Shared subject artifacts use `${module.prefix}.${topicId}` as the
+            // canonical topic identity. Keep the raw id only for manifest lookup.
+            const canonicalTopicSlug = `${subjectModule.prefix}.${topicId}`;
             const topicRecord = topic as unknown as Record<string, unknown>;
             const standaloneTryItExerciseKeys =
               collectStandaloneTryItExerciseKeys(topicRecord);
@@ -165,7 +168,7 @@ async function listAuthoredPracticeExerciseOptions(args: {
                   subjectSlug,
                   subjectModule.slug,
                   section.slug,
-                  target.topicSlug,
+                  canonicalTopicSlug,
                   target.exerciseKey,
                 ].join("::");
 
@@ -184,8 +187,8 @@ async function listAuthoredPracticeExerciseOptions(args: {
                   sectionTitle: titleFromKey(section.titleKey, section.slug),
                   sectionTitleKey: authoredTitleKey(section.titleKey),
                   sectionRole,
-                  topicSlug: target.topicSlug,
-                  topicTitle: titleFromKey(topic.topic?.labelKey, target.topicSlug),
+                  topicSlug: canonicalTopicSlug,
+                  topicTitle: titleFromKey(topic.topic?.labelKey, canonicalTopicSlug),
                   topicTitleKey: authoredTitleKey(topic.topic?.labelKey),
                   exerciseKey: target.exerciseKey,
                   exerciseTitle: target.exerciseTitle,
