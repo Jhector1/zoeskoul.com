@@ -17,6 +17,7 @@ export type PracticeDailyRunMeta = {
   dayKey: string;
   nextResetAt: string;
   targetCount: number;
+  modulePractice?: PracticeSubscriberRunMeta | null;
 };
 
 export type PracticeChallengeRunMeta = {
@@ -29,6 +30,13 @@ export type PracticeChallengeRunMeta = {
 export type PracticeSubscriberRunMeta = {
   moduleTotal: number | null;
   selectedTargets?: Array<{
+    exerciseKey: string;
+    exerciseTitle: string;
+    exerciseKind: string;
+    topicSlug: string;
+    sectionSlug: string;
+  }>;
+  allowedTargets?: Array<{
     exerciseKey: string;
     exerciseTitle: string;
     exerciseKind: string;

@@ -1,4 +1,5 @@
 import type { Difficulty } from "@/lib/practice/types";
+import type { PracticeRunMetaApi } from "@/lib/practice/apiTypes";
 import type { PrismaClient } from "@/lib/prisma";
 import { computeMaxAttempts } from "../../shared/attempts";
 import { resolvePracticeRunMode } from "../../shared/run";
@@ -8,6 +9,7 @@ import {
 } from "@/lib/practice/challenges/session";
 import { readDailyFiveMeta } from "@/lib/practice/experience/dailyFive";
 import { readSubscriberPracticeMeta } from "@/lib/practice/experience/subscriberPractice";
+import { loadCanonicalModulePracticeDisplay } from "@/lib/practice/experience/subscriberPracticeSessions.server";
 import { getPracticeExperiencePolicy } from "@/lib/practice/experience/policy";
 import { resolvePracticeViewer } from "@/lib/practice/experience/viewer";
 import type { PracticeRunViewer } from "@/lib/practice/experience/types";
@@ -25,7 +27,7 @@ export function buildRunMeta(args: {
   diff: Difficulty;
   allowRevealEffective: boolean;
   viewer?: PracticeRunViewer;
-}) {
+}): PracticeRunMetaApi {
   const { session, diff, allowRevealEffective } = args;
   const viewer = args.viewer ?? GUEST_VIEWER;
 
@@ -136,12 +138,68 @@ export async function buildRunMetaWithChallengeAttempts(args: {
     guestId: args.actor.guestId ?? null,
   };
   const viewer = await resolvePracticeViewer(args.prisma, actor);
-  const run = buildRunMeta({
+  let run = buildRunMeta({
     session: args.session,
     diff: args.diff,
     allowRevealEffective: args.allowRevealEffective,
     viewer,
   });
+
+  const daily = readDailyFiveMeta(args.session?.meta ?? null);
+  const firstDailyTarget = daily?.queue[0] ?? null;
+  const singleModuleDaily = Boolean(
+    firstDailyTarget &&
+      daily?.queue.every(
+        (target) =>
+          target.subjectSlug === firstDailyTarget.subjectSlug &&
+          target.moduleSlug === firstDailyTarget.moduleSlug,
+      ),
+  );
+
+  if (run.daily && daily && actor.userId && firstDailyTarget && singleModuleDaily) {
+    const modulePractice = await loadCanonicalModulePracticeDisplay({
+      userId: actor.userId,
+      subjectSlug: firstDailyTarget.subjectSlug,
+      moduleSlug: firstDailyTarget.moduleSlug,
+      moduleId:
+        typeof args.session?.moduleId === "string"
+          ? args.session.moduleId
+          : null,
+    });
+
+    run = {
+      ...run,
+      daily: {
+        ...run.daily,
+        modulePractice: {
+          moduleTotal: modulePractice.moduleTotal,
+          selectedTargets: modulePractice.selectedTargets.map((target) => ({
+            exerciseKey: target.exerciseKey,
+            exerciseTitle: target.exerciseTitle,
+            exerciseKind: target.exerciseKind,
+            topicSlug: target.topicSlug,
+            sectionSlug: target.sectionSlug,
+          })),
+          allowedTargets: daily.queue.map((target) => ({
+            exerciseKey: target.exerciseKey,
+            exerciseTitle: target.exerciseTitle,
+            exerciseKind: target.exerciseKind,
+            topicSlug: target.topicSlug,
+            sectionSlug: target.sectionSlug,
+          })),
+          completedPrefix: modulePractice.completedPrefix.map((target) => ({
+            exerciseKey: target.exerciseKey,
+            exerciseTitle: target.exerciseTitle,
+            exerciseKind: target.exerciseKind,
+            topicSlug: target.topicSlug,
+            sectionSlug: target.sectionSlug,
+            correct: target.correct,
+          })),
+        },
+      },
+    };
+  }
+
   if (!run.challenge || !args.session?.id) return run;
 
   const OR = [

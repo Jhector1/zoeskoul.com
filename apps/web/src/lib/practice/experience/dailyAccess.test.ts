@@ -82,7 +82,7 @@ describe("daily practice access filtering", () => {
     expect(selected.map((item) => item.subjectSlug)).toEqual(["python-v1"]);
   });
 
-  it("does not leak access between courses that reuse a module slug", () => {
+  it("does not leak module availability between courses that reuse a module slug", () => {
     const options = [
       option({ subjectSlug: "python-v2", moduleSlug: "module-1" }),
       option({ subjectSlug: "sql-v2", moduleSlug: "module-1" }),
@@ -123,12 +123,6 @@ describe("daily practice access filtering", () => {
           accessOverride: "inherit",
           subjectSlug: "python-v2",
         },
-        {
-          id: "sql-module",
-          slug: "module-1",
-          accessOverride: "inherit",
-          subjectSlug: "sql-v2",
-        },
       ],
       snapshot: snapshot(),
     });
@@ -136,7 +130,7 @@ describe("daily practice access filtering", () => {
     expect(selected.map((item) => item.subjectSlug)).toEqual(["python-v2"]);
   });
 
-  it("removes paid modules until subscription or a grant is present", () => {
+  it("keeps a paid lesson module available to the free Daily Practice allowance", () => {
     const options = [option({ subjectSlug: "python-v2", moduleSlug: "python-v2-paid" })];
     const subjects = [
       {
@@ -163,15 +157,6 @@ describe("daily practice access filtering", () => {
         subjects,
         modules,
         snapshot: snapshot(),
-      }),
-    ).toEqual([]);
-
-    expect(
-      selectAccessibleDailyPracticeOptions({
-        options,
-        subjects,
-        modules,
-        snapshot: snapshot({ moduleAccess: new Set(["m2"]) }),
       }),
     ).toHaveLength(1);
   });

@@ -26,9 +26,11 @@ export type DailyAccessModule = {
 };
 
 /**
- * Pure access/visibility projection used by the server loader and unit tests.
- * Daily Practice must never become a side door into hidden legacy versions or
- * modules the current learner cannot normally open.
+ * Pure Daily Practice visibility projection used by the server loader and tests.
+ *
+ * Subject/version visibility and restricted-course audience access remain
+ * enforced. Normal paid-course/module entitlement is intentionally not a Daily
+ * Practice boundary: the configured daily question cap is the entitlement.
  */
 export function selectAccessibleDailyPracticeOptions(args: {
   options: readonly PublishedPracticeExerciseOption[];
@@ -72,11 +74,13 @@ export function selectAccessibleDailyPracticeOptions(args: {
       requireAll: args.requireAll,
     });
 
-    if (decision.ok) {
-      allowedModuleKeys.add(
-        practiceModuleAccessKey(subjectModule.subjectSlug, subjectModule.slug),
-      );
+    if (!decision.ok && decision.reason !== "requires_payment") {
+      continue;
     }
+
+    allowedModuleKeys.add(
+      practiceModuleAccessKey(subjectModule.subjectSlug, subjectModule.slug),
+    );
   }
 
   return args.options.filter(

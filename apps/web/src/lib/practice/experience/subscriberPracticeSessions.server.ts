@@ -9,6 +9,7 @@ import {
 } from "@/lib/practice/challenges/publishedCatalog";
 import {
   authoredPracticeTargetFromOption,
+  type AuthoredPracticeTarget,
   authoredPracticeTargetIdentity,
   resolveAuthoredPracticeHistoryTarget,
   selfPacedPracticeExperienceOwnerPrefix,
@@ -163,6 +164,68 @@ export async function loadSubscriberModulePracticeHistory(args: {
       },
     ];
   });
+}
+
+export type CanonicalModulePracticeDisplay = {
+  moduleTotal: number;
+  selectedTargets: AuthoredPracticeTarget[];
+  completedPrefix: Array<AuthoredPracticeTarget & { correct: boolean }>;
+};
+
+/**
+ * Response-time display projection for one canonical authored Practice module.
+ *
+ * This is intentionally not stored on PracticeSession. Module membership comes
+ * from the current published authored Practice pool and completion comes from
+ * canonical learner/module history.
+ */
+export async function loadCanonicalModulePracticeDisplay(args: {
+  userId?: string | null;
+  subjectSlug: string;
+  moduleSlug: string;
+  moduleId?: string | null;
+  publishedOptions?: readonly PublishedPracticeExerciseOption[];
+}): Promise<CanonicalModulePracticeDisplay> {
+  const publishedOptions =
+    args.publishedOptions ?? (await listPublishedPracticeExerciseOptions());
+  const pool = listSubscriberPracticePoolOptions({
+    options: publishedOptions,
+    subjectSlug: args.subjectSlug,
+    moduleSlug: args.moduleSlug,
+  });
+  const selectedTargets = pool.map(authoredPracticeTargetFromOption);
+
+  const history = await loadSubscriberModulePracticeHistory({
+    userId: args.userId,
+    subjectSlug: args.subjectSlug,
+    moduleSlug: args.moduleSlug,
+    moduleId: args.moduleId,
+    publishedOptions,
+  });
+
+  const completedByIdentity = new Map<string, boolean>();
+  for (const item of history) {
+    if (!item.completedAt) continue;
+    const identity = authoredPracticeTargetIdentity({
+      topicSlug: item.topicSlug,
+      exerciseKey: item.exerciseKey,
+    });
+    if (!completedByIdentity.has(identity)) {
+      completedByIdentity.set(identity, item.lastOk === true);
+    }
+  }
+
+  const completedPrefix = selectedTargets.flatMap((target) => {
+    const identity = authoredPracticeTargetIdentity(target);
+    if (!completedByIdentity.has(identity)) return [];
+    return [{ ...target, correct: completedByIdentity.get(identity) === true }];
+  });
+
+  return {
+    moduleTotal: selectedTargets.length,
+    selectedTargets,
+    completedPrefix,
+  };
 }
 
 export async function loadSubscriberModulePracticeProgress(args: {

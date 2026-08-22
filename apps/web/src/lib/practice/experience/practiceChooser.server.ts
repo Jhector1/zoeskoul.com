@@ -115,10 +115,12 @@ export async function loadPracticeChooser(args: {
           modules: course.modules.map((module) => ({
             ...module,
             availability:
-              module.availability === "available" &&
               module.dailyExerciseCount <= 0
                 ? ("unavailable" as const)
-                : module.availability,
+                : module.availability === "locked"
+                  ? ("available" as const)
+                  : module.availability,
+            billingHref: null,
           })),
         }))
         .filter((course) => course.modules.length > 0),

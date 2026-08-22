@@ -64,8 +64,6 @@ export default function DailyFivePracticeClient(props: {
             locale: props.locale,
             subjectSlug: selection?.subjectSlug || undefined,
             moduleSlug: selection?.moduleSlug || undefined,
-            sectionSlug: selection?.sectionSlug || undefined,
-            topicSlug: selection?.topicSlug || undefined,
           }),
         });
         const data = await response.json().catch(() => null);
@@ -117,8 +115,6 @@ export default function DailyFivePracticeClient(props: {
           locale: props.locale,
           subjectSlug: selection.subjectSlug,
           moduleSlug: selection.moduleSlug,
-          sectionSlug: selection.sectionSlug,
-          topicSlug: selection.topicSlug,
           targetCount,
         });
 

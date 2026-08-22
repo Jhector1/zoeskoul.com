@@ -51,6 +51,21 @@ export function shouldShowStandalonePracticeCodeTool(
   );
 }
 
+export function buildStandalonePracticeToolsResetKey(args: {
+  experienceMode: PracticeShellProps["experienceMode"];
+  subjectSlug?: string | null;
+  moduleSlug?: string | null;
+  runtimeResetRevision: number;
+}) {
+  return [
+    "standalone-practice-tools",
+    args.experienceMode,
+    args.subjectSlug ?? "practice",
+    args.moduleSlug ?? args.experienceMode,
+    args.runtimeResetRevision,
+  ].join(":");
+}
+
 export function useStandalonePracticeTools(args: {
   props: PracticeShellProps;
   rightCollapsed: boolean;
@@ -207,12 +222,29 @@ export function useStandalonePracticeTools(args: {
     () => ({
       enabled: true,
       mode: "manual" as const,
-      resetKey: `${exerciseStateKey}:${runtimeResetRevision}`,
+      // Provider lifetime is module/run scoped. The actual editor workspace
+      // remains exercise-scoped through exerciseStateKey below. Resetting the
+      // provider for every A -> B navigation can race child registration and
+      // briefly leave the previous exercise bound in Tools.
+      resetKey: buildStandalonePracticeToolsResetKey({
+        experienceMode: props.experienceMode,
+        subjectSlug: props.subjectSlug,
+        moduleSlug: props.moduleSlug,
+        runtimeResetRevision,
+      }),
       ensureVisible,
       onBindToToolsPanel: bind,
       onUnbindFromToolsPanel: unbind,
     }),
-    [bind, ensureVisible, exerciseStateKey, runtimeResetRevision, unbind],
+    [
+      bind,
+      ensureVisible,
+      props.experienceMode,
+      props.moduleSlug,
+      props.subjectSlug,
+      runtimeResetRevision,
+      unbind,
+    ],
   );
 
   const codeToolEnabled =

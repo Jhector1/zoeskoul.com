@@ -27,6 +27,7 @@ vi.mock("@/lib/practice/challenges/publishedCatalog", () => ({
 }));
 
 import {
+  loadCanonicalModulePracticeDisplay,
   loadSubscriberModulePracticeHistory,
   loadSubscriberModulePracticeProgress,
 } from "./subscriberPracticeSessions.server";
@@ -133,4 +134,25 @@ describe("canonical module Practice history across entry origins", () => {
       pct: 0.5,
     });
   });
+  it("projects the full canonical module in authored order with completion overlaid", async () => {
+    const display = await loadCanonicalModulePracticeDisplay({
+      userId: "learner-1",
+      subjectSlug: "python-v2",
+      moduleSlug: "python-v2-1",
+    });
+
+    expect(display.moduleTotal).toBe(2);
+    expect(display.selectedTargets.map((item) => item.exerciseKey)).toEqual([
+      "observe-reassignment",
+      "double-decimal",
+    ]);
+    expect(display.completedPrefix).toMatchObject([
+      {
+        exerciseKey: "observe-reassignment",
+        topicSlug: "common-variable-mistakes",
+        correct: true,
+      },
+    ]);
+  });
+
 });

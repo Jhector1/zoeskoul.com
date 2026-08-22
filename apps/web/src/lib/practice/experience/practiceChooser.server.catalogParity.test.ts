@@ -4,6 +4,7 @@ const mocks = vi.hoisted(() => ({
   visibleCatalogs: vi.fn(),
   chooserOptions: vi.fn(),
   accessModel: vi.fn(),
+  buildChooser: vi.fn(),
 }));
 
 vi.mock("server-only", () => ({}));
@@ -22,6 +23,10 @@ vi.mock("@/lib/practice/challenges/publishedCatalog", () => ({
 
 vi.mock("./dailyAccess", () => ({
   loadPracticeAccessModelForActor: mocks.accessModel,
+}));
+
+vi.mock("./practiceChooserCore", () => ({
+  buildPracticeChooserCatalogs: mocks.buildChooser,
 }));
 
 vi.mock("@/lib/access/resolveModuleAccess", () => ({
@@ -51,6 +56,7 @@ describe("Practice chooser catalog parity", () => {
     ]);
 
     mocks.chooserOptions.mockResolvedValue([]);
+    mocks.buildChooser.mockReturnValue([]);
 
     mocks.accessModel.mockResolvedValue({
       subjects: [],
@@ -67,7 +73,7 @@ describe("Practice chooser catalog parity", () => {
     });
   });
 
-  it("uses the exact learner catalog course set, including an admin-visible draft course", async () => {
+  it("passes the exact learner-visible course set into authored Practice loading", async () => {
     const actor = {
       userId: "admin-1",
       guestId: null,
@@ -83,14 +89,7 @@ describe("Practice chooser catalog parity", () => {
       },
     });
 
-    const sql = catalogs.find((catalog) => catalog.slug === "sql");
-
-    expect(sql?.courses.map((course) => course.slug)).toEqual([
-      "sql-v2",
-      "sql-analysis-reporting",
-      "multi-table-sql",
-      "sql-data-management",
-    ]);
+    expect(catalogs).toEqual([]);
 
     expect(mocks.visibleCatalogs).toHaveBeenCalledWith({
       userId: "admin-1",
@@ -105,5 +104,98 @@ describe("Practice chooser catalog parity", () => {
         "sql-data-management",
       ]),
     );
+  });
+
+  it("makes a payment-locked module startable in free Daily Practice without a billing link", async () => {
+    mocks.buildChooser.mockReturnValue([
+      {
+        slug: "python",
+        title: "Python",
+        titleKey: null,
+        exerciseCount: 4,
+        dailyExerciseCount: 3,
+        courses: [
+          {
+            slug: "python-v2",
+            title: "Python",
+            titleKey: null,
+            catalogSlug: "python",
+            catalogTitle: "Python",
+            exerciseCount: 4,
+            dailyExerciseCount: 3,
+            modules: [
+              {
+                slug: "python-v2-0",
+                title: "Getting Started",
+                titleKey: null,
+                availability: "locked",
+                billingHref: "/billing",
+                exerciseCount: 4,
+                dailyExerciseCount: 3,
+                sections: [],
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+
+    const catalogs = await loadPracticeChooser({
+      actor: { userId: "learner-1", guestId: null },
+      locale: "en",
+      mode: "free",
+    });
+
+    expect(catalogs[0]?.courses[0]?.modules[0]).toMatchObject({
+      availability: "available",
+      billingHref: null,
+      dailyExerciseCount: 3,
+    });
+  });
+
+  it("keeps a truly unavailable module unavailable in free Daily Practice", async () => {
+    mocks.buildChooser.mockReturnValue([
+      {
+        slug: "python",
+        title: "Python",
+        titleKey: null,
+        exerciseCount: 4,
+        dailyExerciseCount: 3,
+        courses: [
+          {
+            slug: "python-v2",
+            title: "Python",
+            titleKey: null,
+            catalogSlug: "python",
+            catalogTitle: "Python",
+            exerciseCount: 4,
+            dailyExerciseCount: 3,
+            modules: [
+              {
+                slug: "python-v2-0",
+                title: "Getting Started",
+                titleKey: null,
+                availability: "unavailable",
+                billingHref: null,
+                exerciseCount: 4,
+                dailyExerciseCount: 3,
+                sections: [],
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+
+    const catalogs = await loadPracticeChooser({
+      actor: { userId: "learner-1", guestId: null },
+      locale: "en",
+      mode: "free",
+    });
+
+    expect(catalogs[0]?.courses[0]?.modules[0]).toMatchObject({
+      availability: "unavailable",
+      billingHref: null,
+    });
   });
 });

@@ -465,6 +465,7 @@ export function usePracticeController(args: {
       modulePracticeProgress:
         engine.modulePracticeProgress ??
         run?.subscriberPractice ??
+        run?.daily?.modulePractice ??
         null,
 
       // ...existing props...

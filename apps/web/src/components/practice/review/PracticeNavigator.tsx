@@ -110,13 +110,17 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
   const isSelfPacedPractice =
     props.experienceMode === "practice" ||
     props.experienceMode === "standard";
-  const canonicalQueueRows = isSelfPacedPractice
-    ? resolveCanonicalPracticeQueueRows({
-        selectedTargets: props.modulePracticeProgress?.selectedTargets,
-        completedPrefix: props.modulePracticeProgress?.completedPrefix,
-        queueStack,
-      })
-    : [];
+  const canonicalQueueRows =
+    isSelfPacedPractice || isDailyPractice
+      ? resolveCanonicalPracticeQueueRows({
+          selectedTargets: props.modulePracticeProgress?.selectedTargets,
+          completedPrefix: props.modulePracticeProgress?.completedPrefix,
+          allowedTargets: isDailyPractice
+            ? props.modulePracticeProgress?.allowedTargets
+            : undefined,
+          queueStack,
+        })
+      : [];
   const hasCanonicalQueueRows = canonicalQueueRows.length > 0;
 
   const stackAuthoredIdentities = new Set(
@@ -145,16 +149,18 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
         )
       : [];
   const legacyCompletedPrefixCount = legacyCompletedPrefix.length;
-  const modulePracticeTotal = isSelfPacedPractice
-    ? props.modulePracticeProgress?.moduleTotal ?? null
-    : null;
+  const modulePracticeTotal =
+    isSelfPacedPractice || isDailyPractice
+      ? props.modulePracticeProgress?.moduleTotal ?? null
+      : null;
   const displayTotal = hasCanonicalQueueRows
     ? canonicalQueueRows.length
     : modulePracticeTotal && modulePracticeTotal > 0
       ? modulePracticeTotal
       : props.sessionSize;
-  const displayAnswered = Math.min(displayTotal, props.answeredCount);
-  const displayCorrect = Math.min(displayTotal, props.correctCount);
+  const progressTotal = isDailyPractice ? props.sessionSize : displayTotal;
+  const displayAnswered = Math.min(progressTotal, props.answeredCount);
+  const displayCorrect = Math.min(progressTotal, props.correctCount);
   const resolvedTopicOptions = React.useMemo(
     () =>
       props.topicOptionsFixed.map((option) => ({
@@ -251,7 +257,7 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
             <div className="rounded-xl border border-[rgb(var(--ui-border)/0.78)] bg-[rgb(var(--ui-surface)/0.9)] p-3">
               <div className="ui-meta">{tw("navigator.progress")}</div>
               <div className="mt-1 text-base font-black tabular-nums">
-                {displayAnswered}/{displayTotal}
+                {displayAnswered}/{progressTotal}
               </div>
             </div>
             <div className="rounded-xl border border-[rgb(var(--ui-border)/0.78)] bg-[rgb(var(--ui-surface)/0.9)] p-3">
@@ -269,7 +275,7 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
               moduleSlug={props.moduleSlug}
               enabled={canChooseCatalog}
               catalogVisible={catalogVisible}
-              showModule={!isDailyPractice}
+              showModule
               lockedReason={
                 isDailyPractice
                   ? tw("navigator.dailySubjectReason")
@@ -319,6 +325,9 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                     ? canonicalQueueRows[displayIndex] ?? null
                     : null;
                   const canonicalTarget = canonicalRow?.target ?? null;
+                  const isDailyAllowanceLocked = Boolean(
+                    isDailyPractice && canonicalRow?.locked,
+                  );
                   const priorCompleted = canonicalRow
                     ? canonicalRow.completed
                     : displayIndex < legacyCompletedPrefixCount
@@ -342,10 +351,12 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                       : "completed"
                     : item
                       ? resolvePracticeQueueStatus(item)
-                      : resolvePracticeQueuePlaceholderStatus({
-                          index: Math.max(0, sessionIndex),
-                          answeredCount: props.answeredCount,
-                        });
+                      : isDailyPractice && canonicalRow
+                        ? "not_started"
+                        : resolvePracticeQueuePlaceholderStatus({
+                            index: Math.max(0, sessionIndex),
+                            answeredCount: props.answeredCount,
+                          });
                   const isCorrect = queueStatus === "correct";
                   const isRevealed = queueStatus === "revealed";
                   const isFinalized =
@@ -356,7 +367,9 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                     sessionIndex < queueStack.length &&
                     sessionIndex < props.stack.length;
                   const disabled =
-                    Boolean(priorCompleted) || !sessionItemAvailable;
+                    Boolean(priorCompleted) ||
+                    isDailyAllowanceLocked ||
+                    !sessionItemAvailable;
 
                   return (
                     <li
@@ -445,7 +458,9 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                                       ? tw("navigator.statusInProgress")
                                       : isActive
                                         ? tw("navigator.statusCurrent")
-                                        : tw("navigator.statusNotStarted")}
+                                        : isDailyAllowanceLocked
+                                          ? tw("navigator.statusLocked")
+                                          : tw("navigator.statusNotStarted")}
                           </span>
                         </span>
                       </button>

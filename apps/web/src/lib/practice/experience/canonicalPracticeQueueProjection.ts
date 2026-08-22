@@ -34,6 +34,7 @@ export type CanonicalPracticeQueueRow = {
   completed: CompletedTarget | null;
   item: QItem | null;
   sessionIndex: number;
+  locked: boolean;
 };
 
 export function resolveCanonicalPracticeQueueRows(args: {
@@ -43,6 +44,10 @@ export function resolveCanonicalPracticeQueueRows(args: {
     | undefined;
   completedPrefix:
     | PracticeSubscriberRunMeta["completedPrefix"]
+    | null
+    | undefined;
+  allowedTargets?:
+    | PracticeSubscriberRunMeta["allowedTargets"]
     | null
     | undefined;
   queueStack: QItem[];
@@ -55,6 +60,11 @@ export function resolveCanonicalPracticeQueueRows(args: {
     completedByIdentity.set(targetIdentity(target), target);
   }
 
+  const allowedIdentities =
+    args.allowedTargets == null
+      ? null
+      : new Set(args.allowedTargets.map(targetIdentity));
+
   const stackByIdentity = new Map<
     string,
     { item: QItem; sessionIndex: number }
@@ -65,14 +75,30 @@ export function resolveCanonicalPracticeQueueRows(args: {
     stackByIdentity.set(identity, { item, sessionIndex });
   });
 
-  return selectedTargets.map((target) => {
+  const rows = selectedTargets.map((target) => {
     const identity = targetIdentity(target);
     const stackMatch = stackByIdentity.get(identity);
+    const completed = completedByIdentity.get(identity) ?? null;
     return {
       target,
-      completed: completedByIdentity.get(identity) ?? null,
+      completed,
       item: stackMatch?.item ?? null,
       sessionIndex: stackMatch?.sessionIndex ?? -1,
+      locked:
+        completed == null &&
+        allowedIdentities != null &&
+        !allowedIdentities.has(identity),
     };
   });
+
+  /**
+   * Sidebar display only: stable-partition completed authored exercises first.
+   * The canonical order inside each group is preserved, and each row retains its
+   * original sessionIndex/item/lock so execution order and Daily allowance
+   * membership never change.
+   */
+  return [
+    ...rows.filter((row) => row.completed != null),
+    ...rows.filter((row) => row.completed == null),
+  ];
 }

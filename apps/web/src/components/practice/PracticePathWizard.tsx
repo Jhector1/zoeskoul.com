@@ -34,13 +34,7 @@ import {
 
 type WizardStep = "catalog" | "course" | "module" | "section" | "topic";
 
-const STEPS: WizardStep[] = [
-  "catalog",
-  "course",
-  "module",
-  "section",
-  "topic",
-];
+const STEPS: WizardStep[] = ["catalog", "course", "module"];
 
 function countForMode(
   mode: PracticeChooserMode,
@@ -64,17 +58,7 @@ function initialStepIndex(
   const selectedModule = course.modules.find(
     (item) => item.slug === selection.moduleSlug,
   );
-  if (!selectedModule) return 2;
-
-  const section = selectedModule.sections.find(
-    (item) => item.slug === selection.sectionSlug,
-  );
-  if (!section) return 2;
-
-  const topic = section.topics.find(
-    (item) => item.slug === selection.topicSlug,
-  );
-  return topic ? 4 : 3;
+  return selectedModule ? 2 : 2;
 }
 
 function ChoiceCard(props: {
@@ -293,20 +277,12 @@ export default function PracticePathWizard(props: {
   };
 
   const chooseModule = (slug: string) => {
-    if (slug === selection.moduleSlug) {
-      moveTo(3, "forward");
-      return;
-    }
-
-    replacePathAndAdvance(
-      {
-        ...selection,
-        moduleSlug: slug,
-        sectionSlug: "",
-        topicSlug: "",
-      },
-      3,
-    );
+    setSelection((current) => ({
+      ...current,
+      moduleSlug: slug,
+      sectionSlug: "",
+      topicSlug: "",
+    }));
   };
 
   const chooseSection = (slug: string) => {
@@ -358,7 +334,9 @@ export default function PracticePathWizard(props: {
   };
   const StepIcon = icons[step];
 
-  const availableExerciseCount = topic ? countForMode(props.mode, topic) : 0;
+  const availableExerciseCount = selectedModule
+    ? countForMode(props.mode, selectedModule)
+    : 0;
   const requestedTargetCount =
     props.mode === "subscriber"
       ? DEFAULT_STANDARD_PRACTICE_TARGET_COUNT
@@ -372,18 +350,14 @@ export default function PracticePathWizard(props: {
     catalog &&
       course &&
       selectedModule?.availability === "available" &&
-      section &&
-      topic &&
       effectiveTargetCount > 0,
   );
   const canMoveForward = Boolean(
     (step === "catalog" && catalog) ||
-      (step === "course" && course) ||
-      (step === "module" && selectedModule?.availability === "available") ||
-      (step === "section" && section),
+      (step === "course" && course),
   );
 
-  const breadcrumb = [catalog, course, selectedModule, section]
+  const breadcrumb = [catalog, course, selectedModule]
     .map(resolveTitle)
     .filter(Boolean)
     .join(" · ");
@@ -607,7 +581,7 @@ export default function PracticePathWizard(props: {
                 </span>
               </NavButton>
 
-              {step === "topic" ? (
+              {step === "module" ? (
                 <NavButton
                   href={startHref}
                   onClick={
