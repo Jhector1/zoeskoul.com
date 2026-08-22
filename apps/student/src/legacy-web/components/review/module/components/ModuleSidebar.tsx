@@ -386,6 +386,13 @@ const MemoSidebarSectionGroup = React.memo(
         prev.onGoToTopic === next.onGoToTopic,
 );
 
+export function shouldShowModulePracticeCta(args: {
+    showPracticeCta: boolean;
+    practiceProgress?: { completed: number; total: number; pct: number } | null;
+}) {
+    return args.showPracticeCta && (args.practiceProgress?.total ?? 0) > 0;
+}
+
 function ModuleSidebar({
                            mod,
                            topicItems,
@@ -419,6 +426,10 @@ function ModuleSidebar({
 }) {
     const ui = useTaggedT("moduleSidebarUi");
     const t = useTranslations("review.sidebar");
+    const shouldRenderPracticeCta = shouldShowModulePracticeCta({
+        showPracticeCta,
+        practiceProgress,
+    });
 
     const modTitle = String((mod as any)?.title ?? "");
     const modSubtitle = ((mod as any)?.subtitle ?? null) as string | null;
@@ -557,7 +568,7 @@ function ModuleSidebar({
 
             <div
                 className="shrink-0 border-t border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] p-2.5 sm:p-3">
-                {showPracticeCta ? (
+                {shouldRenderPracticeCta ? (
                     <RingButton
                         onClick={onPracticeClick}
                         pct={practiceProgress?.pct ?? 0}
@@ -571,7 +582,7 @@ function ModuleSidebar({
                 ) : null}
 
                 {navLoading ? (
-                    <div className={cn("ui-review-note", showPracticeCta ? "mt-2.5" : "")}>
+                    <div className={cn("ui-review-note", shouldRenderPracticeCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
                             {t("nextModuleTitle")}
                         </div>
@@ -580,7 +591,7 @@ function ModuleSidebar({
                         </div>
                     </div>
                 ) : navError ? (
-                    <div className={cn("ui-review-note-danger", showPracticeCta ? "mt-2.5" : "")}>
+                    <div className={cn("ui-review-note-danger", shouldRenderPracticeCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
                             {t("nextModuleTitle")}
                         </div>
@@ -589,7 +600,7 @@ function ModuleSidebar({
                         </div>
                     </div>
                 ) : hasNextModule ? (
-                    <div className={cn("ui-review-note", showPracticeCta ? "mt-2.5" : "")}>
+                    <div className={cn("ui-review-note", shouldRenderPracticeCta ? "mt-2.5" : "")}>
                         <div className="ui-title-sm">
                             {t("nextModuleTitle")}
                         </div>

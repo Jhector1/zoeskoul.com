@@ -207,7 +207,21 @@ describe("practice chooser hierarchy", () => {
                 slug: "module-1",
                 title: "Foundations",
                 titleKey: null,
-                sections: [],
+                sections: [
+                  {
+                    slug: "section-1",
+                    title: "Start here",
+                    titleKey: null,
+                    topics: [
+                      {
+                        slug: "topic-1",
+                        title: "First steps",
+                        titleKey: null,
+                        description: null,
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },
@@ -251,8 +265,33 @@ describe("practice chooser hierarchy", () => {
   });
 
   it("carries authored topic label keys instead of falling back to the literal word Label", () => {
+    const moduleSlug =
+      "sql-analysis-reporting-module-1-null-safe-calculations";
+    const sectionSlug =
+      "sql-analysis-reporting-sql-analysis-reporting-section-1-business-calculations";
     const catalogs = buildPracticeChooserCatalogs({
-      options: [],
+      options: [
+        option("percentage-practice", {
+          catalogSlug: "sql",
+          catalogTitle: "SQL",
+          subjectSlug: "sql-analysis-reporting",
+          subjectTitle: "SQL Analysis & Reporting",
+          moduleSlug,
+          sectionSlug,
+          topicSlug:
+            "sql_analysis_reporting_module_1.percentage-and-discount-calculations",
+        }),
+        option("labels-practice", {
+          catalogSlug: "sql",
+          catalogTitle: "SQL",
+          subjectSlug: "sql-analysis-reporting",
+          subjectTitle: "SQL Analysis & Reporting",
+          moduleSlug,
+          sectionSlug,
+          topicSlug:
+            "sql_analysis_reporting_module_1.case-for-readable-labels",
+        }),
+      ],
       visibleSubjectSlugs: new Set(["sql-analysis-reporting"]),
       moduleAccessByKey: new Map(),
     });
@@ -296,7 +335,7 @@ describe("practice chooser hierarchy", () => {
     expect(readableLabels?.title).not.toBe("Label");
   });
 
-  it("uses the shared subject artifacts so canonical SQL courses do not disappear", () => {
+  it("hides actor-visible courses when they have no authored Practice exercises", () => {
     const catalogs = buildPracticeChooserCatalogs({
       options: [],
       visibleSubjectSlugs: new Set([
@@ -308,16 +347,144 @@ describe("practice chooser hierarchy", () => {
       moduleAccessByKey: new Map(),
     });
 
-    expect(
-      catalogs
-        .find((catalog) => catalog.slug === "sql")
-        ?.courses.map((course) => course.slug),
-    ).toEqual([
-      "sql-v2",
-      "sql-analysis-reporting",
-      "multi-table-sql",
-      "sql-data-management",
+    expect(catalogs).toEqual([]);
+  });
+
+  it("prunes zero-Practice topics, sections, modules, courses, and empty catalogs bottom-up", () => {
+    const catalogs = buildPracticeChooserCatalogs({
+      options: [
+        option("keep-practice", {
+          catalogSlug: "catalog-a",
+          catalogTitle: "Catalog A",
+          subjectSlug: "course-a",
+          subjectTitle: "Course A",
+          moduleSlug: "module-a",
+          moduleTitle: "Module A",
+          sectionSlug: "section-a",
+          sectionTitle: "Section A",
+          topicSlug: "topic-keep",
+          topicTitle: "Keep Topic",
+        }),
+      ],
+      visibleSubjectSlugs: new Set(["course-a", "course-empty"]),
+      moduleAccessByKey: new Map(),
+      hierarchy: [
+        {
+          slug: "catalog-a",
+          title: "Catalog A",
+          titleKey: null,
+          courses: [
+            {
+              slug: "course-a",
+              title: "Course A",
+              titleKey: null,
+              catalogSlug: "catalog-a",
+              catalogTitle: "Catalog A",
+              modules: [
+                {
+                  slug: "module-a",
+                  title: "Module A",
+                  titleKey: null,
+                  sections: [
+                    {
+                      slug: "section-a",
+                      title: "Section A",
+                      titleKey: null,
+                      topics: [
+                        {
+                          slug: "topic-keep",
+                          title: "Keep Topic",
+                          titleKey: null,
+                          description: null,
+                        },
+                        {
+                          slug: "topic-zero",
+                          title: "Zero Topic",
+                          titleKey: null,
+                          description: null,
+                        },
+                      ],
+                    },
+                    {
+                      slug: "section-zero",
+                      title: "Zero Section",
+                      titleKey: null,
+                      topics: [
+                        {
+                          slug: "topic-zero-only",
+                          title: "Zero Only",
+                          titleKey: null,
+                          description: null,
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  slug: "module-zero",
+                  title: "Zero Module",
+                  titleKey: null,
+                  sections: [
+                    {
+                      slug: "module-zero-section",
+                      title: "Zero Section",
+                      titleKey: null,
+                      topics: [
+                        {
+                          slug: "module-zero-topic",
+                          title: "Zero Topic",
+                          titleKey: null,
+                          description: null,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              slug: "course-empty",
+              title: "Empty Course",
+              titleKey: null,
+              catalogSlug: "catalog-a",
+              catalogTitle: "Catalog A",
+              modules: [
+                {
+                  slug: "empty-module",
+                  title: "Empty Module",
+                  titleKey: null,
+                  sections: [],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          slug: "catalog-empty",
+          title: "Empty Catalog",
+          titleKey: null,
+          courses: [],
+        },
+      ],
+    });
+
+    expect(catalogs.map((catalog) => catalog.slug)).toEqual(["catalog-a"]);
+    expect(catalogs[0]?.courses.map((course) => course.slug)).toEqual([
+      "course-a",
     ]);
+    expect(catalogs[0]?.courses[0]?.modules.map((module) => module.slug)).toEqual([
+      "module-a",
+    ]);
+    expect(
+      catalogs[0]?.courses[0]?.modules[0]?.sections.map(
+        (section) => section.slug,
+      ),
+    ).toEqual(["section-a"]);
+    expect(
+      catalogs[0]?.courses[0]?.modules[0]?.sections[0]?.topics.map(
+        (topic) => topic.slug,
+      ),
+    ).toEqual(["topic-keep"]);
   });
 
 

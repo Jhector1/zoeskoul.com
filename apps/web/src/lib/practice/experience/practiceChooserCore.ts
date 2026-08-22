@@ -253,7 +253,7 @@ export function buildPracticeChooserCatalogs(args: {
       if (!args.visibleSubjectSlugs.has(course.slug)) return [];
 
       const courseOptions = byCourse.get(course.slug) ?? [];
-      const modules = course.modules.map((module) => {
+      const modules = course.modules.flatMap((module) => {
         const moduleKey = practiceModuleAccessKey(course.slug, module.slug);
         const moduleOptions = byModule.get(moduleKey) ?? [];
         const access = args.moduleAccessByKey.get(moduleKey) ?? {
@@ -261,49 +261,67 @@ export function buildPracticeChooserCatalogs(args: {
           billingHref: null,
         };
 
-        const sections = module.sections.map((section) => {
+        const sections = module.sections.flatMap((section) => {
           const sectionOptions =
             bySection.get(
               `${course.slug}|${module.slug}|${section.slug}`,
             ) ?? [];
 
-          const topics = section.topics.map((topic) => {
+          const topics = section.topics.flatMap((topic) => {
             const topicOptions =
               byTopic.get(
                 `${course.slug}|${module.slug}|${section.slug}|${topic.slug}`,
               ) ?? [];
+            const exerciseCount = countEligible(topicOptions);
 
-            return {
-              slug: topic.slug,
-              title: topic.title,
-              titleKey: topic.titleKey,
-              description: topic.description,
-              exerciseCount: countEligible(topicOptions),
-              dailyExerciseCount: countDailyEligible(topicOptions),
-            };
+            if (exerciseCount <= 0) return [];
+
+            return [
+              {
+                slug: topic.slug,
+                title: topic.title,
+                titleKey: topic.titleKey,
+                description: topic.description,
+                exerciseCount,
+                dailyExerciseCount: countDailyEligible(topicOptions),
+              },
+            ];
           });
+          const exerciseCount = countEligible(sectionOptions);
 
-          return {
-            slug: section.slug,
-            title: section.title,
-            titleKey: section.titleKey,
-            exerciseCount: countEligible(sectionOptions),
-            dailyExerciseCount: countDailyEligible(sectionOptions),
-            topics,
-          };
+          if (exerciseCount <= 0 || topics.length <= 0) return [];
+
+          return [
+            {
+              slug: section.slug,
+              title: section.title,
+              titleKey: section.titleKey,
+              exerciseCount,
+              dailyExerciseCount: countDailyEligible(sectionOptions),
+              topics,
+            },
+          ];
         });
+        const exerciseCount = countEligible(moduleOptions);
 
-        return {
-          slug: module.slug,
-          title: module.title,
-          titleKey: module.titleKey,
-          availability: access.availability,
-          billingHref: access.billingHref ?? null,
-          exerciseCount: countEligible(moduleOptions),
-          dailyExerciseCount: countDailyEligible(moduleOptions),
-          sections,
-        } satisfies PracticeChooserModule;
+        if (exerciseCount <= 0 || sections.length <= 0) return [];
+
+        return [
+          {
+            slug: module.slug,
+            title: module.title,
+            titleKey: module.titleKey,
+            availability: access.availability,
+            billingHref: access.billingHref ?? null,
+            exerciseCount,
+            dailyExerciseCount: countDailyEligible(moduleOptions),
+            sections,
+          } satisfies PracticeChooserModule,
+        ];
       });
+      const exerciseCount = countEligible(courseOptions);
+
+      if (exerciseCount <= 0 || modules.length <= 0) return [];
 
       return [
         {
@@ -312,7 +330,7 @@ export function buildPracticeChooserCatalogs(args: {
           titleKey: course.titleKey,
           catalogSlug: catalog.slug,
           catalogTitle: catalog.title,
-          exerciseCount: countEligible(courseOptions),
+          exerciseCount,
           dailyExerciseCount: countDailyEligible(courseOptions),
           modules,
         },
