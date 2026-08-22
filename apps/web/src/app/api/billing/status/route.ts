@@ -8,6 +8,7 @@ import {
   syncSubscriptionsForUser,
 } from "@/lib/billing/stripeService";
 import { getEntitlementForUser } from "@/lib/billing/entitlement";
+import { getActiveBillingPromotions, toBillingPromotionProjection } from "@/lib/billing/promotion.server";
 
 import { getLocaleFromCookie } from "@/serverUtils";
 import { toIntlLocale } from "@/i18n/money";
@@ -26,6 +27,11 @@ export async function GET() {
   const billingCurrency = await resolveBillingCurrency();
 
   const pricing = await getPricePresentation(intlLocale, billingCurrency);
+  const activePromotionRows = await getActiveBillingPromotions();
+  const activePromotions = {
+    monthly: toBillingPromotionProjection(activePromotionRows.monthly),
+    yearly: toBillingPromotionProjection(activePromotionRows.yearly),
+  };
 
   const { monthlyPriceId, yearlyPriceId } = billingConfig();
 
@@ -44,6 +50,7 @@ export async function GET() {
       trialEndsAt: null,
       currentPeriodEnd: null,
       cancelAtPeriodEnd: false,
+      activePromotions,
 
       // optional but handy for debugging/UX
       appLocale,
@@ -91,6 +98,7 @@ export async function GET() {
     trialEndsAt: ent.trialEnd ? ent.trialEnd.toISOString() : null,
     currentPeriodEnd: futureBillingPeriodIsoOrNull(ent.currentPeriodEnd),
     cancelAtPeriodEnd: Boolean(ent.cancelAtPeriodEnd),
+    activePromotions,
 
     appLocale,
 

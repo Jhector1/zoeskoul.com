@@ -7,10 +7,13 @@ const mocks = vi.hoisted(() => ({
   auth: vi.fn(),
   userFindUnique: vi.fn(),
   createCheckoutSession: vi.fn(),
+  findExistingCheckoutSessionForAttempt: vi.fn(),
+  isDeterministicStripeCheckoutRequestError: vi.fn(),
   syncSubscriptionsForUser: vi.fn(),
   getEntitlementForUser: vi.fn(),
   getLocaleFromCookie: vi.fn(),
   resolveBillingCurrency: vi.fn(),
+  getActiveBillingPromotionForPlan: vi.fn(),
   resolveRoleCapabilities: vi.fn(),
   reserveBillingCheckout: vi.fn(),
   releaseBillingCheckoutReservation: vi.fn(),
@@ -33,6 +36,10 @@ vi.mock("@/lib/billing/stripeService", () => ({
     appUrl: "https://zoeskoul.test",
   }),
   createCheckoutSession: mocks.createCheckoutSession,
+  findExistingCheckoutSessionForAttempt:
+    mocks.findExistingCheckoutSessionForAttempt,
+  isDeterministicStripeCheckoutRequestError:
+    mocks.isDeterministicStripeCheckoutRequestError,
   syncSubscriptionsForUser: mocks.syncSubscriptionsForUser,
 }));
 vi.mock("@/lib/billing/entitlement", () => ({
@@ -40,6 +47,9 @@ vi.mock("@/lib/billing/entitlement", () => ({
 }));
 vi.mock("@/lib/billing/currency", () => ({
   resolveBillingCurrency: mocks.resolveBillingCurrency,
+}));
+vi.mock("@/lib/billing/promotion.server", () => ({
+  getActiveBillingPromotionForPlan: mocks.getActiveBillingPromotionForPlan,
 }));
 vi.mock("@/serverUtils", () => ({
   getLocaleFromCookie: mocks.getLocaleFromCookie,
@@ -102,6 +112,11 @@ describe("billing checkout route", () => {
     });
     mocks.getLocaleFromCookie.mockResolvedValue("en");
     mocks.resolveBillingCurrency.mockResolvedValue("usd");
+    mocks.getActiveBillingPromotionForPlan.mockResolvedValue(null);
+    mocks.findExistingCheckoutSessionForAttempt.mockResolvedValue({
+      id: "cs_test_existing",
+    });
+    mocks.isDeterministicStripeCheckoutRequestError.mockReturnValue(false);
     mocks.createCheckoutSession.mockResolvedValue({
       id: "cs_test_1",
       url: "https://checkout.stripe.test/session",
@@ -124,11 +139,43 @@ describe("billing checkout route", () => {
     expect(mocks.createCheckoutSession).not.toHaveBeenCalled();
   });
 
-  it("blocks a distinct concurrent paid or trial Checkout before Stripe work", async () => {
+  it("resumes a distinct existing open Stripe Checkout instead of trapping the learner on 409", async () => {
+    const oldAttemptId = "7f9f8c4d-6a75-4e34-9e2f-6bf07aaf6971";
     mocks.reserveBillingCheckout.mockResolvedValue({
       kind: "conflict",
-      reservedAt: new Date("2026-08-07T02:29:00.000Z"),
+      reservedAt: new Date(),
+      checkoutAttemptId: oldAttemptId,
     });
+    mocks.findExistingCheckoutSessionForAttempt.mockResolvedValue({
+      id: "cs_test_existing",
+      status: "open",
+      url: "https://checkout.stripe.test/existing",
+    });
+
+    const response = await POST(request());
+
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({
+      url: "https://checkout.stripe.test/existing",
+      resumed: true,
+    });
+    expect(mocks.findExistingCheckoutSessionForAttempt).toHaveBeenCalledWith({
+      userId: "user_1",
+      checkoutAttemptId: oldAttemptId,
+    });
+    expect(mocks.releaseBillingCheckoutReservation).not.toHaveBeenCalled();
+    expect(mocks.syncSubscriptionsForUser).not.toHaveBeenCalled();
+    expect(mocks.createCheckoutSession).not.toHaveBeenCalled();
+  });
+
+  it("keeps a fresh conflicting reservation protected while Stripe has not created a resumable Session yet", async () => {
+    const oldAttemptId = "7f9f8c4d-6a75-4e34-9e2f-6bf07aaf6971";
+    mocks.reserveBillingCheckout.mockResolvedValue({
+      kind: "conflict",
+      reservedAt: new Date(),
+      checkoutAttemptId: oldAttemptId,
+    });
+    mocks.findExistingCheckoutSessionForAttempt.mockResolvedValue(null);
 
     const response = await POST(request());
 
@@ -136,7 +183,56 @@ describe("billing checkout route", () => {
     await expect(response.json()).resolves.toMatchObject({
       code: "CHECKOUT_ALREADY_IN_PROGRESS",
     });
+    expect(mocks.findExistingCheckoutSessionForAttempt).toHaveBeenCalledWith({
+      userId: "user_1",
+      checkoutAttemptId: oldAttemptId,
+    });
+    expect(mocks.releaseBillingCheckoutReservation).not.toHaveBeenCalled();
     expect(mocks.syncSubscriptionsForUser).not.toHaveBeenCalled();
+    expect(mocks.createCheckoutSession).not.toHaveBeenCalled();
+  });
+
+  it("replaces an old orphan reservation only after Stripe proves the old attempt has no Checkout Session", async () => {
+    const oldAttemptId = "7f9f8c4d-6a75-4e34-9e2f-6bf07aaf6971";
+    mocks.reserveBillingCheckout
+      .mockResolvedValueOnce({
+        kind: "conflict",
+        reservedAt: new Date("2026-08-07T02:29:00.000Z"),
+        checkoutAttemptId: oldAttemptId,
+      })
+      .mockResolvedValueOnce({
+        kind: "reserved",
+        reservedAt: new Date("2026-08-07T02:35:00.000Z"),
+        reused: false,
+      });
+    mocks.findExistingCheckoutSessionForAttempt.mockResolvedValue(null);
+
+    const response = await POST(request());
+
+    expect(response.status).toBe(200);
+    expect(mocks.releaseBillingCheckoutReservation).toHaveBeenCalledWith(
+      "user_1",
+      oldAttemptId,
+    );
+    expect(mocks.reserveBillingCheckout).toHaveBeenCalledTimes(2);
+    expect(mocks.createCheckoutSession).toHaveBeenCalledTimes(1);
+  });
+
+  it("fails closed and keeps an old reservation when Stripe conflict verification is unavailable", async () => {
+    const oldAttemptId = "7f9f8c4d-6a75-4e34-9e2f-6bf07aaf6971";
+    mocks.reserveBillingCheckout.mockResolvedValue({
+      kind: "conflict",
+      reservedAt: new Date("2026-08-07T02:29:00.000Z"),
+      checkoutAttemptId: oldAttemptId,
+    });
+    mocks.findExistingCheckoutSessionForAttempt.mockRejectedValue(
+      new Error("Stripe unavailable"),
+    );
+
+    const response = await POST(request());
+
+    expect(response.status).toBe(409);
+    expect(mocks.releaseBillingCheckoutReservation).not.toHaveBeenCalled();
     expect(mocks.createCheckoutSession).not.toHaveBeenCalled();
   });
 
@@ -220,6 +316,35 @@ describe("billing checkout route", () => {
         checkoutAttemptId: ATTEMPT_ID,
         checkoutExpiresAt: new Date("2026-08-07T04:30:00.000Z"),
       }),
+    );
+  });
+
+  it("resolves the active campaign on the server and passes it to Stripe creation", async () => {
+    const promotion = { id: "campaign_1", name: "Launch week", percentOff: 20, planScope: "monthly", startsAt: new Date("2026-08-01T00:00:00.000Z"), endsAt: new Date("2026-08-29T00:00:00.000Z"), enabled: true, stripeCouponId: "coupon_20" };
+    mocks.getActiveBillingPromotionForPlan.mockResolvedValue(promotion);
+    const response = await POST(request());
+    expect(response.status).toBe(200);
+    expect(mocks.getActiveBillingPromotionForPlan).toHaveBeenCalledWith("monthly");
+    expect(mocks.createCheckoutSession).toHaveBeenCalledWith(expect.objectContaining({ promotion }));
+  });
+
+  it("releases the reservation after Stripe deterministically rejects the request", async () => {
+    const rejected = Object.assign(new Error("invalid checkout parameters"), {
+      type: "StripeInvalidRequestError",
+      rawType: "invalid_request_error",
+    });
+    mocks.createCheckoutSession.mockRejectedValue(rejected);
+    mocks.isDeterministicStripeCheckoutRequestError.mockReturnValue(true);
+
+    const response = await POST(request());
+
+    expect(response.status).toBe(502);
+    await expect(response.json()).resolves.toMatchObject({
+      code: "CHECKOUT_REQUEST_REJECTED",
+    });
+    expect(mocks.releaseBillingCheckoutReservation).toHaveBeenCalledWith(
+      "user_1",
+      ATTEMPT_ID,
     );
   });
 

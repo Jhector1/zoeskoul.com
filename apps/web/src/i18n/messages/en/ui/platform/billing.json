@@ -25,6 +25,13 @@
       "body": "Your privileged role includes all paid learning features, modules, assignments, practice, and IDE capabilities.",
       "note": "No Stripe subscription or checkout is needed while this role remains assigned."
     },
+    "promotion": {
+      "badge": "{percent}% off",
+      "endsIn": "Offer ends in",
+      "countdown": "{hours}:{minutes}:{seconds}",
+      "ended": "Offer ended",
+      "headerLabel": "Limited-time offer"
+    },
     "plans": {
       "sectionTitle": "Plans",
       "trialInfo": "Trial available if eligible.",
@@ -54,6 +61,7 @@
       },
       "currentPlan": "Current plan",
       "resumeSubscription": "Resume subscription",
+      "resumeCheckout": "Resume checkout",
       "priceKicker": "Price",
       "recommended": "Recommended",
       "startTrial": "Start {days}-day trial",

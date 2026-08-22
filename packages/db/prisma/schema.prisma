@@ -515,6 +515,12 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+enum BillingPromotionPlanScope {
+  monthly
+  yearly
+  both
+}
+
 model Subscription {
   id                   String                   @id @default(cuid())
   userId               String
@@ -532,6 +538,22 @@ model Subscription {
   @@index([userId])
   @@index([stripeCustomerId])
   @@index([status])
+}
+
+model BillingPromotionCampaign {
+  id             String                    @id @default(cuid())
+  name           String
+  percentOff     Int
+  planScope      BillingPromotionPlanScope
+  startsAt       DateTime
+  endsAt         DateTime
+  enabled        Boolean                   @default(false)
+  stripeCouponId String                    @unique
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
+
+  @@index([enabled, startsAt, endsAt])
+  @@index([planScope, enabled])
 }
 
 model PracticeCatalog {

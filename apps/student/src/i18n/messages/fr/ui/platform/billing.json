@@ -25,6 +25,13 @@
       "body": "Votre rôle privilégié inclut toutes les fonctionnalités d’apprentissage payantes, les modules, les devoirs, la pratique et les capacités de l’IDE.",
       "note": "Aucun abonnement Stripe ni paiement n’est nécessaire tant que ce rôle reste attribué."
     },
+    "promotion": {
+      "badge": "{percent} % de réduction",
+      "endsIn": "L’offre se termine dans",
+      "countdown": "{hours}:{minutes}:{seconds}",
+      "ended": "L’offre est terminée",
+      "headerLabel": "Offre à durée limitée"
+    },
     "plans": {
       "sectionTitle": "Formules",
       "trialInfo": "Essai disponible si vous êtes éligible.",

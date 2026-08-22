@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale } from "next-intl";
 import type { BillingStatus } from "@/lib/billing/types";
 import { formatMoneyMinor, toIntlLocale } from "@/i18n/money";
+import { discountedMinorUnits } from "@/lib/billing/promotion";
 import { deriveBillingHeadline } from "@/components/billing/deriveBillingHeadline";
 
 function hasRawPricing(s: BillingStatus | null) {
@@ -60,8 +61,14 @@ export function useBillingStatus() {
         const m = (status as any).monthlyUnitAmountMinor as number;
         const y = (status as any).yearlyUnitAmountMinor as number;
 
+        const monthlyPromotion = status.activePromotions?.monthly;
+        const yearlyPromotion = status.activePromotions?.yearly;
         return {
             ...status,
+            activePromotions: {
+                monthly: monthlyPromotion ? { ...monthlyPromotion, discountedUnitAmountMinor: discountedMinorUnits(m, monthlyPromotion.percentOff), discountedPriceLabel: `${formatMoneyMinor(discountedMinorUnits(m, monthlyPromotion.percentOff), currency, intlLocale)} / mo` } : null,
+                yearly: yearlyPromotion ? { ...yearlyPromotion, discountedUnitAmountMinor: discountedMinorUnits(y, yearlyPromotion.percentOff), discountedPriceLabel: `${formatMoneyMinor(discountedMinorUnits(y, yearlyPromotion.percentOff), currency, intlLocale)} / yr` } : null,
+            },
             monthlyPriceLabel: `${formatMoneyMinor(m, currency, intlLocale)} / mo`,
             yearlyPriceLabel: `${formatMoneyMinor(y, currency, intlLocale)} / yr`,
         };

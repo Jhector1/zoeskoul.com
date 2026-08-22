@@ -46,7 +46,7 @@ vi.mock("@/lib/stripe", () => ({
   }),
 }));
 
-import { createCheckoutSession, upsertFromStripeSubscription } from "./stripeService";
+import { createCheckoutSession, findExistingCheckoutSessionForAttempt, upsertFromStripeSubscription } from "./stripeService";
 
 describe("createCheckoutSession", () => {
   beforeEach(() => {
@@ -123,6 +123,20 @@ describe("createCheckoutSession", () => {
     expect(params.cancel_url).toContain("canceled=1");
   });
 
+  it("applies one server-selected campaign coupon without sending manual-promotion parameters", async () => {
+    await createCheckoutSession({ userId: "user_1", priceId: "price_monthly", useTrial: false, callbackUrl: "/en/billing", currency: "usd", appLocale: "en", checkoutAttemptId: ATTEMPT_ID, promotion: { id: "campaign_1", stripeCouponId: "coupon_20", percentOff: 20 } });
+    const [params] = mocks.checkoutCreate.mock.calls[0];
+    expect(params).toMatchObject({ discounts: [{ coupon: "coupon_20" }], metadata: { promotionCampaignId: "campaign_1", promotionPercentOff: "20" }, subscription_data: { metadata: { promotionCampaignId: "campaign_1", promotionPercentOff: "20" } } });
+    expect(params.allow_promotion_codes).toBeUndefined();
+  });
+
+  it("preserves manual promotion codes without an automatic campaign", async () => {
+    await createCheckoutSession({ userId: "user_1", priceId: "price_monthly", useTrial: false, callbackUrl: "/en/billing", currency: "usd", appLocale: "en", checkoutAttemptId: ATTEMPT_ID, promotion: null });
+    const [params] = mocks.checkoutCreate.mock.calls[0];
+    expect(params.allow_promotion_codes).toBe(true);
+    expect(params.discounts).toBeUndefined();
+  });
+
   it("releases the matching durable Checkout reservation when a subscription is reconciled", async () => {
     mocks.userFindUnique.mockResolvedValue({
       id: "user_1",
@@ -162,6 +176,37 @@ describe("createCheckoutSession", () => {
       "user_1",
       ATTEMPT_ID,
     );
+  });
+
+  it("finds an existing Checkout Session for one exact reserved attempt without creating a customer", async () => {
+    mocks.checkoutList.mockResolvedValue({
+      data: [
+        {
+          id: "cs_test_other",
+          mode: "subscription",
+          status: "open",
+          metadata: { checkoutAttemptId: "7f9f8c4d-6a75-4e34-9e2f-6bf07aaf6971" },
+        },
+        {
+          id: "cs_test_existing",
+          mode: "subscription",
+          status: "open",
+          metadata: { checkoutAttemptId: ATTEMPT_ID },
+        },
+      ],
+    });
+
+    const found = await findExistingCheckoutSessionForAttempt({
+      userId: "user_1",
+      checkoutAttemptId: ATTEMPT_ID,
+    });
+
+    expect(found).toMatchObject({ id: "cs_test_existing" });
+    expect(mocks.checkoutList).toHaveBeenCalledWith({
+      customer: "cus_1",
+      limit: 100,
+    });
+    expect(mocks.customerCreate).not.toHaveBeenCalled();
   });
 
   it("recovers a matching existing Session before issuing another Stripe POST", async () => {

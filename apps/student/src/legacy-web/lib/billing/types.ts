@@ -1,3 +1,14 @@
+export type BillingPromotionProjection = {
+    id: string;
+    name: string;
+    percentOff: number;
+    planScope: "monthly" | "yearly" | "both";
+    startsAt: string;
+    endsAt: string;
+    discountedUnitAmountMinor: number;
+    discountedPriceLabel: string;
+};
+
 export type BillingStatus = {
     isAuthenticated: boolean;
     isSubscribed: boolean;
@@ -26,4 +37,9 @@ export type BillingStatus = {
     trialEndsAt: string | null;
 
     currentPlan?: "monthly" | "yearly" | null;
+
+    activePromotions?: {
+        monthly: BillingPromotionProjection | null;
+        yearly: BillingPromotionProjection | null;
+    };
 };

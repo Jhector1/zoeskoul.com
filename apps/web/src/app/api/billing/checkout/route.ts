@@ -10,10 +10,13 @@ import {
   reserveBillingCheckout,
 } from "@/lib/billing/billingCheckoutReservation";
 import { resolveBillingCurrency } from "@/lib/billing/currency";
+import { getActiveBillingPromotionForPlan } from "@/lib/billing/promotion.server";
 import { getEntitlementForUser } from "@/lib/billing/entitlement";
 import {
   billingConfig,
   createCheckoutSession,
+  findExistingCheckoutSessionForAttempt,
+  isDeterministicStripeCheckoutRequestError,
   syncSubscriptionsForUser,
 } from "@/lib/billing/stripeService";
 import { prisma } from "@/lib/prisma";
@@ -28,6 +31,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const MAX_CHECKOUT_BODY_BYTES = 8 * 1024;
+const BILLING_CHECKOUT_CONFLICT_RECOVERY_GRACE_MS = 5 * 60 * 1000;
 
 function safeInternalPath(path: unknown, fallback = "/") {
   const raw = typeof path === "string" ? path.trim() : "";
@@ -109,10 +113,61 @@ export async function POST(req: Request) {
 
   // Serialize every subscription Checkout for this user before any Stripe
   // customer/session creation. This prevents multi-tab paid and trial races.
-  const reservation = await reserveBillingCheckout(
+  let reservation = await reserveBillingCheckout(
     userId,
     checkoutAttemptId,
   );
+
+  if (
+    reservation.kind === "conflict" &&
+    isCheckoutAttemptId(reservation.checkoutAttemptId)
+  ) {
+    const conflictAgeMs = Math.max(
+      0,
+      Date.now() - reservation.reservedAt.getTime(),
+    );
+
+    try {
+      const existingSession =
+        await findExistingCheckoutSessionForAttempt({
+          userId,
+          checkoutAttemptId: reservation.checkoutAttemptId,
+        });
+
+      if (
+        existingSession?.status === "open" &&
+        typeof existingSession.url === "string" &&
+        existingSession.url
+      ) {
+        return NextResponse.json({
+          url: existingSession.url,
+          resumed: true,
+        });
+      }
+
+      if (
+        !existingSession &&
+        conflictAgeMs >= BILLING_CHECKOUT_CONFLICT_RECOVERY_GRACE_MS
+      ) {
+        const released = await releaseBillingCheckoutReservation(
+          userId,
+          reservation.checkoutAttemptId,
+        ).catch(() => false);
+
+        if (released) {
+          reservation = await reserveBillingCheckout(
+            userId,
+            checkoutAttemptId,
+          );
+        }
+      }
+    } catch (error) {
+      console.error(
+        "[/api/billing/checkout] conflict recovery verification failed",
+        error,
+      );
+    }
+  }
 
   if (reservation.kind === "conflict") {
     return NextResponse.json(
@@ -181,6 +236,8 @@ export async function POST(req: Request) {
     );
   }
 
+  const promotion = await getActiveBillingPromotionForPlan(plan);
+
   const appLocale = await getLocaleFromCookie();
   const billingCurrency = await resolveBillingCurrency();
   const checkoutExpiresAt = new Date(
@@ -197,6 +254,7 @@ export async function POST(req: Request) {
       appLocale,
       checkoutAttemptId,
       checkoutExpiresAt,
+      promotion,
     });
 
     if (!out.url) {
@@ -208,6 +266,21 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ url: out.url });
   } catch (error) {
+    if (isDeterministicStripeCheckoutRequestError(error)) {
+      // Stripe rejected the request before creating a Checkout Session.
+      // This outcome is determinate, so keeping the durable reservation would
+      // incorrectly block the learner's next corrected attempt.
+      await releaseReservation();
+      console.error("[/api/billing/checkout] Stripe request rejected", error);
+      return NextResponse.json(
+        {
+          message: "Checkout configuration was rejected. Please retry.",
+          code: "CHECKOUT_REQUEST_REJECTED",
+        },
+        { status: 502 },
+      );
+    }
+
     // Keep the reservation after an indeterminate Stripe/network failure.
     // Retrying with the same checkoutAttemptId recovers the original Session
     // or reuses Stripe's idempotent POST instead of creating a duplicate.

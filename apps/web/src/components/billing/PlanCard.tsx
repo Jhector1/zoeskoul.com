@@ -7,6 +7,9 @@ import Badge from "./Badge";
 export default function PlanCard(props: {
     title: string;
     price: string;
+    originalPrice?: string;
+    promotionLabel?: string;
+    promotionCountdown?: React.ReactNode;
     subtitle: string;
     features: string[];
 
@@ -44,13 +47,16 @@ export default function PlanCard(props: {
                         <Badge tone="good">{props.recommendedLabel ?? "Recommended"}</Badge>
                     ) : null}
 
+                    {props.promotionLabel ? <Badge tone="good">{props.promotionLabel}</Badge> : null}
                     {props.savings ? <Badge>{props.savings}</Badge> : null}
                 </div>
             </div>
 
             <div className="ui-surface-muted mt-4 p-4">
                 <div className="ui-kicker">{props.priceKicker ?? "Price"}</div>
+                {props.originalPrice ? <div className="mt-1 text-sm text-neutral-500 line-through dark:text-white/45">{props.originalPrice}</div> : null}
                 <div className="mt-1 ui-title-lg">{props.price}</div>
+                {props.promotionCountdown ?? null}
             </div>
 
             <div className="mt-4 grid gap-2 text-sm">

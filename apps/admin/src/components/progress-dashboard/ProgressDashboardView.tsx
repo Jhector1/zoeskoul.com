@@ -56,9 +56,14 @@ function DashboardHero({ data }: { data: ProgressDashboardResponse }) {
                         accuracy, certificates, and at-risk learners from the
                         same production database used by the web app.
                     </p>
-                    <a href="/questions" style={adminLinkStyle}>
-                        View question struggle report
-                    </a>
+                    <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+                        <a href="/questions" style={adminLinkStyle}>
+                            View question struggle report
+                        </a>
+                        <a href="/promotions" style={adminLinkStyle}>
+                            Manage billing promotions
+                        </a>
+                    </div>
                     <div style={metaRowStyle}>
                         <MetaPill label="Range" value={rangeLabel(data.meta.range)} />
                         <MetaPill

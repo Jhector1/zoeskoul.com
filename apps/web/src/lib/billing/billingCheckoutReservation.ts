@@ -35,7 +35,7 @@ export type BillingCheckoutReservationResult =
       reservedAt: Date;
       reused: boolean;
     }
-  | { kind: "conflict"; reservedAt: Date }
+  | { kind: "conflict"; reservedAt: Date; checkoutAttemptId: string }
   | { kind: "stale_attempt"; reservedAt: Date }
   | { kind: "missing_user" };
 
@@ -99,6 +99,7 @@ export async function reserveBillingCheckout(
         return {
           kind: "conflict",
           reservedAt: currentReservedAt,
+          checkoutAttemptId: currentAttemptId,
         };
       }
     }

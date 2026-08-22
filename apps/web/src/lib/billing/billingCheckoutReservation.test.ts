@@ -130,6 +130,7 @@ describe("billing Checkout reservation", () => {
     ).resolves.toEqual({
       kind: "conflict",
       reservedAt,
+      checkoutAttemptId: ATTEMPT_A,
     });
   });
 
@@ -173,6 +174,7 @@ describe("billing Checkout reservation", () => {
     ).resolves.toEqual({
       kind: "conflict",
       reservedAt,
+      checkoutAttemptId: ATTEMPT_A,
     });
   });
 

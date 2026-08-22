@@ -217,6 +217,36 @@ function stripeCheckoutLocaleFromAppLocale(appLocale?: string | null): Stripe.Ch
 }
 
 
+export async function findExistingCheckoutSessionForAttempt(args: {
+    userId: string;
+    checkoutAttemptId: string;
+}) {
+    if (!isCheckoutAttemptId(args.checkoutAttemptId)) return null;
+
+    const user = await prisma.user.findUnique({
+        where: { id: args.userId },
+        select: { stripeCustomerId: true },
+    });
+    const customerId = user?.stripeCustomerId;
+    if (!customerId) return null;
+
+    try {
+        const sessions = await getStripe().checkout.sessions.list({
+            customer: customerId,
+            limit: 100,
+        });
+        return sessions.data.find(
+            (session) =>
+                session.mode === "subscription" &&
+                session.metadata?.checkoutAttemptId === args.checkoutAttemptId &&
+                (session.status === "open" || session.status === "complete"),
+        ) ?? null;
+    } catch (error) {
+        if (isMissingCustomerError(error)) return null;
+        throw error;
+    }
+}
+
 export async function createCheckoutSession(args: {
     userId: string;
     priceId: string;
@@ -226,6 +256,11 @@ export async function createCheckoutSession(args: {
     appLocale?: string | null;
     checkoutAttemptId: string;
     checkoutExpiresAt?: Date;
+    promotion?: {
+        id: string;
+        stripeCouponId: string;
+        percentOff: number;
+    } | null;
 }) {
     const { appUrl, trialDays } = billingConfig();
 
@@ -294,7 +329,11 @@ export async function createCheckoutSession(args: {
                 mode: "subscription",
                 customer: customerId,
                 line_items: [{ price: args.priceId, quantity: 1 }],
-                allow_promotion_codes: true,
+                ...(args.promotion
+                    ? {
+                        discounts: [{ coupon: args.promotion.stripeCouponId }],
+                    }
+                    : { allow_promotion_codes: true }),
                 locale: stripeLocale,
                 ...(args.currency ? { currency: args.currency } : {}),
                 ...(args.checkoutExpiresAt
@@ -308,6 +347,10 @@ export async function createCheckoutSession(args: {
                     userId: args.userId,
                     checkoutAttemptId: args.checkoutAttemptId,
                     useTrial: args.useTrial ? "true" : "false",
+                    ...(args.promotion ? {
+                        promotionCampaignId: args.promotion.id,
+                        promotionPercentOff: String(args.promotion.percentOff),
+                    } : {}),
                 },
                 subscription_data: {
                     ...(args.useTrial
@@ -318,6 +361,10 @@ export async function createCheckoutSession(args: {
                         priceId: args.priceId,
                         currency: args.currency ?? "",
                         checkoutAttemptId: args.checkoutAttemptId,
+                        ...(args.promotion ? {
+                            promotionCampaignId: args.promotion.id,
+                            promotionPercentOff: String(args.promotion.percentOff),
+                        } : {}),
                     },
                 },
                 client_reference_id: args.userId,
@@ -333,6 +380,34 @@ export async function createCheckoutSession(args: {
     });
 
     return { id: checkout.id, url: checkout.url };
+}
+
+export async function createBillingPromotionCoupon(args: {
+    campaignId: string;
+    name: string;
+    percentOff: number;
+    endsAt: Date;
+}) {
+    return getStripe().coupons.create({
+        name: args.name,
+        percent_off: args.percentOff,
+        duration: "once",
+        redeem_by: Math.floor(args.endsAt.getTime() / 1000),
+        metadata: {
+            zoeskoulBillingPromotionCampaignId: args.campaignId,
+            zoeskoulPromotionKind: "billing_campaign",
+        },
+    });
+}
+
+export function isDeterministicStripeCheckoutRequestError(error: unknown) {
+    if (typeof error !== "object" || error === null) return false;
+    const candidate = error as {
+        type?: unknown;
+        rawType?: unknown;
+    };
+    return candidate.type === "StripeInvalidRequestError" ||
+        candidate.rawType === "invalid_request_error";
 }
 
 export async function createBillingPortalSession(userId: string) {

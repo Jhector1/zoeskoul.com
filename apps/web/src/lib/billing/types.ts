@@ -1,3 +1,5 @@
+import type { BillingPromotionProjection } from "@/lib/billing/promotion";
+
 export type BillingStatus = {
     isAuthenticated: boolean;
     isSubscribed: boolean;
@@ -26,4 +28,9 @@ export type BillingStatus = {
     trialEndsAt: string | null;
 
     currentPlan?: "monthly" | "yearly" | null;
+
+    activePromotions?: {
+        monthly: BillingPromotionProjection | null;
+        yearly: BillingPromotionProjection | null;
+    };
 };

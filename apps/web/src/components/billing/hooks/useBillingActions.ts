@@ -33,7 +33,18 @@ export function useBillingActions(args: {
   } = args;
   const router = useRouter();
   const [busy, setBusy] = useState(false);
+  const [checkoutResumeTarget, setCheckoutResumeTarget] = useState<{
+    plan: "monthly" | "yearly";
+    useTrial: boolean;
+  } | null>(null);
   const actionInFlightRef = useRef(false);
+
+  const isCheckoutResume = useCallback(
+    (plan: "monthly" | "yearly", useTrial = false) =>
+      checkoutResumeTarget?.plan === plan &&
+      checkoutResumeTarget.useTrial === useTrial,
+    [checkoutResumeTarget],
+  );
 
   const authRedirect = useCallback(() => {
     startGlobalNavigationPending({
@@ -102,7 +113,22 @@ export function useBillingActions(args: {
         const data = await response.json().catch(() => null);
 
         if (!response.ok) {
-          // A 4xx response definitively rejected this attempt before an
+          // This browser lost a race to another logical Checkout attempt.
+          // Clear only the rejected local attempt, then expose a real Resume
+          // action. The next click lets the server return the verified open
+          // Stripe Session or safely recover an orphan after the grace period.
+          if (data?.code === "CHECKOUT_ALREADY_IN_PROGRESS") {
+            if (checkoutAttemptId) {
+              clearBrowserCheckoutAttempt(checkoutAttemptId);
+            }
+            setCheckoutResumeTarget({ plan, useTrial });
+            onError(null);
+            return;
+          }
+
+          setCheckoutResumeTarget(null);
+
+          // Other 4xx responses definitively rejected this attempt before an
           // uncertain Stripe create. A 5xx can occur after Stripe accepted the
           // request, so preserve the attempt for an idempotent retry.
           if (response.status < 500 && checkoutAttemptId) {
@@ -113,6 +139,16 @@ export function useBillingActions(args: {
 
         if (!data?.url || typeof data.url !== "string") {
           throw new Error("Checkout failed");
+        }
+
+        setCheckoutResumeTarget(null);
+
+        // A resumed Stripe Session belongs to the older server reservation,
+        // not the newer browser attempt that discovered the conflict. Remove
+        // that newer local attempt so Stripe's old cancel/success attempt id
+        // remains the only browser-visible owner.
+        if (data?.resumed === true && checkoutAttemptId) {
+          clearBrowserCheckoutAttempt(checkoutAttemptId);
         }
 
         startGlobalNavigationPending({
@@ -216,5 +252,12 @@ export function useBillingActions(args: {
     }
   }, [status?.isAuthenticated, authRedirect, onError]);
 
-  return { busy, authRedirect, startCheckout, resumeSubscription, openPortal };
+  return {
+    busy,
+    authRedirect,
+    startCheckout,
+    isCheckoutResume,
+    resumeSubscription,
+    openPortal,
+  };
 }

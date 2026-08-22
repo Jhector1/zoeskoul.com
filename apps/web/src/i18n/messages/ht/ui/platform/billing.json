@@ -25,6 +25,13 @@
       "body": "Wòl privilejye ou a gen ladan tout fonksyon aprantisaj ki peye yo, modil, devwa, pratik, ak kapasite IDE yo.",
       "note": "Ou pa bezwen abònman Stripe oswa checkout pandan wòl sa a toujou sou kont lan."
     },
+    "promotion": {
+      "badge": "{percent}% rabè",
+      "endsIn": "Òf la fini nan",
+      "countdown": "{hours}:{minutes}:{seconds}",
+      "ended": "Òf la fini",
+      "headerLabel": "Òf pou yon tan limite"
+    },
     "plans": {
       "sectionTitle": "Plan yo",
       "trialInfo": "Esè disponib si ou elijib.",
@@ -54,6 +61,7 @@
       },
       "currentPlan": "Plan aktyèl la",
       "resumeSubscription": "Rekòmanse abònman",
+      "resumeCheckout": "Kontinye peman an",
       "priceKicker": "Pri",
       "recommended": "Rekòmande",
       "startTrial": "Kòmanse esè {days} jou",

@@ -50,6 +50,15 @@ importers:
       '@prisma/client':
         specifier: ^7.4.0
         version: 7.5.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3))(typescript@5.9.3)
+      '@zoeskoul/api-client':
+        specifier: workspace:*
+        version: link:../../packages/api-client
+      '@zoeskoul/app-config':
+        specifier: workspace:*
+        version: link:../../packages/app-config
+      '@zoeskoul/auth-client':
+        specifier: workspace:*
+        version: link:../../packages/auth-client
       '@zoeskoul/db':
         specifier: workspace:*
         version: link:../../packages/db

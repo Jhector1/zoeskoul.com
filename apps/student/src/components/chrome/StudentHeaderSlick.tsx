@@ -33,6 +33,7 @@ import { BookOpen, Dumbbell, Settings } from "lucide-react";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import Badge from "@/components/billing/Badge";
 import { useBillingStatus } from "@/components/billing/hooks/useBillingStatus";
+import BillingPromotionCountdown from "@/components/billing/BillingPromotionCountdown";
 import SoundToggle from "@/lib/sfx/SoundToggle";
 import {useAuthHref} from "@student/hooks/useAuthHref";
 import { startGlobalNavigationPending } from "@/components/navigation/GlobalNavigationProgress";
@@ -341,6 +342,7 @@ export default function StudentHeaderSlick({
   SlotComponent?: React.ComponentType<HeaderSlotCtx>;
 }) {
   const t = useTranslations("Header");
+  const billingT = useTranslations("billing");
   const locale = useLocale();
   const pathname = usePathname();
   const { data: session, status } = useStudentSession();
@@ -378,7 +380,29 @@ export default function StudentHeaderSlick({
 
   useEffect(() => setOpen(false), [pathname]);
 
-  const { headlineBadge } = useBillingStatus();
+  const {
+    status: billingStatus,
+    headlineBadge,
+    reload: reloadBillingStatus,
+  } = useBillingStatus();
+
+  const headerPromotions = useMemo(() => {
+    if (billingStatus?.isSubscribed) return [];
+
+    const monthly = billingStatus?.activePromotions?.monthly ?? null;
+    const yearly = billingStatus?.activePromotions?.yearly ?? null;
+    const byId = new Map<string, NonNullable<typeof monthly>>();
+
+    for (const promotion of [monthly, yearly]) {
+      if (promotion) byId.set(promotion.id, promotion);
+    }
+
+    return Array.from(byId.values());
+  }, [
+    billingStatus?.isSubscribed,
+    billingStatus?.activePromotions?.monthly,
+    billingStatus?.activePromotions?.yearly,
+  ]);
 
   const authHref = useAuthHref();
   const navLinkClass = (active: boolean) =>
@@ -437,6 +461,29 @@ export default function StudentHeaderSlick({
               ) : (
                   <Badge tone={headlineBadge.tone}>{headlineBadge.text}</Badge>
               )}
+            </div>
+        ) : null}
+
+        {isBillingStatus && headerPromotions.length ? (
+            <div className="hidden items-center gap-2 xl:flex">
+              {headerPromotions.map((promotion) => (
+                  <Link
+                      key={promotion.id}
+                      href={ROUTES.pricing}
+                      aria-label={`${promotion.name}: ${promotion.percentOff}% off`}
+                      className="inline-flex items-center gap-2 rounded-full border border-amber-300/70 bg-amber-50 px-3 py-1.5 text-amber-950 shadow-sm transition hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-400/35 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100 dark:hover:bg-amber-300/15"
+                  >
+                    <span className="whitespace-nowrap text-[11px] font-semibold">
+                      {billingT("promotion.headerLabel")}: {promotion.name} ·{" "}
+                      {billingT("promotion.badge", { percent: promotion.percentOff })}
+                    </span>
+                    <BillingPromotionCountdown
+                      endsAt={promotion.endsAt}
+                      onExpire={reloadBillingStatus}
+                      compact
+                    />
+                  </Link>
+              ))}
             </div>
         ) : null}
       </div>
@@ -555,6 +602,28 @@ export default function StudentHeaderSlick({
                         );
                       })
                       : null}
+
+                  {isBillingStatus && headerPromotions.length ? (
+                      <div className="grid gap-2">
+                        {headerPromotions.map((promotion) => (
+                            <Link
+                                key={promotion.id}
+                                href={ROUTES.pricing}
+                                className="rounded-lg border border-amber-300/70 bg-amber-50 px-3 py-2 text-amber-950 dark:border-amber-300/20 dark:bg-amber-300/10 dark:text-amber-100"
+                            >
+                              <div className="text-xs font-semibold">
+                                {billingT("promotion.headerLabel")}: {promotion.name} ·{" "}
+                                {billingT("promotion.badge", { percent: promotion.percentOff })}
+                              </div>
+                              <BillingPromotionCountdown
+                                endsAt={promotion.endsAt}
+                                onExpire={reloadBillingStatus}
+                                compact
+                              />
+                            </Link>
+                        ))}
+                      </div>
+                  ) : null}
 
                   {isNav ? (
                       <LearningEntryButton

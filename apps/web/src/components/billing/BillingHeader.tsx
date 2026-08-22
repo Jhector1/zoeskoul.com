@@ -43,6 +43,7 @@ export default function BillingHeader({
                             <Badge tone="warn">{t("header.signInRequired")}</Badge>
                         )}
                     </div>
+
                 </div>
 
                 <div className="flex flex-wrap gap-2">

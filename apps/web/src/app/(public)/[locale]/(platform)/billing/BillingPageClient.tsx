@@ -10,6 +10,7 @@ import BillingShell from "@/components/billing/BillingShell";
 import BillingHeader from "@/components/billing/BillingHeader";
 import BillingError from "@/components/billing/BillingError";
 import PlanCard from "@/components/billing/PlanCard";
+import BillingPromotionCountdown from "@/components/billing/BillingPromotionCountdown";
 import InfoRow from "@/components/billing/InfoRow";
 import BillingPageSkeleton from "@/components/billing/BillingPageSkeleton";
 import {
@@ -55,7 +56,14 @@ export default function BillingPageClient({
     const showPaywall = Boolean(paywall?.reason);
     const accessResource = [paywall?.subject, paywall?.module].filter(Boolean).join(" — ") || null;
 
-    const { busy, authRedirect, openPortal, startCheckout, resumeSubscription } = useBillingActions({
+    const {
+        busy,
+        authRedirect,
+        openPortal,
+        startCheckout,
+        isCheckoutResume,
+        resumeSubscription,
+    } = useBillingActions({
         status,
         callbackUrl,
         onError: setError,
@@ -91,7 +99,8 @@ export default function BillingPageClient({
         }
     };
 
-
+    const monthlyPromotion = status?.isSubscribed ? null : status?.activePromotions?.monthly ?? null;
+    const yearlyPromotion = status?.isSubscribed ? null : status?.activePromotions?.yearly ?? null;
     if (loading) {
         return <BillingPageSkeleton showPaywall={Boolean(paywall?.reason)} />;
     }
@@ -245,7 +254,10 @@ export default function BillingPageClient({
                             <div className="grid gap-3 p-5 md:grid-cols-2">
                                 <PlanCard
                                     title={t("plans.monthly.title")}
-                                    price={status.monthlyPriceLabel}
+                                    price={monthlyPromotion?.discountedPriceLabel ?? status.monthlyPriceLabel}
+                                    originalPrice={monthlyPromotion ? status.monthlyPriceLabel : undefined}
+                                    promotionLabel={monthlyPromotion ? t("promotion.badge", { percent: monthlyPromotion.percentOff }) : undefined}
+                                    promotionCountdown={monthlyPromotion ? <BillingPromotionCountdown endsAt={monthlyPromotion.endsAt} onExpire={reload} /> : undefined}
                                     subtitle={t("plans.monthly.subtitle")}
                                     recommended={false}
                                     highlight={status.currentPlan === "monthly"}
@@ -255,9 +267,11 @@ export default function BillingPageClient({
                                     ctaLabel={
                                         resumePlan === "monthly"
                                             ? t("plans.resumeSubscription")
-                                            : status.isSubscribed && status.currentPlan === "monthly"
-                                                ? t("plans.currentPlan")
-                                                : t("plans.monthly.subscribe")
+                                            : isCheckoutResume("monthly", false)
+                                                ? t("plans.resumeCheckout")
+                                                : status.isSubscribed && status.currentPlan === "monthly"
+                                                    ? t("plans.currentPlan")
+                                                    : t("plans.monthly.subscribe")
                                     }
                                     ctaDisabled={
                                         busy ||
@@ -269,9 +283,11 @@ export default function BillingPageClient({
                                             : () => startCheckout("monthly", false)
                                     }
                                     trialLabel={
-                                        canUseTrial
-                                            ? t("plans.startTrial", { days: trialDays })
-                                            : trialState.inTrial
+                                        isCheckoutResume("monthly", true)
+                                            ? t("plans.resumeCheckout")
+                                            : canUseTrial
+                                                ? t("plans.startTrial", { days: trialDays })
+                                                : trialState.inTrial
                                                 ? t("plans.trialActive")
                                                 : t("plans.trialUnavailable")
                                     }
@@ -288,20 +304,25 @@ export default function BillingPageClient({
 
                                 <PlanCard
                                     title={t("plans.yearly.title")}
-                                    price={status.yearlyPriceLabel}
+                                    price={yearlyPromotion?.discountedPriceLabel ?? status.yearlyPriceLabel}
+                                    originalPrice={yearlyPromotion ? status.yearlyPriceLabel : undefined}
+                                    promotionLabel={yearlyPromotion ? t("promotion.badge", { percent: yearlyPromotion.percentOff }) : undefined}
+                                    promotionCountdown={yearlyPromotion ? <BillingPromotionCountdown endsAt={yearlyPromotion.endsAt} onExpire={reload} /> : undefined}
                                     subtitle={t("plans.yearly.subtitle")}
                                     recommended
                                     highlight={status.currentPlan === "yearly"}
-                                    savings={status.yearlySavingsLabel ?? "—"}
+                                    savings={yearlyPromotion ? undefined : status.yearlySavingsLabel ?? undefined}
                                     priceKicker={t("plans.priceKicker")}
                                     recommendedLabel={t("plans.recommended")}
                                     features={t.raw("plans.yearly.features") as string[]}
                                     ctaLabel={
                                         resumePlan === "yearly"
                                             ? t("plans.resumeSubscription")
-                                            : status.isSubscribed && status.currentPlan === "yearly"
-                                                ? t("plans.currentPlan")
-                                                : t("plans.yearly.subscribe")
+                                            : isCheckoutResume("yearly", false)
+                                                ? t("plans.resumeCheckout")
+                                                : status.isSubscribed && status.currentPlan === "yearly"
+                                                    ? t("plans.currentPlan")
+                                                    : t("plans.yearly.subscribe")
                                     }
                                     ctaDisabled={
                                         busy ||
@@ -313,9 +334,11 @@ export default function BillingPageClient({
                                             : () => startCheckout("yearly", false)
                                     }
                                     trialLabel={
-                                        canUseTrial
-                                            ? t("plans.startTrial", { days: trialDays })
-                                            : trialState.inTrial
+                                        isCheckoutResume("yearly", true)
+                                            ? t("plans.resumeCheckout")
+                                            : canUseTrial
+                                                ? t("plans.startTrial", { days: trialDays })
+                                                : trialState.inTrial
                                                 ? t("plans.trialActive")
                                                 : t("plans.trialUnavailable")
                                     }
