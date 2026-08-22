@@ -48,7 +48,15 @@ export default async function DailyFivePage({
   const actor = { userId, guestId: null };
   const viewer = await resolvePracticeViewer(prisma, actor);
   const mode = viewer.subscribed ? "subscriber" : "free";
-  const catalogs = await loadPracticeChooser({ actor, locale, mode });
+  const catalogs = await loadPracticeChooser({
+    actor,
+    locale,
+    mode,
+    catalogIdentity: {
+      userId,
+      email: session?.user?.email ?? null,
+    },
+  });
   const activeSessions =
     mode === "subscriber"
       ? await loadActiveSubscriberPracticeSessions({

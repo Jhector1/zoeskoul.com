@@ -14,6 +14,7 @@ import {
   roundRobinPracticeGroups,
   stableAuthoredPracticeSelectionScore,
   uniquePublishedPracticeOptions,
+  type AuthoredPracticeEligibilityOption,
   type AuthoredPracticeTarget,
 } from "./authoredPracticeQueue";
 import { resolveAvailablePracticeTargetCount } from "./availableTargetCount";
@@ -113,7 +114,9 @@ export function buildDailyFiveMeta(args: {
   };
 }
 
-export function isDailyFiveEligible(option: PublishedPracticeExerciseOption) {
+export function isDailyFiveEligible(
+  option: AuthoredPracticeEligibilityOption,
+) {
   return isAuthoredLessonPracticeOption(option);
 }
 

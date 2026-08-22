@@ -32,7 +32,8 @@ export function isSeededSubject<T extends SubjectAvailabilityInput>(
  * - active courses must exist in Prisma before they can be shown/enrolled
  * - coming-soon courses may be shown from the manifest without a Prisma row
  * - disabled publication entries remain hidden
- * - catalog prefers the active default course over an enrolled legacy course
+ * - catalog keeps the active default course available
+ * - an enrolled legacy sibling remains visible only for that learner
  * - draft/disabled versions stay hidden through the shared version rule
  */
 export function selectSeededVisibleSubjectsForActor<
@@ -46,9 +47,21 @@ export function selectSeededVisibleSubjectsForActor<
         return isSeededSubject(subject);
     });
 
-    return selectVisibleSubjectsForActor(learnerCandidates, {
+    const defaultSubjects = selectVisibleSubjectsForActor(learnerCandidates, {
         familyPreference: "default",
     });
+    const visibleSlugs = new Set(defaultSubjects.map((subject) => subject.slug));
+
+    for (const subject of learnerCandidates) {
+        if (
+            subject.enrolled === true &&
+            subject.versioning?.status === "legacy"
+        ) {
+            visibleSlugs.add(subject.slug);
+        }
+    }
+
+    return learnerCandidates.filter((subject) => visibleSlugs.has(subject.slug));
 }
 
 /**

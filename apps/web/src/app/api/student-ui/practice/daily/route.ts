@@ -99,6 +99,10 @@ export async function GET(
       actor,
       locale,
       mode,
+      catalogIdentity: {
+        userId: access.user.id,
+        email: access.user.email,
+      },
     });
   const activeSessions =
     mode === "subscriber"

@@ -119,7 +119,7 @@ describe("selectSeededVisibleSubjectsForActor", () => {
         expect(visible.map((subject) => subject.slug)).toEqual(["python-v2"]);
     });
 
-    it("catalog prefers the active default even when the learner is enrolled in legacy", () => {
+    it("catalog keeps the active default and the learner enrolled legacy sibling", () => {
         const visible = selectSeededVisibleSubjectsForActor([
             {
                 slug: "python",
@@ -143,7 +143,10 @@ describe("selectSeededVisibleSubjectsForActor", () => {
             },
         ]);
 
-        expect(visible.map((subject) => subject.slug)).toEqual(["python-v2"]);
+        expect(visible.map((subject) => subject.slug)).toEqual([
+            "python",
+            "python-v2",
+        ]);
     });
 
     it("selects sql-v2 as the SQL default for an unenrolled learner", () => {
@@ -175,7 +178,7 @@ describe("selectSeededVisibleSubjectsForActor", () => {
         expect(visible.map((subject) => subject.slug)).toEqual(["sql-v2"]);
     });
 
-    it("keeps sql-v2 visible for a learner enrolled in legacy SQL v1 on catalog surfaces", () => {
+    it("keeps enrolled legacy SQL visible alongside sql-v2 on catalog surfaces", () => {
         const visible = selectSeededVisibleSubjectsForActor([
             {
                 slug: "sql",
@@ -201,7 +204,10 @@ describe("selectSeededVisibleSubjectsForActor", () => {
             },
         ]);
 
-        expect(visible.map((subject) => subject.slug)).toEqual(["sql-v2"]);
+        expect(visible.map((subject) => subject.slug)).toEqual([
+            "sql",
+            "sql-v2",
+        ]);
     });
 
     it("never shows draft or disabled subjects even when seeded", () => {
@@ -407,6 +413,7 @@ describe("selectSeededVisibleSubjectsForActor", () => {
         );
 
         expect(visible.map((subject) => subject.slug)).toEqual([
+            "python",
             "python-v2",
             "python-data-functions",
             "applied-python-projects",

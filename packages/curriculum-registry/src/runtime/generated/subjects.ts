@@ -2970,8 +2970,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         "versioning": {
           "family": "multi-table-sql",
           "version": 1,
-          "status": "draft",
-          "defaultForNewEnrollments": false,
+          "status": "active",
+          "defaultForNewEnrollments": true,
           "supersedes": null,
           "supersededBy": null
         }
@@ -3383,10 +3383,10 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           "certificateEnabledByDefault": true
         },
         "versioning": {
-          "family": "sql",
-          "version": 2,
+          "family": "sql-analysis-reporting",
+          "version": 1,
           "status": "active",
-          "defaultForNewEnrollments": false,
+          "defaultForNewEnrollments": true,
           "supersedes": null,
           "supersededBy": null
         }

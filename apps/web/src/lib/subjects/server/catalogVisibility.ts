@@ -26,6 +26,11 @@ export type CatalogActorAccess = {
     canSeeAllCatalogSubjects: boolean;
 };
 
+export type CatalogActorIdentity = {
+    userId?: string | null;
+    email?: string | null;
+};
+
 export type CatalogSubjectWithAvailability<T> = T &
     SubjectDatabaseStateFields & {
     availabilityStatus: "seeded" | "unseeded";
@@ -42,12 +47,14 @@ export type VisibleCatalog = Omit<ResolvedCatalogItem, "subjects"> & {
     actorAccess: CatalogActorAccess;
 };
 
-async function getCatalogActorAccess(): Promise<CatalogActorAccess> {
-    const session = await auth();
+async function getCatalogActorAccess(
+    identity?: CatalogActorIdentity,
+): Promise<CatalogActorAccess> {
+    const session = identity ? null : await auth();
 
     const access = await resolvePrivilegedLearningAccess({
-        userId: (session?.user as any)?.id ?? null,
-        email: session?.user?.email ?? null,
+        userId: identity?.userId ?? (session?.user as any)?.id ?? null,
+        email: identity?.email ?? session?.user?.email ?? null,
     });
 
     const roles = access.roles ?? [];
@@ -150,10 +157,10 @@ export async function getEnrolledVisibleSubjectCardsForActor(): Promise<
         .map((subject) => withAvailabilityStatus(subject));
 }
 
-export async function getAvailableVisibleCatalogsForActor(): Promise<
-    VisibleCatalog[]
-> {
-    const actorAccess = await getCatalogActorAccess();
+export async function getAvailableVisibleCatalogsForActor(
+    identity?: CatalogActorIdentity,
+): Promise<VisibleCatalog[]> {
+    const actorAccess = await getCatalogActorAccess(identity);
 
     const rawCatalogs = Object.values(await getResolvedCatalogMap()).filter(
         (catalog) =>
@@ -186,8 +193,9 @@ export async function getAvailableVisibleCatalogsForActor(): Promise<
 
 export async function getAvailableVisibleCatalogForActor(
     catalogSlug: string,
+    identity?: CatalogActorIdentity,
 ): Promise<VisibleCatalog | null> {
-    const actorAccess = await getCatalogActorAccess();
+    const actorAccess = await getCatalogActorAccess(identity);
 
     const catalog = await getResolvedCatalogBySlug(catalogSlug);
 

@@ -12,6 +12,7 @@ import {
   roundRobinPracticeGroups,
   stableAuthoredPracticeSelectionScore,
   uniquePublishedPracticeOptions,
+  type AuthoredPracticeEligibilityOption,
   type AuthoredPracticeTarget,
 } from "./authoredPracticeQueue";
 import { resolveAvailablePracticeTargetCount } from "./availableTargetCount";
@@ -92,7 +93,7 @@ function legacyScopeFromQueue(
  * learner surfaces instead of being silently repurposed here.
  */
 export function isSubscriberPracticeEligible(
-  option: PublishedPracticeExerciseOption,
+  option: AuthoredPracticeEligibilityOption,
 ) {
   return isAuthoredLessonPracticeOption(option);
 }

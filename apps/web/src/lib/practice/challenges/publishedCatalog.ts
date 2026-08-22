@@ -1,6 +1,5 @@
 import "server-only";
 
-import { prisma } from "@/lib/prisma";
 import { CATALOG_MANIFESTS } from "@zoeskoul/curriculum-registry/runtime";
 import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 import { resolvePublishedPracticeTarget } from "./target";
@@ -11,14 +10,13 @@ import {
   type PublishedPracticeSectionRole,
 } from "./publishedExerciseMetadata";
 
-export type PublishedPracticeExerciseOption = {
+type PracticeExerciseOptionBase = {
   id: string;
   catalogSlug: string;
   catalogTitle: string;
   subjectSlug: string;
   subjectTitle: string;
   subjectTitleKey?: string | null;
-  releaseStatus: "active" | "legacy";
   moduleSlug: string;
   moduleTitle: string;
   moduleTitleKey?: string | null;
@@ -36,6 +34,14 @@ export type PublishedPracticeExerciseOption = {
   isMultiFile: boolean;
   requiresTerminal: boolean;
   isStandaloneTryIt: boolean;
+};
+
+export type PublishedPracticeExerciseOption = PracticeExerciseOptionBase & {
+  releaseStatus: "active" | "legacy";
+};
+
+export type PracticeChooserPublishedExerciseOption = PracticeExerciseOptionBase & {
+  releaseStatus: "draft" | "active" | "legacy";
 };
 
 // Backward-compatible name used by the public-challenge publisher. Daily practice
@@ -73,51 +79,20 @@ function authoredTitleKey(value: unknown) {
 
 function releaseStatusForSubject(
   source: (typeof SUBJECT_GENERATOR_SOURCES)[string],
-): "active" | "legacy" | null {
+): "draft" | "active" | "legacy" | null {
   const status = source.manifest.subject.status ?? "active";
   const release = source.manifest.subject.meta?.versioning?.status ?? "active";
 
-  if (status !== "active") return null;
-  if (release === "draft" || release === "disabled") return null;
+  if (status !== "active" || release === "disabled") return null;
+  if (release === "draft") return "draft";
   return release === "legacy" ? "legacy" : "active";
 }
 
-export async function listPublishedPracticeExerciseOptions(): Promise<
-  PublishedPracticeExerciseOption[]
-> {
-  const activeSubjects = await prisma.practiceSubject.findMany({
-    where: { status: "active" },
-    select: { id: true, slug: true },
-  });
-  const subjectSlugById = new Map(
-    activeSubjects.map((subject) => [subject.id, subject.slug] as const),
-  );
-  const activeSubjectIds = activeSubjects.map((subject) => subject.id);
-
-  const seededSections = activeSubjectIds.length
-    ? await prisma.practiceSection.findMany({
-        where: { subjectId: { in: activeSubjectIds } },
-        select: {
-          slug: true,
-          subjectId: true,
-          module: { select: { slug: true } },
-        },
-      })
-    : [];
-
-  const availableSections = new Set(
-    seededSections.flatMap((section) => {
-      if (!section.subjectId) return [];
-
-      const subjectSlug = subjectSlugById.get(section.subjectId);
-      const moduleSlug = section.module?.slug;
-      return subjectSlug && moduleSlug
-        ? [`${subjectSlug}|${moduleSlug}|${section.slug}`]
-        : [];
-    }),
-  );
-
-  const options: Array<PublishedPracticeExerciseOption & { sortKey: string }> = [];
+async function listAuthoredPracticeExerciseOptions(args: {
+  allowedSubjectSlugs?: ReadonlySet<string>;
+  includeDraft: boolean;
+}): Promise<PracticeChooserPublishedExerciseOption[]> {
+  const options: Array<PracticeChooserPublishedExerciseOption & { sortKey: string }> = [];
   const catalogs = Object.values(CATALOG_MANIFESTS)
     .map((entry) => entry.catalog)
     .filter((catalog) => (catalog.status ?? "active") === "active")
@@ -128,10 +103,16 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
       const source = SUBJECT_GENERATOR_SOURCES[subjectSlug];
       if (!source) continue;
 
-      const releaseStatus = releaseStatusForSubject(source);
-      if (!releaseStatus || !activeSubjects.some((row) => row.slug === subjectSlug)) {
+      if (
+        args.allowedSubjectSlugs &&
+        !args.allowedSubjectSlugs.has(subjectSlug)
+      ) {
         continue;
       }
+
+      const releaseStatus = releaseStatusForSubject(source);
+      if (!releaseStatus) continue;
+      if (releaseStatus === "draft" && !args.includeDraft) continue;
 
       const subject = source.manifest.subject;
       const modules = [...source.manifest.modules].sort(
@@ -144,14 +125,6 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
         );
 
         for (const section of sections) {
-          if (
-            !availableSections.has(
-              `${subjectSlug}|${subjectModule.slug}|${section.slug}`,
-            )
-          ) {
-            continue;
-          }
-
           for (let topicIndex = 0; topicIndex < section.topics.length; topicIndex += 1) {
             const topicId = section.topics[topicIndex];
             const topic = source.topicManifests[topicId];
@@ -248,6 +221,27 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
     .map(({ sortKey: _sortKey, ...option }) => option);
 }
 
+export async function listPublishedPracticeExerciseOptions(): Promise<
+  PublishedPracticeExerciseOption[]
+> {
+  const options = await listAuthoredPracticeExerciseOptions({
+    includeDraft: false,
+  });
+
+  return options.filter(
+    (option): option is PublishedPracticeExerciseOption =>
+      option.releaseStatus !== "draft",
+  );
+}
+
+export async function listVisiblePracticeChooserExerciseOptions(
+  allowedSubjectSlugs: ReadonlySet<string>,
+): Promise<PracticeChooserPublishedExerciseOption[]> {
+  return listAuthoredPracticeExerciseOptions({
+    allowedSubjectSlugs,
+    includeDraft: true,
+  });
+}
 
 export async function listPublishedChallengeExerciseOptions(): Promise<
   PublishedChallengeExerciseOption[]

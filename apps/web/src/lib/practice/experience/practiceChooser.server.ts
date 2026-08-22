@@ -2,10 +2,13 @@ import "server-only";
 
 import { prisma } from "@/lib/prisma";
 import type { Actor } from "@/lib/practice/actor";
-import { listPublishedPracticeExerciseOptions } from "@/lib/practice/challenges/publishedCatalog";
+import { listVisiblePracticeChooserExerciseOptions } from "@/lib/practice/challenges/publishedCatalog";
 import { buildBillingHref } from "@zoeskoul/learner-ui/lib/billing/moduleAccess";
 import { resolveModuleAccess } from "@/lib/access/resolveModuleAccess";
-import { selectVisibleSubjectsForActor } from "@/lib/subjects/server/subjectVisibilityCore";
+import {
+  getAvailableVisibleCatalogsForActor,
+  type CatalogActorIdentity,
+} from "@/lib/subjects/server/catalogVisibility";
 import { loadPracticeAccessModelForActor } from "./dailyAccess";
 import { buildPracticeChooserCatalogs } from "./practiceChooserCore";
 import { practiceModuleAccessKey } from "./practiceAccessKey";
@@ -18,20 +21,23 @@ export async function loadPracticeChooser(args: {
   actor: Actor;
   locale: string;
   mode: PracticeChooserMode;
+  catalogIdentity?: CatalogActorIdentity;
 }): Promise<PracticeChooserCatalog[]> {
-  const options = await listPublishedPracticeExerciseOptions();
+  const visibleCatalogs = await getAvailableVisibleCatalogsForActor(
+    args.catalogIdentity,
+  );
+  const visibleSubjectSlugs = new Set(
+    visibleCatalogs.flatMap((catalog) =>
+      catalog.subjects.map((subject) => subject.slug),
+    ),
+  );
+  const options =
+    await listVisiblePracticeChooserExerciseOptions(visibleSubjectSlugs);
   const model = await loadPracticeAccessModelForActor({
     prisma,
     actor: args.actor,
     options,
   });
-
-  const visibleSubjects = selectVisibleSubjectsForActor(model.subjects, {
-    familyPreference: "enrolled",
-  });
-  const visibleSubjectSlugs = new Set(
-    visibleSubjects.map((subject) => subject.slug),
-  );
   const subjectBySlug = new Map(
     model.subjects.map((subject) => [subject.slug, subject] as const),
   );

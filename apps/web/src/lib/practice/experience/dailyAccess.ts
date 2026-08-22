@@ -4,7 +4,10 @@ import type { PrismaClient } from "@/lib/prisma";
 import { getAccessSnapshot } from "@/lib/access/accessSnapshot";
 import type { Actor } from "@/lib/practice/actor";
 import { actorKeyOf } from "@/lib/practice/actor";
-import type { PublishedPracticeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
+import type {
+  PracticeChooserPublishedExerciseOption,
+  PublishedPracticeExerciseOption,
+} from "@/lib/practice/challenges/publishedCatalog";
 import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 import {
   selectAccessibleDailyPracticeOptions,
@@ -14,7 +17,7 @@ import {
 
 function versioningForSubject(
   subjectSlug: string,
-  releaseStatus: "active" | "legacy",
+  releaseStatus: "draft" | "active" | "legacy",
 ) {
   const source = SUBJECT_GENERATOR_SOURCES[subjectSlug] as any;
   const configured = source?.manifest?.subject?.meta?.versioning ?? null;
@@ -38,7 +41,7 @@ export type PracticeAccessModel = {
 export async function loadPracticeAccessModelForActor(args: {
   prisma: PrismaClient;
   actor: Actor;
-  options: readonly PublishedPracticeExerciseOption[];
+  options: readonly PracticeChooserPublishedExerciseOption[];
 }): Promise<PracticeAccessModel> {
   if (args.options.length === 0) {
     return {

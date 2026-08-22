@@ -1,6 +1,11 @@
 import type { GetParams } from "@/lib/practice/api/get/schemas";
 import type { PublishedPracticeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
 
+export type AuthoredPracticeEligibilityOption = Omit<
+  PublishedPracticeExerciseOption,
+  "releaseStatus"
+>;
+
 export type AuthoredPracticePurpose = "quiz" | "project" | "practice";
 
 export type AuthoredPracticeTarget = {
@@ -15,7 +20,7 @@ export type AuthoredPracticeTarget = {
 };
 
 export function isAuthoredLessonPracticeOption(
-  option: PublishedPracticeExerciseOption,
+  option: AuthoredPracticeEligibilityOption,
 ) {
   return (
     option.sectionRole === "lesson" &&

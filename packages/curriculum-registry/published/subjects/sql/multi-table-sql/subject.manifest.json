@@ -27,8 +27,8 @@
       "versioning": {
         "family": "multi-table-sql",
         "version": 1,
-        "status": "draft",
-        "defaultForNewEnrollments": false,
+        "status": "active",
+        "defaultForNewEnrollments": true,
         "supersedes": null,
         "supersededBy": null
       }
