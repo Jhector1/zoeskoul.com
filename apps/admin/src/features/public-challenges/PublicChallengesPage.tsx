@@ -44,7 +44,7 @@ export function PublicChallengesPage(props: {
           <p className="eyebrow">Publishing</p>
           <h1>Public challenges</h1>
           <p className="page-description">
-            Select a published quiz or project and create a shareable public
+            Select an authored Practice exercise and create a shareable public
             challenge link. Challenge execution remains in the learner runtime.
           </p>
         </div>
@@ -56,12 +56,8 @@ export function PublicChallengesPage(props: {
           value={String(resource.data.counts.total)}
         />
         <StatCard
-          label="Quiz"
-          value={String(resource.data.counts.quiz)}
-        />
-        <StatCard
-          label="Project"
-          value={String(resource.data.counts.project)}
+          label="Practice"
+          value={String(resource.data.counts.practice)}
         />
       </div>
 

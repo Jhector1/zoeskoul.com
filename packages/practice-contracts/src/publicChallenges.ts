@@ -6,16 +6,19 @@
 
 export type PublicChallengeEligibilityTarget = {
   exerciseKind: unknown;
-  exercisePurpose: unknown;
 };
 
+/**
+ * Browser-safe Public Challenge execution-shape guard.
+ *
+ * Authored Practice eligibility is owned by the existing server-side
+ * isAuthoredLessonPracticeOption concern. Do not duplicate purpose or
+ * lesson-scope policy here.
+ */
 export function isEligiblePublicChallengeTarget(
   target: PublicChallengeEligibilityTarget,
 ): boolean {
-  return (
-    String(target.exercisePurpose ?? "").trim() === "project" &&
-    String(target.exerciseKind ?? "").trim() === "code_input"
-  );
+  return String(target.exerciseKind ?? "").trim() === "code_input";
 }
 
 export function assertEligiblePublicChallengeTarget(
@@ -24,9 +27,9 @@ export function assertEligiblePublicChallengeTarget(
   if (isEligiblePublicChallengeTarget(target)) return;
 
   throw new Error(
-    `Only code_input project exercises can be shared as public challenges. Received purpose "${String(
-      target.exercisePurpose ?? "unknown",
-    )}" and kind "${String(target.exerciseKind ?? "unknown")}".`,
+    `Only code_input exercises can be shared as public challenges. Received kind "${String(
+      target.exerciseKind ?? "unknown",
+    )}".`,
   );
 }
 

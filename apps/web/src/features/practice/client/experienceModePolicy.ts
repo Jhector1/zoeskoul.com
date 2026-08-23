@@ -3,7 +3,7 @@ import type {
   PracticeRuntimeSurface,
 } from "@/lib/practice/experience/routePolicy";
 import { resolvePracticeSurfaceMode } from "@/lib/practice/experience/routePolicy";
-import type { PurposeMode, PurposePolicy } from "@zoeskoul/curriculum-contracts/subjects/types";
+export { resolvePracticePurposeDefaults } from "@zoeskoul/practice-contracts";
 
 /**
  * Resolve the client presentation mode before the session status request has
@@ -22,32 +22,4 @@ export function resolveClientPracticeExperienceMode(args: {
     runMode: args.runMode,
     initialMode: args.initialExperienceMode,
   });
-}
-
-export function resolvePracticePurposeDefaults(args: {
-  experienceMode: PracticeExperienceMode;
-  requestedPurpose?: PurposeMode | null;
-  requestedPolicy?: PurposePolicy | null;
-  isLockedRun: boolean;
-}): { preferPurpose: PurposeMode; purposePolicy: PurposePolicy } {
-  const dailyProjectRun = args.experienceMode === "daily_five";
-  const openPracticeRun =
-    args.experienceMode === "standard" || args.experienceMode === "practice";
-
-  if (openPracticeRun) {
-    return { preferPurpose: "practice", purposePolicy: "strict" };
-  }
-
-  if (dailyProjectRun) {
-    return { preferPurpose: "project", purposePolicy: "strict" };
-  }
-
-  if (args.isLockedRun) {
-    return { preferPurpose: "quiz", purposePolicy: "fallback" };
-  }
-
-  return {
-    preferPurpose: args.requestedPurpose ?? "quiz",
-    purposePolicy: args.requestedPolicy ?? "fallback",
-  };
 }

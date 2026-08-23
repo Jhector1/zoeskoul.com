@@ -3,6 +3,8 @@ import "server-only";
 import { CATALOG_MANIFESTS } from "@zoeskoul/curriculum-registry/runtime";
 import { SUBJECT_GENERATOR_SOURCES } from "@zoeskoul/curriculum-registry/runtime";
 import { resolvePublishedPracticeTarget } from "./target";
+import { isAuthoredLessonPracticeOption } from "../experience/authoredPracticeQueue";
+import { isEligiblePublicChallengeTarget } from "./eligibility";
 import {
   collectStandaloneTryItExerciseKeys,
   resolvePublishedExerciseCapabilities,
@@ -252,7 +254,7 @@ export async function listPublishedChallengeExerciseOptions(): Promise<
   const options = await listPublishedPracticeExerciseOptions();
   return options.filter(
     (option) =>
-      option.exercisePurpose === "project" &&
-      option.exerciseKind === "code_input",
+      isAuthoredLessonPracticeOption(option) &&
+      isEligiblePublicChallengeTarget(option),
   );
 }

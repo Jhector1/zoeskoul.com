@@ -7,7 +7,16 @@ vi.mock("server-only", () => ({}));
 import {
   resolvePublishedPracticeTarget,
   resolveSharedChallengeTarget,
+  type PublishedPracticePurpose,
 } from "./target";
+
+type TargetInput = {
+  subjectSlug: string;
+  moduleSlug: string;
+  sectionSlug: string;
+  topicSlug: string;
+  exerciseKey: string;
+};
 
 function asRecord(value: unknown): Record<string, unknown> | null {
   return value && typeof value === "object" && !Array.isArray(value)
@@ -15,8 +24,12 @@ function asRecord(value: unknown): Record<string, unknown> | null {
     : null;
 }
 
-function findPublishedNonPtyProjectTarget() {
-  for (const [subjectSlug, source] of Object.entries(SUBJECT_GENERATOR_SOURCES)) {
+function candidates(purpose: PublishedPracticePurpose): TargetInput[] {
+  const result: TargetInput[] = [];
+
+  for (const [subjectSlug, source] of Object.entries(
+    SUBJECT_GENERATOR_SOURCES,
+  )) {
     const topicManifests = source.topicManifests as Record<string, unknown>;
 
     for (const [topicSlug, topicValue] of Object.entries(topicManifests)) {
@@ -30,184 +43,95 @@ function findPublishedNonPtyProjectTarget() {
 
       for (const exerciseValue of exercises) {
         const exercise = asRecord(exerciseValue);
-        if (
-          exercise?.kind !== "code_input" ||
-          exercise.purpose !== "project"
-        ) {
-          continue;
-        }
+        if (exercise?.purpose !== purpose) continue;
 
         const exerciseKey = String(exercise.id ?? "").trim();
         if (!exerciseKey) continue;
 
-        try {
-          return resolveSharedChallengeTarget({
-            subjectSlug,
-            moduleSlug,
-            sectionSlug,
-            topicSlug,
-            exerciseKey,
-          });
-        } catch {
-          // Some published projects require the authenticated PTY runner. Keep
-          // scanning for the anonymous non-PTY contract this test covers.
-        }
-      }
-    }
-  }
-
-  throw new Error("Expected at least one published non-PTY project exercise.");
-}
-
-function findPublishedPracticeOnlyTarget() {
-  for (const [subjectSlug, source] of Object.entries(SUBJECT_GENERATOR_SOURCES)) {
-    const topicManifests = source.topicManifests as Record<string, unknown>;
-
-    for (const [topicSlug, topicValue] of Object.entries(topicManifests)) {
-      const topic = asRecord(topicValue);
-      if (!topic) continue;
-
-      const moduleSlug = String(topic.moduleSlug ?? "").trim();
-      const sectionSlug = String(topic.sectionSlug ?? "").trim();
-      const exercises = Array.isArray(topic.exercises) ? topic.exercises : [];
-      if (!moduleSlug || !sectionSlug) continue;
-
-      for (const exerciseValue of exercises) {
-        const exercise = asRecord(exerciseValue);
-        if (exercise?.purpose !== "practice") continue;
-
-        const exerciseKey = String(exercise.id ?? "").trim();
-        if (!exerciseKey) continue;
-
-        return resolvePublishedPracticeTarget({
+        result.push({
           subjectSlug,
           moduleSlug,
           sectionSlug,
           topicSlug,
           exerciseKey,
-          exercisePurpose: "practice",
         });
       }
     }
   }
 
-  throw new Error("Expected at least one published practice-purpose exercise.");
+  return result;
 }
 
-function findPublishedQuizTarget() {
-  for (const [subjectSlug, source] of Object.entries(SUBJECT_GENERATOR_SOURCES)) {
-    const topicManifests = source.topicManifests as Record<string, unknown>;
+function firstPurpose(purpose: PublishedPracticePurpose): TargetInput {
+  const target = candidates(purpose)[0];
+  if (!target) {
+    throw new Error(`Expected at least one published ${purpose} exercise.`);
+  }
+  return target;
+}
 
-    for (const [topicSlug, topicValue] of Object.entries(topicManifests)) {
-      const topic = asRecord(topicValue);
-      if (!topic) continue;
-
-      const moduleSlug = String(topic.moduleSlug ?? "").trim();
-      const sectionSlug = String(topic.sectionSlug ?? "").trim();
-      const exercises = Array.isArray(topic.exercises) ? topic.exercises : [];
-      if (!moduleSlug || !sectionSlug) continue;
-
-      for (const exerciseValue of exercises) {
-        const exercise = asRecord(exerciseValue);
-        if (exercise?.purpose !== "quiz") continue;
-
-        const exerciseKey = String(exercise.id ?? "").trim();
-        if (!exerciseKey) continue;
-
-        try {
-          return resolveSharedChallengeTarget({
-            subjectSlug,
-            moduleSlug,
-            sectionSlug,
-            topicSlug,
-            exerciseKey,
-          });
-        } catch {
-          // Keep scanning if this authored quiz is not anonymously shareable.
-        }
-      }
+function firstShareablePractice(): TargetInput {
+  for (const target of candidates("practice")) {
+    try {
+      const resolved = resolveSharedChallengeTarget({
+        ...target,
+        exercisePurpose: "practice",
+      });
+      if (resolved.exerciseKind !== "code_input") continue;
+      return target;
+    } catch {
+      // Keep scanning past terminal-backed Practice exercises.
     }
   }
 
-  throw new Error("Expected at least one published shareable quiz exercise.");
+  throw new Error(
+    "Expected at least one non-terminal published practice exercise.",
+  );
 }
 
 describe("published shared challenge targets", () => {
-  it("accepts a published quiz exercise", () => {
-    expect(findPublishedQuizTarget()).toMatchObject({
-      exercisePurpose: "quiz",
-    });
-  });
+  it("keeps the broad published resolver available to authenticated Practice", () => {
+    const target = firstPurpose("project");
 
-  it("accepts a published non-PTY project exercise", () => {
-    expect(findPublishedNonPtyProjectTarget()).toMatchObject({
+    expect(resolvePublishedPracticeTarget(target)).toMatchObject({
+      exerciseKey: target.exerciseKey,
       exercisePurpose: "project",
-      exerciseKind: "code_input",
     });
   });
 
+  it("accepts authored practice purpose for Public Challenge", () => {
+    const target = firstShareablePractice();
 
-  it("accepts an authored practice-purpose exercise for authenticated practice", () => {
-    expect(findPublishedPracticeOnlyTarget()).toMatchObject({
+    expect(
+      resolveSharedChallengeTarget({
+        ...target,
+        exercisePurpose: "practice",
+      }),
+    ).toMatchObject({
+      exerciseKey: target.exerciseKey,
       exercisePurpose: "practice",
     });
   });
 
-  it("keeps authored practice exercises out of anonymous shared challenges", () => {
-    const target = findPublishedPracticeOnlyTarget();
+  it.each(["project", "quiz", "try_it"] as const)(
+    "rejects %s purpose from Public Challenge",
+    (purpose) => {
+      const target = firstPurpose(purpose);
+
+      expect(() =>
+        resolveSharedChallengeTarget(target),
+      ).toThrow(/require an authored practice exercise/i);
+    },
+  );
+
+  it("rejects a stale signed purpose instead of relabeling curriculum", () => {
+    const target = firstShareablePractice();
 
     expect(() =>
       resolveSharedChallengeTarget({
-        subjectSlug: target.subjectSlug,
-        moduleSlug: target.moduleSlug,
-        sectionSlug: target.sectionSlug,
-        topicSlug: target.topicSlug,
-        exerciseKey: target.exerciseKey,
-        exercisePurpose: "practice",
+        ...target,
+        exercisePurpose: "project",
       } as any),
-    ).toThrow(/authored practice exercise/i);
-  });
-
-  it("accepts an authored try-it for authenticated practice", () => {
-    expect(
-      resolvePublishedPracticeTarget({
-        subjectSlug: "python-v2",
-        moduleSlug: "python-v2-1",
-        sectionSlug: "python-v2-python-v2-1-variables-and-assignment",
-        topicSlug: "input-and-type-conversion",
-        exerciseKey: "code_echo_name",
-      }),
-    ).toMatchObject({
-      exerciseKey: "code_echo_name",
-      exercisePurpose: "try_it",
-      exerciseKind: "code_input",
-    });
-  });
-
-  it("keeps authenticated try-its out of anonymous shared challenges", () => {
-    expect(() =>
-      resolveSharedChallengeTarget({
-        subjectSlug: "python-v2",
-        moduleSlug: "python-v2-1",
-        sectionSlug: "python-v2-python-v2-1-variables-and-assignment",
-        topicSlug: "input-and-type-conversion",
-        exerciseKey: "code_echo_name",
-      }),
-    ).toThrow(/authenticated lesson try-it/i);
-  });
-
-  it("rejects a stale signed purpose", () => {
-    const target = findPublishedNonPtyProjectTarget();
-
-    expect(() =>
-      resolveSharedChallengeTarget({
-        subjectSlug: target.subjectSlug,
-        moduleSlug: target.moduleSlug,
-        sectionSlug: target.sectionSlug,
-        topicSlug: target.topicSlug,
-        exerciseKey: target.exerciseKey,
-        exercisePurpose: "quiz",
-      }),
-    ).toThrow(/expected a quiz exercise/i);
+    ).toThrow(/expected a project exercise/i);
   });
 });

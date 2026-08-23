@@ -25,6 +25,7 @@ function activePracticeChallengeWhere(
   now = new Date(),
 ): Prisma.PracticeChallengeLinkWhereInput {
   return {
+    exercisePurpose: "practice",
     revokedAt: null,
     OR: [{ expiresAt: null }, { expiresAt: { gt: now } }],
   };

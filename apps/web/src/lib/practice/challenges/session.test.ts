@@ -14,7 +14,7 @@ const meta = buildSharedChallengeMeta({
   topicSlug: "variables",
   exerciseKey: "quiz-variable-name",
   exerciseTitle: "Variable names",
-  exercisePurpose: "project",
+  exercisePurpose: "practice",
   locale: "en",
 });
 
@@ -29,7 +29,7 @@ describe("shared challenge session metadata", () => {
       topicSlug: "variables",
       exerciseKey: "quiz-variable-name",
       exerciseTitle: "Variable names",
-      exercisePurpose: "project",
+      exercisePurpose: "practice",
       maxAttempts: null,
       locale: "en",
     });
@@ -53,11 +53,21 @@ describe("shared challenge session metadata", () => {
       section: "python-1-basics",
       topic: "variables",
       exerciseKey: "quiz-variable-name",
-      preferPurpose: "project",
+      preferPurpose: "practice",
       purposePolicy: "strict",
       seedPolicy: "global",
       salt: "challenge:challenge-hash",
       allowReveal: "true",
     });
   });
+
+  it("rejects legacy project metadata instead of coercing it", () => {
+    expect(
+      readSharedChallengeMeta({
+        ...(meta as Record<string, unknown>),
+        exercisePurpose: "project",
+      }),
+    ).toBeNull();
+  });
+
 });

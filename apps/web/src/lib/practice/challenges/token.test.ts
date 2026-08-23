@@ -14,7 +14,7 @@ const target = {
   sectionSlug: "python-1-basics",
   topicSlug: "variables",
   exerciseKey: "quiz-variable-name",
-  exercisePurpose: "project" as const,
+  exercisePurpose: "practice" as const,
 };
 
 describe("shared practice challenge tokens", () => {
@@ -50,4 +50,14 @@ describe("shared practice challenge tokens", () => {
 
     expect(verifySharedChallenge(token)).toBeNull();
   });
+
+  it("rejects a signed legacy project-purpose token", () => {
+    const legacy = signSharedChallenge({
+      ...target,
+      exercisePurpose: "project",
+    } as any);
+
+    expect(verifySharedChallenge(legacy)).toBeNull();
+  });
+
 });

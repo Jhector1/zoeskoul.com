@@ -68,7 +68,7 @@ export async function updateTrialSession(args: {
   meta: Prisma.InputJsonValue;
   helpPolicy?: Prisma.InputJsonValue;
   targetCount?: number;
-  preferPurpose?: "quiz" | "project";
+  preferPurpose?: "quiz" | "project" | "practice";
 }) {
   return args.prisma.practiceSession.update({
     where: { id: args.sessionId },
@@ -101,7 +101,7 @@ export async function createTrialSession(args: {
   meta: Prisma.InputJsonValue;
   helpPolicy?: Prisma.InputJsonValue;
   targetCount?: number;
-  preferPurpose?: "quiz" | "project";
+  preferPurpose?: "quiz" | "project" | "practice";
 }) {
   return args.prisma.practiceSession.create({
     data: {

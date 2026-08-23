@@ -59,15 +59,15 @@ describe("client practice experience mode", () => {
     }
   });
 
-  it("keeps daily practice on authored project exercises", () => {
+  it("keeps daily practice on the same strict authored practice pool", () => {
     expect(
       resolvePracticePurposeDefaults({
         experienceMode: "daily_five",
-        requestedPurpose: "mixed",
+        requestedPurpose: "project",
         requestedPolicy: "fallback",
         isLockedRun: true,
       }),
-    ).toEqual({ preferPurpose: "project", purposePolicy: "strict" });
+    ).toEqual({ preferPurpose: "practice", purposePolicy: "strict" });
   });
 
 });

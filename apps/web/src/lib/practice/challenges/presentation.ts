@@ -3,7 +3,7 @@ import "server-only";
 import { cloudinaryServerImageUrl } from "@/lib/cloudinary/server";
 
 export const DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION =
-  "Can you complete this coding project challenge? No account is required to try it.";
+  "Can you complete this coding practice challenge? No account is required to try it.";
 
 type ChallengePresentationSource = {
   shareTitle: string | null;

@@ -24,7 +24,10 @@ import {
   createPracticeChallengeCode,
   practiceChallengePath,
 } from "@/lib/practice/challenges/shortLink";
-import { resolveSharedChallengeTarget } from "@/lib/practice/challenges/target";
+import {
+  resolveSharedChallengeTarget,
+  type ResolvedSharedChallengeTarget,
+} from "@/lib/practice/challenges/target";
 import { signSharedChallenge } from "@/lib/practice/challenges/token";
 
 export const runtime = "nodejs";
@@ -137,6 +140,7 @@ async function createChallengeLinkRecord(input: {
   sectionSlug: string;
   topicSlug: string;
   exerciseKey: string;
+  exercisePurpose: ResolvedSharedChallengeTarget["exercisePurpose"];
   signedToken: string;
   shareTitle: string;
   shareDescription: string;
@@ -156,7 +160,7 @@ async function createChallengeLinkRecord(input: {
           sectionSlug: input.sectionSlug,
           topicSlug: input.topicSlug,
           exerciseKey: input.exerciseKey,
-          exercisePurpose: "project",
+          exercisePurpose: input.exercisePurpose,
           signedToken: input.signedToken,
           shareTitle: input.shareTitle,
           shareDescription: input.shareDescription,
@@ -233,6 +237,7 @@ export async function POST(req: Request) {
       sectionSlug: target.sectionSlug,
       topicSlug: target.topicSlug,
       exerciseKey: target.exerciseKey,
+      exercisePurpose: target.exercisePurpose,
       signedToken: token,
       shareTitle,
       shareDescription,

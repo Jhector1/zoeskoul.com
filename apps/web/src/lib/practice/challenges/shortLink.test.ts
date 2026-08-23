@@ -82,4 +82,18 @@ describe("practice challenge short links", () => {
       orderBy: { createdAt: "desc" },
     });
   });
+
+  it("queries only authored Practice challenge links", async () => {
+    prismaMocks.findFirst.mockResolvedValueOnce(null);
+
+    await getLatestActivePracticeChallengeLink("en");
+
+    expect(prismaMocks.findFirst).toHaveBeenCalledWith({
+      where: expect.objectContaining({
+        exercisePurpose: "practice",
+      }),
+      orderBy: { createdAt: "desc" },
+    });
+  });
+
 });

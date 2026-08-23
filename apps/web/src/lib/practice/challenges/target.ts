@@ -8,7 +8,7 @@ export type PublishedPracticePurpose =
   | "project"
   | "try_it"
   | "practice";
-export type SharedChallengePurpose = "quiz" | "project";
+export type SharedChallengePurpose = "practice";
 
 export type PublishedPracticeTargetInput = {
   subjectSlug: string;
@@ -216,15 +216,9 @@ export function resolveSharedChallengeTarget(
 ): ResolvedSharedChallengeTarget {
   const resolved = resolvePublishedPracticeTarget(input);
 
-  if (resolved.exercisePurpose === "try_it") {
+  if (resolved.exercisePurpose !== "practice") {
     throw new Error(
-      `"${resolved.exerciseKey}" is an authenticated lesson try-it and cannot be shared as an anonymous public challenge.`,
-    );
-  }
-
-  if (resolved.exercisePurpose === "practice") {
-    throw new Error(
-      `"${resolved.exerciseKey}" is an authored practice exercise and cannot be shared as an anonymous public challenge.`,
+      `"${resolved.exerciseKey}" cannot be shared as a public challenge. Public challenges require an authored practice exercise.`,
     );
   }
 

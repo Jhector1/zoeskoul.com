@@ -49,12 +49,7 @@ export async function GET(request: Request) {
         options,
         counts: {
           total: options.length,
-          quiz: options.filter(
-            (option) => option.exercisePurpose === "quiz",
-          ).length,
-          project: options.filter(
-            (option) => option.exercisePurpose === "project",
-          ).length,
+          practice: options.length,
         },
       }),
     ),

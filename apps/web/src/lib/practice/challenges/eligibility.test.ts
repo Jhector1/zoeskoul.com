@@ -5,29 +5,33 @@ import {
   isEligiblePublicChallengeTarget,
 } from "./eligibility";
 
-describe("public challenge eligibility", () => {
-  it("accepts only code_input projects", () => {
-    expect(
-      isEligiblePublicChallengeTarget({
-        exercisePurpose: "project",
-        exerciseKind: "code_input",
-      }),
-    ).toBe(true);
+describe("Public Challenge execution-shape eligibility", () => {
+  it("allows code_input independently of curriculum purpose", () => {
+    // Named objects intentionally carry exercisePurpose so this test proves
+    // the shared helper ignores curriculum purpose. Passing a named object
+    // avoids TypeScript's excess-property check on direct object literals.
+    const authoredPractice = {
+      exerciseKind: "code_input",
+      exercisePurpose: "practice",
+    };
+    const authoredProject = {
+      exerciseKind: "code_input",
+      exercisePurpose: "project",
+    };
 
-    expect(
-      isEligiblePublicChallengeTarget({
-        exercisePurpose: "quiz",
-        exerciseKind: "single_choice",
-      }),
-    ).toBe(false);
+    expect(isEligiblePublicChallengeTarget(authoredPractice)).toBe(true);
+    expect(isEligiblePublicChallengeTarget(authoredProject)).toBe(true);
   });
 
-  it("rejects non-code projects at the server boundary", () => {
+  it("rejects non-code-input execution shapes", () => {
+    const nonCodeInput = {
+      exerciseKind: "single_choice",
+      exercisePurpose: "practice",
+    };
+
+    expect(isEligiblePublicChallengeTarget(nonCodeInput)).toBe(false);
     expect(() =>
-      assertEligiblePublicChallengeTarget({
-        exercisePurpose: "project",
-        exerciseKind: "drag_reorder",
-      }),
-    ).toThrow(/only code_input project exercises/i);
+      assertEligiblePublicChallengeTarget(nonCodeInput),
+    ).toThrow(/only code_input exercises/i);
   });
 });

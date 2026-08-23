@@ -145,11 +145,7 @@ export function isAppSessionResponse(
 }
 
 
-export type PublicChallengeExercisePurpose =
-  | "quiz"
-  | "project"
-  | "try_it"
-  | "practice";
+export type PublicChallengeExercisePurpose = "practice";
 
 export type PublicChallengeExerciseOption = {
   id: string;
@@ -188,8 +184,7 @@ export type PublicChallengesAdminResponse = {
   options: PublicChallengeExerciseOption[];
   counts: {
     total: number;
-    quiz: number;
-    project: number;
+    practice: number;
   };
 };
 

@@ -32,7 +32,7 @@ type ShareResponse = {
   imageUrl: string | null;
   exerciseKey: string;
   exerciseKind: string;
-  exercisePurpose: "project";
+  exercisePurpose: "practice";
   expiresAt: string;
   maxAttempts: number | null;
   attemptPolicy: "unlimited";
@@ -182,9 +182,10 @@ function EmptyState() {
         No published challenge exercises found
       </div>
       <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
-        This page only shows generated, seeded, active code-input projects that
-        can run anonymously through the existing practice-trial runtime. Run Gen
-        manifests and seed the published course if an exercise is missing.
+        This page only shows generated, seeded, active code-input Practice
+        exercises that can run anonymously through the existing practice-trial
+        runtime. Run Gen manifests and seed the published course if an exercise
+        is missing.
       </p>
     </div>
   );
@@ -217,7 +218,7 @@ export default function PublicChallengePublisher(props: {
   const [error, setError] = useState<string | null>(null);
   const [shareTitle, setShareTitle] = useState(first?.exerciseTitle ?? "");
   const [shareDescription, setShareDescription] = useState(
-    "Can you complete this coding project challenge? No account is required to try it.",
+    "Can you complete this coding practice challenge? No account is required to try it.",
   );
   const [ogImageAlt, setOgImageAlt] = useState(
     first ? `${first.exerciseTitle} challenge preview` : "",
@@ -411,7 +412,7 @@ export default function PublicChallengePublisher(props: {
   useEffect(() => {
     setShareTitle(selected?.exerciseTitle ?? "");
     setShareDescription(
-      "Can you complete this coding project challenge? No account is required to try it.",
+      "Can you complete this coding practice challenge? No account is required to try it.",
     );
     setOgImageAlt(
       selected ? `${selected.exerciseTitle} challenge preview` : "",
@@ -1269,7 +1270,7 @@ export default function PublicChallengePublisher(props: {
                 Select the exact published exercise
               </h2>
               <p className="mt-1 text-sm text-neutral-600">
-                Only published code-input project exercises are eligible for public
+                Only authored code-input Practice exercises are eligible for public
                 challenge links.
               </p>
             </div>
@@ -1310,13 +1311,7 @@ export default function PublicChallengePublisher(props: {
                     <span className="w-fit rounded-full bg-neutral-100 px-2.5 py-1 text-xs font-semibold text-neutral-700">
                       {option.exerciseKind}
                     </span>
-                    <span
-                      className={`w-fit rounded-full px-2.5 py-1 text-xs font-semibold ${
-                        option.exercisePurpose === "project"
-                          ? "bg-amber-100 text-amber-800"
-                          : "bg-emerald-100 text-emerald-800"
-                      }`}
-                    >
+                    <span className="w-fit rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-800">
                       {option.exercisePurpose}
                     </span>
                   </button>

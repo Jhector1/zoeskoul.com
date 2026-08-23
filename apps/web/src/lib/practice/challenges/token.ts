@@ -9,7 +9,7 @@ export type SharedChallengeClaims = {
   sectionSlug: string;
   topicSlug: string;
   exerciseKey: string;
-  exercisePurpose?: "quiz" | "project";
+  exercisePurpose: "practice";
   iat: number;
   exp?: number;
 };
@@ -77,7 +77,7 @@ export function signSharedChallenge(
     sectionSlug: target.sectionSlug,
     topicSlug: target.topicSlug,
     exerciseKey: target.exerciseKey,
-    ...(target.exercisePurpose ? { exercisePurpose: target.exercisePurpose } : {}),
+    exercisePurpose: target.exercisePurpose,
     iat: now,
     ...(expiresAt ? { exp: expiresAt } : {}),
   };
@@ -124,9 +124,7 @@ export function verifySharedChallenge(
     !isNonEmptyString(claims.sectionSlug) ||
     !isNonEmptyString(claims.topicSlug) ||
     !isNonEmptyString(claims.exerciseKey) ||
-    (claims.exercisePurpose !== undefined &&
-      claims.exercisePurpose !== "quiz" &&
-      claims.exercisePurpose !== "project") ||
+    claims.exercisePurpose !== "practice" ||
     typeof claims.iat !== "number"
   ) {
     return null;

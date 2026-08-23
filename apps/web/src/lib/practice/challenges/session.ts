@@ -31,8 +31,8 @@ function readString(record: Record<string, unknown>, key: string) {
 
 function readPurpose(
   record: Record<string, unknown>,
-): SharedChallengePurpose {
-  return record.exercisePurpose === "project" ? "project" : "quiz";
+): SharedChallengePurpose | null {
+  return record.exercisePurpose === "practice" ? "practice" : null;
 }
 
 export function readSharedChallengeMeta(
@@ -48,6 +48,7 @@ export function readSharedChallengeMeta(
   const topicSlug = readString(record, "topicSlug");
   const exerciseKey = readString(record, "exerciseKey");
   const exerciseTitleValue = readString(record, "exerciseTitle");
+  const exercisePurpose = readPurpose(record);
   const locale = readString(record, "locale") ?? "en";
 
   if (
@@ -56,7 +57,8 @@ export function readSharedChallengeMeta(
     !moduleSlug ||
     !sectionSlug ||
     !topicSlug ||
-    !exerciseKey
+    !exerciseKey ||
+    !exercisePurpose
   ) {
     return null;
   }
@@ -70,7 +72,7 @@ export function readSharedChallengeMeta(
     topicSlug,
     exerciseKey,
     exerciseTitle: exerciseTitleValue ?? exerciseKey,
-    exercisePurpose: readPurpose(record),
+    exercisePurpose,
     maxAttempts: SHARED_CHALLENGE_MAX_ATTEMPTS,
     locale,
   };
