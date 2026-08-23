@@ -3,6 +3,29 @@ import { describe, expect, it, vi } from "vitest";
 import { ApiClientError, createApiClient } from "./index";
 
 describe("createApiClient", () => {
+  it("returns the raw Response through the same credentialed transport", async () => {
+    const fetchImpl = vi.fn(async () =>
+      Response.json({ ok: true }, { status: 202 }),
+    );
+    const client = createApiClient({
+      baseOrigin: "https://zoeskoul.com",
+      fetchImpl,
+    });
+
+    const response = await client.raw("/api/example", {
+      method: "POST",
+    });
+
+    expect(response.status).toBe(202);
+    expect(fetchImpl).toHaveBeenCalledWith(
+      new URL("/api/example", "https://zoeskoul.com"),
+      expect.objectContaining({
+        credentials: "include",
+        method: "POST",
+      }),
+    );
+  });
+
   it("always includes credentials and serializes JSON", async () => {
     const fetchImpl = vi.fn(async () =>
       Response.json({ ok: true }),

@@ -60,6 +60,30 @@ export function createApiClient(options: ApiClientOptions) {
   }
 
   return {
+    async raw(
+      path: string,
+      init: RequestInit = {},
+    ): Promise<Response> {
+      if (!path.startsWith("/")) {
+        throw new Error("API paths must start with '/'.");
+      }
+
+      const url = new URL(path, baseOrigin);
+
+      if (url.origin !== baseOrigin) {
+        throw new Error("Cross-origin API path overrides are not allowed.");
+      }
+
+      const headers = new Headers(init.headers);
+      headers.set("Accept", "application/json");
+
+      return fetchImpl(url, {
+        ...init,
+        credentials: "include",
+        headers,
+      });
+    },
+
     async request<T>(
       path: string,
       init: ApiRequestInit = {},

@@ -1,13 +1,14 @@
-import { notFound } from "next/navigation";
-import CurriculumDraftEditor from "@/components/dev/curriculum-drafts/CurriculumDraftEditor";
-import { isCurriculumDraftEditorEnabled } from "@/lib/dev/curriculumDrafts/fs";
+import {
+  getLocalAppOrigin,
+  getProductionAppOrigin,
+} from "@zoeskoul/app-config";
+import { redirect } from "next/navigation";
 
-export const dynamic = "force-dynamic";
+export default function CurriculumDraftCompatibilityPage() {
+  const adminOrigin =
+    process.env.NODE_ENV === "development"
+      ? getLocalAppOrigin("admin")
+      : getProductionAppOrigin("admin");
 
-export default function CurriculumDraftsDevPage() {
-  if (!isCurriculumDraftEditorEnabled()) {
-    notFound();
-  }
-
-  return <CurriculumDraftEditor />;
+  redirect(new URL("/curriculum", adminOrigin).toString());
 }

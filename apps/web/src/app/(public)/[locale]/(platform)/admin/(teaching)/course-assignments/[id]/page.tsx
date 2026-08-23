@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { ownedTeachingRecordWhere } from "@/lib/teaching/teachingAccess";
 import { requireTeachingPageUser } from "@/lib/teaching/requireTeachingPageUser";
 import { resolveSubjectDeliveryPresentations } from "@/lib/subjects/resolveSubjectDeliveryPresentation";
-import CourseAssignmentEditor from "@/components/admin/course-assignments/CourseAssignmentEditor";
+import CourseAssignmentEditor from "@/components/teaching/course-assignments/CourseAssignmentEditor";
 
 export const dynamic = "force-dynamic";
 

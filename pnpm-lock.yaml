@@ -44,58 +44,61 @@ importers:
 
   apps/admin:
     dependencies:
-      '@prisma/adapter-pg':
-        specifier: ^7.4.0
-        version: 7.5.0
-      '@prisma/client':
-        specifier: ^7.4.0
-        version: 7.5.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3))(typescript@5.9.3)
       '@zoeskoul/api-client':
         specifier: workspace:*
         version: link:../../packages/api-client
+      '@zoeskoul/api-contracts':
+        specifier: workspace:*
+        version: link:../../packages/api-contracts
       '@zoeskoul/app-config':
         specifier: workspace:*
         version: link:../../packages/app-config
       '@zoeskoul/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
-      '@zoeskoul/db':
+      '@zoeskoul/practice-contracts':
         specifier: workspace:*
-        version: link:../../packages/db
+        version: link:../../packages/practice-contracts
       '@zoeskoul/progress-contracts':
         specifier: workspace:*
         version: link:../../packages/progress-contracts
-      next:
-        specifier: 16.1.1
-        version: 16.1.1(@babel/core@7.29.0)(@playwright/test@1.59.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      pg:
-        specifier: ^8.20.0
-        version: 8.20.0
       react:
         specifier: 19.2.3
         version: 19.2.3
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
-      zod:
-        specifier: ^4.3.6
-        version: 4.3.6
     devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4
+        version: 4.2.2
       '@types/node':
         specifier: ^20
         version: 20.19.39
-      '@types/pg':
-        specifier: 8.11.11
-        version: 8.11.11
       '@types/react':
         specifier: ^19
         version: 19.2.14
       '@types/react-dom':
         specifier: ^19
         version: 19.2.3(@types/react@19.2.14)
+      '@vitejs/plugin-react':
+        specifier: ^6.0.4
+        version: 6.0.4(vite@8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+      eslint:
+        specifier: ^9.39.4
+        version: 9.39.4(jiti@2.6.1)
+      tailwindcss:
+        specifier: ^4
+        version: 4.2.2
       typescript:
         specifier: ^5
         version: 5.9.3
+      vite:
+        specifier: ^8.1.5
+        version: 8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
+      vitest:
+        specifier: ^4.1.5
+        version: 4.1.5(@types/node@20.19.39)(vite@8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
 
   apps/runner:
     dependencies:
@@ -423,6 +426,9 @@ importers:
       '@zoeskoul/preferences':
         specifier: workspace:*
         version: link:../../packages/preferences
+      '@zoeskoul/progress-contracts':
+        specifier: workspace:*
+        version: link:../../packages/progress-contracts
       '@zoeskoul/pty-auth':
         specifier: workspace:*
         version: link:../../packages/pty-auth
@@ -2217,29 +2223,11 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  '@prisma/adapter-pg@7.5.0':
-    resolution: {integrity: sha512-EJx7OLULahcC3IjJgdx2qRDNCT+ToY2v66UkeETMCLhNOTgqVzRzYvOEphY7Zp0eHyzfkC33Edd/qqeadf9R4A==}
-
   '@prisma/adapter-pg@7.8.0':
     resolution: {integrity: sha512-ygb3UkerK3v8MDpXVgCISdRNDozpxh6+JVJgiIGbSr5KBgz10LLf5ejUskPGoXlsIjxsOu6nuy1JVQr2EKGSlg==}
 
-  '@prisma/client-runtime-utils@7.5.0':
-    resolution: {integrity: sha512-KnJ2b4Si/pcWEtK68uM+h0h1oh80CZt2suhLTVuLaSKg4n58Q9jBF/A42Kw6Ma+aThy1yAhfDeTC0JvEmeZnFQ==}
-
   '@prisma/client-runtime-utils@7.8.0':
     resolution: {integrity: sha512-5NQZztQ0oY/ADFkmd9gPuweH5A1/CCY8YQPorLLO0Mu6a87mY5gsnDkzmFmIHs9NFaLnZojzgddFVN4RpKYrdw==}
-
-  '@prisma/client@7.5.0':
-    resolution: {integrity: sha512-h4hF9ctp+kSRs7ENHGsFQmHAgHcfkOCxbYt6Ti9Xi8x7D+kP4tTi9x51UKmiTH/OqdyJAO+8V+r+JA5AWdav7w==}
-    engines: {node: ^20.19 || ^22.12 || >=24.0}
-    peerDependencies:
-      prisma: '*'
-      typescript: '>=5.4.0'
-    peerDependenciesMeta:
-      prisma:
-        optional: true
-      typescript:
-        optional: true
 
   '@prisma/client@7.8.0':
     resolution: {integrity: sha512-HFp3Dawv/3sU3JtlPha90IB+48lS7zHiH4LKZPjmcE8YH5P9DOXGPvo8dqOtO7MqLDd1p2hOWMcFlRT1DMblHw==}
@@ -2259,17 +2247,11 @@ packages:
   '@prisma/debug@7.2.0':
     resolution: {integrity: sha512-YSGTiSlBAVJPzX4ONZmMotL+ozJwQjRmZweQNIq/ER0tQJKJynNkRB3kyvt37eOfsbMCXk3gnLF6J9OJ4QWftw==}
 
-  '@prisma/debug@7.5.0':
-    resolution: {integrity: sha512-163+nffny0JoPEkDhfNco0vcuT3ymIJc9+WX7MHSQhfkeKUmKe9/wqvGk5SjppT93DtBjVwr5HPJYlXbzm6qtg==}
-
   '@prisma/debug@7.8.0':
     resolution: {integrity: sha512-p+QZReysDUqXC+mk17q9a+Y/qzh4c2KYliDK30buYUyfrGeTGSyfmc0AIrJRhZJrLHhRiJa9Au/J72h3C+szvA==}
 
   '@prisma/dev@0.24.3':
     resolution: {integrity: sha512-ffHlQuKXZiaDt9Go0OnCTdJZrHxK0k7omJKNV86/VjpsXu5EIHZLK0T7JSWgvNlJwh56kW9JFu9v0qJciFzepg==}
-
-  '@prisma/driver-adapter-utils@7.5.0':
-    resolution: {integrity: sha512-B79N/amgV677mFesFDBAdrW0OIaqawap9E0sjgLBtzIz2R3hIMS1QB8mLZuUEiS4q5Y8Oh3I25Kw4SLxMypk9Q==}
 
   '@prisma/driver-adapter-utils@7.8.0':
     resolution: {integrity: sha512-/Q13o0ZT0rjc1Xk0Q9KhZYwuq2EW/vSbWUBKfgEKkaCuB/Sg6bqnjmTZqC5cD4d6y1vfFAEwBRzfzoSMIVJ55A==}
@@ -5254,14 +5236,8 @@ packages:
   perfect-debounce@2.1.0:
     resolution: {integrity: sha512-LjgdTytVFXeUgtHZr9WYViYSM/g8MkcTPYDlPa3cDqMirHjKiSZPYd6DoL7pK8AJQr+uWkQvCjHNdiMqsrJs+g==}
 
-  pg-cloudflare@1.3.0:
-    resolution: {integrity: sha512-6lswVVSztmHiRtD6I8hw4qP/nDm1EJbKMRhf3HCYaqud7frGysPv7FYJ5noZQdhQtN2xJnimfMtvQq21pdbzyQ==}
-
   pg-cloudflare@1.4.0:
     resolution: {integrity: sha512-Vo7z/6rrQYxpNRylp4Tlob2elzbh+N/MOQbxFVWCxS7oEx6jF53GTJFxK2WWpKuBRkmiin4Mt+xofFDjx09R0A==}
-
-  pg-connection-string@2.12.0:
-    resolution: {integrity: sha512-U7qg+bpswf3Cs5xLzRqbXbQl85ng0mfSV/J0nnA31MCLgvEaAo7CIhmeyrmJpOr7o+zm0rXK+hNnT5l9RHkCkQ==}
 
   pg-connection-string@2.14.0:
     resolution: {integrity: sha512-XwWDGcLRGCXAR8F/AM5bG7Q+A3Wm2s6QeEjlOKZLlH3UYcguiqCWKyWXVag5TLTIjR7oOJUY8kcADaZgWPyLeg==}
@@ -5273,11 +5249,6 @@ packages:
   pg-numeric@1.0.2:
     resolution: {integrity: sha512-BM/Thnrw5jm2kKLE5uJkXqqExRUY/toLHda65XgFTBTFYZyopbKjBe29Ii3RbkvlsMoFwD+tHeGaCjjv0gHlyw==}
     engines: {node: '>=4'}
-
-  pg-pool@3.13.0:
-    resolution: {integrity: sha512-gB+R+Xud1gLFuRD/QgOIgGOBE2KCQPaPwkzBBGC9oG69pHTkhQeIuejVIk3/cnDyX39av2AxomQiyPT13WKHQA==}
-    peerDependencies:
-      pg: '>=8.0'
 
   pg-pool@3.14.0:
     resolution: {integrity: sha512-gKtPkFdQPU3DksooVLi9LsjZxrsBUZIpa+7aVx+LV5pNh0KzP4Zleud2po+ConrxbuXGBJ6Hfer6hdgpIBpBaw==}
@@ -5297,15 +5268,6 @@ packages:
   pg-types@4.1.0:
     resolution: {integrity: sha512-o2XFanIMy/3+mThw69O8d4n1E5zsLhdO+OPqswezu7Z5ekP4hYDqlDjlmOpYMbzY2Br0ufCwJLdDIXeNVwcWFg==}
     engines: {node: '>=10'}
-
-  pg@8.20.0:
-    resolution: {integrity: sha512-ldhMxz2r8fl/6QkXnBD3CR9/xg694oT6DZQ2s6c/RI28OjtSOpxnPrUCGOBJ46RCUxcWdx3p6kw/xnDHjKvaRA==}
-    engines: {node: '>= 16.0.0'}
-    peerDependencies:
-      pg-native: '>=3.0.1'
-    peerDependenciesMeta:
-      pg-native:
-        optional: true
 
   pg@8.22.0:
     resolution: {integrity: sha512-8wih1vVIBMxoUM2oB4soJsD9tDnDpLv4OXBJ+EJzFsvycD+lfyIreC2gGHq78f8jbLLt+bvlPTFdFZfJkOuzAA==}
@@ -7305,15 +7267,6 @@ snapshots:
     dependencies:
       playwright: 1.59.1
 
-  '@prisma/adapter-pg@7.5.0':
-    dependencies:
-      '@prisma/driver-adapter-utils': 7.5.0
-      '@types/pg': 8.11.11
-      pg: 8.20.0
-      postgres-array: 3.0.4
-    transitivePeerDependencies:
-      - pg-native
-
   '@prisma/adapter-pg@7.8.0':
     dependencies:
       '@prisma/driver-adapter-utils': 7.8.0
@@ -7323,16 +7276,7 @@ snapshots:
     transitivePeerDependencies:
       - pg-native
 
-  '@prisma/client-runtime-utils@7.5.0': {}
-
   '@prisma/client-runtime-utils@7.8.0': {}
-
-  '@prisma/client@7.5.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3))(typescript@5.9.3)':
-    dependencies:
-      '@prisma/client-runtime-utils': 7.5.0
-    optionalDependencies:
-      prisma: 7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
-      typescript: 5.9.3
 
   '@prisma/client@7.8.0(prisma@7.8.0(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(better-sqlite3@12.8.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3))(typescript@5.9.3)':
     dependencies:
@@ -7358,8 +7302,6 @@ snapshots:
       - magicast
 
   '@prisma/debug@7.2.0': {}
-
-  '@prisma/debug@7.5.0': {}
 
   '@prisma/debug@7.8.0': {}
 
@@ -7406,10 +7348,6 @@ snapshots:
       zeptomatch: 2.1.0
     transitivePeerDependencies:
       - typescript
-
-  '@prisma/driver-adapter-utils@7.5.0':
-    dependencies:
-      '@prisma/debug': 7.5.0
 
   '@prisma/driver-adapter-utils@7.8.0':
     dependencies:
@@ -8205,6 +8143,11 @@ snapshots:
     dependencies:
       uncrypto: 0.1.3
 
+  '@vitejs/plugin-react@6.0.4(vite@8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))':
+    dependencies:
+      '@rolldown/pluginutils': 1.0.1
+      vite: 8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
+
   '@vitejs/plugin-react@6.0.4(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
@@ -8226,6 +8169,14 @@ snapshots:
       magic-string: 0.30.21
     optionalDependencies:
       vite: 8.1.5(@types/node@20.19.37)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
+
+  '@vitest/mocker@4.1.5(vite@8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))':
+    dependencies:
+      '@vitest/spy': 4.1.5
+      estree-walker: 3.0.3
+      magic-string: 0.30.21
+    optionalDependencies:
+      vite: 8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
 
   '@vitest/mocker@4.1.5(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
@@ -10786,23 +10737,14 @@ snapshots:
 
   perfect-debounce@2.1.0: {}
 
-  pg-cloudflare@1.3.0:
-    optional: true
-
   pg-cloudflare@1.4.0:
     optional: true
-
-  pg-connection-string@2.12.0: {}
 
   pg-connection-string@2.14.0: {}
 
   pg-int8@1.0.1: {}
 
   pg-numeric@1.0.2: {}
-
-  pg-pool@3.13.0(pg@8.20.0):
-    dependencies:
-      pg: 8.20.0
 
   pg-pool@3.14.0(pg@8.22.0):
     dependencies:
@@ -10829,16 +10771,6 @@ snapshots:
       postgres-date: 2.1.0
       postgres-interval: 3.0.0
       postgres-range: 1.1.4
-
-  pg@8.20.0:
-    dependencies:
-      pg-connection-string: 2.12.0
-      pg-pool: 3.13.0(pg@8.20.0)
-      pg-protocol: 1.13.0
-      pg-types: 2.2.0
-      pgpass: 1.0.5
-    optionalDependencies:
-      pg-cloudflare: 1.3.0
 
   pg@8.22.0:
     dependencies:
@@ -11971,6 +11903,21 @@ snapshots:
       tsx: 4.21.0
       yaml: 2.8.3
 
+  vite@8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3):
+    dependencies:
+      lightningcss: 1.32.0
+      picomatch: 4.0.5
+      postcss: 8.5.23
+      rolldown: 1.1.5
+      tinyglobby: 0.2.17
+    optionalDependencies:
+      '@types/node': 20.19.39
+      esbuild: 0.27.4
+      fsevents: 2.3.3
+      jiti: 2.6.1
+      tsx: 4.21.0
+      yaml: 2.8.3
+
   vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3):
     dependencies:
       lightningcss: 1.32.0
@@ -12010,6 +11957,33 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 20.19.37
+    transitivePeerDependencies:
+      - msw
+
+  vitest@4.1.5(@types/node@20.19.39)(vite@8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)):
+    dependencies:
+      '@vitest/expect': 4.1.5
+      '@vitest/mocker': 4.1.5(vite@8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+      '@vitest/pretty-format': 4.1.5
+      '@vitest/runner': 4.1.5
+      '@vitest/snapshot': 4.1.5
+      '@vitest/spy': 4.1.5
+      '@vitest/utils': 4.1.5
+      es-module-lexer: 2.0.0
+      expect-type: 1.3.0
+      magic-string: 0.30.21
+      obug: 2.1.1
+      pathe: 2.0.3
+      picomatch: 4.0.4
+      std-env: 4.1.0
+      tinybench: 2.9.0
+      tinyexec: 1.0.4
+      tinyglobby: 0.2.16
+      tinyrainbow: 3.1.0
+      vite: 8.1.5(@types/node@20.19.39)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@types/node': 20.19.39
     transitivePeerDependencies:
       - msw
 

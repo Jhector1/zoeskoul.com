@@ -138,3 +138,4 @@ export type SubmitAnswer =
   | { kind: "drag_reorder"; tokenIds?: string[]; order?: string[] }
   | { kind: "voice_input"; transcript: string; audioUrl?: string; audioId?: string }
   | { kind: "word_bank_arrange" | "listen_build" | "fill_blank_choice"; value: string };
+export * from "./publicChallenges.js";

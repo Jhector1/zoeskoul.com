@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
-import TutoringSessionEditor from "@/components/admin/tutoring-sessions/TutoringSessionEditor";
-import TutoringLearnerDashboard from "@/components/admin/tutoring-sessions/TutoringLearnerDashboard";
+import TutoringSessionEditor from "@/components/teaching/tutoring-sessions/TutoringSessionEditor";
+import TutoringLearnerDashboard from "@/components/teaching/tutoring-sessions/TutoringLearnerDashboard";
 import { prisma } from "@/lib/prisma";
 import { ownedTeachingRecordWhere } from "@/lib/teaching/teachingAccess";
 import { requireTeachingPageUser } from "@/lib/teaching/requireTeachingPageUser";

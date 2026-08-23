@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
+import {
+  appCorsPreflight,
+  applyAppCorsHeaders,
+  isAppOriginAllowed,
+} from "@/lib/http/appCors";
 import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";
 import {
-  enforceSameOriginPost,
   hardenApiResponse,
   readJsonSafe,
 } from "@/lib/practice/api/shared/http";
@@ -15,6 +19,16 @@ import { signSharedChallenge } from "@/lib/practice/challenges/token";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+function publisherBrowserResponse(
+  request: Request,
+  response: Response,
+) {
+  return applyAppCorsHeaders(
+    request,
+    hardenApiResponse(response),
+  );
+}
 
 const BodySchema = z.object({
   locale: z.enum(["en", "fr", "ht"]).default("en"),
@@ -33,17 +47,17 @@ function requestOrigin(req: Request) {
 
 export async function POST(req: Request) {
   const { denied } = await requireChallengePublisherAccessApi();
-  if (denied) return hardenApiResponse(denied);
+  if (denied) return publisherBrowserResponse(req,denied);
 
-  if (!enforceSameOriginPost(req)) {
-    return hardenApiResponse(
+  if (!isAppOriginAllowed(req)) {
+    return publisherBrowserResponse(req,
       NextResponse.json({ error: "Invalid request origin." }, { status: 403 }),
     );
   }
 
   const parsed = BodySchema.safeParse(await readJsonSafe(req));
   if (!parsed.success) {
-    return hardenApiResponse(
+    return publisherBrowserResponse(req,
       NextResponse.json({ error: "Invalid preview request." }, { status: 400 }),
     );
   }
@@ -63,7 +77,7 @@ export async function POST(req: Request) {
       publisherPreview: "1",
     });
 
-    return hardenApiResponse(
+    return publisherBrowserResponse(req,
       NextResponse.json({
         ok: true,
         url: `${requestOrigin(req)}${path}?${query.toString()}`,
@@ -72,7 +86,7 @@ export async function POST(req: Request) {
       }),
     );
   } catch (error) {
-    return hardenApiResponse(
+    return publisherBrowserResponse(req,
       NextResponse.json(
         {
           error:
@@ -84,4 +98,9 @@ export async function POST(req: Request) {
       ),
     );
   }
+}
+
+
+export function OPTIONS(request: Request) {
+  return appCorsPreflight(request);
 }

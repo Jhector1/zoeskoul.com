@@ -195,7 +195,7 @@ function stableJsonForPracticeRequest(value: unknown): string {
 export async function fetchPracticeExercise(args: Record<string, any>) {
   const draftQa = currentDraftQaPracticeContext();
   const url = new URL(
-    draftQa ? "/api/dev/curriculum-drafts/practice" : "/api/practice",
+    draftQa ? "/api/admin/curriculum-drafts/practice" : "/api/practice",
     window.location.origin,
   );
 
@@ -304,7 +304,7 @@ export async function submitPracticeAnswer(args: {
 
   const promise = (async () => {
     const endpoint = isDraftQaPracticeKey(args.key)
-      ? "/api/dev/curriculum-drafts/practice/validate"
+      ? "/api/admin/curriculum-drafts/practice/validate"
       : "/api/practice/validate";
     const res = await fetch(endpoint, {
       method: "POST",
@@ -362,7 +362,7 @@ export async function fetchPracticeHelp(args: {
   signal?: AbortSignal;
 }): Promise<PracticeHelpClientResponse> {
   const endpoint = isDraftQaPracticeKey(args.key)
-    ? "/api/dev/curriculum-drafts/practice/help"
+    ? "/api/admin/curriculum-drafts/practice/help"
     : "/api/practice/help";
   const res = await fetch(endpoint, {
     method: "POST",
@@ -426,7 +426,7 @@ export async function fetchPracticeTutor(args: {
   signal?: AbortSignal;
 }): Promise<PracticeTutorClientResponse> {
   const endpoint = isDraftQaPracticeKey(args.key)
-    ? "/api/dev/curriculum-drafts/practice/explain"
+    ? "/api/admin/curriculum-drafts/practice/explain"
     : "/api/practice/explain";
   const res = await fetch(endpoint, {
     method: "POST",

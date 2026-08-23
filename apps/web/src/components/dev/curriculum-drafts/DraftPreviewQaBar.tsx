@@ -1,5 +1,6 @@
 "use client";
 
+import { getLocalAppOrigin, getProductionAppOrigin } from "@zoeskoul/app-config";
 import { useParams, useSearchParams } from "next/navigation";
 
 export default function DraftPreviewQaBar() {
@@ -19,9 +20,17 @@ export default function DraftPreviewQaBar() {
   }
 
   const editorQueryString = editorQuery.toString();
-  const editorHref = `/${encodeURIComponent(locale)}/dev/curriculum-drafts${
+  const local =
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1");
+  const adminOrigin = local
+    ? getLocalAppOrigin("admin")
+    : getProductionAppOrigin("admin");
+  const editorPath = `/curriculum${
     editorQueryString ? `?${editorQueryString}` : ""
   }`;
+  const editorHref = new URL(editorPath, adminOrigin).toString();
 
   return (
     <div className="flex min-h-10 items-center justify-between gap-3 border-b border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-950">

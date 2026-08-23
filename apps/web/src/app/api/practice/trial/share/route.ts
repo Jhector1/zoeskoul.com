@@ -1,4 +1,9 @@
 import { NextResponse } from "next/server";
+import {
+  appCorsPreflight,
+  applyAppCorsHeaders,
+  isAppOriginAllowed,
+} from "@/lib/http/appCors";
 import { z } from "zod";
 
 import {
@@ -8,7 +13,6 @@ import {
 } from "@/lib/cloudinary/server";
 import { prisma } from "@/lib/prisma";
 import {
-  enforceSameOriginPost,
   hardenApiResponse,
   readJsonSafe,
 } from "@/lib/practice/api/shared/http";
@@ -25,6 +29,16 @@ import { signSharedChallenge } from "@/lib/practice/challenges/token";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+function publisherBrowserResponse(
+  request: Request,
+  response: Response,
+) {
+  return applyAppCorsHeaders(
+    request,
+    hardenApiResponse(response),
+  );
+}
 
 const BodySchema = z.object({
   locale: z.enum(["en", "fr", "ht"]).default("en"),
@@ -163,10 +177,10 @@ async function createChallengeLinkRecord(input: {
 
 export async function POST(req: Request) {
   const { access, denied } = await requireChallengePublisherAccessApi();
-  if (denied) return hardenApiResponse(denied);
+  if (denied) return publisherBrowserResponse(req,denied);
 
-  if (!enforceSameOriginPost(req)) {
-    return hardenApiResponse(
+  if (!isAppOriginAllowed(req)) {
+    return publisherBrowserResponse(req,
       NextResponse.json({ error: "Forbidden." }, { status: 403 }),
     );
   }
@@ -175,7 +189,7 @@ export async function POST(req: Request) {
   try {
     request = await readShareRequest(req);
   } catch {
-    return hardenApiResponse(
+    return publisherBrowserResponse(req,
       NextResponse.json({ error: "Invalid challenge request." }, { status: 400 }),
     );
   }
@@ -183,7 +197,7 @@ export async function POST(req: Request) {
   const parsed = BodySchema.safeParse(request.raw);
 
   if (!parsed.success) {
-    return hardenApiResponse(
+    return publisherBrowserResponse(req,
       NextResponse.json(
         { error: "Invalid challenge target.", issues: parsed.error.issues },
         { status: 400 },
@@ -248,7 +262,7 @@ export async function POST(req: Request) {
         })
       : null;
 
-    return hardenApiResponse(
+    return publisherBrowserResponse(req,
       NextResponse.json(
         {
           ok: true,
@@ -280,7 +294,7 @@ export async function POST(req: Request) {
       console.error("[challenge-link] persistence failed", error.cause ?? error);
     }
 
-    return hardenApiResponse(
+    return publisherBrowserResponse(req,
       NextResponse.json(
         {
           error: persistenceFailure
@@ -293,4 +307,9 @@ export async function POST(req: Request) {
       ),
     );
   }
+}
+
+
+export function OPTIONS(request: Request) {
+  return appCorsPreflight(request);
 }

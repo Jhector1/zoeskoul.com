@@ -1,4 +1,4 @@
-import TutoringSessionEditor from "@/components/admin/tutoring-sessions/TutoringSessionEditor";
+import TutoringSessionEditor from "@/components/teaching/tutoring-sessions/TutoringSessionEditor";
 import { requireTeachingPageUser } from "@/lib/teaching/requireTeachingPageUser";
 import { loadTutoringSessionEditorData } from "@/lib/tutoring/sessionEditorData";
 

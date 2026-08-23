@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ownedTeachingRecordWhere } from "@/lib/teaching/teachingAccess";
 import { requireTeachingPageUser } from "@/lib/teaching/requireTeachingPageUser";
-import LearningGroupEditor from "@/components/admin/learning-groups/LearningGroupEditor";
+import LearningGroupEditor from "@/components/teaching/learning-groups/LearningGroupEditor";
 
 export const dynamic = "force-dynamic";
 

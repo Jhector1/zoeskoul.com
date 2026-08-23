@@ -143,3 +143,52 @@ export function isAppSessionResponse(
     isAppCapabilityArray(value.capabilities)
   );
 }
+
+
+export type PublicChallengeExercisePurpose =
+  | "quiz"
+  | "project"
+  | "try_it"
+  | "practice";
+
+export type PublicChallengeExerciseOption = {
+  id: string;
+  catalogSlug: string;
+  catalogTitle: string;
+  subjectSlug: string;
+  subjectTitle: string;
+  subjectTitleKey?: string | null;
+  releaseStatus: "active" | "legacy";
+  moduleSlug: string;
+  moduleTitle: string;
+  moduleTitleKey?: string | null;
+  sectionSlug: string;
+  sectionTitle: string;
+  sectionTitleKey?: string | null;
+  sectionRole: string;
+  topicSlug: string;
+  topicTitle: string;
+  topicTitleKey?: string | null;
+  exerciseKey: string;
+  exerciseTitle: string;
+  exerciseKind: string;
+  exercisePurpose: PublicChallengeExercisePurpose;
+  isMultiFile: boolean;
+  requiresTerminal: boolean;
+  isStandaloneTryIt: boolean;
+};
+
+export type PublicChallengePublisherAccess = {
+  authenticated: boolean;
+  allowed: boolean;
+};
+
+export type PublicChallengesAdminResponse = {
+  access: PublicChallengePublisherAccess;
+  options: PublicChallengeExerciseOption[];
+  counts: {
+    total: number;
+    quiz: number;
+    project: number;
+  };
+};
