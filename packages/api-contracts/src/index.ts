@@ -192,3 +192,72 @@ export type PublicChallengesAdminResponse = {
     project: number;
   };
 };
+
+export type PublicChallengeAudienceList = {
+  id: number;
+  name: string;
+  folderId: number;
+  totalSubscribers: number | null;
+  isDefault: boolean;
+};
+
+export type PublicChallengeAudienceSuppressionReason =
+  | "blacklisted"
+  | "unsubscribed"
+  | "invalid_email";
+
+export type PublicChallengeAudienceContact = {
+  email: string;
+  name: string | null;
+  selectable: boolean;
+  suppressionReason: PublicChallengeAudienceSuppressionReason | null;
+};
+
+export type PublicChallengeAudienceListsResponse = {
+  provider: "brevo";
+  configured: boolean;
+  defaultListId: number | null;
+  lists: PublicChallengeAudienceList[];
+};
+
+export type PublicChallengeAudienceContactsResponse = {
+  provider: "brevo";
+  configured: true;
+  list: PublicChallengeAudienceList;
+  contacts: PublicChallengeAudienceContact[];
+  counts: {
+    total: number;
+    selectable: number;
+    suppressed: number;
+  };
+  truncated: boolean;
+};
+
+export type PublicChallengeEmailPreviewResponse = {
+  ok: true;
+  action: "preview";
+  subject: string;
+  previewText: string;
+  html: string;
+};
+
+export type PublicChallengeEmailTestResponse = {
+  ok: true;
+  action: "test";
+  campaignId: number;
+  testEmail: string;
+};
+
+export type PublicChallengeEmailSendResponse = {
+  ok: true;
+  action: "send";
+  campaignId: number;
+  sourceListId: number;
+  exclusionListId: number | null;
+  selectedCount: number;
+};
+
+export type PublicChallengeEmailImageUploadResponse = {
+  ok: true;
+  imageUrl: string;
+};

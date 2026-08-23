@@ -521,6 +521,12 @@ enum BillingPromotionPlanScope {
   both
 }
 
+enum BillingPromotionCouponDuration {
+  once
+  repeating
+  forever
+}
+
 model Subscription {
   id                   String                   @id @default(cuid())
   userId               String
@@ -544,8 +550,10 @@ model BillingPromotionCampaign {
   id             String                    @id @default(cuid())
   name           String
   percentOff     Int
-  planScope      BillingPromotionPlanScope
-  startsAt       DateTime
+  planScope            BillingPromotionPlanScope
+  couponDuration       BillingPromotionCouponDuration @default(once)
+  couponDurationMonths Int?
+  startsAt             DateTime
   endsAt         DateTime
   enabled        Boolean                   @default(false)
   stripeCouponId String                    @unique

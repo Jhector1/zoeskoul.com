@@ -52,6 +52,8 @@ export async function PATCH(req: Request, context: Context) {
   const couponNeedsReplacement =
     existing.name !== parsed.data.name ||
     existing.percentOff !== parsed.data.percentOff ||
+    existing.couponDuration !== parsed.data.couponDuration ||
+    existing.couponDurationMonths !== parsed.data.couponDurationMonths ||
     existing.endsAt.getTime() !== endsAt.getTime();
 
   if (
@@ -91,6 +93,8 @@ export async function PATCH(req: Request, context: Context) {
       campaignId: id,
       name: parsed.data.name,
       percentOff: parsed.data.percentOff,
+      couponDuration: parsed.data.couponDuration,
+      couponDurationMonths: parsed.data.couponDurationMonths,
       endsAt,
     });
     stripeCouponId = coupon.id;
@@ -102,6 +106,8 @@ export async function PATCH(req: Request, context: Context) {
       name: parsed.data.name,
       percentOff: parsed.data.percentOff,
       planScope: parsed.data.planScope,
+      couponDuration: parsed.data.couponDuration,
+      couponDurationMonths: parsed.data.couponDurationMonths,
       startsAt,
       endsAt,
       enabled: parsed.data.enabled,

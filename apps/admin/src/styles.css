@@ -1104,3 +1104,259 @@ select:focus-visible {
   font-size: 12px;
   line-height: 1.6;
 }
+
+/* ZOESKOUL_PUBLIC_CHALLENGE_BREVO_ADD_ONLY_V77C5 */
+.challenge-email-addon {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.challenge-email-addon__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.challenge-email-addon__header h3 {
+  margin: 5px 0 5px;
+  font-size: 15px;
+}
+
+.challenge-email-addon__header p {
+  max-width: 720px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.challenge-email-addon__eyebrow {
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.challenge-email-addon__toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted-strong);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.challenge-email-addon__toggle input,
+.challenge-email-addon__contact input {
+  accent-color: var(--accent);
+}
+
+.challenge-email-addon__grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.challenge-email-addon__grid > label {
+  display: grid;
+  gap: 6px;
+}
+
+.challenge-email-addon__grid > label > span,
+.challenge-email-addon__summary > span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.challenge-email-addon__grid select,
+.challenge-email-addon__toolbar input {
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  outline: none;
+}
+
+.challenge-email-addon__grid select {
+  padding: 0 10px;
+}
+
+.challenge-email-addon__summary {
+  display: grid;
+  align-content: center;
+  gap: 3px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface-soft);
+}
+
+.challenge-email-addon__summary strong {
+  font-size: 13px;
+}
+
+.challenge-email-addon__summary small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.challenge-email-addon__toolbar {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) auto auto;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.challenge-email-addon__toolbar input {
+  padding: 0 10px;
+}
+
+.challenge-email-addon__toolbar button,
+.challenge-email-addon__actions button,
+.challenge-email-addon__preview button,
+.challenge-email-addon .notice button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.challenge-email-addon__toolbar button:disabled,
+.challenge-email-addon__actions button:disabled,
+.challenge-email-addon__preview button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.challenge-email-addon__contacts {
+  max-height: 280px;
+  margin-top: 10px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.challenge-email-addon__contact {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 11px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.challenge-email-addon__contact:last-child {
+  border-bottom: 0;
+}
+
+.challenge-email-addon__contact > span {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.challenge-email-addon__contact strong {
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.challenge-email-addon__contact small,
+.challenge-email-addon__contact em {
+  color: var(--muted);
+  font-size: 10px;
+  font-style: normal;
+}
+
+.challenge-email-addon__contact.is-suppressed {
+  cursor: default;
+  background: var(--surface-soft);
+  opacity: 0.66;
+}
+
+.challenge-email-addon__empty {
+  padding: 20px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.challenge-email-addon__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.challenge-email-addon__preview {
+  margin-top: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.challenge-email-addon__preview > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.challenge-email-addon__preview > div strong {
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.challenge-email-addon__preview iframe {
+  width: 100%;
+  height: 520px;
+  display: block;
+  border: 0;
+  background: #fff;
+}
+
+.challenge-email-addon .notice {
+  margin-top: 12px;
+}
+
+.challenge-email-addon__success {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #166534;
+}
+
+@media (max-width: 720px) {
+  .challenge-email-addon__header {
+    display: grid;
+  }
+
+  .challenge-email-addon__grid,
+  .challenge-email-addon__toolbar {
+    grid-template-columns: 1fr;
+  }
+}

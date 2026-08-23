@@ -77,6 +77,8 @@ describe("Admin-app billing promotion update route", () => {
       startsAt: new Date("2026-08-22T15:00:00.000Z"),
       endsAt: new Date("2026-08-29T15:00:00.000Z"),
       enabled: true,
+      couponDuration: "once",
+      couponDurationMonths: null,
       stripeCouponId: "coupon_old",
       createdAt: new Date("2026-08-22T15:00:00.000Z"),
       updatedAt: new Date("2026-08-22T15:00:00.000Z"),
@@ -141,4 +143,22 @@ describe("Admin-app billing promotion update route", () => {
       }),
     });
   });
+
+  it("creates a replacement coupon when coupon duration changes", async () => {
+    const response = await PATCH(
+      request({ body: { ...BODY, couponDuration: "repeating", couponDurationMonths: 3 } }),
+      context,
+    );
+    expect(response.status).toBe(200);
+    expect(mocks.couponCreate).toHaveBeenCalledWith(expect.objectContaining({
+      campaignId: ID, couponDuration: "repeating", couponDurationMonths: 3,
+    }));
+    expect(mocks.campaignUpdate).toHaveBeenCalledWith({
+      where: { id: ID },
+      data: expect.objectContaining({
+        couponDuration: "repeating", couponDurationMonths: 3, stripeCouponId: "coupon_new",
+      }),
+    });
+  });
+
 });

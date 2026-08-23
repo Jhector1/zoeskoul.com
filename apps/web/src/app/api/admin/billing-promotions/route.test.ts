@@ -133,4 +133,16 @@ describe("Admin-app billing promotion collection route", () => {
       }),
     });
   });
+
+  it("forwards repeating duration to Stripe and persists it", async () => {
+    const response = await POST(request({ body: { ...BODY, couponDuration: "repeating", couponDurationMonths: 3 } }));
+    expect(response.status).toBe(201);
+    expect(mocks.couponCreate).toHaveBeenCalledWith(expect.objectContaining({
+      couponDuration: "repeating", couponDurationMonths: 3,
+    }));
+    expect(mocks.campaignCreate).toHaveBeenCalledWith({
+      data: expect.objectContaining({ couponDuration: "repeating", couponDurationMonths: 3 }),
+    });
+  });
+
 });

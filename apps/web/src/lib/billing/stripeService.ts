@@ -440,12 +440,17 @@ export async function createBillingPromotionCoupon(args: {
     campaignId: string;
     name: string;
     percentOff: number;
+    couponDuration: "once" | "repeating" | "forever";
+    couponDurationMonths: number | null;
     endsAt: Date;
 }) {
     return getStripe().coupons.create({
         name: args.name,
         percent_off: args.percentOff,
-        duration: "once",
+        duration: args.couponDuration,
+        ...(args.couponDuration === "repeating"
+            ? { duration_in_months: args.couponDurationMonths! }
+            : {}),
         redeem_by: Math.floor(args.endsAt.getTime() / 1000),
         metadata: {
             zoeskoulBillingPromotionCampaignId: args.campaignId,

@@ -16,12 +16,15 @@ import {
 import { formatDateTime } from "@/lib/format";
 
 type PlanScope = "monthly" | "yearly" | "both";
+type CouponDuration = "once" | "repeating" | "forever";
 
 type Campaign = {
   id: string;
   name: string;
   percentOff: number;
   planScope: PlanScope;
+  couponDuration: CouponDuration;
+  couponDurationMonths: number | null;
   startsAt: string;
   endsAt: string;
   enabled: boolean;
@@ -34,6 +37,8 @@ type FormState = {
   name: string;
   percentOff: string;
   planScope: PlanScope;
+  couponDuration: CouponDuration;
+  couponDurationMonths: string;
   startsAt: string;
   endsAt: string;
   enabled: boolean;
@@ -55,6 +60,8 @@ function freshForm(): FormState {
     name: "",
     percentOff: "20",
     planScope: "both",
+    couponDuration: "once",
+    couponDurationMonths: "",
     startsAt: localDateTimeInput(start),
     endsAt: localDateTimeInput(end),
     enabled: true,
@@ -67,6 +74,11 @@ function campaignForm(campaign: Campaign): FormState {
     name: campaign.name,
     percentOff: String(campaign.percentOff),
     planScope: campaign.planScope,
+    couponDuration: campaign.couponDuration ?? "once",
+    couponDurationMonths:
+      campaign.couponDuration === "repeating"
+        ? String(campaign.couponDurationMonths ?? "")
+        : "",
     startsAt: localDateTimeInput(new Date(campaign.startsAt)),
     endsAt: localDateTimeInput(new Date(campaign.endsAt)),
     enabled: campaign.enabled,
@@ -77,6 +89,16 @@ function message(error: unknown) {
   return error instanceof Error && error.message
     ? error.message
     : "The request could not be completed.";
+}
+
+function couponDurationLabel(campaign: Campaign) {
+  const duration = campaign.couponDuration ?? "once";
+  if (duration === "repeating") {
+    const months = campaign.couponDurationMonths ?? 0;
+    return months === 1 ? "first month" : `first ${months} months`;
+  }
+  if (duration === "forever") return "ongoing";
+  return "first payment only";
 }
 
 function campaignState(campaign: Campaign) {
@@ -161,6 +183,11 @@ export function BillingPromotionManager(props: {
         name: form.name.trim(),
         percentOff: Number(form.percentOff),
         planScope: form.planScope,
+        couponDuration: form.couponDuration,
+        couponDurationMonths:
+          form.couponDuration === "repeating"
+            ? Number(form.couponDurationMonths)
+            : null,
         startsAt: new Date(form.startsAt).toISOString(),
         endsAt: new Date(form.endsAt).toISOString(),
         enabled: form.enabled,
@@ -214,6 +241,11 @@ export function BillingPromotionManager(props: {
             name: campaign.name,
             percentOff: campaign.percentOff,
             planScope: campaign.planScope,
+            couponDuration: campaign.couponDuration ?? "once",
+            couponDurationMonths:
+              campaign.couponDuration === "repeating"
+                ? campaign.couponDurationMonths
+                : null,
             startsAt: campaign.startsAt,
             endsAt: campaign.endsAt,
             enabled: !campaign.enabled,
@@ -324,6 +356,46 @@ export function BillingPromotionManager(props: {
                   <option value="yearly">Yearly</option>
                 </select>
               </label>
+              <label>
+                <span>Coupon duration</span>
+                <select
+                  value={form.couponDuration}
+                  onChange={(event) => {
+                    const couponDuration =
+                      event.target.value as CouponDuration;
+                    setForm((current) => ({
+                      ...current,
+                      couponDuration,
+                      couponDurationMonths:
+                        couponDuration === "repeating"
+                          ? current.couponDurationMonths || "3"
+                          : "",
+                    }));
+                  }}
+                >
+                  <option value="once">First payment only</option>
+                  <option value="repeating">Multiple months</option>
+                  <option value="forever">Forever</option>
+                </select>
+              </label>
+              {form.couponDuration === "repeating" ? (
+                <label>
+                  <span>Number of months</span>
+                  <input
+                    required
+                    min="1"
+                    step="1"
+                    type="number"
+                    value={form.couponDurationMonths}
+                    onChange={(event) =>
+                      setForm((current) => ({
+                        ...current,
+                        couponDurationMonths: event.target.value,
+                      }))
+                    }
+                  />
+                </label>
+              ) : null}
             </div>
 
             <div className="form-two">
@@ -424,6 +496,8 @@ export function BillingPromotionManager(props: {
                           {campaign.planScope === "both"
                             ? "Monthly + yearly"
                             : campaign.planScope}
+                          {" · "}
+                          {couponDurationLabel(campaign)}
                         </p>
                       </div>
                       <div className="campaign-actions">

@@ -86,6 +86,8 @@ export async function POST(req: Request) {
     campaignId: id,
     name: parsed.data.name,
     percentOff: parsed.data.percentOff,
+    couponDuration: parsed.data.couponDuration,
+    couponDurationMonths: parsed.data.couponDurationMonths,
     endsAt,
   });
 
@@ -95,6 +97,8 @@ export async function POST(req: Request) {
       name: parsed.data.name,
       percentOff: parsed.data.percentOff,
       planScope: parsed.data.planScope,
+      couponDuration: parsed.data.couponDuration,
+      couponDurationMonths: parsed.data.couponDurationMonths,
       startsAt,
       endsAt,
       enabled: parsed.data.enabled,

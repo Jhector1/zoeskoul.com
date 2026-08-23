@@ -3,7 +3,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ChangeEvent, DragEvent } from "react";
 
-import type { PublicChallengeExerciseOption } from "@zoeskoul/api-contracts";
+import type {
+  PublicChallengeAudienceContact,
+  PublicChallengeAudienceContactsResponse,
+  PublicChallengeAudienceList,
+  PublicChallengeAudienceListsResponse,
+  PublicChallengeEmailImageUploadResponse,
+  PublicChallengeEmailPreviewResponse,
+  PublicChallengeEmailSendResponse,
+  PublicChallengeEmailTestResponse,
+  PublicChallengeExerciseOption,
+} from "@zoeskoul/api-contracts";
 import { adminFetch } from "@/lib/adminApi";
 import {
   CHALLENGE_SHARE_IMAGE_HEIGHT,
@@ -101,6 +111,24 @@ async function readPreviewResponse(response: Response) {
   }
 
   return body as PreviewResponse;
+}
+
+async function readJsonResponse<T>(
+  response: Response,
+  fallback: string,
+): Promise<T> {
+  const body = (await response.json().catch(() => null)) as
+    | (T & { error?: string })
+    | { error?: string }
+    | null;
+
+  if (!response.ok || !body) {
+    throw new Error(
+      (body && "error" in body && body.error) || fallback,
+    );
+  }
+
+  return body as T;
 }
 
 function nextAnimationFrame() {
@@ -201,6 +229,39 @@ export default function PublicChallengePublisher(props: {
   const [previewExpiresAt, setPreviewExpiresAt] = useState<string | null>(null);
   const [capturing, setCapturing] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+
+  // ZOESKOUL_PUBLIC_CHALLENGE_BREVO_ADD_ONLY_V77C5
+  const [emailEnabled, setEmailEnabled] = useState(false);
+  const [audienceConfigured, setAudienceConfigured] =
+    useState<boolean | null>(null);
+  const [audienceLists, setAudienceLists] =
+    useState<PublicChallengeAudienceList[]>([]);
+  const [audienceListId, setAudienceListId] = useState<number | null>(null);
+  const [audienceContacts, setAudienceContacts] =
+    useState<PublicChallengeAudienceContact[]>([]);
+  const [audienceCounts, setAudienceCounts] = useState({
+    total: 0,
+    selectable: 0,
+    suppressed: 0,
+  });
+  const [audienceLoading, setAudienceLoading] = useState(false);
+  const [contactQuery, setContactQuery] = useState("");
+  const [selectedEmails, setSelectedEmails] = useState<Set<string>>(
+    () => new Set(),
+  );
+  const [emailBusy, setEmailBusy] =
+    useState<"preview" | "test" | "send" | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [emailNotice, setEmailNotice] = useState<string | null>(null);
+  // ZOESKOUL_BREVO_LIST_TEST_RECIPIENT_V77C10
+  const [testRecipientEmail, setTestRecipientEmail] = useState("");
+  // ZOESKOUL_PUBLIC_CHALLENGE_EMAIL_IMAGE_UPLOAD_V77C12B
+  const [emailImageUrl, setEmailImageUrl] = useState<string | null>(null);
+  const [emailPreview, setEmailPreview] =
+    useState<PublicChallengeEmailPreviewResponse | null>(null);
+  const [emailSendResult, setEmailSendResult] =
+    useState<PublicChallengeEmailSendResponse | null>(null);
+
   const imageInputRef = useRef<HTMLInputElement | null>(null);
 
   const catalogs = useMemo(
@@ -311,12 +372,40 @@ export default function PublicChallengePublisher(props: {
     filteredExercises[0] ??
     null;
 
+  const visibleAudienceContacts = useMemo(() => {
+    const term = contactQuery.trim().toLowerCase();
+    if (!term) return audienceContacts;
+
+    return audienceContacts.filter((contact) =>
+      `${contact.name ?? ""} ${contact.email}`
+        .toLowerCase()
+        .includes(term),
+    );
+  }, [audienceContacts, contactQuery]);
+
+  const excludedEmails = useMemo(
+    () =>
+      audienceContacts
+        .filter(
+          (contact) =>
+            contact.selectable && !selectedEmails.has(contact.email),
+        )
+        .map((contact) => contact.email),
+    [audienceContacts, selectedEmails],
+  );
+
+  const selectedRecipientCount = selectedEmails.size;
+
   useEffect(() => {
     setResult(null);
     setError(null);
     setCopyState("idle");
     setPreviewUrl(null);
     setPreviewExpiresAt(null);
+    setEmailError(null);
+    setEmailNotice(null);
+    setEmailPreview(null);
+    setEmailSendResult(null);
   }, [locale, selected?.id]);
 
   useEffect(() => {
@@ -341,6 +430,129 @@ export default function PublicChallengePublisher(props: {
     setImagePreviewUrl(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
   }, [imageFile]);
+
+  useEffect(() => {
+    setEmailImageUrl(null);
+  }, [imageFile]);
+
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setAudienceLoading(true);
+
+    void adminFetch("/api/admin/public-challenges/audience", {
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+      signal: controller.signal,
+    })
+      .then((response) =>
+        readJsonResponse<PublicChallengeAudienceListsResponse>(
+          response,
+          "Brevo audiences could not be loaded.",
+        ),
+      )
+      .then((payload) => {
+        if (controller.signal.aborted) return;
+
+        setAudienceConfigured(payload.configured);
+        setAudienceLists(payload.lists);
+
+        const preferred =
+          payload.defaultListId &&
+          payload.lists.some((list) => list.id === payload.defaultListId)
+            ? payload.defaultListId
+            : payload.lists[0]?.id ?? null;
+
+        setAudienceListId(preferred);
+      })
+      .catch((cause) => {
+        if (controller.signal.aborted) return;
+        setAudienceConfigured(false);
+        setEmailError(
+          cause instanceof Error
+            ? cause.message
+            : "Brevo audiences could not be loaded.",
+        );
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setAudienceLoading(false);
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    if (!audienceListId || audienceConfigured !== true) {
+      setAudienceContacts([]);
+      setSelectedEmails(new Set());
+      setAudienceCounts({
+        total: 0,
+        selectable: 0,
+        suppressed: 0,
+      });
+      setTestRecipientEmail("");
+      return;
+    }
+
+    const controller = new AbortController();
+    setAudienceLoading(true);
+    setEmailError(null);
+
+    void adminFetch(
+      `/api/admin/public-challenges/audience?listId=${encodeURIComponent(
+        String(audienceListId),
+      )}`,
+      {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+        signal: controller.signal,
+      },
+    )
+      .then((response) =>
+        readJsonResponse<PublicChallengeAudienceContactsResponse>(
+          response,
+          "Brevo contacts could not be loaded.",
+        ),
+      )
+      .then((payload) => {
+        if (controller.signal.aborted) return;
+
+        setAudienceContacts(payload.contacts);
+        setAudienceCounts(payload.counts);
+        setSelectedEmails(
+          new Set(
+            payload.contacts
+              .filter((contact) => contact.selectable)
+              .map((contact) => contact.email),
+          ),
+        );
+        setTestRecipientEmail((current) =>
+          payload.contacts.some(
+            (contact) =>
+              contact.selectable && contact.email === current,
+          )
+            ? current
+            : "",
+        );
+      })
+      .catch((cause) => {
+        if (controller.signal.aborted) return;
+        setAudienceContacts([]);
+        setSelectedEmails(new Set());
+        setEmailError(
+          cause instanceof Error
+            ? cause.message
+            : "Brevo contacts could not be loaded.",
+        );
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setAudienceLoading(false);
+      });
+
+    return () => controller.abort();
+  }, [audienceConfigured, audienceListId]);
 
   function chooseCatalog(value: string) {
     const next = eligibleOptions.find((option) => option.catalogSlug === value);
@@ -638,8 +850,252 @@ export default function PublicChallengePublisher(props: {
     }
   }
 
+  function toggleRecipient(
+    contact: PublicChallengeAudienceContact,
+  ) {
+    if (!contact.selectable) return;
+
+    setSelectedEmails((current) => {
+      const next = new Set(current);
+      if (next.has(contact.email)) next.delete(contact.email);
+      else next.add(contact.email);
+      return next;
+    });
+  }
+
+  function selectAllRecipients() {
+    setSelectedEmails(
+      new Set(
+        audienceContacts
+          .filter((contact) => contact.selectable)
+          .map((contact) => contact.email),
+      ),
+    );
+  }
+
+  function clearRecipients() {
+    setSelectedEmails(new Set());
+  }
+
+  async function ensurePreviewUrl() {
+    if (result?.url) return result.url;
+    if (previewUrl) return previewUrl;
+
+    const created = await createExercisePreview();
+    if (!created) {
+      throw new Error("Could not prepare a challenge preview.");
+    }
+
+    return created.url;
+  }
+
+  async function ensureEmailImageUrl() {
+    if (result?.imageUrl) return result.imageUrl;
+    if (!imageFile) return null;
+    if (emailImageUrl) return emailImageUrl;
+
+    const form = new FormData();
+    form.set("image", imageFile, imageFile.name);
+
+    const response = await adminFetch(
+      "/api/admin/public-challenges/email-image",
+      {
+        method: "POST",
+        credentials: "include",
+        cache: "no-store",
+        body: form,
+      },
+    );
+
+    const uploaded =
+      await readJsonResponse<PublicChallengeEmailImageUploadResponse>(
+        response,
+        "The email preview image could not be uploaded.",
+      );
+
+    setEmailImageUrl(uploaded.imageUrl);
+    return uploaded.imageUrl;
+  }
+
+  function emailPayload(
+    challengeUrl: string,
+    imageUrl?: string | null,
+  ) {
+    return {
+      sourceListId: audienceListId ?? undefined,
+      excludedEmails,
+      challengeUrl,
+      imageUrl: imageUrl ?? null,
+      title:
+        shareTitle.trim() ||
+        selected?.exerciseTitle ||
+        "ZoeSkoul challenge",
+      description: shareDescription.trim(),
+    };
+  }
+
+  async function previewChallengeEmail() {
+    if (!selected || emailBusy) return;
+
+    setEmailBusy("preview");
+    setEmailError(null);
+    setEmailNotice(null);
+
+    try {
+      const challengeUrl = await ensurePreviewUrl();
+      const imageUrl = await ensureEmailImageUrl();
+      const response = await adminFetch(
+        "/api/admin/public-challenges/email",
+        {
+          method: "POST",
+          credentials: "include",
+          cache: "no-store",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "preview",
+            ...emailPayload(challengeUrl, imageUrl),
+          }),
+        },
+      );
+
+      setEmailPreview(
+        await readJsonResponse<PublicChallengeEmailPreviewResponse>(
+          response,
+          "The email preview could not be generated.",
+        ),
+      );
+    } catch (cause) {
+      setEmailError(
+        cause instanceof Error
+          ? cause.message
+          : "The email preview could not be generated.",
+      );
+    } finally {
+      setEmailBusy(null);
+    }
+  }
+
+  async function sendChallengeEmailTest() {
+    if (
+      !selected ||
+      !audienceListId ||
+      !testRecipientEmail ||
+      emailBusy
+    ) {
+      return;
+    }
+
+    setEmailBusy("test");
+    setEmailError(null);
+    setEmailNotice(null);
+
+    try {
+      const challengeUrl = await ensurePreviewUrl();
+      const imageUrl = await ensureEmailImageUrl();
+      const response = await adminFetch(
+        "/api/admin/public-challenges/email",
+        {
+          method: "POST",
+          credentials: "include",
+          cache: "no-store",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "test",
+            testEmail: testRecipientEmail,
+            ...emailPayload(challengeUrl, imageUrl),
+          }),
+        },
+      );
+
+      const sent =
+        await readJsonResponse<PublicChallengeEmailTestResponse>(
+          response,
+          "The test email could not be sent.",
+        );
+
+      setEmailNotice(`Test email sent to ${sent.testEmail}.`);
+    } catch (cause) {
+      setEmailError(
+        cause instanceof Error
+          ? cause.message
+          : "The test email could not be sent.",
+      );
+    } finally {
+      setEmailBusy(null);
+    }
+  }
+
+  async function sendChallengeAnnouncement(created: ShareResponse) {
+    if (!audienceListId) {
+      throw new Error("Choose a Brevo audience list.");
+    }
+    if (selectedRecipientCount <= 0) {
+      throw new Error("Select at least one available Brevo contact.");
+    }
+
+    setEmailBusy("send");
+    setEmailError(null);
+    setEmailNotice(null);
+
+    try {
+      const response = await adminFetch(
+        "/api/admin/public-challenges/email",
+        {
+          method: "POST",
+          credentials: "include",
+          cache: "no-store",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "send",
+            ...emailPayload(created.url, created.imageUrl),
+          }),
+        },
+      );
+
+      const sent =
+        await readJsonResponse<PublicChallengeEmailSendResponse>(
+          response,
+          "The challenge was created, but its email campaign could not be sent.",
+        );
+
+      setEmailSendResult(sent);
+      setEmailNotice(
+        `Campaign ${sent.campaignId} queued for ${sent.selectedCount} recipient${
+          sent.selectedCount === 1 ? "" : "s"
+        }.`,
+      );
+    } finally {
+      setEmailBusy(null);
+    }
+  }
+
+  async function retryChallengeAnnouncement() {
+    if (!result || emailBusy) return;
+
+    try {
+      await sendChallengeAnnouncement(result);
+    } catch (cause) {
+      setEmailError(
+        cause instanceof Error
+          ? cause.message
+          : "The challenge email could not be sent.",
+      );
+    }
+  }
+
   async function createLink() {
     if (!selected) return;
+
+    if (emailEnabled) {
+      if (!audienceListId) {
+        setEmailError("Choose a Brevo audience list.");
+        return;
+      }
+      if (selectedRecipientCount <= 0) {
+        setEmailError("Select at least one available Brevo contact.");
+        return;
+      }
+    }
 
     setCreating(true);
     setError(null);
@@ -672,6 +1128,22 @@ export default function PublicChallengePublisher(props: {
 
       const created = await readShareResponse(response);
       setResult(created);
+
+      setEmailError(null);
+      setEmailNotice(null);
+      setEmailSendResult(null);
+
+      if (emailEnabled) {
+        try {
+          await sendChallengeAnnouncement(created);
+        } catch (cause) {
+          setEmailError(
+            cause instanceof Error
+              ? cause.message
+              : "The challenge was created, but its email campaign could not be sent.",
+          );
+        }
+      }
 
       try {
         await writeClipboard(created.url);
@@ -1081,6 +1553,238 @@ export default function PublicChallengePublisher(props: {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="challenge-email-addon">
+        <div className="challenge-email-addon__header">
+          <div>
+            <span className="challenge-email-addon__eyebrow">
+              Email announcement
+            </span>
+            <h3>Send this challenge through Brevo</h3>
+            <p>
+              Uses your Brevo lists directly, including contacts you added
+              manually. Unsubscribed or blacklisted contacts stay suppressed.
+            </p>
+          </div>
+
+          <label className="challenge-email-addon__toggle">
+            <input
+              type="checkbox"
+              checked={emailEnabled}
+              onChange={(event) => {
+                setEmailEnabled(event.target.checked);
+                setEmailError(null);
+              }}
+              disabled={audienceConfigured !== true}
+            />
+            <span>Send by email</span>
+          </label>
+        </div>
+
+        {audienceConfigured === false ? (
+          <div className="notice">
+            Brevo audiences are unavailable in this environment. You can still
+            create and share the challenge normally.
+          </div>
+        ) : null}
+
+        <div className="challenge-email-addon__grid">
+          <label>
+            <span>Brevo list</span>
+            <select
+              value={audienceListId ?? ""}
+              onChange={(event) =>
+                setAudienceListId(
+                  event.target.value ? Number(event.target.value) : null,
+                )
+              }
+              disabled={audienceLoading || !audienceLists.length}
+            >
+              {audienceLists.map((list) => (
+                <option key={list.id} value={list.id}>
+                  {list.name}{list.isDefault ? " · default" : ""}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <div className="challenge-email-addon__summary">
+            <span>{audienceLoading ? "Loading contacts…" : "Audience"}</span>
+            <strong>
+              {audienceCounts.selectable} available
+              {audienceCounts.suppressed
+                ? ` · ${audienceCounts.suppressed} suppressed`
+                : ""}
+            </strong>
+            <small>
+              {selectedRecipientCount} selected
+              {excludedEmails.length
+                ? ` · ${excludedEmails.length} deselected`
+                : ""}
+            </small>
+          </div>
+        </div>
+
+        {audienceConfigured === true && audienceListId ? (
+          <>
+            <div className="challenge-email-addon__toolbar">
+              <input
+                value={contactQuery}
+                onChange={(event) => setContactQuery(event.target.value)}
+                placeholder="Search Brevo contacts"
+                aria-label="Search Brevo contacts"
+              />
+              <button
+                type="button"
+                onClick={selectAllRecipients}
+                disabled={audienceLoading}
+              >
+                Select all
+              </button>
+              <button
+                type="button"
+                onClick={clearRecipients}
+                disabled={audienceLoading}
+              >
+                Clear
+              </button>
+            </div>
+
+            <div className="challenge-email-addon__contacts">
+              {visibleAudienceContacts.length ? (
+                visibleAudienceContacts.map((contact) => (
+                  <label
+                    key={contact.email}
+                    className={
+                      contact.selectable
+                        ? "challenge-email-addon__contact"
+                        : "challenge-email-addon__contact is-suppressed"
+                    }
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedEmails.has(contact.email)}
+                      onChange={() => toggleRecipient(contact)}
+                      disabled={!contact.selectable}
+                    />
+
+                    <span>
+                      <strong>{contact.name || contact.email}</strong>
+                      {contact.name ? <small>{contact.email}</small> : null}
+                    </span>
+
+                    {contact.suppressionReason ? (
+                      <em>
+                        {contact.suppressionReason === "blacklisted"
+                          ? "Blacklisted"
+                          : contact.suppressionReason === "unsubscribed"
+                            ? "Unsubscribed"
+                            : "Invalid email"}
+                      </em>
+                    ) : null}
+                  </label>
+                ))
+              ) : (
+                <div className="challenge-email-addon__empty">
+                  {audienceLoading
+                    ? "Loading contacts…"
+                    : "No contacts match this search."}
+                </div>
+              )}
+            </div>
+          </>
+        ) : null}
+
+        <label className="challenge-email-addon__test-recipient">
+          <span>Test recipient</span>
+          <select
+            value={testRecipientEmail}
+            onChange={(event) => {
+              setTestRecipientEmail(event.target.value);
+              setEmailError(null);
+            }}
+            disabled={audienceLoading || audienceConfigured !== true}
+          >
+            <option value="">Choose a contact from this Brevo list</option>
+            {audienceContacts
+              .filter((contact) => contact.selectable)
+              .map((contact) => (
+                <option key={contact.email} value={contact.email}>
+                  {contact.name
+                    ? `${contact.name} · ${contact.email}`
+                    : contact.email}
+                </option>
+              ))}
+          </select>
+          <small>
+            Brevo only allows test sends to an existing, non-blacklisted
+            contact in a contact list.
+          </small>
+        </label>
+
+        <div className="challenge-email-addon__actions">
+          <button
+            type="button"
+            onClick={() => void previewChallengeEmail()}
+            disabled={!selected || emailBusy != null}
+          >
+            {emailBusy === "preview" ? "Preparing…" : "Preview email"}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => void sendChallengeEmailTest()}
+            disabled={
+              !selected ||
+              !audienceListId ||
+              !testRecipientEmail ||
+              audienceConfigured !== true ||
+              emailBusy != null
+            }
+          >
+            {emailBusy === "test" ? "Sending…" : "Send test"}
+          </button>
+        </div>
+
+        {emailPreview ? (
+          <div className="challenge-email-addon__preview">
+            <div>
+              <strong>{emailPreview.subject}</strong>
+              <button
+                type="button"
+                onClick={() => setEmailPreview(null)}
+              >
+                Close preview
+              </button>
+            </div>
+            <iframe
+              title="Challenge email preview"
+              srcDoc={emailPreview.html}
+            />
+          </div>
+        ) : null}
+
+        {emailError ? (
+          <div className="notice notice-error" role="alert">
+            {emailError}
+            {result && emailEnabled && !emailSendResult ? (
+              <button
+                type="button"
+                onClick={() => void retryChallengeAnnouncement()}
+                disabled={emailBusy != null}
+              >
+                Retry email
+              </button>
+            ) : null}
+          </div>
+        ) : null}
+
+        {emailNotice ? (
+          <div className="notice challenge-email-addon__success">
+            {emailNotice}
+          </div>
+        ) : null}
       </section>
 
       <section className="rounded-2xl border border-indigo-200 bg-indigo-50/70 p-5 shadow-sm">
