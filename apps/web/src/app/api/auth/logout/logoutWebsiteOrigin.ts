@@ -1,18 +1,9 @@
-import {
-  getProductionAppOrigin,
-} from "@zoeskoul/app-config";
+import { resolveWebsiteOriginForRuntime } from "@/lib/http/websiteOrigin";
 
 export function resolveLogoutWebsiteOrigin(args: {
   requestOrigin: string;
   nodeEnv?: string;
   vercelEnv?: string;
 }): string {
-  const productionRuntime =
-    args.nodeEnv === "production";
-  const previewDeployment =
-    args.vercelEnv === "preview";
-
-  return productionRuntime && !previewDeployment
-    ? getProductionAppOrigin("website")
-    : args.requestOrigin;
+  return resolveWebsiteOriginForRuntime(args);
 }

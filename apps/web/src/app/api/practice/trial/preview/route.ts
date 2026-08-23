@@ -11,6 +11,7 @@ import {
   hardenApiResponse,
   readJsonSafe,
 } from "@/lib/practice/api/shared/http";
+import { resolveRequestWebsiteOrigin } from "@/lib/http/websiteOrigin";
 import { assertEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligibility";
 import { assertPublishedChallengeTargetAvailable } from "@/lib/practice/challenges/publishedAvailability";
 import { requireChallengePublisherAccessApi } from "@/lib/practice/challenges/publisherAccess";
@@ -40,10 +41,6 @@ const BodySchema = z.object({
 });
 
 const PREVIEW_TTL_MINUTES = 15;
-
-function requestOrigin(req: Request) {
-  return new URL(req.url).origin;
-}
 
 export async function POST(req: Request) {
   const { denied } = await requireChallengePublisherAccessApi();
@@ -80,7 +77,7 @@ export async function POST(req: Request) {
     return publisherBrowserResponse(req,
       NextResponse.json({
         ok: true,
-        url: `${requestOrigin(req)}${path}?${query.toString()}`,
+        url: `${resolveRequestWebsiteOrigin(req)}${path}?${query.toString()}`,
         title: target.exerciseTitle,
         expiresAt: expiresAt.toISOString(),
       }),

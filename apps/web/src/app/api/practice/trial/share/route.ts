@@ -16,6 +16,7 @@ import {
   hardenApiResponse,
   readJsonSafe,
 } from "@/lib/practice/api/shared/http";
+import { resolveRequestWebsiteOrigin } from "@/lib/http/websiteOrigin";
 import { assertEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligibility";
 import { DEFAULT_PUBLIC_CHALLENGE_DESCRIPTION } from "@/lib/practice/challenges/presentation";
 import { assertPublishedChallengeTargetAvailable } from "@/lib/practice/challenges/publishedAvailability";
@@ -71,23 +72,6 @@ function challengeTtlDays() {
   const raw = Number(process.env.CHALLENGE_LINK_TTL_DAYS ?? "365");
   if (!Number.isFinite(raw) || raw <= 0) return 365;
   return Math.max(1, Math.min(Math.floor(raw), 3650));
-}
-
-function publicOrigin(req: Request) {
-  const configured = String(process.env.NEXT_PUBLIC_APP_URL ?? "").trim();
-
-  if (configured) {
-    try {
-      const url = new URL(configured);
-      if (url.protocol === "http:" || url.protocol === "https:") {
-        return url.origin;
-      }
-    } catch {
-      // Fall back to the request origin below.
-    }
-  }
-
-  return new URL(req.url).origin;
 }
 
 function optionalFormValue(form: FormData, key: string) {
@@ -255,7 +239,7 @@ export async function POST(req: Request) {
     const shortPath = `/${encodeURIComponent(parsed.data.locale)}${practiceChallengePath(
       link.code,
     )}`;
-    const url = `${publicOrigin(req)}${shortPath}`;
+    const url = `${resolveRequestWebsiteOrigin(req)}${shortPath}`;
     const imageUrl = uploadedPublicId
       ? cloudinaryServerImageUrl(uploadedPublicId, {
           w: 1200,
