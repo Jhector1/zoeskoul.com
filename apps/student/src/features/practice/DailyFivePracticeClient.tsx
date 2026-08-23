@@ -120,8 +120,22 @@ export default function DailyFivePracticeClient(props: {
       return;
     }
 
+    if (
+      props.continueToPractice &&
+      props.initialSelection.subjectSlug &&
+      props.initialSelection.moduleSlug
+    ) {
+      return;
+    }
+
     void startFreePractice(null);
-  }, [props.mode, startFreePractice]);
+  }, [
+    props.continueToPractice,
+    props.initialSelection.moduleSlug,
+    props.initialSelection.subjectSlug,
+    props.mode,
+    startFreePractice,
+  ]);
 
   const startSubscriberPractice = useCallback(
     async (selection: PracticeChooserSelection) => {
@@ -157,7 +171,6 @@ export default function DailyFivePracticeClient(props: {
 
   useEffect(() => {
     if (
-      props.mode !== "subscriber" ||
       !props.continueToPractice ||
       !props.initialSelection.subjectSlug ||
       !props.initialSelection.moduleSlug ||
@@ -167,11 +180,17 @@ export default function DailyFivePracticeClient(props: {
     }
 
     continuationStartedRef.current = true;
-    void startSubscriberPractice(props.initialSelection);
+    if (props.mode === "subscriber") {
+      void startSubscriberPractice(props.initialSelection);
+      return;
+    }
+
+    void startFreePractice(props.initialSelection);
   }, [
     props.continueToPractice,
     props.initialSelection,
     props.mode,
+    startFreePractice,
     startSubscriberPractice,
   ]);
 

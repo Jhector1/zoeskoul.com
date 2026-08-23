@@ -1,4 +1,5 @@
 import type { Prisma } from "@/lib/prisma";
+import { buildSelfPacedPracticeContinuationEntryHref } from "@zoeskoul/learning-client";
 import type { TrialStartContext, TrialStartResult } from "../types";
 import {
   difficultyFromLevel,
@@ -43,7 +44,11 @@ function buildChallengeReturnUrl(args: {
   authenticated: boolean;
 }) {
   if (args.authenticated) {
-    return `/${encodeURIComponent(args.locale)}/subjects/${encodeURIComponent(args.subjectSlug)}/modules/${encodeURIComponent(args.moduleSlug)}/practice`;
+    return buildSelfPacedPracticeContinuationEntryHref({
+      locale: args.locale,
+      subjectSlug: args.subjectSlug,
+      moduleSlug: args.moduleSlug,
+    });
   }
 
   const callbackUrl = `/${encodeURIComponent(args.locale)}/subjects/${encodeURIComponent(args.subjectSlug)}/modules`;

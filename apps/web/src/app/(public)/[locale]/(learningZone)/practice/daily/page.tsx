@@ -83,9 +83,7 @@ export default async function DailyFivePage({
         topicSlug: "",
       }}
       continuations={continuations}
-      continueToPractice={
-        mode === "subscriber" && query.continue === "practice"
-      }
+      continueToPractice={query.continue === "practice"}
     />
   );
 }

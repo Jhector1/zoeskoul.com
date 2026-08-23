@@ -159,7 +159,6 @@ export async function GET(
       },
       continuations,
       continueToPractice:
-        mode === "subscriber" &&
         url.searchParams.get("continue") === "practice",
     },
   );
