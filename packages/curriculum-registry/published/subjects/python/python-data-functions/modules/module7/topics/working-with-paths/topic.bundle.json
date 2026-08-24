@@ -644,25 +644,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "data/source.txt",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.0.message",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "data/copy.txt",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.1.message",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "uses_method",
-            "method": "write",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.2.message"
-          }
         ]
       },
       "solutionFiles": [
@@ -787,14 +768,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "data/items.txt",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.sourceChecks.0.message",
-            "normalizeWhitespace": true
-          }
         ]
       },
       "solutionFiles": [
@@ -899,14 +872,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "data/input.txt",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.sourceChecks.0.message",
-            "normalizeWhitespace": true
           }
         ]
       },

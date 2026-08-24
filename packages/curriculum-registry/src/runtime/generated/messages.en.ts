@@ -9228,6 +9228,23 @@ const messages: Record<string, any> = {
                 "services_report_service_py": {
                   "content": "from model.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\""
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity"
+                },
+                "services_report_service_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\""
+                }
+              },
+              "solutionCode": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+              "checks": {
+                "0": {
+                  "message": "Program should print one formatted report line."
+                }
               }
             },
             "ci-debugging-imports-and-state-5": {
@@ -9250,7 +9267,19 @@ const messages: Record<string, any> = {
                 "main_py": {
                   "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())"
                 }
-              }
+              },
+              "solutionFiles": {
+                "models_init_py": {
+                  "content": "# package marker"
+                },
+                "models_cart_py": {
+                  "content": "class Cart:\n    def __init__(self, owner, items=None):\n        self.owner = owner\n        self.items = [] if items is None else list(items)\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)"
+                },
+                "main_py": {
+                  "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())"
+                }
+              },
+              "solutionCode": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())"
             },
             "ci-debugging-imports-and-state-6": {
               "title": "Fix a state-changing method in a task model",
@@ -9272,7 +9301,19 @@ const messages: Record<string, any> = {
                 "main_py": {
                   "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())"
                 }
-              }
+              },
+              "solutionFiles": {
+                "models_init_py": {
+                  "content": "# package marker"
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\n    def is_done(self):\n        return self.done"
+                },
+                "main_py": {
+                  "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())"
+                }
+              },
+              "solutionCode": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())"
             }
           }
         },
@@ -9952,6 +9993,32 @@ const messages: Record<string, any> = {
                 "services_pricing_service_py": {
                   "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
+                },
+                "services_pricing_service_py": {
+                  "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        total = sum(book.price for book in books)\n        return total * (1 - percent / 100)"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
+              "checks": {
+                "0": {
+                  "message": "Define a PricingService class in services/pricing_service.py."
+                },
+                "1": {
+                  "message": "PricingService should be constructible with no arguments."
+                },
+                "2": {
+                  "message": "discounted_total should apply the percentage discount to the full total."
+                },
+                "3": {
+                  "message": "discounted_total should work with a different total and discount percent."
+                }
               }
             },
             "mc-safe-refactor-steps": {
@@ -9990,6 +10057,32 @@ const messages: Record<string, any> = {
                 "services_summary_service_py": {
                   "content": "class SummaryService:\n    def build_summary(self, books):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
+                },
+                "services_summary_service_py": {
+                  "content": "class SummaryService:\n    def build_summary(self, books):\n        total = sum(book.price for book in books)\n        return f\"Books: {len(books)} | Total: ${total}\""
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
+              "checks": {
+                "0": {
+                  "message": "Define a SummaryService class in services/summary_service.py."
+                },
+                "1": {
+                  "message": "SummaryService should be constructible with no arguments."
+                },
+                "2": {
+                  "message": "build_summary should return the exact summary format for the catalog."
+                },
+                "3": {
+                  "message": "build_summary should work for a one-book catalog."
+                }
               }
             },
             "sc-main-role": {
@@ -10027,6 +10120,32 @@ const messages: Record<string, any> = {
                 },
                 "services_inventory_service_py": {
                   "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
+                },
+                "services_inventory_service_py": {
+                  "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        return [book.title for book in books if book.price <= max_price]"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
+              "checks": {
+                "0": {
+                  "message": "Define an InventoryService class in services/inventory_service.py."
+                },
+                "1": {
+                  "message": "InventoryService should be constructible with no arguments."
+                },
+                "2": {
+                  "message": "affordable_titles should return titles whose prices are at or below the limit."
+                },
+                "3": {
+                  "message": "affordable_titles should return an empty list when nothing matches."
                 }
               }
             }
@@ -10208,7 +10327,8 @@ const messages: Record<string, any> = {
                 "hint_1": "Use < 0 inside an if statement.",
                 "hint_2": "Print False for zero or positive values."
               },
-              "starterCode": "n = int(input())\n# Your code here"
+              "starterCode": "n = int(input())\n# Your code here",
+              "solutionCode": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)"
             },
             "practice-test-inherited-method": {
               "title": "Make an inherited method pass its test",
@@ -10450,6 +10570,32 @@ const messages: Record<string, any> = {
                 "tests_check_book_return_py": {
                   "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")"
                 }
+              },
+              "solutionFiles": {
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True"
+                },
+                "tests_check_book_return_py": {
+                  "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")"
+                }
+              },
+              "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True",
+              "checks": {
+                "0": {
+                  "message": "Keep the Book class defined."
+                },
+                "1": {
+                  "message": "Book instances should still store title and available."
+                },
+                "2": {
+                  "message": "A new Book should start available."
+                },
+                "3": {
+                  "message": "checkout() should mark the book unavailable."
+                },
+                "4": {
+                  "message": "return_book() should make a checked-out book available again."
+                }
               }
             },
             "ci-testing-object-state-fix-wallet-validation": {
@@ -10468,6 +10614,29 @@ const messages: Record<string, any> = {
                 },
                 "tests_check_wallet_py": {
                   "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")"
+                }
+              },
+              "solutionFiles": {
+                "models_wallet_py": {
+                  "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)"
+                },
+                "tests_check_wallet_py": {
+                  "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")"
+                }
+              },
+              "solutionCode": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)",
+              "checks": {
+                "0": {
+                  "message": "Keep the Wallet class defined."
+                },
+                "1": {
+                  "message": "Wallet instances should store owner and balance."
+                },
+                "2": {
+                  "message": "A valid starting balance should stay unchanged."
+                },
+                "3": {
+                  "message": "A negative starting balance should be corrected to 0."
                 }
               }
             },
@@ -10488,302 +10657,38 @@ const messages: Record<string, any> = {
                 "tests_check_scoreboard_py": {
                   "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")"
                 }
+              },
+              "solutionFiles": {
+                "models_scoreboard_py": {
+                  "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points"
+                },
+                "tests_check_scoreboard_py": {
+                  "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")"
+                }
+              },
+              "solutionCode": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points",
+              "checks": {
+                "0": {
+                  "message": "Keep the Scoreboard class defined."
+                },
+                "1": {
+                  "message": "Scoreboard instances should have a score attribute."
+                },
+                "2": {
+                  "message": "A new Scoreboard should start at 0."
+                },
+                "3": {
+                  "message": "After add_points(5), the score should be 5."
+                },
+                "4": {
+                  "message": "Points should accumulate, so 5 then 3 should produce 8."
+                }
               }
             }
           }
         }
       },
       "python-11-oop-capstone-project": {
-        "capstone-domain-model": {
-          "label": "Capstone Domain Model",
-          "summary": "Build the task objects that carry the tracker domain before adding storage or reports.",
-          "cards": {
-            "sketch0": {
-              "title": "Planning brief"
-            }
-          },
-          "finalCapstone": {
-            "steps": {
-              "try_capstone_domain_model_sketch0": {
-                "title": "Create the shared BaseTask model",
-                "prompt": "In `models/base_task.py`, implement `BaseTask` with `title`, validated `priority`, and `completed` state. New tasks start incomplete. `mark_done()` sets completed to True, `is_open()` returns the opposite, and `summary()` raises NotImplementedError. The supplied main.py marks one task done and prints its state.",
-                "hint": "Validate before storing the fields, then mutate only `self.completed` in mark_done().",
-                "help": {
-                  "concept": "The base class owns shared state and behavior while leaving the concrete summary format to subclasses.",
-                  "hint_1": "Validate before storing the fields, then mutate only `self.completed` in mark_done().",
-                  "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
-                },
-                "starterCode": "# Run this provided BaseTask state demo.\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n",
-                "starterFiles": {
-                  "main_py": {
-                    "content": "# Run this provided BaseTask state demo.\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n"
-                  },
-                  "models_base_task_py": {
-                    "content": "class BaseTask:\n    def __init__(self, title, priority=\"medium\", completed=False):\n        # TODO: validate and store title, priority, and completed.\n        pass\n\n    def mark_done(self):\n        # TODO: set completed to True and return it.\n        pass\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
-                  }
-                },
-                "solutionFiles": {
-                  "main_py": {
-                    "content": "from models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n"
-                  },
-                  "models_base_task_py": {
-                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
-                  }
-                },
-                "solutionCode": "from models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n",
-                "checks": {
-                  "0": {
-                    "message": "Store the shared task attributes."
-                  },
-                  "1": {
-                    "message": "A marked-done task should no longer be open."
-                  },
-                  "2": {
-                    "message": "Print the title, priority, and final completed state."
-                  }
-                },
-                "expectedOutput": "Draft roadmap\nhigh\nTrue"
-              }
-            }
-          }
-        },
-        "capstone-scope-and-architecture": {
-          "label": "Capstone Scope and Architecture",
-          "summary": "Plan the Smart Task Tracker workspace so models, services, data, and main.py each have a clear job.",
-          "cards": {
-            "sketch0": {
-              "title": "Planning brief"
-            }
-          },
-          "finalCapstone": {
-            "steps": {
-              "try_capstone_scope_and_architecture_sketch0": {
-                "title": "Plan one clean capstone workspace",
-                "prompt": "Complete `reports/summary.py` so build_summary(tasks) returns one summary line per task. Keep the task hierarchy in models and the runner in main.py; do not copy model classes into main.py.",
-                "hint": "Join task.summary() results with newline characters.",
-                "help": {
-                  "concept": "A clean architecture gives models, reports, storage, services, and the runner separate responsibilities.",
-                  "hint_1": "Join task.summary() results with newline characters.",
-                  "hint_2": "Review the file path, class or function name, and output requirements together."
-                },
-                "starterCode": "# Run this provided architecture snapshot.\nfrom models import BugTask, FeatureTask\nfrom reports.summary import build_summary\n\ntasks = [BugTask(\"Fix login redirect\", \"high\", \"critical\"), FeatureTask(\"Add dark mode\", \"medium\", 3)]\nprint(build_summary(tasks))\n",
-                "starterFiles": {
-                  "main_py": {
-                    "content": "# Run this provided architecture snapshot.\nfrom models import BugTask, FeatureTask\nfrom reports.summary import build_summary\n\ntasks = [BugTask(\"Fix login redirect\", \"high\", \"critical\"), FeatureTask(\"Add dark mode\", \"medium\", 3)]\nprint(build_summary(tasks))\n"
-                  },
-                  "models_base_task_py": {
-                    "content": "# Starter guidance: Plan one clean capstone workspace. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
-                  },
-                  "models_bug_task_py": {
-                    "content": "# Starter guidance: Plan one clean capstone workspace. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
-                  },
-                  "models_feature_task_py": {
-                    "content": "# Starter guidance: Plan one clean capstone workspace. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "def build_summary(tasks):\n    # TODO: return one summary line per task.\n    pass\n"
-                  }
-                },
-                "solutionFiles": {
-                  "main_py": {
-                    "content": "from models import BugTask, FeatureTask\nfrom reports.summary import build_summary\n\ntasks = [BugTask(\"Fix login redirect\", \"high\", \"critical\"), FeatureTask(\"Add dark mode\", \"medium\", 3)]\nprint(build_summary(tasks))\n"
-                  },
-                  "models_base_task_py": {
-                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
-                  },
-                  "models_bug_task_py": {
-                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
-                  },
-                  "models_feature_task_py": {
-                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
-                  },
-                  "models___init___py": {
-                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "def build_summary(tasks):\n    return \"\\n\".join(task.summary() for task in tasks)\n"
-                  }
-                },
-                "solutionCode": "from models import BugTask, FeatureTask\nfrom reports.summary import build_summary\n\ntasks = [BugTask(\"Fix login redirect\", \"high\", \"critical\"), FeatureTask(\"Add dark mode\", \"medium\", 3)]\nprint(build_summary(tasks))\n",
-                "checks": {
-                  "0": {
-                    "message": "Return both task summaries from the report module."
-                  }
-                },
-                "expectedOutput": "BUG: Fix login redirect | priority=high | severity=critical | done=False\nFEATURE: Add dark mode | priority=medium | points=3 | done=False"
-              }
-            }
-          }
-        },
-        "capstone-storage-and-reports": {
-          "label": "Capstone Storage and Reports",
-          "summary": "Load task data into objects and turn those objects into useful report output.",
-          "cards": {
-            "sketch0": {
-              "title": "Planning brief"
-            }
-          },
-          "finalCapstone": {
-            "steps": {
-              "try_capstone_storage_and_reports_sketch0": {
-                "title": "Load task objects from CSV",
-                "prompt": "Complete storage/task_storage.py so load_tasks(path) reads data/tasks.csv and returns the correct task subclasses in file order. The supplied runner prints the count and first title.",
-                "hint": "Use DictReader, convert completed to bool, and convert feature detail to int.",
-                "help": {
-                  "concept": "Storage code translates serialized rows into validated domain objects.",
-                  "hint_1": "Use DictReader, convert completed to bool, and convert feature detail to int.",
-                  "hint_2": "Use the requested file boundary as part of the solution contract."
-                },
-                "starterCode": "# Run this provided storage smoke test.\nfrom storage.task_storage import load_tasks\n\ntasks = load_tasks(\"data/tasks.csv\")\nprint(len(tasks))\nprint(tasks[0].title)\n",
-                "starterFiles": {
-                  "main_py": {
-                    "content": "# Run this provided storage smoke test.\nfrom storage.task_storage import load_tasks\n\ntasks = load_tasks(\"data/tasks.csv\")\nprint(len(tasks))\nprint(tasks[0].title)\n"
-                  },
-                  "models_base_task_py": {
-                    "content": "# Starter guidance: Load task objects from CSV. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
-                  },
-                  "models_bug_task_py": {
-                    "content": "# Starter guidance: Load task objects from CSV. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
-                  },
-                  "models_feature_task_py": {
-                    "content": "# Starter guidance: Load task objects from CSV. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
-                  },
-                  "data_tasks_csv": {
-                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
-                  },
-                  "storage_task_storage_py": {
-                    "content": "import csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    # TODO: parse each CSV row into the matching task subclass.\n    pass\n"
-                  }
-                },
-                "solutionFiles": {
-                  "main_py": {
-                    "content": "from storage.task_storage import load_tasks\n\ntasks = load_tasks(\"data/tasks.csv\")\nprint(len(tasks))\nprint(tasks[0].title)\n"
-                  },
-                  "models_base_task_py": {
-                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
-                  },
-                  "models_bug_task_py": {
-                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
-                  },
-                  "models_feature_task_py": {
-                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
-                  },
-                  "models___init___py": {
-                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
-                  },
-                  "data_tasks_csv": {
-                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
-                  },
-                  "storage_task_storage_py": {
-                    "content": "import csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
-                  }
-                },
-                "solutionCode": "from storage.task_storage import load_tasks\n\ntasks = load_tasks(\"data/tasks.csv\")\nprint(len(tasks))\nprint(tasks[0].title)\n",
-                "checks": {
-                  "0": {
-                    "message": "Load three tasks and preserve the first title."
-                  }
-                },
-                "expectedOutput": "3\nFix login redirect"
-              }
-            }
-          }
-        },
-        "capstone-tests-and-polish": {
-          "label": "Capstone Tests and Polish",
-          "summary": "Add assertions, final output polish, and README handoff notes so the capstone feels complete.",
-          "cards": {
-            "sketch0": {
-              "title": "Planning brief"
-            }
-          },
-          "finalCapstone": {
-            "steps": {
-              "try_capstone_tests_and_polish_sketch0": {
-                "title": "Add focused model checks",
-                "prompt": "Complete main.py with assertions that a new BugTask is open and a FeatureTask estimate of 0 becomes 1. Print `model checks passed` after both assertions.",
-                "hint": "Create both objects, assert their state, then print confirmation.",
-                "help": {
-                  "concept": "Focused tests prove validation and starting state before testing larger workflows.",
-                  "hint_1": "Create both objects, assert their state, then print confirmation.",
-                  "hint_2": "Use the requested file boundary as part of the solution contract."
-                },
-                "starterCode": "# TODO: create the two tasks, add the required assertions, then print confirmation.\n",
-                "starterFiles": {
-                  "main_py": {
-                    "content": "# TODO: create the two tasks, add the required assertions, then print confirmation.\n"
-                  },
-                  "models_base_task_py": {
-                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
-                  },
-                  "models_bug_task_py": {
-                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
-                  },
-                  "models_feature_task_py": {
-                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
-                  },
-                  "models___init___py": {
-                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\ndef build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
-                  },
-                  "storage_task_storage_py": {
-                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nimport csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
-                  },
-                  "services_tracker_service_py": {
-                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nclass TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
-                  },
-                  "data_tasks_csv": {
-                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
-                  }
-                },
-                "solutionFiles": {
-                  "main_py": {
-                    "content": "from models import BugTask, FeatureTask\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Polish UI\", \"low\", 0)\nassert bug.is_open() is True\nassert feature.estimate_points == 1\nprint(\"model checks passed\")\n"
-                  },
-                  "models_base_task_py": {
-                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
-                  },
-                  "models_bug_task_py": {
-                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
-                  },
-                  "models_feature_task_py": {
-                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
-                  },
-                  "models___init___py": {
-                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
-                  },
-                  "reports_summary_py": {
-                    "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
-                  },
-                  "storage_task_storage_py": {
-                    "content": "import csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
-                  },
-                  "services_tracker_service_py": {
-                    "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
-                  },
-                  "data_tasks_csv": {
-                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
-                  }
-                },
-                "solutionCode": "from models import BugTask, FeatureTask\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Polish UI\", \"low\", 0)\nassert bug.is_open() is True\nassert feature.estimate_points == 1\nprint(\"model checks passed\")\n",
-                "checks": {
-                  "0": {
-                    "message": "Run both model assertions before confirmation."
-                  }
-                },
-                "expectedOutput": "model checks passed"
-              }
-            }
-          }
-        },
         "module-11-final-oop-capstone": {
           "label": "Neighborhood Pantry Request Coordinator",
           "summary": "Build a pantry request coordinator that turns saved food and hygiene requests into validated objects, managed state, and a clear daily report.",
@@ -11437,6 +11342,35 @@ const messages: Record<string, any> = {
               "starterFiles": {
                 "main_py": {
                   "content": "from models.account import Account\n\n# Create Ava's account and print owner then balance."
+                },
+                "models_account_py": {
+                  "content": ""
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+              "checks": {
+                "0": {
+                  "message": "Define a class named Account."
+                },
+                "1": {
+                  "message": "Account should accept owner and balance."
+                },
+                "2": {
+                  "message": "Store owner and balance on the Account instance."
+                },
+                "3": {
+                  "message": "Create one Account object in the main code."
+                },
+                "4": {
+                  "message": "Print the owner and balance on separate lines."
                 }
               }
             },
@@ -11453,6 +11387,41 @@ const messages: Record<string, any> = {
               "starterFiles": {
                 "main_py": {
                   "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\n\n# Deposit 30, then print the summary."
+                },
+                "models_account_py": {
+                  "content": ""
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())",
+              "checks": {
+                "0": {
+                  "message": "Keep the Account class defined."
+                },
+                "1": {
+                  "message": "Account should still store owner and balance."
+                },
+                "2": {
+                  "message": "summary() should report the current owner and balance."
+                },
+                "3": {
+                  "message": "summary() should exist before any deposit."
+                },
+                "4": {
+                  "message": "deposit(30) should update the balance to 150."
+                },
+                "5": {
+                  "message": "Create one Account object in the main code."
+                },
+                "6": {
+                  "message": "Print the summary after depositing."
                 }
               }
             },
@@ -11469,6 +11438,38 @@ const messages: Record<string, any> = {
               "starterFiles": {
                 "main_py": {
                   "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\n# Deposit 30 into Ava's account only.\n# Print Ava's summary, then Noah's summary."
+                },
+                "models_account_py": {
+                  "content": ""
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())",
+              "checks": {
+                "0": {
+                  "message": "Keep the Account class defined."
+                },
+                "1": {
+                  "message": "Each Account should store owner and balance."
+                },
+                "2": {
+                  "message": "Ava's account should update to 150 after deposit(30)."
+                },
+                "3": {
+                  "message": "Noah's summary should still show the original balance."
+                },
+                "4": {
+                  "message": "Create two Account objects in the main code."
+                },
+                "5": {
+                  "message": "Print both account summaries on separate lines."
                 }
               }
             }
@@ -11721,7 +11722,38 @@ const messages: Record<string, any> = {
                 "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "# Write your code below."
+              "starterCode": "from models.transaction import Transaction\n\nfor transaction in [Transaction(\"Coffee\", -4), Transaction(\"Paycheck\", 1200)]:\n    print(transaction.summary())\n",
+              "solutionCode": "from models.transaction import Transaction\n\nfor transaction in [Transaction(\"Coffee\", -4), Transaction(\"Paycheck\", 1200)]:\n    print(transaction.summary())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.transaction import Transaction\n\nfor transaction in [Transaction(\"Coffee\", -4), Transaction(\"Paycheck\", 1200)]:\n    print(transaction.summary())\n"
+                },
+                "models_transaction_py": {
+                  "content": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    # Add summary() so it returns text built from the stored attributes.\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.transaction import Transaction\n\nfor transaction in [Transaction(\"Coffee\", -4), Transaction(\"Paycheck\", 1200)]:\n    print(transaction.summary())\n"
+                },
+                "models_transaction_py": {
+                  "content": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    def summary(self):\n        return f\"{self.label}: {self.amount}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define a Transaction class."
+                },
+                "1": {
+                  "message": "Transaction should still accept label and amount."
+                },
+                "2": {
+                  "message": "summary should return text built from the stored label and amount."
+                },
+                "3": {
+                  "message": "summary should work for different transaction objects too."
+                }
+              }
             },
             "ci-constructors-and-object-state-deposit-method": {
               "title": "Track deposits on an account object",
@@ -11732,7 +11764,38 @@ const messages: Record<string, any> = {
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your code below."
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(20)\nprint(account.balance)\n",
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(20)\nprint(account.balance)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(20)\nprint(account.balance)\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        pass\n\n    def deposit(self, amount):\n        pass\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(20)\nprint(account.balance)\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define an Account class."
+                },
+                "1": {
+                  "message": "Account should accept owner and balance."
+                },
+                "2": {
+                  "message": "A deposit should increase the stored balance."
+                },
+                "3": {
+                  "message": "Multiple deposits should keep updating the same balance attribute."
+                }
+              }
             },
             "ci-constructors-and-object-state-ledger-step": {
               "title": "Build a ledger account that keeps owner, balance, and note",
@@ -11743,7 +11806,41 @@ const messages: Record<string, any> = {
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your code below."
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70, \"starter fund\")\naccount.deposit(20)\nprint(account.describe())\n",
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70, \"starter fund\")\naccount.deposit(20)\nprint(account.describe())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70, \"starter fund\")\naccount.deposit(20)\nprint(account.describe())\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance, note):\n        pass\n\n    def deposit(self, amount):\n        pass\n\n    def describe(self):\n        pass\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70, \"starter fund\")\naccount.deposit(20)\nprint(account.describe())\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance, note):\n        self.owner = owner\n        self.balance = balance\n        self.note = note\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n\n    def describe(self):\n        return f\"{self.owner} | {self.balance} | {self.note}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define an Account class."
+                },
+                "1": {
+                  "message": "Account should accept owner, balance, and note."
+                },
+                "2": {
+                  "message": "Store all three constructor values as instance attributes."
+                },
+                "3": {
+                  "message": "deposit should update the stored balance."
+                },
+                "4": {
+                  "message": "describe should return a string built from the stored state."
+                }
+              }
             }
           }
         },
@@ -11933,6 +12030,26 @@ const messages: Record<string, any> = {
                 "models_account_py": {
                   "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"Owner: {self.owner}, Balance: {self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "summary should return the formatted string for Mina's account."
+                },
+                "2": {
+                  "message": "summary should return the formatted string for Leo's account."
+                }
               }
             },
             "ci-account-withdraw": {
@@ -11951,6 +12068,35 @@ const messages: Record<string, any> = {
                 },
                 "models_account_py": {
                   "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def withdraw(self, amount):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should be constructible with owner and balance."
+                },
+                "2": {
+                  "message": "A valid withdrawal should return True."
+                },
+                "3": {
+                  "message": "A valid withdrawal should reduce the balance."
+                },
+                "4": {
+                  "message": "An oversized withdrawal should return False."
+                },
+                "5": {
+                  "message": "An invalid withdrawal should leave the balance unchanged."
                 }
               }
             },
@@ -11973,6 +12119,35 @@ const messages: Record<string, any> = {
                 },
                 "helpers_validation_py": {
                   "content": "def is_positive_amount(amount):\n    pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)"
+                },
+                "models_account_py": {
+                  "content": "from helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False"
+                },
+                "helpers_validation_py": {
+                  "content": "def is_positive_amount(amount):\n    return amount > 0"
+                }
+              },
+              "solutionCode": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)",
+              "checks": {
+                "0": {
+                  "message": "10 should be treated as a positive amount."
+                },
+                "1": {
+                  "message": "0 should not be treated as a positive amount."
+                },
+                "2": {
+                  "message": "Negative numbers should return False."
+                },
+                "3": {
+                  "message": "The helper should support a valid deposit."
+                },
+                "4": {
+                  "message": "A non-positive amount should leave the balance unchanged."
                 }
               }
             }
@@ -12170,6 +12345,26 @@ const messages: Record<string, any> = {
                 "models_account_py": {
                   "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass\n\n    def report_line(self):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "deposit should update the balance to 95."
+                },
+                "2": {
+                  "message": "report_line should return the formatted report text."
+                }
               }
             },
             "ci-methods-and-responsibility-validate-withdrawal": {
@@ -12188,6 +12383,29 @@ const messages: Record<string, any> = {
                 },
                 "models_account_py": {
                   "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "A valid withdrawal should reduce the balance."
+                },
+                "2": {
+                  "message": "After an invalid second withdrawal, the balance should remain 60."
+                },
+                "3": {
+                  "message": "If the amount is too large, return the unchanged balance."
                 }
               }
             },
@@ -12924,13 +13142,60 @@ const messages: Record<string, any> = {
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n# models/audio.py\nfrom models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        pass\n\n    def display_line(self):\n        pass\n\n# services/report_service.py\ndef build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines",
+              "starterCode": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n# models/audio.py\nfrom models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        pass\n\n    def display_line(self):\n        pass\n\n# services/report_service.py\ndef build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines"
+                  "content": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)\n"
+                },
+                "models_base_item_py": {
+                  "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n"
+                },
+                "models_book_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
+                },
+                "models_video_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n"
                 },
                 "models_audio_py": {
-                  "content": "class Audio:\n    def __init__(self, title, speaker):\n        self.title = title\n        self.speaker = speaker\n\n    def display_line(self):\n        pass"
+                  "content": "from models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        pass\n\n    def display_line(self):\n        pass\n"
+                },
+                "services_report_service_py": {
+                  "content": "def build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)\n"
+                },
+                "models_base_item_py": {
+                  "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n"
+                },
+                "models_book_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
+                },
+                "models_video_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n"
+                },
+                "models_audio_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        super().__init__(title)\n        self.speaker = speaker\n\n    def display_line(self):\n        return f\"Audio: {self.title} by {self.speaker}\"\n"
+                },
+                "services_report_service_py": {
+                  "content": "def build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define the Audio class."
+                },
+                "1": {
+                  "message": "Audio should be constructible with title and speaker."
+                },
+                "2": {
+                  "message": "Audio should store title and speaker."
+                },
+                "3": {
+                  "message": "Audio.display_line() should match the shared report contract."
                 }
               }
             },
@@ -12943,19 +13208,51 @@ const messages: Record<string, any> = {
                 "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        pass\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        pass\n\n# services/checkout_service.py\ndef collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages",
+              "starterCode": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        pass\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        pass\n\n# services/checkout_service.py\ndef collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages"
+                  "content": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)\n"
                 },
                 "models_base_item_py": {
-                  "content": "class BaseItem:\n    def __init__(self, value_1):\n        pass\n\n    def checkout_message(self):\n        pass"
+                  "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        pass\n"
                 },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def checkout_message(self):\n        pass"
+                  "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        pass\n"
                 },
                 "models_video_py": {
-                  "content": "class Video:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def checkout_message(self):\n        pass"
+                  "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        pass\n"
+                },
+                "services_checkout_service_py": {
+                  "content": "def collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)\n"
+                },
+                "models_base_item_py": {
+                  "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        return f\"{self.title} is ready\"\n"
+                },
+                "models_book_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        return f\"Borrow book: {self.title}\"\n"
+                },
+                "models_video_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        return f\"Play video: {self.title}\"\n"
+                },
+                "services_checkout_service_py": {
+                  "content": "def collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "BaseItem.checkout_message() should return the generic message."
+                },
+                "1": {
+                  "message": "Book.checkout_message() should return the book-specific message."
+                },
+                "2": {
+                  "message": "Video.checkout_message() should return the video-specific message."
                 }
               }
             },
@@ -12984,6 +13281,29 @@ const messages: Record<string, any> = {
                 },
                 "services_export_service_py": {
                   "content": "def join_labels(items):\n    pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))"
+                },
+                "models_base_item_py": {
+                  "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def export_label(self):\n        return self.title"
+                },
+                "models_book_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def export_label(self):\n        return f\"BOOK-{self.title}\""
+                },
+                "models_video_py": {
+                  "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def export_label(self):\n        return f\"VIDEO-{self.title}\""
+                },
+                "services_export_service_py": {
+                  "content": "def join_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.export_label())\n    return \" | \".join(labels)"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))",
+              "checks": {
+                "0": {
+                  "message": "join_labels() should join export labels from mixed items in order."
                 }
               }
             }
@@ -13199,6 +13519,35 @@ const messages: Record<string, any> = {
                 "services_inventory_service_py": {
                   "content": "def count_available(items):\n    pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, stock):\n        self.title = title\n        self.stock = stock\n\n    def is_available(self):\n        return self.stock > 0"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    pass"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    pass"
+                },
+                "services_inventory_service_py": {
+                  "content": "def count_available(items):\n    return sum(1 for item in items if item.is_available())"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))",
+              "checks": {
+                "0": {
+                  "message": "Book should inherit is_available() and return True when stock is above zero."
+                },
+                "1": {
+                  "message": "Movie should inherit is_available() and return False when stock is zero."
+                },
+                "2": {
+                  "message": "count_available(items) should count available objects in a mixed list."
+                }
               }
             },
             "ci-inheritance-shared-price-method": {
@@ -13210,16 +13559,44 @@ const messages: Record<string, any> = {
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))\n"
                 },
-                "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self):\n        pass"
+                "models_base_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, price):\n        pass\n\n    def discounted_price(self, percent):\n        pass\n"
                 },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def discounted_price(self, amount):\n        pass"
+                  "content": "from models.base_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, price, author):\n        pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))\n"
+                },
+                "models_base_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def discounted_price(self, percent):\n        return self.price * (1 - percent / 100)\n"
+                },
+                "models_book_py": {
+                  "content": "from models.base_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, price, author):\n        super().__init__(title, price)\n        self.author = author\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Make `Book` inherit from `CatalogItem` in the class header."
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define CatalogItem in models/base_item.py."
+                },
+                "1": {
+                  "message": "Define Book in models/book.py."
+                },
+                "2": {
+                  "message": "A Book should inherit discounted_price() from CatalogItem and calculate the reduced price correctly."
                 }
               }
             },
@@ -13691,6 +14068,35 @@ const messages: Record<string, any> = {
                 "models_movie_item_py": {
                   "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title"
+                },
+                "models_book_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\""
+                },
+                "models_movie_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\""
+                }
+              },
+              "solutionCode": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+              "checks": {
+                "0": {
+                  "message": "Define a BookItem class."
+                },
+                "1": {
+                  "message": "Define a MovieItem class."
+                },
+                "2": {
+                  "message": "BookItem.display_name() should return the book label."
+                },
+                "3": {
+                  "message": "MovieItem.display_name() should return the movie label."
+                }
               }
             },
             "catalog-step-mixed-report": {
@@ -13719,7 +14125,25 @@ const messages: Record<string, any> = {
                 "services_reporting_py": {
                   "content": "def build_display_report(items):\n    pass"
                 }
-              }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title"
+                },
+                "models_book_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\""
+                },
+                "models_movie_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\""
+                },
+                "services_reporting_py": {
+                  "content": "def build_display_report(items):\n    return [item.display_name() for item in items]"
+                }
+              },
+              "solutionCode": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)"
             },
             "practice-specialized-display-label": {
               "title": "Override a display label in one subclass",
@@ -13934,7 +14358,16 @@ const messages: Record<string, any> = {
                 "models_magazine_py": {
                   "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        pass"
                 }
-              }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())"
+                },
+                "models_magazine_py": {
+                  "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Magazine: {self.title}\""
+                }
+              },
+              "solutionCode": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())"
             },
             "project-polymorphic-collections-step5": {
               "title": "Build a checkout summary from mixed rentals",
@@ -13956,7 +14389,19 @@ const messages: Record<string, any> = {
                 "models_movie_rental_py": {
                   "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        pass"
                 }
-              }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())"
+                },
+                "models_book_rental_py": {
+                  "content": "class BookRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Book rental: {self.title} ({self.days} days)\""
+                },
+                "models_movie_rental_py": {
+                  "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Movie rental: {self.title} ({self.days} days)\""
+                }
+              },
+              "solutionCode": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())"
             },
             "project-polymorphic-collections-step6": {
               "title": "Create a stock alert service for mixed inventory items",
@@ -13981,7 +14426,22 @@ const messages: Record<string, any> = {
                 "services_alert_service_py": {
                   "content": "def low_stock_lines(items):\n    pass"
                 }
-              }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)"
+                },
+                "models_book_item_py": {
+                  "content": "class BookItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Book {self.title} has {self.quantity} left\""
+                },
+                "models_supply_item_py": {
+                  "content": "class SupplyItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Supply {self.name} has {self.quantity} left\""
+                },
+                "services_alert_service_py": {
+                  "content": "def low_stock_lines(items):\n    return [item.alert_line() for item in items if item.quantity < 3]"
+                }
+              },
+              "solutionCode": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)"
             }
           }
         }
@@ -42681,30 +43141,6 @@ const messages: Record<string, any> = {
         }
       },
       "python-11-oop-capstone-project": {
-        "capstone-domain-model": {
-          "capstone-domain-model-sketch-0": {
-            "title": "Capstone domain model: make the objects carry the app idea",
-            "bodyMarkdown": "A capstone app needs domain objects that mean something.\n\nIn a recipe planner, you might have a base `RecipeItem` and specialized items like `MealPrepTask` or `ShoppingTask`. Each object stores its own state and knows how to summarize itself.\n\nThe Smart Task Tracker applies the same idea to product-team work. A task has a title, status, points, and a summary. Subclasses can represent different kinds of work while sharing the same interface.\n\nBuild the model slowly: base class first, subclasses second, service layer only after the objects are clear.\n\nBuild only the state and behavior the pantry domain needs. A smaller model with explicit validation is easier to extend than a generic object that anticipates requirements the brief never asked for."
-          }
-        },
-        "capstone-scope-and-architecture": {
-          "sketch-0": {
-            "title": "Capstone planning: design the workspace before coding",
-            "bodyMarkdown": "A final project feels easier when the file map tells a story.\n\nBefore building the Smart Task Tracker, think about a different example: a school event planner. It might have:\n\n- `models/event.py` for one event object\n- `services/schedule.py` for app-level scheduling logic\n- `data/events.csv` for saved event data\n- `main.py` for the thin script that wires everything together\n\nThe Smart Task Tracker will use the same architecture idea, but with task objects instead of events.\n\nThe goal of this topic is not to write every feature at once. It is to decide where each responsibility belongs so the project does not become one giant script.\n\nArchitecture starts by naming boundaries: models own valid domain state, services coordinate collections, storage translates files, and main.py demonstrates the workflow. Those boundaries keep the capstone understandable as files accumulate."
-          }
-        },
-        "capstone-storage-and-reports": {
-          "capstone-storage-and-reports-sketch-0": {
-            "title": "Capstone storage and reports: turn objects into useful output",
-            "bodyMarkdown": "Storage and reports are where an OOP project starts to feel like an app.\n\nUse a different mental model first: a pet-sitting app might load pet visits from a CSV file, create `Visit` objects, and print a daily report. The report should not care about raw CSV rows; it should work with objects.\n\nThe Smart Task Tracker follows that same pattern:\n\n1. Read raw data.\n2. Create task objects.\n3. Let services organize those objects.\n4. Print or save a report.\n\nKeep the boundary clear: loading turns text into objects; reporting turns objects into readable output.\n\nStorage should translate between CSV rows and domain objects without teaching the model about filenames. Reports should consume the domain contract so the same objects can be displayed, saved, or tested consistently."
-          }
-        },
-        "capstone-tests-and-polish": {
-          "capstone-tests-and-polish-sketch0": {
-            "title": "Capstone polish: prove the tracker is ready to hand off",
-            "bodyMarkdown": "Polish is not just prettier output. It is proof that the app still works after all the pieces come together.\n\nImagine handing off a volunteer schedule app. You would want a teammate to know:\n\n- what files matter\n- how to run it\n- what output to expect\n- which tests protect the important behavior\n\nThe Smart Task Tracker needs the same handoff care. Add focused assertions, generate the final report, and leave a clear README so another person can understand the project without reading every line first.\n\nPolish means more than formatting. The final workspace should prove its validation rules, explain how to run the program, and leave the next developer a predictable file structure and test command."
-          }
-        },
         "module-11-final-oop-capstone": {
           "module-11-final-oop-capstone-sketch-1": {
             "title": "Capstone story: give pantry volunteers one dependable request system",
@@ -45014,8 +45450,8 @@ const messages: Record<string, any> = {
     },
     "python-data-functions": {
       "title": "Python Data and Functions",
-      "description": "Move from small scripts to programs that organize real information. You will choose between lists, tuples, and dictionaries, design reusable functions, split work across helper modules, read and write files, recover from bad input, and finish with a multi-step data-cleaning capstone in a new community-event domain.",
-      "moreComingSoon": ""
+      "description": "Build practical Python skills with lists, tuples, dictionaries, functions, helper modules, files, exceptions, and simple data cleaning.",
+      "moreComingSoon": "More Python Data and Functions lessons are coming soon."
     },
     "python-v2": {
       "title": "Python for Beginners",
@@ -45285,20 +45721,20 @@ const messages: Record<string, any> = {
     "python-data-functions": {
       "python-5-lists-tuples-and-dictionaries": {
         "title": "Lists, Tuples, and Dictionaries",
-        "description": "Organize related values with lists, protect fixed records with tuples, and retrieve named information with dictionaries.",
+        "description": "Teach learners how to organize multiple values and choose the right collection type.",
         "outcomes": [
           "Create and modify lists",
           "Use tuples for fixed grouped values",
           "Store key-value data in dictionaries"
         ],
         "why": [
-          "Collection choice communicates whether data is ordered, fixed, or addressed by a meaningful key.",
-          "These structures become the shared vocabulary for functions, files, and every project that follows."
+          "Builds confidence with lists, tuples, and dictionaries.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "python-6-functions-and-modularity": {
         "title": "Functions and Modularity",
-        "description": "Turn repeated logic into focused functions, define clear inputs and return values, and move reusable work into helper files.",
+        "description": "Help learners organize code into reusable functions, helper modules, and simple imports with clear inputs and outputs.",
         "outcomes": [
           "Define functions",
           "Use parameters and return values",
@@ -45306,13 +45742,13 @@ const messages: Record<string, any> = {
           "Use simple imports and helper modules"
         ],
         "why": [
-          "Functions make a program easier to test because each piece has one named responsibility.",
-          "Modules let a growing project reuse that logic without copying it into main.py."
+          "Builds confidence with functions and modularity.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "python-7-files-exceptions-and-data-cleaning": {
         "title": "Files, Exceptions, and Data Cleaning",
-        "description": "Read information that survives beyond one run, clean imperfect values, handle expected failures, and write dependable output files.",
+        "description": "Teach learners how to read files, create/write files, import standard-library data tools, and handle messy data without crashing programs.",
         "outcomes": [
           "Read text files",
           "Create and write text files",
@@ -45321,21 +45757,21 @@ const messages: Record<string, any> = {
           "Clean structured text data"
         ],
         "why": [
-          "Real programs rarely receive perfectly formatted data or guaranteed file paths.",
-          "File and exception skills let a script become a resilient tool instead of a one-time demonstration."
+          "Builds confidence with files, exceptions, and data cleaning.",
+          "Prepares learners for the next skills in the course."
         ]
       },
       "python-8-real-world-project": {
         "title": "Real-World Project",
-        "description": "Transfer the course skills to a community-event registration cleaner with helper modules, validation, summaries, and written deliverables.",
+        "description": "Guide learners through a longer beginner data-cleaning project that combines collections, helper modules, CSV files, validation, summaries, and output reports.",
         "outcomes": [
-          "Read and clean a structured file line by line",
-          "Refactor cleaning and summary logic into helper functions",
-          "Write final output files and summaries from one complete workflow"
+          "Read and clean a structured registration file line by line",
+          "Refactor cleaning, summary, and reporting logic into focused helper modules",
+          "Write deterministic cleaned data and summary files from one complete workflow"
         ],
         "why": [
-          "A new domain proves that the techniques work beyond the examples used to teach them.",
-          "The capstone connects collections, functions, modules, files, exceptions, and reporting in one coherent workflow."
+          "Builds confidence with real-world project.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     },
@@ -46122,7 +46558,7 @@ const messages: Record<string, any> = {
       "python-5-lists-tuples-and-dictionaries": {
         "python-data-functions-python-5-list-basics": {
           "title": "List Basics",
-          "description": "Create ordered collections, change them deliberately, loop through every item, and contrast mutable lists with fixed tuple records.",
+          "description": "Learn creating and indexing lists, list methods and mutation, looping through lists through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Creating and Indexing Lists",
@@ -46133,7 +46569,7 @@ const messages: Record<string, any> = {
         },
         "python-data-functions-python-5-dictionaries": {
           "title": "Dictionaries",
-          "description": "Address information by meaningful keys, update entries safely, and combine dictionaries with nested lists and records.",
+          "description": "Learn dictionary basics, updating and looping dictionaries, nested data structures through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Dictionary Basics",
@@ -46143,7 +46579,7 @@ const messages: Record<string, any> = {
         },
         "python-data-functions-python-5-module-project": {
           "title": "Module Project",
-          "description": "Build a workshop schedule from tuples, a list of sessions, and a dictionary lookup instead of returning to another gradebook.",
+          "description": "Learn module 5 workshop schedule project through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Module 5 Workshop Schedule Project"
@@ -46153,7 +46589,7 @@ const messages: Record<string, any> = {
       "python-6-functions-and-modularity": {
         "python-data-functions-python-6-function-basics": {
           "title": "Function Basics",
-          "description": "Name a reusable operation, pass it the values it needs, and distinguish displaying a result from returning it to another part of the program.",
+          "description": "Learn defining and calling functions, parameters and return values, print vs return through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Defining and Calling Functions",
@@ -46163,7 +46599,7 @@ const messages: Record<string, any> = {
         },
         "python-data-functions-python-6-function-design": {
           "title": "Function Design",
-          "description": "Limit scope, split large tasks into helpers, document the contract, and move reusable logic into an importable module.",
+          "description": "Learn scope and local variables, decomposition and refactoring, using imports and helper files through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Scope and Local Variables",
@@ -46174,7 +46610,7 @@ const messages: Record<string, any> = {
         },
         "python-data-functions-python-6-module-project": {
           "title": "Module Project",
-          "description": "Package a name-badge formatter across helper and entry files so each file owns one clear responsibility.",
+          "description": "Learn module 6 name badge package through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Module 6 Name Badge Package"
@@ -46184,7 +46620,7 @@ const messages: Record<string, any> = {
       "python-7-files-exceptions-and-data-cleaning": {
         "python-data-functions-python-7-file-io": {
           "title": "File Input and Output",
-          "description": "Read and write text through explicit paths, then treat folders and filenames as part of the program contract.",
+          "description": "Learn reading text files, writing text files, working with paths through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Reading Text Files",
@@ -46194,7 +46630,7 @@ const messages: Record<string, any> = {
         },
         "python-data-functions-python-7-exceptions-and-cleaning": {
           "title": "Exceptions and Cleaning",
-          "description": "Recover from expected failures, normalize messy text, convert values safely, and process CSV rows one dependable step at a time.",
+          "description": "Learn try/except basics, validating and cleaning input, simple csv processing through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Try/Except Basics",
@@ -46204,7 +46640,7 @@ const messages: Record<string, any> = {
         },
         "python-data-functions-python-7-module-project": {
           "title": "Module Project",
-          "description": "Clean a student-data file into a new output artifact while preserving valid rows and skipping malformed scores.",
+          "description": "Learn module 7 clean student records project through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Module 7 Clean Student Records Project"
@@ -46214,7 +46650,7 @@ const messages: Record<string, any> = {
       "python-8-real-world-project": {
         "python-data-functions-python-8-course-capstone": {
           "title": "Final Project",
-          "description": "Deliver a community-event registration cleaner in a new domain, with modular cleaning, summaries, output files, and deterministic tests.",
+          "description": "Learn community event registration cleaner through focused examples and practice.",
           "weeks": null,
           "bullets": [
             "Community Event Registration Cleaner"

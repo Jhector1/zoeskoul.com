@@ -150,6 +150,32 @@
                 "services_pricing_service_py": {
                   "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
+                },
+                "services_pricing_service_py": {
+                  "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        total = sum(book.price for book in books)\n        return total * (1 - percent / 100)"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
+              "checks": {
+                "0": {
+                  "message": "Define a PricingService class in services/pricing_service.py."
+                },
+                "1": {
+                  "message": "PricingService should be constructible with no arguments."
+                },
+                "2": {
+                  "message": "discounted_total should apply the percentage discount to the full total."
+                },
+                "3": {
+                  "message": "discounted_total should work with a different total and discount percent."
+                }
               }
             },
             "mc-safe-refactor-steps": {
@@ -188,6 +214,32 @@
                 "services_summary_service_py": {
                   "content": "class SummaryService:\n    def build_summary(self, books):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
+                },
+                "services_summary_service_py": {
+                  "content": "class SummaryService:\n    def build_summary(self, books):\n        total = sum(book.price for book in books)\n        return f\"Books: {len(books)} | Total: ${total}\""
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
+              "checks": {
+                "0": {
+                  "message": "Define a SummaryService class in services/summary_service.py."
+                },
+                "1": {
+                  "message": "SummaryService should be constructible with no arguments."
+                },
+                "2": {
+                  "message": "build_summary should return the exact summary format for the catalog."
+                },
+                "3": {
+                  "message": "build_summary should work for a one-book catalog."
+                }
               }
             },
             "sc-main-role": {
@@ -225,6 +277,32 @@
                 },
                 "services_inventory_service_py": {
                   "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price"
+                },
+                "services_inventory_service_py": {
+                  "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        return [book.title for book in books if book.price <= max_price]"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
+              "checks": {
+                "0": {
+                  "message": "Define an InventoryService class in services/inventory_service.py."
+                },
+                "1": {
+                  "message": "InventoryService should be constructible with no arguments."
+                },
+                "2": {
+                  "message": "affordable_titles should return titles whose prices are at or below the limit."
+                },
+                "3": {
+                  "message": "affordable_titles should return an empty list when nothing matches."
                 }
               }
             }

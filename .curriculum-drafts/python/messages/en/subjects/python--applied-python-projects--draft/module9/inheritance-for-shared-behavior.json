@@ -212,6 +212,35 @@
                 "services_inventory_service_py": {
                   "content": "def count_available(items):\n    pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, stock):\n        self.title = title\n        self.stock = stock\n\n    def is_available(self):\n        return self.stock > 0"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    pass"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    pass"
+                },
+                "services_inventory_service_py": {
+                  "content": "def count_available(items):\n    return sum(1 for item in items if item.is_available())"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))",
+              "checks": {
+                "0": {
+                  "message": "Book should inherit is_available() and return True when stock is above zero."
+                },
+                "1": {
+                  "message": "Movie should inherit is_available() and return False when stock is zero."
+                },
+                "2": {
+                  "message": "count_available(items) should count available objects in a mixed list."
+                }
               }
             },
             "ci-inheritance-shared-price-method": {
@@ -223,16 +252,44 @@
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))\n"
                 },
-                "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self):\n        pass"
+                "models_base_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, price):\n        pass\n\n    def discounted_price(self, percent):\n        pass\n"
                 },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def discounted_price(self, amount):\n        pass"
+                  "content": "from models.base_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, price, author):\n        pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))\n"
+                },
+                "models_base_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def discounted_price(self, percent):\n        return self.price * (1 - percent / 100)\n"
+                },
+                "models_book_py": {
+                  "content": "from models.base_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, price, author):\n        super().__init__(title, price)\n        self.author = author\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Make `Book` inherit from `CatalogItem` in the class header."
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define CatalogItem in models/base_item.py."
+                },
+                "1": {
+                  "message": "Define Book in models/book.py."
+                },
+                "2": {
+                  "message": "A Book should inherit discounted_price() from CatalogItem and calculate the reduced price correctly."
                 }
               }
             },

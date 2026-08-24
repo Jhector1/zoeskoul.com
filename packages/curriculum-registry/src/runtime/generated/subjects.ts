@@ -1822,8 +1822,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "profileId": "python",
       "catalogSlug": "python",
       "genKey": "python_part1",
-      "order": 1,
+      "order": 0,
       "accessPolicy": "paid",
+      "visibility": "public",
       "status": "active",
       "imagePublicId": null,
       "imageAlt": null,
@@ -1833,21 +1834,13 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "meta": {
         "curriculum": {
           "plannedModuleCount": 4,
-          "isTerminalRelease": true,
+          "isTerminalRelease": false,
           "moreComingMessageKey": "subjects.python-data-functions.moreComingSoon"
         },
         "completionPolicy": {
           "requireAllPublishedModules": true,
           "rewardEnabledByDefault": true,
           "certificateEnabledByDefault": true
-        },
-        "versioning": {
-          "family": "python-data-functions",
-          "version": 1,
-          "status": "active",
-          "defaultForNewEnrollments": true,
-          "supersedes": null,
-          "supersededBy": null
         }
       }
     },
@@ -1872,9 +1865,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 210,
+          "estimatedMinutes": 223,
           "prereqKeys": [
-            "modules.python--python-v2--draft.python-v2-4.title"
+            "modules.python-data-functions.python-4.title"
           ],
           "outcomeKeys": [
             "modules.python-data-functions.python-5-lists-tuples-and-dictionaries.outcomes.0",
@@ -1975,9 +1968,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 235,
+          "estimatedMinutes": 196,
           "prereqKeys": [
-            "modules.python-data-functions.python-5-lists-tuples-and-dictionaries.title"
+            "modules.python-data-functions.python-5.title"
           ],
           "outcomeKeys": [
             "modules.python-data-functions.python-6-functions-and-modularity.outcomes.0",
@@ -2085,9 +2078,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
           }
         },
         "meta": {
-          "estimatedMinutes": 240,
+          "estimatedMinutes": 171,
           "prereqKeys": [
-            "modules.python-data-functions.python-6-functions-and-modularity.title"
+            "modules.python-data-functions.python-6.title"
           ],
           "outcomeKeys": [
             "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.0",
@@ -2208,9 +2201,9 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
         },
         "serviceDefaults": null,
         "meta": {
-          "estimatedMinutes": 180,
+          "estimatedMinutes": 140,
           "prereqKeys": [
-            "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.title"
+            "modules.python-data-functions.python-7.title"
           ],
           "outcomeKeys": [
             "modules.python-data-functions.python-8-real-world-project.outcomes.0",
@@ -39425,7 +39418,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "models/account.py",
-              "content": "",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -39434,14 +39427,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/account.py",
-              "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.solutionFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -39461,7 +39454,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "models/account.py",
-                "content": "",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -39472,18 +39465,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/account.py",
-                "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.solutionFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -39493,7 +39486,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "Define a class named Account."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.checks.0.message",
+                "path": "models/account.py"
               },
               {
                 "type": "constructible",
@@ -39502,7 +39496,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "Ava",
                   120
                 ],
-                "message": "Account should accept owner and balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.checks.1.message",
+                "path": "models/account.py"
               },
               {
                 "type": "instance_attributes",
@@ -39515,18 +39510,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "owner",
                   "balance"
                 ],
-                "message": "Store owner and balance on the Account instance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.checks.2.message",
+                "path": "models/account.py"
               },
               {
                 "type": "created_instances",
                 "className": "Account",
                 "min": 1,
-                "message": "Create one Account object in the main code."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.checks.3.message",
+                "path": "models/account.py"
               },
               {
                 "type": "printed_line_count",
                 "min": 2,
-                "message": "Print the owner and balance on separate lines."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.checks.4.message",
+                "path": "main.py"
               }
             ]
           }
@@ -39549,7 +39547,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "models/account.py",
-              "content": "",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -39558,14 +39556,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/account.py",
-              "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.solutionFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -39585,7 +39583,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "models/account.py",
-                "content": "",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -39596,18 +39594,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/account.py",
-                "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.solutionFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -39617,7 +39615,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "Keep the Account class defined."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.checks.0.message",
+                "path": "models/account.py"
               },
               {
                 "type": "instance_attributes",
@@ -39630,7 +39629,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "owner",
                   "balance"
                 ],
-                "message": "Account should still store owner and balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.checks.1.message",
+                "path": "models/account.py"
               },
               {
                 "type": "method_returns",
@@ -39645,7 +39645,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Ava: $120",
                 "expectedKind": "value",
-                "message": "summary() should report the current owner and balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.checks.2.message",
+                "path": "models/account.py"
               },
               {
                 "type": "method_returns",
@@ -39660,7 +39661,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Ava: $120",
                 "expectedKind": "value",
-                "message": "summary() should exist before any deposit."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.checks.3.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -39683,18 +39685,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 ],
                 "attributeName": "balance",
                 "expected": 150,
-                "message": "deposit(30) should update the balance to 150."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.checks.4.message",
+                "path": "models/account.py"
               },
               {
                 "type": "created_instances",
                 "className": "Account",
                 "min": 1,
-                "message": "Create one Account object in the main code."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.checks.5.message",
+                "path": "models/account.py"
               },
               {
                 "type": "printed_line_count",
                 "min": 1,
-                "message": "Print the summary after depositing."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.checks.6.message",
+                "path": "main.py"
               }
             ]
           }
@@ -39717,7 +39722,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             },
             {
               "path": "models/account.py",
-              "content": "",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -39726,14 +39731,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/account.py",
-              "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.solutionFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -39753,7 +39758,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               },
               {
                 "path": "models/account.py",
-                "content": "",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -39764,18 +39769,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/account.py",
-                "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.solutionFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -39785,7 +39790,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "Keep the Account class defined."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.checks.0.message",
+                "path": "models/account.py"
               },
               {
                 "type": "instance_attributes",
@@ -39798,7 +39804,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "owner",
                   "balance"
                 ],
-                "message": "Each Account should store owner and balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.checks.1.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -39821,7 +39828,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 ],
                 "attributeName": "balance",
                 "expected": 150,
-                "message": "Ava's account should update to 150 after deposit(30)."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.checks.2.message",
+                "path": "models/account.py"
               },
               {
                 "type": "method_returns",
@@ -39836,18 +39844,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Noah: $90",
                 "expectedKind": "value",
-                "message": "Noah's summary should still show the original balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.checks.3.message",
+                "path": "models/account.py"
               },
               {
                 "type": "created_instances",
                 "className": "Account",
                 "min": 1,
-                "message": "Create two Account objects in the main code."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.checks.4.message",
+                "path": "models/account.py"
               },
               {
                 "type": "printed_line_count",
                 "min": 2,
-                "message": "Print both account summaries on separate lines."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.checks.5.message",
+                "path": "main.py"
               }
             ]
           }
@@ -40515,19 +40526,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
+            },
+            {
+              "path": "models/transaction.py",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.models_transaction_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    def summary(self):\n        return f\"{self.label}: {self.amount}\"",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
+            },
+            {
+              "path": "models/transaction.py",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionFiles.models_transaction_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -40537,10 +40564,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
+              },
+              {
+                "path": "models/transaction.py",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.models_transaction_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
@@ -40548,21 +40583,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    def summary(self):\n        return f\"{self.label}: {self.amount}\"",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    def summary(self):\n        return f\"{self.label}: {self.amount}\"",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
+              },
+              {
+                "path": "models/transaction.py",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionFiles.models_transaction_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "semanticChecks": [
               {
                 "type": "defines_class",
                 "className": "Transaction",
-                "message": "Define a Transaction class."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.0.message",
+                "path": "models/transaction.py"
               },
               {
                 "type": "constructible",
@@ -40571,7 +40615,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "Coffee",
                   -4
                 ],
-                "message": "Transaction should still accept label and amount."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.1.message",
+                "path": "models/transaction.py"
               },
               {
                 "type": "method_returns",
@@ -40589,7 +40634,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Coffee: -4",
                 "expectedKind": "value",
-                "message": "summary should return text built from the stored label and amount."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.2.message",
+                "path": "models/transaction.py"
               },
               {
                 "type": "method_returns",
@@ -40607,10 +40653,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Paycheck: 1200",
                 "expectedKind": "value",
-                "message": "summary should work for different transaction objects too."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.3.message",
+                "path": "models/transaction.py"
               }
             ]
-          }
+          },
+          "entryFilePath": "main.py"
         },
         {
           "id": "ci-constructors-and-object-state-deposit-method",
@@ -40623,19 +40671,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
+            },
+            {
+              "path": "models/account.py",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.models_account_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
+            },
+            {
+              "path": "models/account.py",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionFiles.models_account_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -40645,10 +40709,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
+              },
+              {
+                "path": "models/account.py",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.models_account_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
@@ -40656,21 +40728,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
+              },
+              {
+                "path": "models/account.py",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionFiles.models_account_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "semanticChecks": [
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "Define an Account class."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.0.message",
+                "path": "models/account.py"
               },
               {
                 "type": "constructible",
@@ -40679,7 +40760,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "Ava",
                   100
                 ],
-                "message": "Account should accept owner and balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.1.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -40706,7 +40788,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "balance",
                 "expected": 120,
                 "expectedKind": "value",
-                "message": "A deposit should increase the stored balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.2.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -40742,10 +40825,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "balance",
                 "expected": 30,
                 "expectedKind": "value",
-                "message": "Multiple deposits should keep updating the same balance attribute."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.3.message",
+                "path": "models/account.py"
               }
             ]
-          }
+          },
+          "entryFilePath": "main.py"
         },
         {
           "id": "ci-constructors-and-object-state-ledger-step",
@@ -40758,19 +40843,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
+            },
+            {
+              "path": "models/account.py",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.models_account_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "class Account:\n    def __init__(self, owner, balance, note):\n        self.owner = owner\n        self.balance = balance\n        self.note = note\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n\n    def describe(self):\n        return f\"{self.owner} | {self.balance} | {self.note}\"",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
+            },
+            {
+              "path": "models/account.py",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionFiles.models_account_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false
             }
           ],
           "workspace": {
@@ -40780,10 +40881,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
+              },
+              {
+                "path": "models/account.py",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.models_account_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ]
           },
@@ -40791,21 +40900,30 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "class Account:\n    def __init__(self, owner, balance, note):\n        self.owner = owner\n        self.balance = balance\n        self.note = note\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n\n    def describe(self):\n        return f\"{self.owner} | {self.balance} | {self.note}\"",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "class Account:\n    def __init__(self, owner, balance, note):\n        self.owner = owner\n        self.balance = balance\n        self.note = note\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n\n    def describe(self):\n        return f\"{self.owner} | {self.balance} | {self.note}\"",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
+              },
+              {
+                "path": "models/account.py",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionFiles.models_account_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false
               }
             ],
             "semanticChecks": [
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "Define an Account class."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.0.message",
+                "path": "models/account.py"
               },
               {
                 "type": "constructible",
@@ -40815,7 +40933,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   70,
                   "starter fund"
                 ],
-                "message": "Account should accept owner, balance, and note."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.1.message",
+                "path": "models/account.py"
               },
               {
                 "type": "instance_attributes",
@@ -40830,7 +40949,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "balance",
                   "note"
                 ],
-                "message": "Store all three constructor values as instance attributes."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.2.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -40859,7 +40979,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "balance",
                 "expected": 90,
                 "expectedKind": "value",
-                "message": "deposit should update the stored balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.3.message",
+                "path": "models/account.py"
               },
               {
                 "type": "method_returns",
@@ -40879,10 +41000,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Rae | 90 | starter fund",
                 "expectedKind": "value",
-                "message": "describe should return a string built from the stored state."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.4.message",
+                "path": "models/account.py"
               }
             ]
-          }
+          },
+          "entryFilePath": "main.py"
         }
       ]
     },
@@ -41429,14 +41552,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/account.py",
-              "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance}\"",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -41483,18 +41606,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/account.py",
-                "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance}\"",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -41504,7 +41627,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "Define the Account class."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.checks.0.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -41528,7 +41652,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   95
                 ],
                 "expectedKind": "value",
-                "message": "deposit should update the balance to 95."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.checks.1.message",
+                "path": "models/account.py"
               },
               {
                 "type": "method_returns",
@@ -41543,7 +41668,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Rae | balance: $95",
                 "expectedKind": "value",
-                "message": "report_line should return the formatted report text."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.checks.2.message",
+                "path": "models/account.py"
               }
             ]
           },
@@ -41576,14 +41702,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/account.py",
-              "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -41630,18 +41756,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/account.py",
-                "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -41651,7 +41777,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "Define the Account class."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.checks.0.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -41673,7 +41800,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "balance",
                 "expected": 60,
                 "expectedKind": "value",
-                "message": "A valid withdrawal should reduce the balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.checks.1.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -41704,7 +41832,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   60
                 ],
                 "expectedKind": "value",
-                "message": "After an invalid second withdrawal, the balance should remain 60."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.checks.2.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -41726,7 +41855,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "balance",
                 "expected": 100,
                 "expectedKind": "value",
-                "message": "If the amount is too large, return the unchanged balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.checks.3.message",
+                "path": "models/account.py"
               }
             ]
           },
@@ -42362,14 +42492,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/account.py",
-              "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"Owner: {self.owner}, Balance: {self.balance}\"",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.solutionFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -42416,18 +42546,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/account.py",
-                "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"Owner: {self.owner}, Balance: {self.balance}\"",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.solutionFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -42437,7 +42567,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "Define the Account class."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.checks.0.message",
+                "path": "models/account.py"
               },
               {
                 "type": "method_returns",
@@ -42452,7 +42583,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Owner: Mina, Balance: 125",
                 "expectedKind": "value",
-                "message": "summary should return the formatted string for Mina's account."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.checks.1.message",
+                "path": "models/account.py"
               },
               {
                 "type": "method_returns",
@@ -42467,7 +42599,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Owner: Leo, Balance: 40",
                 "expectedKind": "value",
-                "message": "summary should return the formatted string for Leo's account."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.checks.2.message",
+                "path": "models/account.py"
               }
             ]
           },
@@ -42500,14 +42633,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/account.py",
-              "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.solutionFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -42538,18 +42671,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/account.py",
-                "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.solutionFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -42559,7 +42692,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Account",
-                "message": "Define the Account class."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.checks.0.message",
+                "path": "models/account.py"
               },
               {
                 "type": "constructible",
@@ -42568,7 +42702,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "Trip Fund",
                   90
                 ],
-                "message": "Account should be constructible with owner and balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.checks.1.message",
+                "path": "models/account.py"
               },
               {
                 "type": "method_returns",
@@ -42585,7 +42720,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": true,
                 "expectedKind": "value",
-                "message": "A valid withdrawal should return True."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.checks.2.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -42607,7 +42743,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "balance",
                 "expected": 60,
                 "expectedKind": "value",
-                "message": "A valid withdrawal should reduce the balance."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.checks.3.message",
+                "path": "models/account.py"
               },
               {
                 "type": "method_returns",
@@ -42624,7 +42761,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": false,
                 "expectedKind": "value",
-                "message": "An oversized withdrawal should return False."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.checks.4.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -42646,7 +42784,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "balance",
                 "expected": 20,
                 "expectedKind": "value",
-                "message": "An invalid withdrawal should leave the balance unchanged."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.checks.5.message",
+                "path": "models/account.py"
               }
             ]
           }
@@ -42685,21 +42824,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/account.py",
-              "content": "from helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.solutionFiles.models_account_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "helpers/validation.py",
-              "content": "def is_positive_amount(amount):\n    return amount > 0",
+              "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.solutionFiles.helpers_validation_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -42737,25 +42876,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)",
+            "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/account.py",
-                "content": "from helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.solutionFiles.models_account_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "helpers/validation.py",
-                "content": "def is_positive_amount(amount):\n    return amount > 0",
+                "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.solutionFiles.helpers_validation_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -42771,7 +42910,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "argKinds": [],
                 "expected": true,
                 "expectedKind": "value",
-                "message": "10 should be treated as a positive amount."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.checks.0.message",
+                "path": "helpers/validation.py"
               },
               {
                 "type": "function_returns",
@@ -42782,7 +42922,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "argKinds": [],
                 "expected": false,
                 "expectedKind": "value",
-                "message": "0 should not be treated as a positive amount."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.checks.1.message",
+                "path": "helpers/validation.py"
               },
               {
                 "type": "function_returns",
@@ -42793,7 +42934,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "argKinds": [],
                 "expected": false,
                 "expectedKind": "value",
-                "message": "Negative numbers should return False."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.checks.2.message",
+                "path": "helpers/validation.py"
               },
               {
                 "type": "method_returns",
@@ -42810,7 +42952,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": true,
                 "expectedKind": "value",
-                "message": "The helper should support a valid deposit."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.checks.3.message",
+                "path": "models/account.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -42832,7 +42975,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "balance",
                 "expected": 50,
                 "expectedKind": "value",
-                "message": "A non-positive amount should leave the balance unchanged."
+                "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.checks.4.message",
+                "path": "models/account.py"
               }
             ]
           }
@@ -44214,35 +44358,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/catalog_item.py",
-              "content": "class CatalogItem:\n    def __init__(self, title, stock):\n        self.title = title\n        self.stock = stock\n\n    def is_available(self):\n        return self.stock > 0",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.models_catalog_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/book.py",
-              "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    pass",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/movie.py",
-              "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    pass",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.models_movie_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/inventory_service.py",
-              "content": "def count_available(items):\n    return sum(1 for item in items if item.is_available())",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.services_inventory_service_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -44331,39 +44475,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.inventory_service import count_available\n\nitems = [Book(\"Dune\", 3), Movie(\"Arrival\", 0)]\nprint(count_available(items))",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/catalog_item.py",
-                "content": "class CatalogItem:\n    def __init__(self, title, stock):\n        self.title = title\n        self.stock = stock\n\n    def is_available(self):\n        return self.stock > 0",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.models_catalog_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/book.py",
-                "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    pass",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.models_book_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/movie.py",
-                "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    pass",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.models_movie_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/inventory_service.py",
-                "content": "def count_available(items):\n    return sum(1 for item in items if item.is_available())",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.solutionFiles.services_inventory_service_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -44383,7 +44527,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": true,
                 "expectedKind": "value",
-                "message": "Book should inherit is_available() and return True when stock is above zero."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.checks.0.message",
+                "path": "models/book.py"
               },
               {
                 "type": "method_returns",
@@ -44398,7 +44543,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": false,
                 "expectedKind": "value",
-                "message": "Movie should inherit is_available() and return False when stock is zero."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.checks.1.message",
+                "path": "models/movie.py"
               },
               {
                 "type": "function_returns",
@@ -44440,7 +44586,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 ],
                 "expected": 1,
                 "expectedKind": "value",
-                "message": "count_available(items) should count available objects in a mixed list."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.checks.2.message",
+                "path": "services/inventory_service.py"
               }
             ]
           },
@@ -44457,14 +44604,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterCode",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
             },
             {
-              "path": "models/catalog_item.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.models_catalog_item_py.content",
+              "path": "models/base_item.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.models_base_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -44480,21 +44628,22 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
             },
             {
-              "path": "models/catalog_item.py",
-              "content": "class CatalogItem:\n    def __init__(self):\n        pass",
+              "path": "models/base_item.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.solutionFiles.models_base_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/book.py",
-              "content": "class Book:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def discounted_price(self, amount):\n        return 24",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -44507,14 +44656,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterCode",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
               },
               {
-                "path": "models/catalog_item.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.models_catalog_item_py.content",
+                "path": "models/base_item.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.models_base_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -44532,25 +44682,26 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book import Book\n\nbook = Book(\"Clean Code\", 30, \"Robert C. Martin\")\nprint(book.discounted_price(20))",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
               },
               {
-                "path": "models/catalog_item.py",
-                "content": "class CatalogItem:\n    def __init__(self):\n        pass",
+                "path": "models/base_item.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.solutionFiles.models_base_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/book.py",
-                "content": "class Book:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def discounted_price(self, amount):\n        return 24",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.solutionFiles.models_book_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -44560,12 +44711,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "CatalogItem",
-                "message": "Define CatalogItem in models/base_item.py."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.checks.0.message",
+                "path": "models/base_item.py"
               },
               {
                 "type": "defines_class",
                 "className": "Book",
-                "message": "Define Book in models/book.py."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.checks.1.message",
+                "path": "models/book.py"
               },
               {
                 "type": "method_returns",
@@ -44583,10 +44736,20 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": 24,
                 "expectedKind": "value",
-                "message": "A Book should inherit discounted_price() from CatalogItem and calculate the reduced price correctly."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.checks.2.message",
+                "path": "models/book.py"
               }
             ]
-          }
+          },
+          "entryFilePath": "main.py",
+          "sourceChecks": [
+            {
+              "type": "source_regex",
+              "pattern": "\\bclass\\s+Book\\s*\\(\\s*CatalogItem\\s*\\)\\s*:",
+              "path": "models/book.py",
+              "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.sourceChecks.0.message"
+            }
+          ]
         },
         {
           "id": "practice-inherit-shared-label",
@@ -45040,28 +45203,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/catalog_item.py",
-              "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.solutionFiles.models_catalog_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/book_item.py",
-              "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.solutionFiles.models_book_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/movie_item.py",
-              "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.solutionFiles.models_movie_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -45136,32 +45299,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/catalog_item.py",
-                "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.solutionFiles.models_catalog_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/book_item.py",
-                "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.solutionFiles.models_book_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/movie_item.py",
-                "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.solutionFiles.models_movie_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -45171,12 +45334,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "BookItem",
-                "message": "Define a BookItem class."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.checks.0.message",
+                "path": "models/book_item.py"
               },
               {
                 "type": "defines_class",
                 "className": "MovieItem",
-                "message": "Define a MovieItem class."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.checks.1.message",
+                "path": "models/movie_item.py"
               },
               {
                 "type": "method_returns",
@@ -45191,7 +45356,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Clean Code by Robert C. Martin",
                 "expectedKind": "value",
-                "message": "BookItem.display_name() should return the book label."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.checks.2.message",
+                "path": "models/book_item.py"
               },
               {
                 "type": "method_returns",
@@ -45206,7 +45372,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Arrival (116 min)",
                 "expectedKind": "value",
-                "message": "MovieItem.display_name() should return the movie label."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.checks.3.message",
+                "path": "models/movie_item.py"
               }
             ]
           },
@@ -45260,35 +45427,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/catalog_item.py",
-              "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.models_catalog_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/book_item.py",
-              "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.models_book_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/movie_item.py",
-              "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.models_movie_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/reporting.py",
-              "content": "def build_display_report(items):\n    return [item.display_name() for item in items]",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.services_reporting_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -45377,39 +45544,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "fixed_tests",
             "language": "python",
-            "solutionCode": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/catalog_item.py",
-                "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.models_catalog_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/book_item.py",
-                "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.models_book_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/movie_item.py",
-                "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.models_movie_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/reporting.py",
-                "content": "def build_display_report(items):\n    return [item.display_name() for item in items]",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.solutionFiles.services_reporting_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -45991,14 +46158,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/magazine.py",
-              "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Magazine: {self.title}\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.solutionFiles.models_magazine_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -46045,18 +46212,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "fixed_tests",
             "language": "python",
-            "solutionCode": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/magazine.py",
-                "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Magazine: {self.title}\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.solutionFiles.models_magazine_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -46106,21 +46273,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/book_rental.py",
-              "content": "class BookRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Book rental: {self.title} ({self.days} days)\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.solutionFiles.models_book_rental_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/movie_rental.py",
-              "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Movie rental: {self.title} ({self.days} days)\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.solutionFiles.models_movie_rental_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -46181,25 +46348,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "fixed_tests",
             "language": "python",
-            "solutionCode": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/book_rental.py",
-                "content": "class BookRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Book rental: {self.title} ({self.days} days)\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.solutionFiles.models_book_rental_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/movie_rental.py",
-                "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Movie rental: {self.title} ({self.days} days)\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.solutionFiles.models_movie_rental_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -46256,28 +46423,28 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/book_item.py",
-              "content": "class BookItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Book {self.title} has {self.quantity} left\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.solutionFiles.models_book_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/supply_item.py",
-              "content": "class SupplyItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Supply {self.name} has {self.quantity} left\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.solutionFiles.models_supply_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/alert_service.py",
-              "content": "def low_stock_lines(items):\n    return [item.alert_line() for item in items if item.quantity < 3]",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.solutionFiles.services_alert_service_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -46352,32 +46519,32 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "fixed_tests",
             "language": "python",
-            "solutionCode": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/book_item.py",
-                "content": "class BookItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Book {self.title} has {self.quantity} left\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.solutionFiles.models_book_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/supply_item.py",
-                "content": "class SupplyItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Supply {self.name} has {self.quantity} left\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.solutionFiles.models_supply_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/alert_service.py",
-                "content": "def low_stock_lines(items):\n    return [item.alert_line() for item in items if item.quantity < 3]",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.solutionFiles.services_alert_service_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -46840,10 +47007,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterCode",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
+            },
+            {
+              "path": "models/base_item.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_base_item_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
+            },
+            {
+              "path": "models/book.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_book_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
+            },
+            {
+              "path": "models/video.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_video_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
             },
             {
               "path": "models/audio.py",
@@ -46851,50 +47043,63 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "services/report_service.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.services_report_service_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
-            },
-            {
-              "path": "models/audio.py",
-              "content": "from models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        super().__init__(title)\n        self.speaker = speaker\n\n    def display_line(self):\n        return f\"Audio: {self.title} by {self.speaker}\"",
-              "language": "python",
-              "isEntry": false,
-              "entry": false
+              "entry": true,
+              "readOnly": true
             },
             {
               "path": "models/base_item.py",
-              "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_base_item_py.content",
               "language": "python",
               "isEntry": false,
-              "entry": false
+              "entry": false,
+              "readOnly": true
             },
             {
               "path": "models/book.py",
-              "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
-              "entry": false
+              "entry": false,
+              "readOnly": true
             },
             {
               "path": "models/video.py",
-              "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_video_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
+            },
+            {
+              "path": "models/audio.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_audio_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/report_service.py",
-              "content": "def build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.services_report_service_py.content",
               "language": "python",
               "isEntry": false,
-              "entry": false
+              "entry": false,
+              "readOnly": true
             }
           ],
           "workspace": {
@@ -46904,10 +47109,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterCode",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
+              },
+              {
+                "path": "models/base_item.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_base_item_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
+              },
+              {
+                "path": "models/book.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_book_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
+              },
+              {
+                "path": "models/video.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_video_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
               },
               {
                 "path": "models/audio.py",
@@ -46915,6 +47145,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "services/report_service.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.services_report_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
               }
             ]
           },
@@ -46922,56 +47160,62 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
-              },
-              {
-                "path": "models/audio.py",
-                "content": "from models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        super().__init__(title)\n        self.speaker = speaker\n\n    def display_line(self):\n        return f\"Audio: {self.title} by {self.speaker}\"",
-                "language": "python",
-                "isEntry": false,
-                "entry": false
+                "entry": true,
+                "readOnly": true
               },
               {
                 "path": "models/base_item.py",
-                "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_base_item_py.content",
                 "language": "python",
                 "isEntry": false,
-                "entry": false
+                "entry": false,
+                "readOnly": true
               },
               {
                 "path": "models/book.py",
-                "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_book_py.content",
                 "language": "python",
                 "isEntry": false,
-                "entry": false
+                "entry": false,
+                "readOnly": true
               },
               {
                 "path": "models/video.py",
-                "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_video_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
+              },
+              {
+                "path": "models/audio.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_audio_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/report_service.py",
-                "content": "def build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.services_report_service_py.content",
                 "language": "python",
                 "isEntry": false,
-                "entry": false
+                "entry": false,
+                "readOnly": true
               }
             ],
             "semanticChecks": [
               {
                 "type": "defines_class",
                 "className": "Audio",
-                "message": "Define the Audio class."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.checks.0.message",
+                "path": "models/audio.py"
               },
               {
                 "type": "constructible",
@@ -46980,7 +47224,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "Focus Session",
                   "Maya Lee"
                 ],
-                "message": "Audio should be constructible with title and speaker."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.checks.1.message",
+                "path": "models/audio.py"
               },
               {
                 "type": "instance_attributes",
@@ -46993,7 +47238,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "title",
                   "speaker"
                 ],
-                "message": "Audio should store title and speaker."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.checks.2.message",
+                "path": "models/audio.py"
               },
               {
                 "type": "method_returns",
@@ -47008,10 +47254,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Audio: Focus Session by Maya Lee",
                 "expectedKind": "value",
-                "message": "Audio.display_line() should match the shared report contract."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.checks.3.message",
+                "path": "models/audio.py"
               }
             ]
-          }
+          },
+          "entryFilePath": "main.py"
         },
         {
           "id": "ci-catalog-baseitem-checkout",
@@ -47024,10 +47272,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "starterFiles": [
             {
               "path": "main.py",
-              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterCode",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
             },
             {
               "path": "models/base_item.py",
@@ -47049,43 +47298,53 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               "language": "python",
               "isEntry": false,
               "entry": false
+            },
+            {
+              "path": "services/checkout_service.py",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterFiles.services_checkout_service_py.content",
+              "language": "python",
+              "isEntry": false,
+              "entry": false,
+              "readOnly": true
             }
           ],
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
-              "entry": true
+              "entry": true,
+              "readOnly": true
             },
             {
               "path": "models/base_item.py",
-              "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        return f\"{self.title} is ready\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_base_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/book.py",
-              "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        return f\"Borrow book: {self.title}\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/video.py",
-              "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        return f\"Play video: {self.title}\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_video_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/checkout_service.py",
-              "content": "def collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.services_checkout_service_py.content",
               "language": "python",
               "isEntry": false,
-              "entry": false
+              "entry": false,
+              "readOnly": true
             }
           ],
           "workspace": {
@@ -47095,10 +47354,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             "starterFiles": [
               {
                 "path": "main.py",
-                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterCode",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
               },
               {
                 "path": "models/base_item.py",
@@ -47120,6 +47380,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": false,
                 "entry": false
+              },
+              {
+                "path": "services/checkout_service.py",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterFiles.services_checkout_service_py.content",
+                "language": "python",
+                "isEntry": false,
+                "entry": false,
+                "readOnly": true
               }
             ]
           },
@@ -47127,42 +47395,44 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
-                "entry": true
+                "entry": true,
+                "readOnly": true
               },
               {
                 "path": "models/base_item.py",
-                "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        return f\"{self.title} is ready\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_base_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/book.py",
-                "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        return f\"Borrow book: {self.title}\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_book_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/video.py",
-                "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        return f\"Play video: {self.title}\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_video_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/checkout_service.py",
-                "content": "def collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.services_checkout_service_py.content",
                 "language": "python",
                 "isEntry": false,
-                "entry": false
+                "entry": false,
+                "readOnly": true
               }
             ],
             "semanticChecks": [
@@ -47178,7 +47448,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Dune is ready",
                 "expectedKind": "value",
-                "message": "BaseItem.checkout_message() should return the generic message."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.checks.0.message",
+                "path": "models/base_item.py"
               },
               {
                 "type": "method_returns",
@@ -47193,7 +47464,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Borrow book: Dune",
                 "expectedKind": "value",
-                "message": "Book.checkout_message() should return the book-specific message."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.checks.1.message",
+                "path": "models/book.py"
               },
               {
                 "type": "method_returns",
@@ -47208,10 +47480,12 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "methodArgKinds": [],
                 "expected": "Play video: Safety Training",
                 "expectedKind": "value",
-                "message": "Video.checkout_message() should return the video-specific message."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.checks.2.message",
+                "path": "models/video.py"
               }
             ]
-          }
+          },
+          "entryFilePath": "main.py"
         },
         {
           "id": "ci-catalog-export-labels",
@@ -47261,35 +47535,35 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/base_item.py",
-              "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def export_label(self):\n        return self.title",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_base_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/book.py",
-              "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def export_label(self):\n        return f\"BOOK-{self.title}\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/video.py",
-              "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def export_label(self):\n        return f\"VIDEO-{self.title}\"",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_video_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/export_service.py",
-              "content": "def join_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.export_label())\n    return \" | \".join(labels)",
+              "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.services_export_service_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -47378,39 +47652,39 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))",
+            "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/base_item.py",
-                "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def export_label(self):\n        return self.title",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_base_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/book.py",
-                "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def export_label(self):\n        return f\"BOOK-{self.title}\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_book_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/video.py",
-                "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def export_label(self):\n        return f\"VIDEO-{self.title}\"",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_video_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/export_service.py",
-                "content": "def join_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.export_label())\n    return \" | \".join(labels)",
+                "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.services_export_service_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -47457,7 +47731,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 ],
                 "expected": "BOOK-Refactoring | VIDEO-Git Basics",
                 "expectedKind": "value",
-                "message": "join_labels() should join export labels from mixed items in order."
+                "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.checks.0.message",
+                "path": "services/export_service.py"
               }
             ]
           },
@@ -49201,14 +49476,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "models/book.py",
-              "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "tests/check_book_return.py",
-              "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionFiles.tests_check_book_return_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -49255,18 +49530,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionCode",
             "solutionFiles": [
               {
                 "path": "models/book.py",
-                "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionFiles.models_book_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "tests/check_book_return.py",
-                "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionFiles.tests_check_book_return_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -49276,7 +49551,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Book",
-                "message": "Keep the Book class defined."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.0.message",
+                "path": "models/book.py"
               },
               {
                 "type": "instance_attributes",
@@ -49288,7 +49564,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "title",
                   "available"
                 ],
-                "message": "Book instances should still store title and available."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.1.message",
+                "path": "models/book.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -49301,7 +49578,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "available",
                 "expected": true,
                 "expectedKind": "value",
-                "message": "A new Book should start available."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.2.message",
+                "path": "models/book.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -49320,7 +49598,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "available",
                 "expected": false,
                 "expectedKind": "value",
-                "message": "checkout() should mark the book unavailable."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.3.message",
+                "path": "models/book.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -49344,7 +49623,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "available",
                 "expected": true,
                 "expectedKind": "value",
-                "message": "return_book() should make a checked-out book available again."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.4.message",
+                "path": "models/book.py"
               }
             ]
           },
@@ -49377,14 +49657,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "models/scoreboard.py",
-              "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionFiles.models_scoreboard_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "tests/check_scoreboard.py",
-              "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionFiles.tests_check_scoreboard_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -49431,18 +49711,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionCode",
             "solutionFiles": [
               {
                 "path": "models/scoreboard.py",
-                "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionFiles.models_scoreboard_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "tests/check_scoreboard.py",
-                "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionFiles.tests_check_scoreboard_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -49452,7 +49732,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Scoreboard",
-                "message": "Keep the Scoreboard class defined."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.0.message",
+                "path": "models/scoreboard.py"
               },
               {
                 "type": "instance_attributes",
@@ -49461,7 +49742,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributes": [
                   "score"
                 ],
-                "message": "Scoreboard instances should have a score attribute."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.1.message",
+                "path": "models/scoreboard.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -49472,7 +49754,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "score",
                 "expected": 0,
                 "expectedKind": "value",
-                "message": "A new Scoreboard should start at 0."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.2.message",
+                "path": "models/scoreboard.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -49493,7 +49776,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "score",
                 "expected": 5,
                 "expectedKind": "value",
-                "message": "After add_points(5), the score should be 5."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.3.message",
+                "path": "models/scoreboard.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -49523,7 +49807,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "attributeName": "score",
                 "expected": 8,
                 "expectedKind": "value",
-                "message": "Points should accumulate, so 5 then 3 should produce 8."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.4.message",
+                "path": "models/scoreboard.py"
               }
             ]
           },
@@ -49556,14 +49841,14 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "models/wallet.py",
-              "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionFiles.models_wallet_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "tests/check_wallet.py",
-              "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionFiles.tests_check_wallet_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -49610,18 +49895,18 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionCode",
             "solutionFiles": [
               {
                 "path": "models/wallet.py",
-                "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionFiles.models_wallet_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "tests/check_wallet.py",
-                "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionFiles.tests_check_wallet_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -49631,7 +49916,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "Wallet",
-                "message": "Keep the Wallet class defined."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.checks.0.message",
+                "path": "models/wallet.py"
               },
               {
                 "type": "instance_attributes",
@@ -49644,7 +49930,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "owner",
                   "balance"
                 ],
-                "message": "Wallet instances should store owner and balance."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.checks.1.message",
+                "path": "models/wallet.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -49659,7 +49946,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "expected": [
                   25
                 ],
-                "message": "A valid starting balance should stay unchanged."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.checks.2.message",
+                "path": "models/wallet.py"
               },
               {
                 "type": "attribute_sequence_equals",
@@ -49674,7 +49962,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "expected": [
                   0
                 ],
-                "message": "A negative starting balance should be corrected to 0."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.checks.3.message",
+                "path": "models/wallet.py"
               }
             ]
           },
@@ -50237,7 +50526,7 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.solutionCode",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -50272,11 +50561,11 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "match": "exact"
               }
             ],
-            "solutionCode": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.solutionCode",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -51045,21 +51334,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/catalog_item.py",
-              "content": "class CatalogItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.solutionFiles.models_catalog_item_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/report_service.py",
-              "content": "from models.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\"",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.solutionFiles.services_report_service_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -51120,25 +51409,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/catalog_item.py",
-                "content": "class CatalogItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.solutionFiles.models_catalog_item_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/report_service.py",
-                "content": "from models.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\"",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.solutionFiles.services_report_service_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -51148,7 +51437,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "printed_line_count",
                 "min": 1,
-                "message": "Program should print one formatted report line."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.checks.0.message",
+                "path": "main.py"
               }
             ]
           },
@@ -51188,21 +51478,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "models/__init__.py",
-              "content": "# package marker",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.solutionFiles.models_init_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/cart.py",
-              "content": "class Cart:\n    def __init__(self, owner, items=None):\n        self.owner = owner\n        self.items = [] if items is None else list(items)\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.solutionFiles.models_cart_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "main.py",
-              "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -51263,25 +51553,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "fixed_tests",
             "language": "python",
-            "solutionCode": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.solutionCode",
             "solutionFiles": [
               {
                 "path": "models/__init__.py",
-                "content": "# package marker",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.solutionFiles.models_init_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/cart.py",
-                "content": "class Cart:\n    def __init__(self, owner, items=None):\n        self.owner = owner\n        self.items = [] if items is None else list(items)\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.solutionFiles.models_cart_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "main.py",
-                "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -51331,21 +51621,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "models/__init__.py",
-              "content": "# package marker",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.solutionFiles.models_init_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "models/task.py",
-              "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\n    def is_done(self):\n        return self.done",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.solutionFiles.models_task_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "main.py",
-              "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
@@ -51406,25 +51696,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "fixed_tests",
             "language": "python",
-            "solutionCode": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.solutionCode",
             "solutionFiles": [
               {
                 "path": "models/__init__.py",
-                "content": "# package marker",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.solutionFiles.models_init_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "models/task.py",
-                "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\n    def is_done(self):\n        return self.done",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.solutionFiles.models_task_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "main.py",
-                "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
@@ -51982,21 +52272,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/book.py",
-              "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/pricing_service.py",
-              "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        total = sum(book.price for book in books)\n        return total * (1 - percent / 100)",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.solutionFiles.services_pricing_service_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -52057,25 +52347,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book import Book\nfrom services.pricing_service import PricingService\n\nbooks = [Book(\"Python Basics\", 20), Book(\"Debugging Guide\", 30)]\nservice = PricingService()\nprint(service.discounted_total(books, 10))",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/book.py",
-                "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.solutionFiles.models_book_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/pricing_service.py",
-                "content": "class PricingService:\n    def discounted_total(self, books, percent):\n        total = sum(book.price for book in books)\n        return total * (1 - percent / 100)",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.solutionFiles.services_pricing_service_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -52085,13 +52375,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "PricingService",
-                "message": "Define a PricingService class in services/pricing_service.py."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.checks.0.message",
+                "path": "services/pricing_service.py"
               },
               {
                 "type": "constructible",
                 "className": "PricingService",
                 "constructorArgs": [],
-                "message": "PricingService should be constructible with no arguments."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.checks.1.message",
+                "path": "services/pricing_service.py"
               },
               {
                 "type": "method_returns",
@@ -52138,7 +52430,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 ],
                 "expected": 45,
                 "expectedKind": "value",
-                "message": "discounted_total should apply the percentage discount to the full total."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.checks.2.message",
+                "path": "services/pricing_service.py"
               },
               {
                 "type": "method_returns",
@@ -52185,7 +52478,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 ],
                 "expected": 12,
                 "expectedKind": "value",
-                "message": "discounted_total should work with a different total and discount percent."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.checks.3.message",
+                "path": "services/pricing_service.py"
               }
             ]
           },
@@ -52225,21 +52519,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/book.py",
-              "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/inventory_service.py",
-              "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        return [book.title for book in books if book.price <= max_price]",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.solutionFiles.services_inventory_service_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -52300,25 +52594,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book import Book\nfrom services.inventory_service import InventoryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18), Book(\"Testing Notes\", 10)]\nservice = InventoryService()\nprint(service.affordable_titles(books, 12))",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/book.py",
-                "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.solutionFiles.models_book_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/inventory_service.py",
-                "content": "class InventoryService:\n    def affordable_titles(self, books, max_price):\n        return [book.title for book in books if book.price <= max_price]",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.solutionFiles.services_inventory_service_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -52328,13 +52622,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "InventoryService",
-                "message": "Define an InventoryService class in services/inventory_service.py."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.checks.0.message",
+                "path": "services/inventory_service.py"
               },
               {
                 "type": "constructible",
                 "className": "InventoryService",
                 "constructorArgs": [],
-                "message": "InventoryService should be constructible with no arguments."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.checks.1.message",
+                "path": "services/inventory_service.py"
               },
               {
                 "type": "method_returns",
@@ -52398,7 +52694,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                   "Testing Notes"
                 ],
                 "expectedKind": "value",
-                "message": "affordable_titles should return titles whose prices are at or below the limit."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.checks.2.message",
+                "path": "services/inventory_service.py"
               },
               {
                 "type": "method_returns",
@@ -52445,7 +52742,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 ],
                 "expected": [],
                 "expectedKind": "value",
-                "message": "affordable_titles should return an empty list when nothing matches."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.checks.3.message",
+                "path": "services/inventory_service.py"
               }
             ]
           },
@@ -52485,21 +52783,21 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "solutionFiles": [
             {
               "path": "main.py",
-              "content": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.solutionFiles.main_py.content",
               "language": "python",
               "isEntry": true,
               "entry": true
             },
             {
               "path": "models/book.py",
-              "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.solutionFiles.models_book_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
             },
             {
               "path": "services/summary_service.py",
-              "content": "class SummaryService:\n    def build_summary(self, books):\n        total = sum(book.price for book in books)\n        return f\"Books: {len(books)} | Total: ${total}\"",
+              "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.solutionFiles.services_summary_service_py.content",
               "language": "python",
               "isEntry": false,
               "entry": false
@@ -52560,25 +52858,25 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           "recipe": {
             "type": "semantic",
             "language": "python",
-            "solutionCode": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
+            "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.solutionCode",
             "solutionFiles": [
               {
                 "path": "main.py",
-                "content": "from models.book import Book\nfrom services.summary_service import SummaryService\n\nbooks = [Book(\"Python Basics\", 12), Book(\"Debugging Guide\", 18)]\nservice = SummaryService()\nprint(service.build_summary(books))",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.solutionFiles.main_py.content",
                 "language": "python",
                 "isEntry": true,
                 "entry": true
               },
               {
                 "path": "models/book.py",
-                "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.solutionFiles.models_book_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
               },
               {
                 "path": "services/summary_service.py",
-                "content": "class SummaryService:\n    def build_summary(self, books):\n        total = sum(book.price for book in books)\n        return f\"Books: {len(books)} | Total: ${total}\"",
+                "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.solutionFiles.services_summary_service_py.content",
                 "language": "python",
                 "isEntry": false,
                 "entry": false
@@ -52588,13 +52886,15 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
               {
                 "type": "defines_class",
                 "className": "SummaryService",
-                "message": "Define a SummaryService class in services/summary_service.py."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.checks.0.message",
+                "path": "services/summary_service.py"
               },
               {
                 "type": "constructible",
                 "className": "SummaryService",
                 "constructorArgs": [],
-                "message": "SummaryService should be constructible with no arguments."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.checks.1.message",
+                "path": "services/summary_service.py"
               },
               {
                 "type": "method_returns",
@@ -52639,7 +52939,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 ],
                 "expected": "Books: 2 | Total: $30",
                 "expectedKind": "value",
-                "message": "build_summary should return the exact summary format for the catalog."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.checks.2.message",
+                "path": "services/summary_service.py"
               },
               {
                 "type": "method_returns",
@@ -52670,7 +52971,8 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 ],
                 "expected": "Books: 1 | Total: $7",
                 "expectedKind": "value",
-                "message": "build_summary should work for a one-book catalog."
+                "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.checks.3.message",
+                "path": "services/summary_service.py"
               }
             ]
           },
@@ -57508,13 +57810,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "\\[\\s*color1\\s*,\\s*color2\\s*,\\s*color3\\s*\\]",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.sourceChecks.0.message"
-              }
             ]
           },
           "solutionFiles": [
@@ -57597,22 +57892,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_subscript",
-                "index": 0,
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.0.message"
-              },
-              {
-                "type": "source_contains_any",
-                "patterns": [
-                  "[-1]",
-                  "[2]"
-                ],
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.1.message",
-                "normalizeWhitespace": true
               }
             ]
           },
@@ -57705,13 +57984,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_subscript",
-                "index": 1,
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.sourceChecks.0.message"
               }
             ]
           },
@@ -58475,14 +58747,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_method",
-                "method": "append",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.sourceChecks.0.message",
-                "target": "items"
-              }
             ]
           },
           "solutionFiles": [
@@ -58567,14 +58831,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_method",
-                "method": "remove",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.sourceChecks.0.message",
-                "target": "colors"
-              }
             ]
           },
           "solutionFiles": [
@@ -58658,14 +58914,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_method",
-                "method": "sort",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.sourceChecks.0.message",
-                "target": "numbers"
               }
             ]
           },
@@ -59490,13 +59738,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_for_loop",
-                "iterable": "animals",
-                "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.sourceChecks.0.message"
               }
             ]
           },
@@ -67910,27 +68151,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.tools_badges_py.content",
                 "language": "python"
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_import",
-                "module": "tools.badges",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.0.message",
-                "importName": "make_badge",
-                "path": "main.py"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "def\\s+make_badge\\s*\\(",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.1.message",
-                "path": "tools/badges.py"
-              },
-              {
-                "type": "uses_method",
-                "method": "upper",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.2.message",
-                "path": "tools/badges.py"
-              }
             ]
           },
           "solutionFiles": [
@@ -68201,27 +68421,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_reports_py.content",
                 "language": "python"
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_import",
-                "module": "tools.reports",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.0.message",
-                "importName": "mission_report",
-                "path": "main.py"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "def\\s+mission_report\\s*\\(",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.1.message",
-                "path": "tools/reports.py"
-              },
-              {
-                "type": "uses_call",
-                "functionName": "mission_report",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.2.message",
-                "path": "main.py"
-              }
             ]
           },
           "solutionFiles": [
@@ -68406,33 +68605,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "path": "tools/names.py",
                 "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.solutionFiles.tools_names_py.content",
                 "language": "python"
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_import",
-                "module": "tools.names",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.0.message",
-                "importName": "clean_name",
-                "path": "main.py"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.1.message",
-                "path": "tools/names.py"
-              },
-              {
-                "type": "uses_method",
-                "method": "strip",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.2.message",
-                "path": "tools/names.py"
-              },
-              {
-                "type": "uses_method",
-                "method": "title",
-                "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.3.message",
-                "path": "tools/names.py"
               }
             ]
           },
@@ -70671,14 +70843,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "data/list.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              }
             ]
           },
           "solutionFiles": [
@@ -70781,14 +70945,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "data/notes.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              }
             ]
           },
           "solutionFiles": [
@@ -70890,14 +71046,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "data/message.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.sourceChecks.0.message",
-                "normalizeWhitespace": true
               }
             ]
           },
@@ -71550,19 +71698,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "log.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              },
-              {
-                "type": "source_regex",
-                "pattern": "['\\\"]a['\\\"]",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry.sourceChecks.1.message"
-              }
             ]
           },
           "solutionFiles": [
@@ -71676,19 +71811,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "shopping.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              },
-              {
-                "type": "uses_method",
-                "method": "write",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list.sourceChecks.1.message"
-              }
             ]
           },
           "solutionFiles": [
@@ -71799,19 +71921,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "greeting.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              },
-              {
-                "type": "uses_method",
-                "method": "write",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file.sourceChecks.1.message"
               }
             ]
           },
@@ -72490,25 +72599,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "data/source.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              },
-              {
-                "type": "source_contains",
-                "pattern": "data/copy.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.1.message",
-                "normalizeWhitespace": true
-              },
-              {
-                "type": "uses_method",
-                "method": "write",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.2.message"
-              }
             ]
           },
           "solutionFiles": [
@@ -72633,14 +72723,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "data/items.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.sourceChecks.0.message",
-                "normalizeWhitespace": true
-              }
             ]
           },
           "solutionFiles": [
@@ -72745,14 +72827,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_contains",
-                "pattern": "data/input.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.sourceChecks.0.message",
-                "normalizeWhitespace": true
               }
             ]
           },
@@ -73452,18 +73526,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "\\btry\\s*:",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.sourceChecks.0.message"
-              },
-              {
-                "type": "uses_call",
-                "functionName": "int",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.sourceChecks.1.message"
-              }
             ]
           },
           "solutionFiles": [
@@ -73551,23 +73613,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_for_loop",
-                "iterable": "parts",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.sourceChecks.0.message"
-              },
-              {
-                "type": "source_regex",
-                "pattern": "\\btry\\s*:",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.sourceChecks.1.message"
-              },
-              {
-                "type": "uses_call",
-                "functionName": "int",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.sourceChecks.2.message"
               }
             ]
           },
@@ -73661,18 +73706,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "language": "python",
                 "isEntry": true,
                 "entry": true
-              }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "\\btry\\s*:",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.sourceChecks.0.message"
-              },
-              {
-                "type": "uses_call",
-                "functionName": "int",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.sourceChecks.1.message"
               }
             ]
           },
@@ -75313,13 +75346,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "uses_method",
-                "method": "strip",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.sourceChecks.0.message"
-              }
             ]
           },
           "solutionFiles": [
@@ -75424,18 +75450,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "\\btry\\s*:",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.sourceChecks.0.message"
-              },
-              {
-                "type": "uses_call",
-                "functionName": "int",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.sourceChecks.1.message"
-              }
             ]
           },
           "solutionFiles": [
@@ -75501,8 +75515,23 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
             ],
             "workspaceExpectations": {
               "requiredFolders": [],
-              "requiredFiles": []
-            }
+              "requiredFiles": [
+                "scores.csv",
+                "summary.txt"
+              ]
+            },
+            "files": [
+              {
+                "path": "scores.csv",
+                "content": "name,score\nAva,9\nBen,oops\nCara,7\n",
+                "readOnly": true
+              },
+              {
+                "path": "summary.txt",
+                "content": "",
+                "readOnly": false
+              }
+            ]
           },
           "showExpectedExample": true,
           "recipe": {
@@ -75552,19 +75581,6 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
                 "isEntry": true,
                 "entry": true
               }
-            ],
-            "sourceChecks": [
-              {
-                "type": "source_regex",
-                "pattern": "\\btry\\s*:",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.sourceChecks.0.message"
-              },
-              {
-                "type": "source_contains",
-                "pattern": "summary.txt",
-                "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.sourceChecks.1.message",
-                "normalizeWhitespace": true
-              }
             ]
           },
           "solutionFiles": [
@@ -75578,7 +75594,10 @@ const TOPIC_MANIFESTS_BY_SUBJECT: Record<string, Record<string, any>> =
           ],
           "workspaceExpectations": {
             "requiredFolders": [],
-            "requiredFiles": []
+            "requiredFiles": [
+              "scores.csv",
+              "summary.txt"
+            ]
           },
           "sourceChecks": [
             {

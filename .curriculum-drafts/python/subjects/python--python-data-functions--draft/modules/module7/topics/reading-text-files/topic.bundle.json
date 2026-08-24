@@ -685,14 +685,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "data/list.txt",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.sourceChecks.0.message",
-            "normalizeWhitespace": true
-          }
         ]
       },
       "solutionFiles": [
@@ -795,14 +787,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "data/notes.txt",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.sourceChecks.0.message",
-            "normalizeWhitespace": true
-          }
         ]
       },
       "solutionFiles": [
@@ -904,14 +888,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "data/message.txt",
-            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.sourceChecks.0.message",
-            "normalizeWhitespace": true
           }
         ]
       },

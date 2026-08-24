@@ -563,14 +563,14 @@
       "solutionFiles": [
         {
           "path": "models/book.py",
-          "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "tests/check_book_return.py",
-          "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionFiles.tests_check_book_return_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -617,18 +617,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionCode",
         "solutionFiles": [
           {
             "path": "models/book.py",
-            "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "tests/check_book_return.py",
-            "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.solutionFiles.tests_check_book_return_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -638,7 +638,8 @@
           {
             "type": "defines_class",
             "className": "Book",
-            "message": "Keep the Book class defined."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.0.message",
+            "path": "models/book.py"
           },
           {
             "type": "instance_attributes",
@@ -650,7 +651,8 @@
               "title",
               "available"
             ],
-            "message": "Book instances should still store title and available."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.1.message",
+            "path": "models/book.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -663,7 +665,8 @@
             "attributeName": "available",
             "expected": true,
             "expectedKind": "value",
-            "message": "A new Book should start available."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.2.message",
+            "path": "models/book.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -682,7 +685,8 @@
             "attributeName": "available",
             "expected": false,
             "expectedKind": "value",
-            "message": "checkout() should mark the book unavailable."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.3.message",
+            "path": "models/book.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -706,7 +710,8 @@
             "attributeName": "available",
             "expected": true,
             "expectedKind": "value",
-            "message": "return_book() should make a checked-out book available again."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.checks.4.message",
+            "path": "models/book.py"
           }
         ]
       },
@@ -739,14 +744,14 @@
       "solutionFiles": [
         {
           "path": "models/scoreboard.py",
-          "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionFiles.models_scoreboard_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "tests/check_scoreboard.py",
-          "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionFiles.tests_check_scoreboard_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -793,18 +798,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionCode",
         "solutionFiles": [
           {
             "path": "models/scoreboard.py",
-            "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionFiles.models_scoreboard_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "tests/check_scoreboard.py",
-            "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.solutionFiles.tests_check_scoreboard_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -814,7 +819,8 @@
           {
             "type": "defines_class",
             "className": "Scoreboard",
-            "message": "Keep the Scoreboard class defined."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.0.message",
+            "path": "models/scoreboard.py"
           },
           {
             "type": "instance_attributes",
@@ -823,7 +829,8 @@
             "attributes": [
               "score"
             ],
-            "message": "Scoreboard instances should have a score attribute."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.1.message",
+            "path": "models/scoreboard.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -834,7 +841,8 @@
             "attributeName": "score",
             "expected": 0,
             "expectedKind": "value",
-            "message": "A new Scoreboard should start at 0."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.2.message",
+            "path": "models/scoreboard.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -855,7 +863,8 @@
             "attributeName": "score",
             "expected": 5,
             "expectedKind": "value",
-            "message": "After add_points(5), the score should be 5."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.3.message",
+            "path": "models/scoreboard.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -885,7 +894,8 @@
             "attributeName": "score",
             "expected": 8,
             "expectedKind": "value",
-            "message": "Points should accumulate, so 5 then 3 should produce 8."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.checks.4.message",
+            "path": "models/scoreboard.py"
           }
         ]
       },
@@ -918,14 +928,14 @@
       "solutionFiles": [
         {
           "path": "models/wallet.py",
-          "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionFiles.models_wallet_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "tests/check_wallet.py",
-          "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionFiles.tests_check_wallet_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -972,18 +982,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionCode",
         "solutionFiles": [
           {
             "path": "models/wallet.py",
-            "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionFiles.models_wallet_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "tests/check_wallet.py",
-            "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.solutionFiles.tests_check_wallet_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -993,7 +1003,8 @@
           {
             "type": "defines_class",
             "className": "Wallet",
-            "message": "Keep the Wallet class defined."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.checks.0.message",
+            "path": "models/wallet.py"
           },
           {
             "type": "instance_attributes",
@@ -1006,7 +1017,8 @@
               "owner",
               "balance"
             ],
-            "message": "Wallet instances should store owner and balance."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.checks.1.message",
+            "path": "models/wallet.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -1021,7 +1033,8 @@
             "expected": [
               25
             ],
-            "message": "A valid starting balance should stay unchanged."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.checks.2.message",
+            "path": "models/wallet.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -1036,7 +1049,8 @@
             "expected": [
               0
             ],
-            "message": "A negative starting balance should be corrected to 0."
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.checks.3.message",
+            "path": "models/wallet.py"
           }
         ]
       },

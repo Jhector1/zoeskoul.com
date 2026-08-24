@@ -766,27 +766,6 @@
             "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.tools_badges_py.content",
             "language": "python"
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "tools.badges",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.0.message",
-            "importName": "make_badge",
-            "path": "main.py"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "def\\s+make_badge\\s*\\(",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.1.message",
-            "path": "tools/badges.py"
-          },
-          {
-            "type": "uses_method",
-            "method": "upper",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.2.message",
-            "path": "tools/badges.py"
-          }
         ]
       },
       "solutionFiles": [
@@ -1057,27 +1036,6 @@
             "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_reports_py.content",
             "language": "python"
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "tools.reports",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.0.message",
-            "importName": "mission_report",
-            "path": "main.py"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "def\\s+mission_report\\s*\\(",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.1.message",
-            "path": "tools/reports.py"
-          },
-          {
-            "type": "uses_call",
-            "functionName": "mission_report",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.2.message",
-            "path": "main.py"
-          }
         ]
       },
       "solutionFiles": [
@@ -1262,33 +1220,6 @@
             "path": "tools/names.py",
             "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.solutionFiles.tools_names_py.content",
             "language": "python"
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_import",
-            "module": "tools.names",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.0.message",
-            "importName": "clean_name",
-            "path": "main.py"
-          },
-          {
-            "type": "source_regex",
-            "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.1.message",
-            "path": "tools/names.py"
-          },
-          {
-            "type": "uses_method",
-            "method": "strip",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.2.message",
-            "path": "tools/names.py"
-          },
-          {
-            "type": "uses_method",
-            "method": "title",
-            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.3.message",
-            "path": "tools/names.py"
           }
         ]
       },

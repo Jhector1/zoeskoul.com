@@ -249,7 +249,38 @@
                 "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "# Write your code below."
+              "starterCode": "from models.transaction import Transaction\n\nfor transaction in [Transaction(\"Coffee\", -4), Transaction(\"Paycheck\", 1200)]:\n    print(transaction.summary())\n",
+              "solutionCode": "from models.transaction import Transaction\n\nfor transaction in [Transaction(\"Coffee\", -4), Transaction(\"Paycheck\", 1200)]:\n    print(transaction.summary())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.transaction import Transaction\n\nfor transaction in [Transaction(\"Coffee\", -4), Transaction(\"Paycheck\", 1200)]:\n    print(transaction.summary())\n"
+                },
+                "models_transaction_py": {
+                  "content": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    # Add summary() so it returns text built from the stored attributes.\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.transaction import Transaction\n\nfor transaction in [Transaction(\"Coffee\", -4), Transaction(\"Paycheck\", 1200)]:\n    print(transaction.summary())\n"
+                },
+                "models_transaction_py": {
+                  "content": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    def summary(self):\n        return f\"{self.label}: {self.amount}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define a Transaction class."
+                },
+                "1": {
+                  "message": "Transaction should still accept label and amount."
+                },
+                "2": {
+                  "message": "summary should return text built from the stored label and amount."
+                },
+                "3": {
+                  "message": "summary should work for different transaction objects too."
+                }
+              }
             },
             "ci-constructors-and-object-state-deposit-method": {
               "title": "Track deposits on an account object",
@@ -260,7 +291,38 @@
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your code below."
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(20)\nprint(account.balance)\n",
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(20)\nprint(account.balance)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(20)\nprint(account.balance)\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        pass\n\n    def deposit(self, amount):\n        pass\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(20)\nprint(account.balance)\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define an Account class."
+                },
+                "1": {
+                  "message": "Account should accept owner and balance."
+                },
+                "2": {
+                  "message": "A deposit should increase the stored balance."
+                },
+                "3": {
+                  "message": "Multiple deposits should keep updating the same balance attribute."
+                }
+              }
             },
             "ci-constructors-and-object-state-ledger-step": {
               "title": "Build a ledger account that keeps owner, balance, and note",
@@ -271,7 +333,41 @@
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
               },
-              "starterCode": "# Write your code below."
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70, \"starter fund\")\naccount.deposit(20)\nprint(account.describe())\n",
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70, \"starter fund\")\naccount.deposit(20)\nprint(account.describe())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70, \"starter fund\")\naccount.deposit(20)\nprint(account.describe())\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance, note):\n        pass\n\n    def deposit(self, amount):\n        pass\n\n    def describe(self):\n        pass\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70, \"starter fund\")\naccount.deposit(20)\nprint(account.describe())\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance, note):\n        self.owner = owner\n        self.balance = balance\n        self.note = note\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n\n    def describe(self):\n        return f\"{self.owner} | {self.balance} | {self.note}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define an Account class."
+                },
+                "1": {
+                  "message": "Account should accept owner, balance, and note."
+                },
+                "2": {
+                  "message": "Store all three constructor values as instance attributes."
+                },
+                "3": {
+                  "message": "deposit should update the stored balance."
+                },
+                "4": {
+                  "message": "describe should return a string built from the stored state."
+                }
+              }
             }
           }
         }

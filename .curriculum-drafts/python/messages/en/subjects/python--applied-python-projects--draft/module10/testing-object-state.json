@@ -196,6 +196,32 @@
                 "tests_check_book_return_py": {
                   "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")"
                 }
+              },
+              "solutionFiles": {
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True"
+                },
+                "tests_check_book_return_py": {
+                  "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")"
+                }
+              },
+              "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = True",
+              "checks": {
+                "0": {
+                  "message": "Keep the Book class defined."
+                },
+                "1": {
+                  "message": "Book instances should still store title and available."
+                },
+                "2": {
+                  "message": "A new Book should start available."
+                },
+                "3": {
+                  "message": "checkout() should mark the book unavailable."
+                },
+                "4": {
+                  "message": "return_book() should make a checked-out book available again."
+                }
               }
             },
             "ci-testing-object-state-fix-wallet-validation": {
@@ -215,6 +241,29 @@
                 "tests_check_wallet_py": {
                   "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")"
                 }
+              },
+              "solutionFiles": {
+                "models_wallet_py": {
+                  "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)"
+                },
+                "tests_check_wallet_py": {
+                  "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")"
+                }
+              },
+              "solutionCode": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = max(0, starting_balance)",
+              "checks": {
+                "0": {
+                  "message": "Keep the Wallet class defined."
+                },
+                "1": {
+                  "message": "Wallet instances should store owner and balance."
+                },
+                "2": {
+                  "message": "A valid starting balance should stay unchanged."
+                },
+                "3": {
+                  "message": "A negative starting balance should be corrected to 0."
+                }
               }
             },
             "ci-testing-object-state-fix-scoreboard-add-points": {
@@ -233,6 +282,32 @@
                 },
                 "tests_check_scoreboard_py": {
                   "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")"
+                }
+              },
+              "solutionFiles": {
+                "models_scoreboard_py": {
+                  "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points"
+                },
+                "tests_check_scoreboard_py": {
+                  "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")"
+                }
+              },
+              "solutionCode": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score += points",
+              "checks": {
+                "0": {
+                  "message": "Keep the Scoreboard class defined."
+                },
+                "1": {
+                  "message": "Scoreboard instances should have a score attribute."
+                },
+                "2": {
+                  "message": "A new Scoreboard should start at 0."
+                },
+                "3": {
+                  "message": "After add_points(5), the score should be 5."
+                },
+                "4": {
+                  "message": "Points should accumulate, so 5 then 3 should produce 8."
                 }
               }
             }

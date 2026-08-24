@@ -146,6 +146,35 @@
                 "models_movie_item_py": {
                   "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title"
+                },
+                "models_book_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\""
+                },
+                "models_movie_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\""
+                }
+              },
+              "solutionCode": "from models.book_item import BookItem\nfrom models.movie_item import MovieItem\n\nbook = BookItem(\"Clean Code\", \"Robert C. Martin\")\nmovie = MovieItem(\"Arrival\", 116)\nprint(book.display_name())\nprint(movie.display_name())",
+              "checks": {
+                "0": {
+                  "message": "Define a BookItem class."
+                },
+                "1": {
+                  "message": "Define a MovieItem class."
+                },
+                "2": {
+                  "message": "BookItem.display_name() should return the book label."
+                },
+                "3": {
+                  "message": "MovieItem.display_name() should return the movie label."
+                }
               }
             },
             "catalog-step-mixed-report": {
@@ -174,7 +203,25 @@
                 "services_reporting_py": {
                   "content": "def build_display_report(items):\n    pass"
                 }
-              }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return self.title"
+                },
+                "models_book_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.title} by {self.author}\""
+                },
+                "models_movie_item_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass MovieItem(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_name(self):\n        return f\"{self.title} ({self.minutes} min)\""
+                },
+                "services_reporting_py": {
+                  "content": "def build_display_report(items):\n    return [item.display_name() for item in items]"
+                }
+              },
+              "solutionCode": "from models.catalog_item import CatalogItem\nfrom models.book_item import BookItem\nfrom models.movie_item import MovieItem\nfrom services.reporting import build_display_report\n\nitems = [\n    CatalogItem(\"Notebook\"),\n    BookItem(\"Refactoring\", \"Martin Fowler\"),\n    MovieItem(\"Up\", 96),\n]\nfor line in build_display_report(items):\n    print(line)"
             },
             "practice-specialized-display-label": {
               "title": "Override a display label in one subclass",

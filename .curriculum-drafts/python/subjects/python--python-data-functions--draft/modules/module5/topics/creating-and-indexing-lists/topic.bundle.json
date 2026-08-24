@@ -518,13 +518,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_regex",
-            "pattern": "\\[\\s*color1\\s*,\\s*color2\\s*,\\s*color3\\s*\\]",
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.sourceChecks.0.message"
-          }
         ]
       },
       "solutionFiles": [
@@ -607,22 +600,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_subscript",
-            "index": 0,
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.0.message"
-          },
-          {
-            "type": "source_contains_any",
-            "patterns": [
-              "[-1]",
-              "[2]"
-            ],
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.1.message",
-            "normalizeWhitespace": true
           }
         ]
       },
@@ -715,13 +692,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_subscript",
-            "index": 1,
-            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.sourceChecks.0.message"
           }
         ]
       },

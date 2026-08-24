@@ -800,13 +800,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_for_loop",
-            "iterable": "animals",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.sourceChecks.0.message"
-          }
         ]
       },
       "solutionFiles": [

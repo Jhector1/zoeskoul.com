@@ -739,14 +739,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_method",
-            "method": "append",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.sourceChecks.0.message",
-            "target": "items"
-          }
         ]
       },
       "solutionFiles": [
@@ -831,14 +823,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_method",
-            "method": "remove",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.sourceChecks.0.message",
-            "target": "colors"
-          }
         ]
       },
       "solutionFiles": [
@@ -922,14 +906,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "uses_method",
-            "method": "sort",
-            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.sourceChecks.0.message",
-            "target": "numbers"
           }
         ]
       },

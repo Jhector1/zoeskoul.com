@@ -4,8 +4,9 @@
     "profileId": "python",
     "catalogSlug": "python",
     "genKey": "python_part1",
-    "order": 1,
+    "order": 0,
     "accessPolicy": "paid",
+    "visibility": "public",
     "status": "active",
     "imagePublicId": null,
     "imageAlt": null,
@@ -15,23 +16,14 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
-        "isTerminalRelease": true,
+        "isTerminalRelease": false,
         "moreComingMessageKey": "subjects.python--python-data-functions--draft.moreComingSoon"
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
         "rewardEnabledByDefault": true,
         "certificateEnabledByDefault": true
-      },
-      "versioning": {
-        "family": "python-data-functions",
-        "version": 1,
-        "status": "active",
-        "defaultForNewEnrollments": true,
-        "supersedes": null,
-        "supersededBy": null
       }
-
     }
   },
   "modules": [
@@ -55,9 +47,9 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 210,
+        "estimatedMinutes": 223,
         "prereqKeys": [
-          "modules.python--python-v2--draft.python-v2-4.title"
+          "modules.python--python-data-functions--draft.python-4.title"
         ],
         "outcomeKeys": [
           "modules.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.outcomes.0",
@@ -158,9 +150,9 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 235,
+        "estimatedMinutes": 196,
         "prereqKeys": [
-          "modules.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.title"
+          "modules.python--python-data-functions--draft.python-5.title"
         ],
         "outcomeKeys": [
           "modules.python--python-data-functions--draft.python-6-functions-and-modularity.outcomes.0",
@@ -268,9 +260,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 240,
+        "estimatedMinutes": 171,
         "prereqKeys": [
-          "modules.python--python-data-functions--draft.python-6-functions-and-modularity.title"
+          "modules.python--python-data-functions--draft.python-6.title"
         ],
         "outcomeKeys": [
           "modules.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.outcomes.0",
@@ -391,9 +383,9 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 180,
+        "estimatedMinutes": 140,
         "prereqKeys": [
-          "modules.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.title"
+          "modules.python--python-data-functions--draft.python-7.title"
         ],
         "outcomeKeys": [
           "modules.python--python-data-functions--draft.python-8-real-world-project.outcomes.0",

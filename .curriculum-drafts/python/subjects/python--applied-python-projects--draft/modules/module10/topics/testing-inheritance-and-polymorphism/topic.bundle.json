@@ -553,7 +553,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -588,11 +588,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true

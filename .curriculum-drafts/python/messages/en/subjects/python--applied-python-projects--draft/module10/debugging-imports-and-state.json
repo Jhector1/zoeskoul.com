@@ -199,6 +199,23 @@
                 "services_report_service_py": {
                   "content": "from model.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\""
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity"
+                },
+                "services_report_service_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\ndef format_item(item: CatalogItem):\n    return f\"{item.title}: {item.quantity}\""
+                }
+              },
+              "solutionCode": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+              "checks": {
+                "0": {
+                  "message": "Program should print one formatted report line."
+                }
               }
             },
             "ci-debugging-imports-and-state-5": {
@@ -221,7 +238,19 @@
                 "main_py": {
                   "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())"
                 }
-              }
+              },
+              "solutionFiles": {
+                "models_init_py": {
+                  "content": "# package marker"
+                },
+                "models_cart_py": {
+                  "content": "class Cart:\n    def __init__(self, owner, items=None):\n        self.owner = owner\n        self.items = [] if items is None else list(items)\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)"
+                },
+                "main_py": {
+                  "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())"
+                }
+              },
+              "solutionCode": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())"
             },
             "ci-debugging-imports-and-state-6": {
               "title": "Fix a state-changing method in a task model",
@@ -243,7 +272,19 @@
                 "main_py": {
                   "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())"
                 }
-              }
+              },
+              "solutionFiles": {
+                "models_init_py": {
+                  "content": "# package marker"
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        self.done = True\n\n    def is_done(self):\n        return self.done"
+                },
+                "main_py": {
+                  "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())"
+                }
+              },
+              "solutionCode": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())"
             }
           }
         }

@@ -443,10 +443,35 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterCode",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_base_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "models/video.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_video_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
         },
         {
           "path": "models/audio.py",
@@ -454,50 +479,63 @@
           "language": "python",
           "isEntry": false,
           "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
         }
       ],
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/audio.py",
-          "content": "from models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        super().__init__(title)\n        self.speaker = speaker\n\n    def display_line(self):\n        return f\"Audio: {self.title} by {self.speaker}\"",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
+          "entry": true,
+          "readOnly": true
         },
         {
           "path": "models/base_item.py",
-          "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_base_item_py.content",
           "language": "python",
           "isEntry": false,
-          "entry": false
+          "entry": false,
+          "readOnly": true
         },
         {
           "path": "models/book.py",
-          "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
-          "entry": false
+          "entry": false,
+          "readOnly": true
         },
         {
           "path": "models/video.py",
-          "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_video_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
+        },
+        {
+          "path": "models/audio.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_audio_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "def build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
-          "entry": false
+          "entry": false,
+          "readOnly": true
         }
       ],
       "workspace": {
@@ -507,10 +545,35 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterCode",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
+            "entry": true,
+            "readOnly": true
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_base_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "models/video.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.models_video_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
           },
           {
             "path": "models/audio.py",
@@ -518,6 +581,14 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.starterFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
           }
         ]
       },
@@ -525,56 +596,62 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from models.book import Book\nfrom models.video import Video\nfrom models.audio import Audio\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Atomic Habits\", \"James Clear\"),\n    Video(\"Study Skills\", 15),\n    Audio(\"Focus Session\", \"Maya Lee\")\n]\n\nfor line in build_report(items):\n    print(line)",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/audio.py",
-            "content": "from models.base_item import BaseItem\n\nclass Audio(BaseItem):\n    def __init__(self, title, speaker):\n        super().__init__(title)\n        self.speaker = speaker\n\n    def display_line(self):\n        return f\"Audio: {self.title} by {self.speaker}\"",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
+            "entry": true,
+            "readOnly": true
           },
           {
             "path": "models/base_item.py",
-            "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_base_item_py.content",
             "language": "python",
             "isEntry": false,
-            "entry": false
+            "entry": false,
+            "readOnly": true
           },
           {
             "path": "models/book.py",
-            "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
-            "entry": false
+            "entry": false,
+            "readOnly": true
           },
           {
             "path": "models/video.py",
-            "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_video_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
+          },
+          {
+            "path": "models/audio.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.models_audio_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "def build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.solutionFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
-            "entry": false
+            "entry": false,
+            "readOnly": true
           }
         ],
         "semanticChecks": [
           {
             "type": "defines_class",
             "className": "Audio",
-            "message": "Define the Audio class."
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.checks.0.message",
+            "path": "models/audio.py"
           },
           {
             "type": "constructible",
@@ -583,7 +660,8 @@
               "Focus Session",
               "Maya Lee"
             ],
-            "message": "Audio should be constructible with title and speaker."
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.checks.1.message",
+            "path": "models/audio.py"
           },
           {
             "type": "instance_attributes",
@@ -596,7 +674,8 @@
               "title",
               "speaker"
             ],
-            "message": "Audio should store title and speaker."
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.checks.2.message",
+            "path": "models/audio.py"
           },
           {
             "type": "method_returns",
@@ -611,10 +690,12 @@
             "methodArgKinds": [],
             "expected": "Audio: Focus Session by Maya Lee",
             "expectedKind": "value",
-            "message": "Audio.display_line() should match the shared report contract."
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.checks.3.message",
+            "path": "models/audio.py"
           }
         ]
-      }
+      },
+      "entryFilePath": "main.py"
     },
     {
       "id": "ci-catalog-baseitem-checkout",
@@ -627,10 +708,11 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterCode",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
+          "entry": true,
+          "readOnly": true
         },
         {
           "path": "models/base_item.py",
@@ -652,43 +734,53 @@
           "language": "python",
           "isEntry": false,
           "entry": false
+        },
+        {
+          "path": "services/checkout_service.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterFiles.services_checkout_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": true
         }
       ],
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
+          "entry": true,
+          "readOnly": true
         },
         {
           "path": "models/base_item.py",
-          "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        return f\"{self.title} is ready\"",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_base_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        return f\"Borrow book: {self.title}\"",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/video.py",
-          "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        return f\"Play video: {self.title}\"",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_video_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/checkout_service.py",
-          "content": "def collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.services_checkout_service_py.content",
           "language": "python",
           "isEntry": false,
-          "entry": false
+          "entry": false,
+          "readOnly": true
         }
       ],
       "workspace": {
@@ -698,10 +790,11 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterCode",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
+            "entry": true,
+            "readOnly": true
           },
           {
             "path": "models/base_item.py",
@@ -723,6 +816,14 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "services/checkout_service.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.starterFiles.services_checkout_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false,
+            "readOnly": true
           }
         ]
       },
@@ -730,42 +831,44 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from models.book import Book\nfrom models.video import Video\nfrom services.checkout_service import collect_messages\n\nitems = [Book(\"Dune\", \"Frank Herbert\"), Video(\"Safety Training\", 12)]\nfor line in collect_messages(items):\n    print(line)",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
+            "entry": true,
+            "readOnly": true
           },
           {
             "path": "models/base_item.py",
-            "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def checkout_message(self):\n        return f\"{self.title} is ready\"",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_base_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def checkout_message(self):\n        return f\"Borrow book: {self.title}\"",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/video.py",
-            "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def checkout_message(self):\n        return f\"Play video: {self.title}\"",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.models_video_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/checkout_service.py",
-            "content": "def collect_messages(items):\n    messages = []\n    for item in items:\n        messages.append(item.checkout_message())\n    return messages",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.solutionFiles.services_checkout_service_py.content",
             "language": "python",
             "isEntry": false,
-            "entry": false
+            "entry": false,
+            "readOnly": true
           }
         ],
         "semanticChecks": [
@@ -781,7 +884,8 @@
             "methodArgKinds": [],
             "expected": "Dune is ready",
             "expectedKind": "value",
-            "message": "BaseItem.checkout_message() should return the generic message."
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.checks.0.message",
+            "path": "models/base_item.py"
           },
           {
             "type": "method_returns",
@@ -796,7 +900,8 @@
             "methodArgKinds": [],
             "expected": "Borrow book: Dune",
             "expectedKind": "value",
-            "message": "Book.checkout_message() should return the book-specific message."
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.checks.1.message",
+            "path": "models/book.py"
           },
           {
             "type": "method_returns",
@@ -811,10 +916,12 @@
             "methodArgKinds": [],
             "expected": "Play video: Safety Training",
             "expectedKind": "value",
-            "message": "Video.checkout_message() should return the video-specific message."
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.checks.2.message",
+            "path": "models/video.py"
           }
         ]
-      }
+      },
+      "entryFilePath": "main.py"
     },
     {
       "id": "ci-catalog-export-labels",
@@ -864,35 +971,35 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_item.py",
-          "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def export_label(self):\n        return self.title",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_base_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def export_label(self):\n        return f\"BOOK-{self.title}\"",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/video.py",
-          "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def export_label(self):\n        return f\"VIDEO-{self.title}\"",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_video_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/export_service.py",
-          "content": "def join_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.export_label())\n    return \" | \".join(labels)",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.services_export_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -981,39 +1088,39 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from models.book import Book\nfrom models.video import Video\nfrom services.export_service import join_labels\n\nitems = [Book(\"Refactoring\", \"Martin Fowler\"), Video(\"Git Basics\", 25)]\nprint(join_labels(items))",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_item.py",
-            "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def export_label(self):\n        return self.title",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_base_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def export_label(self):\n        return f\"BOOK-{self.title}\"",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/video.py",
-            "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def export_label(self):\n        return f\"VIDEO-{self.title}\"",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.models_video_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/export_service.py",
-            "content": "def join_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.export_label())\n    return \" | \".join(labels)",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.solutionFiles.services_export_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1060,7 +1167,8 @@
             ],
             "expected": "BOOK-Refactoring | VIDEO-Git Basics",
             "expectedKind": "value",
-            "message": "join_labels() should join export labels from mixed items in order."
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.checks.0.message",
+            "path": "services/export_service.py"
           }
         ]
       },

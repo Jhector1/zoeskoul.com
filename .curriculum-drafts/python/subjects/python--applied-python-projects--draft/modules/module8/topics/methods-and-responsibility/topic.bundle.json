@@ -541,14 +541,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance}\"",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -595,18 +595,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance}\"",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.solutionFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -616,7 +616,8 @@
           {
             "type": "defines_class",
             "className": "Account",
-            "message": "Define the Account class."
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -640,7 +641,8 @@
               95
             ],
             "expectedKind": "value",
-            "message": "deposit should update the balance to 95."
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "method_returns",
@@ -655,7 +657,8 @@
             "methodArgKinds": [],
             "expected": "Rae | balance: $95",
             "expectedKind": "value",
-            "message": "report_line should return the formatted report text."
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.checks.2.message",
+            "path": "models/account.py"
           }
         ]
       },
@@ -688,14 +691,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -742,18 +745,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.solutionFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -763,7 +766,8 @@
           {
             "type": "defines_class",
             "className": "Account",
-            "message": "Define the Account class."
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -785,7 +789,8 @@
             "attributeName": "balance",
             "expected": 60,
             "expectedKind": "value",
-            "message": "A valid withdrawal should reduce the balance."
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -816,7 +821,8 @@
               60
             ],
             "expectedKind": "value",
-            "message": "After an invalid second withdrawal, the balance should remain 60."
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.checks.2.message",
+            "path": "models/account.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -838,7 +844,8 @@
             "attributeName": "balance",
             "expected": 100,
             "expectedKind": "value",
-            "message": "If the amount is too large, return the unchanged balance."
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.checks.3.message",
+            "path": "models/account.py"
           }
         ]
       },

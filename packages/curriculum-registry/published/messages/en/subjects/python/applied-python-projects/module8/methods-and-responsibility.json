@@ -194,6 +194,26 @@
                 "models_account_py": {
                   "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass\n\n    def report_line(self):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\nprint(account.report_line())",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "deposit should update the balance to 95."
+                },
+                "2": {
+                  "message": "report_line should return the formatted report text."
+                }
               }
             },
             "ci-methods-and-responsibility-validate-withdrawal": {
@@ -212,6 +232,29 @@
                 },
                 "models_account_py": {
                   "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Jules\", 100)\nprint(account.withdraw(40))\nprint(account.withdraw(80))",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "A valid withdrawal should reduce the balance."
+                },
+                "2": {
+                  "message": "After an invalid second withdrawal, the balance should remain 60."
+                },
+                "3": {
+                  "message": "If the amount is too large, return the unchanged balance."
                 }
               }
             },

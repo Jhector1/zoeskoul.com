@@ -188,6 +188,26 @@
                 "models_account_py": {
                   "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        pass"
                 }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"Owner: {self.owner}, Balance: {self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "summary should return the formatted string for Mina's account."
+                },
+                "2": {
+                  "message": "summary should return the formatted string for Leo's account."
+                }
               }
             },
             "ci-account-withdraw": {
@@ -206,6 +226,35 @@
                 },
                 "models_account_py": {
                   "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def withdraw(self, amount):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should be constructible with owner and balance."
+                },
+                "2": {
+                  "message": "A valid withdrawal should return True."
+                },
+                "3": {
+                  "message": "A valid withdrawal should reduce the balance."
+                },
+                "4": {
+                  "message": "An oversized withdrawal should return False."
+                },
+                "5": {
+                  "message": "An invalid withdrawal should leave the balance unchanged."
                 }
               }
             },
@@ -228,6 +277,35 @@
                 },
                 "helpers_validation_py": {
                   "content": "def is_positive_amount(amount):\n    pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)"
+                },
+                "models_account_py": {
+                  "content": "from helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False"
+                },
+                "helpers_validation_py": {
+                  "content": "def is_positive_amount(amount):\n    return amount > 0"
+                }
+              },
+              "solutionCode": "from helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)",
+              "checks": {
+                "0": {
+                  "message": "10 should be treated as a positive amount."
+                },
+                "1": {
+                  "message": "0 should not be treated as a positive amount."
+                },
+                "2": {
+                  "message": "Negative numbers should return False."
+                },
+                "3": {
+                  "message": "The helper should support a valid deposit."
+                },
+                "4": {
+                  "message": "A non-positive amount should leave the balance unchanged."
                 }
               }
             }

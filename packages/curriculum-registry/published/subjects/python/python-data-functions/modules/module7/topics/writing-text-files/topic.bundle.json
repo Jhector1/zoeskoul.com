@@ -627,19 +627,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "log.txt",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry.sourceChecks.0.message",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "['\\\"]a['\\\"]",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry.sourceChecks.1.message"
-          }
         ]
       },
       "solutionFiles": [
@@ -753,19 +740,6 @@
             "isEntry": true,
             "entry": true
           }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "shopping.txt",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list.sourceChecks.0.message",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "uses_method",
-            "method": "write",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list.sourceChecks.1.message"
-          }
         ]
       },
       "solutionFiles": [
@@ -876,19 +850,6 @@
             "language": "python",
             "isEntry": true,
             "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "greeting.txt",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file.sourceChecks.0.message",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "uses_method",
-            "method": "write",
-            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file.sourceChecks.1.message"
           }
         ]
       },

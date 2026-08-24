@@ -659,19 +659,35 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/transaction.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.models_transaction_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    def summary(self):\n        return f\"{self.label}: {self.amount}\"",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/transaction.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionFiles.models_transaction_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "workspace": {
@@ -681,10 +697,18 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
+            "entry": true,
+            "readOnly": true
+          },
+          {
+            "path": "models/transaction.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.models_transaction_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ]
       },
@@ -692,21 +716,30 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    def summary(self):\n        return f\"{self.label}: {self.amount}\"",
+        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "class Transaction:\n    def __init__(self, label, amount):\n        self.label = label\n        self.amount = amount\n\n    def summary(self):\n        return f\"{self.label}: {self.amount}\"",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
+            "entry": true,
+            "readOnly": true
+          },
+          {
+            "path": "models/transaction.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.solutionFiles.models_transaction_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "semanticChecks": [
           {
             "type": "defines_class",
             "className": "Transaction",
-            "message": "Define a Transaction class."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.0.message",
+            "path": "models/transaction.py"
           },
           {
             "type": "constructible",
@@ -715,7 +748,8 @@
               "Coffee",
               -4
             ],
-            "message": "Transaction should still accept label and amount."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.1.message",
+            "path": "models/transaction.py"
           },
           {
             "type": "method_returns",
@@ -733,7 +767,8 @@
             "methodArgKinds": [],
             "expected": "Coffee: -4",
             "expectedKind": "value",
-            "message": "summary should return text built from the stored label and amount."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.2.message",
+            "path": "models/transaction.py"
           },
           {
             "type": "method_returns",
@@ -751,10 +786,12 @@
             "methodArgKinds": [],
             "expected": "Paycheck: 1200",
             "expectedKind": "value",
-            "message": "summary should work for different transaction objects too."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.3.message",
+            "path": "models/transaction.py"
           }
         ]
-      }
+      },
+      "entryFilePath": "main.py"
     },
     {
       "id": "ci-constructors-and-object-state-deposit-method",
@@ -767,19 +804,35 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "workspace": {
@@ -789,10 +842,18 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
+            "entry": true,
+            "readOnly": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ]
       },
@@ -800,21 +861,30 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount",
+        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
+            "entry": true,
+            "readOnly": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.solutionFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "semanticChecks": [
           {
             "type": "defines_class",
             "className": "Account",
-            "message": "Define an Account class."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "constructible",
@@ -823,7 +893,8 @@
               "Ava",
               100
             ],
-            "message": "Account should accept owner and balance."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -850,7 +921,8 @@
             "attributeName": "balance",
             "expected": 120,
             "expectedKind": "value",
-            "message": "A deposit should increase the stored balance."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.2.message",
+            "path": "models/account.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -886,10 +958,12 @@
             "attributeName": "balance",
             "expected": 30,
             "expectedKind": "value",
-            "message": "Multiple deposits should keep updating the same balance attribute."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.3.message",
+            "path": "models/account.py"
           }
         ]
-      }
+      },
+      "entryFilePath": "main.py"
     },
     {
       "id": "ci-constructors-and-object-state-ledger-step",
@@ -902,19 +976,35 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "class Account:\n    def __init__(self, owner, balance, note):\n        self.owner = owner\n        self.balance = balance\n        self.note = note\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n\n    def describe(self):\n        return f\"{self.owner} | {self.balance} | {self.note}\"",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
-          "entry": true
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "workspace": {
@@ -924,10 +1014,18 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
+            "entry": true,
+            "readOnly": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ]
       },
@@ -935,21 +1033,30 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "class Account:\n    def __init__(self, owner, balance, note):\n        self.owner = owner\n        self.balance = balance\n        self.note = note\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n\n    def describe(self):\n        return f\"{self.owner} | {self.balance} | {self.note}\"",
+        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "class Account:\n    def __init__(self, owner, balance, note):\n        self.owner = owner\n        self.balance = balance\n        self.note = note\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n\n    def describe(self):\n        return f\"{self.owner} | {self.balance} | {self.note}\"",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
-            "entry": true
+            "entry": true,
+            "readOnly": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.solutionFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "semanticChecks": [
           {
             "type": "defines_class",
             "className": "Account",
-            "message": "Define an Account class."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "constructible",
@@ -959,7 +1066,8 @@
               70,
               "starter fund"
             ],
-            "message": "Account should accept owner, balance, and note."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "instance_attributes",
@@ -974,7 +1082,8 @@
               "balance",
               "note"
             ],
-            "message": "Store all three constructor values as instance attributes."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.2.message",
+            "path": "models/account.py"
           },
           {
             "type": "attribute_sequence_equals",
@@ -1003,7 +1112,8 @@
             "attributeName": "balance",
             "expected": 90,
             "expectedKind": "value",
-            "message": "deposit should update the stored balance."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.3.message",
+            "path": "models/account.py"
           },
           {
             "type": "method_returns",
@@ -1023,10 +1133,12 @@
             "methodArgKinds": [],
             "expected": "Rae | 90 | starter fund",
             "expectedKind": "value",
-            "message": "describe should return a string built from the stored state."
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.4.message",
+            "path": "models/account.py"
           }
         ]
-      }
+      },
+      "entryFilePath": "main.py"
     }
   ]
 }

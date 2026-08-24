@@ -167,6 +167,35 @@
               "starterFiles": {
                 "main_py": {
                   "content": "from models.account import Account\n\n# Create Ava's account and print owner then balance."
+                },
+                "models_account_py": {
+                  "content": ""
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+              "checks": {
+                "0": {
+                  "message": "Define a class named Account."
+                },
+                "1": {
+                  "message": "Account should accept owner and balance."
+                },
+                "2": {
+                  "message": "Store owner and balance on the Account instance."
+                },
+                "3": {
+                  "message": "Create one Account object in the main code."
+                },
+                "4": {
+                  "message": "Print the owner and balance on separate lines."
                 }
               }
             },
@@ -183,6 +212,41 @@
               "starterFiles": {
                 "main_py": {
                   "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\n\n# Deposit 30, then print the summary."
+                },
+                "models_account_py": {
+                  "content": ""
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())",
+              "checks": {
+                "0": {
+                  "message": "Keep the Account class defined."
+                },
+                "1": {
+                  "message": "Account should still store owner and balance."
+                },
+                "2": {
+                  "message": "summary() should report the current owner and balance."
+                },
+                "3": {
+                  "message": "summary() should exist before any deposit."
+                },
+                "4": {
+                  "message": "deposit(30) should update the balance to 150."
+                },
+                "5": {
+                  "message": "Create one Account object in the main code."
+                },
+                "6": {
+                  "message": "Print the summary after depositing."
                 }
               }
             },
@@ -199,6 +263,38 @@
               "starterFiles": {
                 "main_py": {
                   "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\n# Deposit 30 into Ava's account only.\n# Print Ava's summary, then Noah's summary."
+                },
+                "models_account_py": {
+                  "content": ""
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())",
+              "checks": {
+                "0": {
+                  "message": "Keep the Account class defined."
+                },
+                "1": {
+                  "message": "Each Account should store owner and balance."
+                },
+                "2": {
+                  "message": "Ava's account should update to 150 after deposit(30)."
+                },
+                "3": {
+                  "message": "Noah's summary should still show the original balance."
+                },
+                "4": {
+                  "message": "Create two Account objects in the main code."
+                },
+                "5": {
+                  "message": "Print both account summaries on separate lines."
                 }
               }
             }

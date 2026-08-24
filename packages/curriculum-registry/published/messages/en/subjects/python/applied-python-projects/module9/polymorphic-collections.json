@@ -191,7 +191,16 @@
                 "models_magazine_py": {
                   "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        pass"
                 }
-              }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())"
+                },
+                "models_magazine_py": {
+                  "content": "class Magazine:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Magazine: {self.title}\""
+                }
+              },
+              "solutionCode": "from models.magazine import Magazine\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Refactoring\"), Video(\"Git Basics\"), Magazine(\"Science Weekly\")]\nfor item in items:\n    print(item.display_name())"
             },
             "project-polymorphic-collections-step5": {
               "title": "Build a checkout summary from mixed rentals",
@@ -213,7 +222,19 @@
                 "models_movie_rental_py": {
                   "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        pass"
                 }
-              }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())"
+                },
+                "models_book_rental_py": {
+                  "content": "class BookRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Book rental: {self.title} ({self.days} days)\""
+                },
+                "models_movie_rental_py": {
+                  "content": "class MovieRental:\n    def __init__(self, title, days):\n        self.title = title\n        self.days = days\n\n    def checkout_line(self):\n        return f\"Movie rental: {self.title} ({self.days} days)\""
+                }
+              },
+              "solutionCode": "from models.book_rental import BookRental\nfrom models.movie_rental import MovieRental\n\nrentals = [BookRental(\"Refactoring\", 7), MovieRental(\"Design Talk\", 3)]\nfor rental in rentals:\n    print(rental.checkout_line())"
             },
             "project-polymorphic-collections-step6": {
               "title": "Create a stock alert service for mixed inventory items",
@@ -238,7 +259,22 @@
                 "services_alert_service_py": {
                   "content": "def low_stock_lines(items):\n    pass"
                 }
-              }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)"
+                },
+                "models_book_item_py": {
+                  "content": "class BookItem:\n    def __init__(self, title, quantity):\n        self.title = title\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Book {self.title} has {self.quantity} left\""
+                },
+                "models_supply_item_py": {
+                  "content": "class SupplyItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def alert_line(self):\n        return f\"LOW STOCK: Supply {self.name} has {self.quantity} left\""
+                },
+                "services_alert_service_py": {
+                  "content": "def low_stock_lines(items):\n    return [item.alert_line() for item in items if item.quantity < 3]"
+                }
+              },
+              "solutionCode": "from models.book_item import BookItem\nfrom models.supply_item import SupplyItem\nfrom services.alert_service import low_stock_lines\n\nitems = [\n    BookItem(\"API Design\", 2),\n    SupplyItem(\"Sticky Notes\", 1),\n    BookItem(\"Python Guide\", 5),\n]\nfor line in low_stock_lines(items):\n    print(line)"
             }
           }
         }

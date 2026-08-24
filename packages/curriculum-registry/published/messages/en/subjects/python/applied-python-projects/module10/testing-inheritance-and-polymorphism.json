@@ -178,7 +178,8 @@
                 "hint_1": "Use < 0 inside an if statement.",
                 "hint_2": "Print False for zero or positive values."
               },
-              "starterCode": "n = int(input())\n# Your code here"
+              "starterCode": "n = int(input())\n# Your code here",
+              "solutionCode": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)"
             },
             "practice-test-inherited-method": {
               "title": "Make an inherited method pass its test",
