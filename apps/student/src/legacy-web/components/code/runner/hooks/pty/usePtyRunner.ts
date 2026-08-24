@@ -62,6 +62,39 @@ export function isFinalPtySessionState(state: string) {
     );
 }
 
+export function canStartPtyRun(args: {
+    disabled: boolean;
+    allowRun: boolean;
+    runState: RunnerState;
+    startRequestInFlight: boolean;
+}) {
+    return (
+        !args.disabled &&
+        args.allowRun &&
+        args.runState === "idle" &&
+        !args.startRequestInFlight
+    );
+}
+
+export function resolvePtyRunCode(args: {
+    liveCode: string | null | undefined;
+    workspaceCode: string | null | undefined;
+    fallbackCode: string;
+}) {
+    return args.liveCode ?? args.workspaceCode ?? args.fallbackCode;
+}
+
+export function shouldConsumePtyEventStream(args: {
+    sessionId: string | null | undefined;
+    eventsSessionId: string | null | undefined;
+}) {
+    return Boolean(
+        args.sessionId &&
+        args.eventsSessionId &&
+        args.sessionId === args.eventsSessionId
+    );
+}
+
 function isStartedInteractiveSession(
     value: unknown,
 ): value is StartedInteractiveSession {
@@ -155,7 +188,7 @@ function entryKey(entry: WorkspaceSyncEntry) {
     return `${kind}:${normalizeWorkspaceSyncPath(entry.path)}`;
 }
 
-function diffDirtyUiPaths(
+export function diffDirtyUiPaths(
     current: WorkspaceSyncEntry[],
     baseline: WorkspaceSyncEntry[],
 ): Set<string> {
@@ -184,6 +217,21 @@ function diffDirtyUiPaths(
 
     return dirty;
 }
+
+export function resolvePtySnapshotMergeMeta(args: {
+    current: WorkspaceSyncEntry[];
+    baseline: WorkspaceSyncEntry[];
+}) {
+    return {
+        dirtyUiPaths: diffDirtyUiPaths(args.current, args.baseline),
+        baselinePaths: new Set(
+            args.baseline.map((entry) =>
+                normalizeWorkspaceSyncPath(entry.path),
+            ),
+        ),
+    };
+}
+
 
 function patchWorkspaceEntriesWithRunCode(args: {
     entries: WorkspaceSyncEntry[];
@@ -405,26 +453,36 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
 
     const lastHandledSeqRef = React.useRef(0);
     const nextChunkIdRef = React.useRef(1);
-    const runBaselineEntriesRef = React.useRef<WorkspaceSyncEntry[]>([]);
+    const runBaselineBySessionIdRef = React.useRef<
+        Map<string, WorkspaceSyncEntry[]>
+    >(new Map());
     const snapshottedSessionIdsRef = React.useRef<Set<string>>(new Set());
     const snapshotInFlightSessionIdsRef = React.useRef<Set<string>>(new Set());
     const startRequestInFlightRef = React.useRef(false);
     const startAbortControllerRef = React.useRef<AbortController | null>(null);
+
+    const latestArgsRef = React.useRef(args);
+    latestArgsRef.current = args;
+
     const getCurrentWorkspaceEntries = React.useCallback((): WorkspaceSyncEntry[] => {
-        if (typeof args.getWorkspaceFiles === "function") {
-            return sortEntries(args.getWorkspaceFiles());
+        const latest = latestArgsRef.current;
+        if (typeof latest.getWorkspaceFiles === "function") {
+            return sortEntries(latest.getWorkspaceFiles());
         }
 
+        const latestWorkspace = latest.workspace;
         if (
-            workspace &&
-            workspace.version === 2 &&
-            Array.isArray((workspace as any).nodes)
+            latestWorkspace &&
+            latestWorkspace.version === 2 &&
+            Array.isArray((latestWorkspace as any).nodes)
         ) {
-            return sortEntries(exportWorkspaceEntries((workspace as any).nodes));
+            return sortEntries(
+                exportWorkspaceEntries((latestWorkspace as any).nodes),
+            );
         }
 
         return [];
-    }, [args, workspace]);
+    }, []);
 
     const pushChunk = React.useCallback(
         (kind: TerminalChunk["kind"], data: string) => {
@@ -441,8 +499,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     const resetTerminal = React.useCallback(() => {
         lastHandledSeqRef.current = 0;
         nextChunkIdRef.current = 1;
-        runBaselineEntriesRef.current = [];
-        snapshottedSessionIdsRef.current = new Set();
+
         setTerminalFeed([]);
         setInputEnabled(false);
         setBusy(false);
@@ -469,37 +526,41 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         async (sessionId: string | null | undefined) => {
             if (!sessionId) return;
 
-            if (typeof args.onTerminalSnapshotFiles !== "function") {
+            const applySnapshot =
+                latestArgsRef.current.onTerminalSnapshotFiles;
+            if (typeof applySnapshot !== "function") {
                 return;
             }
 
             if (snapshottedSessionIdsRef.current.has(sessionId)) {
                 return;
             }
-
             if (snapshotInFlightSessionIdsRef.current.has(sessionId)) {
                 return;
             }
 
-            snapshotInFlightSessionIdsRef.current.add(sessionId);
+            const baseline =
+                runBaselineBySessionIdRef.current.get(sessionId);
+            if (!baseline) {
+                return;
+            }
 
+            snapshotInFlightSessionIdsRef.current.add(sessionId);
             try {
                 const snapshot = await snapshotSessionWorkspace(sessionId);
                 const currentEntries = getCurrentWorkspaceEntries();
-                const dirtyUiPaths = diffDirtyUiPaths(
-                    currentEntries,
-                    runBaselineEntriesRef.current,
-                );
-
-                await args.onTerminalSnapshotFiles(snapshot, {
-                    dirtyUiPaths,
+                const mergeMeta = resolvePtySnapshotMergeMeta({
+                    current: currentEntries,
+                    baseline,
                 });
 
-                runBaselineEntriesRef.current = snapshot;
+                await applySnapshot(snapshot, {
+                    dirtyUiPaths: mergeMeta.dirtyUiPaths,
+                    baselinePaths: mergeMeta.baselinePaths,
+                });
                 snapshottedSessionIdsRef.current.add(sessionId);
             } catch (e: any) {
                 const message = String(e?.message ?? "");
-
                 if (
                     message.includes("ENOENT") ||
                     message.includes("no such file or directory") ||
@@ -511,28 +572,39 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                     );
                     return;
                 }
-
                 pushChunk(
                     "err",
                     `\r\n${message || "Failed to sync created files back to Explorer."}\r\n`,
                 );
             } finally {
                 snapshotInFlightSessionIdsRef.current.delete(sessionId);
+                runBaselineBySessionIdRef.current.delete(sessionId);
             }
         },
-        [args, getCurrentWorkspaceEntries, pushChunk],
+        [getCurrentWorkspaceEntries, pushChunk],
     );
 
     const startRun = React.useCallback(async () => {
-        if (disabled || !allowRun || busy || startRequestInFlightRef.current) return;
+        if (
+            !canStartPtyRun({
+                disabled,
+                allowRun,
+                runState,
+                startRequestInFlight: startRequestInFlightRef.current,
+            })
+        ) {
+            return;
+        }
+
         const currentEntries = getCurrentWorkspaceEntries();
-        const runCode =
-            readRunCodeFromWorkspaceEntries({
+        const runCode = resolvePtyRunCode({
+            liveCode: args.getLatestCode?.(),
+            workspaceCode: readRunCodeFromWorkspaceEntries({
                 entries: currentEntries,
                 workspace,
-            }) ??
-            args.getLatestCode?.() ??
-            code;
+            }),
+            fallbackCode: code,
+        });
 
         if (!isPtyRunnerLanguage(lang)) {
             pushChunk(
@@ -552,7 +624,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
             setInputEnabled(false);
         }
 
-        runBaselineEntriesRef.current = patchWorkspaceEntriesWithRunCode({
+        const runBaselineEntries = patchWorkspaceEntriesWithRunCode({
             entries: currentEntries,
             workspace,
             runCode,
@@ -579,6 +651,10 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                     signal: startAbortController.signal,
                 } as any,
                 connect: (started) => {
+                    runBaselineBySessionIdRef.current.set(
+                        started.sessionId,
+                        runBaselineEntries,
+                    );
                     session.connect(
                         started.sessionId,
                         started.state,
@@ -586,7 +662,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                     );
                 },
                 fallbackStart: async () => {
-                    await session.start(
+                    const sessionId = await session.start(
                         {
                             kind: "code",
                             mode: "interactive",
@@ -597,6 +673,13 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                         } as any,
                         startAbortController.signal,
                     );
+
+                    if (typeof sessionId === "string" && sessionId) {
+                        runBaselineBySessionIdRef.current.set(
+                            sessionId,
+                            runBaselineEntries,
+                        );
+                    }
                 },
             });
         } catch (e: any) {
@@ -615,7 +698,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     }, [
         disabled,
         allowRun,
-        busy,
+        runState,
         resetTerminalOnRun,
         resetTerminal,
         session,
@@ -627,7 +710,6 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         onRun,
         pushChunk,
         getCurrentWorkspaceEntries,
-        applySnapshotForSession,
     ]);
 
     const cancelRun = React.useCallback(async () => {
@@ -653,6 +735,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
             startAbortControllerRef.current?.abort();
             startAbortControllerRef.current = null;
             startRequestInFlightRef.current = false;
+            runBaselineBySessionIdRef.current.clear();
         };
     }, []);
 
@@ -673,6 +756,15 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     React.useEffect(() => {
         if (!session.events.length) return;
 
+        if (
+            !shouldConsumePtyEventStream({
+                sessionId: session.sessionId,
+                eventsSessionId: session.eventsSessionId,
+            })
+        ) {
+            return;
+        }
+
         const newEvents = session.events.filter(
             (ev) => ev.seq > lastHandledSeqRef.current,
         );
@@ -680,8 +772,10 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         if (!newEvents.length) return;
 
         for (const ev of newEvents) {
-            lastHandledSeqRef.current = Math.max(lastHandledSeqRef.current, ev.seq);
-
+            lastHandledSeqRef.current = Math.max(
+                lastHandledSeqRef.current,
+                ev.seq,
+            );
             handleSessionEvent({
                 ev,
                 pushChunk,
@@ -690,15 +784,23 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
                 setRunState,
             });
 
-            if (ev.type === "status" && isFinalPtySessionState(ev.state)) {
+            if (
+                ev.type === "status" &&
+                isFinalPtySessionState(ev.state)
+            ) {
                 void applySnapshotForSession(session.sessionId);
             }
-
             if (ev.type === "exit" || ev.type === "error") {
                 void applySnapshotForSession(session.sessionId);
             }
         }
-    }, [session.events, session.sessionId, pushChunk, applySnapshotForSession]);
+    }, [
+        session.events,
+        session.eventsSessionId,
+        session.sessionId,
+        pushChunk,
+        applySnapshotForSession,
+    ]);
 
     return {
         backend: "pty",

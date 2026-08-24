@@ -1,8 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 
 import {
+    canStartPtyRun,
     isFinalPtySessionState,
     resolveAuthoritativeInteractiveStart,
+    resolvePtyRunCode,
+    resolvePtySnapshotMergeMeta,
+    shouldConsumePtyEventStream,
     startPtyRunExactlyOnce,
 } from "./usePtyRunner";
 
@@ -154,5 +158,94 @@ describe("authoritative PTY rerun start lifecycle", () => {
 
         expect(onRun).toHaveBeenCalledTimes(1);
         expect(connect).not.toHaveBeenCalled();
+    });
+});
+
+describe("PTY rerun authoritative UI/code/snapshot lifecycle", () => {
+    it("accepts the click whenever the visible state is Run", () => {
+        expect(
+            canStartPtyRun({
+                disabled: false,
+                allowRun: true,
+                runState: "idle",
+                startRequestInFlight: false,
+            }),
+        ).toBe(true);
+
+        expect(
+            canStartPtyRun({
+                disabled: false,
+                allowRun: true,
+                runState: "running",
+                startRequestInFlight: false,
+            }),
+        ).toBe(false);
+
+        expect(
+            canStartPtyRun({
+                disabled: false,
+                allowRun: true,
+                runState: "idle",
+                startRequestInFlight: true,
+            }),
+        ).toBe(false);
+    });
+
+    it("uses live editor code instead of a stale workspace render", () => {
+        expect(
+            resolvePtyRunCode({
+                liveCode: 'print("new")',
+                workspaceCode: 'print("old")',
+                fallbackCode: 'print("older")',
+            }),
+        ).toBe('print("new")');
+    });
+
+    it("marks edits and deletions after a run baseline as UI-authoritative", () => {
+        const baseline = [
+            {
+                kind: "file" as const,
+                path: "src/main.py",
+                content: 'print("old")',
+            },
+            {
+                kind: "file" as const,
+                path: "src/deleted.py",
+                content: 'print("delete me")',
+            },
+        ];
+        const current = [
+            {
+                kind: "file" as const,
+                path: "src/main.py",
+                content: 'print("new")',
+            },
+        ];
+
+        const meta = resolvePtySnapshotMergeMeta({
+            current,
+            baseline,
+        });
+
+        expect(meta.dirtyUiPaths.has("src/main.py")).toBe(true);
+        expect(meta.dirtyUiPaths.has("src/deleted.py")).toBe(true);
+        expect(meta.baselinePaths.has("src/main.py")).toBe(true);
+        expect(meta.baselinePaths.has("src/deleted.py")).toBe(true);
+    });
+
+    it("rejects event replay from the previous backend session", () => {
+        expect(
+            shouldConsumePtyEventStream({
+                sessionId: "session-new",
+                eventsSessionId: "session-old",
+            }),
+        ).toBe(false);
+
+        expect(
+            shouldConsumePtyEventStream({
+                sessionId: "session-new",
+                eventsSessionId: "session-new",
+            }),
+        ).toBe(true);
     });
 });
