@@ -462,13 +462,14 @@ export function useRunSession() {
     );
 
     const start = React.useCallback(
-        async (req: InteractiveRunReq) => {
+        async (req: InteractiveRunReq, signal?: AbortSignal) => {
             const res = await fetch("/api/run/pty/sessions/ensure", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(req),
+                signal,
             });
 
             const parsed = await parseJsonSafe<StartBrowserSessionResult>(

@@ -26,12 +26,22 @@ import {
     unsupportedPtyRunnerLanguageMessage,
 } from "./language";
 
-type StartedInteractiveSession = {
+export type StartedInteractiveSession = {
     ok?: true;
     sessionId: string;
     state: RunSessionState;
     wsUrl: string;
 };
+
+type FailedInteractiveSession = {
+    ok: false;
+    error: string;
+};
+
+export type AuthoritativeInteractiveStartResolution =
+    | { kind: "started"; session: StartedInteractiveSession }
+    | { kind: "failed"; error: string }
+    | { kind: "invalid" };
 
 type SnapshotWorkspaceResponse =
     | {
@@ -64,6 +74,68 @@ function isStartedInteractiveSession(
         typeof v.state === "string" &&
         typeof v.wsUrl === "string"
     );
+}
+
+function isFailedInteractiveSession(
+    value: unknown,
+): value is FailedInteractiveSession {
+    if (!value || typeof value !== "object") return false;
+
+    const v = value as Record<string, unknown>;
+    return v.ok === false && typeof v.error === "string";
+}
+
+export function resolveAuthoritativeInteractiveStart(
+    value: unknown,
+): AuthoritativeInteractiveStartResolution {
+    if (isStartedInteractiveSession(value)) {
+        return { kind: "started", session: value };
+    }
+
+    if (isFailedInteractiveSession(value)) {
+        return { kind: "failed", error: value.error };
+    }
+
+    return { kind: "invalid" };
+}
+
+/**
+ * One click owns exactly one PTY start transaction.
+ *
+ * FullIDE's onRun is authoritative whenever it exists. A failed or malformed
+ * authoritative result must never fall through to useRunSession.start(), which
+ * would turn a single click into a second backend start.
+ */
+export async function startPtyRunExactlyOnce(args: {
+    onRun?: SharedRunnerArgs["onRun"];
+    runArgs: Parameters<NonNullable<SharedRunnerArgs["onRun"]>>[0];
+    fallbackStart: () => Promise<unknown>;
+    connect: (session: StartedInteractiveSession) => void;
+    signal?: AbortSignal;
+}) {
+    if (args.signal?.aborted) return;
+
+    if (args.onRun) {
+        const started = await args.onRun(args.runArgs);
+
+        if (args.signal?.aborted) return;
+
+        const resolution = resolveAuthoritativeInteractiveStart(started);
+        if (resolution.kind === "started") {
+            args.connect(resolution.session);
+            return;
+        }
+        if (resolution.kind === "failed") {
+            throw new Error(
+                resolution.error || "Failed to start interactive run.",
+            );
+        }
+
+        throw new Error("Interactive runner returned an invalid start response.");
+    }
+
+    if (args.signal?.aborted) return;
+    await args.fallbackStart();
 }
 
 function normalizePath(input: string) {
@@ -337,6 +409,7 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     const snapshottedSessionIdsRef = React.useRef<Set<string>>(new Set());
     const snapshotInFlightSessionIdsRef = React.useRef<Set<string>>(new Set());
     const startRequestInFlightRef = React.useRef(false);
+    const startAbortControllerRef = React.useRef<AbortController | null>(null);
     const getCurrentWorkspaceEntries = React.useCallback((): WorkspaceSyncEntry[] => {
         if (typeof args.getWorkspaceFiles === "function") {
             return sortEntries(args.getWorkspaceFiles());
@@ -488,53 +561,56 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
         setBusy(true);
         setRunState("starting");
         setLastRunLanguage(lang);
+
+        const startAbortController = new AbortController();
+        startAbortControllerRef.current = startAbortController;
         startRequestInFlightRef.current = true;
 
         try {
-            if (onRun) {
-                const started = await onRun({
+            await startPtyRunExactlyOnce({
+                onRun,
+                signal: startAbortController.signal,
+                runArgs: {
                     language: lang,
                     code: runCode,
                     workspace,
                     exerciseStateKey,
                     stdin: "",
-                } as any);
-
-                if (isStartedInteractiveSession(started)) {
+                    signal: startAbortController.signal,
+                } as any,
+                connect: (started) => {
                     session.connect(
                         started.sessionId,
                         started.state,
                         started.wsUrl,
                     );
-                    return;
-                }
-            }
-
-            const sessionId = await session.start({
-                kind: "code",
-                mode: "interactive",
-                language: lang,
-                code: runCode,
-                workspace,
-                exerciseStateKey,
-            } as any);
-
-            // if (typeof sessionId === "string") {
-            //     // useRunSession will also emit final events. This is only a fallback
-            //     // in case a runner completes before a final status event is observed.
-            //     setTimeout(() => {
-            //         if (!busy) {
-            //             void applySnapshotForSession(sessionId);
-            //         }
-            //     }, 0);
-            // }
+                },
+                fallbackStart: async () => {
+                    await session.start(
+                        {
+                            kind: "code",
+                            mode: "interactive",
+                            language: lang,
+                            code: runCode,
+                            workspace,
+                            exerciseStateKey,
+                        } as any,
+                        startAbortController.signal,
+                    );
+                },
+            });
         } catch (e: any) {
+            if (startAbortController.signal.aborted) return;
+
             pushChunk("err", `${e?.message ?? "Failed to start session."}\r\n`);
             setBusy(false);
             setRunState("idle");
             setInputEnabled(false);
         } finally {
-            startRequestInFlightRef.current = false;
+            if (startAbortControllerRef.current === startAbortController) {
+                startAbortControllerRef.current = null;
+                startRequestInFlightRef.current = false;
+            }
         }
     }, [
         disabled,
@@ -555,6 +631,13 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
     ]);
 
     const cancelRun = React.useCallback(async () => {
+        const pendingStart = startAbortControllerRef.current;
+        if (pendingStart) {
+            pendingStart.abort();
+            startAbortControllerRef.current = null;
+            startRequestInFlightRef.current = false;
+        }
+
         try {
             await session.cancel();
             pushChunk("sys", "\r\n[run canceled]\r\n");
@@ -564,6 +647,14 @@ export function usePtyRunner(args: SharedRunnerArgs): CodeRunnerController {
             setRunState("idle");
         }
     }, [session, pushChunk]);
+
+    React.useEffect(() => {
+        return () => {
+            startAbortControllerRef.current?.abort();
+            startAbortControllerRef.current = null;
+            startRequestInFlightRef.current = false;
+        };
+    }, []);
 
     React.useEffect(() => {
         if (!isFinalPtySessionState(session.state)) return;
