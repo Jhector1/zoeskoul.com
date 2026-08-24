@@ -10,7 +10,6 @@ import { buildSubmitAnswerFromItem } from "@/lib/practice/uiHelpers";
 import SummaryView from "./shell/SummaryView";
 import PracticeView from "./shell/PracticeView";
 import PracticeReviewWorkspace from "./review/PracticeReviewWorkspace";
-import EmbeddedPracticeReviewWorkspace from "./review/EmbeddedPracticeReviewWorkspace";
 import AiTutorFloating from "@/components/ai-tutor/AiTutorFloating";
 import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
 import { isPracticeItemFinalized } from "@/lib/practice/runtime";
@@ -184,19 +183,10 @@ export default function PracticeShell(props: PracticeShellProps) {
     />
   );
 
-  if (embeddedPresentation) {
-    return (
-      <>
-        <EmbeddedPracticeReviewWorkspace
-          props={props}
-          presentation={embeddedPresentation}
-        />
-        {tutor}
-      </>
-    );
-  }
-
-  if (surface === "tools") {
+  if (
+    exercise?.kind === "code_input" ||
+    (embeddedPresentation || surface === "tools")
+  ) {
     return (
       <>
         <PracticeReviewWorkspace {...sharedViewProps} />

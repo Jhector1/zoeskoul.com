@@ -456,111 +456,6 @@ export function practiceSnapshotMatchesVisibleExercise(args: {
   );
 }
 
-type PracticeWorkspaceHydrationArgs = {
-  exerciseKeyForTools: string;
-  generation: number;
-  runtimeExercise: any;
-  livePracticeItem: any;
-  livePracticeManifest: Exercise;
-  allowLivePracticeItemWorkspace: boolean;
-  patchRuntimeExercise: (key: string, patch: any) => void;
-  patchEditorWorkspace: (
-    key: string,
-    workspace: WorkspaceStateV2 | null,
-    options?: { generation?: number; source?: string; mutation?: any },
-  ) => void;
-};
-
-export function applyPracticeWorkspaceHydration(
-  args: PracticeWorkspaceHydrationArgs,
-) {
-  const liveItemWorkspace = args.allowLivePracticeItemWorkspace
-    ? getWorkspaceFromAnyState(args.livePracticeItem)
-    : null;
-  const itemWorkspace =
-    liveItemWorkspace ??
-    getWorkspaceFromAnyState(args.livePracticeManifest);
-
-  if (!itemWorkspace) return "no-workspace";
-
-  const existingWorkspace = getWorkspaceFromAnyState(args.runtimeExercise);
-  const existingEntryCode = getWorkspaceEntryCodeForPracticeCard(existingWorkspace);
-  const starterEntryCode = getWorkspaceEntryCodeForPracticeCard(itemWorkspace);
-  const itemWorkspaceIsLearnerOwned =
-    args.allowLivePracticeItemWorkspace &&
-    isLearnerOwnedPracticeSnapshot(args.livePracticeItem);
-  const existingIsProtected =
-    args.runtimeExercise?.userEdited === true ||
-    args.runtimeExercise?.workspaceOrigin === "user" ||
-    args.runtimeExercise?.workspaceOrigin === "saved";
-  const protectedButBlank =
-    existingIsProtected &&
-    !existingEntryCode.trim() &&
-    starterEntryCode.trim().length > 0;
-
-  if (existingIsProtected && !protectedButBlank) return "protected-existing";
-  if (!itemWorkspaceIsLearnerOwned && existingWorkspace && !protectedButBlank) {
-    return "passive-existing";
-  }
-
-  const existingWorkspaceKey = workspaceStableKey(existingWorkspace);
-  const liveWorkspaceKey = workspaceStableKey(itemWorkspace);
-  if (existingWorkspaceKey === liveWorkspaceKey) return "same-workspace";
-
-  const code = deriveEntryCode(itemWorkspace) || "";
-  const stdin = typeof itemWorkspace.stdin === "string" ? itemWorkspace.stdin : "";
-  const language = getManifestExerciseLanguage(args.livePracticeManifest);
-
-  const hydratedWorkspaceOrigin = itemWorkspaceIsLearnerOwned
-    ? String((args.livePracticeItem as any)?.workspaceOrigin ?? "").trim().toLowerCase() === "user"
-      ? "user"
-      : "saved"
-    : "starter";
-
-  reviewSaveDebug("quiz practice hydrate workspace", {
-    writer: "QuizPracticeCard.applyPracticeWorkspaceHydration",
-    generation: args.generation,
-    exerciseKey: args.exerciseKeyForTools,
-    workspaceOrigin: hydratedWorkspaceOrigin,
-    userEdited: itemWorkspaceIsLearnerOwned,
-    accepted: true,
-    workspace: itemWorkspace,
-  });
-
-  args.patchRuntimeExercise(args.exerciseKeyForTools, {
-    generation: args.generation,
-    updateOrigin: "quiz-practice-hydrate",
-    workspaceMutation: {
-      generation: args.generation,
-      source: "quiz-practice-hydrate",
-      mutation: "hydrate",
-    },
-    workspace: itemWorkspace,
-    codeWorkspace: itemWorkspace,
-    ideWorkspace: itemWorkspace,
-    code,
-    source: code,
-    stdin,
-    codeStdin: stdin,
-    language,
-    lang: language,
-    codeLang: language,
-    userEdited: itemWorkspaceIsLearnerOwned,
-    workspaceOrigin: hydratedWorkspaceOrigin,
-    updatedAt: Date.now(),
-  });
-  args.patchEditorWorkspace(args.exerciseKeyForTools, itemWorkspace, {
-    generation: args.generation,
-    source: "quiz-practice-hydrate",
-    mutation: {
-      generation: args.generation,
-      source: "quiz-practice-hydrate",
-      mutation: "hydrate",
-    },
-  });
-
-  return "patched";
-}
 
 function firstRecord(...values: unknown[]) {
   for (const value of values) {
@@ -1279,9 +1174,12 @@ export default function QuizPracticeCard(props: {
   });
   const effectiveCodeSurface =
       codeSurfaceOverride === "auto" ? resolvedCodeSurface : codeSurfaceOverride;
-  const useToolsCodeSurface =
-      toolsEnabled && isCodeInput && effectiveCodeSurface === "tools";
-  const codeRunnerMode: "embedded" | "tools" = useToolsCodeSurface ? "tools" : "embedded";
+  // Code workspaces have one learner surface: Review Tools -> FullIDE.
+  // Legacy surface metadata remains readable for compatibility, but it no
+  // longer selects a second executable editor.
+  void effectiveCodeSurface;
+  const useToolsCodeSurface = toolsEnabled && isCodeInput;
+  const codeRunnerMode: "embedded" | "tools" = "tools";
 
   const codeTools = useToolsCodeSurface ? toolsAny : null;
 
@@ -1524,56 +1422,7 @@ export default function QuizPracticeCard(props: {
     runtimeResetRevision,
   ]);
 
-  useEffect(() => {
-    if (!livePracticeManifest) return;
-    if (livePracticeManifest.kind !== "code_input") return;
-    const itemWorkspace =
-      getWorkspaceFromAnyState(livePracticeItem) ??
-      getWorkspaceFromAnyState(livePracticeManifest);
-    if (!itemWorkspace) return;
 
-    const capturedGeneration =
-      practiceSnapshotGeneration ??
-      (
-        !ps && resolvedProjectStepManifest && projectStepFallbackItem
-          ? runtimeResetRevision
-          : null
-      );
-
-    if (capturedGeneration == null) return;
-    if (capturedGeneration !== runtimeResetRevision) return;
-
-    const allowLocalProjectStepWorkspace = Boolean(
-      !ps &&
-      resolvedProjectStepManifest &&
-      projectStepFallbackItem,
-    );
-
-    applyPracticeWorkspaceHydration({
-      exerciseKeyForTools,
-      generation: capturedGeneration,
-      runtimeExercise,
-      livePracticeItem,
-      livePracticeManifest,
-      allowLivePracticeItemWorkspace:
-        practiceSnapshotMaySeedWorkspace || allowLocalProjectStepWorkspace,
-      patchRuntimeExercise,
-      patchEditorWorkspace,
-    });
-  }, [
-    exerciseKeyForTools,
-    livePracticeItem,
-    livePracticeManifest,
-    patchEditorWorkspace,
-    patchRuntimeExercise,
-    practiceSnapshotGeneration,
-    practiceSnapshotMaySeedWorkspace,
-    projectStepFallbackItem,
-    ps,
-    resolvedProjectStepManifest,
-    runtimeResetRevision,
-    runtimeExercise,
-  ]);
 
   useEffect(() => {
     if (toolsActive) return;

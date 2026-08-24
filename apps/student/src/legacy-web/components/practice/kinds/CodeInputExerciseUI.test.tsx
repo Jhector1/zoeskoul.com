@@ -114,7 +114,7 @@ describe("CodeInputExerciseUI", () => {
         }
     });
 
-    it("renders the embedded CodeRunner in embedded mode", () => {
+    it("uses a static non-executable review surface for legacy embedded mode", () => {
         const html = renderToStaticMarkup(
             <CodeInputExerciseUI
                 {...baseProps({
@@ -123,28 +123,9 @@ describe("CodeInputExerciseUI", () => {
             />,
         );
 
-        expect(html).toContain('data-testid="mock-code-runner"');
-    });
-    it("keeps stdin enabled by default outside shared challenges", () => {
-        const html = renderToStaticMarkup(
-            <CodeInputExerciseUI {...baseProps({ variant: "embedded" })} />,
-        );
-
-        expect(html).toContain('data-show-stdin="true"');
-        expect(html).toContain('data-height="420"');
-    });
-
-    it("honors an explicit false stdin setting for shared challenges", () => {
-        const html = renderToStaticMarkup(
-            <CodeInputExerciseUI
-                {...baseProps({
-                    variant: "embedded",
-                    showStdinEditor: false,
-                })}
-            />,
-        );
-
-        expect(html).toContain('data-show-stdin="false"');
+        expect(html).toContain('data-testid="code-input-static-review"');
+        expect(html).toContain("print(&#x27;hi&#x27;)");
+        expect(html).not.toContain('data-testid="mock-code-runner"');
     });
 
     it("renders duplicate SQL column labels without duplicate React keys", () => {

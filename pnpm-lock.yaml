@@ -190,6 +190,9 @@ importers:
       '@zoeskoul/learner-ui':
         specifier: workspace:*
         version: link:../../packages/learner-ui
+      '@zoeskoul/learner-workspace':
+        specifier: workspace:*
+        version: link:../../packages/learner-workspace
       '@zoeskoul/learning-client':
         specifier: workspace:*
         version: link:../../packages/learning-client
@@ -399,6 +402,9 @@ importers:
       '@zoeskoul/learner-ui':
         specifier: workspace:*
         version: link:../../packages/learner-ui
+      '@zoeskoul/learner-workspace':
+        specifier: workspace:*
+        version: link:../../packages/learner-workspace
       '@zoeskoul/learning-client':
         specifier: workspace:*
         version: link:../../packages/learning-client
@@ -878,6 +884,19 @@ importers:
       vitest:
         specifier: ^4.1.5
         version: 4.1.5(@types/node@25.6.0)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  packages/learner-workspace:
+    dependencies:
+      '@zoeskoul/code-contracts':
+        specifier: workspace:*
+        version: link:../code-contracts
+    devDependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.14
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
 
   packages/learning-client:
     dependencies:

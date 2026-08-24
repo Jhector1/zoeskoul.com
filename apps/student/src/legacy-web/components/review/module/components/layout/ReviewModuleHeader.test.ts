@@ -193,3 +193,19 @@ describe("ReviewModuleHeader compact toolbar", () => {
         expect(html).not.toContain("Tools");
     });
 });
+
+describe("ReviewModuleHeader experience action slot", () => {
+    it("renders experience-specific actions inside the shared header", () => {
+        const html = renderHeader({
+            experienceActions: React.createElement(
+                "span",
+                { "data-testid": "challenge-timer" },
+                "12:34",
+            ),
+        });
+
+        expect(html).toContain('data-testid="review-header-experience-actions"');
+        expect(html).toContain('data-testid="challenge-timer"');
+        expect(html).toContain("12:34");
+    });
+});

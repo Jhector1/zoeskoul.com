@@ -15,7 +15,7 @@ import type { FileEntry, RunResult } from "@/lib/code/types";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import { pickRunFeedbackFromResult } from "@/lib/code/feedback";
 import { runViaApi } from "@/lib/code/runClient";
-import CodeRunner, { CodeRunnerFrame } from "@/components/code/CodeRunner";
+import type { CodeRunnerFrame } from "@/components/code/CodeRunner";
 import { resolveEditableWorkspaceFileId } from "@/components/code/runner/workspaceEditing";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import { useTaggedT } from "@student/i18n/tagged";
@@ -38,6 +38,59 @@ import { exerciseDebug, summarizeExerciseWorkspace } from "@zoeskoul/learning-ru
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "@zoeskoul/learning-runtime/review/module/runtime/reviewSaveDebug";
 
 export type CodeInputAutoBindMode = "never" | "whenUnbound" | "whenActive" | "always";
+
+type StaticCodeReviewSurfaceProps = {
+    reviewLabel?: string;
+    code?: string;
+    stdin?: string;
+    language?: unknown;
+    [key: string]: unknown;
+};
+
+function StaticCodeReviewSurface({
+    reviewLabel,
+    code,
+    stdin,
+    language,
+}: StaticCodeReviewSurfaceProps) {
+    const source = String(code ?? "");
+    const input = String(stdin ?? "");
+    const languageLabel = String(language ?? "").trim();
+
+    return (
+        <div
+            className="ui-page-surface p-3"
+            data-testid="code-input-static-review"
+        >
+            {reviewLabel || languageLabel ? (
+                <div className="flex items-center justify-between gap-3">
+                    {reviewLabel ? (
+                        <div className="ui-meta-strong">{reviewLabel}</div>
+                    ) : (
+                        <span />
+                    )}
+                    {languageLabel ? (
+                        <div className="ui-meta">{languageLabel}</div>
+                    ) : null}
+                </div>
+            ) : null}
+
+            <pre className="mt-2 max-h-80 overflow-auto whitespace-pre-wrap break-words rounded-md border border-black/10 bg-black/[0.03] p-3 font-mono text-xs leading-5 dark:border-white/10 dark:bg-white/[0.03]">
+                {source || "—"}
+            </pre>
+
+            {input.trim() ? (
+                <div className="mt-3">
+                    <div className="ui-meta-strong">Input</div>
+                    <pre className="mt-1 max-h-40 overflow-auto whitespace-pre-wrap break-words rounded-md border border-black/10 bg-black/[0.03] p-2 font-mono text-xs leading-5 dark:border-white/10 dark:bg-white/[0.03]">
+                        {input}
+                    </pre>
+                </div>
+            ) : null}
+        </div>
+    );
+}
+
 
 function join(...xs: Array<string | false | null | undefined>) {
     return xs.filter(Boolean).join(" ");
@@ -766,7 +819,8 @@ export default function CodeInputExerciseUI({
                 <ExpectedExampleCard example={exercise.expectedExample} />
             ) : null}
 
-            <CodeRunner
+            <StaticCodeReviewSurface
+                reviewLabel="Your code"
                 key={`${runnerExerciseKey}:main`}
                 testId="code-runner"
                 editorTestId="code-editor"
@@ -809,7 +863,7 @@ export default function CodeInputExerciseUI({
                 sqlPaneOptions={resolvedSql.isSql ? resolvedSql.sqlPaneOptions : undefined}
                 onChangeCode={handleCodeChange}
                 onChangeStdin={handleStdinChange}
-                onRun={(args) =>
+                onRun={(args: any) =>
                     executeEmbeddedRun({
                         language: args.language,
                         code: args.code,
@@ -837,7 +891,8 @@ export default function CodeInputExerciseUI({
                     <div className="ui-meta-strong">Correct solution</div>
 
                     <div className="mt-2">
-                        <CodeRunner
+                        <StaticCodeReviewSurface
+                            reviewLabel=""
                             key={`${runnerExerciseKey}:correct`}
                             frame="plain"
                             title={undefined as any}

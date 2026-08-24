@@ -18,10 +18,8 @@ import {
 
 export default function StandaloneReviewExerciseFlow({
   props,
-  surface,
 }: {
   props: PracticeShellProps;
-  surface: "embedded" | "tools";
 }) {
   const submittedExerciseRef = useRef<string | null>(null);
   const [autoAdvance] = useQuizAutoAdvancePreference(true);
@@ -115,7 +113,6 @@ export default function StandaloneReviewExerciseFlow({
   return (
     <StandaloneReviewExerciseCard
       props={props}
-      surface={surface}
       onSubmitStart={markSubmitAction}
       finalizedAction={finalizedAction}
       onFinalizedNext={finalizedAction ? handleFinalizedNext : undefined}

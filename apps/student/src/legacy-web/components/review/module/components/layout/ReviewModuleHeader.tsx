@@ -26,6 +26,7 @@ type Props = {
         label: string;
         detail?: string;
     } | null;
+    experienceActions?: React.ReactNode;
     onOpenModulesDrawer?: () => void;
     showResetButton?: boolean;
     resetDisabledReason?: string | null;
@@ -76,6 +77,7 @@ export default function ReviewModuleHeader({
                                                modulesButtonTitle,
                                                modulesButtonLoadingText,
                                                contextBadge = null,
+                                               experienceActions = null,
                                                onOpenModulesDrawer,
                                                showResetButton = true,
                                                resetDisabledReason = null,
@@ -278,6 +280,15 @@ export default function ReviewModuleHeader({
             slot={
                 <div className="flex w-full items-center justify-between gap-3">
                     <div className="inline-flex min-w-0 flex-wrap items-center gap-2 [&>button]:shrink-0">
+                        {experienceActions ? (
+                            <div
+                                data-testid="review-header-experience-actions"
+                                className="inline-flex shrink-0 items-center gap-2"
+                            >
+                                {experienceActions}
+                            </div>
+                        ) : null}
+
                         {showModulesButton ? (
                             onOpenModulesDrawer ? (
                                 <button

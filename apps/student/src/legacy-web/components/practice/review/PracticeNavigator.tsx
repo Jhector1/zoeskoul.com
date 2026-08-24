@@ -19,9 +19,7 @@ import { resolveCanonicalPracticeQueueRows } from "@/lib/practice/experience/can
 
 type NavigatorPanel = "controls" | "leaderboard";
 
-type PracticeNavigatorProps = PracticeShellProps & {
-  onResetCurrentExercise: () => void;
-};
+type PracticeNavigatorProps = PracticeShellProps;
 
 function SelectField<T extends string>({
   label,
@@ -471,19 +469,6 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
             </ol>
           </div>
 
-          <div className="p-3">
-            <button
-              type="button"
-              onClick={props.onResetCurrentExercise}
-              disabled={!props.current || !props.exercise || props.busy || props.submitBusy}
-              className="ui-btn ui-btn-secondary w-full justify-center disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              ↺ {tw("navigator.resetExercise")}
-            </button>
-            <p className="mt-2 px-1 text-[11px] font-medium leading-4 text-[rgb(var(--ui-text-muted)/0.84)]">
-              {tw("navigator.resetExerciseDescription")}
-            </p>
-          </div>
         </div>
       )}
     </div>

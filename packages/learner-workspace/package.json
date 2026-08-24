@@ -1,0 +1,21 @@
+{
+  "name": "@zoeskoul/learner-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./fullide/FullIDE": "./src/fullide/FullIDE.tsx",
+    "./fullide/IdeHeader": "./src/fullide/IdeHeader.tsx"
+  },
+  "dependencies": {
+    "@zoeskoul/code-contracts": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "react": "19.2.3"
+  }
+}

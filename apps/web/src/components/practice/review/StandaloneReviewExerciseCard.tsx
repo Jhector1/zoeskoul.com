@@ -20,13 +20,11 @@ function firstText(...values: unknown[]) {
 
 export default function StandaloneReviewExerciseCard({
   props,
-  surface,
   onSubmitStart,
   finalizedAction,
   onFinalizedNext,
 }: {
   props: PracticeShellProps;
-  surface: "embedded" | "tools";
   onSubmitStart?: () => void;
   finalizedAction?: ReviewFinalizedPracticeAction | null;
   onFinalizedNext?: () => void | Promise<void>;
@@ -159,8 +157,8 @@ export default function StandaloneReviewExerciseCard({
         ownerCardId={`standalone-${props.experienceMode}`}
         ps={practiceState}
         toolScopedId={(question as any).exerciseKey || question.id}
-        toolsActive={surface === "tools"}
-        codeSurfaceOverride={surface}
+        toolsActive
+        codeSurfaceOverride="tools"
         suppressInlineHint={props.experienceMode === "assignment"}
         unlocked
         isCompleted={false}

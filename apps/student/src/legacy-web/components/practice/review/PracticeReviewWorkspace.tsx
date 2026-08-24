@@ -8,17 +8,20 @@ import SummaryView from "@/components/practice/shell/SummaryView";
 import PracticeNavigator from "./PracticeNavigator";
 import PracticeCompletionCelebration from "@/components/practice/completion/PracticeCompletionCelebration";
 import { resolvePracticeDisplayStack } from "@/lib/practice/experience/reviewDisplayStack";
-import { resolveCanonicalPracticeQueueRows } from "@/lib/practice/experience/canonicalPracticeQueueProjection";
 import { isLessonPracticeReturnUrl } from "@/lib/practice/experience/completion";
+import {
+  resolveEmbeddedPracticeWorkspacePresentation,
+  type EmbeddedPracticeWorkspacePresentation,
+} from "@/lib/practice/experience/embeddedWorkspace";
 import StandaloneReviewExerciseFlow from "./StandaloneReviewExerciseFlow";
 
 import ReviewModuleLayout from "@/components/review/module/components/layout/ReviewModuleLayout";
 import ReviewModuleHeader from "@/components/review/module/components/layout/ReviewModuleHeader";
+import ReviewModuleNavBar from "@/components/review/ReviewModuleNavBar";
 import ReviewModuleRightRail from "@/components/review/module/components/layout/ReviewModuleRightRail";
 import ReviewModuleStackedTools from "@/components/review/module/components/layout/ReviewModuleStackedTools";
 import MobileDrawer from "@/components/review/module/components/layout/MobileDrawer";
 import TopicShell from "@/components/review/module/components/TopicShell";
-import FlowNavigator from "@/components/review/navigation/FlowNavigator";
 
 import { useReviewPanels } from "@/components/review/module/hooks/useReviewPanels";
 import { useReduceMotion } from "@/components/review/module/hooks/useReduceMotion";
@@ -56,7 +59,32 @@ function hasExplicitLessonReturn(props: PracticeShellProps) {
 function stageCopy(
   props: PracticeShellProps,
   t: ReturnType<typeof useTranslations>,
+  embeddedPresentation: EmbeddedPracticeWorkspacePresentation | null,
 ) {
+  if (embeddedPresentation) {
+    const copy = embeddedPresentation.copy;
+    const progress = t("stage.questionProgress", {
+      current: Math.min(props.idx + 1, Math.max(1, props.sessionSize)),
+      total: Math.max(1, props.sessionSize),
+    });
+
+    return {
+      title:
+        props.phase === "summary"
+          ? t(copy.completeTitle)
+          : props.exercise?.title || t(copy.title),
+      subtitle:
+        props.phase === "summary"
+          ? t(copy.completeSubtitle, {
+              correct: props.correctCount,
+              answered: props.answeredCount,
+            })
+          : [t(copy.kicker), progress, props.exercise?.topic]
+              .filter(Boolean)
+              .join(" • "),
+    };
+  }
+
   if (props.phase === "summary") {
     return {
       title: t("stage.completeTitle"),
@@ -139,84 +167,21 @@ function PracticeLeftRail({
 
 function PracticeStage({
   props,
-  reduceMotion,
   showMobileWorkspaceTabs,
   mobileToolsPanel,
 }: {
   props: PracticeShellProps;
-  reduceMotion: boolean;
   showMobileWorkspaceTabs: boolean;
   mobileToolsPanel: React.ReactNode;
 }) {
   const [activeTab, setActiveTab] = useState<"lesson" | "code">("lesson");
   const t = useTranslations("Practice.workspace");
-  const copy = stageCopy(props, t);
-  const isSelfPacedPractice =
-    props.experienceMode === "practice" ||
-    props.experienceMode === "standard";
-  const canonicalQueueRows = isSelfPacedPractice
-    ? resolveCanonicalPracticeQueueRows({
-        selectedTargets: props.modulePracticeProgress?.selectedTargets,
-        completedPrefix: props.modulePracticeProgress?.completedPrefix,
-        queueStack: props.stack,
-      })
-    : [];
-  const hasCanonicalQueueRows = canonicalQueueRows.length > 0;
-
-  const stackAuthoredIdentities = new Set(
-    props.stack
-      .map((item) => {
-        const exercise = item?.exercise as any;
-        const topicSlug = String(
-          exercise?.topicSlug ?? exercise?.topic ?? "",
-        ).trim();
-        const exerciseKey = String(
-          exercise?.exerciseKey ?? exercise?.id ?? "",
-        ).trim();
-        return topicSlug && exerciseKey
-          ? `${topicSlug}|${exerciseKey}`
-          : "";
-      })
-      .filter(Boolean),
-  );
-  const legacyCompletedPrefixCount =
-    isSelfPacedPractice && !hasCanonicalQueueRows
-      ? (props.modulePracticeProgress?.completedPrefix ?? []).filter(
-          (target) =>
-            !stackAuthoredIdentities.has(
-              `${target.topicSlug}|${target.exerciseKey}`,
-            ),
-        ).length
-      : 0;
-  const modulePracticeTotal = isSelfPacedPractice
-    ? props.modulePracticeProgress?.moduleTotal ?? null
-    : null;
-  const displayTotal = hasCanonicalQueueRows
-    ? canonicalQueueRows.length
-    : modulePracticeTotal && modulePracticeTotal > 0
-      ? modulePracticeTotal
-      : props.sessionSize;
-  const canonicalDisplayIndex = hasCanonicalQueueRows
-    ? canonicalQueueRows.findIndex(
-        (row) => row.sessionIndex === props.idx,
-      )
-    : -1;
-  const displayIndex = Math.min(
-    Math.max(0, displayTotal - 1),
-    canonicalDisplayIndex >= 0
-      ? canonicalDisplayIndex
-      : legacyCompletedPrefixCount + props.idx,
-  );
-  const slots = useMemo(
-    () =>
-      Array.from({ length: Math.max(1, displayTotal) }, (_, index) => ({
-        index,
-      })),
-    [displayTotal],
-  );
+  const embeddedPresentation =
+    resolveEmbeddedPracticeWorkspacePresentation(props.experienceMode);
+  const copy = stageCopy(props, t, embeddedPresentation);
 
   const exerciseCard = (
-    <StandaloneReviewExerciseFlow props={props} surface="tools" />
+    <StandaloneReviewExerciseFlow props={props} />
   );
 
   const lessonContent = (
@@ -225,42 +190,7 @@ function PracticeStage({
         {props.phase === "summary" ? (
           <SummaryView {...props} layoutMode="embedded" />
         ) : (
-          <FlowNavigator
-            items={slots}
-            mode="slideshow"
-            activeIndex={displayIndex}
-            onActiveIndexChange={(index) => {
-              if (hasCanonicalQueueRows) {
-                const row = canonicalQueueRows[index] ?? null;
-                if (
-                  row &&
-                  !row.completed &&
-                  row.sessionIndex >= 0 &&
-                  row.sessionIndex < props.stack.length
-                ) {
-                  props.setIdx(row.sessionIndex);
-                }
-                return;
-              }
-
-              const sessionIndex = index - legacyCompletedPrefixCount;
-              if (sessionIndex >= 0 && sessionIndex < props.stack.length) {
-                props.setIdx(sessionIndex);
-              }
-            }}
-            reduceMotion={reduceMotion}
-            getKey={(slot) => `practice-slot-${slot.index}`}
-            getProgressLabel={(index, total) =>
-              t("stage.questionProgress", { current: index + 1, total })
-            }
-            canGoPrev={props.canGoPrev}
-            canGoNext={props.canGoNext}
-            onPrev={props.goPrev}
-            onNext={() => {
-              void props.goNext();
-            }}
-            renderItem={() => exerciseCard}
-          />
+          <>{exerciseCard}</>
         )}
       </div>
     </TopicShell>
@@ -418,7 +348,13 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
         levelProgressPct: gamificationSummary.levelProgressPct,
       }
     : null;
-  const showLessonReturn = hasExplicitLessonReturn(props);
+  const embeddedPresentation =
+    resolveEmbeddedPracticeWorkspacePresentation(props.experienceMode);
+  const showPracticeNavigator = !embeddedPresentation;
+  const allowExerciseReset = !embeddedPresentation;
+  const showLessonReturn =
+    Boolean(embeddedPresentation) || hasExplicitLessonReturn(props);
+  const embeddedCopy = embeddedPresentation?.copy ?? null;
 
   const handleResetCurrentExercise = useCallback(() => {
     if (!props.exercise || !props.current) return;
@@ -442,12 +378,7 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
     tools.exerciseStateKey,
   ]);
 
-  const navigator = (
-    <PracticeNavigator
-      {...props}
-      onResetCurrentExercise={handleResetCurrentExercise}
-    />
-  );
+  const navigator = <PracticeNavigator {...props} />;
   const mobileToolsPanel =
     showExerciseTools ? (
       <ReviewModuleStackedTools
@@ -472,7 +403,7 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
       showMask={false}
       showSkeleton={false}
       isNavigating={false}
-      leftCollapsed={panels.leftCollapsedEff}
+      leftCollapsed={showPracticeNavigator ? panels.leftCollapsedEff : true}
       rightCollapsed={
         showExerciseTools
           ? panels.rightCollapsedEff
@@ -485,16 +416,28 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
           locale={props.locale || "en"}
           toolsUiEnabled={showExerciseTools}
           toolsToggleAllowed={showDesktopExerciseTools}
-          showDesktopLeft={panels.showDesktopLeft}
+          showDesktopLeft={showPracticeNavigator && panels.showDesktopLeft}
           showDesktopRight={showDesktopExerciseTools}
-          leftCollapsed={panels.leftCollapsedEff}
+          leftCollapsed={showPracticeNavigator ? panels.leftCollapsedEff : true}
           rightCollapsed={panels.rightCollapsedEff}
           modulesHref={safeReturnHref(props)}
           showModulesButton={showLessonReturn}
-          modulesButtonLabel="Return to lesson"
-          modulesButtonTitle="Return to lesson"
-          modulesButtonLoadingText="Returning…"
-          showResetButton={false}
+          modulesButtonLabel={
+            embeddedCopy ? t(embeddedCopy.returnLabel) : "Return to lesson"
+          }
+          modulesButtonTitle={
+            embeddedCopy ? t(embeddedCopy.returnTitle) : "Return to lesson"
+          }
+          modulesButtonLoadingText={
+            embeddedCopy ? t(embeddedCopy.returnLoading) : "Returning…"
+          }
+          showResetButton={
+            allowExerciseReset &&
+            (
+              Boolean(props.exercise && props.current) ||
+              Boolean(props.restartPractice)
+            )
+          }
           onToggleLeftPanel={panels.handleToggleLeftPanel}
           onToggleRightPanel={() => {
             if (
@@ -503,20 +446,32 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
               panels.handleToggleRightPanel();
             }
           }}
-          resetOptions={[
-            {
-              id: "restart-practice",
-              label: t("header.restartTitle"),
-              description: t("header.restartDescription"),
-              onSelect: () => {
-                void props.restartPractice?.();
-              },
-            },
-          ]}
-          onPrevTopic={props.canGoPrev ? props.goPrev : undefined}
-          onNextTopic={props.canGoNext ? () => void props.goNext() : undefined}
-          prevTopic={props.canGoPrev ? { id: "previous" } : null}
-          nextTopic={props.canGoNext ? { id: "next" } : null}
+          resetOptions={allowExerciseReset ? [
+            ...(props.exercise && props.current
+              ? [
+                  {
+                    id: "reset-current-exercise",
+                    label: t("navigator.resetExercise"),
+                    description: t("navigator.resetExerciseDescription"),
+                    onSelect: handleResetCurrentExercise,
+                  },
+                ]
+              : []),
+            ...(props.restartPractice
+              ? [
+                  {
+                    id: "restart-practice",
+                    label: t("header.restartTitle"),
+                    description: t("header.restartDescription"),
+                    onSelect: () => {
+                      void props.restartPractice?.();
+                    },
+                  },
+                ]
+              : []),
+          ] : []}
+          prevTopic={null}
+          nextTopic={null}
           unlockAll
           viewIsComplete
           headerGamification={headerGamification}
@@ -526,7 +481,7 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
       }
       leftRail={
         <PracticeLeftRail
-          show={panels.showDesktopLeft}
+          show={showPracticeNavigator && panels.showDesktopLeft}
           collapsed={panels.leftCollapsedEff}
           width={panels.leftW}
           padStyle={panels.padStyle}
@@ -547,22 +502,23 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
         />
       }
       mobileDrawer={
-        <MobileDrawer
-          open={panels.mobileTopicsOpen}
-          side="left"
-          title={t("header.navigatorDrawerTitle")}
-          reduceMotion={reduceMotion}
-          onClose={() => panels.setMobileTopicsOpen(false)}
-        >
-          <div className="p-3" style={panels.padStyle}>
-            {navigator}
-          </div>
-        </MobileDrawer>
+        showPracticeNavigator ? (
+          <MobileDrawer
+            open={panels.mobileTopicsOpen}
+            side="left"
+            title={t("header.navigatorDrawerTitle")}
+            reduceMotion={reduceMotion}
+            onClose={() => panels.setMobileTopicsOpen(false)}
+          >
+            <div className="p-3" style={panels.padStyle}>
+              {navigator}
+            </div>
+          </MobileDrawer>
+        ) : null
       }
       body={
         <PracticeStage
           props={props}
-          reduceMotion={reduceMotion}
           showMobileWorkspaceTabs={
             showExerciseTools &&
             !showDesktopExerciseTools
@@ -580,6 +536,21 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
         data-testid="practice-review-workspace-viewport"
       >
         {page}
+        <ReviewModuleNavBar
+          show={props.phase !== "summary"}
+          locale={props.locale || "en"}
+          subjectSlug={props.subjectSlug || props.experienceMode}
+          prevModuleId={null}
+          nextModuleId={null}
+          canGoNext={props.canGoNext}
+          compactSingleAction
+          singlePrevDisabled={props.busy || !props.canGoPrev}
+          onSinglePrev={props.canGoPrev ? props.goPrev : undefined}
+          singleNextDisabled={props.busy || !props.canGoNext}
+          onSingleNext={props.canGoNext ? props.goNext : undefined}
+          showNextModuleCta={false}
+          canGetCertificate={false}
+        />
       </div>
       <PracticeCompletionCelebration
         open={completionOpen}

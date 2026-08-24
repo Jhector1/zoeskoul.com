@@ -3,7 +3,6 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import QuizPracticeCard, {
-    applyPracticeWorkspaceHydration,
     flushReviewToolsBeforeSubmit,
     practiceSnapshotMatchesVisibleExercise,
     workspaceStableKey,
@@ -894,7 +893,7 @@ describe("QuizPracticeCard project-step fallback", () => {
     });
 
 
-    it("renders an embedded assignment exercise without a tools provider", () => {
+    it("keeps an assignment code exercise on the canonical tools contract without a tools provider", () => {
         mocked.toolsValue = null;
 
         const exercise = makeCodeInputExercise({
@@ -941,11 +940,11 @@ describe("QuizPracticeCard project-step fallback", () => {
         ).not.toThrow();
 
         const rendererProps = mocked.exerciseRendererProps.at(-1);
-        expect(rendererProps?.codeRunnerMode).toBe("embedded");
+        expect(rendererProps?.codeRunnerMode).toBe("tools");
         expect(rendererProps?.codeTools).toBeNull();
     });
 
-    it("keeps simple inline code_input exercises embedded when the manifest opts in", () => {
+    it("ignores legacy embedded manifest opt-in and uses the canonical tools provider", () => {
         const exercise = makeCodeInputExercise({
             id: "inline-ex",
             title: "Inline exercise",
@@ -987,8 +986,9 @@ describe("QuizPracticeCard project-step fallback", () => {
         );
 
         const props = mocked.exerciseRendererProps.at(-1);
-        expect(props?.codeRunnerMode).toBe("embedded");
-        expect(props?.codeTools).toBeNull();
+        expect(props?.codeRunnerMode).toBe("tools");
+        expect(props?.codeTools).not.toBeNull();
+        expect(props?.codeTools).toMatchObject({ enabled: true });
     });
 
     it("keeps completed full workspace exercises in tools mode for review", () => {
@@ -1226,199 +1226,11 @@ describe("practiceSnapshotMatchesVisibleExercise", () => {
     });
 });
 
-describe("applyPracticeWorkspaceHydration", () => {
+describe("QuizPracticeCard workspace behavior", () => {
     beforeEach(() => {
         resetRuntimeStore();
     });
 
-    it("uses the visible exercise starter when a completed previous item snapshot is stale", () => {
-        const exerciseKey =
-            "python:python-v2-0:section:running-python-code:standalone-standard:practice-reorder-four-lines";
-        const previousWorkspace = makeWorkspace([
-            { path: "main.py", content: "print(8 * 4)\n" },
-        ]);
-        const nextStarterWorkspace = makeWorkspace([
-            { path: "main.py", content: 'print("West")\nprint("North")\nprint("South")\nprint("East")\n' },
-        ]);
-
-        const runtime = useReviewRuntimeStore.getState();
-        runtime.ensureEditorSource({
-            ownerKey: exerciseKey,
-            ownerKind: "exercise",
-            targetKey: exerciseKey,
-            toolScopeKey: exerciseKey,
-            language: "python",
-            manifest: { workspace: nextStarterWorkspace } as any,
-            entry: {
-                targetKey: exerciseKey,
-                routeKey: exerciseKey,
-                targetKind: "exercise",
-                sectionSlug: "section",
-                topicId: "running-python-code",
-                topicSlug: "running-python-code",
-                cardId: "standalone-standard",
-                cardType: "project",
-                targetSlug: "practice-reorder-four-lines",
-                ownerKind: "exercise",
-                ownerKey: exerciseKey,
-                cardKey: "running-python-code:standalone-standard",
-                toolScopeKey: exerciseKey,
-                exerciseId: "practice-reorder-four-lines",
-                exerciseStateKey: exerciseKey,
-                language: "python",
-                item: { workspace: nextStarterWorkspace },
-            } as any,
-            workspaceSeedMode: "starter",
-        });
-
-        applyPracticeWorkspaceHydration({
-            exerciseKeyForTools: exerciseKey,
-            generation: 0,
-            runtimeExercise: useReviewRuntimeStore.getState().exercises[exerciseKey] ?? null,
-            livePracticeItem: {
-                exercise: {
-                    id: "change-one-operator",
-                    exerciseKey: "practice-change-one-operator",
-                    kind: "code_input",
-                },
-                workspace: previousWorkspace,
-                workspaceOrigin: "user",
-                userEdited: true,
-                result: { ok: true },
-            },
-            livePracticeManifest: {
-                id: "reorder-four-lines",
-                exerciseKey: "practice-reorder-four-lines",
-                kind: "code_input",
-                language: "python",
-                starterCode:
-                    'print("West")\nprint("North")\nprint("South")\nprint("East")\n',
-                workspace: nextStarterWorkspace,
-            } as any,
-            allowLivePracticeItemWorkspace: false,
-            patchRuntimeExercise: useReviewRuntimeStore.getState().patchExercise,
-            patchEditorWorkspace: useReviewRuntimeStore.getState().patchEditorWorkspace,
-        });
-
-        expect(
-            fileContent(
-                useReviewRuntimeStore.getState().editorRuntimes[exerciseKey]?.workspace,
-                "main.py",
-            ),
-        ).toBe(
-            'print("West")\nprint("North")\nprint("South")\nprint("East")\n',
-        );
-    });
-
-    it("replays the practice hydration path through the real runtime store and rejects stale blank snapshots after reset", () => {
-        const exerciseKey =
-            "python:python-8-object-oriented-foundations:section:thinking-in-objects:card-2:read-values-from-car-objects";
-        const starterWorkspace = makeWorkspace([
-            { path: "main.py", content: 'from models.car import Car\nprint("starter")\n' },
-            { path: "models/car.py", content: "class Car:\n    pass\n" },
-        ]);
-        const blankShellWorkspace = makeWorkspace([
-            { path: "main.py", content: 'from models.car import Car\nprint("learner")\n' },
-            { path: "models/car.py", content: "" },
-        ]);
-        const entry = {
-            targetKey: exerciseKey,
-            routeKey: exerciseKey,
-            targetKind: "exercise",
-            sectionSlug: "section",
-            topicId: "thinking-in-objects",
-            topicSlug: "thinking-in-objects",
-            cardId: "card-2",
-            cardType: "project",
-            targetSlug: "read-values-from-car-objects",
-            ownerKind: "exercise",
-            ownerKey: exerciseKey,
-            cardKey: "thinking-in-objects:card-2",
-            toolScopeKey: exerciseKey,
-            exerciseId: "read-values-from-car-objects",
-            exerciseStateKey: exerciseKey,
-            language: "python",
-            starterFiles: [
-                { path: "main.py", content: 'from models.car import Car\nprint("starter")\n' },
-                { path: "models/car.py", content: "class Car:\n    pass\n" },
-            ],
-            item: {
-                workspace: starterWorkspace,
-            },
-        } as any;
-
-        const runtime = useReviewRuntimeStore.getState();
-        runtime.ensureEditorSource({
-            ownerKey: exerciseKey,
-            ownerKind: "exercise",
-            targetKey: exerciseKey,
-            toolScopeKey: exerciseKey,
-            language: "python",
-            manifest: entry.item,
-            entry,
-            workspaceSeedMode: "starter",
-        });
-        runtime.patchEditorWorkspace(exerciseKey, starterWorkspace, {
-            generation: 0,
-            source: "authoritative-reset",
-        });
-        runtime.patchExercise(exerciseKey, {
-            generation: 0,
-            updateOrigin: "authoritative-reset",
-            language: "python",
-            lang: "python",
-            workspace: starterWorkspace,
-            codeWorkspace: starterWorkspace,
-            ideWorkspace: starterWorkspace,
-            code: 'from models.car import Car\nprint("starter")\n',
-            source: 'from models.car import Car\nprint("starter")\n',
-            stdin: "",
-            codeStdin: "",
-            workspaceOrigin: "starter",
-            userEdited: false,
-        });
-
-        runtime.clearRuntimeForCard("thinking-in-objects", "card-2");
-        runtime.ensureEditorSource({
-            ownerKey: exerciseKey,
-            ownerKind: "exercise",
-            targetKey: exerciseKey,
-            toolScopeKey: exerciseKey,
-            language: "python",
-            manifest: entry.item,
-            entry,
-            workspaceSeedMode: "starter",
-        });
-
-        const postResetRuntime = useReviewRuntimeStore.getState();
-        applyPracticeWorkspaceHydration({
-            exerciseKeyForTools: exerciseKey,
-            generation: 0,
-            runtimeExercise: postResetRuntime.exercises[exerciseKey] ?? null,
-            livePracticeItem: {
-                workspace: blankShellWorkspace,
-                workspaceOrigin: "starter",
-                userEdited: false,
-                kind: "code_input",
-            },
-            livePracticeManifest: {
-                id: "read-values-from-car-objects",
-                kind: "code_input",
-                language: "python",
-                starterCode: 'from models.car import Car\nprint("starter")\n',
-            } as any,
-            allowLivePracticeItemWorkspace: false,
-            patchRuntimeExercise: useReviewRuntimeStore.getState().patchExercise,
-            patchEditorWorkspace: useReviewRuntimeStore.getState().patchEditorWorkspace,
-        });
-
-        expect(fileContent(useReviewRuntimeStore.getState().editorRuntimes[exerciseKey]?.workspace, "main.py")).toBe(
-            'from models.car import Car\nprint("starter")\n',
-        );
-        expect(fileContent(useReviewRuntimeStore.getState().editorRuntimes[exerciseKey]?.workspace, "models/car.py")).toBe(
-            "class Car:\n    pass\n",
-        );
-    });
     it("keeps Check this answer and shows Reveal answer on the right after three failed attempts", () => {
         const exercise = makeCodeInputExercise();
         const item = {

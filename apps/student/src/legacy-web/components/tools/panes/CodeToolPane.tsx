@@ -353,6 +353,24 @@ function createDefaultToolWorkspace(language: string | null | undefined): Worksp
     };
 }
 
+export function buildLearnerFullIdeKey(args: {
+    exerciseStateKey: string;
+    language: string | null | undefined;
+    servicePreset?: string | null;
+}) {
+    const exerciseStateKey =
+        String(args.exerciseStateKey ?? "").trim() || "review";
+    const language = asWorkspaceLanguage(args.language);
+    const servicePreset =
+        String(args.servicePreset ?? "runner").trim() || "runner";
+
+    return [
+        exerciseStateKey,
+        `language:${language}`,
+        `services:${servicePreset}`,
+    ].join(":");
+}
+
 export function buildReviewWorkspaceOwnerIdentityKey(args: {
     workspaceOwnerKey: string;
     workspaceStarterHash?: string | null;
@@ -2977,14 +2995,12 @@ export default function CodeToolPane(props: {
         workspaceOwnerIdentityKey,
         runtimeResetRevision,
     );
-    const fullIdeKey = [
-        fullIdeExerciseStateKey,
-        effectiveLanguage,
-        usesWorkspaceShell ? "workspace" : "single",
-        reviewWorkspaceNeedsMultiFile ? "multi" : "mono",
-        currentIdeConfigKey,
-    ].join(":");
     const fullIdeLanguage = asWorkspaceLanguage(effectiveLanguage);
+    const fullIdeKey = buildLearnerFullIdeKey({
+        exerciseStateKey: fullIdeExerciseStateKey,
+        language: fullIdeLanguage,
+        servicePreset: ideShell.servicePreset,
+    });
     const effectiveTerminalCwd =
         typeof effectivePaneIdeConfig?.terminalCwd === "string" && effectivePaneIdeConfig.terminalCwd.trim()
             ? effectivePaneIdeConfig.terminalCwd.trim()

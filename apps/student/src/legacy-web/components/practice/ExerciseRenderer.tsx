@@ -1593,7 +1593,7 @@ export default function ExerciseRenderer({
                                              updateCurrent,
                                              readOnly = false,
                                              reviewCorrectItem = null,
-                                             codeRunnerMode = "embedded",
+                                             codeRunnerMode = "tools",
                                              embeddedRunnerHeight,
                                              showStdinEditor,
                                              codeTools = null,
@@ -2167,7 +2167,10 @@ export default function ExerciseRenderer({
         typeof resultAny?.explanation === "string" ? resultAny.explanation : null;
 
     if (ex.kind === "code_input") {
-        const useTools = codeRunnerMode === "tools" && !!codeTools && !!codeInputId;
+        // code_input has one executable surface: Tools -> FullIDE.
+        // The legacy mode prop remains temporarily for caller compatibility.
+        void codeRunnerMode;
+        const useTools = !!codeTools && !!codeInputId;
 
         if (useTools) {
             return (

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+    buildLearnerFullIdeKey,
     buildReviewFullIdeExerciseStateKey,
     buildReviewWorkspaceOwnerIdentityKey,
     pickDirectReviewRuntimeWorkspace,
@@ -486,5 +487,38 @@ describe("pickDirectReviewRuntimeWorkspace multi-file starter hydration", () => 
         });
 
         expect(fileContent(selected, "car.py")).toBe("");
+    });
+});
+
+describe("buildLearnerFullIdeKey", () => {
+    it("does not encode single-file versus multi-file presentation into FullIDE identity", () => {
+        const key = buildLearnerFullIdeKey({
+            exerciseStateKey: "exercise:q1:reset:0",
+            language: "python",
+            servicePreset: "runner",
+        });
+
+        expect(key).toContain("exercise:q1:reset:0");
+        expect(key).toContain("language:python");
+        expect(key).toContain("services:runner");
+        expect(key).not.toContain(":single");
+        expect(key).not.toContain(":multi");
+        expect(key).not.toContain(":workspace");
+        expect(key).not.toContain(":mono");
+    });
+
+    it("still changes at the authoritative reset boundary", () => {
+        const before = buildLearnerFullIdeKey({
+            exerciseStateKey: "exercise:q1:reset:0",
+            language: "python",
+            servicePreset: "runner",
+        });
+        const after = buildLearnerFullIdeKey({
+            exerciseStateKey: "exercise:q1:reset:1",
+            language: "python",
+            servicePreset: "runner",
+        });
+
+        expect(after).not.toBe(before);
     });
 });
