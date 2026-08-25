@@ -45,7 +45,8 @@ describe("HeaderChrome ownership boundary", () => {
     }
   });
 
-  it("keeps Web and Student behavior in app adapters", () => {
+  it("keeps one canonical presentation owner and app-specific adapters", () => {
+    const shared = readSource("./LearnerHeaderSlick.tsx");
     const web = readSource(
       "../../../apps/web/src/components/HeaderSlick.tsx",
     );
@@ -53,11 +54,20 @@ describe("HeaderChrome ownership boundary", () => {
       "../../../apps/student/src/components/chrome/StudentHeaderSlick.tsx",
     );
 
+    expect(shared).toContain(
+      'import { HeaderChrome } from "./HeaderChrome";',
+    );
+    expect(shared).toContain("<HeaderChrome");
+    expect(shared).toContain("const brandGroup = (");
+    expect(shared).toContain("const topRowActions = (");
+    expect(shared).toContain("const mobileMenu = (");
+
     for (const source of [web, student]) {
-      expect(source).toMatch(
-        /import\s+\{[^}]*\bHeaderChrome\b[^}]*\}\s+from\s+"@zoeskoul\/learner-ui";/,
-      );
-      expect(source).toContain("<HeaderChrome");
+      expect(source).toContain("createLearnerHeader({");
+      expect(source).not.toContain("<HeaderChrome");
+      expect(source).not.toContain("const brandGroup = (");
+      expect(source).not.toContain("const topRowActions = (");
+      expect(source).not.toContain("const mobileMenu = (");
       expect(source).not.toContain(
         '<header className="sticky top-0 z-50">',
       );

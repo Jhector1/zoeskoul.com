@@ -1,34 +1,40 @@
 import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-const packageIdeHeader = readFileSync(
-  resolve(
-    process.cwd(),
-    "../../packages/learner-workspace/src/fullide/IdeHeader.tsx",
-  ),
-  "utf8",
+const readRelative = (relativePath: string) =>
+  readFileSync(
+    fileURLToPath(new URL(relativePath, import.meta.url)),
+    "utf8",
+  );
+
+const packageIdeHeader = readRelative(
+  "../../../../../../../packages/learner-workspace/src/fullide/IdeHeader.tsx",
 );
 
-const appAdapter = readFileSync(
-  resolve(process.cwd(), "src/components/ide/fullide/appAdapter.tsx"),
-  "utf8",
+const appAdapter = readRelative(
+  "../appAdapter.tsx",
 );
 
-const appHeader = readFileSync(
-  resolve(process.cwd(), "src/components/HeaderSlick.tsx"),
-  "utf8",
+const appHeaderAdapter = readRelative(
+  "../../../HeaderSlick.tsx",
 );
 
-const sandbox = readFileSync(
-  resolve(process.cwd(), "src/components/sandbox/ProgrammingSandbox.tsx"),
-  "utf8",
+const sharedHeader = readRelative(
+  "../../../../../../../packages/learner-ui/src/LearnerHeaderSlick.tsx",
+);
+
+const sandbox = readRelative(
+  "../../../sandbox/ProgrammingSandbox.tsx",
 );
 
 describe("sandbox settings menu ownership", () => {
-  it("reuses the Web app settings menu and hides sound", () => {
-    expect(appHeader).toContain("export function SettingsMenu(");
-    expect(appHeader).toContain("{showSound ? (");
+  it("reuses the canonical learner settings menu through the Web adapter and hides sound", () => {
+    expect(sharedHeader).toContain("function SettingsMenu(");
+    expect(sharedHeader).toContain("{showSound ? (");
+    expect(appHeaderAdapter).toContain(
+      "export const SettingsMenu = learnerHeader.SettingsMenu;",
+    );
     expect(appAdapter).toContain(
       'import { SettingsMenu } from "@/components/HeaderSlick";',
     );
@@ -40,12 +46,13 @@ describe("sandbox settings menu ownership", () => {
     );
   });
 
-  it("keeps portal behavior in the injected Web settings implementation", () => {
+  it("keeps portal behavior in the canonical shared settings implementation", () => {
     expect(packageIdeHeader).toContain(
       "<FullIDESettingsMenu showSound={false} />",
     );
-    expect(appHeader).toContain("createPortal(");
-    expect(appHeader).toContain("document.body");
+    expect(sharedHeader).toContain("createPortal(");
+    expect(sharedHeader).toContain("document.body");
+    expect(appHeaderAdapter).toContain("createPortal,");
   });
 
   it("enables the gear through the sandbox-only FullIDE prop", () => {

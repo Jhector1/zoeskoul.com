@@ -17,7 +17,7 @@ describe("ThemeToggle shared ownership", () => {
 
     expect(source).toContain('from "next-themes"');
     expect(source).toContain('from "@zoeskoul/preferences/react"');
-    expect(source).toContain('export function ThemeToggle(');
+    expect(source).toContain("export function ThemeToggle(");
     expect(source).toContain('aria-label="Toggle theme"');
 
     for (const forbidden of [
@@ -35,7 +35,8 @@ describe("ThemeToggle shared ownership", () => {
     }
   });
 
-  it("is consumed by both Web and Student header adapters", () => {
+  it("is consumed once by the canonical shared learner header", () => {
+    const shared = readSource("./LearnerHeaderSlick.tsx");
     const web = readSource(
       "../../../apps/web/src/components/HeaderSlick.tsx",
     );
@@ -43,15 +44,15 @@ describe("ThemeToggle shared ownership", () => {
       "../../../apps/student/src/components/chrome/StudentHeaderSlick.tsx",
     );
 
-    expect(web).toContain(
-      'import { HeaderChrome, ThemeToggle } from "@zoeskoul/learner-ui";',
+    expect(shared).toContain(
+      'import { ThemeToggle } from "./ThemeToggle";',
     );
-    expect(student).toMatch(
-      /import\s*\{[\s\S]*HeaderChrome,[\s\S]*ThemeToggle,[\s\S]*\}\s*from "@zoeskoul\/learner-ui";/,
-    );
+    expect(shared).toContain("<ThemeToggle compact />");
 
-    expect(web).not.toContain('from "./ThemeToggle"');
-    expect(student).not.toContain('from "@/components/ThemeToggle"');
+    for (const adapter of [web, student]) {
+      expect(adapter).toContain("createLearnerHeader({");
+      expect(adapter).not.toContain("ThemeToggle");
+    }
   });
 
   it("removes both app-local duplicate implementations", () => {
