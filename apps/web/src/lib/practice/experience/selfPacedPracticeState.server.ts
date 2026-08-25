@@ -14,6 +14,7 @@ import {
   type SubscriberPracticeScope,
 } from "./subscriberPractice";
 import { loadSubscriberModulePracticeHistory } from "./subscriberPracticeSessions.server";
+import type { SessionHistoryRow } from "@/lib/practice/runtime/types";
 
 function historyTime(item: SubscriberPracticeHistoryItem) {
   const raw = item.seenAt instanceof Date ? item.seenAt : new Date(item.seenAt);
@@ -35,6 +36,7 @@ export type SelfPacedPracticeState = {
   practiceRunStartedAt: string;
   selectedTargets: AuthoredPracticeTarget[];
   completedPrefix: Array<AuthoredPracticeTarget & { correct: boolean }>;
+  completedHistory: SessionHistoryRow[];
   queue: AuthoredPracticeTarget[];
   nextTarget: AuthoredPracticeTarget | null;
   targetCount: number;
@@ -83,6 +85,7 @@ export async function loadSelfPacedPracticeState(args: {
     moduleSlug,
     moduleId: args.moduleId,
     publishedOptions: options,
+    includeReview: true,
   });
 
   // Browser-run ordering may be frozen against start-time history, but
@@ -108,7 +111,7 @@ export async function loadSelfPacedPracticeState(args: {
 
   const latestCompletion = new Map<
     string,
-    { at: number; correct: boolean }
+    { at: number; correct: boolean; review: SessionHistoryRow | null }
   >();
   for (const item of fullHistory) {
     if (!item.completedAt) continue;
@@ -128,6 +131,7 @@ export async function loadSelfPacedPracticeState(args: {
       latestCompletion.set(identity, {
         at,
         correct: item.lastOk === true,
+        review: item.review ?? null,
       });
     }
   }
@@ -138,6 +142,13 @@ export async function loadSelfPacedPracticeState(args: {
     );
     return completed ? [{ ...target, correct: completed.correct }] : [];
   });
+  const completedHistory = selectedTargets.flatMap((target) => {
+    const completion = latestCompletion.get(
+      authoredPracticeTargetIdentity(target),
+    );
+    return completion?.review ? [completion.review] : [];
+  });
+
   const completed = new Set(
     completedPrefix.map(authoredPracticeTargetIdentity),
   );
@@ -151,6 +162,7 @@ export async function loadSelfPacedPracticeState(args: {
     practiceRunStartedAt: startedAt.toISOString(),
     selectedTargets,
     completedPrefix,
+    completedHistory,
     queue,
     nextTarget: queue[0] ?? null,
     targetCount: selectedTargets.length,

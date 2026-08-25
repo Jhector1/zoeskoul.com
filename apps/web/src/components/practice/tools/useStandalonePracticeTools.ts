@@ -10,13 +10,8 @@ import { useReviewProgress } from "@/components/review/module/hooks/useReviewPro
 import { getExerciseStateKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
-
-function firstText(...values: unknown[]) {
-  for (const value of values) {
-    if (typeof value === "string" && value.trim()) return value.trim();
-  }
-  return null;
-}
+import { resolveReviewExerciseSourceCoordinates } from "@zoeskoul/learning-runtime/review/module/runtime/resolveReviewExerciseSourceCoordinates";
+import { normalizeTopicProgressKey } from "@zoeskoul/learning-runtime";
 
 export function isStandalonePracticeCodeExercise(
   exerciseKind:
@@ -66,6 +61,52 @@ export function buildStandalonePracticeToolsResetKey(args: {
   ].join(":");
 }
 
+
+export function resolveStandalonePracticeToolsIdentity(args: {
+  exerciseId: string;
+  experienceMode: PracticeShellProps["experienceMode"];
+  subjectSlug?: unknown;
+  moduleSlug?: unknown;
+  sectionSlug?: unknown;
+  topicSlug?: unknown;
+  exercise?: unknown;
+  item?: unknown;
+  selectedTargets?: readonly unknown[] | null;
+}) {
+  const sourceCoordinates = resolveReviewExerciseSourceCoordinates({
+    exerciseKey: args.exerciseId,
+    subjectSlug: args.subjectSlug,
+    moduleSlug: args.moduleSlug,
+    sectionSlug: args.sectionSlug,
+    topicSlug: args.topicSlug,
+    exercise: args.exercise,
+    item: args.item,
+    selectedTargets: args.selectedTargets,
+  });
+
+  const topicId = normalizeTopicProgressKey(sourceCoordinates.topicSlug || "all");
+  const cardId = `standalone-${args.experienceMode}`;
+
+  return {
+    sourceCoordinates,
+    topicId,
+    cardId,
+    exerciseStateKey: getExerciseStateKey(
+      {
+        subjectSlug:
+          sourceCoordinates.subjectSlug || "practice",
+        moduleSlug:
+          sourceCoordinates.moduleSlug || args.experienceMode,
+        sectionSlug:
+          sourceCoordinates.sectionSlug || undefined,
+        topicId,
+        cardId,
+      },
+      args.exerciseId,
+    ),
+  };
+}
+
 export function useStandalonePracticeTools(args: {
   props: PracticeShellProps;
   rightCollapsed: boolean;
@@ -87,16 +128,20 @@ export function useStandalonePracticeTools(args: {
     [props.current, props.exercise, props.idx],
   );
 
-  const topicId = useMemo(
-    () =>
-      firstText(
-        props.exercise?.topic,
-        props.topic,
-        (props.current as any)?.topic,
-        "all",
-      ) ?? "all",
-    [props.current, props.exercise?.topic, props.topic],
-  );
+  const standaloneIdentity = resolveStandalonePracticeToolsIdentity({
+    exerciseId,
+    experienceMode: props.experienceMode,
+    subjectSlug: props.subjectSlug,
+    moduleSlug: props.moduleSlug,
+    sectionSlug: props.section,
+    topicSlug: props.topic,
+    exercise: props.exercise,
+    item: props.current,
+    selectedTargets:
+      props.modulePracticeProgress?.selectedTargets ?? null,
+  });
+
+  const topicId = standaloneIdentity.topicId;
 
   const persistenceFirstTopicRef = useRef<string | null>(null);
   if (
@@ -149,33 +194,9 @@ export function useStandalonePracticeTools(args: {
     ? persistedReviewProgress.hydrated
     : true;
 
-  const cardId = useMemo(
-    () => `standalone-${props.experienceMode}`,
-    [props.experienceMode],
-  );
+  const cardId = standaloneIdentity.cardId;
 
-  const exerciseStateKey = useMemo(
-    () =>
-      getExerciseStateKey(
-        {
-          subjectSlug: props.subjectSlug ?? "practice",
-          moduleSlug: props.moduleSlug ?? props.experienceMode,
-          sectionSlug: props.section ?? undefined,
-          topicId,
-          cardId,
-        },
-        exerciseId,
-      ),
-    [
-      cardId,
-      exerciseId,
-      props.experienceMode,
-      props.moduleSlug,
-      props.section,
-      props.subjectSlug,
-      topicId,
-    ],
-  );
+  const exerciseStateKey = standaloneIdentity.exerciseStateKey;
 
   const codeInputId = useMemo(
     () => `standalone-code:${exerciseStateKey}`,

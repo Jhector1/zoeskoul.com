@@ -9,14 +9,8 @@ import type { PracticeShellProps } from "@/components/practice/PracticeShell";
 import type { ReviewFinalizedPracticeAction } from "@zoeskoul/learning-runtime/review/quiz/reviewQuizCompletion";
 import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
+import { resolveReviewExerciseSourceCoordinates } from "@zoeskoul/learning-runtime/review/module/runtime/resolveReviewExerciseSourceCoordinates";
 import { isExcusedPracticeItem } from "@zoeskoul/learner-ui/lib/flow/excuse";
-
-function firstText(...values: unknown[]) {
-  for (const value of values) {
-    if (typeof value === "string" && value.trim()) return value.trim();
-  }
-  return "";
-}
 
 export default function StandaloneReviewExerciseCard({
   props,
@@ -46,17 +40,26 @@ export default function StandaloneReviewExerciseCard({
       exercise: props.exercise,
       fallbackIndex: props.idx,
     });
-    const topic = firstText(props.exercise.topic, props.topic, "all");
+    const sourceCoordinates = resolveReviewExerciseSourceCoordinates({
+      exerciseKey,
+      subjectSlug: props.subjectSlug,
+      moduleSlug: props.moduleSlug,
+      sectionSlug: props.section,
+      topicSlug: props.topic,
+      exercise: props.exercise,
+      item: props.current,
+      selectedTargets: props.modulePracticeProgress?.selectedTargets ?? null,
+    });
 
     return {
       kind: "practice",
       id: `standalone:${props.experienceMode}:${exerciseKey}`,
       exerciseKey,
       fetch: {
-        subject: props.subjectSlug || "practice",
-        module: props.moduleSlug || props.experienceMode,
-        section: props.section || undefined,
-        topic,
+        subject: sourceCoordinates.subjectSlug,
+        module: sourceCoordinates.moduleSlug || props.moduleSlug || props.experienceMode,
+        section: sourceCoordinates.sectionSlug || undefined,
+        topic: sourceCoordinates.topicSlug,
         difficulty: (props.exercise as any).difficulty || props.difficulty || "easy",
         allowReveal: props.allowReveal,
         preferPurpose: standalonePurpose,
@@ -77,6 +80,7 @@ export default function StandaloneReviewExerciseCard({
     props.experienceMode,
     props.idx,
     props.maxAttempts,
+    props.modulePracticeProgress,
     props.moduleSlug,
     props.section,
     props.subjectSlug,
@@ -89,6 +93,17 @@ export default function StandaloneReviewExerciseCard({
 
   const practiceState = useMemo<PracticeState | undefined>(() => {
     if (!props.exercise || !props.current) return undefined;
+
+    const sourceCoordinates = resolveReviewExerciseSourceCoordinates({
+      exerciseKey: questionExerciseKey ?? "",
+      subjectSlug: props.subjectSlug,
+      moduleSlug: props.moduleSlug,
+      sectionSlug: props.section,
+      topicSlug: props.topic,
+      exercise: props.exercise,
+      item: props.current,
+      selectedTargets: props.modulePracticeProgress?.selectedTargets ?? null,
+    });
 
     return {
       loading: Boolean(props.busy && !props.exercise),
@@ -106,10 +121,10 @@ export default function StandaloneReviewExerciseCard({
           : null,
       helpPolicy: props.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
       exerciseKey: questionExerciseKey,
-      topicId: firstText(props.exercise.topic, props.topic, "all"),
-      subjectSlug: props.subjectSlug || "practice",
-      moduleSlug: props.moduleSlug || props.experienceMode,
-      sectionSlug: props.section || "",
+      topicId: sourceCoordinates.topicSlug,
+      subjectSlug: sourceCoordinates.subjectSlug,
+      moduleSlug: sourceCoordinates.moduleSlug || props.moduleSlug || props.experienceMode,
+      sectionSlug: sourceCoordinates.sectionSlug,
     };
   }, [
     props.actionErr,
@@ -118,6 +133,7 @@ export default function StandaloneReviewExerciseCard({
     props.exercise,
     props.experienceMode,
     props.helpPolicy,
+    props.modulePracticeProgress,
     props.loadErr,
     props.maxAttempts,
     props.moduleSlug,

@@ -1,5 +1,6 @@
 import type { Prisma } from "@/lib/prisma";
 import type { GetParams } from "@/lib/practice/api/get/schemas";
+import type { SessionHistoryRow } from "@/lib/practice/runtime/types";
 import type { PublishedPracticeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
 import {
   applyAuthoredPracticeTarget,
@@ -31,6 +32,12 @@ export type SubscriberPracticeHistoryItem = {
   completedAt?: Date | string | null;
   lastOk?: boolean | null;
   sessionId?: string | null;
+  /**
+   * Read-only learner history used to inspect a completed authored Practice
+   * exercise. This may contain public exercise data and this learner's answer,
+   * but never validator secret payload or a fresh interactive authorization key.
+   */
+  review?: SessionHistoryRow | null;
 };
 
 export type SubscriberPracticeSessionMeta = {

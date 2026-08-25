@@ -340,9 +340,8 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                       ? queueStack[sessionIndex] ?? null
                       : null;
                   const isActive =
-                    !priorCompleted &&
-                    sessionIndex === props.idx &&
-                    props.phase === "practice";
+                     sessionIndex === props.idx &&
+                     props.phase === "practice";
                   const queueStatus = priorCompleted
                     ? priorCompleted.correct === true
                       ? "correct"
@@ -365,9 +364,8 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                     sessionIndex < queueStack.length &&
                     sessionIndex < props.stack.length;
                   const disabled =
-                    Boolean(priorCompleted) ||
-                    isDailyAllowanceLocked ||
-                    !sessionItemAvailable;
+                     isDailyAllowanceLocked ||
+                     !sessionItemAvailable;
 
                   return (
                     <li

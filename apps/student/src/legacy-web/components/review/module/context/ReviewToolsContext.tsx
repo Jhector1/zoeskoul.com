@@ -26,6 +26,7 @@ import type {
   WorkspaceOrigin,
 } from "../runtime/reviewRuntimeTypes";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { mergeMissingWorkspaceFiles } from "@zoeskoul/learning-runtime/review/module/runtime/resolveWorkspaceForTarget";
 import { useDebouncedSketchState } from "../hooks/useDebouncedSketchState";
 import {
     hasNonBlankText,
@@ -163,6 +164,27 @@ export type ReviewToolsValue = {
 };
 
 const Ctx = createContext<ReviewToolsValue | null>(null);
+
+/**
+ * A protected learner/saved registration remains the content owner for paths
+ * it already has, but a newer canonical registration may contain authored
+ * companion files that an older one-file snapshot never knew about.
+ *
+ * Reconcile structure only: existing learner file contents win; only missing
+ * incoming paths are added by the canonical learning-runtime primitive.
+ */
+export function reconcileProtectedCodeInputWorkspace(args: {
+  previous: WorkspaceStateV2 | null | undefined;
+  incoming: WorkspaceStateV2 | null | undefined;
+}): WorkspaceStateV2 | null {
+  if (!args.previous) return null;
+  if (!args.incoming) return args.previous;
+
+  return mergeMissingWorkspaceFiles({
+    base: args.previous,
+    source: args.incoming,
+  });
+}
 
 function workspaceKeyOf(workspace: WorkspaceStateV2 | null | undefined) {
   if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
@@ -399,6 +421,40 @@ export function shouldNotifyCodeInputRegistry(args: {
   return previousTarget !== nextTarget;
 }
 
+
+export function shouldAutoRebindCodeInputRegistration(args: {
+  currentBound: string | null | undefined;
+  externalBoundId: string | null | undefined;
+  targetKey: string;
+  previousKey: string;
+  nextKey: string;
+}) {
+  if (args.previousKey === args.nextKey) return false;
+
+  return (
+    args.currentBound === args.targetKey ||
+    args.externalBoundId === args.targetKey
+  );
+}
+
+/**
+ * bindNow is asynchronous because the host Tools pane may need to hydrate its
+ * own state. If the registry changes while that bind is in flight, the
+ * captured snapshot is stale. The stale bind must not publish itself as the
+ * final runtime binding; retry from the current registry entry instead.
+ */
+export function shouldRetryCodeInputBindAfterRegistryChange(args: {
+  captured: RegisterArgs;
+  latest: RegisterArgs | undefined;
+}) {
+  if (!args.latest) return false;
+
+  return (
+    codeInputRegistrationKey(args.captured) !==
+    codeInputRegistrationKey(args.latest)
+  );
+}
+
 function defer(fn: () => void) {
   if (typeof queueMicrotask === "function") queueMicrotask(fn);
   else Promise.resolve().then(fn);
@@ -613,7 +669,7 @@ export function ReviewToolsProviderWithSketch({
   }, [flushRegisteredToolSnapshot, setFlushToolSnapshotCallback]);
 
   const bindNow = useCallback(
-    async (id: string) => {
+    async function bindNowCurrent(id: string) {
       if (!enabledRef.current) return;
       if (!id) return;
 
@@ -636,6 +692,33 @@ export function ReviewToolsProviderWithSketch({
       }
 
       const accepted = await onBindToToolsPanel({ id, ...snap, exerciseKey: targetKey });
+
+      /**
+       * A registration can be structurally upgraded while onBindToToolsPanel is
+       * still hydrating the earlier snapshot (for example main.py-only saved
+       * work followed by the current authored multi-file manifest).
+       *
+       * Do not let that older in-flight bind become the final binding. Re-read
+       * the registry after the await and retry from the newest registration.
+       */
+      const latestSnap = registryRef.current.get(id);
+
+      if (!latestSnap) {
+        setRequestedId(null);
+        return;
+      }
+
+      if (
+        shouldRetryCodeInputBindAfterRegistryChange({
+          captured: snap,
+          latest: latestSnap,
+        })
+      ) {
+        defer(() => {
+          void bindNowCurrent(id);
+        });
+        return;
+      }
 
       /**
        * Do not mark the global Tools panel as bound when the route/controller
@@ -1250,6 +1333,10 @@ export function ReviewToolsProviderWithSketch({
             ) {
                 nextArgs = {
                     ...prev,
+                    workspace: reconcileProtectedCodeInputWorkspace({
+                        previous: prev.workspace ?? null,
+                        incoming: normalizedArgs.workspace ?? null,
+                    }),
 
                     exerciseKey: nextTargetKey,
                     ownerCardId: normalizedArgs.ownerCardId ?? prev.ownerCardId,
@@ -1301,7 +1388,15 @@ export function ReviewToolsProviderWithSketch({
         const targetKey = nextArgs.exerciseKey ?? id;
         const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
 
-        if (currentBound === targetKey && prevKey !== nextKey) {
+        if (
+            shouldAutoRebindCodeInputRegistration({
+                currentBound,
+                externalBoundId,
+                targetKey,
+                previousKey: prevKey,
+                nextKey,
+            })
+        ) {
             const autoRebindKey = `${id}::${targetKey}::${nextKey}`;
             if (lastRegisterAutoBindKeyRef.current !== autoRebindKey) {
                 lastRegisterAutoBindKeyRef.current = autoRebindKey;
@@ -1313,7 +1408,7 @@ export function ReviewToolsProviderWithSketch({
         defer(() => bindNow(id));
       }
     },
-    [clearUnbindTimer, requestedId, bindNow, currentResetRevision],
+    [clearUnbindTimer, requestedId, bindNow, currentResetRevision, externalBoundId],
   );
 
   const unregisterCodeInput = useCallback(

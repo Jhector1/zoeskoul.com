@@ -51,6 +51,11 @@ export type PracticeSubscriberRunMeta = {
     sectionSlug: string;
     correct?: boolean;
   }>;
+  /**
+   * Finalized inspection rows for completed authored Practice exercises.
+   * These rows never carry a fresh interactive authorization key.
+   */
+  completedHistory?: SessionHistoryRow[];
 };
 
 /**

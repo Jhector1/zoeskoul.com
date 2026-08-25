@@ -573,6 +573,23 @@ function workspaceFileEntries(
     .filter((file) => file.path.trim().length > 0);
 }
 
+/**
+ * Preserve every file already present in `base` and add only paths that are
+ * missing from `source`.
+ *
+ * This is a structural reconciliation primitive. It never replaces learner
+ * content for an existing path, and it does not own persistence or progress.
+ */
+export function mergeMissingWorkspaceFiles(args: {
+  base: WorkspaceStateV2;
+  source: WorkspaceStateV2 | null | undefined;
+}): WorkspaceStateV2 {
+  return mergeMissingFilesIntoWorkspace({
+    base: args.base,
+    fixtureFiles: workspaceFileEntries(args.source),
+  });
+}
+
 function isLegacyGeneratedSafeDirectoryConfig(content: string): boolean {
   const lines = String(content ?? "")
     .replace(/\r\n?/g, "\n")

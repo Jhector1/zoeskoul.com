@@ -85,6 +85,49 @@ describe("canonical authored Practice history identity", () => {
     ).toEqual(candidates[1]);
   });
 
+  it("does not fall back to a unique key when persisted topic metadata mismatches", () => {
+    const candidates = [
+      target("same-key", "topic-current"),
+      target("another-key", "topic-other"),
+    ];
+
+    expect(
+      resolveAuthoredPracticeHistoryTarget({
+        item: {
+          exerciseKey: "runtime:standalone-standard:same-key",
+          publicPayload: {
+            id: "same-key",
+            topicSlug: "topic-legacy-other",
+          },
+          topic: {
+            slug: "topic-legacy-other",
+          },
+        },
+        candidates,
+      }),
+    ).toBeNull();
+  });
+
+  it("still allows the legacy unique-key fallback when topic metadata is truly absent", () => {
+    const candidates = [
+      target("legacy-only-key", "topic-current"),
+      target("another-key", "topic-other"),
+    ];
+
+    expect(
+      resolveAuthoredPracticeHistoryTarget({
+        item: {
+          exerciseKey: "runtime:standalone-standard:legacy-only-key",
+          publicPayload: {
+            id: "legacy-only-key",
+          },
+          topic: null,
+        },
+        candidates,
+      }),
+    ).toEqual(candidates[0]);
+  });
+
   it("does not guess a key-only identity when the authored key is ambiguous", () => {
     const candidates = [
       target("shared-key", "topic-a"),

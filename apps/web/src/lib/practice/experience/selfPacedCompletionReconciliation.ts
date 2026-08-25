@@ -74,3 +74,49 @@ export function reconcileSelfPacedCompletionStack(args: {
 
   return changed ? next : args.stack;
 }
+
+/**
+ * Materialize canonical completed inspection items into the browser navigation
+ * stack without replacing newer browser state for an identity already loaded.
+ *
+ * This does not alter the server's remaining authored queue. It only makes
+ * completed items addressable by the same idx/setIdx navigation primitive used
+ * by the Practice shell.
+ */
+export function mergeSelfPacedCompletedHistoryStack(args: {
+  stack: QItem[];
+  completedItems: QItem[];
+}) {
+  if (!args.completedItems.length) return args.stack;
+
+  const existingByIdentity = new Map<string, QItem>();
+  for (const item of args.stack) {
+    const identity = authoredPracticeItemIdentity(item);
+    if (identity && !existingByIdentity.has(identity)) {
+      existingByIdentity.set(identity, item);
+    }
+  }
+
+  const completedIdentities = new Set<string>();
+  const completedStack = args.completedItems.flatMap((historyItem) => {
+    const identity = authoredPracticeItemIdentity(historyItem);
+    if (!identity || completedIdentities.has(identity)) return [];
+
+    completedIdentities.add(identity);
+    return [existingByIdentity.get(identity) ?? historyItem];
+  });
+
+  const remaining = args.stack.filter((item) => {
+    const identity = authoredPracticeItemIdentity(item);
+    return !identity || !completedIdentities.has(identity);
+  });
+
+  const merged = [...completedStack, ...remaining];
+  if (
+    merged.length === args.stack.length &&
+    merged.every((item, index) => item === args.stack[index])
+  ) {
+    return args.stack;
+  }
+  return merged;
+}

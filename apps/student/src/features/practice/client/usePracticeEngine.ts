@@ -44,7 +44,10 @@ import {
   samePracticeExerciseIdentity,
 } from "@/lib/practice/exerciseIdentity";
 import { resolveRevealCompletionTransition } from "@/lib/practice/experience/revealCompletion";
-import { reconcileSelfPacedCompletionStack } from "@/lib/practice/experience/selfPacedCompletionReconciliation";
+import {
+  mergeSelfPacedCompletedHistoryStack,
+  reconcileSelfPacedCompletionStack,
+} from "@/lib/practice/experience/selfPacedCompletionReconciliation";
 import {
   canRevealPracticeAnswer,
   isRevealStepKey,
@@ -147,6 +150,37 @@ function exerciseSignature(ex: Exercise | null | undefined): string {
     String(ex.title ?? ""),
     String(ex.prompt ?? ""),
   ].join("||");
+}
+
+function isPracticeHistoryInspectionItem(
+  item: QItem | null | undefined,
+) {
+  return String(item?.key ?? "").startsWith("history:");
+}
+
+function mergeFinalizedPracticeResult(
+  currentResult: QItem["result"],
+  patchResult: Partial<QItem>["result"],
+): QItem["result"] {
+  const baseResult = patchResult ?? currentResult;
+  if (!baseResult) return null;
+
+  return {
+    ...(currentResult ?? baseResult),
+    ...(patchResult ?? {}),
+    finalized: true,
+  };
+}
+
+function completedHistoryItemsFromRun(
+  runMeta: RunMeta | null | undefined,
+): QItem[] {
+  if (runMeta?.mode !== "practice") return [];
+  const rows = runMeta?.subscriberPractice?.completedHistory;
+  if (!Array.isArray(rows)) return [];
+  return rows
+    .filter((row) => row && typeof row === "object" && Boolean(row.answeredAt))
+    .map(historyRowToQItem);
 }
 
 function stableAt(q: QItem): number {
@@ -393,15 +427,26 @@ export function usePracticeEngine(args: {
 
   function updateCurrent(patch: Partial<QItem>) {
     if (!current || !exercise) return;
+    const effectivePatch = isPracticeHistoryInspectionItem(current)
+      ? {
+          ...patch,
+          submitted: true,
+          result: mergeFinalizedPracticeResult(
+            current.result,
+            patch.result,
+          ),
+        }
+      : patch;
     updatePracticeItemForIdentity({
       sourceItem: current,
       sourceExercise: exercise,
-      patch,
+      patch: effectivePatch,
     });
   }
 
   function resetCurrentExercise() {
     if (!current || !exercise) return;
+    if (isPracticeHistoryInspectionItem(current)) return;
 
     const resetItem = initItemFromExercise(exercise, current.key, {
       resolveText: (value) => resolveTextRef.current(value),
@@ -669,13 +714,28 @@ export function usePracticeEngine(args: {
     });
 
     if (runFromApi?.mode === "practice") {
-      setStack((prev) =>
-        reconcileSelfPacedCompletionStack({
+      const completedHistoryItems = completedHistoryItemsFromRun(runFromApi);
+      setStack((prev) => {
+        const reconciled = reconcileSelfPacedCompletionStack({
           stack: prev,
           completedPrefix:
             runFromApi?.subscriberPractice?.completedPrefix ?? [],
-        }),
-      );
+        });
+        const merged = mergeSelfPacedCompletedHistoryStack({
+          stack: reconciled,
+          completedItems: completedHistoryItems,
+        });
+        const selectedIndex = merged.findIndex((candidate) =>
+          samePracticeExerciseIdentity({
+            leftItem: sourceItem,
+            leftExercise: sourceExercise,
+            rightItem: candidate,
+            rightExercise: candidate?.exercise ?? null,
+          }),
+        );
+        if (selectedIndex >= 0) setIdx(selectedIndex);
+        return merged;
+      });
     }
 
     return { item: freshItem, exercise: freshExercise };
@@ -721,8 +781,32 @@ export function usePracticeEngine(args: {
       if (runFromApi?.mode && !acceptRunMeta(runFromApi)) {
         throw new Error("Practice session experience mismatch.");
       }
+      const completedHistoryItems =
+        completedHistoryItemsFromRun(runFromApi);
 
       if ((response as any)?.complete) {
+        if (completedHistoryItems.length > 0) {
+          setStack((prev) => {
+            const merged = mergeSelfPacedCompletedHistoryStack({
+              stack: prev,
+              completedItems: completedHistoryItems,
+            });
+            if (current && exercise) {
+              const selectedIndex = merged.findIndex((candidate) =>
+                samePracticeExerciseIdentity({
+                  leftItem: current,
+                  leftExercise: exercise,
+                  rightItem: candidate,
+                  rightExercise: candidate?.exercise ?? null,
+                }),
+              );
+              if (selectedIndex >= 0) setIdx(selectedIndex);
+            } else if (merged.length > 0) {
+              setIdx(0);
+            }
+            return merged;
+          });
+        }
         applyCompletedPracticeSnapshot(
           response as CompletedPracticeGetResponse,
         );
@@ -794,7 +878,11 @@ export function usePracticeEngine(args: {
       }
 
       setStack((prev) => {
-        const next = [...prev, item];
+        const withCompletedHistory = mergeSelfPacedCompletedHistoryStack({
+          stack: prev,
+          completedItems: completedHistoryItems,
+        });
+        const next = [...withCompletedHistory, item];
         setIdx(next.length - 1);
         return next;
       });
@@ -1067,6 +1155,7 @@ export function usePracticeEngine(args: {
 
   async function submit() {
     if (completed) return;
+    if (isPracticeHistoryInspectionItem(current)) return;
     if (deferredRevealCompletion) return;
     if (submitLockRef.current) return;
     if (!current || !exercise) return;
@@ -1177,6 +1266,7 @@ export function usePracticeEngine(args: {
 
   async function openHelp(stepKey?: string) {
     if (completed) return;
+    if (isPracticeHistoryInspectionItem(current)) return;
     if (!current || !exercise || busy) return;
 
     const chosenKey =

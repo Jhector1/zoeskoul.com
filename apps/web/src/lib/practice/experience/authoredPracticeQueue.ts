@@ -148,6 +148,17 @@ export function resolveAuthoredPracticeHistoryTarget(args: {
       ),
     );
     if (topicMatches.length === 1) return topicMatches[0];
+
+    /**
+     * Topic metadata is authoritative when present.
+     *
+     * A legacy/runtime-scoped exercise key may still be accepted when topic
+     * metadata is genuinely absent. But once the persisted row tells us which
+     * topic it belongs to, a mismatch must never fall back to a module-wide
+     * unique exercise-key match. Doing so can mark a different authored
+     * Practice exercise completed.
+     */
+    return null;
   }
 
   return keyMatches.length === 1 ? keyMatches[0] : null;

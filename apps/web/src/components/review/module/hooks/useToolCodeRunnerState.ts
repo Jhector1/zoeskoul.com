@@ -468,6 +468,24 @@ function hydrateWorkspaceShellWithCode(
 }
 
 
+/**
+ * The exercise/workspace resolver upstream owns hydration.
+ *
+ * If bind receives a canonical incoming workspace, do not replace it with a
+ * second saved snapshot here. That second ownership layer is what collapses a
+ * repaired multi-file workspace back to an older one-file save.
+ *
+ * Saved state is only a fallback when the binding has no workspace at all.
+ */
+export function resolveWorkspaceForToolBind(args: {
+    incomingWorkspace: WorkspaceStateV2 | null;
+    savedWorkspace: WorkspaceStateV2 | null;
+    shouldUseSavedWorkspace: boolean;
+}) {
+    if (args.incomingWorkspace) return args.incomingWorkspace;
+    return args.shouldUseSavedWorkspace ? args.savedWorkspace : null;
+}
+
 export function shouldSkipRepeatedToolBind(
     lastBindKey: string,
     nextBindKey: string,
@@ -1694,9 +1712,11 @@ export function useToolCodeRunnerState(args: {
                     existingExerciseForBind?.workspace ?? null,
                     existingExerciseForBindCode,
                 )
-                : shouldUseSavedWorkspace
-                    ? savedWorkspace
-                    : nextWorkspace;
+                : resolveWorkspaceForToolBind({
+                    incomingWorkspace: nextWorkspace,
+                    savedWorkspace,
+                    shouldUseSavedWorkspace,
+                });
 
             const nextSnapCode =
                 deriveEntryCode(workspaceForBind) ||

@@ -447,6 +447,7 @@ export async function generatePracticeExercise(
                         correct: target.correct,
                     }),
                 ),
+                completedHistory: selfPacedPractice.completedHistory,
             },
         };
     }

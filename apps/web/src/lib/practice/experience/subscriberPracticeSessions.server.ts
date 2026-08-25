@@ -33,6 +33,12 @@ export async function loadSubscriberModulePracticeHistory(args: {
   moduleSlug: string;
   moduleId?: string | null;
   publishedOptions?: readonly PublishedPracticeExerciseOption[];
+  /**
+   * Opt-in because progress/percentage/continuation callers need only canonical
+   * identity + completion. Completed-exercise inspection is the only caller
+   * that needs the learner's historical answer payload.
+   */
+  includeReview?: boolean;
 }): Promise<SubscriberPracticeHistoryItem[]> {
   if (!args.userId) return [];
 
@@ -83,9 +89,14 @@ export async function loadSubscriberModulePracticeHistory(args: {
       ],
     },
     select: {
+      id: true,
       sessionId: true,
       exerciseKey: true,
       experienceItemKey: true,
+      kind: true,
+      difficulty: true,
+      title: true,
+      prompt: true,
       publicPayload: true,
       answeredAt: true,
       createdAt: true,
@@ -99,7 +110,11 @@ export async function loadSubscriberModulePracticeHistory(args: {
         },
         orderBy: { createdAt: "desc" },
         take: 1,
-        select: { ok: true },
+        select: {
+          ok: true,
+          answerPayload: true,
+          createdAt: true,
+        },
       },
     },
     orderBy: { createdAt: "desc" },
@@ -121,6 +136,37 @@ export async function loadSubscriberModulePracticeHistory(args: {
         completedAt: row.answeredAt,
         lastOk: row.attempts[0]?.ok ?? null,
         sessionId: row.sessionId,
+        ...(args.includeReview && row.answeredAt
+          ? {
+              review: {
+                instanceId: row.id,
+                createdAt: row.createdAt.toISOString(),
+                answeredAt: row.answeredAt.toISOString(),
+                topic: target.topicSlug,
+                kind: String(row.kind),
+                difficulty: row.difficulty,
+                title: row.title,
+                prompt: row.prompt,
+                publicPayload: {
+                  ...(
+                    row.publicPayload &&
+                    typeof row.publicPayload === "object" &&
+                    !Array.isArray(row.publicPayload)
+                      ? (row.publicPayload as Record<string, unknown>)
+                      : {}
+                  ),
+                  exerciseKey: target.exerciseKey,
+                  topic: target.topicSlug,
+                  topicSlug: target.topicSlug,
+                },
+                lastOk: row.attempts[0]?.ok ?? null,
+                lastAnswerPayload: row.attempts[0]?.answerPayload ?? null,
+                lastAttemptAt:
+                  row.attempts[0]?.createdAt?.toISOString() ?? null,
+                lastRevealUsed: false,
+              },
+            }
+          : {}),
       },
     ];
   });

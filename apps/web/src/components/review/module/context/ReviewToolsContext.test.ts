@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
     codeInputRegistrationKey,
     isSameCodeFeedback,
+    reconcileProtectedCodeInputWorkspace,
     shouldNotifyCodeInputRegistry,
 } from "./ReviewToolsContext";
 
@@ -199,5 +200,96 @@ describe("code input registration stability", () => {
             }),
         ).toBe(true);
     });
-});
+    it("preserves protected learner content while restoring missing authored companion files", () => {
+        const previous = {
+            version: 2,
+            language: "python",
+            entryFileId: "file:main.py",
+            activeFileId: "file:main.py",
+            openTabs: ["file:main.py"],
+            expanded: [],
+            nodes: [
+                {
+                    id: "file:main.py",
+                    kind: "file",
+                    name: "main.py",
+                    parentId: null,
+                    content: "print('learner edit')\n",
+                    createdAt: 1,
+                    updatedAt: 2,
+                },
+            ],
+        } as any;
 
+        const incoming = {
+            version: 2,
+            language: "python",
+            entryFileId: "file:main.py",
+            activeFileId: "file:main.py",
+            openTabs: ["file:main.py"],
+            expanded: ["folder:models"],
+            nodes: [
+                {
+                    id: "file:main.py",
+                    kind: "file",
+                    name: "main.py",
+                    parentId: null,
+                    content: "print('starter')\n",
+                    createdAt: 0,
+                    updatedAt: 0,
+                },
+                {
+                    id: "folder:models",
+                    kind: "folder",
+                    name: "models",
+                    parentId: null,
+                    createdAt: 0,
+                    updatedAt: 0,
+                },
+                {
+                    id: "file:models__transaction.py",
+                    kind: "file",
+                    name: "transaction.py",
+                    parentId: "folder:models",
+                    content: "class Transaction:\n    pass\n",
+                    createdAt: 0,
+                    updatedAt: 0,
+                },
+            ],
+        } as any;
+
+        const reconciled = reconcileProtectedCodeInputWorkspace({
+            previous,
+            incoming,
+        });
+
+        const main = reconciled?.nodes.find(
+            (node: any) => node.kind === "file" && node.name === "main.py",
+        );
+        const transaction = reconciled?.nodes.find(
+            (node: any) =>
+                node.kind === "file" && node.name === "transaction.py",
+        );
+        const models = reconciled?.nodes.find(
+            (node: any) => node.kind === "folder" && node.name === "models",
+        );
+
+        expect(main).toBeTruthy();
+        expect(transaction).toBeTruthy();
+        expect(models).toBeTruthy();
+
+        if (!main || main.kind !== "file") {
+            throw new Error("expected reconciled main.py to be a file");
+        }
+        if (!transaction || transaction.kind !== "file") {
+            throw new Error("expected reconciled transaction.py to be a file");
+        }
+
+        expect(main.content).toBe("print('learner edit')\n");
+        expect(transaction.content).toBe("class Transaction:\n    pass\n");
+        expect(transaction.parentId).toBe(models?.id);
+        expect(reconciled?.entryFileId).toBe("file:main.py");
+        expect(reconciled?.activeFileId).toBe("file:main.py");
+    });
+
+});

@@ -859,10 +859,16 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
      * real starter workspace/code, allow ensureExercise to replace the blank
      * saved shell with the authored starter.
      */
-    if (isUserOwnedWorkspaceState(existing)) {
-        return existingHasContent || !manifestHasStarter;
-    }
-
+    /**
+     * Workspace ownership and workspace structural completeness are separate
+     * concerns.
+     *
+     * A learner-owned save remains authoritative for the content of paths it
+     * already contains, but an older save may predate companion files that are
+     * now part of the authored workspace. In that case we must not skip the
+     * shared ensureExercise owner: it needs the opportunity to reconcile the
+     * saved workspace against the current authored manifest.
+     */
     const manifestPaths = workspaceFilePaths(manifestStarterWorkspace);
     const existingPaths = workspaceFilePaths(existingWorkspace);
     const existingCoversManifestFiles =
@@ -871,6 +877,10 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
 
     if (!existingCoversManifestFiles) {
         return false;
+    }
+
+    if (isUserOwnedWorkspaceState(existing)) {
+        return existingHasContent || !manifestHasStarter;
     }
 
     if (existingHasContent) {

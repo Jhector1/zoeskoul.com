@@ -30,78 +30,15 @@ import {
     deriveEntryCode,
     resolveExerciseWorkspace,
 } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
-
-const PRACTICE_AUTHORED_CONTRACT_FIELDS = [
-    "help",
-    "prompt",
-    "title",
-    "hint",
-    "starterCode",
-    "starterFiles",
-    "workspace",
-    "files",
-    "initialFiles",
-    "workspaceFiles",
-    "fixtureFiles",
-    "fixtures",
-    "fileFixtures",
-    "workspaceExpectations",
-    "recipe",
-    "tests",
-    "solutionCode",
-    "solutionFiles",
-    "expected",
-    "messageBase",
-    "ideConfig",
-    "language",
-    "lang",
-] as const;
+import {
+    PRACTICE_AUTHORED_CONTRACT_FIELDS,
+    isLearnerOwnedPracticeRuntimeState,
+    resolvePracticeAuthoredContractValue,
+    shouldMirrorPracticeAuthoredContractFieldToItem,
+} from "@zoeskoul/learning-runtime/review/module/runtime/practiceAuthoredContract";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
     return Boolean(value) && typeof value === "object" && !Array.isArray(value);
-}
-
-const BARE_I18N_KEY_RE = /^[a-zA-Z0-9_.:-]+$/;
-
-function isTaggedPracticeAlias(value: unknown) {
-    return typeof value === "string" && value.trim().startsWith("@:");
-}
-
-function isBarePracticeI18nAlias(value: unknown) {
-    if (typeof value !== "string") return false;
-
-    const trimmed = value.trim();
-
-    return (
-        trimmed.length > 0 &&
-        trimmed.includes(".") &&
-        !trimmed.includes(" ") &&
-        BARE_I18N_KEY_RE.test(trimmed)
-    );
-}
-
-function pickLivePracticeContractValue(args: {
-    resolvedValue: unknown;
-    currentValue: unknown;
-}) {
-    const { resolvedValue, currentValue } = args;
-
-    if (currentValue === undefined) {
-        return resolvedValue;
-    }
-
-    if (
-        resolvedValue !== undefined &&
-        !isTaggedPracticeAlias(resolvedValue) &&
-        (
-            isTaggedPracticeAlias(currentValue) ||
-            isBarePracticeI18nAlias(currentValue)
-        )
-    ) {
-        return resolvedValue;
-    }
-
-    return currentValue;
 }
 
 /**
@@ -133,14 +70,29 @@ export function normalizeCurrentPracticeItem<T extends Partial<QItem>>(
         exercise: normalizedExercise,
     };
 
+    const learnerOwnedRuntimeState =
+        isLearnerOwnedPracticeRuntimeState(itemRecord) ||
+        isLearnerOwnedPracticeRuntimeState(currentSourceRecord);
+
     for (const field of PRACTICE_AUTHORED_CONTRACT_FIELDS) {
-        const liveValue = pickLivePracticeContractValue({
+        const liveValue = resolvePracticeAuthoredContractValue({
+            field,
             resolvedValue: normalizedExercise[field],
-            currentValue: currentSourceRecord[field] ?? currentExerciseRecord[field],
+            currentExerciseValue: currentExerciseRecord[field],
+            currentItemValue: currentSourceRecord[field],
+            learnerOwnedRuntimeState,
         });
 
         if (liveValue !== undefined) {
-            next[field] = liveValue;
+            if (
+                shouldMirrorPracticeAuthoredContractFieldToItem({
+                    field,
+                    learnerOwnedRuntimeState,
+                })
+            ) {
+                next[field] = liveValue;
+            }
+
             if (isRecord(next.exercise)) {
                 next.exercise[field] = liveValue;
             }
