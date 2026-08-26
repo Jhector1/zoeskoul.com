@@ -287,6 +287,9 @@
           }
         ],
         "solutionCode": "name = input()\nage = input()\nprint(f\"name = {name}\")\nprint(f\"age = {age}\")\n"
+      },
+      "workspace": {
+        "language": "python"
       }
     },
     {
@@ -311,6 +314,9 @@
           }
         ],
         "solutionCode": "a = int(input())\nb = int(input())\na, b = b, a\nprint(a)\nprint(b)\n"
+      },
+      "workspace": {
+        "language": "python"
       }
     },
     {
@@ -335,6 +341,9 @@
           }
         ],
         "solutionCode": "day1 = int(input())\nday2 = int(input())\nday3 = int(input())\ntotal = day1 + day2 + day3\nprint(f\"Total = {total}\")\n"
+      },
+      "workspace": {
+        "language": "python"
       }
     }
   ]

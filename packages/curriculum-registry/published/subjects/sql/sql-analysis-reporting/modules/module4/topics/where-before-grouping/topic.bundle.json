@@ -197,7 +197,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -214,7 +213,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.tryIt.try_where_before_grouping_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -259,7 +257,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-active-gross-sales-by-category",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-active-gross-sales-by-category.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -276,7 +273,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-active-gross-sales-by-category.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -321,7 +317,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-retained-where-before-grouping-sketch1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-retained-where-before-grouping-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -338,7 +333,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-retained-where-before-grouping-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -383,7 +377,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-completed-units-by-category",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-completed-units-by-category.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -400,7 +393,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-4-having-and-conditional-reporting.where-before-grouping.practice.practice-completed-units-by-category.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

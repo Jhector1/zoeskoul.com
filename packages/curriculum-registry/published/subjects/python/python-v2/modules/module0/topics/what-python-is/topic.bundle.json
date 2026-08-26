@@ -202,7 +202,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.ci-beginner-message",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -238,15 +237,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -259,7 +249,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-beginner-message.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -295,7 +284,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.ci-personal-usecase-label",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -331,15 +319,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -352,7 +331,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -388,7 +366,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.what-python-is.quiz.ci-print-usecase-automation",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -424,15 +401,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -445,7 +413,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

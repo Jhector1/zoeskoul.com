@@ -155,7 +155,16 @@
         ],
         "solutionCode": "print('Hello, World!')"
       },
-      "starterCode": "print('Hello, World!')"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "print('Hello, World!')",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

@@ -197,7 +197,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -214,7 +213,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.tryIt.try_group_by_one_column_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -259,7 +257,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-completed-orders-by-region",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-completed-orders-by-region.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -276,7 +273,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-completed-orders-by-region.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -321,7 +317,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-retained-group-by-one-column-sketch1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-retained-group-by-one-column-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -338,7 +333,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-retained-group-by-one-column-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -383,7 +377,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-average-rating-by-sales-rep",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-average-rating-by-sales-rep.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -400,7 +393,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.group-by-one-column.practice.practice-average-rating-by-sales-rep.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

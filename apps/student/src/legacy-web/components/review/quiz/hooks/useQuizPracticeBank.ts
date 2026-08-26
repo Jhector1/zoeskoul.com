@@ -37,6 +37,7 @@ import {
 } from "@zoeskoul/learning-runtime/review/module/runtime/workspaceCodeSource";
 import { buildReviewPracticeRevealCompletionPatch } from "@zoeskoul/learning-runtime/review/quiz/reviewPracticeRevealCompletion";
 import { getReviewSubmitBridgeHost } from "@zoeskoul/learning-runtime/review/submitBridge";
+import { hasUsableStarterFilesValue } from "@zoeskoul/learning-runtime/review/module/runtime/starterContent";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
 type ReviewPracticeQuestionActionOptions = {
@@ -461,67 +462,9 @@ function normalizeTerminalEvidenceForPracticeSubmit(value: unknown) {
 
   const cwd = typeof value.cwd === "string" ? value.cwd.trim() : "";
 
-  if (!commands.length && !outputText.trim() && !cwd) {
+  if (!commands.length && !outputText.trim()) {
     return null;
   }
-
-  return {
-    commands,
-    outputText,
-    ...(cwd ? { cwd } : {}),
-  };
-}
-
-function getVisibleTerminalEvidenceForPracticeSubmit() {
-  if (typeof document === "undefined") return null;
-
-  const transcriptText = normalizeVisibleTerminalTranscriptText(
-      Array.from(
-      document.querySelectorAll<HTMLElement>(
-          '[data-testid="interactive-terminal-transcript"], [data-testid="interactive-terminal"]',
-      ),
-  )
-          .map((node) =>
-              typeof node.innerText === "string" && node.innerText.trim()
-                  ? node.innerText
-                  : node.textContent,
-          ),
-  );
-
-  if (!transcriptText) return null;
-
-  return normalizeTerminalEvidenceForPracticeSubmit({ outputText: transcriptText });
-}
-
-function mergeTerminalEvidenceForPracticeSubmit(...values: unknown[]) {
-  const commands: string[] = [];
-  const seenCommands = new Set<string>();
-  const outputParts: string[] = [];
-  let cwd = "";
-
-  for (const value of values) {
-    const evidence = normalizeTerminalEvidenceForPracticeSubmit(value);
-    if (!evidence) continue;
-
-    for (const command of evidence.commands ?? []) {
-      const normalized = String(command ?? "").trim();
-      if (!normalized || seenCommands.has(normalized)) continue;
-      seenCommands.add(normalized);
-      commands.push(normalized);
-    }
-
-    if (String(evidence.outputText ?? "").trim()) {
-      outputParts.push(String(evidence.outputText));
-    }
-
-    if (!cwd && typeof evidence.cwd === "string" && evidence.cwd.trim()) {
-      cwd = evidence.cwd.trim();
-    }
-  }
-
-  const outputText = outputParts.join("\n");
-
-  if (!commands.length && !outputText.trim() && !cwd) return null;
 
   return {
     commands,
@@ -550,19 +493,9 @@ function getLiveTerminalEvidenceForPracticeSubmit(candidateKeys: string[]) {
     }
   }
 
-  /**
-   * Last-resort browser fallback.
-   *
-   * The visible xterm transcript is rendered from the terminalFeed. It is the
-   * one source that definitely matches what the learner sees. If the runtime
-   * store/global getter is one render tick behind, this still carries commands
-   * such as `mkdir -p semester/notes ...` into validation.
-   */
-  return mergeTerminalEvidenceForPracticeSubmit(
-      keyedEvidence,
-      win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.(),
-      getVisibleTerminalEvidenceForPracticeSubmit(),
-  );
+  // Terminal evidence is target-owned. An unkeyed global getter or visible DOM
+  // transcript can belong to the previous exercise during a route transition.
+  return keyedEvidence;
 }
 
 type LiveWorkspaceSubmitSnapshot = {
@@ -1324,7 +1257,9 @@ export function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
   if (!sanitizedSavedPatch) return item;
 
   const isCodeInput = currentItem?.exercise?.kind === "code_input";
-  const starterCode = String(currentItem?.exercise?.starterCode ?? "").trim();
+  const hasAuthoredStarter = hasUsableStarterFilesValue(
+      (currentItem?.exercise as any)?.workspace?.starterFiles,
+  );
   const expectedLanguage = getPracticeExerciseLanguage(currentItem?.exercise);
 
   const userEdited =
@@ -1371,7 +1306,7 @@ export function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
    * - non-user patch must not replace code/source/workspace
    * - real learner edits are preserved through userEdited/workspaceOrigin=user/saved
    */
-  if (isCodeInput && starterCode && !userEdited) {
+  if (isCodeInput && hasAuthoredStarter && !userEdited) {
     delete patch.code;
     delete patch.source;
     delete patch.workspace;
@@ -2567,4 +2502,3 @@ export function useQuizPracticeBank(args: {
     retryPracticeQuestion,
   };
 }
-import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";

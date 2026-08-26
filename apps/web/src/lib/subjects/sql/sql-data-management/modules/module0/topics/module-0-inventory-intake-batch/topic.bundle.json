@@ -123,25 +123,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -181,7 +162,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step1.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -284,25 +264,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -342,7 +303,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step2.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -445,25 +405,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -503,7 +444,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step3.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -606,25 +546,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -664,7 +585,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step4.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -767,25 +687,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -825,7 +726,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.module-0-inventory-intake-batch.moduleProject.steps.ci_module_0_step5.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",

@@ -253,7 +253,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -286,15 +285,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -307,7 +297,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -343,7 +332,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -376,15 +364,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -397,7 +376,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -433,7 +411,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -466,15 +443,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -487,7 +455,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -523,7 +490,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -556,15 +522,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -577,7 +534,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-4.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -613,7 +569,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -646,15 +601,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -667,7 +613,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.quiz.code-5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -704,16 +649,6 @@
       "messageBase": "topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -726,7 +661,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.for-loops-over-text.practice.practice-print-vowels.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

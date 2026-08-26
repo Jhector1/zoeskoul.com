@@ -46,4 +46,16 @@ describe("shell task expected helpers", () => {
             }),
         ).toBe(true);
     });
+
+    it("rejects cwd-only terminal state as learner attempt evidence", () => {
+        expect(
+            hasTerminalEvidence({
+                terminalEvidence: {
+                    commands: [],
+                    outputText: "",
+                    cwd: "/workspace/already-correct",
+                },
+            }),
+        ).toBe(false);
+    });
 });

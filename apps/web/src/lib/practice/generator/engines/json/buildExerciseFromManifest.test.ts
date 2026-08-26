@@ -156,7 +156,7 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
       id: result.exercise.id,
       kind: result.exercise.kind,
       language: (result.exercise as any).language,
-      starterCode: (result.exercise as any).starterCode,
+      starterCode: (result.exercise as any).workspace?.starterFiles?.[0]?.content,
       expectedExample: (result.exercise as any).expectedExample,
     }).toMatchObject({
       id: "try-what_select_does-sketch0",

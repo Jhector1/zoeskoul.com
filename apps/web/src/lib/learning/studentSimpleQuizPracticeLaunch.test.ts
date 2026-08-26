@@ -268,7 +268,7 @@ describe("student embedded Try It practice launch", () => {
           { path: "helper.py", content: "" },
         ],
       }),
-    ).toBe(false);
+    ).toBe(true);
     const companionEligible = {
       ...eligible,
       starterFiles: [
@@ -1159,7 +1159,7 @@ describe("student embedded Try It practice launch", () => {
           ],
         },
       }),
-    ).toBe(false);
+    ).toBe(true);
     expect(
       isEligibleStudentEmbeddedPythonTryIt({
         ...eligible,

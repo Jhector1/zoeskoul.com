@@ -90,8 +90,6 @@ describe("shouldSkipEmbeddedEnsureExercise", () => {
                 },
                 manifestLanguage: "sql",
                 manifestStarterWorkspace: null,
-                manifestStarterCode:
-                    "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
                 manifestIdeConfig: null,
             }),
         ).toBe(true);

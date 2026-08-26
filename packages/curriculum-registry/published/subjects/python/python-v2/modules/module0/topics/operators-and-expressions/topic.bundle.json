@@ -221,7 +221,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -244,15 +243,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -265,7 +255,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -301,7 +290,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -324,15 +312,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -345,7 +324,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -381,7 +359,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -404,15 +381,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -425,7 +393,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -461,7 +428,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -484,15 +450,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -505,7 +462,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -541,7 +497,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -564,15 +519,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -585,7 +531,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -621,7 +566,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -644,15 +588,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -665,7 +600,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

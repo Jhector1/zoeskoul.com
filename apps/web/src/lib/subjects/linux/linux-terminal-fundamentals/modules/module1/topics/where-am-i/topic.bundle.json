@@ -193,21 +193,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "newsroom/assignment.txt",
-          "content": "Draft the Saturday update\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -257,7 +242,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -317,26 +301,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "art-table/brushes.txt",
-          "content": "Small brush\nLarge brush\n",
-          "language": "bash"
-        },
-        {
-          "path": "art-table/paint-list.txt",
-          "content": "Blue\nYellow\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -392,7 +356,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -468,26 +431,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "event-desk/run-sheet.txt",
-          "content": "Doors open at 6:00\n",
-          "language": "bash"
-        },
-        {
-          "path": "event-desk/contact.txt",
-          "content": "Call the coordinator\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -547,7 +490,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",

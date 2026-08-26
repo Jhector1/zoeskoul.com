@@ -121,6 +121,7 @@ describe("buildExercisePolicyCritiqueIssues edge cases", () => {
                     multi_choice: 0.1,
                     drag_reorder: 0.1,
                     fill_blank_choice: 0.5,
+                    pseudocode_input: 0,
                     code_input: 0.2,
                 },
             },

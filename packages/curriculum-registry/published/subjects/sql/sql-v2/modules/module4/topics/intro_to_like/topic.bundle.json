@@ -144,7 +144,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -178,15 +177,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -199,7 +189,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.try-intro_to_like-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -261,7 +250,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -295,15 +283,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -316,7 +295,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.quiz.practice-like-single-character.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -378,7 +356,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.practice.practice-like-name-ending-a",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.practice.practice-like-name-ending-a.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -395,7 +372,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.practice.practice-like-name-ending-a.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -451,15 +427,6 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.practice.practice-like-name-ending-a.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -477,7 +444,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.intro_to_like.practice.practice-like-city-starting-s",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.practice.practice-like-city-starting-s.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -494,7 +460,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.intro_to_like.practice.practice-like-city-starting-s.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -550,15 +515,6 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.intro_to_like.practice.practice-like-city-starting-s.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",

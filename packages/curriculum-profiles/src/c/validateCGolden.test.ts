@@ -242,6 +242,15 @@ return NULL;`,
                         kind: "code_input",
                         messageBase: "topics.c.linkedHeap.exercise",
                         language: "c",
+                        workspace: {
+                            language: "c",
+                            entryFilePath: "main.c",
+                            starterFiles: [
+                                                        { path: "main.c", content: "int main(void) { return 0; }", isEntry: true },
+                                                        { path: "heap.c", content: "void insert(void) {}" },
+                                                        { path: "heap.h", content: "void insert(void);" },
+                                                    ],
+                        },
                         starterFiles: [
                             { path: "main.c", content: "int main(void) { return 0; }", isEntry: true },
                             { path: "heap.c", content: "void insert(void) {}" },
@@ -254,7 +263,11 @@ return NULL;`,
                         recipe: {
                             type: "fixed_tests",
                             solutionCode: "int main(void) { return 0; }",
-                            tests: [{ stdout: "ok\n", match: "exact" }],
+                            tests: [
+                                { stdin: "", stdout: "ok\n", match: "exact" },
+                                { stdin: "boundary", stdout: "ok\n", match: "exact" },
+                                { stdin: "repeat", stdout: "ok\n", match: "exact" },
+                            ],
                         },
                     },
                 ],

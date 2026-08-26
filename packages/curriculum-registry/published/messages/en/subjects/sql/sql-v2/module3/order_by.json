@@ -154,6 +154,20 @@
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
+          },
+          "practice": {
+            "practice-sort-stock-then-name": {
+              "title": "Practice: Sort by Stock Then Name",
+              "prompt": "Return name and stock from products. Sort stock from highest to lowest, then name alphabetically for ties.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Sorting with ORDER BY in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;"
+            }
           }
         }
       }

@@ -627,10 +627,9 @@ describe("QuizPracticeCard project-step fallback", () => {
         expect(html).toContain("SELECT name");
         expect(html).not.toContain("@:topics.sql-v2");
         const lastProps = mocked.exerciseRendererProps.at(-1);
-        expect(lastProps?.exercise?.starterCode).toContain("SELECT name");
-        expect(lastProps?.exercise?.starterCode).not.toContain("@:");
-        expect(lastProps?.exercise?.starterFiles?.[0]?.path).toBe("query.sql");
-        expect(lastProps?.exercise?.starterFiles?.[0]?.content).toContain("SELECT name");
+        expect((lastProps?.exercise as any)?.workspace).not.toHaveProperty("starterCode");
+        expect((lastProps?.exercise as any)?.workspace?.starterFiles?.[0]?.path).toBe("query.sql");
+        expect((lastProps?.exercise as any)?.workspace?.starterFiles?.[0]?.content).toContain("SELECT name");
     });
 
     it("preserves project step ideConfig on fallback exercises", () => {

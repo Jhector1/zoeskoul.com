@@ -151,7 +151,7 @@ describe("compileSubjectPipeline SQL Foundations regression", () => {
         ]);
     });
 
-    it("compiles what_sql_means into sql-v2 topic bundles without Python help leakage", async () => {
+    it("compiles what_sql_is into sql-v2 topic bundles without Python help leakage", async () => {
         await Promise.all([
             rmIfExists(SQL_V2_DRAFT_ROOT),
             rmIfExists(SQL_V2_REPORT_ROOT),
@@ -184,7 +184,7 @@ describe("compileSubjectPipeline SQL Foundations regression", () => {
             "modules",
             "module0",
             "topics",
-            "what_sql_means",
+            "what_sql_is",
             "topic.bundle.json",
         );
 
@@ -192,7 +192,7 @@ describe("compileSubjectPipeline SQL Foundations regression", () => {
         const messagePath = path.join(
             SQL_V2_MESSAGE_ROOT,
             "module0",
-            "what_sql_means.json",
+            "what_sql_is.json",
         );
 
         const bundle = JSON.parse(await fs.readFile(bundlePath, "utf8"));
@@ -212,7 +212,7 @@ describe("compileSubjectPipeline SQL Foundations regression", () => {
         if (retrySummary) {
             expect(retrySummary.topics).toEqual([
                 expect.objectContaining({
-                    topicId: "what_sql_means",
+                    topicId: "what_sql_is",
                     status: "success",
                 }),
             ]);
@@ -221,7 +221,7 @@ describe("compileSubjectPipeline SQL Foundations regression", () => {
         const attemptDir = path.join(
             SQL_V2_REPORT_ROOT,
             "module0",
-            "what_sql_means",
+            "what_sql_is",
             "attempt-0",
         );
         const prompt = JSON.parse(

@@ -107,25 +107,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch0.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -165,7 +146,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.tryIt.try_creating_tables_and_defining_columns_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -249,25 +229,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -307,7 +268,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-orders-table.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -495,25 +455,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -553,7 +494,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-suppliers-table.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -629,25 +569,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -687,7 +608,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.creating-tables-and-defining-columns.practice.practice-create-shipments-table.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",

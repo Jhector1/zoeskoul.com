@@ -2,6 +2,7 @@ import {
     deriveManifestTerminalBootstrap,
     normalizeWorkspacePath,
     type ManifestCodeInput,
+    type ManifestCodeInputCompilerInput,
     type ManifestStarterFile,
 } from "@zoeskoul/curriculum-contracts";
 import type {
@@ -72,7 +73,7 @@ function repairMissingGitEvidence(
 
 
 
-type GitTerminalManifest = ManifestCodeInput & {
+type GitTerminalManifest = ManifestCodeInputCompilerInput & {
     ideConfig?: Record<string, unknown>;
     fixtureFiles?: ManifestStarterFile[];
     workspace?: (NonNullable<ManifestCodeInput["workspace"]> & {
@@ -154,7 +155,7 @@ function gitAuthoredBootstrapFiles(
     }));
 }
 
-function gitFixtureFiles(manifest: ManifestCodeInput): ManifestStarterFile[] {
+function gitFixtureFiles(manifest: ManifestCodeInputCompilerInput): ManifestStarterFile[] {
     if (!Array.isArray(manifest.starterFiles)) return [];
 
     return manifest.starterFiles
@@ -224,9 +225,9 @@ function markGitEntryFile(args: {
 }
 
 function withGitEditorWorkspace(args: {
-    manifest: ManifestCodeInput;
+    manifest: ManifestCodeInputCompilerInput;
     exercise: ProfileCodeInputDraft;
-}): ManifestCodeInput {
+}): ManifestCodeInputCompilerInput {
     const terminalCwd = gitRepositoryCwd(args.exercise);
     const fixtureFiles = gitFixtureFiles(args.manifest);
     const authoredBootstrapFiles = gitAuthoredBootstrapFiles(args.exercise);
@@ -287,11 +288,10 @@ function withGitEditorWorkspace(args: {
             ...(manifest.workspace ?? {}),
             language: "bash",
             entryFilePath,
-            starterCode,
             starterFiles,
             ...(fixtureFiles.length > 0 ? { fixtureFiles } : {}),
         },
-    } as ManifestCodeInput;
+    } as ManifestCodeInputCompilerInput;
 }
 
 function makeGitCodeHelpFallback(args: {

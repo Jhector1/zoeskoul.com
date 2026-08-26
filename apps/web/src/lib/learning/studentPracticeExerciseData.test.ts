@@ -75,13 +75,6 @@ describe("projectStudentPracticeExercise", () => {
       prompt: "Create main.py.",
       payload: {
         language: "python",
-        starterCode: "# Start here\n",
-        starterFiles: [
-          {
-            path: "main.py",
-            content: "# Start here\n",
-          },
-        ],
         workspace: {
           entryFilePath: "main.py",
           starterFiles: [
@@ -97,6 +90,9 @@ describe("projectStudentPracticeExercise", () => {
         },
       },
     });
+
+    expect(result.payload).not.toHaveProperty("starterCode");
+    expect(result.payload).not.toHaveProperty("starterFiles");
 
     expect(
       hasForbiddenLearningPracticeFields(result),

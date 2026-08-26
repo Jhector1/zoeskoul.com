@@ -96,7 +96,6 @@ function collectExerciseWorkspaceFiles(
         exercise.workspace?.initialFiles,
         exercise.workspace?.workspaceFiles,
         exercise.workspace?.starterFiles,
-        exercise.starterFiles,
     ];
 
     for (const source of starterSources) {
@@ -215,7 +214,7 @@ function hydrateAuthoredCodeForGolden(args: {
 
     const starterFiles = overlayAuthoredFileContents({
         manifestFiles:
-            args.exercise.starterFiles ?? args.exercise.workspace?.starterFiles,
+            args.exercise.workspace?.starterFiles,
         authoredFiles: authored.starterFiles,
     });
     const solutionFiles = overlayAuthoredFileContents({
@@ -313,7 +312,7 @@ function buildSolutionCompletenessIssues(
     exercise: ManifestCodeInput,
 ): GoldenValidationIssue[] {
     const starterFiles = normalizeStarterFileRecords(
-        exercise.starterFiles ?? exercise.workspace?.starterFiles,
+        exercise.workspace?.starterFiles,
     );
     const solutionFiles = normalizeStarterFileRecords(
         exercise.solutionFiles ??

@@ -196,7 +196,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -213,7 +212,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.tryIt.try_percentage_and_discount_calculations_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -259,7 +257,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -276,7 +273,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-pending-order-net-sales.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -322,7 +318,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-retained-percentage-and-discount-calculations-sketch1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-retained-percentage-and-discount-calculations-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -339,7 +334,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-retained-percentage-and-discount-calculations-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -384,7 +378,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-calculate-order-discount-amount",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-calculate-order-discount-amount.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -401,7 +394,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.percentage-and-discount-calculations.practice.practice-calculate-order-discount-amount.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

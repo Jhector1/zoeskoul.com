@@ -459,7 +459,8 @@
         ],
         "requiredFiles": [
           "data/students.csv",
-          "output/clean_students.csv"
+          "output/clean_students.csv",
+          "cleaning.py"
         ]
       },
       "sourceChecks": [
@@ -695,7 +696,8 @@
         ],
         "requiredFiles": [
           "data/students.csv",
-          "output/clean_students.csv"
+          "output/clean_students.csv",
+          "cleaning.py"
         ]
       },
       "sourceChecks": [
@@ -917,7 +919,8 @@
         ],
         "requiredFiles": [
           "data/students.csv",
-          "output/clean_students.csv"
+          "output/clean_students.csv",
+          "cleaning.py"
         ]
       },
       "sourceChecks": [
@@ -1130,7 +1133,8 @@
         ],
         "requiredFiles": [
           "data/students.csv",
-          "output/clean_students.csv"
+          "output/clean_students.csv",
+          "cleaning.py"
         ]
       },
       "sourceChecks": [

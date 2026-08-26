@@ -251,7 +251,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -287,15 +286,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -308,7 +298,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -344,7 +333,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -380,15 +368,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -401,7 +380,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -437,7 +415,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -478,15 +455,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -499,7 +467,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -535,7 +502,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -576,15 +542,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -597,7 +554,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -633,7 +589,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -669,15 +624,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -690,7 +636,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

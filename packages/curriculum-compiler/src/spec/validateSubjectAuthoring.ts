@@ -820,13 +820,27 @@ async function validateSubjectCatalogVersioning(
             return;
         }
 
-        if (isNonEmptyString(liveSubjectSlug) && !subjectSlugs.includes(liveSubjectSlug)) {
+        // Draft publish targets are authoring-only and are not yet canonical registry
+        // subjects. Requiring their future live slug (or the subject they supersede)
+        // to be present in the current catalog makes the validator contradict the
+        // published-runtime generator, which only accepts canonical subject slugs.
+        const catalogMembershipRequired = plan.publishTarget?.channel !== "draft";
+
+        if (
+            catalogMembershipRequired &&
+            isNonEmptyString(liveSubjectSlug) &&
+            !subjectSlugs.includes(liveSubjectSlug)
+        ) {
             issues.push(
                 `${filePath}: catalog.subjectSlugs must include publishTarget.liveSubjectSlug "${liveSubjectSlug}"`,
             );
         }
 
-        if (supersedes && !subjectSlugs.includes(supersedes)) {
+        if (
+            catalogMembershipRequired &&
+            supersedes &&
+            !subjectSlugs.includes(supersedes)
+        ) {
             issues.push(
                 `${filePath}: catalog.subjectSlugs must include versioning.supersedes "${supersedes}"`,
             );

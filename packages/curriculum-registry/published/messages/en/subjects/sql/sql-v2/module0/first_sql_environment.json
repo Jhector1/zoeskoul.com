@@ -112,6 +112,32 @@
               "title": "Run a different one-row query",
               "prompt": "Return the text `Practice ready` in a one-row result with the column heading `check_in`. Run the statement, then verify the Results table shows that heading and value."
             }
+          },
+          "practice": {
+            "practice-run-student-columns": {
+              "title": "Practice: Run a Student Query",
+              "prompt": "Run a query that returns `id` and `name` from the students table. This is a workspace check that the query editor and Results tab are working.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies First SQL Environment in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, name\nFROM students;"
+            },
+            "practice-run-student-city-query": {
+              "title": "Practice: Inspect Student Names and Cities",
+              "prompt": "Run a query that returns `name` and `city` from the students table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies First SQL Environment in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, city\nFROM students;"
+            }
           }
         }
       }

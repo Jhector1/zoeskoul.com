@@ -153,6 +153,20 @@
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-repair-missing-from": {
+              "title": "Practice: Repair a Missing FROM Clause",
+              "prompt": "Write the valid query that returns `name` and `price` from the products table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading and Fixing SELECT Queries in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price\nFROM products;"
+            }
           }
         }
       }

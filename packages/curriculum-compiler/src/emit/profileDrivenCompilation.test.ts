@@ -230,7 +230,7 @@ describe("profile-driven curriculum compilation", () => {
                 content: "Ada\nGrace\nLinus\n",
             }),
         ]);
-        expect(exercise.starterFiles).toEqual([
+        expect(exercise.workspace?.starterFiles).toEqual([
             expect.objectContaining({ path: "main.py" }),
         ]);
         expect(exercise.workspace?.starterFiles).toEqual([

@@ -105,20 +105,9 @@
       "messageBase": "topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -203,20 +192,9 @@
       "messageBase": "topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -301,20 +279,9 @@
       "messageBase": "topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -399,20 +366,9 @@
       "messageBase": "topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -497,20 +453,9 @@
       "messageBase": "topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

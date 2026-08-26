@@ -217,7 +217,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -248,15 +247,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -269,7 +259,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_run_first_edit.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -305,7 +294,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -336,15 +324,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -357,7 +336,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_top_to_bottom_order.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -393,7 +371,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -424,15 +401,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -445,7 +413,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_edit_rerun_preserve.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -481,7 +448,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -512,15 +478,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -533,7 +490,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_insert_middle_line.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -569,7 +525,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -600,15 +555,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -621,7 +567,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_reorder_output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -657,7 +602,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -688,15 +632,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -709,7 +644,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_change_middle.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -745,7 +679,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -776,15 +709,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -797,7 +721,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.running-python-code.quiz.ci_practice_extend_program.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

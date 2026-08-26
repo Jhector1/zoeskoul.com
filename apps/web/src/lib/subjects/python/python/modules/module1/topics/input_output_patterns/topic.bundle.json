@@ -144,6 +144,9 @@
           }
         ],
         "solutionTemplate": "name = input()\nage = int(input())\nprint(f\"Hi {name}! Next year you'll be {age + 1}.\")\n"
+      },
+      "workspace": {
+        "language": "python"
       }
     },
     {
@@ -170,6 +173,9 @@
           }
         ],
         "solutionCode": "bill = int(input())\npct = int(input())\ntip = bill * pct // 100\ntotal = bill + tip\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n"
+      },
+      "workspace": {
+        "language": "python"
       }
     },
     {
@@ -202,6 +208,9 @@
           }
         ],
         "solutionTemplate": "c = int(input())\nf = int(c * 9 / 5 + 32)\nprint(f)\n"
+      },
+      "workspace": {
+        "language": "python"
       }
     },
 

@@ -88,8 +88,6 @@ describe("legacy saved workspace ensure gate", () => {
                 },
                 manifestLanguage: "python",
                 manifestStarterWorkspace: manifestWorkspace as any,
-                manifestStarterCode:
-                    "from models.transaction import Transaction\n",
                 manifestIdeConfig: null,
             }),
         ).toBe(false);
@@ -120,8 +118,6 @@ describe("legacy saved workspace ensure gate", () => {
                 },
                 manifestLanguage: "python",
                 manifestStarterWorkspace: manifestWorkspace as any,
-                manifestStarterCode:
-                    "from models.transaction import Transaction\n",
                 manifestIdeConfig: null,
             }),
         ).toBe(true);

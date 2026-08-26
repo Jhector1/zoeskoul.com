@@ -497,44 +497,12 @@ export function readStudentPythonTryItStarter(
 
   const workspaceStarterFiles =
     workspace?.starterFiles;
-  const payloadStarterFiles =
-    payload.starterFiles;
   const starterFiles =
     workspaceStarterFiles !== undefined
       ? readStarterFiles(
           workspaceStarterFiles,
         )
-      : payloadStarterFiles !== undefined
-        ? readStarterFiles(
-            payloadStarterFiles,
-          )
-        : (
-            entry === "main.py" &&
-            typeof workspace?.starterCode === "string"
-          )
-          ? [
-              {
-                path: "main.py",
-                content:
-                  workspace.starterCode,
-                language:
-                  "python" as const,
-              },
-            ]
-          : (
-              entry === "main.py" &&
-              typeof payload.starterCode === "string"
-            )
-            ? [
-                {
-                  path: "main.py",
-                  content:
-                    payload.starterCode,
-                  language:
-                    "python" as const,
-                },
-              ]
-            : null;
+      : null;
   const files =
     starterFiles
       ? mergeLearnerWorkspaceFiles(

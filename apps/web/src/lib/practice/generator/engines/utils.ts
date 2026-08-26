@@ -74,24 +74,6 @@ export function cleanRuntimeCode(value: unknown): string {
     return text.trim().startsWith("@:") ? "" : text;
 }
 
-/**
- * For generated practice exercises, starterCode may intentionally be an i18n
- * tag such as "@:quiz.some_id.starterCode". The client practice runtime later
- * resolves that tag with useTaggedT()/resolveDeepTagged before initializing the
- * editor item.
- *
- * Explicit manifest starter code must be real code. But localized messageBase
- * starter code should be allowed to travel as a tag until the client resolves it.
- */
-export function starterCodeForGeneratedExercise(
-    explicitStarterCode: unknown,
-    localizedStarterCode: unknown,
-): string {
-    const explicit = cleanRuntimeCode(explicitStarterCode);
-    if (explicit) return explicit;
-
-    return typeof localizedStarterCode === "string" ? localizedStarterCode : "";
-}
 export type SubjectModuleGenerator = (
     rng: RNG,
     diff: Difficulty,
@@ -731,8 +713,6 @@ export function makeCodeInputOut(args: {
     diff: Difficulty;
     title: string;
     prompt: string;
-    starterCode: string;
-
     language?: WorkspaceLanguage;
     expected: CodeExpectedInput;
 
@@ -763,6 +743,18 @@ export function makeCodeInputOut(args: {
     expectedExample?: CodeExpectedExample | null;
     ideConfig?: LearningIdeConfig | null;
 }): GenOut<"code_input"> {
+    const inputWorkspace =
+        args.workspace && typeof args.workspace === "object"
+            ? { ...args.workspace }
+            : {};
+
+    const workspace = {
+        ...inputWorkspace,
+        ...(args.starterFiles && inputWorkspace.starterFiles === undefined
+            ? { starterFiles: args.starterFiles }
+            : {}),
+    };
+
     const exercise: CodeInputExercise = {
         id: args.id,
         topic: args.topic,
@@ -771,10 +763,8 @@ export function makeCodeInputOut(args: {
         title: args.title,
         prompt: args.prompt,
         language: args.language ?? "python",
-        starterCode: args.starterCode,
+        workspace,
 
-        ...(args.workspace ? { workspace: args.workspace } : {}),
-        ...(args.starterFiles ? { starterFiles: args.starterFiles } : {}),
         ...(args.files ? { files: args.files } : {}),
         ...(args.initialFiles ? { initialFiles: args.initialFiles } : {}),
         ...(args.workspaceFiles ? { workspaceFiles: args.workspaceFiles } : {}),

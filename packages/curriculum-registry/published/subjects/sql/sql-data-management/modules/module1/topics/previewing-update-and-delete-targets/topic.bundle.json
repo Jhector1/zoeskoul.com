@@ -101,17 +101,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -142,7 +131,6 @@
         "openTabs": [
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.tryIt.try_previewing_update_and_delete_targets_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -198,25 +186,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -256,7 +225,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-update-reviewed-target-set.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -440,25 +408,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -498,7 +447,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-inactive-test-targets.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -574,25 +522,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -632,7 +561,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.previewing-update-and-delete-targets.practice.practice-preview-accessory-price-targets.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",

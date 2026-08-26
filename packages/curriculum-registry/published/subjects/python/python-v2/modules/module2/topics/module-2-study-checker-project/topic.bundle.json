@@ -105,20 +105,9 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.try-module-2-study-checker-project-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -195,20 +184,9 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-1-check-pass-fail.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -285,20 +263,9 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-2-check-join-rule.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -380,20 +347,9 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-3-handle-missing-text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -475,20 +431,9 @@
       "messageBase": "topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.module-2-study-checker-project.quiz.mp-4-build-final-study-checker.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

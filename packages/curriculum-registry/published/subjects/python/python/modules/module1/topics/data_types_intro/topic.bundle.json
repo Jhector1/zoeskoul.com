@@ -374,7 +374,16 @@
         ],
         "solutionTemplate": "name = input()\nage = int(input())\nprint(f\"Hi {name}! Next year you'll be {age + 1}.\")\n"
       },
-      "starterCode": "name = input()\nage = input()\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input()\nage = input()\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m1_types_tip_total_code",
@@ -400,7 +409,16 @@
         ],
         "solutionCode": "bill = int(input())\npct = int(input())\ntip = bill * pct // 100\ntotal = bill + tip\nprint(f\"Tip = {tip}\")\nprint(f\"Total = {total}\")\n"
       },
-      "starterCode": "bill = int(input())\npct = int(input())\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "bill = int(input())\npct = int(input())\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m1_types_c_to_f_code",
@@ -434,7 +452,16 @@
         ],
         "solutionTemplate": "c = int(input())\nf = int(c * 9 / 5 + 32)\nprint(f)\n"
       },
-      "starterCode": "c = int(input())\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "c = int(input())\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

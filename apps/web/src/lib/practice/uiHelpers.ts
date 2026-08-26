@@ -1,3 +1,4 @@
+import { deriveEntryCode, resolveExerciseWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 import type {
     WorkspaceLanguage,
     Exercise,
@@ -45,7 +46,7 @@ function getTerminalEvidence(value: unknown) {
             ? record.cwd.trim()
             : undefined;
 
-    if (!commands.length && !outputText.trim() && !cwd) {
+    if (!commands.length && !outputText.trim()) {
         return undefined;
     }
 
@@ -106,7 +107,7 @@ function mergeTerminalEvidenceForSubmit(
 
     const outputText = normalizeVisibleTerminalTranscriptText(outputParts);
 
-    if (!commands.length && !outputText.trim() && !cwd) {
+    if (!commands.length && !outputText.trim()) {
         return undefined;
     }
 
@@ -444,10 +445,22 @@ export function initItemFromExercise(
 
     if (ex.kind === "code_input") {
         const lang = (ex as any).language ?? "python";
+        const starterWorkspace = resolveExerciseWorkspace({
+            language: lang,
+            manifest: ex,
+        });
+        const starterCode = resolveMaybeTagged(
+            deriveEntryCode(starterWorkspace) ?? "",
+            resolveText,
+        );
+
         return {
             ...base,
             codeLang: lang,
-            code: resolveMaybeTagged((ex as any).starterCode ?? "", resolveText),
+            code: starterCode,
+            ...(starterWorkspace
+                ? { workspace: starterWorkspace }
+                : {}),
             codeStdin: resolveMaybeTagged((ex as any).starterStdin ?? "", resolveText),
             stdin: resolveMaybeTagged((ex as any).starterStdin ?? "", resolveText),
         };

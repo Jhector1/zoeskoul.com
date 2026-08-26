@@ -189,23 +189,6 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "status.txt",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterFiles.status_txt.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -225,7 +208,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -314,23 +296,6 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "log.txt",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterFiles.log_txt.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -350,7 +315,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -458,16 +422,6 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -480,7 +434,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.try-writing-text-files-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -543,20 +496,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-append-log-entry.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -665,20 +607,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-overwrite-shopping-list.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -776,20 +707,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.writing-text-files.quiz.ci-write-greeting-file.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

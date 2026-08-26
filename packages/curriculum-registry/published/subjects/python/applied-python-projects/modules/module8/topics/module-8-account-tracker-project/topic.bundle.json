@@ -102,23 +102,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.models_account_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -138,7 +121,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -223,23 +205,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.models_account_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -259,7 +224,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -355,23 +319,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.models_account_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -391,7 +338,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -580,23 +526,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.models_account_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -616,7 +545,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

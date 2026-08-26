@@ -144,7 +144,7 @@ describe("pythonProfile", () => {
         expect(manifest.starterCode).toBe(
             "@:topics.python.python-1.helper-modules.quiz.code-1.starterCode",
         );
-        expect(manifest.workspace?.starterCode).toBe(
+        expect((manifest.workspace?.starterFiles as any)?.[0]?.content).toBe(
             "@:topics.python.python-1.helper-modules.quiz.code-1.starterCode",
         );
         expect((manifest.starterFiles as any)?.[0]?.content).toBe(

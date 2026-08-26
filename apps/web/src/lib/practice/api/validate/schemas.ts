@@ -146,8 +146,7 @@ const CodeInputAnswerSchema = z
             !!v.terminalEvidence &&
             (
                 v.terminalEvidence.commands.length > 0 ||
-                v.terminalEvidence.outputText.trim().length > 0 ||
-                typeof v.terminalEvidence.cwd === "string"
+                v.terminalEvidence.outputText.trim().length > 0
             );
 
         if (!code && !hasWorkspaceFiles && !hasTerminalEvidence) {

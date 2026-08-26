@@ -79,6 +79,21 @@ describe("validateCodeProfileGolden", () => {
                         kind: "code_input",
                         messageBase: "quiz.code-1",
                         language: "python",
+                        workspace: {
+                            language: "python",
+                            entryFilePath: "main.py",
+                            starterFiles: [
+                                                        {
+                                                            path: "main.py",
+                                                            content: "from helpers import greet\nprint(greet())\n",
+                                                            isEntry: true,
+                                                        },
+                                                        {
+                                                            path: "helpers.py",
+                                                            content: "def greet():\n    return 'hi'\n",
+                                                        },
+                                                    ],
+                        },
                         starterFiles: [
                             {
                                 path: "main.py",

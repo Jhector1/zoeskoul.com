@@ -189,30 +189,6 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "data/class_a.csv",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_a_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "data/class_b.csv",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterFiles.data_class_b_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -239,7 +215,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -380,30 +355,6 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "data/clean_a.csv",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_a_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "data/clean_b.csv",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterFiles.data_clean_b_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -430,7 +381,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -578,30 +528,6 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "data/mixed_a.csv",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_a_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "data/mixed_b.csv",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterFiles.data_mixed_b_csv.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -628,7 +554,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -751,20 +676,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -855,20 +769,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -964,20 +867,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

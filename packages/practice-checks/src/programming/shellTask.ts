@@ -135,8 +135,7 @@ export function hasTerminalEvidence(value: unknown): boolean {
             terminalEvidence.commands.some(
                 (entry) => String(entry ?? "").trim().length > 0,
             )) ||
-        String(terminalEvidence.outputText ?? "").trim().length > 0 ||
-        String(terminalEvidence.cwd ?? "").trim().length > 0
+        String(terminalEvidence.outputText ?? "").trim().length > 0
     );
 }
 

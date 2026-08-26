@@ -160,7 +160,16 @@
         ],
         "solutionCode": "language = input()\nprint(f'I am learning {language}.')"
       },
-      "starterCode": "language = input()\n# Print the learning message here"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "language = input()\n# Print the learning message here",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

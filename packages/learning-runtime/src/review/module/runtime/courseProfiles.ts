@@ -42,7 +42,6 @@ export type RuntimeDatasetResolution = {
 export type FileSeed = {
   starterFiles?: unknown;
   solutionFiles?: unknown;
-  starterCode?: string;
   solutionCode?: string;
 };
 
@@ -211,6 +210,12 @@ export function resolveFileSeed(
   const workspace = isRecord(source.workspace) ? source.workspace : {};
   const recipe = isRecord(source.recipe) ? source.recipe : {};
 
+  /**
+   * Starter content is canonical in workspace. Top-level/source and recipe
+   * starter aliases are authoring/legacy shapes and must be normalized before
+   * learner runtime. Runtime/support fixture and solution compatibility remain
+   * separate until their own migration is audited.
+   */
   return {
     starterFiles: mergeFiles(
       [
@@ -221,14 +226,12 @@ export function resolveFileSeed(
         workspace.fixtureFiles,
         workspace.fixtures,
         workspace.fileFixtures,
-        source.starterFiles,
         source.files,
         source.initialFiles,
         source.workspaceFiles,
         source.fixtureFiles,
         source.fixtures,
         source.fileFixtures,
-        recipe.starterFiles,
         recipe.files,
         recipe.initialFiles,
         recipe.workspaceFiles,
@@ -245,11 +248,6 @@ export function resolveFileSeed(
         recipe.solutionFiles,
       ],
       fallbackEntryFile,
-    ),
-    starterCode: firstCode(
-        workspace.starterCode,
-        source.starterCode,
-        recipe.starterCode,
     ),
     solutionCode: firstCode(
       workspace.solutionCode,

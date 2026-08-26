@@ -41,7 +41,6 @@ function normalizeWorkspaceFiles(
 
 function collectFixturePaths(exercise: ManifestCodeInput): Set<string> {
     const files = [
-        exercise.starterFiles,
         exercise.workspace?.starterFiles,
         exercise.workspace?.files,
         exercise.workspace?.initialFiles,
@@ -62,7 +61,6 @@ function collectWorkspaceProvidedPaths(
     exercise: ManifestCodeInput,
 ): Set<string> {
     const files = [
-        exercise.starterFiles,
         exercise.workspace?.starterFiles,
         exercise.workspace?.files,
         exercise.workspace?.initialFiles,

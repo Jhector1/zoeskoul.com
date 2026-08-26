@@ -153,7 +153,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -187,15 +186,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -208,7 +198,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.try-what_null_means-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -265,7 +254,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -299,15 +287,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -320,7 +299,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-text-and-null-cleanup.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -377,7 +355,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -411,15 +388,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -432,7 +400,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.quiz.practice-present-emails.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -494,7 +461,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.what_null_means.practice.practice-find-missing-email-active-customers",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.practice.practice-find-missing-email-active-customers.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -511,7 +477,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-4.what_null_means.practice.practice-find-missing-email-active-customers.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -567,15 +532,6 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-4.what_null_means.practice.practice-find-missing-email-active-customers.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",

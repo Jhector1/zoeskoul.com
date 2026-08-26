@@ -254,7 +254,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -285,15 +284,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -306,7 +296,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -342,7 +331,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -383,15 +371,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -404,7 +383,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -440,7 +418,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -481,15 +458,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -502,7 +470,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -538,7 +505,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -579,15 +545,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -600,7 +557,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -636,7 +592,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -677,15 +632,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -698,7 +644,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

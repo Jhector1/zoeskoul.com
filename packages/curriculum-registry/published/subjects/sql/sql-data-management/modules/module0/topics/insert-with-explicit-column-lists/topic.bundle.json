@@ -175,25 +175,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -233,7 +214,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.tryIt.try_insert_with_explicit_column_lists_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -317,25 +297,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -375,7 +336,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-intake.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -496,25 +456,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -554,7 +495,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-desk-lamp.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -630,25 +570,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -688,7 +609,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.insert-with-explicit-column-lists.practice.practice-explicit-column-water-bottle.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",

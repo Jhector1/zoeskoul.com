@@ -1428,22 +1428,6 @@ function buildRouteExerciseManifestFromEntry(
     return {
         ...baseManifest,
 
-        starterCode:
-            registryEntry?.starterCode ??
-            baseManifest.starterCode ??
-            (typeof baseWorkspace?.starterCode === "string"
-                ? baseWorkspace.starterCode
-                : undefined) ??
-            (typeof baseRecipe?.starterCode === "string"
-                ? baseRecipe.starterCode
-                : undefined),
-
-        starterFiles:
-            registryEntry?.starterFiles ??
-            baseManifest.starterFiles ??
-            baseWorkspace?.starterFiles ??
-            baseRecipe?.starterFiles,
-
         files:
             baseManifest.files ??
             baseWorkspace?.files,
@@ -1710,19 +1694,12 @@ function targetHasStarter(
         isWorkspaceValue(source?.initialWorkspace) ||
         isWorkspaceValue(source?.starterWorkspace) ||
         isWorkspaceValue(entry?.starterWorkspace) ||
-        hasStarterIntentValue(entry?.starterFiles) ||
-        hasStarterIntentValue(entry?.starterCode) ||
         hasStarterIntentValue(workspace?.starterFiles) ||
         hasStarterIntentValue(workspace?.initialFiles) ||
         hasStarterIntentValue(workspace?.workspaceFiles) ||
-        hasStarterIntentValue(workspace?.starterCode) ||
-        hasStarterIntentValue(source?.starterFiles) ||
         hasStarterIntentValue(source?.initialFiles) ||
         hasStarterIntentValue(source?.workspaceFiles) ||
-        hasStarterIntentValue(source?.starterCode) ||
-        hasStarterIntentValue(recipe?.starterFiles) ||
-        hasStarterIntentValue(recipe?.initialFiles) ||
-        hasStarterIntentValue(recipe?.starterCode)
+        hasStarterIntentValue(recipe?.initialFiles)
     );
 }
 function workspaceHasUsableFile(workspace: WorkspaceStateV2 | null | undefined) {
@@ -2016,8 +1993,6 @@ function resolveCardToolSeed(args: {
             key: args.entry?.cardKey ?? args.existing?.cardKey ?? null,
             entryFound: !!args.entry,
             targetKind: args.entry?.targetKind ?? "card",
-            starterFilesCount: Array.isArray(args.entry?.starterFiles) ? args.entry.starterFiles.length : 0,
-            starterCodeLength: typeof args.entry?.starterCode === "string" ? args.entry.starterCode.length : 0,
             hasStarter,
             workspaceFileCount: workspaceFileCount(restoredWorkspace),
             workspaceNonEmpty: workspaceHasUsableFile(restoredWorkspace),
@@ -2061,8 +2036,6 @@ function resolveCardToolSeed(args: {
             key: args.entry?.cardKey ?? args.existing?.cardKey ?? null,
             entryFound: !!args.entry,
             targetKind: args.entry?.targetKind ?? "card",
-            starterFilesCount: Array.isArray(args.entry?.starterFiles) ? args.entry!.starterFiles!.length : 0,
-            starterCodeLength: typeof args.entry?.starterCode === "string" ? args.entry.starterCode.length : 0,
             hasStarter,
             workspaceFileCount: workspaceFileCount(workspace),
             workspaceNonEmpty,
@@ -2074,8 +2047,6 @@ function resolveCardToolSeed(args: {
                 key: args.entry?.cardKey ?? args.existing?.cardKey ?? null,
                 entryTargetKey: args.entry?.targetKey,
                 entryTargetSlug: args.entry?.targetSlug,
-                starterFiles: args.entry?.starterFiles,
-                starterCodeLength: typeof args.entry?.starterCode === "string" ? args.entry.starterCode.length : 0,
                 itemWorkspace: args.entry?.item?.workspace ?? manifest?.workspace ?? null,
             });
             return {
@@ -2172,8 +2143,6 @@ function resolveEditorRuntimeSeed(args: {
             key: args.source.ownerKey,
             entryFound: !!args.source.entry,
             targetKind: args.source.entry?.targetKind ?? args.source.ownerKind,
-            starterFilesCount: Array.isArray(args.source.entry?.starterFiles) ? args.source.entry.starterFiles.length : 0,
-            starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
             hasStarter: args.source.workspaceSeedMode === "starter",
             workspaceFileCount: workspaceFileCount(restoredWorkspace),
             workspaceNonEmpty: workspaceHasUsableFile(restoredWorkspace),
@@ -2240,8 +2209,6 @@ function resolveEditorRuntimeSeed(args: {
             key: args.source.ownerKey,
             entryFound: !!args.source.entry,
             targetKind: args.source.entry?.targetKind ?? args.source.ownerKind,
-            starterFilesCount: Array.isArray(args.source.entry?.starterFiles) ? args.source.entry.starterFiles.length : 0,
-            starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
             hasStarter: args.source.workspaceSeedMode === "starter",
             workspaceFileCount: workspaceFileCount(restoredLegacyWorkspace),
             workspaceNonEmpty: workspaceHasUsableFile(restoredLegacyWorkspace),
@@ -2279,8 +2246,6 @@ function resolveEditorRuntimeSeed(args: {
         key: args.source.ownerKey,
         entryFound: !!args.source.entry,
         targetKind: args.source.entry?.targetKind ?? args.source.ownerKind,
-        starterFilesCount: Array.isArray(args.source.entry?.starterFiles) ? args.source.entry.starterFiles.length : 0,
-        starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
         hasStarter: args.source.workspaceSeedMode === "starter",
         workspaceFileCount: workspaceFileCount(workspace),
         workspaceNonEmpty,
@@ -2292,8 +2257,6 @@ function resolveEditorRuntimeSeed(args: {
             key: args.source.ownerKey,
             entryTargetKey: args.source.entry?.targetKey,
             entryTargetSlug: args.source.entry?.targetSlug,
-            starterFiles: args.source.entry?.starterFiles,
-            starterCodeLength: typeof args.source.entry?.starterCode === "string" ? args.source.entry.starterCode.length : 0,
             itemWorkspace: args.source.entry?.item?.workspace ?? manifest?.workspace ?? null,
         });
         return {
@@ -3188,8 +3151,6 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 entryTargetKey: entry?.targetKey,
                 entryTargetSlug: entry?.targetSlug,
                 entryKind: entry?.targetKind,
-                entryStarterFilesCount: Array.isArray(entry?.starterFiles) ? entry.starterFiles.length : null,
-                entryStarterCodeLength: typeof entry?.starterCode === "string" ? entry.starterCode.length : null,
                 toolManifestId: asManifestRecord(toolManifest)?.id,
             });
 

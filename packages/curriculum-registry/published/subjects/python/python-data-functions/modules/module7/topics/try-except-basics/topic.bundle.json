@@ -189,16 +189,6 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -211,7 +201,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -299,23 +288,6 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "data/note.txt",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterFiles.data_note_txt.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -335,7 +307,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -435,30 +406,6 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "data/alpha.txt",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterFiles.data_alpha_txt.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "data/beta.txt",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterFiles.data_beta_txt.content",
-          "language": "text",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -485,7 +432,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -617,20 +563,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -705,20 +640,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -798,20 +722,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

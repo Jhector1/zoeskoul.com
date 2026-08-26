@@ -702,6 +702,10 @@ describe("TopicAuthoringDraft binary workspace files", () => {
                     },
                     starterCode: "print('ready')\n",
                     solutionCode: "print('ready')\n",
+                    recipeType: "fixed_tests" as const,
+                    tests: [
+                        { stdin: "", stdout: "ready\n", match: "exact" as const },
+                    ],
                     fixedLanguage: "python" as const,
                     starterFiles: [
                         { path: "main.py", content: "print('ready')\n", isEntry: true },

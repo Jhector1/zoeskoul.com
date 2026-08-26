@@ -40,7 +40,9 @@ describe("published exercise metadata", () => {
     expect(
       resolvePublishedExerciseCapabilities(
         {
-          starterFiles: [{ path: "main.py" }, { path: "helpers.py" }],
+          workspace: {
+            starterFiles: [{ path: "main.py" }, { path: "helpers.py" }],
+          },
         },
         { runtimeDefaults: { supportsMultiFile: false } },
       ).isMultiFile,
@@ -48,7 +50,7 @@ describe("published exercise metadata", () => {
 
     expect(
       resolvePublishedExerciseCapabilities(
-        { starterFiles: [{ path: "main.py" }] },
+        { workspace: { starterFiles: [{ path: "main.py" }] } },
         { runtimeDefaults: { supportsMultiFile: true } },
       ).isMultiFile,
     ).toBe(false);

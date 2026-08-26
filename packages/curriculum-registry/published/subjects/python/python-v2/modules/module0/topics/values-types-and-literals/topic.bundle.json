@@ -219,7 +219,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -242,15 +241,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -263,7 +253,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-literals.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -299,7 +288,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -322,15 +310,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -343,7 +322,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-print-expression.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -379,7 +357,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -402,15 +379,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -423,7 +391,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-fix-string-quotes.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -459,7 +426,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -501,15 +467,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -522,7 +479,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-and-print.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -564,7 +520,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -611,15 +566,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -632,7 +578,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-read-number-text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -679,7 +624,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -715,15 +659,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -736,7 +671,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.values-types-and-literals.quiz.ci-three-lines.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

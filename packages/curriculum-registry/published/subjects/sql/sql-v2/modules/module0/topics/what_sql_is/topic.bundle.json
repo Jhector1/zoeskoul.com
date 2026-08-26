@@ -214,7 +214,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -231,7 +230,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -287,15 +285,6 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-names.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -313,7 +302,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -330,7 +318,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -386,15 +373,6 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-ask-for-student-grades.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -412,7 +390,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -429,7 +406,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -485,15 +461,6 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-0.what_sql_is.practice.practice-inspect-student-record-columns.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",

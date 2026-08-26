@@ -261,7 +261,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -299,15 +298,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -320,7 +310,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_ticket_check.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -356,7 +345,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -394,15 +382,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -415,7 +394,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_free_day.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -451,7 +429,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -479,15 +456,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -500,7 +468,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_not_logged_in.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -536,7 +503,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -574,15 +540,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -595,7 +552,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_range_check.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -631,7 +587,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -664,15 +619,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -685,7 +631,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.quiz.code_score_certificate.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -722,16 +667,6 @@
       "messageBase": "topics.python-v2.python-v2-2.and-or-not.practice.practice-weekend-or-holiday",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -744,7 +679,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.and-or-not.practice.practice-weekend-or-holiday.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

@@ -262,7 +262,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -303,15 +302,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -324,7 +314,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -360,7 +349,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -401,15 +389,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -422,7 +401,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -458,7 +436,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -504,15 +481,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -525,7 +493,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -561,7 +528,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -602,15 +568,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -623,7 +580,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -659,7 +615,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -700,15 +655,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -721,7 +667,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

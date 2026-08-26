@@ -193,21 +193,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "registration/attendee-list.txt",
-          "content": "Amina\nDiego\nMaya\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -263,7 +248,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -324,26 +308,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "sign-shop/banner-note.txt",
-          "content": "Hang the welcome banner by 8:30.\n",
-          "language": "bash"
-        },
-        {
-          "path": "sign-shop/handoff/.keep",
-          "content": "",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -404,7 +368,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -485,21 +448,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "schedule-desk/schedule-draft.txt",
-          "content": "Opening: 9:00\nWorkshop: 10:30\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -552,7 +500,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",

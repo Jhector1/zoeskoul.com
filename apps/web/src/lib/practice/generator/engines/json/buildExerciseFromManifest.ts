@@ -43,7 +43,7 @@ function resolveBase(messageBase: string) {
         prompt: t(`${messageBase}.prompt`),
         hint: maybeT(`${messageBase}.hint`),
         help: resolveHelp(messageBase),
-        starterCode: cleanRuntimeCode(maybeT(`${messageBase}.starterCode`)),        template: maybeT(`${messageBase}.template`) ?? "",
+        template: maybeT(`${messageBase}.template`) ?? "",
         expectedExampleMeta: maybeT(`${messageBase}.expectedExampleMeta`),
         maybeT,
     };

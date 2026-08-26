@@ -87,7 +87,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -104,7 +103,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.tryIt.try_counting_related_rows_without_inflation_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -149,7 +147,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-department-breadth-per-student",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-department-breadth-per-student.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -166,7 +163,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-department-breadth-per-student.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -316,7 +312,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-retained-counting-related-rows-without-inflation-sketch1",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-retained-counting-related-rows-without-inflation-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -333,7 +328,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-retained-counting-related-rows-without-inflation-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -378,7 +372,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-distinct-courses-per-student",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-distinct-courses-per-student.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -395,7 +388,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.counting-related-rows-without-inflation.practice.practice-count-distinct-courses-per-student.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

@@ -291,36 +291,8 @@ function mergeRenderedExerciseWithRouteManifest(
     const renderedWorkspace = isRecordLike(rendered.workspace) ? rendered.workspace : {};
     const routedWorkspace = isRecordLike(routed.workspace) ? routed.workspace : {};
 
-    /**
-     * Route registry entries are manifest-shaped and can still contain raw
-     * i18n tags such as "@:topics...starterCode". The rendered exercise has
-     * already passed through useTaggedT/resolveDeepTagged, so prefer the
-     * rendered resolved starter over an unresolved routed manifest starter.
-     *
-     * Without this, direct real catalog exercise routes can bind Tools with a
-     * blank/raw starter even though the same embedded Try It resolves correctly.
-     */
-    const starterCode =
-        hasResolvedStarterCodeLike(rendered.starterCode)
-            ? rendered.starterCode
-            : hasResolvedStarterCodeLike(renderedWorkspace.starterCode)
-                ? renderedWorkspace.starterCode
-                : hasResolvedStarterCodeLike(routed.starterCode)
-                    ? routed.starterCode
-                    : hasResolvedStarterCodeLike(routedWorkspace.starterCode)
-                        ? routedWorkspace.starterCode
-                        : hasNonBlankStarterCodeLike(rendered.starterCode)
-                            ? rendered.starterCode
-                            : hasNonBlankStarterCodeLike(renderedWorkspace.starterCode)
-                                ? renderedWorkspace.starterCode
-                                : hasNonBlankStarterCodeLike(routed.starterCode)
-                                    ? routed.starterCode
-                                    : routedWorkspace.starterCode;
-
     const starterFiles = firstResolvedStarterFilesLike(
-        rendered.starterFiles,
         renderedWorkspace.starterFiles,
-        routed.starterFiles,
         routedWorkspace.starterFiles,
     );
 
@@ -328,13 +300,10 @@ function mergeRenderedExerciseWithRouteManifest(
         ...rendered,
         ...routed,
 
-        starterCode,
-        starterFiles,
 
         workspace: {
             ...renderedWorkspace,
             ...routedWorkspace,
-            starterCode,
             starterFiles,
             entryFile:
                 routedWorkspace.entryFile ??
@@ -813,14 +782,12 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
     existing: any;
     manifestLanguage: string;
     manifestStarterWorkspace: WorkspaceStateV2 | null | undefined;
-    manifestStarterCode?: string | null | undefined;
     manifestIdeConfig?: LearningIdeConfig | null | undefined;
 }) {
     const {
         existing,
         manifestLanguage,
         manifestStarterWorkspace,
-        manifestStarterCode,
         manifestIdeConfig,
     } = args;
     if (!existing) return false;
@@ -845,8 +812,7 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
     }
 
     const manifestHasStarter =
-        workspaceHasAnyFile(manifestStarterWorkspace) ||
-        isUsableStarterCode(manifestStarterCode);
+        workspaceHasAnyFile(manifestStarterWorkspace);
 
     const existingHasContent =
         workspaceHasNonBlankFile(existingWorkspace) ||
@@ -1080,7 +1046,7 @@ function CodeInputWithTools(props: {
     const manifestLanguage = getManifestExerciseLanguage(exercise);
     const curLang = manifestLanguage;
 
-    const curCode = (current as any).code ?? exercise.starterCode ?? "";
+    const curCode = (current as any).code ?? deriveEntryCode(getWorkspaceFromAnyState(exercise)) ?? "";
     const curStdin = (current as any).codeStdin ?? "";
 
     const stableExerciseId = getStableExerciseId({
@@ -1191,7 +1157,6 @@ function CodeInputWithTools(props: {
                 existing,
                 manifestLanguage,
                 manifestStarterWorkspace,
-                manifestStarterCode: (exercise as any).starterCode,
                 manifestIdeConfig: resolveCodeInputIdeConfig(exCode),
             })
         ) {
@@ -1271,7 +1236,7 @@ function CodeInputWithTools(props: {
         compatibleStoreExercise?.code,
         compatibleCurrentHasUserWork ? compatibleCurrentState?.code : "",
         manifestStarterCode,
-        exercise.starterCode,
+        deriveEntryCode(getWorkspaceFromAnyState(exercise)),
     );
 
     const resolvedTargetWorkspace = resolveWorkspaceForTarget({
@@ -1499,8 +1464,7 @@ function CodeInputWithTools(props: {
                         code: normalizedActive.code ?? "",
                         language: activeLanguage,
                         ideConfig: resolveCodeInputIdeConfig(exercise),
-                        starterCode: (exercise as any)?.starterCode ?? "",
-                        starterFiles: (exercise as any)?.starterFiles ?? null,
+                        starterFiles: (exercise as any)?.workspace?.starterFiles ?? null,
                         workspace: (exercise as any)?.workspace ?? null,
                         recipe: (exercise as any)?.recipe ?? null,
                     })}
@@ -1738,7 +1702,6 @@ export default function ExerciseRenderer({
                 existing,
                 manifestLanguage,
                 manifestStarterWorkspace,
-                manifestStarterCode: (ex as any).starterCode,
                 manifestIdeConfig: resolveCodeInputIdeConfig(exCode),
             })
         ) {
@@ -2252,7 +2215,7 @@ export default function ExerciseRenderer({
         const fallbackCode = firstNonBlankCode(
             compatibleStoreExercise?.code,
             compatibleCurrentState?.code,
-            (exCode as any).starterCode,
+            deriveEntryCode(getWorkspaceFromAnyState(exCode)),
         );
         const resolvedWorkspace = resolveWorkspaceForExerciseTarget({
             targetKey: exerciseKey,
@@ -2362,8 +2325,7 @@ export default function ExerciseRenderer({
                             code: activeCode ?? "",
                             language: activeLanguage,
                             ideConfig: resolveCodeInputIdeConfig(exCode),
-                            starterCode: (exCode as any)?.starterCode ?? "",
-                            starterFiles: (exCode as any)?.starterFiles ?? null,
+                            starterFiles: (exCode as any)?.workspace?.starterFiles ?? null,
                             workspace: (exCode as any)?.workspace ?? null,
                             recipe: (exCode as any)?.recipe ?? null,
                         })}

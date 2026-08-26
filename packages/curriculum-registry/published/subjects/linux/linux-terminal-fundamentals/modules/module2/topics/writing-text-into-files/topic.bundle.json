@@ -190,16 +190,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterFiles.main_sh.content",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -239,7 +229,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -278,16 +267,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterFiles.main_sh.content",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -340,7 +319,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -383,21 +361,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.main_sh.content",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "supply-list.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.supply_list_txt.content",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -450,7 +413,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",

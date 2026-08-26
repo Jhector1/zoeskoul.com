@@ -155,7 +155,17 @@
         ],
         "solutionCode": "age = 25\nheight = 5.9\nname = 'Zoe'\n\n# Print the variables\nprint(age)\nprint(height)\nprint(name)"
       },
-      "starterCode": "age = \nheight = \nname = \n\n# Print the variables\nprint(age)\nprint(height)\nprint(name)"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "age = \nheight = \nname = \n\n# Print the variables\nprint(age)\nprint(height)\nprint(name)",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

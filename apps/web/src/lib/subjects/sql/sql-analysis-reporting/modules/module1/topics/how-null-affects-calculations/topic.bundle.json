@@ -197,7 +197,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.how-null-affects-calculations.tryIt.try_how_null_affects_calculations_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.how-null-affects-calculations.tryIt.try_how_null_affects_calculations_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -214,7 +213,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.how-null-affects-calculations.tryIt.try_how_null_affects_calculations_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

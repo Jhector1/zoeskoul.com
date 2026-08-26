@@ -180,20 +180,9 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-records-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -275,20 +264,9 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-unpacking-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -355,20 +333,9 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.quiz.try-tuple-loop-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -440,16 +407,6 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-unpack-name-score",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-unpack-name-score.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-unpack-name-score.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -462,7 +419,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-unpack-name-score.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -525,16 +481,6 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-tuple-first-and-last",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-tuple-first-and-last.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-tuple-first-and-last.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -547,7 +493,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-tuple-first-and-last.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -610,16 +555,6 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-loop-unpack-two-records",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-loop-unpack-two-records.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-loop-unpack-two-records.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -632,7 +567,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.tuple-records-and-unpacking.practice.practice-loop-unpack-two-records.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

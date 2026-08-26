@@ -842,30 +842,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "algorithms/pair_sums.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterFiles.algorithms_pair_sums_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "algorithms/pair_sums.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterFiles.algorithms_pair_sums_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -892,7 +868,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.detect-equal-pair-sums.finalLab.steps.equal_pair_sums.starterCode",
         "starterFiles": [
           {
             "path": "main.c",

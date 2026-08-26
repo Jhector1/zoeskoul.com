@@ -8,9 +8,7 @@ import type {
 import { defaultMainFile } from "@zoeskoul/workspace-contracts";
 import type { WorkspaceLanguage } from "@zoeskoul/practice-contracts";
 import {
-  cleanStarterCode,
   hasUsableStarterFilesValue,
-  isUsableStarterCode,
   mergeStarterFileSources,
   pickEntryFileFromStarterFilesValue,
   starterFileNodePayload,
@@ -29,8 +27,6 @@ export type ManifestWorkspaceDefinition = {
   entryFile: string;
   seedSource: "starter" | "default" | "none";
   stdin: string;
-  starterCode: string;
-  starterFiles: NormalizedStarterFile[];
   fixtureFiles: NormalizedStarterFile[];
   manifestWorkspace: WorkspaceStateV2 | null;
   starterHash: string;
@@ -54,9 +50,10 @@ export type EntryWorkspaceFallback = {
   language?: string | null;
   lang?: string | null;
   item?: unknown;
-  starterCode?: unknown;
-  starterFiles?: unknown;
-
+  /**
+   * ReviewTargetEntry and published curriculum expose authored starter content
+   * through canonical workspace records only.
+   */
   /**
    * Keep these unknown because ReviewTargetEntry stores manifest-derived
    * workspace fields as unknown. The resolver already narrows them with
@@ -164,39 +161,12 @@ function mergeNormalizedStarterFiles(
   return mergeStarterFileSources(sources, fallbackEntryFile);
 }
 
-function explicitStarterCodeFromManifest(manifest: UnknownRecord) {
-  const workspace = isRecord(manifest.workspace) ? manifest.workspace : {};
-  const recipe = isRecord(manifest.recipe) ? manifest.recipe : {};
-
-  return (
-    cleanStarterCode(workspace.starterCode) ??
-    cleanStarterCode(manifest?.starterCode) ??
-    cleanStarterCode(recipe.starterCode) ??
-    ""
-  );
-}
-
-function getStarterCode(manifest: UnknownRecord) {
-  return explicitStarterCodeFromManifest(manifest);
-}
-
-function pickNonBlankString(...values: Array<unknown>) {
-  for (const value of values) {
-    if (isUsableStarterCode(value)) return value;
-  }
-  return "";
-}
 
 function collectManifestStarterFileSources(manifest: UnknownRecord) {
   const normalized = normalizeManifestShape(manifest);
   const workspace = isRecord(normalized.workspace) ? normalized.workspace : {};
-  const recipe = isRecord(normalized.recipe) ? normalized.recipe : {};
 
-  return [
-    workspace.starterFiles,
-    normalized.starterFiles,
-    recipe.starterFiles,
-  ];
+  return [workspace.starterFiles];
 }
 
 function collectManifestFixtureFileSources(manifest: UnknownRecord) {
@@ -234,13 +204,7 @@ function collectManifestFixtureFileSources(manifest: UnknownRecord) {
 
 function collectEntryFileSources(manifest: UnknownRecord) {
   const manifestWorkspace = isRecord(manifest.workspace) ? manifest.workspace : {};
-  const manifestRecipe = isRecord(manifest.recipe) ? manifest.recipe : {};
-
-  return [
-    manifestWorkspace.starterFiles,
-    manifest.starterFiles,
-    manifestRecipe.starterFiles,
-  ];
+  return [manifestWorkspace.starterFiles];
 }
 
 function getEntryFileFromStarterFiles(raw: unknown): string {
@@ -629,7 +593,10 @@ function sanitizeLegacyWorkspaceArtifacts(args: {
 }): WorkspaceStateV2 {
   const workspace = cloneWorkspace(args.workspace);
   const authoredPaths = new Set(
-    [...args.manifest.starterFiles, ...args.manifest.fixtureFiles].map((file) =>
+    [
+      ...workspaceFileEntries(args.manifest.manifestWorkspace),
+      ...args.manifest.fixtureFiles,
+    ].map((file) =>
       normalizePath(file.path, args.manifest.entryFile),
     ),
   );
@@ -1083,8 +1050,7 @@ function shouldUseSavedWorkspace(args: {
       hasMeaningfulSavedCodeValue((args.savedState as any).source),
   );
   const manifestHasStarter =
-      workspaceHasNonBlankFile(args.manifest.manifestWorkspace) ||
-      Boolean(String(args.manifest.starterCode ?? "").trim());
+      workspaceHasNonBlankFile(args.manifest.manifestWorkspace);
 
   const userOwned = isUserWorkspaceState(args.savedState);
 
@@ -1263,12 +1229,14 @@ export function createManifestWorkspaceDefinition(args: {
   });
 
   const manifestWorkspace = isRecord(manifest.workspace) ? manifest.workspace : {};
-  const manifestRecipe = isRecord(manifest.recipe) ? manifest.recipe : {};
+  const entryStarterWorkspace = isRecord(args.entry?.starterWorkspace)
+    ? args.entry!.starterWorkspace as UnknownRecord
+    : {};
   const explicitEntryFile = getEntryFile({ manifest, language });
   const entryFromStarterFiles =
       [
         ...collectEntryFileSources(manifest),
-        args.entry?.starterFiles,
+        entryStarterWorkspace.starterFiles,
       ]
           .map((source) => getEntryFileFromStarterFiles(source))
           .find((path) => path.trim().length > 0) ?? "";
@@ -1280,37 +1248,13 @@ export function createManifestWorkspaceDefinition(args: {
     entryFile,
   );
 
-  const starterCode = pickNonBlankString(
-      getStarterCode(manifest),
-      manifestWorkspace.starterCode,
-      manifest.starterCode,
-      manifestRecipe.starterCode,
-      args.entry?.starterCode,
-  );
-
   let starterFiles = mergeNormalizedStarterFiles(
       [
         ...collectManifestStarterFileSources(manifest),
-        args.entry?.starterFiles,
+        entryStarterWorkspace.starterFiles,
       ],
       entryFile,
   );
-
-  const normalizedEntryFile = normalizePath(entryFile, defaultMainFile(language));
-  if (isUsableStarterCode(starterCode)) {
-    const entryIndex = starterFiles.findIndex(
-        (file) => normalizePath(file.path, normalizedEntryFile) === normalizedEntryFile,
-    );
-
-    if (entryIndex >= 0) {
-      const existing = starterFiles[entryIndex];
-      if (!isUsableStarterCode(existing.content)) {
-        starterFiles = starterFiles.map((file, index) =>
-            index === entryIndex ? { ...file, content: starterCode } : file,
-        );
-      }
-    }
-  }
 
   const hasFullManifestWorkspace = Boolean(
       isWorkspace(manifest.workspace) ||
@@ -1321,7 +1265,6 @@ export function createManifestWorkspaceDefinition(args: {
   );
 
   const hasStarterAssets = Boolean(
-      starterCode.trim() ||
       hasUsableStarterFilesValue(starterFiles) ||
       hasUsableStarterFilesValue(fixtureFiles) ||
       hasFullManifestWorkspace,
@@ -1342,7 +1285,7 @@ export function createManifestWorkspaceDefinition(args: {
     starterFiles = [
       {
         path: entryFile,
-        content: starterCode.trim() ? starterCode : "",
+        content: "",
       },
       ...starterFiles,
     ];
@@ -1377,7 +1320,7 @@ export function createManifestWorkspaceDefinition(args: {
                   ? buildDefaultWorkspace({
                     language,
                     entryFile,
-                    code: starterCode.trim() ? starterCode : "",
+                    code: "",
                     stdin,
                   })
                   : null;
@@ -1388,8 +1331,6 @@ export function createManifestWorkspaceDefinition(args: {
     entryFile,
     seedSource: hasStarterAssets ? "starter" : requested ? "default" : "none",
     stdin,
-    starterCode,
-    starterFiles,
     fixtureFiles,
     manifestWorkspace: workspace,
     starterHash: workspaceContentKey(workspace),
@@ -1431,8 +1372,7 @@ export function resolveWorkspaceForTarget(args: {
 
   const draftMaxAgeMs = args.draftMaxAgeMs ?? 10 * 60 * 1000;
   const manifestHasStarter =
-    workspaceHasNonBlankFile(manifest.manifestWorkspace) ||
-    Boolean(String(manifest.starterCode ?? "").trim());
+    workspaceHasNonBlankFile(manifest.manifestWorkspace);
   const localDraftHasMeaningfulContent = workspaceHasMeaningfulSavedContent(
     args.localDraft?.workspace,
   );

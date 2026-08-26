@@ -60,7 +60,6 @@ export function resolvePublishedExerciseCapabilities(
   // older bundles may use files.
   const fileCount = Math.max(
     listLength(exercise.files),
-    listLength(exercise.starterFiles),
     listLength(workspace?.files),
     listLength(workspace?.starterFiles),
   );

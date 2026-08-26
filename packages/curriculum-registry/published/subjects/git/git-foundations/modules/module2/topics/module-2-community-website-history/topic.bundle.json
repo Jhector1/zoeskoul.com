@@ -130,21 +130,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch0",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -174,7 +159,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -294,26 +278,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch1",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/meeting-times.txt",
-          "content": "Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -335,7 +299,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -470,26 +433,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch2",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/meeting-times.txt",
-          "content": "Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -515,7 +458,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -650,26 +592,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch3",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/meeting-times.txt",
-          "content": "Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -691,7 +613,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -826,26 +747,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch4",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/meeting-times.txt",
-          "content": "Volunteer meeting times\n\nOrientation: Saturday 10:00 AM\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -879,7 +780,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -1014,26 +914,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.module-2-community-website-history.moduleProject.steps.try_module_2_community_website_history_sketch5",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/meeting-times.txt",
-          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -1063,7 +943,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",

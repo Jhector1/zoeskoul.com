@@ -168,21 +168,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.main_sh.content",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "newsroom/assignment.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.newsroom_assignment_txt.content",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -232,7 +217,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -292,26 +276,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.main_sh.content",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "art-table/brushes.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.art_table_brushes_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "art-table/paint-list.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.art_table_paint_list_txt.content",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -367,7 +331,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",

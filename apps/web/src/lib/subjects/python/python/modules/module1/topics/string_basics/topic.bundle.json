@@ -407,7 +407,17 @@
         ],
         "solutionCode": "name = input()\nage = int(input())\nprint(\"Hello\", name)\nprint(\"age:\", age)\n"
       },
-      "starterCode": "# TODO\n"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m1_str_fstring_greeting_code",
@@ -438,7 +448,17 @@
         ],
         "solutionTemplate": "name = input()\nprint(f\"Hello, {name}!\")\n"
       },
-      "starterCode": "# TODO\n"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m1_str_username_code",
@@ -468,7 +488,17 @@
         ],
         "solutionCode": "first = input().strip()\nlast = input().strip()\nusername = (first[:1] + last).lower()\nprint(username)"
       },
-      "starterCode": "first = input().strip()\nlast = input().strip()\n# Build and print the username here"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "first = input().strip()\nlast = input().strip()\n# Build and print the username here",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

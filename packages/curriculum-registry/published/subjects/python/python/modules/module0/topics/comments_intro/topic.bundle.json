@@ -495,7 +495,16 @@
         ],
         "solutionCode": "print(\"Start\")\n# print(10 / 0)\nprint(\"End\")\n"
       },
-      "starterCode": "print(\"Start\")\nprint(10 / 0)\nprint(\"End\")\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "print(\"Start\")\nprint(10 / 0)\nprint(\"End\")\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m0_comments_disable_wrong_math_line",
@@ -514,7 +523,16 @@
         ],
         "solutionCode": "total = 12\n# total = total + 100\nprint(total)\n"
       },
-      "starterCode": "total = 12\ntotal = total + 100\nprint(total)\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "total = 12\ntotal = total + 100\nprint(total)\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

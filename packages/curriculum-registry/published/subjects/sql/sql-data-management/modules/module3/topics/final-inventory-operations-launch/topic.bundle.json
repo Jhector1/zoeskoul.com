@@ -141,41 +141,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "seed.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.seed_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -233,7 +198,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.practice.practice-launch-review-mutations.starterFiles.operations_sql.content",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -363,25 +327,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -421,7 +366,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step1.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -505,25 +449,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -563,7 +488,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step2.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -646,33 +570,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.seed_sql.content",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "seed.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.seed_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -721,7 +618,6 @@
           "seed.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step3.starterFiles.seed_sql.content",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -824,33 +720,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "seed.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterFiles.seed_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -899,7 +768,6 @@
           "seed.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step4.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -1002,41 +870,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.operations_sql.content",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "seed.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.seed_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -1094,7 +927,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step5.starterFiles.operations_sql.content",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -1218,41 +1050,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "seed.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterFiles.seed_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -1310,7 +1107,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-3-final-capstone.final-inventory-operations-launch.finalCapstone.steps.ci_final_capstone_step6.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",

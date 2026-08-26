@@ -1,4 +1,4 @@
-import { makeCodeInputOut, starterCodeForGeneratedExercise } from "@/lib/practice/generator/engines/utils";
+import { makeCodeInputOut } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import { mergeLearningIdeConfigs } from "@/lib/ide/learningIdeConfig";
 import { makeShellTaskExpected } from "@zoeskoul/practice-checks";
@@ -39,12 +39,8 @@ export const buildShellTaskRecipe: RecipeHandler<any> = (def, args, resolved) =>
         title: resolved.title,
         prompt: resolved.prompt,
         language: "bash",
-        starterCode: starterCodeForGeneratedExercise(
-            def.starterCode,
-            resolved.starterCode,
-        ),
         workspace: def.workspace,
-        starterFiles: def.starterFiles,
+        starterFiles: def.workspace?.starterFiles,
         files: (def as any).files ?? def.workspace?.files,
         initialFiles: (def as any).initialFiles ?? def.workspace?.initialFiles,
         workspaceFiles: (def as any).workspaceFiles ?? def.workspace?.workspaceFiles,

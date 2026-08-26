@@ -248,30 +248,6 @@
       "weight": 1,
       "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios",
       "language": "c",
-      "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "ratios.h",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterFiles.ratios_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "ratios.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterFiles.ratios_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -298,7 +274,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-2-limit-method.limit-method-review.finalLab.steps.sample_ratios.starterCode",
         "starterFiles": [
           {
             "path": "main.c",

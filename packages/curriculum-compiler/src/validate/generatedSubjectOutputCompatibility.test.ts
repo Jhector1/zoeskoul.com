@@ -39,6 +39,29 @@ function getValueAtPath(source: JsonObject, dottedPath: string) {
     }, source);
 }
 
+function resolvePublishedMessageRefs(value: unknown, messages: JsonObject): unknown {
+    if (typeof value === "string") {
+        if (!value.startsWith("@:")) return value;
+        const resolved = getValueAtPath(messages, value.slice(2));
+        return resolved == null ? value : resolved;
+    }
+
+    if (Array.isArray(value)) {
+        return value.map((entry) => resolvePublishedMessageRefs(entry, messages));
+    }
+
+    if (value && typeof value === "object") {
+        return Object.fromEntries(
+            Object.entries(value as JsonObject).map(([key, entry]) => [
+                key,
+                resolvePublishedMessageRefs(entry, messages),
+            ]),
+        );
+    }
+
+    return value;
+}
+
 function collectTranslationKeys(value: unknown, keys = new Set<string>()) {
     if (Array.isArray(value)) {
         value.forEach((entry) => collectTranslationKeys(entry, keys));
@@ -364,9 +387,11 @@ describe("generated subject output compatibility", () => {
 
             for (const ref of topicRefs("sql-v2")) {
                 const bundle = readJson(ref.bundlePath);
+                const messages = readJson(ref.messagePath);
+                const resolvedBundle = resolvePublishedMessageRefs(bundle, messages) as JsonObject;
                 const result = await collectCodeInputCompatibilityIssues({
                     topicId: ref.topicId,
-                    bundle,
+                    bundle: resolvedBundle,
                     moduleRuntimeDefaults: ref.module.runtimeDefaults ?? null,
                     courseSlug: plan?.publishTarget.courseSlug ?? null,
                 });

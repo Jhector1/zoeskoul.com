@@ -631,30 +631,6 @@
       "weight": 1,
       "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns",
       "language": "c",
-      "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "analysis.h",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterFiles.analysis_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "analysis.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterFiles.analysis_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -681,7 +657,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-1-frequency-counting.frequency-count-method.finalLab.steps.count_patterns.starterCode",
         "starterFiles": [
           {
             "path": "main.c",

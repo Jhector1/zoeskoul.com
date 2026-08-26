@@ -2208,6 +2208,9 @@ export default function CodeToolPane(props: {
         lastIncomingRef.current = null;
         pendingWorkspaceRef.current = undefined;
         pendingWorkspaceForceUserEditRef.current = false;
+        pendingTerminalEvidenceRef.current = undefined;
+        latestTerminalEvidenceRef.current = null;
+        lastTerminalEvidenceKeyRef.current = "";
         lastHandledWorkspaceKeyRef.current = "";
         lastHandledStructureKeyRef.current = "";
         lastUpstreamWorkspaceKeyRef.current = "";
@@ -3087,7 +3090,6 @@ export default function CodeToolPane(props: {
         };
 
         win.__zoeFlushAnyTerminalBeforeSubmit = flush;
-        win.__zoeGetAnyTerminalEvidenceBeforeSubmit = getLatestTerminalEvidence;
 
         const terminalRegistryKeys = Array.from(
             new Set(
@@ -3120,10 +3122,6 @@ export default function CodeToolPane(props: {
                 ) {
                     delete win.__zoeGetTerminalEvidenceBeforeSubmit[key];
                 }
-            }
-
-            if (win.__zoeGetAnyTerminalEvidenceBeforeSubmit === getLatestTerminalEvidence) {
-                delete win.__zoeGetAnyTerminalEvidenceBeforeSubmit;
             }
 
             if (win.__zoeFlushAnyTerminalBeforeSubmit === flush) {

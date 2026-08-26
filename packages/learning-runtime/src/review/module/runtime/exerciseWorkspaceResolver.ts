@@ -8,11 +8,11 @@ import type {
 import type { WorkspaceLanguage } from "@zoeskoul/practice-contracts";
 import { defaultMainFile } from "@zoeskoul/workspace-contracts";
 import {
-  cleanStarterCode,
   hasUsableStarterFilesValue,
   isUsableStarterCode,
   mergeStarterFileSources,
   normalizeStarterFilesValue,
+  pickEntryFileFromStarterFilesValue,
   starterFileNodePayload,
   type NormalizedStarterFile,
 } from "./starterContent";
@@ -22,41 +22,6 @@ type UnknownRecord = Record<string, unknown>;
 
 
 
-
-function explicitStarterCodeFromManifest(manifest: UnknownRecord) {
-  // Only explicit runtime starter fields are allowed to seed the code input pane.
-  // Do not fall back to generic code/content/source fields or i18n aliases,
-  // because those fields may contain solution text, examples, explanations, or
-  // unresolved translation keys such as `@:quiz.some_id.starterCode`.
-  const workspace = isRecord(manifest.workspace) ? manifest.workspace : {};
-  const recipe = isRecord(manifest.recipe) ? manifest.recipe : {};
-
-  return (
-      cleanStarterCode(workspace.starterCode) ??
-      cleanStarterCode(manifest?.starterCode) ??
-      cleanStarterCode(recipe.starterCode) ??
-      ""
-  );
-}
-
-type StarterFile =
-    | string
-    | {
-  path?: string;
-  filePath?: string;
-  filename?: string;
-  name?: string;
-  content?: string;
-  contents?: string;
-  text?: string;
-  code?: string;
-  source?: string;
-  body?: string;
-  value?: string;
-  entry?: boolean;
-  isEntry?: boolean;
-  main?: boolean;
-};
 
 function isRecord(value: unknown): value is UnknownRecord {
   return !!value && typeof value === "object" && !Array.isArray(value);
@@ -256,50 +221,6 @@ function normalizePath(input: unknown, fallback: string) {
   return parts.join("/") || fallback;
 }
 
-function starterFilePath(file: StarterFile, fallback: string) {
-  if (typeof file === "string") return normalizePath(file, fallback);
-  if (!isRecord(file)) return fallback;
-
-  return normalizePath(
-      file.path ?? file.filePath ?? file.filename ?? file.name,
-      fallback,
-  );
-}
-
-function starterFileContent(file: StarterFile): string {
-  if (typeof file === "string") return "";
-  if (!isRecord(file)) return "";
-
-  for (const key of [
-    "content",
-    "contents",
-    "text",
-    "code",
-    "source",
-    "body",
-    "value",
-  ] as const) {
-    if (typeof file[key] === "string") {
-      return isUsableStarterCode(file[key]) ? file[key] : "";
-    }  }
-
-  return "";
-}
-
-function unwrapStarterFiles(raw: unknown): unknown {
-  if (!isRecord(raw)) return raw;
-
-  return (
-      raw.starterFiles ??
-      raw.files ??
-      raw.initialFiles ??
-      raw.workspaceFiles ??
-      raw.entries ??
-      raw.items ??
-      raw
-  );
-}
-
 function normalizeStarterFiles(
     raw: unknown,
     fallbackEntryFile: string,
@@ -318,7 +239,6 @@ function firstUsableStarterFilesSource(...values: Array<unknown>) {
 function collectStarterFilesSources(manifest: UnknownRecord) {
   const normalized = normalizeManifestShape(manifest);
   const workspace = isRecord(normalized.workspace) ? normalized.workspace : {};
-  const recipe = isRecord(normalized.recipe) ? normalized.recipe : {};
 
   return [
       workspace.starterFiles,
@@ -328,20 +248,6 @@ function collectStarterFilesSources(manifest: UnknownRecord) {
       workspace.fixtureFiles,
       workspace.fixtures,
       workspace.fileFixtures,
-      normalized.starterFiles,
-      normalized.files,
-      normalized.initialFiles,
-      normalized.workspaceFiles,
-      normalized.fixtureFiles,
-      normalized.fixtures,
-      normalized.fileFixtures,
-      recipe.starterFiles,
-      recipe.files,
-      recipe.initialFiles,
-      recipe.workspaceFiles,
-      recipe.fixtureFiles,
-      recipe.fixtures,
-      recipe.fileFixtures,
   ];
 }
 
@@ -390,21 +296,18 @@ function collectEntryFileSources(args: {
   manifest: UnknownRecord;
   entry?: import("./reviewTargetRegistry").ReviewTargetEntry | null;
 }) {
-  const manifestWorkspace = isRecord(args.manifest.workspace)
-      ? args.manifest.workspace
+  const normalized = normalizeManifestShape(args.manifest);
+  const manifestWorkspace = isRecord(normalized.workspace)
+      ? normalized.workspace
       : {};
-  const manifestRecipe = isRecord(args.manifest.recipe) ? args.manifest.recipe : {};
+  const entryStarterWorkspace = isRecord(args.entry?.starterWorkspace)
+      ? args.entry.starterWorkspace
+      : {};
 
   return [
     manifestWorkspace.starterFiles,
-    args.manifest.starterFiles,
-    args.entry?.starterFiles,
-    manifestRecipe.starterFiles,
+    entryStarterWorkspace.starterFiles,
   ];
-}
-
-export function getStarterCode(manifest: UnknownRecord) {
-  return explicitStarterCodeFromManifest(manifest);
 }
 
 function pickNonBlankString(...values: Array<unknown>) {
@@ -613,15 +516,7 @@ function hasUsableWorkspaceContent(
   });
 }
 function getEntryFileFromStarterFiles(raw: unknown): string {
-  const source = unwrapStarterFiles(raw);
-  if (!Array.isArray(source)) return "";
-
-  const entry = source.find((file) => {
-    if (!isRecord(file)) return false;
-    return file.entry === true || file.isEntry === true || file.main === true;
-  });
-
-  return entry ? starterFilePath(entry as StarterFile, "") : "";
+  return pickEntryFileFromStarterFilesValue(raw, "");
 }
 
 export function resolveExerciseWorkspace(args: {

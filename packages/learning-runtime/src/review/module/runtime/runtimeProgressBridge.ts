@@ -190,7 +190,7 @@ function getExercisePatchForQuizState(
    *
    * Passive starter/sync snapshots are useful in the runtime store, but if they
    * are copied into quizState.practiceItemPatch they can later override freshly
-   * resolved starterCode before the editor renders.
+   * resolved canonical entry starter file before the editor renders.
    */
   if (userEdited) {
     patch.code = code;

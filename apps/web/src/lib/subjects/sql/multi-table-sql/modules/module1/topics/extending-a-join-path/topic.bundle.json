@@ -99,7 +99,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -116,7 +115,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -161,7 +159,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -178,7 +175,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

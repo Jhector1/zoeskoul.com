@@ -223,11 +223,15 @@ describe("resolveCourseFileSeed", () => {
             profileId: "c",
             versionFamily: "c-data-structures",
             target: {
-                starterCode: "int main(void) { return 0; }\n",
+                workspace: {
+                    starterFiles: [{ path: "main.c", content: "int main(void) { return 0; }\n" }],
+                },
             },
         });
 
-        expect(resolved.starterCode).toBe("int main(void) { return 0; }\n");
+        expect(resolved.starterFiles).toEqual([
+            { path: "main.c", content: "int main(void) { return 0; }\n" },
+        ]);
         expect(
             resolveCourseLanguage({
                 subjectSlug: "c-data-structures",
@@ -251,16 +255,22 @@ describe("resolveCourseFileSeed", () => {
                             isEntry: true,
                         },
                     ],
+                    files: [
+                        {
+                            path: "data.txt",
+                            content: "fixture",
+                        },
+                    ],
                 },
                 starterFiles: [
                     {
                         path: "main.py",
-                        content: "# later main",
+                        content: "# stale legacy main",
                         isEntry: true,
                     },
                     {
-                        path: "data.txt",
-                        content: "fixture",
+                        path: "legacy-only.txt",
+                        content: "must not be seeded",
                     },
                 ],
             },
@@ -276,5 +286,52 @@ describe("resolveCourseFileSeed", () => {
                 content: "fixture",
             },
         ]);
+    });
+
+    it("reads starter content only from canonical workspace fields", () => {
+        const resolved = resolveCourseFileSeed({
+            subjectSlug: "python-v2",
+            language: "python",
+            profileId: "python",
+            versionFamily: "python",
+            target: {
+                starterCode: "print('legacy top-level starter')\n",
+                starterFiles: [
+                    {
+                        path: "legacy-top.py",
+                        content: "print('legacy top-level file')\n",
+                        isEntry: true,
+                    },
+                ],
+                recipe: {
+                    starterCode: "print('legacy recipe starter')\n",
+                    starterFiles: [
+                        {
+                            path: "legacy-recipe.py",
+                            content: "print('legacy recipe file')\n",
+                            isEntry: true,
+                        },
+                    ],
+                },
+                workspace: {
+                    starterFiles: [
+                        {
+                            path: "main.py",
+                            content: "print('canonical workspace starter')\n",
+                            isEntry: true,
+                        },
+                    ],
+                },
+            },
+        });
+
+        expect(resolved.starterFiles).toEqual([
+            {
+                path: "main.py",
+                content: "print('canonical workspace starter')\n",
+            },
+        ]);
+        expect(JSON.stringify(resolved)).not.toContain("legacy top-level");
+        expect(JSON.stringify(resolved)).not.toContain("legacy recipe");
     });
 });

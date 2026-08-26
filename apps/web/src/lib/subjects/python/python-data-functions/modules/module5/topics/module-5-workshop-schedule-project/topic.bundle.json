@@ -87,20 +87,9 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -174,20 +163,9 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -262,20 +240,9 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -360,20 +327,9 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

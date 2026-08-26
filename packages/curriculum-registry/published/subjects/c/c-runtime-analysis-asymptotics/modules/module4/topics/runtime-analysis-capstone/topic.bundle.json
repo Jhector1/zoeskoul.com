@@ -279,30 +279,6 @@
       "weight": 1,
       "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts",
       "language": "c",
-      "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "capstone.h",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterFiles.capstone_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "capstone.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterFiles.capstone_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -329,7 +305,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.derive_exact_counts.starterCode",
         "starterFiles": [
           {
             "path": "main.c",
@@ -443,30 +418,6 @@
       "weight": 1,
       "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms",
       "language": "c",
-      "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "classify.h",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterFiles.classify_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "classify.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterFiles.classify_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -493,7 +444,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.classify_dominant_terms.starterCode",
         "starterFiles": [
           {
             "path": "main.c",
@@ -600,30 +550,6 @@
       "weight": 1,
       "messageBase": "topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof",
       "language": "c",
-      "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "proof.h",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterFiles.proof_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "proof.c",
-          "content": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterFiles.proof_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -650,7 +576,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-runtime-analysis-asymptotics.c-runtime-analysis-asymptotics-module-4-capstone.runtime-analysis-capstone.finalLab.steps.verify_new_theta_proof.starterCode",
         "starterFiles": [
           {
             "path": "main.c",

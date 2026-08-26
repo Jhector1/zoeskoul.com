@@ -107,30 +107,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/report_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.services_report_service_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -157,7 +133,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -280,30 +255,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/catalog_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.services_catalog_service_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -330,7 +281,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -511,30 +461,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/pricing_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterFiles.services_pricing_service_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -561,7 +487,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -758,30 +683,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/inventory_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterFiles.services_inventory_service_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -808,7 +709,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -1022,30 +922,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/summary_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterFiles.services_summary_service_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -1072,7 +948,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

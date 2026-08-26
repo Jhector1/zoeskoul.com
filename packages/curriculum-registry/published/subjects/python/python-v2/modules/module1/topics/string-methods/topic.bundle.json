@@ -254,7 +254,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-1",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-1.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -282,15 +281,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-1.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -303,7 +293,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -345,7 +334,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-2",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-2.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -373,15 +361,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-2.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -394,7 +373,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -436,7 +414,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-3",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-3.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -464,15 +441,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-3.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -485,7 +453,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -527,7 +494,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-4",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-4.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -555,15 +521,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-4.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -576,7 +533,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-4.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -618,7 +574,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-methods.quiz.code-5",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-5.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -646,15 +601,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-5.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -667,7 +613,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.quiz.code-5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -716,16 +661,6 @@
       "messageBase": "topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -738,7 +673,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-methods.practice.practice-split-and-join-tags.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

@@ -3,8 +3,6 @@ export const PRACTICE_AUTHORED_CONTRACT_FIELDS = [
   "prompt",
   "title",
   "hint",
-  "starterCode",
-  "starterFiles",
   "workspace",
   "files",
   "initialFiles",
@@ -102,8 +100,6 @@ export function isLearnerOwnedPracticeRuntimeState(value: unknown) {
 
 const LEARNER_OWNED_AUTHORED_STRUCTURE_FIELDS =
   new Set<PracticeAuthoredContractField>([
-    "starterCode",
-    "starterFiles",
     "workspace",
     "files",
     "initialFiles",
@@ -142,25 +138,32 @@ export function resolvePracticeAuthoredContractValue(args: {
   currentItemValue: unknown;
   learnerOwnedRuntimeState: boolean;
 }) {
+  if (args.field === "workspace") {
+    /**
+     * Authored workspace and learner/runtime workspace are different owners.
+     *
+     * exercise.workspace is authored ManifestWorkspaceSeed.
+     * item.workspace is runtime WorkspaceStateV2.
+     *
+     * A resolved authored seed always wins. The raw nested exercise workspace
+     * is compatibility fallback only when the resolved seed is absent.
+     * Item-level workspace is never authored-contract input.
+     */
+    return preferCanonicalPracticeStructure({
+      resolvedValue: args.resolvedValue,
+      fallbackValue: args.currentExerciseValue,
+    });
+  }
+
   if (
     args.learnerOwnedRuntimeState &&
     LEARNER_OWNED_AUTHORED_STRUCTURE_FIELDS.has(args.field)
   ) {
-    /**
-     * Saved learner state must not redefine the authored workspace contract.
-     *
-     * Canonical resolved structure wins whenever present. A nested live
-     * exercise field is a compatibility fallback. Item-level structure is only
-     * a final fallback for non-workspace aliases; item.workspace itself is
-     * learner/editor state and is never an authored-manifest fallback.
-     */
     return preferCanonicalPracticeStructure({
       resolvedValue: args.resolvedValue,
       fallbackValue:
         args.currentExerciseValue ??
-        (args.field === "workspace"
-          ? undefined
-          : args.currentItemValue),
+        args.currentItemValue,
     });
   }
 
@@ -175,8 +178,5 @@ export function shouldMirrorPracticeAuthoredContractFieldToItem(args: {
   field: PracticeAuthoredContractField;
   learnerOwnedRuntimeState: boolean;
 }) {
-  return !(
-    args.field === "workspace" &&
-    args.learnerOwnedRuntimeState
-  );
+  return args.field !== "workspace";
 }

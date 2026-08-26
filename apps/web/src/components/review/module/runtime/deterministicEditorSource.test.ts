@@ -40,19 +40,39 @@ describe("resolveDeterministicEditorSource", () => {
     expect(resolved?.workspaceSeedMode).toBe("empty");
   });
 
-  it("treats localized starter files as starter-backed seed content", () => {
+  it("treats canonical workspace starter files as starter-backed seed content", () => {
+    const resolved = resolveDeterministicEditorSource(
+      makeEntry({
+        toolManifest: {
+          workspace: {
+            starterFiles: [
+              {
+                path: "query.sql",
+                content: "-- real starter SQL\nSELECT name\nFROM products;\n",
+                isEntry: true,
+              },
+            ],
+          },
+        },
+      }),
+    );
+
+    expect(resolved?.workspaceSeedMode).toBe("starter");
+  });
+
+  it("does not interpret entry-level legacy starter aliases as curriculum source", () => {
     const resolved = resolveDeterministicEditorSource(
       makeEntry({
         starterFiles: [
           {
             path: "query.sql",
-            content: "-- real starter SQL\nSELECT name\nFROM products;\n",
+            content: "-- legacy entry alias\nSELECT 1;\n",
             isEntry: true,
           },
         ],
       }),
     );
 
-    expect(resolved?.workspaceSeedMode).toBe("starter");
+    expect(resolved?.workspaceSeedMode).toBe("empty");
   });
 });

@@ -104,9 +104,7 @@ export type ReviewProjectStep = {
      * Tools never falls back to blank/stale editor state while practice data is
      * loading.
      */
-    starterCode?: string;
     solutionCode?: string;
-    starterFiles?: unknown;
     solutionFiles?: unknown;
     workspace?: unknown;
     files?: unknown;

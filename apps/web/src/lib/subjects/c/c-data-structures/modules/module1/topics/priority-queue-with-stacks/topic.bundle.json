@@ -660,44 +660,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "structures/priority_queue.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_priority_queue_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/priority_queue.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_priority_queue_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/stack.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_stack_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/stack.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterFiles.structures_stack_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -738,7 +700,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.priority-queue-with-stacks.finalLab.steps.priority_queue_stacks.starterCode",
         "starterFiles": [
           {
             "path": "main.c",

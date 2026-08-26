@@ -2051,30 +2051,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "algorithms/recursion.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "algorithms/recursion.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -2101,7 +2077,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.recursive-boolean-configurations.finalLab.steps.recursion_runtime.starterCode",
         "starterFiles": [
           {
             "path": "main.c",

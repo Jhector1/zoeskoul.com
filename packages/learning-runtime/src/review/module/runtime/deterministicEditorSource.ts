@@ -31,7 +31,6 @@ function manifestHasStarter(manifest: unknown, entry: ReviewTargetEntry) {
   const manifestRecord = asRecord(manifest);
   const workspaceContainer =
       asRecord(source.workspace) ?? asRecord(manifestRecord?.workspace) ?? {};
-  const recipe = asRecord(source.recipe);
 
   const workspaceCandidate =
       entry.starterWorkspace ??
@@ -42,26 +41,17 @@ function manifestHasStarter(manifest: unknown, entry: ReviewTargetEntry) {
       null;
 
   /**
-   * Preserve unresolved @: aliases in the manifest/registry so localization can
-   * still resolve them later, but do not treat alias-only values as concrete
-   * starter content for deterministic runtime seeding. Otherwise a blank
-   * pre-localization shell can mount as "starter" and suppress the real
-   * localized workspace once it becomes available.
+   * Published curriculum starter content is workspace-owned. Do not re-read
+   * entry/source/recipe starterCode or starterFiles aliases here.
+   *
+   * Preserve unresolved @: aliases in canonical workspace fields so
+   * localization can still resolve them later, but do not treat alias-only
+   * values as concrete starter content.
    */
   return Boolean(
-      hasUsableStarterFilesValue(entry.starterFiles) ||
-      isUsableStarterCode(entry.starterCode) ||
       hasUsableStarterFilesValue(workspaceContainer.starterFiles) ||
       hasUsableStarterFilesValue(workspaceContainer.initialFiles) ||
       hasUsableStarterFilesValue(workspaceContainer.workspaceFiles) ||
-      hasUsableStarterFilesValue(source.starterFiles) ||
-      hasUsableStarterFilesValue(source.initialFiles) ||
-      hasUsableStarterFilesValue(source.workspaceFiles) ||
-      isUsableStarterCode(workspaceContainer.starterCode) ||
-      isUsableStarterCode(source.starterCode) ||
-      hasUsableStarterFilesValue(recipe?.starterFiles) ||
-      hasUsableStarterFilesValue(recipe?.initialFiles) ||
-      isUsableStarterCode(recipe?.starterCode) ||
       (
           !!workspaceCandidate &&
           typeof workspaceCandidate === "object" &&

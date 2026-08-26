@@ -12,7 +12,6 @@ export type RecipeHandler<T extends ManifestRecipe = ManifestRecipe> = (
             title: string;
             prompt: string;
             hint?: string;
-            starterCode: string;
             help?: any;
             expectedExampleMeta?: string;
             maybeT?: (key: string) => string | undefined;

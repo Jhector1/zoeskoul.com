@@ -1670,30 +1670,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "algorithms/recursion.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "algorithms/recursion.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.starterFiles.algorithms_recursion_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -1720,7 +1696,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.recursion_runtime.starterCode",
         "starterFiles": [
           {
             "path": "main.c",
@@ -1834,30 +1809,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "algorithms/pair_sums.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.starterFiles.algorithms_pair_sums_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "algorithms/pair_sums.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.starterFiles.algorithms_pair_sums_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -1884,7 +1835,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.equal_pair_sums.starterCode",
         "starterFiles": [
           {
             "path": "main.c",
@@ -1998,30 +1948,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "structures/bst.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.starterFiles.structures_bst_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/bst.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.starterFiles.structures_bst_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -2048,7 +1974,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.almost_balanced_bst.starterCode",
         "starterFiles": [
           {
             "path": "main.c",
@@ -2162,44 +2087,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "structures/priority_queue.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.starterFiles.structures_priority_queue_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/priority_queue.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.starterFiles.structures_priority_queue_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/stack.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.starterFiles.structures_stack_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/stack.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.starterFiles.structures_stack_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -2240,7 +2127,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.priority_queue_stacks.starterCode",
         "starterFiles": [
           {
             "path": "main.c",
@@ -2396,30 +2282,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "structures/heap.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.starterFiles.structures_heap_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/heap.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.starterFiles.structures_heap_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -2446,7 +2308,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.written-assignment-2-lab.finalLab.steps.pointer_heap_insert.starterCode",
         "starterFiles": [
           {
             "path": "main.c",

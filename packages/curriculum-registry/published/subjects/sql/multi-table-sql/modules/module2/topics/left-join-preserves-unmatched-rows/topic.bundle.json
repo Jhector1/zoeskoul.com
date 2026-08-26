@@ -87,7 +87,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -104,7 +103,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.tryIt.try_left_join_preserves_unmatched_rows_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -149,7 +147,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -166,7 +163,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-preserve-departments-through-long-path.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -308,7 +304,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-retained-left-join-sketch0",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-retained-left-join-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -325,7 +320,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-retained-left-join-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -370,7 +364,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-retained-left-join-sketch1",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-retained-left-join-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -387,7 +380,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.left-join-preserves-unmatched-rows.practice.practice-retained-left-join-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

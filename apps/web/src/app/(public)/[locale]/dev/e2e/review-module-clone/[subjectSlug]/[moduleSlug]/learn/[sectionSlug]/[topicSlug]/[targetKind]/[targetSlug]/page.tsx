@@ -215,7 +215,6 @@ const exerciseADefinition = {
         starterFiles: exerciseAStarterFiles,
         solutionFiles: exerciseASolutionFiles,
     },
-    starterCode: exerciseAStarterFiles["main.py"],
     solutionCode: exerciseASolutionFiles["main.py"],
 };
 
@@ -229,7 +228,6 @@ const exerciseBDefinition = {
         starterFiles: exerciseBStarterFiles,
         solutionFiles: exerciseBSolutionFiles,
     },
-    starterCode: exerciseBStarterFiles["main.py"],
     solutionCode: exerciseBSolutionFiles["main.py"],
 };
 
@@ -243,7 +241,6 @@ const blankFallbackExerciseDefinition = {
         starterFiles: blankFallbackStarterFiles,
         solutionFiles: blankFallbackSolutionFiles,
     },
-    starterCode: "",
     solutionCode: "",
 };
 
@@ -257,7 +254,6 @@ const revealMultiFileDefinition = {
         starterFiles: revealMultiFileStarterFiles,
         solutionFiles: revealMultiFileSolutionFiles,
     },
-    starterCode: revealMultiFileStarterFiles["main.py"],
     solutionCode: revealMultiFileSolutionFiles["main.py"],
     solutionFiles: revealMultiFileSolutionFiles,
 };
@@ -270,14 +266,11 @@ const e2eI18nStarterDefinition = {
     messageBase: E2E_I18N_STARTER_MESSAGE_BASE,
     language: "python",
     runtime: runtimeDefaults,
-    starterCode: E2E_I18N_STARTER_CODE_REF,
-    starterFiles: e2eI18nStarterFiles,
     solutionFiles: e2eI18nSolutionFiles,
     workspace: {
         language: "python",
         entryFile: "main.py",
         entryFilePath: "main.py",
-        starterCode: E2E_I18N_STARTER_CODE_REF,
         starterFiles: e2eI18nStarterFiles,
         solutionFiles: e2eI18nSolutionFiles,
     },
@@ -303,15 +296,12 @@ const e2eI18nProjectStep = {
     seedPolicy: "global",
     maxAttempts: 3,
     runtime: runtimeDefaults,
-    starterCode: E2E_I18N_STARTER_CODE_REF,
-    starterFiles: e2eI18nStarterFiles,
     solutionCode: e2eI18nSolutionFiles["main.py"],
     solutionFiles: e2eI18nSolutionFiles,
     workspace: {
         language: "python",
         entryFile: "main.py",
         entryFilePath: "main.py",
-        starterCode: E2E_I18N_STARTER_CODE_REF,
         starterFiles: e2eI18nStarterFiles,
         solutionFiles: e2eI18nSolutionFiles,
     },
@@ -401,7 +391,6 @@ const projectStep2Definition = {
         starterFiles: projectStep2StarterFiles,
         solutionFiles: projectStep2SolutionFiles,
     },
-    starterCode: projectStep2StarterFiles["main.py"],
     solutionCode: projectStep2SolutionFiles["main.py"],
 };
 
@@ -415,7 +404,6 @@ const projectStep3Definition = {
         starterFiles: projectStep3StarterFiles,
         solutionFiles: projectStep3SolutionFiles,
     },
-    starterCode: projectStep3StarterFiles["main.py"],
     solutionCode: projectStep3SolutionFiles["main.py"],
 };
 
@@ -435,7 +423,6 @@ const fileIoDefinition = {
         fixtures: fileIoWorkspaceFiles,
         fileFixtures: fileIoWorkspaceFiles,
     } as any,
-    starterFiles: fileIoStarterFiles,
     solutionFiles: fileIoSolutionFiles,
     files: fileIoWorkspaceFiles,
     fixtureFiles: fileIoWorkspaceFiles,
@@ -443,7 +430,6 @@ const fileIoDefinition = {
     workspaceFiles: fileIoWorkspaceFiles,
     fixtures: fileIoWorkspaceFiles,
     fileFixtures: fileIoWorkspaceFiles,
-    starterCode: fileIoStarterFiles["main.py"],
     solutionCode: fileIoSolutionFiles["main.py"],
 };
 
@@ -539,7 +525,6 @@ const linuxTerminalCwdDefinition = {
         fixtures: linuxTerminalMapFixtureFiles,
         fileFixtures: linuxTerminalMapFixtureFiles,
     },
-    starterFiles: linuxTerminalMapStarterFiles,
     solutionFiles: linuxTerminalMapSolutionFiles,
     files: linuxTerminalMapFixtureFiles,
     fixtureFiles: linuxTerminalMapFixtureFiles,
@@ -547,7 +532,6 @@ const linuxTerminalCwdDefinition = {
     workspaceFiles: linuxTerminalMapFixtureFiles,
     fixtures: linuxTerminalMapFixtureFiles,
     fileFixtures: linuxTerminalMapFixtureFiles,
-    starterCode: linuxTerminalMapStarterFiles["README.md"],
     solutionCode: linuxTerminalMapSolutionFiles["README.md"],
 };
 
@@ -567,7 +551,6 @@ const linuxTerminalCwdProjectStep = {
     ideConfig: linuxTerminalCwdIdeConfig,
     recipe: linuxTerminalCwdRecipe,
     workspace: linuxTerminalCwdDefinition.workspace,
-    starterFiles: linuxTerminalMapStarterFiles,
     solutionFiles: linuxTerminalMapSolutionFiles,
     files: linuxTerminalMapFixtureFiles,
     fixtureFiles: linuxTerminalMapFixtureFiles,
@@ -575,7 +558,6 @@ const linuxTerminalCwdProjectStep = {
     workspaceFiles: linuxTerminalMapFixtureFiles,
     fixtures: linuxTerminalMapFixtureFiles,
     fileFixtures: linuxTerminalMapFixtureFiles,
-    starterCode: linuxTerminalMapStarterFiles["README.md"],
     solutionCode: linuxTerminalMapSolutionFiles["README.md"],
 } as any;
 
@@ -644,7 +626,6 @@ function makeProjectCard({
         title: string;
         starterFiles: Record<string, string>;
         solutionFiles: Record<string, string>;
-        starterCode: string;
         solutionCode: string;
         files?: Array<{ path: string; content: string; readOnly?: boolean }>;
         fixtureFiles?: Array<{ path: string; content: string; readOnly?: boolean }>;
@@ -695,7 +676,6 @@ function makeProjectCard({
                         }
                         : {}),
                 },
-                starterCode: step.starterCode,
                 solutionCode: step.solutionCode,
                 solutionFiles: step.solutionFiles,
             } as any)),
@@ -789,7 +769,6 @@ const reviewCloneTopic = {
                     title: "I18N starter code should resolve",
                     starterFiles: e2eI18nStarterFiles,
                     solutionFiles: e2eI18nSolutionFiles,
-                    starterCode: E2E_I18N_STARTER_CODE_REF,
                     solutionCode: e2eI18nSolutionFiles["main.py"],
                 },
             ],
@@ -803,7 +782,6 @@ const reviewCloneTopic = {
                     title: "Edit and run starter code",
                     starterFiles: exerciseAStarterFiles,
                     solutionFiles: exerciseASolutionFiles,
-                    starterCode: exerciseAStarterFiles["main.py"],
                     solutionCode: exerciseASolutionFiles["main.py"],
                 },
                 {
@@ -811,7 +789,6 @@ const reviewCloneTopic = {
                     title: "Build a shipping helper",
                     starterFiles: projectStep2StarterFiles,
                     solutionFiles: projectStep2SolutionFiles,
-                    starterCode: projectStep2StarterFiles["main.py"],
                     solutionCode: projectStep2SolutionFiles["main.py"],
                 },
                 {
@@ -819,7 +796,6 @@ const reviewCloneTopic = {
                     title: "Build a sum helper",
                     starterFiles: projectStep3StarterFiles,
                     solutionFiles: projectStep3SolutionFiles,
-                    starterCode: projectStep3StarterFiles["main.py"],
                     solutionCode: projectStep3SolutionFiles["main.py"],
                 },
                 {
@@ -827,7 +803,6 @@ const reviewCloneTopic = {
                     title: "Read a fixture file",
                     starterFiles: fileIoStarterFiles,
                     solutionFiles: fileIoSolutionFiles,
-                    starterCode: fileIoStarterFiles["main.py"],
                     solutionCode: fileIoSolutionFiles["main.py"],
                     files: fileIoWorkspaceFiles,
                     fixtureFiles: fileIoWorkspaceFiles,
@@ -847,7 +822,6 @@ const reviewCloneTopic = {
                     title: "Second exercise isolation check",
                     starterFiles: exerciseBStarterFiles,
                     solutionFiles: exerciseBSolutionFiles,
-                    starterCode: exerciseBStarterFiles["main.py"],
                     solutionCode: exerciseBSolutionFiles["main.py"],
                 },
             ],
@@ -861,7 +835,6 @@ const reviewCloneTopic = {
                     title: "Fill answer should create tools/badges.py",
                     starterFiles: revealMultiFileStarterFiles,
                     solutionFiles: revealMultiFileSolutionFiles,
-                    starterCode: revealMultiFileStarterFiles["main.py"],
                     solutionCode: revealMultiFileSolutionFiles["main.py"],
                 },
             ],
@@ -875,7 +848,6 @@ const reviewCloneTopic = {
                     title: "Blank fallback exercise",
                     starterFiles: blankFallbackStarterFiles,
                     solutionFiles: blankFallbackSolutionFiles,
-                    starterCode: "",
                     solutionCode: "",
                 },
             ],
@@ -904,7 +876,6 @@ const linuxTerminalCloneTopic = {
                         starterFiles: linuxTerminalStepAStarterFiles,
                         solutionFiles: linuxTerminalStepASolutionFiles,
                     },
-                    starterCode: linuxTerminalStepAStarterFiles["README.md"],
                     solutionCode: linuxTerminalStepASolutionFiles["README.md"],
                 },
                 {
@@ -917,7 +888,6 @@ const linuxTerminalCloneTopic = {
                         starterFiles: linuxTerminalStepBStarterFiles,
                         solutionFiles: linuxTerminalStepBSolutionFiles,
                     },
-                    starterCode: linuxTerminalStepBStarterFiles["README.md"],
                     solutionCode: linuxTerminalStepBSolutionFiles["README.md"],
                 },
                 linuxTerminalCwdDefinition,
@@ -943,7 +913,6 @@ const linuxTerminalCloneTopic = {
                     title: "Create linux-start",
                     starterFiles: linuxTerminalStepAStarterFiles,
                     solutionFiles: linuxTerminalStepASolutionFiles,
-                    starterCode: linuxTerminalStepAStarterFiles["README.md"],
                     solutionCode: linuxTerminalStepASolutionFiles["README.md"],
                 },
                 {
@@ -951,7 +920,6 @@ const linuxTerminalCloneTopic = {
                     title: "Make command practice",
                     starterFiles: linuxTerminalStepBStarterFiles,
                     solutionFiles: linuxTerminalStepBSolutionFiles,
-                    starterCode: linuxTerminalStepBStarterFiles["README.md"],
                     solutionCode: linuxTerminalStepBSolutionFiles["README.md"],
                 },
             ],

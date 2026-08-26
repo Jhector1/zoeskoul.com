@@ -250,20 +250,9 @@
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q9.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -330,20 +319,9 @@
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q10.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -410,20 +388,9 @@
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q11.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -490,20 +457,9 @@
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q13.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -569,7 +525,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q12",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -611,15 +566,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -632,7 +578,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.quiz.q12.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -675,16 +620,6 @@
       "messageBase": "topics.python-v2.python-v2-1.naming-and-assigning-variables.practice.practice-update-score-from-bonus",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.practice.practice-update-score-from-bonus.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.practice.practice-update-score-from-bonus.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -697,7 +632,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.naming-and-assigning-variables.practice.practice-update-score-from-bonus.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

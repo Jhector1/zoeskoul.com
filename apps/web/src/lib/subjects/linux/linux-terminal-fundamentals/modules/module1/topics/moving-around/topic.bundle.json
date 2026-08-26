@@ -193,21 +193,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "newsletter/brief.txt",
-          "content": "Community newsletter brief\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -261,7 +246,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -321,21 +305,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "library-kit/returns/today.txt",
-          "content": "Three books returned\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -389,7 +358,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -449,21 +417,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "museum-tour/signs/labels.txt",
-          "content": "Entrance\nExit\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -517,7 +470,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",

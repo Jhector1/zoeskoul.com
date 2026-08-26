@@ -7,7 +7,7 @@ import {
 } from "./exerciseKeys";
 import { resolveCourseLanguage, resolveCourseFileSeed, resolveRuntimeDefaultDataset } from "./courseProfiles";
 import {tag} from "@zoeskoul/i18n-core";
-import {hasStarterIntentValue, isUsableStarterCode} from "./starterContent";
+import {hasStarterIntentValue} from "./starterContent";
 import { resolveManifestExercise } from "@zoeskoul/curriculum-runtime/curriculum/resolveManifestExercise";
 
 export type ReviewTargetKind = "sketch" | "exercise" | "quiz" | "card" | "project" | "text" | "video";
@@ -35,8 +35,6 @@ export type LooseManifestRecord = UnknownRecord & {
   status?: string;
   updatedAt?: number;
   code?: string;
-  starterCode?: unknown;
-  starterFiles?: unknown;
 };
 
 export type ReviewTargetEntry = {
@@ -56,9 +54,7 @@ export type ReviewTargetEntry = {
   exerciseId?: string;
   exerciseStateKey?: string;
   language?: string;
-  starterFiles?: unknown;
   solutionFiles?: unknown;
-  starterCode?: string;
   solutionCode?: string;
   starterWorkspace?: unknown;
   runtimeDefaults?: UnknownRecord | null;
@@ -164,36 +160,6 @@ function resolveReviewTargetI18nAliases<T>(
   return out as T;
 }
 
-function pickStarterCodeFromMessageBase(
-    item: unknown,
-    resolveMessage?: (key: string) => string | undefined,
-) {
-  /**
-   * Starter code may come from i18n/messageBase ONLY after it has been
-   * resolved into real code text for the active locale.
-   *
-   * Valid:
-   *   "-- Affiche tous les produits.\nSELECT * FROM products;"
-   *
-   * Invalid:
-   *   "@:quiz.some_id.starterCode"
-   *
-   * The runtime registry does not currently have a locale-aware resolver, so
-   * callers normally pass no resolver and this returns undefined. The
-   * curriculum/compiler layer should resolve localized starter code before it
-   * reaches this runtime layer.
-   */
-  const itemRecord = asRecord(item);
-  const messageBase =
-      typeof itemRecord?.messageBase === "string" && itemRecord.messageBase.trim()
-          ? itemRecord.messageBase.trim()
-          : "";
-
-  if (!messageBase || !resolveMessage) return undefined;
-
-  const resolved = resolveMessage(`${messageBase}.starterCode`);
-  return isUsableStarterCode(resolved) ? resolved : undefined;
-}
 function getCardTargetKind(card: ReviewCard): ReviewTargetKind {
   switch (card.type) {
     case "sketch":
@@ -213,12 +179,6 @@ function getCardTargetSlug(card: ReviewCard) {
   }
   return cleanSegment(card.id, "card");
 }
-
-
-
-
-
-
 
 function normalizeWorkspaceFixtureAliases(
     manifest: LooseManifestRecord | null,
@@ -251,6 +211,7 @@ function normalizeWorkspaceFixtureAliases(
         workspace.workspaceFiles ??
         manifest.workspaceFiles,
   };
+  delete (normalizedWorkspace as UnknownRecord).starterCode;
 
   return {
     ...manifest,
@@ -258,25 +219,16 @@ function normalizeWorkspaceFixtureAliases(
   };
 }
 
-function pickStarterCodeCandidate(
-    primary: LooseManifestRecord | null,
-    secondary: LooseManifestRecord | null,
-): unknown {
-  /**
-   * Keep unresolved @: starterCode aliases through manifest merging.
-   * They are localized immediately after this merge by
-   * resolveReviewTargetI18nAliases(). Dropping them here makes SQL-v2 look
-   * starter-less even though it is authored with the same shape as Python-v2.
-   */
-  if (hasStarterIntentValue(primary?.starterCode)) return primary?.starterCode;
-  if (hasStarterIntentValue(secondary?.starterCode)) return secondary?.starterCode;
-  if (primary && Object.prototype.hasOwnProperty.call(primary, "starterCode")) {
-    return primary.starterCode;
-  }
-  if (secondary && Object.prototype.hasOwnProperty.call(secondary, "starterCode")) {
-    return secondary.starterCode;
-  }
-  return undefined;
+
+
+function stripTopLevelStarterAliases(
+    record: LooseManifestRecord | null,
+): LooseManifestRecord | null {
+  if (!record) return record;
+  const normalized = { ...record };
+  delete normalized.starterCode;
+  delete normalized.starterFiles;
+  return normalized;
 }
 
 function mergeManifestParts(
@@ -294,11 +246,11 @@ function mergeManifestParts(
    * We still must normalize top-level files -> workspace.files in that case.
    */
   if (!primaryRecord) {
-    return normalizeWorkspaceFixtureAliases(secondaryRecord);
+    return stripTopLevelStarterAliases(normalizeWorkspaceFixtureAliases(secondaryRecord));
   }
 
   if (!secondaryRecord) {
-    return normalizeWorkspaceFixtureAliases(primaryRecord);
+    return stripTopLevelStarterAliases(normalizeWorkspaceFixtureAliases(primaryRecord));
   }
 
   const primaryWorkspace = asRecord(primaryRecord.workspace) ?? {};
@@ -345,7 +297,7 @@ function mergeManifestParts(
         secondaryRecord.fileFixtures,
   };
 
-  return {
+  return stripTopLevelStarterAliases({
     ...secondaryRecord,
     ...primaryRecord,
     runtime: {
@@ -357,35 +309,17 @@ function mergeManifestParts(
       ...(asRecord(secondaryRecord.recipe) ?? {}),
       ...(asRecord(primaryRecord.recipe) ?? {}),
     },
-    starterFiles: primaryRecord.starterFiles ?? secondaryRecord.starterFiles,
     solutionFiles: primaryRecord.solutionFiles ?? secondaryRecord.solutionFiles,
-    starterCode: pickStarterCodeCandidate(primaryRecord, secondaryRecord),
     solutionCode:
         typeof primaryRecord.solutionCode === "string"
             ? primaryRecord.solutionCode
             : typeof secondaryRecord.solutionCode === "string"
                 ? secondaryRecord.solutionCode
                 : undefined,
-  };
+  });
 }
 
 
-
-function pickStarterFiles(
-  item: unknown,
-  subjectSlug: string,
-  language?: string,
-  profileId?: string | null,
-  versionFamily?: string | null,
-) {
-  return resolveCourseFileSeed({
-    subjectSlug,
-    language,
-    profileId,
-    versionFamily,
-    target: item,
-  }).starterFiles;
-}
 
 function pickSolutionFiles(
   item: unknown,
@@ -403,44 +337,6 @@ function pickSolutionFiles(
   }).solutionFiles;
 }
 
-function pickStarterCode(
-    item: unknown,
-    subjectSlug: string,
-    language?: string,
-    profileId?: string | null,
-    versionFamily?: string | null,
-    resolveMessage?: (key: string) => string | undefined,
-) {
-  /**
-   * Only explicit starter sources may seed the editor.
-   *
-   * Priority:
-   * 1. raw manifest starterCode / starterFiles / workspace starter
-   * 2. localized messageBase.starterCode
-   *
-   * Never use solutionCode, recipe.solutionCode, prompt, body, code, source,
-   * content, or examples as starter code.
-   */
-  const explicit = resolveCourseFileSeed({
-    subjectSlug,
-    language,
-    profileId,
-    versionFamily,
-    target: item,
-  }).starterCode;
-
-  if (isUsableStarterCode(explicit)) {
-    return explicit;
-  }
-
-  const fromMessageBase = pickStarterCodeFromMessageBase(item, resolveMessage);
-
-  if (isUsableStarterCode(fromMessageBase)) {
-    return fromMessageBase;
-  }
-
-  return undefined;
-}
 function pickSolutionCode(
   item: unknown,
   subjectSlug: string,
@@ -710,7 +606,8 @@ export function buildReviewTargetRegistry(args: {
                 resolveMessage,
               )
             : null;
-        const cardToolManifest = localizedEmbeddedTryItToolManifest ?? localizedCardManifest;
+        const cardToolManifest =
+          localizedEmbeddedTryItToolManifest ?? localizedCardManifest;
 
         const cardRuntimeContext = buildRuntimeEntryContext({
           subjectSlug,
@@ -755,16 +652,7 @@ export function buildReviewTargetRegistry(args: {
           tryIt: embeddedTryIt,
           toolScopeKey: getCardToolScopeKey(cardKey),
           language: cardRuntimeContext.language,
-          starterFiles: pickStarterFiles(cardToolManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
           solutionFiles: pickSolutionFiles(cardToolManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
-          starterCode: pickStarterCode(
-              cardToolManifest,
-              subjectSlug,
-              cardRuntimeContext.language,
-              profileId,
-              versionFamily,
-              resolveMessage,
-          ),
           solutionCode: pickSolutionCode(cardToolManifest, subjectSlug, cardRuntimeContext.language, profileId, versionFamily),
           runtimeDefaults: topicRuntimeDefaults,
           topicRuntimeDefaults,
@@ -851,16 +739,7 @@ export function buildReviewTargetRegistry(args: {
             exerciseId: exercise.exerciseId,
             exerciseStateKey,
             language: exerciseRuntimeContext.language,
-            starterFiles: pickStarterFiles(localizedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
             solutionFiles: pickSolutionFiles(localizedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
-            starterCode: pickStarterCode(
-                localizedExerciseManifest,
-                subjectSlug,
-                exerciseRuntimeContext.language,
-                profileId,
-                versionFamily,
-                resolveMessage,
-            ),
             solutionCode: pickSolutionCode(localizedExerciseManifest, subjectSlug, exerciseRuntimeContext.language, profileId, versionFamily),
             runtimeDefaults: topicRuntimeDefaults,
             topicRuntimeDefaults,

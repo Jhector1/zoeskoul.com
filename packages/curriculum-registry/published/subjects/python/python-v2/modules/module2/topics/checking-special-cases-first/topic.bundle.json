@@ -248,7 +248,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -286,15 +285,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -307,7 +297,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-before-range.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -343,7 +332,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -381,15 +369,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -402,7 +381,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-perfect-before-pass.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -438,7 +416,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -471,15 +448,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -492,7 +460,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-empty-yes-other.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -528,7 +495,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -561,15 +527,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -582,7 +539,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-invalid-code-first.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -618,7 +574,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -656,15 +611,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -677,7 +623,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.quiz.code-zero-before-small.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -714,16 +659,6 @@
       "messageBase": "topics.python-v2.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -736,7 +671,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.checking-special-cases-first.practice.practice-missing-score-first.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

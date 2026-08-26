@@ -1668,30 +1668,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.finalLab.steps.almost_balanced_bst",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.finalLab.steps.almost_balanced_bst.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.finalLab.steps.almost_balanced_bst.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "structures/bst.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.finalLab.steps.almost_balanced_bst.starterFiles.structures_bst_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/bst.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.finalLab.steps.almost_balanced_bst.starterFiles.structures_bst_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -1718,7 +1694,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.build-and-rebalance-bsts.finalLab.steps.almost_balanced_bst.starterCode",
         "starterFiles": [
           {
             "path": "main.c",

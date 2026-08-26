@@ -156,6 +156,20 @@
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-find-missing-email-active-customers": {
+              "title": "Practice: Find Active Customers with Missing Email",
+              "prompt": "Return id, full_name, and status for active customers whose email is NULL.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies NULL and Combined Filters in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'active'\n  AND email IS NULL;"
+            }
           }
         }
       }

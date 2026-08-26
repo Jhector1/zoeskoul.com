@@ -220,7 +220,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -251,15 +250,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -272,7 +262,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-print-one-line.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -308,7 +297,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -339,15 +327,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -360,7 +339,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -396,7 +374,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -427,15 +404,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -448,7 +416,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.print-comments-and-errors.quiz.ci-fix-missing-paren.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

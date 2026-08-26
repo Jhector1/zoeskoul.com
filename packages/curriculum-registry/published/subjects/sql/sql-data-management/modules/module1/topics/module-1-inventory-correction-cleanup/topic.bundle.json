@@ -124,17 +124,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterCode",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -165,7 +154,6 @@
         "openTabs": [
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.practice.practice-preview-audit-targets.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -220,25 +208,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch1",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch1.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch1.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -278,7 +247,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -361,25 +329,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch2",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch2.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch2.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -419,7 +368,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch2.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -502,25 +450,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch3",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch3.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch3.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch3.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -560,7 +489,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch3.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -643,25 +571,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch4",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch4.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch4.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch4.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -701,7 +610,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch4.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -784,25 +692,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterFiles.query_sql.content",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": true
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -842,7 +731,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-1-controlled-updates-deletes.module-1-inventory-correction-cleanup.moduleProject.steps.try_module_1_inventory_correction_cleanup_sketch5.starterFiles.query_sql.content",
         "starterFiles": [
           {
             "path": "operations.sql",

@@ -181,7 +181,6 @@ export async function flushReviewToolsBeforeSubmit(
 
     const liveTerminalEvidence =
         (boundId ? win.__zoeGetTerminalEvidenceBeforeSubmit?.[boundId]?.() : null) ??
-        win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.() ??
         null;
     patchTerminalEvidenceForSubmit({
       boundId,
@@ -214,9 +213,7 @@ export async function flushReviewToolsBeforeSubmit(
     const win = getReviewSubmitBridgeHost();
     if (win) {
       const liveTerminalEvidence =
-          win.__zoeGetTerminalEvidenceBeforeSubmit?.[boundId]?.() ??
-          win.__zoeGetAnyTerminalEvidenceBeforeSubmit?.() ??
-          null;
+          win.__zoeGetTerminalEvidenceBeforeSubmit?.[boundId]?.() ?? null;
       patchTerminalEvidenceForSubmit({
         boundId,
         terminalEvidence: liveTerminalEvidence,
@@ -523,25 +520,27 @@ function canonicalizeCodeInputExerciseStarterContract(
     manifest: exercise,
     workspaceRequested: true,
   });
-  const starterCode =
-      deriveEntryCode(manifest.manifestWorkspace) ||
-      manifest.starterCode ||
-      "";
+  const starterFiles = firstUsableStarterFiles(
+      workspaceRecord.starterFiles,
+  );
 
-  return {
+  const canonical = {
     ...exAny,
     language,
-    starterCode,
-    starterFiles: manifest.starterFiles,
     workspace: {
       ...workspaceRecord,
       language,
       entryFilePath: manifest.entryFile,
       entryFile: manifest.entryFile,
-      starterCode,
-      starterFiles: manifest.starterFiles,
+      starterFiles,
     },
-  } as Exercise;
+  };
+
+  delete canonical.starterCode;
+  delete canonical.starterFiles;
+  delete canonical.workspace.starterCode;
+
+  return canonical as Exercise;
 }
 
 function buildWorkspaceFallbackFromProjectStep(step: unknown) {
@@ -552,13 +551,7 @@ function buildWorkspaceFallbackFromProjectStep(step: unknown) {
   const workspaceRecipe = isRecord(rawWorkspace?.recipe) ? rawWorkspace.recipe : null;
 
   const starterFiles =
-      step.starterFiles ??
-      rawWorkspace?.starterFiles ??
-      rawWorkspace?.files ??
-      step.files ??
-      step.initialFiles ??
-      step.workspaceFiles ??
-      null;
+      rawWorkspace?.starterFiles ?? null;
 
   const language = normalizeWorkspaceLanguage(
       firstNonBlankString(
@@ -577,14 +570,7 @@ function buildWorkspaceFallbackFromProjectStep(step: unknown) {
           rawWorkspace?.mainFilePath,
       ) || pickEntryFileFromFiles(starterFiles, defaultEntryFile);
 
-  const starterCode =
-      firstUsableStarterString(
-          step.starterCode,
-          rawWorkspace?.starterCode,
-          fileContentFromFiles(starterFiles, entryFile),
-      );
-
-  if (!starterCode && !starterFiles && !rawWorkspace) {
+  if (!starterFiles && !rawWorkspace) {
     return null;
   }
 
@@ -592,7 +578,6 @@ function buildWorkspaceFallbackFromProjectStep(step: unknown) {
     language,
     entryFile,
     entryFilePath: entryFile,
-    starterCode,
     starterFiles,
     solutionCode: firstNonBlankString(
         step.solutionCode,
@@ -690,8 +675,6 @@ function mergeProjectStepFallbackExercise(
     title: firstNonBlankString(projectStepManifest.title) || "Project step",
     prompt: firstNonBlankString(projectStepManifest.prompt),
     language: fallbackWorkspace.language,
-    starterCode: fallbackWorkspace.starterCode,
-    starterFiles: fallbackWorkspace.starterFiles,
     workspace: fallbackWorkspace,
     runtime: fallbackWorkspace.runtime,
     recipe: fallbackWorkspace.recipe,
@@ -725,21 +708,8 @@ function mergeProjectStepFallbackExercise(
   const exAny = exercise as any;
   const exWorkspace = isRecord(exAny.workspace) ? exAny.workspace : null;
 
-  const mergedStarterCode = firstUsableStarterString(
-      exAny.starterCode,
-      exWorkspace?.starterCode,
-      fallbackExercise.starterCode,
-  );
-
-  const mergedStarterFiles = firstUsableStarterFiles(
-      exAny.starterFiles,
-      exWorkspace?.starterFiles,
-      fallbackExercise.starterFiles,
-  );
-
   const mergedWorkspaceStarterFiles = firstUsableStarterFiles(
       exWorkspace?.starterFiles,
-      exAny.starterFiles,
       fallbackWorkspace.starterFiles,
   );
 
@@ -765,12 +735,6 @@ function mergeProjectStepFallbackExercise(
         fallbackWorkspace.entryFile,
     ),
 
-    starterCode: firstUsableStarterString(
-        exWorkspace?.starterCode,
-        exAny.starterCode,
-        fallbackWorkspace.starterCode,
-    ),
-
     starterFiles: mergedWorkspaceStarterFiles,
   };
 
@@ -786,8 +750,6 @@ function mergeProjectStepFallbackExercise(
     prompt: firstNonBlankString(exAny.prompt, fallbackExercise.prompt),
     language: firstNonBlankString(exAny.language, fallbackExercise.language),
 
-    starterCode: mergedStarterCode,
-    starterFiles: mergedStarterFiles,
     workspace: mergedWorkspace,
     ideConfig: mergeLearningIdeConfigs(
         firstRecord(exAny.ideConfig),
@@ -873,13 +835,7 @@ function buildProjectStepFallbackPracticeItem(args: {
       workspaceRecord.entryFile,
       workspaceRecord.mainFile,
       workspaceRecord.mainFilePath,
-      pickEntryFileFromFiles(exAny.starterFiles ?? workspaceRecord.starterFiles, defaultEntryFile),
-  );
-
-  const starterCode = firstUsableStarterString(
-      exAny.starterCode,
-      workspaceRecord.starterCode,
-      fileContentFromFiles(exAny.starterFiles ?? workspaceRecord.starterFiles, entryFile),
+      pickEntryFileFromFiles(workspaceRecord.starterFiles, defaultEntryFile),
   );
 
   const starterWorkspace =
@@ -893,7 +849,7 @@ function buildProjectStepFallbackPracticeItem(args: {
 
   const entryCode =
       deriveEntryCode(starterWorkspace) ||
-      starterCode ||
+      fileContentFromFiles(workspaceRecord.starterFiles, entryFile) ||
       "";
 
   const id = firstNonBlankString(
@@ -1275,14 +1231,9 @@ export default function QuizPracticeCard(props: {
       hasServerResolvedPracticeForToolBinding || hasLocalProjectStepFallbackForToolBinding,
   );
   const practiceItemReady = Boolean(livePracticeItem);
-  const practiceStarterCode = String(
-      (livePracticeManifest as any)?.starterCode ??
-      (livePracticeItem as any)?.starterCode ??
-      "",
-  );
   const practiceStarterFilesKey = JSON.stringify(
-      (livePracticeManifest as any)?.starterFiles ??
-      (livePracticeItem as any)?.starterFiles ??
+      (getWorkspaceFromAnyState(livePracticeManifest) as any)?.starterFiles ??
+      (getWorkspaceFromAnyState(livePracticeItem) as any)?.starterFiles ??
       null,
   );
   const practiceWorkspaceKey = workspaceStableKey(
@@ -1325,7 +1276,6 @@ export default function QuizPracticeCard(props: {
       practiceExerciseSqlDatasetId,
       practiceExerciseHasSqlSchema ? "sql-schema" : "",
       practiceExerciseHasSqlSeed ? "sql-seed" : "",
-      practiceStarterCode,
       practiceStarterFilesKey,
       practiceWorkspaceKey,
       practiceIdeConfigKey,
@@ -1366,7 +1316,6 @@ export default function QuizPracticeCard(props: {
               : null,
           manifestLanguage,
           manifestStarterWorkspace,
-          manifestStarterCode: practiceStarterCode,
           manifestIdeConfig:
             ((livePracticeManifest as any)?.ideConfig ??
               (livePracticeItem as any)?.ideConfig ??
@@ -1412,7 +1361,6 @@ export default function QuizPracticeCard(props: {
     practiceExerciseHasSqlSeed,
     practiceResolvedForToolBinding,
     practiceItemReady,
-    practiceStarterCode,
     practiceStarterFilesKey,
     practiceWorkspaceKey,
     practiceIdeConfigKey,

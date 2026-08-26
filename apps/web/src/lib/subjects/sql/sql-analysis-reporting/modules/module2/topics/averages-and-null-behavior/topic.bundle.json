@@ -209,7 +209,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -226,7 +225,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -271,7 +269,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -288,7 +285,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.averages-and-null-behavior.tryIt.try_averages_and_null_behavior_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

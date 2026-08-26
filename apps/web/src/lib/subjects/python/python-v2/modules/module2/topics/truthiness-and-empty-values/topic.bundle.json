@@ -254,7 +254,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -296,15 +295,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -317,7 +307,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -359,7 +348,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -406,15 +394,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -427,7 +406,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -469,7 +447,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
@@ -500,15 +477,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -521,7 +489,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -557,7 +524,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -604,15 +570,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -625,7 +582,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -667,7 +623,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -714,15 +669,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -735,7 +681,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

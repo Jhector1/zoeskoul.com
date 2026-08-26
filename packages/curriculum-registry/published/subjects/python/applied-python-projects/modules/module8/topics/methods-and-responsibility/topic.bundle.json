@@ -107,23 +107,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterFiles.models_car_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -143,7 +126,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -313,23 +295,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterFiles.models_car_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -349,7 +314,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -521,23 +485,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterFiles.models_account_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -557,7 +504,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -671,23 +617,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterFiles.models_account_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -707,7 +636,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -859,16 +787,6 @@
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.practice-cart-total-method",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.practice-cart-total-method.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.practice-cart-total-method.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -881,7 +799,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.practice-cart-total-method.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

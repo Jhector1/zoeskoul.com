@@ -119,7 +119,6 @@ function topicAllowsExplicitPythonEntryFile(args: {
 
     const knownWorkspacePaths = new Set([
         ...collectStarterFilePaths(args.exercise.workspace?.starterFiles),
-        ...collectStarterFilePaths(args.exercise.starterFiles),
         ...collectStarterFilePaths(args.exercise.solutionFiles),
     ]);
 
@@ -473,7 +472,6 @@ export function buildCurriculumQualityReport(args: {
                 exercise.workspace?.mainFilePath,
                 ...(exercise.workspace?.openTabs ?? []),
                 flattenStarterFileText(exercise.workspace?.starterFiles),
-                flattenStarterFileText(exercise.starterFiles),
             ]
                 .filter(Boolean)
                 .join("\n");

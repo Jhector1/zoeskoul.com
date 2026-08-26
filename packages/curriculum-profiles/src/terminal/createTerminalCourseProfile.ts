@@ -1,6 +1,7 @@
 import {
     type HiddenShellCheck,
     type ManifestCodeInput,
+    type ManifestCodeInputCompilerInput,
     type ManifestStarterFile,
     type ManifestWorkspaceExpectations,
     type ProgrammingCodeInputStarterFileDraft,
@@ -384,7 +385,6 @@ function buildTerminalCodeInputCapability(
                 workspace: {
                     language: "bash",
                     entryFilePath: authoredEntryFilePath,
-                    starterCode: starterCodeTag,
                     starterFiles: normalizedStarterFiles,
                     ...(workspaceExpectations
                         ? { workspaceExpectations }
@@ -396,7 +396,7 @@ function buildTerminalCodeInputCapability(
                     mode,
                     ...(instructions ? { instructions } : {}),
                 },
-            } satisfies ManifestCodeInput;
+            } satisfies ManifestCodeInputCompilerInput;
         },
     };
 }

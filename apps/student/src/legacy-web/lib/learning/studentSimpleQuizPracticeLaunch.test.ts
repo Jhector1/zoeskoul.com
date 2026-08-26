@@ -268,7 +268,7 @@ describe("student embedded Try It practice launch", () => {
           { path: "helper.py", content: "" },
         ],
       }),
-    ).toBe(false);
+    ).toBe(true);
     const companionEligible = {
       ...eligible,
       starterFiles: [

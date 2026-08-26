@@ -188,16 +188,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -210,7 +200,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -276,16 +265,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -298,7 +277,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -359,16 +337,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -381,7 +349,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -447,20 +414,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -541,20 +497,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -635,20 +580,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

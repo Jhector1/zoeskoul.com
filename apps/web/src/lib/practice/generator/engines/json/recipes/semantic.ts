@@ -1,7 +1,6 @@
 import {
     cleanRuntimeCode,
-    makeCodeInputOut,
-    starterCodeForGeneratedExercise
+    makeCodeInputOut
 } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
 import { buildTerminalExpectedExample } from "@zoeskoul/curriculum-runtime/expected-example";
@@ -67,7 +66,6 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         checks: semanticChecks,
         availableFiles:
             solutionFiles ??
-            (def as any).starterFiles ??
             (def.workspace as any)?.starterFiles,
         exerciseId: String(def.id ?? args.id),
     });
@@ -101,12 +99,9 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         title: resolved.title,
         prompt: resolved.prompt,
         language: def.language ?? def.recipe.language ?? "python",
-      starterCode: starterCodeForGeneratedExercise(
-    def.starterCode,
-    resolved.starterCode,
-),
+
         workspace: def.workspace,
-        starterFiles: def.starterFiles,
+        starterFiles: def.workspace?.starterFiles,
         files: (def as any).files ?? def.workspace?.files,
         initialFiles: (def as any).initialFiles ?? def.workspace?.initialFiles,
         workspaceFiles: (def as any).workspaceFiles ?? def.workspace?.workspaceFiles,

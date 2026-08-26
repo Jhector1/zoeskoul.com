@@ -39128,6 +39128,32 @@ const messages: Record<string, any> = {
               "title": "Run a different one-row query",
               "prompt": "Return the text `Practice ready` in a one-row result with the column heading `check_in`. Run the statement, then verify the Results table shows that heading and value."
             }
+          },
+          "practice": {
+            "practice-run-student-columns": {
+              "title": "Practice: Run a Student Query",
+              "prompt": "Run a query that returns `id` and `name` from the students table. This is a workspace check that the query editor and Results tab are working.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies First SQL Environment in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, name\nFROM students;"
+            },
+            "practice-run-student-city-query": {
+              "title": "Practice: Inspect Student Names and Cities",
+              "prompt": "Run a query that returns `name` and `city` from the students table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies First SQL Environment in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, city\nFROM students;"
+            }
           }
         },
         "module-0-student-roster-project": {
@@ -39262,6 +39288,44 @@ const messages: Record<string, any> = {
                 "c": "A saved password",
                 "d": "A programming command"
               }
+            }
+          },
+          "practice": {
+            "practice-ask-for-student-names": {
+              "title": "Practice: Ask the Database for Student Names",
+              "prompt": "Use SQL to ask the students table for each student name.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies SQL, Databases, and Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name\nFROM students;"
+            },
+            "practice-ask-for-student-grades": {
+              "title": "Practice: Ask for Student Grades",
+              "prompt": "Return each student name and grade from the students table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies SQL, Databases, and Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, grade\nFROM students;"
+            },
+            "practice-inspect-student-record-columns": {
+              "title": "Practice: Inspect a Student Record",
+              "prompt": "Return id, name, grade, and city from the students table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies SQL, Databases, and Tables in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, name, grade, city\nFROM students;"
             }
           }
         }
@@ -39417,6 +39481,20 @@ const messages: Record<string, any> = {
                 "hint_1": "Check the comma between selected columns and make sure FROM appears before the table name.",
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
+            }
+          },
+          "practice": {
+            "practice-repair-missing-from": {
+              "title": "Practice: Repair a Missing FROM Clause",
+              "prompt": "Write the valid query that returns `name` and `price` from the products table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Reading and Fixing SELECT Queries in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price\nFROM products;"
             }
           }
         },
@@ -39641,6 +39719,20 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-select-name-price-stock": {
+              "title": "Practice: Select Three Product Columns",
+              "prompt": "Return product `name`, `price`, and `stock`, in that order, from the products table.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Selecting Data with SELECT and FROM in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price, stock\nFROM products;"
+            }
           }
         }
       },
@@ -39797,6 +39889,20 @@ const messages: Record<string, any> = {
                 "hint_1": "Write one category condition and one stock condition, then connect them with AND.",
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
+            }
+          },
+          "practice": {
+            "practice-home-products-in-stock": {
+              "title": "Practice: Combine Category and Stock Conditions",
+              "prompt": "Return name, category, and stock for products in the `Home` category with stock of at least 10.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Combining Conditions in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Home'\n  AND stock >= 10;"
             }
           }
         },
@@ -40203,6 +40309,20 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
+          },
+          "practice": {
+            "practice-cheapest-two-products": {
+              "title": "Practice: Find the Two Cheapest Products",
+              "prompt": "Return name and price for the two cheapest products. Sort by price ascending, then name ascending, and limit the result to 2 rows.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Ranked Results with LIMIT in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC, name ASC\nLIMIT 2;"
+            }
           }
         },
         "module-3-sales-leaderboard-project": {
@@ -40436,6 +40556,20 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
+          },
+          "practice": {
+            "practice-sort-stock-then-name": {
+              "title": "Practice: Sort by Stock Then Name",
+              "prompt": "Return name and stock from products. Sort stock from highest to lowest, then name alphabetically for ties.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies Sorting with ORDER BY in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;"
+            }
           }
         }
       },
@@ -40598,6 +40732,20 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-active-inactive-status-list": {
+              "title": "Practice: Match a Status List",
+              "prompt": "Return id, full_name, and status for customers whose status is either `active` or `inactive`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies IN and BETWEEN in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'inactive');"
+            }
           }
         },
         "intro_to_like": {
@@ -40739,6 +40887,32 @@ const messages: Record<string, any> = {
                 "hint_1": "For a prefix match, place the fixed starting text before `%`.",
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
+            }
+          },
+          "practice": {
+            "practice-like-name-ending-a": {
+              "title": "Practice: Match Names Ending in a",
+              "prompt": "Return id and full_name for customers whose full name ends with the letter `a`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies LIKE and Wildcards in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a';"
+            },
+            "practice-like-city-starting-s": {
+              "title": "Practice: Match Cities Starting with S",
+              "prompt": "Return full_name and city for customers whose city starts with `S`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies LIKE and Wildcards in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city LIKE 'S%';"
             }
           }
         },
@@ -40969,6 +41143,20 @@ const messages: Record<string, any> = {
                 "hint_1": "Use the dedicated missing-value check on the email column.",
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
+            }
+          },
+          "practice": {
+            "practice-find-missing-email-active-customers": {
+              "title": "Practice: Find Active Customers with Missing Email",
+              "prompt": "Return id, full_name, and status for active customers whose email is NULL.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies NULL and Combined Filters in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'active'\n  AND email IS NULL;"
             }
           }
         }

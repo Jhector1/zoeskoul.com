@@ -111,9 +111,7 @@ export function isEmptyPracticeAnswer(
                 (Array.isArray(terminalEvidence.commands) &&
                     terminalEvidence.commands.some((entry: unknown) => String(entry ?? "").trim().length > 0)) ||
                 (typeof terminalEvidence.outputText === "string" &&
-                    terminalEvidence.outputText.trim().length > 0) ||
-                (typeof terminalEvidence.cwd === "string" &&
-                    terminalEvidence.cwd.trim().length > 0)
+                    terminalEvidence.outputText.trim().length > 0)
             );
 
         return !((code && String(code).trim().length > 0) || hasTerminalEvidence);
@@ -207,9 +205,11 @@ export function applyAnswerPayloadToItem(item: QItem, payload: any) {
                     language: lang ?? "python",
                     manifest: {
                         ...((item as any).exercise ?? {}),
-                        entryFile: payload.entry,
-                        starterCode: code,
-                        starterFiles: submittedFiles,
+                        workspace: {
+                            ...((item as any).exercise?.workspace ?? {}),
+                            entryFilePath: payload.entry,
+                            starterFiles: submittedFiles,
+                        },
                     },
                 });
                 (item as any).workspace = workspace;

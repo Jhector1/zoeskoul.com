@@ -155,7 +155,16 @@
         ],
         "solutionCode": "print('Stay curious.')"
       },
-      "starterCode": "print('')"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "print('')",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

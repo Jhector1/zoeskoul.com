@@ -107,30 +107,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "tests/check_book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterFiles.tests_check_book_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "tests/check_book.py",
@@ -157,7 +133,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "tests/check_book.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "tests/check_book.py",
@@ -313,44 +288,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "tests/check_catalog_report.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.tests_check_catalog_report_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/game.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.models_game_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/catalog_report.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.services_catalog_report_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "tests/check_catalog_report.py",
@@ -391,7 +328,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "tests/check_catalog_report.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "tests/check_catalog_report.py",
@@ -540,16 +476,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -562,7 +488,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -608,16 +533,6 @@
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -630,7 +545,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-inherited-method.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -688,16 +602,6 @@
       "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -710,7 +614,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.practice-test-polymorphic-sounds.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

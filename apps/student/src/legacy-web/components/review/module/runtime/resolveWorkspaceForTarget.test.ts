@@ -89,17 +89,17 @@ function workspaceFromResolved(
     targetKind: "exercise",
     language: "python",
     manifest: {
-      starterCode: "# starter\n",
-      workspace: {
-        entryFilePath: "main.py",
-        starterFiles: [
-          {
-            path: "main.py",
-            content: "# starter\n",
-            isEntry: true,
-          },
-        ],
-      },
+        workspace: {
+            entryFilePath: "main.py",
+            starterFiles: [
+                {
+                    path: "main.py",
+                    content: "# starter\n",
+                    isEntry: true
+                }
+            ],
+            starterCode: "# starter\n"
+        }
     },
     workspaceRequested: true,
     savedCandidates: [
@@ -121,23 +121,23 @@ describe("resolveWorkspaceForTarget", () => {
       targetKind: "exercise",
       language: "python",
       manifest: {
-        starterCode: "# Write your answer below\n",
-        workspace: {
-          entryFilePath: "main.py",
-          starterFiles: [
-            {
-              path: "main.py",
-              content: "# Write your answer below\n",
-              isEntry: true,
-            },
-          ],
-          files: [
-            {
-              path: "data.txt",
-              content: "Hello fixture",
-            },
-          ],
-        },
+          workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [
+                  {
+                      path: "main.py",
+                      content: "# Write your answer below\n",
+                      isEntry: true
+                  }
+              ],
+              files: [
+                  {
+                      path: "data.txt",
+                      content: "Hello fixture"
+                  }
+              ],
+              starterCode: "# Write your answer below\n"
+          }
       },
       workspaceRequested: true,
     });
@@ -283,23 +283,23 @@ describe("resolveWorkspaceForTarget", () => {
       targetKind: "exercise",
       language: "python",
       manifest: {
-        starterCode: "# starter\n",
-        workspace: {
-          entryFilePath: "main.py",
-          starterFiles: [
-            {
-              path: "main.py",
-              content: "# starter\n",
-              isEntry: true,
-            },
-          ],
-          files: [
-            {
-              path: "data.txt",
-              content: "fixture",
-            },
-          ],
-        },
+          workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [
+                  {
+                      path: "main.py",
+                      content: "# starter\n",
+                      isEntry: true
+                  }
+              ],
+              files: [
+                  {
+                      path: "data.txt",
+                      content: "fixture"
+                  }
+              ],
+              starterCode: "# starter\n"
+          }
       },
       workspaceRequested: true,
       savedCandidates: [
@@ -425,12 +425,12 @@ describe("resolveWorkspaceForTarget", () => {
       targetKind: "exercise",
       language: "python",
       manifest: {
-        starterCode: "# starter\n",
-        solutionFiles: [{ path: "hidden.py", content: "print('solution')" }],
-        workspace: {
-          entryFilePath: "main.py",
-          starterFiles: [{ path: "main.py", content: "# starter\n", isEntry: true }],
-        },
+          solutionFiles: [{ path: "hidden.py", content: "print('solution')" }],
+          workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [{ path: "main.py", content: "# starter\n", isEntry: true }],
+              starterCode: "# starter\n"
+          }
       },
       workspaceRequested: true,
     });
@@ -457,11 +457,11 @@ describe("resolveWorkspaceForTarget", () => {
       targetKind: "card",
       language: "python",
       manifest: {
-        starterCode: "print('demo')\n",
-        workspace: {
-          entryFilePath: "main.py",
-          starterFiles: [{ path: "main.py", content: "print('demo')\n", isEntry: true }],
-        },
+          workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [{ path: "main.py", content: "print('demo')\n", isEntry: true }],
+              starterCode: "print('demo')\n"
+          }
       },
       workspaceRequested: true,
     });
@@ -478,11 +478,11 @@ describe("resolveWorkspaceForTarget", () => {
       targetKind: "exercise",
       language: "python",
       manifest: {
-        starterCode: "# starter B\n",
-        workspace: {
-          entryFilePath: "main.py",
-          starterFiles: [{ path: "main.py", content: "# starter B\n", isEntry: true }],
-        },
+          workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [{ path: "main.py", content: "# starter B\n", isEntry: true }],
+              starterCode: "# starter B\n"
+          }
       },
       workspaceRequested: true,
       savedCandidates: [
@@ -505,12 +505,12 @@ describe("resolveWorkspaceForTarget", () => {
       targetKind: "exercise",
       language: "python",
       manifest: {
-        starterCode: "# starter B\n",
-        workspace: {
-          entryFilePath: "main.py",
-          starterFiles: [{ path: "main.py", content: "# starter B\n", isEntry: true }],
-          files: [{ path: "data.txt", content: "fixture B" }],
-        },
+          workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [{ path: "main.py", content: "# starter B\n", isEntry: true }],
+              files: [{ path: "data.txt", content: "fixture B" }],
+              starterCode: "# starter B\n"
+          }
       },
       workspaceRequested: true,
       localDraft: {
@@ -551,7 +551,9 @@ describe("resolveWorkspaceForExerciseTarget", () => {
     const resolved = resolveWorkspaceForExerciseTarget({
       targetKey: "exercise:legacy-code",
       language: "python",
-      manifest: { starterCode: "print('starter loses')\n" },
+      manifest: { workspace: {
+              starterCode: "print('starter loses')\n"
+          } },
       savedCandidates: [{ code: "print('legacy code wins')\n" }],
     });
 
@@ -574,11 +576,13 @@ describe("resolveWorkspaceForExerciseTarget", () => {
     expect(fileContent(resolved.workspace, "main.py")).toBe("print('starter')\n");
   });
 
-  it("starterCode becomes main.py when no starterFiles", () => {
+  it("uses the canonical entry starter file", () => {
     const resolved = resolveWorkspaceForExerciseTarget({
       targetKey: "exercise:starter-code",
       language: "python",
-      manifest: { starterCode: "print('starter code only')\n" },
+      manifest: { workspace: {
+              starterFiles: [{ path: "main.py", content: "print('starter code only')\n", isEntry: true }],
+          } },
     });
 
     expect(resolved.entryFilePath).toBe("main.py");
@@ -681,17 +685,17 @@ describe("resolveWorkspaceForExerciseTarget", () => {
       targetKind: "exercise",
       language: "python",
       manifest: {
-        starterCode: "# TODO: print the required sentence\n",
-        workspace: {
-          entryFilePath: "main.py",
-          starterFiles: [
-            {
-              path: "main.py",
-              content: "# TODO: print the required sentence\n",
-              isEntry: true,
-            },
-          ],
-        },
+          workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [
+                  {
+                      path: "main.py",
+                      content: "# TODO: print the required sentence\n",
+                      isEntry: true
+                  }
+              ],
+              starterCode: "# TODO: print the required sentence\n"
+          }
       },
       workspaceRequested: true,
       savedCandidates: [
@@ -738,17 +742,17 @@ describe("resolveWorkspaceForExerciseTarget", () => {
       targetKind: "exercise",
       language: "python",
       manifest: {
-        starterCode: "# TODO: print the required sentence\n",
-        workspace: {
-          entryFilePath: "main.py",
-          starterFiles: [
-            {
-              path: "main.py",
-              content: "# TODO: print the required sentence\n",
-              isEntry: true,
-            },
-          ],
-        },
+          workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [
+                  {
+                      path: "main.py",
+                      content: "# TODO: print the required sentence\n",
+                      isEntry: true
+                  }
+              ],
+              starterCode: "# TODO: print the required sentence\n"
+          }
       },
       workspaceRequested: true,
       localDraft: {
@@ -801,22 +805,22 @@ describe("resolveWorkspaceForExerciseTarget", () => {
       targetKind: "exercise",
       language: "sql",
       manifest: {
-        starterCode: query,
-        workspace: {
-          language: "sql",
-          entryFilePath: "query.sql",
-          starterFiles: [
-            {
-              path: "schema.sql",
-              content: schema,
-            },
-            {
-              path: "query.sql",
-              content: query,
-              isEntry: true,
-            },
-          ],
-        },
+          workspace: {
+              language: "sql",
+              entryFilePath: "query.sql",
+              starterFiles: [
+                  {
+                      path: "schema.sql",
+                      content: schema
+                  },
+                  {
+                      path: "query.sql",
+                      content: query,
+                      isEntry: true
+                  }
+              ],
+              starterCode: query
+          }
       },
       workspaceRequested: true,
       savedCandidates: [
@@ -876,19 +880,19 @@ describe("resolveWorkspaceForExerciseTarget", () => {
       targetKind: "exercise",
       language: "sql",
       manifest: {
-        starterCode: query,
-        workspace: {
-          language: "sql",
-          entryFilePath: "query.sql",
-          starterFiles: [
-            { path: "schema.sql", content: schema },
-            {
-              path: "query.sql",
-              content: query,
-              isEntry: true,
-            },
-          ],
-        },
+          workspace: {
+              language: "sql",
+              entryFilePath: "query.sql",
+              starterFiles: [
+                  { path: "schema.sql", content: schema },
+                  {
+                      path: "query.sql",
+                      content: query,
+                      isEntry: true
+                  }
+              ],
+              starterCode: query
+          }
       },
       workspaceRequested: true,
       localDraft: {
@@ -945,19 +949,19 @@ describe("resolveWorkspaceForExerciseTarget", () => {
       targetKind: "exercise",
       language: "sql",
       manifest: {
-        starterCode: query,
-        workspace: {
-          language: "sql",
-          entryFilePath: "query.sql",
-          starterFiles: [
-            { path: "schema.sql", content: schema },
-            {
-              path: "query.sql",
-              content: query,
-              isEntry: true,
-            },
-          ],
-        },
+          workspace: {
+              language: "sql",
+              entryFilePath: "query.sql",
+              starterFiles: [
+                  { path: "schema.sql", content: schema },
+                  {
+                      path: "query.sql",
+                      content: query,
+                      isEntry: true
+                  }
+              ],
+              starterCode: query
+          }
       },
       workspaceRequested: true,
       savedCandidates: [
@@ -1014,17 +1018,17 @@ describe("resolveWorkspaceForExerciseTarget", () => {
       targetKind: "exercise",
       language: "python",
       manifest: {
-        starterCode: "# TODO: print the required sentence\n",
-        workspace: {
-          entryFilePath: "main.py",
-          starterFiles: [
-            {
-              path: "main.py",
-              content: "# TODO: print the required sentence\n",
-              isEntry: true,
-            },
-          ],
-        },
+          workspace: {
+              entryFilePath: "main.py",
+              starterFiles: [
+                  {
+                      path: "main.py",
+                      content: "# TODO: print the required sentence\n",
+                      isEntry: true
+                  }
+              ],
+              starterCode: "# TODO: print the required sentence\n"
+          }
       },
       workspaceRequested: true,
       savedCandidates: [
@@ -1079,40 +1083,32 @@ describe("resolveWorkspaceForExerciseTarget", () => {
       targetKind: "exercise",
       language: "sql",
       manifest: {
-        language: "sql",
-        starterCode:
-          "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
-        starterFiles: [
-          {
-            path: "query.sql",
-            content:
-              "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
-            isEntry: true,
-          },
-        ],
-        workspace: {
           language: "sql",
-          entryFilePath: "query.sql",
-          starterFiles: [
-            {
-              path: "query.sql",
-              content:
-                "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
-              isEntry: true,
-            },
-          ],
-        },
+          workspace: {
+              language: "sql",
+              entryFilePath: "query.sql",
+              starterFiles: [
+                  {
+                      path: "query.sql",
+                      content: "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode",
+                      isEntry: true
+                  }
+              ],
+              starterCode: "@:topics.sql-v2.sql-v2-1.query_one_column.quiz.ci_select_name_from_products.starterCode"
+          }
       },
       entry: {
-        language: "sql",
-        starterCode: resolvedSqlStarter,
-        starterFiles: [
-          {
-            path: "query.sql",
-            content: resolvedSqlStarter,
-            isEntry: true,
-          },
-        ],
+          language: "sql",
+          starterWorkspace: {
+              starterCode: resolvedSqlStarter,
+              starterFiles: [
+                  {
+                      path: "query.sql",
+                      content: resolvedSqlStarter,
+                      isEntry: true
+                  }
+              ]
+          }
       },
       workspaceRequested: true,
     });
@@ -1149,8 +1145,10 @@ describe("resolveWorkspaceForExerciseTarget", () => {
         },
       },
       entry: {
-        language: "sql",
-        starterCode: registrySqlStarter,
+          language: "sql",
+          starterWorkspace: {
+              starterFiles: [{ path: "query.sql", content: registrySqlStarter, isEntry: true }],
+          }
       },
       workspaceRequested: true,
     });
@@ -1213,36 +1211,29 @@ describe("resolveWorkspaceForExerciseTarget", () => {
       targetKind: "exercise",
       language: "bash",
       manifest: {
-        starterCode: "# Trail Journal\n",
-        starterFiles: [
-          {
-            path: "trail-journal/README.md",
-            content: "# Trail Journal\n",
-            isEntry: true,
-          },
-        ],
-        fixtureFiles: [
-          {
-            path: ".zoeskoul/setup.sh",
-            content: "#!/usr/bin/env bash\n",
-          },
-        ],
-        workspace: {
-          entryFilePath: "trail-journal/README.md",
-          starterFiles: [
-            {
-              path: "trail-journal/README.md",
-              content: "# Trail Journal\n",
-              isEntry: true,
-            },
-          ],
           fixtureFiles: [
-            {
-              path: ".zoeskoul/setup.sh",
-              content: "#!/usr/bin/env bash\n",
-            },
+              {
+                  path: ".zoeskoul/setup.sh",
+                  content: "#!/usr/bin/env bash\n"
+              }
           ],
-        },
+          workspace: {
+              entryFilePath: "trail-journal/README.md",
+              starterFiles: [
+                  {
+                      path: "trail-journal/README.md",
+                      content: "# Trail Journal\n",
+                      isEntry: true
+                  }
+              ],
+              fixtureFiles: [
+                  {
+                      path: ".zoeskoul/setup.sh",
+                      content: "#!/usr/bin/env bash\n"
+                  }
+              ],
+              starterCode: "# Trail Journal\n"
+          }
       },
       workspaceRequested: true,
       savedCandidates: [
@@ -1354,9 +1345,15 @@ describe("createManifestWorkspaceDefinition", () => {
       workspaceRequested: true,
     });
 
-    expect(definition.starterFiles).toEqual([
-      { path: "main.py", content: "# starter\n" },
-    ]);
+    const canonicalStarterFile =
+      definition.manifestWorkspace?.nodes.find(
+        (node) => node.kind === "file" && node.name === "main.py",
+      );
+
+    expect(canonicalStarterFile).toMatchObject({
+      name: "main.py",
+      content: "# starter\n",
+    });
     expect(definition.fixtureFiles).toEqual([
       { path: "data.txt", content: "fixture" },
     ]);

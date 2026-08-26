@@ -160,6 +160,20 @@
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
+          },
+          "practice": {
+            "practice-active-inactive-status-list": {
+              "title": "Practice: Match a Status List",
+              "prompt": "Return id, full_name, and status for customers whose status is either `active` or `inactive`.",
+              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
+              "help": {
+                "concept": "This practice applies IN and BETWEEN in a new, self-contained task.",
+                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
+                "hint_2": "Run the work and compare the result shape with the expected example."
+              },
+              "starterCode": "-- Write your SQL answer below.\n",
+              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'inactive');"
+            }
           }
         }
       }

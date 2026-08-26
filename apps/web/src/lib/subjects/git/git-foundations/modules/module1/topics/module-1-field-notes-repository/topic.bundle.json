@@ -120,21 +120,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_repo_inspection",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -160,7 +145,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -280,21 +264,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_config",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -316,7 +285,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -436,21 +404,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_init",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -476,7 +429,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -596,21 +548,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_stage_files",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -636,7 +573,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -756,21 +692,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.module-1-field-notes-repository.moduleProject.steps.try_git_commit",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: unassigned\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -800,7 +721,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",

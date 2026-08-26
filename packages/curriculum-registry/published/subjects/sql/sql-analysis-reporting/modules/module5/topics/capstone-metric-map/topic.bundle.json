@@ -186,7 +186,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-metric-map.practice.practice-retained-capstone-metric-map-step1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-metric-map.practice.practice-retained-capstone-metric-map-step1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -203,7 +202,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-metric-map.practice.practice-retained-capstone-metric-map-step1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -248,7 +246,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-metric-map.practice.practice-retained-capstone-metric-map-step2",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-metric-map.practice.practice-retained-capstone-metric-map-step2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -265,7 +262,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-metric-map.practice.practice-retained-capstone-metric-map-step2.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -310,7 +306,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-metric-map.practice.practice-retained-capstone-metric-map-step3",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-metric-map.practice.practice-retained-capstone-metric-map-step3.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -327,7 +322,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-metric-map.practice.practice-retained-capstone-metric-map-step3.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

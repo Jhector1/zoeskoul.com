@@ -185,7 +185,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-report-requirements.practice.practice-retained-capstone-step1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-report-requirements.practice.practice-retained-capstone-step1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -202,7 +201,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-report-requirements.practice.practice-retained-capstone-step1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -247,7 +245,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-report-requirements.practice.practice-retained-capstone-step2",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-report-requirements.practice.practice-retained-capstone-step2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -264,7 +261,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-report-requirements.practice.practice-retained-capstone-step2.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -309,7 +305,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-report-requirements.practice.practice-retained-capstone-step3",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-report-requirements.practice.practice-retained-capstone-step3.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -326,7 +321,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.capstone-report-requirements.practice.practice-retained-capstone-step3.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

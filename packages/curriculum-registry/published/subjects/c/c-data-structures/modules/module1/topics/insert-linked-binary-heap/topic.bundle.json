@@ -1300,30 +1300,6 @@
       "weight": 1,
       "messageBase": "topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert",
       "language": "c",
-      "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterFiles.main_c.content",
-          "language": "c",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "structures/heap.c",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterFiles.structures_heap_c.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "structures/heap.h",
-          "content": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterFiles.structures_heap_h.content",
-          "language": "c",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.c",
@@ -1350,7 +1326,6 @@
       "workspace": {
         "language": "c",
         "entryFilePath": "main.c",
-        "starterCode": "@:topics.c-data-structures.c-data-structures-module-1-algorithm-design-lab.insert-linked-binary-heap.finalLab.steps.pointer_heap_insert.starterCode",
         "starterFiles": [
           {
             "path": "main.c",

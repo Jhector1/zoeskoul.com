@@ -208,25 +208,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -266,7 +247,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.tryIt.try_foreign_keys_and_references_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -350,25 +330,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -408,7 +369,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-two-foreign-key-relationships.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -492,25 +452,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-team-member-foreign-key",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-team-member-foreign-key.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-team-member-foreign-key.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-team-member-foreign-key.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -550,7 +491,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-team-member-foreign-key.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -626,25 +566,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-payment-order-foreign-key",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-payment-order-foreign-key.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-payment-order-foreign-key.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-payment-order-foreign-key.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -684,7 +605,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.foreign-keys-and-references.practice.practice-create-payment-order-foreign-key.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",

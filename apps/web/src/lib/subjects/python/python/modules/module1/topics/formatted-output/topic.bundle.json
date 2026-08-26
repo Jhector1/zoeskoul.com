@@ -160,7 +160,17 @@
         ],
         "solutionCode": "name = input()\nage = input()\nprint(f'{name} is {age} years old.')"
       },
-      "starterCode": "name = input()\nage = input()\n# Print the formatted sentence here"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input()\nage = input()\n# Print the formatted sentence here",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

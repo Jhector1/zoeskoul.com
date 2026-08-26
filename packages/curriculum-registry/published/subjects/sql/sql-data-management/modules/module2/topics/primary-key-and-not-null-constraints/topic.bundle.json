@@ -107,25 +107,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -165,7 +146,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.tryIt.try_primary_key_and_not_null_constraints_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -249,25 +229,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -307,7 +268,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-required-order-columns.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -492,25 +452,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -550,7 +491,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-author-required-columns.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -626,25 +566,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -684,7 +605,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.primary-key-and-not-null-constraints.practice.practice-ticket-required-summary.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",

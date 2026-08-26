@@ -86,7 +86,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -119,15 +118,6 @@
         ]
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -140,7 +130,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-1-rank-by-price.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -185,7 +174,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -218,15 +206,6 @@
         ]
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -239,7 +218,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-2-add-stock-tiebreaker.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -284,7 +262,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -317,15 +294,6 @@
         ]
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -338,7 +306,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.module-3-sales-leaderboard-project.quiz.mp-3-finish-leaderboard.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",

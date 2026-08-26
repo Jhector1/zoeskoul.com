@@ -109,7 +109,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -126,7 +125,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -171,7 +169,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_2",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -188,7 +185,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_2.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -233,7 +229,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_3",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_3.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -250,7 +245,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_3.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -295,7 +289,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_4",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_4.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -312,7 +305,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_4.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -357,7 +349,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_5",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_5.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -374,7 +365,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.module-0-order-value-detail-report.moduleProject.steps.project_step_5.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

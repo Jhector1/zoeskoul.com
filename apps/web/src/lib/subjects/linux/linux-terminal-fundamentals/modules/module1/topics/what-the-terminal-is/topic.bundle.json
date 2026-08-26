@@ -208,21 +208,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "welcome-desk/shift-note.txt",
-          "content": "Morning volunteer shift\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -272,7 +257,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -332,26 +316,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "supply-room/labels.txt",
-          "content": "Name tags\n",
-          "language": "bash"
-        },
-        {
-          "path": "supply-room/inventory.txt",
-          "content": "Markers\nTape\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -407,7 +371,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -483,21 +446,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "check-in/arrival-note.txt",
-          "content": "Open doors at 8:00\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -551,7 +499,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",

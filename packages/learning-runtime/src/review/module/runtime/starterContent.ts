@@ -137,6 +137,17 @@ export function starterFileBinary(
 export function unwrapStarterFilesValue(raw: unknown): unknown {
     if (!isRecord(raw)) return raw;
 
+    // This utility parses file collections and their generic transport wrappers.
+    // A published exercise/manifest is not a collection wrapper: accepting its
+    // top-level starterFiles here would recreate the retired runtime alias.
+    if (
+        typeof raw.kind === "string" ||
+        isRecord(raw.workspace) ||
+        isRecord(raw.recipe)
+    ) {
+        return undefined;
+    }
+
     return (
         raw.starterFiles ??
         raw.files ??

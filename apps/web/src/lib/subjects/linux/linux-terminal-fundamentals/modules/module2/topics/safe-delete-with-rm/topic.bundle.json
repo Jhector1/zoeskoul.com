@@ -194,26 +194,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "print-room/print-test.txt",
-          "content": "Printer alignment test\n",
-          "language": "bash"
-        },
-        {
-          "path": "print-room/event-plan.txt",
-          "content": "Keep this event plan\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -269,7 +249,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -345,26 +324,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "cleanup-desk/temp-label.txt",
-          "content": "Temporary printer label\n",
-          "language": "bash"
-        },
-        {
-          "path": "cleanup-desk/display-plan.txt",
-          "content": "Keep the display plan\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -421,7 +380,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -499,21 +457,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.starterCode",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "archive-review/maybe-archive.txt",
-          "content": "Needs coordinator review\n",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -573,7 +516,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.safe-delete-with-rm.tryIt.exercises.safe-delete-with-rm-try-it-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",

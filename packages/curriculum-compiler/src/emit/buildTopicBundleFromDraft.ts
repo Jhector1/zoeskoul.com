@@ -29,6 +29,7 @@ import {
     resolveTryItSketchIndexes,
 } from "./projectTopicEmission.js";
 import { resolveLogicalSectionSlug } from "./resolveLogicalSectionSlug.js";
+import { normalizeManifestCodeInputWorkspace } from "../normalize/normalizeManifestCodeInputWorkspace.js";
 type DraftExercise = TopicAuthoringDraft["quizDraft"][number];
 
 function optionIdsFromCount(count: number) {
@@ -594,7 +595,14 @@ export function buildTopicBundleFromDraft(args: {
         );
     });
 
-    const exercises: ManifestExercise[] = emittedExercises.map((manifestExercise, index) => {
+    const normalizedExercises: ManifestExercise[] = emittedExercises.map(
+        (manifestExercise) =>
+            manifestExercise.kind === "code_input"
+                ? normalizeManifestCodeInputWorkspace(manifestExercise)
+                : manifestExercise,
+    );
+
+    const exercises: ManifestExercise[] = normalizedExercises.map((manifestExercise, index) => {
         const authoredExercise = canonicalExercises[index];
         const tools = mergeToolPresentationPolicies(
             authoredExercise?.tools,

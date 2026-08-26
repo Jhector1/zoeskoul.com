@@ -1,5 +1,6 @@
 import type {
     ManifestCodeInput,
+    ManifestCodeInputCompilerInput,
     ManifestFileFixture,
     ManifestStarterFile,
     ProgrammingCodeInputStarterFileDraft,
@@ -163,7 +164,7 @@ export function createCompiledLanguageProfile(args: {
         showExpectedExample() {
             return true;
         },
-        buildManifest(buildArgs): ManifestCodeInput {
+        buildManifest(buildArgs): ManifestCodeInputCompilerInput {
             const messageBase = buildArgs.messageBase;
             const starterCodeTag = messageTag(messageBase, "starterCode");
             const solutionCodeTag = messageTag(messageBase, "solutionCode");
@@ -267,7 +268,6 @@ export function createCompiledLanguageProfile(args: {
                 workspace: {
                     language: args.language,
                     entryFilePath,
-                    starterCode: starterCodeTag,
                     starterFiles,
                     ...(fixtureFiles.length > 0 ? { files: fixtureFiles } : {}),
                 },

@@ -397,7 +397,16 @@
         ],
         "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nprint(a + b * c)\n"
       },
-      "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n# TODO: print a + b * c\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\nc = int(input())\n# TODO: print a + b * c\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m1_ops_mod_evenodd_sc",
@@ -422,7 +431,16 @@
         ],
         "solutionCode": "n = int(input())\nif n % 2 == 0:\n    print(\"even\")\nelse:\n    print(\"odd\")\n"
       },
-      "starterCode": "n = int(input())\n# TODO: print \"even\" or \"odd\"\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n# TODO: print \"even\" or \"odd\"\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m1_ops_checkout_code",
@@ -447,7 +465,16 @@
         ],
         "solutionCode": "subtotal = int(input())\ntaxPct = int(input())\ntax = subtotal * taxPct // 100\ntotal = subtotal + tax\nprint(f\"Tax = {tax}\")\nprint(f\"Total = {total}\")\n"
       },
-      "starterCode": "subtotal = int(input())\ntaxPct = int(input())\n# TODO\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "subtotal = int(input())\ntaxPct = int(input())\n# TODO\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

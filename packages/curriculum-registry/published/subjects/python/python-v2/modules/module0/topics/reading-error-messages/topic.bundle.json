@@ -224,7 +224,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -247,15 +246,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -268,7 +258,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -304,7 +293,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-nameerror-clue",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-nameerror-clue.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -327,15 +315,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-nameerror-clue.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -348,7 +327,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-nameerror-clue.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -384,7 +362,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -407,15 +384,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -428,7 +396,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -464,7 +431,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -500,15 +466,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -521,7 +478,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -557,7 +513,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -593,15 +548,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -614,7 +560,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -650,7 +595,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -686,15 +630,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -707,7 +642,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

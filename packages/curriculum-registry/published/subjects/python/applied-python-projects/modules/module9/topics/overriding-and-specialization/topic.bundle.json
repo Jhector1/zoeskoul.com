@@ -82,30 +82,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -132,7 +108,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -334,37 +309,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.models_book_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterFiles.models_movie_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -398,7 +342,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -551,44 +494,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.models_book_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.models_movie_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/reporting.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterFiles.services_reporting_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -629,7 +534,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-mixed-report.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -765,16 +669,6 @@
       "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -787,7 +681,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.practice-specialized-display-label.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

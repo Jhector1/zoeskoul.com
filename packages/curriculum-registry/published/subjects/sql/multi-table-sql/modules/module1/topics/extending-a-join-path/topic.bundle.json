@@ -87,7 +87,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -104,7 +103,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.tryIt.try_extending_a_join_path_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -150,7 +148,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -167,7 +164,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-path-with-enrollment-term.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -313,7 +309,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-student-path-to-department",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-student-path-to-department.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -330,7 +325,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-student-path-to-department.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -375,7 +369,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-department-path-to-students",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-department-path-to-students.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -392,7 +385,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-1-relationship-paths.extending-a-join-path.practice.practice-extend-department-path-to-students.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

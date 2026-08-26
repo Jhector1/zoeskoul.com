@@ -130,26 +130,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch0",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/meeting-times.txt",
-          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -179,7 +159,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -314,31 +293,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch1",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/assignments.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/generated/report.txt",
-          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/meeting-times.txt",
-          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -360,7 +314,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -510,31 +463,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch2",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/generated/report.txt",
-          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/meeting-times.txt",
-          "content": "Volunteer meeting times\n\nOrientation: Saturday 9:30 AM\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/roles.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -560,7 +488,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -710,26 +637,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch3",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/generated/report.txt",
-          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/roles.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -759,7 +666,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -894,31 +800,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch4",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/.gitignore",
-          "content": "generated/\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/generated/report.txt",
-          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/roles.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -952,7 +833,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",
@@ -1102,31 +982,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.module-3-clean-release-snapshot.moduleProject.steps.try_module_3_sketch5",
       "language": "bash",
-      "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
-      "starterFiles": [
-        {
-          "path": "volunteer-project/README.md",
-          "content": "# Volunteer Project\n\nAssignments and meeting times.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "volunteer-project/.gitignore",
-          "content": "generated/\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/generated/report.txt",
-          "content": "Generated volunteer report\n\nPrepared automatically from assignments.\n",
-          "language": "text"
-        },
-        {
-          "path": "volunteer-project/roles.txt",
-          "content": "Volunteer assignments\n\nWelcome table: Sam\nTraining desk: Riley\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -1160,7 +1015,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "volunteer-project/README.md",
-        "starterCode": "# Volunteer Project\n\nAssignments and meeting times.\n",
         "starterFiles": [
           {
             "path": "volunteer-project/README.md",

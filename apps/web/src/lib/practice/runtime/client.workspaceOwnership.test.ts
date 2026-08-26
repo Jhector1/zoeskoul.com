@@ -110,7 +110,9 @@ describe("normalizeCurrentPracticeItem workspace ownership", () => {
     expect(normalized.workspace.nodes[0].content).toContain("learner edit survives");
 
     expect(normalized.exercise.workspace).toBe(authoredWorkspace);
-    expect(normalized.exercise.starterFiles).toBe(authoredStarterFiles);
+    expect(normalized.exercise).not.toHaveProperty("starterCode");
+    expect(normalized.exercise).not.toHaveProperty("starterFiles");
+    expect(normalized.exercise.workspace?.starterFiles).toBe(authoredStarterFiles);
 
     const resolved = resolveExerciseWorkspace({
       language: "python",
@@ -123,8 +125,33 @@ describe("normalizeCurrentPracticeItem workspace ownership", () => {
     ]);
   });
 
-  it("preserves non-user live top-level workspace contract", () => {
-    const liveWorkspace = {
+  it("keeps authored workspace separate from non-user runtime workspace", () => {
+    const resolvedCode = "print('resolved starter')\n";
+    const resolvedWorkspace = {
+      language: "python",
+      entryFilePath: "main.py",
+      starterCode: resolvedCode,
+      starterFiles: [
+        {
+          path: "main.py",
+          content: resolvedCode,
+          isEntry: true,
+        },
+      ],
+    };
+    const rawWorkspace = {
+      language: "python",
+      entryFilePath: "main.py",
+      starterCode: "@:raw.starterCode",
+      starterFiles: [
+        {
+          path: "main.py",
+          content: "@:raw.starterCode",
+          isEntry: true,
+        },
+      ],
+    };
+    const runtimeWorkspace = {
       version: 2,
       language: "python",
       entryFileId: "file:main.py",
@@ -135,47 +162,53 @@ describe("normalizeCurrentPracticeItem workspace ownership", () => {
           kind: "file",
           name: "main.py",
           parentId: null,
-          content: "print(open('data.txt').read())\n",
-          createdAt: 0,
-          updatedAt: 0,
-        },
-        {
-          id: "file:data.txt",
-          kind: "file",
-          name: "data.txt",
-          parentId: null,
-          content: "fixture line\n",
+          content: resolvedCode,
           createdAt: 0,
           updatedAt: 0,
         },
       ],
       openTabs: ["file:main.py"],
-      expanded: [],
       stdin: "",
+      expanded: [],
+      leftPct: 26,
     };
 
     const normalized = normalizeCurrentPracticeItem(
       {
-        key: "dynamic-live",
+        key: "signed-practice-key",
         exercise: {
           id: "dynamic-q1",
           kind: "code_input",
           language: "python",
         },
+        workspace: runtimeWorkspace,
+        code: resolvedCode,
+        codeLang: "python",
         workspaceOrigin: "starter",
       } as any,
       {
         id: "dynamic-q1",
         kind: "code_input",
         language: "python",
+        workspace: resolvedWorkspace,
       } as any,
       {
-        language: "python",
-        workspace: liveWorkspace,
+        workspace: rawWorkspace,
+        exercise: {
+          id: "dynamic-q1",
+          kind: "code_input",
+          language: "python",
+          workspace: rawWorkspace,
+        },
       },
     ) as any;
 
-    expect(normalized.workspace).toBe(liveWorkspace);
-    expect(normalized.exercise.workspace).toBe(liveWorkspace);
-  });
+    expect(normalized.workspace).toBe(runtimeWorkspace);
+    expect(normalized.exercise.workspace).toBe(
+      resolvedWorkspace,
+    );
+    expect(
+      normalized.exercise.workspace.starterCode,
+    ).toBe(resolvedCode);
+  })
 });

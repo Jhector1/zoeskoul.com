@@ -207,31 +207,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch0",
       "language": "bash",
-      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
-      "starterFiles": [
-        {
-          "path": "community-project/README.md",
-          "content": "# Community Project\n\nShared community activities and updates.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "community-project/.gitignore",
-          "content": "generated/\n",
-          "language": "text"
-        },
-        {
-          "path": "community-project/events.txt",
-          "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
-          "language": "text"
-        },
-        {
-          "path": "community-project/generated/summary.txt",
-          "content": "Generated summary\n\nCreated automatically from project notes.\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -247,7 +222,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
-        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
@@ -397,31 +371,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch1",
       "language": "bash",
-      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
-      "starterFiles": [
-        {
-          "path": "community-project/README.md",
-          "content": "# Community Project\n\nShared community activities and updates.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "community-project/.gitignore",
-          "content": "generated/\n",
-          "language": "text"
-        },
-        {
-          "path": "community-project/events.txt",
-          "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
-          "language": "text"
-        },
-        {
-          "path": "community-project/generated/summary.txt",
-          "content": "Generated summary\n\nCreated automatically from project notes.\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -437,7 +386,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
-        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
@@ -587,31 +535,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-3-manage-tracked-files.restore-without-rewriting-history.tryIt.try_restore_without_rewriting_history_sketch2",
       "language": "bash",
-      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
-      "starterFiles": [
-        {
-          "path": "community-project/README.md",
-          "content": "# Community Project\n\nShared community activities and updates.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "community-project/.gitignore",
-          "content": "generated/\n",
-          "language": "text"
-        },
-        {
-          "path": "community-project/events.txt",
-          "content": "Community events\n\nSaturday cleanup: midnight\n",
-          "language": "text"
-        },
-        {
-          "path": "community-project/generated/summary.txt",
-          "content": "Generated summary\n\nCreated automatically from project notes.\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -627,7 +550,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
-        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",

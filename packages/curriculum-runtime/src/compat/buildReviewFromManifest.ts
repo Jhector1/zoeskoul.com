@@ -30,8 +30,6 @@ const TRY_IT_EXERCISE_STEP_FIELDS = [
     "purpose",
     "language",
     "lang",
-    "starterCode",
-    "starterFiles",
     "workspace",
     "files",
     "initialFiles",

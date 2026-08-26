@@ -95,7 +95,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -129,15 +128,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -150,7 +140,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-contactability.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -207,7 +196,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -241,15 +229,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -262,7 +241,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-city-window.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -319,7 +297,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -353,15 +330,6 @@
         "ignoreRowOrder": false
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -374,7 +342,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.practice-capstone-ranked-outreach.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -431,7 +398,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -465,15 +431,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -486,7 +443,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-1-start-follow-up-slice.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -543,7 +499,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -577,15 +532,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -598,7 +544,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-2-keep-real-contactable-customers.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -643,7 +588,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -677,15 +621,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -698,7 +633,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-3-add-city-and-date-focus.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -750,7 +684,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -784,15 +717,6 @@
         "ignoreRowOrder": false
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -805,7 +729,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-5.module-5-customer-follow-up-capstone.quiz.cp-4-finish-capstone-report.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",

@@ -25,7 +25,6 @@ describe("makeCodeInputOut", () => {
             diff: "easy",
             title: "Future language",
             prompt: "Use a future language.",
-            starterCode: "",
             language: futureLanguage,
             expected: {
                 kind: "code_input",

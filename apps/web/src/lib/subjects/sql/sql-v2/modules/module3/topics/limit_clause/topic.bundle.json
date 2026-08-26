@@ -241,7 +241,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.limit_clause.quiz.try-limit_clause-sketch2",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.limit_clause.quiz.try-limit_clause-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -275,15 +274,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.limit_clause.quiz.try-limit_clause-sketch2.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -296,7 +286,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.limit_clause.quiz.try-limit_clause-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",

@@ -42,67 +42,77 @@ describe("Practice authored/runtime workspace ownership", () => {
     ).toBe(false);
   });
 
-  it("keeps canonical starterFiles for learner-owned state instead of stale live files", () => {
-    const canonicalStarterFiles = [
-      { path: "main.py", content: "# canonical main" },
-      {
-        path: "models/transaction.py",
-        content: "class Transaction:\n    pass\n",
-      },
-    ];
-    const staleStarterFiles = [
-      { path: "main.py", content: "# stale main only" },
-    ];
-
-    expect(
-      resolvePracticeAuthoredContractValue({
-        field: "starterFiles",
-        resolvedValue: canonicalStarterFiles,
-        currentExerciseValue: staleStarterFiles,
-        currentItemValue: staleStarterFiles,
-        learnerOwnedRuntimeState: true,
-      }),
-    ).toBe(canonicalStarterFiles);
-  });
-
-  it("keeps canonical starterCode for learner-owned state", () => {
-    expect(
-      resolvePracticeAuthoredContractValue({
-        field: "starterCode",
-        resolvedValue: "from models.transaction import Transaction\n",
-        currentExerciseValue: "print('stale')\n",
-        currentItemValue: "print('learner runtime')\n",
-        learnerOwnedRuntimeState: true,
-      }),
-    ).toBe("from models.transaction import Transaction\n");
-  });
-
-  it("still accepts top-level live workspace for non-user dynamic Practice items", () => {
-    const liveWorkspace = {
-      version: 2,
-      nodes: [
-        { kind: "file", name: "main.py" },
-        { kind: "file", name: "data.txt" },
+  it("keeps resolved authored workspace exercise-only for all runtime origins", () => {
+    const resolvedWorkspace = {
+      entryFilePath: "query.sql",
+      starterFiles: [
+        {
+          path: "query.sql",
+          content: "-- resolved starter\n",
+          isEntry: true,
+        },
       ],
     };
+    const rawWorkspace = {
+      entryFilePath: "query.sql",
+      starterFiles: [
+        {
+          path: "query.sql",
+          content: "@:raw.starterCode",
+          isEntry: true,
+        },
+      ],
+    };
+    const runtimeWorkspace = {
+      version: 2,
+      language: "sql",
+      nodes: [],
+    };
+
+    expect(
+      resolvePracticeAuthoredContractValue({
+        field: "workspace",
+        resolvedValue: resolvedWorkspace,
+        currentExerciseValue: rawWorkspace,
+        currentItemValue: runtimeWorkspace,
+        learnerOwnedRuntimeState: false,
+      }),
+    ).toBe(resolvedWorkspace);
+
+    expect(
+      resolvePracticeAuthoredContractValue({
+        field: "workspace",
+        resolvedValue: undefined,
+        currentExerciseValue: rawWorkspace,
+        currentItemValue: runtimeWorkspace,
+        learnerOwnedRuntimeState: false,
+      }),
+    ).toBe(rawWorkspace);
 
     expect(
       resolvePracticeAuthoredContractValue({
         field: "workspace",
         resolvedValue: undefined,
         currentExerciseValue: undefined,
-        currentItemValue: liveWorkspace,
+        currentItemValue: runtimeWorkspace,
         learnerOwnedRuntimeState: false,
       }),
-    ).toBe(liveWorkspace);
+    ).toBeUndefined();
 
     expect(
       shouldMirrorPracticeAuthoredContractFieldToItem({
         field: "workspace",
         learnerOwnedRuntimeState: false,
       }),
-    ).toBe(true);
-  });
+    ).toBe(false);
+
+    expect(
+      shouldMirrorPracticeAuthoredContractFieldToItem({
+        field: "workspace",
+        learnerOwnedRuntimeState: true,
+      }),
+    ).toBe(false);
+  })
 
   it("falls back to nested live exercise workspace only when canonical workspace is absent", () => {
     const nestedLive = {
@@ -129,11 +139,11 @@ describe("Practice authored/runtime workspace ownership", () => {
     ).toBe(nestedLive);
   });
 
-  it("preserves old live precedence for non-workspace fields", () => {
+  it("preserves old live precedence for solution fields", () => {
     const live = [{ path: "query.sql", content: "-- live\n" }];
     expect(
       resolvePracticeAuthoredContractValue({
-        field: "starterFiles",
+        field: "solutionFiles",
         resolvedValue: [{ path: "main.py", content: "# compiled\n" }],
         currentExerciseValue: undefined,
         currentItemValue: live,

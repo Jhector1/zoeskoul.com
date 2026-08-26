@@ -160,6 +160,9 @@
             "ignoreRowOrder": false
           }
         ]
+      },
+      "workspace": {
+        "language": "sql"
       }
     },
     {
@@ -200,6 +203,9 @@
             "ignoreRowOrder": false
           }
         ]
+      },
+      "workspace": {
+        "language": "sql"
       }
     },
     {
@@ -252,6 +258,9 @@
             "ignoreRowOrder": false
           }
         ]
+      },
+      "workspace": {
+        "language": "sql"
       }
     },
     {

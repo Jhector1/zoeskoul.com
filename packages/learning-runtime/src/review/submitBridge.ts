@@ -9,7 +9,6 @@ export type ReviewSubmitBridgeHost = {
   __zoeFlushTerminalBeforeSubmit?: Record<string, ReviewSubmitFlush>;
   __zoeFlushAnyTerminalBeforeSubmit?: ReviewSubmitFlush;
   __zoeGetTerminalEvidenceBeforeSubmit?: Record<string, ReviewSubmitGetter>;
-  __zoeGetAnyTerminalEvidenceBeforeSubmit?: ReviewSubmitGetter;
 };
 
 export function getReviewSubmitBridgeHost(): ReviewSubmitBridgeHost | null {

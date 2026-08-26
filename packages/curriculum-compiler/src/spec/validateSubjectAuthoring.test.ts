@@ -518,6 +518,42 @@ describe("validateSubjectAuthoring", () => {
         );
     });
 
+    it("allows draft publish targets to remain outside the canonical catalog until release", async () => {
+        const authoringRoot = await makeAuthoringFixture({
+            catalog: {
+                defaultSubjectSlug: "sql",
+                subjectSlugs: ["sql"],
+            },
+            subjectPlan: {
+                publishTarget: {
+                    liveSubjectSlug: "sql-v3",
+                    courseSlug: "sql-foundations",
+                    channel: "draft",
+                },
+                versioning: {
+                    family: "sql",
+                    version: 3,
+                    status: "draft",
+                    defaultForNewEnrollments: false,
+                    supersedes: "sql-v2",
+                    supersededBy: null,
+                },
+            },
+        });
+
+        const issues = await validateSubjectAuthoring("sql", { authoringRoot });
+        expect(issues).not.toEqual(
+            expect.arrayContaining([
+                expect.stringContaining(
+                    'catalog.subjectSlugs must include publishTarget.liveSubjectSlug "sql-v3"',
+                ),
+                expect.stringContaining(
+                    'catalog.subjectSlugs must include versioning.supersedes "sql-v2"',
+                ),
+            ]),
+        );
+    });
+
     it("fails when catalog.subjectSlugs omits the superseded SQL slug", async () => {
         const authoringRoot = await makeAuthoringFixture({
             catalog: {

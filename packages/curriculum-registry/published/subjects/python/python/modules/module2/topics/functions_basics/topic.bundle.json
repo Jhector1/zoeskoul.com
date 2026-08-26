@@ -137,7 +137,16 @@
         ],
         "solutionCode": "def total_with_tip(bill, pct):\n    tip = bill * pct // 100\n    return bill + tip\n\nbill = int(input())\npct = int(input())\ntotal = total_with_tip(bill, pct)\nprint(f\"Total = {total}\")\n"
       },
-      "starterCode": "def total_with_tip(bill, pct):\n    # TODO: compute tip using integer math\n    # TODO: return total\n    pass\n\nbill = int(input())\npct = int(input())\n# TODO: call the function and print Total = <total>"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def total_with_tip(bill, pct):\n    # TODO: compute tip using integer math\n    # TODO: return total\n    pass\n\nbill = int(input())\npct = int(input())\n# TODO: call the function and print Total = <total>",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_func_shipping_rule_code",
@@ -162,7 +171,16 @@
         ],
         "solutionCode": "def shipping_cost(total):\n    if total >= 50:\n        return 0\n    else:\n        return 7\n\ntotal = int(input())\nprint(f\"Shipping = {shipping_cost(total)}\")\n"
       },
-      "starterCode": "def shipping_cost(total):\n    # TODO: return 0 or 7\n    pass\n\ntotal = int(input())\n# TODO: print Shipping = <cost>"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def shipping_cost(total):\n    # TODO: return 0 or 7\n    pass\n\ntotal = int(input())\n# TODO: print Shipping = <cost>",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_func_sum_list_code",
@@ -187,7 +205,16 @@
         ],
         "solutionCode": "def sum_list(xs):\n    total = 0\n    for x in xs:\n        total = total + x\n    return total\n\na = int(input())\nb = int(input())\nc = int(input())\nxs = [a, b, c]\nprint(f\"sum = {sum_list(xs)}\")\n"
       },
-      "starterCode": "def sum_list(xs):\n    # TODO: loop and add\n    pass\n\na = int(input())\nb = int(input())\nc = int(input())\nxs = [a, b, c]\n# TODO: print sum = <sum_list(xs)>"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def sum_list(xs):\n    # TODO: loop and add\n    pass\n\na = int(input())\nb = int(input())\nc = int(input())\nxs = [a, b, c]\n# TODO: print sum = <sum_list(xs)>",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_func_return_vs_print_sc",

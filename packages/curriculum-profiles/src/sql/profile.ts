@@ -1,4 +1,4 @@
-import type { ManifestCodeInput, ManifestStarterFile } from "@zoeskoul/curriculum-contracts";
+import type { ManifestCodeInput, ManifestCodeInputCompilerInput, ManifestStarterFile } from "@zoeskoul/curriculum-contracts";
 import type {
     CodeInputHelpFallback,
     CodeInputProfileCapability,
@@ -186,7 +186,7 @@ const sqlCodeInputCapability: CodeInputProfileCapability = {
     getHelpFallback(args) {
         return makeSqlCodeHelpFallback(args);
     },
-    buildManifest(args): ManifestCodeInput {
+    buildManifest(args): ManifestCodeInputCompilerInput {
         const moduleRuntimeDefaults =
             args.seed.moduleRuntimeDefaults?.kind === "sql"
                 ? args.seed.moduleRuntimeDefaults
@@ -424,7 +424,6 @@ const sqlCodeInputCapability: CodeInputProfileCapability = {
                 entryFilePath,
                 entryFile: entryFilePath,
                 openTabs: fileOrder,
-                starterCode,
                 starterFiles,
             },
             recipe: {

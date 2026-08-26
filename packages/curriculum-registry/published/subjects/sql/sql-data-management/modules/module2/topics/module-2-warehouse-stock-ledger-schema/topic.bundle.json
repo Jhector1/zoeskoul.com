@@ -139,25 +139,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -197,7 +178,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step1.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -281,25 +261,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -339,7 +300,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step2.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -423,25 +383,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -481,7 +422,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step3.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -565,25 +505,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -623,7 +544,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step4.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -707,25 +627,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -765,7 +666,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step5.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -849,25 +749,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterCode",
-      "starterFiles": [
-        {
-          "path": "schema.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterFiles.schema_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -907,7 +788,6 @@
           "schema.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.module-2-warehouse-stock-ledger-schema.moduleProject.steps.ci_warehouse_schema_step6.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",

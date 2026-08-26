@@ -4,6 +4,7 @@
 
 import {
     ManifestCodeInput,
+    ManifestCodeInputCompilerInput,
     ManifestFileFixture,
     ManifestStarterFile,
     ManifestWorkspaceExpectations,
@@ -423,7 +424,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
     showExpectedExample() {
         return true;
     },
-    buildManifest(args): ManifestCodeInput {
+    buildManifest(args): ManifestCodeInputCompilerInput {
         const recipeType = pythonCodeInputCapability.defaultRecipeType(args);
         const recipeTypeValue = String(recipeType ?? "");
         const fixedLanguage =
@@ -581,7 +582,6 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             workspace: {
                 language: manifestLanguage,
                 entryFilePath: authoredEntryFilePath,
-                starterCode,
                 starterFiles,
                 ...(workspaceExpectations ? { workspaceExpectations } : {}),
                 ...(fixtureFiles.length > 0

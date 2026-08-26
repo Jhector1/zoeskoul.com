@@ -162,7 +162,16 @@
         ],
         "solutionCode": "def calculate_area(width, height):\n    return width * height\n\nwidth = int(input())\nheight = int(input())\nprint(calculate_area(width, height))"
       },
-      "starterCode": "def calculate_area(width, height):\n    # Return the area here\n    pass\n\nwidth = int(input())\nheight = int(input())\n\nprint(calculate_area(width, height))"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def calculate_area(width, height):\n    # Return the area here\n    pass\n\nwidth = int(input())\nheight = int(input())\n\nprint(calculate_area(width, height))",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

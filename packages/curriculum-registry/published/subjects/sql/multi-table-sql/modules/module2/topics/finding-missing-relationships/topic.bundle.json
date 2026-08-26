@@ -87,7 +87,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -104,7 +103,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.tryIt.try_finding_missing_relationships_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -149,7 +147,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -166,7 +163,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-students-missing-biology.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -311,7 +307,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-retained-finding-missing-relationships-sketch1",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-retained-finding-missing-relationships-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -328,7 +323,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-retained-finding-missing-relationships-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -373,7 +367,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-departments-without-courses",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-departments-without-courses.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -390,7 +383,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.finding-missing-relationships.practice.practice-find-departments-without-courses.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

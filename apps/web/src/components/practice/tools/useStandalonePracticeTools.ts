@@ -12,6 +12,10 @@ import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/
 import { resolveStablePracticeExerciseId } from "@/lib/practice/exerciseIdentity";
 import { resolveReviewExerciseSourceCoordinates } from "@zoeskoul/learning-runtime/review/module/runtime/resolveReviewExerciseSourceCoordinates";
 import { normalizeTopicProgressKey } from "@zoeskoul/learning-runtime";
+import {
+  deriveEntryCode,
+  resolveExerciseWorkspace,
+} from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
 
 export function isStandalonePracticeCodeExercise(
   exerciseKind:
@@ -202,6 +206,13 @@ export function useStandalonePracticeTools(args: {
     () => `standalone-code:${exerciseStateKey}`,
     [exerciseStateKey],
   );
+  const authoredDefaultCode = useMemo(() => {
+    if (props.exercise?.kind !== "code_input") return "";
+    return deriveEntryCode(resolveExerciseWorkspace({
+      language: (props.exercise as any).language ?? "python",
+      manifest: props.exercise,
+    })) ?? "";
+  }, [props.exercise]);
 
   const tool = useToolCodeRunnerState({
     progress: toolProgress,
@@ -215,7 +226,7 @@ export function useStandalonePracticeTools(args: {
      * runtime/progress state, never by feeding mutable current code back as a default.
      */
     defaultLang: ((props.exercise as any)?.language ?? "python") as any,
-    defaultCode: (props.exercise as any)?.starterCode ?? "",
+    defaultCode: authoredDefaultCode,
     defaultStdin: (props.exercise as any)?.starterStdin ?? "",
     rightCollapsed,
     rightW,

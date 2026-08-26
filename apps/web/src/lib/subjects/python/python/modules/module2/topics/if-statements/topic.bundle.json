@@ -163,7 +163,17 @@
         ],
         "solutionCode": "number = int(input())\nif number > 0:\n    print('Positive')\nelif number < 0:\n    print('Negative')\nelse:\n    print('Zero')"
       },
-      "starterCode": "number = int(input())\n# Add your if statements here"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "number = int(input())\n# Add your if statements here",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

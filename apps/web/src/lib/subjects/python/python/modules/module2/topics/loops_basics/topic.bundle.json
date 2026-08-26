@@ -120,7 +120,17 @@
         ],
         "solutionCode": "guess = int(input())\nwhile guess != 7:\n    guess = int(input())\nprint(\"You got it!\")\n"
       },
-      "starterCode": "# secret is 7\nguess = int(input())\n# TODO: loop until guess == 7\n# TODO: print \"You got it!\""
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# secret is 7\nguess = int(input())\n# TODO: loop until guess == 7\n# TODO: print \"You got it!\"",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_loop_keep_asking_valid_code",
@@ -140,7 +150,17 @@
         ],
         "solutionCode": "n = int(input())\nwhile n < 1 or n > 10:\n    n = int(input())\nprint(f\"OK: {n}\")\n"
       },
-      "starterCode": "n = int(input())\n# TODO: keep reading while n is not 1..10\n# TODO: when valid, print OK: <n>"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n# TODO: keep reading while n is not 1..10\n# TODO: when valid, print OK: <n>",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_loop_echo_until_quit_code",
@@ -160,7 +180,17 @@
         ],
         "solutionCode": "cmd = input().strip()\nwhile cmd != \"quit\":\n    print(f\"You typed: {cmd}\")\n    cmd = input().strip()\nprint(\"Bye!\")\n"
       },
-      "starterCode": "cmd = input().strip()\n# TODO: loop until cmd == \"quit\"\n# TODO: echo each non-quit command"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "cmd = input().strip()\n# TODO: loop until cmd == \"quit\"\n# TODO: echo each non-quit command",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_loop_while_meaning_sc",

@@ -80,7 +80,6 @@ export type Exercise = {
   embedded?: boolean;
   embeddedCodeInput?: boolean;
   ui?: unknown;
-  starterCode?: string;
   starterStdin?: string;
   terminalEvidence?: TerminalEvidence;
   [key: string]: unknown;

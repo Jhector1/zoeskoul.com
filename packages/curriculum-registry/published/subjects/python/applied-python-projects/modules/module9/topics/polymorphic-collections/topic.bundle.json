@@ -107,30 +107,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.starterFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -157,7 +133,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -249,37 +224,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/catalog_report.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterFiles.services_catalog_report_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -313,7 +257,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -462,23 +405,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/magazine.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterFiles.models_magazine_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -498,7 +424,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step4.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -570,30 +495,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book_rental.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterFiles.models_book_rental_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie_rental.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterFiles.models_movie_rental_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -620,7 +521,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -713,37 +613,6 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/book_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.models_book_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/supply_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.models_supply_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "services/alert_service.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterFiles.services_alert_service_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -777,7 +646,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.project-polymorphic-collections-step6.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

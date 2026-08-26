@@ -11,7 +11,7 @@ import type {
     SqlRuntimeSpec,
     Vec3,
 } from "@zoeskoul/practice-contracts";
-import type { WorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
+import type { ManifestWorkspaceSeed, WorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
 import type { PseudocodeMode } from "@zoeskoul/practice-checks";
 import type { GeneratedSubjectGenKey } from "@zoeskoul/curriculum-registry/runtime";
 
@@ -121,7 +121,7 @@ export type CodeInputExercise = ExerciseBase & {
     /** @deprecated Prefer codeSurface: "embedded". */
     embeddedCodeInput?: boolean;
     ui?: CodeInputUiSpec;
-    starterCode?: string;
+    workspace?: ManifestWorkspaceSeed | null;
     starterStdin?: string;
     stdinHint?: string;
     editorHeight?: number;

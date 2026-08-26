@@ -105,16 +105,6 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -127,7 +117,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -196,16 +185,6 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -223,7 +202,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-move-name-helper.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -313,21 +291,6 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "names.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterFiles.names_py.content",
-          "language": "python"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -350,7 +313,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-move-badge-helper.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -463,26 +425,6 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "names.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.names_py.content",
-          "language": "python"
-        },
-        {
-          "path": "badges.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterFiles.badges_py.content",
-          "language": "python"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -505,7 +447,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-helper-contracts.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -610,26 +551,6 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "names.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.names_py.content",
-          "language": "python"
-        },
-        {
-          "path": "badges.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterFiles.badges_py.content",
-          "language": "python"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -657,7 +578,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-add-welcome-helper.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

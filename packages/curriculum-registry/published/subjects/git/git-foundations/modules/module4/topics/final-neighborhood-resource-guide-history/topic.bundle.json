@@ -132,31 +132,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch0",
       "language": "bash",
-      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-      "starterFiles": [
-        {
-          "path": "neighborhood-guide/README.md",
-          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "neighborhood-guide/hours.txt",
-          "content": "Help desk hours: 10 AM - 4 PM\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/old-contacts.txt",
-          "content": "Old contact list\n\nRetired phone tree.\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/services.txt",
-          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -172,7 +147,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "neighborhood-guide/README.md",
-        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
         "starterFiles": [
           {
             "path": "neighborhood-guide/README.md",
@@ -322,31 +296,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch1",
       "language": "bash",
-      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-      "starterFiles": [
-        {
-          "path": "neighborhood-guide/README.md",
-          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "neighborhood-guide/hours.txt",
-          "content": "Help desk hours: 10 AM - 4 PM\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/old-contacts.txt",
-          "content": "Old contact list\n\nRetired phone tree.\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/services.txt",
-          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -362,7 +311,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "neighborhood-guide/README.md",
-        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
         "starterFiles": [
           {
             "path": "neighborhood-guide/README.md",
@@ -512,31 +460,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch2",
       "language": "bash",
-      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-      "starterFiles": [
-        {
-          "path": "neighborhood-guide/README.md",
-          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "neighborhood-guide/hours.txt",
-          "content": "Help desk hours: 10 AM - 4 PM\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/old-contacts.txt",
-          "content": "Old contact list\n\nRetired phone tree.\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/services.txt",
-          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -552,7 +475,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "neighborhood-guide/README.md",
-        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
         "starterFiles": [
           {
             "path": "neighborhood-guide/README.md",
@@ -702,31 +624,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch3",
       "language": "bash",
-      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-      "starterFiles": [
-        {
-          "path": "neighborhood-guide/README.md",
-          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "neighborhood-guide/hours.txt",
-          "content": "Help desk hours: 9 AM - 5 PM\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/old-contacts.txt",
-          "content": "Old contact list\n\nRetired phone tree.\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/services.txt",
-          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -742,7 +639,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "neighborhood-guide/README.md",
-        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
         "starterFiles": [
           {
             "path": "neighborhood-guide/README.md",
@@ -892,26 +788,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch4",
       "language": "bash",
-      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-      "starterFiles": [
-        {
-          "path": "neighborhood-guide/README.md",
-          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "neighborhood-guide/community-services.txt",
-          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/hours.txt",
-          "content": "Help desk hours: 9 AM - 5 PM\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -927,7 +803,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "neighborhood-guide/README.md",
-        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
         "starterFiles": [
           {
             "path": "neighborhood-guide/README.md",
@@ -1062,36 +937,6 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-4-final-capstone.final-neighborhood-resource-guide-history.finalCapstone.steps.try_final_neighborhood_resource_guide_history_sketch5",
       "language": "bash",
-      "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-      "starterFiles": [
-        {
-          "path": "neighborhood-guide/README.md",
-          "content": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
-          "language": "markdown",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "neighborhood-guide/.gitignore",
-          "content": "generated/\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/community-services.txt",
-          "content": "Neighborhood services\n\nWelcome desk\nFood pantry\nHealth clinic\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/generated/preview.txt",
-          "content": "Temporary neighborhood preview.\n",
-          "language": "text"
-        },
-        {
-          "path": "neighborhood-guide/hours.txt",
-          "content": "Help desk hours: 9 AM - 5 PM\n",
-          "language": "text"
-        }
-      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -1107,7 +952,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "neighborhood-guide/README.md",
-        "starterCode": "# Neighborhood Guide\n\nLocal services and opening hours.\n",
         "starterFiles": [
           {
             "path": "neighborhood-guide/README.md",

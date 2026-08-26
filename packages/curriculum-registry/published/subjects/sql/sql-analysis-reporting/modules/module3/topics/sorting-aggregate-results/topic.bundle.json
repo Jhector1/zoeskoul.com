@@ -197,7 +197,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -214,7 +213,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.tryIt.try_sorting_aggregate_results_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -259,7 +257,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-representatives-by-completed-orders",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-representatives-by-completed-orders.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -276,7 +273,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-representatives-by-completed-orders.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -321,7 +317,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-retained-sorting-aggregate-results-sketch1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-retained-sorting-aggregate-results-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -338,7 +333,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-retained-sorting-aggregate-results-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -383,7 +377,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-regions-by-units",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-regions-by-units.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -400,7 +393,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-3-grouped-summaries.sorting-aggregate-results.practice.practice-rank-regions-by-units.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

@@ -1,6 +1,7 @@
 import type {
     ExerciseKind,
     ManifestCodeInput,
+    ManifestCodeInputCompilerInput,
     ManifestRuntimeDefaults,
     PlannedModule,
     ProfileAdapter,
@@ -123,7 +124,7 @@ export type CodeInputProfileCapability = {
         exercise: ProfileCodeInputDraft;
         seed: TopicSeed;
         messageBase: string;
-    }): ManifestCodeInput;
+    }): ManifestCodeInputCompilerInput;
 };
 
 export type CourseProfile = {

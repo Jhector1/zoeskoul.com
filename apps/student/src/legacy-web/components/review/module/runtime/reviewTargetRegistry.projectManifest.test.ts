@@ -192,7 +192,6 @@ describe("buildReviewTargetRegistry project manifest binding", () => {
                         workspace: {
                           language: "sql",
                           entryFilePath: "query.sql",
-                          starterCode: `@:${starterKey}`,
                           starterFiles: [
                             {
                               path: "query.sql",
@@ -220,10 +219,12 @@ describe("buildReviewTargetRegistry project manifest binding", () => {
     );
 
     expect(entry?.language).toBe("sql");
-    expect(entry?.starterCode).toBe(sqlStarter);
-    expect((entry?.starterFiles as any[])?.[0]?.content).toBe(sqlStarter);
-    expect((entry?.toolManifest as any)?.starterCode).toBe(sqlStarter);
-    expect((entry?.toolManifest as any)?.workspace?.starterCode).toBe(sqlStarter);
+    expect(entry).not.toHaveProperty("starterCode");
+    expect(entry).not.toHaveProperty("starterFiles");
+    expect((entry?.starterWorkspace as any)?.starterFiles?.[0]?.content).toBe(sqlStarter);
+    expect(entry?.starterWorkspace).not.toHaveProperty("starterCode");
+    expect(entry?.toolManifest).not.toHaveProperty("starterCode");
+    expect((entry?.toolManifest as any)?.workspace).not.toHaveProperty("starterCode");
     expect((entry?.toolManifest as any)?.workspace?.starterFiles?.[0]?.content).toBe(sqlStarter);
   });
 

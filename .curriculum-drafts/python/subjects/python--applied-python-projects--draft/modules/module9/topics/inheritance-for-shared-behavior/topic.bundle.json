@@ -172,6 +172,13 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ]
       },

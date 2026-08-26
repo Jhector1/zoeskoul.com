@@ -1,7 +1,6 @@
 // src/lib/practice/api/validate/grade/codeInput.ts
 import {
   hasTerminalEvidence,
-  hasTerminalExpectations,
   isTerminalWorkspaceShellTaskExpectedLike,
   parseCodeExpected,
   prepareCodeExpectedForSchema,
@@ -158,7 +157,6 @@ export async function gradeCodeInput(args: {
 
   if (
       terminalWorkspaceShellTask &&
-      hasTerminalExpectations(expectedCanon) &&
       !submissionHasTerminalEvidence
   ) {
     return {
@@ -171,7 +169,7 @@ export async function gradeCodeInput(args: {
         tone: "warning",
         title: "Terminal activity missing",
         message:
-            "This Linux terminal task needs terminal command/output evidence. Run the required command in the terminal, then check again.",
+          "This terminal task needs current command/output evidence. Run a command for this exercise in the terminal, then check again.",
       },
     };
   }

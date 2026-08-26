@@ -460,12 +460,6 @@ export type ManifestWorkspaceSeed = {
   stdin?: string;
 
   /**
-   * Optional single-entry starter code. For multi-file or nested-folder
-   * exercises, prefer starterFiles and set entryFilePath explicitly.
-   */
-  starterCode?: string;
-
-  /**
    * Learner-editable starter files. Paths may include folders.
    */
   starterFiles?: ManifestStarterFiles;
@@ -492,18 +486,25 @@ export type ManifestCodeInput = ManifestBaseExercise & {
   recipe: ManifestRecipe;
   showExpectedExample?: ManifestCodeInputExpectedExample;
 
-  /**
-   * Safe learner starter code for the editor.
-   * Never use recipe.solutionCode as starter code.
-   */
-  starterCode?: string;
-
-  starterFiles?: ManifestStarterFiles;
   solutionFiles?: ManifestStarterFiles;
   sourceChecks?: unknown[];
   workspaceExpectations?: ManifestWorkspaceExpectations;
   terminalExpectations?: TerminalExpectations;
   hiddenShellCheck?: HiddenShellCheck;
+  workspace?: ManifestWorkspaceSeed | null;
+};
+
+/**
+ * Pre-publication compiler ingress. Profiles and legacy authoring may still
+ * provide scalar/top-level starter aliases here; the compiler must normalize
+ * them into `workspace.starterFiles` before producing ManifestCodeInput.
+ */
+export type ManifestCodeInputCompilerInput = Omit<
+  ManifestCodeInput,
+  "workspace"
+> & {
+  starterCode?: string;
+  starterFiles?: ManifestStarterFiles;
   workspace?: ManifestWorkspaceSeed | null;
 };
 

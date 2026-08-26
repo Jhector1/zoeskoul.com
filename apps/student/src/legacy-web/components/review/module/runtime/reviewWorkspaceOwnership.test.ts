@@ -157,7 +157,6 @@ describe("review workspace ownership guards", () => {
                 },
                 manifestLanguage: "python",
                 manifestStarterWorkspace: makeWorkspace("print('starter')\n"),
-                manifestStarterCode: "print('starter')\n",
             }),
         ).toBe(false);
     });
@@ -188,7 +187,6 @@ describe("review workspace ownership guards", () => {
                 },
                 manifestLanguage: "bash",
                 manifestStarterWorkspace: starterWorkspace,
-                manifestStarterCode: "# use terminal\n",
                 manifestIdeConfig: {
                     runnerBackend: "pty",
                     layoutMode: "terminal_workspace",

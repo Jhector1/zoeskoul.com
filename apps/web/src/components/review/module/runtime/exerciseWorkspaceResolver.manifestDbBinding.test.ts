@@ -82,7 +82,9 @@ describe("review exercise workspace manifest/db binding", () => {
         },
       },
       entry: entry({
-        starterCode: "print('registry starter should not win')\n",
+          starterWorkspace: {
+              starterCode: "print('registry starter should not win')\n"
+          }
       }),
     });
 
@@ -133,13 +135,17 @@ describe("review exercise workspace manifest/db binding", () => {
     const workspace = resolveExerciseWorkspace({
       language: "python",
       manifest: {
-        starterFiles: {},
+          workspace: {
+              starterFiles: {}
+          }
       },
       entry: entry({
-        starterFiles: [
-          { path: "src/main.py", content: "print('entry starter')\n", entry: true },
-          { path: "src/helper.py", content: "def helper():\n    return 42\n" },
-        ],
+          starterWorkspace: {
+              starterFiles: [
+                  { path: "src/main.py", content: "print('entry starter')\n", entry: true },
+                  { path: "src/helper.py", content: "def helper():\n    return 42\n" }
+              ]
+          }
       }),
     });
 
@@ -157,9 +163,11 @@ describe("review exercise workspace manifest/db binding", () => {
         },
       },
       entry: entry({
-        starterFiles: [
-          { path: "main.py", content: "print('entry starter after empty array')\n", entry: true },
-        ],
+          starterWorkspace: {
+              starterFiles: [
+                  { path: "main.py", content: "print('entry starter after empty array')\n", entry: true }
+              ]
+          }
       }),
     });
 
@@ -171,16 +179,18 @@ describe("review exercise workspace manifest/db binding", () => {
     );
   });
 
-  it("ignores blank manifest starterCode and falls back to registry/db entry starterCode", () => {
+  it("replaces a blank manifest entry file with the registry entry starter file", () => {
     const workspace = resolveExerciseWorkspace({
       language: "python",
       manifest: {
         workspace: {
-          starterCode: "   ",
+          starterFiles: [{ path: "main.py", content: "   ", isEntry: true }],
         },
       },
       entry: entry({
-        starterCode: "print('entry starter code')\n",
+          starterWorkspace: {
+              starterFiles: [{ path: "main.py", content: "print('entry starter code')\n", isEntry: true }],
+          }
       }),
     });
 
@@ -190,8 +200,10 @@ describe("review exercise workspace manifest/db binding", () => {
   it("does not mark whitespace-only entry starterCode as a starter-backed deterministic source", () => {
     const source = resolveDeterministicEditorSource(
       entry({
-        toolManifest: {},
-        starterCode: "   ",
+          toolManifest: {},
+          starterWorkspace: {
+              starterCode: "   "
+          }
       }),
     );
 
@@ -202,20 +214,17 @@ describe("review exercise workspace manifest/db binding", () => {
     const source = resolveDeterministicEditorSource(
       entry({
         toolManifest: {
-          workspace: {
-            starterFiles: {},
+            workspace: {
+                starterFiles: {},
+                initialFiles: [],
+                workspaceFiles: {},
+                starterCode: ""
+            },
             initialFiles: [],
             workspaceFiles: {},
-            starterCode: "",
-          },
-          starterFiles: {},
-          initialFiles: [],
-          workspaceFiles: {},
-          recipe: {
-            starterFiles: {},
-            initialFiles: [],
-            starterCode: "",
-          },
+            recipe: {
+                initialFiles: []
+            }
         },
       }),
     );
@@ -234,9 +243,11 @@ describe("review exercise workspace manifest/db binding", () => {
         },
       },
       entry: entry({
-        starterFiles: [
-          { path: "main.py", content: "print('entry starter should lose')\n", entry: true },
-        ],
+          starterWorkspace: {
+              starterFiles: [
+                  { path: "main.py", content: "print('entry starter should lose')\n", entry: true }
+              ]
+          }
       }),
     });
 
@@ -264,12 +275,12 @@ describe("review exercise workspace manifest/db binding", () => {
     expect(deriveEntryCode(workspace)).toBe("print('manifest starter')\n");
   });
 
-  it("keeps starterCode as main.py when workspace.files only provides fixtures", () => {
+  it("keeps the canonical entry starter file separate from workspace fixtures", () => {
     const workspace = resolveExerciseWorkspace({
       language: "python",
       manifest: {
         workspace: {
-          starterCode: "print('from starter code')\n",
+          starterFiles: [{ path: "main.py", content: "print('from starter code')\n", isEntry: true }],
           files: [
             { path: "data.txt", content: "alpha\nbeta\n" },
           ],
@@ -318,10 +329,12 @@ describe("review exercise workspace manifest/db binding", () => {
         },
       },
       entry: entry({
-        starterFiles: [
-          { path: "main.py", content: "print('entry should also lose')\n", entry: true },
-          { path: "notes.txt", content: "from entry source\n" },
-        ],
+          starterWorkspace: {
+              starterFiles: [
+                  { path: "main.py", content: "print('entry should also lose')\n", entry: true },
+                  { path: "notes.txt", content: "from entry source\n" }
+              ]
+          }
       }),
     });
 
@@ -360,7 +373,7 @@ describe("review exercise workspace manifest/db binding", () => {
       language: "python",
       manifest: {
         workspace: {
-          starterCode: "print('recipe fixtures should not become entry')\n",
+          starterFiles: [{ path: "main.py", content: "print('recipe fixtures should not become entry')\n", isEntry: true }],
         },
         recipe: {
           files: [
@@ -408,12 +421,14 @@ describe("review exercise workspace manifest/db binding", () => {
       saved: blankSaved,
       manifest: {
         workspace: {
-          starterCode: 'print("Start")\nprint("Done"\n',
+          starterFiles: [{ path: "main.py", content: 'print("Start")\nprint("Done"\n', isEntry: true }],
         },
       },
       entry: entry({
-        exerciseId: "reading-error-messages_ci-fix-second-line-error",
-        starterCode: 'print("Start")\nprint("Done"\n',
+          exerciseId: "reading-error-messages_ci-fix-second-line-error",
+          starterWorkspace: {
+              starterFiles: [{ path: "main.py", content: 'print("Start")\nprint("Done"\n', isEntry: true }],
+          }
       }),
     });
 
@@ -459,8 +474,10 @@ describe("review runtime starter content contract", () => {
             },
           },
           entry: entry({
-            language,
-            starterCode: "@:quiz.m1_s01_show_all_products.starterCode",
+              language,
+              starterWorkspace: {
+                  starterCode: "@:quiz.m1_s01_show_all_products.starterCode"
+              }
           }),
         });
 
@@ -488,12 +505,14 @@ describe("review runtime starter content contract", () => {
           language,
           manifest: {
             workspace: {
-              starterCode: code,
+              starterFiles: [{ path: fileName, content: code, isEntry: true }],
             },
           },
           entry: entry({
-            language,
-            starterCode: code,
+              language,
+              starterWorkspace: {
+                  starterFiles: [{ path: fileName, content: code, isEntry: true }],
+              }
           }),
         });
 
@@ -512,9 +531,11 @@ describe("review runtime starter content contract", () => {
           language,
           manifest: {},
           entry: entry({
-            language,
-            starterCode: undefined,
-            starterFiles: undefined,
+              language,
+              starterWorkspace: {
+                  starterCode: undefined,
+                  starterFiles: undefined
+              }
           }),
         });
 
@@ -532,13 +553,15 @@ describe("review runtime starter content contract", () => {
       ({ language }) => {
         const source = resolveDeterministicEditorSource(
             entry({
-              language,
-              toolManifest: {
-                workspace: {
-                  starterCode: "@:quiz.some_runtime_key.starterCode",
+                language,
+                toolManifest: {
+                    workspace: {
+                        starterCode: "@:quiz.some_runtime_key.starterCode"
+                    }
                 },
-              },
-              starterCode: "@:quiz.some_runtime_key.starterCode",
+                starterWorkspace: {
+                    starterCode: "@:quiz.some_runtime_key.starterCode"
+                }
             }),
         );
 
@@ -557,9 +580,11 @@ describe("review runtime starter content contract", () => {
         },
       },
       entry: entry({
-        language: "sql",
-        sqlDatasetId: "sql_module_1",
-        starterCode: "@:quiz.m1_s01_show_all_products.starterCode",
+          language: "sql",
+          sqlDatasetId: "sql_module_1",
+          starterWorkspace: {
+              starterCode: "@:quiz.m1_s01_show_all_products.starterCode"
+          }
       }),
     });
 
@@ -572,13 +597,15 @@ describe("review runtime starter content contract", () => {
     const saved = resolveExerciseWorkspace({
       language: "python",
       manifest: {
-        starterFiles: [
-          {
-            path: "main.py",
-            content: "# starter",
-            isEntry: true,
-          },
-        ],
+          workspace: {
+              starterFiles: [
+                  {
+                      path: "main.py",
+                      content: "# starter",
+                      isEntry: true
+                  }
+              ]
+          }
       },
     });
 
@@ -666,19 +693,21 @@ describe("review runtime starter content contract", () => {
                       subject: "python",
                       steps: [
                         {
-                          id: "file-io",
-                          title: "File IO",
-                          exerciseKey: "file-io",
-                          starterFiles: {
-                            "main.py": "# Write your answer below\n",
-                          },
-                          files: [
-                            {
-                              path: "data.txt",
-                              content: "Hello, World!\nThis is a test file.",
-                              readOnly: true,
-                            },
-                          ],
+                            id: "file-io",
+                            title: "File IO",
+                            exerciseKey: "file-io",
+                            files: [
+                                {
+                                    path: "data.txt",
+                                    content: "Hello, World!\nThis is a test file.",
+                                    readOnly: true
+                                }
+                            ],
+                            workspace: {
+                                starterFiles: {
+                                    "main.py": "# Write your answer below\n"
+                                }
+                            }
                         },
                       ],
                     },

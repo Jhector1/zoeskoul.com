@@ -1,7 +1,11 @@
 import { describe, expect, it } from "vitest";
 
 import type { QItem } from "@/lib/practice/uiTypes";
-import { historyRowToQItem, isPracticeItemFinalized } from "./helpers";
+import {
+  historyRowToQItem,
+  isEmptyPracticeAnswer,
+  isPracticeItemFinalized,
+} from "./helpers";
 
 function item(patch: Partial<QItem>): QItem {
   return {
@@ -94,5 +98,22 @@ describe("historyRowToQItem", () => {
     expect(restored.submitted).toBe(false);
     expect((restored.result as any)?.finalized).toBe(false);
     expect((restored as any).text).toBe("draft");
+  });
+});
+
+describe("isEmptyPracticeAnswer", () => {
+  it("does not treat cwd-only terminal state as a learner answer", () => {
+    expect(
+      isEmptyPracticeAnswer(
+        { kind: "code_input" } as any,
+        item({
+          terminalEvidence: {
+            commands: [],
+            outputText: "",
+            cwd: "/workspace/git-lab",
+          },
+        } as any),
+      ),
+    ).toBe(true);
   });
 });

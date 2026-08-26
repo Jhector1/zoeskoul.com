@@ -85,36 +85,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.main_sh.content",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "class-notes-organizer/inbox/.keep",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox__keep.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/inbox/math.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_math_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/inbox/history.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_history_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -196,7 +166,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -287,46 +256,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.main_sh.content",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "class-notes-organizer/inbox/.keep",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox__keep.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/handoff/.keep",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_handoff__keep.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/archive/.keep",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_archive__keep.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/inbox/math.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_math_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/inbox/history.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_history_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -421,7 +350,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
@@ -549,51 +477,6 @@
       "weight": 1,
       "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3",
       "language": "bash",
-      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.sh",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.main_sh.content",
-          "language": "bash",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "class-notes-organizer/inbox/.keep",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox__keep.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/handoff/.keep",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff__keep.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/archive/.keep",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_archive__keep.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/inbox/math.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_math_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/inbox/history.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_history_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_inbox_tmp_scratch_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "class-notes-organizer/handoff/README.txt",
-          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterFiles.class_notes_organizer_handoff_README_txt.content",
-          "language": "bash"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.sh",
@@ -683,7 +566,6 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.module-2-notes-organizer-project.moduleProject.steps.module-2-notes-organizer-project-terminal-task-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",

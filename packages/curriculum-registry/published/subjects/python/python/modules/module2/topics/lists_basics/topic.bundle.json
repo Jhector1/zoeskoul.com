@@ -120,7 +120,16 @@
         ],
         "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nprices = [a, b, c]\ntotal = sum(prices)\navg = total // 3\nprint(f\"sum = {total}\")\nprint(f\"avg = {avg}\")\n"
       },
-      "starterCode": "# TODO: read 3 prices\n# TODO: store in a list\n# TODO: compute sum and avg"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO: read 3 prices\n# TODO: store in a list\n# TODO: compute sum and avg",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_list_max_of_four_code",
@@ -145,7 +154,16 @@
         ],
         "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\nd = int(input())\nxs = [a, b, c, d]\nprint(f\"max = {max(xs)}\")\n"
       },
-      "starterCode": "# TODO: read 4 integers\n# TODO: store in list\n# TODO: compute max"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO: read 4 integers\n# TODO: store in list\n# TODO: compute max",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_list_build_names_print_code",
@@ -165,7 +183,16 @@
         ],
         "solutionCode": "first = input()\nsecond = input()\nnames = [first, second]\nprint(f\"names[0] = {names[0]}\")\nprint(f\"names[1] = {names[1]}\")\n"
       },
-      "starterCode": "# TODO: read two names\n# TODO: store into list\n# TODO: print names[0] and names[1] lines"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO: read two names\n# TODO: store into list\n# TODO: print names[0] and names[1] lines",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_list_index_zero_sc",

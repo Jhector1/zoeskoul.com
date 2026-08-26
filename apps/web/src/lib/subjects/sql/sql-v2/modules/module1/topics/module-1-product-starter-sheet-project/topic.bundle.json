@@ -86,7 +86,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -120,15 +119,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -141,7 +131,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-1-preview-product-sheet.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -186,7 +175,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -220,15 +208,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -241,7 +220,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-2-add-pricing-columns.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -286,7 +264,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-3-finish-product-starter-sheet",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-3-finish-product-starter-sheet.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -320,15 +297,6 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-3-finish-product-starter-sheet.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -341,7 +309,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-1.module-1-product-starter-sheet-project.quiz.mp-3-finish-product-starter-sheet.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",

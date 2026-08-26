@@ -254,7 +254,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -282,15 +281,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -303,7 +293,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_echo_name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -345,7 +334,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -373,15 +361,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -394,7 +373,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_add_two_ages.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -436,7 +414,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -464,15 +441,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -485,7 +453,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_double_price.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -527,7 +494,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -555,15 +521,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -576,7 +533,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_profile_line.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -624,7 +580,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -652,15 +607,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -673,7 +619,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.quiz.code_age_next_year.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -716,16 +661,6 @@
       "messageBase": "topics.python-v2.python-v2-1.input-and-type-conversion.practice.practice-price-times-quantity",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.practice.practice-price-times-quantity.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.input-and-type-conversion.practice.practice-price-times-quantity.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -738,7 +673,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.input-and-type-conversion.practice.practice-price-times-quantity.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

@@ -241,7 +241,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.try-why_sorting_matters-sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.try-why_sorting_matters-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -274,15 +273,6 @@
         ]
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.try-why_sorting_matters-sketch0.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -295,7 +285,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.why_sorting_matters.quiz.try-why_sorting_matters-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",

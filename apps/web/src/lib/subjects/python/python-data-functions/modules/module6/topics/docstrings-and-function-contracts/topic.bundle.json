@@ -259,16 +259,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -281,7 +271,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -342,16 +331,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -364,7 +343,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -425,16 +403,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -447,7 +415,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

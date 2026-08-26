@@ -198,25 +198,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -256,7 +237,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-update-verify-id-five.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -332,25 +312,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -390,7 +351,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-price-change-id-three.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",
@@ -466,25 +426,6 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor",
       "language": "sql",
-      "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterCode",
-      "starterFiles": [
-        {
-          "path": "operations.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterFiles.operations_sql.content",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true,
-          "readOnly": false
-        },
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterFiles.query_sql.content",
-          "language": "sql",
-          "isEntry": false,
-          "entry": false,
-          "readOnly": false
-        }
-      ],
       "solutionFiles": [
         {
           "path": "operations.sql",
@@ -524,7 +465,6 @@
           "operations.sql",
           "query.sql"
         ],
-        "starterCode": "@:topics.sql-data-management.sql-data-management-module-0-safe-inserts.mutation-workflow-preview-change-verify.practice.practice-preview-delete-test-decor.starterCode",
         "starterFiles": [
           {
             "path": "operations.sql",

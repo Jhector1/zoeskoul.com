@@ -197,7 +197,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -214,7 +213,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.tryIt.try_summing_business_metrics_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -260,7 +258,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -277,7 +274,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-total-discount-dollars.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -323,7 +319,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-retained-summing-business-metrics-sketch1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-retained-summing-business-metrics-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -340,7 +335,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-retained-summing-business-metrics-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -385,7 +379,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-sum-completed-gross-sales",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-sum-completed-gross-sales.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -402,7 +395,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.summing-business-metrics.practice.practice-sum-completed-gross-sales.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

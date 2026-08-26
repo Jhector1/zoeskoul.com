@@ -151,7 +151,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -184,15 +183,6 @@
         ]
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -205,7 +195,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.try-combining_order_by_with_limit-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -262,7 +251,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -295,15 +283,6 @@
         ]
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -316,7 +295,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-top-three-prices.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -373,7 +351,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -406,15 +383,6 @@
         ]
       },
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -427,7 +395,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.quiz.practice-filter-rank-limit.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -484,7 +451,6 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-3.combining_order_by_with_limit.practice.practice-cheapest-two-products",
       "language": "sql",
-      "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.practice.practice-cheapest-two-products.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -501,7 +467,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
-        "starterCode": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.practice.practice-cheapest-two-products.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -557,15 +522,6 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
-      "starterFiles": [
-        {
-          "path": "query.sql",
-          "content": "@:topics.sql-v2.sql-v2-3.combining_order_by_with_limit.practice.practice-cheapest-two-products.starterCode",
-          "language": "sql",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "query.sql",

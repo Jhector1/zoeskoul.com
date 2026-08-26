@@ -71,7 +71,7 @@ describe("bashProfile", () => {
             instructions: "@:quiz.linux.copy.prompt",
         });
         expect(exercise?.starterCode).toBe("@:quiz.linux.copy.starterCode");
-        expect(exercise?.workspace?.starterCode).toBe("@:quiz.linux.copy.starterCode");
+        expect((exercise?.workspace?.starterFiles as any)?.[0]?.content).toBe("@:quiz.linux.copy.starterCode");
         expect((exercise?.starterFiles as any)?.[0]?.content).toBe("@:quiz.linux.copy.starterCode");
         expect(exercise?.workspaceExpectations).toEqual({
             requiredFiles: ["backups/today.txt"],

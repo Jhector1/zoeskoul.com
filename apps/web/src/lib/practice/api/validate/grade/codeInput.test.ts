@@ -115,6 +115,11 @@ describe("gradeCodeInput", () => {
                 kind: "code_input",
                 language: "bash",
                 code: "",
+                terminalEvidence: {
+                    commands: ["mkdir -p linux-lab/notes"],
+                    outputText: "",
+                    cwd: "/workspace",
+                },
                 entry: "linux-lab/notes/today.txt",
                 files: [
                     {
@@ -227,6 +232,43 @@ describe("gradeCodeInput", () => {
 
         expect(result.ok).toBe(false);
         expect(result.explanation).toContain("Run the required terminal command");
+        expect(result.feedback?.title).toBe("Terminal activity missing");
+        expect(gradeProgrammingCodeInputMock).not.toHaveBeenCalled();
+    });
+
+    it("rejects a pre-satisfied terminal workspace with cwd-only initial state", async () => {
+        const result = await gradeCodeInput({
+            instance: {} as any,
+            expectedCanon: {
+                kind: "code_input",
+                recipeType: "shell_task",
+                shellTaskMode: "terminal_workspace",
+                tests: [{ stdout: "", match: "includes" }],
+                workspaceExpectations: {
+                    requiredFiles: ["community-project/README.md"],
+                },
+                hiddenShellCheck: { script: "exit 0" },
+            },
+            answer: {
+                kind: "code_input",
+                language: "bash",
+                code: "",
+                entry: "community-project/README.md",
+                files: [{
+                    kind: "file",
+                    path: "community-project/README.md",
+                    content: "# Community Project\n",
+                }],
+                terminalEvidence: {
+                    commands: [],
+                    outputText: "",
+                    cwd: "/workspace/community-project",
+                },
+            },
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
         expect(result.feedback?.title).toBe("Terminal activity missing");
         expect(gradeProgrammingCodeInputMock).not.toHaveBeenCalled();
     });

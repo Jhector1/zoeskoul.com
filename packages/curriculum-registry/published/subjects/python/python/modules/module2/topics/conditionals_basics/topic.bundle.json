@@ -137,7 +137,16 @@
         ],
         "solutionCode": "age = int(input())\nif age >= 18:\n    print(\"ALLOWED\")\nelse:\n    print(\"DENIED\")\n"
       },
-      "starterCode": "# TODO\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_cond_member_discount_code",
@@ -167,7 +176,16 @@
         ],
         "solutionCode": "subtotal = int(input())\nmember = input().strip()\nif member.lower() == \"y\":\n    discount = subtotal * 10 // 100\n    total = subtotal - discount\nelse:\n    total = subtotal\nprint(f\"Total = {total}\")\n"
       },
-      "starterCode": "# TODO\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_cond_password_check_code",
@@ -192,7 +210,16 @@
         ],
         "solutionCode": "password = input()\nif password == \"letmein\":\n    print(\"Logged in\")\nelse:\n    print(\"Wrong password\")\n"
       },
-      "starterCode": "# TODO\n"
+      "workspace": {
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# TODO\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m2_cond_elif_meaning_sc",

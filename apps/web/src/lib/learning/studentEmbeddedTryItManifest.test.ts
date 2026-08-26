@@ -227,16 +227,12 @@ const semanticEligibleIds = [
 ] as const;
 
 const stdinFixedTestEligibleIds = [
-  ["python/python-v2/modules/module0/topics/values-types-and-literals/topic.bundle.json", "ci-read-and-print"],
-  ["python/python-v2/modules/module1/topics/f-strings-and-formatting/topic.bundle.json", "ci_input_greeting"],
   ["python/python-v2/modules/module1/topics/input-and-type-conversion/topic.bundle.json", "code_echo_name"],
   ["python/python-v2/modules/module1/topics/input-and-type-conversion/topic.bundle.json", "code_add_two_ages"],
-  ["python/python-v2/modules/module1/topics/input-and-type-conversion/topic.bundle.json", "code_double_price"],
   ["python/python-v2/modules/module1/topics/string-indexing-and-slicing/topic.bundle.json", "code_first_and_last"],
   ["python/python-v2/modules/module1/topics/string-indexing-and-slicing/topic.bundle.json", "code_middle_slice"],
   ["python/python-v2/modules/module1/topics/string-indexing-and-slicing/topic.bundle.json", "code_prefix_suffix"],
   ["python/python-v2/modules/module1/topics/string-methods/topic.bundle.json", "code-1"],
-  ["python/python-v2/modules/module1/topics/string-methods/topic.bundle.json", "code-2"],
   ["python/python-v2/modules/module1/topics/string-methods/topic.bundle.json", "code-3"],
   ["python/python-v2/modules/module2/topics/and-or-not/topic.bundle.json", "code_ticket_check"],
   ["python/python-v2/modules/module2/topics/and-or-not/topic.bundle.json", "code_free_day"],
@@ -249,14 +245,12 @@ const stdinFixedTestEligibleIds = [
   ["python/python-v2/modules/module2/topics/if-elif-else/topic.bundle.json", "code_positive_negative_zero"],
   ["python/python-v2/modules/module2/topics/if-elif-else/topic.bundle.json", "code_pass_fail"],
   ["python/python-v2/modules/module2/topics/if-elif-else/topic.bundle.json", "code_grade_checker"],
-  ["python/python-v2/modules/module2/topics/if-elif-else/topic.bundle.json", "code_empty_or_text"],
   ["python/python-v2/modules/module2/topics/indentation-and-blocks/topic.bundle.json", "code-basic-if-output"],
   ["python/python-v2/modules/module2/topics/indentation-and-blocks/topic.bundle.json", "code-two-lines-in-block"],
   ["python/python-v2/modules/module2/topics/indentation-and-blocks/topic.bundle.json", "code-elif-branches"],
   ["python/python-v2/modules/module2/topics/module-2-study-checker-project/topic.bundle.json", "try-module-2-study-checker-project-sketch0"],
   ["python/python-v2/modules/module2/topics/truthiness-and-empty-values/topic.bundle.json", "code-classify-string"],
   ["python/python-v2/modules/module2/topics/truthiness-and-empty-values/topic.bundle.json", "code-classify-number"],
-  ["python/python-v2/modules/module2/topics/truthiness-and-empty-values/topic.bundle.json", "code-check-missing-word"],
   ["python/python-v2/modules/module3/topics/accumulators-and-counters/topic.bundle.json", "ex9"],
   ["python/python-v2/modules/module3/topics/accumulators-and-counters/topic.bundle.json", "ex10"],
   ["python/python-v2/modules/module3/topics/accumulators-and-counters/topic.bundle.json", "ex11"],
@@ -370,11 +364,13 @@ function starterFilePaths(
 ): string[] {
   const exercise =
     record(exerciseValue);
+  const workspace =
+    record(exercise?.workspace);
 
   return Array.isArray(
-    exercise?.starterFiles,
+    workspace?.starterFiles,
   )
-    ? exercise.starterFiles.flatMap(
+    ? workspace.starterFiles.flatMap(
         (value) => {
           const file = record(value);
           const path =
@@ -562,7 +558,7 @@ describe(
     it("locks the audited stdin candidate inventory", () => {
       expect(
         stdinFixedTestEligibleIds,
-      ).toHaveLength(39);
+      ).toHaveLength(33);
     });
 
     it.each(

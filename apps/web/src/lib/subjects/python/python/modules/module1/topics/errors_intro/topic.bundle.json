@@ -364,7 +364,17 @@
         ],
         "solutionCode": "print(\"NameError\")\n"
       },
-      "starterCode": "# Print the error name\n"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Print the error name\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m1_err_fix_type_mismatch_code",
@@ -390,7 +400,17 @@
         ],
         "solutionCode": "a = int(input())\nb = int(input())\nprint(a + b)\n"
       },
-      "starterCode": "a = input()\nb = input()\n# TODO: convert and print sum\n"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "a = input()\nb = input()\n# TODO: convert and print sum\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     },
     {
       "id": "m1_err_parse_age_safely_code",
@@ -416,7 +436,17 @@
         ],
         "solutionCode": "text = input().strip()\nif text.isdigit():\n    age = int(text)\n    print(f\"Next year = {age + 1}\")\nelse:\n    print(\"Invalid age\")\n"
       },
-      "starterCode": "text = input().strip()\n# TODO\n"
+      "workspace": {
+        "language": "python",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "text = input().strip()\n# TODO\n",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
     }
   ]
 }

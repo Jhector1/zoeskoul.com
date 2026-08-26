@@ -454,7 +454,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
             instructions:
                 "@:topics.python-for-beginners.python-1.read-and-add.practice.linux-course-1-terminal-lab.instructions",
         });
-        expect(exercise.starterCode).toBe(
+        expect(exercise.workspace?.starterFiles?.find((file: any) => file.entry)?.content).toBe(
             "@:topics.python-for-beginners.python-1.read-and-add.practice.linux-course-1-terminal-lab.starterCode",
         );
         expect(exercise.workspace).toMatchObject({
@@ -1049,7 +1049,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterCode).toBe(
+        expect(step2.workspace?.starterFiles?.find((file: any) => file.entry)?.content).toBe(
             "@:topics.python-for-beginners.python-1.read-and-add.moduleProject.steps.step_2.starterCode",
         );
     });
@@ -1111,7 +1111,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterCode).toBe(
+        expect(step2.workspace?.starterFiles?.find((file: any) => file.entry)?.content).toBe(
             "@:topics.python-for-beginners.python-1.read-and-add.finalCapstone.steps.step_2.starterCode",
         );
     });
@@ -1652,7 +1652,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterCode).toBe(
+        expect(step2.workspace?.starterFiles?.find((file: any) => file.entry)?.content).toBe(
             "@:topics.python-for-beginners.python-1.read-and-add.moduleProject.steps.step_2.starterCode",
         );
     });
@@ -1714,7 +1714,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterCode).toBe(
+        expect(step2.workspace?.starterFiles?.find((file: any) => file.entry)?.content).toBe(
             "@:topics.python-for-beginners.python-1.read-and-add.moduleProject.steps.step_2.starterCode",
         );
     });
@@ -1810,7 +1810,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterFiles.map((file: any) => file.path)).toEqual([
+        expect(step2.workspace?.starterFiles?.map((file: any) => file.path)).toEqual([
             "main.py",
             "helpers.py",
             "reports.py",
@@ -1940,7 +1940,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         const step2 = bundle.exercises.find((exercise) => exercise.id === "step-2") as any;
-        expect(step2.starterFiles.map((file: any) => file.path)).toEqual([
+        expect(step2.workspace?.starterFiles?.map((file: any) => file.path)).toEqual([
             "main.py",
             "out/one.txt",
         ]);

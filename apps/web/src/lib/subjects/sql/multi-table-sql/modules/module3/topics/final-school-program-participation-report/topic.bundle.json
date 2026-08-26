@@ -101,7 +101,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step1_establish_grain",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step1_establish_grain.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -118,7 +117,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step1_establish_grain.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -163,7 +161,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step2_add_counts",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step2_add_counts.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -180,7 +177,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step2_add_counts.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -225,7 +221,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step3_add_distinct_students",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step3_add_distinct_students.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -242,7 +237,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step3_add_distinct_students.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -287,7 +281,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step4_label_rank",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step4_label_rank.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -304,7 +297,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-3-final-capstone.final-school-program-participation-report.finalCapstone.steps.step4_label_rank.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

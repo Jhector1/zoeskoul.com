@@ -111,20 +111,9 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -199,20 +188,9 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -287,20 +265,9 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -375,20 +342,9 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -463,20 +419,9 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -551,20 +496,9 @@
       "messageBase": "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

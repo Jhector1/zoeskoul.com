@@ -186,32 +186,6 @@ function readStarterFiles(
   return files;
 }
 
-function sameStarterFiles(
-  left: EmbeddedStarterFile[],
-  right: EmbeddedStarterFile[],
-): boolean {
-  if (left.length !== right.length) {
-    return false;
-  }
-
-  const rightByPath = new Map(
-    right.map((file) => [
-      file.path,
-      file,
-    ]),
-  );
-
-  return left.every((file) => {
-    const match =
-      rightByPath.get(file.path);
-
-    return Boolean(
-      match &&
-      match.content === file.content &&
-      match.language === file.language,
-    );
-  });
-}
 
 function sameStarterFileShapes(
   left: EmbeddedStarterFile[],
@@ -586,15 +560,6 @@ function readEmbeddedStarterWorkspace(
     allowCreation: boolean;
   },
 ): EmbeddedStarterWorkspace | null {
-  const topFiles =
-    readStarterFiles(
-      exercise.starterFiles,
-      {
-        min: 1,
-        max:
-          MAX_EMBEDDED_PYTHON_WORKSPACE_FILES,
-      },
-    );
   const workspaceFiles =
     readStarterFiles(
       workspace?.starterFiles,
@@ -610,21 +575,16 @@ function readEmbeddedStarterWorkspace(
     );
 
   if (
-    !topFiles ||
     !workspaceFiles ||
     !isSafeRelativeWorkspacePath(
       entry,
-    ) ||
-    !sameStarterFiles(
-      topFiles,
-      workspaceFiles,
     )
   ) {
     return null;
   }
 
   const entryFile =
-    topFiles.find(
+    workspaceFiles.find(
       (file) =>
         file.path === entry,
     );
@@ -639,7 +599,7 @@ function readEmbeddedStarterWorkspace(
   const learnerWorkspace =
     mergeLearnerWorkspaceFiles(
       workspace?.files,
-      topFiles,
+      workspaceFiles,
       entry,
     );
 

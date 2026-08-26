@@ -207,7 +207,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch0",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -224,7 +223,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -269,7 +267,6 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch1",
       "language": "sql",
-      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -286,7 +283,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-2-aggregate-functions.counting-rows-and-values.tryIt.try_counting_rows_and_values_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

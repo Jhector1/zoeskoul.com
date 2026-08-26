@@ -65,6 +65,12 @@ export function normalizeCurrentPracticeItem<T extends Partial<QItem>>(
         ...exerciseRecord,
     };
 
+    // Published/runtime starter ownership is workspace-only. Dynamic responses
+    // may still arrive with legacy top-level aliases, but they must not survive
+    // the learner runtime normalization boundary.
+    delete normalizedExercise.starterCode;
+    delete normalizedExercise.starterFiles;
+
     const next: Record<string, unknown> = {
         ...itemRecord,
         exercise: normalizedExercise,
@@ -183,8 +189,7 @@ function hydrateCurrentPracticeRuntimeSnapshot<T extends Partial<QItem>>(
     const nextCode = canReuseExistingStarterCode
         ? existingCode
         : (
-            deriveEntryCode(nextWorkspace) ||
-            String((exercise as any)?.starterCode ?? "")
+            deriveEntryCode(nextWorkspace)
         );
     const nextStdin =
         typeof nextWorkspace?.stdin === "string"
@@ -328,7 +333,13 @@ function hasNonBlankSqlSignal(value: unknown) {
 }
 
 function getExerciseStarterCode(exercise: Exercise) {
-    return String((exercise as any)?.starterCode ?? "").trim();
+    const language = resolvedExerciseLanguage(exercise) ?? "python";
+    const workspace = resolveExerciseWorkspace({
+        language,
+        manifest: exercise,
+    });
+
+    return String(deriveEntryCode(workspace) ?? "").trim();
 }
 
 function resolvedExerciseLanguage(exercise: Exercise) {

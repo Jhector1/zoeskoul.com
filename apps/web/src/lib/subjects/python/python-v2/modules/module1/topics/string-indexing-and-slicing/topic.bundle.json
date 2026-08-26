@@ -250,7 +250,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -292,15 +291,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -313,7 +303,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -355,7 +344,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -397,15 +385,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -418,7 +397,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_middle_slice.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -460,7 +438,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -502,15 +479,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -523,7 +491,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -565,7 +532,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -607,15 +573,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -628,7 +585,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_last_two.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -670,7 +626,6 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges",
       "language": "python",
-      "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.starterCode",
       "showExpectedExample": false,
       "recipe": {
         "type": "fixed_tests",
@@ -712,15 +667,6 @@
         ]
       },
       "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -733,7 +679,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-v2.python-v2-1.string-indexing-and-slicing.quiz.code_wrap_edges.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

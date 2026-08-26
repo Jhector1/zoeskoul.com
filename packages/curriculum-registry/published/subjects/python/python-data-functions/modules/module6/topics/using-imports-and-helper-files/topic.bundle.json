@@ -188,16 +188,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -215,7 +205,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -304,16 +293,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -331,7 +310,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -426,26 +404,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "names.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterFiles.names_py.content",
-          "language": "python"
-        },
-        {
-          "path": "badges.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterFiles.badges_py.content",
-          "language": "python"
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -468,7 +426,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -591,28 +548,6 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "tools/__init__.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterFiles.tools_init_py.content",
-          "language": "python",
-          "readOnly": true
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterFiles.tools_names_py.content",
-          "language": "python",
-          "readOnly": true
-        }
-      ],
       "workspaceExpectations": {
         "requiredFolders": [
           "tools"
@@ -625,7 +560,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -822,34 +756,6 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "tools/__init__.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterFiles.tools_init_py.content",
-          "language": "python",
-          "readOnly": true
-        },
-        {
-          "path": "tools/names.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterFiles.tools_names_py.content",
-          "language": "python",
-          "readOnly": true
-        },
-        {
-          "path": "tools/badges.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterFiles.tools_badges_py.content",
-          "language": "python",
-          "readOnly": true
-        }
-      ],
       "workspaceExpectations": {
         "requiredFolders": [
           "tools"
@@ -863,7 +769,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -1097,16 +1002,6 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspaceExpectations": {
         "requiredFolders": [
           "tools"
@@ -1118,7 +1013,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

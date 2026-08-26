@@ -188,16 +188,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -210,7 +200,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -271,16 +260,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -293,7 +272,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -349,16 +327,6 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -371,7 +339,6 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -432,20 +399,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -530,20 +486,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -624,20 +569,9 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number",
       "language": "python",
-      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

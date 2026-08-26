@@ -109,7 +109,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step1",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -126,7 +125,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -171,7 +169,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step2",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -188,7 +185,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step2.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -233,7 +229,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step3",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step3.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -250,7 +245,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step3.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -295,7 +289,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step4",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step4.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -312,7 +305,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step4.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -357,7 +349,6 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step5",
       "language": "sql",
-      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step5.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -374,7 +365,6 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
-        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.module-0-student-enrollment-roster.moduleProject.steps.step5.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
