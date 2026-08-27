@@ -40,18 +40,21 @@ export default function IdeDesktopLayout({
 }) {
   const t = useTranslations("ide.explorer.layout");
   const paneT = useTranslations("ide.explorer.pane");
+  const explorerAvailable = explorer != null;
 
   return (
       <div
           ref={splitRef}
           className="grid h-full min-h-0 w-full"
           style={{
-            gridTemplateColumns: explorerCollapsed
-                ? "48px minmax(0, 1fr)"
-                : `minmax(240px, ${leftPct}%) 6px minmax(0, 1fr)`,
+            gridTemplateColumns: !explorerAvailable
+                ? "minmax(0, 1fr)"
+                : explorerCollapsed
+                    ? "48px minmax(0, 1fr)"
+                    : `minmax(240px, ${leftPct}%) 6px minmax(0, 1fr)`,
           }}
       >
-        {explorerCollapsed ? (
+        {!explorerAvailable ? null : explorerCollapsed ? (
             <div className="flex min-h-0 flex-col items-center gap-2 border-r border-neutral-200/80 bg-neutral-50/70 py-3 dark:border-white/10 dark:bg-black/20">
               <button
                   type="button"

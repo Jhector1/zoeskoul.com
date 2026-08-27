@@ -230,6 +230,13 @@ function FullIDEInner({
     const entryFileId = learnerWorkspace.entryFileId ?? "";
     const activeFile = learnerWorkspace.activeFile ?? null;
     const entryFile = learnerWorkspace.entryFile ?? undefined;
+    const learnerVisibleFileCount = learnerWorkspace.nodes.reduce(
+        (count, node) => count + (node.kind === "file" ? 1 : 0),
+        0,
+    );
+    const explorerAvailable =
+        services.explorer.enabled &&
+        (!exerciseStateKey || learnerVisibleFileCount > 1);
     const [explorerCollapsed, setExplorerCollapsed] = useState(false);
     const [editorSplit, setEditorSplit] = useState<{
         fileId: string;
@@ -420,14 +427,14 @@ function FullIDEInner({
     const viewport = useIdeViewport({
         height,
         activeFileId,
-        showMobileExplorer: services.explorer.enabled && showMobileExplorer,
+        showMobileExplorer: explorerAvailable && showMobileExplorer,
         forceDesktopLayout,
         rootRef,
         editorHostRef,
         onCloseMobileExplorer: handleCloseMobileExplorer,
     });
     const mobileExplorerAvailable =
-        services.explorer.enabled && !viewport.isDesktop;
+        explorerAvailable && !viewport.isDesktop;
 
     const isSql = language === "sql";
     const canUseWorkspaceTerminal =
@@ -808,9 +815,9 @@ function FullIDEInner({
                         onMouseDownDivider={(e) => actions.onMouseDownDivider(e, splitRef.current)}
                         onPointerDownDivider={(e) => actions.onPointerDownDivider(e, splitRef.current)}
                         onKeyDownDivider={(e) => actions.onKeyDownDivider(e, splitRef.current)}
-                        explorerCollapsed={!services.explorer.enabled || explorerCollapsed}
+                        explorerCollapsed={!explorerAvailable || explorerCollapsed}
                         onToggleExplorer={() => {
-                            if (!services.explorer.enabled) return;
+                            if (!explorerAvailable) return;
                             setExplorerCollapsed((value) => !value);
                         }}
                         showHistoryControls={
@@ -821,27 +828,27 @@ function FullIDEInner({
                         canRedo={services.explorer.enabled && history.canRedo}
                         onUndo={actions.undo}
                         onRedo={actions.redo}
-                        explorer={services.explorer.enabled ? explorerPane : null}
+                        explorer={explorerAvailable ? explorerPane : null}
                         editor={editorPane}
                     />
                 ) : (
                     <IdeMobileLayout
                         open={
-                            services.explorer.enabled &&
+                            explorerAvailable &&
                             mobileExplorerAvailable &&
                             showMobileExplorer
                         }
                         onOpen={() => {
-                            if (!services.explorer.enabled) return;
+                            if (!explorerAvailable) return;
                             setShowMobileExplorer(true);
                         }}
                         onClose={handleCloseMobileExplorer}
                         showExplorerRail={
-                            services.explorer.enabled &&
+                            explorerAvailable &&
                             mobileExplorerAvailable &&
                             !showMobileExplorer
                         }
-                        explorer={services.explorer.enabled ? explorerPane : null}
+                        explorer={explorerAvailable ? explorerPane : null}
                         editor={editorPane}
                     />
                 )}

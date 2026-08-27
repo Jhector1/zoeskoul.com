@@ -27,12 +27,28 @@ describe("persistent FullIDE Review navigation source contract", () => {
         );
     });
 
+    it("hides Explorer chrome for single-file exercise presentations without changing editor ownership", () => {
+        expect(source).toContain(
+            "const learnerVisibleFileCount = learnerWorkspace.nodes.reduce",
+        );
+        expect(source).toContain(
+            "(!exerciseStateKey || learnerVisibleFileCount > 1)",
+        );
+        expect(source).toContain(
+            "explorer={explorerAvailable ? explorerPane : null}",
+        );
+        expect(source).toContain("{viewport.isDesktop ? (");
+        expect(source).not.toContain(
+            "explorerAvailable && viewport.isDesktop ?",
+        );
+    });
+
     it("does not move the editor between different layout parents when Explorer toggles", () => {
         expect(source).not.toContain(
             "services.explorer.enabled && viewport.isDesktop",
         );
         expect(source).toContain(
-            "explorer={services.explorer.enabled ? explorerPane : null}",
+            "explorer={explorerAvailable ? explorerPane : null}",
         );
     });
 
