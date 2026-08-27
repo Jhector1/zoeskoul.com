@@ -36,7 +36,7 @@ describe("publicChallengeCampaign", () => {
       imageUrl: "https://images.example.com/challenge.png",
     });
 
-    expect(rendered.subject).toContain("SQL challenge");
+    expect(rendered.subject).toBe("Your Daily ZoeSkoul Challenge is ready");
     expect(rendered.html).toContain("https://zoeskoul.com/c/test");
     expect(rendered.html).toContain("{{ unsubscribe }}");
     expect(rendered.html).toContain("Try the challenge");
@@ -148,7 +148,7 @@ describe("publicChallengeCampaign", () => {
             {
               id: 12,
               name: "ZoeSkoul",
-              email: "news@zoeskoul.com",
+              email: "challenges@zoeskoul.com",
               active: true,
             },
           ],
@@ -186,7 +186,11 @@ describe("publicChallengeCampaign", () => {
       listIds: [42],
       exclusionListIds: [77],
     });
-    expect(campaignBody.sender).toEqual({ id: 12 });
+    expect(campaignBody.sender).toEqual({
+      email: "challenges@zoeskoul.com",
+      name: "ZoeSkoul Challenges",
+    });
+    expect(campaignBody.replyTo).toBe("support@zoeskoul.com");
   });
 
   it("uses Brevo sendTest only for the publisher test email", async () => {
@@ -218,7 +222,7 @@ describe("publicChallengeCampaign", () => {
             {
               id: 12,
               name: "ZoeSkoul",
-              email: "news@zoeskoul.com",
+              email: "challenges@zoeskoul.com",
               active: true,
             },
           ],
@@ -279,7 +283,7 @@ describe("publicChallengeCampaign", () => {
             {
               id: 12,
               name: "ZoeSkoul",
-              email: "news@zoeskoul.com",
+              email: "challenges@zoeskoul.com",
               active: false,
             },
           ],
@@ -329,7 +333,7 @@ describe("publicChallengeCampaign", () => {
             {
               id: 12,
               name: "ZoeSkoul",
-              email: "news@zoeskoul.com",
+              email: "challenges@zoeskoul.com",
               active: true,
             },
           ],

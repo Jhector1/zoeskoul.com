@@ -15,7 +15,6 @@ import {
   BrevoConfigurationError,
   brevoApiFetch,
   brevoApiJson,
-  getBrevoCampaignSender,
   getBrevoDefaultMarketingListId,
   hasBrevoApiKey,
   isValidBrevoEmail,
@@ -340,6 +339,11 @@ export async function listPublicChallengeAudienceContacts(
   };
 }
 
+const PUBLIC_CHALLENGE_SENDER_EMAIL = "challenges@zoeskoul.com";
+const PUBLIC_CHALLENGE_SENDER_NAME = "ZoeSkoul Challenges";
+const PUBLIC_CHALLENGE_REPLY_TO = "support@zoeskoul.com";
+const PUBLIC_CHALLENGE_EMAIL_SUBJECT = "Your Daily ZoeSkoul Challenge is ready";
+
 export function renderPublicChallengeCampaign(
   input: ChallengeEmailContent,
 ): PublicChallengeEmailPreviewResponse {
@@ -352,7 +356,7 @@ export function renderPublicChallengeCampaign(
     throw new Error("Challenge URL must be an HTTP or HTTPS URL.");
   }
 
-  const subject = `New ZoeSkoul challenge: ${title}`.slice(0, 150);
+  const subject = PUBLIC_CHALLENGE_EMAIL_SUBJECT;
   const previewText = (
     description ||
     "Put your skills to the test with a new hands-on ZoeSkoul challenge."
@@ -426,14 +430,7 @@ function campaignName(title: string, testLabel = false) {
 // ZOESKOUL_BREVO_CAMPAIGN_DIAGNOSTICS_V77C9
 async function resolveVerifiedCampaignSender(
   options: ChallengeCampaignOptions,
-): Promise<{ id: number }> {
-  const configured = getBrevoCampaignSender(options.env);
-  if (!configured) {
-    throw new BrevoConfigurationError(
-      "BREVO_FROM_EMAIL is not configured with a valid sender.",
-    );
-  }
-
+): Promise<{ email: string; name: string }> {
   const payload = await brevoApiJson<RawBrevoSendersPayload>(
     "/senders",
     { method: "GET" },
@@ -447,30 +444,27 @@ async function resolveVerifiedCampaignSender(
   const matching = senders.find(
     (sender) =>
       normalizeBrevoEmail(stringValue(sender.email)) ===
-      normalizeBrevoEmail(configured.email),
+      normalizeBrevoEmail(PUBLIC_CHALLENGE_SENDER_EMAIL),
   );
 
   if (!matching) {
     throw new BrevoConfigurationError(
-      `Brevo sender ${configured.email} does not exist in this Brevo account.`,
-    );
-  }
-
-  const senderId = positiveInt(matching.id);
-  if (!senderId) {
-    throw new BrevoConfigurationError(
-      `Brevo sender ${configured.email} does not have a valid sender ID.`,
+      `Brevo sender ${PUBLIC_CHALLENGE_SENDER_EMAIL} does not exist in this Brevo account.`,
     );
   }
 
   if (matching.active !== true) {
     throw new BrevoConfigurationError(
-      `Brevo sender ${configured.email} is not active/verified. Verify it in Brevo before sending campaigns.`,
+      `Brevo sender ${PUBLIC_CHALLENGE_SENDER_EMAIL} is not active/verified. Verify it in Brevo before sending challenge campaigns.`,
     );
   }
 
-  return { id: senderId };
+  return {
+    email: PUBLIC_CHALLENGE_SENDER_EMAIL,
+    name: PUBLIC_CHALLENGE_SENDER_NAME,
+  };
 }
+
 
 async function createExclusionList(
   sourceList: PublicChallengeAudienceList,
@@ -545,6 +539,7 @@ async function createCampaign(
       body: JSON.stringify({
         name: campaignName(input.title, input.testLabel),
         sender,
+        replyTo: PUBLIC_CHALLENGE_REPLY_TO,
         subject: rendered.subject,
         previewText: rendered.previewText,
         htmlContent: rendered.html,
