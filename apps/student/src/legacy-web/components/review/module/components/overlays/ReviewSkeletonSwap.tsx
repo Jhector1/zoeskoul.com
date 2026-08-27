@@ -50,6 +50,18 @@ function InitialHydrationSkeleton({
  * Review surface mounted and visible. Their exercise and editor loading states
  * are owned by the shared destination coordinator at those local boundaries.
  */
+export function resolveReviewSkeletonSwapMode(args: {
+    showSkeleton: boolean;
+    holdContent: boolean;
+    hasMountedContent: boolean;
+}) {
+    return args.showSkeleton &&
+        !args.holdContent &&
+        !args.hasMountedContent
+        ? "initial-skeleton"
+        : "content";
+}
+
 export default function ReviewSkeletonSwap({
     showSkeleton,
     holdContent = false,
@@ -60,7 +72,26 @@ export default function ReviewSkeletonSwap({
     rightW,
     children,
 }: Props) {
-    if (showSkeleton && !holdContent) {
+    const [hasMountedContent, setHasMountedContent] = React.useState(
+        () => !showSkeleton || holdContent,
+    );
+    const mode = resolveReviewSkeletonSwapMode({
+        showSkeleton,
+        holdContent,
+        hasMountedContent,
+    });
+
+    /**
+     * Initial hydration may own the full skeleton exactly once. As soon as
+     * real Review content has mounted, transient hydration/readiness changes
+     * during Previous/Next must never put the full skeleton back on screen.
+     */
+    React.useEffect(() => {
+        if (mode !== "content" || hasMountedContent) return;
+        setHasMountedContent(true);
+    }, [hasMountedContent, mode]);
+
+    if (mode === "initial-skeleton") {
         return (
             <AnimatePresence mode="wait" initial={false}>
                 <motion.div
@@ -96,7 +127,7 @@ export default function ReviewSkeletonSwap({
                 {children}
             </div>
 
-            {holdContent ? (
+            {holdContent || showSkeleton ? (
                 <span data-review-transition-content-held="true" hidden />
             ) : null}
         </div>

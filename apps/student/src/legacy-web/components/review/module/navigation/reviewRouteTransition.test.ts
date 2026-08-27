@@ -217,17 +217,12 @@ describe("review route transition readiness", () => {
     it("waits for React and browser route identity", () => {
         expect(
             isReviewRouteTransitionReady(
-                readiness({
-                    currentHref: "/en/course/current",
-                }),
+                readiness({ currentHref: "/en/course/current" }),
             ),
         ).toBe(false);
-
         expect(
             isReviewRouteTransitionReady(
-                readiness({
-                    browserHref: "/en/course/current",
-                }),
+                readiness({ browserHref: "/en/course/current" }),
             ),
         ).toBe(false);
     });
@@ -235,14 +230,12 @@ describe("review route transition readiness", () => {
     it("waits for authoritative progress hydration", () => {
         expect(
             isReviewRouteTransitionReady(
-                readiness({
-                    progressHydrated: false,
-                }),
+                readiness({ progressHydrated: false }),
             ),
         ).toBe(false);
     });
 
-    it("waits for expected editor binding and hydration", () => {
+    it("uses the canonical exercise surface as the sole presentation gate", () => {
         expect(
             isReviewRouteTransitionReady(
                 readiness({
@@ -250,75 +243,6 @@ describe("review route transition readiness", () => {
                     hasExpectedEditorBinding: true,
                     pendingExerciseBinding: true,
                     toolHydrated: false,
-                    exerciseReady: false,
-                    editorReady: false,
-                }),
-            ),
-        ).toBe(false);
-
-        expect(
-            isReviewRouteTransitionReady(
-                readiness({
-                    hasExpectedExerciseSurface: true,
-                    hasExpectedEditorBinding: true,
-                    pendingExerciseBinding: false,
-                    toolHydrated: false,
-                    exerciseReady: true,
-                    editorReady: true,
-                }),
-            ),
-        ).toBe(false);
-
-        expect(
-            isReviewRouteTransitionReady(
-                readiness({
-                    hasExpectedExerciseSurface: true,
-                    hasExpectedEditorBinding: true,
-                    pendingExerciseBinding: false,
-                    toolHydrated: true,
-                    exerciseReady: true,
-                    editorReady: true,
-                }),
-            ),
-        ).toBe(true);
-    });
-
-    it("keeps both surfaces loading when only the exercise is ready", () => {
-        expect(
-            isReviewRouteTransitionReady(
-                readiness({
-                    hasExpectedExerciseSurface: true,
-                    hasExpectedEditorBinding: true,
-                    toolHydrated: true,
-                    exerciseReady: true,
-                    editorReady: false,
-                }),
-            ),
-        ).toBe(false);
-    });
-
-    it("keeps both surfaces loading when only the editor is ready", () => {
-        expect(
-            isReviewRouteTransitionReady(
-                readiness({
-                    hasExpectedExerciseSurface: true,
-                    hasExpectedEditorBinding: true,
-                    toolHydrated: true,
-                    exerciseReady: false,
-                    editorReady: true,
-                }),
-            ),
-        ).toBe(false);
-    });
-
-    it("reveals an authored destination once its prompt is ready even before a concrete editor owner is known", () => {
-        expect(
-            isReviewRouteTransitionReady(
-                readiness({
-                    hasExpectedExerciseSurface: true,
-                    hasExpectedEditorBinding: false,
-                    pendingExerciseBinding: false,
-                    toolHydrated: false,
                     exerciseReady: true,
                     editorReady: false,
                 }),
@@ -329,20 +253,46 @@ describe("review route transition readiness", () => {
             isReviewRouteTransitionReady(
                 readiness({
                     hasExpectedExerciseSurface: true,
-                    hasExpectedEditorBinding: false,
+                    hasExpectedEditorBinding: true,
                     pendingExerciseBinding: false,
-                    toolHydrated: false,
+                    toolHydrated: true,
                     exerciseReady: false,
+                    editorReady: true,
+                }),
+            ),
+        ).toBe(false);
+    });
+
+    it("still waits for the editor handshake on editor-only destinations", () => {
+        expect(
+            isReviewRouteTransitionReady(
+                readiness({
+                    hasExpectedExerciseSurface: false,
+                    hasExpectedEditorBinding: true,
+                    pendingExerciseBinding: true,
+                    toolHydrated: false,
+                    exerciseReady: true,
                     editorReady: false,
                 }),
             ),
         ).toBe(false);
+
+        expect(
+            isReviewRouteTransitionReady(
+                readiness({
+                    hasExpectedExerciseSurface: false,
+                    hasExpectedEditorBinding: true,
+                    pendingExerciseBinding: false,
+                    toolHydrated: true,
+                    exerciseReady: true,
+                    editorReady: true,
+                }),
+            ),
+        ).toBe(true);
     });
 
     it("allows a ready non-editor destination", () => {
-        expect(
-            isReviewRouteTransitionReady(readiness()),
-        ).toBe(true);
+        expect(isReviewRouteTransitionReady(readiness())).toBe(true);
     });
 });
 

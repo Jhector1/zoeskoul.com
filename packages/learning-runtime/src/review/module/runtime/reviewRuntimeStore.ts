@@ -1398,8 +1398,12 @@ function findCardAuthoredExerciseEntry(
 
     if (!cardId) return null;
 
-    for (const key of registry.orderedKeys ?? []) {
-        const entry = registry.byKey[key];
+    /**
+     * Embedded Try It exercise owners are intentionally hidden from
+     * orderedKeys because they are not standalone navigation steps.
+     * Discover canonical child owners from byKey instead.
+     */
+    for (const entry of Object.values(registry.byKey ?? {})) {
         if (!entry) continue;
         if (entry.ownerKind !== "exercise") continue;
         if (!entry.exerciseStateKey) continue;

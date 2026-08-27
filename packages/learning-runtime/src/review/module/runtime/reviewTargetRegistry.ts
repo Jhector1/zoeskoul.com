@@ -671,6 +671,87 @@ export function buildReviewTargetRegistry(args: {
         byRoute[cardRouteKey] = cardEntry.targetKey;
         orderedKeys.push(cardEntry.targetKey);
 
+        /**
+         * Text/sketch Try It is visually nested inside the owning lesson card,
+         * but its learner workspace must still have the same canonical authored
+         * exercise identity used by ExerciseRenderer, QuizPracticeCard, and the
+         * Review runtime.
+         *
+         * Keep this child out of byRoute/orderedKeys: it is not a standalone
+         * navigation step and must not alter progressive-unlock/card ordering.
+         * It is a hidden canonical owner discoverable by exact exercise key.
+         */
+        if (
+          rawEmbeddedTryItExerciseKey &&
+          localizedEmbeddedTryItToolManifest
+        ) {
+          const embeddedExerciseStateKey = getExerciseStateKey(
+            {
+              subjectSlug,
+              moduleSlug,
+              sectionSlug,
+              topicId,
+              cardId: card.id,
+            },
+            rawEmbeddedTryItExerciseKey,
+          );
+
+          const embeddedExerciseEntry: ReviewTargetEntry = {
+            targetKey: `exercise:${embeddedExerciseStateKey}`,
+            routeKey: cardRouteKey,
+            targetKind: "exercise",
+            sectionSlug,
+            topicId,
+            topicSlug,
+            cardId: card.id,
+            cardType: card.type,
+            targetSlug: cleanSegment(
+              rawEmbeddedTryItExerciseKey,
+              "exercise",
+            ),
+            ownerKind: "exercise",
+            ownerKey: embeddedExerciseStateKey,
+            cardKey,
+            toolScopeKey: embeddedExerciseStateKey,
+            exerciseId: rawEmbeddedTryItExerciseKey,
+            exerciseStateKey: embeddedExerciseStateKey,
+            language: cardRuntimeContext.language,
+            solutionFiles: pickSolutionFiles(
+              localizedEmbeddedTryItToolManifest,
+              subjectSlug,
+              cardRuntimeContext.language,
+              profileId,
+              versionFamily,
+            ),
+            solutionCode: pickSolutionCode(
+              localizedEmbeddedTryItToolManifest,
+              subjectSlug,
+              cardRuntimeContext.language,
+              profileId,
+              versionFamily,
+            ),
+            runtimeDefaults: topicRuntimeDefaults,
+            topicRuntimeDefaults,
+            moduleRuntimeDefaults,
+            sqlDatasetId:
+              cardRuntimeContext.datasetResolution.datasetId,
+            sqlDatasetResolutionSource:
+              cardRuntimeContext.datasetResolution.source,
+            sqlDatasetResolutionError:
+              cardRuntimeContext.datasetResolution.error,
+            starterWorkspace:
+              asRecord(localizedEmbeddedTryItToolManifest?.workspace) ??
+              null,
+            toolManifest: localizedEmbeddedTryItToolManifest,
+            item: localizedEmbeddedTryItToolManifest,
+            profileId,
+            versionFamily,
+          };
+
+          byKey[embeddedExerciseEntry.targetKey] =
+            embeddedExerciseEntry;
+        }
+
         if (card.type !== "project") continue;
 
         for (const exercise of getProjectExerciseEntries(

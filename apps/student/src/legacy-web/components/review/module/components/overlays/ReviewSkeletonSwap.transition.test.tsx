@@ -2,7 +2,9 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
-import ReviewSkeletonSwap from "./ReviewSkeletonSwap";
+import ReviewSkeletonSwap, {
+    resolveReviewSkeletonSwapMode,
+} from "./ReviewSkeletonSwap";
 
 vi.mock("framer-motion", () => ({
     AnimatePresence: ({
@@ -123,4 +125,34 @@ describe("ReviewSkeletonSwap lightweight navigation", () => {
             'data-testid="review-content"',
         );
     });
+    it("never returns to the full skeleton after Review content has mounted", () => {
+        expect(
+            resolveReviewSkeletonSwapMode({
+                showSkeleton: true,
+                holdContent: false,
+                hasMountedContent: true,
+            }),
+        ).toBe("content");
+    });
+
+    it("still reserves the full skeleton for true initial hydration", () => {
+        expect(
+            resolveReviewSkeletonSwapMode({
+                showSkeleton: true,
+                holdContent: false,
+                hasMountedContent: false,
+            }),
+        ).toBe("initial-skeleton");
+    });
+
+    it("keeps content when navigation itself is holding the surface", () => {
+        expect(
+            resolveReviewSkeletonSwapMode({
+                showSkeleton: true,
+                holdContent: true,
+                hasMountedContent: false,
+            }),
+        ).toBe("content");
+    });
+
 });

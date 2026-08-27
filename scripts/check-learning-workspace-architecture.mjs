@@ -268,19 +268,35 @@ for (const source of paneSources) {
     "CodeToolPane renders a second CodeRunner learner shell",
   );
   must(
-    source.includes("buildLearnerFullIdeKey"),
-    "stable FullIDE identity helper missing",
+    source.includes("buildPersistentFullIdeKey"),
+    "persistent FullIDE identity helper missing",
   );
 
-  const keyAt = source.indexOf("const fullIdeKey = buildLearnerFullIdeKey");
-  must(keyAt >= 0, "CodeToolPane does not use stable FullIDE identity");
+  const keyAt = source.indexOf("const fullIdeKey = buildPersistentFullIdeKey");
+  must(keyAt >= 0, "CodeToolPane does not use persistent FullIDE identity");
   const identitySlice = source.slice(keyAt, keyAt + 500);
   must(
-    !identitySlice.includes("reviewWorkspaceNeedsMultiFile") &&
+    !identitySlice.includes("fullIdeExerciseStateKey") &&
+      !identitySlice.includes("workspaceOwnerIdentityKey") &&
+      !identitySlice.includes("reviewWorkspaceNeedsMultiFile") &&
       !identitySlice.includes('workspace" : "single') &&
       !identitySlice.includes('multi" : "mono') &&
       !identitySlice.includes("currentIdeConfigKey"),
-    "single/multi presentation leaked back into FullIDE identity",
+    "exercise or presentation identity leaked back into FullIDE React ownership",
+  );
+
+  must(
+    source.includes(
+      "const presentedFullIdeExerciseStateKey =",
+    ) &&
+      source.includes(
+        "activeFullIdePresentation?.exerciseStateKey ??",
+      ) &&
+      source.includes("fullIdeExerciseStateKey") &&
+      source.includes(
+        "exerciseStateKey={presentedFullIdeExerciseStateKey}",
+      ),
+    "CodeToolPane does not preserve canonical exercise identity through held-editor presentation",
   );
 
   must(

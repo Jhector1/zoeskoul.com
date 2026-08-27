@@ -134,7 +134,10 @@ export default function FlowNavigator<T>({
             ) : null}
 
             <div className="relative min-h-0 overflow-hidden">
-                <AnimatePresence mode="wait" initial={false}>
+                <AnimatePresence
+                    mode="popLayout"
+                    initial={false}
+                >
                     {current ? (
                         <motion.div
                             key={getKey(current, safeIndex)}

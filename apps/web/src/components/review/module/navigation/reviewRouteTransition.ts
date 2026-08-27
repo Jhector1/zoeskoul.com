@@ -107,11 +107,16 @@ export function isReviewRouteTransitionReady(
      * unnamed state creates a cycle: the transition waits for an editor
      * binding that the destination has not had a chance to publish yet.
      */
-    if (
-        state.hasExpectedExerciseSurface &&
-        !state.exerciseReady
-    ) {
-        return false;
+    /**
+     * An authored exercise surface has one presentation authority. Once its
+     * canonical ExerciseRuntime reports the destination ready, editor binding
+     * and editor hydration proceed in parallel and cannot keep the route-level
+     * animation open.
+     *
+     * Editor-only destinations still require the editor handshake below.
+     */
+    if (state.hasExpectedExerciseSurface) {
+        return state.exerciseReady;
     }
 
     if (

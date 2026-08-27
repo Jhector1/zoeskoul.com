@@ -23,6 +23,7 @@ import {
     resolveFullIDEConfigFromLearningIde,
 } from "@/lib/ide/learningIdeConfig";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { resolveCanonicalExercisePresentation } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExercisePresentation";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "@zoeskoul/learning-runtime/review/module/runtime/reviewSaveDebug";
 import {languagesCompatible} from "@zoeskoul/learning-runtime/review/module/utils";
 import {defaultMainFile} from "@/components/ide/languageDefaults";
@@ -369,6 +370,41 @@ export function buildLearnerFullIdeKey(args: {
         `language:${language}`,
         `services:${servicePreset}`,
     ].join(":");
+}
+
+export function buildPersistentFullIdeKey(args: {
+    hardBoundaryKey: string;
+    runtimeLanguage: string | null | undefined;
+    servicePreset?: string | null;
+}) {
+    const hardBoundaryKey =
+        String(args.hardBoundaryKey ?? "").trim() || "review";
+    const runtimeLanguage = asWorkspaceLanguage(args.runtimeLanguage);
+
+    /**
+     * Exercise-authored service configuration is live presentation/runtime
+     * state, not React ownership. Review navigation may legitimately switch
+     * explorer/runner capabilities while the same language IDE remains mounted.
+     */
+    void args.servicePreset;
+
+    return [hardBoundaryKey, `language:${runtimeLanguage}`].join(":");
+}
+
+export function shouldHoldPreviousCompatibleFullIde(args: {
+    isReviewRouteMode: boolean;
+    canRenderEditor: boolean;
+    showLoadingMask: boolean;
+    currentFullIdeKey: string;
+    previousFullIdeKey: string | null | undefined;
+}) {
+    return Boolean(
+        args.isReviewRouteMode &&
+        !args.canRenderEditor &&
+        args.showLoadingMask &&
+        args.previousFullIdeKey &&
+        args.previousFullIdeKey === args.currentFullIdeKey
+    );
 }
 
 export function buildReviewWorkspaceOwnerIdentityKey(args: {
@@ -1612,6 +1648,22 @@ export default function CodeToolPane(props: {
                     : null
             )
             : null;
+    /**
+     * Exercise-mode presentation has one owner: the canonical ExerciseRuntime.
+     * EditorRuntime remains transport/apply-revision state and sketch mode keeps
+     * its existing card-runtime contract.
+     */
+    const canonicalExercisePresentation =
+        isExerciseEditorMode
+            ? resolveCanonicalExercisePresentation({
+                exercise: exerciseRuntime,
+                resetRevision: runtimeResetRevision,
+            })
+            : null;
+    const canonicalExercisePresentationReady =
+        canonicalExercisePresentation?.ready === true;
+    const canonicalExercisePresentationError =
+        canonicalExercisePresentation?.status === "error";
     useEffect(() => {
         if (!reviewToolPaneDebugEnabled()) return;
 
@@ -1676,8 +1728,8 @@ export default function CodeToolPane(props: {
         canonicalReviewWorkspaceLanguage ?? runtimeLanguage;
 
     const hasReadyDeterministicExerciseWorkspace = Boolean(
-        exerciseRuntime?.workspaceStatus === "ready" &&
-        forceWorkspaceHasContent(exerciseRuntime.workspace),
+        canonicalExercisePresentationReady &&
+        forceWorkspaceHasContent(exerciseRuntime?.workspace),
     );
 
     /**
@@ -1701,22 +1753,34 @@ export default function CodeToolPane(props: {
     const isSql = effectiveLanguage === "sql";
     const reviewTargetKey = resolvedEditorOwnerKey ?? exerciseKey ?? cardRuntimeKey ?? null;
     const reviewDirectWorkspace = useMemo(
-        () =>
-            isReviewRouteMode
-                ? pickDirectReviewRuntimeWorkspace({
-                    targetKey: reviewTargetKey,
-                    editorRuntime,
-                    exerciseRuntime: canonicalReviewRuntime,
-                    normalizedToolWorkspace: resetHydrationActive
-                        ? null
-                        : normalizedToolWorkspace,
-                    effectiveLanguage,
-                })
-                : null,
+        () => {
+            if (!isReviewRouteMode) return null;
+
+            if (
+                isExerciseEditorMode &&
+                canonicalExercisePresentationReady &&
+                forceWorkspaceHasContent(exerciseRuntime?.workspace)
+            ) {
+                return exerciseRuntime?.workspace ?? null;
+            }
+
+            return pickDirectReviewRuntimeWorkspace({
+                targetKey: reviewTargetKey,
+                editorRuntime,
+                exerciseRuntime: canonicalReviewRuntime,
+                normalizedToolWorkspace: resetHydrationActive
+                    ? null
+                    : normalizedToolWorkspace,
+                effectiveLanguage,
+            });
+        },
         [
+            canonicalExercisePresentationReady,
             canonicalReviewRuntime,
             editorRuntime,
             effectiveLanguage,
+            exerciseRuntime?.workspace,
+            isExerciseEditorMode,
             isReviewRouteMode,
             normalizedToolWorkspace,
             resetHydrationActive,
@@ -1879,7 +1943,12 @@ export default function CodeToolPane(props: {
     );
 
     const runtimeWorkspaceError = Boolean(
-        isReviewRouteMode && canonicalReviewRuntime?.workspaceStatus === "error",
+        isReviewRouteMode &&
+        (
+            isExerciseEditorMode
+                ? canonicalExercisePresentationError
+                : canonicalReviewRuntime?.workspaceStatus === "error"
+        ),
     );
     const runtimeWorkspaceErrorMessage =
         firstNonBlankToolPaneString(
@@ -1896,7 +1965,10 @@ export default function CodeToolPane(props: {
                 isReviewRouteMode,
                 isSketchEditorMode,
                 toolHydrated,
-                runtimeStatus: canonicalReviewRuntime?.workspaceStatus ?? null,
+                runtimeStatus:
+                    isExerciseEditorMode && canonicalExercisePresentationReady
+                        ? "ready"
+                        : canonicalReviewRuntime?.workspaceStatus ?? null,
                 workspaceSeedMode: cardRuntime?.workspaceSeedMode ?? null,
                 language: effectiveLanguage,
             });
@@ -1963,7 +2035,11 @@ export default function CodeToolPane(props: {
         if (!forceResetHydration) return;
 
         const authoritativeStarterReady = Boolean(
-            canonicalReviewRuntime?.workspaceStatus === "ready" &&
+            (
+                isExerciseEditorMode
+                    ? canonicalExercisePresentationReady
+                    : canonicalReviewRuntime?.workspaceStatus === "ready"
+            ) &&
             canonicalReviewRuntime?.userEdited !== true &&
             canonicalReviewRuntime?.workspaceOrigin !== "user" &&
             canonicalReviewRuntime?.workspaceOrigin !== "saved" &&
@@ -2005,10 +2081,12 @@ export default function CodeToolPane(props: {
     const shouldHoldEditorForToolHydration = Boolean(
         isReviewRouteMode &&
         hasBindableEditorTarget &&
-        !toolHydrated,
+        !toolHydrated &&
+        !canonicalExercisePresentationReady,
     );
     const shouldHoldEditorForPendingExerciseBinding = Boolean(
-        pendingExerciseBinding,
+        pendingExerciseBinding &&
+        !canonicalExercisePresentationReady,
     );
     const reviewWorkspaceNeedsMultiFile = Boolean(
         isReviewRouteMode &&
@@ -2026,8 +2104,11 @@ export default function CodeToolPane(props: {
         isReviewRouteMode &&
         !runtimeWorkspaceError &&
         (
-            exerciseKey
-                ? canonicalReviewRuntime?.workspaceStatus === "pending"
+            isExerciseEditorMode
+                ? (
+                    canonicalExercisePresentation?.status === "pending" ||
+                    canonicalExercisePresentation?.status === "missing"
+                )
                 : canonicalReviewRuntime?.workspaceStatus === "pending"
         ),
     );
@@ -2115,7 +2196,8 @@ export default function CodeToolPane(props: {
         !canRenderEditor &&
         shouldWaitForWorkspace;
     const coordinatedEditorLoading = Boolean(
-        destinationTransition?.showEditorLoading,
+        destinationTransition?.showEditorLoading &&
+        !canonicalExercisePresentationReady,
     );
     const destinationEditorReady = Boolean(
         destinationTransition?.destinationPublished &&
@@ -2999,11 +3081,80 @@ export default function CodeToolPane(props: {
         runtimeResetRevision,
     );
     const fullIdeLanguage = asWorkspaceLanguage(effectiveLanguage);
-    const fullIdeKey = buildLearnerFullIdeKey({
-        exerciseStateKey: fullIdeExerciseStateKey,
-        language: fullIdeLanguage,
+    const fullIdeHardBoundaryKey = "review";
+    const fullIdeKey = buildPersistentFullIdeKey({
+        hardBoundaryKey: fullIdeHardBoundaryKey,
+        runtimeLanguage: fullIdeLanguage,
         servicePreset: ideShell.servicePreset,
     });
+
+    /**
+     * Ordinary same-host Review navigation retains the last complete editor
+     * presentation until the destination canonical workspace is ready.
+     *
+     * This is presentation retention, not shared exercise state:
+     * - the held editor is read-only;
+     * - exercise/workspace identity remains the previous ready identity;
+     * - a hard-boundary or language change never reuses it;
+     * - initial hydration and real errors keep their existing blocking states.
+     */
+    const lastReadyFullIdePresentationRef = useRef<{
+        fullIdeKey: string;
+        workspace: WorkspaceStateV2;
+        exerciseStateKey: string;
+        workspaceOwnerIdentityKey: string;
+    } | null>(null);
+
+    useLayoutEffect(() => {
+        if (!canRenderEditor || !finalReviewWorkspace) return;
+
+        lastReadyFullIdePresentationRef.current = {
+            fullIdeKey,
+            workspace: finalReviewWorkspace,
+            exerciseStateKey: fullIdeExerciseStateKey,
+            workspaceOwnerIdentityKey,
+        };
+    }, [
+        canRenderEditor,
+        finalReviewWorkspace,
+        fullIdeExerciseStateKey,
+        fullIdeKey,
+        workspaceOwnerIdentityKey,
+    ]);
+
+    const previousReadyFullIdePresentation =
+        lastReadyFullIdePresentationRef.current;
+    const holdPreviousCompatibleFullIde =
+        shouldHoldPreviousCompatibleFullIde({
+            isReviewRouteMode,
+            canRenderEditor,
+            showLoadingMask,
+            currentFullIdeKey: fullIdeKey,
+            previousFullIdeKey:
+                previousReadyFullIdePresentation?.fullIdeKey ?? null,
+        });
+
+    const activeFullIdePresentation =
+        canRenderEditor && finalReviewWorkspace
+            ? {
+                fullIdeKey,
+                workspace: finalReviewWorkspace,
+                exerciseStateKey: fullIdeExerciseStateKey,
+                workspaceOwnerIdentityKey,
+            }
+            : holdPreviousCompatibleFullIde
+              ? previousReadyFullIdePresentation
+              : null;
+
+    const shouldRenderFullIde = Boolean(activeFullIdePresentation);
+    const presentedFullIdeWorkspace =
+        activeFullIdePresentation?.workspace ?? finalReviewWorkspace;
+    const presentedFullIdeExerciseStateKey =
+        activeFullIdePresentation?.exerciseStateKey ??
+        fullIdeExerciseStateKey;
+    const presentedFullIdeWorkspaceOwnerIdentityKey =
+        activeFullIdePresentation?.workspaceOwnerIdentityKey ??
+        workspaceOwnerIdentityKey;
     const effectiveTerminalCwd =
         typeof effectivePaneIdeConfig?.terminalCwd === "string" && effectivePaneIdeConfig.terminalCwd.trim()
             ? effectivePaneIdeConfig.terminalCwd.trim()
@@ -3177,7 +3328,7 @@ export default function CodeToolPane(props: {
     return (
         <div ref={ref} className="flex h-full min-h-0 w-full flex-col overflow-hidden">
             <div className="relative h-full min-h-0 flex-1">
-                {canRenderEditor ? (
+                {shouldRenderFullIde ? (
                     <FullIDE
                         key={fullIdeKey}
                         title={paneIdeMode.fullIdeTitle}
@@ -3205,7 +3356,11 @@ export default function CodeToolPane(props: {
                         loginHref="/authenticate"
                         billingHref="/billing"
                         draftStorageMode={draftStorageMode}
-                        readOnly={readOnly || coordinatedEditorLoading}
+                        readOnly={
+                            readOnly ||
+                            coordinatedEditorLoading ||
+                            holdPreviousCompatibleFullIde
+                        }
                         servicePreset={ideShell.servicePreset}
                         forceDesktopLayout={paneIdeMode.forceDesktopLayout}
                         services={{
@@ -3217,20 +3372,24 @@ export default function CodeToolPane(props: {
                                 ...(effectiveTerminalCwd ? { terminalCwd: effectiveTerminalCwd } : {}),
                             },
                         }}
-                        initialWorkspace={finalReviewWorkspace}
+                        initialWorkspace={presentedFullIdeWorkspace}
                         externalWorkspace={
-                            shouldControlFullIdeWorkspace ||
-                            shouldApplyWorkspaceToMountedEditor
-                                ? finalReviewWorkspace
-                                : undefined
+                            holdPreviousCompatibleFullIde
+                                ? presentedFullIdeWorkspace
+                                : (
+                                    shouldControlFullIdeWorkspace ||
+                                    shouldApplyWorkspaceToMountedEditor
+                                )
+                                  ? presentedFullIdeWorkspace
+                                  : undefined
                         }
                         externalWorkspaceRevision={
                             mountedEditorExternalWorkspaceRevision
                         }
-                        exerciseStateKey={fullIdeExerciseStateKey}
+                        exerciseStateKey={presentedFullIdeExerciseStateKey}
                         projectScope={{
                             kind: "review-tool" as any,
-                            scopeKey: `review-tool:${workspaceOwnerIdentityKey}`,
+                            scopeKey: `review-tool:${presentedFullIdeWorkspaceOwnerIdentityKey}`,
                         }}
                         onTerminalSyncReady={handleTerminalSyncReady}
 
@@ -3252,20 +3411,22 @@ export default function CodeToolPane(props: {
                     />
                 ) : null}
 
-                {coordinatedEditorLoading ? (
+                {coordinatedEditorLoading || holdPreviousCompatibleFullIde ? (
                     <div
-                        className="absolute inset-0 z-30 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm"
+                        className="pointer-events-none absolute right-3 top-3 z-30"
                         data-testid="review-editor-transition-loading"
                         aria-live="polite"
                     >
-                        <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">
+                        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-neutral-950/85 px-3 py-1.5 text-xs font-semibold text-white/80 shadow-lg backdrop-blur">
                             <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
                             {t("loadingEditor")}
                         </div>
                     </div>
                 ) : null}
 
-                {pendingExerciseBinding && !canRenderEditor ? (
+                {pendingExerciseBinding &&
+                !canRenderEditor &&
+                !holdPreviousCompatibleFullIde ? (
                     <div className="absolute inset-0 z-10 flex items-center justify-center bg-neutral-950/35">
                         <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-sm font-semibold text-white/80">
                             <span className="inline-block h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400" />
@@ -3290,7 +3451,8 @@ export default function CodeToolPane(props: {
                             </button>
                         </div>
                     </div>
-                ) : showLoadingMask ? (
+                ) : showLoadingMask &&
+                    !holdPreviousCompatibleFullIde ? (
                     <div className="absolute inset-0 z-20 flex items-center justify-center bg-neutral-950/70 backdrop-blur-sm">
                         {loadingTimedOut ? (
                             <div className="max-w-md rounded-2xl border border-white/10 bg-black/50 p-5 text-center text-white shadow-2xl">

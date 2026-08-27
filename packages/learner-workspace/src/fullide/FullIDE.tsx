@@ -33,6 +33,7 @@ import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminal
 import {FullIDEServices, resolveFullIDEServices} from "@/components/ide/fullide/services";
 import { resolveLearnerWorkspacePresentation } from "@/components/ide/fullide/workspacePresentation";
 import { resolveExternalWorkspaceApplyKey } from "@/components/ide/fullide/externalWorkspaceControl";
+import { buildFullIdeSessionRemountKey } from "./sessionRemountKey";
 import type { EditorSplitPlacement } from "@/components/code/runner/types";
 import {
     resolveFullIdeWorkspaceChangeOrigin,
@@ -343,6 +344,40 @@ function FullIDEInner({
     }, [currentWorkspace]);
 
     const dirty = useProjectDirtyState(currentWorkspace, language);
+    const lastCleanWorkspaceReplacementRevisionRef = useRef<
+        string | number | null
+    >(null);
+
+    useEffect(() => {
+        if (
+            !readOnly ||
+            typeof workspaceReplacementRevision === "undefined" ||
+            !currentWorkspace
+        ) {
+            return;
+        }
+
+        if (
+            lastCleanWorkspaceReplacementRevisionRef.current ===
+            workspaceReplacementRevision
+        ) {
+            return;
+        }
+
+        /**
+         * Review navigation applies the next authored/saved workspace while the
+         * controlled editor is temporarily read-only. That replacement is
+         * hydration, not a learner edit, so establish it as the dirty baseline.
+         */
+        lastCleanWorkspaceReplacementRevisionRef.current =
+            workspaceReplacementRevision;
+        dirty.markLoaded(currentWorkspace);
+    }, [
+        currentWorkspace,
+        dirty.markLoaded,
+        readOnly,
+        workspaceReplacementRevision,
+    ]);
     const projects = useProjectsList({
         enabled: access.canSaveCloud,
     });
@@ -765,7 +800,7 @@ function FullIDEInner({
             ) : null}
 
             <div className="min-h-0 flex-1">
-                {services.explorer.enabled && viewport.isDesktop ? (
+                {viewport.isDesktop ? (
                     <IdeDesktopLayout
                         splitRef={splitRef}
                         leftPct={leftPct}
@@ -773,27 +808,42 @@ function FullIDEInner({
                         onMouseDownDivider={(e) => actions.onMouseDownDivider(e, splitRef.current)}
                         onPointerDownDivider={(e) => actions.onPointerDownDivider(e, splitRef.current)}
                         onKeyDownDivider={(e) => actions.onKeyDownDivider(e, splitRef.current)}
-                        explorerCollapsed={explorerCollapsed}
-                        onToggleExplorer={() => setExplorerCollapsed((value) => !value)}
-                        showHistoryControls={services.explorer.showHistoryControls}
-                        canUndo={history.canUndo}
-                        canRedo={history.canRedo}
+                        explorerCollapsed={!services.explorer.enabled || explorerCollapsed}
+                        onToggleExplorer={() => {
+                            if (!services.explorer.enabled) return;
+                            setExplorerCollapsed((value) => !value);
+                        }}
+                        showHistoryControls={
+                            services.explorer.enabled &&
+                            services.explorer.showHistoryControls
+                        }
+                        canUndo={services.explorer.enabled && history.canUndo}
+                        canRedo={services.explorer.enabled && history.canRedo}
                         onUndo={actions.undo}
                         onRedo={actions.redo}
-                        explorer={explorerPane}
-                        editor={editorPane}
-                    />
-                ) : services.explorer.enabled ? (
-                    <IdeMobileLayout
-                        open={mobileExplorerAvailable && showMobileExplorer}
-                        onOpen={() => setShowMobileExplorer(true)}
-                        onClose={handleCloseMobileExplorer}
-                        showExplorerRail={mobileExplorerAvailable && !showMobileExplorer}
-                        explorer={explorerPane}
+                        explorer={services.explorer.enabled ? explorerPane : null}
                         editor={editorPane}
                     />
                 ) : (
-                    <div className="h-full min-h-0 min-w-0 overflow-hidden">{editorPane}</div>
+                    <IdeMobileLayout
+                        open={
+                            services.explorer.enabled &&
+                            mobileExplorerAvailable &&
+                            showMobileExplorer
+                        }
+                        onOpen={() => {
+                            if (!services.explorer.enabled) return;
+                            setShowMobileExplorer(true);
+                        }}
+                        onClose={handleCloseMobileExplorer}
+                        showExplorerRail={
+                            services.explorer.enabled &&
+                            mobileExplorerAvailable &&
+                            !showMobileExplorer
+                        }
+                        explorer={services.explorer.enabled ? explorerPane : null}
+                        editor={editorPane}
+                    />
                 )}
             </div>
 
@@ -1238,16 +1288,29 @@ export default function FullIDE(props: FullIDEProps) {
         workspace.derived.currentWorkspace,
         currentWorkspaceNotifyKey,
     ]);
+    const sessionRuntimeLanguage =
+        forcedLanguage ?? workspace.state.language;
     const sessionRemountKey = useMemo(
         () =>
-            [
+            buildFullIdeSessionRemountKey({
                 actorKey,
-                workspace.state.language,
-                initialProjectId ?? "local",
-                scopeKey ?? "global",
-                props.exerciseStateKey ?? "none",
-            ].join("::"),
-        [actorKey, workspace.state.language, initialProjectId, scopeKey, props.exerciseStateKey],
+                runtimeLanguage: sessionRuntimeLanguage,
+                initialProjectId,
+                scopeKey,
+                exerciseStateKey: props.exerciseStateKey,
+                controlledWorkspace:
+                    hasExternalWorkspaceProp ||
+                    String(props.projectScope?.scopeKey ?? "").startsWith("review-tool:"),
+            }),
+        [
+            actorKey,
+            hasExternalWorkspaceProp,
+            initialProjectId,
+            props.projectScope?.scopeKey,
+            props.exerciseStateKey,
+            scopeKey,
+            sessionRuntimeLanguage,
+        ],
     );
 
     const isIdeReady = !!(

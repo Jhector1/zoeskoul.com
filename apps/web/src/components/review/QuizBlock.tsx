@@ -37,6 +37,8 @@ import QuizFooter from "./quiz/components/QuizFooter";
 import { emitSfx } from "@/lib/sfx/bus";
 import { QuizBlockSkeleton } from "@/components/review/quiz/components/QuizBlockSkeleton";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { resolveCanonicalExercisePresentation } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExercisePresentation";
+import { resolveCanonicalExerciseOwnerKey } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExerciseOwnerKey";
 import { reviewDebug, summarizePracticePatch } from "@zoeskoul/learning-runtime/review/module/runtime/reviewDebug";
 import { exerciseDebug, summarizeExercisePatch } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseDebug";
 import { deriveEntryCode, isWorkspace } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseWorkspaceResolver";
@@ -840,6 +842,73 @@ export default function QuizBlock({
     activeQuestionIds: activePracticeLoadIds,
     prefetchQuestionIds: prefetchPracticeLoadIds,
   });
+
+  /**
+   * Transition presentation follows the canonical runtime/editor owner, not
+   * the signed practice request. Subscribe to one primitive signature so the
+   * mounted QuizBlock re-evaluates readiness when route sync creates/binds the
+   * destination authored exercise or its workspace becomes ready.
+   */
+  const transitionRuntimePresentationRevision = useReviewRuntimeStore(
+      (state) => {
+        const exerciseKey =
+            state.tool.boundExerciseKey ??
+            state.activeExerciseKey ??
+            "";
+        if (!exerciseKey) return "";
+
+        const exercise = state.exercises[exerciseKey];
+        return [
+          exerciseKey,
+          String(exercise?.updatedAt ?? ""),
+          String(exercise?.workspaceStatus ?? ""),
+          String(exercise?.workspaceGeneration ?? ""),
+        ].join(":");
+      },
+  );
+
+/**
+ * Canonical transition presentation follows the same ExerciseRuntime owner
+ * already selected by syncActiveTarget()/FullIDE. This subscription is
+ * component-level so soft navigation publishes directly into React.
+ */
+const transitionCanonicalExerciseOwnerKey = useReviewRuntimeStore((state) =>
+  resolveCanonicalExerciseOwnerKey({
+    registry: state.targetRegistry,
+    exercises: state.exercises,
+    boundExerciseKey: state.tool.boundExerciseKey,
+    activeExerciseKey: state.activeExerciseKey,
+    fallbackExerciseKey: null,
+  }),
+);
+const transitionCanonicalExercise = useReviewRuntimeStore((state) =>
+  transitionCanonicalExerciseOwnerKey
+    ? state.exercises[transitionCanonicalExerciseOwnerKey] ?? null
+    : null,
+);
+const transitionCanonicalRegistryEntry = useReviewRuntimeStore((state) =>
+  transitionCanonicalExerciseOwnerKey
+    ? state.targetRegistry?.byKey?.[
+        `exercise:${transitionCanonicalExerciseOwnerKey}`
+      ] ?? null
+    : null,
+);
+const transitionCanonicalExercisePresentation = useMemo(
+  () =>
+    resolveCanonicalExercisePresentation({
+      exercise: transitionCanonicalExercise,
+      authoredManifest:
+        (transitionCanonicalRegistryEntry as any)?.toolManifest ??
+        (transitionCanonicalRegistryEntry as any)?.item ??
+        null,
+      resetRevision: runtimeResetRevision,
+    }),
+  [
+    runtimeResetRevision,
+    transitionCanonicalExercise,
+    transitionCanonicalRegistryEntry,
+  ],
+);
 
   useEffect(() => {
     local.hydrate(initState);
@@ -2008,21 +2077,15 @@ export default function QuizBlock({
       q.kind === "practice"
         ? practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id]
         : undefined;
+        /**
+     * The outer exercise transition must not reconstruct runtime identity from
+     * q.fetch. The active boundary consumes the component-level canonical owner
+     * that syncActiveTarget has already published for the destination.
+     */
+    void transitionRuntimePresentationRevision;
     const transitionQuestionReady =
       q.kind !== "practice" ||
-      Boolean(
-        practiceState &&
-        !practiceState.loading &&
-        !practiceState.error &&
-        practiceState.exercise &&
-        practiceState.item &&
-        (
-          readOnly ||
-          String(
-            (practiceState.item as { key?: unknown })?.key ?? "",
-          ).trim()
-        ),
-      );
+      Boolean(transitionCanonicalExercisePresentation?.ready);
 
     /**
      * Important:
@@ -2074,7 +2137,11 @@ export default function QuizBlock({
           <ReviewExerciseTransitionBoundary
               active={idx === activeIndex}
               ready={transitionQuestionReady}
-              ownerKey={q.kind === "practice" ? stablePracticeKey : q.id}
+              ownerKey={
+                  q.kind === "practice"
+                    ? transitionCanonicalExerciseOwnerKey || stablePracticeKey
+                    : q.id
+              }
           >
           {q.kind === "practice" ? (
               <QuizPracticeCard

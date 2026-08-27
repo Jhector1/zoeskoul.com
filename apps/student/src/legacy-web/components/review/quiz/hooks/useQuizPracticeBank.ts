@@ -1444,6 +1444,7 @@ export function useQuizPracticeBank(args: {
       renderedResetKeyRef.current === resetKey ? practice : {};
 
   const loadTokenRef = useRef<Record<string, number>>({});
+  const inFlightLoadRef = useRef<Record<string, string>>({});
   const loadFailureKeyRef = useRef<Record<string, string>>({});
   const loadCycleRef = useRef(0);
 
@@ -1496,6 +1497,7 @@ export function useQuizPracticeBank(args: {
     setPractice({});
     padRefs.current = {};
     loadTokenRef.current = {};
+    inFlightLoadRef.current = {};
   }, [resetKey]);
 
   useEffect(() => {
@@ -1540,10 +1542,9 @@ export function useQuizPracticeBank(args: {
   const loadPracticeQuestion = useCallback(
       async (
           q: Extract<ReviewQuestion, { kind: "practice" }>,
-          opts?: { force?: boolean; cancelledRef?: { current: boolean } },
+          opts?: { force?: boolean },
       ) => {
         const force = Boolean(opts?.force);
-        const cancelledRef = opts?.cancelledRef;
         const cycle = loadCycleRef.current;
         const stableKey = getStablePracticeQuestionKey(q);
         const questionIdentity = getPracticeQuestionIdentity(q);
@@ -1584,8 +1585,22 @@ export function useQuizPracticeBank(args: {
           return existing;
         }
 
+        /**
+         * A navigation/render effect may restart while the same authored
+         * exercise is still loading. The request belongs to the canonical
+         * exercise identity, not to that effect instance.
+         *
+         * Reuse the already-started load instead of issuing another request.
+         * Force retry intentionally supersedes the old token.
+         */
+        if (!force && inFlightLoadRef.current[stableKey] != null) {
+          return existing ?? null;
+        }
+
         const token = (loadTokenRef.current[stableKey] ?? 0) + 1;
         loadTokenRef.current[stableKey] = token;
+        const requestMarker = `${cycle}:${token}`;
+        inFlightLoadRef.current[stableKey] = requestMarker;
 
         const initMeta = getSavedPracticeMeta(initialStateRef.current, q);
         const fallbackMax = unlimitedAttempts
@@ -1723,11 +1738,23 @@ export function useQuizPracticeBank(args: {
             savedPatch: summarizePracticePatch(getSavedPracticePatch(initialStateRef.current, q)),
           });
 
-          if (cancelledRef?.current) return;
           if (loadCycleRef.current !== cycle) return;
           if (loadTokenRef.current[stableKey] !== token) return;
-          if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) return;
 
+          /**
+           * Do not discard a valid signed practice payload solely because the
+           * canonical runtime generation advanced while the network request was
+           * in flight.
+           *
+           * The response is already protected by the current hook load cycle,
+           * the latest token for this stable authored exercise identity, and
+           * the exact returned exercise-identity check above.
+           *
+           * Keep runtimeGeneration=startedGeneration below. That intentionally
+           * marks this signed item as older than the current editor generation,
+           * so it may be used for validation/binding but cannot seed or overwrite
+           * the newer canonical learner workspace.
+           */
           const baseForLoaded =
               practiceRef.current[stableKey] ??
               practiceRef.current[q.id] ??
@@ -1805,7 +1832,6 @@ export function useQuizPracticeBank(args: {
           setPractice((prev) => setPracticeForQuestion(prev, q, nextState));
           return nextState;
         } catch (e: any) {
-          if (cancelledRef?.current) return;
           if (loadCycleRef.current !== cycle) return;
           if (loadTokenRef.current[stableKey] !== token) return;
 
@@ -1833,6 +1859,10 @@ export function useQuizPracticeBank(args: {
             return setPracticeForQuestion(prev, q, nextState);
           });
           return null;
+        } finally {
+          if (inFlightLoadRef.current[stableKey] === requestMarker) {
+            delete inFlightLoadRef.current[stableKey];
+          }
         }
       },
       [specMaxAttempts, unlimitedAttempts],
@@ -1842,7 +1872,7 @@ export function useQuizPracticeBank(args: {
     const currentQuestions = questionsRef.current;
     if (!currentQuestions.length) return;
 
-    const cancelledRef = { current: false };
+    const prefetchCancelledRef = { current: false };
 
     const practiceQuestions = currentQuestions.filter(
         (q): q is Extract<ReviewQuestion, { kind: "practice" }> => q.kind === "practice",
@@ -1877,7 +1907,7 @@ export function useQuizPracticeBank(args: {
         : practiceQuestions;
 
     for (const q of immediate) {
-      void loadPracticeQuestion(q, { cancelledRef });
+      void loadPracticeQuestion(q);
     }
 
     const prefetch = pickQuestions(prefetchQuestionIds).filter((q) => {
@@ -1890,9 +1920,9 @@ export function useQuizPracticeBank(args: {
 
     if (prefetch.length && activeQuestionIds?.length) {
       const runPrefetch = () => {
-        if (cancelledRef.current) return;
+        if (prefetchCancelledRef.current) return;
         for (const q of prefetch) {
-          void loadPracticeQuestion(q, { cancelledRef });
+              void loadPracticeQuestion(q);
         }
       };
 
@@ -1905,7 +1935,7 @@ export function useQuizPracticeBank(args: {
     }
 
     return () => {
-      cancelledRef.current = true;
+      prefetchCancelledRef.current = true;
       const idleApi = typeof globalThis !== "undefined" ? (globalThis as any) : null;
       if (idleHandle != null && idleApi && typeof idleApi.cancelIdleCallback === "function") {
         idleApi.cancelIdleCallback(idleHandle);

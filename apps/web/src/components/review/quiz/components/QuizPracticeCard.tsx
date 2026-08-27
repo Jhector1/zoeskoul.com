@@ -28,6 +28,8 @@ import {
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import { getExerciseStateKey } from "@zoeskoul/learning-runtime/review/module/runtime/exerciseKeys";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { resolveCanonicalExercisePresentation } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExercisePresentation";
+import { resolveCanonicalExerciseOwnerKey } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExerciseOwnerKey";
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import {
   normalizeWorkspaceLanguage,
@@ -1144,7 +1146,7 @@ export default function QuizPracticeCard(props: {
      */
     return manifestSlotId || getStableExerciseSlotId(q, resolvedProjectStepManifest);
   }, [q, resolvedProjectStepManifest, livePracticeManifest]);
-  const exerciseKeyForTools = useMemo(() => {
+  const legacyExerciseKeyForTools = useMemo(() => {
     const fetch = (q as any).fetch ?? {};
 
     return getExerciseStateKey(
@@ -1159,6 +1161,23 @@ export default function QuizPracticeCard(props: {
     );
   }, [q, ownerCardId, stableExerciseSlotId]);
 
+  /**
+   * Route sync already publishes and binds the canonical ExerciseRuntime owner.
+   * q.fetch may lag one soft-navigation render, so its reconstructed key is only
+   * a legacy fallback and must not own card presentation.
+   */
+  const exerciseKeyForTools = useReviewRuntimeStore((state) =>
+      resolveCanonicalExerciseOwnerKey({
+        registry: state.targetRegistry,
+        exercises: state.exercises,
+        boundExerciseKey: state.tool.boundExerciseKey,
+        activeExerciseKey: state.activeExerciseKey,
+        authoredExerciseId: stableExerciseSlotId,
+        ownerCardId,
+        fallbackExerciseKey: legacyExerciseKeyForTools,
+      }),
+  );
+
   const effectiveToolId = toolScopedId ?? stableExerciseSlotId;
   const codeInputId =
       toolsEnabled && isCodeInput ? exerciseKeyForTools : undefined;
@@ -1167,6 +1186,84 @@ export default function QuizPracticeCard(props: {
       (s) => s.exercises[exerciseKeyForTools] ?? null,
   );
   const runtimeResetRevision = useReviewRuntimeStore((s) => s.resetRevision);
+  const canonicalRouteExerciseEntry = useReviewRuntimeStore(
+      (s) =>
+          s.targetRegistry?.byKey[`exercise:${exerciseKeyForTools}`] ??
+          null,
+  );
+  const canonicalRoutePresentationExercise = useMemo<Exercise | null>(() => {
+    const routeManifest =
+        (canonicalRouteExerciseEntry as any)?.toolManifest ??
+        (canonicalRouteExerciseEntry as any)?.item ??
+        null;
+
+    if (!routeManifest || typeof routeManifest !== "object") return null;
+
+    return mergeProjectStepFallbackExercise(
+        routeManifest as Exercise,
+        resolvedProjectStepManifest,
+    );
+  }, [canonicalRouteExerciseEntry, resolvedProjectStepManifest]);
+
+  const canonicalRuntimePresentationWorkspace =
+      getWorkspaceFromAnyState(runtimeExercise);
+
+  const runtimePresentationItem = useMemo(() => {
+    if (!canonicalRoutePresentationExercise) return null;
+    if (!canonicalRuntimePresentationWorkspace) return null;
+
+    const exerciseIdentity = firstNonBlankString(
+        (canonicalRoutePresentationExercise as any)?.exerciseKey,
+        (canonicalRoutePresentationExercise as any)?.id,
+        stableExerciseSlotId,
+    );
+    const runtimeCode = firstNonBlankString(
+        (runtimeExercise as any)?.code,
+        deriveEntryCode(canonicalRuntimePresentationWorkspace),
+    );
+
+    return {
+      key: exerciseIdentity,
+      exerciseKey: exerciseIdentity,
+      exercise: canonicalRoutePresentationExercise,
+      code: runtimeCode,
+      source: runtimeCode,
+      workspace: canonicalRuntimePresentationWorkspace,
+      codeWorkspace: canonicalRuntimePresentationWorkspace,
+      ideWorkspace: canonicalRuntimePresentationWorkspace,
+      workspaceOrigin:
+          (runtimeExercise as any)?.workspaceOrigin ??
+          "starter",
+      userEdited: Boolean(
+          (runtimeExercise as any)?.userEdited,
+      ),
+      submitted: Boolean((runtimeExercise as any)?.submitted),
+      result: (runtimeExercise as any)?.result,
+    } as any;
+  }, [
+    canonicalRoutePresentationExercise,
+    canonicalRuntimePresentationWorkspace,
+    runtimeExercise,
+    stableExerciseSlotId,
+  ]);
+
+  const presentationExercise =
+      (livePracticeManifest as Exercise | null) ??
+      ex ??
+      canonicalRoutePresentationExercise;
+  const presentationItem =
+      livePracticeItem ??
+      runtimePresentationItem;
+  const canonicalRuntimePresentation =
+      resolveCanonicalExercisePresentation({
+        exercise: runtimeExercise,
+        authoredManifest:
+          canonicalRoutePresentationExercise ?? presentationExercise,
+        resetRevision: runtimeResetRevision,
+      });
+  const canonicalRuntimePresentationReady =
+      canonicalRuntimePresentation.ready;
+
   const practiceSnapshotGeneration =
       typeof ps?.runtimeGeneration === "number"
           ? ps.runtimeGeneration
@@ -1217,6 +1314,17 @@ export default function QuizPracticeCard(props: {
   const practiceResolvedForToolBinding = Boolean(
       hasServerResolvedPracticeForToolBinding || hasLocalProjectStepFallbackForToolBinding,
   );
+
+  /**
+   * Presentation is now owned solely by the canonical ExerciseRuntime.
+   * Signed practice state can make validation ready, but it never owns whether
+   * an authored exercise with a current workspace is visible.
+   */
+  const practiceResolvedForPresentation = Boolean(
+      canonicalRuntimePresentationReady ||
+      practiceResolvedForToolBinding,
+  );
+
   const practiceItemReady = Boolean(livePracticeItem);
   const practiceStarterFilesKey = JSON.stringify(
       (getWorkspaceFromAnyState(livePracticeManifest) as any)?.starterFiles ??
@@ -1667,6 +1775,7 @@ export default function QuizPracticeCard(props: {
   const showFinalizedAction = finalizedAction != null;
 
   const disableCheck =
+      !practiceResolvedForToolBinding ||
       readOnly ||
       (!isCodeExerciseWithInput && !unlocked) ||
       isCompleted ||
@@ -1677,6 +1786,7 @@ export default function QuizPracticeCard(props: {
       !hasSubmitInput;
 
   const disableHelpAction =
+      !practiceResolvedForToolBinding ||
       readOnly ||
       (!isCodeExerciseWithInput && !unlocked) ||
       isCompleted ||
@@ -1706,14 +1816,19 @@ export default function QuizPracticeCard(props: {
 
   const maxForRenderer = ps?.maxAttempts ?? Number.POSITIVE_INFINITY;
 
-  const hasExercise = Boolean(ex && livePracticeItem && practiceResolvedForToolBinding);
+  const hasExercise = Boolean(presentationExercise && presentationItem && practiceResolvedForPresentation);
   const hasProjectStepFallback = Boolean(
-      resolvedProjectStepManifest && projectStepFallbackItem && practiceResolvedForToolBinding,
+      resolvedProjectStepManifest && projectStepFallbackItem && practiceResolvedForPresentation,
   );
   const isInitialLoading = Boolean(
       (!ps || ps.loading) && !hasExercise && !hasProjectStepFallback && !ps?.error,
   );
-  const isRefreshing = Boolean(ps?.loading && hasExercise && !hasProjectStepFallback);
+  const isRefreshing = Boolean(
+      ps?.loading &&
+      hasExercise &&
+      Boolean(livePracticeItem) &&
+      !hasProjectStepFallback,
+  );
   const hasBlockingError = Boolean(ps?.error && !hasExercise && !hasProjectStepFallback);
   const hasInlineError = Boolean(
       ps?.error && (hasExercise || hasProjectStepFallback),
@@ -1748,83 +1863,6 @@ export default function QuizPracticeCard(props: {
   const practiceLoadErrorForTools = hasBlockingError
       ? String(ps?.error ?? "Failed to load practice exercise.")
       : "";
-
-  useLayoutEffect(() => {
-    if (!exerciseKeyForTools) return;
-
-    const store = useReviewRuntimeStore.getState();
-    let existing = store.exercises[exerciseKeyForTools];
-
-    if (!existing && livePracticeManifest?.kind === "code_input") {
-      ensureRuntimeExercise({
-        exerciseKey: exerciseKeyForTools,
-        subjectSlug: fetchSubjectSlug,
-        moduleSlug: fetchModuleSlug,
-        sectionSlug: fetchSectionSlug,
-        topicId: fetchTopicId,
-        cardId: fetchOwnerCardId,
-        manifest: livePracticeManifest,
-        saved: practiceSnapshotMaySeedWorkspace ? livePracticeItem : undefined,
-      });
-
-      existing = useReviewRuntimeStore.getState().exercises[exerciseKeyForTools];
-    }
-
-    if (!existing) return;
-
-    const nextWorkspaceStatus = hasBlockingError
-        ? "error"
-        : isInitialLoading || showStuckLoading
-            ? "pending"
-            : practiceResolvedForToolBinding
-                ? "ready"
-                : null;
-
-    if (!nextWorkspaceStatus) return;
-
-    const nextWorkspaceError =
-        nextWorkspaceStatus === "error" ? practiceLoadErrorForTools : null;
-
-    if (
-        existing.workspaceStatus === nextWorkspaceStatus &&
-        String((existing as any).workspaceError ?? "") === String(nextWorkspaceError ?? "")
-    ) {
-      return;
-    }
-
-    patchRuntimeExercise(exerciseKeyForTools, {
-      generation: runtimeExercise?.workspaceGeneration ?? runtimeResetRevision,
-      updateOrigin: "quiz-practice-status",
-      workspaceStatus: nextWorkspaceStatus,
-      workspaceError: nextWorkspaceError,
-      workspace: existing.workspace,
-      codeWorkspace: existing.workspace,
-      ideWorkspace: existing.workspace,
-      code: existing.code,
-      source: existing.source,
-      stdin: existing.stdin,
-      codeStdin: existing.codeStdin,
-    } as any);
-  }, [
-    ensureRuntimeExercise,
-    exerciseKeyForTools,
-    fetchOwnerCardId,
-    fetchModuleSlug,
-    fetchSectionSlug,
-    fetchSubjectSlug,
-    fetchTopicId,
-    hasBlockingError,
-    isInitialLoading,
-    livePracticeItem,
-    livePracticeManifest,
-    patchRuntimeExercise,
-    practiceLoadErrorForTools,
-    practiceResolvedForToolBinding,
-    practiceSnapshotIsCurrent,
-    runtimeExercise?.workspaceGeneration,
-    runtimeResetRevision,
-    showStuckLoading,
-  ]);
 
   return (
       <div className={["p-2", !unlocked ? "opacity-70" : ""].join(" ")}>
@@ -1904,7 +1942,7 @@ export default function QuizPracticeCard(props: {
                 ) : null}
               </div>
             </div>
-        ) : ex && livePracticeItem && practiceResolvedForToolBinding ? (
+        ) : presentationExercise && presentationItem && practiceResolvedForPresentation ? (
             <div className="mt-1">
               {isRefreshing ? (
                   <div className="mb-2 ui-quiz-status-soft flex items-center gap-2">
@@ -1949,22 +1987,22 @@ export default function QuizPracticeCard(props: {
                   qStepId: (q as any).stepId,
                   psExerciseKind: ps?.exercise?.kind,
                   psItem: summarizeExercisePatch(ps?.item),
-                  exKind: ex.kind,
-                  exId: (ex as any).id,
-                  exExerciseKey: (ex as any).exerciseKey,
+                  exKind: presentationExercise.kind,
+                  exId: (presentationExercise as any).id,
+                  exExerciseKey: (presentationExercise as any).exerciseKey,
                   fetchTopic: (q as any).fetch?.topic,
                 }) as any}
 
                 <ExerciseRenderer
                     key={stableExerciseSlotId}
-                    exercise={(rendererExercise ?? ex) as Exercise}
+                    exercise={(rendererExercise ?? presentationExercise) as Exercise}
                     current={
                       isCorrect || isCompleted
                           ? {
-                            ...(livePracticeItem as any),
+                            ...(presentationItem as any),
                             feedbackDismissed: true,
                           }
-                          : (livePracticeItem as any)
+                          : (presentationItem as any)
                     }
                     exerciseStateId={stableExerciseSlotId}
                     busy={
@@ -2147,24 +2185,28 @@ export default function QuizPracticeCard(props: {
                 </div>
               </div>
 
-              <PracticeHelpPanel
-                  exercise={(livePracticeManifest as Exercise) ?? ex}
-                  current={livePracticeItem as any}
-                  help={(livePracticeItem as any)?.help}
-                  helpPolicy={ps?.helpPolicy}
-                  updateCurrent={updateItemSafe}
-                  onOpenHelp={onHelp}
-                  codeInputId={codeInputId}
-                  readOnly={readOnly}
-              />
+              {livePracticeItem ? (
+                <>
+                  <PracticeHelpPanel
+                      exercise={(livePracticeManifest as Exercise) ?? presentationExercise}
+                      current={livePracticeItem as any}
+                      help={(livePracticeItem as any)?.help}
+                      helpPolicy={ps?.helpPolicy}
+                      updateCurrent={updateItemSafe}
+                      onOpenHelp={onHelp}
+                      codeInputId={codeInputId}
+                      readOnly={readOnly}
+                  />
 
-              <AiTutorFloating
-                  current={livePracticeItem as any}
-                  exercise={((livePracticeManifest as Exercise) ?? ex) as Exercise}
-                  enabled={
-                    !readOnly && unlocked && !isCompleted && !locked && !isFinalized
-                  }
-              />
+                  <AiTutorFloating
+                      current={livePracticeItem as any}
+                      exercise={((livePracticeManifest as Exercise) ?? presentationExercise) as Exercise}
+                      enabled={
+                        !readOnly && unlocked && !isCompleted && !locked && !isFinalized
+                      }
+                  />
+                </>
+              ) : null}
             </div>
         ) : (
             <div className="mt-2 ui-quiz-status-soft">
