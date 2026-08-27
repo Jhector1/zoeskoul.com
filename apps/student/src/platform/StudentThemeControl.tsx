@@ -1,5 +1,4 @@
 import {
-  Laptop,
   Moon,
   Sun,
 } from "lucide-react";
@@ -25,11 +24,6 @@ const choices = [
     label: "Dark",
     icon: Moon,
   },
-  {
-    value: "system",
-    label: "System",
-    icon: Laptop,
-  },
 ] as const;
 
 export function StudentThemeControl() {
@@ -47,7 +41,7 @@ export function StudentThemeControl() {
   if (!mounted) {
     return (
       <div
-        className="h-9 w-[15.5rem] rounded-lg border border-neutral-200 bg-white/70 dark:border-white/10 dark:bg-white/[0.04]"
+        className="h-9 w-[10.5rem] rounded-lg border border-neutral-200 bg-white/70 dark:border-white/10 dark:bg-white/[0.04]"
         aria-hidden="true"
       />
     );
@@ -55,7 +49,7 @@ export function StudentThemeControl() {
 
   return (
     <div
-      className="grid grid-cols-3 gap-1 rounded-lg border border-neutral-200 bg-white p-1 dark:border-white/10 dark:bg-white/[0.04]"
+      className="grid grid-cols-2 gap-1 rounded-lg border border-neutral-200 bg-white p-1 dark:border-white/10 dark:bg-white/[0.04]"
       role="radiogroup"
       aria-label="Color theme"
     >

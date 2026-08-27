@@ -5,14 +5,19 @@ import {
   DEFAULT_APP_PREFERENCES,
   PreferencesClientError,
   createPreferencesClient,
+  inferAppLocale,
   isAppTheme,
+  languageTagToAppLocale,
   normalizeAppPreferences,
   normalizeFontSizePx,
   normalizeLocale,
+  parseAcceptLanguage,
   parseAppPreferencesPatch,
   parsePreferencesCookieValue,
   preferencesEqual,
   readBrowserPreferenceSnapshot,
+  resolveConcreteTheme,
+  resolveInitialAppLocale,
   serializePreferencesCookieValue,
   writeLegacyPreferences,
 } from "./index";
@@ -45,6 +50,49 @@ describe("preference contracts", () => {
     );
     expect(normalizeFontSizePx(15)).toBe(16);
     expect(normalizeFontSizePx(21)).toBe(24);
+  });
+
+  it("infers a supported first locale from browser language before country", () => {
+    expect(languageTagToAppLocale("fr-CA")).toBe("fr");
+    expect(languageTagToAppLocale("ht_HT")).toBe("ht");
+    expect(languageTagToAppLocale("es-MX")).toBeNull();
+
+    expect(inferAppLocale({
+      languages: ["fr-CA", "en-US"],
+      country: "HT",
+    })).toBe("fr");
+
+    expect(inferAppLocale({
+      languages: ["es-MX"],
+      country: "HT",
+    })).toBe("ht");
+
+    expect(inferAppLocale({
+      languages: ["es-MX"],
+      country: "US",
+    })).toBe("en");
+  });
+
+  it("lets a saved locale win over every automatic first-visit signal", () => {
+    expect(resolveInitialAppLocale({
+      savedLocale: "ht",
+      languages: ["fr-CA", "en-US"],
+      country: "FR",
+    })).toBe("ht");
+
+    expect(resolveInitialAppLocale({
+      savedLocale: "unsupported",
+      languages: ["fr-CA", "en-US"],
+      country: "HT",
+    })).toBe("fr");
+  });
+
+  it("honors Accept-Language quality and freezes system theme to a concrete value", () => {
+    expect(parseAcceptLanguage("en;q=0.5, fr-CA;q=0.9, ht;q=0.7"))
+      .toEqual(["fr-CA", "ht", "en"]);
+    expect(resolveConcreteTheme("system", true)).toBe("dark");
+    expect(resolveConcreteTheme("system", false)).toBe("light");
+    expect(resolveConcreteTheme("dark", false)).toBe("dark");
   });
 
   it("strictly rejects invalid and unknown patch fields", () => {

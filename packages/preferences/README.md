@@ -21,16 +21,19 @@ Teacher had no preference initialization.
 
 ## Authority and synchronization
 
-Authenticated bootstrap order is database, shared cookie, in-memory state,
-legacy local storage, then defaults. A successful GET always replaces stale
-local values with the database snapshot. Browser updates are optimistic, then
-PATCH the Web API; a failed save leaves the responsive in-memory/local fallback
-and exposes an error, but the next authenticated bootstrap replaces it from the
-database.
+Authenticated bootstrap uses the database when a preference row exists. For a
+new account with no row yet, the shared cookie is adopted first; otherwise the
+request's supported browser language is used before a conservative country
+fallback and English. The first successful browser hydration also resolves the
+legacy `system` theme to a concrete light or dark value so login, logout, route
+changes, and later operating-system theme changes cannot silently change it.
+Browser updates are optimistic and then PATCH the Web API.
 
-Anonymous bootstrap order is shared cookie, local storage, then defaults. A
-local anonymous snapshot is adopted only after GET explicitly reports that no
-shared cookie exists; Web then validates it and writes the anonymous cookie.
+Anonymous bootstrap order is shared cookie, local storage, then first-visit
+inference. Browser language wins over country for locale inference, and English
+is the final fallback. Once that snapshot is mirrored into the shared cookie,
+automatic inference no longer replaces it; a later explicit locale or theme
+action becomes the new persisted value.
 
 Storage events synchronize same-origin tabs. The credentialed API and cookie
 mirror synchronize cross-app navigation and revalidation. Logout leaves only

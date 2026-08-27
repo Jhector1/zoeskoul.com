@@ -15,6 +15,8 @@ import {
   createPreferencesClient,
   normalizeAppPreferences,
   parseAppPreferencesPatch,
+  inferAppLocale,
+  resolveConcreteTheme,
   preferencesEqual,
   readBrowserPreferenceSnapshot,
   readLocalPreferences,
@@ -39,13 +41,36 @@ function browserSnapshot(initial?: AppPreferences): AppPreferences {
     return initial ?? { ...DEFAULT_APP_PREFERENCES };
   }
 
+  const inferredFallback = normalizeAppPreferences({
+    ...(initial ?? DEFAULT_APP_PREFERENCES),
+    locale: initial?.locale ?? inferAppLocale({
+      languages: navigator.languages?.length
+        ? navigator.languages
+        : [navigator.language],
+    }),
+    theme: resolveConcreteTheme(
+      initial?.theme ?? DEFAULT_APP_PREFERENCES.theme,
+      window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false,
+    ),
+  });
+
   const snapshot = readBrowserPreferenceSnapshot({
     cookie: document.cookie,
     storage: window.localStorage,
-    fallback: initial,
+    fallback: inferredFallback,
   });
   persistCompatibility(snapshot);
   return snapshot;
+}
+
+function concreteBrowserTheme(
+  current: AppPreferences["theme"],
+): Exclude<AppPreferences["theme"], "system"> {
+  if (current === "light" || current === "dark") return current;
+  return resolveConcreteTheme(
+    current,
+    window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false,
+  );
 }
 
 function persistCompatibility(preferences: AppPreferences): void {
@@ -97,18 +122,35 @@ export function AppPreferencesProvider(props: {
   async function revalidate() {
     try {
       let response = await clientRef.current.get();
+
       if (
+        response.authenticated &&
+        response.source === "cookie"
+      ) {
+        response = await clientRef.current.patch(response.preferences);
+      } else if (
         !response.authenticated &&
         response.source === "default" &&
         !preferencesEqual(
           preferencesRef.current,
-          DEFAULT_APP_PREFERENCES,
+          response.preferences,
         )
       ) {
         response = await clientRef.current.mirrorAnonymous(
           preferencesRef.current,
         );
       }
+
+      if (response.preferences.theme === "system") {
+        const theme = concreteBrowserTheme(preferencesRef.current.theme);
+        response = response.authenticated
+          ? await clientRef.current.patch({ theme })
+          : await clientRef.current.mirrorAnonymous({
+              ...response.preferences,
+              theme,
+            });
+      }
+
       authenticatedRef.current = response.authenticated;
       setAuthenticated(response.authenticated);
       commit(response.preferences);

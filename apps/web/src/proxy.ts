@@ -4,6 +4,10 @@ import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 import createMiddleware from "next-intl/middleware";
+import {
+  parseAcceptLanguage,
+  resolveInitialAppLocale,
+} from "@zoeskoul/preferences";
 import { routing } from "@/i18n/routing";
 import { isCatalogLearningPath } from "@/lib/routing/protectedLearningPath";
 import { handleAppApiCorsBoundary } from "@/lib/http/appApiCorsBoundary";
@@ -97,6 +101,22 @@ const POSSIBLE_SESSION_COOKIES = [
 
 const LOCALE_COOKIE = "NEXT_LOCALE";
 
+function localePathname(
+  pathname: string,
+  locale: RoutingLocale,
+) {
+  const { path } = stripLocale(pathname);
+  return `/${locale}${path === "/" ? "" : path}`;
+}
+
+function requestCountry(req: NextRequest) {
+  return (
+    req.headers.get("x-vercel-ip-country") ??
+    req.headers.get("cf-ipcountry") ??
+    req.headers.get("x-country-code")
+  );
+}
+
 function redirectToAuthenticate(args: {
   req: NextRequest;
   locale: string;
@@ -131,15 +151,54 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(url, 308);
   }
 
-  // 2) Redirect non-locale routes to saved locale when available
-  if (!hasLocalePrefix(pathname)) {
-    const saved = req.cookies.get(LOCALE_COOKIE)?.value;
+  // 2) Canonical locale precedence for page routes:
+  // saved user choice -> browser language -> country fallback -> English.
+  // API paths are never localized.
+  const localeRoutable =
+    pathname !== "/api" &&
+    !pathname.startsWith("/api/");
+  const savedLocale =
+    req.cookies.get(LOCALE_COOKIE)?.value;
 
-    if (isRoutingLocale(saved)) {
+  if (
+    localeRoutable &&
+    isRoutingLocale(savedLocale)
+  ) {
+    const routeLocale =
+      pathname.split("/")[1];
+
+    if (
+      !hasLocalePrefix(pathname) ||
+      routeLocale !== savedLocale
+    ) {
       const url = req.nextUrl.clone();
-      url.pathname = `/${saved}${pathname === "/" ? "" : pathname}`;
+      url.pathname =
+        localePathname(
+          pathname,
+          savedLocale,
+        );
       return NextResponse.redirect(url);
     }
+  } else if (
+    localeRoutable &&
+    !hasLocalePrefix(pathname)
+  ) {
+    const inferredLocale =
+      resolveInitialAppLocale({
+        languages: parseAcceptLanguage(
+          req.headers.get("accept-language"),
+        ),
+        country: requestCountry(req),
+        fallback: routing.defaultLocale,
+      });
+
+    const url = req.nextUrl.clone();
+    url.pathname =
+      localePathname(
+        pathname,
+        inferredLocale,
+      );
+    return NextResponse.redirect(url);
   }
 
   // 3) Cross-app handoff is controlled by an explicit, currently empty,

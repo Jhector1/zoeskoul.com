@@ -143,7 +143,50 @@ describe("/api/app-preferences", () => {
     await expect(missing.json()).resolves.toEqual({
       authenticated: true,
       preferences: defaults,
-      source: "database",
+      source: "default",
+    });
+  });
+
+  it("keeps a browser preference cookie authoritative when an authenticated user has no database row yet", async () => {
+    authenticate("new-user");
+    mocks.findUnique.mockResolvedValue(null);
+    const { GET } = await route();
+    const response = await GET(request({
+      cookie:
+        `zoeskoul.preferences=${serializePreferencesCookieValue(stored)}`,
+    }));
+
+    await expect(response.json()).resolves.toEqual({
+      authenticated: true,
+      preferences: stored,
+      source: "cookie",
+    });
+    expect(response.headers.get("set-cookie")).toContain(
+      `zoeskoul.preferences=${serializePreferencesCookieValue(stored)}`,
+    );
+  });
+
+  it("infers first locale from Accept-Language before country and falls back to country when unsupported", async () => {
+    const { GET } = await route();
+
+    const frenchRequest = request();
+    frenchRequest.headers.set("Accept-Language", "en;q=0.4, fr-CA;q=0.9");
+    frenchRequest.headers.set("CF-IPCountry", "HT");
+    const french = await GET(frenchRequest);
+    await expect(french.json()).resolves.toMatchObject({
+      authenticated: false,
+      preferences: { locale: "fr" },
+      source: "default",
+    });
+
+    const haitiRequest = request();
+    haitiRequest.headers.set("Accept-Language", "es-MX");
+    haitiRequest.headers.set("CF-IPCountry", "HT");
+    const haiti = await GET(haitiRequest);
+    await expect(haiti.json()).resolves.toMatchObject({
+      authenticated: false,
+      preferences: { locale: "ht" },
+      source: "default",
     });
   });
 

@@ -63,6 +63,81 @@ export function normalizeLocale(
   return isAppLocale(normalized) ? normalized : fallback;
 }
 
+export function languageTagToAppLocale(value: unknown): AppLocale | null {
+  if (typeof value !== "string") return null;
+  const normalized = value.trim().toLowerCase().replace(/_/g, "-");
+  if (!normalized) return null;
+  const base = normalized.split("-", 1)[0];
+  return isAppLocale(base) ? base : null;
+}
+
+export function parseAcceptLanguage(value: string | null | undefined): string[] {
+  if (!value) return [];
+
+  return value
+    .split(",")
+    .map((part, index) => {
+      const [tagPart, ...params] = part.trim().split(";");
+      let quality = 1;
+      for (const param of params) {
+        const match = /^q\s*=\s*(0(?:\.\d+)?|1(?:\.0+)?)$/i.exec(param.trim());
+        if (match) quality = Number(match[1]);
+      }
+      return {
+        tag: tagPart?.trim() ?? "",
+        quality,
+        index,
+      };
+    })
+    .filter((entry) => entry.tag && entry.quality > 0)
+    .sort((left, right) =>
+      right.quality - left.quality || left.index - right.index)
+    .map((entry) => entry.tag);
+}
+
+export function inferAppLocale(args: {
+  languages?: readonly string[] | null;
+  country?: string | null;
+  fallback?: AppLocale;
+}): AppLocale {
+  for (const language of args.languages ?? []) {
+    const locale = languageTagToAppLocale(language);
+    if (locale) return locale;
+  }
+
+  const country = String(args.country ?? "").trim().toUpperCase();
+  if (country === "HT") return "ht";
+  if (country === "FR" || country === "MC") return "fr";
+
+  return args.fallback ?? DEFAULT_APP_PREFERENCES.locale;
+}
+
+export function resolveInitialAppLocale(args: {
+  savedLocale?: unknown;
+  languages?: readonly string[] | null;
+  country?: string | null;
+  fallback?: AppLocale;
+}): AppLocale {
+  if (isAppLocale(args.savedLocale)) {
+    return args.savedLocale;
+  }
+
+  return inferAppLocale({
+    languages: args.languages,
+    country: args.country,
+    fallback: args.fallback,
+  });
+}
+
+export function resolveConcreteTheme(
+  value: AppTheme,
+  prefersDark: boolean,
+): Exclude<AppTheme, "system"> {
+  if (value === "dark") return "dark";
+  if (value === "light") return "light";
+  return prefersDark ? "dark" : "light";
+}
+
 export function normalizeTheme(
   value: unknown,
   fallback: AppTheme = DEFAULT_APP_PREFERENCES.theme,

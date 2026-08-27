@@ -1,7 +1,9 @@
 import {
   DEFAULT_APP_PREFERENCES,
+  inferAppLocale,
   isAppPreferences,
   normalizeAppPreferences,
+  parseAcceptLanguage,
   parseAppPreferencesPatch,
   readPreferencesCookie,
   type AppPreferences,
@@ -20,6 +22,23 @@ import { mirrorPreferencesCookies } from "@/lib/preferences/cookie";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+function inferRequestPreferences(request: Request): AppPreferences {
+  const country =
+    request.headers.get("x-vercel-ip-country") ??
+    request.headers.get("cf-ipcountry") ??
+    request.headers.get("x-country-code");
+
+  return {
+    ...DEFAULT_APP_PREFERENCES,
+    locale: inferAppLocale({
+      languages: parseAcceptLanguage(
+        request.headers.get("accept-language"),
+      ),
+      country,
+    }),
+  };
+}
 
 function response(
   request: Request,
@@ -61,7 +80,7 @@ export async function GET(request: Request) {
     return response(
       request,
       false,
-      cookiePreferences ?? { ...DEFAULT_APP_PREFERENCES },
+      cookiePreferences ?? inferRequestPreferences(request),
       cookiePreferences ? "cookie" : "default",
     );
   }
@@ -76,11 +95,23 @@ export async function GET(request: Request) {
     },
   });
 
+  if (stored) {
+    return response(
+      request,
+      true,
+      normalizeAppPreferences(stored),
+      "database",
+    );
+  }
+
+  const cookiePreferences =
+    readPreferencesCookie(request.headers.get("Cookie"));
+
   return response(
     request,
     true,
-    normalizeAppPreferences(stored),
-    "database",
+    cookiePreferences ?? inferRequestPreferences(request),
+    cookiePreferences ? "cookie" : "default",
   );
 }
 
