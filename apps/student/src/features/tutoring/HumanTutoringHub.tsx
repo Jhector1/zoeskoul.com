@@ -11,6 +11,9 @@ import TutoringSessionCard from "@/components/tutoring/TutoringSessionCard";
 import HumanTutoringManageCreditsModal from "./HumanTutoringManageCreditsModal";
 import HumanTutoringRequestModal from "./HumanTutoringRequestModal";
 import {
+  OTHER_TUTORING_SUBJECT_VALUE,
+} from "./tutoringSubjectCatalog";
+import {
   HumanTutoringApiError,
   authorizeTutoringSavedPaymentMethod,
   cancelHumanTutoringRequest,
@@ -135,6 +138,8 @@ export default function HumanTutoringHub(props: {
   const [courseSlug, setCourseSlug] = useState(
     () => props.courses[0]?.slug ?? "",
   );
+  const [customSubject, setCustomSubject] =
+    useState("");
   const [requestedMinutes, setRequestedMinutes] =
     useState(30);
   const [purchaseMinutes, setPurchaseMinutes] =
@@ -518,9 +523,15 @@ export default function HumanTutoringHub(props: {
   }
 
   async function submitRequest() {
-    if (!courseSlug) {
+    const selectedSubject =
+      courseSlug ===
+      OTHER_TUTORING_SUBJECT_VALUE
+        ? customSubject.trim()
+        : courseSlug.trim();
+
+    if (!selectedSubject) {
       setError(
-        "Choose the course you want help with.",
+        "Select a subject or enter another technology topic.",
       );
       return;
     }
@@ -555,7 +566,8 @@ export default function HumanTutoringHub(props: {
         preferredStartsAt: new Date(
           preferredStartsAt,
         ).toISOString(),
-        sourceSubjectSlug: courseSlug,
+        sourceSubjectSlug:
+          selectedSubject,
         note: note.trim() || null,
       });
       setNote("");
@@ -674,6 +686,7 @@ export default function HumanTutoringHub(props: {
                 locale={props.locale}
                 courses={props.courses}
                 courseSlug={courseSlug}
+                customSubject={customSubject}
                 requestedMinutes={requestedMinutes}
                 preferredStartsAt={preferredStartsAt}
                 note={note}
@@ -682,6 +695,7 @@ export default function HumanTutoringHub(props: {
                 busy={busy === "request"}
                 error={error}
                 onCourseSlugChange={setCourseSlug}
+                onCustomSubjectChange={setCustomSubject}
                 onRequestedMinutesChange={setRequestedMinutes}
                 onPreferredStartsAtChange={setPreferredStartsAt}
                 onNoteChange={setNote}

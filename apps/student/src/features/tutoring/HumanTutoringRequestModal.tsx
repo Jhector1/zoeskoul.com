@@ -21,6 +21,11 @@ import {
 } from "lucide-react";
 
 import HumanTutoringEmbeddedCheckout from "./HumanTutoringEmbeddedCheckout";
+import TutoringSubjectPicker from "./TutoringSubjectPicker";
+import {
+  isTutoringSubjectSelectionValid,
+  tutoringSubjectDisplayName,
+} from "./tutoringSubjectCatalog";
 import type {
   TutoringEmbeddedCheckoutResult,
   TutoringPricingPresentation,
@@ -38,6 +43,7 @@ type Props = {
   locale: string;
   courses: Course[];
   courseSlug: string;
+  customSubject: string;
   requestedMinutes: number;
   preferredStartsAt: string;
   note: string;
@@ -46,6 +52,7 @@ type Props = {
   busy: boolean;
   error: string | null;
   onCourseSlugChange: (value: string) => void;
+  onCustomSubjectChange: (value: string) => void;
   onRequestedMinutesChange: (value: number) => void;
   onPreferredStartsAtChange: (value: string) => void;
   onNoteChange: (value: string) => void;
@@ -562,12 +569,18 @@ export default function HumanTutoringRequestModal(
   const isLastStep =
     stepIndex ===
     STEPS.length - 1;
-  const selectedCourse =
-    props.courses.find(
-      (course) =>
-        course.slug ===
-        props.courseSlug,
-    ) ?? null;
+  const selectedSubject =
+    tutoringSubjectDisplayName(
+      props.courseSlug,
+      props.customSubject,
+      props.courses,
+    );
+
+  const subjectValid =
+    isTutoringSubjectSelectionValid(
+      props.courseSlug,
+      props.customSubject,
+    );
 
   const requestHasCredit =
     props.availableMinutes >=
@@ -587,7 +600,7 @@ export default function HumanTutoringRequestModal(
 
   const canContinue =
     step === "course"
-      ? Boolean(props.courseSlug)
+      ? subjectValid
       : step === "duration"
         ? durationValid
         : step === "date"
@@ -603,7 +616,7 @@ export default function HumanTutoringRequestModal(
 
   const canSubmit =
     Boolean(
-      props.courseSlug &&
+      subjectValid &&
         durationValid &&
         preferredFuture &&
         requestHasCredit,
@@ -612,10 +625,8 @@ export default function HumanTutoringRequestModal(
   const reviewRows = useMemo(
     () => [
       {
-        label: "Course",
-        value:
-          selectedCourse?.title ??
-          "Not selected",
+        label: "Subject",
+        value: selectedSubject,
       },
       {
         label: "Duration",
@@ -645,7 +656,7 @@ export default function HumanTutoringRequestModal(
     [
       props.locale,
       props.requestedMinutes,
-      selectedCourse?.title,
+      selectedSubject,
       selectedDate,
       selectedTime,
     ],
@@ -906,54 +917,22 @@ export default function HumanTutoringRequestModal(
                     What do you need help with?
                   </h3>
                   <p className="mt-2 ui-meta">
-                    Choose the course so your tutor can prepare for the right material.
+                    Choose any technology subject so your tutor can prepare for the right material.
                   </p>
 
-                  <div className="mt-6 grid gap-2 sm:grid-cols-2">
-                    {props.courses.map(
-                      (course) => {
-                        const selected =
-                          props.courseSlug ===
-                          course.slug;
-
-                        return (
-                          <button
-                            key={
-                              course.slug
-                            }
-                            type="button"
-                            aria-pressed={
-                              selected
-                            }
-                            onClick={() =>
-                              props.onCourseSlugChange(
-                                course.slug,
-                              )
-                            }
-                            className={[
-                              "flex min-h-14 items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition",
-                              selected
-                                ? "border-emerald-500 bg-emerald-50 text-emerald-950 ring-1 ring-emerald-500/20 dark:bg-emerald-400/10 dark:text-emerald-100"
-                                : "border-neutral-200 bg-white hover:border-neutral-300 hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.025] dark:hover:bg-white/[0.05]",
-                            ].join(
-                              " ",
-                            )}
-                          >
-                            <span>
-                              {
-                                course.title
-                              }
-                            </span>
-                            {selected ? (
-                              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-600 text-white dark:bg-emerald-400 dark:text-neutral-950">
-                                <Check className="h-3.5 w-3.5" />
-                              </span>
-                            ) : null}
-                          </button>
-                        );
-                      },
-                    )}
-                  </div>
+                  <TutoringSubjectPicker
+                    courses={props.courses}
+                    value={props.courseSlug}
+                    customSubject={
+                      props.customSubject
+                    }
+                    onValueChange={
+                      props.onCourseSlugChange
+                    }
+                    onCustomSubjectChange={
+                      props.onCustomSubjectChange
+                    }
+                  />
                 </>
               ) : null}
 
@@ -1164,7 +1143,7 @@ export default function HumanTutoringRequestModal(
                       Other time
                     </span>
                     <input
-                      className="ui-input mt-2 min-h-12 w-full"
+                      className="ui-input mt-2 min-h-12 w-full border border-neutral-300 bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/20 dark:bg-white/[0.025]"
                       type="time"
                       step={900}
                       value={
@@ -1202,7 +1181,7 @@ export default function HumanTutoringRequestModal(
                       Tutoring details
                     </span>
                     <textarea
-                      className="ui-input min-h-40 w-full resize-y py-3"
+                      className="ui-input min-h-40 w-full resize-y py-3 border border-neutral-300 bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/20 dark:bg-white/[0.025]"
                       value={
                         props.note
                       }
