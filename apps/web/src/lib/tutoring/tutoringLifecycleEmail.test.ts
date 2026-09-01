@@ -95,7 +95,12 @@ describe("tutoring lifecycle transactional email", () => {
     );
     expect(owner).toContain("sendTransactionalEmail");
     expect(owner).toContain("BREVO_TUTORING_FROM_EMAIL");
-    expect(owner).toContain("BREVO_FROM_EMAIL");
+    expect(owner).toContain("BREVO_TUTORING_FROM_NAME");
+    expect(owner).toContain('"tutoring@zoeskoul.com"');
+    expect(owner).toContain('"ZoeSkoul Tutoring"');
+    expect(owner).not.toContain("BREVO_FROM_EMAIL");
+    expect(owner).not.toContain("BREVO_FROM_NAME");
+    expect(owner).not.toContain("process.env.EMAIL_FROM");
     expect(owner).not.toContain("@/lib/marketing/");
     expect(owner).not.toContain("unsubscribe");
   });

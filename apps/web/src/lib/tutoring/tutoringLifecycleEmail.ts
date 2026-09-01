@@ -150,13 +150,12 @@ function teacherTutoringUrl() {
 function resolveTutoringSender() {
   return resolveTransactionalEmailSender({
     from:
-      process.env.BREVO_TUTORING_FROM_EMAIL ??
-      process.env.BREVO_FROM_EMAIL ??
-      process.env.EMAIL_FROM,
+      process.env.BREVO_TUTORING_FROM_EMAIL?.trim() ||
+      "tutoring@zoeskoul.com",
     name:
-      process.env.BREVO_TUTORING_FROM_NAME ??
-      process.env.BREVO_FROM_NAME,
-    defaultName: "ZoeSkoul",
+      process.env.BREVO_TUTORING_FROM_NAME?.trim() ||
+      "ZoeSkoul Tutoring",
+    defaultName: "ZoeSkoul Tutoring",
   });
 }
 
