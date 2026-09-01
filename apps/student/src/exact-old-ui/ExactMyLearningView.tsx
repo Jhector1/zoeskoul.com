@@ -9,6 +9,7 @@ import SubjectPicker from "@student/features/practice/ui/subject-picker/SubjectP
 import type { SubjectCard } from "@student/features/practice/ui/subject-picker/subjectCardTypes";
 import AssignedCourseCard from "@/components/learningAssignments/AssignedCourseCard";
 import TutoringSessionCard from "@/components/tutoring/TutoringSessionCard";
+import HumanTutoringHub from "@student/features/tutoring/HumanTutoringHub";
 import { ROUTES } from "@zoeskoul/app-config";
 
 function courseCard(
@@ -124,33 +125,15 @@ export function ExactMyLearningView(props: {
 
   if (props.mode === "tutoring") {
     return (
-      <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white">
-        <main className="ui-container py-8">
-          <section id="tutoring" className="scroll-mt-24">
-            <div className="mb-4">
-              <div className="ui-section-kicker">Learn with a tutor</div>
-              <h1 className="mt-1 ui-title-md">Tutoring sessions</h1>
-              <p className="mt-1 ui-meta">
-                Join active sessions and reopen lessons, boards, and explanations shared by your tutor.
-              </p>
-            </div>
-            {tutoringSessions.length ? (
-              <div className="grid gap-4 lg:grid-cols-2">
-                {tutoringSessions.map((session) => (
-                  <TutoringSessionCard
-                    key={session.id}
-                    session={session}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="ui-page-surface p-6 text-sm text-[rgb(var(--ui-text-muted)/0.9)]">
-                No tutoring sessions have been shared with you yet.
-              </div>
-            )}
-          </section>
-        </main>
-      </div>
+      <HumanTutoringHub
+        apiOrigin={props.apiOrigin}
+        locale={props.locale}
+        courses={state.data.courses.map((course) => ({
+          slug: course.slug,
+          title: course.title,
+        }))}
+        tutoringSessions={tutoringSessions}
+      />
     );
   }
 

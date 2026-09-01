@@ -16,6 +16,7 @@ import {
 
 import { StudentAccessGate } from "./app/StudentAccessGate";
 import { StudentAppShell } from "./app/StudentAppShell";
+import { StudentCampaignHost } from "./features/campaigns/StudentCampaignHost";
 import {
   isPublicStudentPath,
 } from "./app/studentRoutes";
@@ -142,6 +143,11 @@ export function App() {
                   websiteOrigin={websiteOrigin}
                   session={session}
                 />
+                {session.authenticated ? (
+                  <StudentCampaignHost
+                    apiOrigin={apiOrigin}
+                  />
+                ) : null}
               </LegacyApiBridge>
             </LegacyProviders>
           )}

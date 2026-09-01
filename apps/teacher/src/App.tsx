@@ -2,17 +2,31 @@ import { useAppSession } from "@zoeskoul/auth-client/react";
 import type { AppCapability } from "@zoeskoul/auth-client";
 import {
   getLocalAppOrigin,
-  zoeSkoulApps,
+  normalizeSupportedLocale,
 } from "@zoeskoul/app-config";
 
-const app = zoeSkoulApps.teacher;
+import TeacherTutoringDashboard from "./features/tutoring/TeacherTutoringDashboard";
+
 const TEACHER_ACCESS_CAPABILITY: AppCapability =
   "teacher:access";
+
+function browserLocale() {
+  if (typeof navigator === "undefined") {
+    return "en" as const;
+  }
+
+  return normalizeSupportedLocale(
+    navigator.language.split("-")[0],
+  );
+}
 
 export function App() {
   const apiOrigin =
     import.meta.env.VITE_API_ORIGIN ??
     getLocalAppOrigin("website");
+  const websiteOrigin =
+    import.meta.env.VITE_WEBSITE_ORIGIN ??
+    apiOrigin;
 
   const sessionState = useAppSession({ apiOrigin });
   const session =
@@ -21,71 +35,72 @@ export function App() {
       ? sessionState.session
       : null;
 
-  const sessionSummary =
-    sessionState.status === "loading"
-      ? "Checking the central ZoeSkoul session…"
-      : sessionState.status === "error"
-        ? `Session check failed: ${sessionState.error.message}`
-        : !session?.authenticated
-          ? "Signed out"
-          : session.capabilities.includes(
-                TEACHER_ACCESS_CAPABILITY,
-              )
-            ? "Authenticated teaching application session ready"
-            : "Signed in, but this account cannot access the teacher app";
+  if (sessionState.status === "loading") {
+    return (
+      <main className="app-shell">
+        <section className="foundation-card">
+          <div className="eyebrow">ZoeSkoul Teacher</div>
+          <h1>Loading teacher workspace</h1>
+          <p>Checking the central ZoeSkoul session...</p>
+        </section>
+      </main>
+    );
+  }
 
-  const identity =
-    session?.authenticated && session.user
-      ? session.user.email ?? session.user.name ?? session.user.id
-      : "—";
+  if (sessionState.status === "error") {
+    return (
+      <main className="app-shell">
+        <section className="foundation-card">
+          <div className="eyebrow">ZoeSkoul Teacher</div>
+          <h1>Teacher workspace unavailable</h1>
+          <p>
+            Session check failed:{" "}
+            {sessionState.error.message}
+          </p>
+        </section>
+      </main>
+    );
+  }
 
-  const roles =
-    session?.authenticated
-      ? session.roles.join(", ") || "none"
-      : "—";
+  if (!session?.authenticated) {
+    return (
+      <main className="app-shell">
+        <section className="foundation-card">
+          <div className="eyebrow">ZoeSkoul Teacher</div>
+          <h1>Sign in required</h1>
+          <p>
+            Sign in to ZoeSkoul with a teacher account
+            to manage tutoring.
+          </p>
+        </section>
+      </main>
+    );
+  }
+
+  if (
+    !session.capabilities.includes(
+      TEACHER_ACCESS_CAPABILITY,
+    )
+  ) {
+    return (
+      <main className="app-shell">
+        <section className="foundation-card">
+          <div className="eyebrow">ZoeSkoul Teacher</div>
+          <h1>Teacher access required</h1>
+          <p>
+            Signed in, but this account cannot access
+            the teacher app.
+          </p>
+        </section>
+      </main>
+    );
+  }
 
   return (
-    <main className="app-shell">
-      <section className="foundation-card">
-        <div className="eyebrow">Multi-app migration</div>
-
-        <h1>ZoeSkoul Teacher</h1>
-
-        <p>
-          The teaching, learner review, assignment and live tutoring application.
-        </p>
-
-        <dl>
-          <div>
-            <dt>Application</dt>
-            <dd>{app.id}</dd>
-          </div>
-
-          <div>
-            <dt>Local origin</dt>
-            <dd>{getLocalAppOrigin(app.id)}</dd>
-          </div>
-
-          <div>
-            <dt>Temporary API origin</dt>
-            <dd>{apiOrigin}</dd>
-          </div>
-
-          <div>
-            <dt>Identity</dt>
-            <dd>{identity}</dd>
-          </div>
-
-          <div>
-            <dt>Database roles</dt>
-            <dd>{roles}</dd>
-          </div>
-        </dl>
-
-        <div className="status">
-          {sessionSummary}
-        </div>
-      </section>
-    </main>
+    <TeacherTutoringDashboard
+      apiOrigin={apiOrigin}
+      websiteOrigin={websiteOrigin}
+      locale={browserLocale()}
+    />
   );
 }

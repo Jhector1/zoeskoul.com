@@ -7,12 +7,28 @@ import { getStripe } from "@/lib/stripe";
 import { upsertFromStripeSubscription } from "@/lib/billing/stripeService";
 import { isCheckoutAttemptId } from "@/lib/billing/checkoutAttempt";
 import { releaseBillingCheckoutReservation } from "@/lib/billing/billingCheckoutReservation";
+import {
+  isTutoringCreditCheckoutEvent,
+  isTutoringCreditPaymentIntentEvent,
+  reconcileTutoringCreditCheckoutEvent,
+  reconcileTutoringCreditPaymentIntentEvent,
+} from "@/lib/tutoring/tutoringCreditWebhook";
+import {
+  isTutoringCreditRefundEvent,
+  reconcileTutoringCreditRefundEvent,
+} from "@/lib/tutoring/tutoringCreditRefundWebhook";
 
 export const RELEVANT_STRIPE_BILLING_EVENT_TYPES = [
   "checkout.session.completed",
   "checkout.session.async_payment_succeeded",
   "checkout.session.async_payment_failed",
   "checkout.session.expired",
+  "payment_intent.succeeded",
+  "payment_intent.payment_failed",
+  "payment_intent.canceled",
+  "refund.created",
+  "refund.updated",
+  "refund.failed",
   "customer.subscription.created",
   "customer.subscription.updated",
   "customer.subscription.deleted",
@@ -49,7 +65,10 @@ export type StripeWebhookReconciliationResult =
       action:
         | "subscription_reconciled"
         | "customer_deleted"
-        | "checkout_released";
+        | "checkout_released"
+        | "tutoring_credit_reconciled"
+        | "tutoring_credit_terminal_updated"
+        | "tutoring_credit_refund_reconciled";
     }
   | { kind: "ignored"; reason: string };
 
@@ -276,6 +295,108 @@ export async function reconcileStripeBillingEvent(
     return canceled.users > 0 || canceled.subscriptions > 0
       ? { kind: "processed", action: "customer_deleted" }
       : { kind: "ignored", reason: "unmapped_customer" };
+  }
+
+  if (
+    isTutoringCreditRefundEvent(
+      event,
+    )
+  ) {
+    const refundResult =
+      await reconcileTutoringCreditRefundEvent(
+        event,
+      );
+
+    if (
+      refundResult.kind ===
+        "refunded" ||
+      refundResult.kind ===
+        "already_refunded" ||
+      refundResult.kind ===
+        "status_updated"
+    ) {
+      return {
+        kind:
+          "processed",
+        action:
+          "tutoring_credit_refund_reconciled",
+      };
+    }
+
+    return {
+      kind:
+        "ignored",
+      reason:
+        "tutoring_credit_refund_not_reconciled",
+    };
+  }
+
+  if (isTutoringCreditPaymentIntentEvent(event)) {
+    const tutoringResult =
+      await reconcileTutoringCreditPaymentIntentEvent(event);
+
+    if (
+      tutoringResult.kind === "credited" ||
+      tutoringResult.kind === "already_credited"
+    ) {
+      return {
+        kind: "processed",
+        action: "tutoring_credit_reconciled",
+      };
+    }
+
+    if (tutoringResult.kind === "terminal_updated") {
+      return {
+        kind: "processed",
+        action: "tutoring_credit_terminal_updated",
+      };
+    }
+
+    if (tutoringResult.kind === "pending") {
+      return {
+        kind: "ignored",
+        reason: "tutoring_credit_payment_pending",
+      };
+    }
+
+    return {
+      kind: "ignored",
+      reason: "tutoring_credit_not_reconciled",
+    };
+  }
+
+  if (isTutoringCreditCheckoutEvent(event)) {
+    const tutoringResult =
+      await reconcileTutoringCreditCheckoutEvent(event);
+
+    if (
+      tutoringResult.kind === "credited" ||
+      tutoringResult.kind === "already_credited"
+    ) {
+      return {
+        kind: "processed",
+        action: "tutoring_credit_reconciled",
+      };
+    }
+
+    if (tutoringResult.kind === "terminal_updated") {
+      return {
+        kind: "processed",
+        action: "tutoring_credit_terminal_updated",
+      };
+    }
+
+    if (tutoringResult.kind === "pending") {
+      return {
+        kind: "ignored",
+        reason: "tutoring_credit_payment_pending",
+      };
+    }
+
+    return {
+      kind: "ignored",
+      reason: "tutoring_credit_not_reconciled",
+    };
   }
 
   if (

@@ -18,6 +18,8 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
+    "@stripe/react-stripe-js": "6.8.2",
+    "@stripe/stripe-js": "9.14.0",
     "@zoeskoul/api-client": "workspace:*",
     "@zoeskoul/app-config": "workspace:*",
     "@zoeskoul/auth-client": "workspace:*",
@@ -29,6 +31,7 @@
     "@zoeskoul/editor-surface": "workspace:*",
     "@zoeskoul/i18n-core": "workspace:*",
     "@zoeskoul/learner-ui": "workspace:*",
+    "@zoeskoul/learner-workspace": "workspace:*",
     "@zoeskoul/learning-client": "workspace:*",
     "@zoeskoul/learning-contracts": "workspace:*",
     "@zoeskoul/learning-runtime": "workspace:*",
@@ -55,16 +58,15 @@
     "tailwind-merge": "^3.4.0",
     "xterm": "^5.3.0",
     "zod": "^4.3.6",
-    "zustand": "^5.0.12",
-    "@zoeskoul/learner-workspace": "workspace:*"
+    "zustand": "^5.0.12"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/p5": "^1.7.7",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.4",
-    "vite": "^8.1.5",
-    "@tailwindcss/postcss": "^4",
     "tailwindcss": "^4",
-    "@types/p5": "^1.7.7"
+    "vite": "^8.1.5"
   }
 }

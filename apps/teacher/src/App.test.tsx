@@ -19,6 +19,17 @@ const mocks = vi.hoisted(() => ({
 vi.mock("@zoeskoul/auth-client/react", () => ({
   useAppSession: mocks.useAppSession,
 }));
+vi.mock("./features/tutoring/TeacherTutoringDashboard", () => ({
+  default: (props: {
+    apiOrigin: string;
+    websiteOrigin: string;
+    locale: string;
+  }) => (
+    <div data-testid="teacher-tutoring-dashboard">
+      {props.apiOrigin}|{props.websiteOrigin}|{props.locale}
+    </div>
+  ),
+}));
 
 import { App } from "./App";
 
@@ -48,10 +59,10 @@ describe("Teacher app session contract", () => {
     );
 
     expect(markup).toContain(
-      "Authenticated teaching application session ready",
+      'data-testid="teacher-tutoring-dashboard"',
     );
     expect(markup).toContain(
-      "teacher",
+      "http://localhost:3000",
     );
     const capabilities =
       mocks.useAppSession.mock.results[0]

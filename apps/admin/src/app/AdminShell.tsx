@@ -8,6 +8,7 @@ import { CurriculumDraftsPage } from "@/features/curriculum/CurriculumDraftsPage
 import { AdminDashboard } from "@/features/dashboard/AdminDashboard";
 import { LearnerDetail } from "@/features/learners/LearnerDetail";
 import { BillingPromotionManager } from "@/features/promotions/BillingPromotionManager";
+import { StudentCampaignManager } from "@/features/campaigns/StudentCampaignManager";
 import { PublicChallengesPage } from "@/features/public-challenges/PublicChallengesPage";
 import { QuestionAnalytics } from "@/features/questions/QuestionAnalytics";
 
@@ -22,6 +23,7 @@ const navItems = [
   { href: "/curriculum", label: "Curriculum", route: "curriculum" },
   { href: "/public-challenges", label: "Public Challenges", route: "public-challenges" },
   { href: "/promotions", label: "Promotions", route: "promotions" },
+  { href: "/campaigns", label: "Campaigns", route: "campaigns" },
 ] as const;
 
 export function AdminShell(props: {
@@ -157,6 +159,12 @@ export function AdminShell(props: {
 
         {route.kind === "promotions" ? (
           <BillingPromotionManager
+            apiOrigin={props.apiOrigin}
+          />
+        ) : null}
+
+        {route.kind === "campaigns" ? (
+          <StudentCampaignManager
             apiOrigin={props.apiOrigin}
           />
         ) : null}

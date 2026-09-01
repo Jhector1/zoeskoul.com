@@ -101,9 +101,17 @@ export async function resolveTutoringAudience(
   };
 }
 
+export type TutoringSessionCreateOptions = {
+  onCreated?: (
+    tx: Prisma.TransactionClient,
+    session: { id: string },
+  ) => Promise<void>;
+};
+
 export async function createTutoringSession(
   prisma: PrismaClient,
   args: { teachingUser: TeachingUser; input: TutoringSessionInput },
+  options: TutoringSessionCreateOptions = {},
 ) {
   const resolved = await resolveTutoringAudience(prisma, args);
   if (!resolved.ok) return resolved;
@@ -189,6 +197,7 @@ export async function createTutoringSession(
           sessionId: created.id,
           recipients: resolved.inviteRecipients,
         });
+        await options.onCreated?.(tx, created);
         if (args.input.status === "shared") {
           await publishTutoringWorkspaceSnapshot(tx, {
             sessionId: created.id,

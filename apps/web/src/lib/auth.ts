@@ -5,6 +5,7 @@ import Keycloak from "next-auth/providers/keycloak";
 import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { sendWelcomeEmail } from "@/lib/email/welcomeEmail";
+import { ensureStudentCampaignTutoringGrants } from "@/lib/campaigns/studentCampaign.server";
 import { prisma } from "@/lib/prisma";
 import { resolveAuthRedirect } from "@/lib/auth/resolveAuthRedirect";
 
@@ -153,9 +154,31 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
   events: {
     createUser({ user }) {
+      const userId = user.id;
+      if (!userId) return;
+
+      after(async () => {
+        try {
+          const grants =
+            await ensureStudentCampaignTutoringGrants(userId);
+          if (grants > 0) {
+            console.info("[auth][student-campaign-grant] applied", {
+              userId,
+              grants,
+            });
+          }
+        } catch (error) {
+          // Signup must succeed even when a promotional grant temporarily
+          // fails. Student campaign reads retry with the same idempotency key.
+          console.error("[auth][student-campaign-grant] failed", {
+            userId,
+            error,
+          });
+        }
+      });
+
       if (!user.email) return;
 
-      const userId = user.id;
       const email = user.email;
       const name = user.name;
 

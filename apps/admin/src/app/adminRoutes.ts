@@ -4,6 +4,7 @@ export type AdminRoute =
   | { kind: "curriculum" }
   | { kind: "public-challenges" }
   | { kind: "promotions" }
+  | { kind: "campaigns" }
   | { kind: "learner"; actorKey: string }
   | { kind: "not-found" };
 
@@ -41,6 +42,10 @@ export function resolveAdminRoute(pathname: string): AdminRoute {
 
   if (path === "/promotions" || path === "/admin/promotions") {
     return { kind: "promotions" };
+  }
+
+  if (path === "/campaigns" || path === "/admin/campaigns") {
+    return { kind: "campaigns" };
   }
 
   const match = path.match(/^\/(?:admin\/)?learners\/([^/]+)$/);

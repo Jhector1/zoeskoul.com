@@ -408,39 +408,45 @@ model Assignment {
 }
 
 model User {
-  id                                String                     @id @default(cuid())
+  id                                String                      @id @default(cuid())
   name                              String?
-  email                             String?                    @unique
+  email                             String?                     @unique
   emailVerified                     DateTime?
   image                             String?
-  stripeCustomerId                  String?                    @unique
+  stripeCustomerId                  String?                     @unique
   trialUsedAt                       DateTime?
-  billingCheckoutAttemptId            String?
-  billingCheckoutReservedAt           DateTime?
-  createdAt                         DateTime                   @default(now())
-  updatedAt                         DateTime                   @updatedAt
-  roles                             UserRole[]                 @default([student])
+  billingCheckoutAttemptId          String?
+  billingCheckoutReservedAt         DateTime?
+  createdAt                         DateTime                    @default(now())
+  updatedAt                         DateTime                    @updatedAt
+  roles                             UserRole[]                  @default([student])
   accounts                          Account[]
-  codeProjects                      CodeProject[]              @relation("UserCodeProjects")
-  codeProjectGrants                 CodeProjectGrant[]         @relation("UserCodeProjectGrants")
-  codeProjectRevisions              CodeProjectRevision[]      @relation("UserCodeProjectRevisions")
-  featureGrants                     FeatureGrant[]             @relation("UserFeatureGrants")
+  codeProjects                      CodeProject[]               @relation("UserCodeProjects")
+  codeProjectGrants                 CodeProjectGrant[]          @relation("UserCodeProjectGrants")
+  codeProjectRevisions              CodeProjectRevision[]       @relation("UserCodeProjectRevisions")
+  featureGrants                     FeatureGrant[]              @relation("UserFeatureGrants")
   moduleAccessGrants                ModuleAccessGrant[]
   sessions                          Session[]
   subjectAccessGrants               SubjectAccessGrant[]
   subjectEnrollments                SubjectEnrollment[]
   subscriptions                     Subscription[]
   onboardingProfile                 UserOnboardingProfile?
-  practiceChallengeLinks            PracticeChallengeLink[]    @relation("UserPracticeChallengeLinks")
-  learningGroupsOwned               LearningGroup[]            @relation("LearningGroupOwner")
+  practiceChallengeLinks            PracticeChallengeLink[]     @relation("UserPracticeChallengeLinks")
+  learningGroupsOwned               LearningGroup[]             @relation("LearningGroupOwner")
   learningGroupMemberships          LearningGroupMember[]
-  learningAssignmentsOwned          LearningAssignment[]       @relation("LearningAssignmentOwner")
+  learningAssignmentsOwned          LearningAssignment[]        @relation("LearningAssignmentOwner")
   learningAssignmentRecipients      LearningAssignmentUser[]
-  learningAssignmentInvitesAccepted LearningAssignmentInvite[] @relation("LearningAssignmentInviteAcceptedBy")
-  tutoringSessionInvitesAccepted    TutoringSessionInvite[]    @relation("TutoringSessionInviteAcceptedBy")
-  tutoringSessionInvitesReceived    TutoringSessionInvite[]    @relation("TutoringSessionInviteUser")
-  tutoringSessionsOwned             TutoringSession[]          @relation("TutoringSessionOwner")
+  learningAssignmentInvitesAccepted LearningAssignmentInvite[]  @relation("LearningAssignmentInviteAcceptedBy")
+  tutoringSessionInvitesAccepted    TutoringSessionInvite[]     @relation("TutoringSessionInviteAcceptedBy")
+  tutoringSessionInvitesReceived    TutoringSessionInvite[]     @relation("TutoringSessionInviteUser")
+  tutoringSessionsOwned             TutoringSession[]           @relation("TutoringSessionOwner")
   tutoringSessionMemberships        TutoringSessionUser[]
+  tutoringTeacherPoolMember         TutoringTeacherPoolMember?  @relation("TutoringTeacherPoolUser")
+  tutoringCreditPurchases           TutoringCreditPurchase[]    @relation("TutoringCreditPurchaseUser")
+  tutoringCreditLedgerEntries       TutoringCreditLedgerEntry[] @relation("TutoringCreditLedgerUser")
+  tutoringRequestsMade              TutoringRequest[]           @relation("TutoringRequestLearner")
+  tutoringRequestsAssigned          TutoringRequest[]           @relation("TutoringRequestAssignedTeacher")
+  tutoringBookingsTeaching          TutoringBooking[]           @relation("TutoringBookingTeacher")
   marketingPreference               UserMarketingPreference?
   preferences                       UserPreferences?
 }
@@ -547,18 +553,18 @@ model Subscription {
 }
 
 model BillingPromotionCampaign {
-  id             String                    @id @default(cuid())
-  name           String
-  percentOff     Int
+  id                   String                         @id @default(cuid())
+  name                 String
+  percentOff           Int
   planScope            BillingPromotionPlanScope
   couponDuration       BillingPromotionCouponDuration @default(once)
   couponDurationMonths Int?
   startsAt             DateTime
-  endsAt         DateTime
-  enabled        Boolean                   @default(false)
-  stripeCouponId String                    @unique
-  createdAt      DateTime                  @default(now())
-  updatedAt      DateTime                  @updatedAt
+  endsAt               DateTime
+  enabled              Boolean                        @default(false)
+  stripeCouponId       String                         @unique
+  createdAt            DateTime                       @default(now())
+  updatedAt            DateTime                       @updatedAt
 
   @@index([enabled, startsAt, endsAt])
   @@index([planScope, enabled])
@@ -676,19 +682,19 @@ model PracticeChallengeLink {
 }
 
 model StripeEvent {
-  id             String   @id
+  id             String    @id
   type           String
   livemode       Boolean
   created        Int
   objectId       String?
   customerId     String?
   subscriptionId String?
-  status         String   @default("processing")
-  attemptCount   Int      @default(1)
+  status         String    @default("processing")
+  attemptCount   Int       @default(1)
   processedAt    DateTime?
   lastError      String?
-  receivedAt     DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  receivedAt     DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   @@index([status, updatedAt])
   @@index([subscriptionId])
@@ -900,6 +906,8 @@ model TutoringSession {
   groups              TutoringSessionGroup[]
   invites             TutoringSessionInvite[]
   documents           TutoringSessionDocument[]
+  commercialRequest   TutoringRequest?          @relation("TutoringRequestSession")
+  commercialBooking   TutoringBooking?          @relation("TutoringBookingSession")
 
   @@index([ownerId, updatedAt])
   @@index([subjectId, status])
@@ -1025,6 +1033,247 @@ enum LearningSolutionVisibility {
   after_completion
   after_due_date
   always
+}
+
+model TutoringTeacherPoolMember {
+  userId              String                              @id
+  enabled             Boolean                             @default(true)
+  priority            Int                                 @default(100)
+  timeZone            String                              @default("UTC")
+  createdAt           DateTime                            @default(now())
+  updatedAt           DateTime                            @updatedAt
+  user                User                                @relation("TutoringTeacherPoolUser", fields: [userId], references: [id], onDelete: Cascade)
+  availabilityWindows TutoringTeacherAvailabilityWindow[]
+
+  @@index([enabled, priority])
+}
+
+model TutoringTeacherAvailabilityWindow {
+  id        String                    @id @default(cuid())
+  teacherId String
+  startsAt  DateTime
+  endsAt    DateTime
+  createdAt DateTime                  @default(now())
+  updatedAt DateTime                  @updatedAt
+  teacher   TutoringTeacherPoolMember @relation(fields: [teacherId], references: [userId], onDelete: Cascade)
+
+  @@index([teacherId, startsAt, endsAt])
+  @@index([startsAt, endsAt])
+}
+
+model TutoringCreditPurchase {
+  id                      String                       @id @default(cuid())
+  userId                  String
+  checkoutAttemptId       String                       @unique
+  packageMinutes          Int
+  amountMinor             Int
+  currency                String                       @db.VarChar(3)
+  stripePriceId           String?
+  stripeCheckoutSessionId String?                      @unique
+  stripePaymentIntentId   String?                      @unique
+  status                  TutoringCreditPurchaseStatus @default(pending)
+  checkoutExpiresAt       DateTime?
+  paidAt                  DateTime?
+  failedAt                DateTime?
+  canceledAt              DateTime?
+  refundedAt              DateTime?
+  meta                    Json?
+  createdAt               DateTime                     @default(now())
+  updatedAt               DateTime                     @updatedAt
+  user                    User                         @relation("TutoringCreditPurchaseUser", fields: [userId], references: [id], onDelete: Cascade)
+  ledgerEntries           TutoringCreditLedgerEntry[]
+  refunds                 TutoringCreditRefund[]
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+}
+
+model TutoringCreditRefund {
+  id              String                     @id @default(cuid())
+  purchaseId      String
+  userId          String
+  refundAttemptId String                     @unique
+  minutes         Int
+  amountMinor     Int
+  currency        String                     @db.VarChar(3)
+  stripeRefundId  String?                    @unique
+  status          TutoringCreditRefundStatus @default(pending)
+  requestedAt     DateTime                   @default(now())
+  succeededAt     DateTime?
+  failedAt        DateTime?
+  canceledAt      DateTime?
+  failureReason   String?
+  meta            Json?
+  createdAt       DateTime                   @default(now())
+  updatedAt       DateTime                   @updatedAt
+  purchase        TutoringCreditPurchase     @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([purchaseId, createdAt])
+  @@index([status, createdAt])
+}
+
+model TutoringCreditLedgerEntry {
+  id                    String                   @id @default(cuid())
+  userId                String
+  kind                  TutoringCreditLedgerKind
+  availableMinutesDelta Int
+  reservedMinutesDelta  Int                      @default(0)
+  purchaseId            String?
+  requestId             String?
+  bookingId             String?
+  idempotencyKey        String                   @unique
+  meta                  Json?
+  createdAt             DateTime                 @default(now())
+  user                  User                     @relation("TutoringCreditLedgerUser", fields: [userId], references: [id], onDelete: Cascade)
+  purchase              TutoringCreditPurchase?  @relation(fields: [purchaseId], references: [id], onDelete: SetNull)
+  request               TutoringRequest?         @relation(fields: [requestId], references: [id], onDelete: SetNull)
+  booking               TutoringBooking?         @relation(fields: [bookingId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+  @@index([purchaseId])
+  @@index([requestId])
+  @@index([bookingId])
+  @@index([kind])
+}
+
+model TutoringRequest {
+  id                String                      @id @default(cuid())
+  learnerId         String
+  requestAttemptId  String                      @unique
+  assignedTeacherId String?
+  tutoringSessionId String?                     @unique
+  status            TutoringRequestStatus       @default(requested)
+  requestedMinutes  Int
+  preferredStartsAt DateTime?
+  sourceSubjectSlug String?
+  sourceModuleSlug  String?
+  sourceExerciseKey String?
+  note              String?
+  meta              Json?
+  assignedAt        DateTime?
+  scheduledAt       DateTime?
+  completedAt       DateTime?
+  canceledAt        DateTime?
+  createdAt         DateTime                    @default(now())
+  updatedAt         DateTime                    @updatedAt
+  learner           User                        @relation("TutoringRequestLearner", fields: [learnerId], references: [id], onDelete: Cascade)
+  assignedTeacher   User?                       @relation("TutoringRequestAssignedTeacher", fields: [assignedTeacherId], references: [id], onDelete: SetNull)
+  tutoringSession   TutoringSession?            @relation("TutoringRequestSession", fields: [tutoringSessionId], references: [id], onDelete: SetNull)
+  bookings          TutoringBooking[]
+  ledgerEntries     TutoringCreditLedgerEntry[]
+
+  @@index([learnerId, status, createdAt])
+  @@index([assignedTeacherId, status, createdAt])
+  @@index([status, createdAt])
+}
+
+model TutoringBooking {
+  id                String                      @id @default(cuid())
+  requestId         String
+  teacherId         String?
+  tutoringSessionId String?                     @unique
+  startsAt          DateTime
+  durationMinutes   Int
+  status            TutoringBookingStatus       @default(scheduled)
+  creditReservedAt  DateTime?
+  creditConsumedAt  DateTime?
+  creditReleasedAt  DateTime?
+  completedAt       DateTime?
+  canceledAt        DateTime?
+  meta              Json?
+  createdAt         DateTime                    @default(now())
+  updatedAt         DateTime                    @updatedAt
+  request           TutoringRequest             @relation(fields: [requestId], references: [id], onDelete: Cascade)
+  teacher           User?                       @relation("TutoringBookingTeacher", fields: [teacherId], references: [id], onDelete: SetNull)
+  tutoringSession   TutoringSession?            @relation("TutoringBookingSession", fields: [tutoringSessionId], references: [id], onDelete: SetNull)
+  ledgerEntries     TutoringCreditLedgerEntry[]
+
+  @@index([requestId, status])
+  @@index([teacherId, startsAt, status])
+  @@index([status, startsAt])
+}
+
+model StudentCampaign {
+  id                   String                    @id @default(cuid())
+  name                 String
+  title                String
+  body                 String                    @db.Text
+  ctaLabel             String?
+  ctaHref              String?
+  status               String                    @default("draft")
+  audience             String                    @default("all")
+  displayFrequency     String                    @default("once")
+  priority             Int                       @default(100)
+  startsAt             DateTime
+  endsAt               DateTime
+  enabled              Boolean                   @default(false)
+  tutoringGrantMinutes Int?
+  createdById          String?
+  createdAt            DateTime                  @default(now())
+  updatedAt            DateTime                  @updatedAt
+  deliveries           StudentCampaignDelivery[]
+
+  @@index([enabled, status, startsAt, endsAt])
+  @@index([priority, startsAt])
+}
+
+model StudentCampaignDelivery {
+  id              String          @id @default(cuid())
+  campaignId      String
+  userId          String
+  impressionCount Int             @default(0)
+  firstShownAt    DateTime?
+  lastShownAt     DateTime?
+  dismissedAt     DateTime?
+  dontShowAgainAt DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  campaign        StudentCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@unique([campaignId, userId])
+  @@index([userId, lastShownAt])
+}
+
+enum TutoringCreditPurchaseStatus {
+  pending
+  paid
+  failed
+  canceled
+  refunded
+}
+
+enum TutoringCreditRefundStatus {
+  pending
+  requires_action
+  succeeded
+  failed
+  canceled
+}
+
+enum TutoringCreditLedgerKind {
+  purchase_grant
+  admin_grant
+  plan_grant
+  reservation
+  reservation_release
+  session_consumption
+  refund_reversal
+}
+
+enum TutoringRequestStatus {
+  requested
+  assigned
+  scheduled
+  completed
+  canceled
+}
+
+enum TutoringBookingStatus {
+  scheduled
+  completed
+  canceled
+  no_show
 }
 
 enum TutoringSessionStatus {
