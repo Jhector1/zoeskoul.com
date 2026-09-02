@@ -2438,17 +2438,12 @@ export default function HomePageAvatarOnboardingClient({
                                         title={t(
                                             "ideDemo.title",
                                             undefined,
-                                            "Learn by building in a real coding workspace",
+                                            "Learn by doing, right inside the workspace",
                                         )}
                                         description={t(
                                             "ideDemo.description",
                                             { appName: APP_NAME },
-                                            "Write code, run it, see the output, and get immediate guidance from your AI tutor—all without leaving the lesson.",
-                                        )}
-                                        tutorHint={t(
-                                            "ideDemo.tutorHint",
-                                            undefined,
-                                            "Nice — your f-string is correct.",
+                                            "Write code, query data, work in the terminal, and get immediate guidance from your AI tutor—all without leaving the lesson.",
                                         )}
                                     />
 
