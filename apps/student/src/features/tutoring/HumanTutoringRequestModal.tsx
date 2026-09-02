@@ -440,7 +440,7 @@ function CalendarGrid(props: {
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70",
                   disabled
                     ? "cursor-not-allowed text-neutral-300 dark:text-white/20"
-                    : "hover:bg-neutral-100 dark:hover:bg-white/[0.07]",
+                    : "hover:bg-[rgb(var(--ui-hover)/0.78)]",
                   selected
                     ? "bg-emerald-600 text-white shadow-sm hover:bg-emerald-600 dark:bg-emerald-500 dark:text-neutral-950 dark:hover:bg-emerald-500"
                     : "",
@@ -819,9 +819,9 @@ export default function HumanTutoringRequestModal(
         role="dialog"
         aria-modal="true"
         aria-labelledby="human-tutoring-request-title"
-        className="flex h-[100dvh] w-full flex-col overflow-hidden bg-white shadow-2xl dark:bg-[#0f1218] sm:h-auto sm:max-h-[92dvh] sm:max-w-2xl sm:rounded-[28px] sm:border sm:border-neutral-200 dark:sm:border-white/10"
+        className="ui-surface-floating flex h-[100dvh] w-full flex-col overflow-hidden rounded-none sm:h-auto sm:max-h-[92dvh] sm:max-w-2xl sm:rounded-xl"
       >
-        <div className="border-b border-neutral-200 px-5 pb-4 pt-5 dark:border-white/10 sm:px-7 sm:pt-6">
+        <div className="border-b border-[rgb(var(--ui-border)/0.58)] px-5 pb-4 pt-5 sm:px-7 sm:pt-6">
           <div className="flex items-start justify-between gap-5">
             <div>
               <div className="ui-section-kicker">
@@ -867,9 +867,9 @@ export default function HumanTutoringRequestModal(
                 %
               </span>
             </div>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-neutral-100 dark:bg-white/[0.07]">
+            <div className="ui-progress-track mt-2 h-1.5">
               <div
-                className="h-full rounded-full bg-emerald-600 transition-[width] duration-300 dark:bg-emerald-400"
+                className="ui-progress-fill"
                 style={{
                   width: `${
                     ((stepIndex + 1) /
@@ -969,7 +969,7 @@ export default function HumanTutoringRequestModal(
                               "min-h-16 rounded-2xl border px-3 text-sm font-semibold transition",
                               selected
                                 ? "border-emerald-500 bg-emerald-50 text-emerald-950 dark:bg-emerald-400/10 dark:text-emerald-100"
-                                : "border-neutral-200 bg-white hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.025] dark:hover:bg-white/[0.05]",
+                                : "border-[rgb(var(--ui-border)/0.58)] bg-[rgb(var(--ui-surface)/0.90)] hover:bg-[rgb(var(--ui-hover)/0.78)]",
                             ].join(
                               " ",
                             )}
@@ -987,7 +987,7 @@ export default function HumanTutoringRequestModal(
                     <span className="text-sm font-semibold">
                       Custom duration
                     </span>
-                    <div className="mt-2 flex items-center gap-3 rounded-2xl border border-neutral-200 bg-white p-3 dark:border-white/10 dark:bg-white/[0.025]">
+                    <div className="mt-2 flex items-center gap-3 ui-surface-soft p-3">
                       <input
                         className="ui-input min-h-11 flex-1"
                         type="number"
@@ -1027,7 +1027,7 @@ export default function HumanTutoringRequestModal(
                     </div>
                   </label>
 
-                  <div className="mt-4 rounded-2xl bg-neutral-50 px-4 py-3 text-sm dark:bg-white/[0.04]">
+                  <div className="mt-4 ui-surface-muted px-4 py-3 text-sm">
                     <div className="font-medium">
                       {durationLabel(
                         props.requestedMinutes,
@@ -1120,10 +1120,10 @@ export default function HumanTutoringRequestModal(
                             className={[
                               "min-h-12 rounded-2xl border px-3 text-sm font-semibold transition",
                               !future
-                                ? "cursor-not-allowed border-neutral-100 text-neutral-300 dark:border-white/[0.05] dark:text-white/20"
+                                ? "cursor-not-allowed border-[rgb(var(--ui-border)/0.38)] text-[rgb(var(--ui-text-muted)/0.42)]"
                                 : selected
                                   ? "border-emerald-500 bg-emerald-50 text-emerald-950 dark:bg-emerald-400/10 dark:text-emerald-100"
-                                  : "border-neutral-200 bg-white hover:bg-neutral-50 dark:border-white/10 dark:bg-white/[0.025] dark:hover:bg-white/[0.05]",
+                                  : "border-[rgb(var(--ui-border)/0.58)] bg-[rgb(var(--ui-surface)/0.90)] hover:bg-[rgb(var(--ui-hover)/0.78)]",
                             ].join(
                               " ",
                             )}
@@ -1143,7 +1143,7 @@ export default function HumanTutoringRequestModal(
                       Other time
                     </span>
                     <input
-                      className="ui-input mt-2 min-h-12 w-full border border-neutral-300 bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/20 dark:bg-white/[0.025]"
+                      className="ui-input mt-2 min-h-12 w-full"
                       type="time"
                       step={900}
                       value={
@@ -1181,7 +1181,7 @@ export default function HumanTutoringRequestModal(
                       Tutoring details
                     </span>
                     <textarea
-                      className="ui-input min-h-40 w-full resize-y py-3 border border-neutral-300 bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-white/20 dark:bg-white/[0.025]"
+                      className="ui-input min-h-40 w-full resize-y py-3"
                       value={
                         props.note
                       }
@@ -1215,7 +1215,7 @@ export default function HumanTutoringRequestModal(
                     Your tutoring minutes are reserved only after you press Request tutoring. Your tutor will confirm the final schedule.
                   </p>
 
-                  <div className="mt-6 overflow-hidden rounded-2xl border border-neutral-200 dark:border-white/10">
+                  <div className="ui-surface-muted mt-6 overflow-hidden">
                     {reviewRows.map(
                       (
                         row,
@@ -1228,7 +1228,7 @@ export default function HumanTutoringRequestModal(
                           className={[
                             "flex items-start justify-between gap-5 px-4 py-3.5",
                             index
-                              ? "border-t border-neutral-200 dark:border-white/10"
+                              ? "border-t border-[rgb(var(--ui-border)/0.58)]"
                               : "",
                           ].join(
                             " ",
@@ -1250,8 +1250,8 @@ export default function HumanTutoringRequestModal(
                   </div>
 
                   {props.note.trim() ? (
-                    <div className="mt-4 rounded-2xl bg-neutral-50 p-4 dark:bg-white/[0.04]">
-                      <div className="text-xs font-semibold uppercase tracking-wide text-neutral-500 dark:text-white/45">
+                    <div className="ui-surface-muted mt-4 p-4">
+                      <div className="text-xs font-medium uppercase tracking-wide ui-text-muted">
                         Your note
                       </div>
                       <p className="mt-2 whitespace-pre-wrap text-sm leading-6">
@@ -1322,7 +1322,7 @@ export default function HumanTutoringRequestModal(
             </div>
           </div>
 
-          <div className="border-t border-neutral-200 bg-white px-5 py-4 dark:border-white/10 dark:bg-[#0f1218] sm:px-7">
+          <div className="border-t border-[rgb(var(--ui-border)/0.58)] bg-[rgb(var(--ui-surface)/0.96)] px-5 py-4 sm:px-7">
             <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
               {stepIndex > 0 ? (
                 <button

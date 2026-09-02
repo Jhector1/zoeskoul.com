@@ -10,28 +10,17 @@ import {
   it,
 } from "vitest";
 
-describe("Student bootstrap dark mode", () => {
-  it("keeps a dark state-card override beside the base state card", () => {
+describe("Student bootstrap semantic theme ownership", () => {
+  it("uses shared UI tokens instead of a separate dark card override", () => {
     const css = readFileSync(
-      resolve(
-        process.cwd(),
-        "src/shell.css",
-      ),
+      resolve(process.cwd(), "src/shell.css"),
       "utf8",
     );
 
-    const base =
-      css.indexOf(".student-state-card {");
-    const dark =
-      css.indexOf("html.dark .student-state-card {");
-
-    expect(base).toBeGreaterThanOrEqual(0);
-    expect(dark).toBeGreaterThan(base);
-    expect(css).toContain(
-      "background: rgba(23, 23, 23, 0.96);",
-    );
-    expect(css).toContain(
-      "html.dark .student-state-card p",
-    );
+    expect(css).toContain("background: rgb(var(--ui-bg) / 1);");
+    expect(css).toContain("background: rgb(var(--ui-surface) / 0.94);");
+    expect(css).toContain("color: rgb(var(--ui-text-muted) / 0.88);");
+    expect(css).not.toContain("html.dark .student-state-card");
+    expect(css).not.toContain("background: rgba(23, 23, 23, 0.96);");
   });
 });

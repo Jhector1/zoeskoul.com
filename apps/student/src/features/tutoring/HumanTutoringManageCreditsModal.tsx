@@ -118,9 +118,9 @@ export default function HumanTutoringManageCreditsModal(
         role="dialog"
         aria-modal="true"
         aria-labelledby="manage-tutoring-credits-title"
-        className="max-h-[92vh] w-full overflow-y-auto rounded-t-3xl border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface))] shadow-2xl sm:max-w-3xl sm:rounded-3xl"
+        className="ui-surface-floating max-h-[92vh] w-full overflow-y-auto rounded-t-2xl rounded-b-none sm:max-w-3xl sm:rounded-xl"
       >
-        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface))] px-5 py-5 sm:px-6">
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-[rgb(var(--ui-border)/0.58)] bg-[rgb(var(--ui-surface)/0.96)] px-5 py-5 sm:px-6">
           <div>
             <div className="ui-section-kicker">
               Tutoring wallet
@@ -145,7 +145,7 @@ export default function HumanTutoringManageCreditsModal(
         </div>
 
         <div className="space-y-5 p-5 sm:p-6">
-          <div className="rounded-2xl border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.5)] p-4">
+          <div className="ui-surface-soft p-4">
             <div className="text-2xl font-semibold">
               {props.loading
                 ? "—"
@@ -192,7 +192,7 @@ export default function HumanTutoringManageCreditsModal(
               ))}
             </div>
 
-            <div className="mt-4 rounded-xl border border-[rgb(var(--ui-border)/0.9)] p-4">
+            <div className="mt-5 border-t border-[rgb(var(--ui-border)/0.58)] pt-5">
               <div className="font-medium">
                 Custom amount
               </div>
@@ -241,7 +241,7 @@ export default function HumanTutoringManageCreditsModal(
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[rgb(var(--ui-border)/0.9)] p-4">
+          <div className="border-t border-[rgb(var(--ui-border)/0.58)] pt-5">
             <div className="font-semibold">
               Refunds
             </div>
@@ -261,7 +261,7 @@ export default function HumanTutoringManageCreditsModal(
                 props.refundable.purchases.map((purchase) => (
                   <div
                     key={purchase.purchaseId}
-                    className="rounded-xl border border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.35)] p-4"
+                    className="ui-surface-soft p-4"
                   >
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
@@ -310,7 +310,7 @@ export default function HumanTutoringManageCreditsModal(
                             : `Retry refund · ${purchase.retryableRefundMinutes} min`}
                         </button>
                       ) : purchase.pendingRefundMinutes > 0 ? (
-                        <span className="rounded-full border border-[rgb(var(--ui-border)/0.9)] px-3 py-2 text-xs font-medium">
+                        <span className="ui-pill-neutral">
                           Refund pending · {purchase.pendingRefundMinutes} min
                         </span>
                       ) : purchase.refundableMinutes > 0 ? (

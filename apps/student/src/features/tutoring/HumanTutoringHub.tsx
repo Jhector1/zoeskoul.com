@@ -597,7 +597,7 @@ export default function HumanTutoringHub(props: {
       : null;
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white">
+    <div className="min-h-screen bg-[rgb(var(--ui-bg)/1)] text-[rgb(var(--ui-text)/1)]">
       <main className="ui-container py-8">
         <div className="space-y-6">
           <section className="ui-page-surface overflow-hidden">
@@ -737,7 +737,7 @@ export default function HumanTutoringHub(props: {
                 overview.requests.map((request) => (
                   <article
                     key={request.id}
-                    className="rounded-xl border border-[rgb(var(--ui-border)/0.9)] p-4"
+                    className="ui-surface-soft p-4"
                   >
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>

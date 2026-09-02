@@ -275,35 +275,35 @@ export function StudentCampaignHost(props: {
         role="dialog"
         aria-modal="true"
         aria-labelledby="student-campaign-title"
-        className="relative w-full max-w-lg overflow-hidden rounded-t-3xl border border-neutral-200 bg-white p-6 shadow-2xl sm:rounded-3xl sm:p-8 dark:border-white/10 dark:bg-neutral-950"
+        className="ui-surface-floating relative w-full max-w-lg overflow-hidden rounded-t-2xl rounded-b-none p-6 sm:rounded-xl sm:p-8"
       >
         <button
           type="button"
           aria-label="Close announcement"
-          className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full border border-neutral-200 bg-white text-lg text-neutral-600 transition hover:bg-neutral-50 dark:border-white/10 dark:bg-white/5 dark:text-white/70"
+          className="ui-btn-secondary absolute right-4 top-4 h-9 w-9 p-0 text-lg"
           onClick={() => void closeForNow()}
         >
           ×
         </button>
 
         <div className="pr-8">
-          <div className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-600 dark:text-emerald-400">
+          <div className="ui-section-kicker">
             ZoeSkoul update
           </div>
 
           <h2
             id="student-campaign-title"
-            className="mt-3 text-2xl font-extrabold tracking-tight text-neutral-950 dark:text-white"
+            className="mt-3 text-2xl font-semibold tracking-tight text-[rgb(var(--ui-text)/1)]"
           >
             {campaign.title}
           </h2>
 
-          <p className="mt-3 whitespace-pre-line text-sm leading-6 text-neutral-600 dark:text-white/70">
+          <p className="mt-3 whitespace-pre-line text-sm leading-6 ui-text-muted">
             {campaign.body}
           </p>
 
           {campaign.tutoringGrantMinutes ? (
-            <div className="mt-5 inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-800 dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-200">
+            <div className="ui-badge-good mt-5">
               {campaign.tutoringGrantMinutes} promotional tutoring minutes
             </div>
           ) : null}
@@ -320,7 +320,7 @@ export function StudentCampaignHost(props: {
           <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
             <button
               type="button"
-              className="rounded-xl border border-neutral-200 px-4 py-2.5 text-sm font-bold text-neutral-700 transition hover:bg-neutral-50 dark:border-white/10 dark:text-white/75 dark:hover:bg-white/5"
+              className="ui-btn-secondary"
               onClick={() => void closeForNow()}
             >
               Not now
@@ -330,7 +330,7 @@ export function StudentCampaignHost(props: {
             campaign.ctaHref ? (
               <button
                 type="button"
-                className="rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-extrabold text-white shadow-sm transition hover:bg-emerald-700"
+                className="ui-btn-primary"
                 onClick={activateCta}
               >
                 {campaign.ctaLabel}
@@ -340,7 +340,7 @@ export function StudentCampaignHost(props: {
 
           <button
             type="button"
-            className="mt-4 w-full text-center text-xs font-semibold text-neutral-500 underline underline-offset-4 transition hover:text-neutral-800 dark:text-white/45 dark:hover:text-white/75"
+            className="mt-4 w-full text-center text-xs font-medium ui-text-muted underline underline-offset-4 transition hover:text-[rgb(var(--ui-text)/1)]"
             onClick={() =>
               void dontShowAgain()
             }

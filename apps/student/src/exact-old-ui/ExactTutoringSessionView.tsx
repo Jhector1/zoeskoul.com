@@ -119,7 +119,7 @@ export function ExactTutoringSessionView(props: {
 
   if (!data) {
     return (
-      <main className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white">
+      <main className="min-h-screen bg-[rgb(var(--ui-bg)/1)] text-[rgb(var(--ui-text)/1)]">
         <div className="ui-container py-8">
           <section className="ui-page-surface p-6">
             <div className="ui-kicker">Tutoring session</div>
