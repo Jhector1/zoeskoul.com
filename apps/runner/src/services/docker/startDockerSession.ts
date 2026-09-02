@@ -37,6 +37,7 @@ import {
 
 import { getExecutionPlan } from "../execution/executionPlan.js";
 import { docker } from "./dockerClient.js";
+import { waitForAttachOutputDrain } from "./attachOutputDrain.js";
 import { killSession } from "./killSession.js";
 import { ensureWorkspaceWritableForShellUser } from "../workspace/workspacePermissions.js";
 import {
@@ -427,21 +428,12 @@ async function startDockerSessionUncoordinated(
         hijack: true,
       });
 
-      await container.start();
-
+      /**
+       * Install every readable-output owner before the container starts. Fast
+       * programs (notably a one-line Python script) can otherwise finish while
+       * the start request is still returning.
+       */
       setSessionStream(sessionId, attach);
-      pushEvent(sessionId, {
-        type: "status",
-        state: normalized.kind === "shell" ? "waiting_for_input" : "running",
-      });
-
-      if (typeof timeouts.wallTimeoutMs === "number") {
-        armWallTimeout(sessionId, timeouts.wallTimeoutMs);
-      }
-      armIdleTimeout(sessionId, timeouts.idleTimeoutMs);
-      if (typeof timeouts.hardLifetimeMs === "number") {
-        armHardLifetimeTimeout(sessionId, timeouts.hardLifetimeMs);
-      }
 
       let startupChunkBudget = 6;
 
@@ -467,10 +459,35 @@ async function startDockerSessionUncoordinated(
         pushEvent(sessionId, { type: "error", message: err.message });
       });
 
+      /**
+       * container.wait() reports process/container completion, but Docker may
+       * still be draining the last bytes through the hijacked attach stream.
+       * Arm the barrier before start so even an immediate process exit is
+       * observed. Final events are published only after readable output drains.
+       */
+      const attachDrainPromise = waitForAttachOutputDrain(attach);
+
+      await container.start();
+
+      pushEvent(sessionId, {
+        type: "status",
+        state: normalized.kind === "shell" ? "waiting_for_input" : "running",
+      });
+
+      if (typeof timeouts.wallTimeoutMs === "number") {
+        armWallTimeout(sessionId, timeouts.wallTimeoutMs);
+      }
+      armIdleTimeout(sessionId, timeouts.idleTimeoutMs);
+      if (typeof timeouts.hardLifetimeMs === "number") {
+        armHardLifetimeTimeout(sessionId, timeouts.hardLifetimeMs);
+      }
+
       void container
         .wait()
         .then(async (result) => {
           const code = result.StatusCode ?? 0;
+
+          await attachDrainPromise;
 
           clearAllTimeouts(sessionId);
           pushEvent(sessionId, { type: "exit", code });
