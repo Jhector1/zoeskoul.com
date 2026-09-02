@@ -57,6 +57,7 @@ import {
 } from "@/lib/practice/entry";
 import { ONBOARDING_TRIAL_TARGET_COUNT } from "@/lib/practice/experience/defaults";
 import { buildStudentAppHref } from "@/lib/navigation/studentAppHref";
+import HomeIdeDemo from "@/components/home/demo/HomeIdeDemo";
 
 type Choice = {
     label: string;
@@ -2427,6 +2428,29 @@ export default function HomePageAvatarOnboardingClient({
                                             </div>
                                         </div>
                                     </Surface>
+
+                                    <HomeIdeDemo
+                                        kicker={t(
+                                            "ideDemo.kicker",
+                                            undefined,
+                                            "Inside ZoeSkoul",
+                                        )}
+                                        title={t(
+                                            "ideDemo.title",
+                                            undefined,
+                                            "Learn by building in a real coding workspace",
+                                        )}
+                                        description={t(
+                                            "ideDemo.description",
+                                            { appName: APP_NAME },
+                                            "Write code, run it, see the output, and get immediate guidance from your AI tutor—all without leaving the lesson.",
+                                        )}
+                                        tutorHint={t(
+                                            "ideDemo.tutorHint",
+                                            undefined,
+                                            "Nice — your f-string is correct.",
+                                        )}
+                                    />
 
                                     <HomePracticeCard
                                         isAuthenticated={isAuthenticated}
