@@ -23,7 +23,7 @@ export async function generateMetadata(
         twitterTitle: seo.twitterTitle,
         twitterDescription: seo.twitterDescription,
         imageAlt: shared.defaultOgAlt,
-        noIndex: true
+        noIndex: false
     });
 }
 

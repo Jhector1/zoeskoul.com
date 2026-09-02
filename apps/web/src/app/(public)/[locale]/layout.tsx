@@ -13,6 +13,7 @@ import { SfxProvider } from "@/lib/sfx/SfxProvider";
 import { inter, playfair, greatVibes } from "@/app/fonts";
 import { getSiteUrl } from "@/lib/seo/site";
 import MarketingConsentPrompt from "@/components/marketing/MarketingConsentPrompt";
+import { normalizeConfiguredAppOrigin } from "@zoeskoul/app-config";
 import { cookies } from "next/headers";
 import {
     APP_PREFERENCES_COOKIE_NAME,
@@ -87,6 +88,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
             ...DEFAULT_APP_PREFERENCES,
             locale: normalizeLocale(locale),
         };
+    const apiOrigin =
+        normalizeConfiguredAppOrigin(process.env.NEXT_PUBLIC_APP_URL) ??
+        getSiteUrl().origin;
 
     return (
         <html
@@ -98,7 +102,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         <div className="min-h-dvh w-full min-w-0 overflow-x-hidden bg-[radial-gradient(1200px_700px_at_20%_0%,var(--app-bg-ink)_0%,transparent_60%)]">
             <Providers
                 session={session}
-                apiOrigin={getSiteUrl().origin}
+                apiOrigin={apiOrigin}
                 initialPreferences={initialPreferences}
             >
                 <NextIntlClientProvider messages={messages}>

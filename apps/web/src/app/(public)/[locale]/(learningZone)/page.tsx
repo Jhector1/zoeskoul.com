@@ -10,7 +10,34 @@
 // }
 
 
+import type { Metadata } from "next";
 import HomePageAvatarOnboardingServer from "@/components/home/onboarding/HomePageAvatarOnboardingServer";
+import { buildMetadata } from "@/lib/seo/buildMetadata";
+import { getRouteSeo, getSharedSeo } from "@/lib/seo/getSeo";
+import type { AppLocale } from "@/lib/seo/types";
+
+export async function generateMetadata(
+    { params }: { params: Promise<{ locale: string }> },
+): Promise<Metadata> {
+    const { locale } = await params;
+    const l = locale as AppLocale;
+
+    const seo = await getRouteSeo(l, "home");
+    const shared = await getSharedSeo(l);
+
+    return buildMetadata({
+        locale: l,
+        path: "/",
+        title: seo.title,
+        description: seo.description,
+        keywords: shared.keywords,
+        ogTitle: seo.ogTitle,
+        ogDescription: seo.ogDescription,
+        twitterTitle: seo.twitterTitle,
+        twitterDescription: seo.twitterDescription,
+        imageAlt: shared.defaultOgAlt,
+    });
+}
 
 export default async function HomePage({
                                            params,

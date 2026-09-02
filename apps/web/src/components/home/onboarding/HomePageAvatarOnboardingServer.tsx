@@ -1,5 +1,8 @@
 import { auth } from "@/lib/auth";
-import { getOnboardingSubjects } from "@/lib/onboarding/getOnboardingSubjects";
+import {
+    getOnboardingSubjects,
+    getPublicOnboardingSubjects,
+} from "@/lib/onboarding/getOnboardingSubjects";
 import { buildPublicChallengePresentation } from "@/lib/practice/challenges/presentation";
 import { getLatestActivePracticeChallengeLink } from "@/lib/practice/challenges/shortLink";
 import type { PublicChallengeCardData } from "@/lib/practice/challenges/types";
@@ -39,22 +42,32 @@ async function getLatestChallengeCard(
 }
 
 export default async function HomePageAvatarOnboardingServer({
-                                                                 locale,
-                                                             }: {
+    locale,
+}: {
     locale: string;
 }) {
     const session = await auth();
     const userId = (session?.user as any)?.id as string | undefined;
+
+    if (!userId) {
+        const subjects = await getPublicOnboardingSubjects();
+
+        return (
+            <HomePageAvatarOnboardingClient
+                locale={locale}
+                initialSubjects={subjects}
+                isAuthenticated={Boolean(session?.user)}
+                isSubscriber={false}
+                latestChallenge={null}
+                dailyPracticeTargetCount={DAILY_PRACTICE_TARGET_COUNT}
+            />
+        );
+    }
+
     const [subjects, latestChallenge, viewer] = await Promise.all([
         getOnboardingSubjects(),
         getLatestChallengeCard(locale),
-        userId
-            ? resolvePracticeViewer(prisma, { userId, guestId: null })
-            : Promise.resolve({
-                  tier: "guest" as const,
-                  authenticated: false,
-                  subscribed: false,
-              }),
+        resolvePracticeViewer(prisma, { userId, guestId: null }),
     ]);
 
     return (

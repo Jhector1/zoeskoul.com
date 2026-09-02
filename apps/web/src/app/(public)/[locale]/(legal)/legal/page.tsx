@@ -11,10 +11,6 @@ type PageProps = {
     params: Promise<{ locale: string }>;
 };
 
-export const dynamic = "force-static";
-export const dynamicParams = false;
-export const revalidate = false;
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { locale } = await params;
     const l = locale as AppLocale;

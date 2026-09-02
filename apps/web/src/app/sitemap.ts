@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
+import { LEGAL_INDEX } from "@/lib/legal/content";
 import { PUBLIC_INDEXABLE_ROUTES } from "@/lib/seo/publicRoutes";
 import { LOCALES, SITE_URL } from "@/lib/seo/site";
+import { PUBLIC_SANDBOX_TOOL_PATHS } from "@/lib/sandbox/toolRegistry";
 
 function absoluteUrl(path: string) {
     return `${SITE_URL}${path}`;
@@ -28,7 +30,15 @@ function makeEntry(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    return PUBLIC_INDEXABLE_ROUTES.flatMap((path) =>
+    const publicPaths = Array.from(
+        new Set<string>([
+            ...PUBLIC_INDEXABLE_ROUTES,
+            ...LEGAL_INDEX.map((doc) => `/legal/${doc.slug}`),
+            ...PUBLIC_SANDBOX_TOOL_PATHS,
+        ]),
+    );
+
+    return publicPaths.flatMap((path) =>
         LOCALES.map((locale) => makeEntry(locale, path))
     );
 }

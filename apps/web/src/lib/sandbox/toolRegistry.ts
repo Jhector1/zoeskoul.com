@@ -65,6 +65,19 @@ export const PROGRAMMING_TOOL_ORDER: ProgrammingCodeToolSlug[] = [
     "sql",
 ];
 
+export const MATH_TOOL_ORDER: MathToolSlug[] = [
+    "linear-algebra",
+];
+
+export const PUBLIC_SANDBOX_TOOL_PATHS: string[] = [
+    ...PROGRAMMING_TOOL_ORDER.map(
+        (toolSlug) => `/sandbox/programming/${toolSlug}`,
+    ),
+    ...MATH_TOOL_ORDER.map(
+        (toolSlug) => `/sandbox/math/${toolSlug}`,
+    ),
+];
+
 export function buildSandboxToolHref(
     locale: string,
     category: SandboxCategory,

@@ -4,10 +4,8 @@ export const PUBLIC_INDEXABLE_ROUTES = [
     ROUTES.home,
     ROUTES.pricing,
     ROUTES.contact,
-    ROUTES.privacy,
-    ROUTES.terms
+    "/legal",
+    ROUTES.sandbox,
 ] as const;
 
-export const PUBLIC_NOINDEX_ROUTES = [
-    ROUTES.sandbox
-] as const;
+export const PUBLIC_NOINDEX_ROUTES = [] as const;

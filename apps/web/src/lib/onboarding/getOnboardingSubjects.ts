@@ -5,7 +5,10 @@ import {
     CATALOG_MANIFESTS,
     SUBJECT_CATALOG_SLUGS,
 } from "@zoeskoul/curriculum-registry/runtime";
-import { getResolvedSubjectCatalogMap } from "@/lib/subjects/server/resolveSubjectPresentation";
+import {
+    getResolvedCatalogMap,
+    getResolvedSubjectCatalogMap,
+} from "@/lib/subjects/server/resolveSubjectPresentation";
 
 import {
     selectVisibleSubjectsForActor,
@@ -107,4 +110,60 @@ export async function getOnboardingSubjects(): Promise<OnboardingSubjectOption[]
             catalogOrder: catalog?.order ?? Number.MAX_SAFE_INTEGER,
         };
     });
+}
+
+/**
+ * Public homepage/onboarding presentation from the canonical published
+ * curriculum only. This deliberately does not consult Prisma.
+ *
+ * Authenticated learners continue through getOnboardingSubjects(), which
+ * enriches the same canonical presentation with persisted enrollment,
+ * access, and activity.
+ */
+export async function getPublicOnboardingSubjects(): Promise<
+    OnboardingSubjectOption[]
+> {
+    const catalogMap = await getResolvedCatalogMap();
+
+    return Object.values(catalogMap)
+        .filter((catalog) => catalog.status === "active")
+        .flatMap((catalog) => {
+            const catalogOrder =
+                CATALOG_MANIFESTS[catalog.slug]?.catalog?.order ??
+                Number.MAX_SAFE_INTEGER;
+
+            return catalog.subjects
+                .filter((subject) => {
+                    const lifecycleStatus = subject.versioning?.status;
+
+                    return (
+                        subject.visibility === "public" &&
+                        subject.status === "active" &&
+                        lifecycleStatus !== "draft" &&
+                        lifecycleStatus !== "disabled"
+                    );
+                })
+                .map((subject) => {
+                    const imagePublicId = subject.imagePublicId ?? null;
+
+                    return {
+                        slug: subject.slug,
+                        enrolled: false,
+                        lastSeenAt: null,
+                        title: subject.title,
+                        description: subject.description ?? "",
+                        badge: null,
+                        imageUrl: imagePublicId
+                            ? `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${imagePublicId}`
+                            : null,
+                        imageAlt:
+                            subject.imageAlt ??
+                            subject.title ??
+                            subject.slug,
+                        catalogSlug: catalog.slug,
+                        catalogTitle: catalog.title,
+                        catalogOrder,
+                    } satisfies OnboardingSubjectOption;
+                });
+        });
 }

@@ -2042,19 +2042,12 @@ export default function HomePageAvatarOnboardingClient({
 
     // 5) replace these booleans
 
-    const showEntryGate =
-        bootstrapped &&
-        !isAuthenticated &&
-        !completed &&
-        !skipped &&
-        !showOnboarding &&
-        !pendingLocaleSwitch;
-
     const showOnboardingGate =
         bootstrapped && (showOnboarding || Boolean(pendingLocaleSwitch));
 
-    const showHomeContent =
-        bootstrapped && !showEntryGate && !showOnboardingGate;
+    // Keep bootstrap readiness for existing effects, but make the real
+    // marketing homepage the server-rendered/default public surface.
+    const showHomeContent = !showOnboardingGate;
 
     const showChrome = showHomeContent;
 
@@ -2097,108 +2090,7 @@ export default function HomePageAvatarOnboardingClient({
                 <section className="relative overflow-hidden">
                     <PageContainer>
                         <AnimatePresence mode="wait">
-                            {!bootstrapped ? (
-                                <motion.div
-                                    key="gate-loading"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="mx-auto max-w-[760px]"
-                                >
-                                    <Surface className="p-4 sm:p-5 lg:p-6">
-                                        <div className="mx-auto max-w-[520px] text-center">
-                                            <SectionKicker>{t("gate.kicker")}</SectionKicker>
-                                            <h1 className="mt-2 text-[26px] font-semibold tracking-tight sm:text-[34px]">
-                                                {t("gate.title", { appName: APP_NAME })}
-                                            </h1>
-                                            <p className="mt-3 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.86)]">
-                                                {t("gate.description", { appName: APP_NAME })}
-                                            </p>
-                                        </div>
-                                    </Surface>
-                                </motion.div>
-                            )
-                                : showEntryGate ? (
-                                    <motion.div
-                                        key="entry-gate"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        transition={{ duration: 0.28 }}
-                                        className="mx-auto max-w-[760px]"
-                                    >
-                                        <Surface className="p-4 sm:p-5 lg:p-6">
-                                            <div className="mx-auto max-w-[560px] text-center">
-                                                <SectionKicker>
-                                                    {t("entry.kicker", undefined, "Welcome")}
-                                                </SectionKicker>
-
-                                                <h1 className="mt-2 text-[26px] font-semibold tracking-tight sm:text-[34px]">
-                                                    {t(
-                                                        "entry.title",
-                                                        { appName: APP_NAME },
-                                                        `Welcome to ${APP_NAME}`,
-                                                    )}
-                                                </h1>
-
-                                                <p className="mt-3 text-sm leading-6 text-[rgb(var(--ui-text-muted)/0.86)]">
-                                                    {t(
-                                                        "entry.description",
-                                                        { appName: APP_NAME },
-                                                        "Let’s get you to the right place. Are you new here, or do you already have an account?",
-                                                    )}
-                                                </p>
-                                            </div>
-
-                                            <div className="mt-6">
-                                                <AvatarWithQuestion
-                                                    text={t(
-                                                        "entry.avatarText",
-                                                        { appName: APP_NAME },
-                                                        "Hi, I’m your guide. Are you new here, or do you already have an account?",
-                                                    )}
-                                                    speaking
-                                                    side="right"
-                                                />
-                                            </div>
-
-                                            <div className="mx-auto mt-6 max-w-[520px]">
-                                                <Surface className="p-4">
-                                                    <div className="grid gap-3 sm:grid-cols-2">
-                                                        <button
-                                                            type="button"
-                                                            onClick={openOnboardingFlow}
-                                                            className={cn(buttonClass("primary"), "h-10 w-full")}
-                                                        >
-                                                            {t("entry.newUser", undefined, "I’m new here")}
-                                                        </button>
-
-                                                        <NavButton
-                                                            href={authHref}
-                                                            prefetch
-                                                            className={cn(buttonClass("secondary"), "h-10 w-full")}
-                                                        >
-                                                            {t(
-                                                                "entry.returningUser",
-                                                                undefined,
-                                                                "I already have an account",
-                                                            )}
-                                                        </NavButton>
-                                                    </div>
-
-                                                    <div className="mt-3 text-center text-xs text-[rgb(var(--ui-text-muted)/0.8)]">
-                                                        {t(
-                                                            "entry.helper",
-                                                            undefined,
-                                                            "New users start onboarding. Returning users go to sign in.",
-                                                        )}
-                                                    </div>
-                                                </Surface>
-                                            </div>
-                                        </Surface>
-                                    </motion.div>
-                                ) : showOnboardingGate ? (
+                            {showOnboardingGate ? (
                                 <motion.div
                                     key="gate-only"
                                     initial={{ opacity: 0, y: 10 }}

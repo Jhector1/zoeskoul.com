@@ -68,13 +68,24 @@ export async function generateMetadata(
         twitterTitle: seo.twitterTitle,
         twitterDescription: seo.twitterDescription,
         imageAlt: shared.defaultOgAlt,
-        noIndex: false,
+        noIndex:
+            entry.kind === "programming" &&
+            entry.toolSlug === "shell",
     });
 }
 
 async function getSandboxAccessForActor(
     actor: Awaited<ReturnType<typeof getActor>>,
 ): Promise<SandboxAccess> {
+    if (!actor.userId) {
+        return {
+            hasUser: false,
+            canUseMultiFile: false,
+            canSaveCloud: false,
+            canCreateProjects: false,
+        };
+    }
+
     const [multiFileDecision, saveDecision] = await Promise.all([
         checkIdeCapability(prisma, {
             actor,

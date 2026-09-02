@@ -1,7 +1,7 @@
+import { getProductionAppOrigin } from "@zoeskoul/app-config";
 import type { AppLocale } from "./types";
 
-export const SITE_URL =
-    process.env.NEXT_PUBLIC_APP_URL || "https://zoeskoul.com";
+export const SITE_URL = getProductionAppOrigin("website");
 
 export const SITE_NAME =
     process.env.NEXT_PUBLIC_APP_NAME || "ZoeSkoul";
