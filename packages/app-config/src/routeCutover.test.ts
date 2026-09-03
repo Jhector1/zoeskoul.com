@@ -43,6 +43,7 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     "/en/invitations/course/token-1",
     "/en/invitations/tutoring/token-2",
     "/en/invitations/class/token-3",
+    "/en/invitations/school/token-4",
     "/en/legal/privacy",
     "/en/profile",
     "/en/settings/security",
@@ -200,4 +201,9 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
       }),
     ).toBe("unknown");
   });
+
+  it("assigns localized School administration to Teacher", () => {
+    expect(resolveAppRouteOwner({ pathname: "/en/school", currentApp: "teacher" })).toBe("teacher");
+  });
+
 });

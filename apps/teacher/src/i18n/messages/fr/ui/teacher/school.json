@@ -1,0 +1,86 @@
+{
+  "Teacher": {
+    "school": {
+      "kicker": "Administration scolaire",
+      "title": "École",
+      "subtitle": "Gérez les informations de l’école, les enseignants, administrateurs, invitations et classes existantes.",
+      "loading": "Chargement de l’école…",
+      "na": "—",
+      "nav": {
+        "classes": "Classes",
+        "reports": "Rapports"
+      },
+      "selector": {
+        "label": "École",
+        "none": "Aucune école sélectionnée"
+      },
+      "create": {
+        "title": "Créer une école",
+        "description": "Créez l’organisation qui regroupe vos classes et votre équipe enseignante.",
+        "name": "Nom de l’école",
+        "slug": "Identifiant de l’école",
+        "action": "Créer l’école"
+      },
+      "details": {
+        "title": "Informations de l’école",
+        "slug": "Identifiant : {slug}",
+        "name": "Nom",
+        "description": "Description",
+        "save": "Enregistrer",
+        "manage": "Accès de gestion",
+        "readOnly": "Lecture seule"
+      },
+      "staff": {
+        "title": "Enseignants et administrateurs",
+        "description": "Les rôles scolaires sont limités à cette école et ne donnent jamais le rôle d’administrateur de la plateforme.",
+        "owner": "Propriétaire de l’école",
+        "ownerFallback": "Propriétaire",
+        "memberFallback": "Membre du personnel",
+        "remove": "Retirer",
+        "empty": "Aucun autre membre du personnel."
+      },
+      "roles": {
+        "admin": "Administrateur scolaire",
+        "instructor": "Enseignant"
+      },
+      "invites": {
+        "title": "Invitations du personnel",
+        "description": "Invitez des enseignants ou administrateurs scolaires. L’acceptation crée l’appartenance à l’école et l’accès Teacher sans accorder le rôle d’administrateur de la plateforme.",
+        "email": "E-mail",
+        "send": "Envoyer",
+        "copy": "Copier le lien",
+        "resend": "Renvoyer l’e-mail",
+        "revoke": "Révoquer",
+        "pending": "En attente · {role}",
+        "empty": "Aucune invitation en attente."
+      },
+      "classes": {
+        "title": "Classes",
+        "description": "Classes ZoeSkoul existantes rattachées à cette école.",
+        "new": "Nouvelle classe",
+        "meta": "{students} membres · {assignments} devoirs",
+        "empty": "Aucune classe rattachée pour le moment."
+      },
+      "errors": {
+        "load": "Impossible de charger vos écoles.",
+        "createFields": "Saisissez un nom et un identifiant.",
+        "create": "Impossible de créer l’école.",
+        "save": "Impossible d’enregistrer l’école.",
+        "staff": "Impossible de mettre à jour le personnel.",
+        "inviteEmail": "Saisissez une adresse e-mail.",
+        "invite": "Impossible d’envoyer l’invitation.",
+        "copy": "Impossible de copier le lien.",
+        "revoke": "Impossible de révoquer l’invitation."
+      },
+      "notices": {
+        "created": "École créée.",
+        "saved": "École enregistrée.",
+        "role": "Rôle mis à jour.",
+        "removed": "Membre retiré de cette école.",
+        "sent": "Invitation envoyée.",
+        "copied": "Lien copié.",
+        "revoked": "Invitation révoquée."
+      }
+    }
+  }
+}

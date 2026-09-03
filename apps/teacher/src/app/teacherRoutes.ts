@@ -33,6 +33,10 @@ export type TeacherLocation =
       locale: string;
     }
   | {
+      kind: "school";
+      locale: string;
+    }
+  | {
       kind: "tutoring";
       locale: string;
     };
@@ -86,6 +90,13 @@ export function resolveTeacherLocation(
       locale,
       classId: parts[1],
     };
+  }
+
+  if (
+    parts[0] === "school" &&
+    !parts[1]
+  ) {
+    return { kind: "school", locale };
   }
 
   if (

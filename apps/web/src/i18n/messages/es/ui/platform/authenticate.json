@@ -38,6 +38,24 @@
       "anotherAccount": "otra cuenta",
       "unavailableTitle": "Esta invitación a la clase no está disponible",
       "unavailableBody": "Esta invitación no se puede usar. Pide a tu docente un enlace nuevo."
+    },
+    "schoolStaffInviteContext": {
+      "title": "Únete a tu escuela en ZoeSkoul",
+      "body": "Inicia sesión o crea una cuenta con el correo invitado para unirte a {resource} como personal escolar.",
+      "fallbackResource": "esta escuela"
+    },
+    "schoolStaffInvitePage": {
+      "kicker": "Invitación escolar",
+      "notFoundTitle": "Invitación no encontrada",
+      "notFoundBody": "Este enlace no está disponible.",
+      "expiredTitle": "La invitación venció",
+      "withdrawnTitle": "Invitación retirada",
+      "inactiveBody": "Pide una nueva invitación a un administrador escolar.",
+      "wrongAccountTitle": "Usa el correo invitado",
+      "wrongAccountBody": "Esta invitación se envió a {invitedEmail}. Has iniciado sesión como {currentEmail}.",
+      "anotherAccount": "otra cuenta",
+      "unavailableTitle": "Invitación no disponible",
+      "unavailableBody": "No se puede aceptar esta invitación."
     }
   }
 }

@@ -434,6 +434,7 @@ model User {
   practiceChallengeLinks            PracticeChallengeLink[]     @relation("UserPracticeChallengeLinks")
   learningOrganizationsOwned        LearningOrganization[]      @relation("LearningOrganizationOwner")
   learningOrganizationMemberships  LearningOrganizationMember[]
+  learningOrganizationInvitesAccepted LearningOrganizationInvite[] @relation("LearningOrganizationInviteAcceptedBy")
   learningGroupsOwned               LearningGroup[]             @relation("LearningGroupOwner")
   learningGroupMemberships          LearningGroupMember[]
   learningGroupInvitesAccepted LearningGroupInvite[] @relation("LearningGroupInviteAcceptedBy")
@@ -798,6 +799,7 @@ model LearningOrganization {
   owner       User                         @relation("LearningOrganizationOwner", fields: [ownerId], references: [id], onDelete: Cascade)
   memberships LearningOrganizationMember[]
   groups      LearningGroup[]
+  invites     LearningOrganizationInvite[]
 
   @@index([ownerId, updatedAt])
 }
@@ -813,6 +815,28 @@ model LearningOrganizationMember {
   @@id([organizationId, userId])
   @@index([userId])
   @@index([organizationId, role])
+}
+
+model LearningOrganizationInvite {
+  id               String                          @id @default(cuid())
+  organizationId   String
+  email            String
+  role             LearningOrganizationMemberRole @default(instructor)
+  tokenHash        String                          @unique @db.VarChar(64)
+  expiresAt        DateTime
+  sentAt           DateTime?
+  acceptedAt       DateTime?
+  acceptedByUserId String?
+  revokedAt        DateTime?
+  createdAt        DateTime                        @default(now())
+  updatedAt        DateTime                        @updatedAt
+  organization     LearningOrganization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  acceptedBy       User?                           @relation("LearningOrganizationInviteAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
+
+  @@unique([organizationId, email])
+  @@index([organizationId, revokedAt, expiresAt])
+  @@index([email, revokedAt])
+  @@index([acceptedByUserId])
 }
 
 model LearningGroup {

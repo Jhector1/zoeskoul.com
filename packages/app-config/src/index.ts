@@ -270,6 +270,7 @@ const teacherOwnedRoots =
     "payouts",
     "rates",
     "reports",
+    "school",
     "schedule",
     "students",
     "teacher-profile",

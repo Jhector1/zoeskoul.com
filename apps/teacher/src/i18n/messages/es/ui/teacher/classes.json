@@ -103,7 +103,8 @@
           "load": "No se pudo cargar el progreso de la clase."
         }
       },
-      "reports": "Informes"
+      "reports": "Informes",
+      "schoolAdmin": "Escuela"
     }
   }
 }

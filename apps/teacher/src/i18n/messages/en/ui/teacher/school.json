@@ -1,0 +1,86 @@
+{
+  "Teacher": {
+    "school": {
+      "kicker": "School administration",
+      "title": "School",
+      "subtitle": "Manage school details, teachers, administrators, staff invitations, and the existing classes connected to your school.",
+      "loading": "Loading school…",
+      "na": "—",
+      "nav": {
+        "classes": "Classes",
+        "reports": "Reports"
+      },
+      "selector": {
+        "label": "School",
+        "none": "No school selected"
+      },
+      "create": {
+        "title": "Create a school",
+        "description": "Create the organization that groups your classes and teaching staff.",
+        "name": "School name",
+        "slug": "School slug",
+        "action": "Create school"
+      },
+      "details": {
+        "title": "School details",
+        "slug": "Slug: {slug}",
+        "name": "Name",
+        "description": "Description",
+        "save": "Save school",
+        "manage": "Management access",
+        "readOnly": "Read-only access"
+      },
+      "staff": {
+        "title": "Teachers and administrators",
+        "description": "School roles are scoped to this school and never grant platform-admin access.",
+        "owner": "School owner",
+        "ownerFallback": "Owner",
+        "memberFallback": "Staff member",
+        "remove": "Remove",
+        "empty": "No additional staff have joined this school yet."
+      },
+      "roles": {
+        "admin": "School admin",
+        "instructor": "Teacher"
+      },
+      "invites": {
+        "title": "Staff invitations",
+        "description": "Invite teachers or school administrators. Acceptance creates school membership and Teacher access without granting platform-admin access.",
+        "email": "Email",
+        "send": "Send invitation",
+        "copy": "Copy invite link",
+        "resend": "Resend email",
+        "revoke": "Revoke",
+        "pending": "Pending · {role}",
+        "empty": "No pending staff invitations."
+      },
+      "classes": {
+        "title": "Classes",
+        "description": "Existing ZoeSkoul classes connected to this school.",
+        "new": "New class",
+        "meta": "{students} members · {assignments} assignments",
+        "empty": "No classes are connected to this school yet."
+      },
+      "errors": {
+        "load": "Your schools could not be loaded.",
+        "createFields": "Enter a school name and slug.",
+        "create": "The school could not be created.",
+        "save": "The school could not be saved.",
+        "staff": "The staff member could not be updated.",
+        "inviteEmail": "Enter an email address to invite.",
+        "invite": "The staff invitation could not be sent.",
+        "copy": "The invitation link could not be copied.",
+        "revoke": "The invitation could not be revoked."
+      },
+      "notices": {
+        "created": "School created.",
+        "saved": "School saved.",
+        "role": "Staff role updated.",
+        "removed": "Staff member removed from this school.",
+        "sent": "Invitation email sent.",
+        "copied": "Invitation link copied.",
+        "revoked": "Invitation revoked."
+      }
+    }
+  }
+}

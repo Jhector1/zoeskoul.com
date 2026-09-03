@@ -103,7 +103,8 @@
           "load": "Impossible de charger la progression de la classe."
         }
       },
-      "reports": "Rapports"
+      "reports": "Rapports",
+      "schoolAdmin": "École"
     }
   }
 }

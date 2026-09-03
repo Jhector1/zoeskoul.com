@@ -1,6 +1,7 @@
 import "server-only";
 
 import type { PrismaClient } from "@/lib/prisma";
+import { resolveInviteLocaleFromRequest, type InviteLocale } from "@/lib/invitations/inviteLocale";
 import {
   buildLearningGroupInviteMailto,
   sendLearningGroupInviteEmail,
@@ -11,33 +12,8 @@ import {
 } from "@/lib/learningGroups/groupInvites";
 import { normalizeEmails } from "@/lib/teaching/recipientResolution";
 
-export type LearningGroupInviteLocale = "en" | "es" | "fr" | "ht";
-
-function normalizeInviteLocale(value: string | null | undefined): LearningGroupInviteLocale {
-  const normalized = value?.trim().toLowerCase();
-  return normalized === "es" || normalized === "fr" || normalized === "ht"
-    ? normalized
-    : "en";
-}
-
-export function resolveLearningGroupInviteLocaleFromRequest(
-  request: Request,
-): LearningGroupInviteLocale {
-  const referer = request.headers.get("referer");
-  if (referer) {
-    try {
-      const first = new URL(referer).pathname.split("/").filter(Boolean)[0];
-      if (first === "en" || first === "es" || first === "fr" || first === "ht") {
-        return first;
-      }
-    } catch {
-      // Fall through to Accept-Language/default.
-    }
-  }
-
-  const language = request.headers.get("accept-language")?.split(",")[0]?.split("-")[0];
-  return normalizeInviteLocale(language);
-}
+export type LearningGroupInviteLocale = InviteLocale;
+export const resolveLearningGroupInviteLocaleFromRequest = resolveInviteLocaleFromRequest;
 
 export async function deliverLearningGroupInvite(
   prisma: PrismaClient,

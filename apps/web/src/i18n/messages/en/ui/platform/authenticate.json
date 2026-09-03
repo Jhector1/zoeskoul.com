@@ -89,6 +89,24 @@
       "anotherAccount": "another account",
       "unavailableTitle": "This class invitation is not available",
       "unavailableBody": "This invitation cannot be used. Ask your teacher for a new link."
+    },
+    "schoolStaffInviteContext": {
+      "title": "Join your school on ZoeSkoul",
+      "body": "Sign in or create an account with the email that received the invitation to join {resource} as school staff.",
+      "fallbackResource": "this school"
+    },
+    "schoolStaffInvitePage": {
+      "kicker": "School invitation",
+      "notFoundTitle": "Invitation not found",
+      "notFoundBody": "This school staff invitation link is not available.",
+      "expiredTitle": "Invitation expired",
+      "withdrawnTitle": "Invitation withdrawn",
+      "inactiveBody": "Ask a school administrator to send a new staff invitation.",
+      "wrongAccountTitle": "Use the invited email",
+      "wrongAccountBody": "This invitation was sent to {invitedEmail}. You are signed in as {currentEmail}.",
+      "anotherAccount": "another account",
+      "unavailableTitle": "Invitation unavailable",
+      "unavailableBody": "This school staff invitation cannot be accepted."
     }
   }
 }

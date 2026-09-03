@@ -1,0 +1,86 @@
+{
+  "Teacher": {
+    "school": {
+      "kicker": "Administrasyon lekòl",
+      "title": "Lekòl",
+      "subtitle": "Jere enfòmasyon lekòl la, pwofesè, administratè, envitasyon ak klas ki deja konekte.",
+      "loading": "Ap chaje lekòl la…",
+      "na": "—",
+      "nav": {
+        "classes": "Klas",
+        "reports": "Rapò"
+      },
+      "selector": {
+        "label": "Lekòl",
+        "none": "Pa gen lekòl ki chwazi"
+      },
+      "create": {
+        "title": "Kreye yon lekòl",
+        "description": "Kreye òganizasyon ki rasanble klas ou yo ak ekip ansèyman an.",
+        "name": "Non lekòl la",
+        "slug": "Idantifyan lekòl la",
+        "action": "Kreye lekòl"
+      },
+      "details": {
+        "title": "Enfòmasyon lekòl la",
+        "slug": "Idantifyan: {slug}",
+        "name": "Non",
+        "description": "Deskripsyon",
+        "save": "Sove lekòl",
+        "manage": "Aksè jesyon",
+        "readOnly": "Li sèlman"
+      },
+      "staff": {
+        "title": "Pwofesè ak administratè",
+        "description": "Wòl lekòl yo limite ak lekòl sa a epi yo pa janm bay aksè administratè platfòm.",
+        "owner": "Pwopriyetè lekòl la",
+        "ownerFallback": "Pwopriyetè",
+        "memberFallback": "Anplwaye",
+        "remove": "Retire",
+        "empty": "Pa gen lòt anplwaye ankò."
+      },
+      "roles": {
+        "admin": "Administratè lekòl",
+        "instructor": "Pwofesè"
+      },
+      "invites": {
+        "title": "Envitasyon anplwaye",
+        "description": "Envite pwofesè oswa administratè lekòl. Akseptasyon kreye manm lekòl ak aksè Teacher san aksè administratè platfòm.",
+        "email": "Imèl",
+        "send": "Voye envitasyon",
+        "copy": "Kopye lyen",
+        "resend": "Revoye imèl",
+        "revoke": "Anile",
+        "pending": "Annatant · {role}",
+        "empty": "Pa gen envitasyon annatant."
+      },
+      "classes": {
+        "title": "Klas",
+        "description": "Klas ZoeSkoul ki deja konekte ak lekòl sa a.",
+        "new": "Nouvo klas",
+        "meta": "{students} manm · {assignments} devwa",
+        "empty": "Pa gen klas ki konekte ankò."
+      },
+      "errors": {
+        "load": "Nou pa t kapab chaje lekòl ou yo.",
+        "createFields": "Antre non ak idantifyan lekòl la.",
+        "create": "Nou pa t kapab kreye lekòl la.",
+        "save": "Nou pa t kapab sove lekòl la.",
+        "staff": "Nou pa t kapab mete anplwaye a ajou.",
+        "inviteEmail": "Antre yon adrès imèl.",
+        "invite": "Nou pa t kapab voye envitasyon an.",
+        "copy": "Nou pa t kapab kopye lyen an.",
+        "revoke": "Nou pa t kapab anile envitasyon an."
+      },
+      "notices": {
+        "created": "Lekòl kreye.",
+        "saved": "Lekòl sove.",
+        "role": "Wòl mete ajou.",
+        "removed": "Anplwaye retire nan lekòl sa a.",
+        "sent": "Envitasyon voye.",
+        "copied": "Lyen kopye.",
+        "revoked": "Envitasyon anile."
+      }
+    }
+  }
+}

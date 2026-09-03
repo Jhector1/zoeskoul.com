@@ -78,6 +78,14 @@ export function TeacherClassesPage(props: {
 
         <div className="flex gap-2">
           <TeacherLink
+            href="/school"
+            locale={props.locale}
+            className="ui-btn-secondary rounded-lg px-4 py-2 text-sm font-medium"
+          >
+            {t("schoolAdmin")}
+          </TeacherLink>
+
+          <TeacherLink
             href="/reports"
             locale={props.locale}
             className="ui-btn-secondary rounded-lg px-4 py-2 text-sm font-medium"

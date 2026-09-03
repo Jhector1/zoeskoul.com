@@ -103,4 +103,9 @@ describe("Teacher route ownership", () => {
     });
   });
 
+
+  it("resolves localized School administration inside Teacher", () => {
+    expect(resolveTeacherLocation("/ht/school", "en")).toEqual({ kind: "school", locale: "ht" });
+  });
+
 });

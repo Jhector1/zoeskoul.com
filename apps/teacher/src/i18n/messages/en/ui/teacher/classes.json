@@ -103,7 +103,8 @@
           "load": "Class progress could not be loaded."
         }
       },
-      "reports": "Reports"
+      "reports": "Reports",
+      "schoolAdmin": "School"
     }
   }
 }

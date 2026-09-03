@@ -89,6 +89,24 @@
       "anotherAccount": "yon lòt kont",
       "unavailableTitle": "Envitasyon klas sa a pa disponib",
       "unavailableBody": "Ou pa kapab sèvi ak envitasyon sa a. Mande pwofesè ou yon nouvo lyen."
+    },
+    "schoolStaffInviteContext": {
+      "title": "Antre nan lekòl ou sou ZoeSkoul",
+      "body": "Konekte oswa kreye yon kont ak imèl yo te envite a pou antre nan {resource} kòm anplwaye lekòl.",
+      "fallbackResource": "lekòl sa a"
+    },
+    "schoolStaffInvitePage": {
+      "kicker": "Envitasyon lekòl",
+      "notFoundTitle": "Envitasyon pa jwenn",
+      "notFoundBody": "Lyen sa a pa disponib.",
+      "expiredTitle": "Envitasyon ekspire",
+      "withdrawnTitle": "Envitasyon retire",
+      "inactiveBody": "Mande yon administratè lekòl voye yon nouvo envitasyon.",
+      "wrongAccountTitle": "Sèvi ak imèl yo te envite a",
+      "wrongAccountBody": "Yo te voye envitasyon sa a bay {invitedEmail}. Ou konekte kòm {currentEmail}.",
+      "anotherAccount": "yon lòt kont",
+      "unavailableTitle": "Envitasyon pa disponib",
+      "unavailableBody": "Envitasyon sa a pa ka aksepte."
     }
   }
 }

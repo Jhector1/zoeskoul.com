@@ -20,6 +20,9 @@ import {
 import {
   TeacherReportsPage,
 } from "../features/reports/TeacherReportsPage";
+import {
+  TeacherSchoolPage,
+} from "../features/school/TeacherSchoolPage";
 import TeacherTutoringDashboard from "../features/tutoring/TeacherTutoringDashboard";
 import {
   resolveTeacherLocation,
@@ -79,6 +82,10 @@ export function TeacherAppShell(props: {
         />
       </>
     );
+  }
+
+  if (location.kind === "school") {
+    return <TeacherSchoolPage apiOrigin={props.apiOrigin} locale={location.locale} />;
   }
 
   if (

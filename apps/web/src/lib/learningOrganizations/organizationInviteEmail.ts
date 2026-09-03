@@ -1,0 +1,4 @@
+
+import "server-only";import { buildClassroomInviteMailto,sendClassroomInviteEmail,type ClassroomInviteEmailResult } from "@/lib/invitations/classroomInviteEmail";
+export async function sendLearningOrganizationInviteEmail(args:{to:string;inviteUrl:string;schoolName:string;inviterName:string;expiresAt:Date}):Promise<ClassroomInviteEmailResult>{return sendClassroomInviteEmail({to:args.to,inviteUrl:args.inviteUrl,instructorName:args.inviterName,classroomTitle:args.schoolName,courseTitle:args.schoolName,classroomKind:"school staff",expiresAt:args.expiresAt});}
+export function buildLearningOrganizationInviteMailto(args:{to:string;inviteUrl:string;schoolName:string;inviterName:string}){return buildClassroomInviteMailto({to:args.to,inviteUrl:args.inviteUrl,instructorName:args.inviterName,classroomTitle:args.schoolName,courseTitle:args.schoolName,classroomKind:"school staff"});}
