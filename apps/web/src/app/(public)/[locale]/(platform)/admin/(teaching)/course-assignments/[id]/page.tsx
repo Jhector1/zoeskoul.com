@@ -1,4 +1,5 @@
-import { notFound } from "next/navigation";
+import { resolveTeacherAppHref } from "@/lib/navigation/teacherAppHref";
+import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ownedTeachingRecordWhere } from "@/lib/teaching/teachingAccess";
 import { requireTeachingPageUser } from "@/lib/teaching/requireTeachingPageUser";
@@ -13,7 +14,15 @@ export default async function CourseAssignmentPage({
   params: Promise<{ locale: string; id: string }>;
 }) {
   const { locale, id } = await params;
-  const teachingUser = await requireTeachingPageUser({
+    const teacherAppHref = resolveTeacherAppHref({
+    locale,
+    pathname: `/assignments/${encodeURIComponent(id)}`,
+  });
+  if (teacherAppHref) {
+    redirect(teacherAppHref);
+  }
+
+const teachingUser = await requireTeachingPageUser({
     locale,
     callbackPath: `/admin/course-assignments/${id}`,
   });

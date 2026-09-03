@@ -61,12 +61,6 @@ export function TeacherClassesPage(props: {
     };
   }, [client]);
 
-  const courseAssignmentsHref =
-    new URL(
-      `/${props.locale}/admin/course-assignments`,
-      props.websiteOrigin,
-    ).toString();
-
   return (
     <main className="mx-auto max-w-5xl p-6">
       <div className="flex items-start justify-between gap-4">
@@ -83,12 +77,13 @@ export function TeacherClassesPage(props: {
         </div>
 
         <div className="flex gap-2">
-          <a
-            href={courseAssignmentsHref}
+          <TeacherLink
+            href="/assignments"
+            locale={props.locale}
             className="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium"
           >
             {t("courseAssignments")}
-          </a>
+          </TeacherLink>
 
           <TeacherLink
             href="/classes/new"
