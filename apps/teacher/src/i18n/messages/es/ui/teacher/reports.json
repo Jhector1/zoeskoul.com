@@ -1,0 +1,43 @@
+{
+  "Teacher": {
+    "reports": {
+      "kicker": "Informes escolares",
+      "title": "Informes",
+      "subtitle": "Progreso de toda la escuela basado en los mismos registros de clases y estudiantes que ZoeSkoul ya utiliza.",
+      "classes": "Clases",
+      "school": "Escuela",
+      "loadingSchools": "Cargando escuelas…",
+      "noSchools": "No hay escuelas disponibles",
+      "loadingReport": "Cargando informe escolar…",
+      "unknownStudent": "Estudiante",
+      "notAvailable": "—",
+      "emptyClasses": "Esta escuela todavía no tiene clases.",
+      "emptyStudents": "Todavía no hay estudiantes aceptados disponibles para esta escuela.",
+      "classMeta": "{students} estudiantes · {assignments} asignaciones · {progress}% progreso · {accuracy}% precisión",
+      "accuracyMeta": "{accuracy}% · {attempts} intentos",
+      "stats": {
+        "classes": "Clases",
+        "students": "Estudiantes",
+        "assignments": "Asignaciones",
+        "progress": "Progreso promedio",
+        "accuracy": "Precisión promedio"
+      },
+      "sections": {
+        "classes": "Rendimiento por clase",
+        "students": "Resumen de estudiantes"
+      },
+      "columns": {
+        "student": "Estudiante",
+        "classes": "Clases",
+        "assignments": "Asignaciones",
+        "progress": "Progreso",
+        "accuracy": "Precisión",
+        "activity": "Última actividad"
+      },
+      "errors": {
+        "schools": "No se pudieron cargar tus escuelas.",
+        "report": "No se pudo cargar este informe escolar. Los informes de toda la escuela están disponibles para propietarios y administradores."
+      }
+    }
+  }
+}

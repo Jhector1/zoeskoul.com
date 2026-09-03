@@ -90,4 +90,17 @@ describe("Teacher route ownership", () => {
       ).toBe("tutoring");
     }
   });
+
+  it("resolves localized school reports inside Teacher", () => {
+    expect(
+      resolveTeacherLocation(
+        "/fr/reports",
+        "en",
+      ),
+    ).toEqual({
+      kind: "reports",
+      locale: "fr",
+    });
+  });
+
 });

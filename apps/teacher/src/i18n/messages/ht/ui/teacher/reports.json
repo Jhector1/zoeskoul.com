@@ -1,0 +1,43 @@
+{
+  "Teacher": {
+    "reports": {
+      "kicker": "Rapò lekòl",
+      "title": "Rapò",
+      "subtitle": "Pwogrè tout lekòl la ki soti nan menm done klas ak elèv ZoeSkoul deja itilize.",
+      "classes": "Klas",
+      "school": "Lekòl",
+      "loadingSchools": "Ap chaje lekòl yo…",
+      "noSchools": "Pa gen lekòl disponib",
+      "loadingReport": "Ap chaje rapò lekòl la…",
+      "unknownStudent": "Elèv",
+      "notAvailable": "—",
+      "emptyClasses": "Lekòl sa a poko gen klas.",
+      "emptyStudents": "Pa gen elèv klas ki aksepte ki disponib pou lekòl sa a ankò.",
+      "classMeta": "{students} elèv · {assignments} travay · {progress}% pwogrè · {accuracy}% presizyon",
+      "accuracyMeta": "{accuracy}% · {attempts} tantativ",
+      "stats": {
+        "classes": "Klas",
+        "students": "Elèv",
+        "assignments": "Travay",
+        "progress": "Pwogrè mwayèn",
+        "accuracy": "Presizyon mwayèn"
+      },
+      "sections": {
+        "classes": "Pèfòmans klas",
+        "students": "Apèsi elèv yo"
+      },
+      "columns": {
+        "student": "Elèv",
+        "classes": "Klas",
+        "assignments": "Travay",
+        "progress": "Pwogrè",
+        "accuracy": "Presizyon",
+        "activity": "Dènye aktivite"
+      },
+      "errors": {
+        "schools": "Nou pa t kapab chaje lekòl ou yo.",
+        "report": "Nou pa t kapab chaje rapò lekòl sa a. Rapò tout lekòl la disponib pou pwopriyetè ak administratè lekòl yo."
+      }
+    }
+  }
+}

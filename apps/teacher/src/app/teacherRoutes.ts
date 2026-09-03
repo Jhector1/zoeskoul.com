@@ -29,6 +29,10 @@ export type TeacherLocation =
       assignmentId: string;
     }
   | {
+      kind: "reports";
+      locale: string;
+    }
+  | {
       kind: "tutoring";
       locale: string;
     };
@@ -81,6 +85,16 @@ export function resolveTeacherLocation(
       kind: "class-detail",
       locale,
       classId: parts[1],
+    };
+  }
+
+  if (
+    parts[0] === "reports" &&
+    !parts[1]
+  ) {
+    return {
+      kind: "reports",
+      locale,
     };
   }
 

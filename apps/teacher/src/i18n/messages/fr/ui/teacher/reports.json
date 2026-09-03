@@ -1,0 +1,43 @@
+{
+  "Teacher": {
+    "reports": {
+      "kicker": "Rapports scolaires",
+      "title": "Rapports",
+      "subtitle": "Une vue de la progression de l’école fondée sur les mêmes données de classes et d’apprenants déjà utilisées par ZoeSkoul.",
+      "classes": "Classes",
+      "school": "École",
+      "loadingSchools": "Chargement des écoles…",
+      "noSchools": "Aucune école disponible",
+      "loadingReport": "Chargement du rapport scolaire…",
+      "unknownStudent": "Élève",
+      "notAvailable": "—",
+      "emptyClasses": "Cette école n’a pas encore de classes.",
+      "emptyStudents": "Aucun élève accepté n’est encore disponible pour cette école.",
+      "classMeta": "{students} élèves · {assignments} attributions · {progress}% progression · {accuracy}% réussite",
+      "accuracyMeta": "{accuracy}% · {attempts} tentatives",
+      "stats": {
+        "classes": "Classes",
+        "students": "Élèves",
+        "assignments": "Attributions",
+        "progress": "Progression moyenne",
+        "accuracy": "Réussite moyenne"
+      },
+      "sections": {
+        "classes": "Performance des classes",
+        "students": "Vue des élèves"
+      },
+      "columns": {
+        "student": "Élève",
+        "classes": "Classes",
+        "assignments": "Attributions",
+        "progress": "Progression",
+        "accuracy": "Réussite",
+        "activity": "Dernière activité"
+      },
+      "errors": {
+        "schools": "Impossible de charger vos écoles.",
+        "report": "Impossible de charger ce rapport scolaire. Les rapports à l’échelle de l’école sont réservés aux propriétaires et administrateurs."
+      }
+    }
+  }
+}

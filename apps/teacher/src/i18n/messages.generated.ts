@@ -27,21 +27,25 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
   "en": [
     () => import("./messages/en/ui/teacher/assignments.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/teacher/classes.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/teacher/reports.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "es": [
     () => import("./messages/es/ui/teacher/assignments.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/ui/teacher/classes.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/es/ui/teacher/reports.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "fr": [
     () => import("./messages/fr/ui/teacher/assignments.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/teacher/classes.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/teacher/reports.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "ht": [
     () => import("./messages/ht/ui/teacher/assignments.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/teacher/classes.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/teacher/reports.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 };
 
