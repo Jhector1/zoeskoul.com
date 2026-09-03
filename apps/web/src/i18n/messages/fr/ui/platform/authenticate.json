@@ -71,6 +71,24 @@
       "saving": "Enregistrement…",
       "loadError": "Nous n’avons pas pu vérifier votre préférence e-mail.",
       "saveError": "Nous n’avons pas pu enregistrer votre choix. Veuillez réessayer."
+    },
+    "classInviteContext": {
+      "title": "Vous avez été invité(e) dans une classe",
+      "body": "Créez un compte ou connectez-vous avec l’adresse qui a reçu l’invitation pour {resource}. Après votre connexion, ZoeSkoul vous ajoutera à la classe.",
+      "fallbackResource": "cette classe"
+    },
+    "classInvitePage": {
+      "kicker": "Invitation à une classe",
+      "notFoundTitle": "Invitation introuvable",
+      "notFoundBody": "Ce lien d’invitation à la classe est invalide ou a été remplacé. Demandez un nouveau lien à votre enseignant.",
+      "expiredTitle": "Invitation expirée",
+      "withdrawnTitle": "Invitation retirée",
+      "inactiveBody": "Demandez à votre enseignant de créer un nouveau lien d’invitation pour cette classe.",
+      "wrongAccountTitle": "Utilisez le compte qui a reçu cette invitation",
+      "wrongAccountBody": "Ce lien a été envoyé à {invitedEmail}. Vous êtes actuellement connecté(e) avec {currentEmail}.",
+      "anotherAccount": "un autre compte",
+      "unavailableTitle": "Cette invitation à la classe n’est pas disponible",
+      "unavailableBody": "Cette invitation ne peut pas être utilisée. Demandez un nouveau lien à votre enseignant."
     }
   }
 }

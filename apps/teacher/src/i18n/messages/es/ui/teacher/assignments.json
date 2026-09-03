@@ -1,0 +1,96 @@
+{
+  "Teacher": {
+    "assignments": {
+      "kicker": "Enseñanza",
+      "title": "Asignaciones de cursos",
+      "subtitle": "Asigna cursos existentes de ZoeSkoul a clases o estudiantes individuales sin crear otra copia del curso.",
+      "classes": "Clases",
+      "newAssignment": "Nueva asignación",
+      "loading": "Cargando asignaciones de cursos…",
+      "loadingEditor": "Cargando el editor de asignaciones…",
+      "empty": "Aún no hay asignaciones de cursos privados.",
+      "errors": {
+        "load": "No se pudieron cargar las asignaciones de cursos.",
+        "loadEditor": "No se pudo cargar el editor de asignaciones.",
+        "save": "No se pudo guardar la asignación del curso.",
+        "delete": "No se pudo eliminar la asignación del curso.",
+        "forbidden": "Tu cuenta no tiene permiso para administrar esta asignación.",
+        "notFound": "No se pudo encontrar esta asignación de curso."
+      },
+      "notices": {
+        "saved": "Asignación de curso guardada.",
+        "savedOnePending": "Guardado. Un estudiante está esperando una invitación de cuenta.",
+        "savedManyPending": "Guardado. {count} estudiantes están esperando invitaciones de cuenta."
+      },
+      "table": {
+        "assignment": "Asignación",
+        "course": "Curso",
+        "audience": "Destinatarios",
+        "status": "Estado",
+        "due": "Entrega",
+        "actions": "Acciones",
+        "audienceValue": "{students} estudiantes · {invites} invitaciones pendientes · {groups} clases",
+        "noDue": "Sin fecha de entrega",
+        "edit": "Editar"
+      },
+      "status": {
+        "draft": "Borrador",
+        "assigned": "Asignada",
+        "closed": "Cerrada"
+      },
+      "visibility": {
+        "public": "Público",
+        "private": "Privado",
+        "organization": "Organización"
+      },
+      "solutionVisibility": {
+        "instructor_only": "Solo instructor",
+        "after_completion": "Después de completar el curso",
+        "after_due_date": "Después de la fecha de entrega",
+        "always": "Siempre"
+      },
+      "editor": {
+        "newTitle": "Asignar un curso privado",
+        "editTitle": "Editar asignación de curso",
+        "accessNote": "La asignación concede acceso a este curso. Los estudiantes no necesitan una suscripción personal para el contenido asignado.",
+        "delete": "Eliminar",
+        "saving": "Guardando…",
+        "save": "Guardar",
+        "deleteConfirm": "¿Eliminar esta asignación de curso?",
+        "content": "Contenido",
+        "course": "Curso",
+        "courseAccess": "Visibilidad: {visibility}. La propia asignación concede el acceso del estudiante.",
+        "assignmentTitle": "Título de la asignación",
+        "slug": "Identificador",
+        "instructions": "Instrucciones para estudiantes",
+        "delivery": "Entrega",
+        "status": "Estado",
+        "opens": "Apertura",
+        "due": "Entrega",
+        "solutionVisibility": "Visibilidad de la solución oficial",
+        "audience": "Destinatarios",
+        "studentEmails": "Correos de estudiantes individuales",
+        "emailPlaceholder": "estudiante@ejemplo.com\notro@ejemplo.com",
+        "emailHint": "Las cuentas existentes se asignan de inmediato. Los correos sin cuenta se convierten en invitaciones pendientes que puedes copiar o enviar.",
+        "groups": "Clases",
+        "groupMembers": "({count} estudiantes)",
+        "noGroups": "Crea primero una clase o asigna correos individuales."
+      },
+      "invites": {
+        "title": "Invitaciones de cuenta pendientes",
+        "description": "Estos estudiantes aún no tienen cuentas de ZoeSkoul asociadas. La invitación los guía por la creación de cuenta y luego directamente al curso asignado.",
+        "disabled": "Cambia el estado a Asignada y guarda antes de enviar enlaces de invitación.",
+        "copyLink": "Copiar enlace",
+        "sendEmail": "Enviar correo",
+        "resendEmail": "Reenviar correo",
+        "sending": "Enviando…",
+        "notSent": "Correo aún no enviado",
+        "sent": "Correo enviado {date}",
+        "linkCopied": "Enlace de invitación copiado para {email}.",
+        "emailSent": "Correo de invitación aceptado para entrega a {email}.",
+        "emailFailedCopied": "Falló el envío automático para {email}. Se copió el enlace para que puedas enviarlo manualmente.",
+        "deliveryFailed": "No se pudo enviar la invitación para {email}."
+      }
+    }
+  }
+}

@@ -80,6 +80,16 @@ export default function AuthenticatePage() {
     );
 
     const accessContext = useMemo(() => {
+if (accessReason === "class_invite") {
+    return {
+        title: t("classInviteContext.title"),
+        body: t("classInviteContext.body", {
+            resource:
+                accessResource ||
+                t("classInviteContext.fallbackResource"),
+        }),
+    };
+}
         if (accessReason === "course_invite") {
             return {
                 title: t("context.courseInvite.title"),

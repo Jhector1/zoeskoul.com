@@ -1,4 +1,8 @@
-import { NextResponse } from "next/server";
+import {
+  appCorsJson,
+  appCorsPreflight,
+  isAppMutationOriginAllowed,
+} from "@/lib/http/appCors";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import {
@@ -19,20 +23,28 @@ type Context = { params: Promise<{ id: string }> };
 const InviteDeliverySchema = z.object({
   email: z.string().trim().email(),
   action: z.enum(["link", "email"]),
-  locale: z.enum(["en", "fr", "ht"]).default("en"),
+  locale: z.enum(["en", "es", "fr", "ht"]).default("en"),
 });
 
 export async function POST(req: Request, context: Context) {
+  if (!isAppMutationOriginAllowed(req)) {
+    return appCorsJson(
+      req,
+      { error: "Forbidden" },
+      { status: 403 },
+    );
+  }
+
   const teachingUser = await getTeachingUser();
   if (!teachingUser) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    return appCorsJson(req,{ error: "Forbidden" }, { status: 403 });
   }
 
   const parsed = InviteDeliverySchema.safeParse(
     await req.json().catch(() => null),
   );
   if (!parsed.success) {
-    return NextResponse.json(
+    return appCorsJson(req,
       { error: "Invalid invitation request", details: parsed.error.flatten() },
       { status: 400 },
     );
@@ -57,16 +69,16 @@ export async function POST(req: Request, context: Context) {
   });
 
   if (!assignment) {
-    return NextResponse.json({ error: "Assignment not found" }, { status: 404 });
+    return appCorsJson(req,{ error: "Assignment not found" }, { status: 404 });
   }
   if (assignment.status !== "assigned") {
-    return NextResponse.json(
+    return appCorsJson(req,
       { error: "Publish the assignment before sending invitations." },
       { status: 409 },
     );
   }
   if (!assignment.invites.length) {
-    return NextResponse.json(
+    return appCorsJson(req,
       { error: "This email is no longer waiting for an account invitation." },
       { status: 404 },
     );
@@ -77,7 +89,7 @@ export async function POST(req: Request, context: Context) {
     email,
   });
   if (!rotated) {
-    return NextResponse.json({ error: "Invitation not found" }, { status: 404 });
+    return appCorsJson(req,{ error: "Invitation not found" }, { status: 404 });
   }
 
   const origin = new URL(req.url).origin;
@@ -100,7 +112,7 @@ export async function POST(req: Request, context: Context) {
   });
 
   if (parsed.data.action === "link") {
-    return NextResponse.json({
+    return appCorsJson(req,{
       ok: true,
       inviteUrl,
       mailtoHref,
@@ -135,7 +147,7 @@ export async function POST(req: Request, context: Context) {
         delivery.reason === "provider_error" ? delivery.detail : undefined,
     });
 
-    return NextResponse.json(
+    return appCorsJson(req,
       {
         ok: false,
         error,
@@ -168,7 +180,7 @@ export async function POST(req: Request, context: Context) {
     messageId: delivery.messageId,
   });
 
-  return NextResponse.json({
+  return appCorsJson(req,{
     ok: true,
     inviteUrl,
     mailtoHref,
@@ -178,4 +190,8 @@ export async function POST(req: Request, context: Context) {
     emailMessageId: delivery.messageId,
     sentAt,
   });
+}
+
+export function OPTIONS(req: Request) {
+  return appCorsPreflight(req);
 }

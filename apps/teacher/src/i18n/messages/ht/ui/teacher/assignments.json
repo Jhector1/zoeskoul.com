@@ -1,0 +1,96 @@
+{
+  "Teacher": {
+    "assignments": {
+      "kicker": "Ansèyman",
+      "title": "Kou yo bay",
+      "subtitle": "Bay klas oswa elèv endividyèl kou ZoeSkoul ki deja egziste san kreye yon lòt kopi kou a.",
+      "classes": "Klas",
+      "newAssignment": "Nouvo travay",
+      "loading": "N ap chaje kou yo bay yo…",
+      "loadingEditor": "N ap chaje editè travay la…",
+      "empty": "Pa gen kou prive yo bay pou kounye a.",
+      "errors": {
+        "load": "Nou pa t kapab chaje kou yo bay yo.",
+        "loadEditor": "Nou pa t kapab chaje editè travay la.",
+        "save": "Nou pa t kapab anrejistre kou yo bay la.",
+        "delete": "Nou pa t kapab efase kou yo bay la.",
+        "forbidden": "Kont ou a pa gen pèmisyon pou jere travay sa a.",
+        "notFound": "Nou pa t kapab jwenn kou yo bay sa a."
+      },
+      "notices": {
+        "saved": "Kou yo bay la anrejistre.",
+        "savedOnePending": "Anrejistre. Yon elèv ap tann yon envitasyon pou kont.",
+        "savedManyPending": "Anrejistre. {count} elèv ap tann envitasyon pou kont."
+      },
+      "table": {
+        "assignment": "Travay",
+        "course": "Kou",
+        "audience": "Moun k ap resevwa",
+        "status": "Estati",
+        "due": "Dat limit",
+        "actions": "Aksyon",
+        "audienceValue": "{students} elèv · {invites} envitasyon k ap tann · {groups} klas",
+        "noDue": "Pa gen dat limit",
+        "edit": "Modifye"
+      },
+      "status": {
+        "draft": "Bouyon",
+        "assigned": "Bay",
+        "closed": "Fèmen"
+      },
+      "visibility": {
+        "public": "Piblik",
+        "private": "Prive",
+        "organization": "Òganizasyon"
+      },
+      "solutionVisibility": {
+        "instructor_only": "Pwofesè sèlman",
+        "after_completion": "Apre elèv la fini kou a",
+        "after_due_date": "Apre dat limit la",
+        "always": "Toujou"
+      },
+      "editor": {
+        "newTitle": "Bay yon kou prive",
+        "editTitle": "Modifye kou yo bay la",
+        "accessNote": "Travay la bay aksè ak kou sa a. Elèv yo pa bezwen yon abònman pèsonèl pou kontni yo ba yo.",
+        "delete": "Efase",
+        "saving": "N ap anrejistre…",
+        "save": "Anrejistre",
+        "deleteConfirm": "Efase kou yo bay sa a?",
+        "content": "Kontni",
+        "course": "Kou",
+        "courseAccess": "Vizibilite: {visibility}. Travay la menm se otorizasyon aksè elèv la.",
+        "assignmentTitle": "Tit travay la",
+        "slug": "Idantifyan",
+        "instructions": "Enstriksyon pou elèv",
+        "delivery": "Livrezon",
+        "status": "Estati",
+        "opens": "Ouvè",
+        "due": "Dat limit",
+        "solutionVisibility": "Vizibilite solisyon ofisyèl la",
+        "audience": "Moun k ap resevwa",
+        "studentEmails": "Imèl elèv endividyèl",
+        "emailPlaceholder": "elev@egzanp.com\nyonlot@egzanp.com",
+        "emailHint": "Kont ki deja egziste yo jwenn travay la touswit. Imèl ki pa gen kont vin envitasyon k ap tann ke ou ka kopye oswa voye.",
+        "groups": "Klas",
+        "groupMembers": "({count} elèv)",
+        "noGroups": "Kreye yon klas anvan, oswa bay imèl endividyèl."
+      },
+      "invites": {
+        "title": "Envitasyon kont k ap tann",
+        "description": "Elèv sa yo poko gen kont ZoeSkoul ki koresponn. Envitasyon an mennen yo nan kreye kont epi apre sa dirèkteman nan kou yo ba yo a.",
+        "disabled": "Chanje estati a pou Bay epi anrejistre anvan ou voye lyen envitasyon.",
+        "copyLink": "Kopye lyen envitasyon",
+        "sendEmail": "Voye imèl",
+        "resendEmail": "Voye imèl ankò",
+        "sending": "N ap voye…",
+        "notSent": "Imèl poko voye",
+        "sent": "Imèl voye {date}",
+        "linkCopied": "Lyen envitasyon kopye pou {email}.",
+        "emailSent": "Yo aksepte imèl envitasyon an pou livrezon bay {email}.",
+        "emailFailedCopied": "Livrezon otomatik echwe pou {email}. Lyen envitasyon an kopye pou ou ka voye li manyèlman.",
+        "deliveryFailed": "Nou pa t kapab voye envitasyon an pou {email}."
+      }
+    }
+  }
+}

@@ -9,14 +9,17 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src vite.config.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "i18n:generate": "pnpm --dir ../.. --filter @zoeskoul/curriculum-registry build && cd ../.. && node packages/curriculum-registry/dist/generate/generateI18nManifest.js --app-root apps/teacher"
   },
   "dependencies": {
     "@zoeskoul/app-config": "workspace:*",
     "@zoeskoul/auth-client": "workspace:*",
     "@zoeskoul/preferences": "workspace:*",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "@zoeskoul/api-client": "workspace:*",
+    "@zoeskoul/i18n-core": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^19",
@@ -24,6 +27,8 @@
     "@vitejs/plugin-react": "^6.0.4",
     "eslint": "^9.39.4",
     "vitest": "^4.1.5",
-    "vite": "^8.1.5"
+    "vite": "^8.1.5",
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4"
   }
 }

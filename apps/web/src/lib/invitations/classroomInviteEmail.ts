@@ -23,7 +23,7 @@ export type ClassroomInviteArgs = {
   instructorName: string;
   classroomTitle: string;
   courseTitle: string;
-  classroomKind: "assigned course" | "tutoring session";
+  classroomKind: "assigned course" | "tutoring session" | "class membership";
 };
 
 export type ClassroomInviteEmailArgs = ClassroomInviteArgs & {
@@ -45,8 +45,20 @@ function resolveInviteSender() {
 }
 
 function classroomInviteCopy(args: ClassroomInviteArgs) {
-  const intro = `${args.instructorName} invited you to a ZoeSkoul ${args.classroomKind} for ${args.courseTitle}.`;
+  if (args.classroomKind === "class membership") {
+    return {
+      subject: `${args.instructorName} invited you to join ${args.classroomTitle}`,
+      heading: "You are invited to a ZoeSkoul class",
+      intro: `${args.instructorName} invited you to join ${args.classroomTitle} on ZoeSkoul.`,
+      detailLabel: "Class",
+      detailValue: args.classroomTitle,
+      actionLabel: "Join class",
+      accountInstruction:
+        "Create an account or sign in using the email address that received this invitation. After you accept, ZoeSkoul will add you to the class.",
+    };
+  }
 
+  const intro = `${args.instructorName} invited you to a ZoeSkoul ${args.classroomKind} for ${args.courseTitle}.`;
   if (args.classroomKind === "tutoring session") {
     return {
       subject: `${args.instructorName} invited you to a ZoeSkoul tutoring session`,
@@ -59,7 +71,6 @@ function classroomInviteCopy(args: ClassroomInviteArgs) {
         "Create an account or sign in using the email address that received this invitation. You will be taken directly to your tutoring session.",
     };
   }
-
   return {
     subject: `${args.instructorName} invited you to ${args.classroomTitle}`,
     heading: "You have been invited to a ZoeSkoul classroom",

@@ -1,0 +1,73 @@
+{
+  "Teacher": {
+    "shell": {
+      "brand": "ZoeSkoul Pwofesè",
+      "loadingTitle": "N ap ouvri espas pwofesè a",
+      "loadingBody": "N ap verifye sesyon ZoeSkoul ou ak otorizasyon ou yo.",
+      "errorEyebrow": "Sesyon an pa disponib",
+      "errorTitle": "Espas pwofesè a pa disponib",
+      "errorBody": "Nou pa t kapab verifye sesyon pwofesè ou a.",
+      "retry": "Eseye ankò",
+      "signInEyebrow": "Ou dwe konekte",
+      "signInTitle": "N ap voye ou nan koneksyon ZoeSkoul",
+      "signInBody": "Apre ou fin konekte, w ap retounen nan espas pwofesè a.",
+      "accessEyebrow": "Aksè pa disponib",
+      "accessTitle": "Aksè pwofesè obligatwa",
+      "accessBody": "Kont sa a pa gen pèmisyon pou louvri aplikasyon pwofesè a.",
+      "return": "Retounen sou ZoeSkoul"
+    },
+    "classes": {
+      "kicker": "Ansèyman",
+      "title": "Gwoup elèv",
+      "subtitle": "Jere manm gwoup la yon sèl fwa epi sèvi avè l ankò pou bay kou prive.",
+      "courseAssignments": "Kou yo bay",
+      "newGroup": "Nouvo gwoup",
+      "loading": "N ap chaje gwoup elèv yo…",
+      "empty": "Pa gen gwoup pou kounye a.",
+      "cardMeta": "{members} elèv · {assignments} travay",
+      "errors": {
+        "load": "Nou pa t kapab chaje gwoup elèv yo.",
+        "loadOne": "Nou pa t kapab chaje gwoup elèv sa a.",
+        "save": "Nou pa t kapab anrejistre gwoup elèv la.",
+        "delete": "Nou pa t kapab efase gwoup elèv la.",
+        "forbidden": "Kont ou a pa gen pèmisyon pou jere gwoup sa a.",
+        "notFound": "Nou pa t kapab jwenn gwoup elèv sa a.",
+        "loadSchools": "Nou pa t kapab chaje lekòl ou yo."
+      },
+      "editor": {
+        "newTitle": "Nouvo gwoup elèv",
+        "editTitle": "Modifye gwoup elèv",
+        "subtitle": "Gwoup yo jere manm sèlman; kou yo ak pwogrè yo rete pataje.",
+        "delete": "Efase",
+        "saving": "N ap anrejistre…",
+        "save": "Anrejistre",
+        "name": "Non",
+        "slug": "Idantifyan",
+        "description": "Deskripsyon",
+        "studentEmails": "Imèl elèv yo",
+        "emailHint": "Mete yon imèl sou chak liy. Chak nouvo elèv resevwa yon envitasyon klas, menm si li deja gen yon kont ZoeSkoul. Li antre nan klas la sèlman apre li aksepte envitasyon an.",
+        "deleteConfirm": "Efase gwoup elèv sa a?",
+        "school": "Lekòl",
+        "noSchool": "Pa gen lekòl",
+        "schoolHint": "Opsyonèl. Klas endepandan yo toujou sipòte.",
+        "saved": "Klas la anrejistre."
+      },
+      "standalone": "Endepandan",
+      "schoolValue": "Lekòl: {school}",
+      "invites": {
+        "title": "Envitasyon klas k ap tann",
+        "description": "Nou voye nouvo envitasyon yo otomatikman lè ou anrejistre. Envitasyon k ap tann yo rete isit la pou ou ka kopye lyen an oswa voye imèl la ankò.",
+        "notSent": "Poko voye",
+        "sent": "Voye {date}",
+        "copyLink": "Kopye lyen envitasyon an",
+        "sendEmail": "Voye imèl",
+        "resendEmail": "Voye imèl ankò",
+        "sending": "N ap voye…",
+        "linkCopied": "Lyen envitasyon klas la kopye pou {email}.",
+        "emailSent": "Envitasyon klas la voye bay {email}.",
+        "emailFailedCopied": "Voye imèl la bay {email} echwe; nou kopye lyen envitasyon klas la pito.",
+        "deliveryFailed": "Nou pa t kapab voye envitasyon klas la bay {email}."
+      }
+    }
+  }
+}

@@ -1,27 +1,31 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { App } from "./App";
 import {
   AppPreferencesProvider,
 } from "@zoeskoul/preferences/react";
+
+import { App } from "./App";
 import {
-  getLocalAppOrigin,
-} from "@zoeskoul/app-config";
+  resolveTeacherAppOrigins,
+} from "./appOrigins";
 import "./styles.css";
 
-const rootElement = document.getElementById("root");
+const rootElement =
+  document.getElementById("root");
 
 if (!rootElement) {
-  throw new Error("The application root element was not found.");
+  throw new Error(
+    "The application root element was not found.",
+  );
 }
+
+const { apiOrigin } =
+  resolveTeacherAppOrigins();
 
 createRoot(rootElement).render(
   <StrictMode>
     <AppPreferencesProvider
-      apiOrigin={
-        import.meta.env.VITE_API_ORIGIN ??
-        getLocalAppOrigin("website")
-      }
+      apiOrigin={apiOrigin}
     >
       <App />
     </AppPreferencesProvider>

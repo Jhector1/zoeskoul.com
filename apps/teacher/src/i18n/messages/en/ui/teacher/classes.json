@@ -1,0 +1,73 @@
+{
+  "Teacher": {
+    "shell": {
+      "brand": "ZoeSkoul Teacher",
+      "loadingTitle": "Loading teacher workspace",
+      "loadingBody": "Checking your ZoeSkoul session and permissions.",
+      "errorEyebrow": "Session unavailable",
+      "errorTitle": "Teacher workspace unavailable",
+      "errorBody": "We could not verify your teacher session.",
+      "retry": "Try again",
+      "signInEyebrow": "Sign-in required",
+      "signInTitle": "Taking you to ZoeSkoul sign in",
+      "signInBody": "You will return to the teacher workspace after authentication.",
+      "accessEyebrow": "Access unavailable",
+      "accessTitle": "Teacher access required",
+      "accessBody": "This account does not have permission to open the teacher application.",
+      "return": "Return to ZoeSkoul"
+    },
+    "classes": {
+      "kicker": "Teaching",
+      "title": "Student groups",
+      "subtitle": "Maintain audience membership once and reuse it across private course assignments.",
+      "courseAssignments": "Course assignments",
+      "newGroup": "New group",
+      "loading": "Loading student groups…",
+      "empty": "No groups yet.",
+      "cardMeta": "{members} students · {assignments} assignments",
+      "errors": {
+        "load": "Could not load student groups.",
+        "loadOne": "Could not load this student group.",
+        "save": "Could not save the student group.",
+        "delete": "Could not delete the student group.",
+        "forbidden": "Your account does not have permission to manage this group.",
+        "notFound": "This student group could not be found.",
+        "loadSchools": "Could not load your schools."
+      },
+      "editor": {
+        "newTitle": "New student group",
+        "editTitle": "Edit student group",
+        "subtitle": "Groups only own audience membership; courses and progress remain shared.",
+        "delete": "Delete",
+        "saving": "Saving…",
+        "save": "Save",
+        "name": "Name",
+        "slug": "Slug",
+        "description": "Description",
+        "studentEmails": "Student emails",
+        "emailHint": "One email per line. Every newly added learner receives a class invitation, including existing ZoeSkoul users. They join the class only after accepting.",
+        "deleteConfirm": "Delete this student group?",
+        "school": "School",
+        "noSchool": "No school",
+        "schoolHint": "Optional. Standalone classes remain supported.",
+        "saved": "Class saved."
+      },
+      "standalone": "Standalone",
+      "schoolValue": "School: {school}",
+      "invites": {
+        "title": "Pending class invitations",
+        "description": "New learner emails are invited automatically when you save. Pending invitations stay here so you can copy the link or resend the email.",
+        "notSent": "Not sent",
+        "sent": "Sent {date}",
+        "copyLink": "Copy invite link",
+        "sendEmail": "Send email",
+        "resendEmail": "Resend email",
+        "sending": "Sending…",
+        "linkCopied": "Class invite link copied for {email}.",
+        "emailSent": "Class invitation sent to {email}.",
+        "emailFailedCopied": "Email delivery failed for {email}; the class invite link was copied instead.",
+        "deliveryFailed": "Could not deliver the class invitation to {email}."
+      }
+    }
+  }
+}

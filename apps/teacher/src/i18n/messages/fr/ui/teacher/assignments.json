@@ -1,0 +1,96 @@
+{
+  "Teacher": {
+    "assignments": {
+      "kicker": "Enseignement",
+      "title": "Attributions de cours",
+      "subtitle": "Attribuez des cours ZoeSkoul existants à des classes ou à des élèves individuels sans créer une autre copie du cours.",
+      "classes": "Classes",
+      "newAssignment": "Nouvelle attribution",
+      "loading": "Chargement des attributions de cours…",
+      "loadingEditor": "Chargement de l’éditeur d’attribution…",
+      "empty": "Aucune attribution de cours privé pour le moment.",
+      "errors": {
+        "load": "Impossible de charger les attributions de cours.",
+        "loadEditor": "Impossible de charger l’éditeur d’attribution.",
+        "save": "Impossible d’enregistrer l’attribution du cours.",
+        "delete": "Impossible de supprimer l’attribution du cours.",
+        "forbidden": "Votre compte n’est pas autorisé à gérer cette attribution.",
+        "notFound": "Cette attribution de cours est introuvable."
+      },
+      "notices": {
+        "saved": "Attribution de cours enregistrée.",
+        "savedOnePending": "Enregistré. Un élève attend une invitation de compte.",
+        "savedManyPending": "Enregistré. {count} élèves attendent des invitations de compte."
+      },
+      "table": {
+        "assignment": "Attribution",
+        "course": "Cours",
+        "audience": "Public",
+        "status": "Statut",
+        "due": "Échéance",
+        "actions": "Actions",
+        "audienceValue": "{students} élèves · {invites} invitations en attente · {groups} classes",
+        "noDue": "Aucune échéance",
+        "edit": "Modifier"
+      },
+      "status": {
+        "draft": "Brouillon",
+        "assigned": "Attribuée",
+        "closed": "Fermée"
+      },
+      "visibility": {
+        "public": "Public",
+        "private": "Privé",
+        "organization": "Organisation"
+      },
+      "solutionVisibility": {
+        "instructor_only": "Enseignant uniquement",
+        "after_completion": "Après la fin du cours",
+        "after_due_date": "Après l’échéance",
+        "always": "Toujours"
+      },
+      "editor": {
+        "newTitle": "Attribuer un cours privé",
+        "editTitle": "Modifier l’attribution du cours",
+        "accessNote": "L’attribution donne accès à ce cours. Les élèves n’ont pas besoin d’un abonnement personnel pour le contenu attribué.",
+        "delete": "Supprimer",
+        "saving": "Enregistrement…",
+        "save": "Enregistrer",
+        "deleteConfirm": "Supprimer cette attribution de cours ?",
+        "content": "Contenu",
+        "course": "Cours",
+        "courseAccess": "Visibilité : {visibility}. L’attribution elle-même donne le droit d’accès à l’élève.",
+        "assignmentTitle": "Titre de l’attribution",
+        "slug": "Identifiant",
+        "instructions": "Instructions pour les élèves",
+        "delivery": "Diffusion",
+        "status": "Statut",
+        "opens": "Ouverture",
+        "due": "Échéance",
+        "solutionVisibility": "Visibilité de la solution officielle",
+        "audience": "Public",
+        "studentEmails": "E-mails des élèves individuels",
+        "emailPlaceholder": "eleve@exemple.com\nautre@exemple.com",
+        "emailHint": "Les comptes existants sont attribués immédiatement. Les e-mails sans compte deviennent des invitations en attente que vous pouvez copier ou envoyer.",
+        "groups": "Classes",
+        "groupMembers": "({count} élèves)",
+        "noGroups": "Créez d’abord une classe ou attribuez des e-mails individuels."
+      },
+      "invites": {
+        "title": "Invitations de compte en attente",
+        "description": "Ces élèves n’ont pas encore de compte ZoeSkoul correspondant. L’invitation les guide vers la création du compte puis directement vers le cours attribué.",
+        "disabled": "Passez le statut à Attribuée et enregistrez avant d’envoyer des liens d’invitation.",
+        "copyLink": "Copier le lien",
+        "sendEmail": "Envoyer l’e-mail",
+        "resendEmail": "Renvoyer l’e-mail",
+        "sending": "Envoi…",
+        "notSent": "E-mail pas encore envoyé",
+        "sent": "E-mail envoyé {date}",
+        "linkCopied": "Lien d’invitation copié pour {email}.",
+        "emailSent": "E-mail d’invitation accepté pour livraison à {email}.",
+        "emailFailedCopied": "L’envoi automatique a échoué pour {email}. Le lien a été copié afin que vous puissiez l’envoyer manuellement.",
+        "deliveryFailed": "Impossible d’envoyer l’invitation à {email}."
+      }
+    }
+  }
+}

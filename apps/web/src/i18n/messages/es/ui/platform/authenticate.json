@@ -20,6 +20,24 @@
       "SessionRequired": "Inicia sesión para continuar.",
       "Configuration": "El inicio de sesión no está disponible temporalmente. Inténtalo de nuevo en un momento o contacta con soporte.",
       "Default": "Algo salió mal. Inténtalo de nuevo."
+    },
+    "classInviteContext": {
+      "title": "Te invitaron a una clase",
+      "body": "Crea una cuenta o inicia sesión con el correo que recibió la invitación para {resource}. Después de iniciar sesión, ZoeSkoul te añadirá a la clase.",
+      "fallbackResource": "esta clase"
+    },
+    "classInvitePage": {
+      "kicker": "Invitación a clase",
+      "notFoundTitle": "Invitación no encontrada",
+      "notFoundBody": "Este enlace de invitación a la clase no es válido o fue reemplazado. Pide a tu docente un enlace nuevo.",
+      "expiredTitle": "La invitación venció",
+      "withdrawnTitle": "Invitación retirada",
+      "inactiveBody": "Pide a tu docente que cree un nuevo enlace de invitación para esta clase.",
+      "wrongAccountTitle": "Usa la cuenta que recibió esta invitación",
+      "wrongAccountBody": "Este enlace se envió a {invitedEmail}. Ahora has iniciado sesión como {currentEmail}.",
+      "anotherAccount": "otra cuenta",
+      "unavailableTitle": "Esta invitación a la clase no está disponible",
+      "unavailableBody": "Esta invitación no se puede usar. Pide a tu docente un enlace nuevo."
     }
   }
 }

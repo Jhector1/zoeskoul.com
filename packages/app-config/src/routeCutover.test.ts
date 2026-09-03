@@ -42,6 +42,7 @@ describe("ZoeSkoul desired route ownership and cutover gates", () => {
     "/en/c/invite-code",
     "/en/invitations/course/token-1",
     "/en/invitations/tutoring/token-2",
+    "/en/invitations/class/token-3",
     "/en/legal/privacy",
     "/en/profile",
     "/en/settings/security",

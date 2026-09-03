@@ -13,6 +13,7 @@ export const LearningGroupInputSchema = z.object({
   slug,
   name: z.string().trim().min(2).max(120),
   description: z.string().trim().max(1000).nullable().optional(),
+  organizationId: z.string().min(1).nullable().optional(),
   memberEmails: emailList,
 });
 

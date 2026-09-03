@@ -1,0 +1,96 @@
+{
+  "Teacher": {
+    "assignments": {
+      "kicker": "Teaching",
+      "title": "Course assignments",
+      "subtitle": "Assign existing ZoeSkoul courses to classes or individual students without creating another copy of the course.",
+      "classes": "Classes",
+      "newAssignment": "New assignment",
+      "loading": "Loading course assignments…",
+      "loadingEditor": "Loading assignment editor…",
+      "empty": "No private course assignments yet.",
+      "errors": {
+        "load": "Could not load course assignments.",
+        "loadEditor": "Could not load the assignment editor.",
+        "save": "Could not save the course assignment.",
+        "delete": "Could not delete the course assignment.",
+        "forbidden": "Your account does not have permission to manage this assignment.",
+        "notFound": "This course assignment could not be found."
+      },
+      "notices": {
+        "saved": "Course assignment saved.",
+        "savedOnePending": "Saved. One student is waiting for an account invitation.",
+        "savedManyPending": "Saved. {count} students are waiting for account invitations."
+      },
+      "table": {
+        "assignment": "Assignment",
+        "course": "Course",
+        "audience": "Audience",
+        "status": "Status",
+        "due": "Due",
+        "actions": "Actions",
+        "audienceValue": "{students} students · {invites} pending invites · {groups} groups",
+        "noDue": "No due date",
+        "edit": "Edit"
+      },
+      "status": {
+        "draft": "Draft",
+        "assigned": "Assigned",
+        "closed": "Closed"
+      },
+      "visibility": {
+        "public": "Public",
+        "private": "Private",
+        "organization": "Organization"
+      },
+      "solutionVisibility": {
+        "instructor_only": "Instructor only",
+        "after_completion": "After course completion",
+        "after_due_date": "After due date",
+        "always": "Always"
+      },
+      "editor": {
+        "newTitle": "Assign a private course",
+        "editTitle": "Edit course assignment",
+        "accessNote": "The assignment grants access to this course. Students do not need a personal subscription for assigned content.",
+        "delete": "Delete",
+        "saving": "Saving…",
+        "save": "Save",
+        "deleteConfirm": "Delete this course assignment?",
+        "content": "Content",
+        "course": "Course",
+        "courseAccess": "Visibility: {visibility}. The assignment itself is the learner's access entitlement.",
+        "assignmentTitle": "Assignment title",
+        "slug": "Slug",
+        "instructions": "Student instructions",
+        "delivery": "Delivery",
+        "status": "Status",
+        "opens": "Opens",
+        "due": "Due",
+        "solutionVisibility": "Official solution visibility",
+        "audience": "Audience",
+        "studentEmails": "Individual student emails",
+        "emailPlaceholder": "student@example.com\none@example.com",
+        "emailHint": "Existing accounts are assigned immediately. Emails without an account become pending invitations that you can copy or send.",
+        "groups": "Classes",
+        "groupMembers": "({count} students)",
+        "noGroups": "Create a class first, or assign individual emails."
+      },
+      "invites": {
+        "title": "Pending account invitations",
+        "description": "These students do not have matching ZoeSkoul accounts yet. The invitation takes them through account creation and then directly into this assigned course.",
+        "disabled": "Change the status to Assigned and save before sending invitation links.",
+        "copyLink": "Copy invite link",
+        "sendEmail": "Send email",
+        "resendEmail": "Resend email",
+        "sending": "Sending…",
+        "notSent": "Email not sent yet",
+        "sent": "Email sent {date}",
+        "linkCopied": "Invitation link copied for {email}.",
+        "emailSent": "Invitation email accepted for delivery to {email}.",
+        "emailFailedCopied": "Automatic email delivery failed for {email}. The invitation link was copied so you can send it manually.",
+        "deliveryFailed": "Could not deliver the invitation for {email}."
+      }
+    }
+  }
+}

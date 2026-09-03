@@ -71,6 +71,24 @@
       "saving": "N ap anrejistre…",
       "loadError": "Nou pa t kapab verifye preferans imèl ou.",
       "saveError": "Nou pa t kapab anrejistre chwa ou. Tanpri eseye ankò."
+    },
+    "classInviteContext": {
+      "title": "Yo envite w nan yon klas",
+      "body": "Kreye yon kont oswa konekte ak imèl ki te resevwa envitasyon an pou {resource}. Apre ou konekte, ZoeSkoul ap ajoute w nan klas la.",
+      "fallbackResource": "klas sa a"
+    },
+    "classInvitePage": {
+      "kicker": "Envitasyon klas",
+      "notFoundTitle": "Nou pa jwenn envitasyon an",
+      "notFoundBody": "Lyen envitasyon klas sa a pa valab oswa yo ranplase li. Mande pwofesè ou yon nouvo lyen.",
+      "expiredTitle": "Envitasyon an ekspire",
+      "withdrawnTitle": "Yo retire envitasyon an",
+      "inactiveBody": "Mande pwofesè ou kreye yon nouvo lyen envitasyon pou klas sa a.",
+      "wrongAccountTitle": "Sèvi ak kont ki te resevwa envitasyon sa a",
+      "wrongAccountBody": "Yo te voye lyen sa a bay {invitedEmail}. Kounye a ou konekte kòm {currentEmail}.",
+      "anotherAccount": "yon lòt kont",
+      "unavailableTitle": "Envitasyon klas sa a pa disponib",
+      "unavailableBody": "Ou pa kapab sèvi ak envitasyon sa a. Mande pwofesè ou yon nouvo lyen."
     }
   }
 }

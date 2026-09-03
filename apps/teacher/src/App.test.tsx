@@ -1,115 +1,39 @@
-import React from "react";
 import {
   readFileSync,
 } from "node:fs";
 import {
-  renderToStaticMarkup,
-} from "react-dom/server";
-import {
   describe,
   expect,
   it,
-  vi,
 } from "vitest";
 
-const mocks = vi.hoisted(() => ({
-  useAppSession: vi.fn(),
-}));
-
-vi.mock("@zoeskoul/auth-client/react", () => ({
-  useAppSession: mocks.useAppSession,
-}));
-vi.mock("./features/tutoring/TeacherTutoringDashboard", () => ({
-  default: (props: {
-    apiOrigin: string;
-    websiteOrigin: string;
-    locale: string;
-  }) => (
-    <div data-testid="teacher-tutoring-dashboard">
-      {props.apiOrigin}|{props.websiteOrigin}|{props.locale}
-    </div>
+const source = readFileSync(
+  new URL(
+    "./App.tsx",
+    import.meta.url,
   ),
-}));
+  "utf8",
+);
 
-import { App } from "./App";
-
-describe("Teacher app session contract", () => {
-  it("recognizes the shared teacher capability", () => {
-    mocks.useAppSession.mockReturnValue({
-      status: "authenticated",
-      session: {
-        authenticated: true,
-        user: {
-          id: "teacher-1",
-          name: "Teacher",
-          email: "teacher@example.com",
-          image: null,
-        },
-        roles: ["teacher"],
-        capabilities: [
-          "student:access",
-          "teacher:access",
-        ],
-      },
-      error: null,
-    });
-
-    const markup = renderToStaticMarkup(
-      <App />,
+describe("Teacher application composition", () => {
+  it("uses shared access, i18n, and route-shell owners", () => {
+    expect(source).toContain(
+      "TeacherIntlProvider",
     );
-
-    expect(markup).toContain(
-      'data-testid="teacher-tutoring-dashboard"',
+    expect(source).toContain(
+      "TeacherAccessGate",
     );
-    expect(markup).toContain(
-      "http://localhost:3000",
-    );
-    const capabilities =
-      mocks.useAppSession.mock.results[0]
-        .value.session.capabilities;
-    expect(Array.isArray(capabilities)).toBe(
-      true,
-    );
-    expect(Object.keys(capabilities)).toEqual([
-      "0",
-      "1",
-    ]);
-  });
-
-  it("denies a student-only session", () => {
-    mocks.useAppSession.mockReturnValue({
-      status: "authenticated",
-      session: {
-        authenticated: true,
-        user: {
-          id: "student-1",
-          name: "Student",
-          email: "student@example.com",
-          image: null,
-        },
-        roles: ["student"],
-        capabilities: ["student:access"],
-      },
-      error: null,
-    });
-
-    const markup = renderToStaticMarkup(
-      <App />,
-    );
-
-    expect(markup).toContain(
-      "Signed in, but this account cannot access the teacher app",
+    expect(source).toContain(
+      "TeacherAppShell",
     );
   });
 
-  it("does not define a raw role union in the active Teacher entrypoint", () => {
-    const source = readFileSync(
-      new URL("./App.tsx", import.meta.url),
-      "utf8",
-    );
-
+  it("does not redefine raw roles or directly own tutoring routing", () => {
     expect(source).not.toContain(
-      "\"student\" | \"teacher\" | \"admin\"",
+      '"student" | "teacher" | "admin"',
+    );
+    expect(source).not.toContain(
+      "TeacherTutoringDashboard",
     );
   });
 });

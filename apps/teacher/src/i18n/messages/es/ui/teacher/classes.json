@@ -1,0 +1,73 @@
+{
+  "Teacher": {
+    "shell": {
+      "brand": "ZoeSkoul Docente",
+      "loadingTitle": "Abriendo el espacio docente",
+      "loadingBody": "Comprobando tu sesión y permisos de ZoeSkoul.",
+      "errorEyebrow": "Sesión no disponible",
+      "errorTitle": "El espacio docente no está disponible",
+      "errorBody": "No pudimos verificar tu sesión de docente.",
+      "retry": "Intentar de nuevo",
+      "signInEyebrow": "Inicio de sesión requerido",
+      "signInTitle": "Te llevamos al inicio de sesión de ZoeSkoul",
+      "signInBody": "Volverás al espacio docente después de autenticarte.",
+      "accessEyebrow": "Acceso no disponible",
+      "accessTitle": "Se requiere acceso de docente",
+      "accessBody": "Esta cuenta no tiene permiso para abrir la aplicación docente.",
+      "return": "Volver a ZoeSkoul"
+    },
+    "classes": {
+      "kicker": "Enseñanza",
+      "title": "Grupos de estudiantes",
+      "subtitle": "Mantén la membresía del grupo una sola vez y reutilízala en asignaciones privadas de cursos.",
+      "courseAssignments": "Asignaciones de cursos",
+      "newGroup": "Nuevo grupo",
+      "loading": "Cargando grupos de estudiantes…",
+      "empty": "Aún no hay grupos.",
+      "cardMeta": "{members} estudiantes · {assignments} asignaciones",
+      "errors": {
+        "load": "No se pudieron cargar los grupos de estudiantes.",
+        "loadOne": "No se pudo cargar este grupo de estudiantes.",
+        "save": "No se pudo guardar el grupo de estudiantes.",
+        "delete": "No se pudo eliminar el grupo de estudiantes.",
+        "forbidden": "Tu cuenta no tiene permiso para administrar este grupo.",
+        "notFound": "No se pudo encontrar este grupo de estudiantes.",
+        "loadSchools": "No se pudieron cargar tus escuelas."
+      },
+      "editor": {
+        "newTitle": "Nuevo grupo de estudiantes",
+        "editTitle": "Editar grupo de estudiantes",
+        "subtitle": "Los grupos solo administran la membresía; los cursos y el progreso siguen siendo compartidos.",
+        "delete": "Eliminar",
+        "saving": "Guardando…",
+        "save": "Guardar",
+        "name": "Nombre",
+        "slug": "Identificador",
+        "description": "Descripción",
+        "studentEmails": "Correos de estudiantes",
+        "emailHint": "Un correo por línea. Cada estudiante nuevo recibe una invitación a la clase, incluso si ya usa ZoeSkoul. Solo se une después de aceptarla.",
+        "deleteConfirm": "¿Eliminar este grupo de estudiantes?",
+        "school": "Escuela",
+        "noSchool": "Sin escuela",
+        "schoolHint": "Opcional. Las clases independientes siguen siendo compatibles.",
+        "saved": "Clase guardada."
+      },
+      "standalone": "Independiente",
+      "schoolValue": "Escuela: {school}",
+      "invites": {
+        "title": "Invitaciones pendientes a la clase",
+        "description": "Las invitaciones nuevas se envían automáticamente al guardar. Las invitaciones pendientes permanecen aquí para que puedas copiar el enlace o reenviar el correo.",
+        "notSent": "No enviada",
+        "sent": "Enviada {date}",
+        "copyLink": "Copiar enlace de invitación",
+        "sendEmail": "Enviar correo",
+        "resendEmail": "Reenviar correo",
+        "sending": "Enviando…",
+        "linkCopied": "Se copió el enlace de invitación a la clase para {email}.",
+        "emailSent": "Invitación a la clase enviada a {email}.",
+        "emailFailedCopied": "Falló el envío a {email}; se copió el enlace de invitación a la clase.",
+        "deliveryFailed": "No se pudo enviar la invitación a la clase a {email}."
+      }
+    }
+  }
+}

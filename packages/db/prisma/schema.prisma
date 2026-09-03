@@ -432,8 +432,11 @@ model User {
   subscriptions                     Subscription[]
   onboardingProfile                 UserOnboardingProfile?
   practiceChallengeLinks            PracticeChallengeLink[]     @relation("UserPracticeChallengeLinks")
+  learningOrganizationsOwned        LearningOrganization[]      @relation("LearningOrganizationOwner")
+  learningOrganizationMemberships  LearningOrganizationMember[]
   learningGroupsOwned               LearningGroup[]             @relation("LearningGroupOwner")
   learningGroupMemberships          LearningGroupMember[]
+  learningGroupInvitesAccepted LearningGroupInvite[] @relation("LearningGroupInviteAcceptedBy")
   learningAssignmentsOwned          LearningAssignment[]        @relation("LearningAssignmentOwner")
   learningAssignmentRecipients      LearningAssignmentUser[]
   learningAssignmentInvitesAccepted LearningAssignmentInvite[]  @relation("LearningAssignmentInviteAcceptedBy")
@@ -783,20 +786,76 @@ model SubjectEnrollment {
   @@index([actorKey, status])
 }
 
+
+model LearningOrganization {
+  id          String                       @id @default(cuid())
+  slug        String                       @unique
+  name        String
+  description String?
+  ownerId     String
+  createdAt   DateTime                     @default(now())
+  updatedAt   DateTime                     @updatedAt
+  owner       User                         @relation("LearningOrganizationOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  memberships LearningOrganizationMember[]
+  groups      LearningGroup[]
+
+  @@index([ownerId, updatedAt])
+}
+
+model LearningOrganizationMember {
+  organizationId String
+  userId         String
+  role           LearningOrganizationMemberRole @default(instructor)
+  joinedAt       DateTime                       @default(now())
+  organization   LearningOrganization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User                           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([organizationId, userId])
+  @@index([userId])
+  @@index([organizationId, role])
+}
+
 model LearningGroup {
   id               String                    @id @default(cuid())
   slug             String                    @unique
   name             String
   description      String?
   ownerId          String
+  organizationId String?
   createdAt        DateTime                  @default(now())
   updatedAt        DateTime                  @updatedAt
   owner            User                      @relation("LearningGroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  organization LearningOrganization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
   members          LearningGroupMember[]
+  invites          LearningGroupInvite[]
   assignments      LearningAssignmentGroup[]
   tutoringSessions TutoringSessionGroup[]
 
   @@index([ownerId, updatedAt])
+
+  @@index([organizationId, updatedAt])
+}
+
+
+model LearningGroupInvite {
+  id               String        @id @default(cuid())
+  groupId          String
+  email            String
+  tokenHash        String        @unique @db.VarChar(64)
+  expiresAt        DateTime
+  sentAt           DateTime?
+  acceptedAt       DateTime?
+  acceptedByUserId String?
+  revokedAt        DateTime?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  group            LearningGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  acceptedBy       User?         @relation("LearningGroupInviteAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
+
+  @@unique([groupId, email])
+  @@index([groupId, revokedAt, expiresAt])
+  @@index([email, revokedAt])
+  @@index([acceptedByUserId])
 }
 
 model LearningGroupMember {
@@ -1293,6 +1352,12 @@ enum TutoringSelectionScope {
 enum TutoringParticipantRole {
   learner
   observer
+}
+
+
+enum LearningOrganizationMemberRole {
+  admin
+  instructor
 }
 
 enum LearningGroupMemberRole {

@@ -1,5 +1,6 @@
 export type AccessGateReason =
   | "course_invite"
+  | "class_invite"
   | "payment_required"
   | "private_course"
   | "assignment_required"
