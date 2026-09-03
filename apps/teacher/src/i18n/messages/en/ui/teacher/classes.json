@@ -67,6 +67,41 @@
         "emailSent": "Class invitation sent to {email}.",
         "emailFailedCopied": "Email delivery failed for {email}; the class invite link was copied instead.",
         "deliveryFailed": "Could not deliver the class invitation to {email}."
+      },
+      "dashboard": {
+        "kicker": "Class dashboard",
+        "title": "Progress and gradebook",
+        "subtitle": "A live view of class assignments using the same learner progress ZoeSkoul already records.",
+        "loading": "Loading class progress…",
+        "emptyAssignments": "No course assignments are connected to this class yet.",
+        "emptyStudents": "No accepted students are in this class yet.",
+        "unknownStudent": "Student",
+        "notAvailable": "—",
+        "assignmentMeta": "{subject} · {progress}% average progress",
+        "due": "Due {date}",
+        "cellAccuracy": "{accuracy}% accuracy · {attempts} attempts",
+        "stats": {
+          "students": "Students",
+          "assignments": "Assignments",
+          "averageProgress": "Average progress",
+          "averageAccuracy": "Average accuracy"
+        },
+        "sections": {
+          "assignments": "Assigned courses",
+          "gradebook": "Gradebook"
+        },
+        "columns": {
+          "student": "Student",
+          "activity": "Last activity"
+        },
+        "status": {
+          "not_started": "Not started",
+          "in_progress": "In progress",
+          "completed": "Completed"
+        },
+        "errors": {
+          "load": "Class progress could not be loaded."
+        }
       }
     }
   }

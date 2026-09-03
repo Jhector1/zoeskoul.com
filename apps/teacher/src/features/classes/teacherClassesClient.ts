@@ -55,6 +55,54 @@ export type TeacherClass = {
   };
 };
 
+export type TeacherClassProgressStatus =
+  | "not_started"
+  | "in_progress"
+  | "completed";
+
+export type TeacherClassDashboard = {
+  class: {
+    id: string;
+    name: string;
+  };
+  summary: {
+    students: number;
+    assignments: number;
+    averageProgressPct: number;
+    averageAccuracyPct: number;
+  };
+  assignments: Array<{
+    id: string;
+    title: string;
+    status: string;
+    availableFrom: string | null;
+    dueAt: string | null;
+    subjectId: string;
+    subjectSlug: string;
+    subjectTitle: string;
+    totalModules: number;
+    averageProgressPct: number;
+  }>;
+  students: Array<{
+    userId: string;
+    name: string | null;
+    email: string | null;
+    totalXp: number;
+    lastActivityAt: string | null;
+    assignments: Array<{
+      assignmentId: string;
+      status: TeacherClassProgressStatus;
+      progressPct: number;
+      completedModules: number;
+      totalModules: number;
+      attempts: number;
+      correct: number;
+      accuracyPct: number;
+      lastActivityAt: string | null;
+    }>;
+  }>;
+};
+
 export type TeacherClassInput = {
   slug: string;
   name: string;
@@ -151,6 +199,18 @@ async deliverInvite(
     { method: "POST", json: input },
   );
 },
+
+    async getDashboard(classId: string) {
+      return api.request<{
+        dashboard: TeacherClassDashboard;
+      }>(
+        `/api/teacher/learning-groups/${encodeURIComponent(classId)}/dashboard`,
+        {
+          method: "GET",
+          cache: "no-store",
+        },
+      );
+    },
 
     async remove(classId: string) {
       return api.request<{

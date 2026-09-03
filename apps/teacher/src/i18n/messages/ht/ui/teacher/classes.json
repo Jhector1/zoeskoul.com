@@ -67,6 +67,41 @@
         "emailSent": "Envitasyon klas la voye bay {email}.",
         "emailFailedCopied": "Voye imèl la bay {email} echwe; nou kopye lyen envitasyon klas la pito.",
         "deliveryFailed": "Nou pa t kapab voye envitasyon klas la bay {email}."
+      },
+      "dashboard": {
+        "kicker": "Tablo klas",
+        "title": "Pwogrè ak kanè",
+        "subtitle": "Yon vizyon an dirèk sou travay klas la ki sèvi ak menm pwogrè elèv ZoeSkoul deja anrejistre.",
+        "loading": "Ap chaje pwogrè klas la…",
+        "emptyAssignments": "Pa gen okenn kou ki asosye ak klas sa a ankò.",
+        "emptyStudents": "Pa gen okenn elèv ki aksepte envitasyon an nan klas sa a ankò.",
+        "unknownStudent": "Elèv",
+        "notAvailable": "—",
+        "assignmentMeta": "{subject} · {progress}% pwogrè mwayèn",
+        "due": "Pou remèt {date}",
+        "cellAccuracy": "{accuracy}% presizyon · {attempts} tantativ",
+        "stats": {
+          "students": "Elèv",
+          "assignments": "Travay",
+          "averageProgress": "Pwogrè mwayèn",
+          "averageAccuracy": "Presizyon mwayèn"
+        },
+        "sections": {
+          "assignments": "Kou yo bay",
+          "gradebook": "Kanè"
+        },
+        "columns": {
+          "student": "Elèv",
+          "activity": "Dènye aktivite"
+        },
+        "status": {
+          "not_started": "Poko kòmanse",
+          "in_progress": "An pwogrè",
+          "completed": "Fini"
+        },
+        "errors": {
+          "load": "Pwogrè klas la pa t kapab chaje."
+        }
       }
     }
   }

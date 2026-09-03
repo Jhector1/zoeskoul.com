@@ -153,4 +153,42 @@ it("delivers class invitations through the LearningGroup invite endpoint", async
   );
 });
 
+
+  it("loads the class dashboard from the scoped LearningGroup projection endpoint", async () => {
+    const fetchImpl = vi.fn(async () =>
+      Response.json({
+        dashboard: {
+          class: { id: "group-1", name: "Python 1" },
+          summary: {
+            students: 0,
+            assignments: 0,
+            averageProgressPct: 0,
+            averageAccuracyPct: 0,
+          },
+          assignments: [],
+          students: [],
+        },
+      }),
+    );
+
+    const client = createTeacherClassesClient({
+      apiOrigin: "https://zoeskoul.com",
+      fetchImpl,
+    });
+
+    await client.getDashboard("group-1");
+
+    expect(fetchImpl).toHaveBeenCalledWith(
+      new URL(
+        "/api/teacher/learning-groups/group-1/dashboard",
+        "https://zoeskoul.com",
+      ),
+      expect.objectContaining({
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+      }),
+    );
+  });
+
 });

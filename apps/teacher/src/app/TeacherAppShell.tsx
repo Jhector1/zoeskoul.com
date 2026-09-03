@@ -12,6 +12,9 @@ import {
   TeacherClassEditor,
 } from "../features/classes/TeacherClassEditor";
 import {
+  TeacherClassDashboard,
+} from "../features/classes/TeacherClassDashboard";
+import {
   TeacherClassesPage,
 } from "../features/classes/TeacherClassesPage";
 import TeacherTutoringDashboard from "../features/tutoring/TeacherTutoringDashboard";
@@ -58,13 +61,20 @@ export function TeacherAppShell(props: {
     "class-detail"
   ) {
     return (
-      <TeacherClassEditor
-        apiOrigin={props.apiOrigin}
-        locale={location.locale}
-        classId={
-          location.classId
-        }
-      />
+      <>
+        <TeacherClassDashboard
+          apiOrigin={props.apiOrigin}
+          locale={location.locale}
+          classId={location.classId}
+        />
+        <TeacherClassEditor
+          apiOrigin={props.apiOrigin}
+          locale={location.locale}
+          classId={
+            location.classId
+          }
+        />
+      </>
     );
   }
 

@@ -67,6 +67,41 @@
         "emailSent": "Invitación a la clase enviada a {email}.",
         "emailFailedCopied": "Falló el envío a {email}; se copió el enlace de invitación a la clase.",
         "deliveryFailed": "No se pudo enviar la invitación a la clase a {email}."
+      },
+      "dashboard": {
+        "kicker": "Panel de clase",
+        "title": "Progreso y calificaciones",
+        "subtitle": "Una vista en vivo de las asignaciones de la clase usando el mismo progreso de aprendizaje que ZoeSkoul ya registra.",
+        "loading": "Cargando el progreso de la clase…",
+        "emptyAssignments": "Todavía no hay asignaciones de curso conectadas a esta clase.",
+        "emptyStudents": "Todavía no hay estudiantes aceptados en esta clase.",
+        "unknownStudent": "Estudiante",
+        "notAvailable": "—",
+        "assignmentMeta": "{subject} · {progress}% de progreso promedio",
+        "due": "Entrega {date}",
+        "cellAccuracy": "{accuracy}% de precisión · {attempts} intentos",
+        "stats": {
+          "students": "Estudiantes",
+          "assignments": "Asignaciones",
+          "averageProgress": "Progreso promedio",
+          "averageAccuracy": "Precisión promedio"
+        },
+        "sections": {
+          "assignments": "Cursos asignados",
+          "gradebook": "Calificaciones"
+        },
+        "columns": {
+          "student": "Estudiante",
+          "activity": "Última actividad"
+        },
+        "status": {
+          "not_started": "Sin comenzar",
+          "in_progress": "En progreso",
+          "completed": "Completado"
+        },
+        "errors": {
+          "load": "No se pudo cargar el progreso de la clase."
+        }
       }
     }
   }

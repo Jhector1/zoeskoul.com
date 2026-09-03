@@ -67,6 +67,41 @@
         "emailSent": "Invitation de classe envoyée à {email}.",
         "emailFailedCopied": "L’envoi à {email} a échoué ; le lien d’invitation de classe a été copié.",
         "deliveryFailed": "Impossible d’envoyer l’invitation de classe à {email}."
+      },
+      "dashboard": {
+        "kicker": "Tableau de classe",
+        "title": "Progression et relevé",
+        "subtitle": "Une vue en direct des devoirs de la classe à partir de la progression apprenant déjà enregistrée par ZoeSkoul.",
+        "loading": "Chargement de la progression de la classe…",
+        "emptyAssignments": "Aucun cours attribué n’est encore associé à cette classe.",
+        "emptyStudents": "Aucun élève accepté n’est encore dans cette classe.",
+        "unknownStudent": "Élève",
+        "notAvailable": "—",
+        "assignmentMeta": "{subject} · {progress}% de progression moyenne",
+        "due": "À rendre le {date}",
+        "cellAccuracy": "{accuracy}% de réussite · {attempts} tentatives",
+        "stats": {
+          "students": "Élèves",
+          "assignments": "Attributions",
+          "averageProgress": "Progression moyenne",
+          "averageAccuracy": "Réussite moyenne"
+        },
+        "sections": {
+          "assignments": "Cours attribués",
+          "gradebook": "Relevé"
+        },
+        "columns": {
+          "student": "Élève",
+          "activity": "Dernière activité"
+        },
+        "status": {
+          "not_started": "Non commencé",
+          "in_progress": "En cours",
+          "completed": "Terminé"
+        },
+        "errors": {
+          "load": "Impossible de charger la progression de la classe."
+        }
       }
     }
   }
