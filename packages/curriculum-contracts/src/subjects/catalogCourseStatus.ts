@@ -59,3 +59,37 @@ export function resolveCatalogCourseStatusPresentation(
         lifecycleLabel,
     };
 }
+
+export const CATALOG_COURSE_FALLBACK_ART_VARIANT_COUNT = 6 as const;
+
+export type CatalogCourseFallbackArtVariant = 0 | 1 | 2 | 3 | 4 | 5;
+
+/**
+ * Resolve a stable visual fallback for a catalog course that has no authored
+ * image. The course identity (normally the canonical slug) is the only input,
+ * so the same course keeps the same art across locales, sessions, and apps.
+ *
+ * This intentionally owns only variant selection. The actual visual palette
+ * remains in the shared ui-styles layer.
+ */
+export function resolveCatalogCourseFallbackArtVariant(
+  identity: string,
+): CatalogCourseFallbackArtVariant {
+  const normalized = identity.trim().toLowerCase();
+
+  if (!normalized) {
+    return 0;
+  }
+
+  // FNV-1a: small, deterministic, dependency-free, and stable across runtimes.
+  let hash = 0x811c9dc5;
+
+  for (let index = 0; index < normalized.length; index += 1) {
+    hash ^= normalized.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193) >>> 0;
+  }
+
+  return (
+    hash % CATALOG_COURSE_FALLBACK_ART_VARIANT_COUNT
+  ) as CatalogCourseFallbackArtVariant;
+}

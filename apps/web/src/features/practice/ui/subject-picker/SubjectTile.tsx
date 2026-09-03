@@ -7,7 +7,10 @@ import { cloudinaryImageUrl } from "@zoeskoul/learner-ui/lib/cloudinary/url";
 import { cn } from "@zoeskoul/learner-ui/lib/cn";
 import Pill from "./Pill";
 import { useTaggedT } from "@/i18n/tagged";
-import { resolveCatalogCourseStatusPresentation } from "@zoeskoul/curriculum-contracts/subjects/catalogCourseStatus";
+import {
+  resolveCatalogCourseFallbackArtVariant,
+  resolveCatalogCourseStatusPresentation,
+} from "@zoeskoul/curriculum-contracts/subjects/catalogCourseStatus";
 
 export default function SubjectTile({
                                       s,
@@ -24,6 +27,7 @@ export default function SubjectTile({
     const isMissingFromDb = !s.subjectId && !isComingSoon;
     const disabled = !isEnterable || !s.defaultModuleSlug || enrolling || isComingSoon;
     const statusPresentation = resolveCatalogCourseStatusPresentation(s);
+    const fallbackArtVariant = resolveCatalogCourseFallbackArtVariant(s.slug);
     const imageUrl = s.imagePublicId
       ? cloudinaryImageUrl(s.imagePublicId, {
           w: 1400,
@@ -70,9 +74,11 @@ export default function SubjectTile({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/12 to-transparent" />
               </>
           ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-200 via-slate-100 to-white dark:from-slate-800 dark:via-slate-900 dark:to-slate-800">
-                <div className="absolute inset-0 opacity-[0.22] [background-image:radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.9),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.7),transparent_28%),radial-gradient(circle_at_60%_70%,rgba(255,255,255,0.55),transparent_34%)]" />
-              </div>
+              <div
+                className="ui-course-fallback-art"
+                data-course-art-variant={fallbackArtVariant}
+                aria-hidden="true"
+              />
           )}
 
           <div className="absolute left-4 right-4 top-4 flex items-start justify-between gap-3">
@@ -109,7 +115,7 @@ export default function SubjectTile({
           <div className="absolute inset-x-4 bottom-4">
             <div className={cn(
                 "text-lg font-semibold tracking-tight sm:text-xl",
-                imageUrl ? "text-white" : "text-neutral-900 dark:text-white",
+                "text-white",
             )}>
               {s.title}
             </div>

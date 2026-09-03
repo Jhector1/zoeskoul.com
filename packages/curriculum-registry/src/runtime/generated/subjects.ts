@@ -2750,8 +2750,8 @@ export const SUBJECT_MANIFESTS: Record<string, any> = {
       "order": 30,
       "accessPolicy": "free",
       "status": "active",
-      "imagePublicId": "Screenshot_2026-02-03_at_1.19.20_AM_kdnlpk",
-      "imageAlt": "Python subject cover",
+      "imagePublicId": null,
+      "imageAlt": null,
       "titleKey": "subjects.python.title",
       "descriptionKey": "subjects.python.description",
       "meta": {
