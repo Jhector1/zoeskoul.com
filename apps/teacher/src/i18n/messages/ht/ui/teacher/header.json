@@ -1,0 +1,17 @@
+{
+  "Teacher": {
+    "header": {
+      "badge": "Pwofesè",
+      "tagline": "Espas ansèyman",
+      "navLabel": "Navigasyon pwofesè",
+      "mainSite": "Sit prensipal",
+      "nav": {
+        "tutoring": "Leson prive",
+        "classes": "Klas",
+        "assignments": "Devwa",
+        "reports": "Rapò",
+        "school": "Lekòl"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "Teacher": {
+    "announcements": {
+      "kicker": "Kominikasyon",
+      "title": "Anons",
+      "description": "Pataje yon mizajou ak elèv ki nan {scope} sa a.",
+      "scope": {
+        "school": "lekòl",
+        "class": "klas"
+      },
+      "fields": {
+        "title": "Tit",
+        "body": "Mesaj"
+      },
+      "actions": {
+        "publish": "Pibliye anons",
+        "publishing": "Ap pibliye…"
+      },
+      "loading": "Ap chaje anons yo…",
+      "empty": "Pa gen anons pou kounye a.",
+      "published": "Pibliye {date}",
+      "meta": "{recipients} moun · {read} li",
+      "errors": {
+        "load": "Nou pa t kapab chaje anons yo.",
+        "required": "Ajoute yon tit ak yon mesaj.",
+        "publish": "Nou pa t kapab pibliye anons la."
+      },
+      "notices": {
+        "published": "Anons la pibliye."
+      }
+    }
+  }
+}

@@ -3,40 +3,47 @@
     "reports": {
       "kicker": "Informes escolares",
       "title": "Informes",
-      "subtitle": "Progreso de toda la escuela basado en los mismos registros de clases y estudiantes que ZoeSkoul ya utiliza.",
-      "classes": "Clases",
+      "subtitle": "Progreso escolar por curso, clase y estudiante, construido con los mismos registros canónicos de aprendizaje de ZoeSkoul.",
       "school": "Escuela",
       "loadingSchools": "Cargando escuelas…",
       "noSchools": "No hay escuelas disponibles",
       "loadingReport": "Cargando informe escolar…",
+      "emptyCourses": "Todavía no hay progreso de cursos asignados para esta escuela.",
+      "emptyClasses": "Todavía no hay clases disponibles para esta escuela.",
+      "emptyStudents": "Todavía no hay estudiantes aceptados en clases de esta escuela.",
       "unknownStudent": "Estudiante",
       "notAvailable": "—",
-      "emptyClasses": "Esta escuela todavía no tiene clases.",
-      "emptyStudents": "Todavía no hay estudiantes aceptados disponibles para esta escuela.",
-      "classMeta": "{students} estudiantes · {assignments} asignaciones · {progress}% progreso · {accuracy}% precisión",
+      "classMeta": "{students} estudiantes · {assignments} tareas · {progress}% progreso · {accuracy}% precisión",
       "accuracyMeta": "{accuracy}% · {attempts} intentos",
       "stats": {
         "classes": "Clases",
         "students": "Estudiantes",
-        "assignments": "Asignaciones",
+        "assignments": "Tareas",
         "progress": "Progreso promedio",
         "accuracy": "Precisión promedio"
       },
       "sections": {
-        "classes": "Rendimiento por clase",
-        "students": "Resumen de estudiantes"
+        "courses": "Rendimiento por curso",
+        "classes": "Clases",
+        "students": "Estudiantes"
       },
       "columns": {
+        "course": "Curso",
         "student": "Estudiante",
         "classes": "Clases",
-        "assignments": "Asignaciones",
+        "students": "Estudiantes",
+        "assignments": "Tareas",
         "progress": "Progreso",
         "accuracy": "Precisión",
         "activity": "Última actividad"
       },
+      "links": {
+        "school": "Escuela",
+        "classes": "Clases"
+      },
       "errors": {
-        "schools": "No se pudieron cargar tus escuelas.",
-        "report": "No se pudo cargar este informe escolar. Los informes de toda la escuela están disponibles para propietarios y administradores."
+        "schools": "No se pudieron cargar las escuelas.",
+        "report": "No se pudo cargar este informe. Los informes escolares están disponibles para propietarios y administradores."
       }
     }
   }

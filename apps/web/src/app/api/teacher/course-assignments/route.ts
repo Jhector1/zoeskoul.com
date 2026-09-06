@@ -5,6 +5,7 @@ import {
   isAppOriginAllowed,
 } from "@/lib/http/appCors";
 import { prisma } from "@/lib/prisma";
+import { listRawAssignableCourses } from "@/lib/learningAssignments/assignableCourses";
 import {
   learningAssignmentAudienceCreateData,
   learningAssignmentScalarData,
@@ -165,27 +166,7 @@ export async function GET(
       include: assignmentInclude,
     }),
     includeEditorData
-      ? prisma.practiceSubject.findMany({
-          where: {
-            status: "active",
-            visibility: "private",
-          },
-          orderBy: [
-            {
-              visibility: "desc",
-            },
-            {
-              order: "asc",
-            },
-          ],
-          select: {
-            id: true,
-            slug: true,
-            title: true,
-            description: true,
-            visibility: true,
-          },
-        })
+      ? listRawAssignableCourses()
       : Promise.resolve([]),
   ]);
 

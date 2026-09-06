@@ -3,16 +3,16 @@
     "reports": {
       "kicker": "School reporting",
       "title": "Reports",
-      "subtitle": "School-wide progress built from the same class and learner records ZoeSkoul already uses.",
-      "classes": "Classes",
+      "subtitle": "School-wide course, class, and learner progress built from the same canonical ZoeSkoul learning records.",
       "school": "School",
       "loadingSchools": "Loading schools…",
       "noSchools": "No schools available",
       "loadingReport": "Loading school report…",
+      "emptyCourses": "No assigned course progress is available for this school yet.",
+      "emptyClasses": "No classes are available for this school yet.",
+      "emptyStudents": "No accepted class students are available for this school yet.",
       "unknownStudent": "Student",
       "notAvailable": "—",
-      "emptyClasses": "This school has no classes yet.",
-      "emptyStudents": "No accepted class students are available for this school yet.",
       "classMeta": "{students} students · {assignments} assignments · {progress}% progress · {accuracy}% accuracy",
       "accuracyMeta": "{accuracy}% · {attempts} attempts",
       "stats": {
@@ -23,19 +23,26 @@
         "accuracy": "Average accuracy"
       },
       "sections": {
-        "classes": "Class performance",
-        "students": "Student overview"
+        "courses": "Course performance",
+        "classes": "Classes",
+        "students": "Students"
       },
       "columns": {
+        "course": "Course",
         "student": "Student",
         "classes": "Classes",
+        "students": "Students",
         "assignments": "Assignments",
         "progress": "Progress",
         "accuracy": "Accuracy",
         "activity": "Last activity"
       },
+      "links": {
+        "school": "School",
+        "classes": "Classes"
+      },
       "errors": {
-        "schools": "Your schools could not be loaded.",
+        "schools": "Schools could not be loaded.",
         "report": "This school report could not be loaded. School-wide reports are available to school owners and administrators."
       }
     }

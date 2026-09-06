@@ -5,6 +5,7 @@ import {
 } from "react";
 
 import { TeacherLink } from "../../app/TeacherLink";
+import { TeacherAnnouncementsPanel } from "../announcements/TeacherAnnouncementsPanel";
 import {
   useTranslations,
 } from "../../compat/next-intl";
@@ -111,6 +112,16 @@ export function TeacherClassDashboard(props: {
         <p className="mt-1 text-sm text-neutral-500">
           {t("dashboard.subtitle")}
         </p>
+      </div>
+
+      <div className="mb-6">
+        <TeacherAnnouncementsPanel
+          apiOrigin={props.apiOrigin}
+          locale={props.locale}
+          scope="class"
+          targetId={props.classId}
+          canPublish
+        />
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

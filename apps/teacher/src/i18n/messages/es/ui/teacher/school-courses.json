@@ -1,0 +1,31 @@
+{
+  "Teacher": {
+    "schoolCourses": {
+      "kicker": "Catálogo escolar",
+      "title": "Cursos",
+      "description": "Habilita cursos canónicos de ZoeSkoul para esta escuela. Las clases y tareas hacen referencia al mismo curso; no se crean copias.",
+      "enabledCount": "{count} habilitados",
+      "loading": "Cargando cursos…",
+      "saving": "Guardando…",
+      "empty": "No hay cursos asignables disponibles.",
+      "readOnly": "Los instructores pueden ver el catálogo escolar. Los propietarios y administradores gestionan la disponibilidad de cursos.",
+      "status": {
+        "enabled": "Habilitado",
+        "available": "Disponible"
+      },
+      "actions": {
+        "add": "Agregar a la escuela",
+        "remove": "Quitar"
+      },
+      "notices": {
+        "added": "Curso agregado a la escuela.",
+        "removed": "Curso eliminado de la escuela."
+      },
+      "errors": {
+        "load": "No se pudieron cargar los cursos de la escuela.",
+        "add": "No se pudo agregar este curso.",
+        "remove": "No se pudo quitar este curso. Una tarea escolar actual o histórica puede seguir utilizándolo."
+      }
+    }
+  }
+}

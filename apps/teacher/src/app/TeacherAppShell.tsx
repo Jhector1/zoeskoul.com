@@ -25,8 +25,45 @@ import {
 } from "../features/school/TeacherSchoolPage";
 import TeacherTutoringDashboard from "../features/tutoring/TeacherTutoringDashboard";
 import {
+  TeacherHeader,
+  type TeacherHeaderSection,
+} from "./TeacherHeader";
+import {
   resolveTeacherLocation,
 } from "./teacherRoutes";
+
+function headerSection(
+  kind:
+    ReturnType<
+      typeof resolveTeacherLocation
+    >["kind"],
+): TeacherHeaderSection {
+  if (
+    kind === "classes" ||
+    kind === "class-new" ||
+    kind === "class-detail"
+  ) {
+    return "classes";
+  }
+
+  if (
+    kind === "assignments" ||
+    kind === "assignment-new" ||
+    kind === "assignment-detail"
+  ) {
+    return "assignments";
+  }
+
+  if (kind === "reports") {
+    return "reports";
+  }
+
+  if (kind === "school") {
+    return "school";
+  }
+
+  return "tutoring";
+}
 
 export function TeacherAppShell(props: {
   apiOrigin: string;
@@ -40,8 +77,10 @@ export function TeacherAppShell(props: {
       currentLocale(),
     );
 
+  let content;
+
   if (location.kind === "classes") {
-    return (
+    content = (
       <TeacherClassesPage
         apiOrigin={props.apiOrigin}
         websiteOrigin={
@@ -50,23 +89,21 @@ export function TeacherAppShell(props: {
         locale={location.locale}
       />
     );
-  }
-
-  if (location.kind === "class-new") {
-    return (
+  } else if (
+    location.kind === "class-new"
+  ) {
+    content = (
       <TeacherClassEditor
         apiOrigin={props.apiOrigin}
         locale={location.locale}
         classId={null}
       />
     );
-  }
-
-  if (
+  } else if (
     location.kind ===
     "class-detail"
   ) {
-    return (
+    content = (
       <>
         <TeacherClassDashboard
           apiOrigin={props.apiOrigin}
@@ -82,54 +119,50 @@ export function TeacherAppShell(props: {
         />
       </>
     );
-  }
-
-  if (location.kind === "school") {
-    return <TeacherSchoolPage apiOrigin={props.apiOrigin} locale={location.locale} />;
-  }
-
-  if (
-    location.kind ===
-    "reports"
+  } else if (
+    location.kind === "school"
   ) {
-    return (
+    content = (
+      <TeacherSchoolPage
+        apiOrigin={props.apiOrigin}
+        locale={location.locale}
+      />
+    );
+  } else if (
+    location.kind === "reports"
+  ) {
+    content = (
       <TeacherReportsPage
         apiOrigin={props.apiOrigin}
         locale={location.locale}
       />
     );
-  }
-
-  if (
+  } else if (
     location.kind ===
     "assignments"
   ) {
-    return (
+    content = (
       <TeacherAssignmentsPage
         apiOrigin={props.apiOrigin}
         locale={location.locale}
       />
     );
-  }
-
-  if (
+  } else if (
     location.kind ===
     "assignment-new"
   ) {
-    return (
+    content = (
       <TeacherAssignmentEditor
         apiOrigin={props.apiOrigin}
         locale={location.locale}
         assignmentId={null}
       />
     );
-  }
-
-  if (
+  } else if (
     location.kind ===
     "assignment-detail"
   ) {
-    return (
+    content = (
       <TeacherAssignmentEditor
         apiOrigin={props.apiOrigin}
         locale={location.locale}
@@ -138,15 +171,30 @@ export function TeacherAppShell(props: {
         }
       />
     );
+  } else {
+    content = (
+      <TeacherTutoringDashboard
+        apiOrigin={props.apiOrigin}
+        websiteOrigin={
+          props.websiteOrigin
+        }
+        locale={location.locale}
+      />
+    );
   }
 
   return (
-    <TeacherTutoringDashboard
-      apiOrigin={props.apiOrigin}
-      websiteOrigin={
-        props.websiteOrigin
-      }
-      locale={location.locale}
-    />
+    <div className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white">
+      <TeacherHeader
+        locale={location.locale}
+        websiteOrigin={
+          props.websiteOrigin
+        }
+        activeSection={headerSection(
+          location.kind,
+        )}
+      />
+      {content}
+    </div>
   );
 }

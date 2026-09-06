@@ -1,0 +1,31 @@
+{
+  "Teacher": {
+    "schoolCourses": {
+      "kicker": "Katalòg lekòl",
+      "title": "Kou",
+      "description": "Aktive kou ZoeSkoul kanonik pou lekòl sa a. Klas ak devwa yo sèvi ak menm kou a; pa gen okenn kopi.",
+      "enabledCount": "{count} aktive",
+      "loading": "Ap chaje kou yo…",
+      "saving": "Ap anrejistre…",
+      "empty": "Pa gen kou ki disponib pou bay kounye a.",
+      "readOnly": "Pwofesè lekòl yo ka wè katalòg la. Pwopriyetè ak administratè lekòl la jere kou ki disponib yo.",
+      "status": {
+        "enabled": "Aktive",
+        "available": "Disponib"
+      },
+      "actions": {
+        "add": "Ajoute nan lekòl",
+        "remove": "Retire"
+      },
+      "notices": {
+        "added": "Kou a ajoute nan lekòl la.",
+        "removed": "Kou a retire nan lekòl la."
+      },
+      "errors": {
+        "load": "Nou pa t kapab chaje kou lekòl la.",
+        "add": "Nou pa t kapab ajoute kou sa a.",
+        "remove": "Nou pa t kapab retire kou sa a. Yon devwa lekòl aktyèl oswa istorik ka toujou sèvi avè l."
+      }
+    }
+  }
+}

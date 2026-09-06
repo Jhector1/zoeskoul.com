@@ -1,0 +1,18 @@
+{
+  "Learning": {
+    "announcements": {
+      "ariaLabel": "Learning announcement",
+      "scope": {
+        "school": "School announcement",
+        "class": "Class announcement"
+      },
+      "count": "{current} of {total}",
+      "source": "{source} · {date}",
+      "actions": {
+        "later": "Later",
+        "markRead": "Mark as read",
+        "marking": "Saving…"
+      }
+    }
+  }
+}

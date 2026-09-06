@@ -1,0 +1,17 @@
+{
+  "Teacher": {
+    "header": {
+      "badge": "Teacher",
+      "tagline": "Teaching workspace",
+      "navLabel": "Teacher navigation",
+      "mainSite": "Main site",
+      "nav": {
+        "tutoring": "Tutoring",
+        "classes": "Classes",
+        "assignments": "Assignments",
+        "reports": "Reports",
+        "school": "School"
+      }
+    }
+  }
+}

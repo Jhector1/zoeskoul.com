@@ -1,10 +1,8 @@
 import "server-only";
 
 import type { PrismaClient } from "@/lib/prisma";
-
-export function normalizeEmails(values: readonly string[]): string[] {
-  return [...new Set(values.map((value) => value.trim().toLowerCase()).filter(Boolean))];
-}
+import { normalizeEmails } from "./emailNormalization";
+export { normalizeEmails } from "./emailNormalization";
 
 export async function resolveUsersByEmail(
   prisma: PrismaClient,

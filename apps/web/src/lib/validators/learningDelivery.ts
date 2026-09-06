@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { normalizeEmailValue } from "@/lib/teaching/emailNormalization";
 
 const slug = z
   .string()
@@ -7,7 +8,18 @@ const slug = z
   .max(120)
   .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 
-const emailList = z.array(z.string().trim().email()).max(500).default([]);
+const normalizedEmail = z.preprocess(
+  (value) =>
+    typeof value === "string"
+      ? normalizeEmailValue(value)
+      : value,
+  z.string().email(),
+);
+
+const emailList = z
+  .array(normalizedEmail)
+  .max(500)
+  .default([]);
 
 export const LearningGroupInputSchema = z.object({
   slug,

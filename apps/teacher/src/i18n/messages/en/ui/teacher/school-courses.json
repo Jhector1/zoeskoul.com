@@ -1,0 +1,31 @@
+{
+  "Teacher": {
+    "schoolCourses": {
+      "kicker": "School catalog",
+      "title": "Courses",
+      "description": "Enable canonical ZoeSkoul courses for this school. Classes and assignments reference the same course—nothing is copied.",
+      "enabledCount": "{count} enabled",
+      "loading": "Loading courses…",
+      "saving": "Saving…",
+      "empty": "No assignable courses are available.",
+      "readOnly": "School instructors can view the school catalog. School owners and administrators manage course availability.",
+      "status": {
+        "enabled": "Enabled",
+        "available": "Available"
+      },
+      "actions": {
+        "add": "Add to school",
+        "remove": "Remove"
+      },
+      "notices": {
+        "added": "Course added to the school.",
+        "removed": "Course removed from the school."
+      },
+      "errors": {
+        "load": "School courses could not be loaded.",
+        "add": "This course could not be added.",
+        "remove": "This course could not be removed. A current or historical school assignment may still use it."
+      }
+    }
+  }
+}

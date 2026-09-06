@@ -3,40 +3,47 @@
     "reports": {
       "kicker": "Rapò lekòl",
       "title": "Rapò",
-      "subtitle": "Pwogrè tout lekòl la ki soti nan menm done klas ak elèv ZoeSkoul deja itilize.",
-      "classes": "Klas",
+      "subtitle": "Pwogrè lekòl la pa kou, klas ak elèv, soti nan menm done aprantisaj kanonik ZoeSkoul yo.",
       "school": "Lekòl",
       "loadingSchools": "Ap chaje lekòl yo…",
-      "noSchools": "Pa gen lekòl disponib",
+      "noSchools": "Pa gen lekòl ki disponib",
       "loadingReport": "Ap chaje rapò lekòl la…",
+      "emptyCourses": "Pa gen pwogrè pou kou yo bay nan lekòl sa a ankò.",
+      "emptyClasses": "Pa gen klas ki disponib pou lekòl sa a ankò.",
+      "emptyStudents": "Pa gen elèv klas ki aksepte ki disponib pou lekòl sa a ankò.",
       "unknownStudent": "Elèv",
       "notAvailable": "—",
-      "emptyClasses": "Lekòl sa a poko gen klas.",
-      "emptyStudents": "Pa gen elèv klas ki aksepte ki disponib pou lekòl sa a ankò.",
-      "classMeta": "{students} elèv · {assignments} travay · {progress}% pwogrè · {accuracy}% presizyon",
+      "classMeta": "{students} elèv · {assignments} devwa · {progress}% pwogrè · {accuracy}% presizyon",
       "accuracyMeta": "{accuracy}% · {attempts} tantativ",
       "stats": {
         "classes": "Klas",
         "students": "Elèv",
-        "assignments": "Travay",
+        "assignments": "Devwa",
         "progress": "Pwogrè mwayèn",
         "accuracy": "Presizyon mwayèn"
       },
       "sections": {
-        "classes": "Pèfòmans klas",
-        "students": "Apèsi elèv yo"
+        "courses": "Pèfòmans pa kou",
+        "classes": "Klas",
+        "students": "Elèv"
       },
       "columns": {
+        "course": "Kou",
         "student": "Elèv",
         "classes": "Klas",
-        "assignments": "Travay",
+        "students": "Elèv",
+        "assignments": "Devwa",
         "progress": "Pwogrè",
         "accuracy": "Presizyon",
         "activity": "Dènye aktivite"
       },
+      "links": {
+        "school": "Lekòl",
+        "classes": "Klas"
+      },
       "errors": {
-        "schools": "Nou pa t kapab chaje lekòl ou yo.",
-        "report": "Nou pa t kapab chaje rapò lekòl sa a. Rapò tout lekòl la disponib pou pwopriyetè ak administratè lekòl yo."
+        "schools": "Nou pa t kapab chaje lekòl yo.",
+        "report": "Nou pa t kapab chaje rapò sa a. Rapò lekòl yo disponib pou pwopriyetè ak administratè lekòl la."
       }
     }
   }

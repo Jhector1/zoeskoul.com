@@ -1,0 +1,18 @@
+{
+  "Learning": {
+    "announcements": {
+      "ariaLabel": "Anons aprantisaj",
+      "scope": {
+        "school": "Anons lekòl",
+        "class": "Anons klas"
+      },
+      "count": "{current} sou {total}",
+      "source": "{source} · {date}",
+      "actions": {
+        "later": "Pita",
+        "markRead": "Make kòm li",
+        "marking": "Ap sove…"
+      }
+    }
+  }
+}

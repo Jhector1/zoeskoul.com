@@ -451,6 +451,8 @@ model User {
   tutoringRequestsMade              TutoringRequest[]           @relation("TutoringRequestLearner")
   tutoringRequestsAssigned          TutoringRequest[]           @relation("TutoringRequestAssignedTeacher")
   tutoringBookingsTeaching          TutoringBooking[]           @relation("TutoringBookingTeacher")
+  learningAnnouncementsAuthored     LearningAnnouncement[]        @relation("LearningAnnouncementAuthor")
+  learningAnnouncementReceipts      LearningAnnouncementReceipt[] @relation("LearningAnnouncementRecipient")
   marketingPreference               UserMarketingPreference?
   preferences                       UserPreferences?
 }
@@ -626,6 +628,7 @@ model PracticeSubject {
   @@index([status, order])
   @@index([visibility, status, order])
   @@index([showInOnboarding, status, order])
+  organizationCourseAccesses LearningOrganizationCourseAccess[]
 }
 
 model ReviewProgress {
@@ -800,8 +803,10 @@ model LearningOrganization {
   memberships LearningOrganizationMember[]
   groups      LearningGroup[]
   invites     LearningOrganizationInvite[]
+  announcements LearningAnnouncement[]
 
   @@index([ownerId, updatedAt])
+  courseAccesses LearningOrganizationCourseAccess[]
 }
 
 model LearningOrganizationMember {
@@ -839,6 +844,17 @@ model LearningOrganizationInvite {
   @@index([acceptedByUserId])
 }
 
+model LearningOrganizationCourseAccess {
+  organizationId String
+  subjectId      String
+  enabledAt      DateTime             @default(now())
+  organization   LearningOrganization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  subject        PracticeSubject      @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@id([organizationId, subjectId])
+  @@index([subjectId])
+}
+
 model LearningGroup {
   id               String                    @id @default(cuid())
   slug             String                    @unique
@@ -854,6 +870,7 @@ model LearningGroup {
   invites          LearningGroupInvite[]
   assignments      LearningAssignmentGroup[]
   tutoringSessions TutoringSessionGroup[]
+  announcements   LearningAnnouncement[]
 
   @@index([ownerId, updatedAt])
 
@@ -892,6 +909,45 @@ model LearningGroupMember {
 
   @@id([groupId, userId])
   @@index([userId])
+}
+
+
+enum LearningAnnouncementScope {
+  school
+  class
+}
+
+model LearningAnnouncement {
+  id             String                     @id @default(cuid())
+  scope          LearningAnnouncementScope
+  organizationId String?
+  groupId        String?
+  authorId       String
+  title          String
+  body           String                     @db.Text
+  publishedAt    DateTime                   @default(now())
+  createdAt      DateTime                   @default(now())
+  updatedAt      DateTime                   @updatedAt
+  organization   LearningOrganization?      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  group          LearningGroup?             @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  author         User                       @relation("LearningAnnouncementAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  receipts       LearningAnnouncementReceipt[]
+
+  @@index([organizationId, publishedAt])
+  @@index([groupId, publishedAt])
+  @@index([authorId, publishedAt])
+}
+
+model LearningAnnouncementReceipt {
+  announcementId String
+  userId         String
+  readAt         DateTime?
+  createdAt      DateTime             @default(now())
+  announcement   LearningAnnouncement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+  user           User                 @relation("LearningAnnouncementRecipient", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([announcementId, userId])
+  @@index([userId, readAt, createdAt])
 }
 
 model LearningAssignment {

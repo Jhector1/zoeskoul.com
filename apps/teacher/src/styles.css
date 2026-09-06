@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@import "../../../packages/ui-styles/colors.css";
+@import "../../../packages/ui-styles/ui-v2.css";
+@source "../../../packages/learner-ui/src";
+
 :root {
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,

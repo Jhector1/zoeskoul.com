@@ -1,0 +1,33 @@
+{
+  "Teacher": {
+    "announcements": {
+      "kicker": "Communication",
+      "title": "Announcements",
+      "description": "Share an update with students in this {scope}.",
+      "scope": {
+        "school": "school",
+        "class": "class"
+      },
+      "fields": {
+        "title": "Title",
+        "body": "Message"
+      },
+      "actions": {
+        "publish": "Publish announcement",
+        "publishing": "Publishing…"
+      },
+      "loading": "Loading announcements…",
+      "empty": "No announcements yet.",
+      "published": "Published {date}",
+      "meta": "{recipients} recipients · {read} read",
+      "errors": {
+        "load": "Announcements could not be loaded.",
+        "required": "Add a title and message.",
+        "publish": "Announcement could not be published."
+      },
+      "notices": {
+        "published": "Announcement published."
+      }
+    }
+  }
+}

@@ -14,6 +14,18 @@ export type TeacherSchoolReport = {
     averageProgressPct: number;
     averageAccuracyPct: number;
   };
+  courses: Array<{
+    subjectId: string;
+    subjectSlug: string;
+    subjectTitle: string;
+    classes: number;
+    students: number;
+    assignments: number;
+    averageProgressPct: number;
+    attempts: number;
+    correct: number;
+    accuracyPct: number;
+  }>;
   classes: Array<{
     id: string;
     name: string;
@@ -36,21 +48,29 @@ export type TeacherSchoolReport = {
   }>;
 };
 
-export function createTeacherReportsClient(args: {
-  apiOrigin: string;
-  fetchImpl?: typeof globalThis.fetch;
-}) {
+export function createTeacherReportsClient(
+  args: {
+    apiOrigin: string;
+    fetchImpl?:
+      typeof globalThis.fetch;
+  },
+) {
   const api = createApiClient({
     baseOrigin: args.apiOrigin,
     fetchImpl: args.fetchImpl,
   });
 
   return {
-    async getSchoolReport(schoolId: string) {
+    async getSchoolReport(
+      schoolId: string,
+    ) {
       return api.request<{
-        report: TeacherSchoolReport;
+        report:
+          TeacherSchoolReport;
       }>(
-        `/api/teacher/schools/${encodeURIComponent(schoolId)}/report`,
+        `/api/teacher/schools/${encodeURIComponent(
+          schoolId,
+        )}/report`,
         {
           method: "GET",
           cache: "no-store",

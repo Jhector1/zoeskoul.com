@@ -1,0 +1,17 @@
+{
+  "Teacher": {
+    "header": {
+      "badge": "Enseignant",
+      "tagline": "Espace d’enseignement",
+      "navLabel": "Navigation enseignant",
+      "mainSite": "Site principal",
+      "nav": {
+        "tutoring": "Tutorat",
+        "classes": "Classes",
+        "assignments": "Devoirs",
+        "reports": "Rapports",
+        "school": "École"
+      }
+    }
+  }
+}

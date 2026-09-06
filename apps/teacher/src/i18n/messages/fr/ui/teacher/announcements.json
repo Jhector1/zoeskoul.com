@@ -1,0 +1,33 @@
+{
+  "Teacher": {
+    "announcements": {
+      "kicker": "Communication",
+      "title": "Annonces",
+      "description": "Partagez une mise à jour avec les élèves de cette {scope}.",
+      "scope": {
+        "school": "école",
+        "class": "classe"
+      },
+      "fields": {
+        "title": "Titre",
+        "body": "Message"
+      },
+      "actions": {
+        "publish": "Publier l’annonce",
+        "publishing": "Publication…"
+      },
+      "loading": "Chargement des annonces…",
+      "empty": "Aucune annonce pour le moment.",
+      "published": "Publiée le {date}",
+      "meta": "{recipients} destinataires · {read} lus",
+      "errors": {
+        "load": "Impossible de charger les annonces.",
+        "required": "Ajoutez un titre et un message.",
+        "publish": "Impossible de publier l’annonce."
+      },
+      "notices": {
+        "published": "Annonce publiée."
+      }
+    }
+  }
+}

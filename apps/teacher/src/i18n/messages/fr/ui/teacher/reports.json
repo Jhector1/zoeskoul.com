@@ -3,40 +3,47 @@
     "reports": {
       "kicker": "Rapports scolaires",
       "title": "Rapports",
-      "subtitle": "Une vue de la progression de l’école fondée sur les mêmes données de classes et d’apprenants déjà utilisées par ZoeSkoul.",
-      "classes": "Classes",
+      "subtitle": "Progression de l’école par cours, classe et apprenant à partir des mêmes données d’apprentissage canoniques ZoeSkoul.",
       "school": "École",
       "loadingSchools": "Chargement des écoles…",
       "noSchools": "Aucune école disponible",
-      "loadingReport": "Chargement du rapport scolaire…",
+      "loadingReport": "Chargement du rapport…",
+      "emptyCourses": "Aucune progression de cours attribué n’est encore disponible pour cette école.",
+      "emptyClasses": "Aucune classe n’est encore disponible pour cette école.",
+      "emptyStudents": "Aucun élève accepté n’est encore disponible pour cette école.",
       "unknownStudent": "Élève",
       "notAvailable": "—",
-      "emptyClasses": "Cette école n’a pas encore de classes.",
-      "emptyStudents": "Aucun élève accepté n’est encore disponible pour cette école.",
-      "classMeta": "{students} élèves · {assignments} attributions · {progress}% progression · {accuracy}% réussite",
+      "classMeta": "{students} élèves · {assignments} devoirs · {progress}% de progression · {accuracy}% de précision",
       "accuracyMeta": "{accuracy}% · {attempts} tentatives",
       "stats": {
         "classes": "Classes",
         "students": "Élèves",
-        "assignments": "Attributions",
+        "assignments": "Devoirs",
         "progress": "Progression moyenne",
-        "accuracy": "Réussite moyenne"
+        "accuracy": "Précision moyenne"
       },
       "sections": {
-        "classes": "Performance des classes",
-        "students": "Vue des élèves"
+        "courses": "Performance par cours",
+        "classes": "Classes",
+        "students": "Élèves"
       },
       "columns": {
+        "course": "Cours",
         "student": "Élève",
         "classes": "Classes",
-        "assignments": "Attributions",
+        "students": "Élèves",
+        "assignments": "Devoirs",
         "progress": "Progression",
-        "accuracy": "Réussite",
+        "accuracy": "Précision",
         "activity": "Dernière activité"
       },
+      "links": {
+        "school": "École",
+        "classes": "Classes"
+      },
       "errors": {
-        "schools": "Impossible de charger vos écoles.",
-        "report": "Impossible de charger ce rapport scolaire. Les rapports à l’échelle de l’école sont réservés aux propriétaires et administrateurs."
+        "schools": "Les écoles n’ont pas pu être chargées.",
+        "report": "Ce rapport n’a pas pu être chargé. Les rapports globaux sont disponibles aux propriétaires et administrateurs."
       }
     }
   }

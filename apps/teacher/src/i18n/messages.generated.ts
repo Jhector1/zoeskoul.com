@@ -25,30 +25,42 @@ function deepMerge<T extends AnyObj>(base: T, override: AnyObj): T {
 
 const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
   "en": [
+    () => import("./messages/en/ui/teacher/announcements.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/teacher/assignments.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/teacher/classes.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/teacher/header.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/teacher/reports.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/teacher/school-courses.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/teacher/school.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "es": [
+    () => import("./messages/es/ui/teacher/announcements.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/ui/teacher/assignments.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/ui/teacher/classes.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/es/ui/teacher/header.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/ui/teacher/reports.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/es/ui/teacher/school-courses.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/ui/teacher/school.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "fr": [
+    () => import("./messages/fr/ui/teacher/announcements.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/teacher/assignments.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/teacher/classes.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/teacher/header.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/teacher/reports.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/teacher/school-courses.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/teacher/school.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
   "ht": [
+    () => import("./messages/ht/ui/teacher/announcements.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/teacher/assignments.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/teacher/classes.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/teacher/header.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/teacher/reports.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/teacher/school-courses.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/teacher/school.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 };

@@ -31,6 +31,9 @@ const invites = source(
 const assignmentAdmin = source(
   "apps/web/src/lib/learningAssignments/assignmentAdminServer.ts",
 );
+const assignableCourses = source(
+  "apps/web/src/lib/learningAssignments/assignableCourses.ts",
+);
 const validator = source(
   "apps/web/src/lib/validators/learningDelivery.ts",
 );
@@ -122,9 +125,12 @@ describe(
           "resolveSubjectDeliveryPresentations",
         );
         expect(collection).toContain(
+          "listRawAssignableCourses",
+        );
+        expect(assignableCourses).toContain(
           'visibility: "private"',
         );
-        expect(collection).toContain(
+        expect(assignableCourses).toContain(
           'status: "active"',
         );
         expect(collection).toContain(

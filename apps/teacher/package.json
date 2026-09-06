@@ -13,13 +13,14 @@
     "i18n:generate": "pnpm --dir ../.. --filter @zoeskoul/curriculum-registry build && cd ../.. && node packages/curriculum-registry/dist/generate/generateI18nManifest.js --app-root apps/teacher"
   },
   "dependencies": {
+    "@zoeskoul/api-client": "workspace:*",
     "@zoeskoul/app-config": "workspace:*",
     "@zoeskoul/auth-client": "workspace:*",
+    "@zoeskoul/i18n-core": "workspace:*",
+    "@zoeskoul/learner-ui": "workspace:*",
     "@zoeskoul/preferences": "workspace:*",
     "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "@zoeskoul/api-client": "workspace:*",
-    "@zoeskoul/i18n-core": "workspace:*"
+    "react-dom": "19.2.3"
   },
   "devDependencies": {
     "@types/react": "^19",

@@ -317,6 +317,9 @@ importers:
       '@zoeskoul/i18n-core':
         specifier: workspace:*
         version: link:../../packages/i18n-core
+      '@zoeskoul/learner-ui':
+        specifier: workspace:*
+        version: link:../../packages/learner-ui
       '@zoeskoul/preferences':
         specifier: workspace:*
         version: link:../../packages/preferences

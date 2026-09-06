@@ -43,6 +43,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/en/ui/ide/playground.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/ide/projects.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/ide/tools-panel.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/en/ui/learning/announcements.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/learning/certificate-page.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/learning/certificate-preview.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/en/ui/learning/content-card.json").then((m) => (m?.default ?? {}) as AnyObj),
@@ -73,6 +74,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
   "es": [
     () => import("./messages/es/ui/ide/editor-layout.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/ui/ide/pdf-viewer.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/es/ui/learning/announcements.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/es/ui/platform/authenticate.json").then((m) => (m?.default ?? {}) as AnyObj),
   ],
 
@@ -91,6 +93,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/fr/ui/ide/editor-layout.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/ide/pdf-viewer.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/ide/playground.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/fr/ui/learning/announcements.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/learning/content-card.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/learning/exercise-renderer.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/fr/ui/learning/landings/matrices-part-1-landing.json").then((m) => (m?.default ?? {}) as AnyObj),
@@ -128,6 +131,7 @@ const loaders: Record<string, Array<() => Promise<AnyObj>>> = {
     () => import("./messages/ht/ui/ide/full-ide.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/ide/pdf-viewer.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/ide/playground.json").then((m) => (m?.default ?? {}) as AnyObj),
+    () => import("./messages/ht/ui/learning/announcements.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/learning/content-card.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/learning/exercise-renderer.json").then((m) => (m?.default ?? {}) as AnyObj),
     () => import("./messages/ht/ui/learning/landings/matrices-part-1-landing.json").then((m) => (m?.default ?? {}) as AnyObj),
