@@ -1,9 +1,28 @@
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 import {
     appendRunEventToStream,
     createAcceptedRunEventStreamUpdater,
 } from "./useRunSession";
+
+describe("useRunSession WebSocket event wiring", () => {
+    it("never rechecks mutable transport identity inside the deferred event-stream updater", () => {
+        const source = readFileSync(
+            fileURLToPath(new URL("./useRunSession.ts", import.meta.url)),
+            "utf8",
+        );
+
+        expect(source).toContain(
+            "setEventStream(\n                        createAcceptedRunEventStreamUpdater({",
+        );
+
+        expect(source).not.toMatch(
+            /setEventStream\(\(previous\)\s*=>\s*\{\s*if\s*\(!isCurrentConnection\(\)\)/,
+        );
+    });
+});
 
 describe("appendRunEventToStream", () => {
     it("does not append events from a previous terminal session into a new owner stream", () => {

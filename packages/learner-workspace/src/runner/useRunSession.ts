@@ -387,15 +387,20 @@ export function useRunSession() {
 
                 if (msg.type === "event") {
                     const parsedEvent = msg.event;
-                    setEventStream((previous) => {
-                        if (!isCurrentConnection()) return previous;
-
-                        return appendRunEventToStream(previous, {
+                    /**
+                     * Transport identity was already validated synchronously at
+                     * message receipt above. Do not re-check mutable socket/session
+                     * refs inside the deferred React updater: a following final
+                     * status can close the socket before React applies an already
+                     * accepted stdout/exit event.
+                     */
+                    setEventStream(
+                        createAcceptedRunEventStreamUpdater({
                             sessionId: nextSessionId,
                             ownerKey: normalizedOwnerKey,
                             event: parsedEvent,
-                        });
-                    });
+                        }),
+                    );
 
                     if (parsedEvent.type === "status") {
                         setState(parsedEvent.state);
