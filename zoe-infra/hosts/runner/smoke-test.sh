@@ -30,17 +30,32 @@ fi
 echo "Checking Judge0 public HTTPS with token..."
 curl -fsS -H "${JUDGE0_AUTHN_HEADER:-X-Judge0-Token}: ${JUDGE0_AUTHN_TOKEN}" "https://${JUDGE0_DOMAIN}/about" >/dev/null
 
-echo "Checking raw runner port is not published by Docker compose..."
-if docker compose port runner 4001 >/dev/null 2>&1; then
-  echo "ERROR: runner service has a published host port. It should only be exposed behind Caddy." >&2
-  exit 1
-fi
+assert_service_has_no_published_ports() {
+  service="$1"
 
-echo "Checking raw Judge0 port is not published by Docker compose..."
-if docker compose port judge0 2358 >/dev/null 2>&1; then
-  echo "ERROR: judge0 service has a published host port. It should only be exposed behind Caddy." >&2
-  exit 1
-fi
+  container_id="$(docker compose ps -q "$service")"
+  if [ -z "$container_id" ]; then
+    echo "ERROR: unable to resolve container for service ${service}." >&2
+    exit 1
+  fi
+
+  bindings="$(docker inspect --format '{{json .HostConfig.PortBindings}}' "$container_id")"
+
+  case "$bindings" in
+    "{}"|"null"|"")
+      ;;
+    *)
+      echo "ERROR: ${service} has published host port bindings: ${bindings}" >&2
+      exit 1
+      ;;
+  esac
+}
+
+echo "Checking runner has no published host ports..."
+assert_service_has_no_published_ports runner
+
+echo "Checking Judge0 has no published host ports..."
+assert_service_has_no_published_ports judge0
 
 echo "Checking Docker socket visible to runner..."
 docker compose exec -T runner sh -lc 'test -S "${DOCKER_SOCKET:-/docker.sock}" && echo socket-ok'
