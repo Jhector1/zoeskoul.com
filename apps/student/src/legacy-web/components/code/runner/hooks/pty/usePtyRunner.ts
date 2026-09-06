@@ -8,7 +8,7 @@ import type {
     WorkspaceSyncEntry,
 } from "../../runtime";
 import type { RunnerState } from "../../types";
-import { useRunSession } from "../useRunSession";
+import { useRunSession } from "@zoeskoul/learner-workspace/runner/useRunSession";
 import { resolveRuntime } from "../controller/useResolvedRuntime";
 import {
     RunEvent,

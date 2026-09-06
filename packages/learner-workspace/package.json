@@ -6,10 +6,13 @@
   "sideEffects": false,
   "exports": {
     "./fullide/FullIDE": "./src/fullide/FullIDE.tsx",
-    "./fullide/IdeHeader": "./src/fullide/IdeHeader.tsx"
+    "./fullide/IdeHeader": "./src/fullide/IdeHeader.tsx",
+    "./runner/useRunSession": "./src/runner/useRunSession.ts",
+    "./runner/sessionRuntime": "./src/runner/sessionRuntime.ts"
   },
   "dependencies": {
-    "@zoeskoul/code-contracts": "workspace:*"
+    "@zoeskoul/code-contracts": "workspace:*",
+    "@zoeskoul/api-client": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18.0.0"

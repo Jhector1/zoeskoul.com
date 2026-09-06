@@ -30,7 +30,7 @@ import {
     workspaceSyncEntryValue,
 } from "@/lib/projects/workspaceSyncEntries";
 
-import { useRunSession } from "../useRunSession";
+import { useRunSession } from "@zoeskoul/learner-workspace/runner/useRunSession";
 import {
     deleteTerminalHistory,
     getTerminalHistory,
