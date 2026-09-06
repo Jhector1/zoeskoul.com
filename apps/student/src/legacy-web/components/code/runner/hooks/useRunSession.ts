@@ -60,10 +60,34 @@ export function appendRunEventToStream(
         return stream;
     }
 
+    // WebSocket replay and live delivery can overlap during reconnect/finalization.
+    // Sequence identity makes delivery idempotent without coupling an already
+    // accepted event to mutable socket refs that may change before React flushes.
+    if (stream.events.some((existing) => existing.seq === args.event.seq)) {
+        return stream;
+    }
+
     return {
         ...stream,
         events: [...stream.events, args.event],
     };
+}
+
+export function createAcceptedRunEventStreamUpdater(args: {
+    sessionId: string;
+    ownerKey: string | null;
+    event: RunEvent;
+}) {
+    /**
+     * The WebSocket message handler has already synchronously established that
+     * the message belongs to the current connection before this updater is
+     * queued. React may apply the updater after a later final-status message has
+     * closed that socket, so never re-check mutable transport refs here.
+     *
+     * Session + owner + sequence identity remain the authoritative stale-event
+     * protection at state-application time.
+     */
+    return (stream: RunEventStream) => appendRunEventToStream(stream, args);
 }
 
 function normalizeSessionOwnerKey(value: unknown): string | null {
