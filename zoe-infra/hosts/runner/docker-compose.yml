@@ -1,3 +1,5 @@
+name: ${COMPOSE_PROJECT_NAME:-runner}
+
 x-logging: &default_logging
   driver: json-file
   options:
@@ -42,7 +44,7 @@ services:
       PORT: 4001
       DOCKER_HOST: unix://${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/docker.sock}
       DOCKER_SOCKET: ${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/docker.sock}
-      RUNNER_WORKSPACE_ROOT: /workspaces
+      RUNNER_WORKSPACE_ROOT: ${RUNNER_WORKSPACE_HOST_ROOT:-/var/lib/zoeskoul-runner/workspaces}
       RUNNER_IMAGE: ghcr.io/${GHCR_OWNER:?required}/zoeskoul-runtime:${IMAGE_TAG:-prod}
       JUDGE0_URL: http://judge0:2358
       COREPACK_HOME: /tmp/corepack
@@ -50,7 +52,7 @@ services:
       HOME: /tmp
     volumes:
       - ${RUNNER_DOCKER_SOCKET_HOST:-/run/user/1000/docker.sock}:${RUNNER_DOCKER_SOCKET_IN_CONTAINER:-/docker.sock}
-      - /workspaces:/workspaces
+      - ${RUNNER_WORKSPACE_HOST_ROOT:-/var/lib/zoeskoul-runner/workspaces}:${RUNNER_WORKSPACE_HOST_ROOT:-/var/lib/zoeskoul-runner/workspaces}
     depends_on:
       judge0:
         condition: service_healthy

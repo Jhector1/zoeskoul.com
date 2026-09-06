@@ -177,8 +177,18 @@ def apply_rlimits() -> None:
     # Rely on container-level limits instead.
 
     try:
-        resource.setrlimit(resource.RLIMIT_FSIZE, (16 * 1024 * 1024, 16 * 1024 * 1024))
+        max_file_write_bytes = int(
+            os.environ.get("RUNNER_MAX_FILE_WRITE_BYTES", str(16 * 1024 * 1024))
+        )
+        if max_file_write_bytes <= 0:
+            raise ValueError("RUNNER_MAX_FILE_WRITE_BYTES must be positive")
+        resource.setrlimit(
+            resource.RLIMIT_FSIZE,
+            (max_file_write_bytes, max_file_write_bytes),
+        )
     except Exception:
+        # Container/workspace watchdogs remain the second line of defense even
+        # if a platform refuses RLIMIT_FSIZE.
         pass
 
     try:

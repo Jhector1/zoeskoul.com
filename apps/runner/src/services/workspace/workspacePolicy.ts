@@ -237,62 +237,148 @@ export function normalizeWorkspaceEntries(
   return sortWorkspaceEntries(normalized);
 }
 
-export async function getDirectoryBytes(dir: string): Promise<number> {
-  let total = 0;
+export type WorkspaceUsage = {
+  bytes: number;
+  entries: number;
+};
+
+export async function getDirectoryUsage(
+  dir: string,
+  limits?: { maxBytes?: number; maxEntries?: number },
+): Promise<WorkspaceUsage> {
+  let bytes = 0;
+  let entries = 0;
+  let overLimit = false;
 
   async function walk(current: string): Promise<void> {
-    let entries;
+    if (overLimit) return;
+
+    let dirEntries;
     try {
-      entries = await fs.readdir(current, { withFileTypes: true });
+      dirEntries = await fs.readdir(current, { withFileTypes: true });
     } catch {
       return;
     }
 
-    for (const entry of entries) {
+    for (const entry of dirEntries) {
+      if (overLimit) return;
+
       const abs = path.join(current, entry.name);
+      entries += 1;
+
+      if (limits?.maxEntries != null && entries > limits.maxEntries) {
+        overLimit = true;
+        return;
+      }
+
       if (entry.isDirectory()) {
         await walk(abs);
         continue;
       }
       if (!entry.isFile()) continue;
+
       const st = await fs.stat(abs).catch(() => null);
-      total += st?.size ?? 0;
+      bytes += st?.size ?? 0;
+
+      if (limits?.maxBytes != null && bytes > limits.maxBytes) {
+        overLimit = true;
+        return;
+      }
     }
   }
 
   await walk(dir);
-  return total;
+  return { bytes, entries };
+}
+
+export async function getDirectoryBytes(dir: string): Promise<number> {
+  return (await getDirectoryUsage(dir)).bytes;
+}
+
+export type RunnerFilesystemCapacity = {
+  freeBytes: number;
+  totalBytes: number;
+  minFreeBytes: number;
+  minFreePercent: number;
+  requiredFreeBytes: number;
+  freePercent: number;
+};
+
+export async function getRunnerFilesystemCapacity(
+  root: string,
+): Promise<RunnerFilesystemCapacity | null> {
+  await fs.mkdir(root, { recursive: true }).catch(() => {});
+
+  const statfs = (fs as any).statfs as
+    | ((p: string) => Promise<{
+        bavail: number;
+        blocks: number;
+        bsize: number;
+      }>)
+    | undefined;
+
+  if (typeof statfs !== "function") return null;
+
+  const st = await statfs(root);
+  const freeBytes = st.bavail * st.bsize;
+  const totalBytes = st.blocks * st.bsize;
+  const percentFloorBytes = Math.ceil(
+    totalBytes * (env.minFreePercent / 100),
+  );
+  const requiredFreeBytes = Math.max(env.minFreeBytes, percentFloorBytes);
+
+  return {
+    freeBytes,
+    totalBytes,
+    minFreeBytes: env.minFreeBytes,
+    minFreePercent: env.minFreePercent,
+    requiredFreeBytes,
+    freePercent: totalBytes > 0 ? (freeBytes / totalBytes) * 100 : 0,
+  };
+}
+
+export async function assertRunnerFilesystemHasCapacity(root: string) {
+  const capacity = await getRunnerFilesystemCapacity(root);
+  if (!capacity) return;
+
+  if (capacity.freeBytes < capacity.requiredFreeBytes) {
+    throw new Error(
+      `Runner host disk is low: ${(capacity.freeBytes / 1024 / 1024).toFixed(0)} MB free; ` +
+        `requires at least ${(capacity.requiredFreeBytes / 1024 / 1024).toFixed(0)} MB (${env.minFreePercent}% floor).`,
+    );
+  }
 }
 
 export async function assertWorkspaceRootHasCapacity(root: string) {
   await fs.mkdir(root, { recursive: true }).catch(() => {});
 
-  const usedBytes = await getDirectoryBytes(root);
-  if (usedBytes > env.maxWorkspaceRootBytes) {
+  const usage = await getDirectoryUsage(root, {
+    maxBytes: env.maxWorkspaceRootBytes,
+  });
+  if (usage.bytes > env.maxWorkspaceRootBytes) {
     throw new Error(
-      `Runner workspace root is over quota: ${(usedBytes / 1024 / 1024).toFixed(1)} MB used.`,
+      `Runner workspace root is over quota: ${(usage.bytes / 1024 / 1024).toFixed(1)} MB used.`,
     );
   }
 
-  const statfs = (fs as any).statfs as
-    | ((p: string) => Promise<{ bavail: number; bsize: number }>)
-    | undefined;
-  if (typeof statfs === "function") {
-    const st = await statfs(root);
-    const freeBytes = st.bavail * st.bsize;
-    if (freeBytes < env.minFreeBytes) {
-      throw new Error(
-        `Runner host disk is low: ${(freeBytes / 1024 / 1024).toFixed(0)} MB free.`,
-      );
-    }
-  }
+  await assertRunnerFilesystemHasCapacity(root);
 }
 
 export async function assertWorkspaceUnderQuota(workspaceDir: string) {
-  const usedBytes = await getDirectoryBytes(workspaceDir);
-  if (usedBytes > env.maxWorkspaceBytes) {
+  const usage = await getDirectoryUsage(workspaceDir, {
+    maxBytes: env.maxWorkspaceBytes,
+    maxEntries: env.maxRuntimeEntries,
+  });
+
+  if (usage.bytes > env.maxWorkspaceBytes) {
     throw new Error(
       `Workspace limit reached: max ${(env.maxWorkspaceBytes / 1024 / 1024).toFixed(1)} MB on disk.`,
+    );
+  }
+
+  if (usage.entries > env.maxRuntimeEntries) {
+    throw new Error(
+      `Workspace entry limit reached: max ${env.maxRuntimeEntries} entries on disk.`,
     );
   }
 }

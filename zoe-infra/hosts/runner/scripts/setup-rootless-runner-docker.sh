@@ -94,6 +94,12 @@ sudo -u "$DEPLOY_USER" \
   DOCKER_HOST="unix://$SOCKET" \
   docker info | grep -Ei "rootless|cgroup driver" || true
 
+echo "Rootless Docker data root:"
+sudo -u "$DEPLOY_USER" \
+  XDG_RUNTIME_DIR="$RUNTIME_DIR" \
+  DOCKER_HOST="unix://$SOCKET" \
+  docker info --format 'DockerRootDir={{.DockerRootDir}}'
+
 echo
 echo "Rootless Docker is ready."
 echo
@@ -102,3 +108,6 @@ echo "RUNNER_DOCKER_SOCKET_HOST=$SOCKET"
 echo "RUNNER_DOCKER_SOCKET_IN_CONTAINER=/docker.sock"
 echo "RUNNER_CONTAINER_USER=$DEPLOY_UID:$DEPLOY_UID"
 echo "RUNNER_IMAGE=$RUNTIME_IMAGE"
+echo
+echo "After the runner host is configured, install hourly storage maintenance:"
+echo "  cd /opt/zoeskoul/zoe-infra/hosts/runner && ./install-maintenance.sh"

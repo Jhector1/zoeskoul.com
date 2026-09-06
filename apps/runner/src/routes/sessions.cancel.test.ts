@@ -56,8 +56,10 @@ describe("cancelSessionRoute", () => {
     it("releases actor capacity before Docker teardown finishes", async () => {
         const kill = deferred();
         const containerKill = vi.fn(() => kill.promise);
+        const containerRemove = vi.fn(async () => undefined);
         vi.spyOn(docker, "getContainer").mockReturnValue({
             kill: containerKill,
+            remove: containerRemove,
         } as any);
 
         createSession({
@@ -82,5 +84,8 @@ describe("cancelSessionRoute", () => {
         // The HTTP response and capacity release do not wait for Docker.
         kill.resolve();
         await kill.promise;
+        await vi.waitFor(() => {
+            expect(containerRemove).toHaveBeenCalledWith({ force: true });
+        });
     });
 });

@@ -3,7 +3,7 @@ import { interactiveRunReqSchema } from "@zoeskoul/code-contracts";
 import { startDockerSession } from "../services/docker/startDockerSession.js";
 import { getRequiredActorKey } from "../middleware/serviceAuth.js";
 
-function statusForError(message: string) {
+export function statusForError(message: string) {
   if (message === "Unauthorized") return 401;
   if (message.includes("Too many") || message.includes("Runner is busy"))
     return 429;
@@ -70,7 +70,7 @@ export const startSessionRoute: RequestHandler = async (req, res) => {
       return res.status(200).json(out);
     }
 
-    return res.status(400).json(out);
+    return res.status(statusForError(out.error)).json(out);
   } catch (e: any) {
     const message = e?.message ?? "Failed to start session.";
 

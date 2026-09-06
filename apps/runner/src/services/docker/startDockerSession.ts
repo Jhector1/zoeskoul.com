@@ -21,6 +21,7 @@ import {
   armIdleTimeout,
   armHardLifetimeTimeout,
   armWallTimeout,
+  armWorkspacePressureGuard,
   clearAllTimeouts,
 } from "../sessions/timeoutManager.js";
 import { resolveTimeoutPolicy } from "../sessions/timeoutPolicy.js";
@@ -369,6 +370,7 @@ async function startDockerSessionUncoordinated(
         "PROMPT_COMMAND=history -a; history -n",
         "UMASK=000",
         `START_CWD=${sessionCwd}`,
+        `RUNNER_MAX_FILE_WRITE_BYTES=${env.maxWorkspaceBytes}`,
       ],
       Cmd: ["python3", "/opt/runner/pty-runner.py"],
       HostConfig: {
@@ -481,6 +483,7 @@ async function startDockerSessionUncoordinated(
       if (typeof timeouts.hardLifetimeMs === "number") {
         armHardLifetimeTimeout(sessionId, timeouts.hardLifetimeMs);
       }
+      armWorkspacePressureGuard(sessionId, resolvedWorkspaceDir);
 
       void container
         .wait()
@@ -541,6 +544,9 @@ async function startDockerSessionUncoordinated(
         message: e?.message ?? "Failed to start container.",
       });
       pushEvent(sessionId, { type: "status", state: "failed" });
+      // A container that was created but failed before start may never trigger
+      // AutoRemove. Force-remove it now so failed starts cannot accumulate.
+      await container.remove({ force: true }).catch(() => {});
       if (workspaceDir) {
         scheduleWorkspaceCleanup(sessionId, workspaceDir);
       }

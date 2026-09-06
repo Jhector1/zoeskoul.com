@@ -6,6 +6,7 @@ import {
   RUNNER_MANAGED_DIRS,
 } from "./runnerManagedWorkspace.js";
 import {
+  assertRunnerFilesystemHasCapacity,
   isSafeRelativePath,
   normalizeWorkspaceEntries,
 } from "./workspacePolicy.js";
@@ -56,6 +57,8 @@ export async function replaceWorkspaceFiles(
   workspaceDir: string,
   files: WorkspaceSyncEntry[],
 ) {
+  await assertRunnerFilesystemHasCapacity(workspaceDir);
+
   const normalized = normalizeWorkspaceEntries(files, {
     dropRunnerManaged: true,
   });

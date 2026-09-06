@@ -10,6 +10,11 @@ import { sessionsReplaceWorkspaceRoute } from "./routes/sessions.replaceWorkspac
 import { heartbeatSessionRoute } from "./routes/sessions.heartbeat.js";
 import { activeSessionsRoute } from "./routes/sessions.active.js";
 import { getSessionStats } from "./services/sessions/sessionStore.js";
+import { env } from "./lib/env.js";
+import {
+  getDirectoryUsage,
+  getRunnerFilesystemCapacity,
+} from "./services/workspace/workspacePolicy.js";
 
 export const app = express();
 
@@ -31,8 +36,35 @@ app.get("/health", (_req, res) => {
   res.status(200).json({ ok: true, stats: getSessionStats() });
 });
 
-app.get("/metrics", (_req, res) => {
-  res.status(200).json({ ok: true, stats: getSessionStats() });
+app.get("/metrics", async (_req, res) => {
+  try {
+    const [workspace, filesystem] = await Promise.all([
+      getDirectoryUsage(env.workspaceRoot, {
+        maxBytes: env.maxWorkspaceRootBytes,
+        maxEntries: env.maxRuntimeEntries * env.maxConcurrentGlobal,
+      }),
+      getRunnerFilesystemCapacity(env.workspaceRoot),
+    ]);
+
+    res.status(200).json({
+      ok: true,
+      stats: getSessionStats(),
+      storage: {
+        workspaceBytes: workspace.bytes,
+        workspaceEntries: workspace.entries,
+        maxWorkspaceRootBytes: env.maxWorkspaceRootBytes,
+        filesystem,
+      },
+    });
+  } catch (err) {
+    res.status(200).json({
+      ok: true,
+      stats: getSessionStats(),
+      storage: {
+        error: err instanceof Error ? err.message : String(err),
+      },
+    });
+  }
 });
 
 app.post("/sessions/start", startSessionRoute);

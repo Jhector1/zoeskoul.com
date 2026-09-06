@@ -46,27 +46,40 @@ export function killSession(
     closeSessionSockets(sessionId, 1012, `Session ${finalState}`);
     (session.attachStream as { destroy?: () => void } | null | undefined)?.destroy?.();
 
-    if (isTerminalState(session.state)) {
-        return Promise.resolve();
+    const alreadyTerminal = isTerminalState(session.state);
+
+    if (!alreadyTerminal) {
+        // Release runner capacity before waiting on the Docker daemon.
+        pushEvent(sessionId, { type: "status", state: finalState });
     }
 
-    // Release runner capacity before waiting on the Docker daemon.
-    pushEvent(sessionId, { type: "status", state: finalState });
-    scheduleWorkspaceCleanup(sessionId, session.workspaceDir);
+    if (!session.expiresAt) {
+        scheduleWorkspaceCleanup(sessionId, session.workspaceDir);
+    }
 
     console.info("RUNNER session cleanup scheduled", {
         sessionId,
         ownerKey: session.ownerKey ?? "anonymous",
-        finalState,
+        finalState: alreadyTerminal ? session.state : finalState,
     });
 
     const teardown = (async () => {
+        const container = docker.getContainer(session.containerId);
+
+        // AutoRemove is still enabled on child containers, but it is not enough
+        // for never-started containers or daemon edge cases. Force-remove is
+        // idempotent from the runner's perspective and prevents container
+        // metadata from becoming a long-lived disk leak.
         try {
-            const container = docker.getContainer(session.containerId);
             await container.kill();
         } catch {
-            // The container may already be gone. The session is finalized and its
-            // workspace cleanup is still scheduled, so a kill error is non-fatal.
+            // The container may already have stopped or been auto-removed.
+        }
+
+        try {
+            await container.remove({ force: true });
+        } catch {
+            // AutoRemove may already have removed it after kill.
         }
     })().finally(() => {
         sessionTeardowns.delete(sessionId);

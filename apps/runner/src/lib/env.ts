@@ -40,6 +40,7 @@ const envSchema = z.object({
   RUNNER_MAX_BINARY_TOTAL_BYTES: intEnv(8 * 1024 * 1024),
   RUNNER_MAX_BINARY_FILE_BYTES: intEnv(5 * 1024 * 1024),
   RUNNER_MAX_ENTRIES: intEnv(200),
+  RUNNER_MAX_RUNTIME_ENTRIES: intEnv(1000),
   RUNNER_MAX_CONCURRENT_PER_ACTOR: z.coerce.number().int().positive().optional(),
   MAX_ACTIVE_SESSIONS_PER_USER: intEnv(4),
   RUNNER_MAX_CONCURRENT_GLOBAL: intEnv(40),
@@ -59,8 +60,13 @@ const envSchema = z.object({
   RUNNER_CPU_QUOTA: intEnv(50000),
   RUNNER_PIDS_LIMIT: intEnv(128),
 
-  RUNNER_MIN_FREE_BYTES: intEnv(1024 * 1024 * 1024),
-  RUNNER_MAX_WORKSPACE_ROOT_BYTES: intEnv(5 * 1024 * 1024 * 1024),
+  // Keep enough host headroom for Docker/containerd metadata, logs, and a
+  // production deploy. The percentage guard prevents a larger disk from
+  // silently using nearly all of its capacity before the byte floor trips.
+  RUNNER_MIN_FREE_BYTES: intEnv(8 * 1024 * 1024 * 1024),
+  RUNNER_MIN_FREE_PERCENT: z.coerce.number().min(1).max(50).default(10),
+  RUNNER_MAX_WORKSPACE_ROOT_BYTES: intEnv(2 * 1024 * 1024 * 1024),
+  RUNNER_WORKSPACE_PRESSURE_CHECK_MS: intEnv(500),
 
   PTY_ATTACH_TOKEN_TTL_SECONDS: intEnv(60),
   PTY_ATTACH_REPLAY_TTL_MS: intEnv(5 * 60 * 1000),
@@ -99,6 +105,7 @@ export const env = {
   maxWorkspaceBytes:
     parsed.RUNNER_MAX_TOTAL_BYTES + parsed.RUNNER_MAX_BINARY_TOTAL_BYTES,
   maxEntries: parsed.RUNNER_MAX_ENTRIES,
+  maxRuntimeEntries: parsed.RUNNER_MAX_RUNTIME_ENTRIES,
   maxConcurrentPerActor:
     parsed.RUNNER_MAX_CONCURRENT_PER_ACTOR ??
     parsed.MAX_ACTIVE_SESSIONS_PER_USER,
@@ -118,7 +125,9 @@ export const env = {
   pidsLimit: parsed.RUNNER_PIDS_LIMIT,
 
   minFreeBytes: parsed.RUNNER_MIN_FREE_BYTES,
+  minFreePercent: parsed.RUNNER_MIN_FREE_PERCENT,
   maxWorkspaceRootBytes: parsed.RUNNER_MAX_WORKSPACE_ROOT_BYTES,
+  workspacePressureCheckMs: parsed.RUNNER_WORKSPACE_PRESSURE_CHECK_MS,
 
   attachTokenTtlSeconds: parsed.PTY_ATTACH_TOKEN_TTL_SECONDS,
   attachReplayTtlMs: parsed.PTY_ATTACH_REPLAY_TTL_MS,

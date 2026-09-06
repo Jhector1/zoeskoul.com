@@ -46,9 +46,11 @@ export const sessionsReplaceWorkspaceRoute: RequestHandler = async (req, res) =>
             fileCount: result.fileCount,
         });
     } catch (e: any) {
-        return res.status(400).json({
+        const message = e?.message ?? "Failed to replace workspace.";
+        const status = message.includes("disk is low") ? 503 : 400;
+        return res.status(status).json({
             ok: false,
-            error: e?.message ?? "Failed to replace workspace.",
+            error: message,
         });
     }
 };

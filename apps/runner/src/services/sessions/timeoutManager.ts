@@ -6,10 +6,16 @@ import {
 } from "./sessionStore.js";
 import { killSession } from "../docker/killSession.js";
 import { runScheduledWorkspaceCleanupNow } from "../workspace/cleanupWorkspace.js";
+import {
+    getDirectoryUsage,
+    getRunnerFilesystemCapacity,
+} from "../workspace/workspacePolicy.js";
 
 const wallTimers = new Map<string, NodeJS.Timeout>();
 const idleTimers = new Map<string, NodeJS.Timeout>();
 const hardLifetimeTimers = new Map<string, NodeJS.Timeout>();
+const workspacePressureTimers = new Map<string, NodeJS.Timeout>();
+const workspacePressureChecks = new Set<string>();
 let cleanupSweepTimer: NodeJS.Timeout | null = null;
 
 function isTerminalState(state: string) {
@@ -110,10 +116,111 @@ export function clearHardLifetimeTimeout(sessionId: string) {
     hardLifetimeTimers.delete(sessionId);
 }
 
+
+export function clearWorkspacePressureGuard(sessionId: string) {
+    const timer = workspacePressureTimers.get(sessionId);
+    if (timer) clearInterval(timer);
+    workspacePressureTimers.delete(sessionId);
+    workspacePressureChecks.delete(sessionId);
+}
+
+export function armWorkspacePressureGuard(
+    sessionId: string,
+    workspaceDir: string,
+) {
+    clearWorkspacePressureGuard(sessionId);
+
+    const runCheck = async () => {
+        if (workspacePressureChecks.has(sessionId)) return;
+
+        const session = getSession(sessionId);
+        if (!session || isTerminalState(session.state)) {
+            clearWorkspacePressureGuard(sessionId);
+            return;
+        }
+
+        workspacePressureChecks.add(sessionId);
+        try {
+            const usage = await getDirectoryUsage(workspaceDir, {
+                maxBytes: env.maxWorkspaceBytes,
+                maxEntries: env.maxRuntimeEntries,
+            });
+
+            if (usage.bytes > env.maxWorkspaceBytes) {
+                console.warn("RUNNER workspace quota-killed", {
+                    sessionId,
+                    ownerKey: session.ownerKey ?? "anonymous",
+                    usedBytes: usage.bytes,
+                    maxBytes: env.maxWorkspaceBytes,
+                });
+                pushEvent(sessionId, {
+                    type: "error",
+                    message: "Workspace storage limit reached.",
+                });
+                await killSession(sessionId, "failed");
+                return;
+            }
+
+            if (usage.entries > env.maxRuntimeEntries) {
+                console.warn("RUNNER workspace entry-quota-killed", {
+                    sessionId,
+                    ownerKey: session.ownerKey ?? "anonymous",
+                    entries: usage.entries,
+                    maxEntries: env.maxRuntimeEntries,
+                });
+                pushEvent(sessionId, {
+                    type: "error",
+                    message: "Workspace file-count limit reached.",
+                });
+                await killSession(sessionId, "failed");
+                return;
+            }
+
+            const capacity = await getRunnerFilesystemCapacity(workspaceDir);
+            if (
+                capacity &&
+                capacity.freeBytes < capacity.requiredFreeBytes
+            ) {
+                console.error("RUNNER host disk-pressure-killed", {
+                    sessionId,
+                    ownerKey: session.ownerKey ?? "anonymous",
+                    freeBytes: capacity.freeBytes,
+                    requiredFreeBytes: capacity.requiredFreeBytes,
+                    freePercent: Number(capacity.freePercent.toFixed(2)),
+                });
+                pushEvent(sessionId, {
+                    type: "error",
+                    message: "Runner storage is temporarily unavailable.",
+                });
+                await killSession(sessionId, "failed");
+            }
+        } catch (err) {
+            console.error("RUNNER workspace pressure check failed", {
+                sessionId,
+                message: err instanceof Error ? err.message : String(err),
+            });
+        } finally {
+            workspacePressureChecks.delete(sessionId);
+        }
+    };
+
+    const timer = setInterval(() => {
+        void runCheck();
+    }, env.workspacePressureCheckMs);
+
+    if (typeof timer.unref === "function") timer.unref();
+    workspacePressureTimers.set(sessionId, timer);
+
+    // Do not wait for the first interval before enforcing a newly-created
+    // session's disk budget.
+    void runCheck();
+}
+
 export function clearAllTimeouts(sessionId: string) {
     clearWallTimeout(sessionId);
     clearIdleTimeout(sessionId);
     clearHardLifetimeTimeout(sessionId);
+    clearWorkspacePressureGuard(sessionId);
 }
 
 export async function runSessionCleanupSweep(now = Date.now()) {

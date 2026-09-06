@@ -64,6 +64,29 @@ export async function cleanupOrphanedRunnerContainers() {
   }
 }
 
+
+export async function cleanupAllRunnerWorkspaceDirs() {
+  const root = env.workspaceRoot;
+  await fs.mkdir(root, { recursive: true }).catch(() => {});
+
+  const entries = await fs
+    .readdir(root, { withFileTypes: true })
+    .catch(() => []);
+
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+    if (!entry.name.startsWith("zoeskoul-run-")) continue;
+
+    const abs = path.join(root, entry.name);
+    await fs.rm(abs, { recursive: true, force: true }).catch((err) => {
+      console.error("RUNNER startup workspace cleanup failed", {
+        workspace: entry.name,
+        message: err instanceof Error ? err.message : String(err),
+      });
+    });
+  }
+}
+
 export async function cleanupExpiredWorkspaceDirs() {
   const root = env.workspaceRoot;
   await fs.mkdir(root, { recursive: true }).catch(() => {});
@@ -92,6 +115,11 @@ export async function cleanupExpiredWorkspaceDirs() {
 }
 
 export async function cleanupRunnerOrphansOnStartup() {
+  // Session identity lives in memory. After a runner restart there is no safe
+  // way to reattach old containers/workspaces, so remove every runner-owned
+  // child container and workspace immediately instead of leaving recent
+  // directories stranded forever waiting for an in-memory TTL timer that no
+  // longer exists.
   await cleanupOrphanedRunnerContainers();
-  await cleanupExpiredWorkspaceDirs();
+  await cleanupAllRunnerWorkspaceDirs();
 }
