@@ -46,10 +46,10 @@
                 "hint_2": "Look for the line whose first meaningful character is `#`."
               },
               "options": {
-                "a": "print(\"Note\")",
-                "b": "# Note for the reader",
-                "c": "\"Note for the reader\"",
-                "d": "// Note for the reader"
+                "a": "`print(\"Note\")`",
+                "b": "`# Note for the reader`",
+                "c": "`// Note for the reader`",
+                "d": "`\"Note for the reader\"`"
               }
             },
             "mc-valid-print-lines": {
@@ -177,7 +177,12 @@
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# Write your introduction program below"
+              "starterCode": "# Write your introduction program below",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             },
             "ci-two-lines": {
               "title": "Print two lines",
@@ -188,7 +193,12 @@
                 "hint_1": "Write the code that creates exactly the requested output.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "# Print the two required lines"
+              "starterCode": "# Print the two required lines",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             }
           },
           "practice": {
@@ -211,6 +221,11 @@
               "solutionFiles": {
                 "main_py": {
                   "content": "# Show the program status.\nprint(\"Ready to run\")\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Add one non-empty Python comment immediately above the existing `print()` statement."
                 }
               }
             }

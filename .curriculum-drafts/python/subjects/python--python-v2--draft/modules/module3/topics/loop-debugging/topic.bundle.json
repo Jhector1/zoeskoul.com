@@ -274,6 +274,13 @@
             "type": "printed_line_count",
             "min": 3
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -443,6 +450,13 @@
           {
             "type": "printed_line_count",
             "min": 3
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n",
+            "match": "exact"
           }
         ]
       },

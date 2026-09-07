@@ -107,6 +107,25 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch0",
       "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch0.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch0.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -146,6 +165,7 @@
           "schema.sql",
           "query.sql"
         ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.tryIt.try_unique_and_default_constraints_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -229,6 +249,25 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status",
       "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -268,6 +307,7 @@
           "schema.sql",
           "query.sql"
         ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-order-status.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -455,6 +495,25 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email",
       "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -494,6 +553,7 @@
           "schema.sql",
           "query.sql"
         ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-unique-user-email.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",
@@ -569,6 +629,25 @@
       "weight": 1,
       "messageBase": "topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status",
       "language": "sql",
+      "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterCode",
+      "starterFiles": [
+        {
+          "path": "schema.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterFiles.schema_sql.content",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        },
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterFiles.query_sql.content",
+          "language": "sql",
+          "isEntry": false,
+          "entry": false,
+          "readOnly": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "schema.sql",
@@ -608,6 +687,7 @@
           "schema.sql",
           "query.sql"
         ],
+        "starterCode": "@:topics.sql-data-management.sql-data-management-module-2-table-creation-constraints.unique-and-default-constraints.practice.practice-default-task-status.starterCode",
         "starterFiles": [
           {
             "path": "schema.sql",

@@ -123,6 +123,37 @@
       "messageBase": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.data_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.output_clean_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/summary.txt",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterFiles.output_summary_txt.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -156,6 +187,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.try-community-event-registration-cleaner-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -304,6 +336,37 @@
       "messageBase": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.data_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.output_clean_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/summary.txt",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterFiles.output_summary_txt.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -337,6 +400,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-1-read-registration-file.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -521,6 +585,37 @@
       "messageBase": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.data_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.output_clean_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/summary.txt",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterFiles.output_summary_txt.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -554,6 +649,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-2-clean-one-registration.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -696,6 +792,37 @@
       "messageBase": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.data_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.output_clean_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/summary.txt",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterFiles.output_summary_txt.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -736,6 +863,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-3-skip-bad-registration-rows.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -899,6 +1027,44 @@
       "messageBase": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.data_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.output_clean_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/summary.txt",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterFiles.output_summary_txt.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -946,6 +1112,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-4-move-cleaning-to-module.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -1147,6 +1314,51 @@
       "messageBase": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "summary.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.data_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.output_clean_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/summary.txt",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterFiles.output_summary_txt.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -1201,6 +1413,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-5-add-summary-functions.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -1429,6 +1642,58 @@
       "messageBase": "topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "summary.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports.py",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.reports_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.data_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_registrations.csv",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.output_clean_registrations_csv.content",
+          "language": "csv",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/summary.txt",
+          "content": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterFiles.output_summary_txt.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -1483,6 +1748,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-8-real-world-project.community-event-registration-cleaner.quiz.cp-6-write-final-reports.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

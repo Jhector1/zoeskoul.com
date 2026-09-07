@@ -114,7 +114,10 @@
               "solutionCode": "print(\"Zoe\")\nprint(7)\nprint(2.5)",
               "sourceChecks": {
                 "0": {
-                  "message": "Print Zoe as a string, then 7 as an integer, then 2.5 as a float."
+                  "message": "Use three separate `print()` statements, one for each required value."
+                },
+                "1": {
+                  "message": "Print `\"Zoe\"` as a string, then `7` as an integer, then `2.5` as a float."
                 }
               }
             },
@@ -131,7 +134,13 @@
               "solutionCode": "print(2 + 3)\nprint(1.5 + 2.5)",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the two addition expressions themselves inside print calls."
+                  "message": "Use two separate `print()` statements, one for each required expression."
+                },
+                "1": {
+                  "message": "Use the expression `2 + 3` itself inside the first `print()` call."
+                },
+                "2": {
+                  "message": "Use the expression `1.5 + 2.5` itself inside the second `print()` call."
                 }
               }
             },
@@ -177,7 +186,15 @@
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# TODO: read one line and print it"
+              "starterCode": "# TODO: read one line and print it",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                },
+                "1": {
+                  "message": "Read the needed value with input() instead of hard-coding the answer."
+                }
+              }
             },
             "ci-read-number-text": {
               "title": "Read a number-looking input",
@@ -188,7 +205,18 @@
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# TODO: read input and print it after the label"
+              "starterCode": "# TODO: read input and print it after the label",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                },
+                "1": {
+                  "message": "Read the needed value with input() instead of hard-coding the answer."
+                },
+                "2": {
+                  "message": "Use the variable name `value` in your solution."
+                }
+              }
             },
             "ci-three-lines": {
               "title": "Print mixed values",
@@ -199,7 +227,12 @@
                 "hint_1": "Use one `print()` statement per line of output.",
                 "hint_2": "Print the text first, then the computed number, then the final text."
               },
-              "starterCode": "# TODO: print the required three lines"
+              "starterCode": "# TODO: print the required three lines",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             }
           }
         }

@@ -35,7 +35,7 @@
       "descriptionKey": "modules.applied-python-projects.python-8-object-oriented-foundations.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "code",
         "language": "python",

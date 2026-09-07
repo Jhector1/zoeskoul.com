@@ -660,6 +660,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.checks.2.message",
             "path": "models/account.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Rae | balance: $95\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -846,6 +853,13 @@
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.checks.3.message",
             "path": "models/account.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "60\n60\n",
+            "match": "exact"
           }
         ]
       },

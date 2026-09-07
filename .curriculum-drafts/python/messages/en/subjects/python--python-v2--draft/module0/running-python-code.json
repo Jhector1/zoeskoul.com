@@ -134,7 +134,7 @@
             },
             "ci_top_to_bottom_order": {
               "title": "Put output statements in execution order",
-              "prompt": "Reorder the starter program so its output is exactly:\n\n`First`\n`Second`\n`Third`",
+              "prompt": "Reorder the starter program so it prints these words in this order, with each word on a separate line:",
               "hint": "The first source line runs before the lines below it.",
               "help": {
                 "concept": "For this straight-line program, Python executes each statement from top to bottom.",

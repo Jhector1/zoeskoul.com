@@ -315,6 +315,115 @@ describe("gradeProgrammingCodeInput", () => {
         expect(result.explanation).toContain("fruits.remove");
         expect(mockedSharedRunner).not.toHaveBeenCalled();
     });
+it("accepts a non-empty Python comment immediately above the requested line", async () => {
+        mockedSharedRunner.mockResolvedValue({
+            ok: true,
+            stdout: "Ready\n",
+            stderr: "",
+        });
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "Ready\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+            sourceChecks: [
+                {
+                    type: "uses_comment",
+                    pattern: `^\\s*print\\(\\s*["']Ready["']\\s*\\)\\s*$`,
+                    message: "Add one non-empty comment above the print call.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: '# Explain the status\nprint("Ready")\n',
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
+    });
+
+    it("rejects an empty Python comment for uses_comment", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "Ready\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+            sourceChecks: [
+                {
+                    type: "uses_comment",
+                    pattern: `^\\s*print\\(\\s*["']Ready["']\\s*\\)\\s*$`,
+                    message: "Add one non-empty comment above the print call.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: '#   \nprint("Ready")\n',
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toContain("non-empty comment");
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
+    it("rejects a comment that is not immediately above the requested line", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "Ready\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+            sourceChecks: [
+                {
+                    type: "uses_comment",
+                    pattern: `^\\s*print\\(\\s*["']Ready["']\\s*\\)\\s*$`,
+                    message: "Add one non-empty comment above the print call.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: 'print("Ready")\n# Explain the status\n',
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
     it("accepts a single-name from import for multi-file source checks", async () => {
         mockedSharedRunner.mockResolvedValue({
             ok: true,
@@ -2011,6 +2120,46 @@ for book in books:
             tone: "danger",
         });
         expect(mockedRunCode).not.toHaveBeenCalled();
+    });
+
+
+it("accepts uses_comment without a target pattern when any non-empty Python comment exists", async () => {
+        mockedSharedRunner.mockResolvedValue({
+            ok: true,
+            stdout: "Ready\n",
+            stderr: "",
+        });
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            tests: [
+                {
+                    stdin: "",
+                    stdout: "Ready\n",
+                    match: "exact",
+                },
+            ],
+            semanticChecks: [],
+            sourceChecks: [
+                {
+                    type: "uses_comment",
+                    message: "Add one non-empty Python comment.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: '# Explain the status\nprint("Ready")\n',
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedSharedRunner).toHaveBeenCalledOnce();
     });
 
 });

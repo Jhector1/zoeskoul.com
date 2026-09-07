@@ -145,6 +145,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -164,6 +181,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -254,6 +272,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -273,6 +308,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -383,6 +419,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -402,6 +455,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -566,6 +620,16 @@
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -578,6 +642,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-book-object-description.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -635,6 +700,16 @@
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -647,6 +722,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-two-pet-instances.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -704,6 +780,16 @@
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -716,6 +802,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.practice-task-state-method.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

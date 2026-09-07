@@ -101,6 +101,12 @@
       "archetype": "paragraph",
       "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_elif_chain.title",
       "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_elif_chain.bodyMarkdown"
+    },
+    {
+      "id": "sketch_order_matters",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_order_matters.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.if-elif-else.sketch_order_matters.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -256,6 +262,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -288,6 +295,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -300,6 +316,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_positive_negative_zero.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -335,6 +352,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -367,6 +385,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -379,6 +406,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_pass_fail.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -414,6 +442,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -451,6 +480,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -463,6 +501,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_grade_checker.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -498,6 +537,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -530,6 +570,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -542,6 +591,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_empty_or_text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -577,6 +627,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -609,6 +660,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -621,6 +681,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.quiz.code_even_odd.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -657,6 +718,16 @@
       "messageBase": "topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -669,6 +740,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.if-elif-else.practice.practice-temperature-branches.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

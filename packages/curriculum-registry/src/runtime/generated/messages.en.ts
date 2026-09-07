@@ -20236,7 +20236,7 @@ const messages: Record<string, any> = {
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Add one non-empty Python comment above the existing event-title print call."
+                  "message": "Add one non-empty Python comment immediately above the first `print()` statement."
                 }
               }
             },
@@ -20253,7 +20253,7 @@ const messages: Record<string, any> = {
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Preserve the comment and title, then add the event-time line below them."
+                  "message": "Keep the useful Python comment immediately above the first `print()` statement."
                 }
               }
             },
@@ -20270,7 +20270,10 @@ const messages: Record<string, any> = {
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)",
               "sourceChecks": {
                 "0": {
-                  "message": "Preserve the board and print the seat count as numeric literal 24 without quotes."
+                  "message": "Keep the useful Python comment immediately above the first `print()` statement."
+                },
+                "1": {
+                  "message": "Print the seat count as the integer literal `24`, not as text."
                 }
               }
             },
@@ -20287,7 +20290,10 @@ const messages: Record<string, any> = {
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)\nprint(\"Helpers ready\")\nprint(2 * 3)",
               "sourceChecks": {
                 "0": {
-                  "message": "Preserve the board and calculate the helper count with the expression 2 * 3."
+                  "message": "Keep the useful Python comment immediately above the first `print()` statement."
+                },
+                "1": {
+                  "message": "Use the expression `2 * 3` itself to calculate the helper count."
                 }
               }
             },
@@ -20304,7 +20310,7 @@ const messages: Record<string, any> = {
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)\nprint(\"Helpers ready\")\nprint(2 * 3)\nprint(\"Bring your questions!\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Preserve the complete Step 5 solution and add only the final quoted Bring your questions! print line."
+                  "message": "Keep the useful Python comment immediately above the first `print()` statement."
                 }
               }
             }
@@ -20438,7 +20444,19 @@ const messages: Record<string, any> = {
               "solutionCode": "print(12 + 3)\nprint(12 - 3)\nprint(12 * 3)\nprint(12 / 3)",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the four requested expressions in +, -, *, / order."
+                  "message": "Use four separate `print()` statements, one for each required expression."
+                },
+                "1": {
+                  "message": "Use `12 + 3` itself inside the first `print()` call."
+                },
+                "2": {
+                  "message": "Use `12 - 3` itself inside the second `print()` call."
+                },
+                "3": {
+                  "message": "Use `12 * 3` itself inside the third `print()` call."
+                },
+                "4": {
+                  "message": "Use `12 / 3` itself inside the fourth `print()` call."
                 }
               }
             },
@@ -20455,7 +20473,13 @@ const messages: Record<string, any> = {
               "solutionCode": "print(2 + 3 * 4)\nprint(18 - 8 / 2)",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep both mixed expressions ungrouped so normal precedence applies."
+                  "message": "Use two separate `print()` statements, one for each required expression."
+                },
+                "1": {
+                  "message": "Use `2 + 3 * 4` itself inside the first `print()` call without grouping parentheses."
+                },
+                "2": {
+                  "message": "Use `18 - 8 / 2` itself inside the second `print()` call without grouping parentheses."
                 }
               }
             },
@@ -20472,7 +20496,7 @@ const messages: Record<string, any> = {
               "solutionCode": "print((2 + 3) * 4)",
               "sourceChecks": {
                 "0": {
-                  "message": "Group 2 + 3 before multiplying by 4."
+                  "message": "Use the grouped expression `(2 + 3) * 4` itself inside `print()`."
                 }
               }
             },
@@ -20489,7 +20513,7 @@ const messages: Record<string, any> = {
               "solutionCode": "print(8 * 4)",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep 8 and 4 and change only the operator to multiplication."
+                  "message": "Keep `8` and `4`, and change only the arithmetic operator to multiplication: `8 * 4`."
                 }
               }
             },
@@ -20506,7 +20530,13 @@ const messages: Record<string, any> = {
               "solutionCode": "print(10 - 2 * 3)\nprint((10 - 2) * 3)",
               "sourceChecks": {
                 "0": {
-                  "message": "Print the ungrouped expression first and the grouped version second."
+                  "message": "Use two separate `print()` statements so both expressions remain visible for comparison."
+                },
+                "1": {
+                  "message": "Use `10 - 2 * 3` itself inside the first `print()` call."
+                },
+                "2": {
+                  "message": "Use `(10 - 2) * 3` itself inside the second `print()` call."
                 }
               }
             },
@@ -20523,7 +20553,7 @@ const messages: Record<string, any> = {
               "solutionCode": "print(20 - 12 / 3)",
               "sourceChecks": {
                 "0": {
-                  "message": "Complete the ungrouped expression 20 - 12 / 3."
+                  "message": "Use the ungrouped expression `20 - 12 / 3` itself inside `print()`."
                 }
               }
             }
@@ -20573,10 +20603,10 @@ const messages: Record<string, any> = {
                 "hint_2": "Look for the line whose first meaningful character is `#`."
               },
               "options": {
-                "a": "print(\"Note\")",
-                "b": "# Note for the reader",
-                "c": "\"Note for the reader\"",
-                "d": "// Note for the reader"
+                "a": "`print(\"Note\")`",
+                "b": "`# Note for the reader`",
+                "c": "`// Note for the reader`",
+                "d": "`\"Note for the reader\"`"
               }
             },
             "mc-valid-print-lines": {
@@ -20704,7 +20734,12 @@ const messages: Record<string, any> = {
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# Write your introduction program below"
+              "starterCode": "# Write your introduction program below",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             },
             "ci-two-lines": {
               "title": "Print two lines",
@@ -20715,7 +20750,12 @@ const messages: Record<string, any> = {
                 "hint_1": "Write the code that creates exactly the requested output.",
                 "hint_2": "Click Run and compare the output panel with the expected result."
               },
-              "starterCode": "# Print the two required lines"
+              "starterCode": "# Print the two required lines",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             }
           },
           "practice": {
@@ -20738,6 +20778,11 @@ const messages: Record<string, any> = {
               "solutionFiles": {
                 "main_py": {
                   "content": "# Show the program status.\nprint(\"Ready to run\")\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Add one non-empty Python comment immediately above the existing `print()` statement."
                 }
               }
             }
@@ -20871,7 +20916,13 @@ const messages: Record<string, any> = {
               "solutionCode": "print(\"Start\")\nprint(\"Done\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Repair only the incomplete second print call so Start and Done both run."
+                  "message": "Keep two separate `print()` statements after fixing the syntax error."
+                },
+                "1": {
+                  "message": "The first line should print the string `\"Start\"`."
+                },
+                "2": {
+                  "message": "The second line should print the string `\"Done\"`."
                 }
               }
             },
@@ -20888,7 +20939,7 @@ const messages: Record<string, any> = {
               "solutionCode": "print(\"banana\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the NameError clue to turn banana into quoted literal text."
+                  "message": "Put `banana` in quotes so Python treats it as a string instead of an undefined name."
                 }
               }
             },
@@ -20905,7 +20956,19 @@ const messages: Record<string, any> = {
               "solutionCode": "print(\"One\")\nprint(\"Two\")\nprint(\"Three\")\nprint(\"Four\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep the working lines and repair line 3 so Three is quoted text."
+                  "message": "Keep four separate `print()` statements and fix the line identified by the error clue."
+                },
+                "1": {
+                  "message": "The first line should print `\"One\"`."
+                },
+                "2": {
+                  "message": "The second line should print `\"Two\"`."
+                },
+                "3": {
+                  "message": "The third line should print `\"Three\"`."
+                },
+                "4": {
+                  "message": "The fourth line should print `\"Four\"`."
                 }
               }
             },
@@ -20918,7 +20981,12 @@ const messages: Record<string, any> = {
                 "hint_1": "The string itself is fine. Look just outside the quotes.",
                 "hint_2": "A valid print call needs matching parentheses around its argument."
               },
-              "starterCode": "print(\"Hello\""
+              "starterCode": "print(\"Hello\"",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `print(...)` to show the required result."
+                }
+              }
             },
             "ci-fix-missing-quote": {
               "title": "Fix a missing quote",
@@ -20929,7 +20997,12 @@ const messages: Record<string, any> = {
                 "hint_1": "The problem is inside the print statement, around the text.",
                 "hint_2": "Make sure the text is fully wrapped in one pair of quotes before the closing parenthesis."
               },
-              "starterCode": "print(\"Python is fun)"
+              "starterCode": "print(\"Python is fun)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `print(...)` to show the required result."
+                }
+              }
             },
             "ci-fix-nameerror-string": {
               "title": "Turn a missing name into a string",
@@ -20940,7 +21013,12 @@ const messages: Record<string, any> = {
                 "hint_1": "The word should be printed as text, not looked up as a variable.",
                 "hint_2": "Keep the print call, but change the argument so Python reads it as a string."
               },
-              "starterCode": "print(banana)"
+              "starterCode": "print(banana)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `print(...)` to show the required result."
+                }
+              }
             }
           }
         },
@@ -21076,7 +21154,7 @@ const messages: Record<string, any> = {
             },
             "ci_top_to_bottom_order": {
               "title": "Put output statements in execution order",
-              "prompt": "Reorder the starter program so its output is exactly:\n\n`First`\n`Second`\n`Third`",
+              "prompt": "Reorder the starter program so it prints these words in this order, with each word on a separate line:",
               "hint": "The first source line runs before the lines below it.",
               "help": {
                 "concept": "For this straight-line program, Python executes each statement from top to bottom.",
@@ -21290,7 +21368,10 @@ const messages: Record<string, any> = {
               "solutionCode": "print(\"Zoe\")\nprint(7)\nprint(2.5)",
               "sourceChecks": {
                 "0": {
-                  "message": "Print Zoe as a string, then 7 as an integer, then 2.5 as a float."
+                  "message": "Use three separate `print()` statements, one for each required value."
+                },
+                "1": {
+                  "message": "Print `\"Zoe\"` as a string, then `7` as an integer, then `2.5` as a float."
                 }
               }
             },
@@ -21307,7 +21388,13 @@ const messages: Record<string, any> = {
               "solutionCode": "print(2 + 3)\nprint(1.5 + 2.5)",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the two addition expressions themselves inside print calls."
+                  "message": "Use two separate `print()` statements, one for each required expression."
+                },
+                "1": {
+                  "message": "Use the expression `2 + 3` itself inside the first `print()` call."
+                },
+                "2": {
+                  "message": "Use the expression `1.5 + 2.5` itself inside the second `print()` call."
                 }
               }
             },
@@ -21353,7 +21440,15 @@ const messages: Record<string, any> = {
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# TODO: read one line and print it"
+              "starterCode": "# TODO: read one line and print it",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                },
+                "1": {
+                  "message": "Read the needed value with input() instead of hard-coding the answer."
+                }
+              }
             },
             "ci-read-number-text": {
               "title": "Read a number-looking input",
@@ -21364,7 +21459,18 @@ const messages: Record<string, any> = {
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# TODO: read input and print it after the label"
+              "starterCode": "# TODO: read input and print it after the label",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                },
+                "1": {
+                  "message": "Read the needed value with input() instead of hard-coding the answer."
+                },
+                "2": {
+                  "message": "Use the variable name `value` in your solution."
+                }
+              }
             },
             "ci-three-lines": {
               "title": "Print mixed values",
@@ -21375,7 +21481,12 @@ const messages: Record<string, any> = {
                 "hint_1": "Use one `print()` statement per line of output.",
                 "hint_2": "Print the text first, then the computed number, then the final text."
               },
-              "starterCode": "# TODO: print the required three lines"
+              "starterCode": "# TODO: print the required three lines",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             }
           }
         },
@@ -21505,7 +21616,12 @@ const messages: Record<string, any> = {
                 "hint_1": "There are two sentences, each ending with a period.",
                 "hint_2": "Print the first sentence on one line and the second sentence on the next line."
               },
-              "starterCode": "# TODO: print both required lines"
+              "starterCode": "# TODO: print both required lines",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             },
             "ci-personal-usecase-label": {
               "title": "Label a Python use",
@@ -21516,7 +21632,12 @@ const messages: Record<string, any> = {
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# TODO: print the required labeled sentence"
+              "starterCode": "# TODO: print the required labeled sentence",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             },
             "ci-print-usecase-automation": {
               "title": "Print an automation message",
@@ -21527,7 +21648,12 @@ const messages: Record<string, any> = {
                 "hint_1": "You need one line of code that prints the whole sentence.",
                 "hint_2": "Put the message inside parentheses and quotation marks so Python treats it as text."
               },
-              "starterCode": "# TODO: print the required sentence"
+              "starterCode": "# TODO: print the required sentence",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             }
           }
         }
@@ -21755,7 +21881,15 @@ const messages: Record<string, any> = {
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# Read one line into city\n# Then print city"
+              "starterCode": "# Read one line into city\n# Then print city",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                },
+                "1": {
+                  "message": "Read the needed value with input() instead of hard-coding the answer."
+                }
+              }
             }
           },
           "practice": {
@@ -22680,7 +22814,15 @@ const messages: Record<string, any> = {
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# Read one line into city\n# Print city"
+              "starterCode": "# Read one line into city\n# Print city",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                },
+                "1": {
+                  "message": "Read the needed value with input() instead of hard-coding the answer."
+                }
+              }
             }
           },
           "practice": {
@@ -39128,32 +39270,6 @@ const messages: Record<string, any> = {
               "title": "Run a different one-row query",
               "prompt": "Return the text `Practice ready` in a one-row result with the column heading `check_in`. Run the statement, then verify the Results table shows that heading and value."
             }
-          },
-          "practice": {
-            "practice-run-student-columns": {
-              "title": "Practice: Run a Student Query",
-              "prompt": "Run a query that returns `id` and `name` from the students table. This is a workspace check that the query editor and Results tab are working.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies First SQL Environment in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT id, name\nFROM students;"
-            },
-            "practice-run-student-city-query": {
-              "title": "Practice: Inspect Student Names and Cities",
-              "prompt": "Run a query that returns `name` and `city` from the students table.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies First SQL Environment in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT name, city\nFROM students;"
-            }
           }
         },
         "module-0-student-roster-project": {
@@ -39288,44 +39404,6 @@ const messages: Record<string, any> = {
                 "c": "A saved password",
                 "d": "A programming command"
               }
-            }
-          },
-          "practice": {
-            "practice-ask-for-student-names": {
-              "title": "Practice: Ask the Database for Student Names",
-              "prompt": "Use SQL to ask the students table for each student name.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies SQL, Databases, and Tables in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT name\nFROM students;"
-            },
-            "practice-ask-for-student-grades": {
-              "title": "Practice: Ask for Student Grades",
-              "prompt": "Return each student name and grade from the students table.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies SQL, Databases, and Tables in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT name, grade\nFROM students;"
-            },
-            "practice-inspect-student-record-columns": {
-              "title": "Practice: Inspect a Student Record",
-              "prompt": "Return id, name, grade, and city from the students table.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies SQL, Databases, and Tables in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT id, name, grade, city\nFROM students;"
             }
           }
         }
@@ -39481,20 +39559,6 @@ const messages: Record<string, any> = {
                 "hint_1": "Check the comma between selected columns and make sure FROM appears before the table name.",
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
-            }
-          },
-          "practice": {
-            "practice-repair-missing-from": {
-              "title": "Practice: Repair a Missing FROM Clause",
-              "prompt": "Write the valid query that returns `name` and `price` from the products table.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies Reading and Fixing SELECT Queries in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT name, price\nFROM products;"
             }
           }
         },
@@ -39719,20 +39783,6 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare the returned columns and their order with the expected result."
               }
             }
-          },
-          "practice": {
-            "practice-select-name-price-stock": {
-              "title": "Practice: Select Three Product Columns",
-              "prompt": "Return product `name`, `price`, and `stock`, in that order, from the products table.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies Selecting Data with SELECT and FROM in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT name, price, stock\nFROM products;"
-            }
           }
         }
       },
@@ -39889,20 +39939,6 @@ const messages: Record<string, any> = {
                 "hint_1": "Write one category condition and one stock condition, then connect them with AND.",
                 "hint_2": "Run the query and compare the returned rows and columns with the requirement."
               }
-            }
-          },
-          "practice": {
-            "practice-home-products-in-stock": {
-              "title": "Practice: Combine Category and Stock Conditions",
-              "prompt": "Return name, category, and stock for products in the `Home` category with stock of at least 10.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies Combining Conditions in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT name, category, stock\nFROM products\nWHERE category = 'Home'\n  AND stock >= 10;"
             }
           }
         },
@@ -40309,20 +40345,6 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
-          },
-          "practice": {
-            "practice-cheapest-two-products": {
-              "title": "Practice: Find the Two Cheapest Products",
-              "prompt": "Return name and price for the two cheapest products. Sort by price ascending, then name ascending, and limit the result to 2 rows.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies Ranked Results with LIMIT in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT name, price\nFROM products\nORDER BY price ASC, name ASC\nLIMIT 2;"
-            }
           }
         },
         "module-3-sales-leaderboard-project": {
@@ -40556,20 +40578,6 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare both row order and row count with the requirement."
               }
             }
-          },
-          "practice": {
-            "practice-sort-stock-then-name": {
-              "title": "Practice: Sort by Stock Then Name",
-              "prompt": "Return name and stock from products. Sort stock from highest to lowest, then name alphabetically for ties.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies Sorting with ORDER BY in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT name, stock\nFROM products\nORDER BY stock DESC, name ASC;"
-            }
           }
         }
       },
@@ -40732,20 +40740,6 @@ const messages: Record<string, any> = {
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
             }
-          },
-          "practice": {
-            "practice-active-inactive-status-list": {
-              "title": "Practice: Match a Status List",
-              "prompt": "Return id, full_name, and status for customers whose status is either `active` or `inactive`.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies IN and BETWEEN in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status IN ('active', 'inactive');"
-            }
           }
         },
         "intro_to_like": {
@@ -40887,32 +40881,6 @@ const messages: Record<string, any> = {
                 "hint_1": "For a prefix match, place the fixed starting text before `%`.",
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
-            }
-          },
-          "practice": {
-            "practice-like-name-ending-a": {
-              "title": "Practice: Match Names Ending in a",
-              "prompt": "Return id and full_name for customers whose full name ends with the letter `a`.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies LIKE and Wildcards in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT id, full_name\nFROM customers\nWHERE full_name LIKE '%a';"
-            },
-            "practice-like-city-starting-s": {
-              "title": "Practice: Match Cities Starting with S",
-              "prompt": "Return full_name and city for customers whose city starts with `S`.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies LIKE and Wildcards in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT full_name, city\nFROM customers\nWHERE city LIKE 'S%';"
             }
           }
         },
@@ -41143,20 +41111,6 @@ const messages: Record<string, any> = {
                 "hint_1": "Use the dedicated missing-value check on the email column.",
                 "hint_2": "Run the query and compare the returned columns and rows with the expected result."
               }
-            }
-          },
-          "practice": {
-            "practice-find-missing-email-active-customers": {
-              "title": "Practice: Find Active Customers with Missing Email",
-              "prompt": "Return id, full_name, and status for active customers whose email is NULL.",
-              "hint": "Build the query from the requested tables, columns, relationships, and conditions.",
-              "help": {
-                "concept": "This practice applies NULL and Combined Filters in a new, self-contained task.",
-                "hint_1": "Identify the exact data or database change the prompt asks you to produce.",
-                "hint_2": "Run the work and compare the result shape with the expected example."
-              },
-              "starterCode": "-- Write your SQL answer below.\n",
-              "solutionCode": "SELECT id, full_name, status\nFROM customers\nWHERE status = 'active'\n  AND email IS NULL;"
             }
           }
         }

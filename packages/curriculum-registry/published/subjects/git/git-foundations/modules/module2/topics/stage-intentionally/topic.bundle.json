@@ -231,6 +231,26 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch0",
       "language": "bash",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0130\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
+          "language": "text"
+        }
+      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -242,6 +262,7 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
@@ -380,6 +401,26 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch1",
       "language": "bash",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0130\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
+          "language": "text"
+        }
+      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -397,6 +438,7 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
@@ -535,6 +577,26 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch2",
       "language": "bash",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0130\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
+          "language": "text"
+        }
+      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -546,6 +608,7 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
@@ -684,6 +747,26 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-2-meaningful-history.stage-intentionally.tryIt.try_stage_intentionally_sketch3",
       "language": "bash",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/contacts.txt",
+          "content": "Community contacts\n\nHelp desk: 555-0130\n",
+          "language": "text"
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community events\n\nSaturday cleanup: 9:30 AM\n",
+          "language": "text"
+        }
+      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -699,6 +782,7 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",

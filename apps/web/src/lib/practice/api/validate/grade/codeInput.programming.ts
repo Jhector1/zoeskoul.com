@@ -902,6 +902,75 @@ function checkSourceRegex(source: string, pattern: unknown): boolean {
     return regex ? regex.test(stripPythonComments(source)) : false;
 }
 
+function findPythonComments(source: string): Array<{
+    lineIndex: number;
+    column: number;
+    text: string;
+    codeBefore: string;
+}> {
+    const commentFree = stripPythonComments(source);
+    const sourceLines = source.split(/\r?\n/);
+    const commentFreeLines = commentFree.split(/\r?\n/);
+    const comments: Array<{
+        lineIndex: number;
+        column: number;
+        text: string;
+        codeBefore: string;
+    }> = [];
+
+    for (let lineIndex = 0; lineIndex < sourceLines.length; lineIndex += 1) {
+        const rawLine = sourceLines[lineIndex] ?? "";
+        const cleanLine = commentFreeLines[lineIndex] ?? "";
+        let commentColumn = -1;
+
+        for (let column = 0; column < rawLine.length; column += 1) {
+            if (rawLine[column] === "#" && cleanLine[column] !== "#") {
+                commentColumn = column;
+                break;
+            }
+        }
+
+        if (commentColumn < 0) continue;
+
+        const text = rawLine.slice(commentColumn + 1).trim();
+        if (!text) continue;
+
+        comments.push({
+            lineIndex,
+            column: commentColumn,
+            text,
+            codeBefore: rawLine.slice(0, commentColumn),
+        });
+    }
+
+    return comments;
+}
+
+function checkUsesComment(source: string, check: SourceCheckInput): boolean {
+    const comments = findPythonComments(source);
+    if (!comments.length) return false;
+
+    const targetPattern =
+        typeof check.pattern === "string" ? check.pattern.trim() : "";
+
+    if (!targetPattern) return true;
+
+    const targetRegex = compileSourceRegex(targetPattern);
+    if (!targetRegex) return false;
+
+    const sourceLines = source.split(/\r?\n/);
+
+    return comments.some((comment) => {
+        if (comment.codeBefore.trim()) return false;
+
+        const nextLine = sourceLines[comment.lineIndex + 1];
+        if (nextLine === undefined) return false;
+
+        targetRegex.lastIndex = 0;
+        return targetRegex.test(nextLine);
+    });
+}
+
 function checkOrderedPatterns(args: {
     source: string;
     patterns: unknown;
@@ -1067,6 +1136,8 @@ function sourceCheckPasses(source: string, check: SourceCheckInput): boolean {
                 normalizeWhitespace: check.normalizeWhitespace,
                 treatAsRegex: true,
             });
+        case "uses_comment":
+            return checkUsesComment(source, check);
         case "uses_method":
             return checkUsesMethod(source, check);
         case "uses_call":

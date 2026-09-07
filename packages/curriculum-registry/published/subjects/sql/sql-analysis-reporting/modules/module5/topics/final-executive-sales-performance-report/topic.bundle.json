@@ -101,6 +101,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_1",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -117,6 +118,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -162,6 +164,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_2",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -178,6 +181,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_2.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -223,6 +227,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_3",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_3.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -239,6 +244,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_3.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -284,6 +290,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_4",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_4.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -300,6 +307,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.final-executive-sales-performance-report.finalCapstone.steps.capstone_step_4.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

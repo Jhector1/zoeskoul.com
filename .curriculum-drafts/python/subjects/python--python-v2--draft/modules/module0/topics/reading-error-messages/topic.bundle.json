@@ -244,6 +244,13 @@
             "type": "printed_line_count",
             "min": 2
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Start\nDone\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -291,8 +298,20 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Start[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Done[\"\\']\\s*\\)\\s*$",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
           "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\\\"']Start[\\\"']\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue.sourceChecks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*[\\\"']Done[\\\"']\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-syntaxerror-clue.sourceChecks.2.message",
           "normalizeWhitespace": false
         }
       ]
@@ -323,6 +342,13 @@
           {
             "type": "printed_line_count",
             "min": 1
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "banana\n",
+            "match": "exact"
           }
         ]
       },
@@ -371,7 +397,7 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']banana[\"\\']\\s*\\)\\s*$",
+          "pattern": "(?s)^\\s*print\\(\\s*[\\\"']banana[\\\"']\\s*\\)\\s*$",
           "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-nameerror-clue.sourceChecks.0.message",
           "normalizeWhitespace": false
         }
@@ -403,6 +429,13 @@
           {
             "type": "printed_line_count",
             "min": 4
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "One\nTwo\nThree\nFour\n",
+            "match": "exact"
           }
         ]
       },
@@ -451,8 +484,32 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']One[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Two[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Three[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Four[\"\\']\\s*\\)\\s*$",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
           "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*[\\\"']One[\\\"']\\s*\\)\\s*\\n(?:[^\\n]*\\n){2}[^\\n]*\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.sourceChecks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^[^\\n]*\\n\\s*print\\(\\s*[\\\"']Two[\\\"']\\s*\\)\\s*\\n[^\\n]*\\n[^\\n]*\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.sourceChecks.2.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^(?:[^\\n]*\\n){2}\\s*print\\(\\s*[\\\"']Three[\\\"']\\s*\\)\\s*\\n[^\\n]*\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.sourceChecks.3.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^(?:[^\\n]*\\n){3}\\s*print\\(\\s*[\\\"']Four[\\\"']\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-use-line-number-clue.sourceChecks.4.message",
           "normalizeWhitespace": false
         }
       ]
@@ -473,11 +530,6 @@
             "stdin": "",
             "stdout": "Hello\n",
             "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "Hello\n",
-            "match": "exact"
           }
         ],
         "solutionCode": "print(\"Hello\")",
@@ -494,7 +546,7 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -545,7 +597,7 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-fix-missing-paren.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -566,11 +618,6 @@
             "stdin": "",
             "stdout": "Python is fun\n",
             "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "Python is fun\n",
-            "match": "exact"
           }
         ],
         "solutionCode": "print(\"Python is fun\")",
@@ -587,7 +634,7 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -638,7 +685,7 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-fix-missing-quote.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -659,11 +706,6 @@
             "stdin": "",
             "stdout": "banana\n",
             "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "banana\n",
-            "match": "exact"
           }
         ],
         "solutionCode": "print(\"banana\")",
@@ -680,7 +722,7 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -731,7 +773,7 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.reading-error-messages.quiz.ci-fix-nameerror-string.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]

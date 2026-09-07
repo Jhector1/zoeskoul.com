@@ -69,7 +69,7 @@
       "descriptionKey": "modules.c--c-data-structures--draft.c--c-data-structures--draft-module-1-algorithm-design-lab.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "code",
         "language": "c",

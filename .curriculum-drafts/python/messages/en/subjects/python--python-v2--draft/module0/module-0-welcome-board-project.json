@@ -64,7 +64,7 @@
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Add one non-empty Python comment above the existing event-title print call."
+                  "message": "Add one non-empty Python comment immediately above the first `print()` statement."
                 }
               }
             },
@@ -81,7 +81,7 @@
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Preserve the comment and title, then add the event-time line below them."
+                  "message": "Keep the useful Python comment immediately above the first `print()` statement."
                 }
               }
             },
@@ -98,7 +98,10 @@
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)",
               "sourceChecks": {
                 "0": {
-                  "message": "Preserve the board and print the seat count as numeric literal 24 without quotes."
+                  "message": "Keep the useful Python comment immediately above the first `print()` statement."
+                },
+                "1": {
+                  "message": "Print the seat count as the integer literal `24`, not as text."
                 }
               }
             },
@@ -115,7 +118,10 @@
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)\nprint(\"Helpers ready\")\nprint(2 * 3)",
               "sourceChecks": {
                 "0": {
-                  "message": "Preserve the board and calculate the helper count with the expression 2 * 3."
+                  "message": "Keep the useful Python comment immediately above the first `print()` statement."
+                },
+                "1": {
+                  "message": "Use the expression `2 * 3` itself to calculate the helper count."
                 }
               }
             },
@@ -132,7 +138,7 @@
               "solutionCode": "# Show the welcome board for arriving students\nprint(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Seats available\")\nprint(24)\nprint(\"Helpers ready\")\nprint(2 * 3)\nprint(\"Bring your questions!\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Preserve the complete Step 5 solution and add only the final quoted Bring your questions! print line."
+                  "message": "Keep the useful Python comment immediately above the first `print()` statement."
                 }
               }
             }

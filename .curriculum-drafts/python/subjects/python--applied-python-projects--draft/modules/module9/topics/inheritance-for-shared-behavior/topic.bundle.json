@@ -813,6 +813,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.checks.2.message",
             "path": "services/inventory_service.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -962,6 +969,13 @@
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.checks.2.message",
             "path": "models/book.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "24.0\n",
+            "match": "exact"
           }
         ]
       },

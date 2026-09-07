@@ -59,7 +59,7 @@
       "descriptionKey": "modules.sql--sql-data-management--draft.sql-data-management-module-0-safe-inserts.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,

@@ -225,7 +225,15 @@
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# Read one line into city\n# Print city"
+              "starterCode": "# Read one line into city\n# Print city",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                },
+                "1": {
+                  "message": "Read the needed value with input() instead of hard-coding the answer."
+                }
+              }
             }
           },
           "practice": {

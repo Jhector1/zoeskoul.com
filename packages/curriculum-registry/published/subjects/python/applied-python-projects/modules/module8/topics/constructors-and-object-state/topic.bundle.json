@@ -132,6 +132,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -151,6 +168,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -273,6 +291,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -292,6 +327,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -421,6 +457,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -440,6 +493,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -601,6 +655,24 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/transaction.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterFiles.models_transaction_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -621,6 +693,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -716,6 +789,13 @@
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.3.message",
             "path": "models/transaction.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Coffee: -4\nPaycheck: 1200\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -727,6 +807,24 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -747,6 +845,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -869,6 +968,13 @@
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.3.message",
             "path": "models/account.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "120\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -880,6 +986,24 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -900,6 +1024,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -1024,6 +1149,13 @@
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.4.message",
             "path": "models/account.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Rae | 90 | starter fund\n",
+            "match": "exact"
           }
         ]
       },

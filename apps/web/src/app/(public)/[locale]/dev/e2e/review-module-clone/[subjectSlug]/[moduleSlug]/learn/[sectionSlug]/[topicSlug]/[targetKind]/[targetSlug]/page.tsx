@@ -1045,15 +1045,35 @@ export default async function Page({
     }>;
     searchParams?: Promise<DevCloneSearchParams>;
 }) {
+    console.info("[review-clone-enter]", {
+        nodeEnv: process.env.NODE_ENV,
+        e2eAllowDevRoutes: process.env.E2E_ALLOW_DEV_ROUTES,
+        devCurriculumEditor: process.env.DEV_CURRICULUM_EDITOR,
+    });
+
     if (
         process.env.NODE_ENV === "production" &&
         process.env.E2E_ALLOW_DEV_ROUTES !== "1"
     ) {
+        console.info("[review-clone-not-found]", "production-guard");
         notFound();
     }
 
     const resolvedParams = (await params) ?? {};
     const resolvedSearchParams = (await searchParams) ?? {};
+
+    console.info("[review-clone-resolved]", {
+        locale: resolvedParams.locale,
+        subjectSlug: resolvedParams.subjectSlug,
+        moduleSlug: resolvedParams.moduleSlug,
+        sectionSlug: resolvedParams.sectionSlug,
+        topicSlug: resolvedParams.topicSlug,
+        targetKind: resolvedParams.targetKind,
+        targetSlug: resolvedParams.targetSlug,
+        source: previewSource(resolvedSearchParams),
+        draftPreview: searchParamIsTrue(resolvedSearchParams, "draftPreview"),
+        draftQa: searchParamIsTrue(resolvedSearchParams, "draftQa"),
+    });
 
     const progressiveLockMode = searchParamIsTrue(
         resolvedSearchParams,
@@ -1095,8 +1115,18 @@ export default async function Page({
         : null;
 
     if (generatedDraftPreview && !generatedPreviewModule) {
+        console.info("[review-clone-not-found]", "generated-preview-missing");
         notFound();
     }
+
+    console.info("[review-clone-render]", {
+        rawDraftPreview,
+        hasDraftPreviewModule: Boolean(draftPreviewModule),
+        generatedDraftPreview,
+        hasGeneratedPreviewModule: Boolean(generatedPreviewModule),
+        isSqlClone,
+        isLinuxTerminalClone,
+    });
 
     const selectedModule = draftPreviewModule ?? generatedPreviewModule ?? (isSqlClone
         ? sqlReviewCloneModule

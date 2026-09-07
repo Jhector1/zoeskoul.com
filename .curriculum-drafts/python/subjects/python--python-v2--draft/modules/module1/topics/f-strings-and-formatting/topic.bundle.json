@@ -302,6 +302,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Mila is 13 years old\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -381,6 +388,13 @@
           {
             "type": "printed_line_count",
             "min": 1
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Price: $4.50\n",
+            "match": "exact"
           }
         ]
       },

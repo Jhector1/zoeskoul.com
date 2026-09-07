@@ -301,6 +301,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "7\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -380,6 +387,13 @@
           {
             "type": "printed_line_count",
             "min": 1
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Mila\n",
+            "match": "exact"
           }
         ]
       },
@@ -461,6 +475,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "green\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -541,6 +562,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "12\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -598,13 +626,13 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "source_contains",
             "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.sourceChecks.1.message",
             "normalizeWhitespace": true
           }
         ]
@@ -655,13 +683,13 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "source_contains",
           "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "message": "@:topics.python--python-v2--draft.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.sourceChecks.1.message",
           "normalizeWhitespace": true
         }
       ]

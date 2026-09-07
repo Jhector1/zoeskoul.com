@@ -254,6 +254,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -286,6 +287,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -298,6 +308,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-stop-at-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -333,6 +344,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -365,6 +377,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -377,6 +398,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-multiples.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -412,6 +434,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -444,6 +467,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -456,6 +488,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-first-negative.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -491,6 +524,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -523,6 +557,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -535,6 +578,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-break-guess-game.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -570,6 +614,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -602,6 +647,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -614,6 +668,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.quiz.code-continue-skip-letter.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -650,6 +705,16 @@
       "messageBase": "topics.python-v2.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -662,6 +727,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.break-and-continue.practice.practice-skip-negatives-stop-zero.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

@@ -44,7 +44,7 @@
       "descriptionKey": "modules.sql--sql-analysis-reporting--draft.sql-analysis-reporting-module-0-report-foundations.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,

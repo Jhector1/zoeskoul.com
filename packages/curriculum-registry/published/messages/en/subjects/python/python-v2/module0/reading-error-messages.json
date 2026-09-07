@@ -130,7 +130,13 @@
               "solutionCode": "print(\"Start\")\nprint(\"Done\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Repair only the incomplete second print call so Start and Done both run."
+                  "message": "Keep two separate `print()` statements after fixing the syntax error."
+                },
+                "1": {
+                  "message": "The first line should print the string `\"Start\"`."
+                },
+                "2": {
+                  "message": "The second line should print the string `\"Done\"`."
                 }
               }
             },
@@ -147,7 +153,7 @@
               "solutionCode": "print(\"banana\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the NameError clue to turn banana into quoted literal text."
+                  "message": "Put `banana` in quotes so Python treats it as a string instead of an undefined name."
                 }
               }
             },
@@ -164,7 +170,19 @@
               "solutionCode": "print(\"One\")\nprint(\"Two\")\nprint(\"Three\")\nprint(\"Four\")",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep the working lines and repair line 3 so Three is quoted text."
+                  "message": "Keep four separate `print()` statements and fix the line identified by the error clue."
+                },
+                "1": {
+                  "message": "The first line should print `\"One\"`."
+                },
+                "2": {
+                  "message": "The second line should print `\"Two\"`."
+                },
+                "3": {
+                  "message": "The third line should print `\"Three\"`."
+                },
+                "4": {
+                  "message": "The fourth line should print `\"Four\"`."
                 }
               }
             },
@@ -177,7 +195,12 @@
                 "hint_1": "The string itself is fine. Look just outside the quotes.",
                 "hint_2": "A valid print call needs matching parentheses around its argument."
               },
-              "starterCode": "print(\"Hello\""
+              "starterCode": "print(\"Hello\"",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `print(...)` to show the required result."
+                }
+              }
             },
             "ci-fix-missing-quote": {
               "title": "Fix a missing quote",
@@ -188,7 +211,12 @@
                 "hint_1": "The problem is inside the print statement, around the text.",
                 "hint_2": "Make sure the text is fully wrapped in one pair of quotes before the closing parenthesis."
               },
-              "starterCode": "print(\"Python is fun)"
+              "starterCode": "print(\"Python is fun)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `print(...)` to show the required result."
+                }
+              }
             },
             "ci-fix-nameerror-string": {
               "title": "Turn a missing name into a string",
@@ -199,7 +227,12 @@
                 "hint_1": "The word should be printed as text, not looked up as a variable.",
                 "hint_2": "Keep the print call, but change the argument so Python reads it as a string."
               },
-              "starterCode": "print(banana)"
+              "starterCode": "print(banana)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use `print(...)` to show the required result."
+                }
+              }
             }
           }
         }

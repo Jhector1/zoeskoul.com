@@ -693,6 +693,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-add-audio-subclass.checks.3.message",
             "path": "models/audio.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: Atomic Habits by James Clear\nVideo: Study Skills (15 min)\nAudio: Focus Session by Maya Lee\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -918,6 +925,13 @@
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-baseitem-checkout.checks.2.message",
             "path": "models/video.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Borrow book: Dune\nPlay video: Safety Training\n",
+            "match": "exact"
           }
         ]
       },
@@ -1169,6 +1183,13 @@
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.ci-catalog-export-labels.checks.0.message",
             "path": "services/export_service.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BOOK-Refactoring | VIDEO-Git Basics\n",
+            "match": "exact"
           }
         ]
       },

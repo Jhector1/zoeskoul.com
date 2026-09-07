@@ -211,11 +211,6 @@
             "stdin": "",
             "stdout": "Python is beginner-friendly.\nIt is used in many fields.\n",
             "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "Python is beginner-friendly.\nIt is used in many fields.\n",
-            "match": "exact"
           }
         ],
         "solutionCode": "print(\"Python is beginner-friendly.\")\nprint(\"It is used in many fields.\")",
@@ -232,7 +227,7 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-beginner-message.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -283,7 +278,7 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-beginner-message.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -304,11 +299,6 @@
             "stdin": "",
             "stdout": "One Python use: web apps\n",
             "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "One Python use: web apps\n",
-            "match": "exact"
           }
         ],
         "solutionCode": "print(\"One Python use: web apps\")",
@@ -325,7 +315,7 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -376,7 +366,7 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-personal-usecase-label.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -397,11 +387,6 @@
             "stdin": "",
             "stdout": "Python helps automate repeated tasks.\n",
             "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "Python helps automate repeated tasks.\n",
-            "match": "exact"
           }
         ],
         "solutionCode": "print(\"Python helps automate repeated tasks.\")",
@@ -418,7 +403,7 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -469,7 +454,7 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.what-python-is.quiz.ci-print-usecase-automation.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]

@@ -241,6 +241,13 @@
             "type": "printed_line_count",
             "min": 4
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "15\n9\n36\n4.0\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -288,8 +295,32 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*12\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*-\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*/\\s*3\\s*\\)\\s*$",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
           "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*12\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*12\\s*-\\s*3\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.2.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*12\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.3.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*12\\s*/\\s*3\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.4.message",
           "normalizeWhitespace": false
         }
       ]
@@ -320,6 +351,13 @@
           {
             "type": "printed_line_count",
             "min": 2
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "14\n14.0\n",
+            "match": "exact"
           }
         ]
       },
@@ -368,8 +406,20 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\*\\s*4\\s*\\)\\s*\\n\\s*print\\(\\s*18\\s*-\\s*8\\s*/\\s*2\\s*\\)\\s*$",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
           "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\*\\s*4\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.sourceChecks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*18\\s*-\\s*8\\s*/\\s*2\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.sourceChecks.2.message",
           "normalizeWhitespace": false
         }
       ]
@@ -400,6 +450,13 @@
           {
             "type": "printed_line_count",
             "min": 1
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "20\n",
+            "match": "exact"
           }
         ]
       },
@@ -481,6 +538,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "32\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -561,6 +625,13 @@
             "type": "printed_line_count",
             "min": 2
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "4\n24\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -608,8 +679,20 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*10\\s*-\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*\\(\\s*10\\s*-\\s*2\\s*\\)\\s*\\*\\s*3\\s*\\)\\s*$",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
           "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*10\\s*-\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.sourceChecks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*\\(\\s*10\\s*-\\s*2\\s*\\)\\s*\\*\\s*3\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.sourceChecks.2.message",
           "normalizeWhitespace": false
         }
       ]
@@ -640,6 +723,13 @@
           {
             "type": "printed_line_count",
             "min": 1
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "16.0\n",
+            "match": "exact"
           }
         ]
       },

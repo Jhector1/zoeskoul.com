@@ -27,8 +27,8 @@
       "versioning": {
         "family": "multi-table-sql",
         "version": 1,
-        "status": "active",
-        "defaultForNewEnrollments": true,
+        "status": "draft",
+        "defaultForNewEnrollments": false,
         "supersedes": null,
         "supersededBy": null
       }
@@ -44,7 +44,7 @@
       "descriptionKey": "modules.multi-table-sql.multi-table-sql-module-0-join-foundations.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,

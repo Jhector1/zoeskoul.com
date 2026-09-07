@@ -656,6 +656,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.checks.2.message",
             "path": "models/account.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Owner: Mina, Balance: 125\nOwner: Leo, Balance: 40\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -840,6 +847,13 @@
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.checks.5.message",
             "path": "models/account.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "True\n60\nFalse\n20\n",
+            "match": "exact"
           }
         ]
       }
@@ -1031,6 +1045,13 @@
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.checks.4.message",
             "path": "models/account.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "True\n60\nFalse\n50\n",
+            "match": "exact"
           }
         ]
       }

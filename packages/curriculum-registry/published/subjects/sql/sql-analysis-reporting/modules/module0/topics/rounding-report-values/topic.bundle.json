@@ -197,6 +197,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch0",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -213,6 +214,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.tryIt.try_rounding_report_values_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -258,6 +260,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-round-adjusted-order-value",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-round-adjusted-order-value.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -274,6 +277,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-round-adjusted-order-value.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -319,6 +323,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-retained-rounding-sketch0",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-retained-rounding-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -335,6 +340,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-retained-rounding-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -379,6 +385,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-retained-rounding-sketch1",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-retained-rounding-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -395,6 +402,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.rounding-report-values.practice.practice-retained-rounding-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

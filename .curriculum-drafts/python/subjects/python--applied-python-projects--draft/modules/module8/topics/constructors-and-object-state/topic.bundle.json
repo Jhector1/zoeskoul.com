@@ -789,6 +789,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.checks.3.message",
             "path": "models/transaction.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Coffee: -4\nPaycheck: 1200\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -960,6 +967,13 @@
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.checks.3.message",
             "path": "models/account.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "120\n",
+            "match": "exact"
           }
         ]
       },
@@ -1135,6 +1149,13 @@
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.checks.4.message",
             "path": "models/account.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Rae | 90 | starter fund\n",
+            "match": "exact"
           }
         ]
       },

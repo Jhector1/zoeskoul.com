@@ -105,6 +105,30 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterFiles.data_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterFiles.output_clean_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -131,6 +155,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.try-module-7-clean-student-records-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -262,6 +287,30 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterFiles.data_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterFiles.output_clean_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -295,6 +344,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-1-read-student-file.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -409,7 +459,8 @@
         ],
         "requiredFiles": [
           "data/students.csv",
-          "output/clean_students.csv"
+          "output/clean_students.csv",
+          "cleaning.py"
         ]
       },
       "sourceChecks": [
@@ -459,6 +510,37 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.data_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterFiles.output_clean_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -492,6 +574,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-2-clean-one-row.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -613,7 +696,8 @@
         ],
         "requiredFiles": [
           "data/students.csv",
-          "output/clean_students.csv"
+          "output/clean_students.csv",
+          "cleaning.py"
         ]
       },
       "sourceChecks": [
@@ -649,6 +733,37 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.data_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterFiles.output_clean_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -682,6 +797,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-3-skip-bad-rows.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -803,7 +919,8 @@
         ],
         "requiredFiles": [
           "data/students.csv",
-          "output/clean_students.csv"
+          "output/clean_students.csv",
+          "cleaning.py"
         ]
       },
       "sourceChecks": [
@@ -830,6 +947,37 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "cleaning.py",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.cleaning_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.data_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "output/clean_students.csv",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterFiles.output_clean_students_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -863,6 +1011,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.module-7-clean-student-records.quiz.mp-4-write-clean-records.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -984,7 +1133,8 @@
         ],
         "requiredFiles": [
           "data/students.csv",
-          "output/clean_students.csv"
+          "output/clean_students.csv",
+          "cleaning.py"
         ]
       },
       "sourceChecks": [

@@ -130,7 +130,19 @@
               "solutionCode": "print(12 + 3)\nprint(12 - 3)\nprint(12 * 3)\nprint(12 / 3)",
               "sourceChecks": {
                 "0": {
-                  "message": "Use the four requested expressions in +, -, *, / order."
+                  "message": "Use four separate `print()` statements, one for each required expression."
+                },
+                "1": {
+                  "message": "Use `12 + 3` itself inside the first `print()` call."
+                },
+                "2": {
+                  "message": "Use `12 - 3` itself inside the second `print()` call."
+                },
+                "3": {
+                  "message": "Use `12 * 3` itself inside the third `print()` call."
+                },
+                "4": {
+                  "message": "Use `12 / 3` itself inside the fourth `print()` call."
                 }
               }
             },
@@ -147,7 +159,13 @@
               "solutionCode": "print(2 + 3 * 4)\nprint(18 - 8 / 2)",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep both mixed expressions ungrouped so normal precedence applies."
+                  "message": "Use two separate `print()` statements, one for each required expression."
+                },
+                "1": {
+                  "message": "Use `2 + 3 * 4` itself inside the first `print()` call without grouping parentheses."
+                },
+                "2": {
+                  "message": "Use `18 - 8 / 2` itself inside the second `print()` call without grouping parentheses."
                 }
               }
             },
@@ -164,7 +182,7 @@
               "solutionCode": "print((2 + 3) * 4)",
               "sourceChecks": {
                 "0": {
-                  "message": "Group 2 + 3 before multiplying by 4."
+                  "message": "Use the grouped expression `(2 + 3) * 4` itself inside `print()`."
                 }
               }
             },
@@ -181,7 +199,7 @@
               "solutionCode": "print(8 * 4)",
               "sourceChecks": {
                 "0": {
-                  "message": "Keep 8 and 4 and change only the operator to multiplication."
+                  "message": "Keep `8` and `4`, and change only the arithmetic operator to multiplication: `8 * 4`."
                 }
               }
             },
@@ -198,7 +216,13 @@
               "solutionCode": "print(10 - 2 * 3)\nprint((10 - 2) * 3)",
               "sourceChecks": {
                 "0": {
-                  "message": "Print the ungrouped expression first and the grouped version second."
+                  "message": "Use two separate `print()` statements so both expressions remain visible for comparison."
+                },
+                "1": {
+                  "message": "Use `10 - 2 * 3` itself inside the first `print()` call."
+                },
+                "2": {
+                  "message": "Use `(10 - 2) * 3` itself inside the second `print()` call."
                 }
               }
             },
@@ -215,7 +239,7 @@
               "solutionCode": "print(20 - 12 / 3)",
               "sourceChecks": {
                 "0": {
-                  "message": "Complete the ungrouped expression 20 - 12 / 3."
+                  "message": "Use the ungrouped expression `20 - 12 / 3` itself inside `print()`."
                 }
               }
             }

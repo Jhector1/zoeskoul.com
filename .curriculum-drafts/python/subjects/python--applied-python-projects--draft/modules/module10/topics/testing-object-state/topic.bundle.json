@@ -613,7 +613,7 @@
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -794,7 +794,7 @@
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -978,7 +978,7 @@
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
         "language": "python",

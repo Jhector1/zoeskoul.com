@@ -240,6 +240,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Welcome to Python\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -320,6 +327,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ready\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -366,8 +380,7 @@
       },
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "(?s)^\\s*#[^\\n]+\\n\\s*print\\(\\s*[\"\\']Ready[\"\\']\\s*\\)\\s*$",
+          "type": "uses_comment",
           "message": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-comment-and-output.sourceChecks.0.message",
           "normalizeWhitespace": false
         }
@@ -399,6 +412,13 @@
           {
             "type": "printed_line_count",
             "min": 1
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello\n",
+            "match": "exact"
           }
         ]
       },
@@ -469,11 +489,6 @@
             "stdin": "",
             "stdout": "About me\nName: Sam\nFavorite color: Green\n",
             "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "About me\nName: Sam\nFavorite color: Green\n",
-            "match": "exact"
           }
         ],
         "solutionCode": "print(\"About me\")\nprint(\"Name: Sam\")\nprint(\"Favorite color: Green\")",
@@ -490,7 +505,7 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -541,7 +556,7 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-personal-intro.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -562,11 +577,6 @@
             "stdin": "",
             "stdout": "Name: Alex\nCity: Lima\n",
             "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "Name: Alex\nCity: Lima\n",
-            "match": "exact"
           }
         ],
         "solutionCode": "print(\"Name: Alex\")\nprint(\"City: Lima\")",
@@ -583,7 +593,7 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -634,7 +644,7 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.quiz.ci-two-lines.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -717,7 +727,15 @@
       "workspaceExpectations": {
         "requiredFolders": [],
         "requiredFiles": []
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_comment",
+          "pattern": "^\\s*print\\(",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.print-comments-and-errors.practice.practice-comment-and-ready.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        }
+      ]
     }
   ]
 }

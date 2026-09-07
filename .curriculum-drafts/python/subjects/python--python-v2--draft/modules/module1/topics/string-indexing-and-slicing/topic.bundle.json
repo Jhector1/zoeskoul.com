@@ -328,7 +328,7 @@
         },
         {
           "type": "source_regex",
-          "pattern": "\\[\\s*0\\s*\\].*\\[\\s*-1\\s*\\]",
+          "pattern": "(?s)\\[\\s*0\\s*\\].*\\[\\s*-1\\s*\\]",
           "normalizeWhitespace": false,
           "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_first_and_last.sourceChecks.1.message"
         }
@@ -510,7 +510,7 @@
         },
         {
           "type": "source_regex",
-          "pattern": "\\[\\s*:\\s*3\\s*\\].*\\[\\s*3\\s*:\\s*\\]",
+          "pattern": "(?s)\\[\\s*:\\s*3\\s*\\].*\\[\\s*3\\s*:\\s*\\]",
           "normalizeWhitespace": false,
           "message": "@:topics.python--python-v2--draft.python-v2-1.string-indexing-and-slicing.quiz.code_prefix_suffix.sourceChecks.1.message"
         }

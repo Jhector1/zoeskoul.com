@@ -15,7 +15,7 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
-        "isTerminalRelease": true,
+        "isTerminalRelease": false,
         "moreComingMessageKey": "subjects.git-foundations.moreComingSoon"
       },
       "completionPolicy": {
@@ -27,7 +27,7 @@
         "family": "git-foundations",
         "version": 1,
         "status": "active",
-        "defaultForNewEnrollments": false,
+        "defaultForNewEnrollments": true,
         "supersedes": null,
         "supersededBy": null
       }
@@ -50,7 +50,7 @@
       "descriptionKey": "modules.git-foundations.git-foundations-module-1-start-tracking.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "code",
         "language": "bash",

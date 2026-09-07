@@ -154,6 +154,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -187,6 +188,15 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -199,6 +209,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.try-in_list_filter-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -260,6 +271,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -293,6 +305,15 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -305,6 +326,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-inclusive-range.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -361,6 +383,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -394,6 +417,15 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -406,6 +438,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.quiz.practice-exclude-status-list.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -467,6 +500,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-4.in_list_filter.practice.practice-active-inactive-status-list",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.practice.practice-active-inactive-status-list.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -483,6 +517,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-4.in_list_filter.practice.practice-active-inactive-status-list.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -538,6 +573,15 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-4.in_list_filter.practice.practice-active-inactive-status-list.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",

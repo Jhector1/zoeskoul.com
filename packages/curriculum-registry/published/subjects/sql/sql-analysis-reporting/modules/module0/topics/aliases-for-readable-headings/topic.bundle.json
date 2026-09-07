@@ -196,6 +196,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch0",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -212,6 +213,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.tryIt.try_aliases_for_readable_headings_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -257,6 +259,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-reader-friendly-headings",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-reader-friendly-headings.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -273,6 +276,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-reader-friendly-headings.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -318,6 +322,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-retained-aliases-for-readable-headings-sketch1",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-retained-aliases-for-readable-headings-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -334,6 +339,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-retained-aliases-for-readable-headings-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -378,6 +384,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-alias-representative-status-headings",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-alias-representative-status-headings.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -394,6 +401,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.aliases-for-readable-headings.practice.practice-alias-representative-status-headings.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

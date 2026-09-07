@@ -496,6 +496,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.checks.4.message",
             "path": "main.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n120\n",
+            "match": "exact"
+          }
         ]
       }
     },
@@ -671,6 +678,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.checks.6.message",
             "path": "main.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: $150\n",
+            "match": "exact"
+          }
         ]
       }
     },
@@ -829,6 +843,13 @@
             "min": 2,
             "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.checks.5.message",
             "path": "main.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: $150\nNoah: $90\n",
+            "match": "exact"
           }
         ]
       }

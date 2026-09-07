@@ -205,6 +205,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.practice-retained-7",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.practice-retained-7.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -221,6 +222,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.practice-retained-7.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -265,6 +267,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.practice-retained-8",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.practice-retained-8.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -281,6 +284,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.practice-retained-8.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -325,6 +329,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.practice-follow-student-course-keys",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.practice-follow-student-course-keys.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -341,6 +346,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.reading-keys-and-relationships.practice.practice-follow-student-course-keys.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

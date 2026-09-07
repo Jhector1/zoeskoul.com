@@ -49,7 +49,7 @@
       "descriptionKey": "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "code",
         "language": "bash",

@@ -25,10 +25,10 @@
         "certificateEnabledByDefault": true
       },
       "versioning": {
-        "family": "sql-analysis-reporting",
-        "version": 1,
+        "family": "sql",
+        "version": 2,
         "status": "active",
-        "defaultForNewEnrollments": true,
+        "defaultForNewEnrollments": false,
         "supersedes": null,
         "supersededBy": null
       }
@@ -44,7 +44,7 @@
       "descriptionKey": "modules.sql-analysis-reporting.sql-analysis-reporting-module-0-report-foundations.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,

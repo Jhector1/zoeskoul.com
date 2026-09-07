@@ -237,6 +237,11 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdout": "Ready\n"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -310,6 +315,11 @@
             "language": "python",
             "isEntry": true,
             "entry": true
+          }
+        ],
+        "tests": [
+          {
+            "stdout": "First\nSecond\nThird\n"
           }
         ],
         "semanticChecks": [
@@ -397,6 +407,11 @@
             "type": "printed_line_count",
             "min": 2
           }
+        ],
+        "tests": [
+          {
+            "stdout": "Status\nVersion 2\n"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -476,6 +491,11 @@
           {
             "type": "printed_line_count",
             "min": 3
+          }
+        ],
+        "tests": [
+          {
+            "stdout": "Start\nMiddle\nEnd\n"
           }
         ]
       },
@@ -557,6 +577,11 @@
             "type": "printed_line_count",
             "min": 4
           }
+        ],
+        "tests": [
+          {
+            "stdout": "North\nEast\nSouth\nWest\n"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -637,6 +662,11 @@
             "type": "printed_line_count",
             "min": 3
           }
+        ],
+        "tests": [
+          {
+            "stdout": "Red\nGold\nGreen\n"
+          }
         ]
       },
       "entryFilePath": "main.py",
@@ -716,6 +746,11 @@
           {
             "type": "printed_line_count",
             "min": 4
+          }
+        ],
+        "tests": [
+          {
+            "stdout": "Step 1\nStep 2\nStep 3\nStep 4\n"
           }
         ]
       },

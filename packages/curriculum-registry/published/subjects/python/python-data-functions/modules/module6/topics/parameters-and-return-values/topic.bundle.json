@@ -188,6 +188,16 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0",
       "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -200,6 +210,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -265,6 +276,16 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1",
       "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -277,6 +298,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -342,6 +364,16 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2",
       "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -354,6 +386,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -419,9 +452,20 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip",
       "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -506,9 +550,20 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item",
       "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -596,9 +651,20 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label",
       "language": "python",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

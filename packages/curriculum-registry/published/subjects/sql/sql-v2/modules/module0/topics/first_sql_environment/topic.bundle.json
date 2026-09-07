@@ -100,6 +100,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -133,6 +134,15 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -145,6 +155,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.try-first_sql_environment-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -189,6 +200,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -222,6 +234,15 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -234,6 +255,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.quiz.practice-edit-run-inspect.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -346,6 +368,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.practice.practice-run-student-columns",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.practice.practice-run-student-columns.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -362,6 +385,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.practice.practice-run-student-columns.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -417,6 +441,15 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.practice.practice-run-student-columns.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -434,6 +467,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-0.first_sql_environment.practice.practice-run-student-city-query",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.practice.practice-run-student-city-query.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -450,6 +484,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-0.first_sql_environment.practice.practice-run-student-city-query.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -505,6 +540,15 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-0.first_sql_environment.practice.practice-run-student-city-query.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",

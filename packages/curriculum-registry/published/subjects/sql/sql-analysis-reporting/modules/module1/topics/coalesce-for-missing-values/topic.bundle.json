@@ -196,6 +196,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.tryIt.try_coalesce_for_missing_values_sketch0",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.tryIt.try_coalesce_for_missing_values_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -212,6 +213,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.tryIt.try_coalesce_for_missing_values_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -257,6 +259,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-null-safe-review-discount",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-null-safe-review-discount.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -273,6 +276,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-null-safe-review-discount.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -318,6 +322,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-retained-coalesce-for-missing-values-sketch1",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-retained-coalesce-for-missing-values-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -334,6 +339,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-retained-coalesce-for-missing-values-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -378,6 +384,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-coalesce-missing-rating",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-coalesce-missing-rating.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -394,6 +401,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-1-null-safe-calculations.coalesce-for-missing-values.practice.practice-coalesce-missing-rating.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

@@ -254,6 +254,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -273,9 +274,25 @@
             "type": "printed_line_count",
             "min": 3
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -288,6 +305,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -323,6 +341,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -355,6 +374,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -367,6 +395,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -402,6 +431,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -421,9 +451,25 @@
             "type": "printed_line_count",
             "min": 3
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -436,6 +482,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -471,6 +518,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -503,6 +551,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -515,6 +572,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-4.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -550,6 +608,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -582,6 +641,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -594,6 +662,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.quiz.loop-debug-code-5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -630,6 +699,16 @@
       "messageBase": "topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -642,6 +721,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.loop-debugging.practice.practice-fix-while-update-direction.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

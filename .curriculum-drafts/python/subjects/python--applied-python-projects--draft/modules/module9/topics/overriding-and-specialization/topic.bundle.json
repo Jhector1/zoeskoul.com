@@ -540,6 +540,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.catalog-step-book-and-movie.checks.3.message",
             "path": "models/movie_item.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Clean Code by Robert C. Martin\nArrival (116 min)\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"

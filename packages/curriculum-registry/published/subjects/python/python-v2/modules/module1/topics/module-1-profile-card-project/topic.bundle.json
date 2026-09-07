@@ -104,6 +104,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -123,9 +124,25 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -138,6 +155,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.try-module-1-profile-card-project-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -173,6 +191,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -192,9 +211,25 @@
             "type": "printed_line_count",
             "min": 2
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Profile for Maya\nLevel: 7\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -207,6 +242,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-1-store-profile-values.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -242,6 +278,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -269,6 +306,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -281,6 +327,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-2-read-and-label-input.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -322,6 +369,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -349,6 +397,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -361,6 +418,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-3-clean-typed-name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -402,6 +460,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -429,6 +488,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -441,6 +509,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.module-1-profile-card-project.quiz.mp-4-build-full-profile-card.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

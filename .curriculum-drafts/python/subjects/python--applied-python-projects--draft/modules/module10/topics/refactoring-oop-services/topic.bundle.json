@@ -747,6 +747,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-discount-service.checks.3.message",
             "path": "services/pricing_service.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "45.0\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -1011,6 +1018,13 @@
             "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-filter-service.checks.3.message",
             "path": "services/inventory_service.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['Python Basics', 'Testing Notes']\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -1239,6 +1253,13 @@
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.ci-refactor-summary-service.checks.3.message",
             "path": "services/summary_service.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Books: 2 | Total: $30\n",
+            "match": "exact"
           }
         ]
       },

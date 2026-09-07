@@ -135,6 +135,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -168,6 +169,15 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -180,6 +190,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.try-common_beginner_syntax_mistakes-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -236,6 +247,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -269,6 +281,15 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -281,6 +302,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-clause-order.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -337,6 +359,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -370,6 +393,15 @@
         "ignoreRowOrder": true
       },
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",
@@ -382,6 +414,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.quiz.practice-repair-column-list.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -438,6 +471,7 @@
       "weight": 1,
       "messageBase": "topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from",
       "language": "sql",
+      "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -454,6 +488,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "query.sql",
+        "starterCode": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.starterCode",
         "starterFiles": [
           {
             "path": "query.sql",
@@ -509,6 +544,15 @@
       },
       "showExpectedExample": true,
       "entryFilePath": "query.sql",
+      "starterFiles": [
+        {
+          "path": "query.sql",
+          "content": "@:topics.sql-v2.sql-v2-1.common_beginner_syntax_mistakes.practice.practice-repair-missing-from.starterCode",
+          "language": "sql",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "query.sql",

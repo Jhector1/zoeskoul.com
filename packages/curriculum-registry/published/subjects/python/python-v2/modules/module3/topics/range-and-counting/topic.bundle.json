@@ -252,6 +252,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -284,6 +285,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -296,6 +306,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-zero-to-four.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -331,6 +342,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -363,6 +375,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -375,6 +396,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-one-to-five.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -410,6 +432,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -442,6 +465,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -454,6 +486,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-even-under-ten.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -489,6 +522,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -521,6 +555,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -533,6 +576,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-countdown-three-to-one.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -568,6 +612,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -600,6 +645,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -612,6 +666,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.quiz.ci-print-squares-one-to-four.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -648,6 +703,16 @@
       "messageBase": "topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -660,6 +725,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-3.range-and-counting.practice.practice-range-step-three.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

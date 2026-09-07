@@ -50,7 +50,7 @@
       "descriptionKey": "modules.git--git-foundations--draft.git-foundations-module-1-start-tracking.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "code",
         "language": "bash",

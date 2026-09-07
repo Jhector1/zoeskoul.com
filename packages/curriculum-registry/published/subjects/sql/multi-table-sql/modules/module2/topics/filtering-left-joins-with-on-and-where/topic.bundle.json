@@ -87,6 +87,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch0",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -103,6 +104,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.tryIt.try_filtering_left_joins_with_on_and_where_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -147,6 +149,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -163,6 +166,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-to-history-course-rows.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -304,6 +308,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-retained-filtering-left-joins-with-on-and-where-sketch1",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-retained-filtering-left-joins-with-on-and-where-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -320,6 +325,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-retained-filtering-left-joins-with-on-and-where-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -364,6 +370,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-course-match-in-on",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-course-match-in-on.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -380,6 +387,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-2-outer-joins-and-accurate-counts.filtering-left-joins-with-on-and-where.practice.practice-filter-course-match-in-on.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

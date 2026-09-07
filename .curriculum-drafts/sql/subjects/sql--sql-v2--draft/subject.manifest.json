@@ -42,7 +42,7 @@
       "descriptionKey": "modules.sql--sql-v2--draft.sql-v2-0.description",
       "weekStart": null,
       "weekEnd": null,
-      "accessOverride": null,
+      "accessOverride": "free",
       "runtimeDefaults": {
         "kind": "sql",
         "showSchema": true,

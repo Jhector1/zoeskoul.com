@@ -107,6 +107,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -126,6 +143,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -302,6 +320,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -321,6 +356,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -490,6 +526,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -509,6 +562,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -602,6 +656,13 @@
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-summary-method.checks.2.message",
             "path": "models/account.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Owner: Mina, Balance: 125\nOwner: Leo, Balance: 40\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py"
@@ -613,6 +674,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -632,6 +710,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -769,6 +848,13 @@
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-withdraw.checks.5.message",
             "path": "models/account.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "True\n60\nFalse\n20\n",
+            "match": "exact"
+          }
         ]
       }
     },
@@ -779,6 +865,30 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "helpers/validation.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterFiles.helpers_validation_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -805,6 +915,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -934,6 +1045,13 @@
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-helper-is_positive_amount.checks.4.message",
             "path": "models/account.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "True\n60\nFalse\n50\n",
+            "match": "exact"
           }
         ]
       }

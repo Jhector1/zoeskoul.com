@@ -249,9 +249,20 @@
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-undefined-name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -290,6 +301,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "7\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -318,9 +336,20 @@
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-print-variable-not-text.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -359,6 +388,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Mila\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -387,9 +423,20 @@
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-match-variable-spelling.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -428,6 +475,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "green\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -456,9 +510,20 @@
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-fix-accidental-string-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -497,6 +562,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "12\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -524,6 +596,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -553,18 +626,27 @@
           {
             "type": "source_contains",
             "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
+            "message": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "source_contains",
             "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "message": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.sourceChecks.1.message",
             "normalizeWhitespace": true
           }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -577,6 +659,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -600,13 +683,13 @@
         {
           "type": "source_contains",
           "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
+          "message": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "source_contains",
           "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "message": "@:topics.python-v2.python-v2-1.common-variable-mistakes.quiz.ci-read-and-store-input.sourceChecks.1.message",
           "normalizeWhitespace": true
         }
       ]
@@ -619,6 +702,16 @@
       "messageBase": "topics.python-v2.python-v2-1.common-variable-mistakes.practice.practice-fix-variable-case",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.practice.practice-fix-variable-case.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.common-variable-mistakes.practice.practice-fix-variable-case.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -631,6 +724,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.common-variable-mistakes.practice.practice-fix-variable-case.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

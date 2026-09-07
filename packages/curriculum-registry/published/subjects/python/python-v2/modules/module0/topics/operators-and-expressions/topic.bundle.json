@@ -221,6 +221,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -240,9 +241,25 @@
             "type": "printed_line_count",
             "min": 4
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "15\n9\n36\n4.0\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -255,6 +272,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -277,8 +295,32 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*12\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*-\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*12\\s*/\\s*3\\s*\\)\\s*$",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
           "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*12\\s*\\+\\s*3\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*12\\s*-\\s*3\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.2.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*12\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.3.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*12\\s*/\\s*3\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-use-four-operators.sourceChecks.4.message",
           "normalizeWhitespace": false
         }
       ]
@@ -290,6 +332,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -309,9 +352,25 @@
             "type": "printed_line_count",
             "min": 2
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "14\n14.0\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -324,6 +383,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -346,8 +406,20 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\*\\s*4\\s*\\)\\s*\\n\\s*print\\(\\s*18\\s*-\\s*8\\s*/\\s*2\\s*\\)\\s*$",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
           "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*2\\s*\\+\\s*3\\s*\\*\\s*4\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.sourceChecks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*18\\s*-\\s*8\\s*/\\s*2\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-follow-precedence.sourceChecks.2.message",
           "normalizeWhitespace": false
         }
       ]
@@ -359,6 +431,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -378,9 +451,25 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "20\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -393,6 +482,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-change-grouping.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -428,6 +518,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -447,9 +538,25 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "32\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -462,6 +569,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-choose-operator.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -497,6 +605,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -516,9 +625,25 @@
             "type": "printed_line_count",
             "min": 2
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "4\n24\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -531,6 +656,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -553,8 +679,20 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*10\\s*-\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*\\(\\s*10\\s*-\\s*2\\s*\\)\\s*\\*\\s*3\\s*\\)\\s*$",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
           "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\(\\s*10\\s*-\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.sourceChecks.1.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "(?s)^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*\\(\\s*10\\s*-\\s*2\\s*\\)\\s*\\*\\s*3\\s*\\)\\s*$",
+          "message": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-compare-grouping.sourceChecks.2.message",
           "normalizeWhitespace": false
         }
       ]
@@ -566,6 +704,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "semantic",
@@ -585,9 +724,25 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "16.0\n",
+            "match": "exact"
+          }
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -600,6 +755,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-0.operators-and-expressions.quiz.ci-practice-division-precedence.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

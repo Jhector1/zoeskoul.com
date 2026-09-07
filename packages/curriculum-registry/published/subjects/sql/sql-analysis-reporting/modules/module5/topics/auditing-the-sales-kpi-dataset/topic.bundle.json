@@ -197,6 +197,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.tryIt.try_auditing_the_sales_kpi_dataset_sketch0",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.tryIt.try_auditing_the_sales_kpi_dataset_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -213,6 +214,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.tryIt.try_auditing_the_sales_kpi_dataset_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -257,6 +259,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-audit-date-and-value-boundaries",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-audit-date-and-value-boundaries.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -273,6 +276,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-audit-date-and-value-boundaries.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -318,6 +322,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch1",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -334,6 +339,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -378,6 +384,7 @@
       "weight": 1,
       "messageBase": "topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch2",
       "language": "sql",
+      "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch2.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -394,6 +401,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.sql-analysis-reporting.sql-analysis-reporting-module-5-final-capstone.auditing-the-sales-kpi-dataset.practice.practice-retained-auditing-the-sales-kpi-dataset-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",

@@ -571,10 +571,9 @@
       },
       "sourceChecks": [
         {
-          "type": "source_contains",
-          "pattern": "print(",
+          "type": "uses_comment",
           "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
+          "normalizeWhitespace": false
         }
       ]
     },

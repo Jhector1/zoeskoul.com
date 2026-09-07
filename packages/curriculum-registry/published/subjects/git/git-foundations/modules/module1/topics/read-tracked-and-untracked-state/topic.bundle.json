@@ -197,6 +197,21 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch0",
       "language": "bash",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
+        }
+      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -214,6 +229,7 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
@@ -337,6 +353,21 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch1",
       "language": "bash",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
+        }
+      ],
       "terminalExpectations": {
         "forbiddenCommands": [
           {
@@ -348,6 +379,7 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",
@@ -471,6 +503,21 @@
       "weight": 1,
       "messageBase": "topics.git-foundations.git-foundations-module-1-start-tracking.read-tracked-and-untracked-state.tryIt.try_read_tracked_and_untracked_state_sketch2",
       "language": "bash",
+      "starterCode": "# Community Project\n\nShared community activities and updates.\n",
+      "starterFiles": [
+        {
+          "path": "community-project/README.md",
+          "content": "# Community Project\n\nShared community activities and updates.\n",
+          "language": "markdown",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "community-project/schedule.txt",
+          "content": "Community events\n\nSaturday cleanup: 10:00 AM\n",
+          "language": "text"
+        }
+      ],
       "terminalExpectations": {
         "requiredCommands": [
           {
@@ -488,6 +535,7 @@
       "workspace": {
         "language": "bash",
         "entryFilePath": "community-project/README.md",
+        "starterCode": "# Community Project\n\nShared community activities and updates.\n",
         "starterFiles": [
           {
             "path": "community-project/README.md",

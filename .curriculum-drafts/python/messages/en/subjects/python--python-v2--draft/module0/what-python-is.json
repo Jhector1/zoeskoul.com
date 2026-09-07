@@ -128,7 +128,12 @@
                 "hint_1": "There are two sentences, each ending with a period.",
                 "hint_2": "Print the first sentence on one line and the second sentence on the next line."
               },
-              "starterCode": "# TODO: print both required lines"
+              "starterCode": "# TODO: print both required lines",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             },
             "ci-personal-usecase-label": {
               "title": "Label a Python use",
@@ -139,7 +144,12 @@
                 "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
                 "hint_2": "Choose the option that directly matches the question without relying on answer wording."
               },
-              "starterCode": "# TODO: print the required labeled sentence"
+              "starterCode": "# TODO: print the required labeled sentence",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             },
             "ci-print-usecase-automation": {
               "title": "Print an automation message",
@@ -150,7 +160,12 @@
                 "hint_1": "You need one line of code that prints the whole sentence.",
                 "hint_2": "Put the message inside parentheses and quotation marks so Python treats it as text."
               },
-              "starterCode": "# TODO: print the required sentence"
+              "starterCode": "# TODO: print the required sentence",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use print(...) to show the required result."
+                }
+              }
             }
           }
         }

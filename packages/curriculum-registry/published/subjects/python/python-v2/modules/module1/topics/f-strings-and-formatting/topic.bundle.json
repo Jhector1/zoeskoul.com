@@ -250,9 +250,20 @@
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_print_profile_line.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -291,6 +302,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Mila is 13 years old\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -319,9 +337,20 @@
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_format_price_two_decimals.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -360,6 +389,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Price: $4.50\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -387,6 +423,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -414,6 +451,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -426,6 +472,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_greeting.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -467,6 +514,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -494,6 +542,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -506,6 +563,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_input_name_city.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -547,6 +605,7 @@
       "weight": 1,
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal",
       "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -574,6 +633,15 @@
         ]
       },
       "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -586,6 +654,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.quiz.ci_average_one_decimal.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -628,6 +697,16 @@
       "messageBase": "topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring",
       "language": "python",
       "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -640,6 +719,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-1.f-strings-and-formatting.practice.practice-item-quantity-fstring.starterCode",
         "starterFiles": [
           {
             "path": "main.py",

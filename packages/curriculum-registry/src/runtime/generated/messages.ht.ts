@@ -9776,7 +9776,18 @@ const messages: Record<string, any> = {
                 "hint_1": "Premye ekspresyon an itilize integers, epi dezyèm nan itilize nonb desimal.",
                 "hint_2": "Ou bezwen de liy print, chak ladan yo gen yon ekspresyon adisyon."
               },
-              "starterCode": "# TODO: print the two expression results"
+              "starterCode": "# TODO: print the two expression results",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak de deklarasyon `print()` separe, youn pou chak ekspresyon yo mande a."
+                },
+                "1": {
+                  "message": "Sèvi ak ekspresyon `2 + 3` la menm andedan premye apèl `print()` la."
+                },
+                "2": {
+                  "message": "Sèvi ak ekspresyon `1.5 + 2.5` la menm andedan dezyèm apèl `print()` la."
+                }
+              }
             },
             "ci-read-and-print": {
               "title": "Li tèks epi afiche li",

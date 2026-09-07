@@ -163,6 +163,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Code Club Open House\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -177,7 +184,7 @@
       "sourceChecks": [
         {
           "type": "source_regex",
-          "pattern": "(?s)^\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*$",
+          "pattern": "^\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*$",
           "message": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-1-set-event-title.sourceChecks.0.message",
           "normalizeWhitespace": false
         }
@@ -243,6 +250,13 @@
             "type": "printed_line_count",
             "min": 1
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Code Club Open House\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -256,8 +270,8 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*$",
+          "type": "uses_comment",
+          "pattern": "^\\s*print\\(",
           "message": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-2-add-useful-comment.sourceChecks.0.message",
           "normalizeWhitespace": false
         }
@@ -323,6 +337,13 @@
             "type": "printed_line_count",
             "min": 2
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Code Club Open House\nDoors open at 4 PM\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -336,8 +357,8 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*$",
+          "type": "uses_comment",
+          "pattern": "^\\s*print\\(",
           "message": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-3-add-event-time.sourceChecks.0.message",
           "normalizeWhitespace": false
         }
@@ -403,6 +424,13 @@
             "type": "printed_line_count",
             "min": 4
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Code Club Open House\nDoors open at 4 PM\nSeats available\n24\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -416,9 +444,15 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*$",
+          "type": "uses_comment",
+          "pattern": "^\\s*print\\(",
           "message": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-4-add-seat-literal.sourceChecks.1.message",
           "normalizeWhitespace": false
         }
       ]
@@ -483,6 +517,13 @@
             "type": "printed_line_count",
             "min": 6
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Code Club Open House\nDoors open at 4 PM\nSeats available\n24\nHelpers ready\n6\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -496,9 +537,15 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Helpers ready[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*2\\s*\\*\\s*3\\s*\\)\\s*$",
+          "type": "uses_comment",
+          "pattern": "^\\s*print\\(",
           "message": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.sourceChecks.0.message",
+          "normalizeWhitespace": false
+        },
+        {
+          "type": "source_regex",
+          "pattern": "^\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\([^\\n]*\\)\\s*\\n\\s*print\\(\\s*2\\s*\\*\\s*3\\s*\\)\\s*$",
+          "message": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-5-calculate-helper-count.sourceChecks.1.message",
           "normalizeWhitespace": false
         }
       ]
@@ -563,6 +610,13 @@
             "type": "printed_line_count",
             "min": 7
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Code Club Open House\nDoors open at 4 PM\nSeats available\n24\nHelpers ready\n6\nBring your questions!\n",
+            "match": "exact"
+          }
         ]
       },
       "solutionFiles": [
@@ -576,8 +630,8 @@
       ],
       "sourceChecks": [
         {
-          "type": "source_regex",
-          "pattern": "(?s)^\\s*#[^\\n]+\\s*\\n\\s*print\\(\\s*[\"\\']Code Club Open House[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Doors open at 4 PM[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Seats available[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*24\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Helpers ready[\"\\']\\s*\\)\\s*\\n\\s*print\\(\\s*2\\s*\\*\\s*3\\s*\\)\\s*\\n\\s*print\\(\\s*[\"\\']Bring your questions![\"\\']\\s*\\)\\s*$",
+          "type": "uses_comment",
+          "pattern": "^\\s*print\\(",
           "message": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-6-add-final-message.sourceChecks.0.message",
           "normalizeWhitespace": false
         }

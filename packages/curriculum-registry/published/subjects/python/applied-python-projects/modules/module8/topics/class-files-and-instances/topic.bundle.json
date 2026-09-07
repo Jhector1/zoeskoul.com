@@ -107,6 +107,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -126,6 +143,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -196,6 +214,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/car.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterFiles.models_car_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -215,6 +250,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -341,6 +377,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -360,6 +413,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -442,6 +496,13 @@
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.checks.4.message",
             "path": "main.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n120\n",
+            "match": "exact"
+          }
         ]
       }
     },
@@ -452,6 +513,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -471,6 +549,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -599,6 +678,13 @@
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.checks.6.message",
             "path": "main.py"
           }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: $150\n",
+            "match": "exact"
+          }
         ]
       }
     },
@@ -609,6 +695,23 @@
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts",
       "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
       "solutionFiles": [
         {
           "path": "main.py",
@@ -628,6 +731,7 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
@@ -739,6 +843,13 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.checks.5.message",
             "path": "main.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: $150\nNoah: $90\n",
+            "match": "exact"
           }
         ]
       }

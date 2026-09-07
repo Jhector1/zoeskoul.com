@@ -87,6 +87,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch0",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch0.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -103,6 +104,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.tryIt.try_table_aliases_for_join_queries_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -147,6 +149,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -163,6 +166,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-student-enrollment-aliases.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -317,6 +321,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-retained-table-aliases-for-join-queries-sketch1",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-retained-table-aliases-for-join-queries-sketch1.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -333,6 +338,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-retained-table-aliases-for-join-queries-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
@@ -377,6 +383,7 @@
       "weight": 1,
       "messageBase": "topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-alias-course-department-join",
       "language": "sql",
+      "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-alias-course-department-join.starterCode",
       "fixedSqlDialect": "sqlite",
       "runtime": {
         "kind": "sql",
@@ -393,6 +400,7 @@
       "workspace": {
         "language": "sql",
         "entryFilePath": "main.sql",
+        "starterCode": "@:topics.multi-table-sql.multi-table-sql-module-0-join-foundations.table-aliases-for-join-queries.practice.practice-alias-course-department-join.starterCode",
         "starterFiles": [
           {
             "path": "main.sql",
