@@ -1691,6 +1691,12 @@ export function useToolCodeRunnerState(args: {
             const savedWorkspaceCode = deriveEntryCode(savedWorkspace);
             const incomingWorkspaceCode = deriveEntryCode(nextWorkspace);
 
+            const effectiveSavedIsUserWork = Boolean(
+                effectiveSavedForBind &&
+                !isPassiveSeedSnapshot(effectiveSavedForBind) &&
+                isUserWork(effectiveSavedForBind),
+            );
+
             const effectiveSavedCanOverrideStarter =
                 savedCanOverrideStarter(effectiveSavedForBind);
 
