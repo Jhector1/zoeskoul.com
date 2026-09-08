@@ -147,7 +147,7 @@ describe("resolveWorkspaceForTarget", () => {
     expect(fileContent(resolved.workspace, "data.txt")).toBe("Hello fixture");
     expect(resolved.source).toBe("manifest");
   });
-  it("keeps real saved user workspace even when the starter hash changed", () => {
+  it("rejects saved user workspace when the authored starter hash changed", () => {
     const oldStarter = resolveWorkspaceForTarget({
       targetKey: "exercise:regen",
       targetKind: "exercise",
@@ -198,9 +198,9 @@ describe("resolveWorkspaceForTarget", () => {
       ],
     });
 
-    expect(resolved.source).toBe("saved");
+    expect(resolved.source).toBe("manifest");
     expect(fileContent(resolved.workspace, "main.py")).toBe(
-        "print('real learner work')\n",
+        "# new starter after regen\n",
     );
   });
 

@@ -1052,6 +1052,37 @@ function shouldUseSavedWorkspace(args: {
   const manifestHasStarter =
       workspaceHasNonBlankFile(args.manifest.manifestWorkspace);
 
+  const savedWorkspaceKey = workspaceContentKey(args.savedWorkspace);
+  const savedStarterHash =
+      typeof args.savedState.starterHash === "string"
+          ? args.savedState.starterHash
+          : "";
+  const currentStarterHash = args.manifest.starterHash;
+
+  const matchesSavedStarter = Boolean(
+      savedStarterHash && savedWorkspaceKey === savedStarterHash,
+  );
+  const matchesCurrentStarter = Boolean(
+      currentStarterHash && savedWorkspaceKey === currentStarterHash,
+  );
+  const authoredStarterRevisionChanged = Boolean(
+      savedStarterHash &&
+      currentStarterHash &&
+      savedStarterHash !== currentStarterHash
+  );
+
+  /**
+   * Exercise IDs are intentionally stable, but editor state is owned by the
+   * authored starter revision that created it. A modern saved workspace from a
+   * previous starter revision belongs to the previous exercise contract and
+   * must not override the current canonical task.
+   *
+   * Legacy saves without starterHash keep the existing compatibility behavior.
+   */
+  if (authoredStarterRevisionChanged) {
+    return false;
+  }
+
   const userOwned = isUserWorkspaceState(args.savedState);
 
   /**
@@ -1070,10 +1101,9 @@ function shouldUseSavedWorkspace(args: {
   }
 
   /**
-   * Real learner work must win even when the course was regenerated and the
-   * starter hash changed. This is the core saved > starter > default contract.
+   * Real learner work wins within the same authored starter revision.
    *
-   * But an old broken i18n pass could persist an empty editor shell, or even
+   * An old broken i18n pass could persist an empty editor shell, or even
    * the raw @: starterCode alias, as workspaceOrigin="saved". That is not
    * learner work. When the current manifest has a resolved starter, reject that
    * stale saved shell so embedded Try It cards seed the authored starter again.
@@ -1090,15 +1120,6 @@ function shouldUseSavedWorkspace(args: {
     return false;
   }
 
-  const savedWorkspaceKey = workspaceContentKey(args.savedWorkspace);
-  const savedStarterHash =
-      typeof args.savedState.starterHash === "string"
-          ? args.savedState.starterHash
-          : "";
-  const currentStarterHash = args.manifest.starterHash;
-
-  const matchesSavedStarter = Boolean(savedStarterHash && savedWorkspaceKey === savedStarterHash);
-  const matchesCurrentStarter = Boolean(currentStarterHash && savedWorkspaceKey === currentStarterHash);
 
   /**
    * Passive starter/default snapshots are not learner work, but older progress
