@@ -92,7 +92,11 @@ type TopicBundleManifest = {
 
 const dataDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(dataDir, "../../../../..");
-const subjectsRoot = path.join(repoRoot, "apps/web/src/lib/subjects");
+// Canonical live curriculum owner. Do not seed access/content from the legacy Web mirror.
+const subjectsRoot = path.join(
+  repoRoot,
+  "packages/curriculum-registry/published/subjects",
+);
 const authoringCatalogsRoot = path.join(repoRoot, "authoring", "catalogs");
 
 function readJson<T>(filePath: string): T {

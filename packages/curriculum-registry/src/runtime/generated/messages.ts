@@ -6,9 +6,6 @@ const loaders: Record<
   () => Promise<Record<string, any>>
 > = {
   "en": () => import("./messages.en.js").then((module) => module.default as Record<string, any>),
-  "es": () => import("./messages.es.js").then((module) => module.default as Record<string, any>),
-  "fr": () => import("./messages.fr.js").then((module) => module.default as Record<string, any>),
-  "ht": () => import("./messages.ht.js").then((module) => module.default as Record<string, any>),
 };
 
 export async function loadCurriculumLocaleMessages(
@@ -20,8 +17,5 @@ export async function loadCurriculumLocaleMessages(
 
 export const AVAILABLE_CURRICULUM_MESSAGE_LOCALES =
   [
-  "en",
-  "es",
-  "fr",
-  "ht"
+  "en"
 ] as const;

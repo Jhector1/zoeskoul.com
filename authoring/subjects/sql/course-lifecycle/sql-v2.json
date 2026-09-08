@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "subjectSlug": "sql",
+  "courseSlug": "sql-v2",
+  "draftSubjectSlug": "sql--sql-v2--draft",
+  "lastDraftEditedAt": "2026-09-07T18:15:37.086Z",
+  "lastPublishedAt": "2026-09-08T02:10:40.758Z",
+  "currentDraftHash": "sha256:c4f6f713e2a89552a4e58ad70d4d616882ec008f0358389e556f3a3b957ab572",
+  "lastPublishedDraftHash": "sha256:c4f6f713e2a89552a4e58ad70d4d616882ec008f0358389e556f3a3b957ab572",
+  "liveSubjectSlug": "sql-v2",
+  "hasUnpublishedChanges": false,
+  "draftFileCount": 36
+}

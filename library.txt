@@ -315,3 +315,5 @@ pnpm dlx dotenv-cli \
      --report "/Users/admin/Documents/NextJSProject/zoeskoul-web-infra/.curriculum-reviews/student/sql-data-management-gpt5-run-1.json" \
      --headed \
      --max-turns 800
+
+    pnpm curr:course -- status python python-v2

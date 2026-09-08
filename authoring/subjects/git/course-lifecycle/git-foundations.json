@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "subjectSlug": "git",
+  "courseSlug": "git-foundations",
+  "draftSubjectSlug": "git--git-foundations--draft",
+  "lastDraftEditedAt": "2026-09-07T18:15:37.072Z",
+  "lastPublishedAt": "2026-09-08T02:10:01.884Z",
+  "currentDraftHash": "sha256:8cffffe271e1194d1feec24e13e752c502173ca490011b087cb2e3155ddd8baa",
+  "lastPublishedDraftHash": "sha256:8cffffe271e1194d1feec24e13e752c502173ca490011b087cb2e3155ddd8baa",
+  "liveSubjectSlug": "git-foundations",
+  "hasUnpublishedChanges": false,
+  "draftFileCount": 30
+}

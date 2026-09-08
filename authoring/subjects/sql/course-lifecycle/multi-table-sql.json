@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "subjectSlug": "sql",
+  "courseSlug": "multi-table-sql",
+  "draftSubjectSlug": "sql--multi-table-sql--draft",
+  "lastDraftEditedAt": "2026-09-07T18:15:37.082Z",
+  "lastPublishedAt": "2026-09-08T02:10:11.972Z",
+  "currentDraftHash": "sha256:7269b786db29b5ca2653b55f165693c6ca342b202b3e8cbff8c170fe8438bd48",
+  "lastPublishedDraftHash": "sha256:7269b786db29b5ca2653b55f165693c6ca342b202b3e8cbff8c170fe8438bd48",
+  "liveSubjectSlug": "multi-table-sql",
+  "hasUnpublishedChanges": false,
+  "draftFileCount": 34
+}

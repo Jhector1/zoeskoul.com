@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "subjectSlug": "sql",
+  "courseSlug": "sql-data-management",
+  "draftSubjectSlug": "sql--sql-data-management--draft",
+  "lastDraftEditedAt": "2026-09-07T18:15:37.085Z",
+  "lastPublishedAt": "2026-09-08T02:10:31.730Z",
+  "currentDraftHash": "sha256:9d31802369aa0481c4db74077b9b15e3c1faabbb039748c97ea29b23de28740c",
+  "lastPublishedDraftHash": "sha256:9d31802369aa0481c4db74077b9b15e3c1faabbb039748c97ea29b23de28740c",
+  "liveSubjectSlug": "sql-data-management",
+  "hasUnpublishedChanges": false,
+  "draftFileCount": 34
+}

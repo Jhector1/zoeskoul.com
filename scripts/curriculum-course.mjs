@@ -9,6 +9,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import {
   buildCheckCliPlan,
@@ -184,6 +185,7 @@ Course-specific examples:
   pnpm curr:course -- backup-draft python applied-python-projects
   pnpm curr:course -- list-backups python applied-python-projects
   pnpm curr:course -- restore-draft python applied-python-projects --backup-key <backupKey>
+  pnpm curr:course -- status python python-v2
 
 Flags:
   --resume                 Skip topics that already have completed draft artifacts
@@ -218,6 +220,7 @@ Actions:
   backup-draft / backup-course-draft
   list-backups / list-course-backups
   restore-draft / restore-course-draft
+  status / course-status
 `);
 }
 
@@ -371,6 +374,589 @@ function resolveDraftSubjectTarget() {
   };
 }
 
+
+const COURSE_LIFECYCLE_SCHEMA_VERSION = 1;
+
+function courseLifecyclePath(resolvedCourseSlug) {
+  return path.join(
+      root,
+      "authoring",
+      "subjects",
+      subjectSlug,
+      "course-lifecycle",
+      `${resolvedCourseSlug}.json`,
+  );
+}
+
+function readCourseLifecycle(resolvedCourseSlug) {
+  const filePath = courseLifecyclePath(resolvedCourseSlug);
+  if (!existsSync(filePath)) return null;
+  return readJson(filePath);
+}
+
+function writeCourseLifecycle(resolvedCourseSlug, value) {
+  const filePath = courseLifecyclePath(resolvedCourseSlug);
+  mkdirSync(path.dirname(filePath), { recursive: true });
+  writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
+  return filePath;
+}
+
+function collectLifecycleFiles(basePath) {
+  if (!existsSync(basePath)) return [];
+  const rows = [];
+
+  function walk(currentPath) {
+    const entries = readdirSync(currentPath, { withFileTypes: true })
+        .sort((a, b) => a.name.localeCompare(b.name));
+    for (const entry of entries) {
+      const fullPath = path.join(currentPath, entry.name);
+      if (entry.isDirectory()) {
+        walk(fullPath);
+      } else if (entry.isFile()) {
+        rows.push(fullPath);
+      }
+    }
+  }
+
+  walk(basePath);
+  return rows;
+}
+
+function snapshotCourseDraft(resolvedCourseSlug) {
+  const draftSubjectSlug = `${subjectSlug}--${resolvedCourseSlug}--draft`;
+  const draftRoot = path.join(root, ".curriculum-drafts", subjectSlug);
+  const roots = [];
+
+  const subjectRoot = path.join(draftRoot, "subjects", draftSubjectSlug);
+  if (existsSync(subjectRoot)) {
+    roots.push({ label: "subject", basePath: subjectRoot });
+  }
+
+  const messagesRoot = path.join(draftRoot, "messages");
+  if (existsSync(messagesRoot)) {
+    const locales = readdirSync(messagesRoot, { withFileTypes: true })
+        .filter((entry) => entry.isDirectory())
+        .sort((a, b) => a.name.localeCompare(b.name));
+    for (const locale of locales) {
+      if (locale.name !== "en") continue;
+      const localeRoot = path.join(messagesRoot, locale.name, "subjects", draftSubjectSlug);
+      if (existsSync(localeRoot)) {
+        roots.push({ label: `messages/${locale.name}`, basePath: localeRoot });
+      }
+    }
+  }
+
+  if (roots.length === 0) {
+    return { draftSubjectSlug, currentDraftHash: null, draftFileCount: 0, lastModifiedAt: null };
+  }
+
+  const hash = createHash("sha256");
+  let fileCount = 0;
+  let maxMtimeMs = 0;
+
+  for (const rootEntry of roots.sort((a, b) => a.label.localeCompare(b.label))) {
+    for (const filePath of collectLifecycleFiles(rootEntry.basePath)) {
+      const relativePath = path.relative(rootEntry.basePath, filePath).split(path.sep).join("/");
+      const bytes = readFileSync(filePath);
+      const stat = statSync(filePath);
+      hash.update(rootEntry.label);
+      hash.update("\\0");
+      hash.update(relativePath);
+      hash.update("\\0");
+      hash.update(bytes);
+      hash.update("\\0");
+      fileCount += 1;
+      maxMtimeMs = Math.max(maxMtimeMs, stat.mtimeMs);
+    }
+  }
+
+  return {
+    draftSubjectSlug,
+    currentDraftHash: `sha256:${hash.digest("hex")}`,
+    draftFileCount: fileCount,
+    lastModifiedAt: maxMtimeMs > 0 ? new Date(maxMtimeMs).toISOString() : null,
+  };
+}
+
+function refreshCourseLifecycle(resolvedCourseSlug, { quiet = false } = {}) {
+  const snapshot = snapshotCourseDraft(resolvedCourseSlug);
+  const previous = readCourseLifecycle(resolvedCourseSlug);
+
+  if (!snapshot.currentDraftHash) {
+    if (!quiet) {
+      console.log(`No canonical draft artifacts found for ${subjectSlug}/${resolvedCourseSlug}.`);
+      console.log(`Expected draft subject: ${snapshot.draftSubjectSlug}`);
+    }
+    return previous;
+  }
+
+  const draftChanged = !previous || previous.currentDraftHash !== snapshot.currentDraftHash;
+  const next = {
+    schemaVersion: COURSE_LIFECYCLE_SCHEMA_VERSION,
+    subjectSlug,
+    courseSlug: resolvedCourseSlug,
+    draftSubjectSlug: snapshot.draftSubjectSlug,
+    lastDraftEditedAt: draftChanged
+      ? snapshot.lastModifiedAt ?? new Date().toISOString()
+      : previous.lastDraftEditedAt ?? snapshot.lastModifiedAt ?? new Date().toISOString(),
+    lastPublishedAt: previous?.lastPublishedAt ?? null,
+    currentDraftHash: snapshot.currentDraftHash,
+    lastPublishedDraftHash: previous?.lastPublishedDraftHash ?? null,
+    liveSubjectSlug: previous?.liveSubjectSlug ?? null,
+    hasUnpublishedChanges: previous?.lastPublishedDraftHash
+      ? previous.lastPublishedDraftHash !== snapshot.currentDraftHash
+      : true,
+    draftFileCount: snapshot.draftFileCount,
+  };
+
+  if (!previous || JSON.stringify(previous) !== JSON.stringify(next)) {
+    const filePath = writeCourseLifecycle(resolvedCourseSlug, next);
+    if (!quiet) console.log(`Updated course lifecycle metadata: ${filePath}`);
+  }
+  return next;
+}
+
+function normalizePublishedIdentity(value, draftSubjectSlug, liveSubjectSlug) {
+  if (typeof value === "string") {
+    return value.split(draftSubjectSlug).join(liveSubjectSlug);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) =>
+      normalizePublishedIdentity(item, draftSubjectSlug, liveSubjectSlug),
+    );
+  }
+
+  if (value && typeof value === "object") {
+    const out = {};
+    for (const [key, child] of Object.entries(value)) {
+      const normalizedKey = key.split(draftSubjectSlug).join(liveSubjectSlug);
+      out[normalizedKey] = normalizePublishedIdentity(
+          child,
+          draftSubjectSlug,
+          liveSubjectSlug,
+      );
+    }
+    return out;
+  }
+
+  return value;
+}
+
+function stableJsonValue(value) {
+  if (Array.isArray(value)) {
+    return value.map(stableJsonValue);
+  }
+
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+        Object.entries(value)
+            .sort(([left], [right]) => left.localeCompare(right))
+            .map(([key, child]) => [key, stableJsonValue(child)]),
+    );
+  }
+
+  return value;
+}
+
+function listRelativeFiles(basePath) {
+  if (!existsSync(basePath)) return [];
+
+  return collectLifecycleFiles(basePath)
+      .map((filePath) => path.relative(basePath, filePath).split(path.sep).join("/"))
+      .sort();
+}
+
+function canonicalPublishedSubjectRoot(resolvedLiveSubjectSlug) {
+  const publishedSubjectsRoot = path.join(
+      root,
+      "packages",
+      "curriculum-registry",
+      "published",
+      "subjects",
+  );
+
+  const candidates = [
+    path.join(publishedSubjectsRoot, subjectSlug, resolvedLiveSubjectSlug),
+    path.join(publishedSubjectsRoot, resolvedLiveSubjectSlug),
+  ].filter((candidate, index, all) => all.indexOf(candidate) === index);
+
+  const existing = candidates.filter((candidate) =>
+    existsSync(path.join(candidate, "subject.manifest.json")),
+  );
+
+  if (existing.length === 1) return existing[0];
+
+  if (existing.length === 0) {
+    console.error(
+        `Published subject root not found for ${subjectSlug}/${resolvedLiveSubjectSlug}.`,
+    );
+    console.error(`Checked:`);
+    for (const candidate of candidates) {
+      console.error(`  ${candidate}`);
+    }
+    process.exit(1);
+  }
+
+  console.error(
+      `Ambiguous published subject roots for ${subjectSlug}/${resolvedLiveSubjectSlug}:`,
+  );
+  for (const candidate of existing) {
+    console.error(`  ${candidate}`);
+  }
+  process.exit(1);
+}
+
+function publishedMessagesRoot() {
+  return path.join(
+      root,
+      "packages",
+      "curriculum-registry",
+      "published",
+      "messages",
+  );
+}
+
+function draftMessageLocaleRoots(draftSubjectSlug) {
+  const messagesRoot = path.join(
+      root,
+      ".curriculum-drafts",
+      subjectSlug,
+      "messages",
+  );
+
+  if (!existsSync(messagesRoot)) return new Map();
+
+  const result = new Map();
+  for (const entry of readdirSync(messagesRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    if (entry.name !== "en") continue;
+
+    const subjectMessages = path.join(
+        messagesRoot,
+        entry.name,
+        "subjects",
+        draftSubjectSlug,
+    );
+
+    if (existsSync(subjectMessages)) {
+      result.set(entry.name, subjectMessages);
+    }
+  }
+
+  return result;
+}
+
+function publishedMessageLocaleRoots(resolvedLiveSubjectSlug) {
+  const messagesRoot = publishedMessagesRoot();
+  if (!existsSync(messagesRoot)) return new Map();
+
+  const result = new Map();
+  for (const entry of readdirSync(messagesRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    if (entry.name !== "en") continue;
+
+    const subjectMessages = path.join(
+        messagesRoot,
+        entry.name,
+        "subjects",
+        subjectSlug,
+        resolvedLiveSubjectSlug,
+    );
+
+    if (existsSync(subjectMessages)) {
+      result.set(entry.name, subjectMessages);
+    }
+  }
+
+  return result;
+}
+
+function removeEmptyDirectories(basePath) {
+  if (!existsSync(basePath)) return;
+
+  function visit(currentPath) {
+    for (const entry of readdirSync(currentPath, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const child = path.join(currentPath, entry.name);
+      visit(child);
+      if (existsSync(child) && readdirSync(child).length === 0) {
+        rmSync(child, { recursive: true, force: true });
+      }
+    }
+  }
+
+  visit(basePath);
+}
+
+function pruneExtraPublishedFiles(draftRoot, publishedRoot, label) {
+  if (!existsSync(draftRoot) || !existsSync(publishedRoot)) return 0;
+
+  const expected = new Set(listRelativeFiles(draftRoot));
+  let removed = 0;
+
+  for (const relativePath of listRelativeFiles(publishedRoot)) {
+    if (expected.has(relativePath)) continue;
+
+    const target = path.join(publishedRoot, relativePath);
+    rmSync(target, { force: true });
+    console.log(`Pruned stale published ${label}: ${relativePath}`);
+    removed += 1;
+  }
+
+  removeEmptyDirectories(publishedRoot);
+  return removed;
+}
+
+function prunePublishedCourseExtras(resolvedCourseSlug, resolvedLiveSubjectSlug) {
+  const draftSubjectSlug = `${subjectSlug}--${resolvedCourseSlug}--draft`;
+  const draftSubjectRoot = path.join(
+      root,
+      ".curriculum-drafts",
+      subjectSlug,
+      "subjects",
+      draftSubjectSlug,
+  );
+  const liveSubjectRoot = canonicalPublishedSubjectRoot(resolvedLiveSubjectSlug);
+
+  let removed = pruneExtraPublishedFiles(
+      draftSubjectRoot,
+      liveSubjectRoot,
+      "subject file",
+  );
+
+  const draftLocales = draftMessageLocaleRoots(draftSubjectSlug);
+  const liveLocales = publishedMessageLocaleRoots(resolvedLiveSubjectSlug);
+
+  for (const [locale, liveRoot] of liveLocales) {
+    const draftRoot = draftLocales.get(locale);
+
+    if (!draftRoot) {
+      rmSync(liveRoot, { recursive: true, force: true });
+      console.log(`Pruned stale published message locale: ${locale}`);
+      removed += 1;
+      continue;
+    }
+
+    removed += pruneExtraPublishedFiles(
+        draftRoot,
+        liveRoot,
+        `message file (${locale})`,
+    );
+  }
+
+  if (removed > 0) {
+    console.log(`Pruned ${removed} stale published artifact(s) before parity verification.`);
+  }
+}
+
+function compareParityTree(args) {
+  const {
+    draftRoot,
+    publishedRoot,
+    draftSubjectSlug,
+    liveSubjectSlug,
+    label,
+  } = args;
+
+  if (!existsSync(draftRoot)) {
+    return [`${label}: draft root missing: ${draftRoot}`];
+  }
+
+  if (!existsSync(publishedRoot)) {
+    return [`${label}: published root missing: ${publishedRoot}`];
+  }
+
+  const draftFiles = listRelativeFiles(draftRoot);
+  const liveFiles = listRelativeFiles(publishedRoot);
+  const draftSet = new Set(draftFiles);
+  const liveSet = new Set(liveFiles);
+  const issues = [];
+
+  for (const relativePath of draftFiles) {
+    if (!liveSet.has(relativePath)) {
+      issues.push(`${label}: missing published file ${relativePath}`);
+    }
+  }
+
+  for (const relativePath of liveFiles) {
+    if (!draftSet.has(relativePath)) {
+      issues.push(`${label}: stale published file ${relativePath}`);
+    }
+  }
+
+  for (const relativePath of draftFiles) {
+    if (!liveSet.has(relativePath)) continue;
+
+    const draftPath = path.join(draftRoot, relativePath);
+    const livePath = path.join(publishedRoot, relativePath);
+
+    if (relativePath.endsWith(".json")) {
+      let draftJson;
+      let liveJson;
+
+      try {
+        draftJson = readJson(draftPath);
+      } catch (error) {
+        issues.push(
+            `${label}: invalid draft JSON ${relativePath}: ${
+              error instanceof Error ? error.message : String(error)
+            }`,
+        );
+        continue;
+      }
+
+      try {
+        liveJson = readJson(livePath);
+      } catch (error) {
+        issues.push(
+            `${label}: invalid published JSON ${relativePath}: ${
+              error instanceof Error ? error.message : String(error)
+            }`,
+        );
+        continue;
+      }
+
+      const normalizedDraft = stableJsonValue(
+          normalizePublishedIdentity(
+              draftJson,
+              draftSubjectSlug,
+              liveSubjectSlug,
+          ),
+      );
+      const normalizedLive = stableJsonValue(liveJson);
+
+      if (JSON.stringify(normalizedDraft) !== JSON.stringify(normalizedLive)) {
+        issues.push(`${label}: content mismatch ${relativePath}`);
+      }
+      continue;
+    }
+
+    const draftRaw = readFileSync(draftPath, "utf8")
+        .split(draftSubjectSlug)
+        .join(liveSubjectSlug);
+    const liveRaw = readFileSync(livePath, "utf8");
+
+    if (draftRaw !== liveRaw) {
+      issues.push(`${label}: content mismatch ${relativePath}`);
+    }
+  }
+
+  return issues;
+}
+
+function assertDraftPublishedParity(resolvedCourseSlug, resolvedLiveSubjectSlug) {
+  const draftSubjectSlug = `${subjectSlug}--${resolvedCourseSlug}--draft`;
+  const draftSubjectRoot = path.join(
+      root,
+      ".curriculum-drafts",
+      subjectSlug,
+      "subjects",
+      draftSubjectSlug,
+  );
+  const liveSubjectRoot = canonicalPublishedSubjectRoot(resolvedLiveSubjectSlug);
+
+  const issues = compareParityTree({
+    draftRoot: draftSubjectRoot,
+    publishedRoot: liveSubjectRoot,
+    draftSubjectSlug,
+    liveSubjectSlug: resolvedLiveSubjectSlug,
+    label: "subject",
+  });
+
+  const draftLocales = draftMessageLocaleRoots(draftSubjectSlug);
+  const liveLocales = publishedMessageLocaleRoots(resolvedLiveSubjectSlug);
+
+  const localeNames = Array.from(
+      new Set([...draftLocales.keys(), ...liveLocales.keys()]),
+  ).sort();
+
+  for (const locale of localeNames) {
+    const draftRoot = draftLocales.get(locale);
+    const liveRoot = liveLocales.get(locale);
+
+    if (!draftRoot) {
+      issues.push(`messages/${locale}: locale exists only in published output`);
+      continue;
+    }
+
+    if (!liveRoot) {
+      issues.push(`messages/${locale}: locale exists only in draft output`);
+      continue;
+    }
+
+    issues.push(
+        ...compareParityTree({
+          draftRoot,
+          publishedRoot: liveRoot,
+          draftSubjectSlug,
+          liveSubjectSlug: resolvedLiveSubjectSlug,
+          label: `messages/${locale}`,
+        }),
+    );
+  }
+
+  if (issues.length > 0) {
+    console.error("");
+    console.error(
+        `Draft → published parity FAILED for ${subjectSlug}/${resolvedCourseSlug} -> ${resolvedLiveSubjectSlug}.`,
+    );
+    console.error(
+        `Allowed difference: draft subject identity "${draftSubjectSlug}" -> "${resolvedLiveSubjectSlug}" only.`,
+    );
+    for (const issue of issues.slice(0, 80)) {
+      console.error(`  - ${issue}`);
+    }
+    if (issues.length > 80) {
+      console.error(`  - ... ${issues.length - 80} additional issue(s)`);
+    }
+    console.error("");
+    console.error(
+        `Publish lifecycle metadata was NOT advanced. Fix the publisher/output and publish again.`,
+    );
+    process.exit(1);
+  }
+
+  console.log(
+      `Draft → published parity PASS for ${subjectSlug}/${resolvedCourseSlug} -> ${resolvedLiveSubjectSlug}`,
+  );
+}
+
+function recordCoursePublished(resolvedCourseSlug, resolvedLiveSubjectSlug) {
+  const refreshed = refreshCourseLifecycle(resolvedCourseSlug, { quiet: true });
+  if (!refreshed?.currentDraftHash) {
+    console.error(`Cannot record publish lifecycle for ${subjectSlug}/${resolvedCourseSlug}: draft artifacts are missing.`);
+    process.exit(1);
+  }
+
+  const next = {
+    ...refreshed,
+    lastPublishedAt: new Date().toISOString(),
+    lastPublishedDraftHash: refreshed.currentDraftHash,
+    liveSubjectSlug: resolvedLiveSubjectSlug,
+    hasUnpublishedChanges: false,
+  };
+  const filePath = writeCourseLifecycle(resolvedCourseSlug, next);
+  console.log(`Recorded course publish lifecycle: ${filePath}`);
+}
+
+function printCourseLifecycle(resolvedCourseSlug) {
+  const value = refreshCourseLifecycle(resolvedCourseSlug, { quiet: true });
+  const snapshot = snapshotCourseDraft(resolvedCourseSlug);
+  console.log(`Course lifecycle: ${subjectSlug}/${resolvedCourseSlug}`);
+  console.log(`  draftSubjectSlug: ${snapshot.draftSubjectSlug}`);
+  if (!value || !snapshot.currentDraftHash) {
+    console.log("  draft: missing");
+    return;
+  }
+  console.log(`  lastDraftEditedAt: ${value.lastDraftEditedAt ?? "unknown"}`);
+  console.log(`  lastPublishedAt: ${value.lastPublishedAt ?? "never"}`);
+  console.log(`  currentDraftHash: ${value.currentDraftHash}`);
+  console.log(`  lastPublishedDraftHash: ${value.lastPublishedDraftHash ?? "never"}`);
+  console.log(`  liveSubjectSlug: ${value.liveSubjectSlug ?? "never"}`);
+  console.log(`  hasUnpublishedChanges: ${value.hasUnpublishedChanges ? "yes" : "no"}`);
+  console.log(`  draftFileCount: ${value.draftFileCount ?? 0}`);
+}
 
 function timestampBackupSuffix() {
   return new Date().toISOString().replace(/[:.]/g, "-");
@@ -784,6 +1370,7 @@ function restoreDraftFromBackup() {
   if (!descriptor.hasManifest) {
     console.log(`Note: restored from legacy publish backup and rewrote subject slug to draft slug.`);
   }
+  refreshCourseLifecycle(resolvedCourseSlug);
 }
 
 function loadEnvFiles() {
@@ -1029,6 +1616,7 @@ switch (action) {
     const resolvedCourseSlug = resolveCourseSlug({ required: true });
     assertCourseExists(resolvedCourseSlug);
     cli(buildCompileCourseArgs(resolvedCourseSlug));
+    refreshCourseLifecycle(resolvedCourseSlug);
     break;
   }
 
@@ -1080,6 +1668,9 @@ switch (action) {
       cli(args);
     }
 
+    prunePublishedCourseExtras(resolvedCourseSlug, resolvedLiveSubjectSlug);
+    assertDraftPublishedParity(resolvedCourseSlug, resolvedLiveSubjectSlug);
+    recordCoursePublished(resolvedCourseSlug, resolvedLiveSubjectSlug);
     break;
   }
   case "publish-subject": {
@@ -1147,6 +1738,14 @@ switch (action) {
     } else {
       runDraftGoldensForCourse();
     }
+    refreshCourseLifecycle(resolvedCourseSlug);
+    break;
+  }
+
+  case "status":
+  case "course-status": {
+    const resolvedCourseSlug = resolveCourseSlug({ required: true });
+    printCourseLifecycle(resolvedCourseSlug);
     break;
   }
 

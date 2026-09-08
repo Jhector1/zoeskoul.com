@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "subjectSlug": "linux",
+  "courseSlug": "linux-terminal-fundamentals",
+  "draftSubjectSlug": "linux--linux-terminal-fundamentals--draft",
+  "lastDraftEditedAt": "2026-09-07T18:15:37.074Z",
+  "lastPublishedAt": "2026-09-08T02:09:33.807Z",
+  "currentDraftHash": "sha256:2487d16802ffd46c7526d6053a88043dbb88f9ab9d79ab28530498446a66517c",
+  "lastPublishedDraftHash": "sha256:2487d16802ffd46c7526d6053a88043dbb88f9ab9d79ab28530498446a66517c",
+  "liveSubjectSlug": "linux-terminal-fundamentals",
+  "hasUnpublishedChanges": false,
+  "draftFileCount": 24
+}
