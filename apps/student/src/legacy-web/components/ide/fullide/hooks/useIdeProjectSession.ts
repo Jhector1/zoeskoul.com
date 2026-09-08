@@ -55,34 +55,42 @@ function projectSessionStorageKey(args: {
     return `full-ide:project-session:v7:${actor}:${scope}:${args.language}`;
 }
 
-function ensureBrowserInstanceId(key: string) {
+function createEphemeralBrowserInstanceId() {
+    return typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `browser-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function ensureBrowserInstanceId(
+    browserPersistenceEnabled: boolean,
+    key: string,
+) {
     if (typeof window === "undefined") return "server";
+
+    const ephemeralId = createEphemeralBrowserInstanceId();
+    if (!browserPersistenceEnabled) return ephemeralId;
 
     try {
         const raw = window.localStorage.getItem(key);
         if (raw) return raw;
 
-        const id =
-            typeof crypto !== "undefined" && "randomUUID" in crypto
-                ? crypto.randomUUID()
-                : `browser-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-
-        window.localStorage.setItem(key, id);
-        return id;
+        window.localStorage.setItem(key, ephemeralId);
+        return ephemeralId;
     } catch {
-        return `browser-${Date.now()}`;
+        return ephemeralId;
     }
 }
-
-function readProjectSessionMeta(key: string): LocalProjectSessionMeta | null {
-    if (typeof window === "undefined") return null;
+function readProjectSessionMeta(
+    browserPersistenceEnabled: boolean,
+    key: string,
+): LocalProjectSessionMeta | null {
+    if (!browserPersistenceEnabled || typeof window === "undefined") return null;
 
     try {
         const raw = window.localStorage.getItem(key);
         if (!raw) return null;
 
         const parsed = JSON.parse(raw) as Partial<LocalProjectSessionMeta>;
-
         return {
             projectId: typeof parsed.projectId === "string" ? parsed.projectId : null,
             currentProjectName:
@@ -102,9 +110,12 @@ function readProjectSessionMeta(key: string): LocalProjectSessionMeta | null {
         return null;
     }
 }
-
-function writeProjectSessionMeta(key: string, meta: LocalProjectSessionMeta) {
-    if (typeof window === "undefined") return;
+function writeProjectSessionMeta(
+    browserPersistenceEnabled: boolean,
+    key: string,
+    meta: LocalProjectSessionMeta,
+) {
+    if (!browserPersistenceEnabled || typeof window === "undefined") return;
 
     try {
         window.localStorage.setItem(key, JSON.stringify(meta));
@@ -112,15 +123,17 @@ function writeProjectSessionMeta(key: string, meta: LocalProjectSessionMeta) {
     }
 }
 
-function clearProjectSessionMeta(key: string) {
-    if (typeof window === "undefined") return;
+function clearProjectSessionMeta(
+    browserPersistenceEnabled: boolean,
+    key: string,
+) {
+    if (!browserPersistenceEnabled || typeof window === "undefined") return;
 
     try {
         window.localStorage.removeItem(key);
     } catch {
     }
 }
-
 export function useIdeProjectSession({
                                          actorKey,
                                          title,
@@ -128,6 +141,7 @@ export function useIdeProjectSession({
                                          projectDescription = null,
                                          projectScope,
                                          initialProjectId = null,
+                                         draftStorageMode = "local",
                                          access,
                                          loginHref,
                                          billingHref,
@@ -162,6 +176,7 @@ export function useIdeProjectSession({
         language,
     });
     const browserInstanceKey = `${sessionKey}:browser-instance`;
+    const browserPersistenceEnabled = draftStorageMode === "local";
 
     const [projectId, setProjectId] = useState<string | null>(initialProjectId);
     const [currentProjectName, setCurrentProjectName] = useState(
@@ -202,13 +217,13 @@ export function useIdeProjectSession({
             lastSavedAt: string | null;
             baseVersion: number | null;
         }) => {
-            writeProjectSessionMeta(sessionKey, {
+            writeProjectSessionMeta(browserPersistenceEnabled, sessionKey, {
                 ...next,
                 clientInstanceId:
-                    clientInstanceId || ensureBrowserInstanceId(browserInstanceKey),
+                    clientInstanceId || ensureBrowserInstanceId(browserPersistenceEnabled, browserInstanceKey),
             });
         },
-        [sessionKey, clientInstanceId, browserInstanceKey],
+        [browserPersistenceEnabled, sessionKey, clientInstanceId, browserInstanceKey],
     );
 
     const resetLanguageScopedProjectState = useCallback(
@@ -245,12 +260,19 @@ export function useIdeProjectSession({
             setConflictInfo(null);
             setPendingProjectId(null);
             setPendingStartBlank(false);
-            clearProjectSessionMeta(sessionKey);
+            clearProjectSessionMeta(browserPersistenceEnabled, sessionKey);
             clearSavedBaseline();
             setSaveError(message);
             setToast({kind: "error", text: message});
         },
-        [projectTitle, title, sessionKey, clearSavedBaseline, setToast],
+        [
+            browserPersistenceEnabled,
+            projectTitle,
+            title,
+            sessionKey,
+            clearSavedBaseline,
+            setToast,
+        ],
     );
 
     const dismissConflict = useCallback(() => {
@@ -309,7 +331,7 @@ export function useIdeProjectSession({
 
         setHydratedSessionKey(null);
 
-        const ensuredBrowserId = ensureBrowserInstanceId(browserInstanceKey);
+        const ensuredBrowserId = ensureBrowserInstanceId(browserPersistenceEnabled, browserInstanceKey);
         setClientInstanceId(ensuredBrowserId);
 
         if (initialProjectId) {
@@ -326,7 +348,7 @@ export function useIdeProjectSession({
             return;
         }
 
-        const meta = readProjectSessionMeta(sessionKey);
+        const meta = readProjectSessionMeta(browserPersistenceEnabled, sessionKey);
 
         if (meta) {
             projectIdSourceRef.current = "session";
@@ -345,6 +367,7 @@ export function useIdeProjectSession({
 
         setHydratedSessionKey(sessionKey);
     }, [
+        browserPersistenceEnabled,
         initialProjectId,
         sessionKey,
         browserInstanceKey,
@@ -433,7 +456,7 @@ export function useIdeProjectSession({
 
                 if (data?.project?.language && data.project.language !== language) {
                     if (projectId === targetProjectId) {
-                        clearProjectSessionMeta(sessionKey);
+                        clearProjectSessionMeta(browserPersistenceEnabled, sessionKey);
                         resetLanguageScopedProjectState({
                             keepProjectsOpen: true,
                             keepSaveError: true,
@@ -521,6 +544,7 @@ export function useIdeProjectSession({
             }
         },
         [
+            browserPersistenceEnabled,
             access.canSaveCloud,
             handleProjectApiFailure,
             detachMissingProject,
@@ -577,7 +601,7 @@ export function useIdeProjectSession({
                 return {ok: false};
             }
 
-            const localMeta = readProjectSessionMeta(sessionKey);
+            const localMeta = readProjectSessionMeta(browserPersistenceEnabled, sessionKey);
             const targetProjectId =
                 args?.targetProjectId ?? projectId ?? localMeta?.projectId ?? null;
 
@@ -647,6 +671,7 @@ export function useIdeProjectSession({
             }
         },
         [
+            browserPersistenceEnabled,
             currentWorkspace,
             access.canSaveCloud,
             goToUpgrade,
@@ -686,7 +711,7 @@ export function useIdeProjectSession({
             return false;
         }
 
-        const localMeta = readProjectSessionMeta(sessionKey);
+        const localMeta = readProjectSessionMeta(browserPersistenceEnabled, sessionKey);
         const effectiveProjectId = projectId ?? localMeta?.projectId ?? null;
         const effectiveProjectName =
             currentProjectName ||
@@ -732,6 +757,7 @@ export function useIdeProjectSession({
         void refreshProjects();
         return true;
     }, [
+        browserPersistenceEnabled,
         currentWorkspace,
         loadingProject,
         sessionKey,
@@ -908,11 +934,12 @@ export function useIdeProjectSession({
             replaceWorkspace(blankWorkspace);
         }
 
-        clearProjectSessionMeta(sessionKey);
+        clearProjectSessionMeta(browserPersistenceEnabled, sessionKey);
         resetLanguageScopedProjectState();
         clearSavedBaseline();
         setToast({ kind: "success", text: "Started a new local project." });
     }, [
+        browserPersistenceEnabled,
         access.canUseMultiFile,
         language,
         resetWorkspaceForLanguage,
@@ -1046,7 +1073,7 @@ export function useIdeProjectSession({
                 }
 
                 if (projectId === targetProjectId) {
-                    clearProjectSessionMeta(sessionKey);
+                    clearProjectSessionMeta(browserPersistenceEnabled, sessionKey);
                     resetLanguageScopedProjectState();
                     clearSavedBaseline();
                 }
@@ -1061,6 +1088,7 @@ export function useIdeProjectSession({
             }
         },
         [
+            browserPersistenceEnabled,
             projectId,
             sessionKey,
             detachMissingProject,

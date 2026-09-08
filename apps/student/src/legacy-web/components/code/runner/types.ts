@@ -113,6 +113,8 @@ export type CommonProps = {
      * Routine controlled-code renders leave this undefined.
      */
     workspaceReplacementRevision?: string | number;
+    /** When off, CodeRunner/EditorPane must not use browser-local learner-state caches. */
+    draftStorageMode?: "off" | "local";
     activeWorkspaceFileId?: string;
     /** Binary files bypass Monaco and use a capability-specific read-only preview. */
     activeBinaryFile?: {

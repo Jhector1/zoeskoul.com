@@ -307,6 +307,8 @@ export default function EditorPane(props: {
     exerciseStateKey?: string;
     workspace?: WorkspaceStateV2 | null;
     workspaceReplacementRevision?: string | number;
+    /** Umbrella browser-local learner-state persistence policy. */
+    draftStorageMode?: "off" | "local";
     frame?: RunnerFrame;
     mobileEditMode?: MobileEditMode;
 }) {
@@ -323,6 +325,7 @@ export default function EditorPane(props: {
         exerciseStateKey,
         workspace,
         workspaceReplacementRevision,
+        draftStorageMode = "local",
         frame = "card",
         mobileEditMode = "auto",
     } = props;
@@ -391,8 +394,11 @@ export default function EditorPane(props: {
         !exerciseStateKey.startsWith("code-runner:");
 
     const cacheScope = useMemo(
-        () => (hasRealExerciseScope ? `${exerciseStateKey}` : ""),
-        [hasRealExerciseScope, exerciseStateKey],
+        () =>
+            draftStorageMode === "local" && hasRealExerciseScope
+                ? `${exerciseStateKey}`
+                : "",
+        [draftStorageMode, hasRealExerciseScope, exerciseStateKey],
     );
 
     const path = useMemo(() => {

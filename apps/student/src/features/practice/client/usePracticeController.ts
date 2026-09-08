@@ -53,7 +53,7 @@ export function usePracticeController(args: {
     authoritativeSessionId = false,
     surface,
     initialExperienceMode,
-    clientStatePersistence = "session",
+    clientStatePersistence = "off",
     initialSessionStatus = null,
   } = args;
 

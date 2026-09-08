@@ -613,11 +613,7 @@ function isCardToolKey(toolKey: string | null | undefined) {
     return true;
 }
 
-function cardToolWorkspaceStorageKey(topicId: string, toolKey: string) {
-    return `zoe:review-card-tool-workspace:${topicId}:${toolKey}`;
-}
-
-function writeCardToolWorkspaceBackup(args: {
+function writeCardToolWorkspaceBackup(_args: {
     topicId: string;
     toolKey: string;
     snap: {
@@ -627,84 +623,16 @@ function writeCardToolWorkspaceBackup(args: {
         workspace?: WorkspaceStateV2 | null;
     };
 }) {
-    if (typeof window === "undefined") return;
-    if (!args.snap.workspace) return;
-
-    const cardId = getCardIdFromToolScopeKey(args.toolKey);
-
-    const aliases = Array.from(
-        new Set([
-            args.toolKey,
-            `card:${cardId}`,
-        ]),
-    );
-
-    const payload = JSON.stringify({
-        savedAt: Date.now(),
-        lang: args.snap.lang,
-        code: args.snap.code,
-        stdin: args.snap.stdin,
-        workspace: args.snap.workspace,
-    });
-
-    try {
-        aliases.forEach((toolKey) => {
-            window.localStorage.setItem(
-                cardToolWorkspaceStorageKey(args.topicId, toolKey),
-                payload,
-            );
-        });
-    } catch {
-        // local backup is best-effort
-    }
+    // Review/Practice browser-local workspace backups are deliberately disabled.
+    // Runtime state + canonical server progress remain the only persistence owners.
+    void _args;
 }
 
-function readCardToolWorkspaceBackup(topicId: string, toolKey: string) {
-    if (typeof window === "undefined") return null;
-
-    const cardId = getCardIdFromToolScopeKey(toolKey);
-
-    function parse(raw: string | null) {
-        if (!raw) return null;
-
-        try {
-            const parsed = JSON.parse(raw);
-            if (!parsed?.workspace || parsed.workspace.version !== 2) return null;
-            return parsed;
-        } catch {
-            return null;
-        }
-    }
-
-    const exact = parse(
-        window.localStorage.getItem(
-            cardToolWorkspaceStorageKey(topicId, toolKey),
-        ),
-    );
-    if (exact) return exact;
-
-    const legacyToolKey = `card:${cardId}`;
-    const legacy = parse(
-        window.localStorage.getItem(
-            cardToolWorkspaceStorageKey(topicId, legacyToolKey),
-        ),
-    );
-    if (legacy) return legacy;
-
-    const prefix = `zoe:review-card-tool-workspace:${topicId}:`;
-
-    for (let i = 0; i < window.localStorage.length; i += 1) {
-        const key = window.localStorage.key(i);
-        if (!key || !key.startsWith(prefix)) continue;
-
-        const storedToolKey = key.slice(prefix.length);
-
-        if (getCardIdFromToolScopeKey(storedToolKey) !== cardId) continue;
-
-        const candidate = parse(window.localStorage.getItem(key));
-        if (candidate) return candidate;
-    }
-
+function readCardToolWorkspaceBackup(
+    _topicId: string,
+    _toolKey: string,
+): any | null {
+    // Never resurrect a legacy browser-local card/tool snapshot when persistence is off.
     return null;
 }
 

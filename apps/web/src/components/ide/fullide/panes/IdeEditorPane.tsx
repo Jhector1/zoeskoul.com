@@ -46,6 +46,8 @@ type Props = {
     exerciseStateKey?: string;
     workspace: WorkspaceStateV2 | null;
     workspaceReplacementRevision?: string | number;
+    /** Umbrella browser-local learner-state persistence policy. */
+    draftStorageMode?: "off" | "local";
     readOnly?: boolean;
     terminalHistoryScopeKey?: string;
     onApplyTerminalSnapshotFiles?: (
@@ -108,6 +110,7 @@ export default function IdeEditorPane({
     exerciseStateKey,
     workspace,
     workspaceReplacementRevision,
+    draftStorageMode = "local",
     readOnly = false,
     terminalHistoryScopeKey,
     onApplyTerminalSnapshotFiles,
@@ -353,6 +356,7 @@ export default function IdeEditorPane({
                             workspaceReplacementRevision={
                                 workspaceReplacementRevision
                             }
+                            draftStorageMode={draftStorageMode}
                             editorModelKey={
                                 exerciseStateKey
                                     ? `${exerciseStateKey}:${activeFileId ?? "no-file"}`

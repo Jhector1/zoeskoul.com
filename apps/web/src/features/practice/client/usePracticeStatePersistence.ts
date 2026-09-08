@@ -78,7 +78,7 @@ export function usePracticeStatePersistence(args: {
     initialSessionId = null,
     authoritativeSessionId = false,
     expectedExperienceMode,
-    clientStatePersistence = "session",
+    clientStatePersistence = "off",
     run,
 
     phase,
@@ -179,7 +179,12 @@ export function usePracticeStatePersistence(args: {
     }
 
     let rememberedSessionId: string | null = null;
-    if (!sessionIdParam && !initialSessionId && !authoritativeSessionId) {
+    if (
+      clientStatePersistence === "session" &&
+      !sessionIdParam &&
+      !initialSessionId &&
+      !authoritativeSessionId
+    ) {
       try {
         rememberedSessionId =
           localStorage.getItem(lastSessionKey(subjectSlug, moduleSlug)) || null;
@@ -395,6 +400,7 @@ export function usePracticeStatePersistence(args: {
 
   useEffect(() => {
     if (!hydrated) return;
+    if (clientStatePersistence === "off") return;
     if (!subjectSlug || !moduleSlug) return;
     if (!sessionId) return;
     if (explicitSessionRef.current) return;
@@ -402,7 +408,7 @@ export function usePracticeStatePersistence(args: {
     try {
       localStorage.setItem(lastSessionKey(subjectSlug, moduleSlug), sessionId);
     } catch {}
-  }, [hydrated, sessionId, subjectSlug, moduleSlug]);
+  }, [clientStatePersistence, hydrated, sessionId, subjectSlug, moduleSlug]);
 
   return { hydrated, resolvedSessionIdRef };
 }

@@ -62,6 +62,8 @@ type FullIDEInnerProps = {
     projectDescription?: string | null;
     projectScope: FullIDEProps["projectScope"];
     readOnly: boolean;
+    /** Umbrella policy for every browser-local learner-state cache below FullIDE. */
+    draftStorageMode: NonNullable<FullIDEProps["draftStorageMode"]>;
     router: ReturnType<typeof useFullIDERouter>;
     splitRef: React.RefObject<HTMLDivElement | null>;
     rootRef: React.RefObject<HTMLDivElement | null>;
@@ -95,8 +97,23 @@ type FullIDEInnerProps = {
     actions: WorkspaceHookResult["actions"];
 };
 
-function getOrCreateGuestActorKey() {
+function createGuestActorId() {
+    return typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `guest-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function getOrCreateGuestActorKey(
+    draftStorageMode: NonNullable<FullIDEProps["draftStorageMode"]>,
+) {
     if (typeof window === "undefined") return "guest:server";
+
+    const id = createGuestActorId();
+
+    // "off" is authoritative: even actor identity must stay memory-only.
+    if (draftStorageMode !== "local") {
+        return `guest:${id}`;
+    }
 
     const key = `${process.env.NEXT_PUBLIC_APP_NAME ?? "app"}.ide.guest-actor.v1`;
 
@@ -104,15 +121,10 @@ function getOrCreateGuestActorKey() {
         const existing = window.localStorage.getItem(key);
         if (existing) return `guest:${existing}`;
 
-        const id =
-            typeof crypto !== "undefined" && "randomUUID" in crypto
-                ? crypto.randomUUID()
-                : `guest-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-
         window.localStorage.setItem(key, id);
         return `guest:${id}`;
     } catch {
-        return `guest:fallback`;
+        return `guest:${id}`;
     }
 }
 
@@ -166,6 +178,7 @@ function FullIDEInner({
                           projectTitle,
                           projectDescription,
                           projectScope,
+                          draftStorageMode,
                           readOnly,
                           exerciseStateKey,
                           workspaceReplacementRevision,
@@ -401,6 +414,7 @@ function FullIDEInner({
         projectDescription,
         projectScope,
         initialProjectId,
+        draftStorageMode,
         access,
         loginHref,
         billingHref,
@@ -695,6 +709,7 @@ function FullIDEInner({
             exerciseStateKey={exerciseStateKey}
             workspace={currentWorkspace}
             workspaceReplacementRevision={workspaceReplacementRevision}
+            draftStorageMode={draftStorageMode}
             readOnly={readOnly}
             terminalHistoryScopeKey={terminalHistoryScopeKey}
             onApplyTerminalSnapshotFiles={applyTerminalSnapshotFiles}
@@ -1013,8 +1028,8 @@ export default function FullIDE(props: FullIDEProps) {
 
     useEffect(() => {
         if (access.hasUser) return;
-        setGuestActorKey(getOrCreateGuestActorKey());
-    }, [access.hasUser]);
+        setGuestActorKey(getOrCreateGuestActorKey(draftStorageMode));
+    }, [access.hasUser, draftStorageMode]);
 
     const actorKey = useMemo(() => {
         if (access.hasUser) {
@@ -1377,6 +1392,7 @@ export default function FullIDE(props: FullIDEProps) {
                 projectTitle={projectTitle}
                 projectDescription={projectDescription}
                 projectScope={projectScope}
+                draftStorageMode={effectiveDraftStorageMode}
                 readOnly={readOnly}
                 exerciseStateKey={props.exerciseStateKey}
                 workspaceReplacementRevision={

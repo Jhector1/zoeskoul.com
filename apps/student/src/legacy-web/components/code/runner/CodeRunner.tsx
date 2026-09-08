@@ -665,6 +665,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         exerciseStateKey,
         workspace,
         workspaceReplacementRevision,
+        draftStorageMode = "local",
         activeBinaryFile,
         splitEditor,
         onCloseSplitEditor,
@@ -694,6 +695,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         mobileOutputTabTestId,
     } = props as any;
 
+    const browserPersistenceEnabled = draftStorageMode === "local";
     const controlled = isControlled(props as any);
     const runtime = resolveRuntime((props as any).runtime);
 
@@ -994,7 +996,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 if (disposed || !canActivate) return;
 
                 activated = true;
-                const restored = loadWorkspaceTerminalTabs(resolvedTerminalHostKey);
+                const restored = browserPersistenceEnabled
+                    ? loadWorkspaceTerminalTabs(resolvedTerminalHostKey)
+                    : {
+                          tabs: [{ id: "primary", label: "Terminal 1" }],
+                          activeId: "primary",
+                      };
                 const hydration = resolveWorkspaceTerminalHydration(restored);
 
                 /**
@@ -1068,7 +1075,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                 scheduleTerminalHostCleanup(resolvedTerminalHostKey);
             }
         };
-    }, [resolvedTerminalHostKey, terminalWindowId]);
+    }, [browserPersistenceEnabled, resolvedTerminalHostKey, terminalWindowId]);
 
     useEffect(() => {
         if (!resolvedTerminalHostKey) return;
@@ -1112,6 +1119,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [resolvedTerminalHostKey, terminalWorkspaceIdentityKey]);
 
     useEffect(() => {
+        if (!browserPersistenceEnabled) return;
         if (
             !resolvedTerminalHostKey ||
             hydratedTerminalHostKey !== resolvedTerminalHostKey
@@ -1131,6 +1139,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         );
     }, [
         activeTerminalId,
+        browserPersistenceEnabled,
         hydratedTerminalHostKey,
         resolvedTerminalHostKey,
         terminalTabStrip.visibleTabs,
@@ -3099,6 +3108,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                             exerciseStateKey={effectiveExerciseStateKey}
                             workspace={workspace}
                             workspaceReplacementRevision={workspaceReplacementRevision}
+                            draftStorageMode={draftStorageMode}
                             onMount={
                                 args.primary
                                     ? (ed) => {

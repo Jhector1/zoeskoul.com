@@ -196,6 +196,8 @@ export type UseIdeProjectSessionArgs = {
     projectDescription?: string | null;
     projectScope?: ProjectScopeInput;
     initialProjectId?: string | null;
+    /** Controls browser-local project/session metadata; cloud persistence is unaffected. */
+    draftStorageMode?: FullIDEProps["draftStorageMode"];
     access: FullIDEProps["access"];
     loginHref: string;
     billingHref: string;
