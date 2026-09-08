@@ -155,6 +155,38 @@ function savedStarterStillMatches(args: {
 
     return savedStarterHash === workspaceKeyOf(args.currentStarterWorkspace);
 }
+
+/**
+ * Saved editor state is owned by the authored starter revision that created it.
+ *
+ * Modern saved state must match the current starter hash. Legacy state without
+ * starterHash remains compatible during ordinary hydration, but an explicit
+ * reset generation is authoritative and must not resurrect unversioned editor
+ * state from before the reset.
+ */
+export function canSavedToolWorkspaceOverrideCurrentStarter(args: {
+    saved: any;
+    currentStarterWorkspace: WorkspaceStateV2 | null;
+    resetRevision: number;
+}) {
+    if (!args.saved) return false;
+
+    const savedStarterHash =
+        typeof args.saved?.starterHash === "string"
+            ? args.saved.starterHash.trim()
+            : "";
+    const currentStarterHash = workspaceKeyOf(args.currentStarterWorkspace);
+
+    if (savedStarterHash) {
+        return Boolean(
+            currentStarterHash &&
+            currentStarterHash !== "null" &&
+            savedStarterHash === currentStarterHash,
+        );
+    }
+
+    return Number(args.resetRevision ?? 0) <= 0;
+}
 function firstNonBlank(...values: Array<string | null | undefined>) {
     for (const value of values) {
         if (typeof value === "string" && value.trim()) return value;
@@ -1588,12 +1620,12 @@ export function useToolCodeRunnerState(args: {
                 if (!languageMatches(value)) return false;
                 if (isPassiveSeedSnapshot(value)) return false;
 
-                /**
-                 * Real learner work wins even if the manifest starter changed.
-                 * This is the saved > starter > default contract.
-                 */
                 if (isUserWork(value)) {
-                    return true;
+                    return canSavedToolWorkspaceOverrideCurrentStarter({
+                        saved: value,
+                        currentStarterWorkspace: nextWorkspace,
+                        resetRevision: runtimeResetRevision,
+                    });
                 }
 
                 /**
@@ -1659,18 +1691,12 @@ export function useToolCodeRunnerState(args: {
             const savedWorkspaceCode = deriveEntryCode(savedWorkspace);
             const incomingWorkspaceCode = deriveEntryCode(nextWorkspace);
 
-            const effectiveSavedIsUserWork = Boolean(
-                effectiveSavedForBind &&
-                !isPassiveSeedSnapshot(effectiveSavedForBind) &&
-                isUserWork(effectiveSavedForBind),
-            );
-
-            const effectiveSavedStarterMatchesCurrent =
-                savedStarterMatchesCurrent(effectiveSavedForBind);
+            const effectiveSavedCanOverrideStarter =
+                savedCanOverrideStarter(effectiveSavedForBind);
 
             const shouldUseSavedWorkspace =
                 !!savedWorkspace &&
-                (effectiveSavedIsUserWork || effectiveSavedStarterMatchesCurrent) &&
+                effectiveSavedCanOverrideStarter &&
                 !(
                     String(savedWorkspaceCode ?? "").trim() === "" &&
                     String(incomingWorkspaceCode ?? "").trim() !== ""

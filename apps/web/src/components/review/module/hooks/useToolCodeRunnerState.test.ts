@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { resolveToolStateSeed, shouldSkipRepeatedToolBind } from "./useToolCodeRunnerState";
+import {
+    resolveToolStateSeed,
+    shouldSkipRepeatedToolBind,
+    canSavedToolWorkspaceOverrideCurrentStarter,
+} from "./useToolCodeRunnerState";
 
 describe("shouldSkipRepeatedToolBind", () => {
     it("skips only an identical semantic bind key", () => {
@@ -229,5 +233,70 @@ describe("resolveToolStateSeed", () => {
             otherExercise.exerciseId === "e2e-project-step-3";
 
         expect(matchesCurrentTarget).toBe(false);
+    });
+});
+
+describe("canSavedToolWorkspaceOverrideCurrentStarter", () => {
+    const makeWorkspace = (content: string) => ({
+        version: 2,
+        language: "python",
+        nodes: [
+            {
+                id: "main.py",
+                kind: "file",
+                name: "main.py",
+                parentId: null,
+                content,
+            },
+        ],
+        activeFileId: "main.py",
+        entryFileId: "main.py",
+        stdin: "",
+    }) as any;
+
+    it("rejects saved state from a different authored starter revision", () => {
+        const currentStarter = makeWorkspace("# current starter\n");
+
+        expect(
+            canSavedToolWorkspaceOverrideCurrentStarter({
+                saved: {
+                    starterHash: "old-authored-starter",
+                    userEdited: true,
+                    workspaceOrigin: "saved",
+                },
+                currentStarterWorkspace: currentStarter,
+                resetRevision: 0,
+            }),
+        ).toBe(false);
+    });
+
+    it("rejects legacy unversioned saved state after an explicit reset generation", () => {
+        const currentStarter = makeWorkspace("# current starter\n");
+
+        expect(
+            canSavedToolWorkspaceOverrideCurrentStarter({
+                saved: {
+                    userEdited: true,
+                    workspaceOrigin: "saved",
+                },
+                currentStarterWorkspace: currentStarter,
+                resetRevision: 1,
+            }),
+        ).toBe(false);
+    });
+
+    it("preserves legacy unversioned saved state before any explicit reset", () => {
+        const currentStarter = makeWorkspace("# current starter\n");
+
+        expect(
+            canSavedToolWorkspaceOverrideCurrentStarter({
+                saved: {
+                    userEdited: true,
+                    workspaceOrigin: "saved",
+                },
+                currentStarterWorkspace: currentStarter,
+                resetRevision: 0,
+            }),
+        ).toBe(true);
     });
 });
