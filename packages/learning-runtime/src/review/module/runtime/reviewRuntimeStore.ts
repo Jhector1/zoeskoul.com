@@ -2656,8 +2656,22 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         set((state) => {
             const existing = state.exercises[exerciseKey] ?? null;
 
-            const manifest = asManifestRecord(args.manifest ?? null);
             const saved = asSavedExerciseRecord(args.saved ?? null);
+            const incomingManifest = asManifestRecord(args.manifest ?? null);
+            /**
+             * Review-progress hydration historically passes the same persisted
+             * exercise object as both `manifest` and `saved`. Once the authored
+             * route contract already exists, that persisted object must never
+             * redefine starter identity.
+             */
+            const preserveExistingAuthoredIdentity = Boolean(
+                existing &&
+                args.saved != null &&
+                args.manifest === args.saved
+            );
+            const manifest = preserveExistingAuthoredIdentity
+                ? asManifestRecord(existing?.manifest ?? null)
+                : incomingManifest;
 
             const resolvedLanguage = resolveCourseLanguage({
                 subjectSlug: args.subjectSlug,
@@ -2739,7 +2753,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 ].filter(Boolean) as any,
             });
 
-            const starterHash = resolvedWorkspace.starterHash;
+            const starterHash = preserveExistingAuthoredIdentity
+                ? existing?.starterHash
+                : resolvedWorkspace.starterHash;
             const selectedWorkspace = resolvedWorkspace.workspace;
             const selectedCode = resolvedWorkspace.code;
             const selectedStdin = resolvedWorkspace.stdin;
@@ -2784,9 +2800,11 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 ...(existing ?? {}),
                 exerciseKey,
                 starterWorkspace:
-                    resolvedWorkspace.source === "manifest"
-                        ? selectedWorkspace
-                        : existing?.starterWorkspace ?? selectedWorkspace ?? null,
+                    preserveExistingAuthoredIdentity
+                        ? existing?.starterWorkspace ?? null
+                        : resolvedWorkspace.source === "manifest"
+                            ? selectedWorkspace
+                            : existing?.starterWorkspace ?? selectedWorkspace ?? null,
                 fileEditState:
                     resolvedWorkspace.source === "manifest"
                         ? buildRuntimeFileEditState({
@@ -2824,7 +2842,10 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 workspaceGeneration: state.resetRevision,
                 starterHash,
                 ideConfig: (manifest as any)?.ideConfig ?? existing?.ideConfig ?? null,
-                manifest: (manifest as Record<string, unknown> | null) ?? existing?.manifest ?? null,
+                manifest:
+                    preserveExistingAuthoredIdentity
+                        ? existing?.manifest ?? null
+                        : (manifest as Record<string, unknown> | null) ?? existing?.manifest ?? null,
                 updatedAt: existing?.updatedAt ?? Date.now(),
             };
 
@@ -3191,10 +3212,28 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 effectivePatch.workspaceOrigin === "user" ||
                 effectivePatch.workspaceOrigin === "saved" ||
                 existing?.userEdited === true;
+            /**
+             * Hydration may restore learner workspace/content, but authored
+             * identity is immutable once the exercise contract is registered.
+             */
+            const preserveAuthoredIdentityOnHydrate =
+                workspaceMutation?.mutation === "hydrate" && Boolean(existing);
+            const nextStarterWorkspace =
+                preserveAuthoredIdentityOnHydrate
+                    ? existing?.starterWorkspace ?? null
+                    : existing?.starterWorkspace ?? workspace ?? null;
             const nextStarterHash =
-                typeof effectivePatch.starterHash === "string"
-                    ? effectivePatch.starterHash
-                    : existing?.starterHash;
+                preserveAuthoredIdentityOnHydrate
+                    ? existing?.starterHash
+                    : typeof effectivePatch.starterHash === "string"
+                        ? effectivePatch.starterHash
+                        : existing?.starterHash;
+            const nextManifest =
+                preserveAuthoredIdentityOnHydrate
+                    ? existing?.manifest ?? null
+                    : Object.prototype.hasOwnProperty.call(effectivePatch, "manifest")
+                        ? (effectivePatch as any).manifest
+                        : existing?.manifest;
             const nextWorkspaceGeneration = nextWorkspaceGenerationForPatch;
             const nextFileEditState = patchHasWorkspace || mergedIncomingWorkspace
                 ? mergeRuntimeFileEditState({
@@ -3365,8 +3404,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 userEdited: nextUserEdited,
                 workspaceGeneration: nextWorkspaceGeneration,
                 fileEditState: nextFileEditState,
-                starterWorkspace: existing?.starterWorkspace ?? workspace ?? null,
+                starterWorkspace: nextStarterWorkspace,
                 starterHash: nextStarterHash,
+                manifest: nextManifest,
                 updatedAt: Date.now(),
                 code,
                 source: code,
@@ -3393,8 +3433,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 userEdited: nextUserEdited,
                 workspaceGeneration: nextWorkspaceGeneration,
                 fileEditState: nextFileEditState,
-                starterWorkspace: existing?.starterWorkspace ?? workspace ?? null,
+                starterWorkspace: nextStarterWorkspace,
                 starterHash: nextStarterHash,
+                manifest: nextManifest,
                 status:
                     existing?.status === "not_started" || !existing
                         ? "in_progress"
