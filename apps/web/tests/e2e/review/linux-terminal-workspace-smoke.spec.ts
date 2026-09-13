@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { reviewFullIdeEditorInputs } from "./support/reviewUi";
 import {
     expectTerminalContains,
     expectTerminalVisible,
@@ -214,7 +215,7 @@ test.describe("linux terminal_workspace smoke", () => {
         });
         await expect(page.getByTestId("interactive-terminal")).toBeVisible();
         await expect(explorerPathLocator(page, "README.md")).toHaveCount(0);
-        await expect(page.getByTestId("code-editor-e2e-input")).toHaveCount(0);
+        await expect(reviewFullIdeEditorInputs(page)).toHaveCount(0);
         await expectTerminalVisible(page);
         await expect(page.getByTestId("code-runner-run-button")).toHaveCount(0);
         await expect(page.getByRole("button", { name: /^Output$/ })).toHaveCount(0);

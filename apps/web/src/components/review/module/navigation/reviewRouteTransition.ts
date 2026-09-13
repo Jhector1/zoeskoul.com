@@ -67,10 +67,11 @@ export function reviewToolBindMatchesCurrentCard(args: {
 export async function publishReviewToolBindIfCurrent(args: {
     acceptedOwner: ReviewToolBindOwner;
     getCurrentOwner: () => ReviewToolBindOwner;
-    bind: () => Promise<void>;
+    bind: () => Promise<void | boolean>;
     publish: () => void;
 }) {
-    await args.bind();
+    const accepted = await args.bind();
+    if (accepted === false) return false;
 
     const currentOwner = args.getCurrentOwner();
     if (

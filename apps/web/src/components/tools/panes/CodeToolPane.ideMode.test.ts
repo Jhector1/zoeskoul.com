@@ -9,7 +9,181 @@ import {
     resolveCodeToolPaneSketchWorkspace,
     resolveEffectiveCodeToolPaneIdeConfig,
     reviewRuntimeTargetKeysMatch,
+    shouldBlockReviewWorkspaceEmissionDuringReset,
+    shouldHoldPreviousCompatibleFullIde,
+    resolveMountedReviewWorkspaceReplacementRevision,
 } from "@/components/tools/panes/CodeToolPane";
+import { resolveCanonicalExercisePresentation } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExercisePresentation";
+import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+
+describe("shouldBlockReviewWorkspaceEmissionDuringReset", () => {
+    it("blocks only route-owned emissions while reset replacement awaits acknowledgement", () => {
+        expect(
+            shouldBlockReviewWorkspaceEmissionDuringReset({
+                isReviewRouteMode: true,
+                resetHydrationActive: true,
+            }),
+        ).toBe(true);
+        expect(
+            shouldBlockReviewWorkspaceEmissionDuringReset({
+                isReviewRouteMode: true,
+                resetHydrationActive: false,
+            }),
+        ).toBe(false);
+        expect(
+            shouldBlockReviewWorkspaceEmissionDuringReset({
+                isReviewRouteMode: false,
+                resetHydrationActive: true,
+            }),
+        ).toBe(false);
+    });
+});
+
+describe("CodeToolPane authoritative reset presentation", () => {
+    it("selects the current canonical presentation after the runtime topic reset", () => {
+        const topicId = "creating-and-indexing-lists";
+        const ownerKey = [
+            "python-data-functions",
+            "python-5-lists-tuples-and-dictionaries",
+            "python-data-functions-python-5-list-basics",
+            topicId,
+            "sketch0",
+            "try-creating-and-indexing-lists-sketch0",
+        ].join(":");
+        const canonicalCode = [
+            "club1 = input()",
+            "club2 = input()",
+            "club3 = input()",
+            "",
+            "# Create a list named clubs containing the three inputs.",
+            "# Print the whole list.",
+            "",
+        ].join("\n");
+        const workspace = (content: string) => ({
+            version: 2 as const,
+            language: "python" as const,
+            nodes: [
+                {
+                    id: "file:main.py",
+                    kind: "file" as const,
+                    name: "main.py",
+                    parentId: null,
+                    content,
+                    createdAt: 0,
+                    updatedAt: 0,
+                },
+            ],
+            openTabs: ["file:main.py"],
+            activeFileId: "file:main.py",
+            entryFileId: "file:main.py",
+            stdin: "",
+            expanded: [],
+            leftPct: 40,
+        });
+        const starterWorkspace = workspace(canonicalCode);
+        const editedWorkspace = workspace(
+            `${canonicalCode}THIS_MUST_DISAPPEAR_AFTER_RESET\n`,
+        );
+
+        useReviewRuntimeStore.setState({
+            subjectSlug: "python-data-functions",
+            moduleSlug: "python-5-lists-tuples-and-dictionaries",
+            sectionSlug: "python-data-functions-python-5-list-basics",
+            activeExerciseKey: ownerKey,
+            resetRevision: 0,
+            exercises: {
+                [ownerKey]: {
+                    exerciseKey: ownerKey,
+                    topicId,
+                    cardId: "sketch0",
+                    exerciseId: "try-creating-and-indexing-lists-sketch0",
+                    manifest: { kind: "code_input", workspace: starterWorkspace },
+                    starterWorkspace,
+                    workspace: editedWorkspace,
+                    workspaceGeneration: 0,
+                    workspaceStatus: "ready",
+                    workspaceOrigin: "user",
+                    userEdited: true,
+                },
+            },
+            editorRuntimes: {
+                [ownerKey]: {
+                    ownerKey,
+                    ownerKind: "exercise",
+                    starterWorkspace,
+                    workspace: editedWorkspace,
+                    workspaceGeneration: 0,
+                    workspaceStatus: "ready",
+                    workspaceOrigin: "user",
+                    userEdited: true,
+                },
+            },
+            cards: {},
+            tool: { boundExerciseKey: ownerKey },
+            targetRegistry: {
+                byKey: {
+                    [`exercise:${ownerKey}`]: {
+                        ownerKind: "exercise",
+                        ownerKey,
+                        exerciseStateKey: ownerKey,
+                        targetKey: `exercise:${ownerKey}`,
+                        toolScopeKey: ownerKey,
+                        topicId,
+                        cardId: "sketch0",
+                        exerciseId: "try-creating-and-indexing-lists-sketch0",
+                        sectionSlug: "python-data-functions-python-5-list-basics",
+                        language: "python",
+                        starterWorkspace,
+                        toolManifest: { kind: "code_input", workspace: starterWorkspace },
+                    },
+                },
+                orderedKeys: [],
+                byRoute: {},
+            },
+        } as any);
+
+        const previousExercise = useReviewRuntimeStore.getState().exercises[ownerKey];
+        const previousPresentation = {
+            ...resolveCanonicalExercisePresentation({
+                exercise: previousExercise,
+                resetRevision: 0,
+            }),
+            workspace: previousExercise.workspace,
+        };
+        useReviewRuntimeStore.getState().resetTopicToCanonicalState(topicId);
+        const state = useReviewRuntimeStore.getState();
+        const currentExercise = state.exercises[ownerKey];
+        const currentPresentation = {
+            ...resolveCanonicalExercisePresentation({
+                exercise: currentExercise,
+                resetRevision: state.resetRevision,
+            }),
+            workspace: currentExercise.workspace,
+        };
+        const holdPrevious = shouldHoldPreviousCompatibleFullIde({
+            isReviewRouteMode: true,
+            canRenderEditor: currentPresentation.ready,
+            showLoadingMask: false,
+            currentFullIdeKey: "review:language:python",
+            previousFullIdeKey: "review:language:python",
+        });
+        const activeFullIdePresentation = currentPresentation.ready
+            ? currentPresentation
+            : holdPrevious
+              ? previousPresentation
+              : null;
+
+        expect(previousPresentation.workspace?.nodes[0]).toMatchObject({
+            content: `${canonicalCode}THIS_MUST_DISAPPEAR_AFTER_RESET\n`,
+        });
+        expect(currentPresentation).toMatchObject({ status: "ready", ready: true });
+        expect(holdPrevious).toBe(false);
+        expect(activeFullIdePresentation).toBe(currentPresentation);
+        expect(activeFullIdePresentation?.workspace?.nodes[0]).toMatchObject({
+            content: canonicalCode,
+        });
+    });
+});
 
 describe("reviewRuntimeTargetKeysMatch", () => {
     const ownerKey =
@@ -520,5 +694,63 @@ describe("buildLearnerFullIdeKey", () => {
         });
 
         expect(after).not.toBe(before);
+    });
+});
+
+describe("shouldHoldPreviousCompatibleFullIde reset boundary", () => {
+    it("never retains the old presentation across an authoritative reset", () => {
+        expect(shouldHoldPreviousCompatibleFullIde({
+            isReviewRouteMode: true,
+            canRenderEditor: false,
+            showLoadingMask: true,
+            currentFullIdeKey: "review:language:python",
+            previousFullIdeKey: "review:language:python",
+            currentResetRevision: 8,
+            previousResetRevision: 7,
+        })).toBe(false);
+    });
+
+    it("still retains compatible presentation during ordinary same-generation navigation", () => {
+        expect(shouldHoldPreviousCompatibleFullIde({
+            isReviewRouteMode: true,
+            canRenderEditor: false,
+            showLoadingMask: true,
+            currentFullIdeKey: "review:language:python",
+            previousFullIdeKey: "review:language:python",
+            currentResetRevision: 8,
+            previousResetRevision: 8,
+        })).toBe(true);
+    });
+});
+
+describe("resolveMountedReviewWorkspaceReplacementRevision", () => {
+    it("forces reset replacement even when editor apply revision is zero", () => {
+        expect(resolveMountedReviewWorkspaceReplacementRevision({
+            isReviewRouteMode: true,
+            resetHydrationActive: true,
+            workspaceContextKey: "creating-and-indexing-lists",
+            resetRevision: 9,
+            editorApplyRevision: 0,
+        })).toBe("creating-and-indexing-lists:reset:9:apply:0");
+    });
+
+    it("preserves explicit editor apply revision behavior", () => {
+        expect(resolveMountedReviewWorkspaceReplacementRevision({
+            isReviewRouteMode: true,
+            resetHydrationActive: false,
+            workspaceContextKey: "exercise",
+            resetRevision: 9,
+            editorApplyRevision: 4,
+        })).toBe("exercise:reset:9:apply:4");
+    });
+
+    it("does not force ordinary same-generation control", () => {
+        expect(resolveMountedReviewWorkspaceReplacementRevision({
+            isReviewRouteMode: true,
+            resetHydrationActive: false,
+            workspaceContextKey: "exercise",
+            resetRevision: 9,
+            editorApplyRevision: 0,
+        })).toBeUndefined();
     });
 });

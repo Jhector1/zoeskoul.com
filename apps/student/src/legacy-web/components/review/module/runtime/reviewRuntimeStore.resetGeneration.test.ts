@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 
 import type { WorkspaceStateV2 } from "@/components/ide/types";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { resolveCanonicalExercisePresentation } from "@zoeskoul/learning-runtime/review/module/runtime/canonicalExercisePresentation";
 
 function makeWorkspace(files: Array<{ path: string; content: string }>): WorkspaceStateV2 {
   const now = Date.now();
@@ -763,6 +764,202 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     expect(useReviewRuntimeStore.getState().exercises[ownerKey]?.fileEditState?.["models/car.py"]?.hasUserEdited).toBe(
       true,
     );
+  });
+
+  it("atomically restores the active topic exercise to the authored starter", () => {
+    const topicId = "creating-and-indexing-lists";
+    const cardId = "sketch0";
+    const exerciseId = "try-creating-and-indexing-lists-sketch0";
+    const ownerKey = [
+      "python-data-functions",
+      "python-5-lists-tuples-and-dictionaries",
+      "python-data-functions-python-5-list-basics",
+      topicId,
+      cardId,
+      exerciseId,
+    ].join(":");
+    const otherOwnerKey = `${ownerKey}:other`;
+    const starterCode = [
+      "club1 = input()",
+      "club2 = input()",
+      "club3 = input()",
+      "",
+      "# Create a list named clubs containing the three inputs.",
+      "# Print the whole list.",
+      "",
+    ].join("\n");
+    const starterWorkspace = makeWorkspace([
+      { path: "main.py", content: starterCode },
+    ]);
+    const learnerWorkspace = makeWorkspace([
+      {
+        path: "main.py",
+        content: `${starterCode}THIS_MUST_DISAPPEAR_AFTER_RESET\n`,
+      },
+    ]);
+    const runtime = useReviewRuntimeStore.getState();
+
+    useReviewRuntimeStore.setState({
+      subjectSlug: "python-data-functions",
+      moduleSlug: "python-5-lists-tuples-and-dictionaries",
+      sectionSlug: "python-data-functions-python-5-list-basics",
+      targetRegistry: {
+        byKey: {
+          [`exercise:${ownerKey}`]: {
+            targetKey: `exercise:${ownerKey}`,
+            routeKey: `${topicId}/${cardId}/${exerciseId}`,
+            targetKind: "exercise",
+            sectionSlug: "python-data-functions-python-5-list-basics",
+            topicId,
+            topicSlug: topicId,
+            cardId,
+            cardType: "sketch",
+            targetSlug: exerciseId,
+            ownerKind: "exercise",
+            ownerKey,
+            cardKey: ownerKey.split(":").slice(0, 5).join(":"),
+            toolScopeKey: ownerKey,
+            exerciseId,
+            exerciseStateKey: ownerKey,
+            language: "python",
+            starterWorkspace,
+            toolManifest: {
+              id: exerciseId,
+              kind: "code_input",
+              language: "python",
+              workspace: starterWorkspace,
+            },
+            item: {
+              id: exerciseId,
+              kind: "code_input",
+              language: "python",
+              workspace: starterWorkspace,
+            },
+          } as any,
+        },
+        orderedKeys: [],
+        byRoute: {},
+      },
+    } as any);
+
+    runtime.ensureExercise({
+      exerciseKey: ownerKey,
+      subjectSlug: "python-data-functions",
+      moduleSlug: "python-5-lists-tuples-and-dictionaries",
+      sectionSlug: "python-data-functions-python-5-list-basics",
+      topicId,
+      cardId,
+      manifest: {
+        id: exerciseId,
+        kind: "code_input",
+        language: "python",
+        workspace: starterWorkspace,
+      },
+    });
+    runtime.ensureEditorSource({
+      ownerKey,
+      ownerKind: "exercise",
+      targetKey: `exercise:${ownerKey}`,
+      toolScopeKey: ownerKey,
+      language: "python",
+      manifest: { workspace: starterWorkspace },
+      entry: { item: { workspace: starterWorkspace } } as any,
+      workspaceSeedMode: "starter",
+    });
+    runtime.patchEditorWorkspace(ownerKey, learnerWorkspace, {
+      generation: 0,
+      source: "test-user-edit",
+      mutation: {
+        generation: 0,
+        source: "test-user-edit",
+        mutation: "user-content",
+        changedFilePaths: ["main.py"],
+      },
+    });
+    runtime.patchExercise(ownerKey, {
+      generation: 0,
+      workspace: learnerWorkspace,
+      codeWorkspace: learnerWorkspace,
+      ideWorkspace: learnerWorkspace,
+      code: `${starterCode}THIS_MUST_DISAPPEAR_AFTER_RESET\n`,
+      source: `${starterCode}THIS_MUST_DISAPPEAR_AFTER_RESET\n`,
+      workspaceOrigin: "user",
+      userEdited: true,
+    });
+    runtime.ensureExercise({
+      exerciseKey: otherOwnerKey,
+      subjectSlug: "python-data-functions",
+      moduleSlug: "python-5-lists-tuples-and-dictionaries",
+      sectionSlug: "python-data-functions-python-5-list-basics",
+      topicId,
+      cardId: "sketch1",
+      manifest: {
+        id: "other",
+        kind: "code_input",
+        language: "python",
+        workspace: makeWorkspace([{ path: "main.py", content: "other\n" }]),
+      },
+    });
+    useReviewRuntimeStore.setState({ activeExerciseKey: ownerKey });
+    runtime.bindExerciseTool(ownerKey);
+
+    const result = runtime.resetTopicToCanonicalState(topicId);
+    const state = useReviewRuntimeStore.getState();
+    const exercise = state.exercises[ownerKey];
+    const editor = state.editorRuntimes[ownerKey];
+    const presentation = resolveCanonicalExercisePresentation({
+      exercise,
+      resetRevision: state.resetRevision,
+    });
+
+    expect(result).toEqual({
+      exerciseKey: ownerKey,
+      resetRevision: 1,
+      restored: true,
+    });
+    expect(state.resetRevision).toBe(1);
+    expect(Object.keys(state.exercises)).toEqual([ownerKey]);
+    expect(state.activeExerciseKey).toBe(ownerKey);
+    expect(state.tool.boundExerciseKey).toBe(ownerKey);
+    expect(fileContent(exercise?.workspace, "main.py")).toBe(starterCode);
+    expect(fileContent(editor?.workspace, "main.py")).toBe(starterCode);
+    expect(exercise?.workspaceGeneration).toBe(1);
+    expect(editor?.workspaceGeneration).toBe(1);
+    expect(exercise?.workspaceOrigin).toBe("starter");
+    expect(editor?.workspaceOrigin).toBe("starter");
+    expect(exercise?.userEdited).toBe(false);
+    expect(editor?.userEdited).toBe(false);
+    expect(editor?.workspaceApplyRevision).toBe(1);
+    expect(presentation).toMatchObject({ status: "ready", ready: true });
+
+    runtime.ensureExercise({
+      exerciseKey: "python-data-functions:other-module:section:other-topic:card:other",
+      subjectSlug: "python-data-functions",
+      moduleSlug: "other-module",
+      sectionSlug: "section",
+      topicId: "other-topic",
+      cardId: "card",
+      manifest: {
+        id: "other",
+        kind: "code_input",
+        language: "python",
+        workspace: makeWorkspace([{ path: "main.py", content: "other module\n" }]),
+      },
+    });
+
+    const moduleResult = runtime.resetModuleToCanonicalState();
+    const moduleState = useReviewRuntimeStore.getState();
+    expect(moduleResult).toEqual({
+      exerciseKey: ownerKey,
+      resetRevision: 2,
+      restored: true,
+    });
+    expect(Object.keys(moduleState.exercises)).toEqual([ownerKey]);
+    expect(fileContent(moduleState.exercises[ownerKey]?.workspace, "main.py")).toBe(
+      starterCode,
+    );
+    expect(moduleState.exercises[ownerKey]?.workspaceGeneration).toBe(2);
+    expect(moduleState.editorRuntimes[ownerKey]?.workspaceApplyRevision).toBe(2);
   });
 });
 

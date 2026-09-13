@@ -1,6 +1,7 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 import { replaceMonacoText } from "../../utils";
 
+import { reviewFullIdeEditorInputs, clickReviewResetAction } from "./support/reviewUi";
 type RenderedExerciseState = {
   exerciseId: string;
   exerciseKey: string;
@@ -144,8 +145,7 @@ test.describe("dev clone curriculum i18n + workspace runtime regressions", () =>
       )
       .toBe(true);
 
-    await page.getByTestId("review-reset-menu-button").first().click();
-    await page.getByRole("button", { name: /This exercise/i }).click();
+    await clickReviewResetAction(page, "card");
 
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible({ timeout: 15_000 });
@@ -303,7 +303,7 @@ async function openCodeWorkspaceIfPresent(page: Page) {
 
   await Promise.race([
     page.getByTestId("fullide-editor-e2e-input").first().waitFor({ state: "attached", timeout: 15_000 }).catch(() => null),
-    page.getByTestId("code-editor-e2e-input").first().waitFor({ state: "attached", timeout: 15_000 }).catch(() => null),
+    reviewFullIdeEditorInputs(page).first().waitFor({ state: "attached", timeout: 15_000 }).catch(() => null),
     page.getByTestId("interactive-terminal").first().waitFor({ state: "visible", timeout: 15_000 }).catch(() => null),
   ]);
 }

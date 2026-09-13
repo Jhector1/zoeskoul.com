@@ -1051,6 +1051,7 @@ export function useReviewModuleController({
         routeTargetUnlocked,
         syncActiveTarget,
         targetRegistry,
+        resetRevision,
     ]);
 
     const sketch = useDebouncedSketchState({});
@@ -1846,7 +1847,6 @@ export function useReviewModuleController({
         setActiveTopicId,
         setViewTopicId,
         flushNow,
-        toolUnbindCodeInput: tool.unbindCodeInput,
 
         onAfterResetModule: () => {
             const firstTarget = findFirstRouteTargetForModule();

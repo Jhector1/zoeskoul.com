@@ -637,6 +637,9 @@ export function mergeReviewProgressForSave(args: {
   incomingState: ReviewProgressState;
   saveRevision: number;
   moduleTopicIds?: readonly string[];
+  resetIntent?:
+    | { kind: "module" }
+    | { kind: "topic"; topicId: string };
 }) {
   const moduleTopicIds =
     normalizeReviewProgressTopicScope(args.moduleTopicIds);
@@ -659,11 +662,14 @@ export function mergeReviewProgressForSave(args: {
       : normalizeProgressTopics(args.incomingState ?? {}),
   );
 
-  if (isAuthoritativeModuleReset({ previous, incoming })) {
+  if (
+    args.resetIntent?.kind === "module" ||
+    isAuthoritativeModuleReset({ previous, incoming })
+  ) {
     return {
       ...incoming,
       quizVersion: Math.max(
-        numericVersion(previous.quizVersion),
+        numericVersion(previous.quizVersion) + 1,
         numericVersion(incoming.quizVersion),
       ),
       moduleCompleted: false,
@@ -681,6 +687,10 @@ export function mergeReviewProgressForSave(args: {
   const nextTopics: Record<string, ReviewTopicProgress> = {
     ...(previous.topics ?? {}),
   };
+  const explicitTopicResetId =
+    args.resetIntent?.kind === "topic"
+      ? normalizeTopicProgressKey(args.resetIntent.topicId)
+      : "";
   let hasAuthoritativeTopicReset = false;
 
   const incomingTopicEntries = Object.entries(incoming.topics ?? {}) as Array<
@@ -691,9 +701,25 @@ export function mergeReviewProgressForSave(args: {
     const normalizedTopicKey = normalizeTopicProgressKey(topicKey);
     const previousTopic = nextTopics[normalizedTopicKey];
 
-    if (isAuthoritativeTopicReset({ previousTopic, incomingTopic })) {
+    const explicitTopicReset =
+      explicitTopicResetId === normalizedTopicKey;
+
+    if (
+      explicitTopicReset ||
+      isAuthoritativeTopicReset({ previousTopic, incomingTopic })
+    ) {
       hasAuthoritativeTopicReset = true;
-      nextTopics[normalizedTopicKey] = incomingTopic;
+      nextTopics[normalizedTopicKey] = explicitTopicReset
+        ? {
+            ...incomingTopic,
+            quizVersion: Math.max(
+              numericVersion(previousTopic?.quizVersion) + 1,
+              numericVersion(incomingTopic.quizVersion),
+            ),
+            completed: false,
+            completedAt: undefined,
+          }
+        : incomingTopic;
       continue;
     }
 

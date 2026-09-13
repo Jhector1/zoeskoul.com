@@ -9,6 +9,7 @@ import {
     markCardDoneInTopicState,
     normalizeTopicProgressForCards,
 } from "@zoeskoul/learning-runtime/review/module/progressKeys";
+import { stripResetExerciseToolState } from "@zoeskoul/learning-runtime/review/resetExerciseToolStatePolicy";
 
 type RuntimeStateRecord = {
     exercises?: Record<string, { cardId?: string }>;
@@ -155,13 +156,27 @@ function dropRuntimeForQuizCard(
 function dropTopicStateForCard(
     topicState: ExtendedTopicProgress,
     runtimeCardId: string,
+    exerciseStateKey?: string,
 ) {
     const nextSketchState = Object.fromEntries(
         Object.entries(topicState.sketchState ?? {}).filter(([key]) => key !== runtimeCardId),
     );
 
+    const normalizedExerciseStateKey = String(exerciseStateKey ?? "").trim();
+    const exerciseToolKeys = new Set(
+        normalizedExerciseStateKey
+            ? [
+                  normalizedExerciseStateKey,
+                  normalizedExerciseStateKey.startsWith("exercise:")
+                      ? normalizedExerciseStateKey
+                      : `exercise:${normalizedExerciseStateKey}`,
+              ]
+            : [],
+    );
+
     const nextToolState = Object.fromEntries(
         Object.entries(topicState.toolState ?? {}).filter(([key]) => {
+            if (exerciseToolKeys.has(key)) return false;
             if (key === runtimeCardId) return false;
             if (key === `card:${runtimeCardId}`) return false;
             if (key.endsWith(`:${runtimeCardId}:general`)) return false;
@@ -323,7 +338,14 @@ export function buildQuizResetProgress(
                   exerciseId: target.exerciseId,
                   exerciseStateKey: target.exerciseStateKey,
               };
-    const tp0 = getTopicProgress(progress, viewTid);
+    const tp0 = stripResetExerciseToolState(
+        getTopicProgress(progress, viewTid),
+        {
+            exerciseStateKey: normalizedTarget.exerciseStateKey,
+            exerciseId: normalizedTarget.exerciseId,
+            runtimeCardId: normalizedTarget.runtimeCardId,
+        },
+    );
     const nextQuizState = { ...(tp0.quizState ?? {}) };
     delete nextQuizState[normalizedTarget.progressId];
 
@@ -354,6 +376,7 @@ export function buildQuizResetProgress(
     const nextTopic = dropTopicStateForCard(
         nextTopicBase,
         normalizedTarget.runtimeCardId ?? normalizedTarget.progressId,
+        normalizedTarget.exerciseStateKey,
     );
 
     return {

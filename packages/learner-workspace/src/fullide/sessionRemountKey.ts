@@ -1,3 +1,11 @@
+export function controlledWorkspaceResetBoundary(
+    exerciseStateKey: string | null | undefined,
+): string {
+    const normalized = String(exerciseStateKey ?? "").trim();
+    const match = /:reset:(\d+)$/.exec(normalized);
+    return match ? `reset:${match[1]}` : "reset:none";
+}
+
 export function buildFullIdeSessionRemountKey(args: {
     actorKey: string;
     runtimeLanguage: string | null | undefined;
@@ -14,11 +22,15 @@ export function buildFullIdeSessionRemountKey(args: {
         String(args.initialProjectId ?? "local").trim() || "local";
 
     if (args.controlledWorkspace) {
+        const resetBoundary = controlledWorkspaceResetBoundary(
+            args.exerciseStateKey,
+        );
         return [
             actorKey,
             runtimeLanguage,
             initialProjectId,
             "controlled-workspace",
+            resetBoundary,
         ].join("::");
     }
 

@@ -1,9 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-// Zoeskoul E2E suite pruning: this file is opt-in.
-test.skip(process.env.RUN_E2E_LEGACY !== "1", "Legacy broad E2E suite is opt-in. Run with RUN_E2E_LEGACY=1 or pnpm test:e2e:legacy.");
 
 
+import { reviewFullIdeEditorInputs } from "./support/reviewUi";
 test.use({
     viewport: {
         width: 1440,
@@ -21,7 +20,7 @@ test.describe("code_input Fill answer visibility", () => {
         await page.goto(DIRECT_TOOLS_ROUTE);
 
         // The direct exercise/tools route should load the real editor surface.
-        await expect(page.getByTestId("code-editor-e2e-input").first()).toBeAttached({
+        await expect(reviewFullIdeEditorInputs(page).first()).toBeAttached({
             timeout: 15_000,
         });
 

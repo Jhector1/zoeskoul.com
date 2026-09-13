@@ -4,7 +4,23 @@ import {
     resolveToolStateSeed,
     shouldSkipRepeatedToolBind,
     canSavedToolWorkspaceOverrideCurrentStarter,
+    resolveBoundToolSnapshotGeneration,
 } from "./useToolCodeRunnerState";
+
+describe("resolveBoundToolSnapshotGeneration", () => {
+    it("keeps legacy generationless snapshots compatible before the first reset", () => {
+        expect(resolveBoundToolSnapshotGeneration(undefined, 0)).toBe(0);
+    });
+
+    it("rejects generationless snapshots after an authoritative reset", () => {
+        expect(resolveBoundToolSnapshotGeneration(undefined, 1)).toBeNull();
+    });
+
+    it("rejects stale snapshots instead of relabeling them to the active generation", () => {
+        expect(resolveBoundToolSnapshotGeneration(0, 1)).toBeNull();
+        expect(resolveBoundToolSnapshotGeneration(1, 1)).toBe(1);
+    });
+});
 
 describe("shouldSkipRepeatedToolBind", () => {
     it("skips only an identical semantic bind key", () => {

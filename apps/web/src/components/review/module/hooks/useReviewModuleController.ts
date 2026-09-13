@@ -1090,6 +1090,7 @@ export function useReviewModuleController({
         routeTargetUnlocked,
         syncActiveTarget,
         targetRegistry,
+        resetRevision,
     ]);
 
     const sketch = useDebouncedSketchState({});
@@ -1871,7 +1872,6 @@ export function useReviewModuleController({
         setActiveTopicId,
         setViewTopicId,
         flushNow,
-        toolUnbindCodeInput: tool.unbindCodeInput,
 
         onAfterResetModule: () => {
             const firstTarget = findFirstRouteTargetForModule();
@@ -2133,7 +2133,20 @@ export function useReviewModuleController({
             });
         }
 
-        const next = buildQuizResetProgress(progress, viewTid, resetTarget);
+        const progressResetTarget: QuizResetTarget =
+            resetResult?.exerciseKey
+                ? {
+                    ...resetTarget,
+                    exerciseStateKey:
+                        resetTarget.exerciseStateKey ?? resetResult.exerciseKey,
+                }
+                : resetTarget;
+
+        const next = buildQuizResetProgress(
+            progress,
+            viewTid,
+            progressResetTarget,
+        );
         setProgress(next);
         void Promise.resolve(
             flushNow(next, {

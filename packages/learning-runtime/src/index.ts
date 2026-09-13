@@ -175,3 +175,27 @@ export {
   shouldBlockReviewPracticeQuestionAction,
   type ReviewPracticeQuestionActionState,
 } from "./reviewPracticeCompletionScope";
+
+export {
+  shouldPropagateReviewCodeInputSnapshotToRuntime,
+} from "./review/codeInputSnapshotRuntimePolicy";
+
+export {
+  applyReviewProgressHydratedWorkspaceToMountedEditor,
+} from "./review/progressHydratedMountedEditor";
+
+export {
+  resolveReviewToolsMountedWorkspaceAfterBind,
+  type ReviewToolsMountedWorkspaceBinding,
+} from "./review/reviewToolsMountedWorkspacePolicy";
+
+export {
+  shouldPreserveProtectedReviewCodeInputRegistration,
+  type ReviewCodeInputRegistrationContent,
+} from "./review/codeInputRegistrationConflictPolicy";
+
+export {
+  attachReviewProgressResetIntent,
+  resolveReviewProgressResetIntent,
+  type ReviewProgressResetIntent,
+} from "./review/reviewProgressResetTransport";

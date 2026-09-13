@@ -1,8 +1,13 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
-// Zoeskoul E2E suite pruning: this file is opt-in.
-test.skip(process.env.RUN_E2E_LEGACY !== "1", "Legacy broad E2E suite is opt-in. Run with RUN_E2E_LEGACY=1 or pnpm test:e2e:legacy.");
 
+
+import { reviewResetAction } from "./support/reviewUi";
+/**
+ * Concern owner: completion/progress reset semantics.
+ * Mounted-editor starter restoration is owned by reset-starter-restoration.spec.ts.
+ * This file must not substitute navigation-only checks for that browser contract.
+ */
 
 test.use({
     viewport: {
@@ -375,7 +380,7 @@ async function clickVisibleFirst(locator: Locator) {
 }
 
 async function clickResetModule(page: Page) {
-    const resetModuleButton = page.getByTestId("review-reset-module-button");
+    const resetModuleButton = reviewResetAction(page, "module");
 
     await expect(resetModuleButton.first()).toBeAttached({
         timeout: 15_000,
@@ -385,7 +390,7 @@ async function clickResetModule(page: Page) {
 }
 
 async function clickResetTopic(page: Page) {
-    const resetTopicButton = page.getByTestId("review-reset-topic-button");
+    const resetTopicButton = reviewResetAction(page, "topic");
 
     await expect(resetTopicButton.first()).toBeAttached({
         timeout: 15_000,

@@ -9,7 +9,8 @@
     "./ai-tutor/*": "./src/ai-tutor/*.ts",
     "./lib/*": "./src/lib/*.ts",
     "./sketches/*": "./src/sketches/*.ts",
-    "./vectorpad/*": "./src/vectorpad/*.ts"
+    "./vectorpad/*": "./src/vectorpad/*.ts",
+    "./review/useReviewReset": "./src/review/useReviewReset.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit",

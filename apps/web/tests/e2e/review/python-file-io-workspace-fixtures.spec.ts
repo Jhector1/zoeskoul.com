@@ -1,9 +1,8 @@
 import { expect, test, type Page } from "@playwright/test";
 
-// Zoeskoul E2E suite pruning: this file is opt-in.
-test.skip(process.env.RUN_E2E_LEGACY !== "1", "Legacy broad E2E suite is opt-in. Run with RUN_E2E_LEGACY=1 or pnpm test:e2e:legacy.");
 
 
+import { reviewFullIdeEditorInputs } from "./support/reviewUi";
 test.use({
     viewport: {
         width: 1440,
@@ -531,7 +530,7 @@ async function gotoFileIoExercise(page: Page) {
         timeout: 30_000,
     });
 
-    await expect(page.getByTestId("code-editor-e2e-input").last()).toBeAttached({
+    await expect(reviewFullIdeEditorInputs(page).last()).toBeAttached({
         timeout: 30_000,
     });
 }
@@ -544,8 +543,12 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
      * If auto-advance is enabled, a correct Check moves from quiz9 to quiz10
      * before Run, and the test starts running the next exercise's workspace.
      */
-    await page.addInitScript(() => {
-        window.localStorage.setItem("learnoir.quiz.autoAdvance", "0");
+    /**
+         * UI navigation preference only. This does not persist learner code or
+         * workspace state; Review learner persistence remains server-backed.
+         */
+        await page.addInitScript(() => {
+            window.localStorage.setItem("learnoir.quiz.autoAdvance", "0");
     });
 
     await installReviewChromeMocks(page);
@@ -553,7 +556,7 @@ test("python file I/O exercise check uses the visible editor workspace and fixtu
 
     await gotoFileIoExercise(page);
 
-    const editor = page.getByTestId("code-editor-e2e-input").last();
+    const editor = reviewFullIdeEditorInputs(page).last();
     const mainNode = page.getByTestId("tools-file-node-main.py");
     const dataNode = await ensureFixtureFileVisible(page);
     const runButton = page.getByTestId("code-runner-run-button").first();

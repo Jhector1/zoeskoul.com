@@ -1,9 +1,8 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
-// Zoeskoul E2E suite pruning: this file is opt-in.
-test.skip(process.env.RUN_E2E_LEGACY !== "1", "Legacy broad E2E suite is opt-in. Run with RUN_E2E_LEGACY=1 or pnpm test:e2e:legacy.");
 
 
+import { reviewFullIdeEditorInputs } from "./support/reviewUi";
 const EXERCISE_A_URL =
     "/en/dev/e2e/review-module-clone/python/e2e-review-clone/learn/e2e-section/e2e-review-topic/exercise/e2e-print-name";
 
@@ -17,7 +16,7 @@ const EXERCISE_A_SOLVED = [
 ].join("\n");
 
 function getEditorInputs(page: Page): Locator {
-    return page.getByTestId("code-editor-e2e-input");
+    return reviewFullIdeEditorInputs(page);
 }
 
 /**
@@ -60,9 +59,9 @@ async function expectToolsEditorNotBlank(page: Page, timeout = 30_000) {
 
 async function gotoExerciseA(page: Page) {
     /**
-     * Do not clear localStorage/sessionStorage with addInitScript here.
-     * addInitScript runs again on page.reload(), which would erase the
-     * learner workspace before the app can restore it.
+     * Review learner workspace persistence is server-backed.
+     * Do not seed any learner workspace state outside the Review progress API:
+     * reload must restore the saved Review progress/runtime workspace.
      */
     await page.goto(EXERCISE_A_URL);
     await page.waitForLoadState("domcontentloaded");
@@ -208,7 +207,7 @@ test.describe("dev clone review code_input Tools workspace persistence", () => {
         expect(codeAfterAction).not.toContain(EXERCISE_A_STARTER_MARKER);
     });
 
-    test("reload preserves learner code for the first exercise instead of restoring starter", async ({
+    test("reload restores learner code from server-backed Review progress instead of reverting to starter", async ({
                                                                                                          page,
                                                                                                      }) => {
         await gotoExerciseA(page);

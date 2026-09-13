@@ -9,6 +9,7 @@ import {
     markCardDoneInTopicState,
     normalizeTopicProgressForCards,
 } from "@zoeskoul/learning-runtime/review/module/progressKeys";
+import { stripResetExerciseToolState } from "@zoeskoul/learning-runtime/review/resetExerciseToolStatePolicy";
 
 type RuntimeStateRecord = {
     exercises?: Record<string, { cardId?: string }>;
@@ -323,7 +324,14 @@ export function buildQuizResetProgress(
                   exerciseId: target.exerciseId,
                   exerciseStateKey: target.exerciseStateKey,
               };
-    const tp0 = getTopicProgress(progress, viewTid);
+    const tp0 = stripResetExerciseToolState(
+        getTopicProgress(progress, viewTid),
+        {
+            exerciseStateKey: normalizedTarget.exerciseStateKey,
+            exerciseId: normalizedTarget.exerciseId,
+            runtimeCardId: normalizedTarget.runtimeCardId,
+        },
+    );
     const nextQuizState = { ...(tp0.quizState ?? {}) };
     delete nextQuizState[normalizedTarget.progressId];
 

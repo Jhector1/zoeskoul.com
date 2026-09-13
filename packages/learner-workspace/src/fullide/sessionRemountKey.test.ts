@@ -1,66 +1,49 @@
 import { describe, expect, it } from "vitest";
+import {
+    buildFullIdeSessionRemountKey,
+    controlledWorkspaceResetBoundary,
+} from "./sessionRemountKey";
 
-import { buildFullIdeSessionRemountKey } from "./sessionRemountKey";
-
-describe("buildFullIdeSessionRemountKey", () => {
+describe("controlled FullIDE reset boundary", () => {
     const base = {
         actorKey: "user:1",
         runtimeLanguage: "python",
-        initialProjectId: "local",
-        scopeKey: "review-tool:exercise-a",
-        exerciseStateKey: "exercise-a:reset:0",
+        initialProjectId: null,
         controlledWorkspace: true,
     };
 
-    it("keeps controlled Review FullIDE mounted across exercise and reset identity changes", () => {
-        const current = buildFullIdeSessionRemountKey(base);
-        const next = buildFullIdeSessionRemountKey({
+    it("stays mounted across ordinary exercise navigation in one reset generation", () => {
+        const a = buildFullIdeSessionRemountKey({
             ...base,
-            scopeKey: "review-tool:exercise-b",
-            exerciseStateKey: "exercise-b:reset:3",
+            scopeKey: "review-tool:a",
+            exerciseStateKey: "exercise:a:reset:7",
         });
-
-        expect(next).toBe(current);
-    });
-
-    it("still remounts controlled workspaces for genuine actor, language, or project boundaries", () => {
-        const current = buildFullIdeSessionRemountKey(base);
-
-        expect(
-            buildFullIdeSessionRemountKey({ ...base, actorKey: "user:2" }),
-        ).not.toBe(current);
-        expect(
-            buildFullIdeSessionRemountKey({
-                ...base,
-                runtimeLanguage: "javascript",
-            }),
-        ).not.toBe(current);
-        expect(
-            buildFullIdeSessionRemountKey({
-                ...base,
-                initialProjectId: "project:2",
-            }),
-        ).not.toBe(current);
-    });
-
-    it("preserves scope and exercise boundaries for uncontrolled sandbox/project workspaces", () => {
-        const uncontrolled = {
+        const b = buildFullIdeSessionRemountKey({
             ...base,
-            controlledWorkspace: false,
-        };
-        const current = buildFullIdeSessionRemountKey(uncontrolled);
+            scopeKey: "review-tool:b",
+            exerciseStateKey: "exercise:b:reset:7",
+        });
+        expect(a).toBe(b);
+    });
 
-        expect(
-            buildFullIdeSessionRemountKey({
-                ...uncontrolled,
-                scopeKey: "scope:2",
-            }),
-        ).not.toBe(current);
-        expect(
-            buildFullIdeSessionRemountKey({
-                ...uncontrolled,
-                exerciseStateKey: "exercise:2",
-            }),
-        ).not.toBe(current);
+    it("remounts when reset generation changes", () => {
+        const before = buildFullIdeSessionRemountKey({
+            ...base,
+            scopeKey: "review-tool:a",
+            exerciseStateKey: "exercise:a:reset:7",
+        });
+        const after = buildFullIdeSessionRemountKey({
+            ...base,
+            scopeKey: "review-tool:a",
+            exerciseStateKey: "exercise:a:reset:8",
+        });
+        expect(after).not.toBe(before);
+        expect(after).toContain("reset:8");
+    });
+
+    it("extracts only reset generation", () => {
+        expect(controlledWorkspaceResetBoundary("exercise:a:reset:12")).toBe("reset:12");
+        expect(controlledWorkspaceResetBoundary("exercise:b:reset:12")).toBe("reset:12");
+        expect(controlledWorkspaceResetBoundary("exercise:a")).toBe("reset:none");
     });
 });

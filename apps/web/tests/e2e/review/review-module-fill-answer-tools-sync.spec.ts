@@ -1,5 +1,6 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
+import { reviewFullIdeEditorInputs } from "./support/reviewUi";
 test.use({
     viewport: {
         width: 1440,
@@ -62,7 +63,7 @@ async function clickStartAssignmentOrNext(page: Page) {
 
 
 async function visibleCodeEditorValues(page: Page): Promise<string[]> {
-    const editors = page.getByTestId("code-editor-e2e-input");
+    const editors = reviewFullIdeEditorInputs(page);
 
     return editors.evaluateAll((nodes) =>
         nodes
@@ -103,7 +104,7 @@ async function openFillAnswerExerciseFromCloneStart(page: Page) {
 
     await clickStartAssignmentOrNext(page);
 
-    await expect(page.getByTestId("code-editor-e2e-input").first()).toBeAttached({
+    await expect(reviewFullIdeEditorInputs(page).first()).toBeAttached({
         timeout: 15_000,
     });
 
@@ -398,7 +399,7 @@ async function getVisibleButtons(page: Page) {
 }
 
 async function getCodeEditors(page: Page) {
-    const editors = page.getByTestId("code-editor-e2e-input");
+    const editors = reviewFullIdeEditorInputs(page);
 
     await expect(editors.first()).toBeAttached({
         timeout: 15_000,
@@ -529,7 +530,7 @@ test("ReviewModule Fill answer patches the bound right-side Tools editor", async
         timeout: 15_000,
     });
 
-    await expect(page.getByTestId("code-editor-e2e-input").first()).toBeAttached({
+    await expect(reviewFullIdeEditorInputs(page).first()).toBeAttached({
         timeout: 15_000,
     });
 
@@ -620,7 +621,7 @@ test("ReviewModule Fill answer patches the bound right-side Tools editor", async
 //         timeout: 15_000,
 //     });
 //
-//     await expect(page.getByTestId("code-editor-e2e-input").first()).toBeAttached({
+//     await expect(reviewFullIdeEditorInputs(page).first()).toBeAttached({
 //         timeout: 15_000,
 //     });
 //
@@ -721,7 +722,7 @@ test("ReviewModule Fill answer patches the bound right-side Tools editor", async
 //         timeout: 15_000,
 //     });
 //
-//     await expect(page.getByTestId("code-editor-e2e-input").first()).toBeAttached({
+//     await expect(reviewFullIdeEditorInputs(page).first()).toBeAttached({
 //         timeout: 15_000,
 //     });
 //

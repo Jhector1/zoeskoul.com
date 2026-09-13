@@ -181,6 +181,7 @@ export async function PUT(req: Request) {
     const moduleSlug = parsed.data.moduleRef;
     const locale = pickLocale(parsed.data.locale, "en");
     const state = parsed.data.state;
+    const resetIntent = parsed.data.resetIntent;
 
     const { actor, setGuestId, resolved } = await resolveReviewProgressScope({
         subjectSlug,
@@ -250,6 +251,40 @@ export async function PUT(req: Request) {
     const existingRevision = getReviewProgressSaveRevision(previousState);
     const incomingRevision = getReviewProgressSaveRevision(state);
 
+    const v129HasSaveTrace = (value: unknown) => {
+        try {
+            return JSON.stringify(value ?? null).includes("__SAVE_TRACE_");
+        } catch {
+            return false;
+        }
+    };
+
+    const v130SaveTraceMarkers = (value: unknown) => {
+        try {
+            return Array.from(
+                new Set(
+                    JSON.stringify(value ?? null).match(/__SAVE_TRACE_\d+__/g) ?? [],
+                ),
+            );
+        } catch {
+            return [] as string[];
+        }
+    };
+
+    if (v129HasSaveTrace(state) || v129HasSaveTrace(previousState)) {
+        console.log("[review-progress-v129]", {
+            phase: "before-merge",
+            incomingHasSaveTrace: v129HasSaveTrace(state),
+            previousHasSaveTrace: v129HasSaveTrace(previousState),
+            incomingSaveTraceMarkers: v130SaveTraceMarkers(state),
+            previousSaveTraceMarkers: v130SaveTraceMarkers(previousState),
+            incomingRevision,
+            existingRevision,
+            incomingBytes: reviewProgressStateBytes(state),
+            previousBytes: reviewProgressStateBytes(previousState),
+        });
+    }
+
     if (previous && incomingRevision < existingRevision) {
         console.warn("[review-progress] ignored stale save", {
             actorKey,
@@ -281,7 +316,28 @@ export async function PUT(req: Request) {
         incomingState: state as ReviewProgressState,
         saveRevision: nextRevision,
         moduleTopicIds: parsed.data.moduleTopicIds,
+        resetIntent,
     });
+
+    if (
+        v129HasSaveTrace(state) ||
+        v129HasSaveTrace(previousState) ||
+        v129HasSaveTrace(stateToPersist)
+    ) {
+        console.log("[review-progress-v129]", {
+            phase: "after-merge",
+            incomingHasSaveTrace: v129HasSaveTrace(state),
+            previousHasSaveTrace: v129HasSaveTrace(previousState),
+            stateToPersistHasSaveTrace: v129HasSaveTrace(stateToPersist),
+            incomingSaveTraceMarkers: v130SaveTraceMarkers(state),
+            previousSaveTraceMarkers: v130SaveTraceMarkers(previousState),
+            stateToPersistSaveTraceMarkers: v130SaveTraceMarkers(stateToPersist),
+            incomingRevision,
+            existingRevision,
+            nextRevision,
+            persistedBytes: reviewProgressStateBytes(stateToPersist),
+        });
+    }
 
     let saved;
     try {
@@ -347,6 +403,26 @@ export async function PUT(req: Request) {
             );
         }
         throw error;
+    }
+
+    if (
+        v129HasSaveTrace(state) ||
+        v129HasSaveTrace(previousState) ||
+        v129HasSaveTrace(stateToPersist) ||
+        v129HasSaveTrace(saved.state)
+    ) {
+        console.log("[review-progress-v129]", {
+            phase: "after-db",
+            incomingHasSaveTrace: v129HasSaveTrace(state),
+            stateToPersistHasSaveTrace: v129HasSaveTrace(stateToPersist),
+            savedStateHasSaveTrace: v129HasSaveTrace(saved.state),
+            incomingSaveTraceMarkers: v130SaveTraceMarkers(state),
+            stateToPersistSaveTraceMarkers: v130SaveTraceMarkers(stateToPersist),
+            savedStateSaveTraceMarkers: v130SaveTraceMarkers(saved.state),
+            savedRevision: getReviewProgressSaveRevision(
+                saved.state as ReviewProgressState,
+            ),
+        });
     }
 
     let gamification = null;

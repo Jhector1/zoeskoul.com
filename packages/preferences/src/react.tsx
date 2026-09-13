@@ -305,3 +305,23 @@ export function useAppPreferences(): AppPreferencesState {
 export function useOptionalAppPreferences(): AppPreferencesState | null {
   return useContext(PreferencesContext);
 }
+
+
+export function useResolvedAppTheme(): Exclude<AppPreferences["theme"], "system"> {
+  const { preferences } = useAppPreferences();
+  const [systemDark, setSystemDark] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const sync = () => setSystemDark(media.matches);
+    sync();
+    media.addEventListener?.("change", sync);
+    return () => media.removeEventListener?.("change", sync);
+  }, []);
+
+  return resolveConcreteTheme(preferences.theme, systemDark);
+}

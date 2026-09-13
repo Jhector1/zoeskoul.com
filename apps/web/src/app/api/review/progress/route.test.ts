@@ -209,8 +209,9 @@ describe("/api/review/progress route", () => {
         expect(restoredExercise.workspace).toEqual(workspace);
         expect(restoredExercise).not.toHaveProperty("codeWorkspace");
         expect(restoredExercise).not.toHaveProperty("ideWorkspace");
-        expect(restoredExercise.stdin).toBe("9\n");
-        expect(restoredExercise.codeStdin).toBe("9\n");
+        expect(restoredExercise.workspace.stdin).toBe("9\n");
+        expect(restoredExercise).not.toHaveProperty("stdin");
+        expect(restoredExercise).not.toHaveProperty("codeStdin");
         expect(restoredExercise.workspace.activeFileId).toBe("src/helper.py");
         expect(restoredExercise.workspace.entryFileId).toBe("src/main.py");
         expect(restoredExercise.workspace.openTabs).toEqual(["src/main.py", "src/helper.py"]);

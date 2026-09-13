@@ -522,6 +522,20 @@ export const ReviewProgressWriteSchema = z
             )
             .max(REVIEW_PROGRESS_LIMITS.maxTopics)
             .optional(),
+        resetIntent: z
+            .discriminatedUnion("kind", [
+                z.object({
+                    kind: z.literal("module"),
+                }),
+                z.object({
+                    kind: z.literal("topic"),
+                    topicId: z.string()
+                        .trim()
+                        .min(1)
+                        .max(REVIEW_PROGRESS_LIMITS.maxStringFieldBytes),
+                }),
+            ])
+            .optional(),
         state: z.custom<ReviewProgressState>(
             (value) => !!value && typeof value === "object" && !Array.isArray(value),
             "Missing/invalid state.",

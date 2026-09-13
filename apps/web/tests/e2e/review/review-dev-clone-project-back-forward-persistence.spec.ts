@@ -1,9 +1,8 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
-// Zoeskoul E2E suite pruning: this file is opt-in.
-test.skip(process.env.RUN_E2E_LEGACY !== "1", "Legacy broad E2E suite is opt-in. Run with RUN_E2E_LEGACY=1 or pnpm test:e2e:legacy.");
 
 
+import { reviewFullIdeEditorInputs } from "./support/reviewUi";
 const EXERCISE_A_URL =
     "/en/dev/e2e/review-module-clone/python/e2e-review-clone/learn/e2e-section/e2e-review-topic/exercise/e2e-print-name";
 
@@ -22,7 +21,7 @@ const STEP_A_SOLVED = [
 const STEP_B_STARTER_MARKER = "# TODO: print shipping cost";
 
 function getEditorInputs(page: Page): Locator {
-    return page.getByTestId("code-editor-e2e-input");
+    return reviewFullIdeEditorInputs(page);
 }
 
 function getToolsEditorInput(page: Page): Locator {

@@ -1,10 +1,9 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 import {replaceMonacoText} from "../../utils";
 
-// Zoeskoul E2E suite pruning: this file is opt-in.
-test.skip(process.env.RUN_E2E_LEGACY !== "1", "Legacy broad E2E suite is opt-in. Run with RUN_E2E_LEGACY=1 or pnpm test:e2e:legacy.");
 
 
+import { reviewFullIdeEditorInputs, reviewResetAction } from "./support/reviewUi";
 test.use({
     viewport: {
         width: 1440,
@@ -461,7 +460,7 @@ async function gotoReviewRoute(page: Page, route: string) {
 }
 
 async function getVisibleCodeEditorValues(page: Page): Promise<string[]> {
-    const editors = page.getByTestId("code-editor-e2e-input");
+    const editors = reviewFullIdeEditorInputs(page);
 
     await expect(editors.first()).toBeAttached({
         timeout: 15_000,
@@ -528,7 +527,7 @@ async function expectNoVisibleEditorToContain(
 }
 
 async function pickVisibleCodeEditor(page: Page): Promise<Locator> {
-    const editors = page.getByTestId("code-editor-e2e-input");
+    const editors = reviewFullIdeEditorInputs(page);
 
     await expect(editors.first()).toBeAttached({
         timeout: 15_000,
@@ -1264,7 +1263,7 @@ test("hard direct reload of the current project exercise does not leak sibling e
     );
 });
 
-test("reset module clears project exercise workspace drafts so old question code cannot return", async ({
+test("reset module clears server-backed project exercise workspace state so old question code cannot return", async ({
                                                                                                             page,
                                                                                                         }) => {
     await installDeterministicReviewCloneMocks(page);
@@ -1307,7 +1306,7 @@ test("reset module clears project exercise workspace drafts so old question code
         "Question 2 stale marker should be visible before reset",
     );
 
-    await page.getByTestId("review-reset-module-button").click();
+    await reviewResetAction(page, "module").click();
 
     const dialog = page.getByRole("dialog");
 
@@ -1326,7 +1325,7 @@ test("reset module clears project exercise workspace drafts so old question code
     /**
      * Re-open the same exercise route after reset.
      *
-     * This proves reset cleared local drafts AND that the route can still
+     * This proves reset cleared the server-backed Review workspace state AND that the route can still
      * hydrate its starter workspace instead of rendering a blank editor.
      */
     await page.goto(PROJECT_STEP_2_ROUTE);
@@ -1340,13 +1339,13 @@ test("reset module clears project exercise workspace drafts so old question code
     await expectNoVisibleEditorToContain(
         page,
         Q2_MARKER,
-        "Reset Module must clear stale Question 2 workspace draft",
+        "Reset Module must clear stale Question 2 server-backed workspace state",
     );
 
     await expectNoVisibleEditorToContain(
         page,
         "this should be cleared by reset module",
-        "Reset Module must not restore old edited code from local draft storage",
+        "Reset Module must not restore old edited code from server-backed Review progress",
     );
 
     await expectAnyVisibleEditorToContain(
@@ -1362,7 +1361,7 @@ test("reset module clears project exercise workspace drafts so old question code
     );
 });
 
-test("reset topic clears project exercise workspace drafts so old question code cannot return", async ({
+test("reset topic clears server-backed project exercise workspace state so old question code cannot return", async ({
                                                                                                            page,
                                                                                                        }) => {
     await installDeterministicReviewCloneMocks(page);
@@ -1426,13 +1425,13 @@ test("reset topic clears project exercise workspace drafts so old question code 
     await expectNoVisibleEditorToContain(
         page,
         Q2_MARKER,
-        "Reset Topic must clear stale Question 2 workspace draft",
+        "Reset Topic must clear stale Question 2 server-backed workspace state",
     );
 
     await expectNoVisibleEditorToContain(
         page,
         "this should be cleared by reset topic",
-        "Reset Topic must not restore old edited code from local draft storage",
+        "Reset Topic must not restore old edited code from server-backed Review progress",
     );
 
     await expectAnyVisibleEditorToContain(
@@ -1585,7 +1584,7 @@ test("reset module navigates to the first topic card instead of staying on the o
 
     await expect(page).toHaveURL(new RegExp(`${PROJECT_STEP_2_SLUG}$`));
 
-    await page.getByTestId("review-reset-module-button").click();
+    await reviewResetAction(page, "module").click();
 
     const dialog = page.getByRole("dialog");
 

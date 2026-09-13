@@ -209,6 +209,11 @@ const exerciseADefinition = {
     id: "e2e-print-name",
     title: "Print a name",
     runtime: runtimeDefaults,
+    tools: {
+        defaultVisible: true,
+        allowOpen: true,
+        defaultSurface: "editor",
+    },
     workspace: {
         language: "python",
         entryFile: "main.py",

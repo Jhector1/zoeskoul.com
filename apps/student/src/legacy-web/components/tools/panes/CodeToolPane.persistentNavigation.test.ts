@@ -42,7 +42,7 @@ describe("persistent Review CodeToolPane FullIDE navigation", () => {
 
     it("uses a nonblocking transition indicator instead of a full editor mask", () => {
         const source = readFileSync(
-            resolve(process.cwd(), "src/legacy-web/components/tools/panes/CodeToolPane.tsx"),
+            resolve(process.cwd(), "../../packages/learner-workspace/src/tools/code/CodeToolPane.tsx"),
             "utf8",
         );
         const marker = 'data-testid="review-editor-transition-loading"';
@@ -94,7 +94,7 @@ describe("persistent Review CodeToolPane FullIDE navigation", () => {
 
     it("keeps FullIDE mounted and immutable while a compatible destination resolves", () => {
         const source = readFileSync(
-            resolve(process.cwd(), "src/legacy-web/components/tools/panes/CodeToolPane.tsx"),
+            resolve(process.cwd(), "../../packages/learner-workspace/src/tools/code/CodeToolPane.tsx"),
             "utf8",
         );
 
@@ -121,7 +121,7 @@ describe("persistent Review CodeToolPane FullIDE navigation", () => {
 
     it("does not cover a retained editor with legacy full-screen wait masks", () => {
         const source = readFileSync(
-            resolve(process.cwd(), "src/legacy-web/components/tools/panes/CodeToolPane.tsx"),
+            resolve(process.cwd(), "../../packages/learner-workspace/src/tools/code/CodeToolPane.tsx"),
             "utf8",
         );
         expect(source).toContain(
@@ -140,7 +140,7 @@ describe("persistent Review CodeToolPane FullIDE navigation", () => {
 describe("CodeToolPane canonical exercise presentation ownership", () => {
     it("uses the shared ExerciseRuntime presentation contract for exercise mode", () => {
         const source = readFileSync(
-            resolve(process.cwd(), "src/legacy-web/components/tools/panes/CodeToolPane.tsx"),
+            resolve(process.cwd(), "../../packages/learner-workspace/src/tools/code/CodeToolPane.tsx"),
             "utf8",
         );
 
@@ -151,7 +151,7 @@ describe("CodeToolPane canonical exercise presentation ownership", () => {
 
     it("does not let tool binding or destination loading hide a ready exercise", () => {
         const source = readFileSync(
-            resolve(process.cwd(), "src/legacy-web/components/tools/panes/CodeToolPane.tsx"),
+            resolve(process.cwd(), "../../packages/learner-workspace/src/tools/code/CodeToolPane.tsx"),
             "utf8",
         );
 
@@ -168,7 +168,7 @@ describe("CodeToolPane canonical exercise presentation ownership", () => {
 
     it("preserves previous compatible FullIDE only as visual continuity", () => {
         const source = readFileSync(
-            resolve(process.cwd(), "src/legacy-web/components/tools/panes/CodeToolPane.tsx"),
+            resolve(process.cwd(), "../../packages/learner-workspace/src/tools/code/CodeToolPane.tsx"),
             "utf8",
         );
 

@@ -1,4 +1,12 @@
 "use client";
+import {
+  shouldApplyDeferredReviewCodeInputUnregister,
+  shouldScheduleReviewCodeInputUnregister,
+} from "@zoeskoul/learning-runtime/review/codeInputUnregisterPolicy";
+import { shouldPreserveProtectedReviewCodeInputRegistration } from "@zoeskoul/learning-runtime";
+import { resolveReviewToolsMountedWorkspaceAfterBind } from "@zoeskoul/learning-runtime";
+import { shouldPropagateReviewCodeInputSnapshotToRuntime } from "@zoeskoul/learning-runtime";
+import { applyCanonicalResetToToolBinding } from "@zoeskoul/learning-runtime/review/toolStarterIdentity";
 
 import React, {
   createContext,
@@ -25,7 +33,11 @@ import type {
   UnknownRecord,
   WorkspaceOrigin,
 } from "../runtime/reviewRuntimeTypes";
-import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import {
+  shouldRetainBoundExerciseForResetNavigation,
+  type ReviewResetNavigationBindingLease,
+  useReviewRuntimeStore,
+} from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
 import { mergeMissingWorkspaceFiles } from "@zoeskoul/learning-runtime/review/module/runtime/resolveWorkspaceForTarget";
 import { useDebouncedSketchState } from "../hooks/useDebouncedSketchState";
 import {
@@ -491,6 +503,7 @@ export function ReviewToolsProviderWithSketch({
   const [requestedId, setRequestedId] = useState<string | null>(null);
   const lastRegisterAutoBindKeyRef = useRef<string | null>(null);
   const lastExternalBoundBindKeyRef = useRef<string | null>(null);
+  const resetNavigationBindingLeaseRef = useRef<ReviewResetNavigationBindingLease | null>(null);
   const [registryTick, setRegistryTick] = useState(0);
   const [metaTick, setMetaTick] = useState(0);
   const [runFeedbackById, setRunFeedbackById] = useState<Record<string, RunFeedbackEntry>>({});
@@ -501,6 +514,7 @@ export function ReviewToolsProviderWithSketch({
   const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
   const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
   const currentResetRevision = useReviewRuntimeStore((s) => s.resetRevision);
+
   const setFlushToolSnapshotCallback = useReviewRuntimeStore((s) => s.setFlushToolSnapshotCallback);
   const flushToolSnapshot = useReviewRuntimeStore((s) => s.flushToolSnapshot);
 
@@ -626,6 +640,8 @@ export function ReviewToolsProviderWithSketch({
             if (!entry) return;
 
             const { snap, targetKey } = entry;
+
+
             const userEdited =
                 snap.userEdited === true ||
                 snap.workspaceOrigin === "user" ||
@@ -687,6 +703,7 @@ export function ReviewToolsProviderWithSketch({
       const targetKey = snap.exerciseKey ?? id;
       const current = useReviewRuntimeStore.getState().tool.boundExerciseKey;
 
+
       if (current !== targetKey) {
         flushByToolKey(current);
       }
@@ -702,6 +719,7 @@ export function ReviewToolsProviderWithSketch({
        * the registry after the await and retry from the newest registration.
        */
       const latestSnap = registryRef.current.get(id);
+
 
       if (!latestSnap) {
         setRequestedId(null);
@@ -747,6 +765,7 @@ export function ReviewToolsProviderWithSketch({
           ? (snap.workspaceOrigin ?? "saved")
           : "starter";
 
+
       patchExercise(targetKey, {
         generation: snap.generation,
         language: snap.lang,
@@ -762,11 +781,26 @@ export function ReviewToolsProviderWithSketch({
         workspaceOrigin: boundOrigin,
       });
 
-      if (boundWorkspace && (boundOrigin === "user" || boundOrigin === "saved")) {
-        patchEditorWorkspace(targetKey, boundWorkspace, {
-          generation: snap.generation,
-          source: "review-tools-bind",
+      const mountedWorkspaceBinding =
+        resolveReviewToolsMountedWorkspaceAfterBind({
+          boundWorkspace,
+          boundOrigin,
+          boundGeneration: snap.generation,
+          runtimeExercise:
+            useReviewRuntimeStore.getState().exercises[targetKey] ?? null,
         });
+
+      if (mountedWorkspaceBinding) {
+        patchEditorWorkspace(
+          targetKey,
+          mountedWorkspaceBinding.workspace,
+          {
+            generation: mountedWorkspaceBinding.generation,
+            source: "review-tools-bind",
+            applyToMountedEditor:
+              mountedWorkspaceBinding.applyToMountedEditor,
+          },
+        );
       }
 
       bindExerciseTool(targetKey);
@@ -787,8 +821,12 @@ export function ReviewToolsProviderWithSketch({
         (id: string, patch: CodeInputPatch) => {
             if (!id) return;
 
-            const cur = registryRef.current.get(id);
-            if (!cur) return;
+            let cur = registryRef.current.get(id);
+            if (!cur) {
+                return;
+            }
+
+
             const effectiveGeneration =
                 typeof patch?.generation === "number" ? patch.generation : cur.generation;
             if (
@@ -799,6 +837,13 @@ export function ReviewToolsProviderWithSketch({
             }
 
             const targetKey = patch?.exerciseKey ?? cur.exerciseKey ?? id;
+            const canonicalBinding = applyCanonicalResetToToolBinding(
+                cur, useReviewRuntimeStore.getState().exercises[targetKey],
+            );
+            if (canonicalBinding !== cur) {
+                registryRef.current.set(id, canonicalBinding);
+                cur = canonicalBinding;
+            }
             const userEdited = isRealUserWorkspaceEdit(patch);
 
             const incomingWorkspaceRaw =
@@ -945,13 +990,21 @@ export function ReviewToolsProviderWithSketch({
             const registrationChanged =
                 codeInputRegistrationKey(cur) !== codeInputRegistrationKey(next);
 
+
             /**
              * A mounted-editor replacement is a command, not only a state diff.
              * The persisted/registry workspace may already contain the solution
              * while Monaco is still showing its previous local model. Do not let
              * registration dedupe swallow that command.
              */
-            if (!registrationChanged && patch?.applyToMountedEditor !== true) {
+            if (
+                !shouldPropagateReviewCodeInputSnapshotToRuntime({
+                    registrationChanged,
+                    applyToMountedEditor:
+                        patch?.applyToMountedEditor === true,
+                    userEdited,
+                })
+            ) {
                 return;
             }
 
@@ -1005,7 +1058,9 @@ export function ReviewToolsProviderWithSketch({
                 ...feedbackDismissPatch,
             };
 
+
             patchExercise(targetKey, runtimePatch);
+
 
             const runtimeState = useReviewRuntimeStore.getState();
             const currentBound = runtimeState.tool.boundExerciseKey;
@@ -1226,6 +1281,20 @@ export function ReviewToolsProviderWithSketch({
     const currentBound = (externalBoundId ?? storeBoundId) ?? null;
 
     if (currentBound) {
+      const runtimeState = useReviewRuntimeStore.getState();
+      const retainResetNavigationBinding =
+        shouldRetainBoundExerciseForResetNavigation(
+          runtimeState,
+          currentBound,
+          resetNavigationBindingLeaseRef.current,
+        );
+
+      if (retainResetNavigationBinding) {
+        setRequestedId(null);
+        return;
+      }
+
+      resetNavigationBindingLeaseRef.current = null;
       flushByToolKey(currentBound);
       storeUnbindExerciseTool(currentBound);
     }
@@ -1243,6 +1312,8 @@ export function ReviewToolsProviderWithSketch({
 
       const had = registryRef.current.has(id);
       const prev = registryRef.current.get(id);
+
+
       if (!orderRef.current.includes(id)) orderRef.current.push(id);
 
         const normalizedPair = normalizeCodeWorkspacePair({
@@ -1258,7 +1329,9 @@ export function ReviewToolsProviderWithSketch({
             generation:
                 typeof args.generation === "number"
                     ? args.generation
-                    : currentResetRevision,
+                    : currentResetRevision === 0
+                        ? 0
+                        : undefined,
             workspace: normalizedPair.workspace,
             code: normalizedPair.code,
         };
@@ -1299,38 +1372,80 @@ export function ReviewToolsProviderWithSketch({
         );
 
         if (prevIsProtectedUserSnapshot && prev) {
-            const incomingMatchesPatchedSnapshot =
-                prev.lang === normalizedArgs.lang &&
-                prev.code === normalizedArgs.code &&
-                (prev.stdin ?? "") === (normalizedArgs.stdin ?? "") &&
-                workspaceKeyOf(prev.workspace ?? null) ===
-                workspaceKeyOf(normalizedArgs.workspace ?? null);
+            const runtimeExerciseForRegistration =
+                useReviewRuntimeStore.getState().exercises[nextTargetKey] ?? null;
+            const runtimeWorkspaceForRegistration =
+                runtimeExerciseForRegistration?.workspace ??
+                runtimeExerciseForRegistration?.codeWorkspace ??
+                runtimeExerciseForRegistration?.ideWorkspace ??
+                null;
+            const runtimeOwnsLearnerWorkspace = Boolean(
+                runtimeWorkspaceForRegistration &&
+                (
+                    runtimeExerciseForRegistration?.userEdited === true ||
+                    runtimeExerciseForRegistration?.workspaceOrigin === "user" ||
+                    runtimeExerciseForRegistration?.workspaceOrigin === "saved"
+                )
+            );
+            const runtimeCodeForRegistration =
+                getWorkspaceEntryCode(runtimeWorkspaceForRegistration) ??
+                runtimeExerciseForRegistration?.code ??
+                runtimeExerciseForRegistration?.source ??
+                "";
 
-            const incomingIsBlankNonUser =
-                !incomingIsExplicitUserSnapshot && !hasNonBlankText(incomingCode);
-
-            const incomingWouldDowngradeProtectedSnapshot =
-                !incomingIsExplicitUserSnapshot &&
-                hasNonBlankText(incomingCode) &&
-                incomingCode !== prevCode;
+            const preserveProtectedRegistration =
+                shouldPreserveProtectedReviewCodeInputRegistration({
+                    previousProtected: true,
+                    previousGeneration:
+                        typeof prev.generation === "number" ? prev.generation : undefined,
+                    incomingGeneration:
+                        typeof normalizedArgs.generation === "number"
+                            ? normalizedArgs.generation
+                            : undefined,
+                    activeGeneration: currentResetRevision,
+                    incomingClaimsLearnerOwnership:
+                        incomingIsExplicitUserSnapshot,
+                    previous: {
+                        code: prevCode,
+                        stdin: prev.stdin ?? "",
+                        language: String(prev.lang ?? ""),
+                        workspaceKey: workspaceKeyOf(prev.workspace ?? null),
+                    },
+                    incoming: {
+                        code: incomingCode,
+                        stdin: normalizedArgs.stdin ?? "",
+                        language: String(normalizedArgs.lang ?? ""),
+                        workspaceKey: workspaceKeyOf(
+                            normalizedArgs.workspace ?? null,
+                        ),
+                    },
+                    runtime: runtimeOwnsLearnerWorkspace
+                        ? {
+                            code: String(runtimeCodeForRegistration ?? ""),
+                            stdin:
+                                runtimeExerciseForRegistration?.stdin ??
+                                runtimeExerciseForRegistration?.codeStdin ??
+                                "",
+                            language: String(
+                                runtimeExerciseForRegistration?.language ??
+                                runtimeExerciseForRegistration?.lang ??
+                                "",
+                            ),
+                            workspaceKey: workspaceKeyOf(
+                                runtimeWorkspaceForRegistration,
+                            ),
+                        }
+                        : null,
+                });
 
             /**
-             * Critical:
-             * When navigating real review routes, the same code_input can re-register
-             * with nonblank starter code after the learner already solved it.
-             *
-             * That incoming starter is nonblank, so the old guard allowed it to replace
-             * the protected learner snapshot. Then CodeToolPane correctly rendered the
-             * registry's new value: starter code.
-             *
-             * Preserve the previous learner/saved snapshot unless the incoming
-             * registration is an explicit user edit.
+             * registerCodeInput() is a passive render registration. A stale render
+             * can inherit userEdited/workspaceOrigin="saved" while still carrying
+             * starter content, so those ownership flags do not make it a learner
+             * edit. Preserve protected learner content unless canonical runtime
+             * uniquely agrees with the incoming registration.
              */
-            if (
-                incomingMatchesPatchedSnapshot ||
-                incomingIsBlankNonUser ||
-                incomingWouldDowngradeProtectedSnapshot
-            ) {
+            if (preserveProtectedRegistration) {
                 nextArgs = {
                     ...prev,
                     workspace: reconcileProtectedCodeInputWorkspace({
@@ -1371,6 +1486,7 @@ export function ReviewToolsProviderWithSketch({
 
       const prevKey = codeInputRegistrationKey(prev);
       const nextKey = codeInputRegistrationKey(nextArgs);
+
 
       registryRef.current.set(id, nextArgs);
 
@@ -1417,10 +1533,24 @@ export function ReviewToolsProviderWithSketch({
 
       clearUnbindTimer(id);
 
+      const capturedRegistration = registryRef.current.get(id);
+      if (!shouldScheduleReviewCodeInputUnregister(capturedRegistration)) {
+        return;
+      }
+
       const targetKeyBeforeDelete = getTargetKeyForInputId(id);
 
       const timer = window.setTimeout(() => {
         unbindTimersRef.current.delete(id);
+
+        if (
+          !shouldApplyDeferredReviewCodeInputUnregister({
+            capturedRegistration,
+            currentRegistration: registryRef.current.get(id),
+          })
+        ) {
+          return;
+        }
 
         registryRef.current.delete(id);
         metaRef.current.delete(id);
@@ -1428,12 +1558,26 @@ export function ReviewToolsProviderWithSketch({
         setMetaTick((x) => x + 1);
         clearRunFeedback(id);
 
-        const currentBound = useReviewRuntimeStore.getState().tool.boundExerciseKey;
+        const runtimeState = useReviewRuntimeStore.getState();
+        const currentBound = runtimeState.tool.boundExerciseKey;
 
         if (
           !registryRef.current.has(id) &&
           (currentBound === id || currentBound === targetKeyBeforeDelete)
         ) {
+          const retainResetNavigationBinding =
+            Boolean(currentBound) &&
+            shouldRetainBoundExerciseForResetNavigation(
+              runtimeState,
+              currentBound,
+              resetNavigationBindingLeaseRef.current,
+            );
+
+          if (retainResetNavigationBinding) {
+            return;
+          }
+
+          resetNavigationBindingLeaseRef.current = null;
           if (currentBound) {
             storeUnbindExerciseTool(currentBound);
           }
@@ -1582,11 +1726,28 @@ export function ReviewToolsProviderWithSketch({
 
     if (!next) {
       lastExternalBoundBindKeyRef.current = null;
-      const current = useReviewRuntimeStore.getState().tool.boundExerciseKey;
-      if (current) storeUnbindExerciseTool(current);
+
+      const runtimeState = useReviewRuntimeStore.getState();
+      const current = runtimeState.tool.boundExerciseKey;
+      const retainResetNavigationBinding =
+        Boolean(current) &&
+        shouldRetainBoundExerciseForResetNavigation(
+          runtimeState,
+          current,
+          resetNavigationBindingLeaseRef.current,
+        );
+
+      if (current && !retainResetNavigationBinding) {
+        resetNavigationBindingLeaseRef.current = null;
+        storeUnbindExerciseTool(current);
+      }
+
       setRequestedId(null);
       return;
     }
+
+    // Any explicit routed exercise ends the reset-navigation handoff lease.
+    resetNavigationBindingLeaseRef.current = null;
 
     const entry = getRegistryEntryForToolKey(next);
 
@@ -1636,7 +1797,24 @@ export function ReviewToolsProviderWithSketch({
     setRegistryTick((x) => x + 1);
     setMetaTick((x) => x + 1);
 
-    const current = useReviewRuntimeStore.getState().tool.boundExerciseKey;
+    const runtimeState = useReviewRuntimeStore.getState();
+    const current = runtimeState.tool.boundExerciseKey;
+
+    if (
+      current &&
+      shouldRetainBoundExerciseForResetNavigation(
+        runtimeState,
+        current,
+      )
+    ) {
+      resetNavigationBindingLeaseRef.current = {
+        exerciseKey: current,
+        resetRevision: runtimeState.resetRevision,
+      };
+      return;
+    }
+
+    resetNavigationBindingLeaseRef.current = null;
     if (current) storeUnbindExerciseTool(current);
     onUnbindFromToolsPanel?.();
   }, [enabled, storeUnbindExerciseTool, onUnbindFromToolsPanel]);
@@ -1651,23 +1829,66 @@ export function ReviewToolsProviderWithSketch({
     }
 
     if (lastResetRef.current !== resetKey) {
+      /**
+       * Authoritative reset cleanup is DISCARD, not ordinary unbind.
+       *
+       * The ordinary onUnbindFromToolsPanel path calls tool.flushLatest() and
+       * tool.unbindCodeInput(). At this point those callbacks can still hold the
+       * pre-reset Monaco/Tools snapshot. Flushing it after reset writes stale
+       * learner-owned toolState back into progress and lets later hydration
+       * resurrect it.
+       *
+       * Clear every pre-reset registration/timer first. Keep the canonical
+       * runtime binding created by the reset; the new registration will
+       * reconnect the mounted editor without publishing stale work.
+       */
+      for (const timer of unbindTimersRef.current.values()) {
+        window.clearTimeout(timer);
+      }
+      unbindTimersRef.current.clear();
+
       registryRef.current.clear();
       orderRef.current = [];
       metaRef.current.clear();
+      lastRegisterAutoBindKeyRef.current = null;
+      lastExternalBoundBindKeyRef.current = null;
 
       setRequestedId(null);
       setRunFeedbackById({});
       setRegistryTick((x) => x + 1);
       setMetaTick((x) => x + 1);
 
-      onUnbindFromToolsPanel?.();
+      /**
+       * The runtime reset is the canonical owner of the post-reset binding.
+       * resetTopicToCanonicalState/resetModuleToCanonicalState may already have
+       * rebuilt and rebound the current route exercise at the new generation.
+       *
+       * Clearing the old registry is still required, but unbinding here would
+       * destroy that freshly restored canonical owner and leave the mounted
+       * route with activeExerciseKey/boundExerciseKey = null.
+       */
+      const runtimeState = useReviewRuntimeStore.getState();
+      const current = runtimeState.tool.boundExerciseKey;
 
-      const current = useReviewRuntimeStore.getState().tool.boundExerciseKey;
-      if (current) storeUnbindExerciseTool(current);
+      if (
+        current &&
+        shouldRetainBoundExerciseForResetNavigation(
+          runtimeState,
+          current,
+        )
+      ) {
+        resetNavigationBindingLeaseRef.current = {
+          exerciseKey: current,
+          resetRevision: runtimeState.resetRevision,
+        };
+      } else {
+        resetNavigationBindingLeaseRef.current = null;
+      }
+
     }
 
     lastResetRef.current = resetKey;
-  }, [resetKey, storeUnbindExerciseTool, onUnbindFromToolsPanel]);
+  }, [resetKey]);
 
   useEffect(() => {
     setBoundId(getInputIdForToolKey((externalBoundId ?? storeBoundId) ?? null) ?? null);

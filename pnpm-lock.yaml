@@ -914,10 +914,64 @@ importers:
       '@zoeskoul/code-contracts':
         specifier: workspace:*
         version: link:../code-contracts
+      '@zoeskoul/curriculum-contracts':
+        specifier: workspace:*
+        version: link:../curriculum-contracts
+      '@zoeskoul/curriculum-registry':
+        specifier: workspace:*
+        version: link:../curriculum-registry
+      '@zoeskoul/db':
+        specifier: workspace:*
+        version: link:../db
+      '@zoeskoul/editor-surface':
+        specifier: workspace:*
+        version: link:../editor-surface
+      '@zoeskoul/learner-ui':
+        specifier: workspace:*
+        version: link:../learner-ui
+      '@zoeskoul/learning-runtime':
+        specifier: workspace:*
+        version: link:../learning-runtime
+      '@zoeskoul/lesson-renderer':
+        specifier: workspace:*
+        version: link:../lesson-renderer
+      '@zoeskoul/pdf-viewer':
+        specifier: workspace:*
+        version: link:../pdf-viewer
+      '@zoeskoul/practice-checks':
+        specifier: workspace:*
+        version: link:../practice-checks
+      '@zoeskoul/practice-contracts':
+        specifier: workspace:*
+        version: link:../practice-contracts
+      '@zoeskoul/preferences':
+        specifier: workspace:*
+        version: link:../preferences
+      '@zoeskoul/workspace-contracts':
+        specifier: workspace:*
+        version: link:../workspace-contracts
+      lucide-react:
+        specifier: ^0.563.0
+        version: 0.563.0(react@19.2.3)
+      monaco-editor:
+        specifier: ^0.55.1
+        version: 0.55.1
+      react-dom:
+        specifier: 19.2.3
+        version: 19.2.3(react@19.2.3)
+      react-icons:
+        specifier: ^5.5.0
+        version: 5.6.0(react@19.2.3)
+      xterm:
+        specifier: ^5.3.0
+        version: 5.3.0
     devDependencies:
       '@types/react':
         specifier: ^19.0.0
         version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.3(@types/react@19.2.14)
       react:
         specifier: 19.2.3
         version: 19.2.3

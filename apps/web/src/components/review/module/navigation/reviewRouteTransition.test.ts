@@ -16,6 +16,22 @@ import {
 } from "./reviewRouteTransition";
 
 describe("review navigation publication", () => {
+    it("does not publish a tool bind rejected by the tool snapshot owner", async () => {
+        let published = false;
+
+        await expect(
+            publishReviewToolBindIfCurrent({
+                acceptedOwner: { navigationGeneration: 0, routeIdentity: "A" },
+                getCurrentOwner: () => ({ navigationGeneration: 0, routeIdentity: "A" }),
+                bind: async () => false,
+                publish: () => {
+                    published = true;
+                },
+            }),
+        ).resolves.toBe(false);
+        expect(published).toBe(false);
+    });
+
     it("accepts an embedded exercise bind owned by the mounted card when the route has no card target", () => {
         expect(reviewToolBindMatchesCurrentCard({
             bindOwnerCardId: "sketch1",

@@ -1,7 +1,4 @@
 "use client";
 
-export {
-  LessonMarkdown as default,
-  shouldRenderLiteralOperatorContent,
-  type LessonMarkdownProps,
-} from "@zoeskoul/lesson-renderer";
+export { default } from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";
+export * from "@zoeskoul/learner-workspace/ui/markdown/MathMarkdown";

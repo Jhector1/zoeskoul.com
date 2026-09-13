@@ -322,8 +322,27 @@ export function mergeRuntimeIntoProgress(
        * mirrored on every learner save.
        */
       for (const alias of aliases) {
+        const oldAlias = {
+          ...(asRecord(oldPracticePatch[alias]) ?? {}),
+        };
+
+        /**
+         * Starter/reset runtime snapshots deliberately do not carry learner
+         * workspace/code. If we spread the old alias unchanged, those omitted
+         * fields survive and can later rehydrate pre-reset learner code.
+         */
+        if (patch.userEdited !== true) {
+          delete oldAlias.workspace;
+          delete oldAlias.codeWorkspace;
+          delete oldAlias.ideWorkspace;
+          delete oldAlias.code;
+          delete oldAlias.source;
+          delete oldAlias.stdin;
+          delete oldAlias.codeStdin;
+        }
+
         nextPracticePatch[alias] = {
-          ...(oldPracticePatch[alias] ?? {}),
+          ...oldAlias,
           ...patch,
         };
       }

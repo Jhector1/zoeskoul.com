@@ -1,48 +1,49 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { getLearnerWorkspaceEnv, getLearnerWorkspaceStaticConfig } from "@zoeskoul/learner-workspace/runtime/appRuntime";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 
 import {
     useFullIDEAuthenticatedUserId,
     useFullIDERouter,
-} from "@/components/ide/fullide/appAdapter";
+} from "@zoeskoul/learner-workspace/runtime/appRuntime";
 
-import { DEFAULT_SQL_DIALECT } from "@/components/code/runner/constants";
-import { useProjectDirtyState } from "@/components/code/projects/hooks/useProjectDirtyState";
-import { useProjectsList } from "@/components/code/projects/hooks/useProjectsList";
+import { DEFAULT_SQL_DIALECT } from "@zoeskoul/learner-workspace/runner/constants";
+import { useProjectDirtyState } from "@zoeskoul/learner-workspace/projects/hooks/useProjectDirtyState";
+import { useProjectsList } from "@zoeskoul/learner-workspace/projects/hooks/useProjectsList";
 
-import { pathOf } from "@/components/ide/fsTree";
+import { pathOf } from "@zoeskoul/learner-workspace/ide/fsTree";
 import type { WorkspaceSyncEntry } from "@zoeskoul/code-contracts";
-import { useIdeWorkspace } from "@/components/ide/workspaceHook/useIdeWorkspace";
-import { cn } from "@/components/ide/utils";
-import IdeDesktopLayout from "@/components/ide/fullide/chrome/IdeDesktopLayout";
+import { useIdeWorkspace } from "@zoeskoul/learner-workspace/ide/workspaceHook/useIdeWorkspace";
+import { cn } from "@zoeskoul/learner-workspace/ide/utils";
+import IdeDesktopLayout from "@zoeskoul/learner-workspace/fullide/chrome/IdeDesktopLayout";
 import IdeHeader from "./IdeHeader";
-import IdeMobileLayout from "@/components/ide/fullide/chrome/IdeMobileLayout";
-import IdeStatusBanners from "@/components/ide/fullide/chrome/IdeStatusBanners";
-import IdeToastHost from "@/components/ide/fullide/chrome/IdeToastHost";
-import IdeConflictBanner from "@/components/ide/fullide/chrome/IdeConflictBanner";
-import { useIdeProjectSession } from "@/components/ide/fullide/hooks/useIdeProjectSession";
-import { useIdeRunner } from "@/components/ide/fullide/hooks/useIdeRunner";
-import { useIdeViewport } from "@/components/ide/fullide/hooks/useIdeViewport";
-import IdeProjectModals from "@/components/ide/fullide/modals/IdeProjectModals";
-import IdeEditorPane from "@/components/ide/fullide/panes/IdeEditorPane";
-import IdeExplorerPane from "@/components/ide/fullide/panes/IdeExplorerPane";
-import type {FullIDEProps, WorkspaceStateV2} from "@/components/ide/types";
-import { CodeRunnerRuntime, ExecutionBackend } from "@/components/code/runner/runtime";
-import { mergeTerminalSnapshotIntoWorkspace } from "@/lib/projects/mergeTerminalSnapshotIntoWorkspace";
-import {FullIDEServices, resolveFullIDEServices} from "@/components/ide/fullide/services";
-import { resolveLearnerWorkspacePresentation } from "@/components/ide/fullide/workspacePresentation";
-import { resolveExternalWorkspaceApplyKey } from "@/components/ide/fullide/externalWorkspaceControl";
+import IdeMobileLayout from "@zoeskoul/learner-workspace/fullide/chrome/IdeMobileLayout";
+import IdeStatusBanners from "@zoeskoul/learner-workspace/ide/fullide/chrome/IdeStatusBanners";
+import IdeToastHost from "@zoeskoul/learner-workspace/fullide/chrome/IdeToastHost";
+import IdeConflictBanner from "@zoeskoul/learner-workspace/ide/fullide/chrome/IdeConflictBanner";
+import { useIdeProjectSession } from "@zoeskoul/learner-workspace/fullide/hooks/useIdeProjectSession";
+import { useIdeRunner } from "@zoeskoul/learner-workspace/fullide/hooks/useIdeRunner";
+import { useIdeViewport } from "@zoeskoul/learner-workspace/ide/fullide/hooks/useIdeViewport";
+import IdeProjectModals from "@zoeskoul/learner-workspace/fullide/modals/IdeProjectModals";
+import IdeEditorPane from "@zoeskoul/learner-workspace/fullide/panes/IdeEditorPane";
+import IdeExplorerPane from "@zoeskoul/learner-workspace/fullide/panes/IdeExplorerPane";
+import type {FullIDEProps, WorkspaceStateV2} from "@zoeskoul/learner-workspace/ide/types";
+import { CodeRunnerRuntime, ExecutionBackend } from "@zoeskoul/learner-workspace/runner/runtime";
+import { mergeTerminalSnapshotIntoWorkspace } from "@zoeskoul/learner-workspace/lib/projects/mergeTerminalSnapshotIntoWorkspace";
+import {FullIDEServices, resolveFullIDEServices} from "@zoeskoul/learner-workspace/ide/fullide/services";
+import { resolveLearnerWorkspacePresentation } from "@zoeskoul/learner-workspace/fullide/workspacePresentation";
+import { resolveExternalWorkspaceApplyKey, resolveReadyWorkspaceReplacementRevision } from "@zoeskoul/learner-workspace/ide/fullide/externalWorkspaceControl";
 import { buildFullIdeSessionRemountKey } from "./sessionRemountKey";
-import type { EditorSplitPlacement } from "@/components/code/runner/types";
+import type { EditorSplitPlacement } from "@zoeskoul/learner-workspace/runner/types";
 import {
     resolveFullIdeWorkspaceChangeOrigin,
     type PendingUserWorkspaceMutation,
-} from "@/components/ide/fullide/workspaceChangeOrigin";
+} from "@zoeskoul/learner-workspace/ide/fullide/workspaceChangeOrigin";
 // import {
 //     FullIDEServices,
 //     resolveFullIDEServices,
-// } from "@/components/ide/fullide/services";
+// } from "@zoeskoul/learner-workspace/ide/fullide/services";
 
 type WorkspaceHookResult = ReturnType<typeof useIdeWorkspace>;
 
@@ -76,6 +77,7 @@ type FullIDEInnerProps = {
     forceDesktopLayout?: boolean;
     exerciseStateKey?: string;
     workspaceReplacementRevision?: string | number;
+    onWorkspaceReplacementApplied?: FullIDEProps["onWorkspaceReplacementApplied"];
     sqlDatasetId?: FullIDEProps["sqlDatasetId"];
     sqlResultShape?: FullIDEProps["sqlResultShape"];
     sqlPaneOptions?: FullIDEProps["sqlPaneOptions"];
@@ -115,7 +117,7 @@ function getOrCreateGuestActorKey(
         return `guest:${id}`;
     }
 
-    const key = `${process.env.NEXT_PUBLIC_APP_NAME ?? "app"}.ide.guest-actor.v1`;
+    const key = `${getLearnerWorkspaceStaticConfig().appName}.ide.guest-actor.v1`;
 
     try {
         const existing = window.localStorage.getItem(key);
@@ -182,6 +184,7 @@ function FullIDEInner({
                           readOnly,
                           exerciseStateKey,
                           workspaceReplacementRevision,
+                          onWorkspaceReplacementApplied,
                           router,
                           splitRef,
                           rootRef,
@@ -257,7 +260,7 @@ function FullIDEInner({
     } | null>(null);
     const splitFile = editorSplit
         ? visibleWorkspaceNodes.find(
-              (node): node is import("@/components/ide/types").FileNode =>
+              (node): node is import("@zoeskoul/learner-workspace/ide/types").FileNode =>
                   node.kind === "file" && node.id === editorSplit.fileId,
           ) ?? null
         : null;
@@ -709,6 +712,7 @@ function FullIDEInner({
             exerciseStateKey={exerciseStateKey}
             workspace={currentWorkspace}
             workspaceReplacementRevision={workspaceReplacementRevision}
+            onWorkspaceReplacementApplied={onWorkspaceReplacementApplied}
             draftStorageMode={draftStorageMode}
             readOnly={readOnly}
             terminalHistoryScopeKey={terminalHistoryScopeKey}
@@ -970,7 +974,7 @@ export default function FullIDE(props: FullIDEProps) {
         height = 720,
         className,
         fullHeight = false,
-        storageKey = `${process.env.NEXT_PUBLIC_APP_NAME}.ide.workspace.v2`,
+        storageKey = `${getLearnerWorkspaceStaticConfig().appName}.ide.workspace.v2`,
         language: forcedLanguage,
         onChangeLanguage,
         resetOnForcedLanguageChange = false,
@@ -1185,7 +1189,7 @@ export default function FullIDE(props: FullIDEProps) {
     const resetWorkspaceForLanguageActionRef = useRef(workspace.actions.resetWorkspaceForLanguage);
     const workspaceLanguageRef = useRef(workspace.state.language);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         replaceWorkspaceActionRef.current = workspace.actions.replaceWorkspace;
         resetWorkspaceForLanguageActionRef.current = workspace.actions.resetWorkspaceForLanguage;
         workspaceLanguageRef.current = workspace.state.language;
@@ -1208,7 +1212,7 @@ export default function FullIDE(props: FullIDEProps) {
     const currentWorkspaceJsonRef = useRef(currentWorkspaceJson);
     const currentWorkspaceNotifyKeyRef = useRef(currentWorkspaceNotifyKey);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         externalWorkspaceRef.current = externalWorkspace;
         initialWorkspaceRef.current = initialWorkspace;
     }, [externalWorkspace, initialWorkspace]);
@@ -1218,7 +1222,7 @@ export default function FullIDE(props: FullIDEProps) {
         currentWorkspaceNotifyKeyRef.current = currentWorkspaceNotifyKey;
     }, [currentWorkspaceJson, currentWorkspaceNotifyKey]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!hasExternalWorkspaceProp) return;
 
         const applyKey = externalWorkspaceApplyKey;
@@ -1269,12 +1273,11 @@ export default function FullIDE(props: FullIDEProps) {
      * against the previous active file during the hydration render. When React
      * state already matches but Monaco is stale, the command is ready immediately.
      */
-    const readyWorkspaceReplacementRevision =
-        typeof externalWorkspaceRevision !== "undefined" &&
-        workspaceNotifyKey(externalWorkspaceRef.current ?? null) ===
-            currentWorkspaceNotifyKey
-            ? externalWorkspaceRevision
-            : undefined;
+    const readyWorkspaceReplacementRevision = resolveReadyWorkspaceReplacementRevision({
+        revision: externalWorkspaceRevision,
+        requestedWorkspaceKey: externalWorkspaceControlKey,
+        committedWorkspaceKey: currentWorkspaceNotifyKey,
+    });
 
     useEffect(() => {
         const current = workspace.derived.currentWorkspace;
@@ -1397,6 +1400,9 @@ export default function FullIDE(props: FullIDEProps) {
                 exerciseStateKey={props.exerciseStateKey}
                 workspaceReplacementRevision={
                     readyWorkspaceReplacementRevision
+                }
+                onWorkspaceReplacementApplied={
+                    props.onWorkspaceReplacementApplied
                 }
                 router={router}
                 splitRef={splitRef}

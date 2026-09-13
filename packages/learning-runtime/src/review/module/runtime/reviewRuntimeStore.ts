@@ -35,8 +35,49 @@ import {
     hasStarterIntentValue,
     workspaceHasUsableStarterContent
 } from "./starterContent";
+import { shouldRetainFreshResetMountedEditor } from "./resetMountedEditorRetentionPolicy";
 
 type InternalStore = ReviewRuntimeStore;
+
+export type ReviewResetNavigationBindingLease = {
+    exerciseKey: string;
+    resetRevision: number;
+};
+
+export function shouldRetainBoundExerciseForResetNavigation(
+    state: Pick<
+        InternalStore,
+        "resetRevision" | "exercises" | "editorRuntimes"
+    >,
+    exerciseKey: string | null | undefined,
+    lease?: ReviewResetNavigationBindingLease | null,
+): boolean {
+    if (!exerciseKey) return false;
+
+    // A supplied lease narrows retention to the exact reset handoff. Some
+    // teardown paths can run before React has published that lease, so the
+    // canonical fresh-reset generation remains the authoritative fallback.
+    if (
+        lease &&
+        (
+            lease.exerciseKey !== exerciseKey ||
+            lease.resetRevision !== state.resetRevision
+        )
+    ) {
+        return false;
+    }
+
+    const exercise = state.exercises[exerciseKey] ?? null;
+    const editor = state.editorRuntimes[exerciseKey] ?? null;
+
+    return shouldRetainFreshResetMountedEditor({
+        resetRevision: state.resetRevision,
+        workspaceGeneration: exercise?.workspaceGeneration,
+        workspaceApplyRevision: editor?.workspaceApplyRevision,
+        workspaceOrigin: exercise?.workspaceOrigin,
+        userEdited: exercise?.userEdited,
+    });
+}
 
 /**
  * Imperative bridge for the currently mounted review tools provider.
@@ -750,15 +791,6 @@ function resolveAuthoritativeResetWorkspace(args: {
     registryEntry: ReviewTargetEntry | null;
     language: string;
 }) {
-    for (const candidate of [
-        args.existingExercise?.starterWorkspace,
-        args.existingEditor?.starterWorkspace,
-    ]) {
-        if (workspaceHasUsableStarterContent(candidate)) {
-            return cloneRuntimeWorkspace(candidate!);
-        }
-    }
-
     const manifest = asManifestRecord(
         args.registryEntry?.toolManifest ??
         args.registryEntry?.item ??
@@ -766,17 +798,285 @@ function resolveAuthoritativeResetWorkspace(args: {
         null,
     );
 
-    if (!manifest) return null;
-
-    const resolved = resolveExerciseWorkspace({
+    const resolved = manifest ? resolveExerciseWorkspace({
         language: args.language || args.registryEntry?.language || "python",
         manifest,
         entry: args.registryEntry,
+    }) : null;
+
+    // Runtime starter snapshots can have been reconstructed from saved learner
+    // progress. Reset must prefer the authored target over those cached copies.
+    for (const candidate of [
+        resolved,
+        args.existingExercise?.starterWorkspace,
+        args.existingEditor?.starterWorkspace,
+    ]) {
+        if (workspaceHasUsableStarterContent(candidate)) {
+            return cloneRuntimeWorkspace(candidate!);
+        }
+    }
+    return null;
+}
+
+type CanonicalExerciseResetBuild = {
+    exerciseKey: string;
+    exercise: ExerciseRuntimeState | null;
+    editor: EditorRuntimeState | null;
+    workspace: WorkspaceStateV2 | null;
+};
+
+function registryExerciseEntryForKey(
+    registry: ReviewTargetRegistry | null | undefined,
+    exerciseKey: string,
+) {
+    const exact = registry?.byKey?.[`exercise:${exerciseKey}`] ?? null;
+    if (exact?.ownerKind === "exercise") return exact;
+
+    return (
+        Object.values(registry?.byKey ?? {}).find(
+            (entry) =>
+                entry?.ownerKind === "exercise" &&
+                (entry.exerciseStateKey === exerciseKey || entry.ownerKey === exerciseKey),
+        ) ?? null
+    );
+}
+
+function resetArgsForExerciseKey(
+    state: ReviewRuntimeState,
+    exerciseKey: string | null | undefined,
+): ResetExerciseToStarterArgs | null {
+    const normalizedKey = String(exerciseKey ?? "").trim();
+    if (!normalizedKey) return null;
+
+    const existing = state.exercises[normalizedKey] ?? null;
+    const registryEntry = registryExerciseEntryForKey(
+        state.targetRegistry,
+        normalizedKey,
+    );
+    const parsed = parseRuntimeOwnerKey(normalizedKey);
+    const topicId = String(
+        existing?.topicId ?? registryEntry?.topicId ?? parsed.topicId ?? "",
+    ).trim();
+    const cardId = String(
+        existing?.cardId ?? registryEntry?.cardId ?? parsed.cardId ?? "",
+    ).trim();
+    const exerciseId = String(
+        existing?.exerciseId ??
+        registryEntry?.exerciseId ??
+        parsed.exerciseId ??
+        "",
+    ).trim();
+
+    if (!topicId || !cardId || !exerciseId) return null;
+
+    return {
+        topicId,
+        cardId,
+        exerciseId,
+        exerciseStateKey: normalizedKey,
+    };
+}
+
+function activeResetExerciseArgs(
+    state: ReviewRuntimeState,
+    topicId?: string,
+): ResetExerciseToStarterArgs | null {
+    const candidates = [
+        state.activeExerciseKey,
+        state.tool.boundExerciseKey,
+    ];
+
+    for (const candidate of candidates) {
+        const args = resetArgsForExerciseKey(state, candidate);
+        if (!args) continue;
+        if (topicId && !sameResetTopicId(args.topicId, topicId)) continue;
+        return args;
+    }
+
+    return null;
+}
+
+function buildCanonicalExerciseReset(
+    state: ReviewRuntimeState,
+    args: ResetExerciseToStarterArgs,
+    nextResetRevision: number,
+): CanonicalExerciseResetBuild {
+    const normalizedArgs: ResetExerciseToStarterArgs = {
+        topicId: String(args.topicId ?? "").trim(),
+        cardId: String(args.cardId ?? "").trim(),
+        exerciseId: String(args.exerciseId ?? "").trim(),
+        exerciseStateKey:
+            typeof args.exerciseStateKey === "string" &&
+            args.exerciseStateKey.trim()
+                ? args.exerciseStateKey.trim()
+                : null,
+    };
+    const matchingExerciseEntry = Object.entries(state.exercises).find(
+        ([key, value]) => runtimeEntryMatchesExercise(value, key, normalizedArgs),
+    );
+    const knownExerciseKey =
+        normalizedArgs.exerciseStateKey ?? matchingExerciseEntry?.[0] ?? null;
+    const exactRegistryEntry = knownExerciseKey
+        ? registryExerciseEntryForKey(state.targetRegistry, knownExerciseKey)
+        : null;
+    const registryEntry =
+        exactRegistryEntry ??
+        findResetExerciseTargetEntry(state.targetRegistry, normalizedArgs);
+    const exerciseKey =
+        normalizedArgs.exerciseStateKey ??
+        matchingExerciseEntry?.[0] ??
+        registryEntry?.exerciseStateKey ??
+        getExerciseStateKey(
+            {
+                subjectSlug: state.subjectSlug,
+                moduleSlug: state.moduleSlug,
+                sectionSlug: registryEntry?.sectionSlug ?? state.sectionSlug,
+                topicId: normalizedArgs.topicId,
+                cardId: normalizedArgs.cardId,
+            },
+            normalizedArgs.exerciseId,
+        );
+    const existingExercise =
+        state.exercises[exerciseKey] ?? matchingExerciseEntry?.[1] ?? null;
+    const existingEditor =
+        state.editorRuntimes[exerciseKey] ??
+        (matchingExerciseEntry
+            ? state.editorRuntimes[matchingExerciseEntry[0]] ?? null
+            : null);
+    const manifest = asManifestRecord(
+        registryEntry?.toolManifest ??
+        registryEntry?.item ??
+        existingExercise?.manifest ??
+        null,
+    );
+    const language = resolveCourseLanguage({
+        subjectSlug:
+            existingExercise?.subjectSlug ?? state.subjectSlug ?? "",
+        language:
+            existingExercise?.language ??
+            existingExercise?.lang ??
+            registryEntry?.language ??
+            workspaceLanguage(existingExercise?.starterWorkspace) ??
+            "python",
+        runtimeDefaults:
+            registryEntry?.runtimeDefaults ??
+            registryEntry?.topicRuntimeDefaults ??
+            registryEntry?.moduleRuntimeDefaults ??
+            null,
+        target: manifest ?? registryEntry?.item ?? null,
+    });
+    const starterWorkspace = resolveAuthoritativeResetWorkspace({
+        existingExercise,
+        existingEditor,
+        registryEntry,
+        language,
     });
 
-    return workspaceHasUsableStarterContent(resolved)
-        ? cloneRuntimeWorkspace(resolved)
-        : null;
+    if (!starterWorkspace) {
+        return {
+            exerciseKey,
+            exercise: null,
+            editor: null,
+            workspace: null,
+        };
+    }
+
+    const workspace = cloneRuntimeWorkspace(starterWorkspace);
+    const starterSnapshot = cloneRuntimeWorkspace(starterWorkspace);
+    const code = deriveCodeFromWorkspace(workspace);
+    const stdin = typeof workspace.stdin === "string" ? workspace.stdin : "";
+    const now = Date.now();
+    const fileEditState = buildRuntimeFileEditState({
+        workspace,
+        generation: nextResetRevision,
+        origin: "starter",
+        hasUserEdited: false,
+    });
+    const subjectSlug =
+        existingExercise?.subjectSlug ?? state.subjectSlug ?? "unknown";
+    const moduleSlug =
+        existingExercise?.moduleSlug ?? state.moduleSlug ?? "unknown";
+    const sectionSlug =
+        existingExercise?.sectionSlug ??
+        registryEntry?.sectionSlug ??
+        state.sectionSlug ??
+        undefined;
+    const workspaceApplyRevision = Math.max(
+        existingExercise?.workspaceApplyRevision ?? 0,
+        existingEditor?.workspaceApplyRevision ?? 0,
+    ) + 1;
+
+    const exercise: ExerciseRuntimeState = {
+        ...(existingExercise ?? {}),
+        exerciseKey,
+        subjectSlug,
+        moduleSlug,
+        sectionSlug,
+        topicId: normalizedArgs.topicId,
+        cardId: normalizedArgs.cardId,
+        exerciseId: normalizedArgs.exerciseId,
+        language: language as WorkspaceStateV2["language"],
+        lang: language as WorkspaceStateV2["language"],
+        codeLang: language as WorkspaceStateV2["language"],
+        workspace,
+        codeWorkspace: workspace,
+        ideWorkspace: workspace,
+        starterWorkspace: starterSnapshot,
+        starterHash: workspaceHash(starterSnapshot),
+        fileEditState,
+        workspaceGeneration: nextResetRevision,
+        workspaceApplyRevision,
+        workspaceStatus: "ready",
+        workspaceOrigin: "starter",
+        userEdited: false,
+        code,
+        source: code,
+        stdin,
+        codeStdin: stdin,
+        runner: {},
+        answer: { revealed: false },
+        terminalEvidence: undefined,
+        status: "in_progress",
+        submitted: false,
+        result: undefined,
+        workspaceError: null,
+        manifest: manifest ?? existingExercise?.manifest ?? null,
+        ideConfig:
+            (manifest?.ideConfig as ExerciseRuntimeState["ideConfig"]) ??
+            existingExercise?.ideConfig ??
+            null,
+        updatedAt: now,
+    };
+    const editor: EditorRuntimeState = {
+        ...(existingEditor ?? {}),
+        ownerKey: exerciseKey,
+        ownerKind: "exercise",
+        targetKey:
+            existingEditor?.targetKey ??
+            registryEntry?.targetKey ??
+            `exercise:${exerciseKey}`,
+        toolScopeKey:
+            existingEditor?.toolScopeKey ??
+            registryEntry?.toolScopeKey ??
+            exerciseKey,
+        language: language as WorkspaceStateV2["language"],
+        workspaceStatus: "ready",
+        workspaceSeedMode: "starter",
+        workspaceOrigin: "starter",
+        userEdited: false,
+        workspaceGeneration: nextResetRevision,
+        workspaceApplyRevision,
+        starterWorkspace: cloneRuntimeWorkspace(starterSnapshot),
+        starterHash: workspaceHash(starterSnapshot),
+        fileEditState: { ...fileEditState },
+        workspace: cloneRuntimeWorkspace(workspace),
+        code,
+        stdin,
+        terminalEvidence: undefined,
+        updatedAt: now,
+    };
+
+    return { exerciseKey, exercise, editor, workspace };
 }
 
 function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
@@ -2696,6 +2996,9 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 : patch;
 
             const incomingWorkspaceForPreserveCheck = getPatchWorkspace(effectivePatch, existing);
+            if (state.resetRevision > 0 && JSON.stringify(incomingWorkspaceForPreserveCheck).includes("ffggggfff")) {
+                console.log("[mounted-reset] stale incoming workspace", JSON.stringify({ origin: effectivePatch.updateOrigin, mutation: workspaceMutation, existingOrigin: existing?.workspaceOrigin, existingCode: existing?.code, code: effectivePatch.code, stack: new Error().stack }));
+            }
 
             if (
                 shouldPreserveExistingUserWorkspace({
@@ -2845,6 +3148,10 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
             reviewSaveDebug("runtime patchExercise", {
                 exerciseKey: key,
+                incomingGeneration,
+                activeGeneration: state.resetRevision,
+                patchUpdateOrigin: (effectivePatch as any).updateOrigin ?? null,
+                workspaceMutation: workspaceMutation ?? null,
                 patchKeys: Object.keys(effectivePatch ?? {}),
                 patchUserEdited: (effectivePatch as any).userEdited,
                 patchWorkspaceOrigin: (effectivePatch as any).workspaceOrigin,
@@ -3315,6 +3622,109 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         });
     },
 
+    resetTopicToCanonicalState: (topicId) => {
+        let result: ResetExerciseToStarterResult = {
+            exerciseKey: null,
+            resetRevision: get().resetRevision,
+            restored: false,
+        };
+
+        set((state) => {
+            const nextResetRevision = state.resetRevision + 1;
+            const resetArgs = activeResetExerciseArgs(state, topicId);
+            const canonical = resetArgs
+                ? buildCanonicalExerciseReset(
+                    state,
+                    resetArgs,
+                    nextResetRevision,
+                )
+                : null;
+            const nextExercises = Object.fromEntries(
+                Object.entries(state.exercises).filter(
+                    ([key, value]) =>
+                        !runtimeEntryMatchesTopic(value, key, topicId),
+                ),
+            );
+            const nextCards = Object.fromEntries(
+                Object.entries(state.cards).filter(
+                    ([key, value]) =>
+                        !runtimeEntryMatchesTopic(value, key, topicId),
+                ),
+            );
+            const nextEditorRuntimes = Object.fromEntries(
+                Object.entries(state.editorRuntimes).filter(([key, value]) => {
+                    const ownerKey = String(
+                        (value as { ownerKey?: string } | undefined)?.ownerKey ?? key,
+                    );
+                    return !runtimeEntryMatchesTopic(value, ownerKey, topicId);
+                }),
+            );
+            const restored = Boolean(
+                canonical?.exercise && canonical.editor && canonical.workspace,
+            );
+
+            if (restored && canonical) {
+                nextExercises[canonical.exerciseKey] = canonical.exercise!;
+                nextEditorRuntimes[canonical.exerciseKey] = canonical.editor!;
+            }
+
+            const activeMatches = Boolean(
+                state.activeExerciseKey &&
+                runtimeEntryMatchesTopic(
+                    state.exercises[state.activeExerciseKey],
+                    state.activeExerciseKey,
+                    topicId,
+                ),
+            );
+            const boundMatches = Boolean(
+                state.tool.boundExerciseKey &&
+                runtimeEntryMatchesTopic(
+                    state.exercises[state.tool.boundExerciseKey],
+                    state.tool.boundExerciseKey,
+                    topicId,
+                ),
+            );
+
+            result = {
+                exerciseKey: canonical?.exerciseKey ?? null,
+                resetRevision: nextResetRevision,
+                restored,
+            };
+
+            return {
+                resetRevision: nextResetRevision,
+                activeExerciseKey: restored
+                    ? canonical!.exerciseKey
+                    : activeMatches
+                        ? null
+                        : state.activeExerciseKey,
+                boundToolWorkspace: restored
+                    ? cloneRuntimeWorkspace(canonical!.workspace!)
+                    : activeMatches || boundMatches
+                        ? null
+                        : state.boundToolWorkspace,
+                exercises: nextExercises,
+                cards: nextCards,
+                editorRuntimes: nextEditorRuntimes,
+                tool: {
+                    ...state.tool,
+                    boundExerciseKey: restored
+                        ? canonical!.exerciseKey
+                        : boundMatches
+                            ? null
+                            : state.tool.boundExerciseKey,
+                },
+                persistence: {
+                    dirty: false,
+                    pendingExerciseKeys: new Set(),
+                    pendingCardKeys: new Set(),
+                },
+            };
+        });
+
+        return result;
+    },
+
     clearRuntimeForCard: (topicId, cardId) => {
         set((state) => {
             const activeMatches = Boolean(
@@ -3393,72 +3803,12 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                         ? args.exerciseStateKey.trim()
                         : null,
             };
-
-            const matchingExerciseEntry = Object.entries(state.exercises).find(
-                ([key, value]) =>
-                    runtimeEntryMatchesExercise(value, key, normalizedArgs),
-            );
-            const registryEntry = findResetExerciseTargetEntry(
-                state.targetRegistry,
+            const canonical = buildCanonicalExerciseReset(
+                state,
                 normalizedArgs,
+                nextResetRevision,
             );
-            const exerciseKey =
-                normalizedArgs.exerciseStateKey ??
-                matchingExerciseEntry?.[0] ??
-                registryEntry?.exerciseStateKey ??
-                getExerciseStateKey(
-                    {
-                        subjectSlug: state.subjectSlug,
-                        moduleSlug: state.moduleSlug,
-                        sectionSlug:
-                            registryEntry?.sectionSlug ?? state.sectionSlug,
-                        topicId: normalizedArgs.topicId,
-                        cardId: normalizedArgs.cardId,
-                    },
-                    normalizedArgs.exerciseId,
-                );
-
-            const existingExercise =
-                state.exercises[exerciseKey] ??
-                matchingExerciseEntry?.[1] ??
-                null;
-            const existingEditor =
-                state.editorRuntimes[exerciseKey] ??
-                (
-                    matchingExerciseEntry
-                        ? state.editorRuntimes[matchingExerciseEntry[0]] ?? null
-                        : null
-                );
-            const manifest = asManifestRecord(
-                registryEntry?.toolManifest ??
-                registryEntry?.item ??
-                existingExercise?.manifest ??
-                null,
-            );
-            const language = resolveCourseLanguage({
-                subjectSlug:
-                    existingExercise?.subjectSlug ??
-                    state.subjectSlug ??
-                    "",
-                language:
-                    existingExercise?.language ??
-                    existingExercise?.lang ??
-                    registryEntry?.language ??
-                    workspaceLanguage(existingExercise?.starterWorkspace) ??
-                    "python",
-                runtimeDefaults:
-                    registryEntry?.runtimeDefaults ??
-                    registryEntry?.topicRuntimeDefaults ??
-                    registryEntry?.moduleRuntimeDefaults ??
-                    null,
-                target: manifest ?? registryEntry?.item ?? null,
-            });
-            const starterWorkspace = resolveAuthoritativeResetWorkspace({
-                existingExercise,
-                existingEditor,
-                registryEntry,
-                language,
-            });
+            const exerciseKey = canonical.exerciseKey;
 
             const nextExercises = Object.fromEntries(
                 Object.entries(state.exercises).filter(([key, value]) => {
@@ -3492,7 +3842,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 }),
             );
 
-            if (!starterWorkspace) {
+            if (!canonical.exercise || !canonical.editor || !canonical.workspace) {
                 result = {
                     exerciseKey,
                     resetRevision: nextResetRevision,
@@ -3526,100 +3876,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 };
             }
 
-            const workspace = cloneRuntimeWorkspace(starterWorkspace);
-            const starterSnapshot = cloneRuntimeWorkspace(starterWorkspace);
-            const code = deriveCodeFromWorkspace(workspace);
-            const stdin =
-                typeof workspace.stdin === "string" ? workspace.stdin : "";
-            const now = Date.now();
-            const fileEditState = buildRuntimeFileEditState({
-                workspace,
-                generation: nextResetRevision,
-                origin: "starter",
-                hasUserEdited: false,
-            });
-            const subjectSlug =
-                existingExercise?.subjectSlug ?? state.subjectSlug ?? "unknown";
-            const moduleSlug =
-                existingExercise?.moduleSlug ?? state.moduleSlug ?? "unknown";
-            const sectionSlug =
-                existingExercise?.sectionSlug ??
-                registryEntry?.sectionSlug ??
-                state.sectionSlug ??
-                undefined;
-
-            const resetExercise: ExerciseRuntimeState = {
-                ...(existingExercise ?? {}),
-                exerciseKey,
-                subjectSlug,
-                moduleSlug,
-                sectionSlug,
-                topicId: normalizedArgs.topicId,
-                cardId: normalizedArgs.cardId,
-                exerciseId: normalizedArgs.exerciseId,
-                language: language as WorkspaceStateV2["language"],
-                lang: language as WorkspaceStateV2["language"],
-                codeLang: language as WorkspaceStateV2["language"],
-                workspace,
-                codeWorkspace: workspace,
-                ideWorkspace: workspace,
-                starterWorkspace: starterSnapshot,
-                fileEditState,
-                workspaceGeneration: nextResetRevision,
-                workspaceStatus: "ready",
-                workspaceOrigin: "starter",
-                userEdited: false,
-                code,
-                source: code,
-                stdin,
-                codeStdin: stdin,
-                runner: {},
-                answer: { revealed: false },
-                terminalEvidence: undefined,
-                status: "in_progress",
-                submitted: false,
-                result: undefined,
-                workspaceError: null,
-                manifest:
-                    manifest ??
-                    existingExercise?.manifest ??
-                    null,
-                ideConfig:
-                    (manifest?.ideConfig as ExerciseRuntimeState["ideConfig"]) ??
-                    existingExercise?.ideConfig ??
-                    null,
-                updatedAt: now,
-            };
-
-            const resetEditor: EditorRuntimeState = {
-                ...(existingEditor ?? {}),
-                ownerKey: exerciseKey,
-                ownerKind: "exercise",
-                targetKey:
-                    existingEditor?.targetKey ??
-                    registryEntry?.targetKey ??
-                    `exercise:${exerciseKey}`,
-                toolScopeKey:
-                    existingEditor?.toolScopeKey ??
-                    registryEntry?.toolScopeKey ??
-                    exerciseKey,
-                language: language as WorkspaceStateV2["language"],
-                workspaceStatus: "ready",
-                workspaceSeedMode: "starter",
-                workspaceOrigin: "starter",
-                userEdited: false,
-                workspaceGeneration: nextResetRevision,
-                starterWorkspace: cloneRuntimeWorkspace(starterSnapshot),
-                fileEditState: { ...fileEditState },
-                workspace: cloneRuntimeWorkspace(workspace),
-                code,
-                stdin,
-                terminalEvidence: undefined,
-                updatedAt: now,
-            };
-
-            nextExercises[exerciseKey] = resetExercise;
-            nextEditorRuntimes[exerciseKey] = resetEditor;
+            nextExercises[exerciseKey] = canonical.exercise;
+            nextEditorRuntimes[exerciseKey] = canonical.editor;
 
             result = {
                 exerciseKey,
@@ -3634,13 +3892,13 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 exerciseId: normalizedArgs.exerciseId,
                 resetRevision: nextResetRevision,
                 restored: true,
-                workspace: summarizeWorkspaceForSave(workspace),
+                workspace: summarizeWorkspaceForSave(canonical.workspace),
             });
 
             return {
                 resetRevision: nextResetRevision,
                 activeExerciseKey: exerciseKey,
-                boundToolWorkspace: cloneRuntimeWorkspace(workspace),
+                boundToolWorkspace: cloneRuntimeWorkspace(canonical.workspace),
                 exercises: nextExercises,
                 cards: nextCards,
                 editorRuntimes: nextEditorRuntimes,
@@ -3676,6 +3934,62 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 pendingCardKeys: new Set(),
             },
         }));
+    },
+    resetModuleToCanonicalState: () => {
+        let result: ResetExerciseToStarterResult = {
+            exerciseKey: null,
+            resetRevision: get().resetRevision,
+            restored: false,
+        };
+
+        set((state) => {
+            const nextResetRevision = state.resetRevision + 1;
+            const resetArgs = activeResetExerciseArgs(state);
+            const canonical = resetArgs
+                ? buildCanonicalExerciseReset(
+                    state,
+                    resetArgs,
+                    nextResetRevision,
+                )
+                : null;
+            const restored = Boolean(
+                canonical?.exercise && canonical.editor && canonical.workspace,
+            );
+            const exercises: Record<string, ExerciseRuntimeState> = {};
+            const editorRuntimes: Record<string, EditorRuntimeState> = {};
+
+            if (restored && canonical) {
+                exercises[canonical.exerciseKey] = canonical.exercise!;
+                editorRuntimes[canonical.exerciseKey] = canonical.editor!;
+            }
+
+            result = {
+                exerciseKey: canonical?.exerciseKey ?? null,
+                resetRevision: nextResetRevision,
+                restored,
+            };
+
+            return {
+                resetRevision: nextResetRevision,
+                activeExerciseKey: restored ? canonical!.exerciseKey : null,
+                boundToolWorkspace: restored
+                    ? cloneRuntimeWorkspace(canonical!.workspace!)
+                    : null,
+                exercises,
+                cards: {},
+                editorRuntimes,
+                tool: {
+                    boundExerciseKey: restored ? canonical!.exerciseKey : null,
+                },
+                persistence: {
+                    dirty: false,
+                    pendingExerciseKeys: new Set(),
+                    pendingCardKeys: new Set(),
+                },
+            };
+        });
+
+        return result;
     },
     patchCard: (key, patch) => {
         let didPatch = false;
@@ -3927,6 +4241,17 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 source: options?.source,
                 workspaceOrigin: workspaceMutation ? undefined : existing.workspaceOrigin,
                 userEdited: workspaceMutation ? undefined : existing.userEdited,
+            });
+            reviewSaveDebug("runtime patchEditorWorkspace accepted", {
+                ownerKey,
+                source: options?.source ?? null,
+                incomingGeneration,
+                activeGeneration: state.resetRevision,
+                existingWorkspaceGeneration: existing.workspaceGeneration ?? null,
+                patchSourceType,
+                workspaceMutation: workspaceMutation ?? null,
+                applyToMountedEditor: options?.applyToMountedEditor === true,
+                workspace: summarizeWorkspaceForSave(workspace),
             });
             const existingExercise =
                 existing.ownerKind === "exercise" ? state.exercises[ownerKey] ?? null : null;
@@ -4480,8 +4805,40 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 return;
             }
 
+            // Topic/Module reset intentionally navigates back to the first
+            // lesson. The Review editor persists across lesson navigation, so a
+            // card without its own authored editor must not discard the fresh
+            // canonical starter that the authoritative reset just applied.
+            //
+            // Retention is reset-generation-bound and ends after a learner edit.
+            const boundExerciseKey = get().tool.boundExerciseKey;
+            const boundExercise = boundExerciseKey
+                ? get().exercises[boundExerciseKey]
+                : null;
+            const boundEditor = boundExerciseKey
+                ? get().editorRuntimes[boundExerciseKey]
+                : null;
+
+            const resetMountedEditorRetentionArgs = {
+                resetRevision: get().resetRevision,
+                workspaceGeneration: boundExercise?.workspaceGeneration,
+                workspaceApplyRevision: boundEditor?.workspaceApplyRevision,
+                workspaceOrigin: boundExercise?.workspaceOrigin,
+                userEdited: boundExercise?.userEdited,
+            };
+            const retainFreshResetMountedEditor =
+                Boolean(boundExerciseKey) &&
+                shouldRetainFreshResetMountedEditor(
+                    resetMountedEditorRetentionArgs,
+                );
+
+
+            if (retainFreshResetMountedEditor) {
+                return;
+            }
+
             // Unbind exercise only for cards that do not expose an authored editor surface.
-            get().unbindExerciseTool(get().tool.boundExerciseKey ?? "");
+            get().unbindExerciseTool(boundExerciseKey ?? "");
         }
     },
 

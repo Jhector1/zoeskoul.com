@@ -248,6 +248,7 @@ export default function ReviewModuleHeader({
                                     key={option.id}
                                     type="button"
                                     role="menuitem"
+                                    data-testid={`review-reset-${option.id}-button`}
                                     onClick={() => {
                                         closeResetMenu();
                                         option.onSelect();

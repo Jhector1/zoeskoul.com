@@ -1,8 +1,13 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
-// Zoeskoul E2E suite pruning: this file is opt-in.
-test.skip(process.env.RUN_E2E_LEGACY !== "1", "Legacy broad E2E suite is opt-in. Run with RUN_E2E_LEGACY=1 or pnpm test:e2e:legacy.");
 
+
+import { reviewResetAction } from "./support/reviewUi";
+/**
+ * Concern owner: saved-workspace precedence versus authored starter.
+ * Mounted Reset Exercise/Reset Topic behavior is owned by reset-starter-restoration.spec.ts.
+ * Navigation here is a durability/precedence assertion, not the reset presentation owner.
+ */
 
 const BASE_URL = process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:3000";
 
@@ -46,7 +51,7 @@ async function bindTools(page: Page) {
 }
 
 async function resetTopicIfPossible(page: Page) {
-    const resetButton = page.getByTestId("review-reset-topic-button").first();
+    const resetButton = reviewResetAction(page, "topic").first();
 
     if (!(await isVisible(resetButton))) return;
 

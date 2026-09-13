@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 
+import { reviewFullIdeEditorInputs } from "./support/reviewUi";
 const DEV_REVIEW_FILE_IO_URL =
     "/en/dev/e2e/review-module-clone/python/e2e-review-clone/learn/e2e-section/e2e-review-topic/exercise/e2e-file-io";
 
@@ -49,7 +50,7 @@ function workspaceWithoutOutput(mainCode: string) {
 }
 
 async function waitForReviewEditor(page: Page) {
-    const editor = page.getByTestId("code-editor-e2e-input");
+    const editor = reviewFullIdeEditorInputs(page);
 
     await expect(editor).toBeAttached();
     await expect(page.getByTestId("tools-file-tree")).toBeVisible();
@@ -59,7 +60,7 @@ async function waitForReviewEditor(page: Page) {
 }
 
 async function writeCodeAndRun(page: Page, code: string) {
-    const editor = page.getByTestId("code-editor-e2e-input");
+    const editor = reviewFullIdeEditorInputs(page);
     const runButton = page.locator('[data-testid="code-runner-run-button"]:visible').first();
 
     await page.getByTestId("tools-file-node-main.py").click();
@@ -72,7 +73,7 @@ async function writeCodeAndRun(page: Page, code: string) {
 }
 
 async function expectMainFileStillHasCode(page: Page, code: string) {
-    const editor = page.getByTestId("code-editor-e2e-input");
+    const editor = reviewFullIdeEditorInputs(page);
 
     await page.getByTestId("tools-file-node-main.py").click();
     await expect(editor).toHaveValue(code);
@@ -83,7 +84,7 @@ async function expectMainFileStillHasCode(page: Page, code: string) {
 
 async function expectOutputFileWithContent(page: Page) {
     const outputNode = page.getByTestId("tools-file-node-output.txt");
-    const editor = page.getByTestId("code-editor-e2e-input");
+    const editor = reviewFullIdeEditorInputs(page);
 
     await expect(outputNode).toBeVisible();
     await outputNode.click();
@@ -93,7 +94,7 @@ async function expectOutputFileWithContent(page: Page) {
 
 async function expectOutputFileStillHasContent(page: Page) {
     const outputNode = page.getByTestId("tools-file-node-output.txt");
-    const editor = page.getByTestId("code-editor-e2e-input");
+    const editor = reviewFullIdeEditorInputs(page);
 
     await expect(outputNode).toBeVisible();
     await outputNode.click();

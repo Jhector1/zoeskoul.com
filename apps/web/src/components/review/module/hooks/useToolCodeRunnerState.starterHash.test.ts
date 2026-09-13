@@ -3,6 +3,16 @@ import { describe, expect, it } from "vitest";
 import { resolveStarterHashForToolBind } from "./useToolCodeRunnerState";
 
 describe("resolveStarterHashForToolBind", () => {
+    it("keeps the canonical reset starter identity across a stale tool rebind", () => {
+        expect(resolveStarterHashForToolBind({
+            canonicalStarterHash: "authored-starter",
+            snapshotOverridesSaved: true,
+            effectiveSavedStarterHash: "ffggggfff",
+            runtimeStarterHash: "old-starter",
+            progressRuntimeStarterHash: "ffggggfff",
+            currentStarterHash: "ffggggfff",
+        })).toBe("authored-starter");
+    });
     it("preserves the authored starter hash for a terminal snapshot rebind", () => {
         expect(
             resolveStarterHashForToolBind({

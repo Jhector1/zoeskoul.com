@@ -420,11 +420,21 @@ export default function ReviewTopicCards({
                         });
                       }
 
+                      const progressResetTarget: QuizResetTarget =
+                        resetResult?.exerciseKey
+                          ? {
+                              ...resetTarget,
+                              exerciseStateKey:
+                                resetTarget.exerciseStateKey ??
+                                resetResult.exerciseKey,
+                            }
+                          : resetTarget;
+
                       setProgress((prev) => {
                         const next = buildQuizResetProgress(
                             prev,
                             viewTid,
-                            resetTarget,
+                            progressResetTarget,
                         );
 
                         queueMicrotask(() => flushNow(next));

@@ -1,1 +1,1 @@
-export * from "@/lib/ide/workspacePolicy";
+export * from "@zoeskoul/learner-workspace/ide/workspaceHook/workspace.policy";

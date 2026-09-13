@@ -1,5 +1,6 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
+import { reviewResetAction } from "./support/reviewUi";
 test.use({
     viewport: {
         width: 1440,
@@ -264,7 +265,7 @@ function explorerTextNode(page: Page, label: string): Locator {
 }
 
 async function resetTopicIfPossible(page: Page) {
-    const resetButton = page.getByTestId("review-reset-topic-button").first();
+    const resetButton = reviewResetAction(page, "topic").first();
 
     if (!(await isVisible(resetButton))) {
         return;

@@ -4,16 +4,16 @@ import {
     FullIDELink,
     FullIDESettingsMenu,
     useFullIDETranslations,
-} from "@/components/ide/fullide/appAdapter";
+} from "@zoeskoul/learner-workspace/runtime/appRuntime";
 
 
 
-import ProjectSwitcherButton from "@/components/code/projects/ProjectSwitcherButton";
-import type { WorkspaceLanguage, SqlDialect } from "@/lib/practice/types";
+import ProjectSwitcherButton from "@zoeskoul/learner-workspace/projects/ProjectSwitcherButton";
+import type { WorkspaceLanguage, SqlDialect } from "@zoeskoul/learner-workspace/contracts/practiceTypes";
 
-import { IDE_LANGUAGES } from "@/components/ide/constants";
-import { SQL_DIALECT_LABEL } from "@/components/ide/constants";
-import { cn } from "@/components/ide/utils";
+import { IDE_LANGUAGES } from "@zoeskoul/learner-workspace/ide/constants";
+import { SQL_DIALECT_LABEL } from "@zoeskoul/learner-workspace/ide/constants";
+import { cn } from "@zoeskoul/learner-workspace/ide/utils";
 
 const IDE_TOOL_BTN =
     "inline-flex h-8 shrink-0 items-center justify-center gap-1.5 rounded-md px-2.5 text-[11px] font-medium text-neutral-600 transition-colors " +

@@ -30,6 +30,16 @@ export type WorkspaceLanguage =
   | "web"
   | (string & {});
 
+/**
+ * Runtime guard for the open WorkspaceLanguage contract.
+ * WorkspaceLanguage intentionally allows future language identifiers, so
+ * any non-empty string is valid here.
+ */
+export function isWorkspaceLanguage(value: unknown): value is WorkspaceLanguage {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
+
 export type ManifestFileActions = {
   enabled?: boolean;
   createFile?: boolean;

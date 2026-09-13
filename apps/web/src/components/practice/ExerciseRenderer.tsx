@@ -41,6 +41,7 @@ import {
     resolveWorkspaceForExerciseTarget,
     resolveWorkspaceForTarget,
 } from "@zoeskoul/learning-runtime/review/module/runtime/resolveWorkspaceForTarget";
+import { resolveReviewProgressHydrationGeneration } from "@zoeskoul/learning-runtime/review/workspaceHydrationGeneration";
 import { isUsableStarterCode } from "@zoeskoul/learning-runtime/review/module/runtime/starterContent";
 
 
@@ -1087,6 +1088,7 @@ function CodeInputWithTools(props: {
     const ensureExercise = useReviewRuntimeStore((s) => s.ensureExercise);
     const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
     const storeExercise = useReviewRuntimeStore((s) => s.exercises[exerciseKey]);
+    const runtimeResetRevision = useReviewRuntimeStore((s) => s.resetRevision);
 
     const isSqlExercise =
         curLang === "sql" ||
@@ -1206,13 +1208,16 @@ function CodeInputWithTools(props: {
     )
         ? storeExercise
         : null;
-    const compatibleCurrentState = stateLanguageMatches(
-        current,
-        manifestLanguage,
-        currentWorkspace,
-    )
-        ? current
-        : null;
+    const currentStateGeneration = resolveReviewProgressHydrationGeneration({
+        persistedGeneration:
+            (current as any)?.workspaceGeneration ?? (current as any)?.generation,
+        runtimeResetRevision,
+    });
+    const compatibleCurrentState =
+        currentStateGeneration !== undefined &&
+        stateLanguageMatches(current, manifestLanguage, currentWorkspace)
+            ? current
+            : null;
     const manifestStarterWorkspace = resolveExerciseWorkspace({
         language: manifestLanguage,
         manifest: exerciseManifest,
@@ -1355,6 +1360,12 @@ function CodeInputWithTools(props: {
 
             return {
             exerciseKey,
+            generation: resolveReviewProgressHydrationGeneration({
+                persistedGeneration:
+                    (activeState as any)?.workspaceGeneration ??
+                    (activeState as any)?.generation,
+                runtimeResetRevision,
+            }),
             lang: activeLanguage,
             code: normalizedActive.code,
             workspace: normalizedActive.workspace,
@@ -1399,6 +1410,7 @@ function CodeInputWithTools(props: {
             exerciseSqlInitialTableSnapshots,
             onPatch,
             resolvedExerciseSql,
+            runtimeResetRevision,
         ],
     );
 

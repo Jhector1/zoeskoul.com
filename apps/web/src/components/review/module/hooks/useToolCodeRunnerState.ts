@@ -1,4 +1,5 @@
 "use client";
+import { applyCanonicalResetToToolBinding, resolveStarterHashForToolBind } from "@zoeskoul/learning-runtime/review/toolStarterIdentity";
 
 import {
     canonicalizeReviewExerciseStateKey as canonicalizeExerciseStateKey,
@@ -52,6 +53,7 @@ export type ToolStateSeed = {
 type ToolSnap = {
     topicId: string;
     toolKey: string;
+    generation: number;
 
     lang: WorkspaceLanguage;
     code: string;
@@ -67,10 +69,26 @@ type ToolSnap = {
     sqlSeedSql?: string;
     sqlInitialTableSnapshots?: SqlTableSnapshots;
 };
+
+export function resolveBoundToolSnapshotGeneration(
+    snapshotGeneration: number | undefined,
+    activeResetRevision: number,
+) {
+    const ownedGeneration =
+        typeof snapshotGeneration === "number"
+            ? snapshotGeneration
+            : activeResetRevision === 0
+                ? 0
+                : null;
+
+    return ownedGeneration === activeResetRevision ? ownedGeneration : null;
+}
+
 function snapKey(s: ToolSnap) {
     return [
         s.topicId,
         s.toolKey,
+        s.generation,
         s.lang,
         s.sqlDialect,
         s.sqlDatasetId ?? "",
@@ -194,44 +212,7 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
     return undefined;
 }
 
-export function resolveStarterHashForToolBind(args: {
-    snapshotOverridesSaved: boolean;
-    effectiveSavedStarterHash?: string | null;
-    runtimeStarterHash?: string | null;
-    progressRuntimeStarterHash?: string | null;
-    progressToolStarterHash?: string | null;
-    currentStarterHash: string;
-}) {
-    const effectiveSavedStarterHash = firstNonBlank(
-        args.effectiveSavedStarterHash,
-    );
-
-    if (effectiveSavedStarterHash) {
-        return effectiveSavedStarterHash;
-    }
-
-    /**
-     * A terminal-created file is learner workspace state, not a new authored
-     * starter. syncCodeInputSnapshot rebinds the visible tool with
-     * preferSnapshot=true after a terminal snapshot. Preserve the original
-     * starter identity during that rebind.
-     *
-     * Replacing starterHash with the mutated workspace hash changes
-     * CodeToolPane's workspaceOwnerIdentityKey, remounts FullIDE/CodeRunner,
-     * and auto-opens a fresh PTY session.
-     */
-    if (args.snapshotOverridesSaved) {
-        return (
-            firstNonBlank(
-                args.runtimeStarterHash,
-                args.progressRuntimeStarterHash,
-                args.progressToolStarterHash,
-            ) ?? args.currentStarterHash
-        );
-    }
-
-    return args.currentStarterHash;
-}
+export { resolveStarterHashForToolBind } from "@zoeskoul/learning-runtime/review/toolStarterIdentity";
 
 function isSavedUserWork(value: any) {
     if (!value) return false;
@@ -894,6 +875,7 @@ export function useToolCodeRunnerState(args: {
     const latestSnapRef = useRef<ToolSnap>({
         topicId: viewTid,
         toolKey: effectiveToolKey,
+        generation: runtimeResetRevision,
         lang: initialLang,
         code: initialCode,
         stdin: initialStdin,
@@ -911,6 +893,7 @@ export function useToolCodeRunnerState(args: {
         () => ({
             topicId: viewTid,
             toolKey: effectiveToolKey,
+            generation: latestSnapRef.current.generation,
             lang: toolLang,
             code: toolCode,
             stdin: toolStdin,
@@ -941,6 +924,19 @@ export function useToolCodeRunnerState(args: {
 
     const commitToolToProgress = useCallback(
         async (latest: ToolSnap) => {
+            const activeResetRevision =
+                useReviewRuntimeStore.getState().resetRevision;
+            if (latest.generation !== activeResetRevision) {
+                reviewSaveDebug("discard stale tool snapshot after reset", {
+                    snapshotGeneration: latest.generation,
+                    activeGeneration: activeResetRevision,
+                    topicId: latest.topicId,
+                    toolKey: latest.toolKey,
+                    workspace: summarizeWorkspaceForSave(latest.workspace),
+                });
+                return;
+            }
+
             const topicId = latest.topicId;
             const toolKey = latest.toolKey;
             if (!topicId || !toolKey) return;
@@ -1020,7 +1016,7 @@ export function useToolCodeRunnerState(args: {
 
                     if (!runtimeAlreadyMatches) {
                         runtimeApi.patchExercise(exerciseKey, {
-                            generation: runtimeResetRevision,
+                            generation: latest.generation,
                             language: latest.lang,
                             lang: latest.lang,
                             workspace: latest.workspace,
@@ -1092,6 +1088,7 @@ export function useToolCodeRunnerState(args: {
                 const toolState = { ...(tp0.toolState ?? {}) };
 
                 const nextToolEntry = {
+                    generation: latest.generation,
                     lang: latest.lang,
                     code: workspaceCode || latest.code,
                     stdin: latest.stdin,
@@ -1211,13 +1208,20 @@ export function useToolCodeRunnerState(args: {
     useEffect(() => {
         const previous = lastNavigationContextRef.current;
 
-        if (progressHydrated && previous) {
-            void commitToolToProgress(latestSnapRef.current);
-        }
-
         const topicChanged = Boolean(previous && previous.viewTid !== viewTid);
         const scopeChanged = Boolean(previous && previous.scopeKey !== scopeKey);
         const versionChanged = Boolean(previous && previous.versionStr !== versionStr);
+
+        /**
+         * quizVersion is the authoritative reset boundary. A reset increments it.
+         * Never flush the previous ToolSnap across that boundary: its workspace
+         * was captured under the old reset generation.
+         */
+        if (versionChanged) {
+            cancel();
+        } else if (progressHydrated && previous) {
+            void commitToolToProgress(latestSnapRef.current);
+        }
 
         lastNavigationContextRef.current = {
             viewTid,
@@ -1230,7 +1234,7 @@ export function useToolCodeRunnerState(args: {
         }
 
         if (topicChanged || scopeChanged || versionChanged) {
-            if (!preserveCurrentBoundContext()) {
+            if (versionChanged || !preserveCurrentBoundContext()) {
                 clearBoundState();
             }
         }
@@ -1242,6 +1246,7 @@ export function useToolCodeRunnerState(args: {
         commitToolToProgress,
         clearBoundState,
         preserveCurrentBoundContext,
+        cancel,
     ]);
     useEffect(() => {
         if (!progressHydrated) return;
@@ -1330,6 +1335,7 @@ export function useToolCodeRunnerState(args: {
         });
 
         const nextSnap: ToolSnap = {
+            generation: runtimeResetRevision,
             topicId: viewTid,
             toolKey: effectiveToolKey,
             lang: nextLang,
@@ -1348,6 +1354,7 @@ export function useToolCodeRunnerState(args: {
         const latest = latestSnapRef.current;
         const latestIdentity = `${latest.topicId}::${latest.toolKey}::${versionStr}`;
         const hasUnsavedLocalEdits =
+            latest.generation === runtimeResetRevision &&
             hydratedToolIdentity === toolIdentity &&
             latestIdentity === toolIdentity &&
             snapKey(latest) !== snapKey(nextSnap);
@@ -1411,6 +1418,7 @@ export function useToolCodeRunnerState(args: {
     const bindCodeInput = useCallback(
         async (args2: {
             id: string;
+            generation?: number;
             ownerCardId?: string | null;
             lang: WorkspaceLanguage;
             code: string;
@@ -1429,6 +1437,20 @@ export function useToolCodeRunnerState(args: {
             workspaceOrigin?: "user" | "saved" | "starter" | "empty" | string;
             onPatch: (patch: any) => void;
         }) => {
+            const snapshotGeneration = resolveBoundToolSnapshotGeneration(
+                args2.generation,
+                runtimeResetRevision,
+            );
+            if (snapshotGeneration === null) {
+                reviewSaveDebug("discard unowned or stale tool bind after reset", {
+                    snapshotGeneration: args2.generation ?? null,
+                    activeGeneration: runtimeResetRevision,
+                    inputId: args2.id,
+                    workspace: summarizeWorkspaceForSave(args2.workspace),
+                });
+                return false;
+            }
+
             if (boundRef.current && boundRef.current.id !== args2.id) {
                 await flushLatest();
             }
@@ -1449,6 +1471,8 @@ export function useToolCodeRunnerState(args: {
                 inputId,
                 args2.exerciseKey ?? null,
             ) ?? inputId;
+
+            args2 = applyCanonicalResetToToolBinding(args2, runtimeExercises[targetKey]);
 
             const incomingPair = normalizeCodeWorkspacePair({
                 workspace: args2.workspace ?? null,
@@ -1696,6 +1720,7 @@ export function useToolCodeRunnerState(args: {
             const workspaceForBindCode = deriveEntryCode(hydratedWorkspaceForBind);
 
             const nextSnap: ToolSnap = {
+            generation: snapshotGeneration,
                 topicId: viewTid,
                 toolKey: nextToolKey,
                 lang: args2.lang,
@@ -1730,6 +1755,9 @@ export function useToolCodeRunnerState(args: {
                     resolvedSql.sqlSeedSql,
                 ),
                     starterHash: resolveStarterHashForToolBind({
+                        canonicalStarterHash: runtimeSaved?.starterWorkspace
+                            ? workspaceKeyOf(runtimeSaved.starterWorkspace)
+                            : null,
                         snapshotOverridesSaved,
                         effectiveSavedStarterHash:
                             typeof effectiveSavedForBind?.starterHash === "string"
@@ -1808,7 +1836,7 @@ export function useToolCodeRunnerState(args: {
 
             if (shouldPatchRuntimeForBind) {
                 patchExercise(targetKey, {
-                    generation: runtimeResetRevision,
+                    generation: nextSnap.generation,
                     language: nextSnap.lang,
                     lang: nextSnap.lang,
                     workspace: nextSnap.workspace ?? undefined,
@@ -1911,6 +1939,7 @@ export function useToolCodeRunnerState(args: {
             progress,
             patchExercise,
             flushLatest,
+            runtimeResetRevision,
         ],
     );
 
@@ -2227,7 +2256,10 @@ dismissFeedbackOnEdit: true,
     ]);
 
     const setToolSqlDialect = useCallback((d: SqlDialect) => {
-        latestSnapRef.current = { ...latestSnapRef.current, sqlDialect: d };
+        latestSnapRef.current = {
+            ...latestSnapRef.current,
+            sqlDialect: d,
+        };
         setToolSqlDialect0((prev) => (prev === d ? prev : d));
 
         const b = boundRef.current;

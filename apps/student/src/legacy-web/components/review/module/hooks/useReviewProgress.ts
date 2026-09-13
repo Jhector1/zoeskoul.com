@@ -1,4 +1,8 @@
 "use client";
+import {
+    attachReviewProgressResetIntent,
+    resolveReviewProgressResetIntent,
+} from "@zoeskoul/learning-runtime";
 
 import { useEffect, useMemo, useRef, useState, useCallback, type Dispatch, type SetStateAction } from "react";
 import type { ReviewProgressState, ReviewTopicProgress } from "@/lib/review/progressTypes";
@@ -28,6 +32,7 @@ import {
     isScopedReviewExerciseStateKey as isScopedExerciseStateKey,
     looksLikeBetterReviewExerciseRestoreCandidate as looksLikeBetterExerciseRestoreCandidate,
     savedReviewExerciseLooksLikeLearnerEditorWork as savedExerciseLooksLikeLearnerEditorWork,
+    applyReviewProgressHydratedWorkspaceToMountedEditor,
 } from "@zoeskoul/learning-runtime";
 import { stableJson } from "@zoeskoul/learning-client/legacy-compatible/client/persistence/stableJson";
 import { useFlushOnPageExit } from "@zoeskoul/learning-client/legacy-compatible/client/persistence/useFlushOnPageExit";
@@ -42,6 +47,7 @@ import {
 } from "@zoeskoul/learning-runtime/review/workspacePersistenceContract";
 import { emitGamificationUpdate } from "@zoeskoul/learning-client/legacy-compatible/gamification/browserEvents";
 import { useReviewRuntimeStore } from "@zoeskoul/learning-runtime/review/module/runtime/reviewRuntimeStore";
+import { resolveReviewProgressHydrationGeneration } from "@zoeskoul/learning-runtime/review/workspaceHydrationGeneration";
 import { mergeRuntimeIntoProgress } from "@zoeskoul/learning-runtime/review/module/runtime/runtimeProgressBridge";
 import { reviewSaveDebug, summarizeWorkspaceForSave } from "@zoeskoul/learning-runtime/review/module/runtime/reviewSaveDebug";
 import {
@@ -188,6 +194,7 @@ export function useReviewProgress(args: {
     const progressRef = useRef(progress);
     const activeTopicIdRef = useRef(firstTopicId);
     const saveSeqRef = useRef(0);
+    const saveEpochRef = useRef(0);
     const hydrationCompleteRef = useRef(false);
     const pendingRuntimeHydrationRef = useRef(false);
     const applyingRemoteRef = useRef(false);
@@ -210,6 +217,9 @@ export function useReviewProgress(args: {
     const [lastSaveError, setLastSaveError] = useState<string | null>(null);
 
     useEffect(() => {
+        const renderedRevision = getSaveRevision(progress);
+        const currentRevision = getSaveRevision(progressRef.current);
+        if (renderedRevision < currentRevision) return;
         progressRef.current = progress;
     }, [progress]);
 
@@ -391,6 +401,7 @@ export function useReviewProgress(args: {
 
     const savePayloadToApi = useCallback(
         async (nextPayload: typeof payload, options?: { keepalive?: boolean; reason?: string }) => {
+            const requestSaveEpoch = saveEpochRef.current;
             if (readOnly) {
                 pendingSavePayloadRef.current = null;
                 localDirtyRef.current = false;
@@ -398,8 +409,19 @@ export function useReviewProgress(args: {
                 setLastSaveError(null);
                 return;
             }
-            let payloadToSave = nextPayload;
+            const resetTopicId = normalizeTopicProgressKey(
+                (nextPayload.state as any).activeTopicId ?? activeTopicIdRef.current,
+            );
+            const resetIntent = resolveReviewProgressResetIntent({
+                reason: options?.reason ?? null,
+                topicId: resetTopicId,
+                existing: (nextPayload as any).resetIntent,
+            });
+            let payloadToSave = resetIntent
+                ? ({ ...nextPayload, resetIntent } as typeof nextPayload)
+                : nextPayload;
             let meaningfulBody = meaningfulBodyForPayload(payloadToSave);
+
 
             if (meaningfulBody === lastSavedMeaningfulBodyRef.current) {
                 lastCommittedRef.current = stableJson(payloadToSave);
@@ -430,6 +452,7 @@ export function useReviewProgress(args: {
             const putOnce = async (
                 requestPayload: typeof payloadToSave,
             ) => {
+
                 return saveReviewProgressPUT({
                     payload: requestPayload,
                     endpoint,
@@ -464,28 +487,49 @@ export function useReviewProgress(args: {
                         }),
                         moduleTopicIds,
                     );
+
+                if (requestSaveEpoch !== saveEpochRef.current) {
+                    const staleEpochError = new Error(
+                        "Review progress save superseded by an authoritative reset.",
+                    );
+                    (staleEpochError as any).reviewSaveEpochSuperseded = true;
+                    throw staleEpochError;
+                }
+
                 lastAcceptedSaveRevisionRef.current = Math.max(
                     lastAcceptedSaveRevisionRef.current,
                     reviewProgressSaveRevisionOf(latestRemote),
                 );
-                const mergedState =
-                    sanitizeReviewProgressWorkspaceReferences(
-                        mergeProgressStatesForSave(
-                            latestRemote,
-                            payloadToSave.state as ReviewProgressState,
-                        ),
-                    );
-                payloadToSave = buildReviewProgressPayload({
+
+                const localState = payloadToSave.state as ReviewProgressState;
+                const mergedState = sanitizeReviewProgressWorkspaceReferences(
+                    resetIntent
+                        ? ({
+                            ...(localState as any),
+                            __saveRevision: nextWorkspaceSaveRevision({
+                                previousRevision: Math.max(
+                                    getSaveRevision(latestRemote),
+                                    getSaveRevision(localState),
+                                ),
+                            }),
+                        } as ReviewProgressState)
+                        : mergeProgressStatesForSave(latestRemote, localState),
+                );
+
+                const rebuiltPayload = buildReviewProgressPayload({
                     subjectSlug: payloadToSave.subjectSlug,
                     moduleSlug: payloadToSave.moduleSlug,
                     locale: payloadToSave.locale,
                     moduleTopicIds,
                     state: mergedState,
                     activeTopicId: normalizeTopicProgressKey(
-                        (payloadToSave.state as any).activeTopicId ??
-                            activeTopicIdRef.current,
+                        (payloadToSave.state as any).activeTopicId ?? activeTopicIdRef.current,
                     ),
                 }) as typeof payload;
+
+                payloadToSave = resetIntent
+                    ? ({ ...rebuiltPayload, resetIntent } as typeof payload)
+                    : rebuiltPayload;
                 payloadToSave = {
                     ...payloadToSave,
                     state: rebaseReviewProgressStateRevisionForSend(
@@ -493,8 +537,7 @@ export function useReviewProgress(args: {
                         lastAcceptedSaveRevisionRef.current,
                     ),
                 } as typeof payload;
-                meaningfulBody =
-                    meaningfulBodyForPayload(payloadToSave);
+                meaningfulBody = meaningfulBodyForPayload(payloadToSave);
                 saveResult = await putOnce(payloadToSave);
             }
 
@@ -597,6 +640,7 @@ export function useReviewProgress(args: {
         }
 
         if (!navigationSnapshot) pendingSavePayloadRef.current = null;
+        const saveEpoch = saveEpochRef.current;
         saveInFlightRef.current = true;
         setLastSaveError(null);
 
@@ -605,6 +649,7 @@ export function useReviewProgress(args: {
             setSaveStatus("saving");
             await savePayloadToApi(nextPayload);
         } catch (error: any) {
+            if (saveEpoch !== saveEpochRef.current) return;
             failed = true;
             const status = Number(error?.status ?? 0);
             const message = error?.message ?? String(error);
@@ -702,12 +747,14 @@ export function useReviewProgress(args: {
                 }
             }
         } finally {
-            saveInFlightRef.current = false;
-            if (
-                !failed &&
-                (navigationSaveQueueRef.current.length > 0 || pendingSavePayloadRef.current)
-            ) {
-                void drainSaveQueueRef.current();
+            if (saveEpoch === saveEpochRef.current) {
+                saveInFlightRef.current = false;
+                if (
+                    !failed &&
+                    (navigationSaveQueueRef.current.length > 0 || pendingSavePayloadRef.current)
+                ) {
+                    void drainSaveQueueRef.current();
+                }
             }
         }
     }, [subjectSlug, moduleSlug, meaningfulBodyForPayload, savePayloadToApi]);
@@ -793,6 +840,7 @@ export function useReviewProgress(args: {
             );
             const meaningfulBody =
                 meaningfulBodyForPayload(meaningfulPayload as any);
+
 
             if (meaningfulBody === lastSavedMeaningfulBodyRef.current) {
                 localDirtyRef.current = false;
@@ -942,6 +990,8 @@ export function useReviewProgress(args: {
                 : state;
 
             if (options?.discardPendingSaves) {
+                saveEpochRef.current += 1;
+                saveSeqRef.current += 1;
                 if (pendingSaveTimerRef.current != null) {
                     window.clearTimeout(pendingSaveTimerRef.current);
                     pendingSaveTimerRef.current = null;
@@ -951,6 +1001,9 @@ export function useReviewProgress(args: {
                     runtimeSaveTimerRef.current = null;
                 }
                 pendingSavePayloadRef.current = null;
+                navigationSaveQueueRef.current = [];
+                saveInFlightRef.current = false;
+                localDirtyRef.current = false;
             }
 
             const meaningfulPayload = buildPayloadFromState(withoutSaveRevision(stateForSave) as ReviewProgressState);
@@ -962,21 +1015,33 @@ export function useReviewProgress(args: {
                 return;
             }
 
+            const saveEpoch = saveEpochRef.current;
             const saveSeq = ++saveSeqRef.current;
             const stateToSave = makeSaveState(stateForSave, {
                 runtimeAlreadyMerged: mergeRuntime,
             });
-            const nextPayload = buildPayloadFromState(stateToSave);
+            const nextPayloadBase = buildPayloadFromState(stateToSave);
+            const nextPayload = attachReviewProgressResetIntent({
+                payload: nextPayloadBase,
+                reason: options?.reason ?? null,
+                topicId: normalizeTopicProgressKey(
+                    (stateToSave as any).activeTopicId ?? activeTopicIdRef.current,
+                ),
+            }) as typeof nextPayloadBase;
 
             if (options?.keepalive) {
                 saveInFlightRef.current = true;
                 setSaveStatus("saving");
                 try {
                     await savePayloadToApi(nextPayload as any, options);
-                    if (saveSeq === saveSeqRef.current) {
+                    if (
+                        saveEpoch === saveEpochRef.current &&
+                        saveSeq === saveSeqRef.current
+                    ) {
                         setProgressSafe(stateToSave);
                     }
                 } catch (error: any) {
+                    if (saveEpoch !== saveEpochRef.current) return;
                     const status = Number(error?.status ?? 0);
                     const message =
                         error?.message ?? String(error);
@@ -1004,7 +1069,9 @@ export function useReviewProgress(args: {
                     setLastSaveError(message);
                     localDirtyRef.current = true;
                 } finally {
-                    saveInFlightRef.current = false;
+                    if (saveEpoch === saveEpochRef.current) {
+                        saveInFlightRef.current = false;
+                    }
                 }
                 return;
             }
@@ -1024,7 +1091,11 @@ export function useReviewProgress(args: {
                 await sleep(50);
             }
 
-            if (saveSeq === saveSeqRef.current && lastSavedMeaningfulBodyRef.current === meaningfulBody) {
+            if (
+                saveEpoch === saveEpochRef.current &&
+                saveSeq === saveSeqRef.current &&
+                lastSavedMeaningfulBodyRef.current === meaningfulBody
+            ) {
                 setProgressSafe(stateToSave);
             }
         },
@@ -1323,12 +1394,47 @@ export function useReviewProgress(args: {
                 });
 
                 const runtimeApi = useReviewRuntimeStore.getState();
-                const incomingExerciseGeneration =
+                const incomingExerciseHasWorkspace =
                     isWorkspaceState((incomingExercise as any)?.workspace) ||
                     isWorkspaceState((incomingExercise as any)?.codeWorkspace) ||
-                    isWorkspaceState((incomingExercise as any)?.ideWorkspace)
-                        ? runtimeGeneration
+                    isWorkspaceState((incomingExercise as any)?.ideWorkspace);
+                const incomingExerciseGeneration =
+                    incomingExerciseHasWorkspace
+                        ? resolveReviewProgressHydrationGeneration({
+                            persistedGeneration:
+                                (saved as any)?.generation ??
+                                (saved as any)?.workspaceGeneration,
+                            runtimeResetRevision: runtimeGeneration,
+                        })
                         : undefined;
+
+                /**
+                 * Never let ensureExercise() launder stale/unversioned server
+                 * workspace state into the current reset generation.
+                 *
+                 * patchExercise() already rejects missing/stale generations, but
+                 * ensureExercise() runs first and receives `saved`, so the guard
+                 * must happen before either runtime write.
+                 */
+                if (
+                    incomingExerciseHasWorkspace &&
+                    typeof incomingExerciseGeneration !== "number"
+                ) {
+                    reviewSaveDebug("hydrate exercise rejected by reset generation", {
+                        reason,
+                        source,
+                        rawKey,
+                        canonicalExerciseKey,
+                        topicId,
+                        persistedGeneration:
+                            (saved as any)?.generation ??
+                            (saved as any)?.workspaceGeneration ??
+                            null,
+                        runtimeGeneration,
+                    });
+                    return;
+                }
+
                 runtimeApi.ensureExercise({
                     exerciseKey: canonicalExerciseKey,
                     subjectSlug: incomingExercise.subjectSlug,
@@ -1353,6 +1459,14 @@ export function useReviewProgress(args: {
                         }
                         : {}),
                 } as any);
+
+                applyReviewProgressHydratedWorkspaceToMountedEditor({
+                    ownerKey: canonicalExerciseKey,
+                    workspace,
+                    generation: incomingExerciseGeneration,
+                    shouldHydrateEditorState,
+                    patchEditorWorkspace: runtimeApi.patchEditorWorkspace,
+                });
             };
 
             Object.entries(topics).forEach(([tidRaw, tp]: any) => {

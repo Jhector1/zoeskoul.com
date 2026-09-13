@@ -1,7 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
 
-// Zoeskoul E2E suite pruning: this file is opt-in.
-test.skip(process.env.RUN_E2E_LEGACY !== "1", "Legacy broad E2E suite is opt-in. Run with RUN_E2E_LEGACY=1 or pnpm test:e2e:legacy.");
 
 
 const REAL_EXERCISE_URL =
@@ -496,6 +494,10 @@ test.describe("real review route Tools editor back/forward persistence", () => {
     test.beforeEach(async ({ context, page }) => {
         await context.clearCookies();
 
+        /**
+         * UI navigation preference only. This does not persist learner code or
+         * workspace state; Review learner persistence remains server-backed.
+         */
         await page.addInitScript(() => {
             window.localStorage.setItem("learnoir.quiz.autoAdvance", "0");
         });

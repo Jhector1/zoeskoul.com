@@ -17,7 +17,7 @@ import {
     toPrismaJson,
     toWorkspaceAccessFromProjectGate,
 } from "@/lib/projects/projectRouteUtils";
-import {isWorkspaceLanguage} from "@/components/ide/workspaceHook/workspace.persistence";
+import { isWorkspaceLanguage } from "@zoeskoul/curriculum-contracts";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

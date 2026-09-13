@@ -352,11 +352,15 @@ export type ReviewRuntimeActions = {
 
 
   clearRuntimeForTopic: (topicId: string) => void;
+  resetTopicToCanonicalState: (
+    topicId: string,
+  ) => ResetExerciseToStarterResult;
   clearRuntimeForCard: (topicId: string, cardId: string) => void;
   resetExerciseToStarter: (
     args: ResetExerciseToStarterArgs,
   ) => ResetExerciseToStarterResult;
   clearRuntimeForModule: () => void;
+  resetModuleToCanonicalState: () => ResetExerciseToStarterResult;
   flushNow: () => Promise<void>;
 };
 
