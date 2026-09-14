@@ -2753,9 +2753,25 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 ].filter(Boolean) as any,
             });
 
-            const starterHash = preserveExistingAuthoredIdentity
-                ? existing?.starterHash
-                : resolvedWorkspace.starterHash;
+            const authoredStarterWorkspace =
+                !preserveExistingAuthoredIdentity && manifest
+                    ? resolveExerciseWorkspace({
+                        language: resolvedLanguage,
+                        manifest,
+                        entry: args.entry ?? null,
+                    })
+                    : null;
+
+            const authoritativeStarterWorkspace =
+                workspaceHasUsableStarterContent(authoredStarterWorkspace)
+                    ? cloneRuntimeWorkspace(authoredStarterWorkspace!)
+                    : null;
+
+            const starterHash = authoritativeStarterWorkspace
+                ? workspaceHash(authoritativeStarterWorkspace)
+                : preserveExistingAuthoredIdentity
+                    ? existing?.starterHash
+                    : resolvedWorkspace.starterHash;
             const selectedWorkspace = resolvedWorkspace.workspace;
             const selectedCode = resolvedWorkspace.code;
             const selectedStdin = resolvedWorkspace.stdin;
@@ -2800,11 +2816,14 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 ...(existing ?? {}),
                 exerciseKey,
                 starterWorkspace:
-                    preserveExistingAuthoredIdentity
-                        ? existing?.starterWorkspace ?? null
-                        : resolvedWorkspace.source === "manifest"
-                            ? selectedWorkspace
-                            : existing?.starterWorkspace ?? selectedWorkspace ?? null,
+                    authoritativeStarterWorkspace ??
+                    (
+                        preserveExistingAuthoredIdentity
+                            ? existing?.starterWorkspace ?? null
+                            : resolvedWorkspace.source === "manifest"
+                                ? selectedWorkspace
+                                : existing?.starterWorkspace ?? selectedWorkspace ?? null
+                    ),
                 fileEditState:
                     resolvedWorkspace.source === "manifest"
                         ? buildRuntimeFileEditState({
@@ -2878,6 +2897,8 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
                 ) &&
                 String(existing.starterHash ?? "") ===
                 String(nextExercise.starterHash ?? "") &&
+                workspaceContentKey(existing.starterWorkspace ?? null) ===
+                workspaceContentKey(nextExercise.starterWorkspace ?? null) &&
                 terminalEvidenceContentKey((existing as any)?.terminalEvidence) ===
                 terminalEvidenceContentKey((nextExercise as any).terminalEvidence) &&
                 ideConfigContentKey(existing?.ideConfig ?? null) ===

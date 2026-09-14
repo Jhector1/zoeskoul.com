@@ -177,4 +177,166 @@ describe("review runtime progress hydration ownership", () => {
     expect(hydrated?.starterHash).toBe(authoredStarterHash);
     expect((hydrated?.manifest as any)?.workspace).toEqual(authoredWorkspace);
   });
+
+  it("repairs a legacy production starter polluted before authored registration while preserving learner work until reset", () => {
+    const exerciseKey =
+      "python-v2:python-v2-1:python-v2-python-v2-1-string-foundations:f-strings-and-formatting:f-strings-and-formatting_s0:ci_print_profile_line";
+
+    const subjectSlug = "python-v2";
+    const moduleSlug = "python-v2-1";
+    const sectionSlug = "python-v2-python-v2-1-string-foundations";
+    const topicId = "f-strings-and-formatting";
+    const cardId = "f-strings-and-formatting_s0";
+    const exerciseId = "ci_print_profile_line";
+
+    const authoredCode =
+      '# Store "Mila" in name\n' +
+      "# Store 13 in age\n" +
+      "# Print the sentence with one f-string\n";
+
+    const legacyLearnerCode =
+      "# TODO: store the values in variables\n" +
+      "# TODO: print the sentence with an f-string\n" +
+      "ooppppp";
+
+    const authoredWorkspace = workspace(authoredCode);
+    const legacyLearnerWorkspace = workspace(legacyLearnerCode);
+
+    const authoredManifest = {
+      id: exerciseId,
+      kind: "code_input",
+      language: "python",
+      workspace: authoredWorkspace,
+    };
+
+    // Obtain the real canonical hash produced by the runtime, then recreate
+    // the production ordering where polluted progress exists BEFORE authored
+    // registration occurs.
+    useReviewRuntimeStore.getState().ensureExercise({
+      exerciseKey,
+      subjectSlug,
+      moduleSlug,
+      sectionSlug,
+      topicId,
+      cardId,
+      manifest: authoredManifest,
+    });
+
+    const canonicalStarterHash =
+      useReviewRuntimeStore.getState().exercises[exerciseKey]?.starterHash;
+
+    expect(canonicalStarterHash).toBeTruthy();
+
+    resetRuntimeStore();
+
+    const legacyPollutedExercise = {
+      exerciseKey,
+      exerciseId,
+      subjectSlug,
+      moduleSlug,
+      sectionSlug,
+      topicId,
+      cardId,
+
+      language: "python",
+      lang: "python",
+
+      workspace: legacyLearnerWorkspace,
+      codeWorkspace: legacyLearnerWorkspace,
+      ideWorkspace: legacyLearnerWorkspace,
+      code: legacyLearnerCode,
+      source: legacyLearnerCode,
+      stdin: "",
+      codeStdin: "",
+
+      userEdited: true,
+      workspaceOrigin: "user",
+      workspaceStatus: "ready",
+      workspaceGeneration: 0,
+
+      // Exact legacy production split-brain shape:
+      // hash is canonical, snapshot/manifest are polluted.
+      starterHash: canonicalStarterHash,
+      starterWorkspace: legacyLearnerWorkspace,
+
+      manifest: {
+        id: exerciseId,
+        kind: "code_input",
+        language: "python",
+        code: legacyLearnerCode,
+        source: legacyLearnerCode,
+        workspace: legacyLearnerWorkspace,
+      },
+
+      runner: {},
+      answer: { revealed: false },
+      sketch: null,
+      status: "in_progress",
+      fileEditState: {
+        "main.py": {
+          origin: "learner",
+          generation: 0,
+          hasUserEdited: true,
+        },
+      },
+    } as any;
+
+    useReviewRuntimeStore.setState((state) => ({
+      exercises: {
+        ...state.exercises,
+        [exerciseKey]: legacyPollutedExercise,
+      },
+    }));
+
+    // This is the ordering production needs to heal:
+    //
+    // legacy DB state B already exists
+    // -> real authored contract A arrives
+    // -> preserve live learner B
+    // -> repair starter identity to A
+    useReviewRuntimeStore.getState().ensureExercise({
+      exerciseKey,
+      subjectSlug,
+      moduleSlug,
+      sectionSlug,
+      topicId,
+      cardId,
+      manifest: authoredManifest,
+      saved: legacyPollutedExercise,
+    });
+
+    const healed =
+      useReviewRuntimeStore.getState().exercises[exerciseKey];
+
+    // Do not erase the learner's existing work just because metadata was bad.
+    expect(codeOf(healed?.workspace)).toBe(legacyLearnerCode);
+    expect(healed?.workspaceOrigin).toBe("user");
+    expect(healed?.userEdited).toBe(true);
+
+    // Authored starter identity must self-heal.
+    expect(codeOf(healed?.starterWorkspace)).toBe(authoredCode);
+    expect(healed?.starterHash).toBe(canonicalStarterHash);
+    expect(codeOf((healed?.manifest as any)?.workspace)).toBe(authoredCode);
+
+    // Once the learner explicitly resets, the repaired authored starter wins.
+    const result =
+      useReviewRuntimeStore.getState().resetExerciseToStarter({
+        topicId,
+        cardId,
+        exerciseId,
+        exerciseStateKey: exerciseKey,
+      });
+
+    expect(result.restored).toBe(true);
+
+    const resetExercise =
+      useReviewRuntimeStore.getState().exercises[exerciseKey];
+
+    expect(codeOf(resetExercise?.workspace)).toBe(authoredCode);
+    expect(codeOf(resetExercise?.starterWorkspace)).toBe(authoredCode);
+    expect(resetExercise?.workspaceOrigin).toBe("starter");
+    expect(resetExercise?.userEdited).toBe(false);
+    expect(codeOf(resetExercise?.workspace)).not.toContain("ooppppp");
+  });
+
 });
