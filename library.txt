@@ -181,6 +181,7 @@ docker compose down
 docker compose up -d
 sleep 30
 ./smoke-test.sh
+cd /opt/zoeskoul/zoeskoul.com/zoe-infra/hosts/web
 
 cd /opt/zoeskoul/zoe-infra/hosts/runner
 ./deploy.sh
