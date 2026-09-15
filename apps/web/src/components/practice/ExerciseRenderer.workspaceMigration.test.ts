@@ -114,6 +114,80 @@ describe("legacy saved workspace ensure gate", () => {
                     userEdited: true,
                     workspaceOrigin: "saved",
                     code: 'print("learner complete workspace")\n',
+                    starterWorkspace: manifestWorkspace,
+                    ideConfig: null,
+                },
+                manifestLanguage: "python",
+                manifestStarterWorkspace: manifestWorkspace as any,
+                manifestIdeConfig: null,
+            }),
+        ).toBe(true);
+    });
+
+
+    it("does not skip authored ensure when a legacy learner record has a polluted starterWorkspace", () => {
+        const learnerWorkspace = makeWorkspace({
+            main: [
+                "from models.transaction import Transaction",
+                'print("legacy learner work")',
+                "",
+            ].join("\n"),
+            includeCompanion: true,
+        });
+
+        expect(
+            shouldSkipEmbeddedEnsureExercise({
+                existing: {
+                    language: "python",
+                    lang: "python",
+
+                    // Learner work itself is valid and must be preserved.
+                    workspace: learnerWorkspace,
+                    codeWorkspace: learnerWorkspace,
+                    ideWorkspace: learnerWorkspace,
+                    userEdited: true,
+                    workspaceOrigin: "saved",
+                    code: 'print("legacy learner work")\n',
+
+                    // Reproduce the production split-brain state:
+                    // starterHash may already be canonical while the persisted
+                    // starter snapshot itself still contains learner content.
+                    starterHash: "CANONICAL_AUTHORED_HASH",
+                    starterWorkspace: learnerWorkspace,
+                    ideConfig: null,
+                },
+                manifestLanguage: "python",
+                manifestStarterWorkspace: manifestWorkspace as any,
+                manifestIdeConfig: null,
+            }),
+        ).toBe(false);
+    });
+
+    it("skips redundant authored ensure once the learner record starterWorkspace is healthy", () => {
+        const learnerWorkspace = makeWorkspace({
+            main: [
+                "from models.transaction import Transaction",
+                'print("learner work remains")',
+                "",
+            ].join("\n"),
+            includeCompanion: true,
+        });
+
+        expect(
+            shouldSkipEmbeddedEnsureExercise({
+                existing: {
+                    language: "python",
+                    lang: "python",
+                    workspace: learnerWorkspace,
+                    codeWorkspace: learnerWorkspace,
+                    ideWorkspace: learnerWorkspace,
+                    userEdited: true,
+                    workspaceOrigin: "saved",
+                    code: 'print("learner work remains")\n',
+
+                    // Authored identity is already repaired even though the
+                    // live workspace intentionally remains learner-owned.
+                    starterWorkspace: manifestWorkspace,
                     ideConfig: null,
                 },
                 manifestLanguage: "python",

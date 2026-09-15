@@ -846,6 +846,34 @@ export function shouldSkipEmbeddedEnsureExercise(args: {
         return false;
     }
 
+    /**
+     * Learner workspace ownership must not hide corrupted historical starter
+     * identity.
+     *
+     * Production records created before the starter-ownership fix can contain:
+     *
+     *   workspace          = learner work
+     *   starterHash        = current authored starter hash
+     *   starterWorkspace   = old learner work
+     *
+     * The live learner workspace must remain untouched, but the shared
+     * ensureExercise owner needs one opportunity to repair starterWorkspace
+     * from the authored manifest. Once repaired, subsequent renders can skip
+     * the redundant ensure normally.
+     */
+    const existingStarterWorkspace =
+        existing?.starterWorkspace?.version === 2
+            ? existing.starterWorkspace
+            : null;
+
+    if (
+        manifestHasStarter &&
+        workspaceContentKeyForExerciseRenderer(existingStarterWorkspace) !==
+            workspaceContentKeyForExerciseRenderer(manifestStarterWorkspace)
+    ) {
+        return false;
+    }
+
     if (isUserOwnedWorkspaceState(existing)) {
         return existingHasContent || !manifestHasStarter;
     }
