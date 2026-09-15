@@ -36,6 +36,7 @@ import {
     workspaceHasUsableStarterContent
 } from "./starterContent";
 import { shouldRetainFreshResetMountedEditor } from "./resetMountedEditorRetentionPolicy";
+import { nextReviewResetRevision } from "../../workspaceHydrationGeneration";
 
 type InternalStore = ReviewRuntimeStore;
 
@@ -3648,7 +3649,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             );
 
             return {
-                resetRevision: state.resetRevision + 1,
+                resetRevision: nextReviewResetRevision(state.resetRevision),
                 activeExerciseKey: activeMatches ? null : state.activeExerciseKey,
                 boundToolWorkspace: activeMatches ? null : state.boundToolWorkspace,
 
@@ -3692,7 +3693,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         };
 
         set((state) => {
-            const nextResetRevision = state.resetRevision + 1;
+            const nextResetRevision = nextReviewResetRevision(state.resetRevision);
             const resetArgs = activeResetExerciseArgs(state, topicId);
             const canonical = resetArgs
                 ? buildCanonicalExerciseReset(
@@ -3810,7 +3811,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
             );
 
             return {
-                resetRevision: state.resetRevision + 1,
+                resetRevision: nextReviewResetRevision(state.resetRevision),
                 activeExerciseKey: activeMatches ? null : state.activeExerciseKey,
                 boundToolWorkspace: activeMatches ? null : state.boundToolWorkspace,
 
@@ -3854,7 +3855,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         };
 
         set((state) => {
-            const nextResetRevision = state.resetRevision + 1;
+            const nextResetRevision = nextReviewResetRevision(state.resetRevision);
             const normalizedArgs: ResetExerciseToStarterArgs = {
                 topicId: String(args.topicId ?? "").trim(),
                 cardId: String(args.cardId ?? "").trim(),
@@ -3981,7 +3982,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
 
     clearRuntimeForModule: () => {
         set((state) => ({
-            resetRevision: state.resetRevision + 1,
+            resetRevision: nextReviewResetRevision(state.resetRevision),
             activeExerciseKey: null,
             boundToolWorkspace: null,
             exercises: {},
@@ -4005,7 +4006,7 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         };
 
         set((state) => {
-            const nextResetRevision = state.resetRevision + 1;
+            const nextResetRevision = nextReviewResetRevision(state.resetRevision);
             const resetArgs = activeResetExerciseArgs(state);
             const canonical = resetArgs
                 ? buildCanonicalExerciseReset(

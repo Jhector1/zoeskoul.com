@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { resolveReviewProgressHydrationGeneration } from "./workspaceHydrationGeneration";
+import {
+  nextReviewResetRevision,
+  resolveReviewProgressHydrationGeneration,
+} from "./workspaceHydrationGeneration";
 
 describe("resolveReviewProgressHydrationGeneration", () => {
   it("accepts the latest server workspace as the baseline on a fresh session", () => {
@@ -61,4 +64,44 @@ describe("resolveReviewProgressHydrationGeneration", () => {
       }),
     ).toBeUndefined();
   });
+
+  it("does not let an old generation 1 impersonate the first reset of a new session", () => {
+    const freshResetGeneration = nextReviewResetRevision(
+      0,
+      1_800_000_000_000,
+    );
+
+    expect(freshResetGeneration).toBe(1_800_000_000_000);
+
+    expect(
+      resolveReviewProgressHydrationGeneration({
+        persistedGeneration: 1,
+        runtimeResetRevision: freshResetGeneration,
+      }),
+    ).toBeUndefined();
+
+    expect(
+      resolveReviewProgressHydrationGeneration({
+        persistedGeneration: freshResetGeneration,
+        runtimeResetRevision: freshResetGeneration,
+      }),
+    ).toBe(freshResetGeneration);
+  });
+
+  it("remains strictly monotonic when the clock does not advance", () => {
+    expect(
+      nextReviewResetRevision(
+        1_800_000_000_000,
+        1_700_000_000_000,
+      ),
+    ).toBe(1_800_000_000_001);
+
+    expect(
+      nextReviewResetRevision(
+        1_800_000_000_000,
+        1_800_000_000_000,
+      ),
+    ).toBe(1_800_000_000_001);
+  });
+
 });

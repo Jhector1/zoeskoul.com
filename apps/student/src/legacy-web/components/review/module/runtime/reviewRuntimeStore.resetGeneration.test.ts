@@ -201,7 +201,8 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     );
 
     runtime.clearRuntimeForCard("thinking-in-objects", "card-2");
-    expect(useReviewRuntimeStore.getState().resetRevision).toBe(1);
+    const resetGeneration = useReviewRuntimeStore.getState().resetRevision;
+    expect(resetGeneration).toBeGreaterThan(0);
 
     runtime.ensureEditorSource({
       ownerKey,
@@ -215,19 +216,19 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     });
 
     runtime.patchEditorWorkspace(ownerKey, starterWorkspace, {
-      generation: 1,
+      generation: resetGeneration,
       source: "authoritative-reset",
       mutation: {
-        generation: 1,
+        generation: resetGeneration,
         source: "authoritative-reset",
         mutation: "reset",
       },
     });
 
     runtime.patchExercise(ownerKey, {
-      generation: 1,
+      generation: resetGeneration,
       workspaceMutation: {
-        generation: 1,
+        generation: resetGeneration,
         source: "authoritative-reset",
         mutation: "reset",
       },
@@ -274,20 +275,20 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     );
 
     runtime.patchEditorWorkspace(ownerKey, learnerMainOnlyWorkspace, {
-      generation: 1,
+      generation: resetGeneration,
       source: "code-tool-emit-upstream",
       mutation: {
-        generation: 1,
+        generation: resetGeneration,
         source: "code-tool-emit-upstream",
         mutation: "user-content",
         changedFilePaths: ["main.py"],
       },
     });
     runtime.patchExercise(ownerKey, {
-      generation: 1,
+      generation: resetGeneration,
       updateOrigin: "user",
       workspaceMutation: {
-        generation: 1,
+        generation: resetGeneration,
         source: "code-tool-emit-upstream",
         mutation: "user-content",
         changedFilePaths: ["main.py"],
@@ -319,19 +320,19 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     );
 
     runtime.patchEditorWorkspace(ownerKey, currentGenerationShellWorkspace, {
-      generation: 1,
+      generation: resetGeneration,
       source: "quiz-practice-hydrate",
       mutation: {
-        generation: 1,
+        generation: resetGeneration,
         source: "quiz-practice-hydrate",
         mutation: "hydrate",
       },
     });
     runtime.patchExercise(ownerKey, {
-      generation: 1,
+      generation: resetGeneration,
       updateOrigin: "quiz-practice-hydrate",
       workspaceMutation: {
-        generation: 1,
+        generation: resetGeneration,
         source: "quiz-practice-hydrate",
         mutation: "hydrate",
       },
@@ -356,20 +357,20 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     );
 
     runtime.patchEditorWorkspace(ownerKey, learnerClearedWorkspace, {
-      generation: 1,
+      generation: resetGeneration,
       source: "code-tool-emit-upstream",
       mutation: {
-        generation: 1,
+        generation: resetGeneration,
         source: "code-tool-emit-upstream",
         mutation: "user-content",
         changedFilePaths: ["models/car.py"],
       },
     });
     runtime.patchExercise(ownerKey, {
-      generation: 1,
+      generation: resetGeneration,
       updateOrigin: "user",
       workspaceMutation: {
-        generation: 1,
+        generation: resetGeneration,
         source: "code-tool-emit-upstream",
         mutation: "user-content",
         changedFilePaths: ["models/car.py"],
@@ -404,7 +405,7 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     expect(fileContent(useReviewRuntimeStore.getState().editorRuntimes[ownerKey]?.workspace, "main.py")).toBe(
       'from models.car import Car\nprint("new gen learner edit")\n',
     );
-    expect(useReviewRuntimeStore.getState().editorRuntimes[ownerKey]?.workspaceGeneration).toBe(1);
+    expect(useReviewRuntimeStore.getState().editorRuntimes[ownerKey]?.workspaceGeneration).toBe(resetGeneration);
     expect(useReviewRuntimeStore.getState().editorRuntimes[ownerKey]?.fileEditState?.["models/car.py"]?.hasUserEdited).toBe(
       true,
     );
@@ -511,9 +512,12 @@ describe("reviewRuntimeStore reset generation boundary", () => {
       exerciseStateKey: ownerKey,
     });
 
+    const resetGeneration = result.resetRevision;
+    expect(resetGeneration).toBeGreaterThan(0);
+
     expect(result).toMatchObject({
       exerciseKey: ownerKey,
-      resetRevision: 1,
+      resetRevision: resetGeneration,
       restored: true,
     });
     expect(fileContent(useReviewRuntimeStore.getState().exercises[ownerKey]?.workspace, "main.py")).toBe(
@@ -540,7 +544,7 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     expect(useReviewRuntimeStore.getState().exercises[ownerKey]?.workspaceOrigin).toBe("starter");
     expect(useReviewRuntimeStore.getState().exercises[ownerKey]?.userEdited).toBe(false);
     expect(useReviewRuntimeStore.getState().tool.boundExerciseKey).toBe(ownerKey);
-    expect(useReviewRuntimeStore.getState().resetRevision).toBe(1);
+    expect(useReviewRuntimeStore.getState().resetRevision).toBe(resetGeneration);
 
     runtime.patchExercise(ownerKey, {
       generation: 0,
@@ -912,19 +916,22 @@ describe("reviewRuntimeStore reset generation boundary", () => {
       resetRevision: state.resetRevision,
     });
 
+    const topicResetGeneration = result.resetRevision;
+    expect(topicResetGeneration).toBeGreaterThan(0);
+
     expect(result).toEqual({
       exerciseKey: ownerKey,
-      resetRevision: 1,
+      resetRevision: topicResetGeneration,
       restored: true,
     });
-    expect(state.resetRevision).toBe(1);
+    expect(state.resetRevision).toBe(topicResetGeneration);
     expect(Object.keys(state.exercises)).toEqual([ownerKey]);
     expect(state.activeExerciseKey).toBe(ownerKey);
     expect(state.tool.boundExerciseKey).toBe(ownerKey);
     expect(fileContent(exercise?.workspace, "main.py")).toBe(starterCode);
     expect(fileContent(editor?.workspace, "main.py")).toBe(starterCode);
-    expect(exercise?.workspaceGeneration).toBe(1);
-    expect(editor?.workspaceGeneration).toBe(1);
+    expect(exercise?.workspaceGeneration).toBe(topicResetGeneration);
+    expect(editor?.workspaceGeneration).toBe(topicResetGeneration);
     expect(exercise?.workspaceOrigin).toBe("starter");
     expect(editor?.workspaceOrigin).toBe("starter");
     expect(exercise?.userEdited).toBe(false);
@@ -949,16 +956,19 @@ describe("reviewRuntimeStore reset generation boundary", () => {
 
     const moduleResult = runtime.resetModuleToCanonicalState();
     const moduleState = useReviewRuntimeStore.getState();
+    const moduleResetGeneration = moduleResult.resetRevision;
+
+    expect(moduleResetGeneration).toBeGreaterThan(topicResetGeneration);
     expect(moduleResult).toEqual({
       exerciseKey: ownerKey,
-      resetRevision: 2,
+      resetRevision: moduleResetGeneration,
       restored: true,
     });
     expect(Object.keys(moduleState.exercises)).toEqual([ownerKey]);
     expect(fileContent(moduleState.exercises[ownerKey]?.workspace, "main.py")).toBe(
       starterCode,
     );
-    expect(moduleState.exercises[ownerKey]?.workspaceGeneration).toBe(2);
+    expect(moduleState.exercises[ownerKey]?.workspaceGeneration).toBe(moduleResetGeneration);
     expect(moduleState.editorRuntimes[ownerKey]?.workspaceApplyRevision).toBe(2);
   });
 });
