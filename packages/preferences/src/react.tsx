@@ -81,6 +81,15 @@ function persistCompatibility(preferences: AppPreferences): void {
     // Restricted storage must not block appearance updates.
   }
 
+  const concreteTheme = concreteBrowserTheme(preferences.theme);
+  document.documentElement.classList.toggle(
+    "dark",
+    concreteTheme === "dark",
+  );
+  document.documentElement.dataset.theme = concreteTheme;
+  document.documentElement.style.colorScheme = concreteTheme;
+  document.documentElement.lang = preferences.locale;
+
   document.documentElement.style.setProperty(
     "--app-font-size",
     `${preferences.fontSizePx}px`,

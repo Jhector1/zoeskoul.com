@@ -1,42 +1,31 @@
 import {
   ThemeProvider,
-  useTheme,
 } from "next-themes";
 import type {
   ReactNode,
 } from "react";
 import {
-  useEffect,
-} from "react";
-import {
   useAppPreferences,
 } from "@zoeskoul/preferences/react";
-
-function ThemePreferenceSync() {
-  const { preferences } = useAppPreferences();
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    if (theme !== preferences.theme) {
-      setTheme(preferences.theme);
-    }
-  }, [preferences.theme, setTheme, theme]);
-
-  return null;
-}
 
 export function StudentThemeProvider(props: {
   children: ReactNode;
 }) {
+  const { preferences } = useAppPreferences();
+  const theme =
+    preferences.theme === "dark" ? "dark" : "light";
+
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange={false}
+      value={{ dark: "dark", light: "light" }}
+      defaultTheme={theme}
+      forcedTheme={theme}
+      enableSystem={false}
+      enableColorScheme={false}
+      disableTransitionOnChange
       storageKey="zoeskoul-theme"
     >
-      <ThemePreferenceSync />
       {props.children}
     </ThemeProvider>
   );

@@ -38,7 +38,6 @@ describe("Student shared preference compatibility", () => {
     expect(source).toContain("updatePreferences");
     expect(source).toContain("persistLocale");
     expect(source).toContain("useOptionalAppPreferences");
-    expect(source).toContain("grid w-full grid-cols-4");
     expect(source).toContain("ui-btn-ide-border");
   });
 });

@@ -68,7 +68,7 @@ function useStudentPathname() {
 function StudentLocalePreferenceBoundary(props: {
   children: ReactNode;
 }) {
-  const { preferences } =
+  const { preferences, status } =
     useAppPreferences();
   const location =
     useLocationSnapshot();
@@ -78,7 +78,10 @@ function StudentLocalePreferenceBoundary(props: {
     routeLocale === preferences.locale;
 
   useEffect(() => {
-    if (routeMatchesPreference) {
+    if (
+      status === "loading" ||
+      routeMatchesPreference
+    ) {
       return;
     }
 
@@ -94,19 +97,24 @@ function StudentLocalePreferenceBoundary(props: {
     location,
     preferences.locale,
     routeMatchesPreference,
+    status,
   ]);
 
-  if (!routeMatchesPreference) {
+  if (
+    status === "loading" ||
+    !routeMatchesPreference
+  ) {
     return (
       <main
-        className="min-h-screen bg-neutral-50 text-neutral-900 dark:bg-[#0b0d12] dark:text-white"
+        className="student-state-page"
         aria-busy="true"
       >
-        <div className="ui-container py-12">
-          <div className="ui-page-surface p-6">
-            Loading ZoeSkoul…
-          </div>
-        </div>
+        <section
+          className="student-state-card"
+          aria-hidden="true"
+        >
+          <div className="student-state-spinner" />
+        </section>
       </main>
     );
   }

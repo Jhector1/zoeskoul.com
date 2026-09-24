@@ -45,11 +45,8 @@ export function StudentAccessGate(props: {
   if (state.status === "loading") {
     return (
       <main className="student-state-page" aria-busy="true">
-        <section className="student-state-card">
-          <div className="student-state-spinner" aria-hidden="true" />
-          <p className="student-state-eyebrow">ZoeSkoul Student</p>
-          <h1>Opening your learning space</h1>
-          <p>Checking your session and database permissions.</p>
+        <section className="student-state-card" aria-hidden="true">
+          <div className="student-state-spinner" />
         </section>
       </main>
     );
