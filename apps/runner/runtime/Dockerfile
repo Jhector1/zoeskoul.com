@@ -13,18 +13,31 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     HOME=/tmp
 
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
+RUN set -eux; \
+  apt_install_retry() { \
+    local attempt; \
+    for attempt in 1 2 3; do \
+      rm -rf /var/lib/apt/lists/*; \
+      if apt-get -o Acquire::Retries=5 update \
+        && apt-get -o Acquire::Retries=5 install -y --no-install-recommends "$@"; then \
+        return 0; \
+      fi; \
+      echo "apt install attempt ${attempt}/3 failed; refreshing indexes and retrying" >&2; \
+      sleep "$((attempt * 5))"; \
+    done; \
+    return 1; \
+  }; \
+  apt_install_retry \
     ca-certificates \
     curl \
-    gpg \
- && mkdir -p /etc/apt/keyrings \
- && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
-    | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
- && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" \
-    > /etc/apt/sources.list.d/nodesource.list \
- && apt-get update \
- && apt-get install -y --no-install-recommends \
+    gpg; \
+  mkdir -p /etc/apt/keyrings; \
+  curl -fsSL --retry 5 --retry-delay 2 --retry-connrefused \
+    https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
+    | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg; \
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_${NODE_MAJOR}.x nodistro main" \
+    > /etc/apt/sources.list.d/nodesource.list; \
+  apt_install_retry \
     bash \
     coreutils \
     findutils \
@@ -37,10 +50,9 @@ RUN apt-get update \
     openjdk-21-jdk-headless \
     python3 \
     r-base \
-    tini \
- && apt-get purge -y --auto-remove curl gpg \
- && rm -rf /var/lib/apt/lists/*
-
+    tini; \
+  apt-get purge -y --auto-remove curl gpg; \
+  rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /opt/runner /workspace /tmp \
  && if ! getent group 1000 >/dev/null; then groupadd --gid 1000 sandbox; fi \
  && if ! getent passwd 1000 >/dev/null; then \
