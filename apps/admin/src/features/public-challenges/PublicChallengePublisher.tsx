@@ -15,6 +15,7 @@ import type {
   PublicChallengeExerciseOption,
 } from "@zoeskoul/api-contracts";
 import { adminFetch } from "@/lib/adminApi";
+import PublicChallengeSocialPublisher from "./PublicChallengeSocialPublisher";
 import {
   CHALLENGE_SHARE_IMAGE_HEIGHT,
   CHALLENGE_SHARE_IMAGE_WIDTH,
@@ -1890,6 +1891,7 @@ export default function PublicChallengePublisher(props: {
           </div>
         ) : null}
       </section>
+      <PublicChallengeSocialPublisher challenge={result} />
     </div>
   );
 }

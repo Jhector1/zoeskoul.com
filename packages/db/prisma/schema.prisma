@@ -408,53 +408,53 @@ model Assignment {
 }
 
 model User {
-  id                                String                      @id @default(cuid())
-  name                              String?
-  email                             String?                     @unique
-  emailVerified                     DateTime?
-  image                             String?
-  stripeCustomerId                  String?                     @unique
-  trialUsedAt                       DateTime?
-  billingCheckoutAttemptId          String?
-  billingCheckoutReservedAt         DateTime?
-  createdAt                         DateTime                    @default(now())
-  updatedAt                         DateTime                    @updatedAt
-  roles                             UserRole[]                  @default([student])
-  accounts                          Account[]
-  codeProjects                      CodeProject[]               @relation("UserCodeProjects")
-  codeProjectGrants                 CodeProjectGrant[]          @relation("UserCodeProjectGrants")
-  codeProjectRevisions              CodeProjectRevision[]       @relation("UserCodeProjectRevisions")
-  featureGrants                     FeatureGrant[]              @relation("UserFeatureGrants")
-  moduleAccessGrants                ModuleAccessGrant[]
-  sessions                          Session[]
-  subjectAccessGrants               SubjectAccessGrant[]
-  subjectEnrollments                SubjectEnrollment[]
-  subscriptions                     Subscription[]
-  onboardingProfile                 UserOnboardingProfile?
-  practiceChallengeLinks            PracticeChallengeLink[]     @relation("UserPracticeChallengeLinks")
-  learningOrganizationsOwned        LearningOrganization[]      @relation("LearningOrganizationOwner")
-  learningOrganizationMemberships  LearningOrganizationMember[]
-  learningOrganizationInvitesAccepted LearningOrganizationInvite[] @relation("LearningOrganizationInviteAcceptedBy")
-  learningGroupsOwned               LearningGroup[]             @relation("LearningGroupOwner")
-  learningGroupMemberships          LearningGroupMember[]
-  learningGroupInvitesAccepted LearningGroupInvite[] @relation("LearningGroupInviteAcceptedBy")
-  learningAssignmentsOwned          LearningAssignment[]        @relation("LearningAssignmentOwner")
-  learningAssignmentRecipients      LearningAssignmentUser[]
-  learningAssignmentInvitesAccepted LearningAssignmentInvite[]  @relation("LearningAssignmentInviteAcceptedBy")
-  tutoringSessionInvitesAccepted    TutoringSessionInvite[]     @relation("TutoringSessionInviteAcceptedBy")
-  tutoringSessionInvitesReceived    TutoringSessionInvite[]     @relation("TutoringSessionInviteUser")
-  tutoringSessionsOwned             TutoringSession[]           @relation("TutoringSessionOwner")
-  tutoringSessionMemberships        TutoringSessionUser[]
-  tutoringTeacherPoolMember         TutoringTeacherPoolMember?  @relation("TutoringTeacherPoolUser")
-  tutoringCreditPurchases           TutoringCreditPurchase[]    @relation("TutoringCreditPurchaseUser")
-  tutoringCreditLedgerEntries       TutoringCreditLedgerEntry[] @relation("TutoringCreditLedgerUser")
-  tutoringRequestsMade              TutoringRequest[]           @relation("TutoringRequestLearner")
-  tutoringRequestsAssigned          TutoringRequest[]           @relation("TutoringRequestAssignedTeacher")
-  tutoringBookingsTeaching          TutoringBooking[]           @relation("TutoringBookingTeacher")
-  learningAnnouncementsAuthored     LearningAnnouncement[]        @relation("LearningAnnouncementAuthor")
-  learningAnnouncementReceipts      LearningAnnouncementReceipt[] @relation("LearningAnnouncementRecipient")
-  marketingPreference               UserMarketingPreference?
-  preferences                       UserPreferences?
+  id                                  String                        @id @default(cuid())
+  name                                String?
+  email                               String?                       @unique
+  emailVerified                       DateTime?
+  image                               String?
+  stripeCustomerId                    String?                       @unique
+  trialUsedAt                         DateTime?
+  billingCheckoutAttemptId            String?
+  billingCheckoutReservedAt           DateTime?
+  createdAt                           DateTime                      @default(now())
+  updatedAt                           DateTime                      @updatedAt
+  roles                               UserRole[]                    @default([student])
+  accounts                            Account[]
+  codeProjects                        CodeProject[]                 @relation("UserCodeProjects")
+  codeProjectGrants                   CodeProjectGrant[]            @relation("UserCodeProjectGrants")
+  codeProjectRevisions                CodeProjectRevision[]         @relation("UserCodeProjectRevisions")
+  featureGrants                       FeatureGrant[]                @relation("UserFeatureGrants")
+  moduleAccessGrants                  ModuleAccessGrant[]
+  sessions                            Session[]
+  subjectAccessGrants                 SubjectAccessGrant[]
+  subjectEnrollments                  SubjectEnrollment[]
+  subscriptions                       Subscription[]
+  onboardingProfile                   UserOnboardingProfile?
+  practiceChallengeLinks              PracticeChallengeLink[]       @relation("UserPracticeChallengeLinks")
+  learningOrganizationsOwned          LearningOrganization[]        @relation("LearningOrganizationOwner")
+  learningOrganizationMemberships     LearningOrganizationMember[]
+  learningOrganizationInvitesAccepted LearningOrganizationInvite[]  @relation("LearningOrganizationInviteAcceptedBy")
+  learningGroupsOwned                 LearningGroup[]               @relation("LearningGroupOwner")
+  learningGroupMemberships            LearningGroupMember[]
+  learningGroupInvitesAccepted        LearningGroupInvite[]         @relation("LearningGroupInviteAcceptedBy")
+  learningAssignmentsOwned            LearningAssignment[]          @relation("LearningAssignmentOwner")
+  learningAssignmentRecipients        LearningAssignmentUser[]
+  learningAssignmentInvitesAccepted   LearningAssignmentInvite[]    @relation("LearningAssignmentInviteAcceptedBy")
+  tutoringSessionInvitesAccepted      TutoringSessionInvite[]       @relation("TutoringSessionInviteAcceptedBy")
+  tutoringSessionInvitesReceived      TutoringSessionInvite[]       @relation("TutoringSessionInviteUser")
+  tutoringSessionsOwned               TutoringSession[]             @relation("TutoringSessionOwner")
+  tutoringSessionMemberships          TutoringSessionUser[]
+  tutoringTeacherPoolMember           TutoringTeacherPoolMember?    @relation("TutoringTeacherPoolUser")
+  tutoringCreditPurchases             TutoringCreditPurchase[]      @relation("TutoringCreditPurchaseUser")
+  tutoringCreditLedgerEntries         TutoringCreditLedgerEntry[]   @relation("TutoringCreditLedgerUser")
+  tutoringRequestsMade                TutoringRequest[]             @relation("TutoringRequestLearner")
+  tutoringRequestsAssigned            TutoringRequest[]             @relation("TutoringRequestAssignedTeacher")
+  tutoringBookingsTeaching            TutoringBooking[]             @relation("TutoringBookingTeacher")
+  learningAnnouncementsAuthored       LearningAnnouncement[]        @relation("LearningAnnouncementAuthor")
+  learningAnnouncementReceipts        LearningAnnouncementReceipt[] @relation("LearningAnnouncementRecipient")
+  marketingPreference                 UserMarketingPreference?
+  preferences                         UserPreferences?
 }
 
 model UserPreferences {
@@ -596,39 +596,39 @@ model PracticeCatalog {
 }
 
 model PracticeSubject {
-  id                  String                   @id @default(cuid())
-  slug                String                   @unique
-  title               String
-  description         String?
-  order               Int                      @default(0)
-  meta                Json?
-  createdAt           DateTime                 @default(now())
-  updatedAt           DateTime                 @updatedAt
-  imageAlt            String?
-  imagePublicId       String?
-  accessPolicy        AccessPolicy             @default(free)
-  entitlementKey      String?
-  status              SubjectStatus            @default(active)
-  visibility          SubjectVisibility        @default(public)
-  catalogId           String?
-  showInOnboarding    Boolean                  @default(true)
-  catalog             PracticeCatalog?         @relation(fields: [catalogId], references: [id])
-  codeProjects        CodeProject[]            @relation("SubjectCodeProjects")
-  modules             PracticeModule[]
-  sections            PracticeSection[]
-  topics              PracticeTopic[]
-  accessGrants        SubjectAccessGrant[]
-  enrollments         SubjectEnrollment[]
-  learningAssignments LearningAssignment[]
-  tutoringSessions    TutoringSession[]
-  onboardingInterests UserOnboardingInterest[]
+  id                         String                             @id @default(cuid())
+  slug                       String                             @unique
+  title                      String
+  description                String?
+  order                      Int                                @default(0)
+  meta                       Json?
+  createdAt                  DateTime                           @default(now())
+  updatedAt                  DateTime                           @updatedAt
+  imageAlt                   String?
+  imagePublicId              String?
+  accessPolicy               AccessPolicy                       @default(free)
+  entitlementKey             String?
+  status                     SubjectStatus                      @default(active)
+  visibility                 SubjectVisibility                  @default(public)
+  catalogId                  String?
+  showInOnboarding           Boolean                            @default(true)
+  catalog                    PracticeCatalog?                   @relation(fields: [catalogId], references: [id])
+  codeProjects               CodeProject[]                      @relation("SubjectCodeProjects")
+  modules                    PracticeModule[]
+  sections                   PracticeSection[]
+  topics                     PracticeTopic[]
+  accessGrants               SubjectAccessGrant[]
+  enrollments                SubjectEnrollment[]
+  learningAssignments        LearningAssignment[]
+  tutoringSessions           TutoringSession[]
+  onboardingInterests        UserOnboardingInterest[]
+  organizationCourseAccesses LearningOrganizationCourseAccess[]
 
   @@index([order])
   @@index([catalogId, order])
   @@index([status, order])
   @@index([visibility, status, order])
   @@index([showInOnboarding, status, order])
-  organizationCourseAccesses LearningOrganizationCourseAccess[]
 }
 
 model ReviewProgress {
@@ -660,15 +660,15 @@ model ReviewQuizInstance {
 }
 
 model PracticeChallengeLink {
-  id               String          @id @default(cuid())
-  code             String          @unique @db.VarChar(24)
-  locale           String          @default("en") @db.VarChar(8)
+  id               String                      @id @default(cuid())
+  code             String                      @unique @db.VarChar(24)
+  locale           String                      @default("en") @db.VarChar(8)
   subjectSlug      String
   moduleSlug       String
   sectionSlug      String
   topicSlug        String
   exerciseKey      String
-  exercisePurpose  PracticePurpose @default(project)
+  exercisePurpose  PracticePurpose             @default(project)
   signedToken      String
   shareTitle       String?
   shareDescription String?
@@ -677,15 +677,52 @@ model PracticeChallengeLink {
   createdById      String?
   expiresAt        DateTime?
   revokedAt        DateTime?
-  createdAt        DateTime        @default(now())
-  updatedAt        DateTime        @updatedAt
-  createdBy        User?           @relation("UserPracticeChallengeLinks", fields: [createdById], references: [id], onDelete: SetNull)
+  createdAt        DateTime                    @default(now())
+  updatedAt        DateTime                    @updatedAt
+  createdBy        User?                       @relation("UserPracticeChallengeLinks", fields: [createdById], references: [id], onDelete: SetNull)
+  socialPosts      PublicChallengeSocialPost[]
 
   @@index([exerciseKey])
   @@index([subjectSlug, moduleSlug])
   @@index([createdById, createdAt])
   @@index([expiresAt])
   @@index([revokedAt])
+}
+
+model PublicChallengeSocialAutomation {
+  id               String   @id
+  enabled          Boolean  @default(false)
+  locale           String   @default("en") @db.VarChar(8)
+  localTime        String   @default("09:00") @db.VarChar(5)
+  timezone         String   @default("America/Chicago") @db.VarChar(80)
+  facebookEnabled  Boolean  @default(false)
+  instagramEnabled Boolean  @default(false)
+  linkedinEnabled  Boolean  @default(false)
+  xEnabled         Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model PublicChallengeSocialPost {
+  id              String                @id @default(cuid())
+  challengeId     String
+  provider        String                @db.VarChar(24)
+  dispatchDate    String                @db.VarChar(10)
+  source          String                @db.VarChar(16)
+  status          String                @default("pending") @db.VarChar(16)
+  idempotencyKey  String                @unique @db.VarChar(220)
+  providerPostId  String?
+  providerPostUrl String?
+  attemptCount    Int                   @default(0)
+  lastError       String?
+  publishedAt     DateTime?
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+  challenge       PracticeChallengeLink @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  @@index([challengeId, createdAt])
+  @@index([provider, status, createdAt])
+  @@index([dispatchDate, provider])
 }
 
 model StripeEvent {
@@ -790,23 +827,22 @@ model SubjectEnrollment {
   @@index([actorKey, status])
 }
 
-
 model LearningOrganization {
-  id          String                       @id @default(cuid())
-  slug        String                       @unique
-  name        String
-  description String?
-  ownerId     String
-  createdAt   DateTime                     @default(now())
-  updatedAt   DateTime                     @updatedAt
-  owner       User                         @relation("LearningOrganizationOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-  memberships LearningOrganizationMember[]
-  groups      LearningGroup[]
-  invites     LearningOrganizationInvite[]
-  announcements LearningAnnouncement[]
+  id             String                             @id @default(cuid())
+  slug           String                             @unique
+  name           String
+  description    String?
+  ownerId        String
+  createdAt      DateTime                           @default(now())
+  updatedAt      DateTime                           @updatedAt
+  owner          User                               @relation("LearningOrganizationOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  memberships    LearningOrganizationMember[]
+  groups         LearningGroup[]
+  invites        LearningOrganizationInvite[]
+  announcements  LearningAnnouncement[]
+  courseAccesses LearningOrganizationCourseAccess[]
 
   @@index([ownerId, updatedAt])
-  courseAccesses LearningOrganizationCourseAccess[]
 }
 
 model LearningOrganizationMember {
@@ -823,20 +859,20 @@ model LearningOrganizationMember {
 }
 
 model LearningOrganizationInvite {
-  id               String                          @id @default(cuid())
+  id               String                         @id @default(cuid())
   organizationId   String
   email            String
   role             LearningOrganizationMemberRole @default(instructor)
-  tokenHash        String                          @unique @db.VarChar(64)
+  tokenHash        String                         @unique @db.VarChar(64)
   expiresAt        DateTime
   sentAt           DateTime?
   acceptedAt       DateTime?
   acceptedByUserId String?
   revokedAt        DateTime?
-  createdAt        DateTime                        @default(now())
-  updatedAt        DateTime                        @updatedAt
-  organization     LearningOrganization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  acceptedBy       User?                           @relation("LearningOrganizationInviteAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
+  createdAt        DateTime                       @default(now())
+  updatedAt        DateTime                       @updatedAt
+  organization     LearningOrganization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  acceptedBy       User?                          @relation("LearningOrganizationInviteAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
 
   @@unique([organizationId, email])
   @@index([organizationId, revokedAt, expiresAt])
@@ -861,22 +897,20 @@ model LearningGroup {
   name             String
   description      String?
   ownerId          String
-  organizationId String?
+  organizationId   String?
   createdAt        DateTime                  @default(now())
   updatedAt        DateTime                  @updatedAt
   owner            User                      @relation("LearningGroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-  organization LearningOrganization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+  organization     LearningOrganization?     @relation(fields: [organizationId], references: [id], onDelete: SetNull)
   members          LearningGroupMember[]
   invites          LearningGroupInvite[]
   assignments      LearningAssignmentGroup[]
   tutoringSessions TutoringSessionGroup[]
-  announcements   LearningAnnouncement[]
+  announcements    LearningAnnouncement[]
 
   @@index([ownerId, updatedAt])
-
   @@index([organizationId, updatedAt])
 }
-
 
 model LearningGroupInvite {
   id               String        @id @default(cuid())
@@ -911,26 +945,25 @@ model LearningGroupMember {
   @@index([userId])
 }
 
-
 enum LearningAnnouncementScope {
   school
   class
 }
 
 model LearningAnnouncement {
-  id             String                     @id @default(cuid())
+  id             String                        @id @default(cuid())
   scope          LearningAnnouncementScope
   organizationId String?
   groupId        String?
   authorId       String
   title          String
-  body           String                     @db.Text
-  publishedAt    DateTime                   @default(now())
-  createdAt      DateTime                   @default(now())
-  updatedAt      DateTime                   @updatedAt
-  organization   LearningOrganization?      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
-  group          LearningGroup?             @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  author         User                       @relation("LearningAnnouncementAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  body           String                        @db.Text
+  publishedAt    DateTime                      @default(now())
+  createdAt      DateTime                      @default(now())
+  updatedAt      DateTime                      @updatedAt
+  organization   LearningOrganization?         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  group          LearningGroup?                @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  author         User                          @relation("LearningAnnouncementAuthor", fields: [authorId], references: [id], onDelete: Cascade)
   receipts       LearningAnnouncementReceipt[]
 
   @@index([organizationId, publishedAt])
@@ -1433,7 +1466,6 @@ enum TutoringParticipantRole {
   learner
   observer
 }
-
 
 enum LearningOrganizationMemberRole {
   admin

@@ -44,6 +44,58 @@ services:
       retries: 10
       start_period: 45s
 
+  social-challenge-scheduler:
+    image: ghcr.io/${GHCR_OWNER:?required}/zoeskoul-web:${IMAGE_TAG:-prod}
+    container_name: zoeskoul-social-challenge-scheduler
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    depends_on:
+      web:
+        condition: service_healthy
+
+    entrypoint: ["node", "-e"]
+    command:
+      - |
+        const secret = (process.env.ZOESKOUL_SOCIAL_SCHEDULER_SECRET || "").trim();
+        if (!secret) {
+          console.log("Daily challenge social scheduler disabled: secret not configured.");
+          setInterval(() => {}, 3600000);
+        } else {
+          const tick = async () => {
+            try {
+              const response = await fetch("http://web:3000/api/internal/public-challenges/social/tick", {
+                method: "POST",
+                headers: { authorization: "Bearer " + secret },
+              });
+              if (!response.ok) {
+                console.error("Daily challenge social tick failed with HTTP " + response.status);
+              }
+            } catch (error) {
+              console.error(
+                "Daily challenge social tick request failed:",
+                error instanceof Error ? error.message : String(error),
+              );
+            }
+          };
+          void tick();
+          setInterval(() => void tick(), 60000);
+        }
+
+    networks:
+      - webnet
+
+    logging: *default_logging
+
+    security_opt:
+      - no-new-privileges:true
+
+    pids_limit: 64
+    mem_limit: 128m
+    cpus: 0.15
+
   postgres:
     image: ${POSTGRES_IMAGE:-postgres:16-alpine}
     restart: unless-stopped

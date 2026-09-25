@@ -256,3 +256,61 @@ export type PublicChallengeEmailImageUploadResponse = {
   ok: true;
   imageUrl: string;
 };
+
+export type PublicChallengeSocialProvider =
+  | "facebook"
+  | "instagram"
+  | "linkedin"
+  | "x";
+
+export type PublicChallengeSocialProviderStatus = {
+  provider: PublicChallengeSocialProvider;
+  label: string;
+  configured: boolean;
+  imageRequired: boolean;
+};
+
+export type PublicChallengeSocialAutomationSettings = {
+  enabled: boolean;
+  locale: "en" | "fr" | "ht";
+  localTime: string;
+  timezone: string;
+  providers: PublicChallengeSocialProvider[];
+};
+
+export type PublicChallengeSocialRecentPost = {
+  id: string;
+  provider: PublicChallengeSocialProvider;
+  dispatchDate: string;
+  source: "manual" | "daily";
+  status: "pending" | "publishing" | "published" | "failed";
+  providerPostId: string | null;
+  providerPostUrl: string | null;
+  attemptCount: number;
+  lastError: string | null;
+  publishedAt: string | null;
+  createdAt: string;
+  challengeCode: string;
+  challengeTitle: string;
+};
+
+export type PublicChallengeSocialAdminResponse = {
+  schedulerConfigured: boolean;
+  providers: PublicChallengeSocialProviderStatus[];
+  automation: PublicChallengeSocialAutomationSettings;
+  recentPosts: PublicChallengeSocialRecentPost[];
+};
+
+export type PublicChallengeSocialPublishResult = {
+  provider: PublicChallengeSocialProvider;
+  status: "published" | "failed" | "skipped";
+  providerPostId: string | null;
+  providerPostUrl: string | null;
+  error: string | null;
+};
+
+export type PublicChallengeSocialPublishResponse = {
+  ok: true;
+  challengeCode: string;
+  results: PublicChallengeSocialPublishResult[];
+};

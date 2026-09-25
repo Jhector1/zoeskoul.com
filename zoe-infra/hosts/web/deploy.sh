@@ -47,7 +47,7 @@ pull_with_retry() {
 }
 
 echo "Pulling production images..."
-pull_with_retry docker compose pull web postgres redis
+pull_with_retry docker compose pull web social-challenge-scheduler postgres redis
 
 echo "Starting database and Redis..."
 docker compose up \
@@ -70,6 +70,13 @@ docker compose up \
   --wait \
   --wait-timeout 180 \
   web
+
+echo "Starting/replacing daily challenge social scheduler..."
+docker compose up \
+  -d \
+  --force-recreate \
+  --no-deps \
+  social-challenge-scheduler
 
 echo "Current services:"
 docker compose ps
