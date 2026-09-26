@@ -25,6 +25,8 @@ import {
   publishPublicChallengeToProvider,
 } from "@/lib/marketing/publicChallengeSocial";
 
+import { ensurePublicChallengeSocialImage } from "@/lib/practice/challenges/socialCard";
+
 const AUTOMATION_ID = "daily";
 const PROVIDERS: PublicChallengeSocialProvider[] = [
   "facebook",
@@ -265,6 +267,8 @@ export async function publishChallengeToSocial(args: {
     id: string;
     code: string;
     locale: string;
+    subjectSlug: string;
+    topicSlug: string;
     exerciseKey: string;
     shareTitle: string | null;
     shareDescription: string | null;
@@ -283,15 +287,18 @@ export async function publishChallengeToSocial(args: {
       status.configured,
     ]),
   );
+  const challengeWithImage = await ensurePublicChallengeSocialImage(
+    args.challenge,
+  );
   const presentation = buildPublicChallengePresentation({
-    source: args.challenge,
+    source: challengeWithImage,
     fallbackTitle: args.challenge.shareTitle || args.challenge.exerciseKey,
   });
 
   const content = {
     title: presentation.title,
     description: presentation.description,
-    challengeUrl: challengeUrl(args.challenge),
+    challengeUrl: challengeUrl(challengeWithImage),
     imageUrl: presentation.imageUrl,
     imageAlt: presentation.imageAlt,
   };

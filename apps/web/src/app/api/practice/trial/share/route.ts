@@ -31,6 +31,8 @@ import {
 } from "@/lib/practice/challenges/target";
 import { signSharedChallenge } from "@/lib/practice/challenges/token";
 
+import { uploadGeneratedPublicChallengeSocialCard } from "@/lib/practice/challenges/socialCard";
+
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
@@ -212,6 +214,15 @@ export async function POST(req: Request) {
     if (request.image) {
       const uploaded = await uploadChallengeOgImage(request.image);
       uploadedPublicId = uploaded.publicId;
+    } else {
+      const generated = await uploadGeneratedPublicChallengeSocialCard({
+        locale: parsed.data.locale,
+        subjectSlug: target.subjectSlug,
+        topicSlug: target.topicSlug,
+        exerciseKey: target.exerciseKey,
+        shareTitle,
+      });
+      uploadedPublicId = generated.publicId;
     }
 
     const link = await createChallengeLinkRecord({
