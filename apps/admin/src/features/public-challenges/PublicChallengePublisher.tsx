@@ -46,6 +46,42 @@ type PreviewResponse = {
   expiresAt: string;
 };
 
+const DEFAULT_PUBLIC_CHALLENGE_SHARE_DESCRIPTION =
+  "Can you complete this coding practice challenge? No account is required to try it.";
+const MAX_PUBLIC_CHALLENGE_SHARE_DESCRIPTION = 240;
+
+function compactPublicChallengeShareDescription(value: unknown) {
+  const raw = typeof value === "string" ? value : "";
+
+  const cleaned = raw
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[*_>#~]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!cleaned) return DEFAULT_PUBLIC_CHALLENGE_SHARE_DESCRIPTION;
+  if (cleaned.length <= MAX_PUBLIC_CHALLENGE_SHARE_DESCRIPTION) {
+    return cleaned;
+  }
+
+  const clipped = cleaned.slice(
+    0,
+    MAX_PUBLIC_CHALLENGE_SHARE_DESCRIPTION - 1,
+  );
+  const lastSpace = clipped.lastIndexOf(" ");
+  const safeCut = lastSpace >= 180 ? clipped.slice(0, lastSpace) : clipped;
+
+  return `${safeCut.trimEnd()}…`;
+}
+
+function defaultPublicChallengeShareDescription(
+  option: PublicChallengeExerciseOption | null | undefined,
+) {
+  return compactPublicChallengeShareDescription(option?.exercisePrompt);
+}
+
 const MAX_PREVIEW_IMAGE_BYTES = 4 * 1024 * 1024;
 const PREVIEW_IMAGE_TYPES = new Set([
   "image/jpeg",
@@ -219,7 +255,7 @@ export default function PublicChallengePublisher(props: {
   const [error, setError] = useState<string | null>(null);
   const [shareTitle, setShareTitle] = useState(first?.exerciseTitle ?? "");
   const [shareDescription, setShareDescription] = useState(
-    "Can you complete this coding practice challenge? No account is required to try it.",
+    defaultPublicChallengeShareDescription(first),
   );
   const [ogImageAlt, setOgImageAlt] = useState(
     first ? `${first.exerciseTitle} challenge preview` : "",
@@ -413,14 +449,18 @@ export default function PublicChallengePublisher(props: {
   useEffect(() => {
     setShareTitle(selected?.exerciseTitle ?? "");
     setShareDescription(
-      "Can you complete this coding practice challenge? No account is required to try it.",
+      defaultPublicChallengeShareDescription(selected),
     );
     setOgImageAlt(
       selected ? `${selected.exerciseTitle} challenge preview` : "",
     );
     setImageFile(null);
     if (imageInputRef.current) imageInputRef.current.value = "";
-  }, [selected?.id, selected?.exerciseTitle]);
+  }, [
+    selected?.id,
+    selected?.exerciseTitle,
+    selected?.exercisePrompt,
+  ]);
 
   useEffect(() => {
     if (!imageFile) {

@@ -167,6 +167,7 @@ export type PublicChallengeExerciseOption = {
   topicTitleKey?: string | null;
   exerciseKey: string;
   exerciseTitle: string;
+  exercisePrompt?: string | null;
   exerciseKind: string;
   exercisePurpose: PublicChallengeExercisePurpose;
   isMultiFile: boolean;

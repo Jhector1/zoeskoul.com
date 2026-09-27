@@ -31,6 +31,7 @@ type PracticeExerciseOptionBase = {
   topicTitleKey?: string | null;
   exerciseKey: string;
   exerciseTitle: string;
+  exercisePrompt?: string | null;
   exerciseKind: string;
   exercisePurpose: "quiz" | "project" | "try_it" | "practice";
   isMultiFile: boolean;
@@ -77,6 +78,27 @@ function titleFromKey(value: unknown, fallback: string) {
 function authoredTitleKey(value: unknown) {
   const key = typeof value === "string" ? value.trim() : "";
   return key || null;
+}
+
+function exercisePromptReference(
+  exercise: Record<string, unknown>,
+): string | null {
+  const prompt =
+    typeof exercise.prompt === "string" ? exercise.prompt.trim() : "";
+  if (prompt) return prompt;
+
+  const promptKey =
+    typeof exercise.promptKey === "string" ? exercise.promptKey.trim() : "";
+  if (promptKey) {
+    return promptKey.startsWith("@:") ? promptKey : `@:${promptKey}`;
+  }
+
+  const messageBase =
+    typeof exercise.messageBase === "string"
+      ? exercise.messageBase.trim()
+      : "";
+
+  return messageBase ? `@:${messageBase}.prompt` : null;
 }
 
 function releaseStatusForSubject(
@@ -194,6 +216,7 @@ async function listAuthoredPracticeExerciseOptions(args: {
                   topicTitleKey: authoredTitleKey(topic.topic?.labelKey),
                   exerciseKey: target.exerciseKey,
                   exerciseTitle: target.exerciseTitle,
+                  exercisePrompt: exercisePromptReference(exercise),
                   exerciseKind: target.exerciseKind,
                   exercisePurpose: target.exercisePurpose,
                   isMultiFile: capabilities.isMultiFile,
