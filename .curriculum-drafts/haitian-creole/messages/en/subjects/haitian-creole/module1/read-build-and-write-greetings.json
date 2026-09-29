@@ -1,0 +1,138 @@
+{
+  "topics": {
+    "haitian-creole": {
+      "haitian-creole-foundations-2-bonjou": {
+        "read-build-and-write-greetings": {
+          "label": "Read, Build, and Write Greetings",
+          "summary": "Use everyday polite expressions such as Mèsi, Mèsi anpil, Tanpri, and Padon in short beginner interactions.",
+          "cards": {
+            "sketch0": {
+              "title": "Say Thank You"
+            },
+            "sketch1": {
+              "title": "Ask Politely"
+            },
+            "sketch2": {
+              "title": "Get Someone's Attention"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "read-build-and-write-greetings-choice": {
+              "title": "Choose thank you",
+              "prompt": "Which Kreyòl word means “thank you”?",
+              "hint": "Choose the familiar polite expression.",
+              "help": {
+                "concept": "Mèsi is the basic Kreyòl expression for thanking someone.",
+                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+                "hint_2": "Read or listen to the complete phrase once more before answering."
+              },
+              "options": {
+                "a": "Mèsi.",
+                "b": "Tanpri.",
+                "c": "Padon."
+              }
+            },
+            "read-build-and-write-greetings-fill": {
+              "title": "Complete Tanpri",
+              "prompt": "Choose the letters that complete the Kreyòl word for “please.”",
+              "hint": "Choose the ending that completes the polite word.",
+              "help": {
+                "concept": "This polite expression has a fixed spelling in Kreyòl.",
+                "hint_1": "Compare the available endings carefully.",
+                "hint_2": "Choose the spelling pattern practiced in the lesson."
+              },
+              "template": "Tan[blank1]",
+              "choices": [
+                "pri",
+                "pre",
+                "pro"
+              ]
+            },
+            "read-build-and-write-greetings-listen": {
+              "title": "Hear please",
+              "prompt": "Listen, then build the polite Kreyòl word you hear.",
+              "hint": "Listen for the complete word.",
+              "help": {
+                "concept": "Listening practice connects the spoken polite expression with its spelling.",
+                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+                "hint_2": "Read or listen to the complete phrase once more before answering."
+              },
+              "targetText": "Tanpri.",
+              "wordBank": [
+                "Tanpri."
+              ],
+              "distractors": [
+                "Padon."
+              ]
+            },
+            "read-build-and-write-greetings-voice": {
+              "title": "Say thank you very much",
+              "prompt": "Say: Mèsi anpil.",
+              "hint": "Say both words as one polite expression.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl phrase.",
+                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+                "hint_2": "Read or listen to the complete phrase once more before answering."
+              },
+              "targetText": "Mèsi anpil."
+            },
+            "read-build-and-write-greetings-build": {
+              "title": "Build strong thanks",
+              "prompt": "Arrange the words to say “Thank you very much.”",
+              "hint": "Put the basic thank-you word first.",
+              "help": {
+                "concept": "Mèsi anpil is a common two-word expression of stronger thanks.",
+                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+                "hint_2": "Read or listen to the complete phrase once more before answering."
+              },
+              "targetText": "Mèsi anpil.",
+              "wordBank": [
+                "Mèsi",
+                "anpil."
+              ],
+              "distractors": [
+                "Tanpri"
+              ],
+              "ttsText": "Mèsi anpil."
+            },
+            "read-build-and-write-greetings-write": {
+              "title": "Write Padon",
+              "prompt": "Type the Kreyòl word practiced for “pardon” or “excuse me.”",
+              "hint": "Write the complete polite word.",
+              "help": {
+                "concept": "Writing Padon gives you another small phrase for real interactions.",
+                "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+                "hint_2": "Read or listen to the complete phrase once more before answering."
+              },
+              "expectedText": "Padon",
+              "placeholder": "Type the Kreyòl answer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole": {
+      "haitian-creole-foundations-2-bonjou": {
+        "read-build-and-write-greetings": {
+          "thanks": {
+            "title": "Mèsi and Mèsi anpil",
+            "bodyMarkdown": "**Mèsi** means “thank you.” To make the thanks stronger, say **Mèsi anpil** — “thank you very much.”\n\nBoth are complete, useful expressions you can use immediately."
+          },
+          "please": {
+            "title": "Tanpri",
+            "bodyMarkdown": "**Tanpri** means “please.” It is useful when making a polite request.\n\nAt this stage, practice recognizing the word and placing it naturally with other short expressions."
+          },
+          "excuse": {
+            "title": "Padon",
+            "bodyMarkdown": "**Padon** can be used for “pardon” or “excuse me” in simple situations.\n\nThese small polite words matter because they make even very short conversations feel complete and respectful."
+          }
+        }
+      }
+    }
+  }
+}

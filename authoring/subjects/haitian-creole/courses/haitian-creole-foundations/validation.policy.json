@@ -1,0 +1,141 @@
+{
+  "policyId": "haitian-creole-foundations-validation",
+  "allowedConcepts": [
+    "Kreyòl sound-spelling relationships",
+    "greetings",
+    "leave-taking",
+    "identity",
+    "everyday objects",
+    "common actions",
+    "beginner questions",
+    "short answers",
+    "numbers",
+    "basic time",
+    "short everyday conversations"
+  ],
+  "disallowedConcepts": [
+    "code_input",
+    "pseudocode_input",
+    "phoneme-level pronunciation score claims",
+    "advanced literary analysis",
+    "advanced grammar terminology before communicative use"
+  ],
+  "globalRules": [
+    "Keep every topic at A0-to-A1 difficulty.",
+    "Use official Kreyòl spelling and preserve meaningful diacritics.",
+    "Use integrated receptive and productive practice rather than quiz-only instruction.",
+    "Do not use programming runtime or code-workspace language.",
+    "Do not describe speech transcript matching as a pronunciation score.",
+    "Module 1 must have accessOverride free; later modules inherit paid access."
+  ],
+  "moduleRules": {
+    "1": {
+      "focus": [
+        "Kreyòl spelling",
+        "sound-letter patterns",
+        "vowels",
+        "nasal sounds",
+        "first high-frequency words"
+      ],
+      "notes": [
+        "Give true beginners enough sound and spelling confidence to approach their first spoken and written Kreyòl without treating English spelling as a guide.",
+        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+      ]
+    },
+    "2": {
+      "focus": [
+        "greetings",
+        "leave-taking",
+        "polite expressions",
+        "short social responses"
+      ],
+      "notes": [
+        "Move from isolated sounds into the first complete social interactions a learner can understand and use immediately.",
+        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+      ]
+    },
+    "3": {
+      "focus": [
+        "names",
+        "identity",
+        "introductions",
+        "simple personal questions"
+      ],
+      "notes": [
+        "Give learners a practical identity exchange they can understand and produce with increasing independence.",
+        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+      ]
+    },
+    "4": {
+      "focus": [
+        "everyday objects",
+        "identifying things",
+        "simple descriptions",
+        "basic noun phrases"
+      ],
+      "notes": [
+        "Expand from people to concrete objects so learners can understand and produce useful noun-centered sentences.",
+        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+      ]
+    },
+    "5": {
+      "focus": [
+        "common actions",
+        "present activity",
+        "simple action questions",
+        "short action statements"
+      ],
+      "notes": [
+        "Introduce the learner to useful action language without overloading the course with abstract grammar terminology.",
+        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+      ]
+    },
+    "6": {
+      "focus": [
+        "question words",
+        "yes-no questions",
+        "short answers",
+        "familiar information exchange"
+      ],
+      "notes": [
+        "Turn memorized statements into flexible two-way communication by practicing common question-and-answer structures.",
+        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+      ]
+    },
+    "7": {
+      "focus": [
+        "numbers",
+        "basic time",
+        "quantities",
+        "everyday routine information"
+      ],
+      "notes": [
+        "Give learners practical language for quantities, basic time, and routine information they are likely to encounter early.",
+        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+      ]
+    },
+    "8": {
+      "focus": [
+        "cumulative conversation",
+        "greetings",
+        "identity",
+        "questions",
+        "actions",
+        "numbers and time"
+      ],
+      "notes": [
+        "Consolidate A0-to-A1 foundations into a small but meaningful conversation the learner can understand and produce.",
+        "Use the four topic shells in order: learn/notice, listen/speak, read/build/write, then use-it/review."
+      ]
+    }
+  },
+  "validationRequirements": {
+    "profileId": "language",
+    "moduleCount": 8,
+    "topicsPerModule": 4,
+    "firstModuleFree": true,
+    "forbidCodeInput": true,
+    "forbidPseudocodeInput": true,
+    "requireIntegratedSkills": true
+  }
+}

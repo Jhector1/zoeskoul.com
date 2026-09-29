@@ -1,12 +1,6 @@
 import type { GradeResult } from ".";
+import { scorePhraseMatch } from "@zoeskoul/practice-checks";
 import {LoadedValidateInstance} from "@/lib/practice/api/validate/repositories/instance.repo";import type { SubmitAnswer } from "../schemas";
-
-function norm(s: string) {
-  return String(s ?? "")
-    .trim()
-    .replace(/\s+/g, " ")
-    .toLowerCase();
-}
 
 export function gradeVoiceInput(args: {
   instance: LoadedValidateInstance;
@@ -15,13 +9,16 @@ export function gradeVoiceInput(args: {
   isReveal: boolean;
 }): GradeResult {
   const expected =
-    typeof args.expectedCanon.transcript === "string"
-      ? args.expectedCanon.transcript
-      : typeof args.expectedCanon.value === "string"
-        ? args.expectedCanon.value
-        : Array.isArray(args.expectedCanon.answers) && typeof args.expectedCanon.answers[0] === "string"
-          ? args.expectedCanon.answers[0]
-          : null;
+    typeof args.expectedCanon?.targetText === "string"
+      ? args.expectedCanon.targetText
+      : typeof args.expectedCanon?.transcript === "string"
+        ? args.expectedCanon.transcript
+        : typeof args.expectedCanon?.value === "string"
+          ? args.expectedCanon.value
+          : Array.isArray(args.expectedCanon?.answers) &&
+              typeof args.expectedCanon.answers[0] === "string"
+            ? args.expectedCanon.answers[0]
+            : null;
 
   if (args.isReveal) {
     return {
@@ -37,14 +34,24 @@ export function gradeVoiceInput(args: {
   }
 
   if (!expected) {
-    return { ok: true,  explanation: "Answer recorded." };
+    return {
+      ok: false,
+      explanation: "Server bug: missing voice_input expected phrase.",
+    };
   }
 
-  const ok = norm(transcript) === norm(expected);
+  const match = scorePhraseMatch({
+    transcript,
+    targetText: expected,
+    locale:
+      typeof args.expectedCanon?.locale === "string"
+        ? args.expectedCanon.locale
+        : undefined,
+  });
 
   return {
-    ok,
-    
-    explanation: ok ? "Correct." : "Not correct.",
+    ok: match.ok,
+
+    explanation: match.ok ? "Correct." : "Not correct.",
   };
 }

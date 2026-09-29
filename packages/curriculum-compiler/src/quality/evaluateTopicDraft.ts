@@ -41,6 +41,7 @@ export async function evaluateTopicDraft(args: {
     rawDraft: TopicAuthoringDraft;
     profileServices: ProfileServices;
     skipSemantic?: boolean;
+    mode?: "generated" | "manual-strict";
 }): Promise<{
     normalizedDraft: TopicAuthoringDraft;
     draft: TopicAuthoringDraft;
@@ -49,33 +50,49 @@ export async function evaluateTopicDraft(args: {
     semanticReport: SemanticValidationReport;
     hintWarnings: string[];
 }> {
-    let draft = normalizeTopicAuthoringDraft(args.rawDraft, {
-        profileId: args.seed.profileId,
-    });
+    const manualStrict = args.mode === "manual-strict";
+
+    let draft = manualStrict
+        ? args.rawDraft
+        : normalizeTopicAuthoringDraft(args.rawDraft, {
+              profileId: args.seed.profileId,
+          });
     const normalizedDraft = draft;
 
-    draft = await repairIncompleteExercises({
-        provider: args.provider,
-        seed: args.seed,
-        draft,
-    });
+    let profileRepairResult: {
+        draft: TopicAuthoringDraft;
+        report: RepairReport;
+    };
 
-    draft = repairTopicAuthoringDraft(draft, args.seed);
-    draft = sanitizeHintLeaksInDraft(draft, args.seed);
+    if (manualStrict) {
+        profileRepairResult = {
+            draft,
+            report: makeBaseRepairReport(args.seed.topicId),
+        };
+    } else {
+        draft = await repairIncompleteExercises({
+            provider: args.provider,
+            seed: args.seed,
+            draft,
+        });
 
-    const profileRepairResult = await args.profileServices.repairDraft({
-        seed: args.seed,
-        draft,
-    });
+        draft = repairTopicAuthoringDraft(draft, args.seed);
+        draft = sanitizeHintLeaksInDraft(draft, args.seed);
 
-    draft = await repairIncompleteExercises({
-        provider: args.provider,
-        seed: args.seed,
-        draft: profileRepairResult.draft,
-    });
+        profileRepairResult = await args.profileServices.repairDraft({
+            seed: args.seed,
+            draft,
+        });
 
-    draft = repairTopicAuthoringDraft(draft, args.seed);
-    draft = sanitizeHintLeaksInDraft(draft, args.seed);
+        draft = await repairIncompleteExercises({
+            provider: args.provider,
+            seed: args.seed,
+            draft: profileRepairResult.draft,
+        });
+
+        draft = repairTopicAuthoringDraft(draft, args.seed);
+        draft = sanitizeHintLeaksInDraft(draft, args.seed);
+    }
 
     const hintWarnings = validateExerciseHints(draft);
     const hintCritiqueIssues = buildHintCritiqueIssues(hintWarnings);

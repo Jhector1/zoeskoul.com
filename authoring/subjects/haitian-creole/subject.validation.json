@@ -1,0 +1,18 @@
+{
+  "subjectSlug": "haitian-creole",
+  "catalogSlug": "haitian-creole",
+  "profileId": "language",
+  "requirements": {
+    "officialOrthography": true,
+    "preserveDiacritics": true,
+    "noCodeRuntime": true,
+    "integratedSkills": true,
+    "voiceIsTranscriptPractice": true
+  },
+  "rules": [
+    "Use Kreyòl Ayisyen as the target language and English as the current authoring/source locale.",
+    "Do not describe transcript matching as phoneme-level pronunciation scoring.",
+    "Do not introduce code_input or pseudocode_input into language courses.",
+    "Preserve meaningful Kreyòl diacritics and apostrophes; do not auto-expand learner text."
+  ]
+}

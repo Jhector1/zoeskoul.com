@@ -1,0 +1,18 @@
+{
+  "profileId": "language",
+  "language": "ht",
+  "nativeName": "Kreyòl Ayisyen",
+  "bcp47": "ht-HT",
+  "transcriptionLanguage": "ht",
+  "direction": "ltr",
+  "exerciseKinds": [
+    "single_choice",
+    "multi_choice",
+    "drag_reorder",
+    "fill_blank_choice",
+    "text_input",
+    "voice_input",
+    "word_bank_arrange",
+    "listen_build"
+  ]
+}

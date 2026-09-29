@@ -1,0 +1,661 @@
+{
+  "subject": {
+    "slug": "haitian-creole",
+    "profileId": "language",
+    "catalogSlug": "haitian-creole",
+    "genKey": "language_course",
+    "order": 1,
+    "accessPolicy": "paid",
+    "visibility": "public",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.haitian-creole.title",
+    "descriptionKey": "subjects.haitian-creole.description",
+    "serviceDefaults": null,
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 8,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.haitian-creole.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "haitian-creole-foundations-1-sounds-of-kreyol",
+      "prefix": "ht1",
+      "order": 0,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.title",
+      "descriptionKey": "modules.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": "free",
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 102,
+        "prereqKeys": [],
+        "outcomeKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.outcomes.0",
+          "modules.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.outcomes.1",
+          "modules.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.why.0",
+          "modules.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole-ht1-learn-listen-speak",
+          "order": 1,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-learn-listen-speak.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-learn-listen-speak.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-learn-listen-speak.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-learn-listen-speak.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-learn-listen-speak.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-learn-listen-speak.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-learn-listen-speak.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "notice-kreyol-sounds",
+            "listen-and-say-first-sounds"
+          ]
+        },
+        {
+          "slug": "haitian-creole-ht1-read-build-write-use",
+          "order": 2,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-read-build-write-use.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-read-build-write-use.description",
+          "meta": {
+            "module": 0,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-read-build-write-use.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-read-build-write-use.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-read-build-write-use.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-read-build-write-use.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.haitian-creole-ht1-read-build-write-use.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "read-build-and-write-first-words",
+            "use-sounds-in-a-mini-exchange"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-foundations-2-bonjou",
+      "prefix": "ht2",
+      "order": 1,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole.haitian-creole-foundations-2-bonjou.title",
+      "descriptionKey": "modules.haitian-creole.haitian-creole-foundations-2-bonjou.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 102,
+        "prereqKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-1-sounds-of-kreyol.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-2-bonjou.outcomes.0",
+          "modules.haitian-creole.haitian-creole-foundations-2-bonjou.outcomes.1",
+          "modules.haitian-creole.haitian-creole-foundations-2-bonjou.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-2-bonjou.why.0",
+          "modules.haitian-creole.haitian-creole-foundations-2-bonjou.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole-ht2-learn-listen-speak",
+          "order": 1,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-learn-listen-speak.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-learn-listen-speak.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-learn-listen-speak.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-learn-listen-speak.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-learn-listen-speak.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-learn-listen-speak.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-learn-listen-speak.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "learn-greetings-and-polite-basics",
+            "listen-and-say-hello"
+          ]
+        },
+        {
+          "slug": "haitian-creole-ht2-read-build-write-use",
+          "order": 2,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-read-build-write-use.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-read-build-write-use.description",
+          "meta": {
+            "module": 1,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-read-build-write-use.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-read-build-write-use.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-read-build-write-use.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-read-build-write-use.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-2-bonjou.haitian-creole-ht2-read-build-write-use.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "read-build-and-write-greetings",
+            "greeting-scenario-and-review"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-foundations-3-who-are-you",
+      "prefix": "ht3",
+      "order": 2,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole.haitian-creole-foundations-3-who-are-you.title",
+      "descriptionKey": "modules.haitian-creole.haitian-creole-foundations-3-who-are-you.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 102,
+        "prereqKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-2-bonjou.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-3-who-are-you.outcomes.0",
+          "modules.haitian-creole.haitian-creole-foundations-3-who-are-you.outcomes.1",
+          "modules.haitian-creole.haitian-creole-foundations-3-who-are-you.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-3-who-are-you.why.0",
+          "modules.haitian-creole.haitian-creole-foundations-3-who-are-you.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole-ht3-learn-listen-speak",
+          "order": 1,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-learn-listen-speak.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-learn-listen-speak.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-learn-listen-speak.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-learn-listen-speak.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-learn-listen-speak.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-learn-listen-speak.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-learn-listen-speak.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "learn-names-and-introductions",
+            "listen-and-introduce-yourself"
+          ]
+        },
+        {
+          "slug": "haitian-creole-ht3-read-build-write-use",
+          "order": 2,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-read-build-write-use.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-read-build-write-use.description",
+          "meta": {
+            "module": 2,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-read-build-write-use.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-read-build-write-use.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-read-build-write-use.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-read-build-write-use.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-3-who-are-you.haitian-creole-ht3-read-build-write-use.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "read-build-and-write-an-introduction",
+            "meet-someone-scenario-and-review"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-foundations-4-talking-about-things",
+      "prefix": "ht4",
+      "order": 3,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole.haitian-creole-foundations-4-talking-about-things.title",
+      "descriptionKey": "modules.haitian-creole.haitian-creole-foundations-4-talking-about-things.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 102,
+        "prereqKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-3-who-are-you.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-4-talking-about-things.outcomes.0",
+          "modules.haitian-creole.haitian-creole-foundations-4-talking-about-things.outcomes.1",
+          "modules.haitian-creole.haitian-creole-foundations-4-talking-about-things.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-4-talking-about-things.why.0",
+          "modules.haitian-creole.haitian-creole-foundations-4-talking-about-things.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole-ht4-learn-listen-speak",
+          "order": 1,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-learn-listen-speak.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-learn-listen-speak.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-learn-listen-speak.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-learn-listen-speak.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-learn-listen-speak.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-learn-listen-speak.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-learn-listen-speak.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "learn-everyday-things",
+            "listen-and-name-things"
+          ]
+        },
+        {
+          "slug": "haitian-creole-ht4-read-build-write-use",
+          "order": 2,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-read-build-write-use.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-read-build-write-use.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-read-build-write-use.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-read-build-write-use.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-read-build-write-use.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-read-build-write-use.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-4-talking-about-things.haitian-creole-ht4-read-build-write-use.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "read-build-and-write-about-things",
+            "what-is-this-scenario-and-review"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-foundations-5-what-are-you-doing",
+      "prefix": "ht5",
+      "order": 4,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.title",
+      "descriptionKey": "modules.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 102,
+        "prereqKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-4-talking-about-things.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.outcomes.0",
+          "modules.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.outcomes.1",
+          "modules.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.why.0",
+          "modules.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole-ht5-learn-listen-speak",
+          "order": 1,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-learn-listen-speak.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-learn-listen-speak.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-learn-listen-speak.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-learn-listen-speak.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-learn-listen-speak.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-learn-listen-speak.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-learn-listen-speak.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "learn-common-actions",
+            "listen-and-say-what-is-happening"
+          ]
+        },
+        {
+          "slug": "haitian-creole-ht5-read-build-write-use",
+          "order": 2,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-read-build-write-use.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-read-build-write-use.description",
+          "meta": {
+            "module": 4,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-read-build-write-use.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-read-build-write-use.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-read-build-write-use.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-read-build-write-use.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.haitian-creole-ht5-read-build-write-use.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "read-build-and-write-actions",
+            "what-are-you-doing-scenario"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-foundations-6-questions-and-answers",
+      "prefix": "ht6",
+      "order": 5,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole.haitian-creole-foundations-6-questions-and-answers.title",
+      "descriptionKey": "modules.haitian-creole.haitian-creole-foundations-6-questions-and-answers.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 102,
+        "prereqKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-5-what-are-you-doing.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-6-questions-and-answers.outcomes.0",
+          "modules.haitian-creole.haitian-creole-foundations-6-questions-and-answers.outcomes.1",
+          "modules.haitian-creole.haitian-creole-foundations-6-questions-and-answers.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-6-questions-and-answers.why.0",
+          "modules.haitian-creole.haitian-creole-foundations-6-questions-and-answers.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole-ht6-learn-listen-speak",
+          "order": 1,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-learn-listen-speak.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-learn-listen-speak.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-learn-listen-speak.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-learn-listen-speak.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-learn-listen-speak.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-learn-listen-speak.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-learn-listen-speak.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "learn-core-question-patterns",
+            "listen-ask-and-answer"
+          ]
+        },
+        {
+          "slug": "haitian-creole-ht6-read-build-write-use",
+          "order": 2,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-read-build-write-use.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-read-build-write-use.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-read-build-write-use.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-read-build-write-use.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-read-build-write-use.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-read-build-write-use.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-6-questions-and-answers.haitian-creole-ht6-read-build-write-use.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "read-build-and-write-questions",
+            "question-chain-scenario-and-review"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-foundations-7-numbers-time-and-everyday-life",
+      "prefix": "ht7",
+      "order": 6,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.title",
+      "descriptionKey": "modules.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 102,
+        "prereqKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-6-questions-and-answers.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.outcomes.0",
+          "modules.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.outcomes.1",
+          "modules.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.why.0",
+          "modules.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole-ht7-learn-listen-speak",
+          "order": 1,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-learn-listen-speak.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-learn-listen-speak.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-learn-listen-speak.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-learn-listen-speak.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-learn-listen-speak.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-learn-listen-speak.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-learn-listen-speak.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "learn-numbers-and-time-basics",
+            "listen-for-numbers-and-time"
+          ]
+        },
+        {
+          "slug": "haitian-creole-ht7-read-build-write-use",
+          "order": 2,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-read-build-write-use.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-read-build-write-use.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-read-build-write-use.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-read-build-write-use.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-read-build-write-use.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-read-build-write-use.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.haitian-creole-ht7-read-build-write-use.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "read-build-and-write-everyday-details",
+            "everyday-plans-scenario-and-review"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "haitian-creole-foundations-8-my-first-kreyol-conversation",
+      "prefix": "ht8",
+      "order": 7,
+      "role": "standard",
+      "titleKey": "modules.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.title",
+      "descriptionKey": "modules.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "serviceDefaults": null,
+      "meta": {
+        "estimatedMinutes": 102,
+        "prereqKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-7-numbers-time-and-everyday-life.title"
+        ],
+        "outcomeKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.outcomes.0",
+          "modules.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.outcomes.1",
+          "modules.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.why.0",
+          "modules.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "haitian-creole-ht8-learn-listen-speak",
+          "order": 1,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-learn-listen-speak.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-learn-listen-speak.description",
+          "meta": {
+            "module": 7,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-learn-listen-speak.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-learn-listen-speak.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-learn-listen-speak.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-learn-listen-speak.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-learn-listen-speak.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "learn-the-conversation-map",
+            "listen-and-speak-through-a-conversation"
+          ]
+        },
+        {
+          "slug": "haitian-creole-ht8-read-build-write-use",
+          "order": 2,
+          "titleKey": "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-read-build-write-use.title",
+          "descriptionKey": "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-read-build-write-use.description",
+          "meta": {
+            "module": 7,
+            "weeksKey": "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-read-build-write-use.weeks",
+            "bulletKeys": [
+              "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-read-build-write-use.bullets.0",
+              "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-read-build-write-use.bullets.1",
+              "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-read-build-write-use.bullets.2",
+              "sections.haitian-creole.haitian-creole-foundations-8-my-first-kreyol-conversation.haitian-creole-ht8-read-build-write-use.bullets.3"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "read-build-and-write-a-conversation",
+            "my-first-kreyol-conversation"
+          ]
+        }
+      ]
+    }
+  ]
+}

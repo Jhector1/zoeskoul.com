@@ -86,23 +86,25 @@ export function resolveToolsRailVisibility(args: ResolveToolsRailVisibilityArgs)
     const isQuizCard = args.activeCard?.type === "quiz";
 
     /**
-     * Default behavior is based on ownership, not merely on whether a reusable
-     * editor happens to exist:
+     * Automatic Tools visibility belongs to an actual workspace exercise,
+     * not merely to an interactive Try It card.
      *
-     * - an exercise-owned workspace opens by default;
-     * - a topic/card-owned reusable workspace stays closed by default;
-     * - authored policy at subject -> module -> section -> topic -> card ->
-     *   exercise scope overrides that inferred default.
+     * In the current runtime, workspace exercise detection is code-input
+     * specific. Non-workspace Try It kinds such as choices, reorder, text,
+     * listen, voice, and word-bank activities keep Tools manually available
+     * but must not open the right rail automatically.
      *
-     * Registry detection matters on the first render, before runtime exercise
-     * state has hydrated. Without it, an exercise could flash or remain closed
-     * until the learner interacted with the card.
+     * Registry detection still matters on the first render, before runtime
+     * exercise state has hydrated.
      */
     const isExerciseBound = Boolean(
-        args.cardHasEmbeddedTryIt ||
         args.hasWorkspaceExercise ||
         args.hasRegistryWorkspaceExercise,
     );
+
+    const isNonWorkspaceEmbeddedTryIt =
+        args.cardHasEmbeddedTryIt &&
+        !isExerciseBound;
 
     /**
      * Quiz ownership is intentionally stricter than inherited topic policy.
@@ -118,9 +120,21 @@ export function resolveToolsRailVisibility(args: ResolveToolsRailVisibilityArgs)
         authoredBoolean(args.exerciseTools, "defaultVisible") ??
         authoredBoolean(args.activeCard?.tools, "defaultVisible");
 
-    const defaultVisible = isQuizCard
+    const inferredDefaultVisible = isQuizCard
         ? quizScopedDefaultVisible ?? isExerciseBound
         : authoredDefaultVisible ?? isExerciseBound;
+
+    /**
+     * Non-workspace embedded Try It is learner-opt-in.
+     *
+     * Even an inherited topic/card defaultVisible=true must not automatically
+     * expose the right rail. The Tools button remains available through
+     * allowOpen, so the learner can open Notes/Tools explicitly.
+     */
+    const defaultVisible = isNonWorkspaceEmbeddedTryIt
+        ? false
+        : inferredDefaultVisible;
+
     const allowOpen = authoredAllowOpen ?? true;
 
     // Explicitly setting both fields false removes Tools entirely. Otherwise a
@@ -148,6 +162,22 @@ export function resolveToolsRailVisibility(args: ResolveToolsRailVisibilityArgs)
  * policy and current ownership decide the initial state. The reusable
  * workspace remains mounted in controller state even while the rail is hidden.
  */
+export function shouldShowMobileCodeWorkspaceTabs(args: {
+    toolsAvailable: boolean;
+    showDesktopRight: boolean;
+    hasRouteWorkspaceExercise: boolean;
+    hasActiveCardWorkspaceExercise: boolean;
+    hasActiveCardRegistryExercise: boolean;
+}) {
+    if (!args.toolsAvailable || args.showDesktopRight) return false;
+
+    return Boolean(
+        args.hasRouteWorkspaceExercise ||
+        args.hasActiveCardWorkspaceExercise ||
+        args.hasActiveCardRegistryExercise
+    );
+}
+
 export function shouldDefaultCollapseToolsRail(args: {
     showDebugLearningUi: boolean;
     activeCard: ReviewCard | null;

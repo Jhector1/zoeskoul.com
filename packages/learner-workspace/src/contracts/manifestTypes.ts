@@ -162,13 +162,19 @@ export type AppManifestCodeInput = SharedManifestCodeInput & {
 
 /**
  * App-side exercise union.
+ *
+ * Keep every portable non-code exercise kind owned by
+ * @zoeskoul/curriculum-contracts so new manifest kinds cannot silently drift
+ * out of the learner runtime. Replace only the shared code_input branch with
+ * the app-enriched compatibility shape below.
  */
+type SharedNonCodeManifestExercise = Exclude<
+    SharedManifestExercise,
+    { kind: "code_input" }
+>;
+
 export type AppManifestExercise =
-    | ManifestSingleChoice
-    | ManifestMultiChoice
-    | ManifestDragReorder
-    | ManifestFillBlankChoice
-    | ManifestPseudocodeInput
+    | SharedNonCodeManifestExercise
     | AppManifestCodeInput;
 
 /**
@@ -189,11 +195,13 @@ export type ManifestCodeInput = AppManifestCodeInput;
 
 /**
  * Important:
- * Do not union SharedManifestExercise back in here.
+ * Do not union SharedManifestExercise directly back in here.
  *
- * AppManifestExercise already includes the shared non-code exercise shapes and
- * the enriched app code_input shape. Adding SharedManifestExercise reintroduces
- * the less-specific shared code_input branch and can cause type narrowing issues.
+ * AppManifestExercise intentionally inherits all shared non-code exercise
+ * shapes through SharedNonCodeManifestExercise and replaces only code_input
+ * with the enriched app compatibility shape. Directly adding
+ * SharedManifestExercise would reintroduce the less-specific shared code_input
+ * branch and can cause type narrowing issues.
  */
 export type ManifestExercise = AppManifestExercise;
 

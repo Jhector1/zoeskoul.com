@@ -1092,6 +1092,48 @@ function normalizePseudocodeInput(
     };
 }
 
+function normalizeLanguageStringArray(value: unknown): string[] | undefined {
+    if (!Array.isArray(value)) return undefined;
+
+    const values = value
+        .map((entry) => String(entry).trim())
+        .filter(Boolean);
+
+    return values.length > 0 ? values : undefined;
+}
+
+function normalizeLearnerTextNormalization(value: unknown):
+    | {
+        trim?: boolean;
+        caseFold?: boolean;
+        collapseSpaces?: boolean;
+        stripPunct?: boolean;
+    }
+    | undefined {
+    if (!value || typeof value !== "object") return undefined;
+
+    const raw = value as Record<string, unknown>;
+    const normalized: {
+        trim?: boolean;
+        caseFold?: boolean;
+        collapseSpaces?: boolean;
+        stripPunct?: boolean;
+    } = {};
+
+    for (const key of [
+        "trim",
+        "caseFold",
+        "collapseSpaces",
+        "stripPunct",
+    ] as const) {
+        if (typeof raw[key] === "boolean") {
+            normalized[key] = raw[key] as boolean;
+        }
+    }
+
+    return Object.keys(normalized).length > 0 ? normalized : undefined;
+}
+
 function normalizeQuizItem(
     item: Record<string, unknown>,
     context?: { profileId?: string },
@@ -1104,6 +1146,136 @@ function normalizeQuizItem(
     if (rawKind === "fill_blank_choice") return normalizeFillBlankChoice(item);
     if (rawKind === "pseudocode_input") return normalizePseudocodeInput(item);
     if (rawKind === "code_input") return normalizeCodeInput(item, context);
+
+    // LANGUAGE_KIND_NATIVE_NORMALIZATION
+    if (rawKind === "text_input") {
+        const title =
+            asOptionalString(item.title) ??
+            asOptionalString(item.messageBase) ??
+            asOptionalString(item.prompt) ??
+            "Untitled";
+        const prompt =
+            asOptionalString(item.prompt) ??
+            asOptionalString(item.messageBase) ??
+            title;
+        const anyOf = normalizeLanguageStringArray(item.anyOf);
+        const placeholder = asOptionalString(item.placeholder);
+        const normalization = normalizeLearnerTextNormalization(item.normalize);
+
+        return {
+            id: String(item.id ?? "").trim(),
+            kind: "text_input",
+            title,
+            prompt,
+            hint: asOptionalString(item.hint) ?? fallbackHint(title, "text_input"),
+            help: normalizeHelp(item, title, "text_input"),
+            expectedText: asOptionalString(item.expectedText) ?? "",
+            ...(anyOf ? { anyOf } : {}),
+            ...(placeholder ? { placeholder } : {}),
+            ...(normalization ? { normalize: normalization } : {}),
+        };
+    }
+
+    if (rawKind === "voice_input") {
+        const title =
+            asOptionalString(item.title) ??
+            asOptionalString(item.messageBase) ??
+            asOptionalString(item.prompt) ??
+            "Untitled";
+        const prompt =
+            asOptionalString(item.prompt) ??
+            asOptionalString(item.messageBase) ??
+            title;
+        const anyOf = normalizeLanguageStringArray(item.anyOf);
+        const locale = asOptionalString(item.locale);
+        const normalization = normalizeLearnerTextNormalization(item.normalize);
+        const maxSeconds =
+            typeof item.maxSeconds === "number" && Number.isFinite(item.maxSeconds)
+                ? Math.max(1, Math.min(120, Math.floor(item.maxSeconds)))
+                : undefined;
+
+        return {
+            id: String(item.id ?? "").trim(),
+            kind: "voice_input",
+            title,
+            prompt,
+            hint: asOptionalString(item.hint) ?? fallbackHint(title, "voice_input"),
+            help: normalizeHelp(item, title, "voice_input"),
+            targetText: asOptionalString(item.targetText) ?? "",
+            ...(locale ? { locale } : {}),
+            ...(anyOf ? { anyOf } : {}),
+            ...(maxSeconds ? { maxSeconds } : {}),
+            ...(normalization ? { normalize: normalization } : {}),
+        };
+    }
+
+    if (rawKind === "word_bank_arrange") {
+        const title =
+            asOptionalString(item.title) ??
+            asOptionalString(item.messageBase) ??
+            asOptionalString(item.prompt) ??
+            "Untitled";
+        const prompt =
+            asOptionalString(item.prompt) ??
+            asOptionalString(item.messageBase) ??
+            title;
+        const anyOf = normalizeLanguageStringArray(item.anyOf);
+        const wordBank = normalizeLanguageStringArray(item.wordBank);
+        const distractors = normalizeLanguageStringArray(item.distractors);
+        const locale = asOptionalString(item.locale);
+        const ttsText = asOptionalString(item.ttsText);
+        const normalization = normalizeLearnerTextNormalization(item.normalize);
+
+        return {
+            id: String(item.id ?? "").trim(),
+            kind: "word_bank_arrange",
+            title,
+            prompt,
+            hint:
+                asOptionalString(item.hint) ??
+                fallbackHint(title, "word_bank_arrange"),
+            help: normalizeHelp(item, title, "word_bank_arrange"),
+            targetText: asOptionalString(item.targetText) ?? "",
+            ...(locale ? { locale } : {}),
+            ...(anyOf ? { anyOf } : {}),
+            ...(wordBank ? { wordBank } : {}),
+            ...(distractors ? { distractors } : {}),
+            ...(ttsText ? { ttsText } : {}),
+            ...(normalization ? { normalize: normalization } : {}),
+        };
+    }
+
+    if (rawKind === "listen_build") {
+        const title =
+            asOptionalString(item.title) ??
+            asOptionalString(item.messageBase) ??
+            asOptionalString(item.prompt) ??
+            "Untitled";
+        const prompt =
+            asOptionalString(item.prompt) ??
+            asOptionalString(item.messageBase) ??
+            title;
+        const anyOf = normalizeLanguageStringArray(item.anyOf);
+        const wordBank = normalizeLanguageStringArray(item.wordBank);
+        const distractors = normalizeLanguageStringArray(item.distractors);
+        const locale = asOptionalString(item.locale);
+        const normalization = normalizeLearnerTextNormalization(item.normalize);
+
+        return {
+            id: String(item.id ?? "").trim(),
+            kind: "listen_build",
+            title,
+            prompt,
+            hint: asOptionalString(item.hint) ?? fallbackHint(title, "listen_build"),
+            help: normalizeHelp(item, title, "listen_build"),
+            targetText: asOptionalString(item.targetText) ?? "",
+            ...(locale ? { locale } : {}),
+            ...(anyOf ? { anyOf } : {}),
+            ...(wordBank ? { wordBank } : {}),
+            ...(distractors ? { distractors } : {}),
+            ...(normalization ? { normalize: normalization } : {}),
+        };
+    }
 
     const title =
         asOptionalString(item.title) ??
@@ -1151,6 +1323,20 @@ export function normalizeTopicAuthoringDraft(
                     id: asOptionalString(x.id) ?? "sketch",
                     title: asOptionalString(x.title) ?? "Sketch",
                     bodyMarkdown: asOptionalString(x.bodyMarkdown) ?? "",
+                    ...(Array.isArray(x.tryItExercises)
+                        ? {
+                            tryItExercises: x.tryItExercises
+                                .filter(
+                                    (
+                                        item,
+                                    ): item is Record<string, unknown> =>
+                                        !!item && typeof item === "object",
+                                )
+                                .map((item) =>
+                                    normalizeQuizItem(item, context),
+                                ),
+                        }
+                        : {}),
                 }))
             : [],
         quizDraft: Array.isArray(draft.quizDraft)

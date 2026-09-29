@@ -1,0 +1,200 @@
+{
+  "topics": {
+    "haitian-creole--haitian-creole-foundations--draft": {
+      "haitian-creole-foundations-3-who-are-you": {
+        "learn-names-and-introductions": {
+          "label": "Learn Names and Introductions",
+          "summary": "Use the core Kreyòl personal pronouns and the patterns for saying who you are and giving your name.",
+          "cards": {
+            "sketch0": {
+              "title": "People in Kreyòl"
+            },
+            "sketch1": {
+              "title": "Say Who You Are"
+            },
+            "sketch2": {
+              "title": "Give Your Name"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_learn_names_and_introductions_sketch0": {
+              "title": "Try it yourself: Recognize Mwen",
+              "prompt": "Right after the sketch \"Mwen, Ou, Li, Nou, Yo\", practice that exact idea with this task. Which pronoun in the lesson means “I / me”? Produce the result for recognize Mwen so it reinforces Learn Names and Introductions."
+            },
+            "try_learn_names_and_introductions_sketch1": {
+              "title": "Try it yourself: Build a new identity sentence",
+              "prompt": "Right after the sketch \"Mwen se…\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I am Mari.”. Produce the result for build a new identity sentence so it reinforces Learn Names and Introductions."
+            },
+            "try_learn_names_and_introductions_sketch2": {
+              "title": "Try it yourself: Give a different name",
+              "prompt": "Right after the sketch \"M rele…\", practice that exact idea with this task. Say “My name is Ana.” in Kreyòl. Produce the result for give a different name so it reinforces Learn Names and Introductions."
+            }
+          },
+          "practice": {
+            "learn-names-and-introductions-choice": {
+              "title": "Choose the first-person pronoun",
+              "prompt": "Which Kreyòl pronoun means “I”?",
+              "hint": "Choose the form used when a speaker refers to themself.",
+              "help": {
+                "concept": "Personal pronouns tell us who is speaking or being discussed.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "options": {
+                "a": "Mwen",
+                "b": "Ou",
+                "c": "Yo"
+              }
+            },
+            "learn-names-and-introductions-fill": {
+              "title": "Complete the identity sentence",
+              "prompt": "Choose the word that completes “I am Jan.”",
+              "hint": "Use the identity pattern introduced in the lesson.",
+              "help": {
+                "concept": "The sentence needs the speaker form before the identity phrase.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "template": "[blank1] se Jan.",
+              "choices": [
+                "Mwen",
+                "Ou",
+                "Yo"
+              ]
+            },
+            "learn-names-and-introductions-listen": {
+              "title": "Hear a name introduction",
+              "prompt": "Listen, then build the introduction you hear.",
+              "hint": "Build the complete short introduction.",
+              "help": {
+                "concept": "Listen for the name pattern and keep the words in spoken order.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "targetText": "M rele Mari.",
+              "wordBank": [
+                "M",
+                "rele",
+                "Mari."
+              ],
+              "distractors": [
+                "Ou"
+              ]
+            },
+            "learn-names-and-introductions-voice": {
+              "title": "Introduce yourself",
+              "prompt": "Say: Mwen se Jan.",
+              "hint": "Say the complete identity sentence.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl target.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "targetText": "Mwen se Jan."
+            },
+            "learn-names-and-introductions-build": {
+              "title": "Build a name introduction",
+              "prompt": "Arrange the words to say “My name is Mari.”",
+              "hint": "Build the short name pattern from the lesson.",
+              "help": {
+                "concept": "Kreyòl name introductions follow a compact conversational pattern.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "targetText": "M rele Mari.",
+              "wordBank": [
+                "M",
+                "rele",
+                "Mari."
+              ],
+              "distractors": [
+                "se"
+              ],
+              "ttsText": "M rele Mari."
+            },
+            "learn-names-and-introductions-write": {
+              "title": "Write the pronoun",
+              "prompt": "Type the Kreyòl pronoun for “you.”",
+              "hint": "Use the form addressed directly to another person.",
+              "help": {
+                "concept": "This pronoun is used when speaking directly to one person.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "expectedText": "Ou",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-pronouns-mwen": {
+              "title": "Recognize Mwen",
+              "prompt": "Which pronoun in the lesson means “I / me”?",
+              "hint": "Choose the option that correctly applies the pattern.",
+              "help": {
+                "concept": "personal pronouns",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "options": {
+                "a": "Mwen",
+                "b": "Ou",
+                "c": "Li",
+                "d": "Nou",
+                "e": "Yo"
+              }
+            },
+            "try-say-who-student": {
+              "title": "Build a new identity sentence",
+              "prompt": "Arrange the Kreyòl sentence for “I am Mari.”",
+              "hint": "Use Mwen se before the name.",
+              "help": {
+                "concept": "Mwen se identity pattern",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "Mwen se Mari.",
+              "wordBank": [
+                "Mwen",
+                "se",
+                "Mari."
+              ]
+            },
+            "try-say-name-mari": {
+              "title": "Give a different name",
+              "prompt": "Say “My name is Ana.” in Kreyòl.",
+              "hint": "Use M rele before the new name.",
+              "help": {
+                "concept": "M rele name pattern",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "M rele Ana."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole--haitian-creole-foundations--draft": {
+      "haitian-creole-foundations-3-who-are-you": {
+        "learn-names-and-introductions": {
+          "pronouns": {
+            "title": "Mwen, Ou, Li, Nou, Yo",
+            "bodyMarkdown": "Kreyòl uses a small set of personal pronouns:\n\n- **Mwen** — I / me\n- **Ou** — you\n- **Li** — he / she / it\n- **Nou** — we / you (plural)\n- **Yo** — they\n\nFor this module, focus first on **Mwen** and **Ou** because they are the forms you need for a simple introduction."
+          },
+          "say-who": {
+            "title": "Mwen se…",
+            "bodyMarkdown": "Use **Mwen se…** to identify yourself:\n\n- **Mwen se Jan.** — I am Jan.\n- **Mwen se yon elèv.** — I am a student.\n\nThe pattern is short and useful. Learn it as a complete conversational chunk."
+          },
+          "say-name": {
+            "title": "M rele…",
+            "bodyMarkdown": "Another common way to introduce yourself is **M rele…** — “My name is…” / literally, “I am called…”.\n\n- **M rele Mari.**\n- **M rele Jan.**\n\nYou will practice both **Mwen se…** and **M rele…**."
+          }
+        }
+      }
+    }
+  }
+}

@@ -126,6 +126,19 @@
           "path": "subjects/c/courses/algorithms-in-c/course.spec.json"
         }
       ]
+    },
+    {
+      "subjectSlug": "haitian-creole",
+      "path": "subjects/haitian-creole",
+      "courseOrder": [
+        "haitian-creole-foundations"
+      ],
+      "courses": [
+        {
+          "courseSlug": "haitian-creole-foundations",
+          "path": "subjects/haitian-creole/courses/haitian-creole-foundations/course.spec.json"
+        }
+      ]
     }
   ]
 }

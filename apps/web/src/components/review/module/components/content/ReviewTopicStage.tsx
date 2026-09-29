@@ -136,8 +136,18 @@ export default function ReviewTopicStage({
 
                                              onBeforeCardNavigate,
 }: Props) {
-    const useWorkspaceTabs = Boolean(showMobileWorkspaceTabs && mobileToolsPanel);
-    const activeTab = useWorkspaceTabs ? activeMobileWorkspaceTab : "lesson";
+    const useWorkspaceTabs = Boolean(
+        showMobileWorkspaceTabs && mobileToolsPanel,
+    );
+    const showManualMobileTools = Boolean(
+        !useWorkspaceTabs &&
+        mobileToolsPanel &&
+        activeMobileWorkspaceTab === "code",
+    );
+    const activeTab =
+        useWorkspaceTabs || showManualMobileTools
+            ? activeMobileWorkspaceTab
+            : "lesson";
     const activeCard = viewCards[activeCardIndex] ?? null;
     const shouldConstrainQuizWidth =
         learnerUiFlags.compactLearnerUi &&
@@ -261,7 +271,6 @@ export default function ReviewTopicStage({
                     progressiveLockMessage={progressiveLockMessage}
                     onLockedNavigate={onLockedNavigate}
                 />
-                {!useWorkspaceTabs ? mobileToolsPanel : null}
                 <ReviewTopicCompletion
                     viewIsComplete={viewIsComplete}
                     viewTopic={viewTopic}

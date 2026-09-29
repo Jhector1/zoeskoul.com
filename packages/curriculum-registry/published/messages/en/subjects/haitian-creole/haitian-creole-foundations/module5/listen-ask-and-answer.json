@@ -1,0 +1,198 @@
+{
+  "topics": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-6-questions-and-answers": {
+        "listen-ask-and-answer": {
+          "label": "Listen, Ask, and Answer",
+          "summary": "Use Kijan and Kisa to ask about a name, condition, meaning, or action.",
+          "cards": {
+            "sketch0": {
+              "title": "Ask How"
+            },
+            "sketch1": {
+              "title": "Ask What"
+            },
+            "sketch2": {
+              "title": "Answer with What You Know"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_listen_ask_and_answer_sketch0": {
+              "title": "Try it yourself: Choose the name question",
+              "prompt": "Right after the sketch \"Kijan…?\", practice that exact idea with this task. Which Kijan question in the lesson asks for someone’s name? Produce the result for choose the name question so it reinforces Listen, Ask, and Answer."
+            },
+            "try_listen_ask_and_answer_sketch1": {
+              "title": "Try it yourself: Choose the action question",
+              "prompt": "Right after the sketch \"Kisa…?\", practice that exact idea with this task. Which Kisa question asks what someone is doing? Produce the result for choose the action question so it reinforces Listen, Ask, and Answer."
+            },
+            "try_listen_ask_and_answer_sketch2": {
+              "title": "Try it yourself: Answer with another known action",
+              "prompt": "Right after the sketch \"Reuse earlier modules\", practice that exact idea with this task. Answer “What are you doing?” with “I am working.” in Kreyòl. Produce the result for answer with another known action so it reinforces Listen, Ask, and Answer."
+            }
+          },
+          "practice": {
+            "listen-ask-and-answer-choice": {
+              "title": "Choose the name question",
+              "prompt": "Which question asks a person’s name?",
+              "hint": "Choose the familiar introduction question.",
+              "help": {
+                "concept": "One common beginner question asks how a person is called.",
+                "hint_1": "Use the question pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+              },
+              "options": {
+                "a": "Kijan ou rele?",
+                "b": "Kisa ou ap fè?",
+                "c": "Èske ou travay?"
+              }
+            },
+            "listen-ask-and-answer-fill": {
+              "title": "Complete the action question",
+              "prompt": "Choose the question word that completes “What are you doing?”",
+              "hint": "Use the question word for asking what.",
+              "help": {
+                "concept": "The blank begins a question asking for an action or thing.",
+                "hint_1": "Use the question pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+              },
+              "template": "[blank1] ou ap fè?",
+              "choices": [
+                "Kisa",
+                "Kijan",
+                "Èske"
+              ]
+            },
+            "listen-ask-and-answer-listen": {
+              "title": "Hear a familiar question",
+              "prompt": "Listen, then build the question you hear.",
+              "hint": "Listen for the question word and name pattern.",
+              "help": {
+                "concept": "Build the introduction question in spoken order.",
+                "hint_1": "Use the question pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+              },
+              "targetText": "Kijan ou rele?",
+              "wordBank": [
+                "Kijan",
+                "ou",
+                "rele?"
+              ],
+              "distractors": [
+                "Kisa"
+              ]
+            },
+            "listen-ask-and-answer-voice": {
+              "title": "Ask what someone is doing",
+              "prompt": "Say: Kisa ou ap fè?",
+              "hint": "Say the complete action question.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
+                "hint_1": "Use the question pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+              },
+              "targetText": "Kisa ou ap fè?"
+            },
+            "listen-ask-and-answer-build": {
+              "title": "Build an answer",
+              "prompt": "Arrange the words to answer “My name is Ana.”",
+              "hint": "Use the short name-introduction pattern from Module 3.",
+              "help": {
+                "concept": "Answer the name question with the familiar introduction pattern.",
+                "hint_1": "Use the question pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+              },
+              "targetText": "M rele Ana.",
+              "wordBank": [
+                "M",
+                "rele",
+                "Ana."
+              ],
+              "distractors": [
+                "rete"
+              ],
+              "ttsText": "M rele Ana."
+            },
+            "listen-ask-and-answer-write": {
+              "title": "Write the action answer",
+              "prompt": "Type the Kreyòl sentence “I am studying.”",
+              "hint": "Use the current-action pattern from Module 5.",
+              "help": {
+                "concept": "Write a complete answer to a current-action question.",
+                "hint_1": "Use the question pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete sentence before choosing your answer."
+              },
+              "expectedText": "M ap etidye.",
+              "placeholder": "Type the Kreyòl answer",
+              "anyOf": [
+                "Mwen ap etidye."
+              ]
+            },
+            "try-kijan-name": {
+              "title": "Choose the name question",
+              "prompt": "Which Kijan question in the lesson asks for someone’s name?",
+              "hint": "Choose the option that correctly applies the pattern.",
+              "help": {
+                "concept": "common Kijan questions",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "options": {
+                "a": "Kijan ou rele?",
+                "b": "Kijan ou ye?"
+              }
+            },
+            "try-kisa-doing": {
+              "title": "Choose the action question",
+              "prompt": "Which Kisa question asks what someone is doing?",
+              "hint": "Choose the option that correctly applies the pattern.",
+              "help": {
+                "concept": "common Kisa questions",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "options": {
+                "a": "Kisa ou ap fè?",
+                "b": "Kisa sa vle di?"
+              }
+            },
+            "try-answer-known-study": {
+              "title": "Answer with another known action",
+              "prompt": "Answer “What are you doing?” with “I am working.” in Kreyòl.",
+              "hint": "Use M ap before the action.",
+              "help": {
+                "concept": "reusing an earlier answer",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "M ap travay."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-6-questions-and-answers": {
+        "listen-ask-and-answer": {
+          "kijan": {
+            "title": "Kijan…?",
+            "bodyMarkdown": "**Kijan** is used in several common beginner questions:\n\n- **Kijan ou ye?** — How are you?\n- **Kijan ou rele?** — What is your name? / How are you called?\n\nThese are best learned as complete expressions."
+          },
+          "kisa": {
+            "title": "Kisa…?",
+            "bodyMarkdown": "**Kisa** asks “what”:\n\n- **Kisa ou ap fè?** — What are you doing?\n- **Kisa sa vle di?** — What does that mean?\n\nThe rest of the sentence tells you what kind of information is being requested."
+          },
+          "answer-known": {
+            "title": "Reuse earlier modules",
+            "bodyMarkdown": "You already know how to answer many of these questions:\n\n- **Kijan ou ye?** — **Mwen byen, mèsi.**\n- **Kijan ou rele?** — **M rele Ana.**\n- **Kisa ou ap fè?** — **M ap etidye.**"
+          }
+        }
+      }
+    }
+  }
+}

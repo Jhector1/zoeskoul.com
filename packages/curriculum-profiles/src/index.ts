@@ -22,3 +22,4 @@ export * from "./git/index.js";
 export * from "./terminal/index.js";
 export * from "./workspaceProfiles.js";
 export * from "./profileServicesRegistry.js";
+export * from "./language/index.js";

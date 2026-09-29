@@ -1,0 +1,281 @@
+{
+  "subjects": {
+    "haitian-creole-foundations": {
+      "title": "Haitian Creole Foundations",
+      "description": "An A0-to-A1 Haitian Creole course that develops listening, speaking, reading, sentence building, and writing together from the first module.",
+      "moreComingSoon": "More Haitian Creole Foundations lessons are coming soon."
+    }
+  },
+  "modules": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-1-sounds-of-kreyol": {
+        "title": "Sounds of Kreyòl",
+        "description": "Build a first sound-to-spelling map for Kreyòl and begin recognizing, saying, reading, arranging, and writing short high-frequency words.",
+        "outcomes": [
+          "Recognize core Kreyòl sound and spelling patterns in short familiar words.",
+          "Listen for and repeat short sound patterns and first words.",
+          "Read, arrange, and write a small set of high-frequency words using official Kreyòl spelling."
+        ],
+        "why": [
+          "Builds confidence with sounds of kreyòl.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-foundations-2-bonjou": {
+        "title": "Bonjou!",
+        "description": "Use greetings, polite expressions, and simple social responses in short everyday exchanges.",
+        "outcomes": [
+          "Recognize and use common greetings and leave-taking expressions.",
+          "Respond to short polite exchanges by listening and speaking.",
+          "Read, arrange, and write basic greeting lines in Kreyòl."
+        ],
+        "why": [
+          "Builds confidence with bonjou!.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-foundations-3-who-are-you": {
+        "title": "Who Are You?",
+        "description": "Introduce yourself, ask another person's name, and exchange a few simple personal details.",
+        "outcomes": [
+          "Ask and answer simple questions about names and identity.",
+          "Understand short introductions when heard at beginner speed.",
+          "Read, arrange, and write simple self-introduction sentences."
+        ],
+        "why": [
+          "Builds confidence with who are you?.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-foundations-4-talking-about-things": {
+        "title": "Talking About Things",
+        "description": "Name everyday objects and use simple patterns to identify, describe, and point out things around you.",
+        "outcomes": [
+          "Recognize and use beginner vocabulary for common everyday objects.",
+          "Identify and describe objects with short Kreyòl sentence patterns.",
+          "Read, arrange, and write simple object descriptions."
+        ],
+        "why": [
+          "Builds confidence with talking about things.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-foundations-5-what-are-you-doing": {
+        "title": "What Are You Doing?",
+        "description": "Talk about simple actions happening now and understand short action-centered sentences.",
+        "outcomes": [
+          "Recognize common beginner action words in short sentences.",
+          "Ask and answer what someone is doing in simple contexts.",
+          "Read, build, and write short action-centered statements."
+        ],
+        "why": [
+          "Builds confidence with what are you doing?.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-foundations-6-questions-and-answers": {
+        "title": "Questions & Answers",
+        "description": "Recognize and produce core beginner question patterns and short natural answers.",
+        "outcomes": [
+          "Recognize common beginner question words and question patterns.",
+          "Ask and answer short questions about familiar people, objects, and actions.",
+          "Read, arrange, and write short question-and-answer pairs."
+        ],
+        "why": [
+          "Builds confidence with questions & answers.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
+        "title": "Numbers, Time & Everyday Life",
+        "description": "Use beginner numbers and time expressions in useful everyday contexts.",
+        "outcomes": [
+          "Recognize and use beginner number expressions in context.",
+          "Understand and answer simple questions involving time and everyday quantities.",
+          "Read, arrange, and write short number- and time-based statements."
+        ],
+        "why": [
+          "Builds confidence with numbers, time & everyday life.",
+          "Prepares learners for the next skills in the course."
+        ]
+      },
+      "haitian-creole-foundations-8-my-first-kreyol-conversation": {
+        "title": "My First Kreyòl Conversation",
+        "description": "Combine greetings, identity, objects, actions, questions, numbers, and time in a first sustained beginner conversation.",
+        "outcomes": [
+          "Follow a short beginner Kreyòl conversation built from previously taught language.",
+          "Respond aloud to familiar prompts without relying on English word order.",
+          "Read, arrange, and write a short conversation using course vocabulary and patterns."
+        ],
+        "why": [
+          "Builds confidence with my first kreyòl conversation.",
+          "Prepares learners for the next skills in the course."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-1-sounds-of-kreyol": {
+        "haitian-creole-foundations-ht1-learn-listen-speak": {
+          "title": "Learn, Listen & Speak",
+          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "weeks": null,
+          "bullets": [
+            "Notice Kreyòl Sounds",
+            "Listen and Say First Sounds"
+          ]
+        },
+        "haitian-creole-foundations-ht1-read-build-write-use": {
+          "title": "Read, Build, Write & Use It",
+          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
+          "weeks": null,
+          "bullets": [
+            "Read, Build, and Write First Words",
+            "Use Sounds in a Mini Exchange"
+          ]
+        }
+      },
+      "haitian-creole-foundations-2-bonjou": {
+        "haitian-creole-foundations-ht2-learn-listen-speak": {
+          "title": "Learn, Listen & Speak",
+          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "weeks": null,
+          "bullets": [
+            "Learn Greetings and Polite Basics",
+            "Listen and Say Hello"
+          ]
+        },
+        "haitian-creole-foundations-ht2-read-build-write-use": {
+          "title": "Read, Build, Write & Use It",
+          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
+          "weeks": null,
+          "bullets": [
+            "Read, Build, and Write Greetings",
+            "Greeting Scenario and Review"
+          ]
+        }
+      },
+      "haitian-creole-foundations-3-who-are-you": {
+        "haitian-creole-foundations-ht3-learn-listen-speak": {
+          "title": "Learn, Listen & Speak",
+          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "weeks": null,
+          "bullets": [
+            "Learn Names and Introductions",
+            "Listen and Introduce Yourself"
+          ]
+        },
+        "haitian-creole-foundations-ht3-read-build-write-use": {
+          "title": "Read, Build, Write & Use It",
+          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
+          "weeks": null,
+          "bullets": [
+            "Read, Build, and Write an Introduction",
+            "Meet Someone: Scenario and Review"
+          ]
+        }
+      },
+      "haitian-creole-foundations-4-talking-about-things": {
+        "haitian-creole-foundations-ht4-learn-listen-speak": {
+          "title": "Learn, Listen & Speak",
+          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "weeks": null,
+          "bullets": [
+            "Learn Everyday Things",
+            "Listen and Name Things"
+          ]
+        },
+        "haitian-creole-foundations-ht4-read-build-write-use": {
+          "title": "Read, Build, Write & Use It",
+          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
+          "weeks": null,
+          "bullets": [
+            "Read, Build, and Write About Things",
+            "What Is This? Scenario and Review"
+          ]
+        }
+      },
+      "haitian-creole-foundations-5-what-are-you-doing": {
+        "haitian-creole-foundations-ht5-learn-listen-speak": {
+          "title": "Learn, Listen & Speak",
+          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "weeks": null,
+          "bullets": [
+            "Learn Common Actions",
+            "Listen and Say What Is Happening"
+          ]
+        },
+        "haitian-creole-foundations-ht5-read-build-write-use": {
+          "title": "Read, Build, Write & Use It",
+          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
+          "weeks": null,
+          "bullets": [
+            "Read, Build, and Write Actions",
+            "What Are You Doing? Scenario"
+          ]
+        }
+      },
+      "haitian-creole-foundations-6-questions-and-answers": {
+        "haitian-creole-foundations-ht6-learn-listen-speak": {
+          "title": "Learn, Listen & Speak",
+          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "weeks": null,
+          "bullets": [
+            "Learn Core Question Patterns",
+            "Listen, Ask, and Answer"
+          ]
+        },
+        "haitian-creole-foundations-ht6-read-build-write-use": {
+          "title": "Read, Build, Write & Use It",
+          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
+          "weeks": null,
+          "bullets": [
+            "Read, Build, and Write Questions",
+            "Question Chain: Scenario and Review"
+          ]
+        }
+      },
+      "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
+        "haitian-creole-foundations-ht7-learn-listen-speak": {
+          "title": "Learn, Listen & Speak",
+          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "weeks": null,
+          "bullets": [
+            "Learn Numbers and Time Basics",
+            "Listen for Numbers and Time"
+          ]
+        },
+        "haitian-creole-foundations-ht7-read-build-write-use": {
+          "title": "Read, Build, Write & Use It",
+          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
+          "weeks": null,
+          "bullets": [
+            "Read, Build, and Write Everyday Details",
+            "Everyday Plans: Scenario and Review"
+          ]
+        }
+      },
+      "haitian-creole-foundations-8-my-first-kreyol-conversation": {
+        "haitian-creole-foundations-ht8-learn-listen-speak": {
+          "title": "Learn, Listen & Speak",
+          "description": "Introduce the module language, hear it in context, and begin producing it aloud.",
+          "weeks": null,
+          "bullets": [
+            "Learn the Conversation Map",
+            "Listen and Speak Through a Conversation"
+          ]
+        },
+        "haitian-creole-foundations-ht8-read-build-write-use": {
+          "title": "Read, Build, Write & Use It",
+          "description": "Read and reconstruct the language, write it, use it in context, and finish with review.",
+          "weeks": null,
+          "bullets": [
+            "Read, Build, and Write a Conversation",
+            "My First Kreyòl Conversation"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -353,7 +353,20 @@ function enrichReviewTopic(args: {
     if (!rawTryIt) return nextCard;
 
     const tryItId = asString(rawTryIt.id);
-    const exerciseKey = asString(rawTryIt.exerciseKey);
+    const singularExerciseKey = asString(rawTryIt.exerciseKey);
+    const explicitExerciseKeys = Array.isArray(rawTryIt.exerciseKeys)
+      ? rawTryIt.exerciseKeys.map((key) => asString(key)).filter(Boolean)
+      : [];
+    const embeddedTryItExerciseKeys = Array.from(
+      new Set(
+        explicitExerciseKeys.length
+          ? explicitExerciseKeys
+          : singularExerciseKey
+            ? [singularExerciseKey]
+            : [],
+      ),
+    );
+    const exerciseKey = embeddedTryItExerciseKeys[0] ?? "";
     if (!tryItId || !exerciseKey) return nextCard;
 
     const titleKey = asString(rawTryIt.titleKey);
@@ -364,20 +377,30 @@ function enrichReviewTopic(args: {
     const preferKind = (asString(rawTryIt.preferKind) || "code_input") as PracticeKind;
     const seedPolicy = (asString(rawTryIt.seedPolicy) || "global") as SeedPolicy;
     const maxAttempts = typeof rawTryIt.maxAttempts === "number" ? rawTryIt.maxAttempts : null;
-    const authoredExercise = findExerciseManifestByKey(args.manifest, exerciseKey);
-    const authoredExerciseStepFields = pickExerciseStepFields(authoredExercise, args.resolveMessage);
 
-    const tryItStep = {
-      ...authoredExerciseStepFields,
-      id: tryItId.replace(/-/g, "_"),
-      title,
-      prompt,
-      exerciseKey,
-      difficulty,
-      preferKind,
-      seedPolicy,
-      maxAttempts,
-    };
+    const tryItSteps = embeddedTryItExerciseKeys.map((stepExerciseKey, index) => {
+      const authoredExercise = findExerciseManifestByKey(args.manifest, stepExerciseKey);
+      const authoredExerciseStepFields = pickExerciseStepFields(
+        authoredExercise,
+        args.resolveMessage,
+      );
+
+      return {
+        ...authoredExerciseStepFields,
+        id:
+          index === 0
+            ? tryItId.replace(/-/g, "_")
+            : `${tryItId.replace(/-/g, "_")}_${index + 1}`,
+        title,
+        prompt,
+        exerciseKey: stepExerciseKey,
+        difficulty,
+        preferKind:
+          (asString(authoredExercise?.kind) || preferKind) as PracticeKind,
+        seedPolicy,
+        maxAttempts,
+      } as ReviewProjectStep;
+    });
 
     const spec: ReviewProjectSpec = {
       mode: "project",
@@ -389,7 +412,7 @@ function enrichReviewTopic(args: {
       preferKind,
       allowReveal: true,
       maxAttempts,
-      steps: [tryItStep as ReviewProjectStep],
+      steps: tryItSteps,
       runtime: args.manifest.runtimeDefaults ?? null,
       tryIt: true,
       uiKind: "try_it",
@@ -401,6 +424,7 @@ function enrichReviewTopic(args: {
       title,
       prompt,
       exerciseKey,
+      exerciseKeys: embeddedTryItExerciseKeys,
       difficulty,
       preferKind,
       seedPolicy,

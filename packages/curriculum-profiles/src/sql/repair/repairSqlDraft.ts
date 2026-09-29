@@ -137,6 +137,10 @@ function makeSqlFallbackExercise(args: {
                 ],
                 correctValue: "learning goals",
             };
+        default:
+            throw new Error(
+                `SQL fallback received unsupported exercise kind: ${String(args.kind)}`,
+            );
     }
 }
 

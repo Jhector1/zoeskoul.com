@@ -96,6 +96,13 @@ export type TopicAuthoringDraft = {
         /** Inner heading that introduces the body prose. */
         title: string;
         bodyMarkdown: string;
+        /**
+         * Dedicated exercises for this teaching sketch.
+         *
+         * These use the exact same canonical exercise draft type as quizDraft,
+         * but they are not part of the normal quiz/practice pool.
+         */
+        tryItExercises?: TopicAuthoringDraft["quizDraft"];
         /** Optional lesson/card-level Tools presentation override. */
         tools?: ToolPresentationPolicy;
     }>;
@@ -128,6 +135,60 @@ export type TopicAuthoringDraft = {
         template: string;
         choices: string[];
         correctValue: string;
+    })
+        | (DraftCommon & {
+        kind: "text_input";
+        expectedText: string;
+        anyOf?: string[];
+        placeholder?: string;
+        normalize?: {
+            trim?: boolean;
+            caseFold?: boolean;
+            collapseSpaces?: boolean;
+            stripPunct?: boolean;
+        };
+    })
+        | (DraftCommon & {
+        kind: "voice_input";
+        targetText: string;
+        locale?: string;
+        anyOf?: string[];
+        maxSeconds?: number;
+        normalize?: {
+            trim?: boolean;
+            caseFold?: boolean;
+            collapseSpaces?: boolean;
+            stripPunct?: boolean;
+        };
+    })
+        | (DraftCommon & {
+        kind: "word_bank_arrange";
+        targetText: string;
+        locale?: string;
+        anyOf?: string[];
+        wordBank?: string[];
+        distractors?: string[];
+        ttsText?: string;
+        normalize?: {
+            trim?: boolean;
+            caseFold?: boolean;
+            collapseSpaces?: boolean;
+            stripPunct?: boolean;
+        };
+    })
+        | (DraftCommon & {
+        kind: "listen_build";
+        targetText: string;
+        locale?: string;
+        anyOf?: string[];
+        wordBank?: string[];
+        distractors?: string[];
+        normalize?: {
+            trim?: boolean;
+            caseFold?: boolean;
+            collapseSpaces?: boolean;
+            stripPunct?: boolean;
+        };
     })
         | (DraftCommon & {
         kind: "pseudocode_input";
@@ -200,6 +261,10 @@ const EXERCISE_KIND_ENUM = [
     "multi_choice",
     "drag_reorder",
     "fill_blank_choice",
+    "text_input",
+    "voice_input",
+    "word_bank_arrange",
+    "listen_build",
     "pseudocode_input",
     "code_input",
 ] satisfies ExerciseKind[];
@@ -257,6 +322,17 @@ const toolPresentationSchema = {
     },
 } satisfies JsonSchema;
 
+const learnerTextNormalizationSchema = {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+        trim: { type: "boolean" },
+        caseFold: { type: "boolean" },
+        collapseSpaces: { type: "boolean" },
+        stripPunct: { type: "boolean" },
+    },
+} satisfies JsonSchema;
+
 const draftCommonSchema = {
     id: { type: "string" },
     kind: { type: "string", enum: EXERCISE_KIND_ENUM },
@@ -267,35 +343,7 @@ const draftCommonSchema = {
     tools: toolPresentationSchema,
 } satisfies JsonSchema;
 
-export const TOPIC_AUTHORING_DRAFT_SCHEMA_VERSION =
-    "2026-07-27-topic-authoring-draft-v3";
-
-export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
-    type: "object",
-    additionalProperties: false,
-    required: ["title", "summary", "minutes", "sketchBlocks", "quizDraft"],
-    properties: {
-        title: { type: "string" },
-        summary: { type: "string" },
-        minutes: { type: "number" },
-        sketchBlocks: {
-            type: "array",
-            items: {
-                type: "object",
-                additionalProperties: false,
-                required: ["id", "title", "bodyMarkdown"],
-                properties: {
-                    id: { type: "string" },
-                    cardTitle: { type: "string" },
-                    title: { type: "string" },
-                    bodyMarkdown: { type: "string" },
-                    tools: toolPresentationSchema,
-                },
-            },
-        },
-        quizDraft: {
-            type: "array",
-            items: {
+const authoringExerciseItemSchema = {
                 oneOf: [
                     {
                         type: "object",
@@ -386,6 +434,64 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                             template: { type: "string" },
                             choices: { type: "array", items: { type: "string" } },
                             correctValue: { type: "string" },
+                        },
+                    },
+                    {
+                        type: "object",
+                        additionalProperties: false,
+                        required: ["id", "kind", "title", "prompt", "hint", "help", "expectedText"],
+                        properties: {
+                            ...draftCommonSchema,
+                            kind: { const: "text_input" },
+                            expectedText: { type: "string" },
+                            anyOf: { type: "array", items: { type: "string" } },
+                            placeholder: { type: "string" },
+                            normalize: learnerTextNormalizationSchema,
+                        },
+                    },
+                    {
+                        type: "object",
+                        additionalProperties: false,
+                        required: ["id", "kind", "title", "prompt", "hint", "help", "targetText"],
+                        properties: {
+                            ...draftCommonSchema,
+                            kind: { const: "voice_input" },
+                            targetText: { type: "string" },
+                            locale: { type: "string" },
+                            anyOf: { type: "array", items: { type: "string" } },
+                            maxSeconds: { type: "integer", minimum: 1, maximum: 120 },
+                            normalize: learnerTextNormalizationSchema,
+                        },
+                    },
+                    {
+                        type: "object",
+                        additionalProperties: false,
+                        required: ["id", "kind", "title", "prompt", "hint", "help", "targetText"],
+                        properties: {
+                            ...draftCommonSchema,
+                            kind: { const: "word_bank_arrange" },
+                            targetText: { type: "string" },
+                            locale: { type: "string" },
+                            anyOf: { type: "array", items: { type: "string" } },
+                            wordBank: { type: "array", items: { type: "string" } },
+                            distractors: { type: "array", items: { type: "string" } },
+                            ttsText: { type: "string" },
+                            normalize: learnerTextNormalizationSchema,
+                        },
+                    },
+                    {
+                        type: "object",
+                        additionalProperties: false,
+                        required: ["id", "kind", "title", "prompt", "hint", "help", "targetText"],
+                        properties: {
+                            ...draftCommonSchema,
+                            kind: { const: "listen_build" },
+                            targetText: { type: "string" },
+                            locale: { type: "string" },
+                            anyOf: { type: "array", items: { type: "string" } },
+                            wordBank: { type: "array", items: { type: "string" } },
+                            distractors: { type: "array", items: { type: "string" } },
+                            normalize: learnerTextNormalizationSchema,
                         },
                     },
                     {
@@ -721,7 +827,43 @@ export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
                         },
                     },
                 ],
+            } satisfies JsonSchema;
+
+export const TOPIC_AUTHORING_DRAFT_SCHEMA_VERSION =
+    "2026-07-27-topic-authoring-draft-v3";
+
+export const TOPIC_AUTHORING_DRAFT_JSON_SCHEMA = {
+    type: "object",
+    additionalProperties: false,
+    required: ["title", "summary", "minutes", "sketchBlocks", "quizDraft"],
+    properties: {
+        title: { type: "string" },
+        summary: { type: "string" },
+        minutes: { type: "number" },
+        sketchBlocks: {
+            type: "array",
+            items: {
+                type: "object",
+                additionalProperties: false,
+                required: ["id", "title", "bodyMarkdown"],
+                properties: {
+                    id: { type: "string" },
+                    cardTitle: { type: "string" },
+                    title: { type: "string" },
+                    bodyMarkdown: { type: "string" },
+                    tryItExercises: {
+                        type: "array",
+                        minItems: 1,
+                        maxItems: 3,
+                        items: authoringExerciseItemSchema,
+                    },
+                    tools: toolPresentationSchema,
+                },
             },
+        },
+        quizDraft: {
+            type: "array",
+            items: authoringExerciseItemSchema,
         },
         projectDraft: {
             type: "object",
@@ -929,6 +1071,799 @@ function assertHelp(
 
 
 
+function assertAuthoringExerciseDraft(
+    exercise: TopicAuthoringDraft["quizDraft"][number],
+    label: string,
+) {
+    if (!isRecord(exercise)) {
+        fail(`${label} must be an object`);
+    }
+
+    if (!isNonEmptyString(exercise.id)) {
+        fail(`${label} needs id`);
+    }
+    if (!isNonEmptyString(exercise.title)) {
+        fail(`${label} needs title`);
+    }
+    if (!isNonEmptyString(exercise.prompt)) {
+        fail(`${label} needs prompt`);
+    }
+    if (!isNonEmptyString(exercise.hint)) {
+        fail(`${label} needs hint`);
+    }
+
+    assertHelp(exercise.help, label);
+
+    if (exercise.kind === "single_choice" || exercise.kind === "multi_choice") {
+        assertOnlyKeys(
+            exercise,
+            ["id", "kind", "title", "prompt", "hint", "help", "options", "correctOptionIds"],
+            label,
+        );
+
+        if (!Array.isArray(exercise.options) || exercise.options.length < 2) {
+            fail(`${label} ${exercise.kind} needs at least 2 options`);
+        }
+
+        if (exercise.options.some((opt) => !isNonEmptyString(opt))) {
+            fail(`${label} ${exercise.kind} options must be non-empty strings`);
+        }
+
+        if (
+            !Array.isArray(exercise.correctOptionIds) ||
+            exercise.correctOptionIds.some((id) => !isNonEmptyString(id))
+        ) {
+            fail(`${label} ${exercise.kind} correctOptionIds must be non-empty strings`);
+        }
+
+        const allowedOptionIds = canonicalOptionIds(exercise.options.length);
+
+        if (exercise.kind === "single_choice" && exercise.correctOptionIds.length !== 1) {
+            fail(`${label} single_choice needs exactly 1 correctOptionIds entry`);
+        }
+
+        if (exercise.kind === "multi_choice" && exercise.correctOptionIds.length < 1) {
+            fail(`${label} multi_choice needs at least 1 correctOptionIds entry`);
+        }
+
+        if (!exercise.correctOptionIds.every((id) => allowedOptionIds.includes(id))) {
+            fail(
+                `${label} ${exercise.kind} correctOptionIds must be included in available options (${allowedOptionIds.join(", ")})`,
+            );
+        }
+
+        return;
+    }
+
+    if (exercise.kind === "drag_reorder") {
+        assertOnlyKeys(
+            exercise,
+            ["id", "kind", "title", "prompt", "hint", "help", "tokens", "correctOrder"],
+            label,
+        );
+
+        if (!Array.isArray(exercise.tokens) || exercise.tokens.length < 2) {
+            fail(`${label} drag_reorder needs at least 2 tokens`);
+        }
+
+        if (exercise.tokens.some((token) => !isNonEmptyString(token))) {
+            fail(`${label} drag_reorder tokens must be non-empty strings`);
+        }
+
+        if (
+            !Array.isArray(exercise.correctOrder) ||
+            exercise.correctOrder.length !== exercise.tokens.length
+        ) {
+            fail(`${label} drag_reorder correctOrder must have same length as tokens`);
+        }
+
+        if (exercise.correctOrder.some((token) => !isNonEmptyString(token))) {
+            fail(`${label} drag_reorder correctOrder must be non-empty strings`);
+        }
+
+        const tokenSet = new Set(exercise.tokens.map((token) => token.trim()));
+
+        if (!exercise.correctOrder.every((token) => tokenSet.has(token.trim()))) {
+            fail(`${label} drag_reorder correctOrder must only contain values from tokens`);
+        }
+
+        return;
+    }
+
+    if (exercise.kind === "fill_blank_choice") {
+        assertOnlyKeys(
+            exercise,
+            ["id", "kind", "title", "prompt", "hint", "help", "template", "choices", "correctValue"],
+            label,
+        );
+
+        if (!isNonEmptyString(exercise.template)) {
+            fail(`${label} fill_blank_choice needs template`);
+        }
+
+        const blankCount = countFillBlanks(exercise.template, exercise.prompt);
+
+        if (blankCount === 0) {
+            fail(`${label} fill_blank_choice needs exactly 1 blank placeholder`);
+        }
+
+        if (blankCount > 1) {
+            fail(`${label} fill_blank_choice supports only 1 blank, but found ${blankCount}`);
+        }
+
+        if (!Array.isArray(exercise.choices) || exercise.choices.length < 2) {
+            fail(`${label} fill_blank_choice needs at least 2 choices`);
+        }
+
+        if (exercise.choices.some((choice) => !isNonEmptyString(choice))) {
+            fail(`${label} fill_blank_choice choices must be non-empty strings`);
+        }
+
+        if (!isNonEmptyString(exercise.correctValue)) {
+            fail(`${label} fill_blank_choice needs correctValue`);
+        }
+
+        if (!exercise.choices.some((choice) => choice.trim() === exercise.correctValue.trim())) {
+            fail(`${label} fill_blank_choice correctValue must be included in choices`);
+        }
+
+        return;
+    }
+
+    if (exercise.kind === "text_input") {
+        assertOnlyKeys(
+            exercise,
+            ["id", "kind", "title", "prompt", "hint", "help", "tools", "expectedText", "anyOf", "placeholder", "normalize"],
+            label,
+        );
+        if (!isNonEmptyString(exercise.expectedText)) {
+            fail(`${label} text_input needs expectedText`);
+        }
+        if (
+            exercise.anyOf !== undefined &&
+            (!Array.isArray(exercise.anyOf) ||
+                exercise.anyOf.length === 0 ||
+                exercise.anyOf.some((value) => !isNonEmptyString(value)))
+        ) {
+            fail(`${label} text_input anyOf must contain non-empty strings`);
+        }
+        if (exercise.placeholder !== undefined && !isNonEmptyString(exercise.placeholder)) {
+            fail(`${label} text_input placeholder must be a non-empty string when provided`);
+        }
+        if (exercise.normalize !== undefined) {
+            assertOnlyKeys(
+                exercise.normalize,
+                ["trim", "caseFold", "collapseSpaces", "stripPunct"],
+                `${label}.normalize`,
+            );
+            for (const value of Object.values(exercise.normalize)) {
+                if (typeof value !== "boolean") {
+                    fail(`${label} text_input normalize values must be booleans`);
+                }
+            }
+        }
+        return;
+    }
+
+    if (exercise.kind === "voice_input") {
+        assertOnlyKeys(
+            exercise,
+            ["id", "kind", "title", "prompt", "hint", "help", "tools", "targetText", "locale", "anyOf", "maxSeconds", "normalize"],
+            label,
+        );
+        if (!isNonEmptyString(exercise.targetText)) {
+            fail(`${label} voice_input needs targetText`);
+        }
+        if (exercise.locale !== undefined && !isNonEmptyString(exercise.locale)) {
+            fail(`${label} voice_input locale must be a non-empty string when provided`);
+        }
+        if (
+            exercise.anyOf !== undefined &&
+            (!Array.isArray(exercise.anyOf) ||
+                exercise.anyOf.length === 0 ||
+                exercise.anyOf.some((value) => !isNonEmptyString(value)))
+        ) {
+            fail(`${label} voice_input anyOf must contain non-empty strings`);
+        }
+        if (
+            exercise.maxSeconds !== undefined &&
+            (!Number.isInteger(exercise.maxSeconds) ||
+                exercise.maxSeconds < 1 ||
+                exercise.maxSeconds > 120)
+        ) {
+            fail(`${label} voice_input maxSeconds must be an integer from 1 to 120`);
+        }
+        if (exercise.normalize !== undefined) {
+            assertOnlyKeys(
+                exercise.normalize,
+                ["trim", "caseFold", "collapseSpaces", "stripPunct"],
+                `${label}.normalize`,
+            );
+            for (const value of Object.values(exercise.normalize)) {
+                if (typeof value !== "boolean") {
+                    fail(`${label} voice_input normalize values must be booleans`);
+                }
+            }
+        }
+        return;
+    }
+
+    if (exercise.kind === "word_bank_arrange") {
+        assertOnlyKeys(
+            exercise,
+            ["id", "kind", "title", "prompt", "hint", "help", "tools", "targetText", "locale", "anyOf", "wordBank", "distractors", "ttsText", "normalize"],
+            label,
+        );
+        if (!isNonEmptyString(exercise.targetText)) {
+            fail(`${label} word_bank_arrange needs targetText`);
+        }
+        if (exercise.locale !== undefined && !isNonEmptyString(exercise.locale)) {
+            fail(`${label} word_bank_arrange locale must be a non-empty string when provided`);
+        }
+        for (const [field, value] of [
+            ["anyOf", exercise.anyOf],
+            ["wordBank", exercise.wordBank],
+            ["distractors", exercise.distractors],
+        ] as const) {
+            if (
+                value !== undefined &&
+                (!Array.isArray(value) || value.some((item) => !isNonEmptyString(item)))
+            ) {
+                fail(`${label} word_bank_arrange ${field} must contain non-empty strings`);
+            }
+        }
+        if (exercise.anyOf !== undefined && exercise.anyOf.length === 0) {
+            fail(`${label} word_bank_arrange anyOf must not be empty when provided`);
+        }
+        if (exercise.ttsText !== undefined && !isNonEmptyString(exercise.ttsText)) {
+            fail(`${label} word_bank_arrange ttsText must be a non-empty string when provided`);
+        }
+        if (exercise.normalize !== undefined) {
+            assertOnlyKeys(
+                exercise.normalize,
+                ["trim", "caseFold", "collapseSpaces", "stripPunct"],
+                `${label}.normalize`,
+            );
+            for (const value of Object.values(exercise.normalize)) {
+                if (typeof value !== "boolean") {
+                    fail(`${label} word_bank_arrange normalize values must be booleans`);
+                }
+            }
+        }
+        return;
+    }
+
+    if (exercise.kind === "listen_build") {
+        assertOnlyKeys(
+            exercise,
+            ["id", "kind", "title", "prompt", "hint", "help", "tools", "targetText", "locale", "anyOf", "wordBank", "distractors", "normalize"],
+            label,
+        );
+        if (!isNonEmptyString(exercise.targetText)) {
+            fail(`${label} listen_build needs targetText`);
+        }
+        if (exercise.locale !== undefined && !isNonEmptyString(exercise.locale)) {
+            fail(`${label} listen_build locale must be a non-empty string when provided`);
+        }
+        for (const [field, value] of [
+            ["anyOf", exercise.anyOf],
+            ["wordBank", exercise.wordBank],
+            ["distractors", exercise.distractors],
+        ] as const) {
+            if (
+                value !== undefined &&
+                (!Array.isArray(value) || value.some((item) => !isNonEmptyString(item)))
+            ) {
+                fail(`${label} listen_build ${field} must contain non-empty strings`);
+            }
+        }
+        if (exercise.anyOf !== undefined && exercise.anyOf.length === 0) {
+            fail(`${label} listen_build anyOf must not be empty when provided`);
+        }
+        if (exercise.normalize !== undefined) {
+            assertOnlyKeys(
+                exercise.normalize,
+                ["trim", "caseFold", "collapseSpaces", "stripPunct"],
+                `${label}.normalize`,
+            );
+            for (const value of Object.values(exercise.normalize)) {
+                if (typeof value !== "boolean") {
+                    fail(`${label} listen_build normalize values must be booleans`);
+                }
+            }
+        }
+        return;
+    }
+
+    if (exercise.kind === "pseudocode_input") {
+        assertOnlyKeys(
+            exercise,
+            [
+                "id",
+                "kind",
+                "title",
+                "prompt",
+                "hint",
+                "help",
+                "mode",
+                "dialect",
+                "starterPseudocode",
+                "solutionPseudocode",
+                "validation",
+                "editor",
+            ],
+            label,
+        );
+        if (!isNonEmptyString(exercise.solutionPseudocode)) {
+            fail(`${label} pseudocode_input needs solutionPseudocode`);
+        }
+        const parsed = PseudocodeExpectedSchema.safeParse({
+            kind: "pseudocode_input",
+            dialect: exercise.dialect ?? "zoeskoul-v1",
+            mode: exercise.mode,
+            solution: exercise.solutionPseudocode,
+            ...(isRecord(exercise.validation) ? exercise.validation : {}),
+        });
+        if (!parsed.success) {
+            fail(`${label} pseudocode_input validation contract is invalid: ${parsed.error.issues.map((issue: { message: string }) => issue.message).join("; ")}`);
+        }
+        if (exercise.editor !== undefined && !isRecord(exercise.editor)) {
+            fail(`${label} pseudocode_input editor must be an object when provided`);
+        }
+        if (isRecord(exercise.editor)) {
+            assertOnlyKeys(
+                exercise.editor,
+                ["showLineNumbers", "allowIndentation", "showKeywordReference", "minRows"],
+                `${label}.editor`,
+            );
+            if (
+                exercise.editor.minRows !== undefined &&
+                (!Number.isInteger(exercise.editor.minRows) ||
+                    Number(exercise.editor.minRows) < 4 ||
+                    Number(exercise.editor.minRows) > 40)
+            ) {
+                fail(`${label} pseudocode_input editor.minRows must be an integer from 4 to 40`);
+            }
+        }
+        return;
+    }
+
+    if (exercise.kind === "code_input") {
+        assertOnlyKeys(
+            exercise,
+            [
+
+                    "id",
+                    "kind",
+                    "title",
+                    "prompt",
+                    "hint",
+                    "help",
+                    "starterCode",
+                    "fixedLanguage",
+                    "entryFilePath",
+                    "starterFiles",
+                    "solutionFiles",
+                    "sqlFileOrder",
+                    "sourceChecks",
+                    "workspaceExpectations",
+                    "terminalExpectations",
+                    "hiddenShellCheck",
+                    "gitExpectations",
+                    "solutionCode",
+                    "tests",
+                    "files",
+                    "semanticChecks",
+                    "datasetId",
+                    "recipeType",
+                    "mode",
+                    "instructions",
+                    "checkSql",
+            ],
+            label,
+        );
+
+        if (!isNonEmptyString(exercise.starterCode)) {
+            fail(`${label} code_input needs starterCode`);
+        }
+
+        if (!isNonEmptyString(exercise.solutionCode)) {
+            fail(`${label} code_input needs solutionCode`);
+        }
+
+        if (
+            typeof exercise.datasetId !== "undefined" &&
+            !isNonEmptyString(exercise.datasetId)
+        ) {
+            fail(`${label} code_input datasetId must be non-empty when provided`);
+        }
+
+        if (
+            typeof exercise.checkSql !== "undefined" &&
+            !isNonEmptyString(exercise.checkSql)
+        ) {
+            fail(`${label} code_input checkSql must be non-empty when provided`);
+        }
+
+        if (
+            typeof exercise.recipeType !== "undefined" &&
+            !RECIPE_TYPE_ENUM.includes(exercise.recipeType)
+        ) {
+            fail(`${label} code_input recipeType is invalid`);
+        }
+
+        if (
+            typeof exercise.mode !== "undefined" &&
+            exercise.mode !== "terminal_workspace" &&
+            exercise.mode !== "stdout" &&
+            exercise.mode !== "workspace_and_stdout"
+        ) {
+            fail(`${label} code_input mode is invalid`);
+        }
+
+        if (
+            typeof exercise.instructions !== "undefined" &&
+            !isNonEmptyString(exercise.instructions)
+        ) {
+            fail(`${label} code_input instructions must be non-empty when provided`);
+        }
+
+
+
+        if (typeof exercise.entryFilePath !== "undefined") {
+            assertWorkspacePath(exercise.entryFilePath, `${label}.entryFilePath`);
+        }
+
+        if (typeof exercise.workspaceExpectations !== "undefined") {
+            assertWorkspaceExpectations(
+                exercise.workspaceExpectations,
+                `${label}.workspaceExpectations`,
+            );
+        }
+
+        if (typeof exercise.terminalExpectations !== "undefined") {
+            assertTerminalExpectations(
+                exercise.terminalExpectations,
+                `${label}.terminalExpectations`,
+            );
+
+            if (
+                exercise.recipeType !== "shell_task" ||
+                exercise.mode !== "terminal_workspace"
+            ) {
+                fail(
+                    `${label} terminalExpectations is only supported for shell_task terminal_workspace exercises`,
+                );
+            }
+        }
+
+        if (typeof exercise.hiddenShellCheck !== "undefined") {
+            assertHiddenShellCheck(
+                exercise.hiddenShellCheck,
+                `${label}.hiddenShellCheck`,
+            );
+
+            if (
+                exercise.recipeType !== "shell_task" ||
+                exercise.mode !== "terminal_workspace"
+            ) {
+                fail(
+                    `${label} hiddenShellCheck is only supported for shell_task terminal_workspace exercises`,
+                );
+            }
+        }
+
+        if (typeof exercise.gitExpectations !== "undefined") {
+            assertGitExpectations(
+                exercise.gitExpectations,
+                `${label}.gitExpectations`,
+            );
+
+            if (
+                exercise.recipeType !== "shell_task" ||
+                exercise.mode !== "terminal_workspace"
+            ) {
+                fail(
+                    `${label} gitExpectations is only supported for shell_task terminal_workspace exercises`,
+                );
+            }
+
+            if (
+                typeof exercise.fixedLanguage !== "undefined" &&
+                exercise.fixedLanguage !== "bash"
+            ) {
+                fail(`${label} gitExpectations requires fixedLanguage "bash"`);
+            }
+        }
+
+        if (typeof exercise.starterFiles !== "undefined") {
+            if (!Array.isArray(exercise.starterFiles)) {
+                fail(`${label} code_input starterFiles must be an array when provided`);
+            }
+
+            exercise.starterFiles.forEach((file, fileIndex) => {
+                assertFileDraft(
+                    file,
+                    `${label} starterFiles[${fileIndex}]`,
+                    ["path", "content", "encoding", "data", "mimeType", "sizeBytes", "checksum", "language", "isEntry", "entry", "readOnly"],
+                );
+
+                const record = file as Record<string, unknown>;
+
+                if (
+                    typeof record.language !== "undefined" &&
+                    typeof record.language !== "string"
+                ) {
+                    fail(`${label} starterFiles[${fileIndex}].language must be a string when provided`);
+                }
+
+                if (
+                    typeof record.isEntry !== "undefined" &&
+                    typeof record.isEntry !== "boolean"
+                ) {
+                    fail(`${label} starterFiles[${fileIndex}].isEntry must be a boolean when provided`);
+                }
+
+                if (
+                    typeof record.entry !== "undefined" &&
+                    typeof record.entry !== "boolean"
+                ) {
+                    fail(`${label} starterFiles[${fileIndex}].entry must be a boolean when provided`);
+                }
+            });
+        }
+
+        if (typeof exercise.solutionFiles !== "undefined") {
+            if (!Array.isArray(exercise.solutionFiles)) {
+                fail(`${label} code_input solutionFiles must be an array when provided`);
+            }
+
+            exercise.solutionFiles.forEach((file, fileIndex) => {
+                assertFileDraft(
+                    file,
+                    `${label} solutionFiles[${fileIndex}]`,
+                    ["path", "content", "encoding", "data", "mimeType", "sizeBytes", "checksum", "language", "isEntry", "entry", "readOnly"],
+                );
+
+                const record = file as Record<string, unknown>;
+
+                if (
+                    typeof record.language !== "undefined" &&
+                    typeof record.language !== "string"
+                ) {
+                    fail(`${label} solutionFiles[${fileIndex}].language must be a string when provided`);
+                }
+
+                if (
+                    typeof record.isEntry !== "undefined" &&
+                    typeof record.isEntry !== "boolean"
+                ) {
+                    fail(`${label} solutionFiles[${fileIndex}].isEntry must be a boolean when provided`);
+                }
+
+                if (
+                    typeof record.entry !== "undefined" &&
+                    typeof record.entry !== "boolean"
+                ) {
+                    fail(`${label} solutionFiles[${fileIndex}].entry must be a boolean when provided`);
+                }
+            });
+        }
+
+        if (typeof exercise.sqlFileOrder !== "undefined") {
+            if (
+                !Array.isArray(exercise.sqlFileOrder) ||
+                exercise.sqlFileOrder.length < 1 ||
+                exercise.sqlFileOrder.some((path) => !isNonEmptyString(path))
+            ) {
+                fail(`${label} code_input sqlFileOrder must be a non-empty array of workspace-relative paths when provided`);
+            }
+
+            exercise.sqlFileOrder.forEach((path, pathIndex) => {
+                assertWorkspacePath(path, `${label}.sqlFileOrder[${pathIndex}]`);
+            });
+
+            if (new Set(exercise.sqlFileOrder.map((path) => path.trim())).size !== exercise.sqlFileOrder.length) {
+                fail(`${label} code_input sqlFileOrder must not contain duplicate paths`);
+            }
+
+            if (exercise.recipeType !== "sql_query") {
+                fail(`${label} code_input sqlFileOrder is only supported for sql_query exercises`);
+            }
+
+            const orderedPaths = exercise.sqlFileOrder.map((path) => path.trim());
+            const solutionPaths = Array.isArray(exercise.solutionFiles)
+                ? exercise.solutionFiles.map((file) => file.path.trim())
+                : [];
+            if (
+                solutionPaths.length > 0 &&
+                (orderedPaths.length !== solutionPaths.length ||
+                    solutionPaths.some((path) => !orderedPaths.includes(path)))
+            ) {
+                fail(`${label} code_input sqlFileOrder must list every solutionFiles path exactly once`);
+            }
+
+            if (
+                typeof exercise.entryFilePath === "string" &&
+                !orderedPaths.includes(exercise.entryFilePath.trim())
+            ) {
+                fail(`${label} code_input sqlFileOrder must include entryFilePath`);
+            }
+        }
+
+        if (
+            exercise.recipeType === "sql_query" &&
+            Array.isArray(exercise.starterFiles) &&
+            Array.isArray(exercise.solutionFiles)
+        ) {
+            const starterPaths = exercise.starterFiles.map((file) => file.path.trim());
+            const solutionPaths = exercise.solutionFiles.map((file) => file.path.trim());
+            if (
+                starterPaths.length !== solutionPaths.length ||
+                starterPaths.some((path) => !solutionPaths.includes(path))
+            ) {
+                fail(`${label} SQL starterFiles and solutionFiles must describe the same workspace paths`);
+            }
+        }
+
+        if (typeof exercise.sourceChecks !== "undefined") {
+            if (!Array.isArray(exercise.sourceChecks)) {
+                fail(`${label} code_input sourceChecks must be an array when provided`);
+            }
+
+            exercise.sourceChecks.forEach((check, checkIndex) => {
+                if (!check || typeof check !== "object" || Array.isArray(check)) {
+                    fail(`${label} sourceChecks[${checkIndex}] must be an object`);
+                    return;
+                }
+
+                const record = check as Record<string, unknown>;
+                assertOnlyKeys(
+                    record,
+                    ["type", "pattern", "message", "normalizeWhitespace"],
+                    `${label}.sourceChecks[${checkIndex}]`,
+                );
+
+                if (
+                    record.type !== "source_contains" &&
+                    record.type !== "source_regex"
+                ) {
+                    fail(`${label} sourceChecks[${checkIndex}].type must be "source_contains" or "source_regex"`);
+                }
+
+                if (!isNonEmptyString(record.pattern)) {
+                    fail(`${label} sourceChecks[${checkIndex}].pattern must be non-empty`);
+                }
+
+                if (!isNonEmptyString(record.message)) {
+                    fail(`${label} sourceChecks[${checkIndex}].message must be non-empty`);
+                }
+
+                if (
+                    typeof record.normalizeWhitespace !== "undefined" &&
+                    typeof record.normalizeWhitespace !== "boolean"
+                ) {
+                    fail(`${label} sourceChecks[${checkIndex}].normalizeWhitespace must be a boolean when provided`);
+                }
+            });
+        }
+
+
+
+        if (typeof exercise.tests !== "undefined") {
+            if (!Array.isArray(exercise.tests)) {
+                fail(`${label} code_input tests must be an array when provided`);
+            }
+
+            exercise.tests.forEach((test, testIndex) => {
+                if (!isRecord(test)) {
+                    fail(`${label} tests[${testIndex}] must be an object`);
+                }
+
+                assertOnlyKeys(
+                    test,
+                    ["stdin", "stdout", "match", "files"],
+                    `${label} tests[${testIndex}]`,
+                );
+
+                if (
+                    typeof test.stdin !== "undefined" &&
+                    typeof test.stdin !== "string"
+                ) {
+                    fail(`${label} tests[${testIndex}].stdin must be a string when provided`);
+                }
+
+                if (!isNonEmptyString(test.stdout)) {
+                    fail(`${label} tests[${testIndex}].stdout must be a non-empty string`);
+                }
+
+                if (
+                    typeof test.match !== "undefined" &&
+                    test.match !== "exact" &&
+                    test.match !== "includes"
+                ) {
+                    fail(`${label} tests[${testIndex}].match must be "exact" or "includes"`);
+                }
+
+                if (typeof test.files !== "undefined") {
+                    if (!Array.isArray(test.files)) {
+                        fail(`${label} tests[${testIndex}].files must be an array when provided`);
+                    }
+
+                    test.files.forEach((file, fileIndex) => {
+                        assertFileDraft(
+                            file,
+                            `${label} tests[${testIndex}].files[${fileIndex}]`,
+                        );
+                    });
+                }
+            });
+        }
+
+        if (typeof exercise.semanticChecks !== "undefined") {
+            const parsed = SemanticCheckSchema.array().safeParse(exercise.semanticChecks);
+
+            if (!parsed.success) {
+                fail(`${label} semanticChecks must match the canonical semantic check schema`);
+            }
+        }
+
+        if (typeof exercise.files !== "undefined") {
+            if (!Array.isArray(exercise.files)) {
+                fail(`${label} code_input files must be an array when provided`);
+            }
+
+            exercise.files.forEach((file, fileIndex) => {
+                if (!isRecord(file)) {
+                    fail(`${label} files[${fileIndex}] must be an object`);
+                }
+
+                assertOnlyKeys(file, ["path", "content", "readOnly"], `${label} files[${fileIndex}]`);
+
+                if (!isNonEmptyString(file.path)) {
+                    fail(`${label} files[${fileIndex}].path must be a non-empty string`);
+                }
+
+                if (typeof file.content !== "string") {
+                    fail(`${label} files[${fileIndex}].content must be a string`);
+                }
+
+                if (
+                    typeof file.readOnly !== "undefined" &&
+                    typeof file.readOnly !== "boolean"
+                ) {
+                    fail(`${label} files[${fileIndex}].readOnly must be a boolean when provided`);
+                }
+            });
+        }
+
+        const hasTests = Array.isArray(exercise.tests) && exercise.tests.length > 0;
+        const hasSemanticChecks =
+            Array.isArray(exercise.semanticChecks) && exercise.semanticChecks.length > 0;
+
+        if (exercise.recipeType === "semantic" && !hasSemanticChecks) {
+            fail(`${label} semantic code_input needs semanticChecks`);
+        }
+
+        if (exercise.recipeType === "fixed_tests" && !hasTests) {
+            fail(`${label} fixed_tests code_input needs tests`);
+        }
+
+        if (
+            exercise.recipeType !== "sql_query" &&
+            exercise.recipeType !== "shell_task" &&
+            !hasTests &&
+            !hasSemanticChecks
+        ) {
+            fail(`${label} code_input needs either tests or semanticChecks`);
+        }
+
+        return;
+    }
+
+    fail(`${label} has unknown kind`);
+}
+
 export function assertTopicAuthoringDraft(
     draft: TopicAuthoringDraft,
 ): asserts draft is TopicAuthoringDraft {
@@ -969,7 +1904,14 @@ export function assertTopicAuthoringDraft(
 
         assertOnlyKeys(
             block,
-            ["id", "cardTitle", "title", "bodyMarkdown", "tools"],
+            [
+                "id",
+                "cardTitle",
+                "title",
+                "bodyMarkdown",
+                "tryItExercises",
+                "tools",
+            ],
             `sketchBlocks[${i}]`,
         );
 
@@ -985,6 +1927,25 @@ export function assertTopicAuthoringDraft(
         if (!isNonEmptyString(block.bodyMarkdown)) {
             fail(`sketchBlocks[${i}] needs bodyMarkdown`);
         }
+
+        if (block.tryItExercises !== undefined) {
+            if (
+                !Array.isArray(block.tryItExercises) ||
+                block.tryItExercises.length < 1 ||
+                block.tryItExercises.length > 3
+            ) {
+                fail(
+                    `sketchBlocks[${i}].tryItExercises must contain 1 to 3 dedicated exercises`,
+                );
+            }
+
+            block.tryItExercises.forEach((exercise, exerciseIndex) => {
+                assertAuthoringExerciseDraft(
+                    exercise,
+                    `sketchBlocks[${i}].tryItExercises[${exerciseIndex}]`,
+                );
+            });
+        }
     });
 
     if (!Array.isArray(draft.quizDraft)) {
@@ -992,631 +1953,20 @@ export function assertTopicAuthoringDraft(
     }
 
     draft.quizDraft.forEach((exercise, i) => {
-        const label = `quizDraft[${i}]`;
-
-        if (!isRecord(exercise)) {
-            fail(`${label} must be an object`);
-        }
-
-        if (!isNonEmptyString(exercise.id)) {
-            fail(`${label} needs id`);
-        }
-        if (!isNonEmptyString(exercise.title)) {
-            fail(`${label} needs title`);
-        }
-        if (!isNonEmptyString(exercise.prompt)) {
-            fail(`${label} needs prompt`);
-        }
-        if (!isNonEmptyString(exercise.hint)) {
-            fail(`${label} needs hint`);
-        }
-
-        assertHelp(exercise.help, label);
-
-        if (exercise.kind === "single_choice" || exercise.kind === "multi_choice") {
-            assertOnlyKeys(
-                exercise,
-                ["id", "kind", "title", "prompt", "hint", "help", "options", "correctOptionIds"],
-                label,
-            );
-
-            if (!Array.isArray(exercise.options) || exercise.options.length < 2) {
-                fail(`${label} ${exercise.kind} needs at least 2 options`);
-            }
-
-            if (exercise.options.some((opt) => !isNonEmptyString(opt))) {
-                fail(`${label} ${exercise.kind} options must be non-empty strings`);
-            }
-
-            if (
-                !Array.isArray(exercise.correctOptionIds) ||
-                exercise.correctOptionIds.some((id) => !isNonEmptyString(id))
-            ) {
-                fail(`${label} ${exercise.kind} correctOptionIds must be non-empty strings`);
-            }
-
-            const allowedOptionIds = canonicalOptionIds(exercise.options.length);
-
-            if (exercise.kind === "single_choice" && exercise.correctOptionIds.length !== 1) {
-                fail(`${label} single_choice needs exactly 1 correctOptionIds entry`);
-            }
-
-            if (exercise.kind === "multi_choice" && exercise.correctOptionIds.length < 1) {
-                fail(`${label} multi_choice needs at least 1 correctOptionIds entry`);
-            }
-
-            if (!exercise.correctOptionIds.every((id) => allowedOptionIds.includes(id))) {
-                fail(
-                    `${label} ${exercise.kind} correctOptionIds must be included in available options (${allowedOptionIds.join(", ")})`,
-                );
-            }
-
-            return;
-        }
-
-        if (exercise.kind === "drag_reorder") {
-            assertOnlyKeys(
-                exercise,
-                ["id", "kind", "title", "prompt", "hint", "help", "tokens", "correctOrder"],
-                label,
-            );
-
-            if (!Array.isArray(exercise.tokens) || exercise.tokens.length < 2) {
-                fail(`${label} drag_reorder needs at least 2 tokens`);
-            }
-
-            if (exercise.tokens.some((token) => !isNonEmptyString(token))) {
-                fail(`${label} drag_reorder tokens must be non-empty strings`);
-            }
-
-            if (
-                !Array.isArray(exercise.correctOrder) ||
-                exercise.correctOrder.length !== exercise.tokens.length
-            ) {
-                fail(`${label} drag_reorder correctOrder must have same length as tokens`);
-            }
-
-            if (exercise.correctOrder.some((token) => !isNonEmptyString(token))) {
-                fail(`${label} drag_reorder correctOrder must be non-empty strings`);
-            }
-
-            const tokenSet = new Set(exercise.tokens.map((token) => token.trim()));
-
-            if (!exercise.correctOrder.every((token) => tokenSet.has(token.trim()))) {
-                fail(`${label} drag_reorder correctOrder must only contain values from tokens`);
-            }
-
-            return;
-        }
-
-        if (exercise.kind === "fill_blank_choice") {
-            assertOnlyKeys(
-                exercise,
-                ["id", "kind", "title", "prompt", "hint", "help", "template", "choices", "correctValue"],
-                label,
-            );
-
-            if (!isNonEmptyString(exercise.template)) {
-                fail(`${label} fill_blank_choice needs template`);
-            }
-
-            const blankCount = countFillBlanks(exercise.template, exercise.prompt);
-
-            if (blankCount === 0) {
-                fail(`${label} fill_blank_choice needs exactly 1 blank placeholder`);
-            }
-
-            if (blankCount > 1) {
-                fail(`${label} fill_blank_choice supports only 1 blank, but found ${blankCount}`);
-            }
-
-            if (!Array.isArray(exercise.choices) || exercise.choices.length < 2) {
-                fail(`${label} fill_blank_choice needs at least 2 choices`);
-            }
-
-            if (exercise.choices.some((choice) => !isNonEmptyString(choice))) {
-                fail(`${label} fill_blank_choice choices must be non-empty strings`);
-            }
-
-            if (!isNonEmptyString(exercise.correctValue)) {
-                fail(`${label} fill_blank_choice needs correctValue`);
-            }
-
-            if (!exercise.choices.some((choice) => choice.trim() === exercise.correctValue.trim())) {
-                fail(`${label} fill_blank_choice correctValue must be included in choices`);
-            }
-
-            return;
-        }
-
-        if (exercise.kind === "pseudocode_input") {
-            assertOnlyKeys(
-                exercise,
-                [
-                    "id",
-                    "kind",
-                    "title",
-                    "prompt",
-                    "hint",
-                    "help",
-                    "mode",
-                    "dialect",
-                    "starterPseudocode",
-                    "solutionPseudocode",
-                    "validation",
-                    "editor",
-                ],
-                label,
-            );
-            if (!isNonEmptyString(exercise.solutionPseudocode)) {
-                fail(`${label} pseudocode_input needs solutionPseudocode`);
-            }
-            const parsed = PseudocodeExpectedSchema.safeParse({
-                kind: "pseudocode_input",
-                dialect: exercise.dialect ?? "zoeskoul-v1",
-                mode: exercise.mode,
-                solution: exercise.solutionPseudocode,
-                ...(isRecord(exercise.validation) ? exercise.validation : {}),
-            });
-            if (!parsed.success) {
-                fail(`${label} pseudocode_input validation contract is invalid: ${parsed.error.issues.map((issue: { message: string }) => issue.message).join("; ")}`);
-            }
-            if (exercise.editor !== undefined && !isRecord(exercise.editor)) {
-                fail(`${label} pseudocode_input editor must be an object when provided`);
-            }
-            if (isRecord(exercise.editor)) {
-                assertOnlyKeys(
-                    exercise.editor,
-                    ["showLineNumbers", "allowIndentation", "showKeywordReference", "minRows"],
-                    `${label}.editor`,
-                );
-                if (
-                    exercise.editor.minRows !== undefined &&
-                    (!Number.isInteger(exercise.editor.minRows) ||
-                        Number(exercise.editor.minRows) < 4 ||
-                        Number(exercise.editor.minRows) > 40)
-                ) {
-                    fail(`${label} pseudocode_input editor.minRows must be an integer from 4 to 40`);
-                }
-            }
-            return;
-        }
-
-        if (exercise.kind === "code_input") {
-            assertOnlyKeys(
-                exercise,
-                [
-
-                        "id",
-                        "kind",
-                        "title",
-                        "prompt",
-                        "hint",
-                        "help",
-                        "starterCode",
-                        "fixedLanguage",
-                        "entryFilePath",
-                        "starterFiles",
-                        "solutionFiles",
-                        "sqlFileOrder",
-                        "sourceChecks",
-                        "workspaceExpectations",
-                        "terminalExpectations",
-                        "hiddenShellCheck",
-                        "gitExpectations",
-                        "solutionCode",
-                        "tests",
-                        "files",
-                        "semanticChecks",
-                        "datasetId",
-                        "recipeType",
-                        "mode",
-                        "instructions",
-                        "checkSql",
-                ],
-                label,
-            );
-
-            if (!isNonEmptyString(exercise.starterCode)) {
-                fail(`${label} code_input needs starterCode`);
-            }
-
-            if (!isNonEmptyString(exercise.solutionCode)) {
-                fail(`${label} code_input needs solutionCode`);
-            }
-
-            if (
-                typeof exercise.datasetId !== "undefined" &&
-                !isNonEmptyString(exercise.datasetId)
-            ) {
-                fail(`${label} code_input datasetId must be non-empty when provided`);
-            }
-
-            if (
-                typeof exercise.checkSql !== "undefined" &&
-                !isNonEmptyString(exercise.checkSql)
-            ) {
-                fail(`${label} code_input checkSql must be non-empty when provided`);
-            }
-
-            if (
-                typeof exercise.recipeType !== "undefined" &&
-                !RECIPE_TYPE_ENUM.includes(exercise.recipeType)
-            ) {
-                fail(`${label} code_input recipeType is invalid`);
-            }
-
-            if (
-                typeof exercise.mode !== "undefined" &&
-                exercise.mode !== "terminal_workspace" &&
-                exercise.mode !== "stdout" &&
-                exercise.mode !== "workspace_and_stdout"
-            ) {
-                fail(`${label} code_input mode is invalid`);
-            }
-
-            if (
-                typeof exercise.instructions !== "undefined" &&
-                !isNonEmptyString(exercise.instructions)
-            ) {
-                fail(`${label} code_input instructions must be non-empty when provided`);
-            }
-
-
-
-            if (typeof exercise.entryFilePath !== "undefined") {
-                assertWorkspacePath(exercise.entryFilePath, `${label}.entryFilePath`);
-            }
-
-            if (typeof exercise.workspaceExpectations !== "undefined") {
-                assertWorkspaceExpectations(
-                    exercise.workspaceExpectations,
-                    `${label}.workspaceExpectations`,
-                );
-            }
-
-            if (typeof exercise.terminalExpectations !== "undefined") {
-                assertTerminalExpectations(
-                    exercise.terminalExpectations,
-                    `${label}.terminalExpectations`,
-                );
-
-                if (
-                    exercise.recipeType !== "shell_task" ||
-                    exercise.mode !== "terminal_workspace"
-                ) {
-                    fail(
-                        `${label} terminalExpectations is only supported for shell_task terminal_workspace exercises`,
-                    );
-                }
-            }
-
-            if (typeof exercise.hiddenShellCheck !== "undefined") {
-                assertHiddenShellCheck(
-                    exercise.hiddenShellCheck,
-                    `${label}.hiddenShellCheck`,
-                );
-
-                if (
-                    exercise.recipeType !== "shell_task" ||
-                    exercise.mode !== "terminal_workspace"
-                ) {
-                    fail(
-                        `${label} hiddenShellCheck is only supported for shell_task terminal_workspace exercises`,
-                    );
-                }
-            }
-
-            if (typeof exercise.gitExpectations !== "undefined") {
-                assertGitExpectations(
-                    exercise.gitExpectations,
-                    `${label}.gitExpectations`,
-                );
-
-                if (
-                    exercise.recipeType !== "shell_task" ||
-                    exercise.mode !== "terminal_workspace"
-                ) {
-                    fail(
-                        `${label} gitExpectations is only supported for shell_task terminal_workspace exercises`,
-                    );
-                }
-
-                if (
-                    typeof exercise.fixedLanguage !== "undefined" &&
-                    exercise.fixedLanguage !== "bash"
-                ) {
-                    fail(`${label} gitExpectations requires fixedLanguage "bash"`);
-                }
-            }
-
-            if (typeof exercise.starterFiles !== "undefined") {
-                if (!Array.isArray(exercise.starterFiles)) {
-                    fail(`${label} code_input starterFiles must be an array when provided`);
-                }
-
-                exercise.starterFiles.forEach((file, fileIndex) => {
-                    assertFileDraft(
-                        file,
-                        `${label} starterFiles[${fileIndex}]`,
-                        ["path", "content", "encoding", "data", "mimeType", "sizeBytes", "checksum", "language", "isEntry", "entry", "readOnly"],
-                    );
-
-                    const record = file as Record<string, unknown>;
-
-                    if (
-                        typeof record.language !== "undefined" &&
-                        typeof record.language !== "string"
-                    ) {
-                        fail(`${label} starterFiles[${fileIndex}].language must be a string when provided`);
-                    }
-
-                    if (
-                        typeof record.isEntry !== "undefined" &&
-                        typeof record.isEntry !== "boolean"
-                    ) {
-                        fail(`${label} starterFiles[${fileIndex}].isEntry must be a boolean when provided`);
-                    }
-
-                    if (
-                        typeof record.entry !== "undefined" &&
-                        typeof record.entry !== "boolean"
-                    ) {
-                        fail(`${label} starterFiles[${fileIndex}].entry must be a boolean when provided`);
-                    }
-                });
-            }
-
-            if (typeof exercise.solutionFiles !== "undefined") {
-                if (!Array.isArray(exercise.solutionFiles)) {
-                    fail(`${label} code_input solutionFiles must be an array when provided`);
-                }
-
-                exercise.solutionFiles.forEach((file, fileIndex) => {
-                    assertFileDraft(
-                        file,
-                        `${label} solutionFiles[${fileIndex}]`,
-                        ["path", "content", "encoding", "data", "mimeType", "sizeBytes", "checksum", "language", "isEntry", "entry", "readOnly"],
-                    );
-
-                    const record = file as Record<string, unknown>;
-
-                    if (
-                        typeof record.language !== "undefined" &&
-                        typeof record.language !== "string"
-                    ) {
-                        fail(`${label} solutionFiles[${fileIndex}].language must be a string when provided`);
-                    }
-
-                    if (
-                        typeof record.isEntry !== "undefined" &&
-                        typeof record.isEntry !== "boolean"
-                    ) {
-                        fail(`${label} solutionFiles[${fileIndex}].isEntry must be a boolean when provided`);
-                    }
-
-                    if (
-                        typeof record.entry !== "undefined" &&
-                        typeof record.entry !== "boolean"
-                    ) {
-                        fail(`${label} solutionFiles[${fileIndex}].entry must be a boolean when provided`);
-                    }
-                });
-            }
-
-            if (typeof exercise.sqlFileOrder !== "undefined") {
-                if (
-                    !Array.isArray(exercise.sqlFileOrder) ||
-                    exercise.sqlFileOrder.length < 1 ||
-                    exercise.sqlFileOrder.some((path) => !isNonEmptyString(path))
-                ) {
-                    fail(`${label} code_input sqlFileOrder must be a non-empty array of workspace-relative paths when provided`);
-                }
-
-                exercise.sqlFileOrder.forEach((path, pathIndex) => {
-                    assertWorkspacePath(path, `${label}.sqlFileOrder[${pathIndex}]`);
-                });
-
-                if (new Set(exercise.sqlFileOrder.map((path) => path.trim())).size !== exercise.sqlFileOrder.length) {
-                    fail(`${label} code_input sqlFileOrder must not contain duplicate paths`);
-                }
-
-                if (exercise.recipeType !== "sql_query") {
-                    fail(`${label} code_input sqlFileOrder is only supported for sql_query exercises`);
-                }
-
-                const orderedPaths = exercise.sqlFileOrder.map((path) => path.trim());
-                const solutionPaths = Array.isArray(exercise.solutionFiles)
-                    ? exercise.solutionFiles.map((file) => file.path.trim())
-                    : [];
-                if (
-                    solutionPaths.length > 0 &&
-                    (orderedPaths.length !== solutionPaths.length ||
-                        solutionPaths.some((path) => !orderedPaths.includes(path)))
-                ) {
-                    fail(`${label} code_input sqlFileOrder must list every solutionFiles path exactly once`);
-                }
-
-                if (
-                    typeof exercise.entryFilePath === "string" &&
-                    !orderedPaths.includes(exercise.entryFilePath.trim())
-                ) {
-                    fail(`${label} code_input sqlFileOrder must include entryFilePath`);
-                }
-            }
-
-            if (
-                exercise.recipeType === "sql_query" &&
-                Array.isArray(exercise.starterFiles) &&
-                Array.isArray(exercise.solutionFiles)
-            ) {
-                const starterPaths = exercise.starterFiles.map((file) => file.path.trim());
-                const solutionPaths = exercise.solutionFiles.map((file) => file.path.trim());
-                if (
-                    starterPaths.length !== solutionPaths.length ||
-                    starterPaths.some((path) => !solutionPaths.includes(path))
-                ) {
-                    fail(`${label} SQL starterFiles and solutionFiles must describe the same workspace paths`);
-                }
-            }
-
-            if (typeof exercise.sourceChecks !== "undefined") {
-                if (!Array.isArray(exercise.sourceChecks)) {
-                    fail(`${label} code_input sourceChecks must be an array when provided`);
-                }
-
-                exercise.sourceChecks.forEach((check, checkIndex) => {
-                    if (!check || typeof check !== "object" || Array.isArray(check)) {
-                        fail(`${label} sourceChecks[${checkIndex}] must be an object`);
-                        return;
-                    }
-
-                    const record = check as Record<string, unknown>;
-                    assertOnlyKeys(
-                        record,
-                        ["type", "pattern", "message", "normalizeWhitespace"],
-                        `${label}.sourceChecks[${checkIndex}]`,
-                    );
-
-                    if (
-                        record.type !== "source_contains" &&
-                        record.type !== "source_regex"
-                    ) {
-                        fail(`${label} sourceChecks[${checkIndex}].type must be "source_contains" or "source_regex"`);
-                    }
-
-                    if (!isNonEmptyString(record.pattern)) {
-                        fail(`${label} sourceChecks[${checkIndex}].pattern must be non-empty`);
-                    }
-
-                    if (!isNonEmptyString(record.message)) {
-                        fail(`${label} sourceChecks[${checkIndex}].message must be non-empty`);
-                    }
-
-                    if (
-                        typeof record.normalizeWhitespace !== "undefined" &&
-                        typeof record.normalizeWhitespace !== "boolean"
-                    ) {
-                        fail(`${label} sourceChecks[${checkIndex}].normalizeWhitespace must be a boolean when provided`);
-                    }
-                });
-            }
-
-
-
-            if (typeof exercise.tests !== "undefined") {
-                if (!Array.isArray(exercise.tests)) {
-                    fail(`${label} code_input tests must be an array when provided`);
-                }
-
-                exercise.tests.forEach((test, testIndex) => {
-                    if (!isRecord(test)) {
-                        fail(`${label} tests[${testIndex}] must be an object`);
-                    }
-
-                    assertOnlyKeys(
-                        test,
-                        ["stdin", "stdout", "match", "files"],
-                        `${label} tests[${testIndex}]`,
-                    );
-
-                    if (
-                        typeof test.stdin !== "undefined" &&
-                        typeof test.stdin !== "string"
-                    ) {
-                        fail(`${label} tests[${testIndex}].stdin must be a string when provided`);
-                    }
-
-                    if (!isNonEmptyString(test.stdout)) {
-                        fail(`${label} tests[${testIndex}].stdout must be a non-empty string`);
-                    }
-
-                    if (
-                        typeof test.match !== "undefined" &&
-                        test.match !== "exact" &&
-                        test.match !== "includes"
-                    ) {
-                        fail(`${label} tests[${testIndex}].match must be "exact" or "includes"`);
-                    }
-
-                    if (typeof test.files !== "undefined") {
-                        if (!Array.isArray(test.files)) {
-                            fail(`${label} tests[${testIndex}].files must be an array when provided`);
-                        }
-
-                        test.files.forEach((file, fileIndex) => {
-                            assertFileDraft(
-                                file,
-                                `${label} tests[${testIndex}].files[${fileIndex}]`,
-                            );
-                        });
-                    }
-                });
-            }
-
-            if (typeof exercise.semanticChecks !== "undefined") {
-                const parsed = SemanticCheckSchema.array().safeParse(exercise.semanticChecks);
-
-                if (!parsed.success) {
-                    fail(`${label} semanticChecks must match the canonical semantic check schema`);
-                }
-            }
-
-            if (typeof exercise.files !== "undefined") {
-                if (!Array.isArray(exercise.files)) {
-                    fail(`${label} code_input files must be an array when provided`);
-                }
-
-                exercise.files.forEach((file, fileIndex) => {
-                    if (!isRecord(file)) {
-                        fail(`${label} files[${fileIndex}] must be an object`);
-                    }
-
-                    assertOnlyKeys(file, ["path", "content", "readOnly"], `${label} files[${fileIndex}]`);
-
-                    if (!isNonEmptyString(file.path)) {
-                        fail(`${label} files[${fileIndex}].path must be a non-empty string`);
-                    }
-
-                    if (typeof file.content !== "string") {
-                        fail(`${label} files[${fileIndex}].content must be a string`);
-                    }
-
-                    if (
-                        typeof file.readOnly !== "undefined" &&
-                        typeof file.readOnly !== "boolean"
-                    ) {
-                        fail(`${label} files[${fileIndex}].readOnly must be a boolean when provided`);
-                    }
-                });
-            }
-
-            const hasTests = Array.isArray(exercise.tests) && exercise.tests.length > 0;
-            const hasSemanticChecks =
-                Array.isArray(exercise.semanticChecks) && exercise.semanticChecks.length > 0;
-
-            if (exercise.recipeType === "semantic" && !hasSemanticChecks) {
-                fail(`${label} semantic code_input needs semanticChecks`);
-            }
-
-            if (exercise.recipeType === "fixed_tests" && !hasTests) {
-                fail(`${label} fixed_tests code_input needs tests`);
-            }
-
-            if (
-                exercise.recipeType !== "sql_query" &&
-                exercise.recipeType !== "shell_task" &&
-                !hasTests &&
-                !hasSemanticChecks
-            ) {
-                fail(`${label} code_input needs either tests or semanticChecks`);
-            }
-
-            return;
-        }
-
-        fail(`${label} has unknown kind`);
+        assertAuthoringExerciseDraft(exercise, `quizDraft[${i}]`);
     });
+
+    const allExerciseIds = [
+        ...draft.quizDraft.map((exercise) => exercise.id),
+        ...draft.sketchBlocks.flatMap((block) =>
+            (block.tryItExercises ?? []).map((exercise) => exercise.id),
+        ),
+    ];
+    if (new Set(allExerciseIds).size !== allExerciseIds.length) {
+        fail(
+            "exercise ids must be unique across quizDraft and sketch tryItExercises",
+        );
+    }
 
     if (typeof draft.projectDraft !== "undefined") {
         if (!isRecord(draft.projectDraft)) {

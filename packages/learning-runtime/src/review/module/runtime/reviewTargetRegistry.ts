@@ -593,19 +593,43 @@ export function buildReviewTargetRegistry(args: {
         const rawEmbeddedTryItSteps = Array.isArray(rawEmbeddedTryItSpec?.steps)
             ? rawEmbeddedTryItSpec.steps
             : [];
-        const rawEmbeddedTryItStep = asRecord(rawEmbeddedTryItSteps[0]);
-        const rawEmbeddedTryItExerciseKey =
-            asString(rawEmbeddedTryItStep?.exerciseKey) ||
+        const fallbackEmbeddedTryItExerciseKey =
             asString(rawEmbeddedTryIt?.exerciseKey);
-        const rawEmbeddedTryItExercise = rawEmbeddedTryItExerciseKey
-            ? findManifestExerciseByKey(rawManifest, rawEmbeddedTryItExerciseKey)
-            : null;
-        const localizedEmbeddedTryItToolManifest = rawEmbeddedTryItStep
-            ? resolveReviewTargetI18nAliases(
-                mergeManifestParts(rawEmbeddedTryItExercise, rawEmbeddedTryItStep),
-                resolveMessage,
-              )
-            : null;
+        const effectiveEmbeddedTryItSteps =
+            rawEmbeddedTryItSteps.length > 0
+                ? rawEmbeddedTryItSteps
+                : fallbackEmbeddedTryItExerciseKey
+                    ? [{ exerciseKey: fallbackEmbeddedTryItExerciseKey }]
+                    : [];
+
+        const embeddedTryItStepContexts = effectiveEmbeddedTryItSteps.flatMap(
+          (rawStep) => {
+            const step = asRecord(rawStep);
+            if (!step) return [];
+
+            const exerciseKey = asString(step.exerciseKey);
+            if (!exerciseKey) return [];
+
+            const authoredExercise =
+              findManifestExerciseByKey(rawManifest, exerciseKey);
+            const toolManifest = resolveReviewTargetI18nAliases(
+              mergeManifestParts(authoredExercise, step),
+              resolveMessage,
+            );
+            if (!toolManifest) return [];
+
+            return [{
+              exerciseKey,
+              rawStep: step,
+              toolManifest,
+            }];
+          },
+        );
+
+        const primaryEmbeddedTryItContext =
+            embeddedTryItStepContexts[0] ?? null;
+        const localizedEmbeddedTryItToolManifest =
+            primaryEmbeddedTryItContext?.toolManifest ?? null;
         const cardToolManifest =
           localizedEmbeddedTryItToolManifest ?? localizedCardManifest;
 
@@ -672,19 +696,14 @@ export function buildReviewTargetRegistry(args: {
         orderedKeys.push(cardEntry.targetKey);
 
         /**
-         * Text/sketch Try It is visually nested inside the owning lesson card,
-         * but its learner workspace must still have the same canonical authored
-         * exercise identity used by ExerciseRenderer, QuizPracticeCard, and the
-         * Review runtime.
+         * One embedded Try It may contain multiple project steps. Each step gets
+         * its own hidden canonical exercise owner while the lesson still renders
+         * one Try It container.
          *
-         * Keep this child out of byRoute/orderedKeys: it is not a standalone
-         * navigation step and must not alter progressive-unlock/card ordering.
-         * It is a hidden canonical owner discoverable by exact exercise key.
+         * Hidden children stay out of byRoute/orderedKeys so they do not alter
+         * lesson navigation or progressive unlock ordering.
          */
-        if (
-          rawEmbeddedTryItExerciseKey &&
-          localizedEmbeddedTryItToolManifest
-        ) {
+        for (const embeddedStep of embeddedTryItStepContexts) {
           const embeddedExerciseStateKey = getExerciseStateKey(
             {
               subjectSlug,
@@ -693,8 +712,18 @@ export function buildReviewTargetRegistry(args: {
               topicId,
               cardId: card.id,
             },
-            rawEmbeddedTryItExerciseKey,
+            embeddedStep.exerciseKey,
           );
+
+          const embeddedStepRuntimeContext = buildRuntimeEntryContext({
+            subjectSlug,
+            item: embeddedStep.toolManifest,
+            topicRuntimeDefaults,
+            moduleRuntimeDefaults,
+            fallbackLanguage: cardRuntimeContext.language,
+            profileId,
+            versionFamily,
+          });
 
           const embeddedExerciseEntry: ReviewTargetEntry = {
             targetKey: `exercise:${embeddedExerciseStateKey}`,
@@ -706,27 +735,27 @@ export function buildReviewTargetRegistry(args: {
             cardId: card.id,
             cardType: card.type,
             targetSlug: cleanSegment(
-              rawEmbeddedTryItExerciseKey,
+              embeddedStep.exerciseKey,
               "exercise",
             ),
             ownerKind: "exercise",
             ownerKey: embeddedExerciseStateKey,
             cardKey,
             toolScopeKey: embeddedExerciseStateKey,
-            exerciseId: rawEmbeddedTryItExerciseKey,
+            exerciseId: embeddedStep.exerciseKey,
             exerciseStateKey: embeddedExerciseStateKey,
-            language: cardRuntimeContext.language,
+            language: embeddedStepRuntimeContext.language,
             solutionFiles: pickSolutionFiles(
-              localizedEmbeddedTryItToolManifest,
+              embeddedStep.toolManifest,
               subjectSlug,
-              cardRuntimeContext.language,
+              embeddedStepRuntimeContext.language,
               profileId,
               versionFamily,
             ),
             solutionCode: pickSolutionCode(
-              localizedEmbeddedTryItToolManifest,
+              embeddedStep.toolManifest,
               subjectSlug,
-              cardRuntimeContext.language,
+              embeddedStepRuntimeContext.language,
               profileId,
               versionFamily,
             ),
@@ -734,16 +763,16 @@ export function buildReviewTargetRegistry(args: {
             topicRuntimeDefaults,
             moduleRuntimeDefaults,
             sqlDatasetId:
-              cardRuntimeContext.datasetResolution.datasetId,
+              embeddedStepRuntimeContext.datasetResolution.datasetId,
             sqlDatasetResolutionSource:
-              cardRuntimeContext.datasetResolution.source,
+              embeddedStepRuntimeContext.datasetResolution.source,
             sqlDatasetResolutionError:
-              cardRuntimeContext.datasetResolution.error,
+              embeddedStepRuntimeContext.datasetResolution.error,
             starterWorkspace:
-              asRecord(localizedEmbeddedTryItToolManifest?.workspace) ??
+              asRecord(embeddedStep.toolManifest?.workspace) ??
               null,
-            toolManifest: localizedEmbeddedTryItToolManifest,
-            item: localizedEmbeddedTryItToolManifest,
+            toolManifest: embeddedStep.toolManifest,
+            item: embeddedStep.toolManifest,
             profileId,
             versionFamily,
           };

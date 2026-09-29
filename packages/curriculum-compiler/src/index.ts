@@ -49,6 +49,8 @@ export { compileSubject } from "./compile/compileSubject.js";
 export { compileCourse } from "./compile/compileCourse.js";
 export * from "./compile/resolveAuthoringCompileTarget.js";
 export { compileTopic } from "./compile/compileTopic.js";
+export { compileManualTopic } from "./manual/compileManualTopic.js";
+export * from "./manual/loadManualTopicDraft.js";
 export { critiqueTopic } from "./compile/critiqueTopic.js";
 export { critiqueTopicDraft } from "./compile/critiqueTopicDraft.js";
 export { critiqueSubject } from "./compile/critiqueSubject.js";

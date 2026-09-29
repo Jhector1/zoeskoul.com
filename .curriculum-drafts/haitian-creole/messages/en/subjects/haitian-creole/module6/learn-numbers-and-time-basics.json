@@ -1,0 +1,139 @@
+{
+  "topics": {
+    "haitian-creole": {
+      "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
+        "learn-numbers-and-time-basics": {
+          "label": "Learn Numbers and Time Basics",
+          "summary": "Learn and recognize the Kreyòl numbers from one through twenty in useful spoken and written forms.",
+          "cards": {
+            "sketch0": {
+              "title": "Numbers 1–10"
+            },
+            "sketch1": {
+              "title": "Numbers 11–20"
+            },
+            "sketch2": {
+              "title": "Use Numbers With Things"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "learn-numbers-and-time-basics-choice": {
+              "title": "Choose five",
+              "prompt": "Which Kreyòl number means “five”?",
+              "hint": "Choose the number word from the first group.",
+              "help": {
+                "concept": "The lesson introduces the basic number sequence from one to ten.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "options": {
+                "a": "senk",
+                "b": "sèt",
+                "c": "nèf"
+              }
+            },
+            "learn-numbers-and-time-basics-fill": {
+              "title": "Complete the number phrase",
+              "prompt": "Choose the number that completes “three books.”",
+              "hint": "Use the number represented by 3.",
+              "help": {
+                "concept": "The blank needs the number word that comes before the noun.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "template": "[blank1] liv",
+              "choices": [
+                "twa",
+                "de",
+                "kat"
+              ]
+            },
+            "learn-numbers-and-time-basics-listen": {
+              "title": "Hear a number",
+              "prompt": "Listen, then build the number phrase you hear.",
+              "hint": "Listen for the number and the noun.",
+              "help": {
+                "concept": "Build the short quantity phrase in spoken order.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "targetText": "de valiz",
+              "wordBank": [
+                "de",
+                "valiz"
+              ],
+              "distractors": [
+                "twa"
+              ]
+            },
+            "learn-numbers-and-time-basics-voice": {
+              "title": "Say a number",
+              "prompt": "Say: ven.",
+              "hint": "Say the Kreyòl number shown.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored number word.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "targetText": "ven"
+            },
+            "learn-numbers-and-time-basics-build": {
+              "title": "Build “five notebooks”",
+              "prompt": "Arrange the words to say “five notebooks.”",
+              "hint": "Put the number before the noun.",
+              "help": {
+                "concept": "A quantity phrase places the number before the thing being counted.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "targetText": "senk kaye",
+              "wordBank": [
+                "senk",
+                "kaye"
+              ],
+              "distractors": [
+                "sèt"
+              ],
+              "ttsText": "senk kaye"
+            },
+            "learn-numbers-and-time-basics-write": {
+              "title": "Write eight",
+              "prompt": "Type the Kreyòl number word for 8.",
+              "hint": "Use the number sequence from the lesson.",
+              "help": {
+                "concept": "Write the number word with its Kreyòl spelling.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "expectedText": "wit",
+              "placeholder": "Type the Kreyòl answer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole": {
+      "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
+        "learn-numbers-and-time-basics": {
+          "one-ten": {
+            "title": "youn, de, twa…",
+            "bodyMarkdown": "Start with the first ten numbers:\n\n1 **youn** · 2 **de** · 3 **twa** · 4 **kat** · 5 **senk**\n\n6 **sis** · 7 **sèt** · 8 **wit** · 9 **nèf** · 10 **dis**\n\nSay them aloud in small groups rather than trying to memorize the whole list at once."
+          },
+          "eleven-twenty": {
+            "title": "onz through ven",
+            "bodyMarkdown": "Continue from eleven to twenty:\n\n11 **onz** · 12 **douz** · 13 **trèz** · 14 **katòz** · 15 **kenz**\n\n16 **sèz** · 17 **disèt** · 18 **dizwit** · 19 **diznèf** · 20 **ven**."
+          },
+          "use-numbers": {
+            "title": "de liv, twa valiz",
+            "bodyMarkdown": "Numbers can go directly before a noun:\n\n- **de liv** — two books\n- **twa valiz** — three bags\n- **senk kaye** — five notebooks\n\nThis prepares you for quantities, time, prices, and everyday counting."
+          }
+        }
+      }
+    }
+  }
+}

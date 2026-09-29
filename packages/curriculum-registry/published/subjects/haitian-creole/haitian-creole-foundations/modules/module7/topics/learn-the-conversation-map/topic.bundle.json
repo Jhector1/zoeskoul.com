@@ -1,0 +1,277 @@
+{
+  "topicId": "learn-the-conversation-map",
+  "subjectSlug": "haitian-creole-foundations",
+  "moduleSlug": "haitian-creole-foundations-8-my-first-kreyol-conversation",
+  "sectionSlug": "haitian-creole-foundations-ht8-learn-listen-speak",
+  "prefix": "ht8",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.label",
+    "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.cards.sketch0.title",
+      "sketchId": "meet-someone",
+      "height": 420,
+      "tryIt": {
+        "id": "try-learn-the-conversation-map-sketch0",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch0.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch0.prompt",
+        "exerciseKey": "try-meet-someone-order",
+        "exerciseKeys": [
+          "try-meet-someone-order"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.cards.sketch1.title",
+      "sketchId": "identity-place",
+      "height": 420,
+      "tryIt": {
+        "id": "try-learn-the-conversation-map-sketch1",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch1.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.tryIt.try_learn_the_conversation_map_sketch1.prompt",
+        "exerciseKey": "try-identity-place-order",
+        "exerciseKeys": [
+          "try-identity-place-order"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.cards.sketch2.title",
+      "sketchId": "keep-simple",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "meet-someone",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.meet-someone.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.meet-someone.bodyMarkdown"
+    },
+    {
+      "id": "identity-place",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.identity-place.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.identity-place.bodyMarkdown"
+    },
+    {
+      "id": "keep-simple",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.keep-simple.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.keep-simple.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "learn-the-conversation-map-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "learn-the-conversation-map-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "rele"
+      }
+    },
+    {
+      "id": "learn-the-conversation-map-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-listen",
+      "targetText": "Wi, mwen pale kreyòl.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Wi,",
+        "mwen",
+        "pale",
+        "kreyòl."
+      ],
+      "distractors": [
+        "rete"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Wi, mwen pale kreyòl.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "learn-the-conversation-map-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-voice",
+      "targetText": "Bonjou! M rele Ana. Mwen rete Chicago.",
+      "locale": "ht-HT",
+      "maxSeconds": 18,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Bonjou! M rele Ana. Mwen rete Chicago.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "learn-the-conversation-map-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-build",
+      "targetText": "Ki kote ou rete?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Ki",
+        "kote",
+        "ou",
+        "rete?"
+      ],
+      "distractors": [
+        "rele?"
+      ],
+      "ttsText": "Ki kote ou rete?",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Ki kote ou rete?",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "learn-the-conversation-map-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.learn-the-conversation-map-write",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "M rele Jan.",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-meet-someone-order",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.try-meet-someone-order",
+      "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Mwen byen tou. Kijan ou rele? M rele Ana.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Bonjou! Kijan ou ye?",
+        "Mwen byen, mèsi. E ou menm?",
+        "Mwen byen tou. Kijan ou rele?",
+        "M rele Ana."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Mwen byen tou. Kijan ou rele? M rele Ana.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-identity-place-order",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-8-my-first-kreyol-conversation.learn-the-conversation-map.practice.try-identity-place-order",
+      "targetText": "Èske ou pale kreyòl? Wi, mwen pale kreyòl. Ki kote ou rete? Mwen rete Chicago.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Èske ou pale kreyòl?",
+        "Wi, mwen pale kreyòl.",
+        "Ki kote ou rete?",
+        "Mwen rete Chicago."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Èske ou pale kreyòl? Wi, mwen pale kreyòl. Ki kote ou rete? Mwen rete Chicago.",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

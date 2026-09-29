@@ -1,0 +1,21 @@
+{
+  "catalog": {
+    "slug": "haitian-creole",
+    "order": 60,
+    "title": "Haitian Creole",
+    "defaultSubjectSlug": "haitian-creole-foundations",
+    "description": "Haitian Creole learning paths focused on practical listening, speaking, reading, writing, culture, stories, and everyday communication.",
+    "imagePublicId": null,
+    "imageAlt": "Haitian Creole catalog cover",
+    "status": "active",
+    "subjectSlugs": [
+      "haitian-creole-foundations"
+    ],
+    "meta": {
+      "family": "languages",
+      "featured": true,
+      "targetLanguage": "ht",
+      "nativeName": "Kreyòl Ayisyen"
+    }
+  }
+}

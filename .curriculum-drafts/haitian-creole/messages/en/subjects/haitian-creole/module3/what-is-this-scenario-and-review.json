@@ -1,0 +1,144 @@
+{
+  "topics": {
+    "haitian-creole": {
+      "haitian-creole-foundations-4-talking-about-things": {
+        "what-is-this-scenario-and-review": {
+          "label": "What Is This? Scenario and Review",
+          "summary": "Use sa a and sa yo to point out singular and plural things, then combine demonstratives with ownership.",
+          "cards": {
+            "sketch0": {
+              "title": "Point to One Thing"
+            },
+            "sketch1": {
+              "title": "Point to More Than One"
+            },
+            "sketch2": {
+              "title": "Point and Say Who Owns It"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "what-is-this-scenario-and-review-choice": {
+              "title": "Choose “this bag”",
+              "prompt": "Which phrase means “this/that bag”?",
+              "hint": "Choose the singular demonstrative pattern.",
+              "help": {
+                "concept": "A singular demonstrative follows the noun it points out.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "options": {
+                "a": "valiz sa a",
+                "b": "valiz sa yo",
+                "c": "yon valiz"
+              }
+            },
+            "what-is-this-scenario-and-review-fill": {
+              "title": "Complete the plural demonstrative",
+              "prompt": "Choose the final marker that makes the phrase plural.",
+              "hint": "Use the plural demonstrative pattern.",
+              "help": {
+                "concept": "The blank completes the plural pointing expression after the noun.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "template": "kaye sa [blank1]",
+              "choices": [
+                "yo",
+                "a",
+                "la"
+              ]
+            },
+            "what-is-this-scenario-and-review-listen": {
+              "title": "Hear a demonstrative phrase",
+              "prompt": "Listen, then build the phrase you hear.",
+              "hint": "Listen for the noun followed by the pointing expression.",
+              "help": {
+                "concept": "Build the singular demonstrative phrase in spoken order.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "machin sa a",
+              "wordBank": [
+                "machin",
+                "sa",
+                "a"
+              ],
+              "distractors": [
+                "yo"
+              ]
+            },
+            "what-is-this-scenario-and-review-voice": {
+              "title": "Point out several books",
+              "prompt": "Say: liv sa yo.",
+              "hint": "Say the noun and plural demonstrative together.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored demonstrative phrase.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "liv sa yo"
+            },
+            "what-is-this-scenario-and-review-build": {
+              "title": "Say whose bag it is",
+              "prompt": "Arrange the words to say “This bag is for Mari.”",
+              "hint": "Point out the bag first, then identify the owner.",
+              "help": {
+                "concept": "A demonstrative noun phrase can be followed by the ownership pattern.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "Valiz sa a se pou Mari.",
+              "wordBank": [
+                "Valiz",
+                "sa",
+                "a",
+                "se",
+                "pou",
+                "Mari."
+              ],
+              "distractors": [
+                "yo"
+              ],
+              "ttsText": "Valiz sa a se pou Mari."
+            },
+            "what-is-this-scenario-and-review-write": {
+              "title": "Write “these books”",
+              "prompt": "Type the Kreyòl phrase for “these/those books.”",
+              "hint": "Use the plural demonstrative pattern after the noun.",
+              "help": {
+                "concept": "Write the complete three-word demonstrative noun phrase.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "expectedText": "liv sa yo",
+              "placeholder": "Type the Kreyòl answer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole": {
+      "haitian-creole-foundations-4-talking-about-things": {
+        "what-is-this-scenario-and-review": {
+          "sa-a": {
+            "title": "sa a — this / that",
+            "bodyMarkdown": "Use **sa a** after a noun to point out one thing:\n\n- **valiz sa a** — this/that bag\n- **machin sa a** — this/that car\n\nThe demonstrative follows the noun."
+          },
+          "sa-yo": {
+            "title": "sa yo — these / those",
+            "bodyMarkdown": "For more than one thing, use **sa yo**:\n\n- **kaye sa yo** — these/those notebooks\n- **liv sa yo** — these/those books\n\nThe final **yo** marks the plural."
+          },
+          "demonstrative-owner": {
+            "title": "Valiz sa a se pou Mari",
+            "bodyMarkdown": "Combine the demonstrative with **se pou**:\n\n- **Valiz sa a se pou Mari.** — This/that bag is Mari's.\n- **Kaye sa yo se pou nou.** — These/those notebooks are ours.\n\nThis is a practical way to talk about objects around you."
+          }
+        }
+      }
+    }
+  }
+}

@@ -15,8 +15,17 @@ import { sqlProfile, sqlProfileAdapter } from "./sql/index.js";
 import { pythonProfile, pythonProfileAdapter } from "./python/index.js";
 import { cProfile, cProfileAdapter } from "./c/index.js";
 import { mathProfile, mathProfileAdapter } from "./math/index.js";
+import { languageProfile, languageProfileAdapter } from "./language/index.js";
 
-const builtinProfiles = [bashProfile, gitProfile, sqlProfile, pythonProfile, cProfile, mathProfile] satisfies CourseProfile[];
+const builtinProfiles = [
+    bashProfile,
+    gitProfile,
+    sqlProfile,
+    pythonProfile,
+    cProfile,
+    mathProfile,
+    languageProfile,
+] satisfies CourseProfile[];
 const builtinAdapters = [
     bashProfileAdapter,
     gitProfileAdapter,
@@ -24,6 +33,7 @@ const builtinAdapters = [
     pythonProfileAdapter,
     cProfileAdapter,
     mathProfileAdapter,
+    languageProfileAdapter,
 ] satisfies CourseProfileAdapter[];
 
 const profileRegistry = new Map<string, CourseProfile>(

@@ -1,0 +1,144 @@
+{
+  "topics": {
+    "haitian-creole": {
+      "haitian-creole-foundations-5-what-are-you-doing": {
+        "listen-and-say-what-is-happening": {
+          "label": "Listen and Say What Is Happening",
+          "summary": "Use ap with an action verb to talk about something happening now.",
+          "cards": {
+            "sketch0": {
+              "title": "An Action Happening Now"
+            },
+            "sketch1": {
+              "title": "Common Short Forms"
+            },
+            "sketch2": {
+              "title": "Make “Now” Explicit"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "listen-and-say-what-is-happening-choice": {
+              "title": "Choose the action happening now",
+              "prompt": "Which sentence means “I am studying”?",
+              "hint": "Choose the sentence that marks an action in progress.",
+              "help": {
+                "concept": "An action happening now uses an aspect marker before the verb.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "options": {
+                "a": "M ap etidye.",
+                "b": "Mwen se etidyan.",
+                "c": "Mwen rete isit."
+              }
+            },
+            "listen-and-say-what-is-happening-fill": {
+              "title": "Complete the progressive action",
+              "prompt": "Choose the action that completes “Jan is working now.”",
+              "hint": "Use the work action from the lesson.",
+              "help": {
+                "concept": "The blank needs the verb describing Jan's current activity.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "template": "Jan ap [blank1] kounyeya.",
+              "choices": [
+                "travay",
+                "manje",
+                "rete"
+              ]
+            },
+            "listen-and-say-what-is-happening-listen": {
+              "title": "Hear an action in progress",
+              "prompt": "Listen, then build the sentence you hear.",
+              "hint": "Listen for the subject, progress marker, and action.",
+              "help": {
+                "concept": "Build the current-action sentence in spoken order.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "targetText": "Li ap etidye.",
+              "wordBank": [
+                "Li",
+                "ap",
+                "etidye."
+              ],
+              "distractors": [
+                "rete"
+              ]
+            },
+            "listen-and-say-what-is-happening-voice": {
+              "title": "Say what they are doing",
+              "prompt": "Say: Yo ap manje.",
+              "hint": "Say the complete current-action sentence.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl sentence.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "targetText": "Yo ap manje."
+            },
+            "listen-and-say-what-is-happening-build": {
+              "title": "Build “I am studying”",
+              "prompt": "Arrange the words to say “I am studying.”",
+              "hint": "Put the speaker first, then the progress marker, then the action.",
+              "help": {
+                "concept": "The sentence follows the current-action pattern practiced in the lesson.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "targetText": "M ap etidye.",
+              "wordBank": [
+                "M",
+                "ap",
+                "etidye."
+              ],
+              "distractors": [
+                "rete"
+              ],
+              "ttsText": "M ap etidye."
+            },
+            "listen-and-say-what-is-happening-write": {
+              "title": "Write “now”",
+              "prompt": "Type the Kreyòl word used in this lesson for “now.”",
+              "hint": "Use the time word from the example with Jan.",
+              "help": {
+                "concept": "Write the time word with its Kreyòl spelling.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "expectedText": "kounyeya",
+              "placeholder": "Type the Kreyòl answer",
+              "anyOf": [
+                "kounya"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole": {
+      "haitian-creole-foundations-5-what-are-you-doing": {
+        "listen-and-say-what-is-happening": {
+          "ap-now": {
+            "title": "M ap etidye",
+            "bodyMarkdown": "Use **ap** before an action to describe something in progress:\n\n- **M ap etidye.** — I am studying.\n- **Li ap travay.** — He/she is working.\n- **Yo ap manje.** — They are eating.\n\nThe important beginner pattern is: **person + ap + action**."
+          },
+          "common-short-forms": {
+            "title": "M ap, W ap, L ap, N ap, Y ap",
+            "bodyMarkdown": "In normal Kreyòl, subject pronouns often appear in shortened forms before **ap**:\n\n- **M ap** — I am...\n- **W ap** — you are...\n- **L ap** — he/she is...\n- **N ap** — we are...\n- **Y ap** — they are...\n\nYou will see both full and shortened subject forms as you continue."
+          },
+          "kounyeya": {
+            "title": "kounyeya",
+            "bodyMarkdown": "**kounyeya** means “now.” You can add it when the time matters:\n\n**Jan ap travay kounyeya.** — Jan is working now.\n\nThe sentence still uses the same **ap + action** pattern."
+          }
+        }
+      }
+    }
+  }
+}

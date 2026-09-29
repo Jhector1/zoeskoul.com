@@ -1,0 +1,166 @@
+{
+  "title": "What Are You Doing? Scenario",
+  "summary": "Combine action questions, current activities, and simple routine language in a short everyday exchange.",
+  "minutes": 27,
+  "sketchBlocks": [
+    {
+      "id": "short-exchange",
+      "cardTitle": "Use It in Conversation",
+      "title": "What are you doing?",
+      "bodyMarkdown": "**A:** Kisa ou ap fè?\n\n**B:** M ap etidye kreyòl.\n\n**A:** E Jan?\n\n**B:** Jan ap travay kounyeya.\n\nThis exchange reuses the same current-action pattern with different people and actions."
+    },
+    {
+      "id": "routine-language",
+      "cardTitle": "Talk About Everyday Life",
+      "title": "chak jou",
+      "bodyMarkdown": "**chak jou** means “every day.” It is useful when talking about routines:\n\n- **Mwen travay chak jou.**\n- **Mwen etidye kreyòl chak jou.**\n\nFor this beginner module, notice the difference between a routine expression and a sentence about what is happening now."
+    },
+    {
+      "id": "now-vs-routine",
+      "cardTitle": "Now or Every Day?",
+      "title": "kounyeya vs. chak jou",
+      "bodyMarkdown": "Compare these time expressions:\n\n- **Jan ap travay kounyeya.** — Jan is working now.\n- **Jan travay chak jou.** — Jan works every day.\n\nThe time expression helps make the meaning clear."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "what-are-you-doing-scenario-choice",
+      "kind": "single_choice",
+      "title": "Choose the sentence about now",
+      "prompt": "Which sentence says that Jan is working now?",
+      "hint": "Choose the sentence that marks an action in progress and includes the time word for now.",
+      "help": {
+        "concept": "A current action can be made explicit with both an aspect pattern and a time expression.",
+        "hint_1": "Use the action pattern introduced in this lesson.",
+        "hint_2": "Compare the complete sentence with the choices before answering."
+      },
+      "options": [
+        "Jan ap travay kounyeya.",
+        "Jan travay chak jou.",
+        "Jan rete Chicago."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "what-are-you-doing-scenario-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete the routine sentence",
+      "prompt": "Choose the action that completes “I study Kreyòl every day.”",
+      "hint": "Use the study action from this module.",
+      "help": {
+        "concept": "The blank needs the activity performed as part of the routine.",
+        "hint_1": "Use the action pattern introduced in this lesson.",
+        "hint_2": "Compare the complete sentence with the choices before answering."
+      },
+      "template": "Mwen [blank1] kreyòl chak jou.",
+      "choices": [
+        "etidye",
+        "rete",
+        "rele"
+      ],
+      "correctValue": "etidye"
+    },
+    {
+      "id": "what-are-you-doing-scenario-listen",
+      "kind": "listen_build",
+      "title": "Hear a routine sentence",
+      "prompt": "Listen, then build the sentence you hear.",
+      "hint": "Listen for the action and the everyday time phrase.",
+      "help": {
+        "concept": "Build the routine sentence in the same order as the audio.",
+        "hint_1": "Use the action pattern introduced in this lesson.",
+        "hint_2": "Compare the complete sentence with the choices before answering."
+      },
+      "targetText": "Mwen travay chak jou.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mwen",
+        "travay",
+        "chak",
+        "jou."
+      ],
+      "distractors": [
+        "kounyeya."
+      ],
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    },
+    {
+      "id": "what-are-you-doing-scenario-voice",
+      "kind": "voice_input",
+      "title": "Say what you are studying now",
+      "prompt": "Say: M ap etidye kreyòl.",
+      "hint": "Say the complete current-action sentence.",
+      "help": {
+        "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl sentence.",
+        "hint_1": "Use the action pattern introduced in this lesson.",
+        "hint_2": "Compare the complete sentence with the choices before answering."
+      },
+      "targetText": "M ap etidye kreyòl.",
+      "locale": "ht-HT",
+      "maxSeconds": 14,
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    },
+    {
+      "id": "what-are-you-doing-scenario-build",
+      "kind": "word_bank_arrange",
+      "title": "Build the current-action sentence",
+      "prompt": "Arrange the words to say “Jan is working now.”",
+      "hint": "Put the person first, then the current-action pattern, then the time word.",
+      "help": {
+        "concept": "The sentence combines a person, an action in progress, and an explicit time expression.",
+        "hint_1": "Use the action pattern introduced in this lesson.",
+        "hint_2": "Compare the complete sentence with the choices before answering."
+      },
+      "targetText": "Jan ap travay kounyeya.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Jan",
+        "ap",
+        "travay",
+        "kounyeya."
+      ],
+      "distractors": [
+        "chak"
+      ],
+      "ttsText": "Jan ap travay kounyeya.",
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    },
+    {
+      "id": "what-are-you-doing-scenario-write",
+      "kind": "text_input",
+      "title": "Write “every day”",
+      "prompt": "Type the Kreyòl phrase used in this lesson for “every day.”",
+      "hint": "Use the two-word routine expression.",
+      "help": {
+        "concept": "Write the complete time expression.",
+        "hint_1": "Use the action pattern introduced in this lesson.",
+        "hint_2": "Compare the complete sentence with the choices before answering."
+      },
+      "expectedText": "chak jou",
+      "placeholder": "Type the Kreyòl answer",
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    }
+  ]
+}

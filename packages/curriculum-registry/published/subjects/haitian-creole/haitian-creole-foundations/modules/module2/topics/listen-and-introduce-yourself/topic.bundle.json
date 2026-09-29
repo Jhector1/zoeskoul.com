@@ -1,0 +1,297 @@
+{
+  "topicId": "listen-and-introduce-yourself",
+  "subjectSlug": "haitian-creole-foundations",
+  "moduleSlug": "haitian-creole-foundations-3-who-are-you",
+  "sectionSlug": "haitian-creole-foundations-ht3-learn-listen-speak",
+  "prefix": "ht3",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.label",
+    "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.cards.sketch0.title",
+      "sketchId": "nationality",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-introduce-yourself-sketch0",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch0.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch0.prompt",
+        "exerciseKey": "try-nationality-ayisyen",
+        "exerciseKeys": [
+          "try-nationality-ayisyen"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.cards.sketch1.title",
+      "sketchId": "language",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-introduce-yourself-sketch1",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch1.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch1.prompt",
+        "exerciseKey": "try-language-kreyol",
+        "exerciseKeys": [
+          "try-language-kreyol"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.cards.sketch2.title",
+      "sketchId": "combine",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-introduce-yourself-sketch2",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch2.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.tryIt.try_listen_and_introduce_yourself_sketch2.prompt",
+        "exerciseKey": "try-combine-identity-language",
+        "exerciseKeys": [
+          "try-combine-identity-language"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "nationality",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.nationality.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.nationality.bodyMarkdown"
+    },
+    {
+      "id": "language",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.language.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.language.bodyMarkdown"
+    },
+    {
+      "id": "combine",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.combine.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.combine.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "listen-and-introduce-yourself-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "listen-and-introduce-yourself-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "pale"
+      }
+    },
+    {
+      "id": "listen-and-introduce-yourself-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-listen",
+      "targetText": "Li se ayisyen.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Li",
+        "se",
+        "ayisyen."
+      ],
+      "distractors": [
+        "pale"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Li se ayisyen.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-and-introduce-yourself-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-voice",
+      "targetText": "Mwen pale kreyòl.",
+      "locale": "ht-HT",
+      "maxSeconds": 12,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mwen pale kreyòl.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-and-introduce-yourself-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-build",
+      "targetText": "Mwen se ayisyen.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mwen",
+        "se",
+        "ayisyen."
+      ],
+      "distractors": [
+        "pale"
+      ],
+      "ttsText": "Mwen se ayisyen.",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Mwen se ayisyen.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-and-introduce-yourself-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.listen-and-introduce-yourself-write",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "kreyòl",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-nationality-ayisyen",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.try-nationality-ayisyen",
+      "targetText": "Mwen se ameriken.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mwen se ameriken.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-language-kreyol",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.try-language-kreyol",
+      "targetText": "Mwen pale fransè.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mwen",
+        "pale",
+        "fransè."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Mwen pale fransè.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-combine-identity-language",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-3-who-are-you.listen-and-introduce-yourself.practice.try-combine-identity-language",
+      "targetText": "Mwen se ameriken. Mwen pale anglè.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mwen se ameriken. Mwen pale anglè.",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

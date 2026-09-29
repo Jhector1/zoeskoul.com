@@ -191,6 +191,21 @@ function sanitizeExerciseBase(exercise: Record<string, unknown>) {
     };
 }
 
+function sanitizeLearnerTextNormalization(
+    value: unknown,
+): Record<string, boolean> | undefined {
+    if (!isRecord(value)) return undefined;
+
+    const next: Record<string, boolean> = {};
+    for (const key of ["trim", "caseFold", "collapseSpaces", "stripPunct"] as const) {
+        if (typeof value[key] === "boolean") {
+            next[key] = value[key];
+        }
+    }
+
+    return Object.keys(next).length > 0 ? next : undefined;
+}
+
 function sanitizeNonCodeExercise(
     exercise: Record<string, unknown>,
 ): Record<string, unknown> {
@@ -242,6 +257,81 @@ function sanitizeNonCodeExercise(
                     .filter(Boolean)
                 : [],
             correctValue: normalizeText(exercise.correctValue),
+        };
+    }
+
+    if (kind === "text_input") {
+        const anyOf = sanitizeStringArray(exercise.anyOf);
+        const placeholder = normalizeText(exercise.placeholder);
+        const normalization = sanitizeLearnerTextNormalization(exercise.normalize);
+
+        return {
+            ...base,
+            kind,
+            expectedText: normalizeText(exercise.expectedText),
+            ...(anyOf ? { anyOf } : {}),
+            ...(placeholder ? { placeholder } : {}),
+            ...(normalization ? { normalize: normalization } : {}),
+        };
+    }
+
+    if (kind === "voice_input") {
+        const anyOf = sanitizeStringArray(exercise.anyOf);
+        const locale = normalizeText(exercise.locale);
+        const normalization = sanitizeLearnerTextNormalization(exercise.normalize);
+        const maxSeconds =
+            typeof exercise.maxSeconds === "number" && Number.isFinite(exercise.maxSeconds)
+                ? Math.max(1, Math.min(120, Math.floor(exercise.maxSeconds)))
+                : undefined;
+
+        return {
+            ...base,
+            kind,
+            targetText: normalizeText(exercise.targetText),
+            ...(locale ? { locale } : {}),
+            ...(anyOf ? { anyOf } : {}),
+            ...(maxSeconds ? { maxSeconds } : {}),
+            ...(normalization ? { normalize: normalization } : {}),
+        };
+    }
+
+    if (kind === "word_bank_arrange") {
+        const anyOf = sanitizeStringArray(exercise.anyOf);
+        const wordBank = sanitizeStringArray(exercise.wordBank);
+        const distractors = sanitizeStringArray(exercise.distractors);
+        const locale = normalizeText(exercise.locale);
+        const ttsText = normalizeText(exercise.ttsText);
+        const normalization = sanitizeLearnerTextNormalization(exercise.normalize);
+
+        return {
+            ...base,
+            kind,
+            targetText: normalizeText(exercise.targetText),
+            ...(locale ? { locale } : {}),
+            ...(anyOf ? { anyOf } : {}),
+            ...(wordBank ? { wordBank } : {}),
+            ...(distractors ? { distractors } : {}),
+            ...(ttsText ? { ttsText } : {}),
+            ...(normalization ? { normalize: normalization } : {}),
+        };
+    }
+
+    if (kind === "listen_build") {
+        const anyOf = sanitizeStringArray(exercise.anyOf);
+        const wordBank = sanitizeStringArray(exercise.wordBank);
+        const distractors = sanitizeStringArray(exercise.distractors);
+        const locale = normalizeText(exercise.locale);
+        const normalization = sanitizeLearnerTextNormalization(exercise.normalize);
+
+        return {
+            ...base,
+            kind,
+            targetText: normalizeText(exercise.targetText),
+            ...(locale ? { locale } : {}),
+            ...(anyOf ? { anyOf } : {}),
+            ...(wordBank ? { wordBank } : {}),
+            ...(distractors ? { distractors } : {}),
+            ...(normalization ? { normalize: normalization } : {}),
         };
     }
 

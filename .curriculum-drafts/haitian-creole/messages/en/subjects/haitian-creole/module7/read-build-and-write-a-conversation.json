@@ -1,0 +1,142 @@
+{
+  "topics": {
+    "haitian-creole": {
+      "haitian-creole-foundations-8-my-first-kreyol-conversation": {
+        "read-build-and-write-a-conversation": {
+          "label": "Read, Build, and Write a Conversation",
+          "summary": "Use numbers, time, schedules, and complete questions to arrange a simple everyday plan.",
+          "cards": {
+            "sketch0": {
+              "title": "Make a Simple Plan"
+            },
+            "sketch1": {
+              "title": "Add a Quantity"
+            },
+            "sketch2": {
+              "title": "Use Time Chunks"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "read-build-and-write-a-conversation-choice": {
+              "title": "Choose the time question",
+              "prompt": "Which question asks what time someone works?",
+              "hint": "Choose the clock-time question from Module 7.",
+              "help": {
+                "concept": "A schedule conversation needs a question that asks for clock time.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "options": {
+                "a": "Akilè ou travay?",
+                "b": "Kijan ou rele?",
+                "c": "Ki moun sa a?"
+              }
+            },
+            "read-build-and-write-a-conversation-fill": {
+              "title": "Complete the quantity answer",
+              "prompt": "Choose the number that completes “I have three books.”",
+              "hint": "Use the number represented by 3.",
+              "help": {
+                "concept": "The blank needs the number word before the noun.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "template": "Mwen gen [blank1] liv.",
+              "choices": [
+                "twa",
+                "de",
+                "kat"
+              ]
+            },
+            "read-build-and-write-a-conversation-listen": {
+              "title": "Hear a schedule answer",
+              "prompt": "Listen, then build the sentence you hear.",
+              "hint": "Listen for the activity and frequency expression.",
+              "help": {
+                "concept": "Build the complete routine sentence in spoken order.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "targetText": "Mwen etidye kreyòl chak jou.",
+              "wordBank": [
+                "Mwen",
+                "etidye",
+                "kreyòl",
+                "chak",
+                "jou."
+              ],
+              "distractors": [
+                "kounyeya"
+              ]
+            },
+            "read-build-and-write-a-conversation-voice": {
+              "title": "Ask a quantity question",
+              "prompt": "Say: Konbyen liv ou genyen?",
+              "hint": "Say the complete quantity question.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "targetText": "Konbyen liv ou genyen?"
+            },
+            "read-build-and-write-a-conversation-build": {
+              "title": "Build the time answer",
+              "prompt": "Arrange the words to say 7:30.",
+              "hint": "Use the hour-plus-half pattern from Module 7.",
+              "help": {
+                "concept": "Build the complete half-hour clock expression.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "targetText": "setè edmi",
+              "wordBank": [
+                "setè",
+                "edmi"
+              ],
+              "distractors": [
+                "senkè"
+              ],
+              "ttsText": "setè edmi"
+            },
+            "read-build-and-write-a-conversation-write": {
+              "title": "Write the everyday frequency",
+              "prompt": "Type the Kreyòl phrase for “every day.”",
+              "hint": "Use the routine expression from Module 7.",
+              "help": {
+                "concept": "Write the complete two-word frequency expression.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "expectedText": "chak jou",
+              "placeholder": "Type the Kreyòl answer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole": {
+      "haitian-creole-foundations-8-my-first-kreyol-conversation": {
+        "read-build-and-write-a-conversation": {
+          "make-plan": {
+            "title": "Ask what time",
+            "bodyMarkdown": "**A:** Akilè ou travay?\n\n**B:** Setè edmi.\n\n**A:** Èske ou etidye kreyòl chak jou?\n\n**B:** Wi, mwen etidye kreyòl chak jou.\n\nThis combines the question patterns from Module 6 with the time language from Module 7."
+          },
+          "count-things": {
+            "title": "Konbyen…?",
+            "bodyMarkdown": "Numbers can enter the conversation naturally:\n\n**A:** Konbyen liv ou genyen?\n\n**B:** Mwen gen twa liv.\n\nYou only need the 1–20 number system from Module 7 for this beginner exchange."
+          },
+          "schedule-chunks": {
+            "title": "jòdi a, kounyeya, chak jou",
+            "bodyMarkdown": "Small time expressions make your meaning clearer:\n\n- **jòdi a** — today\n- **kounyeya** — now\n- **chak jou** — every day\n\nUse them with sentences you already know instead of adding new tense grammar."
+          }
+        }
+      }
+    }
+  }
+}

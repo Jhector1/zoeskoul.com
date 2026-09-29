@@ -240,8 +240,7 @@ export default function ListenBuildExerciseUI({
     const listen = (speed = 1.0) =>
         void speak(exercise.targetText, {
             speed,
-            voice: "marin",
-            instructions: "Speak clearly. Slightly slow. Haitian Creole friendly teacher tone.",
+            locale: exercise.locale ?? "ht",
         });
 
     const reset = useCallback(() => {

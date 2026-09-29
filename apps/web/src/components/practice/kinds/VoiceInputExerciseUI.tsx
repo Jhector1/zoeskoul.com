@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { scorePhraseMatch } from "@zoeskoul/practice-checks";
 import { ExercisePrompt } from "@/components/practice/kinds/KindHelper";
 import Tooltip from "@/components/ui/Tooltip";
 
@@ -24,12 +25,6 @@ function getSpeechRecognition(): any | null {
     return w.SpeechRecognition || w.webkitSpeechRecognition || null;
 }
 
-function getSpeechGrammarListCtor(): any | null {
-    if (typeof window === "undefined") return null;
-    const w = window as any;
-    return w.SpeechGrammarList || w.webkitSpeechGrammarList || null;
-}
-
 function normalizeSpeechLang(locale?: string) {
     const raw = String(locale ?? "").trim();
     if (!raw) return "ht";
@@ -47,24 +42,6 @@ function normalizePhrase(s: string) {
         .replace(/[’‘]/g, "'")
         .replace(/\s+/g, " ")
         .trim();
-}
-
-function escapeJsgfPhrase(s: string) {
-    return normalizePhrase(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"');
-}
-
-function buildJsgfFromPhrases(phrases: string[]) {
-    const uniq = Array.from(new Set(phrases.map(normalizePhrase).filter(Boolean))).slice(0, 40);
-    if (!uniq.length) return null;
-    const body = uniq.map((p) => `"${escapeJsgfPhrase(p)}"`).join(" | ");
-    return `#JSGF V1.0; grammar phrases; public <phrase> = ${body} ;`;
-}
-
-function phraseVariants(target: string) {
-    const t = normalizePhrase(target);
-    if (!t) return [];
-    const stripped = t.replace(/[^\p{L}\p{N}\s']/gu, " ").replace(/\s+/g, " ").trim();
-    return Array.from(new Set([t, stripped].filter(Boolean)));
 }
 
 function pickBestAlternative(res: any): { text: string; conf: number } {
@@ -217,6 +194,19 @@ export default function VoiceInputExerciseUI({
     const Rec = useMemo(() => getSpeechRecognition(), []);
     const recRef = useRef<any | null>(null);
 
+    const phraseMatch = useMemo(
+        () =>
+            scorePhraseMatch({
+                transcript,
+                targetText: exercise.targetText,
+                locale: exercise.locale,
+            }),
+        [exercise.locale, exercise.targetText, transcript],
+    );
+    const showPhraseMatch = Boolean(
+        transcript?.trim() && exercise.targetText?.trim(),
+    );
+
     const lang = useMemo(() => normalizeSpeechLang(exercise.locale), [exercise.locale]);
     const isHaitian = lang === "ht";
 
@@ -237,10 +227,8 @@ export default function VoiceInputExerciseUI({
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     text: clean,
-                    voice: "marin",
+                    locale: exercise.locale ?? "ht",
                     format: "mp3",
-                    speed: 1.0,
-                    instructions: "Speak in Haitian Creole. Clear, friendly, teacher-like. Slightly slow.",
                 }),
             });
 
@@ -498,18 +486,15 @@ export default function VoiceInputExerciseUI({
             const file = await blobToFile(blob, "speech.webm");
             fd.append("file", file);
 
-            // ✅ always send language/locale; server should do “try ht then omit”
+            // Recognition must be blind to the authored answer.
+            // Send language context only; targetText/hints belong exclusively to grading.
             fd.append("language", normalizeSpeechLang(exercise.locale));
-            fd.append("target", exercise.targetText);
-
-            // include a bit more context to reduce English drift
-            const promptParts = [
-                "WorkspaceLanguage: Haitian Creole / Kreyòl ayisyen. Pa tradui. Kenbe òtograf nòmal.",
-                exercise.hint ? `Sijesyon: ${String(exercise.hint).slice(0, 200)}` : null,
-                "Transkri egzakteman sa w tande a. Pa tradui.",
-            ].filter(Boolean);
-
-            fd.append("prompt", promptParts.join("\n"));
+            fd.append(
+                "prompt",
+                "WorkspaceLanguage: Haitian Creole / Kreyòl ayisyen. "
+                + "Transkri egzakteman sa w tande a. Pa tradui. "
+                + "Pa ajoute mo moun nan pa di.",
+            );
 
             const res = await fetch("/api/speech/transcribe", { method: "POST", body: fd });
             const json = await res.json().catch(() => ({}));
@@ -525,7 +510,7 @@ export default function VoiceInputExerciseUI({
 
             return normalizePhrase(String((json as any)?.text ?? ""));
         },
-        [exercise.locale, exercise.targetText, exercise.hint]
+        [exercise.locale]
     );
 
     const startServerMode = useCallback(async () => {
@@ -638,22 +623,6 @@ export default function VoiceInputExerciseUI({
             r.continuous = false;
             r.maxAlternatives = 5;
 
-            const GrammarList = getSpeechGrammarListCtor();
-            if (GrammarList) {
-                try {
-                    const g = new GrammarList();
-                    const phrases = [
-                        ...phraseVariants(exercise.targetText),
-                        ...(exercise.hint ? phraseVariants(exercise.hint) : []),
-                    ];
-                    const jsgf = buildJsgfFromPhrases(phrases);
-                    if (jsgf) {
-                        g.addFromString(jsgf, 1);
-                        r.grammars = g;
-                    }
-                } catch {}
-            }
-
             r.onstart = () => {
                 setIsRecording(true);
                 setStatus(lang2 === "ht" ? "Koute…" : "Listening…");
@@ -716,10 +685,8 @@ export default function VoiceInputExerciseUI({
         canBrowser,
         clearStopTimeout,
         ensureMicStream,
-        exercise.hint,
         exercise.locale,
         exercise.maxSeconds,
-        exercise.targetText,
         onChangeTranscript,
         showViz,
         startVisualizer,
@@ -845,9 +812,7 @@ export default function VoiceInputExerciseUI({
                 ) : null}
             </div>
 
-            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <div className={`text-xs font-extrabold ${muted}`}>Speak clearly. You can edit the transcript anytime.</div>
-
+            <div className="mt-3 flex justify-end">
                 <div className="flex flex-wrap items-center gap-2">
                     <IconBtn
                         type="button"
@@ -963,21 +928,37 @@ export default function VoiceInputExerciseUI({
                     ].join(" ")}
                 />
 
-                <div className={`mt-2 flex items-center justify-between text-[11px] font-extrabold ${muted}`}>
-                    <span>{exercise.maxSeconds ? `Auto-stop ${exercise.maxSeconds}s` : "Auto-stop off"}</span>
-                    <span className="tabular-nums">{transcript?.length ?? 0}</span>
-                </div>
-            </div>
-
-            <div className="mt-3 ui-soft p-3">
-                <div className={`text-xs font-extrabold ${muted}`}>Target</div>
-                <div className={`mt-1 text-sm font-extrabold ${text}`}>{exercise.targetText}</div>
-                {exercise.hint ? (
-                    <div className={`mt-1 text-xs font-extrabold ${muted}`}>
-                        Hint: <span className="text-neutral-700 dark:text-white/70">{exercise.hint}</span>
+                {showPhraseMatch ? (
+                    <div
+                        className="mt-2 flex items-center gap-2"
+                        aria-live="polite"
+                    >
+                        <div
+                            className="h-1.5 flex-1 overflow-hidden rounded-full bg-black/10 dark:bg-white/10"
+                            role="progressbar"
+                            aria-valuemin={0}
+                            aria-valuemax={100}
+                            aria-valuenow={phraseMatch.percent}
+                        >
+                            <div
+                                className={[
+                                    "h-full rounded-full transition-[width] duration-200",
+                                    phraseMatch.ok
+                                        ? "bg-emerald-500"
+                                        : phraseMatch.percent >= 40
+                                            ? "bg-amber-500"
+                                            : "bg-neutral-400 dark:bg-white/40",
+                                ].join(" ")}
+                                style={{ width: `${phraseMatch.percent}%` }}
+                            />
+                        </div>
+                        <span className={`min-w-[3.5ch] text-right text-[11px] font-extrabold tabular-nums ${muted}`}>
+                            {phraseMatch.percent}%
+                        </span>
                     </div>
                 ) : null}
             </div>
+
 
             {checked && ok === false && reviewCorrectTranscript ? (
                 <div className="mt-3 ui-soft p-3">

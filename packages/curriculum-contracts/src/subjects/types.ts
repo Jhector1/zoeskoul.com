@@ -137,7 +137,10 @@ export type ReviewEmbeddedTryIt = {
     id: string;
     title?: string;
     prompt?: string;
+    /** First exercise; preserves the existing single-step compatibility key. */
     exerciseKey: string;
+    /** Ordered exercises inside this one embedded Try It container. */
+    exerciseKeys?: string[];
     difficulty?: Difficulty;
     preferKind?: PracticeKind | null;
     seedPolicy?: SeedPolicy;

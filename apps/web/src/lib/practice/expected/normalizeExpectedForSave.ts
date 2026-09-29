@@ -21,6 +21,60 @@ function toNumberGrid(x: any): number[][] | null {
 
 type ExpectedNormalizer = (expected: any) => any;
 
+function assertNonEmptyString(value: unknown, label: string): asserts value is string {
+    if (typeof value !== "string" || !value.trim()) {
+        throw new Error(`Generator bug: ${label} must be a non-empty string.`);
+    }
+}
+
+function assertOptionalStringArray(value: unknown, label: string) {
+    if (value === undefined) return;
+    if (
+        !Array.isArray(value) ||
+        value.some((item) => typeof item !== "string" || !item.trim())
+    ) {
+        throw new Error(`Generator bug: ${label} must be an array of non-empty strings.`);
+    }
+}
+
+function normalizeCanonicalLanguageExpected(
+    kind: PracticeKind,
+    expected: any,
+) {
+    if (!expected || typeof expected !== "object" || Array.isArray(expected)) {
+        throw new Error(
+            `Generator bug: ${String(kind)} expected must be an object.`,
+        );
+    }
+
+    if (
+        expected.kind !== undefined &&
+        String(expected.kind) !== String(kind)
+    ) {
+        throw new Error(
+            `Generator bug: ${String(kind)} expected.kind mismatch: ${String(
+                expected.kind,
+            )}.`,
+        );
+    }
+
+    if (kind === PracticeKind.text_input) {
+        assertNonEmptyString(expected.value, "text_input expected.value");
+    } else {
+        assertNonEmptyString(
+            expected.targetText,
+            `${String(kind)} expected.targetText`,
+        );
+    }
+
+    assertOptionalStringArray(
+        expected.anyOf,
+        `${String(kind)} expected.anyOf`,
+    );
+
+    return expected;
+}
+
 function normalizeDragReorderExpected(expected: any) {
     const orderRaw =
         expected?.order ??
@@ -124,11 +178,16 @@ const EXPECTED_NORMALIZERS: Partial<Record<PracticeKind, ExpectedNormalizer>> = 
     [PracticeKind.matrix_input]: normalizeMatrixInputExpected,
     [PracticeKind.code_input]: normalizeCodeExpectedForSave,
     [PracticeKind.text_input]: (expected) =>
-        normalizeTextualAnswerExpected(PracticeKind.text_input, expected),
+        normalizeCanonicalLanguageExpected(PracticeKind.text_input, expected),
+    [PracticeKind.voice_input]: (expected) =>
+        normalizeCanonicalLanguageExpected(PracticeKind.voice_input, expected),
     [PracticeKind.word_bank_arrange]: (expected) =>
-        normalizeTextualAnswerExpected(PracticeKind.word_bank_arrange, expected),
+        normalizeCanonicalLanguageExpected(
+            PracticeKind.word_bank_arrange,
+            expected,
+        ),
     [PracticeKind.listen_build]: (expected) =>
-        normalizeTextualAnswerExpected(PracticeKind.listen_build, expected),
+        normalizeCanonicalLanguageExpected(PracticeKind.listen_build, expected),
     [PracticeKind.fill_blank_choice]: (expected) =>
         normalizeTextualAnswerExpected(PracticeKind.fill_blank_choice, expected),
 };

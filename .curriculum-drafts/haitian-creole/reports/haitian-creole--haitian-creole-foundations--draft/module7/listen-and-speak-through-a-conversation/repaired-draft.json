@@ -1,0 +1,220 @@
+{
+  "title": "Listen and Speak Through a Conversation",
+  "summary": "Talk about familiar things, ownership, and what people are doing in a short everyday exchange.",
+  "minutes": 27,
+  "sketchBlocks": [
+    {
+      "id": "things-owner",
+      "cardTitle": "Talk About Things",
+      "title": "What is this? Whose is it?",
+      "bodyMarkdown": "Use the object language from Module 4:\n\n**A:** Ki sa sa a ye?\n\n**B:** Se yon liv.\n\n**A:** Liv la se pou ki moun?\n\n**B:** Liv la se pou Mari.\n\nYou can identify a thing and then say who owns it.",
+      "tryItExercises": [
+        {
+          "id": "try-things-owner-identify",
+          "kind": "word_bank_arrange",
+          "title": "Identify the thing",
+          "prompt": "Arrange the answer identifying the object.",
+          "hint": "Use the pattern from the lesson to build the new phrase.",
+          "help": {
+            "concept": "identifying an object",
+            "hint_1": "Use the Kreyòl pattern from this lesson.",
+            "hint_2": "Use the pattern you just learned."
+          },
+          "targetText": "Se yon liv.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Se",
+            "yon",
+            "liv."
+          ]
+        },
+        {
+          "id": "try-things-owner-owner",
+          "kind": "voice_input",
+          "title": "Say who owns it",
+          "prompt": "Say the ownership answer using the pattern from the lesson.",
+          "hint": "Say: Liv la se pou Mari.",
+          "help": {
+            "concept": "stating ownership",
+            "hint_1": "Use the Kreyòl pattern from this lesson.",
+            "hint_2": "Use the pattern you just learned."
+          },
+          "targetText": "Liv la se pou Mari.",
+          "locale": "ht-HT"
+        }
+      ]
+    },
+    {
+      "id": "people-actions",
+      "cardTitle": "Ask About an Action",
+      "title": "Kisa li ap fè?",
+      "bodyMarkdown": "Bring in Module 5:\n\n**A:** Kisa Mari ap fè?\n\n**B:** Li ap etidye kreyòl.\n\nThe same conversation can move naturally from an object to a person and an action.",
+      "tryItExercises": [
+        {
+          "id": "try-people-actions-answer",
+          "kind": "voice_input",
+          "title": "Say what Mari is doing",
+          "prompt": "Say the action answer using the pattern from the lesson.",
+          "hint": "Say: Li ap etidye kreyòl.",
+          "help": {
+            "concept": "describing a person's action",
+            "hint_1": "Use the Kreyòl pattern from this lesson.",
+            "hint_2": "Use the pattern you just learned."
+          },
+          "targetText": "Li ap etidye kreyòl.",
+          "locale": "ht-HT"
+        }
+      ]
+    },
+    {
+      "id": "point-and-answer",
+      "cardTitle": "Point, Ask, Answer",
+      "title": "Reuse small chunks",
+      "bodyMarkdown": "You do not need long sentences. Combine small chunks you already control:\n\n- **liv sa a**\n- **se pou Mari**\n- **li ap etidye**\n\nThis is enough to sustain a simple everyday exchange."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "listen-and-speak-through-a-conversation-choice",
+      "kind": "single_choice",
+      "title": "Choose the ownership answer",
+      "prompt": "Which sentence says “The book is Mari’s / for Mari”?",
+      "hint": "Use the ownership pattern from Module 4.",
+      "help": {
+        "concept": "Ownership can be expressed after identifying the object.",
+        "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+        "hint_2": "Read or listen to the whole exchange before answering."
+      },
+      "options": [
+        "Liv la se pou Mari.",
+        "Mari ap li liv la.",
+        "Se yon liv."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete the current action",
+      "prompt": "Choose the action that completes “She is studying Kreyòl.”",
+      "hint": "Use the study action from Module 5.",
+      "help": {
+        "concept": "The blank needs the activity happening now.",
+        "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+        "hint_2": "Read or listen to the whole exchange before answering."
+      },
+      "template": "Li ap [blank1] kreyòl.",
+      "choices": [
+        "etidye",
+        "rete",
+        "rele"
+      ],
+      "correctValue": "etidye"
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-listen",
+      "kind": "listen_build",
+      "title": "Hear an ownership sentence",
+      "prompt": "Listen, then build the sentence you hear.",
+      "hint": "Listen for the object first and the owner second.",
+      "help": {
+        "concept": "Build the complete ownership sentence in spoken order.",
+        "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+        "hint_2": "Read or listen to the whole exchange before answering."
+      },
+      "targetText": "Liv la se pou Mari.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Liv",
+        "la",
+        "se",
+        "pou",
+        "Mari."
+      ],
+      "distractors": [
+        "yo"
+      ],
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-voice",
+      "kind": "voice_input",
+      "title": "Ask what someone is doing",
+      "prompt": "Say: Kisa Mari ap fè?",
+      "hint": "Say the complete current-action question.",
+      "help": {
+        "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
+        "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+        "hint_2": "Read or listen to the whole exchange before answering."
+      },
+      "targetText": "Kisa Mari ap fè?",
+      "locale": "ht-HT",
+      "maxSeconds": 12,
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-build",
+      "kind": "word_bank_arrange",
+      "title": "Build “this book”",
+      "prompt": "Arrange the words to say “this/that book.”",
+      "hint": "Use the singular demonstrative pattern from Module 4.",
+      "help": {
+        "concept": "The demonstrative follows the noun.",
+        "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+        "hint_2": "Read or listen to the whole exchange before answering."
+      },
+      "targetText": "liv sa a",
+      "locale": "ht-HT",
+      "wordBank": [
+        "liv",
+        "sa",
+        "a"
+      ],
+      "distractors": [
+        "yo"
+      ],
+      "ttsText": "liv sa a",
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-write",
+      "kind": "text_input",
+      "title": "Write the action answer",
+      "prompt": "Type the Kreyòl sentence “She is studying Kreyòl.”",
+      "hint": "Use the current-action pattern from Module 5.",
+      "help": {
+        "concept": "Write the complete current-action sentence.",
+        "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+        "hint_2": "Read or listen to the whole exchange before answering."
+      },
+      "expectedText": "Li ap etidye kreyòl.",
+      "anyOf": [
+        "L ap etidye kreyòl."
+      ],
+      "placeholder": "Type the Kreyòl answer",
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    }
+  ]
+}

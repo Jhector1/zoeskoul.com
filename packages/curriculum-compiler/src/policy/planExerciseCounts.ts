@@ -14,6 +14,10 @@ const KIND_KEYS: ExerciseKindKey[] = [
     "multi_choice",
     "drag_reorder",
     "fill_blank_choice",
+    "text_input",
+    "voice_input",
+    "word_bank_arrange",
+    "listen_build",
     "pseudocode_input",
     "code_input",
 ];
@@ -43,6 +47,10 @@ export function planExerciseCounts(args: {
         multi_choice: 0,
         drag_reorder: 0,
         fill_blank_choice: 0,
+        text_input: 0,
+        voice_input: 0,
+        word_bank_arrange: 0,
+        listen_build: 0,
         pseudocode_input: 0,
         code_input: 0,
     };
@@ -132,7 +140,7 @@ export function planExerciseCounts(args: {
 
 function dominantFromCounts(
     counts: Record<ExerciseKindKey, number>,
-    mix: Record<ExerciseKindKey, number>,
+    mix: Partial<Record<ExerciseKindKey, number>>,
 ): ExerciseKindKey {
     return KIND_KEYS.slice().sort((a, b) => {
         const countDiff = counts[b] - counts[a];

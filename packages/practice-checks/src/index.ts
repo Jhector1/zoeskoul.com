@@ -14,3 +14,5 @@ export * from "./sql/normalize.js";
 export * from "./pseudocode/types.js";
 export * from "./pseudocode/schemas.js";
 export * from "./pseudocode/validate.js";
+
+export * from "./language/phraseMatch.js";

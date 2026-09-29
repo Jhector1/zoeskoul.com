@@ -1,0 +1,44 @@
+{
+  "policyId": "haitian-creole-language-practice",
+  "uiTerms": {
+    "editor": "answer area",
+    "runButton": "Check Answer",
+    "output": "feedback"
+  },
+  "preferredTerms": {
+    "code editor": "answer area",
+    "Run": "Check Answer",
+    "output panel": "feedback",
+    "terminal": "practice activity",
+    "command line": "practice activity",
+    "shell": "practice activity"
+  },
+  "learnerInstructions": [
+    "Listen, speak, read, build, or write the Kreyòl requested by the activity.",
+    "Use the activity controls provided for the current exercise.",
+    "Select Check Answer when the response is ready to grade."
+  ],
+  "forbiddenActions": [
+    "terminal",
+    "command line",
+    "shell",
+    "code editor",
+    "run code",
+    "create files",
+    "install packages",
+    "use VS Code",
+    "use a local IDE",
+    "phoneme-level pronunciation score"
+  ],
+  "notes": [
+    "Haitian Creole is a non-code learner experience; ordinary language-practice controls own the interaction.",
+    "voice_input is transcript-based speaking practice and must not be presented as phoneme-level pronunciation scoring.",
+    "listen_build, word_bank_arrange, text_input, choices, and voice_input do not require a programming workspace."
+  ],
+  "validationRequirements": {
+    "nonCodeExperience": true,
+    "forbidProgrammingWorkspaceLanguage": true,
+    "forbidTerminalLanguage": true,
+    "speakingPracticeUsesTranscript": true
+  }
+}

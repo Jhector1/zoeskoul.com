@@ -181,6 +181,87 @@ export function buildExerciseFromManifest(
             };
         }
 
+        case "text_input":
+            return {
+                archetype: def.id,
+                exercise: {
+                    id: args.id,
+                    topic: args.topic,
+                    difficulty: args.diff,
+                    title: resolved.title,
+                    prompt: resolved.prompt,
+                    kind: "text_input",
+                    ...(def.placeholder ? { placeholder: def.placeholder } : {}),
+                    ...(resolved.help ? { help: resolved.help } : {}),
+                    ...(resolved.hint ? { hint: resolved.hint } : {}),
+                    ...(def.tools ? { tools: def.tools } : {}),
+                },
+                expected: def.expected,
+            };
+
+        case "voice_input":
+            return {
+                archetype: def.id,
+                exercise: {
+                    id: args.id,
+                    topic: args.topic,
+                    difficulty: args.diff,
+                    title: resolved.title,
+                    prompt: resolved.prompt,
+                    kind: "voice_input",
+                    targetText: def.targetText,
+                    ...(def.locale ? { locale: def.locale } : {}),
+                    ...(def.maxSeconds ? { maxSeconds: def.maxSeconds } : {}),
+                    ...(resolved.help ? { help: resolved.help } : {}),
+                    ...(resolved.hint ? { hint: resolved.hint } : {}),
+                    ...(def.tools ? { tools: def.tools } : {}),
+                },
+                expected: def.expected,
+            };
+
+        case "word_bank_arrange":
+            return {
+                archetype: def.id,
+                exercise: {
+                    id: args.id,
+                    topic: args.topic,
+                    difficulty: args.diff,
+                    title: resolved.title,
+                    prompt: resolved.prompt,
+                    kind: "word_bank_arrange",
+                    targetText: def.targetText,
+                    ...(def.locale ? { locale: def.locale } : {}),
+                    ...(def.wordBank ? { wordBank: def.wordBank } : {}),
+                    ...(def.distractors ? { distractors: def.distractors } : {}),
+                    ...(def.ttsText ? { ttsText: def.ttsText } : {}),
+                    ...(resolved.help ? { help: resolved.help } : {}),
+                    ...(resolved.hint ? { hint: resolved.hint } : {}),
+                    ...(def.tools ? { tools: def.tools } : {}),
+                },
+                expected: def.expected,
+            };
+
+        case "listen_build":
+            return {
+                archetype: def.id,
+                exercise: {
+                    id: args.id,
+                    topic: args.topic,
+                    difficulty: args.diff,
+                    title: resolved.title,
+                    prompt: resolved.prompt,
+                    kind: "listen_build",
+                    targetText: def.targetText,
+                    ...(def.locale ? { locale: def.locale } : {}),
+                    ...(def.wordBank ? { wordBank: def.wordBank } : {}),
+                    ...(def.distractors ? { distractors: def.distractors } : {}),
+                    ...(resolved.help ? { help: resolved.help } : {}),
+                    ...(resolved.hint ? { hint: resolved.hint } : {}),
+                    ...(def.tools ? { tools: def.tools } : {}),
+                },
+                expected: def.expected,
+            };
+
         case "code_input":
             return buildCodeInput(
                 {

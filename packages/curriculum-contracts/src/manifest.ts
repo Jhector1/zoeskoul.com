@@ -14,6 +14,10 @@ export type ExerciseKind =
   | "multi_choice"
   | "drag_reorder"
   | "fill_blank_choice"
+  | "text_input"
+  | "voice_input"
+  | "word_bank_arrange"
+  | "listen_build"
   | "code_input"
   | "pseudocode_input";
 
@@ -93,7 +97,13 @@ export type ManifestEmbeddedTryIt = {
   id: string;
   titleKey: string;
   promptKey: string;
+  /**
+   * Primary exercise identity. For a multi-step Try It this is the first
+   * entry in exerciseKeys. Existing one-exercise manifests remain valid.
+   */
   exerciseKey: string;
+  /** Ordered exercises rendered inside this one embedded Try It container. */
+  exerciseKeys?: string[];
   difficulty?: "easy" | "medium" | "hard";
   preferKind?: ExerciseKind | null;
   seedPolicy?: "global" | "step";
@@ -266,6 +276,69 @@ export type ManifestFillBlankChoice = ManifestBaseExercise & {
   kind: "fill_blank_choice";
   choiceCount: number;
   expected: { kind: "fill_blank_choice"; value: string };
+};
+
+export type ManifestLearnerTextNormalization = {
+  trim?: boolean;
+  caseFold?: boolean;
+  collapseSpaces?: boolean;
+  stripPunct?: boolean;
+};
+
+export type ManifestTextInput = ManifestBaseExercise & {
+  kind: "text_input";
+  placeholder?: string;
+  expected: {
+    kind: "text_input";
+    value?: string;
+    anyOf?: string[];
+    normalize?: ManifestLearnerTextNormalization;
+  };
+};
+
+export type ManifestVoiceInput = ManifestBaseExercise & {
+  kind: "voice_input";
+  targetText: string;
+  locale?: string;
+  maxSeconds?: number;
+  expected: {
+    kind: "voice_input";
+    targetText: string;
+    anyOf?: string[];
+    locale?: string;
+    normalize?: ManifestLearnerTextNormalization;
+  };
+};
+
+export type ManifestWordBankArrange = ManifestBaseExercise & {
+  kind: "word_bank_arrange";
+  targetText: string;
+  locale?: string;
+  wordBank?: string[];
+  distractors?: string[];
+  ttsText?: string;
+  expected: {
+    kind: "word_bank_arrange";
+    targetText: string;
+    anyOf?: string[];
+    locale?: string;
+    normalize?: ManifestLearnerTextNormalization;
+  };
+};
+
+export type ManifestListenBuild = ManifestBaseExercise & {
+  kind: "listen_build";
+  targetText: string;
+  locale?: string;
+  wordBank?: string[];
+  distractors?: string[];
+  expected: {
+    kind: "listen_build";
+    targetText: string;
+    anyOf?: string[];
+    locale?: string;
+    normalize?: ManifestLearnerTextNormalization;
+  };
 };
 
 export type ManifestVarSpec =
@@ -537,6 +610,10 @@ export type ManifestExercise =
   | ManifestMultiChoice
   | ManifestDragReorder
   | ManifestFillBlankChoice
+  | ManifestTextInput
+  | ManifestVoiceInput
+  | ManifestWordBankArrange
+  | ManifestListenBuild
   | ManifestPseudocodeInput
   | ManifestCodeInput;
 

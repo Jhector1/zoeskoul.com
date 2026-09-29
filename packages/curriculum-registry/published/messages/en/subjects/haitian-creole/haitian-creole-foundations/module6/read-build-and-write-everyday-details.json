@@ -1,0 +1,196 @@
+{
+  "topics": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
+        "read-build-and-write-everyday-details": {
+          "label": "Read, Build, and Write Everyday Details",
+          "summary": "Use common Kreyòl time-of-day and everyday time expressions such as maten, aswè, jòdi a, kounyeya, and denmen maten.",
+          "cards": {
+            "sketch0": {
+              "title": "Parts of the Day"
+            },
+            "sketch1": {
+              "title": "Today and Now"
+            },
+            "sketch2": {
+              "title": "Tomorrow and Every Day"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_read_build_and_write_everyday_details_sketch0": {
+              "title": "Try it yourself: Recognize evening",
+              "prompt": "Right after the sketch \"maten and aswè\", practice that exact idea with this task. Which word in the lesson means **evening**? Produce the result for recognize evening so it reinforces Read, Build, and Write Everyday Details."
+            },
+            "try_read_build_and_write_everyday_details_sketch1": {
+              "title": "Try it yourself: Recognize now",
+              "prompt": "Right after the sketch \"jòdi a and kounyeya\", practice that exact idea with this task. Which expression in the lesson means **now**? Produce the result for recognize now so it reinforces Read, Build, and Write Everyday Details."
+            },
+            "try_read_build_and_write_everyday_details_sketch2": {
+              "title": "Try it yourself: Recognize every day",
+              "prompt": "Right after the sketch \"denmen maten and chak jou\", practice that exact idea with this task. Which expression in the lesson means **every day**? Produce the result for recognize every day so it reinforces Read, Build, and Write Everyday Details."
+            }
+          },
+          "practice": {
+            "read-build-and-write-everyday-details-choice": {
+              "title": "Choose “today”",
+              "prompt": "Which Kreyòl expression means “today”?",
+              "hint": "Choose the expression for the current day.",
+              "help": {
+                "concept": "The lesson contrasts current-day and current-moment expressions.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "options": {
+                "a": "jòdi a",
+                "b": "denmen maten",
+                "c": "chak jou"
+              }
+            },
+            "read-build-and-write-everyday-details-fill": {
+              "title": "Complete tomorrow morning",
+              "prompt": "Choose the word that completes “tomorrow morning.”",
+              "hint": "Use the day-part word from this lesson.",
+              "help": {
+                "concept": "The blank completes a two-word expression referring to the next morning.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "template": "denmen [blank1]",
+              "choices": [
+                "maten",
+                "aswè",
+                "jou"
+              ]
+            },
+            "read-build-and-write-everyday-details-listen": {
+              "title": "Hear an everyday time phrase",
+              "prompt": "Listen, then build the expression you hear.",
+              "hint": "Listen for the two-word routine phrase.",
+              "help": {
+                "concept": "Build the time expression in spoken order.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "targetText": "chak jou",
+              "wordBank": [
+                "chak",
+                "jou"
+              ],
+              "distractors": [
+                "maten"
+              ]
+            },
+            "read-build-and-write-everyday-details-voice": {
+              "title": "Say “now”",
+              "prompt": "Say: kounyeya.",
+              "hint": "Say the current-moment word.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl time word.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "targetText": "kounyeya"
+            },
+            "read-build-and-write-everyday-details-build": {
+              "title": "Build Monday morning",
+              "prompt": "Arrange the words to say “Monday morning.”",
+              "hint": "Put the day before the day-part word.",
+              "help": {
+                "concept": "A simple schedule expression can combine a weekday and part of the day.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "targetText": "Lendi maten",
+              "wordBank": [
+                "Lendi",
+                "maten"
+              ],
+              "distractors": [
+                "aswè"
+              ],
+              "ttsText": "Lendi maten"
+            },
+            "read-build-and-write-everyday-details-write": {
+              "title": "Write “evening”",
+              "prompt": "Type the Kreyòl word for “evening.”",
+              "hint": "Use the day-part word from this lesson.",
+              "help": {
+                "concept": "Write the single Kreyòl time-of-day word.",
+                "hint_1": "Use the number or time pattern introduced in this lesson.",
+                "hint_2": "Read or listen to the complete expression before choosing your answer."
+              },
+              "expectedText": "aswè",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-day-parts-evening": {
+              "title": "Recognize evening",
+              "prompt": "Which word in the lesson means **evening**?",
+              "hint": "Choose the option that correctly applies the pattern.",
+              "help": {
+                "concept": "day-part vocabulary",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "options": {
+                "a": "aswè",
+                "b": "maten"
+              }
+            },
+            "try-today-now-now": {
+              "title": "Recognize now",
+              "prompt": "Which expression in the lesson means **now**?",
+              "hint": "Choose the option that correctly applies the pattern.",
+              "help": {
+                "concept": "today versus now",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "options": {
+                "a": "kounyeya",
+                "b": "jòdi a"
+              }
+            },
+            "try-tomorrow-routine-everyday": {
+              "title": "Recognize every day",
+              "prompt": "Which expression in the lesson means **every day**?",
+              "hint": "Choose the option that correctly applies the pattern.",
+              "help": {
+                "concept": "tomorrow morning versus every day",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "options": {
+                "a": "chak jou",
+                "b": "denmen maten"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-7-numbers-time-and-everyday-life": {
+        "read-build-and-write-everyday-details": {
+          "day-parts": {
+            "title": "maten and aswè",
+            "bodyMarkdown": "Two useful everyday time words are:\n\n- **maten** — morning\n- **aswè** — evening\n\nThe source materials use expressions such as **Lendi maten** and questions about what people eat **aswè**."
+          },
+          "today-now": {
+            "title": "jòdi a and kounyeya",
+            "bodyMarkdown": "Use:\n\n- **jòdi a** — today\n- **kounyeya** — now\n\nYou have already seen **kounyeya** with actions happening now. **Jòdi a** places something in the current day."
+          },
+          "tomorrow-routine": {
+            "title": "denmen maten and chak jou",
+            "bodyMarkdown": "Useful everyday expressions include:\n\n- **denmen maten** — tomorrow morning\n- **chak jou** — every day\n\nThese phrases help you talk about a simple schedule without needing advanced tense grammar."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "subjectSlug": "haitian-creole",
+  "catalogSlug": "haitian-creole",
+  "profileId": "language",
+  "title": "Haitian Creole / Kreyòl Ayisyen",
+  "summary": "An integrated-skills Haitian Creole pathway beginning with sound, greetings, identity, everyday language, questions, numbers, time, and first conversations.",
+  "courseOrder": [
+    "haitian-creole-foundations"
+  ],
+  "milestones": [
+    {
+      "courseSlug": "haitian-creole-foundations",
+      "outcome": "Reach an A1 foundation by understanding and producing short everyday Kreyòl through listening, speaking, reading, building, and writing."
+    }
+  ]
+}

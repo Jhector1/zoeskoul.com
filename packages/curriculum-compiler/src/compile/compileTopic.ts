@@ -113,10 +113,30 @@ export async function compileTopic(args: {
     blueprint: CourseBlueprint;
     provider: AiProvider;
     translationProvider?: AiProvider;
+    /**
+     * Optional emitted subject identity.
+     *
+     * Plan resolution, profile selection, translation policy, and authoring
+     * validation continue to use the canonical authoring blueprint. When this
+     * differs from blueprint.subjectSlug, emitted subject/topic identities,
+     * message keys, reports, and storage use this subject slug.
+     */
+    outputSubjectSlug?: string;
     topicId: string;
     onProgress?: CompileProgressCallback;
+    manualDraft?: TopicAuthoringDraft;
 }) {
     validateBlueprint(args.blueprint);
+
+    const outputSubjectSlug =
+        args.outputSubjectSlug ?? args.blueprint.subjectSlug;
+    const emissionBlueprint =
+        outputSubjectSlug === args.blueprint.subjectSlug
+            ? args.blueprint
+            : {
+                  ...args.blueprint,
+                  subjectSlug: outputSubjectSlug,
+              };
 
     const translationProvider = args.translationProvider ?? args.provider;
     const sourceLocale = args.blueprint.sourceLocale;
@@ -124,7 +144,8 @@ export async function compileTopic(args: {
         (locale) => locale !== sourceLocale,
     );
 
-    const totalStages = 8 + extraLocales.length * 2 + MAX_TOPIC_RETRIES;
+    const maxTopicRetries = args.manualDraft ? 0 : MAX_TOPIC_RETRIES;
+    const totalStages = 8 + extraLocales.length * 2 + maxTopicRetries;
     let currentStage = 0;
 
     function advanceProgress(info: {
@@ -181,13 +202,13 @@ export async function compileTopic(args: {
     advanceProgress({ stage: "building subject manifest", topicId: args.topicId });
 
     const subjectManifest = buildSubjectManifestFromPlan({
-        blueprint: args.blueprint,
+        blueprint: emissionBlueprint,
         plan: resolved.plan,
         shape,
     });
 
     const sourceSubjectMessages = buildSubjectMessagesFromPlan({
-        blueprint: args.blueprint,
+        blueprint: emissionBlueprint,
         plan: resolved.plan,
         shape,
     });
@@ -218,13 +239,13 @@ export async function compileTopic(args: {
     advanceProgress({ stage: "writing subject artifacts", topicId: args.topicId });
 
     await writeSubjectArtifacts({
-        subjectSlug: args.blueprint.subjectSlug,
+        subjectSlug: outputSubjectSlug,
         subjectManifest,
         subjectMessagesByLocale,
     });
 
     const seed = buildTopicSeedFromPlanNode({
-        blueprint: args.blueprint,
+        blueprint: emissionBlueprint,
         spec: resolved.spec,
         module: node.module,
         section: node.section,
@@ -232,19 +253,19 @@ export async function compileTopic(args: {
     });
 
     const reportDir = getTopicReportDir({
-        subjectSlug: args.blueprint.subjectSlug,
+        subjectSlug: outputSubjectSlug,
         moduleOrder: node.moduleIndex,
         topicId: node.topic.topicId,
     });
 
     let previousError: unknown = null;
 
-    for (let attempt = 0; attempt <= MAX_TOPIC_RETRIES; attempt += 1) {
+    for (let attempt = 0; attempt <= maxTopicRetries; attempt += 1) {
         const retryContext: TopicRetryContext | undefined =
             attempt > 0 && previousError instanceof Error
                 ? {
                       attempt,
-                      maxRetries: MAX_TOPIC_RETRIES,
+                      maxRetries: maxTopicRetries,
                       previousErrorCode: errorCode(previousError),
                       previousErrorMessage: previousError.message,
                       qualityIssues: extractRetryIssues(previousError),
@@ -274,7 +295,7 @@ export async function compileTopic(args: {
 
         try {
             advanceProgress({
-                stage: attempt > 0 ? `retrying topic draft (${attempt}/${MAX_TOPIC_RETRIES})` : "generating topic draft",
+                stage: attempt > 0 ? `retrying topic draft (${attempt}/${maxTopicRetries})` : "generating topic draft",
                 topicId: node.topic.topicId,
                 moduleSlug: node.module.moduleSlug,
                 sectionSlug: node.section.sectionSlug,
@@ -282,12 +303,33 @@ export async function compileTopic(args: {
 
             let generationAttempt;
             try {
-                generationAttempt = await generateTopicAuthoringDraftAttempt(args.provider, {
-                    seed,
-                    locale: sourceLocale,
-                    shape,
-                    retry: retryContext,
-                });
+                if (args.manualDraft) {
+                    const rawText = JSON.stringify(args.manualDraft);
+                    generationAttempt = {
+                        prompt: {
+                            system: "manual-topic-authoring",
+                            user: node.topic.topicId,
+                        },
+                        generation: {
+                            provider: "manual",
+                            model: "checked-in-json",
+                            temperature: 0,
+                            seed: 0,
+                            schemaName: "TopicAuthoringDraft" as const,
+                            strictSchema: true,
+                            rawText,
+                            parsedJson: args.manualDraft,
+                            value: args.manualDraft,
+                        },
+                    };
+                } else {
+                    generationAttempt = await generateTopicAuthoringDraftAttempt(args.provider, {
+                        seed,
+                        locale: sourceLocale,
+                        shape,
+                        retry: retryContext,
+                    });
+                }
             } catch (error) {
                 const diagnostics = extractGenerationDiagnostics(error);
                 const prompt =
@@ -313,7 +355,7 @@ export async function compileTopic(args: {
                     seed,
                     generation: diagnostics.generation,
                     retryAttempt: attempt,
-                    maxRetries: MAX_TOPIC_RETRIES,
+                    maxRetries: maxTopicRetries,
                 });
                 attemptArtifacts.hashes = buildTopicAttemptHashes({
                     seed,
@@ -330,6 +372,11 @@ export async function compileTopic(args: {
             }
 
             const rawDraft = generationAttempt.generation.value;
+
+            if (args.manualDraft) {
+                assertTopicAuthoringDraft(rawDraft);
+            }
+
             attemptArtifacts.prompt = generationAttempt.prompt;
             attemptArtifacts.rawModelOutput = generationAttempt.generation.rawText;
             attemptArtifacts.parsedOutput = generationAttempt.generation.parsedJson;
@@ -342,7 +389,7 @@ export async function compileTopic(args: {
                 seed,
                 generation: generationAttempt.generation,
                 retryAttempt: attempt,
-                maxRetries: MAX_TOPIC_RETRIES,
+                maxRetries: maxTopicRetries,
             });
             attemptArtifacts.hashes = buildTopicAttemptHashes({
                 seed,
@@ -363,6 +410,7 @@ export async function compileTopic(args: {
                 seed,
                 rawDraft,
                 profileServices,
+                mode: args.manualDraft ? "manual-strict" : "generated",
             });
 
             const draft = evaluation.draft;
@@ -497,7 +545,7 @@ export async function compileTopic(args: {
 
             const qualityReport = buildCurriculumQualityReport({
                 profileId: args.blueprint.profileId,
-                subjectSlug: args.blueprint.subjectSlug,
+                subjectSlug: outputSubjectSlug,
                 courseSlug: args.blueprint.courseSlug,
                 topics: [{ seed, draft, topicBundle }],
             });
@@ -594,7 +642,7 @@ export async function compileTopic(args: {
             });
 
             await writeTopicArtifacts({
-                subjectSlug: args.blueprint.subjectSlug,
+                subjectSlug: outputSubjectSlug,
                 moduleOrder: node.moduleIndex,
                 topicId: node.topic.topicId,
                 topicBundle,
@@ -602,7 +650,7 @@ export async function compileTopic(args: {
             });
 
             await writeTopicReports({
-                subjectSlug: args.blueprint.subjectSlug,
+                subjectSlug: outputSubjectSlug,
                 moduleOrder: node.moduleIndex,
                 topicId: node.topic.topicId,
                 rawDraft,
@@ -640,7 +688,7 @@ export async function compileTopic(args: {
 
             return {
                 topicId: node.topic.topicId,
-                subjectSlug: args.blueprint.subjectSlug,
+                subjectSlug: outputSubjectSlug,
             };
         } catch (error) {
             previousError = error;
@@ -654,12 +702,12 @@ export async function compileTopic(args: {
             });
 
             const canRetry =
-                attempt < MAX_TOPIC_RETRIES &&
+                attempt < maxTopicRetries &&
                 isRetryableTopicValidationError(error);
 
             if (canRetry) {
                 advanceProgress({
-                    stage: `retryable topic failure (${attempt + 1}/${MAX_TOPIC_RETRIES})`,
+                    stage: `retryable topic failure (${attempt + 1}/${maxTopicRetries})`,
                     topicId: node.topic.topicId,
                     moduleSlug: node.module.moduleSlug,
                     sectionSlug: node.section.sectionSlug,

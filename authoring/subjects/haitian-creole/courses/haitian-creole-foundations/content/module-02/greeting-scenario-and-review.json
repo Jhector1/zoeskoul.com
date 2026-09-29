@@ -1,0 +1,234 @@
+{
+  "title": "Greeting Scenario and Review",
+  "summary": "Combine greetings, a simple check-in, thanks, and a closing into a short beginner Kreyòl exchange.",
+  "minutes": 25,
+  "sketchBlocks": [
+    {
+      "id": "mini-dialogue",
+      "cardTitle": "Put It Together",
+      "title": "A short greeting exchange",
+      "bodyMarkdown": "Here is a complete beginner exchange:\n\n**A:** Bonjou!\n\n**B:** Bonjou!\n\n**A:** Kijan ou ye?\n\n**B:** Mwen byen, mèsi. E ou menm?\n\n**A:** Mwen byen tou.\n\nEvery line uses language from this module.",
+      "tryItExercises": [
+        {
+          "id": "try-mini-dialogue-question",
+          "kind": "listen_build",
+          "title": "Hear the check-in",
+          "prompt": "Listen and rebuild the check-in question from the dialogue.",
+          "hint": "Listen again and rebuild the new Kreyòl phrase.",
+          "help": {
+            "concept": "hearing a greeting exchange",
+            "hint_1": "Use the Kreyòl pattern from this lesson.",
+            "hint_2": "Use the pattern you just learned."
+          },
+          "targetText": "Kijan ou ye?",
+          "locale": "ht-HT"
+        },
+        {
+          "id": "try-mini-dialogue-response",
+          "kind": "voice_input",
+          "title": "Give the response",
+          "prompt": "Say the response line from the dialogue.",
+          "hint": "Say: Mwen byen, mèsi. E ou menm?",
+          "help": {
+            "concept": "responding in a greeting exchange",
+            "hint_1": "Use the Kreyòl pattern from this lesson.",
+            "hint_2": "Use the pattern you just learned."
+          },
+          "targetText": "Mwen byen, mèsi. E ou menm?",
+          "locale": "ht-HT"
+        }
+      ]
+    },
+    {
+      "id": "close-conversation",
+      "cardTitle": "Close Politely",
+      "title": "Orevwa",
+      "bodyMarkdown": "**Orevwa** is a useful way to say goodbye.\n\nA complete beginner interaction can be very short: greet, ask how the person is, answer, and close politely.",
+      "tryItExercises": [
+        {
+          "id": "try-close-conversation-orevwa",
+          "kind": "voice_input",
+          "title": "Close a short conversation",
+          "prompt": "Say “Thank you. Goodbye.” in Kreyòl.",
+          "hint": "Thank the person first, then close the conversation.",
+          "help": {
+            "concept": "closing a conversation",
+            "hint_1": "Use the Kreyòl pattern from this lesson.",
+            "hint_2": "Use the pattern you just learned."
+          },
+          "targetText": "Mèsi. Orevwa.",
+          "locale": "ht-HT"
+        }
+      ]
+    },
+    {
+      "id": "conversation-flow",
+      "cardTitle": "Conversation Flow",
+      "title": "Think in small reusable chunks",
+      "bodyMarkdown": "You now have several reusable chunks:\n\n- **Bonjou!**\n- **Kijan ou ye?**\n- **Mwen byen, mèsi.**\n- **E ou menm?**\n- **Orevwa.**\n\nPractice the chunks in order until the exchange feels familiar.",
+      "tryItExercises": [
+        {
+          "id": "try-conversation-flow-order",
+          "kind": "word_bank_arrange",
+          "title": "Order the conversation chunks",
+          "prompt": "Arrange the reusable chunks to form the complete exchange.",
+          "hint": "Use the pattern from the lesson to build the new phrase.",
+          "help": {
+            "concept": "ordering a greeting exchange",
+            "hint_1": "Use the Kreyòl pattern from this lesson.",
+            "hint_2": "Use the pattern you just learned."
+          },
+          "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Orevwa.",
+          "locale": "ht-HT",
+          "wordBank": [
+            "Bonjou!",
+            "Kijan ou ye?",
+            "Mwen byen, mèsi.",
+            "E ou menm?",
+            "Orevwa."
+          ]
+        }
+      ]
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "greeting-scenario-and-review-choice",
+      "kind": "single_choice",
+      "title": "Open the conversation",
+      "prompt": "Which phrase is the best opening for this short exchange?",
+      "hint": "Start with the greeting.",
+      "help": {
+        "concept": "A simple conversation usually begins with a greeting before the check-in question.",
+        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+        "hint_2": "Read or listen to the complete phrase once more before answering."
+      },
+      "options": [
+        "Bonjou!",
+        "Orevwa.",
+        "Mwen byen."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "greeting-scenario-and-review-fill",
+      "kind": "fill_blank_choice",
+      "title": "Complete the response",
+      "prompt": "Choose the word that completes the polite answer.",
+      "hint": "Use the complete response pattern practiced in the lesson.",
+      "help": {
+        "concept": "A polite check-in response combines a status phrase with a thank-you expression.",
+        "hint_1": "Look at the full response pattern from the lesson.",
+        "hint_2": "Choose the option that completes the response naturally."
+      },
+      "template": "Mwen byen, [blank1].",
+      "choices": [
+        "mèsi",
+        "bonjou",
+        "padon"
+      ],
+      "correctValue": "mèsi"
+    },
+    {
+      "id": "greeting-scenario-and-review-listen",
+      "kind": "listen_build",
+      "title": "Hear the check-in",
+      "prompt": "Listen, then build the Kreyòl question you hear.",
+      "hint": "Build the familiar question from this module.",
+      "help": {
+        "concept": "Recognizing Kijan ou ye? by ear helps the learner follow a real greeting exchange.",
+        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+        "hint_2": "Read or listen to the complete phrase once more before answering."
+      },
+      "targetText": "Kijan ou ye?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Kijan",
+        "ou",
+        "ye?"
+      ],
+      "distractors": [
+        "byen"
+      ],
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    },
+    {
+      "id": "greeting-scenario-and-review-voice",
+      "kind": "voice_input",
+      "title": "Give the full response",
+      "prompt": "Say: Mwen byen, mèsi. E ou menm?",
+      "hint": "Say the response and return question together.",
+      "help": {
+        "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl exchange.",
+        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+        "hint_2": "Read or listen to the complete phrase once more before answering."
+      },
+      "targetText": "Mwen byen, mèsi. E ou menm?",
+      "locale": "ht-HT",
+      "maxSeconds": 15,
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    },
+    {
+      "id": "greeting-scenario-and-review-build",
+      "kind": "word_bank_arrange",
+      "title": "Build the mini exchange",
+      "prompt": "Arrange the chunks into a natural greeting and check-in.",
+      "hint": "Greeting first, then the check-in question.",
+      "help": {
+        "concept": "Short conversational chunks become useful when they are placed in a natural sequence.",
+        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+        "hint_2": "Read or listen to the complete phrase once more before answering."
+      },
+      "targetText": "Bonjou! Kijan ou ye?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Bonjou!",
+        "Kijan",
+        "ou",
+        "ye?"
+      ],
+      "distractors": [
+        "Orevwa."
+      ],
+      "ttsText": "Bonjou! Kijan ou ye?",
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    },
+    {
+      "id": "greeting-scenario-and-review-write",
+      "kind": "text_input",
+      "title": "Write the goodbye",
+      "prompt": "Type the Kreyòl goodbye practiced in this lesson.",
+      "hint": "Write the complete closing word.",
+      "help": {
+        "concept": "A closing expression completes a short beginner conversation.",
+        "hint_1": "Use the Kreyòl words and word order practiced in this lesson.",
+        "hint_2": "Read or listen to the complete phrase once more before answering."
+      },
+      "expectedText": "Orevwa",
+      "placeholder": "Type the Kreyòl answer",
+      "normalize": {
+        "trim": true,
+        "caseFold": true,
+        "collapseSpaces": true,
+        "stripPunct": true
+      }
+    }
+  ]
+}

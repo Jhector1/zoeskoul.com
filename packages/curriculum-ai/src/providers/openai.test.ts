@@ -12,26 +12,51 @@ import {
     setOpenAiModelResolverForTests,
 } from "./openai.js";
 
-function findKeywordPath(value: unknown, keyword: string, path = "$"): string | null {
+function findKeywordPath(
+    value: unknown,
+    keyword: string,
+    path = "$",
+): string | null {
+    if (Array.isArray(value)) {
+        for (let index = 0; index < value.length; index += 1) {
+            const found = findKeywordPath(value[index], keyword, `${path}[${index}]`);
+            if (found) return found;
+        }
+        return null;
+    }
+
     if (!value || typeof value !== "object") {
         return null;
     }
 
-    if (keyword in (value as Record<string, unknown>)) {
-        return `${path}.${keyword}`;
-    }
+    const record = value as Record<string, unknown>;
 
-    for (const [key, child] of Object.entries(value as Record<string, unknown>)) {
-        if (Array.isArray(child)) {
-            for (const [index, item] of child.entries()) {
-                const nested = findKeywordPath(item, keyword, `${path}.${key}[${index}]`);
-                if (nested) return nested;
+    for (const [key, child] of Object.entries(record)) {
+        if (key === keyword) {
+            return `${path}.${key}`;
+        }
+
+        if (
+            key === "properties" &&
+            child &&
+            typeof child === "object" &&
+            !Array.isArray(child)
+        ) {
+            for (const [propertyName, propertySchema] of Object.entries(
+                child as Record<string, unknown>,
+            )) {
+                const found = findKeywordPath(
+                    propertySchema,
+                    keyword,
+                    `${path}.properties.${propertyName}`,
+                );
+                if (found) return found;
             }
             continue;
         }
 
-        const nested = findKeywordPath(child, keyword, `${path}.${key}`);
-        if (nested) return nested;
+        const found = findKeywordPath(child, keyword, `${path}.${key}`);
+        if (found) return found;
     }
 
     return null;

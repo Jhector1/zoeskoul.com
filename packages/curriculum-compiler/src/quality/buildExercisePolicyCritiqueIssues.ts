@@ -10,6 +10,10 @@ const KINDS = [
     "multi_choice",
     "drag_reorder",
     "fill_blank_choice",
+    "text_input",
+    "voice_input",
+    "word_bank_arrange",
+    "listen_build",
     "pseudocode_input",
     "code_input",
 ] as const;
@@ -19,6 +23,12 @@ type Kind = (typeof KINDS)[number];
 type PlannedExerciseCounts = NonNullable<TopicSeed["plannedExerciseCounts"]>;
 
 type GenerationTargets = TopicSeed["generationTargets"];
+
+function normalizedMix(mix: Partial<Record<Kind, number>>): Record<Kind, number> {
+    return Object.fromEntries(
+        KINDS.map((kind) => [kind, Math.max(0, Number(mix[kind] ?? 0))]),
+    ) as Record<Kind, number>;
+}
 
 function dominantKind(mix: Record<Kind, number>): Kind {
     return dominantKinds(mix)[0] ?? "single_choice";
@@ -35,6 +45,10 @@ function countKinds(draft: TopicAuthoringDraft): Record<Kind, number> {
         multi_choice: 0,
         drag_reorder: 0,
         fill_blank_choice: 0,
+        text_input: 0,
+        voice_input: 0,
+        word_bank_arrange: 0,
+        listen_build: 0,
         pseudocode_input: 0,
         code_input: 0,
     };
@@ -57,6 +71,10 @@ function toMix(counts: Record<Kind, number>): Record<Kind, number> {
             multi_choice: 0,
             drag_reorder: 0,
             fill_blank_choice: 0,
+            text_input: 0,
+            voice_input: 0,
+            word_bank_arrange: 0,
+            listen_build: 0,
             pseudocode_input: 0,
             code_input: 0,
         };
@@ -67,6 +85,10 @@ function toMix(counts: Record<Kind, number>): Record<Kind, number> {
         multi_choice: counts.multi_choice / total,
         drag_reorder: counts.drag_reorder / total,
         fill_blank_choice: counts.fill_blank_choice / total,
+        text_input: counts.text_input / total,
+        voice_input: counts.voice_input / total,
+        word_bank_arrange: counts.word_bank_arrange / total,
+        listen_build: counts.listen_build / total,
         pseudocode_input: counts.pseudocode_input / total,
         code_input: counts.code_input / total,
     };
@@ -205,7 +227,7 @@ function buildMixBasedIssues(args: {
     generationTargets?: GenerationTargets;
 }): CritiqueIssue[] {
     const actualMix = toMix(args.counts);
-    const targetMix = args.policy.mix as Record<Kind, number>;
+    const targetMix = normalizedMix(args.policy.mix as Partial<Record<Kind, number>>);
     const issues: CritiqueIssue[] = [];
 
     const desiredDominant = dominantKind(targetMix);

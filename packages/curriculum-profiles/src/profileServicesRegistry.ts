@@ -4,6 +4,7 @@ import { gitProfileServices } from "./git/profileServices.js";
 import { sqlProfileServices } from "./sql/profileServices.js";
 import { pythonProfileServices } from "./python/profileServices.js";
 import { cProfileServices } from "./c/profileServices.js";
+import { languageProfileServices } from "./language/profileServices.js";
 
 const PROFILE_SERVICES: Record<string, ProfileServices> = {
     bash: bashProfileServices,
@@ -11,6 +12,7 @@ const PROFILE_SERVICES: Record<string, ProfileServices> = {
     sql: sqlProfileServices,
     python: pythonProfileServices,
     c: cProfileServices,
+    language: languageProfileServices,
 };
 
 export function getProfileServices(profileId: string): ProfileServices {

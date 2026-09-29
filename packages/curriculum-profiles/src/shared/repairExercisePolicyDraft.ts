@@ -180,6 +180,10 @@ function makeGenericFallbackExercise(args: {
             return makeFallbackPseudocode(args.seed, args.index);
         case "code_input":
             return null;
+        default:
+            // New profile-specific kinds are not synthesized by this legacy shared
+            // programming fallback. Their owning profile must provide them.
+            return null;
     }
 }
 

@@ -1,0 +1,331 @@
+{
+  "topicId": "meet-someone-scenario-and-review",
+  "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
+  "moduleSlug": "haitian-creole-foundations-3-who-are-you",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht3-read-build-write-use",
+  "prefix": "ht3",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.label",
+    "summaryKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.cards.sketch0.title",
+      "sketchId": "intro-flow",
+      "height": 420,
+      "tryIt": {
+        "id": "try-meet-someone-scenario-and-review-sketch0",
+        "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch0.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch0.prompt",
+        "exerciseKey": "try-intro-flow-order",
+        "exerciseKeys": [
+          "try-intro-flow-order"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.cards.sketch1.title",
+      "sketchId": "ask-back",
+      "height": 420,
+      "tryIt": {
+        "id": "try-meet-someone-scenario-and-review-sketch1",
+        "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch1.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch1.prompt",
+        "exerciseKey": "try-ask-back-name",
+        "exerciseKeys": [
+          "try-ask-back-name",
+          "try-ask-back-place"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.cards.sketch2.title",
+      "sketchId": "mini-exchange",
+      "height": 420,
+      "tryIt": {
+        "id": "try-meet-someone-scenario-and-review-sketch2",
+        "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch2.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.tryIt.try_meet_someone_scenario_and_review_sketch2.prompt",
+        "exerciseKey": "try-mini-exchange-name",
+        "exerciseKeys": [
+          "try-mini-exchange-name",
+          "try-mini-exchange-place"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "intro-flow",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.intro-flow.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.intro-flow.bodyMarkdown"
+    },
+    {
+      "id": "ask-back",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.ask-back.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.ask-back.bodyMarkdown"
+    },
+    {
+      "id": "mini-exchange",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.mini-exchange.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.mini-exchange.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "meet-someone-scenario-and-review-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "meet-someone-scenario-and-review-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "rele"
+      }
+    },
+    {
+      "id": "meet-someone-scenario-and-review-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-listen",
+      "targetText": "Mwen pale kreyòl.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mwen",
+        "pale",
+        "kreyòl."
+      ],
+      "distractors": [
+        "rete"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Mwen pale kreyòl.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "meet-someone-scenario-and-review-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-voice",
+      "targetText": "M rele Ana. Mwen rete Chicago.",
+      "locale": "ht-HT",
+      "maxSeconds": 16,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "M rele Ana. Mwen rete Chicago.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "meet-someone-scenario-and-review-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-build",
+      "targetText": "Kijan ou rele?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Kijan",
+        "ou",
+        "rele?"
+      ],
+      "distractors": [
+        "rete"
+      ],
+      "ttsText": "Kijan ou rele?",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Kijan ou rele?",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "meet-someone-scenario-and-review-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.meet-someone-scenario-and-review-write",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "Mwen se ayisyen.",
+        "anyOf": [
+          "Mwen se ayisyèn."
+        ],
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-intro-flow-order",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-intro-flow-order",
+      "targetText": "M rele Ana. Mwen se ayisyèn. Mwen pale kreyòl. Mwen rete Chicago.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "M rele Ana.",
+        "Mwen se ayisyèn.",
+        "Mwen pale kreyòl.",
+        "Mwen rete Chicago."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "M rele Ana. Mwen se ayisyèn. Mwen pale kreyòl. Mwen rete Chicago.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-ask-back-name",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-ask-back-name",
+      "targetText": "Kijan li rele?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Kijan li rele?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-ask-back-place",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-ask-back-place",
+      "targetText": "Ki kote li rete?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Ki kote li rete?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-mini-exchange-name",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-mini-exchange-name",
+      "targetText": "M rele Ana. E ou menm?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "M rele Ana. E ou menm?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-mini-exchange-place",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-3-who-are-you.meet-someone-scenario-and-review.practice.try-mini-exchange-place",
+      "targetText": "Mwen rete Chicago.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mwen rete Chicago.",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

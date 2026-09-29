@@ -628,20 +628,10 @@ export function repairTopicAuthoringDraft(
     draft: TopicAuthoringDraft,
     seed?: TopicSeed,
 ): TopicAuthoringDraft {
-    const normalizedDraft: TopicAuthoringDraft = {
-        ...draft,
-        title: normalizeText(draft.title),
-        summary: normalizeText(draft.summary),
-        minutes:
-            typeof draft.minutes === "number" && Number.isFinite(draft.minutes)
-                ? draft.minutes
-                : 0,
-        sketchBlocks: (draft.sketchBlocks ?? []).map((block, index) => ({
-            id: normalizeText(block.id) || `sketch-${index + 1}`,
-            title: normalizeText(block.title),
-            bodyMarkdown: normalizeText(block.bodyMarkdown),
-        })),
-        quizDraft: (draft.quizDraft ?? []).map((exercise, index) => {
+    const repairExerciseDraft = (
+        exercise: TopicAuthoringDraft["quizDraft"][number],
+        index: number,
+    ): TopicAuthoringDraft["quizDraft"][number] => {
             const base = {
                 ...exercise,
                 id: normalizeText(exercise.id) || `exercise-${index + 1}`,
@@ -898,9 +888,46 @@ export function repairTopicAuthoringDraft(
                 };
             }
 
+            // LANGUAGE_KIND_REPAIR_PASSTHROUGH
+            if (
+                exercise.kind === "text_input" ||
+                exercise.kind === "voice_input" ||
+                exercise.kind === "word_bank_arrange" ||
+                exercise.kind === "listen_build"
+            ) {
+                return {
+                    ...exercise,
+                    ...base,
+                };
+            }
+
             const exhaustive: never = exercise;
             return exhaustive;
-        }),
+            };
+
+    const normalizedDraft: TopicAuthoringDraft = {
+        ...draft,
+        title: normalizeText(draft.title),
+        summary: normalizeText(draft.summary),
+        minutes:
+            typeof draft.minutes === "number" && Number.isFinite(draft.minutes)
+                ? draft.minutes
+                : 0,
+        sketchBlocks: (draft.sketchBlocks ?? []).map((block, index) => ({
+            id: normalizeText(block.id) || `sketch-${index + 1}`,
+            title: normalizeText(block.title),
+            bodyMarkdown: normalizeText(block.bodyMarkdown),
+            ...(block.tryItExercises?.length
+                ? {
+                    tryItExercises: block.tryItExercises.map(
+                        repairExerciseDraft,
+                    ),
+                }
+                : {}),
+        })),
+        quizDraft: (draft.quizDraft ?? []).map(
+            repairExerciseDraft,
+        ),
         projectDraft: draft.projectDraft
             ? {
                 title: normalizeText(draft.projectDraft.title),

@@ -1,0 +1,58 @@
+{
+  "subjectSlug": "haitian-creole",
+  "courseSlug": "haitian-creole-foundations",
+  "catalogSlug": "haitian-creole",
+  "trackSlug": "haitian-creole",
+  "profileId": "language",
+  "courseNumber": 1,
+  "title": "Haitian Creole Foundations",
+  "subtitle": "From first Kreyòl sounds to your first everyday conversation.",
+  "level": "beginner",
+  "moduleCount": 8,
+  "description": "An A0-to-A1 Haitian Creole course that develops listening, speaking, reading, sentence building, and writing together from the first module.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "True beginners with no prior Haitian Creole required.",
+    "Learners who want practical everyday Kreyòl with listening and speaking from the beginning."
+  ],
+  "prerequisites": [
+    "No Haitian Creole prerequisite.",
+    "Ability to read short English instructions."
+  ],
+  "goals": [
+    "Build a reliable sound-to-spelling foundation in Kreyòl.",
+    "Use greetings, identity language, everyday objects, actions, questions, numbers, and time.",
+    "Finish by understanding and producing a short first Kreyòl conversation."
+  ],
+  "teachingStyle": {
+    "tone": "clear, practical, encouraging, culturally respectful",
+    "integratedSkillRhythm": [
+      "learn",
+      "listen",
+      "speak",
+      "read",
+      "build",
+      "write",
+      "use_it",
+      "review"
+    ]
+  },
+  "constraints": {
+    "moduleCount": 8,
+    "topicsPerModuleMin": 4,
+    "topicsPerModuleMax": 4
+  },
+  "seedModules": [
+    "haitian-creole-foundations-1-sounds-of-kreyol",
+    "haitian-creole-foundations-2-bonjou",
+    "haitian-creole-foundations-3-who-are-you",
+    "haitian-creole-foundations-4-talking-about-things",
+    "haitian-creole-foundations-5-what-are-you-doing",
+    "haitian-creole-foundations-6-questions-and-answers",
+    "haitian-creole-foundations-7-numbers-time-and-everyday-life",
+    "haitian-creole-foundations-8-my-first-kreyol-conversation"
+  ]
+}

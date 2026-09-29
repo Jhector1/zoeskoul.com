@@ -15,12 +15,33 @@ export function buildExpectedAnswerPayload(kind: PracticeKind, expectedCanon: an
             : null;
     }
 
+    if (kind === PracticeKind.text_input) {
+        const value =
+            typeof expectedCanon?.value === "string"
+                ? expectedCanon.value
+                : null;
+
+        return value
+            ? { kind: "text_input", value: String(value) }
+            : null;
+    }
+
     if (
-        kind === PracticeKind.text_input ||
+        kind === PracticeKind.voice_input ||
         kind === PracticeKind.word_bank_arrange ||
-        kind === PracticeKind.listen_build ||
-        kind === PracticeKind.fill_blank_choice
+        kind === PracticeKind.listen_build
     ) {
+        const targetText =
+            typeof expectedCanon?.targetText === "string"
+                ? expectedCanon.targetText
+                : null;
+
+        return targetText
+            ? { kind: String(kind), targetText: String(targetText) }
+            : null;
+    }
+
+    if (kind === PracticeKind.fill_blank_choice) {
         const value =
             typeof expectedCanon?.value === "string"
                 ? expectedCanon.value
@@ -29,7 +50,9 @@ export function buildExpectedAnswerPayload(kind: PracticeKind, expectedCanon: an
                     ? expectedCanon.answers[0]
                     : null;
 
-        return value ? { kind: String(kind), value: String(value) } : null;
+        return value
+            ? { kind: "fill_blank_choice", value: String(value) }
+            : null;
     }
 
     if (kind === PracticeKind.multi_choice) {

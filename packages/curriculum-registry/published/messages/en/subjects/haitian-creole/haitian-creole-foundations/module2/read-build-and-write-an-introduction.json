@@ -1,0 +1,199 @@
+{
+  "topics": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-3-who-are-you": {
+        "read-build-and-write-an-introduction": {
+          "label": "Read, Build, and Write an Introduction",
+          "summary": "Ask and answer where someone lives using Ki kote ou rete? and Mwen rete…",
+          "cards": {
+            "sketch0": {
+              "title": "Ask Where Someone Lives"
+            },
+            "sketch1": {
+              "title": "Say Where You Live"
+            },
+            "sketch2": {
+              "title": "Talk About Someone Else"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_read_build_and_write_an_introduction_sketch0": {
+              "title": "Try it yourself: Ask where Mari lives",
+              "prompt": "Right after the sketch \"Ki kote ou rete?\", practice that exact idea with this task. Say “Where does Mari live?” in Kreyòl. Produce the result for ask where Mari lives so it reinforces Read, Build, and Write an Introduction."
+            },
+            "try_read_build_and_write_an_introduction_sketch1": {
+              "title": "Try it yourself: Build a different residence answer",
+              "prompt": "Right after the sketch \"Mwen rete…\", practice that exact idea with this task. Arrange the Kreyòl sentence for “I live in Boston.”. Produce the result for build a different residence answer so it reinforces Read, Build, and Write an Introduction."
+            },
+            "try_read_build_and_write_an_introduction_sketch2": {
+              "title": "Try it yourself: Build another third-person residence",
+              "prompt": "Right after the sketch \"Li rete…\", practice that exact idea with this task. Arrange the Kreyòl sentence for “He or she lives in Chicago.”. Produce the result for build another third-person residence so it reinforces Read, Build, and Write an Introduction."
+            }
+          },
+          "practice": {
+            "read-build-and-write-an-introduction-choice": {
+              "title": "Choose the residence question",
+              "prompt": "Which Kreyòl question asks where someone lives?",
+              "hint": "Choose the question about place of residence.",
+              "help": {
+                "concept": "A location question uses a fixed beginner conversational pattern.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "options": {
+                "a": "Ki kote ou rete?",
+                "b": "Kijan ou rele?",
+                "c": "Kijan ou ye?"
+              }
+            },
+            "read-build-and-write-an-introduction-fill": {
+              "title": "Complete the residence sentence",
+              "prompt": "Choose the verb that completes the sentence about where a person lives.",
+              "hint": "Use the residence pattern practiced in the lesson.",
+              "help": {
+                "concept": "The blank needs the action associated with a person's place of residence.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "template": "Mwen [blank1] Chicago.",
+              "choices": [
+                "rete",
+                "pale",
+                "rele"
+              ]
+            },
+            "read-build-and-write-an-introduction-listen": {
+              "title": "Hear where someone lives",
+              "prompt": "Listen, then build the sentence you hear.",
+              "hint": "Listen for the subject, residence verb, and place.",
+              "help": {
+                "concept": "Build the sentence in the same order as the spoken Kreyòl.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "targetText": "Li rete Boston.",
+              "wordBank": [
+                "Li",
+                "rete",
+                "Boston."
+              ],
+              "distractors": [
+                "pale"
+              ]
+            },
+            "read-build-and-write-an-introduction-voice": {
+              "title": "Ask where someone lives",
+              "prompt": "Say: Ki kote ou rete?",
+              "hint": "Say the complete question.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl question.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "targetText": "Ki kote ou rete?"
+            },
+            "read-build-and-write-an-introduction-build": {
+              "title": "Build a residence answer",
+              "prompt": "Arrange the words to say “I live in Chicago.”",
+              "hint": "Put the speaker first, then the residence pattern, then the place.",
+              "help": {
+                "concept": "A short location answer follows a stable word order.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "targetText": "Mwen rete Chicago.",
+              "wordBank": [
+                "Mwen",
+                "rete",
+                "Chicago."
+              ],
+              "distractors": [
+                "rele"
+              ],
+              "ttsText": "Mwen rete Chicago."
+            },
+            "read-build-and-write-an-introduction-write": {
+              "title": "Write the location question word",
+              "prompt": "Type the Kreyòl word used in the question to ask “where.”",
+              "hint": "Use the first word from the residence question.",
+              "help": {
+                "concept": "This question word is used to ask about a place.",
+                "hint_1": "Use the complete pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the sentence or audio before answering."
+              },
+              "expectedText": "kote",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-ask-place": {
+              "title": "Ask where Mari lives",
+              "prompt": "Say “Where does Mari live?” in Kreyòl.",
+              "hint": "Keep Ki kote and replace ou with the person’s name.",
+              "help": {
+                "concept": "residence question",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "Ki kote Mari rete?"
+            },
+            "try-answer-place-chicago": {
+              "title": "Build a different residence answer",
+              "prompt": "Arrange the Kreyòl sentence for “I live in Boston.”",
+              "hint": "Keep Mwen rete and change the place.",
+              "help": {
+                "concept": "residence answer pattern",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "Mwen rete Boston.",
+              "wordBank": [
+                "Mwen",
+                "rete",
+                "Boston."
+              ]
+            },
+            "try-third-person-place": {
+              "title": "Build another third-person residence",
+              "prompt": "Arrange the Kreyòl sentence for “He or she lives in Chicago.”",
+              "hint": "Keep Li rete and change the place.",
+              "help": {
+                "concept": "third-person residence",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "Li rete Chicago.",
+              "wordBank": [
+                "Li",
+                "rete",
+                "Chicago."
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-3-who-are-you": {
+        "read-build-and-write-an-introduction": {
+          "ask-place": {
+            "title": "Ki kote ou rete?",
+            "bodyMarkdown": "A useful introduction question is:\n\n**Ki kote ou rete?** — Where do you live?\n\nLearn the question as one complete chunk. You will hear the same structure again in later travel and everyday-life lessons."
+          },
+          "answer-place": {
+            "title": "Mwen rete…",
+            "bodyMarkdown": "Answer with **Mwen rete…** followed by a place:\n\n- **Mwen rete Chicago.**\n\nThe place changes, but the sentence pattern stays stable. In the practice, keep the pattern and use a different city."
+          },
+          "third-person-place": {
+            "title": "Li rete…",
+            "bodyMarkdown": "Use **Li rete…** to say where another person lives:\n\n**Li rete Boston.**\n\nThis reuses the pronoun **Li** from the beginning of the module."
+          }
+        }
+      }
+    }
+  }
+}

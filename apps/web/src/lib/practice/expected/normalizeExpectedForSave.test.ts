@@ -4,6 +4,82 @@ import { PracticeKind } from "@zoeskoul/db";
 import { normalizeExpectedForSave } from "./normalizeExpectedForSave";
 
 describe("normalizeExpectedForSave", () => {
+    it("preserves canonical listen_build expected without legacy aliases", () => {
+        const expected = {
+            kind: "listen_build",
+            targetText: "Bonjou.",
+            anyOf: ["Bonjou", "Bonjou!"],
+            locale: "ht-HT",
+            normalize: {
+                trim: true,
+                caseFold: true,
+                collapseSpaces: true,
+                stripPunct: true,
+            },
+        };
+
+        const normalized = normalizeExpectedForSave(
+            PracticeKind.listen_build,
+            expected,
+        );
+
+        expect(normalized).toEqual(expected);
+        expect(normalized).not.toHaveProperty("answers");
+        expect(normalized).not.toHaveProperty("value");
+    });
+
+    it("preserves canonical voice_input expected without legacy aliases", () => {
+        const expected = {
+            kind: "voice_input",
+            targetText: "Kijan ou ye?",
+            anyOf: ["Kijan w ye?"],
+            locale: "ht-HT",
+        };
+
+        const normalized = normalizeExpectedForSave(
+            PracticeKind.voice_input,
+            expected,
+        );
+
+        expect(normalized).toEqual(expected);
+        expect(normalized).not.toHaveProperty("answers");
+        expect(normalized).not.toHaveProperty("value");
+    });
+
+    it("preserves canonical word_bank_arrange expected without legacy aliases", () => {
+        const expected = {
+            kind: "word_bank_arrange",
+            targetText: "M rele Mari.",
+            anyOf: ["Mwen rele Mari."],
+            locale: "ht-HT",
+        };
+
+        const normalized = normalizeExpectedForSave(
+            PracticeKind.word_bank_arrange,
+            expected,
+        );
+
+        expect(normalized).toEqual(expected);
+        expect(normalized).not.toHaveProperty("answers");
+        expect(normalized).not.toHaveProperty("value");
+    });
+
+    it("preserves canonical text_input value without adding answers", () => {
+        const expected = {
+            kind: "text_input",
+            value: "M rete isit la.",
+            anyOf: ["Mwen rete isit la."],
+        };
+
+        const normalized = normalizeExpectedForSave(
+            PracticeKind.text_input,
+            expected,
+        );
+
+        expect(normalized).toEqual(expected);
+        expect(normalized).not.toHaveProperty("answers");
+    });
+
     it("preserves code_input solutionFiles in the secret expected payload", () => {
         const solutionFiles = [
             {

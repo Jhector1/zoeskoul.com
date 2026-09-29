@@ -1,0 +1,18 @@
+{
+  "profileId": "language",
+  "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
+  "courseSlug": "haitian-creole-foundations",
+  "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
+  "sectionSlug": "ht4-learn-listen-speak",
+  "topicId": "listen-and-name-things",
+  "provider": "manual",
+  "model": "checked-in-json",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-07-27-topic-authoring-draft-v3",
+  "strictSchema": true,
+  "retryAttempt": 0,
+  "maxRetries": 0
+}

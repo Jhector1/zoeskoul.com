@@ -1,0 +1,140 @@
+{
+  "topics": {
+    "haitian-creole": {
+      "haitian-creole-foundations-5-what-are-you-doing": {
+        "learn-common-actions": {
+          "label": "Learn Common Actions",
+          "summary": "Learn a small set of useful Kreyòl action verbs and use them in short subject-plus-action sentences.",
+          "cards": {
+            "sketch0": {
+              "title": "Everyday Actions"
+            },
+            "sketch1": {
+              "title": "Make a Short Sentence"
+            },
+            "sketch2": {
+              "title": "Reuse What You Know"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "learn-common-actions-choice": {
+              "title": "Choose the action sentence",
+              "prompt": "Which sentence means “I eat”?",
+              "hint": "Choose the sentence with the first-person pronoun and the eating action.",
+              "help": {
+                "concept": "A short Kreyòl action sentence can use a pronoun directly before a verb.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "options": {
+                "a": "Mwen manje.",
+                "b": "Ou travay.",
+                "c": "Li ale."
+              }
+            },
+            "learn-common-actions-fill": {
+              "title": "Complete the work sentence",
+              "prompt": "Choose the action that completes “He/she works.”",
+              "hint": "Use the work action from the lesson.",
+              "help": {
+                "concept": "The blank needs the verb associated with doing a job or work.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "template": "Li [blank1].",
+              "choices": [
+                "travay",
+                "manje",
+                "ale"
+              ]
+            },
+            "learn-common-actions-listen": {
+              "title": "Hear an action",
+              "prompt": "Listen, then build the sentence you hear.",
+              "hint": "Listen for the subject and action.",
+              "help": {
+                "concept": "Build the short action sentence in the same order as the audio.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "targetText": "Ou manje anpil.",
+              "wordBank": [
+                "Ou",
+                "manje",
+                "anpil."
+              ],
+              "distractors": [
+                "travay"
+              ]
+            },
+            "learn-common-actions-voice": {
+              "title": "Say an action sentence",
+              "prompt": "Say: Mwen etidye.",
+              "hint": "Say the subject and action together.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl sentence.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "targetText": "Mwen etidye."
+            },
+            "learn-common-actions-build": {
+              "title": "Build “They drink”",
+              "prompt": "Arrange the words to say “They drink.”",
+              "hint": "Put the plural subject before the action.",
+              "help": {
+                "concept": "A simple action sentence keeps the subject before the verb.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "targetText": "Yo bwè.",
+              "wordBank": [
+                "Yo",
+                "bwè."
+              ],
+              "distractors": [
+                "manje."
+              ],
+              "ttsText": "Yo bwè."
+            },
+            "learn-common-actions-write": {
+              "title": "Write the study verb",
+              "prompt": "Type the Kreyòl verb for “study.”",
+              "hint": "Use the action word from this lesson.",
+              "help": {
+                "concept": "Write the verb by itself with its Kreyòl spelling.",
+                "hint_1": "Use the action pattern introduced in this lesson.",
+                "hint_2": "Compare the complete sentence with the choices before answering."
+              },
+              "expectedText": "etidye",
+              "placeholder": "Type the Kreyòl answer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole": {
+      "haitian-creole-foundations-5-what-are-you-doing": {
+        "learn-common-actions": {
+          "actions": {
+            "title": "manje, bwè, travay, etidye, ale",
+            "bodyMarkdown": "Start with a few useful action words:\n\n- **manje** — eat\n- **bwè** — drink\n- **travay** — work\n- **etidye** — study\n- **ale** — go\n\nThese verbs will appear again in later modules, so learn them as reusable building blocks."
+          },
+          "subject-action": {
+            "title": "Mwen manje",
+            "bodyMarkdown": "A simple beginner sentence can be just a subject plus an action:\n\n- **Mwen manje.** — I eat.\n- **Ou manje anpil.** — You eat a lot.\n- **Li travay.** — He/she works.\n\nThe verb does not change its spelling for different people."
+          },
+          "reuse-pronouns": {
+            "title": "Pronouns + action",
+            "bodyMarkdown": "The pronouns from Module 3 work directly with action words:\n\n- **Mwen etidye.**\n- **Ou travay.**\n- **Li manje.**\n- **Nou ale.**\n- **Yo bwè.**\n\nThis makes it easy to build many new sentences from a small vocabulary."
+          }
+        }
+      }
+    }
+  }
+}

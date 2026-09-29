@@ -127,6 +127,10 @@ export type TopicBundleShape = {
         | "multi_choice"
         | "drag_reorder"
         | "fill_blank_choice"
+        | "text_input"
+        | "voice_input"
+        | "word_bank_arrange"
+        | "listen_build"
         | "code_input"
         | "pseudocode_input"
     )[];
@@ -166,6 +170,18 @@ export type QuizShape = {
     };
     fillBlankChoice: {
         requiredFields: readonly ["id", "kind", "purpose", "weight", "messageBase", "choiceCount", "expected"];
+    };
+    textInput?: {
+        requiredFields: readonly ["id", "kind", "purpose", "weight", "messageBase", "expected"];
+    };
+    voiceInput?: {
+        requiredFields: readonly ["id", "kind", "purpose", "weight", "messageBase", "targetText", "expected"];
+    };
+    wordBankArrange?: {
+        requiredFields: readonly ["id", "kind", "purpose", "weight", "messageBase", "targetText", "expected"];
+    };
+    listenBuild?: {
+        requiredFields: readonly ["id", "kind", "purpose", "weight", "messageBase", "targetText", "expected"];
     };
     pseudocodeInput?: {
         requiredFields: readonly ["id", "kind", "purpose", "weight", "messageBase", "mode", "expected"];

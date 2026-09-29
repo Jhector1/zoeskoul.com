@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "profileId": "language",
+  "subjectSlug": "haitian-creole",
+  "courseSlug": "haitian-creole-foundations",
+  "topicId": "listen-and-name-things",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 6,
+    "exerciseKinds": {
+      "single_choice": 1,
+      "fill_blank_choice": 1,
+      "listen_build": 1,
+      "voice_input": 1,
+      "word_bank_arrange": 1,
+      "text_input": 1
+    },
+    "codeInputs": 0,
+    "projects": 0,
+    "capstones": 0,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 0,
+    "info": 0
+  },
+  "issues": []
+}

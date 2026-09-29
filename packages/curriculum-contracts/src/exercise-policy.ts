@@ -3,6 +3,10 @@ export type ExerciseKindKey =
     | "multi_choice"
     | "drag_reorder"
     | "fill_blank_choice"
+    | "text_input"
+    | "voice_input"
+    | "word_bank_arrange"
+    | "listen_build"
     | "pseudocode_input"
     | "code_input";
 
@@ -14,5 +18,5 @@ export type ResolvedExercisePolicy = {
         | "course_spec"
         | "blueprint_teaching_style"
         | "default";
-    mix: Record<ExerciseKindKey, number>;
+    mix: ExerciseKindMix;
 };

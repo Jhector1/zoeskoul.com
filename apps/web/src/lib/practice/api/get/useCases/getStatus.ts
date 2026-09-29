@@ -70,6 +70,30 @@ function sanitizeExpectedForHistory(kind: string, raw: any) {
             : null;
     }
 
+    if (k === "text_input") {
+        const value =
+            typeof raw?.value === "string"
+                ? raw.value
+                : null;
+        return value
+            ? { kind: "text_input", value: String(value) }
+            : null;
+    }
+
+    if (
+        k === "voice_input" ||
+        k === "word_bank_arrange" ||
+        k === "listen_build"
+    ) {
+        const targetText =
+            typeof raw?.targetText === "string"
+                ? raw.targetText
+                : null;
+        return targetText
+            ? { kind: k, targetText: String(targetText) }
+            : null;
+    }
+
     return null;
 }
 

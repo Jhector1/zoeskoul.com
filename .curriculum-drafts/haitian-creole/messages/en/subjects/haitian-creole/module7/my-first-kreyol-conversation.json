@@ -1,0 +1,144 @@
+{
+  "topics": {
+    "haitian-creole": {
+      "haitian-creole-foundations-8-my-first-kreyol-conversation": {
+        "my-first-kreyol-conversation": {
+          "label": "My First Kreyòl Conversation",
+          "summary": "Complete a first independent Kreyòl conversation by greeting, introducing yourself, asking questions, and closing politely.",
+          "cards": {
+            "sketch0": {
+              "title": "Your First Full Conversation"
+            },
+            "sketch1": {
+              "title": "What You Can Now Do"
+            },
+            "sketch2": {
+              "title": "Use What You Know"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "my-first-kreyol-conversation-choice": {
+              "title": "Choose the natural next line",
+              "prompt": "Someone says “Bonjou! Kijan ou ye?” Which answer fits naturally?",
+              "hint": "Choose the polite check-in response from Module 2.",
+              "help": {
+                "concept": "A conversation works when the response matches the question that was asked.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "options": {
+                "a": "Mwen byen, mèsi.",
+                "b": "Twa liv.",
+                "c": "Setè edmi."
+              }
+            },
+            "my-first-kreyol-conversation-fill": {
+              "title": "Complete the final question",
+              "prompt": "Choose the word that completes the question about language.",
+              "hint": "Use the action associated with speaking a language.",
+              "help": {
+                "concept": "The blank needs the verb used in the familiar language question.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "template": "Èske ou [blank1] kreyòl?",
+              "choices": [
+                "pale",
+                "rete",
+                "rele"
+              ]
+            },
+            "my-first-kreyol-conversation-listen": {
+              "title": "Hear the conversation close",
+              "prompt": "Listen, then build the closing exchange you hear.",
+              "hint": "Listen for the repeated goodbye.",
+              "help": {
+                "concept": "Build the two-line closing using the familiar farewell.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "targetText": "Orevwa! Orevwa!",
+              "wordBank": [
+                "Orevwa!",
+                "Orevwa!"
+              ],
+              "distractors": [
+                "Bonjou!"
+              ]
+            },
+            "my-first-kreyol-conversation-voice": {
+              "title": "Give your first conversation",
+              "prompt": "Say: Bonjou! M rele Jan. Mwen rete Chicago. Mwen pale kreyòl. Orevwa!",
+              "hint": "Say the short sentences one at a time at a comfortable pace.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored capstone response.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "targetText": "Bonjou! M rele Jan. Mwen rete Chicago. Mwen pale kreyòl. Orevwa!"
+            },
+            "my-first-kreyol-conversation-build": {
+              "title": "Build a complete mini exchange",
+              "prompt": "Arrange the chunks into a natural question and answer.",
+              "hint": "Put the residence question before its answer.",
+              "help": {
+                "concept": "A useful exchange pairs one clear question with one complete answer.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "targetText": "Ki kote ou rete? Mwen rete Chicago.",
+              "wordBank": [
+                "Ki",
+                "kote",
+                "ou",
+                "rete?",
+                "Mwen",
+                "rete",
+                "Chicago."
+              ],
+              "distractors": [
+                "Konbyen"
+              ],
+              "ttsText": "Ki kote ou rete? Mwen rete Chicago."
+            },
+            "my-first-kreyol-conversation-write": {
+              "title": "Write a short self-introduction",
+              "prompt": "Type: “My name is Ana. I speak Kreyòl.”",
+              "hint": "Use two short sentences from Modules 3 and 8.",
+              "help": {
+                "concept": "Write two complete beginner sentences.",
+                "hint_1": "Reuse a complete pattern you practiced earlier in this course.",
+                "hint_2": "Read or listen to the whole exchange before answering."
+              },
+              "expectedText": "M rele Ana. Mwen pale kreyòl.",
+              "placeholder": "Type the Kreyòl answer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole": {
+      "haitian-creole-foundations-8-my-first-kreyol-conversation": {
+        "my-first-kreyol-conversation": {
+          "full-conversation": {
+            "title": "From Bonjou to Orevwa",
+            "bodyMarkdown": "**A:** Bonjou! Kijan ou ye?\n\n**B:** Mwen byen, mèsi. E ou menm?\n\n**A:** Mwen byen tou. Kijan ou rele?\n\n**B:** M rele Ana. E ou menm?\n\n**A:** M rele Jan. Ki kote ou rete?\n\n**B:** Mwen rete Chicago.\n\n**A:** Èske ou pale kreyòl?\n\n**B:** Wi, mwen pale kreyòl. M ap etidye kreyòl kounyeya.\n\n**A:** Trè byen. Orevwa!\n\n**B:** Orevwa!"
+          },
+          "conversation-skills": {
+            "title": "A0 → A1 foundations",
+            "bodyMarkdown": "You can now:\n\n- greet and close politely\n- give your name and basic identity\n- say where you live and what language you speak\n- identify and describe simple things\n- say what someone is doing\n- ask common beginner questions\n- understand basic numbers and time expressions\n\nThat is the foundation for the next course."
+          },
+          "independent-use": {
+            "title": "Do not memorize one script",
+            "bodyMarkdown": "The goal is not to memorize this exact conversation. Swap in a different name, place, action, object, number, or time. Keep the grammar simple and make the conversation your own."
+          }
+        }
+      }
+    }
+  }
+}

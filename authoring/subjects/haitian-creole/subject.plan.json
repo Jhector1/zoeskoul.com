@@ -1,0 +1,31 @@
+{
+  "subjectSlug": "haitian-creole",
+  "catalogSlug": "haitian-creole",
+  "profileId": "language",
+  "accessPolicy": "paid",
+  "visibility": "public",
+  "courseOrder": [
+    "haitian-creole-foundations"
+  ],
+  "publishTarget": {
+    "liveSubjectSlug": "haitian-creole-foundations",
+    "courseSlug": "haitian-creole-foundations",
+    "channel": "current"
+  },
+  "versioning": {
+    "family": "haitian-creole",
+    "version": 1,
+    "status": "active",
+    "defaultForNewEnrollments": true,
+    "supersedes": null,
+    "supersededBy": null
+  },
+  "courses": [
+    {
+      "courseSlug": "haitian-creole-foundations",
+      "title": "Haitian Creole Foundations",
+      "order": 1,
+      "path": "courses/haitian-creole-foundations/course.spec.json"
+    }
+  ]
+}

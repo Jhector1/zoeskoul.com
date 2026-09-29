@@ -1,0 +1,302 @@
+{
+  "topicId": "read-build-and-write-about-things",
+  "subjectSlug": "haitian-creole-foundations",
+  "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
+  "sectionSlug": "haitian-creole-foundations-ht4-read-build-write-use",
+  "prefix": "ht4",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.label",
+    "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.cards.sketch0.title",
+      "sketchId": "possessor-after",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-build-and-write-about-things-sketch0",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch0.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch0.prompt",
+        "exerciseKey": "try-possessor-after-car",
+        "exerciseKeys": [
+          "try-possessor-after-car"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.cards.sketch1.title",
+      "sketchId": "with-definite",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-build-and-write-about-things-sketch1",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch1.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch1.prompt",
+        "exerciseKey": "try-with-definite-car",
+        "exerciseKeys": [
+          "try-with-definite-car"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.cards.sketch2.title",
+      "sketchId": "se-pou",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-build-and-write-about-things-sketch2",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch2.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.tryIt.try_read_build_and_write_about_things_sketch2.prompt",
+        "exerciseKey": "try-se-pou-mwen",
+        "exerciseKeys": [
+          "try-se-pou-mwen"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "possessor-after",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.possessor-after.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.possessor-after.bodyMarkdown"
+    },
+    {
+      "id": "with-definite",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.with-definite.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.with-definite.bodyMarkdown"
+    },
+    {
+      "id": "se-pou",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.se-pou.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.se-pou.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "read-build-and-write-about-things-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "read-build-and-write-about-things-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ou"
+      }
+    },
+    {
+      "id": "read-build-and-write-about-things-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-listen",
+      "targetText": "machin mwen",
+      "locale": "ht-HT",
+      "wordBank": [
+        "machin",
+        "mwen"
+      ],
+      "distractors": [
+        "yo"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "machin mwen",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "read-build-and-write-about-things-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-voice",
+      "targetText": "Sa se pou mwen.",
+      "locale": "ht-HT",
+      "maxSeconds": 12,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Sa se pou mwen.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "read-build-and-write-about-things-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-build",
+      "targetText": "Liv la se pou li.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Liv",
+        "la",
+        "se",
+        "pou",
+        "li."
+      ],
+      "distractors": [
+        "yo"
+      ],
+      "ttsText": "Liv la se pou li.",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Liv la se pou li.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "read-build-and-write-about-things-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.read-build-and-write-about-things-write",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "kaye mwen",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-possessor-after-car",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-possessor-after-car",
+      "targetText": "liv mwen",
+      "locale": "ht-HT",
+      "wordBank": [
+        "liv",
+        "mwen"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "liv mwen",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-with-definite-car",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-with-definite-car",
+      "targetText": "liv mwen an",
+      "locale": "ht-HT",
+      "wordBank": [
+        "liv",
+        "mwen",
+        "an"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "liv mwen an",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-se-pou-mwen",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.read-build-and-write-about-things.practice.try-se-pou-mwen",
+      "targetText": "Sa se pou ou.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Sa se pou ou.",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

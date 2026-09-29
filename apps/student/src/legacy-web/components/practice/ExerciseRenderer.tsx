@@ -19,6 +19,7 @@ import MatrixInputPanel from "./MatrixInputPanel";
 import {resizeGrid} from "@/lib/practice/matrixHelpers";
 import FillBlankChoiceExerciseUI from "@/components/practice/kinds/FillBlankChoiceExerciseUI";
 import ListenBuildExerciseUI from "@/components/practice/kinds/ListenBuildExerciseUI";
+import WordBankArrangeExerciseUI from "@/components/practice/kinds/WordBankArrangeExerciseUI";
 import {resolveDeepTagged} from "@zoeskoul/i18n-core";
 import {useTaggedT} from "@student/i18n/tagged";
 import type {RunnerLanguage} from "@zoeskoul/code-contracts";
@@ -2083,6 +2084,29 @@ export default function ExerciseRenderer({
                 onChange={(a, b) => updateCurrent({dragA: a, dragB: b, ...resetCheckPatch()})}
                 padRef={padRef}
                 disabled={lockInputs}
+            />
+        );
+    }
+
+    if (ex.kind === "word_bank_arrange") {
+        const reviewCorrectValue =
+            reviewCorrectItem && typeof (reviewCorrectItem as any).text === "string"
+                ? String((reviewCorrectItem as any).text)
+                : typeof (exercise as any).targetText === "string"
+                    ? String((exercise as any).targetText)
+                    : null;
+
+        return (
+            <WordBankArrangeExerciseUI
+                exercise={ex as any}
+                value={(current as any).text ?? ""}
+                onChangeValue={(text) =>
+                    updateCurrent({text, ...resetCheckPatch()})
+                }
+                disabled={lockInputs}
+                checked={checked}
+                ok={ok}
+                reviewCorrectValue={reviewCorrectValue}
             />
         );
     }

@@ -101,8 +101,15 @@ export function buildTopicBundleFromDraft(args: {
 }): TopicBundleManifest {
     const { shape, seed, draft } = args;
     const profile = getCurriculumProfile(seed.profileId);
+    const authoredTryItExercises = draft.sketchBlocks.flatMap(
+        (block) => block.tryItExercises ?? [],
+    );
+    const authoredExercisePool = [
+        ...draft.quizDraft,
+        ...authoredTryItExercises,
+    ];
     const codeInputProfile =
-        draft.quizDraft.some((exercise) => exercise.kind === "code_input")
+        authoredExercisePool.some((exercise) => exercise.kind === "code_input")
             ? assertProfileSupportsCodeInput(profile)
             : null;
     const kp = shape.subjectManifest.keyPatterns;
@@ -180,12 +187,18 @@ export function buildTopicBundleFromDraft(args: {
     const projectStepIds = isProjectOnlyTopic
         ? resolvedProjectStepIds.slice(0, expectedProjectStepCount)
         : [];
+    const sketchBlocks = effectiveSketchBlocks({ draft, topicKind });
+    const explicitTryItExercises = sketchBlocks.flatMap(
+        (block) => block.tryItExercises ?? [],
+    );
+    const explicitTryItExerciseIdSet = new Set(
+        explicitTryItExercises.map((exercise) => exercise.id),
+    );
     const tryItExercises = isProjectOnlyTopic
         ? []
         : draft.quizDraft.filter((exercise) => exercise.kind === "code_input");
 
     const quizOnlyExercises = isProjectOnlyTopic ? [] : quizExercises(draft);
-    const sketchBlocks = effectiveSketchBlocks({ draft, topicKind });
 
     const quizVisibleDefault = targets?.quizVisibleDefault ?? 4;
     const quizVisibleMax = targets?.quizVisibleMax ?? 6;
@@ -195,18 +208,30 @@ export function buildTopicBundleFromDraft(args: {
         profile.practice?.preferredTryItExerciseKind ??
         null;
     const tryItSketchIndexes = new Set(
-        isProjectOnlyTopic ? [] : resolveTryItSketchIndexes(
-            { ...draft, sketchBlocks },
-            seed,
-            profile,
-        ),
+        isProjectOnlyTopic
+            ? []
+            : resolveTryItSketchIndexes(
+                { ...draft, sketchBlocks },
+                seed,
+                profile,
+            ).filter(
+                (sketchIndex) =>
+                    (sketchBlocks[sketchIndex]?.tryItExercises?.length ?? 0) === 0,
+            ),
     );
     const tryItExerciseIdToMessageId = new Map<string, string>();
     const tryItSourceIdToCanonicalId = new Map<string, string>();
     const sketchCards: ManifestCard[] = sketchBlocks.map((block, index) => {
-        const tryItEnabled = seed.practice?.tryIt === true && !isProjectOnlyTopic;
+        const automaticTryItEnabled =
+            seed.practice?.tryIt === true && !isProjectOnlyTopic;
+        const dedicatedTryItExercises =
+            !isProjectOnlyTopic ? (block.tryItExercises ?? []) : [];
+        const explicitTryItExerciseKeys = uniqueNonEmpty(
+            dedicatedTryItExercises.map((exercise) => exercise.id),
+        );
+        const explicitTryItPrimaryExercise = dedicatedTryItExercises[0];
         const sourceTryItExerciseId =
-            tryItEnabled && tryItSketchIndexes.has(index)
+            automaticTryItEnabled && tryItSketchIndexes.has(index)
                 ? resolveTryItExerciseIdForSketch({
                     draft,
                     exercises: tryItExercises,
@@ -219,6 +244,24 @@ export function buildTopicBundleFromDraft(args: {
         const canonicalTryItExerciseId = sourceTryItExerciseId
             ? tryItExerciseId(seed.topicId, index)
             : undefined;
+        const embeddedTryItExerciseKeys =
+            explicitTryItExerciseKeys.length > 0
+                ? explicitTryItExerciseKeys
+                : canonicalTryItExerciseId
+                    ? [canonicalTryItExerciseId]
+                    : [];
+        const embeddedTryItId =
+            embeddedTryItExerciseKeys.length > 0
+                ? tryItExerciseId(seed.topicId, index)
+                : undefined;
+        const embeddedTryItPreferKind =
+            explicitTryItExerciseKeys.length > 1
+                ? null
+                : explicitTryItExerciseKeys.length === 1
+                    ? manifestPreferredKind(
+                        explicitTryItPrimaryExercise?.kind ?? null,
+                    )
+                    : manifestPreferredKind(preferredTryItKind);
 
         if (sourceTryItExerciseId && canonicalTryItExerciseId) {
             tryItSourceIdToCanonicalId.set(sourceTryItExerciseId, canonicalTryItExerciseId);
@@ -244,10 +287,10 @@ export function buildTopicBundleFromDraft(args: {
                 sourceId: block.id,
                 authored: block.tools,
             }),
-            ...(canonicalTryItExerciseId
+            ...(embeddedTryItId
                 ? {
                     tryIt: {
-                        id: canonicalTryItExerciseId,
+                        id: embeddedTryItId,
                         titleKey: `${topicMessageRoot(
                             seed.subjectSlug,
                             logicalModuleSlug,
@@ -258,9 +301,12 @@ export function buildTopicBundleFromDraft(args: {
                             logicalModuleSlug,
                             seed.topicId,
                         )}.tryIt.${tryItMessageId(seed.topicId, index)}.prompt`,
-                        exerciseKey: canonicalTryItExerciseId,
+                        exerciseKey: embeddedTryItExerciseKeys[0],
+                        ...(explicitTryItExerciseKeys.length > 0
+                            ? { exerciseKeys: embeddedTryItExerciseKeys }
+                            : {}),
                         difficulty: "easy" as const,
-                        preferKind: manifestPreferredKind(preferredTryItKind),
+                        preferKind: embeddedTryItPreferKind,
                         seedPolicy: "global" as const,
                         required: true,
                         allowReveal:
@@ -379,7 +425,10 @@ export function buildTopicBundleFromDraft(args: {
 
     const emittedDraftExercises = isProjectOnlyTopic
         ? draft.quizDraft.filter((exercise) => projectStepIdSet.has(exercise.id))
-        : draft.quizDraft;
+        : [
+            ...draft.quizDraft,
+            ...explicitTryItExercises,
+        ];
 
     validateTopicMessageBases(
         emittedDraftExercises.map((exercise) => ({
@@ -431,7 +480,9 @@ export function buildTopicBundleFromDraft(args: {
 
         const messageBase = messageKeys.qualifiedBase;
 
-        const isProjectExercise = projectStepIdSet.has(exercise.id);
+        const isProjectExercise =
+            projectStepIdSet.has(exercise.id) ||
+            explicitTryItExerciseIdSet.has(exercise.id);
 
         if (exercise.kind === "single_choice") {
             const optionIds = optionIdsFromCount(exercise.options.length);
@@ -557,6 +608,114 @@ export function buildTopicBundleFromDraft(args: {
                 expected: {
                     kind: "fill_blank_choice" as const,
                     value: correctValue,
+                },
+            };
+        }
+
+        if (exercise.kind === "text_input") {
+            const value = normalizeText(exercise.expectedText);
+            const anyOf = (exercise.anyOf ?? []).map(normalizeText).filter(Boolean);
+
+            if (!value) {
+                throw new Error(`Invalid text_input exercise "${exercise.id}": expectedText must not be empty.`);
+            }
+
+            return {
+                id: exercise.id,
+                kind: "text_input" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
+                weight: 1,
+                messageBase,
+                ...(exercise.placeholder ? { placeholder: exercise.placeholder } : {}),
+                expected: {
+                    kind: "text_input" as const,
+                    value,
+                    ...(anyOf.length > 0 ? { anyOf } : {}),
+                    ...(exercise.normalize ? { normalize: exercise.normalize } : {}),
+                },
+            };
+        }
+
+        if (exercise.kind === "voice_input") {
+            const targetText = normalizeText(exercise.targetText);
+            const anyOf = (exercise.anyOf ?? []).map(normalizeText).filter(Boolean);
+
+            if (!targetText) {
+                throw new Error(`Invalid voice_input exercise "${exercise.id}": targetText must not be empty.`);
+            }
+
+            return {
+                id: exercise.id,
+                kind: "voice_input" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
+                weight: 1,
+                messageBase,
+                targetText,
+                ...(exercise.locale ? { locale: exercise.locale } : {}),
+                ...(exercise.maxSeconds ? { maxSeconds: exercise.maxSeconds } : {}),
+                expected: {
+                    kind: "voice_input" as const,
+                    targetText,
+                    ...(anyOf.length > 0 ? { anyOf } : {}),
+                    ...(exercise.locale ? { locale: exercise.locale } : {}),
+                    ...(exercise.normalize ? { normalize: exercise.normalize } : {}),
+                },
+            };
+        }
+
+        if (exercise.kind === "word_bank_arrange") {
+            const targetText = normalizeText(exercise.targetText);
+            const anyOf = (exercise.anyOf ?? []).map(normalizeText).filter(Boolean);
+
+            if (!targetText) {
+                throw new Error(`Invalid word_bank_arrange exercise "${exercise.id}": targetText must not be empty.`);
+            }
+
+            return {
+                id: exercise.id,
+                kind: "word_bank_arrange" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
+                weight: 1,
+                messageBase,
+                targetText,
+                ...(exercise.locale ? { locale: exercise.locale } : {}),
+                ...(exercise.wordBank ? { wordBank: exercise.wordBank } : {}),
+                ...(exercise.distractors ? { distractors: exercise.distractors } : {}),
+                ...(exercise.ttsText ? { ttsText: exercise.ttsText } : {}),
+                expected: {
+                    kind: "word_bank_arrange" as const,
+                    targetText,
+                    ...(anyOf.length > 0 ? { anyOf } : {}),
+                    ...(exercise.locale ? { locale: exercise.locale } : {}),
+                    ...(exercise.normalize ? { normalize: exercise.normalize } : {}),
+                },
+            };
+        }
+
+        if (exercise.kind === "listen_build") {
+            const targetText = normalizeText(exercise.targetText);
+            const anyOf = (exercise.anyOf ?? []).map(normalizeText).filter(Boolean);
+
+            if (!targetText) {
+                throw new Error(`Invalid listen_build exercise "${exercise.id}": targetText must not be empty.`);
+            }
+
+            return {
+                id: exercise.id,
+                kind: "listen_build" as const,
+                purpose: isProjectExercise ? ("project" as const) : ("quiz" as const),
+                weight: 1,
+                messageBase,
+                targetText,
+                ...(exercise.locale ? { locale: exercise.locale } : {}),
+                ...(exercise.wordBank ? { wordBank: exercise.wordBank } : {}),
+                ...(exercise.distractors ? { distractors: exercise.distractors } : {}),
+                expected: {
+                    kind: "listen_build" as const,
+                    targetText,
+                    ...(anyOf.length > 0 ? { anyOf } : {}),
+                    ...(exercise.locale ? { locale: exercise.locale } : {}),
+                    ...(exercise.normalize ? { normalize: exercise.normalize } : {}),
                 },
             };
         }

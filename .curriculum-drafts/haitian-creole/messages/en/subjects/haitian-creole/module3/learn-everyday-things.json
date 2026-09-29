@@ -1,0 +1,139 @@
+{
+  "topics": {
+    "haitian-creole": {
+      "haitian-creole-foundations-4-talking-about-things": {
+        "learn-everyday-things": {
+          "label": "Learn Everyday Things",
+          "summary": "Introduce Kreyòl noun phrases with yon and the idea that definite markers come after the noun.",
+          "cards": {
+            "sketch0": {
+              "title": "Talk About One Thing"
+            },
+            "sketch1": {
+              "title": "Talk About a Specific Thing"
+            },
+            "sketch2": {
+              "title": "Compare the Patterns"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "practice": {
+            "learn-everyday-things-choice": {
+              "title": "Choose “a book”",
+              "prompt": "Which Kreyòl phrase means “a book”?",
+              "hint": "Use the indefinite pattern from the lesson.",
+              "help": {
+                "concept": "An unspecified singular thing uses a short marker before the noun.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "options": {
+                "a": "yon liv",
+                "b": "liv la",
+                "c": "liv yo"
+              }
+            },
+            "learn-everyday-things-fill": {
+              "title": "Complete the indefinite phrase",
+              "prompt": "Choose the word that completes “a bag.”",
+              "hint": "Use the singular indefinite pattern.",
+              "help": {
+                "concept": "The blank needs the marker that comes before an unspecified singular noun.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "template": "[blank1] valiz",
+              "choices": [
+                "yon",
+                "yo",
+                "la"
+              ]
+            },
+            "learn-everyday-things-listen": {
+              "title": "Hear a specific thing",
+              "prompt": "Listen, then build the noun phrase you hear.",
+              "hint": "Build the noun first, then its following marker.",
+              "help": {
+                "concept": "Listen for the order of the noun and its definite marker.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "liv la",
+              "wordBank": [
+                "liv",
+                "la"
+              ],
+              "distractors": [
+                "yon"
+              ]
+            },
+            "learn-everyday-things-voice": {
+              "title": "Say an indefinite noun phrase",
+              "prompt": "Say: yon machin.",
+              "hint": "Say both words in the authored order.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored Kreyòl phrase.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "yon machin"
+            },
+            "learn-everyday-things-build": {
+              "title": "Build “the cat”",
+              "prompt": "Arrange the words to build the Kreyòl phrase for “the cat.”",
+              "hint": "Put the noun before its marker.",
+              "help": {
+                "concept": "The definite marker follows the noun in this phrase.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "chat la",
+              "wordBank": [
+                "chat",
+                "la"
+              ],
+              "distractors": [
+                "yon"
+              ],
+              "ttsText": "chat la"
+            },
+            "learn-everyday-things-write": {
+              "title": "Write “a book”",
+              "prompt": "Type the Kreyòl phrase for “a book.”",
+              "hint": "Use the indefinite pattern from the lesson.",
+              "help": {
+                "concept": "Write the complete two-word noun phrase.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "expectedText": "yon liv",
+              "placeholder": "Type the Kreyòl answer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole": {
+      "haitian-creole-foundations-4-talking-about-things": {
+        "learn-everyday-things": {
+          "yon": {
+            "title": "Use yon before a noun",
+            "bodyMarkdown": "**yon** means “a” or “an” and comes before the noun:\n\n- **yon liv** — a book\n- **yon valiz** — a bag\n- **yon machin** — a car\n\nThis is the simplest way to introduce one unspecified thing."
+          },
+          "definite-after": {
+            "title": "The definite marker comes after the noun",
+            "bodyMarkdown": "Kreyòl places its singular definite marker **after** the noun:\n\n- **tifi a** — the girl\n- **chat la** — the cat\n- **pen an** — the bread\n\nThe exact form changes with the final sound of the noun. For now, notice the most important structural fact: the marker follows the noun."
+          },
+          "contrast": {
+            "title": "yon liv vs. liv la",
+            "bodyMarkdown": "Compare:\n\n- **yon liv** — a book\n- **liv la** — the book\n\nThe indefinite word comes before the noun; the definite marker comes after it."
+          }
+        }
+      }
+    }
+  }
+}

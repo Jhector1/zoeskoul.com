@@ -1,0 +1,288 @@
+{
+  "topicId": "listen-and-speak-through-a-conversation",
+  "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
+  "moduleSlug": "haitian-creole-foundations-8-my-first-kreyol-conversation",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht8-learn-listen-speak",
+  "prefix": "ht8",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.label",
+    "summaryKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.cards.sketch0.title",
+      "sketchId": "things-owner",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-speak-through-a-conversation-sketch0",
+        "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch0.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch0.prompt",
+        "exerciseKey": "try-things-owner-identify",
+        "exerciseKeys": [
+          "try-things-owner-identify",
+          "try-things-owner-owner"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.cards.sketch1.title",
+      "sketchId": "people-actions",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-speak-through-a-conversation-sketch1",
+        "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch1.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.tryIt.try_listen_and_speak_through_a_conversation_sketch1.prompt",
+        "exerciseKey": "try-people-actions-answer",
+        "exerciseKeys": [
+          "try-people-actions-answer"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.cards.sketch2.title",
+      "sketchId": "point-and-answer",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "things-owner",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.things-owner.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.things-owner.bodyMarkdown"
+    },
+    {
+      "id": "people-actions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.people-actions.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.people-actions.bodyMarkdown"
+    },
+    {
+      "id": "point-and-answer",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.point-and-answer.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.point-and-answer.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "listen-and-speak-through-a-conversation-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "etidye"
+      }
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-listen",
+      "targetText": "Liv la se pou Mari.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Liv",
+        "la",
+        "se",
+        "pou",
+        "Mari."
+      ],
+      "distractors": [
+        "yo"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Liv la se pou Mari.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-voice",
+      "targetText": "Kisa Mari ap fè?",
+      "locale": "ht-HT",
+      "maxSeconds": 12,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Kisa Mari ap fè?",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-build",
+      "targetText": "liv sa a",
+      "locale": "ht-HT",
+      "wordBank": [
+        "liv",
+        "sa",
+        "a"
+      ],
+      "distractors": [
+        "yo"
+      ],
+      "ttsText": "liv sa a",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "liv sa a",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-and-speak-through-a-conversation-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.listen-and-speak-through-a-conversation-write",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "Li ap etidye kreyòl.",
+        "anyOf": [
+          "L ap etidye kreyòl."
+        ],
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-things-owner-identify",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.try-things-owner-identify",
+      "targetText": "Se yon liv.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Se",
+        "yon",
+        "liv."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Se yon liv.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-things-owner-owner",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.try-things-owner-owner",
+      "targetText": "Liv la se pou Mari.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Liv la se pou Mari.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-people-actions-answer",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.listen-and-speak-through-a-conversation.practice.try-people-actions-answer",
+      "targetText": "Li ap etidye kreyòl.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Li ap etidye kreyòl.",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

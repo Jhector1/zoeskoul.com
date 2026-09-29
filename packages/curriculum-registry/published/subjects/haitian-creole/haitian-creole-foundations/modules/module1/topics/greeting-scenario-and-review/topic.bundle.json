@@ -1,0 +1,315 @@
+{
+  "topicId": "greeting-scenario-and-review",
+  "subjectSlug": "haitian-creole-foundations",
+  "moduleSlug": "haitian-creole-foundations-2-bonjou",
+  "sectionSlug": "haitian-creole-foundations-ht2-read-build-write-use",
+  "prefix": "ht2",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.label",
+    "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.cards.sketch0.title",
+      "sketchId": "mini-dialogue",
+      "height": 420,
+      "tryIt": {
+        "id": "try-greeting-scenario-and-review-sketch0",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch0.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch0.prompt",
+        "exerciseKey": "try-mini-dialogue-question",
+        "exerciseKeys": [
+          "try-mini-dialogue-question",
+          "try-mini-dialogue-response"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.cards.sketch1.title",
+      "sketchId": "close-conversation",
+      "height": 420,
+      "tryIt": {
+        "id": "try-greeting-scenario-and-review-sketch1",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch1.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch1.prompt",
+        "exerciseKey": "try-close-conversation-orevwa",
+        "exerciseKeys": [
+          "try-close-conversation-orevwa"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.cards.sketch2.title",
+      "sketchId": "conversation-flow",
+      "height": 420,
+      "tryIt": {
+        "id": "try-greeting-scenario-and-review-sketch2",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch2.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.tryIt.try_greeting_scenario_and_review_sketch2.prompt",
+        "exerciseKey": "try-conversation-flow-order",
+        "exerciseKeys": [
+          "try-conversation-flow-order"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "mini-dialogue",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.mini-dialogue.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.mini-dialogue.bodyMarkdown"
+    },
+    {
+      "id": "close-conversation",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.close-conversation.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.close-conversation.bodyMarkdown"
+    },
+    {
+      "id": "conversation-flow",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.conversation-flow.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.conversation-flow.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "greeting-scenario-and-review-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "greeting-scenario-and-review-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "mèsi"
+      }
+    },
+    {
+      "id": "greeting-scenario-and-review-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-listen",
+      "targetText": "Kijan ou ye?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Kijan",
+        "ou",
+        "ye?"
+      ],
+      "distractors": [
+        "byen"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Kijan ou ye?",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "greeting-scenario-and-review-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-voice",
+      "targetText": "Mwen byen, mèsi. E ou menm?",
+      "locale": "ht-HT",
+      "maxSeconds": 15,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mwen byen, mèsi. E ou menm?",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "greeting-scenario-and-review-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-build",
+      "targetText": "Bonjou! Kijan ou ye?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Bonjou!",
+        "Kijan",
+        "ou",
+        "ye?"
+      ],
+      "distractors": [
+        "Orevwa."
+      ],
+      "ttsText": "Bonjou! Kijan ou ye?",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Bonjou! Kijan ou ye?",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "greeting-scenario-and-review-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.greeting-scenario-and-review-write",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "Orevwa",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-mini-dialogue-question",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-mini-dialogue-question",
+      "targetText": "Kijan ou ye?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Kijan ou ye?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-mini-dialogue-response",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-mini-dialogue-response",
+      "targetText": "Mwen byen, mèsi. E ou menm?",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mwen byen, mèsi. E ou menm?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-close-conversation-orevwa",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-close-conversation-orevwa",
+      "targetText": "Mèsi. Orevwa.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Mèsi. Orevwa.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-conversation-flow-order",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-2-bonjou.greeting-scenario-and-review.practice.try-conversation-flow-order",
+      "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Orevwa.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Bonjou!",
+        "Kijan ou ye?",
+        "Mwen byen, mèsi.",
+        "E ou menm?",
+        "Orevwa."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Bonjou! Kijan ou ye? Mwen byen, mèsi. E ou menm? Orevwa.",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,321 @@
+{
+  "topicId": "read-build-and-write-a-conversation",
+  "subjectSlug": "haitian-creole--haitian-creole-foundations--draft",
+  "moduleSlug": "haitian-creole-foundations-8-my-first-kreyol-conversation",
+  "sectionSlug": "haitian-creole--haitian-creole-foundations--draft-ht8-read-build-write-use",
+  "prefix": "ht8",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.label",
+    "summaryKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.cards.sketch0.title",
+      "sketchId": "make-plan",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-build-and-write-a-conversation-sketch0",
+        "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch0.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch0.prompt",
+        "exerciseKey": "try-make-plan-question",
+        "exerciseKeys": [
+          "try-make-plan-question",
+          "try-make-plan-routine"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.cards.sketch1.title",
+      "sketchId": "count-things",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-build-and-write-a-conversation-sketch1",
+        "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch1.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch1.prompt",
+        "exerciseKey": "try-count-things-answer",
+        "exerciseKeys": [
+          "try-count-things-answer"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.cards.sketch2.title",
+      "sketchId": "schedule-chunks",
+      "height": 420,
+      "tryIt": {
+        "id": "try-read-build-and-write-a-conversation-sketch2",
+        "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch2.title",
+        "promptKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.tryIt.try_read_build_and_write_a_conversation_sketch2.prompt",
+        "exerciseKey": "try-schedule-chunks-everyday",
+        "exerciseKeys": [
+          "try-schedule-chunks-everyday"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "make-plan",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.make-plan.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.make-plan.bodyMarkdown"
+    },
+    {
+      "id": "count-things",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.count-things.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.count-things.bodyMarkdown"
+    },
+    {
+      "id": "schedule-chunks",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.schedule-chunks.title",
+      "bodyKey": "sketches.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.schedule-chunks.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "read-build-and-write-a-conversation-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "read-build-and-write-a-conversation-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "twa"
+      }
+    },
+    {
+      "id": "read-build-and-write-a-conversation-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-listen",
+      "targetText": "Mwen etidye kreyòl chak jou.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mwen",
+        "etidye",
+        "kreyòl",
+        "chak",
+        "jou."
+      ],
+      "distractors": [
+        "kounyeya"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Mwen etidye kreyòl chak jou.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "read-build-and-write-a-conversation-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-voice",
+      "targetText": "Konbyen liv ou genyen?",
+      "locale": "ht-HT",
+      "maxSeconds": 12,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Konbyen liv ou genyen?",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "read-build-and-write-a-conversation-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-build",
+      "targetText": "setè edmi",
+      "locale": "ht-HT",
+      "wordBank": [
+        "setè",
+        "edmi"
+      ],
+      "distractors": [
+        "senkè"
+      ],
+      "ttsText": "setè edmi",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "setè edmi",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "read-build-and-write-a-conversation-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.read-build-and-write-a-conversation-write",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "chak jou",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-make-plan-question",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.try-make-plan-question",
+      "targetText": "Akilè ou travay?",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Akilè",
+        "ou",
+        "travay?"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Akilè ou travay?",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-make-plan-routine",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.try-make-plan-routine",
+      "targetText": "Wi, mwen etidye kreyòl chak jou.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Wi, mwen etidye kreyòl chak jou.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-count-things-answer",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.try-count-things-answer",
+      "targetText": "Mwen gen twa liv.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mwen",
+        "gen",
+        "twa",
+        "liv."
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Mwen gen twa liv.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-schedule-chunks-everyday",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole--haitian-creole-foundations--draft.haitian-creole-foundations-8-my-first-kreyol-conversation.read-build-and-write-a-conversation.practice.try-schedule-chunks-everyday",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    }
+  ]
+}

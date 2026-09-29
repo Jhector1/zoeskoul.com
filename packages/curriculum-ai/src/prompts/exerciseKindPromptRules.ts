@@ -59,6 +59,53 @@ const GENERIC_EXERCISE_KIND_RULES: ExerciseKindRule[] = [
         ],
     },
     {
+        kind: "text_input",
+        description:
+            "course-agnostic short written-response exercise graded against an authored target and explicit accepted variants.",
+        requiredFields: ["expectedText"],
+        shapeRules: [
+            "expectedText must be the canonical written answer.",
+            "use anyOf only for explicitly accepted alternative answers; do not silently rewrite learner language.",
+            "normalization may relax formatting only when the course profile permits it.",
+        ],
+    },
+    {
+        kind: "voice_input",
+        description:
+            "spoken-response exercise where speech is transcribed and compared with the authored target text.",
+        requiredFields: ["targetText"],
+        shapeRules: [
+            "targetText must contain the exact phrase the learner is expected to say.",
+            "include locale whenever the profile provides a target speech locale.",
+            "this is transcript-based speaking practice, not phoneme-level pronunciation scoring.",
+            "use anyOf only for explicitly accepted spoken variants.",
+        ],
+    },
+    {
+        kind: "word_bank_arrange",
+        description:
+            "sentence-building exercise where learners arrange words into the authored target text.",
+        requiredFields: ["targetText"],
+        shapeRules: [
+            "targetText must be the complete intended sentence or phrase.",
+            "wordBank and distractors must contain learner-visible text, not answer ids.",
+            "include locale when speech playback or target-language behavior depends on it.",
+            "ttsText may differ from targetText only when there is a deliberate spoken rendering.",
+        ],
+    },
+    {
+        kind: "listen_build",
+        description:
+            "listening exercise where learners hear the target phrase and build that phrase from words.",
+        requiredFields: ["targetText"],
+        shapeRules: [
+            "targetText must be the exact phrase used for listening and grading.",
+            "include locale whenever the profile provides a target speech locale.",
+            "wordBank and distractors must contain learner-visible text, not answer ids.",
+            "use anyOf only for explicitly accepted language variants.",
+        ],
+    },
+    {
         kind: "pseudocode_input",
         description:
             "algorithm-logic exercise graded by deterministic structure, semantic-operation, and trace rules without compiling a programming language.",
@@ -109,7 +156,7 @@ export function renderExerciseKindPromptRules(args: {
     }
 
     lines.push("");
-    lines.push("Code-input profile rules (most specific):");
+    lines.push("Profile-specific exercise rules (most specific):");
     lines.push(
         ...(profile.renderExerciseKindPromptRules?.({
             mode: args.mode,
@@ -119,7 +166,7 @@ export function renderExerciseKindPromptRules(args: {
 
     if (args.mode === "authoring") {
         lines.push(
-            "- Authoring items must stay course-agnostic at the exercise-kind level; push course-specific runtime differences into profile-specific code_input rules, grounded datasets, or the seed.",
+            "- Authoring items must stay course-agnostic at the exercise-kind level; push course-specific runtime, language, speech, grading, and dataset differences into profile-specific rules or the seed.",
         );
     } else {
         lines.push(

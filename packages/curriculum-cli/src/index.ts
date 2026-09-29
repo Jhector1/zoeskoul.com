@@ -2,6 +2,7 @@ import { runPlan } from "./commands/plan.js";
 import { runCompileSubject } from "./commands/compile-subject.js";
 import { runCompileCourse } from "./commands/compile-course.js";
 import { runCompileTopic } from "./commands/compile-topic.js";
+import { runCompileManualTopic } from "./commands/compile-manual-topic.js";
 import { runCritiqueTopic } from "./commands/critique-topic.js";
 import { runCritiqueTopicDraft } from "./commands/critique-topic-draft.js";
 import { runCritiqueSubject } from "./commands/critique-subject.js";
@@ -114,6 +115,15 @@ async function main() {
       await runCompileTopic(arg1, arg2, rest);
       return;
     }
+    case "compile-manual-topic": {
+      if (!arg1 || !arg2) {
+        throw new Error(
+            "Usage: curriculum-cli compile-manual-topic <blueprintPath> <topicId>",
+        );
+      }
+      await runCompileManualTopic(arg1, arg2);
+      return;
+    }
 
     case "critique-topic": {
       if (!arg1 || !arg2) {
@@ -224,7 +234,7 @@ async function main() {
 
     default: {
       throw new Error(
-          "Usage: curriculum-cli <plan|compile-subject|compile-course|compile-topic|critique-topic|critique-topic-draft|critique-subject|critique-subject-draft|review-draft|validate|validate-spec|validate-subject|validate-course|publish|publish-subject|publish-course|backup-course-draft|restore-course-draft|list-course-backups|publish-auto> <subjectSlug|blueprintPath> [courseSlug|topicId|options]",      );
+          "Usage: curriculum-cli <plan|compile-subject|compile-course|compile-topic|compile-manual-topic|critique-topic|critique-topic-draft|critique-subject|critique-subject-draft|review-draft|validate|validate-spec|validate-subject|validate-course|publish|publish-subject|publish-course|backup-course-draft|restore-course-draft|list-course-backups|publish-auto> <subjectSlug|blueprintPath> [courseSlug|topicId|options]",      );
     }
   }
 }

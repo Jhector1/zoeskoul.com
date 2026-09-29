@@ -1,0 +1,305 @@
+{
+  "topicId": "listen-and-say-first-sounds",
+  "subjectSlug": "haitian-creole-foundations",
+  "moduleSlug": "haitian-creole-foundations-1-sounds-of-kreyol",
+  "sectionSlug": "haitian-creole-foundations-ht1-learn-listen-speak",
+  "prefix": "ht1",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.label",
+    "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.cards.sketch0.title",
+      "sketchId": "listen-first",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-say-first-sounds-sketch0",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.tryIt.try_listen_and_say_first_sounds_sketch0.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.tryIt.try_listen_and_say_first_sounds_sketch0.prompt",
+        "exerciseKey": "try-listen-first-bonjou",
+        "exerciseKeys": [
+          "try-listen-first-bonjou"
+        ],
+        "difficulty": "easy",
+        "preferKind": "listen_build",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.cards.sketch1.title",
+      "sketchId": "say-whole-word",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-say-first-sounds-sketch1",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.tryIt.try_listen_and_say_first_sounds_sketch1.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.tryIt.try_listen_and_say_first_sounds_sketch1.prompt",
+        "exerciseKey": "try-say-whole-word-mesi",
+        "exerciseKeys": [
+          "try-say-whole-word-mesi"
+        ],
+        "difficulty": "easy",
+        "preferKind": "voice_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.cards.sketch2.title",
+      "sketchId": "short-phrases",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-say-first-sounds-sketch2",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.tryIt.try_listen_and_say_first_sounds_sketch2.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.tryIt.try_listen_and_say_first_sounds_sketch2.prompt",
+        "exerciseKey": "try-short-phrases-listen",
+        "exerciseKeys": [
+          "try-short-phrases-listen",
+          "try-short-phrases-say"
+        ],
+        "difficulty": "easy",
+        "preferKind": null,
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "listen-first",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.listen-first.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.listen-first.bodyMarkdown"
+    },
+    {
+      "id": "say-whole-word",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.say-whole-word.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.say-whole-word.bodyMarkdown"
+    },
+    {
+      "id": "short-phrases",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.short-phrases.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.short-phrases.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "listen-choice-ou",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.listen-choice-ou",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "listen-fill-bonjou",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.listen-fill-bonjou",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "ou"
+      }
+    },
+    {
+      "id": "listen-wi-mesi",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.listen-wi-mesi",
+      "targetText": "Wi, mèsi.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Wi,",
+        "mèsi."
+      ],
+      "distractors": [
+        "Non,"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Wi, mèsi.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "speak-bonjou",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.speak-bonjou",
+      "targetText": "Bonjou.",
+      "locale": "ht-HT",
+      "maxSeconds": 10,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Bonjou.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-build-mesi-manman",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.listen-build-mesi-manman",
+      "targetText": "Mèsi, manman.",
+      "locale": "ht-HT",
+      "wordBank": [
+        "Mèsi,",
+        "manman."
+      ],
+      "distractors": [
+        "Bonjou,"
+      ],
+      "ttsText": "Mèsi, manman.",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "Mèsi, manman.",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-write-non",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.listen-write-non",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "non",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-listen-first-bonjou",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.try-listen-first-bonjou",
+      "targetText": "non",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "non",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-say-whole-word-mesi",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.try-say-whole-word-mesi",
+      "targetText": "bonjou",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "bonjou",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-short-phrases-listen",
+      "kind": "listen_build",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.try-short-phrases-listen",
+      "targetText": "Non, mèsi.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "Non, mèsi.",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-short-phrases-say",
+      "kind": "voice_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-1-sounds-of-kreyol.listen-and-say-first-sounds.practice.try-short-phrases-say",
+      "targetText": "Non, mèsi.",
+      "locale": "ht-HT",
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "Non, mèsi.",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

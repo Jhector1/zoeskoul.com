@@ -259,12 +259,18 @@ export function buildMessagesFromDraft(args: {
         : [];
 
 
+    const explicitTryItExercises = sketchBlocks.flatMap(
+        (block) => block.tryItExercises ?? [],
+    );
     const tryItExercises = isProjectOnlyTopic
         ? []
         : draft.quizDraft.filter((exercise) => exercise.kind === "code_input");
     const emittedDraftExercises = isProjectOnlyTopic
         ? draft.quizDraft.filter((exercise) => projectStepIds.includes(exercise.id))
-        : draft.quizDraft;
+        : [
+            ...draft.quizDraft,
+            ...explicitTryItExercises,
+        ];
     const progressiveExercises = applyProgressiveProjectFlow({
         exercises: emittedDraftExercises,
         projectStepIds,
@@ -307,6 +313,9 @@ export function buildMessagesFromDraft(args: {
             { ...draft, sketchBlocks },
             seed,
             profile,
+        ).filter(
+            (sketchIndex) =>
+                (sketchBlocks[sketchIndex]?.tryItExercises?.length ?? 0) === 0,
         );
         const preferredTryItKind =
             projectConfig?.preferredProjectExerciseKind ??
@@ -365,6 +374,49 @@ export function buildMessagesFromDraft(args: {
                     topicTitle: draft.title,
                     seed,
                     sketchTitle: sketchBlocks[sketchIndex]?.title,
+                }),
+            );
+        }
+    }
+
+    if (!isProjectOnlyTopic) {
+        for (const [sketchIndex, block] of sketchBlocks.entries()) {
+            const dedicatedExercises = block.tryItExercises ?? [];
+            const explicitExerciseIds = uniqueNonEmpty(
+                dedicatedExercises.map((exercise) => exercise.id),
+            );
+            if (explicitExerciseIds.length === 0) continue;
+
+            const primaryExercise = dedicatedExercises[0];
+            if (!primaryExercise) continue;
+
+            const explicitTryItId = tryItMessageId(
+                seed.topicId,
+                sketchIndex,
+            );
+
+            setNested(
+                out,
+                [...topicPath, "tryIt", "allowReveal"],
+                projectConfig?.tryItDefault?.allowReveal ??
+                    projectConfig?.allowReveal ??
+                    profile.practice?.tryItDefault.allowReveal ??
+                    true,
+            );
+            setNested(
+                out,
+                [...topicPath, "tryIt", explicitTryItId, "title"],
+                buildTryItTitle(primaryExercise.title),
+            );
+            setNested(
+                out,
+                [...topicPath, "tryIt", explicitTryItId, "prompt"],
+                buildTryItPrompt({
+                    exerciseTitle: primaryExercise.title,
+                    exercisePrompt: primaryExercise.prompt,
+                    topicTitle: draft.title,
+                    seed,
+                    sketchTitle: block.title,
                 }),
             );
         }
@@ -444,6 +496,56 @@ export function buildMessagesFromDraft(args: {
         if (exercise.kind === "fill_blank_choice") {
             setNested(out, [...quizBase, "template"], exercise.template);
             setNested(out, [...quizBase, "choices"], exercise.choices);
+            continue;
+        }
+
+        if (exercise.kind === "text_input") {
+            setNested(out, [...quizBase, "expectedText"], exercise.expectedText);
+            if (exercise.placeholder) {
+                setNested(out, [...quizBase, "placeholder"], exercise.placeholder);
+            }
+            if (exercise.anyOf?.length) {
+                setNested(out, [...quizBase, "anyOf"], exercise.anyOf);
+            }
+            continue;
+        }
+
+        if (exercise.kind === "voice_input") {
+            setNested(out, [...quizBase, "targetText"], exercise.targetText);
+            if (exercise.anyOf?.length) {
+                setNested(out, [...quizBase, "anyOf"], exercise.anyOf);
+            }
+            continue;
+        }
+
+        if (exercise.kind === "word_bank_arrange") {
+            setNested(out, [...quizBase, "targetText"], exercise.targetText);
+            if (exercise.wordBank?.length) {
+                setNested(out, [...quizBase, "wordBank"], exercise.wordBank);
+            }
+            if (exercise.distractors?.length) {
+                setNested(out, [...quizBase, "distractors"], exercise.distractors);
+            }
+            if (exercise.ttsText) {
+                setNested(out, [...quizBase, "ttsText"], exercise.ttsText);
+            }
+            if (exercise.anyOf?.length) {
+                setNested(out, [...quizBase, "anyOf"], exercise.anyOf);
+            }
+            continue;
+        }
+
+        if (exercise.kind === "listen_build") {
+            setNested(out, [...quizBase, "targetText"], exercise.targetText);
+            if (exercise.wordBank?.length) {
+                setNested(out, [...quizBase, "wordBank"], exercise.wordBank);
+            }
+            if (exercise.distractors?.length) {
+                setNested(out, [...quizBase, "distractors"], exercise.distractors);
+            }
+            if (exercise.anyOf?.length) {
+                setNested(out, [...quizBase, "anyOf"], exercise.anyOf);
+            }
             continue;
         }
 

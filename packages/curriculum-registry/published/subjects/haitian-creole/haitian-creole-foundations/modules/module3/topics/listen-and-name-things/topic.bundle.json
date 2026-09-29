@@ -1,0 +1,299 @@
+{
+  "topicId": "listen-and-name-things",
+  "subjectSlug": "haitian-creole-foundations",
+  "moduleSlug": "haitian-creole-foundations-4-talking-about-things",
+  "sectionSlug": "haitian-creole-foundations-ht4-learn-listen-speak",
+  "prefix": "ht4",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.label",
+    "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.cards.sketch0.title",
+      "sketchId": "article-forms",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-name-things-sketch0",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch0.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch0.prompt",
+        "exerciseKey": "try-article-forms-bread",
+        "exerciseKeys": [
+          "try-article-forms-bread"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.cards.sketch1.title",
+      "sketchId": "plural-yo",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-name-things-sketch1",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch1.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch1.prompt",
+        "exerciseKey": "try-plural-yo-books",
+        "exerciseKeys": [
+          "try-plural-yo-books"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.cards.sketch2.title",
+      "sketchId": "switch-number",
+      "height": 420,
+      "tryIt": {
+        "id": "try-listen-and-name-things-sketch2",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch2.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.tryIt.try_listen_and_name_things_sketch2.prompt",
+        "exerciseKey": "try-switch-number-plural",
+        "exerciseKeys": [
+          "try-switch-number-plural"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "article-forms",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.article-forms.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.article-forms.bodyMarkdown"
+    },
+    {
+      "id": "plural-yo",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.plural-yo.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.plural-yo.bodyMarkdown"
+    },
+    {
+      "id": "switch-number",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.switch-number.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.switch-number.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "listen-and-name-things-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "listen-and-name-things-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "yo"
+      }
+    },
+    {
+      "id": "listen-and-name-things-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-listen",
+      "targetText": "pen an",
+      "locale": "ht-HT",
+      "wordBank": [
+        "pen",
+        "an"
+      ],
+      "distractors": [
+        "yo"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "pen an",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-and-name-things-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-voice",
+      "targetText": "liv yo",
+      "locale": "ht-HT",
+      "maxSeconds": 10,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "liv yo",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-and-name-things-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-build",
+      "targetText": "plim nan",
+      "locale": "ht-HT",
+      "wordBank": [
+        "plim",
+        "nan"
+      ],
+      "distractors": [
+        "yo"
+      ],
+      "ttsText": "plim nan",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "plim nan",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "listen-and-name-things-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.listen-and-name-things-write",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "chen yo",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-article-forms-bread",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.try-article-forms-bread",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-plural-yo-books",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.try-plural-yo-books",
+      "targetText": "machin yo",
+      "locale": "ht-HT",
+      "wordBank": [
+        "machin",
+        "yo"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "machin yo",
+        "locale": "ht-HT"
+      }
+    },
+    {
+      "id": "try-switch-number-plural",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-4-talking-about-things.listen-and-name-things.practice.try-switch-number-plural",
+      "optionIds": [
+        "a",
+        "b"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    }
+  ]
+}

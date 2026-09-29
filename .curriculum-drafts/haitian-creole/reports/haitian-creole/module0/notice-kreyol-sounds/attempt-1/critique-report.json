@@ -1,0 +1,42 @@
+{
+  "topicId": "notice-kreyol-sounds",
+  "ok": false,
+  "issues": [
+    {
+      "code": "EXERCISE_POLICY_KIND_OVER_TARGET",
+      "category": "clarity",
+      "severity": "error",
+      "message": "Exercise policy targets 1 \"single_choice\" exercise(s), but the draft has 5."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy targets 1 \"multi_choice\" exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy targets 1 \"drag_reorder\" exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy targets 2 \"fill_blank_choice\" exercise(s), but the draft has 1."
+    },
+    {
+      "code": "EXERCISE_POLICY_KIND_UNDER_TARGET",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy targets 1 \"text_input\" exercise(s), but the draft has 0."
+    },
+    {
+      "code": "EXERCISE_POLICY_DOMINANT_KIND_MISMATCH",
+      "category": "clarity",
+      "severity": "warn",
+      "message": "Exercise policy expects \"fill_blank_choice\" to be dominant, but the draft is dominated by \"single_choice\"."
+    }
+  ]
+}

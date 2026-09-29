@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type SpeakOpts = {
+    locale?: string;
     voice?: string;         // e.g. "marin"
     format?: "mp3" | "wav" | "opus";
     speed?: number;         // 0.8..1.2
@@ -37,12 +38,11 @@ export function useSpeak() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     text: clean,
-                    voice: opts.voice ?? "marin",
+                    ...(opts.locale ? { locale: opts.locale } : {}),
+                    ...(opts.voice ? { voice: opts.voice } : {}),
                     format: opts.format ?? "mp3",
-                    speed: typeof opts.speed === "number" ? opts.speed : 1.0,
-                    instructions:
-                        opts.instructions ??
-                        "Speak clearly and naturally. Friendly teacher tone. Slightly slow.",
+                    ...(typeof opts.speed === "number" ? { speed: opts.speed } : {}),
+                    ...(opts.instructions ? { instructions: opts.instructions } : {}),
                 }),
             });
 

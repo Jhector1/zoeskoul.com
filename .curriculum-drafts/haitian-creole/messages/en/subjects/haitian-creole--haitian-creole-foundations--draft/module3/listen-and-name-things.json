@@ -1,0 +1,200 @@
+{
+  "topics": {
+    "haitian-creole--haitian-creole-foundations--draft": {
+      "haitian-creole-foundations-4-talking-about-things": {
+        "listen-and-name-things": {
+          "label": "Listen and Name Things",
+          "summary": "Recognize the main singular definite markers and use yo for plural definite noun phrases.",
+          "cards": {
+            "sketch0": {
+              "title": "Several Singular Forms"
+            },
+            "sketch1": {
+              "title": "Plural Is Simpler"
+            },
+            "sketch2": {
+              "title": "Singular and Plural"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_listen_and_name_things_sketch0": {
+              "title": "Try it yourself: Recognize the bread phrase",
+              "prompt": "Right after the sketch \"a, la, an, lan, nan\", practice that exact idea with this task. Which phrase using the pattern from the lesson means “the bread”? Produce the result for recognize the bread phrase so it reinforces Listen and Name Things."
+            },
+            "try_listen_and_name_things_sketch1": {
+              "title": "Try it yourself: Build a different plural phrase",
+              "prompt": "Right after the sketch \"Use yo after the noun\", practice that exact idea with this task. Arrange the Kreyòl phrase for “the cars.”. Produce the result for build a different plural phrase so it reinforces Listen and Name Things."
+            },
+            "try_listen_and_name_things_sketch2": {
+              "title": "Try it yourself: Choose the plural phrase",
+              "prompt": "Right after the sketch \"Notice what changes\", practice that exact idea with this task. Which phrase using the pattern from the lesson means “the books”? Produce the result for choose the plural phrase so it reinforces Listen and Name Things."
+            }
+          },
+          "practice": {
+            "listen-and-name-things-choice": {
+              "title": "Choose the plural phrase",
+              "prompt": "Which phrase means “the books”?",
+              "hint": "Choose the definite plural pattern.",
+              "help": {
+                "concept": "Definite plural noun phrases use one regular marker after the noun.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "options": {
+                "a": "liv yo",
+                "b": "liv la",
+                "c": "yon liv"
+              }
+            },
+            "listen-and-name-things-fill": {
+              "title": "Complete a plural phrase",
+              "prompt": "Choose the marker that completes “the dogs.”",
+              "hint": "Use the plural definite pattern.",
+              "help": {
+                "concept": "The blank needs the regular plural marker that follows the noun.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "template": "chen [blank1]",
+              "choices": [
+                "yo",
+                "an",
+                "la"
+              ]
+            },
+            "listen-and-name-things-listen": {
+              "title": "Hear a singular phrase",
+              "prompt": "Listen, then build the noun phrase you hear.",
+              "hint": "Listen for both the noun and its following marker.",
+              "help": {
+                "concept": "Build the complete singular noun phrase in spoken order.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "pen an",
+              "wordBank": [
+                "pen",
+                "an"
+              ],
+              "distractors": [
+                "yo"
+              ]
+            },
+            "listen-and-name-things-voice": {
+              "title": "Say a plural noun phrase",
+              "prompt": "Say: liv yo.",
+              "hint": "Say the noun and plural marker together.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored plural phrase.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "liv yo"
+            },
+            "listen-and-name-things-build": {
+              "title": "Build “the pen”",
+              "prompt": "Arrange the words to build the Kreyòl phrase for “the pen.”",
+              "hint": "Put the noun first and its definite marker second.",
+              "help": {
+                "concept": "This familiar noun uses one of the post-nominal singular markers.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "plim nan",
+              "wordBank": [
+                "plim",
+                "nan"
+              ],
+              "distractors": [
+                "yo"
+              ],
+              "ttsText": "plim nan"
+            },
+            "listen-and-name-things-write": {
+              "title": "Write “the dogs”",
+              "prompt": "Type the Kreyòl phrase for “the dogs.”",
+              "hint": "Use the regular plural marker after the noun.",
+              "help": {
+                "concept": "Write the complete definite plural noun phrase.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "expectedText": "chen yo",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-article-forms-bread": {
+              "title": "Recognize the bread phrase",
+              "prompt": "Which phrase using the pattern from the lesson means “the bread”?",
+              "hint": "Choose the option that correctly applies the pattern.",
+              "help": {
+                "concept": "singular definite markers",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "options": {
+                "a": "pen an",
+                "b": "tifi a",
+                "c": "chat la",
+                "d": "chanm lan",
+                "e": "plim nan"
+              }
+            },
+            "try-plural-yo-books": {
+              "title": "Build a different plural phrase",
+              "prompt": "Arrange the Kreyòl phrase for “the cars.”",
+              "hint": "Put yo after the noun.",
+              "help": {
+                "concept": "plural definite yo",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "machin yo",
+              "wordBank": [
+                "machin",
+                "yo"
+              ]
+            },
+            "try-switch-number-plural": {
+              "title": "Choose the plural phrase",
+              "prompt": "Which phrase using the pattern from the lesson means “the books”?",
+              "hint": "Choose the option that correctly applies the pattern.",
+              "help": {
+                "concept": "singular versus plural marker",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "options": {
+                "a": "liv yo",
+                "b": "liv la"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole--haitian-creole-foundations--draft": {
+      "haitian-creole-foundations-4-talking-about-things": {
+        "listen-and-name-things": {
+          "article-forms": {
+            "title": "a, la, an, lan, nan",
+            "bodyMarkdown": "Kreyòl uses several singular definite markers. The form depends on the final sound of the noun:\n\n- **tifi a**\n- **chat la**\n- **pen an**\n- **chanm lan**\n- **plim nan**\n\nDo not try to memorize every sound rule at once. Start by recognizing the correct form in familiar examples."
+          },
+          "plural-yo": {
+            "title": "Use yo after the noun",
+            "bodyMarkdown": "For definite plurals, use **yo** after the noun:\n\n- **tifi yo** — the girls\n- **chen yo** — the dogs\n- **liv yo** — the books\n\nThe plural pattern is much more regular than the singular forms."
+          },
+          "switch-number": {
+            "title": "Notice what changes",
+            "bodyMarkdown": "Compare:\n\n- **liv la** — the book\n- **liv yo** — the books\n\nThe noun stays in place. The marker after the noun tells you whether the phrase is singular or plural."
+          }
+        }
+      }
+    }
+  }
+}

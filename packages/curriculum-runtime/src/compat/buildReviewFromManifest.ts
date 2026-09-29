@@ -30,6 +30,16 @@ const TRY_IT_EXERCISE_STEP_FIELDS = [
     "purpose",
     "language",
     "lang",
+    "optionIds",
+    "tokenIds",
+    "choiceCount",
+    "placeholder",
+    "targetText",
+    "locale",
+    "maxSeconds",
+    "wordBank",
+    "distractors",
+    "ttsText",
     "workspace",
     "files",
     "initialFiles",
@@ -201,7 +211,22 @@ export function buildReviewFromManifest(args: {
         if (!rawTryIt) return cardWithTools;
 
         const tryItId = asString(rawTryIt.id);
-        const exerciseKey = asString(rawTryIt.exerciseKey);
+        const explicitExerciseKeys = Array.isArray(rawTryIt.exerciseKeys)
+            ? rawTryIt.exerciseKeys
+                .map((key) => asString(key))
+                .filter(Boolean)
+            : [];
+        const legacyExerciseKey = asString(rawTryIt.exerciseKey);
+        const exerciseKeys = Array.from(
+            new Set(
+                explicitExerciseKeys.length
+                    ? explicitExerciseKeys
+                    : legacyExerciseKey
+                        ? [legacyExerciseKey]
+                        : [],
+            ),
+        );
+        const exerciseKey = exerciseKeys[0] ?? "";
         if (!tryItId || !exerciseKey) return cardWithTools;
 
         const titleKey = asString(rawTryIt.titleKey);
@@ -210,7 +235,7 @@ export function buildReviewFromManifest(args: {
         const prompt = promptKey ? resolveText(promptKey) : undefined;
 
         const difficulty = (asString(rawTryIt.difficulty) || "easy") as Difficulty;
-        const preferKind = (asString(rawTryIt.preferKind) || "code_input") as PracticeKind;
+        const configuredPreferKind = asString(rawTryIt.preferKind);
         const seedPolicy = (asString(rawTryIt.seedPolicy) || "global") as SeedPolicy;
         const maxAttempts = typeof rawTryIt.maxAttempts === "number"
             ? rawTryIt.maxAttempts
@@ -218,19 +243,43 @@ export function buildReviewFromManifest(args: {
                 ? null
                 : null;
 
-        const authoredExercise = findExerciseManifestByKey(args.manifest, exerciseKey);
-        const authoredExerciseStepFields = pickExerciseStepFields(authoredExercise);
+        const tryItSteps = exerciseKeys.map((stepExerciseKey, stepIndex) => {
+            const authoredExercise = findExerciseManifestByKey(
+                args.manifest,
+                stepExerciseKey,
+            );
+            const authoredExerciseStepFields =
+                pickExerciseStepFields(authoredExercise);
+            const authoredKind = asString(authoredExercise?.kind);
+            const stepPreferKind = (
+                authoredKind ||
+                configuredPreferKind ||
+                "code_input"
+            ) as PracticeKind;
 
-        const tryItStep = {
-            ...authoredExerciseStepFields,
-            id: tryItId.replace(/-/g, "_"),
-            title,
-            exerciseKey,
-            difficulty,
-            preferKind,
-            seedPolicy,
-            maxAttempts,
-        };
+            return {
+                ...authoredExerciseStepFields,
+                id:
+                    exerciseKeys.length === 1
+                        ? tryItId.replace(/-/g, "_")
+                        : `${tryItId.replace(/-/g, "_")}_${stepIndex + 1}`,
+                title,
+                exerciseKey: stepExerciseKey,
+                difficulty,
+                preferKind: stepPreferKind,
+                seedPolicy,
+                maxAttempts,
+            };
+        });
+
+        const containerPreferKind = (
+            configuredPreferKind ||
+            (exerciseKeys.length === 1
+                ? asString(
+                    findExerciseManifestByKey(args.manifest, exerciseKey)?.kind,
+                ) || "code_input"
+                : "")
+        ) as PracticeKind | "";
 
         const spec: ReviewProjectSpec = {
             mode: "project",
@@ -239,10 +288,10 @@ export function buildReviewFromManifest(args: {
             section: args.manifest.sectionSlug,
             topic: topicSlug,
             difficulty,
-            preferKind,
+            preferKind: containerPreferKind || null,
             allowReveal: true,
             maxAttempts,
-            steps: [tryItStep as any],
+            steps: tryItSteps as any,
             runtime: args.manifest.runtimeDefaults ?? null,
             tryIt: true,
             uiKind: "try_it",
@@ -254,8 +303,9 @@ export function buildReviewFromManifest(args: {
             title,
             prompt,
             exerciseKey,
+            exerciseKeys,
             difficulty,
-            preferKind,
+            preferKind: containerPreferKind || null,
             seedPolicy,
             required: rawTryIt.required !== false,
             allowReveal: true,

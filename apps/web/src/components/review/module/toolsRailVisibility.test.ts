@@ -126,7 +126,7 @@ describe("resolveToolsRailVisibility", () => {
         });
     });
 
-    it("opens embedded try-it and registry-backed exercise workspaces by default", () => {
+    it("keeps non-workspace embedded try-it closed while workspace exercises open by default", () => {
         expect(
             resolveToolsRailVisibility({
                 ...baseArgs,
@@ -145,8 +145,11 @@ describe("resolveToolsRailVisibility", () => {
                 cardHasEmbeddedTryIt: true,
             }),
         ).toMatchObject({
-            defaultVisible: true,
-            isExerciseBound: true,
+            defaultVisible: false,
+            allowOpen: true,
+            isAvailable: true,
+            shouldCollapseByDefault: true,
+            isExerciseBound: false,
         });
 
         expect(

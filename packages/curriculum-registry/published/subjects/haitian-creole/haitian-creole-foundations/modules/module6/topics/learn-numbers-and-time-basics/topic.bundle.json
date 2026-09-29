@@ -1,0 +1,298 @@
+{
+  "topicId": "learn-numbers-and-time-basics",
+  "subjectSlug": "haitian-creole-foundations",
+  "moduleSlug": "haitian-creole-foundations-7-numbers-time-and-everyday-life",
+  "sectionSlug": "haitian-creole-foundations-ht7-learn-listen-speak",
+  "prefix": "ht7",
+  "minutes": 24,
+  "runtimeDefaults": {
+    "kind": "code",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": null,
+  "topic": {
+    "labelKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.label",
+    "summaryKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.cards.sketch0.title",
+      "sketchId": "one-ten",
+      "height": 420,
+      "tryIt": {
+        "id": "try-learn-numbers-and-time-basics-sketch0",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch0.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch0.prompt",
+        "exerciseKey": "try-one-ten-eight",
+        "exerciseKeys": [
+          "try-one-ten-eight"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.cards.sketch1.title",
+      "sketchId": "eleven-twenty",
+      "height": 420,
+      "tryIt": {
+        "id": "try-learn-numbers-and-time-basics-sketch1",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch1.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch1.prompt",
+        "exerciseKey": "try-eleven-twenty-eighteen",
+        "exerciseKeys": [
+          "try-eleven-twenty-eighteen"
+        ],
+        "difficulty": "easy",
+        "preferKind": "single_choice",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.cards.sketch2.title",
+      "sketchId": "use-numbers",
+      "height": 420,
+      "tryIt": {
+        "id": "try-learn-numbers-and-time-basics-sketch2",
+        "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch2.title",
+        "promptKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.tryIt.try_learn_numbers_and_time_basics_sketch2.prompt",
+        "exerciseKey": "try-use-numbers-notebooks",
+        "exerciseKeys": [
+          "try-use-numbers-notebooks"
+        ],
+        "difficulty": "easy",
+        "preferKind": "word_bank_arrange",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "one-ten",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.one-ten.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.one-ten.bodyMarkdown"
+    },
+    {
+      "id": "eleven-twenty",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.eleven-twenty.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.eleven-twenty.bodyMarkdown"
+    },
+    {
+      "id": "use-numbers",
+      "archetype": "paragraph",
+      "titleKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.use-numbers.title",
+      "bodyKey": "sketches.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.use-numbers.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "learn-numbers-and-time-basics-choice",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-choice",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "learn-numbers-and-time-basics-fill",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-fill",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "twa"
+      }
+    },
+    {
+      "id": "learn-numbers-and-time-basics-listen",
+      "kind": "listen_build",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-listen",
+      "targetText": "de valiz",
+      "locale": "ht-HT",
+      "wordBank": [
+        "de",
+        "valiz"
+      ],
+      "distractors": [
+        "twa"
+      ],
+      "expected": {
+        "kind": "listen_build",
+        "targetText": "de valiz",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "learn-numbers-and-time-basics-voice",
+      "kind": "voice_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-voice",
+      "targetText": "ven",
+      "locale": "ht-HT",
+      "maxSeconds": 8,
+      "expected": {
+        "kind": "voice_input",
+        "targetText": "ven",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "learn-numbers-and-time-basics-build",
+      "kind": "word_bank_arrange",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-build",
+      "targetText": "senk kaye",
+      "locale": "ht-HT",
+      "wordBank": [
+        "senk",
+        "kaye"
+      ],
+      "distractors": [
+        "sèt"
+      ],
+      "ttsText": "senk kaye",
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "senk kaye",
+        "locale": "ht-HT",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "learn-numbers-and-time-basics-write",
+      "kind": "text_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.learn-numbers-and-time-basics-write",
+      "placeholder": "Type the Kreyòl answer",
+      "expected": {
+        "kind": "text_input",
+        "value": "wit",
+        "normalize": {
+          "trim": true,
+          "caseFold": true,
+          "collapseSpaces": true,
+          "stripPunct": true
+        }
+      }
+    },
+    {
+      "id": "try-one-ten-eight",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.try-one-ten-eight",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-eleven-twenty-eighteen",
+      "kind": "single_choice",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.try-eleven-twenty-eighteen",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "try-use-numbers-notebooks",
+      "kind": "word_bank_arrange",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.haitian-creole-foundations.haitian-creole-foundations-7-numbers-time-and-everyday-life.learn-numbers-and-time-basics.practice.try-use-numbers-notebooks",
+      "targetText": "de kaye",
+      "locale": "ht-HT",
+      "wordBank": [
+        "de",
+        "kaye"
+      ],
+      "expected": {
+        "kind": "word_bank_arrange",
+        "targetText": "de kaye",
+        "locale": "ht-HT"
+      }
+    }
+  ]
+}

@@ -136,6 +136,16 @@ const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
     "template",
     "choices",
     "correctValue",
+    "expectedText",
+    "anyOf",
+    "placeholder",
+    "targetText",
+    "locale",
+    "maxSeconds",
+    "wordBank",
+    "distractors",
+    "ttsText",
+    "normalize",
     "starterPseudocode",
     "solutionPseudocode",
     "mode",
@@ -164,6 +174,10 @@ const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
         "multi_choice",
         "drag_reorder",
         "fill_blank_choice",
+        "text_input",
+        "voice_input",
+        "word_bank_arrange",
+        "listen_build",
         "pseudocode_input",
         "code_input",
       ],
@@ -188,6 +202,26 @@ const OPENAI_TOPIC_AUTHORING_EXERCISE_ITEM_SCHEMA = {
     template: { type: ["string", "null"] },
     choices: { type: ["array", "null"], items: { type: "string" } },
     correctValue: { type: ["string", "null"] },
+    expectedText: { type: ["string", "null"] },
+    anyOf: { type: ["array", "null"], items: { type: "string" } },
+    placeholder: { type: ["string", "null"] },
+    targetText: { type: ["string", "null"] },
+    locale: { type: ["string", "null"] },
+    maxSeconds: { type: ["number", "null"] },
+    wordBank: { type: ["array", "null"], items: { type: "string" } },
+    distractors: { type: ["array", "null"], items: { type: "string" } },
+    ttsText: { type: ["string", "null"] },
+    normalize: {
+      type: ["object", "null"],
+      additionalProperties: false,
+      required: ["trim", "caseFold", "collapseSpaces", "stripPunct"],
+      properties: {
+        trim: { type: ["boolean", "null"] },
+        caseFold: { type: ["boolean", "null"] },
+        collapseSpaces: { type: ["boolean", "null"] },
+        stripPunct: { type: ["boolean", "null"] },
+      },
+    },
     starterPseudocode: { type: ["string", "null"] },
     solutionPseudocode: { type: ["string", "null"] },
     mode: { type: ["string", "null"], enum: ["complete", "fill_blanks", "reorder", "trace", "write", null] },
@@ -633,6 +667,20 @@ export function assertOpenAiStructuredOutputSchemaCompatible(
     }
 
     if (value && typeof value === "object") {
+      if (key === "properties" && !Array.isArray(value)) {
+        for (const [propertyName, propertySchema] of Object.entries(
+          value as Record<string, unknown>,
+        )) {
+          if (propertySchema && typeof propertySchema === "object") {
+            assertOpenAiStructuredOutputSchemaCompatible(
+              propertySchema as JsonSchema,
+              `${path}.properties.${propertyName}`,
+            );
+          }
+        }
+        continue;
+      }
+
       assertOpenAiStructuredOutputSchemaCompatible(
         value as JsonSchema,
         `${path}.${key}`,

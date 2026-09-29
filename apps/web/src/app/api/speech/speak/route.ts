@@ -1,5 +1,6 @@
 // src/app/api/speech/speak/route.ts
 import { NextResponse } from "next/server";
+import { resolveSpeechSynthesisDefaults } from "@zoeskoul/learner-workspace/language/resolveSpeechProfile";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -60,19 +61,16 @@ export async function POST(req: Request) {
         );
     }
 
-    // Marin/Cedar are high-quality voices :contentReference[oaicite:7]{index=7}
-    const voice = String(body?.voice ?? "marin");
+    const locale = String(body?.locale ?? body?.language ?? "").trim();
+    const speechDefaults = resolveSpeechSynthesisDefaults(locale);
+
+    const voice = String(body?.voice ?? speechDefaults.voice);
     const format = (String(body?.format ?? "mp3") as Format) || "mp3";
-    const speed = typeof body?.speed === "number" ? body.speed : 1.0;
+    const speed =
+        typeof body?.speed === "number" ? body.speed : speechDefaults.speed;
 
     const instructions =
-        String(body?.instructions ?? "").trim() ||
-        [
-            "Speak in Haitian Creole (Kreyòl ayisyen). Do not switch to English.",
-            "Warm, clear teacher tone. Slightly slow. Clean consonants.",
-            "Use Haitian pronunciation (nasal vowels: an/on/en).",
-            "Do not read punctuation aloud.",
-        ].join(" ");
+        String(body?.instructions ?? "").trim() || speechDefaults.instructions;
 
     const payload = {
         model: DEFAULT_TTS_MODEL,

@@ -13,3 +13,4 @@ export function getSubjectShape(profileId: string): SubjectShapePack {
 
 export { bashShape, cShape, gitShape, sqlShape, pythonShape, mathShape };
 export type * from "./types.js";
+export * from "./languageShape.js";

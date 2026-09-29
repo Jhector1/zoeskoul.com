@@ -1,0 +1,25 @@
+{
+  "policyId": "haitian-creole-shared-validation",
+  "extendsValidation": [
+    "course-structure",
+    "versioning"
+  ],
+  "validationRequirements": {
+    "noCodeInput": true,
+    "noPseudocodeInput": true,
+    "preserveTargetLanguageOrthography": true,
+    "speakingPracticeUsesTranscript": true
+  },
+  "rules": {
+    "pedagogy": [
+      "Use an integrated Learn → Listen → Speak → Read → Build → Write → Use it → Review rhythm.",
+      "Keep beginner instructions concise and concrete.",
+      "Introduce language through meaningful phrases and exchanges rather than isolated grammar terminology."
+    ],
+    "language": [
+      "Use official Kreyòl spelling.",
+      "Keep locale-sensitive speech activities aligned with ht-HT/ht support.",
+      "Treat voice_input as speaking/transcript practice, not pronunciation scoring."
+    ]
+  }
+}

@@ -3693,7 +3693,9 @@ function repairPythonBrowserWorkspaceTerms(args: {
 function countKinds(draft: TopicAuthoringDraft) {
     return draft.quizDraft.reduce(
         (counts, exercise) => {
-            counts[exercise.kind] += 1;
+            if (exercise.kind in counts) {
+                counts[exercise.kind as keyof typeof counts] += 1;
+            }
             return counts;
         },
         {
@@ -7132,6 +7134,14 @@ function normalizePolicyExerciseSignature(exercise: PythonDraftExercise): string
                 prompt: String(exercise.prompt ?? "").trim().toLowerCase(),
                 mode: exercise.mode,
                 solutionPseudocode: exercise.solutionPseudocode,
+            });
+        default:
+            // This helper is Python-policy-specific. Global exercise kinds owned by
+            // other profiles keep a stable signature but are not synthesized here.
+            return JSON.stringify({
+                kind: exercise.kind,
+                prompt: String(exercise.prompt ?? "").trim().toLowerCase(),
+                title: String(exercise.title ?? "").trim().toLowerCase(),
             });
     }
 }

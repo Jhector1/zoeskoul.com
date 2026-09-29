@@ -1,0 +1,199 @@
+{
+  "topics": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-4-talking-about-things": {
+        "read-build-and-write-about-things": {
+          "label": "Read, Build, and Write About Things",
+          "summary": "Express ownership by placing the possessor after the thing and by using se pou.",
+          "cards": {
+            "sketch0": {
+              "title": "Say Whose Thing It Is"
+            },
+            "sketch1": {
+              "title": "Add the Definite Marker"
+            },
+            "sketch2": {
+              "title": "Another Ownership Pattern"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_read_build_and_write_about_things_sketch0": {
+              "title": "Try it yourself: Build a new possessive phrase",
+              "prompt": "Right after the sketch \"Put the owner after the thing\", practice that exact idea with this task. Arrange the Kreyòl phrase for “my book.”. Produce the result for build a new possessive phrase so it reinforces Read, Build, and Write About Things."
+            },
+            "try_read_build_and_write_about_things_sketch1": {
+              "title": "Try it yourself: Build another definite possessive phrase",
+              "prompt": "Right after the sketch \"machin mwen an\", practice that exact idea with this task. Arrange the definite Kreyòl phrase for “my book.”. Produce the result for build another definite possessive phrase so it reinforces Read, Build, and Write About Things."
+            },
+            "try_read_build_and_write_about_things_sketch2": {
+              "title": "Try it yourself: Say who it belongs to",
+              "prompt": "Right after the sketch \"Sa se pou mwen\", practice that exact idea with this task. Say “This is yours / for you.” in Kreyòl. Produce the result for say who it belongs to so it reinforces Read, Build, and Write About Things."
+            }
+          },
+          "practice": {
+            "read-build-and-write-about-things-choice": {
+              "title": "Choose “my car”",
+              "prompt": "Which phrase means “my car”?",
+              "hint": "Place the owner after the thing.",
+              "help": {
+                "concept": "Simple possession places the possessor after the possessed noun.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "options": {
+                "a": "machin mwen",
+                "b": "mwen machin",
+                "c": "machin yo"
+              }
+            },
+            "read-build-and-write-about-things-fill": {
+              "title": "Complete the possession phrase",
+              "prompt": "Choose the possessor that completes “your notebook.”",
+              "hint": "Use the owner form that refers to the person being addressed.",
+              "help": {
+                "concept": "The blank comes after the possessed noun and identifies its owner.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "template": "kaye [blank1]",
+              "choices": [
+                "ou",
+                "yo",
+                "li"
+              ]
+            },
+            "read-build-and-write-about-things-listen": {
+              "title": "Hear an ownership phrase",
+              "prompt": "Listen, then build the phrase you hear.",
+              "hint": "Listen for the thing first and the owner second.",
+              "help": {
+                "concept": "Build the possessive noun phrase in the same order as the audio.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "machin mwen",
+              "wordBank": [
+                "machin",
+                "mwen"
+              ],
+              "distractors": [
+                "yo"
+              ]
+            },
+            "read-build-and-write-about-things-voice": {
+              "title": "Say who owns it",
+              "prompt": "Say: Sa se pou mwen.",
+              "hint": "Say the complete ownership sentence.",
+              "help": {
+                "concept": "Speaking practice compares the recognized transcript with the authored ownership sentence.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "Sa se pou mwen."
+            },
+            "read-build-and-write-about-things-build": {
+              "title": "Build “the book is hers/his”",
+              "prompt": "Arrange the words to say “The book is his/her.”",
+              "hint": "Start with the definite noun phrase, then use the ownership pattern.",
+              "help": {
+                "concept": "The sentence identifies an object first and its owner second.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "targetText": "Liv la se pou li.",
+              "wordBank": [
+                "Liv",
+                "la",
+                "se",
+                "pou",
+                "li."
+              ],
+              "distractors": [
+                "yo"
+              ],
+              "ttsText": "Liv la se pou li."
+            },
+            "read-build-and-write-about-things-write": {
+              "title": "Write “my notebook”",
+              "prompt": "Type the Kreyòl phrase for “my notebook.”",
+              "hint": "Put the thing first and the owner second.",
+              "help": {
+                "concept": "Write the complete two-word possessive noun phrase.",
+                "hint_1": "Use the noun-phrase pattern introduced in this lesson.",
+                "hint_2": "Compare the choices with the whole sentence before answering."
+              },
+              "expectedText": "kaye mwen",
+              "placeholder": "Type the Kreyòl answer"
+            },
+            "try-possessor-after-car": {
+              "title": "Build a new possessive phrase",
+              "prompt": "Arrange the Kreyòl phrase for “my book.”",
+              "hint": "Put the owner after the thing.",
+              "help": {
+                "concept": "possessor after the thing",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "liv mwen",
+              "wordBank": [
+                "liv",
+                "mwen"
+              ]
+            },
+            "try-with-definite-car": {
+              "title": "Build another definite possessive phrase",
+              "prompt": "Arrange the definite Kreyòl phrase for “my book.”",
+              "hint": "Use thing + possessor + final definite marker.",
+              "help": {
+                "concept": "thing + possessor + definite marker",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "liv mwen an",
+              "wordBank": [
+                "liv",
+                "mwen",
+                "an"
+              ]
+            },
+            "try-se-pou-mwen": {
+              "title": "Say who it belongs to",
+              "prompt": "Say “This is yours / for you.” in Kreyòl.",
+              "hint": "Keep Sa se pou and change the person.",
+              "help": {
+                "concept": "se pou ownership",
+                "hint_1": "Use the Kreyòl pattern from this lesson.",
+                "hint_2": "Use the pattern you just learned."
+              },
+              "targetText": "Sa se pou ou."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "haitian-creole-foundations": {
+      "haitian-creole-foundations-4-talking-about-things": {
+        "read-build-and-write-about-things": {
+          "possessor-after": {
+            "title": "Put the owner after the thing",
+            "bodyMarkdown": "In a simple possessive noun phrase, the possessor comes after the thing:\n\n- **machin mwen** — my car\n- **kaye ou** — your notebook\n- **fanmi li** — his/her family\n\nThe same personal forms from Module 3 now show ownership."
+          },
+          "with-definite": {
+            "title": "machin mwen an",
+            "bodyMarkdown": "When the phrase is definite, the definite marker still comes at the end:\n\n**machin mwen an** — my car / the car that is mine\n\nThe pattern is: **thing + possessor + definite marker**."
+          },
+          "se-pou": {
+            "title": "Sa se pou mwen",
+            "bodyMarkdown": "You can also express ownership with **se pou**:\n\n- **Sa se pou mwen.** — This/that is mine / for me.\n- **Liv la se pou li.** — The book is his/hers.\n\nThis pattern is useful when identifying who an object belongs to."
+          }
+        }
+      }
+    }
+  }
+}

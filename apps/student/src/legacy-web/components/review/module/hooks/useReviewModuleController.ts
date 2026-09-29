@@ -110,6 +110,7 @@ import { shouldShowFinalCertificateCta } from "../certificateNavigation";
 import {
     resolveToolsRailVisibility,
     shouldDefaultCollapseToolsRail,
+    shouldShowMobileCodeWorkspaceTabs,
     toolPresentationPolicyFromManifest,
     toolPresentationPolicyFromTopic,
 } from "@zoeskoul/learning-runtime/review/module/toolsRailVisibility";
@@ -2722,6 +2723,14 @@ export function useReviewModuleController({
         ),
     );
 
+    const showMobileCodeWorkspaceTabs = shouldShowMobileCodeWorkspaceTabs({
+        toolsAvailable: toolsRailVisibility.isAvailable,
+        showDesktopRight: panels.showDesktopRight,
+        hasRouteWorkspaceExercise: Boolean(routeWorkspaceExercise),
+        hasActiveCardWorkspaceExercise: Boolean(activeCardWorkspaceExerciseKey),
+        hasActiveCardRegistryExercise: Boolean(activeCardRegistryExerciseEntry),
+    });
+
     useEffect(() => {
         setActiveMobileWorkspaceTab("lesson");
     }, [viewTid, activeCard?.id, activeExerciseTarget?.exerciseId]);
@@ -3037,7 +3046,13 @@ export function useReviewModuleController({
                     : null,
             onOpenModulesDrawer: handleOpenCourseModules,
             onToggleLeftPanel: panels.handleToggleLeftPanel,
-            onToggleRightPanel: panels.handleToggleRightPanel,
+            onToggleRightPanel: panels.showDesktopRight
+                ? panels.handleToggleRightPanel
+                : () => {
+                    setActiveMobileWorkspaceTab((current) =>
+                        current === "code" ? "lesson" : "code",
+                    );
+                },
             resetOptions: headerResetOptions,
             resetDisabledReason:
                 !workspaceCapabilities.canMutateProgress
@@ -3318,7 +3333,7 @@ export function useReviewModuleController({
             sectionSlug,
             routeExerciseId: activeExerciseTarget?.exerciseId ?? null,
             defaultToolLanguage: runtime.toolDefaults.defaultLang,
-            showMobileWorkspaceTabs: shouldRenderStackedTools && !panels.showDesktopRight,
+            showMobileWorkspaceTabs: showMobileCodeWorkspaceTabs,
             desktopToolsVisible:
                 panels.showDesktopRight && !panels.rightCollapsedEff,
             activeMobileWorkspaceTab,

@@ -54,6 +54,27 @@ export const CATALOG_MANIFESTS: Record<string, any> =
     ],
     "defaultSubjectSlug": "git-foundations"
   },
+  "haitian-creole": {
+    "catalog": {
+      "slug": "haitian-creole",
+      "order": 60,
+      "title": "Haitian Creole",
+      "defaultSubjectSlug": "haitian-creole-foundations",
+      "description": "Haitian Creole learning paths focused on practical listening, speaking, reading, writing, culture, stories, and everyday communication.",
+      "imagePublicId": null,
+      "imageAlt": "Haitian Creole catalog cover",
+      "status": "active",
+      "subjectSlugs": [
+        "haitian-creole-foundations"
+      ],
+      "meta": {
+        "family": "languages",
+        "featured": true,
+        "targetLanguage": "ht",
+        "nativeName": "Kreyòl Ayisyen"
+      }
+    }
+  },
   "linux": {
     "catalog": {
       "slug": "linux",
@@ -128,6 +149,7 @@ export const SUBJECT_CATALOG_SLUGS: Record<string, string> =
   "c-runtime-analysis-asymptotics": "c",
   "c-data-structures": "c",
   "git-foundations": "git",
+  "haitian-creole-foundations": "haitian-creole",
   "linux-terminal-fundamentals": "linux",
   "python": "python",
   "python-v2": "python",
